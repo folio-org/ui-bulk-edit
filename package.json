@@ -16,9 +16,7 @@
     "route": "/bulck-edit",
     "home": "/bulck-edit",
     "okapiInterfaces": {},
-    "optionalOkapiInterfaces": {
-      "data-export-spring": "1.0"
-    },
+    "optionalOkapiInterfaces": {},
     "icons": [
       {
         "name": "app",
@@ -32,7 +30,7 @@
     "permissionSets": [
       {
         "permissionName": "module.bulck-edit.enabled",
-        "displayName": "UI: Circulation logs module is enabled",
+        "displayName": "UI: Bulck edit module is enabled",
         "visible": false
       }
     ]
@@ -56,6 +54,7 @@
     "@babel/preset-react": "^7.7.4",
     "@folio/eslint-config-stripes": "^5.0.0",
     "@folio/stripes": "^7.0.0",
+    "@folio/stripes-cli": "^2.0.0",
     "@formatjs/cli": "^4.2.10",
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^11.0.2",
@@ -99,8 +98,5 @@
     "react-query": "^3.6.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
-  },
-  "optionalDependencies": {
-    "@folio/plugin-find-user": "^5.0.0"
   }
 }
