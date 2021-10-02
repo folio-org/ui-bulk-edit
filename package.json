@@ -43,7 +43,7 @@
     "test:unit:report": "cp -r ./artifacts/coverage-jest ./artifacts/coverage",
     "test:e2e": "echo Not implemented",
     "test": "yarn run test:unit && yarn run test:e2e",
-    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-circulation-log ./translations/ui-circulation-log/compiled"
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-bulck-edit ./translations/ui-bulck-edit/compiled"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",

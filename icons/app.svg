@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><defs><style>.cls-1{fill:url(#linear-gradient);}.cls-2{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}</style><linearGradient id="linear-gradient" x1="12" y1="0.08" x2="12" y2="24.25" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffd31f"/><stop offset="1" stop-color="#f8ac14"/></linearGradient></defs><title>Circulation</title><g id="Circulation"><rect class="cls-1" width="24" height="24"/><polyline class="cls-2" points="10.13 10.82 6.93 14.01 10.13 17.21"/><polyline class="cls-2" points="14.13 13.21 17.32 10.01 14.13 6.82"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon Artboard</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="97.0714415%" id="linearGradient-1">
+            <stop stop-color="#3D9BD4" offset="0%"></stop>
+            <stop stop-color="#1E60A6" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Icon-Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="BG" fill="url(#linearGradient-1)">
+            <rect x="0" y="0" width="1024" height="1024"></rect>
+        </g>
+        <g id="icons6-ui-icons-only_duplicate" transform="translate(238.000000, 236.804932)" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M88.401709,89.4017092 L456.194872,89.4017092 L456.356079,177.609826 L556.725586,288.847619 L555.596581,54.7008547 C555.596581,24.5059829 531.145299,0 500.895726,0 L54.7008547,0 C24.4512821,0 0,24.5059829 0,54.7008547 L0,500.895726 C0,531.090598 24.4512821,555.596581 54.7008547,555.596581 L332.074829,555.79165 L220.116943,464.733361 L89.401709,466.194872 L88.401709,89.4017092 Z" id="Path" transform="translate(278.362793, 277.895825) scale(1, -1) translate(-278.362793, -277.895825) "></path>
+        </g>
+        <g id="icons6-ui-icons-only_edit" transform="translate(423.000000, 218.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <path d="M37.4280493,398.6127 L172.214123,356.215202 C176.614949,354.805788 180.641849,352.389648 183.920895,349.110601 L391.565084,141.466413 C402.811639,130.219858 402.811639,112.041284 391.565084,100.794729 L299.205271,8.43491597 C287.958716,-2.81163866 269.780142,-2.81163866 258.533587,8.43491597 L50.8318715,216.079105 C47.5528248,219.329388 45.1079217,223.356287 43.7272704,227.785877 L1.32977295,362.571951 C-1.89174653,372.783017 0.840792313,383.943281 8.43437395,391.536862 C13.8994517,397.00194 21.2629248,399.964588 28.7702157,399.964588 C31.6753359,399.935824 34.6092198,399.533134 37.4280493,398.6127 Z M96.5084156,251.774691 L278.840666,69.4424412 L330.528795,121.130571 L148.196545,303.434057 L72.7784729,327.164 L96.5084156,251.774691 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>
