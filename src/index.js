@@ -1,1 +1,1 @@
-export { default } from './BulckEdit';
+export { default } from './BulkEdit';

@@ -3,14 +3,14 @@ import {
   Route,
 } from 'react-router-dom';
 
-const BulckEdit = () => {
+const BulkEdit = () => {
   return (
     <Switch>
-      <Route path="/bulck-edit">
-        <div>Bulck Edit</div>
+      <Route path="/bulk-edit">
+        <div>Bulk Edit</div>
       </Route>
     </Switch>
   );
 };
 
-export default BulckEdit;
+export default BulkEdit;

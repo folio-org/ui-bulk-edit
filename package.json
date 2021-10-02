@@ -1,7 +1,7 @@
 {
-  "name": "@folio/bulck-edit",
+  "name": "@folio/bulk-edit",
   "version": "1.0.0",
-  "description": "Description for bulck edit",
+  "description": "Description for bulk edit",
   "main": "index.js",
   "repository": "",
   "license": "Apache-2.0",
@@ -12,16 +12,16 @@
     "actsAs": [
       "app"
     ],
-    "displayName": "ui-bulck-edit.meta.title",
-    "route": "/bulck-edit",
-    "home": "/bulck-edit",
+    "displayName": "ui-bulk-edit.meta.title",
+    "route": "/bulk-edit",
+    "home": "/bulk-edit",
     "okapiInterfaces": {},
     "optionalOkapiInterfaces": {},
     "icons": [
       {
         "name": "app",
-        "alt": "View and manage bulck edit",
-        "title": "Bulck edit"
+        "alt": "View and manage bulk edit",
+        "title": "Bulk edit"
       }
     ],
     "stripesDeps": [
@@ -29,8 +29,8 @@
     ],
     "permissionSets": [
       {
-        "permissionName": "module.bulck-edit.enabled",
-        "displayName": "UI: Bulck edit module is enabled",
+        "permissionName": "module.bulk-edit.enabled",
+        "displayName": "UI: Bulk edit module is enabled",
         "visible": false
       }
     ]
@@ -43,7 +43,7 @@
     "test:unit:report": "cp -r ./artifacts/coverage-jest ./artifacts/coverage",
     "test:e2e": "echo Not implemented",
     "test": "yarn run test:unit && yarn run test:e2e",
-    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-bulck-edit ./translations/ui-bulck-edit/compiled"
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-bulk-edit ./translations/ui-bulk-edit/compiled"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
