@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset } from '@folio/stripes/components';

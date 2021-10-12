@@ -1,4 +1,4 @@
-import React, {
+import {
   Switch,
   Route,
 } from 'react-router-dom';

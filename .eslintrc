@@ -2,14 +2,15 @@
   "parser": "babel-eslint",
   "extends": ["@folio/eslint-config-stripes/acquisitions"],
   "rules": {
-    "no-multiple-empty-lines": "off"
+    "no-multiple-empty-lines": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "overrides": [
     {
       "files": ["*test.*", "test/**"],
       "rules": {
         "react/prop-types": "off",
-        "padding-line-between-statements": "off"
+        "padding-line-between-statements": "off",
       }
     }
   ]
