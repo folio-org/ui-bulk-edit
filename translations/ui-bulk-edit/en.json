@@ -2,5 +2,8 @@
   "meta.title": "Bulk edit",
 
   "list.criteriaTitle": "Set criteria",
-  "list.logSubTitle": "Set criteria to start bulk edit"
+  "list.logSubTitle": "Set criteria to start bulk edit",
+  "list.filters.identifier": "Identifier",
+  "list.filters.query": "Query",
+  "list.result.emptyMessage": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab"
 }
