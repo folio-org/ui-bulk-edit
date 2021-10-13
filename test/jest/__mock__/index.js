@@ -1,0 +1,1 @@
+import './stripesComponents.mock';

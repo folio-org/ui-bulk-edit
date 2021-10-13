@@ -9,7 +9,7 @@ import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
 export const BulkEditListResult = () => {
   const resultsStatusMessage = (
     <Layout className="display-flex centerContent">
-      <NoResultsMessage>
+      <NoResultsMessage data-testid="empty-message">
         <FormattedMessage id="ui-bulk-edit.list.result.emptyMessage" />
       </NoResultsMessage>
     </Layout>
