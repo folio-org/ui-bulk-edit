@@ -2,6 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
+
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult/BulkEditListResult';
 
