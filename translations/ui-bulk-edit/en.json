@@ -1,3 +1,6 @@
 {
-  "meta.title": "Bulk edit"
+  "meta.title": "Bulk edit",
+
+  "list.criteriaTitle": "Set criteria",
+  "list.logSubTitle": "Set criteria to start bulk edit"
 }

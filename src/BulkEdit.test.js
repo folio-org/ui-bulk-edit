@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -17,6 +18,13 @@ describe('BulkEdit', () => {
   it('displays Bulk edit', () => {
     renderBulkEdit();
 
-    expect(screen.getByText('Bulk Edit')).toBeVisible();
+    expect(screen.getByText(/meta.title/)).toBeVisible();
+  });
+
+  it('should display correct pane titles', () => {
+    renderBulkEdit();
+
+    expect(screen.getByText(/list.logSubTitle/)).toBeVisible();
+    expect(screen.getByText(/list.criteriaTitle/)).toBeVisible();
   });
 });
