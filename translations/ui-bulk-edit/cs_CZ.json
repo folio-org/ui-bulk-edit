@@ -1,3 +1,8 @@
 {
-    "meta.title": "Hromadná úprava"
+    "meta.title": "Hromadná úprava",
+    "list.criteriaTitle": "Set criteria",
+    "list.logSubTitle": "Set criteria to start bulk edit",
+    "list.filters.identifier": "Identifier",
+    "list.filters.query": "Query",
+    "list.result.emptyMessage": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab"
 }
