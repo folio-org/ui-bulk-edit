@@ -59,4 +59,24 @@ describe('BulkEdit', () => {
 
     expect(identifierButton).toHaveAttribute('class', 'button primary');
   });
+
+  it('should display select', () => {
+    renderBulkEdit();
+
+    expect(screen.getByRole('combobox', { name: 'ui-bulk-edit.list.filters.recordIdentifier' })).toBeEnabled();
+  });
+
+  it('should display select right select options', () => {
+    renderBulkEdit();
+
+    const options = [
+      /filters.recordIdentifier.placeholder/,
+      /filters.recordIdentifier.userUUIDs/,
+      /filters.recordIdentifier.userBarcodes/,
+      /filters.recordIdentifier.externalIDs/,
+      /filters.recordIdentifier.usernames/,
+    ];
+
+    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+  });
 });

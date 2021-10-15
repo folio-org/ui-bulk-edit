@@ -5,5 +5,11 @@
   "list.logSubTitle": "Set criteria to start bulk edit",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
+  "list.filters.recordIdentifier": "Record identifier",
+  "list.filters.recordIdentifier.placeholder": "Select record identifier",
+  "list.filters.recordIdentifier.userUUIDs": "User UUIDs",
+  "list.filters.recordIdentifier.userBarcodes": "User Barcodes",
+  "list.filters.recordIdentifier.externalIDs": "External IDs",
+  "list.filters.recordIdentifier.usernames": "Usernames",
   "list.result.emptyMessage": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab"
 }
