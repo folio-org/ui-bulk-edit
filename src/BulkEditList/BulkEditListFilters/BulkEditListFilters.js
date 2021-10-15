@@ -6,8 +6,12 @@ import {
   ButtonGroup,
 } from '@folio/stripes/components';
 
+import { ListSelect } from './ListSelect/ListSelect';
+
 export const BulkEditListFilters = () => {
   const [criteria, setCriteria] = useState('identifier');
+
+
 
   const renderIdentifierButton = () => {
     return (
@@ -32,9 +36,12 @@ export const BulkEditListFilters = () => {
   };
 
   return (
-    <ButtonGroup fullWidth>
-      {renderIdentifierButton()}
-      {renderQueryButton()}
-    </ButtonGroup>
+    <>
+      <ButtonGroup fullWidth>
+        {renderIdentifierButton()}
+        {renderQueryButton()}
+      </ButtonGroup>
+      <ListSelect />
+    </>
   );
 };
