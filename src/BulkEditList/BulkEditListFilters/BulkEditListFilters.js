@@ -8,8 +8,6 @@ import {
 
 import { ListSelect } from './ListSelect/ListSelect';
 
-
-
 export const BulkEditListFilters = () => {
   const [criteria, setCriteria] = useState('identifier');
 
