@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -78,5 +78,38 @@ describe('BulkEdit', () => {
     ];
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+  });
+
+  it('should trigger the drag and drop', async () => {
+    function dispatchEvt(node, type, data) {
+      const event = new Event(type, { bubbles: true });
+
+      Object.assign(event, data);
+      fireEvent(node, event);
+    }
+
+    function mockData(files) {
+      return {
+        dataTransfer: {
+          files,
+          items: files.map(file => ({
+            kind: 'file',
+            type: file.type,
+            getAsFile: () => file,
+          })),
+          types: ['Files'],
+        },
+      };
+    }
+    const file = new File([
+      JSON.stringify({ ping: true }),
+    ], 'ping.json', { type: 'application/json' });
+    const data = mockData([file]);
+
+    renderBulkEdit();
+
+    const fileInput = screen.getByTestId('fileUploader-input');
+
+    dispatchEvt(fileInput, 'dragenter', data);
   });
 });
