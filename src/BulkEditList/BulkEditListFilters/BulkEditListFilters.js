@@ -7,11 +7,12 @@ import {
 } from '@folio/stripes/components';
 
 import { ListSelect } from './ListSelect/ListSelect';
+import { ListFileUploader } from './ListFileUploader/ListFileUploader';
 
 export const BulkEditListFilters = () => {
   const [criteria, setCriteria] = useState('identifier');
-
-
+  const [isLoading, setLoading] = useState(false);
+  const [isDropZoneActive, setDropZoneActive] = useState(false);
 
   const renderIdentifierButton = () => {
     return (
@@ -35,6 +36,19 @@ export const BulkEditListFilters = () => {
     );
   };
 
+  const handleDragEnter = () => {
+    setDropZoneActive(true);
+  };
+
+  const handleDragLeave = () => {
+    setDropZoneActive(false);
+  };
+
+  const handleDrop = () => {
+    setLoading(false);
+    setDropZoneActive(false);
+  };
+
   return (
     <>
       <ButtonGroup fullWidth>
@@ -42,6 +56,13 @@ export const BulkEditListFilters = () => {
         {renderQueryButton()}
       </ButtonGroup>
       <ListSelect />
+      <ListFileUploader
+        isLoading={isLoading}
+        isDropZoneActive={isDropZoneActive}
+        handleDragEnter={handleDragEnter}
+        handleDrop={handleDrop}
+        handleDragLeave={handleDragLeave}
+      />
     </>
   );
 };
