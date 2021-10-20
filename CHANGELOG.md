@@ -2,6 +2,7 @@
 
 ## (IN PROGRESS)
 
+* [UIBULKED-5](https://issues.folio.org/browse/UIBULKED-5) Add Apps with bulk edit capability accordion
 * [UIBULKED-6](https://issues.folio.org/browse/UIBULKED-6) Add file drag and drop component
 * [UIBULKED-4](https://issues.folio.org/browse/UIBULKED-4) Add Record identifier component to the Set Criteria pane
 * [UIBULKED-3](https://issues.folio.org/browse/UIBULKED-3) Add Identifier and Query options to the landing page
