@@ -12,6 +12,11 @@
   "list.filters.recordIdentifier.externalIDs": "External IDs",
   "list.filters.recordIdentifier.usernames": "Usernames",
   "list.result.emptyMessage": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+  "list.filters.capabilities.title": "Apps with bulk edit capabilities",
+  "list.filters.capabilities.users": "Users",
+  "list.filters.capabilities.inventory": "Inventory",
+  "list.filters.capabilities.circulation": "Circulation",
+  "list.filters.capabilities.acquisition": "Acquisition",
 
   "uploaderBtnText": "or choose file",
   "uploaderSubTitle": "Select a file with record identifiers",
