@@ -1,8 +1,23 @@
 {
     "meta.title": "تحرير بالجملة",
-    "list.criteriaTitle": "Set criteria",
-    "list.logSubTitle": "Set criteria to start bulk edit",
-    "list.filters.identifier": "Identifier",
-    "list.filters.query": "Query",
-    "list.result.emptyMessage": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab"
+    "list.criteriaTitle": "تعيين المعايير",
+    "list.logSubTitle": "قم بتعيين المعايير لبدء التحرير بالجملة",
+    "list.filters.identifier": "المعرّف",
+    "list.filters.query": "الاستعلام",
+    "list.result.emptyMessage": "حدد \"معرف التسجيلة\" أثناء وجودك في تبويب المعرف. قم بإدخال \"استعلام البحث\" أثناء وجودك في تبويب الاستعلام",
+    "list.filters.recordIdentifier": "معرّف التسجيلة",
+    "list.filters.recordIdentifier.placeholder": "حدد معرّف التسجيلة",
+    "list.filters.recordIdentifier.userUUIDs": "المعرّفات الفريدة العمومية للمستخدم",
+    "list.filters.recordIdentifier.userBarcodes": "أرقام باركود المستخدمين",
+    "list.filters.recordIdentifier.externalIDs": "المعرفات الخارجية",
+    "list.filters.recordIdentifier.usernames": "أسماء المستخدمين",
+    "uploaderBtnText": "or choose file",
+    "uploaderSubTitle": "Select a file with record identifiers",
+    "uploaderTitle": "Drag and drop",
+    "uploaderActiveTitle": "Drop to start edit",
+    "uploading": "Uploading",
+    "cancel": "Cancel",
+    "modal.fileExtensions.blocked.header": "Invalid file",
+    "modal.fileExtensions.blocked.message": "Only file with .csv or .cql extension can be uploaded",
+    "modal.fileExtensions.actionButton": "Choose other file to upload"
 }
