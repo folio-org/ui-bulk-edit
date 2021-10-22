@@ -57,6 +57,10 @@ export const BulkEditListFilters = () => {
     setDropZoneActive(false);
   };
 
+  const hanldeCapabilityChange = (event) => setFilter({
+    ...filters, capabilities: event.values,
+  });
+
   return (
     <>
       <ButtonGroup fullWidth>
@@ -76,9 +80,7 @@ export const BulkEditListFilters = () => {
         options={capabilitiesFilterOptions}
         name="capabilities"
         activeFilters={filters.capabilities}
-        onChange={(event) => setFilter({
-          ...filters, capabilities: event.values,
-        })}
+        onChange={hanldeCapabilityChange}
         closedByDefault={false}
       />
     </>
