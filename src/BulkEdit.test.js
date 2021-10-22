@@ -112,4 +112,30 @@ describe('BulkEdit', () => {
 
     dispatchEvt(fileInput, 'dragenter', data);
   });
+
+  it('should display capability accordion with right options', () => {
+    renderBulkEdit();
+
+    const enabledOption = screen.getByRole('checkbox', { name: /capabilities.users/ });
+
+    const disabledOptions = [
+      /filters.capabilities.inventory/,
+      /filters.capabilities.circulation/,
+      /filters.capabilities.acquisition/,
+    ];
+
+    disabledOptions.forEach((el) => expect(screen.getByRole('checkbox', { name: el })).toBeDisabled());
+
+    expect(enabledOption).toBeEnabled();
+  });
+
+  it('should display unchecked option', () => {
+    renderBulkEdit();
+
+    const enabledOption = screen.getByRole('checkbox', { name: /capabilities.users/ });
+
+    userEvent.click(enabledOption);
+
+    expect(enabledOption).not.toBeChecked();
+  });
 });
