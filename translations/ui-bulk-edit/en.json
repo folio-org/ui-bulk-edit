@@ -17,6 +17,7 @@
   "list.filters.capabilities.inventory": "Inventory",
   "list.filters.capabilities.circulation": "Circulation",
   "list.filters.capabilities.acquisition": "Acquisition",
+  "list.savedQueries.title": "Saved queries",
 
   "uploaderBtnText": "or choose file",
   "uploaderSubTitle": "Select a file with record identifiers",

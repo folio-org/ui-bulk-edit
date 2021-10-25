@@ -20,23 +20,26 @@ export const ListFileUploader = (
     : <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
 
   return (
-    <FileUploader
-      multiple={false}
-      title={uploaderTitle}
-      uploadButtonText={<FormattedMessage id="ui-bulk-edit.uploaderBtnText" />}
-      isDropZoneActive={isDropZoneActive}
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-    >
-      <>
-        <Layout className="padding-top-gutter padding-start-gutter padding-end-gutter textCentered">
-          <span data-test-sub-title>
-            <FormattedMessage id="ui-bulk-edit.uploaderSubTitle" />
-          </span>
-        </Layout>
-      </>
-    </FileUploader>
+    <div style={{ marginBottom: '15px' }}>
+      <FileUploader
+        multiple={false}
+        title={uploaderTitle}
+        uploadButtonText={<FormattedMessage id="ui-bulk-edit.uploaderBtnText" />}
+        isDropZoneActive={isDropZoneActive}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        marginBottom
+      >
+        <>
+          <Layout className="padding-top-gutter padding-start-gutter padding-end-gutter textCentered">
+            <span data-test-sub-title>
+              <FormattedMessage id="ui-bulk-edit.uploaderSubTitle" />
+            </span>
+          </Layout>
+        </>
+      </FileUploader>
+    </div>
   );
 };
 
