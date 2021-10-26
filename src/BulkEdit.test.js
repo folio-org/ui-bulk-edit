@@ -143,6 +143,5 @@ describe('BulkEdit', () => {
     renderBulkEdit();
 
     expect(screen.getByRole('button', { name: /Icon ui-bulk-edit.list.savedQueries.title/ })).toBeEnabled();
-    expect(screen.getByText(/list.savedQueries.title/)).toBeVisible();
   });
 });
