@@ -138,4 +138,10 @@ describe('BulkEdit', () => {
 
     expect(enabledOption).not.toBeChecked();
   });
+
+  it('should display Saved queries', () => {
+    renderBulkEdit();
+
+    expect(screen.getByRole('button', { name: /Icon ui-bulk-edit.list.savedQueries.title/ })).toBeEnabled();
+  });
 });

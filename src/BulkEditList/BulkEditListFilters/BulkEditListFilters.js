@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import {
   Button,
   ButtonGroup,
+  Accordion,
+  Badge,
 } from '@folio/stripes/components';
 import { AcqCheckboxFilter } from '@folio/stripes-acq-components';
 
@@ -44,6 +46,8 @@ export const BulkEditListFilters = () => {
     );
   };
 
+  const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
+
   const handleDragEnter = () => {
     setDropZoneActive(true);
   };
@@ -82,6 +86,12 @@ export const BulkEditListFilters = () => {
         activeFilters={filters.capabilities}
         onChange={hanldeCapabilityChange}
         closedByDefault={false}
+      />
+      <Accordion
+        closedByDefault
+        displayWhenClosed={renderBadge()}
+        displayWhenOpen={renderBadge()}
+        label={<FormattedMessage id="ui-bulk-edit.list.savedQueries.title" />}
       />
     </>
   );
