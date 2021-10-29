@@ -19,5 +19,11 @@
     "cancel": "Cancel",
     "modal.fileExtensions.blocked.header": "Invalid file",
     "modal.fileExtensions.blocked.message": "Only file with .csv or .cql extension can be uploaded",
-    "modal.fileExtensions.actionButton": "Choose other file to upload"
+    "modal.fileExtensions.actionButton": "Choose other file to upload",
+    "list.filters.capabilities.title": "Apps with bulk edit capabilities",
+    "list.filters.capabilities.users": "Users",
+    "list.filters.capabilities.inventory": "Inventory",
+    "list.filters.capabilities.circulation": "Circulation",
+    "list.filters.capabilities.acquisition": "Acquisition",
+    "list.savedQueries.title": "Saved queries"
 }
