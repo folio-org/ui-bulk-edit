@@ -25,5 +25,5 @@
     "list.filters.capabilities.inventory": "Inventaire / catalogue",
     "list.filters.capabilities.circulation": "Circulation",
     "list.filters.capabilities.acquisition": "Acquisition",
-    "list.savedQueries.title": "Saved queries"
+    "list.savedQueries.title": "Requêtes enregistrées"
 }
