@@ -14,7 +14,7 @@
     "uploaderBtnText": "or choose file",
     "uploaderSubTitle": "Select a file with record identifiers",
     "uploaderTitle": "Drag and drop",
-    "uploaderActiveTitle": "Drop to start edit",
+    "uploaderActiveTitle": "Drop to continue",
     "uploading": "Uploading",
     "cancel": "Cancel",
     "modal.fileExtensions.blocked.header": "Invalid file",

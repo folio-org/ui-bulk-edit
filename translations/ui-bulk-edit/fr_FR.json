@@ -14,7 +14,7 @@
     "uploaderBtnText": "ou choisir un fichier",
     "uploaderSubTitle": "Select a file with record identifiers",
     "uploaderTitle": "Glisser-déposer",
-    "uploaderActiveTitle": "Drop to start edit",
+    "uploaderActiveTitle": "Drop to continue",
     "uploading": "Chargement...",
     "cancel": "Annuler",
     "modal.fileExtensions.blocked.header": "Fichier non valide",
