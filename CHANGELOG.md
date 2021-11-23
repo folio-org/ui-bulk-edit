@@ -10,3 +10,4 @@
 * [UIBULKED-5](https://issues.folio.org/browse/UIBULKED-5) Add Apps with bulk edit capability accordion
 * [UIBULKED-8](https://issues.folio.org/browse/UIBULKED-8) Add Saved queries accordion
 * [UIBULKED-23](https://issues.folio.org/browse/UIBULKED-23) Add "Drop to continue" label to the Drag and drop area
+* [UIBULKED-10](https://issues.folio.org/browse/UIBULKED-10) Actions menu
