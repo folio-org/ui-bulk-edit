@@ -12,7 +12,7 @@ import { AcqCheckboxFilter } from '@folio/stripes-acq-components';
 import { ListSelect } from './ListSelect/ListSelect';
 import { ListFileUploader } from './ListFileUploader/ListFileUploader';
 import { buildCheckboxFilterOptions } from './utils';
-import { EDIT_CAPABILITIES } from '../../constants/optionsRecordIdentifiers';
+import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
 
 export const BulkEditListFilters = () => {
   const [criteria, setCriteria] = useState('identifier');

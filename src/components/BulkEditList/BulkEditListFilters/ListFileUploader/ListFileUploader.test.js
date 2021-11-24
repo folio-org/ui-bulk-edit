@@ -3,7 +3,7 @@ import {
   screen, render, fireEvent,
 } from '@testing-library/react';
 
-import '../../../../test/jest/__mock__';
+import '../../../../../test/jest/__mock__';
 
 import { ListFileUploader } from './ListFileUploader';
 

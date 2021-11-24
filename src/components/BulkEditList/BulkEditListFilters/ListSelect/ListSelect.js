@@ -2,7 +2,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Select } from '@folio/stripes-acq-components';
 
-import { identifierOptions } from '../../../constants/optionsRecordIdentifiers';
+import { identifierOptions } from '../../../../constants/optionsRecordIdentifiers';
 
 export const ListSelect = () => {
   const intl = useIntl();
