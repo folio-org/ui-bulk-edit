@@ -1,1 +1,1 @@
-export { default } from './BulkEdit';
+export { default } from './components/BulkEdit';

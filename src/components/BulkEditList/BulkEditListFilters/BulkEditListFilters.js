@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -11,18 +12,34 @@ import { AcqCheckboxFilter } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
 import { ListFileUploader } from './ListFileUploader/ListFileUploader';
-import { buildCheckboxFilterOptions } from './utils';
-import { EDIT_CAPABILITIES } from '../../constants/optionsRecordIdentifiers';
+import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
+import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
+import { getFileInfo } from './utils/getFileInfo';
 
-export const BulkEditListFilters = () => {
+export const BulkEditListFilters = (
+  {
+    setFileUploadedName,
+    setIsFileUploaded,
+    isFileUploaded,
+  },
+) => {
   const [criteria, setCriteria] = useState('identifier');
   const [isLoading, setLoading] = useState(false);
   const [isDropZoneActive, setDropZoneActive] = useState(false);
+  const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [filters, setFilter] = useState({
     capabilities: ['users'],
+    recordIdentifier: '',
   });
+  const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
+
+  useEffect(() => {
+    if (isFileUploaded || filters.recordIdentifier === '') {
+      setIsDropZoneDisabled(true);
+    } else setIsDropZoneDisabled(false);
+  }, [filters.recordIdentifier, isFileUploaded]);
 
   const renderIdentifierButton = () => {
     return (
@@ -56,13 +73,36 @@ export const BulkEditListFilters = () => {
     setDropZoneActive(false);
   };
 
-  const handleDrop = () => {
-    setLoading(false);
-    setDropZoneActive(false);
+  const showFileExtensionModal = () => {
+    setFileExtensionModalOpen(true);
   };
+
+  const hideFileExtensionModal = () => {
+    setFileExtensionModalOpen(false);
+  };
+
+  async function handleDrop(acceptedFiles) {
+    const fileToUpload = acceptedFiles[0];
+
+    if (!fileToUpload) return;
+
+    const { isTypeSupported } = getFileInfo(fileToUpload);
+
+    if (!isTypeSupported) {
+      showFileExtensionModal();
+    } else {
+      setFileUploadedName(fileToUpload.name);
+      setIsFileUploaded(true);
+      setDropZoneActive(false);
+    }
+  }
 
   const hanldeCapabilityChange = (event) => setFilter({
     ...filters, capabilities: event.values,
+  });
+
+  const hanldeRecordIdentifierChange = (event) => setFilter({
+    ...filters, recordIdentifier: event.target.value,
   });
 
   return (
@@ -71,13 +111,19 @@ export const BulkEditListFilters = () => {
         {renderIdentifierButton()}
         {renderQueryButton()}
       </ButtonGroup>
-      <ListSelect />
+      <ListSelect
+        hanldeRecordIdentifier={hanldeRecordIdentifierChange}
+      />
       <ListFileUploader
         isLoading={isLoading}
         isDropZoneActive={isDropZoneActive}
         handleDragEnter={handleDragEnter}
         handleDrop={handleDrop}
         handleDragLeave={handleDragLeave}
+        fileExtensionModalOpen={fileExtensionModalOpen}
+        setFileExtensionModalOpen={setFileExtensionModalOpen}
+        hideFileExtensionModal={hideFileExtensionModal}
+        isDropZoneDisabled={isDropZoneDisabled}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
@@ -95,4 +141,10 @@ export const BulkEditListFilters = () => {
       />
     </>
   );
+};
+
+BulkEditListFilters.propTypes = {
+  setFileUploadedName: PropTypes.func.isRequired,
+  setIsFileUploaded: PropTypes.func.isRequired,
+  isFileUploaded: PropTypes.bool.isRequired,
 };
