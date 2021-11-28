@@ -60,6 +60,36 @@ describe('BulkEdit', () => {
     expect(identifierButton).toHaveAttribute('class', 'button primary');
   });
 
+  it('should change display text area on query tab ', () => {
+    renderBulkEdit();
+
+    const queryButton = screen.getByRole('button', { name: /list.filters.query/ });
+
+    userEvent.click(queryButton);
+
+    const textArea = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /textArea.search/ });
+    const resetButton = screen.getByTestId('reset-button');
+
+    expect(queryButton).toHaveAttribute('class', 'button primary');
+
+    expect(textArea).toBeVisible();
+
+    expect(searchButton).toBeDisabled();
+    expect(resetButton).toBeDisabled();
+
+    userEvent.type(textArea, 'text');
+
+    expect(textArea).toHaveValue('text');
+
+    expect(searchButton).toBeEnabled();
+    expect(resetButton).toBeEnabled();
+
+    userEvent.click(resetButton);
+
+    expect(textArea).not.toHaveValue();
+  });
+
   it('should display select', () => {
     renderBulkEdit();
 

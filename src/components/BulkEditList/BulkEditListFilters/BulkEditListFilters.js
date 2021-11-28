@@ -11,6 +11,7 @@ import { AcqCheckboxFilter } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
 import { ListFileUploader } from './ListFileUploader/ListFileUploader';
+import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { buildCheckboxFilterOptions } from './utils';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
 
@@ -20,6 +21,7 @@ export const BulkEditListFilters = () => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [filters, setFilter] = useState({
     capabilities: ['users'],
+    queryText: '',
   });
 
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
@@ -71,6 +73,7 @@ export const BulkEditListFilters = () => {
         {renderIdentifierButton()}
         {renderQueryButton()}
       </ButtonGroup>
+      {criteria === 'query' ? <QueryTextArea filters={filters} setQueryText={setFilter} /> : null}
       <ListSelect />
       <ListFileUploader
         isLoading={isLoading}
