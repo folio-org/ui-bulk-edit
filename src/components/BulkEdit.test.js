@@ -204,6 +204,6 @@ describe('BulkEdit', () => {
     fireEvent.drop(fileInput, event);
     await flushPromises();
 
-    expect(screen.getByText(/meta.title.uploadedFile/)).toBeVisible();
+    expect(screen.getByText(/meta.title/)).toBeVisible();
   });
 });
