@@ -40,7 +40,6 @@ export const BulkEditListFilters = (
       setIsDropZoneDisabled(true);
     } else setIsDropZoneDisabled(false);
   }, [filters.recordIdentifier, isFileUploaded]);
-
   const renderIdentifierButton = () => {
     return (
       <Button
