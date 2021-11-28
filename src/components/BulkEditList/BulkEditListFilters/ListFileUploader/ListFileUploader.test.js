@@ -3,7 +3,7 @@ import {
   screen, render, fireEvent,
 } from '@testing-library/react';
 
-import '../../../../test/jest/__mock__';
+import '../../../../../test/jest/__mock__';
 
 import { ListFileUploader } from './ListFileUploader';
 
@@ -26,9 +26,33 @@ const renderListFileUploader = (isDropZoneActive = false, isLoading = false) => 
   );
 };
 
+function createDtWithFiles(files = []) {
+  return {
+    dataTransfer: {
+      files,
+      items: files.map(file => ({
+        kind: 'file',
+        size: file.size,
+        type: file.type,
+        getAsFile: () => file,
+      })),
+      types: ['Files'],
+    },
+  };
+}
+
+function createFile(name, size, type) {
+  const file = new File([], name, { type });
+  Object.defineProperty(file, 'size', {
+    get() {
+      return size;
+    },
+  });
+  return file;
+}
+
 function flushPromises(container) {
   return new Promise(resolve => setImmediate(() => {
-    renderListFileUploader();
     resolve(container);
   }));
 }
@@ -90,5 +114,26 @@ describe('FileUploader', () => {
     await flushPromises();
 
     expect(onDragEnterMock).toHaveBeenCalled();
+  });
+
+  it('should call onDrop', async () => {
+    const file = [createFile('file1.pdf', 1111, 'application/pdf')];
+
+    const event = createDtWithFiles(file);
+    const data = mockData([file]);
+
+    renderListFileUploader();
+
+    const fileInput = screen.getByTestId('fileUploader-input');
+
+    dispatchEvt(fileInput, 'dragenter', data);
+    await flushPromises();
+
+    expect(onDragEnterMock).toHaveBeenCalled();
+
+    fireEvent.drop(fileInput, event);
+    await flushPromises();
+
+    expect(onDropMock).toHaveBeenCalled();
   });
 });

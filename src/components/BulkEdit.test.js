@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 
-import '../test/jest/__mock__';
+import '../../test/jest/__mock__';
 
 import BulkEdit from './BulkEdit';
 
@@ -16,6 +16,58 @@ const renderBulkEdit = () => {
     </BrowserRouter>,
   );
 };
+
+function mockData(files) {
+  return {
+    dataTransfer: {
+      files,
+      items: files.map(file => ({
+        kind: 'file',
+        type: file.type,
+        getAsFile: () => file,
+      })),
+      types: ['Files'],
+    },
+  };
+}
+
+function createDtWithFiles(files = []) {
+  return {
+    dataTransfer: {
+      files,
+      items: files.map(file => ({
+        kind: 'file',
+        size: file.size,
+        type: file.type,
+        getAsFile: () => file,
+      })),
+      types: ['Files'],
+    },
+  };
+}
+
+function createFile(name, size, type) {
+  const file = new File([], name, { type });
+  Object.defineProperty(file, 'size', {
+    get() {
+      return size;
+    },
+  });
+  return file;
+}
+
+function flushPromises(container) {
+  return new Promise(resolve => setImmediate(() => {
+    resolve(container);
+  }));
+}
+
+function dispatchEvt(node, type, data) {
+  const event = new Event(type, { bubbles: true });
+
+  Object.assign(event, data);
+  fireEvent(node, event);
+}
 
 describe('BulkEdit', () => {
   it('displays Bulk edit', () => {
@@ -77,30 +129,21 @@ describe('BulkEdit', () => {
       /filters.recordIdentifier.usernames/,
     ];
 
+    const userUUIDs = screen.getByRole('option', { name: /filters.recordIdentifier.userUUIDs/ });
+
+    const selectRecordIdentifier = screen.getByRole('combobox');
+
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+
+    userEvent.selectOptions(
+      selectRecordIdentifier,
+      userUUIDs,
+    );
+
+    expect(userUUIDs.selected).toBe(true);
   });
 
   it('should trigger the drag and drop', async () => {
-    function dispatchEvt(node, type, data) {
-      const event = new Event(type, { bubbles: true });
-
-      Object.assign(event, data);
-      fireEvent(node, event);
-    }
-
-    function mockData(files) {
-      return {
-        dataTransfer: {
-          files,
-          items: files.map(file => ({
-            kind: 'file',
-            type: file.type,
-            getAsFile: () => file,
-          })),
-          types: ['Files'],
-        },
-      };
-    }
     const file = new File([
       JSON.stringify({ ping: true }),
     ], 'ping.json', { type: 'application/json' });
@@ -143,5 +186,24 @@ describe('BulkEdit', () => {
     renderBulkEdit();
 
     expect(screen.getByRole('button', { name: /Icon ui-bulk-edit.list.savedQueries.title/ })).toBeEnabled();
+  });
+
+  it('should update title with uploaded name', async () => {
+    const file = [createFile('SearchHoldings.csv', 1111, 'application/csv')];
+
+    const event = createDtWithFiles(file);
+    const data = mockData([file]);
+
+    renderBulkEdit();
+
+    const fileInput = screen.getByTestId('fileUploader-input');
+
+    dispatchEvt(fileInput, 'dragenter', data);
+    await flushPromises();
+
+    fireEvent.drop(fileInput, event);
+    await flushPromises();
+
+    expect(screen.getByText(/meta.title.uploadedFile/)).toBeVisible();
   });
 });

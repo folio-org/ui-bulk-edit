@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Select } from '@folio/stripes-acq-components';
 
-import { identifierOptions } from '../../../constants/optionsRecordIdentifiers';
+import { identifierOptions } from '../../../../constants/optionsRecordIdentifiers';
 
-export const ListSelect = () => {
+export const ListSelect = ({ hanldeRecordIdentifier }) => {
   const intl = useIntl();
 
   const options = identifierOptions.map((el) => ({
@@ -19,6 +20,11 @@ export const ListSelect = () => {
       arial-label={intl.formatMessage({ id: 'ui-bulk-edit.list.filters.recordIdentifier' })}
       label={<FormattedMessage id="ui-bulk-edit.list.filters.recordIdentifier" />}
       defaultValue={options[0].value}
+      onChange={hanldeRecordIdentifier}
     />
   );
+};
+
+ListSelect.propTypes = {
+  hanldeRecordIdentifier: PropTypes.func.isRequired,
 };
