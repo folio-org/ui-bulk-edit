@@ -21,7 +21,7 @@ export const BulkEditListFilters = () => {
   const [filters, setFilter] = useState({
     capabilities: ['users'],
   });
-  const [selectedIdentifier, setSelectedIdentifier] = useState();
+  const [selectedIdentifier, setSelectedIdentifier] = useState(null);
 
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
 

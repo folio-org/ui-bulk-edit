@@ -20,7 +20,7 @@
   "list.savedQueries.title": "Saved queries",
 
   "uploaderBtnText": "or choose file",
-  "uploaderSubTitle": "Select a file with {identifier, select, undefined {record identifiers} other {{identifier}}}",
+  "uploaderSubTitle": "Select a file with {identifier, select, null {record identifiers} other {{identifier}}}",
   "uploaderTitle": "Drag and drop",
   "uploaderActiveTitle": "Drop to continue",
   "uploading": "Uploading",
