@@ -4,21 +4,36 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-import { API_PATH } from '../constants/constants';
-
-export const useFileUploadComand = (options = {}) => {
+export const useFileUploadComand = (options) => {
   const ky = useOkapiKy();
 
-  const { data: jobId } = useMutation({
-    mutationFn: (fileName) => {
-      const kyPath = `${API_PATH}/jobs–createJobCommand`;
+  const { isLoading, mutateAsync } = useMutation({
+    mutationFn: () => {
+      const json = {
+        type: 'CIRCULATION_LOG',
+        exportTypeSpecificParameters: options.recordIdentifier,
+      };
 
-      return ky.post(kyPath, { json: fileName });
+      return ky.post('data-export-spring/jobs', { json });
+    },
+    ...options,
+  });
+
+  const { data } = useMutation({
+    mutationFn: () => {
+      const json = {
+        type: 'CIRCULATION_LOG',
+        exportTypeSpecificParameters: options.recordIdentifier,
+      };
+
+      return ky.post('data-export-spring/jobs', { json });
     },
     ...options,
   });
 
   return {
-    data: jobId,
+    isLoading,
+    requestJobId: data,
   };
 };
+

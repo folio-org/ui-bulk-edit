@@ -6,11 +6,11 @@ export const identifierOptions = [
     disabled: true,
   },
   {
-    value: 'User UUIDs',
+    value: 'ID',
     label: 'ui-bulk-edit.list.filters.recordIdentifier.userUUIDs',
   },
   {
-    value: 'User Barcodes',
+    value: 'BARCODE',
     label: 'ui-bulk-edit.list.filters.recordIdentifier.userBarcodes',
   },
   {

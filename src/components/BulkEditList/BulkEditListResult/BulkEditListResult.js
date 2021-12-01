@@ -1,15 +1,24 @@
 import PropTypes from 'prop-types';
-import { Headline } from '@folio/stripes/components';
+import {
+  Switch,
+  Route,
+} from 'react-router-dom';
 
 import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
+import { Preview } from './Preview/Preview';
 
 export const BulkEditListResult = ({ fileUploadedName }) => {
   return (
-    fileUploadedName ?
-      <Headline size="large" margin="medium" tag="h3">
-        FileName: {fileUploadedName}
-      </Headline> :
-      <NoResultsMessage />
+    <Switch>
+      <Route path="/bulk-edit" exact component={NoResultsMessage} />
+      <Route
+        path="/bulk-edit/preview"
+        exact
+        component={
+        () => <Preview fileUploadedName={fileUploadedName} />
+      }
+      />
+    </Switch>
   );
 };
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 
 import {
   Button,
@@ -15,6 +16,7 @@ import { ListFileUploader } from './ListFileUploader/ListFileUploader';
 import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
 import { getFileInfo } from './utils/getFileInfo';
+import { useFileUploadComand } from '../../../API/useFileUpload';
 
 export const BulkEditListFilters = (
   {
@@ -31,6 +33,7 @@ export const BulkEditListFilters = (
     capabilities: ['users'],
     recordIdentifier: '',
   });
+  const history = useHistory();
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
@@ -93,6 +96,7 @@ export const BulkEditListFilters = (
       setFileUploadedName(fileToUpload.name);
       setIsFileUploaded(true);
       setDropZoneActive(false);
+      history.push('bulk-edit/preview');
     }
   }
 
