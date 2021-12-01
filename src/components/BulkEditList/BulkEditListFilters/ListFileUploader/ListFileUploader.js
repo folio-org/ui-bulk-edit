@@ -7,13 +7,15 @@ import {
   Preloader,
 } from '@folio/stripes-data-transfer-components';
 
-export const ListFileUploader = (
-  { isDropZoneActive,
-    isLoading,
-    handleDragEnter,
-    handleDragLeave,
-    handleDrop },
-) => {
+export const ListFileUploader = ({
+  disableUploader,
+  isDropZoneActive,
+  isLoading,
+  handleDragEnter,
+  handleDragLeave,
+  handleDrop,
+
+}) => {
   const uploaderTitle = isDropZoneActive ? isLoading
     ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
     : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />
@@ -30,6 +32,7 @@ export const ListFileUploader = (
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         marginBottom
+        disabled={disableUploader}
       >
         <>
           <Layout className="padding-top-gutter padding-start-gutter padding-end-gutter textCentered">
@@ -46,6 +49,7 @@ export const ListFileUploader = (
 
 ListFileUploader.propTypes = {
   isDropZoneActive: PropTypes.bool.isRequired,
+  disableUploader: PropTypes.bool,
   isLoading: PropTypes.bool.isRequired,
   handleDragEnter: PropTypes.func.isRequired,
   handleDragLeave: PropTypes.func.isRequired,

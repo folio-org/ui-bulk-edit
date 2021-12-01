@@ -1,5 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
+import { IfPermission } from '@folio/stripes/core';
 
 import {
   Button,
@@ -19,22 +20,26 @@ export const BulkEditActionMenu = ({
 
   return (
     <>
-      <Button
-        buttonStyle="dropdownItem"
-        onClick={buildButtonClickHandler(onEdit)}
-      >
-        <Icon icon="edit">
-          <FormattedMessage id="ui-bulk-edit.start.edit" />
-        </Icon>
-      </Button>
-      <Button
-        buttonStyle="dropdownItem"
-        onClick={buildButtonClickHandler(onDelete)}
-      >
-        <Icon icon="trash">
-          <FormattedMessage id="ui-bulk-edit.start.delete" />
-        </Icon>
-      </Button>
+      <IfPermission perm="bulk-edit.edit">
+        <Button
+          buttonStyle="dropdownItem"
+          onClick={buildButtonClickHandler(onEdit)}
+        >
+          <Icon icon="edit">
+            <FormattedMessage id="ui-bulk-edit.start.edit" />
+          </Icon>
+        </Button>
+      </IfPermission>
+      <IfPermission perm="bulk-edit.delete">
+        <Button
+          buttonStyle="dropdownItem"
+          onClick={buildButtonClickHandler(onDelete)}
+        >
+          <Icon icon="trash">
+            <FormattedMessage id="ui-bulk-edit.start.delete" />
+          </Icon>
+        </Button>
+      </IfPermission>
     </>
   );
 };

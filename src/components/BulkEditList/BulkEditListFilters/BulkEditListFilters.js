@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useStripes } from '@folio/stripes/core';
 
 import {
   Button,
@@ -22,6 +23,8 @@ export const BulkEditListFilters = () => {
     capabilities: ['users'],
   });
 
+  const stripes = useStripes();
+  const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
 
   const renderIdentifierButton = () => {
@@ -71,13 +74,14 @@ export const BulkEditListFilters = () => {
         {renderIdentifierButton()}
         {renderQueryButton()}
       </ButtonGroup>
-      <ListSelect />
+      <ListSelect disabled={!hasEditOrDeletePerms} />
       <ListFileUploader
         isLoading={isLoading}
         isDropZoneActive={isDropZoneActive}
         handleDragEnter={handleDragEnter}
         handleDrop={handleDrop}
         handleDragLeave={handleDragLeave}
+        disableUploader={!hasEditOrDeletePerms}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"

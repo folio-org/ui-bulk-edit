@@ -32,6 +32,32 @@
         "permissionName": "module.bulk-edit.enabled",
         "displayName": "UI: Bulk edit module is enabled",
         "visible": false
+      },
+      {
+        "permissionName": "ui-bulk-edit.view",
+        "displayName": "Bulk Edit: View permissions",
+        "visible": true,
+        "subPermissions": [
+          "bulk-edit.preview.get"
+        ]
+      },
+      {
+        "permissionName": "ui-bulk-edit.edit",
+        "displayName": "Bulk Edit: Edit permissions",
+        "subPermissions": [
+          "bulk-edit.upload.post",
+          "bulk-edit.preview.get"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-bulk-edit.delete",
+        "displayName": "Bulk Edit: Delete permissions",
+        "subPermissions": [
+          "bulk-edit.upload.post",
+          "bulk-edit.preview.get"
+        ],
+        "visible": true
       }
     ]
   },
