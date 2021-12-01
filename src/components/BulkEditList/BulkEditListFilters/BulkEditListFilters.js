@@ -21,6 +21,7 @@ export const BulkEditListFilters = () => {
   const [filters, setFilter] = useState({
     capabilities: ['users'],
   });
+  const [selectedIdentifier, setSelectedIdentifier] = useState(null);
 
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
 
@@ -71,13 +72,16 @@ export const BulkEditListFilters = () => {
         {renderIdentifierButton()}
         {renderQueryButton()}
       </ButtonGroup>
-      <ListSelect />
+      <ListSelect
+        onSelectIdentifier={setSelectedIdentifier}
+      />
       <ListFileUploader
         isLoading={isLoading}
         isDropZoneActive={isDropZoneActive}
         handleDragEnter={handleDragEnter}
         handleDrop={handleDrop}
         handleDragLeave={handleDragLeave}
+        selectedIdentifier={selectedIdentifier}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
