@@ -1,5 +1,3 @@
-export const SUPPORTED_FILE_EXTENSIONS = {
-  CSV: 'csv',
-};
+export const SUPPORTED_FILE_EXTENSIONS = ['csv'];
 
 export const API_PATH = 'data-export-spring';

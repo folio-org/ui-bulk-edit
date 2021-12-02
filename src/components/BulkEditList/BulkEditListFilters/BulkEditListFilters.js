@@ -39,7 +39,7 @@ export const BulkEditListFilters = (
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
 
   useEffect(() => {
-    if (isFileUploaded || filters.recordIdentifier === '') {
+    if (isFileUploaded || !filters.recordIdentifier) {
       setIsDropZoneDisabled(true);
     } else setIsDropZoneDisabled(false);
   }, [filters.recordIdentifier, isFileUploaded]);

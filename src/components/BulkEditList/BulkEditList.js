@@ -13,6 +13,14 @@ export const BulkEditList = () => {
   const [fileUploadedName, setFileUploadedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
 
+  const paneTitle = isFileUploaded ?
+    <FormattedMessage
+      id="ui-bulk-edit.meta.title.uploadedFile"
+      values={{ fileName: fileUploadedName }}
+    />
+    :
+    <FormattedMessage id="ui-bulk-edit.meta.title" />;
+
   const renderActionMenu = () => (
     <BulkEditActionMenu
       onEdit={noop}
@@ -35,13 +43,7 @@ export const BulkEditList = () => {
       </Pane>
       <Pane
         defaultWidth="fill"
-        paneTitle={isFileUploaded ?
-          <FormattedMessage
-            id="ui-bulk-edit.meta.title.uploadedFile"
-            values={{ fileName: fileUploadedName }}
-          />
-          :
-          <FormattedMessage id="ui-bulk-edit.meta.title" />}
+        paneTitle={paneTitle}
         paneSub={<FormattedMessage id="ui-bulk-edit.list.logSubTitle" />}
         appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
         actionMenu={renderActionMenu}
