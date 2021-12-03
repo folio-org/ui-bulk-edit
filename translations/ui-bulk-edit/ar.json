@@ -25,5 +25,7 @@
     "list.filters.capabilities.inventory": "المخزون",
     "list.filters.capabilities.circulation": "الإعارة",
     "list.filters.capabilities.acquisition": "التزويد",
-    "list.savedQueries.title": "استعلامات محفوظة"
+    "list.savedQueries.title": "استعلامات محفوظة",
+    "start.edit": "بدء التحرير بالدفعة",
+    "start.delete": "بدء الحذف بالدفعة"
 }

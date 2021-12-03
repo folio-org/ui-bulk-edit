@@ -12,7 +12,7 @@
     "list.filters.recordIdentifier.externalIDs": "External IDs",
     "list.filters.recordIdentifier.usernames": "Usernames",
     "uploaderBtnText": "or choose file",
-    "uploaderSubTitle": "Select a file with record identifiers",
+    "uploaderSubTitle": "Select a file with {identifier, select, null {record identifiers} other {{identifier}}}",
     "uploaderTitle": "Drag and drop",
     "uploaderActiveTitle": "Drop to continue",
     "uploading": "Uploading",
@@ -25,5 +25,7 @@
     "list.filters.capabilities.inventory": "Inventory",
     "list.filters.capabilities.circulation": "Circulation",
     "list.filters.capabilities.acquisition": "Acquisition",
-    "list.savedQueries.title": "Saved queries"
+    "list.savedQueries.title": "Saved queries",
+    "start.edit": "Start bulk edit",
+    "start.delete": "Start bulk delete"
 }
