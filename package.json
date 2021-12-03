@@ -36,10 +36,7 @@
       {
         "permissionName": "ui-bulk-edit.view",
         "displayName": "Bulk Edit: View permissions",
-        "visible": true,
-        "subPermissions": [
-          "bulk-edit.preview.get"
-        ]
+        "visible": true
       },
       {
         "permissionName": "ui-bulk-edit.edit",

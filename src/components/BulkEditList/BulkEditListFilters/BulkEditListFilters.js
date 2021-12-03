@@ -90,6 +90,7 @@ export const BulkEditListFilters = () => {
         activeFilters={filters.capabilities}
         onChange={hanldeCapabilityChange}
         closedByDefault={false}
+        disabled={!hasEditOrDeletePerms}
       />
       <Accordion
         closedByDefault
