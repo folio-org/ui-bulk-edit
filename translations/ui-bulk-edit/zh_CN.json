@@ -25,5 +25,7 @@
     "list.filters.capabilities.inventory": "典藏",
     "list.filters.capabilities.circulation": "流通",
     "list.filters.capabilities.acquisition": "采访",
-    "list.savedQueries.title": "保存的查询"
+    "list.savedQueries.title": "保存的查询",
+    "start.edit": "开始批编辑",
+    "start.delete": "开始批删除"
 }
