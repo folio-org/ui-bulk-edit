@@ -12,7 +12,11 @@ const onDragLeaveMock = jest.fn();
 const onDropMock = jest.fn();
 const hideFileExtensionModalMock = jest.fn();
 
-const renderListFileUploader = (isDropZoneActive = false, isLoading = false) => {
+const renderListFileUploader = ({
+  isDropZoneActive = false,
+  isLoading = false,
+  selectedIdentifier = null,
+} = {}) => {
   render(
     <ListFileUploader
       handleDragEnter={onDragEnterMock}
@@ -22,6 +26,7 @@ const renderListFileUploader = (isDropZoneActive = false, isLoading = false) => 
       hideFileExtensionModal={hideFileExtensionModalMock}
       isLoading={isLoading}
       fileExtensionModalOpen={false}
+      selectedIdentifier={selectedIdentifier}
     />,
   );
 };
@@ -61,17 +66,17 @@ describe('FileUploader', () => {
 
     expect(screen.getByText(/uploaderTitle/)).toBeVisible();
     expect(screen.getByText(/uploaderSubTitle/)).toBeVisible();
-    expect(screen.getByRole('button', { name: /uploaderBtnText/ })).toBeEnabled();
+    expect(screen.getByRole('button', { name: /uploaderBtnText/ })).toBeDisabled();
   });
 
   it('should display FileUploader with loading state', () => {
-    renderListFileUploader(true, true);
+    renderListFileUploader({ isDropZoneActive: true, isLoading: true });
 
     expect(screen.getByText(/uploading/)).toBeEnabled();
   });
 
   it('should display FileUploader without loading state', () => {
-    renderListFileUploader(true, false);
+    renderListFileUploader({ isDropZoneActive: true, isLoading: false });
 
     expect(screen.getByText(/uploaderActiveTitle/)).toBeEnabled();
   });
@@ -82,7 +87,7 @@ describe('FileUploader', () => {
     ], 'ping.json', { type: 'application/json' });
     const data = mockData([file]);
 
-    renderListFileUploader();
+    renderListFileUploader({ selectedIdentifier: 'Users UUIDs' });
 
     const fileInput = screen.getByTestId('fileUploader-input');
 

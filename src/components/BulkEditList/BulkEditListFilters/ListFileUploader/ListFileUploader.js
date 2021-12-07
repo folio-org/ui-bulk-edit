@@ -14,12 +14,21 @@ export const ListFileUploader = ({
   handleDragEnter,
   handleDragLeave,
   handleDrop,
-
+  selectedIdentifier,
 }) => {
   const uploaderTitle = isDropZoneActive ? isLoading
     ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
     : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />
     : <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
+
+  const usploderSubTitle = (
+    <FormattedMessage
+      id="ui-bulk-edit.uploaderSubTitle"
+      values={{
+        identifier: selectedIdentifier,
+      }}
+    />
+  );
 
   return (
     <div style={{ marginBottom: '15px' }}>
@@ -28,16 +37,16 @@ export const ListFileUploader = ({
         title={uploaderTitle}
         uploadButtonText={<FormattedMessage id="ui-bulk-edit.uploaderBtnText" />}
         isDropZoneActive={isDropZoneActive}
+        disabled={!selectedIdentifier || disableUploader}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         marginBottom
-        disabled={disableUploader}
       >
         <>
           <Layout className="padding-top-gutter padding-start-gutter padding-end-gutter textCentered">
             <span data-test-sub-title>
-              <FormattedMessage id="ui-bulk-edit.uploaderSubTitle" />
+              {usploderSubTitle}
             </span>
           </Layout>
         </>
@@ -54,4 +63,5 @@ ListFileUploader.propTypes = {
   handleDragEnter: PropTypes.func.isRequired,
   handleDragLeave: PropTypes.func.isRequired,
   handleDrop: PropTypes.func.isRequired,
+  selectedIdentifier: PropTypes.string,
 };

@@ -22,6 +22,7 @@ export const BulkEditListFilters = () => {
   const [filters, setFilter] = useState({
     capabilities: ['users'],
   });
+  const [selectedIdentifier, setSelectedIdentifier] = useState(null);
 
   const stripes = useStripes();
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
@@ -74,7 +75,10 @@ export const BulkEditListFilters = () => {
         {renderIdentifierButton()}
         {renderQueryButton()}
       </ButtonGroup>
-      <ListSelect disabled={!hasEditOrDeletePerms} />
+      <ListSelect
+        onSelectIdentifier={setSelectedIdentifier}
+        disabled={!hasEditOrDeletePerms}
+      />
       <ListFileUploader
         isLoading={isLoading}
         isDropZoneActive={isDropZoneActive}
@@ -82,6 +86,7 @@ export const BulkEditListFilters = () => {
         handleDrop={handleDrop}
         handleDragLeave={handleDragLeave}
         disableUploader={!hasEditOrDeletePerms}
+        selectedIdentifier={selectedIdentifier}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"

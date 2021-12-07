@@ -25,5 +25,7 @@
     "list.filters.capabilities.inventory": "Acervo",
     "list.filters.capabilities.circulation": "Circulação",
     "list.filters.capabilities.acquisition": "Aquisição",
-    "list.savedQueries.title": "Consultas salvas"
+    "list.savedQueries.title": "Consultas salvas",
+    "start.edit": "Start bulk edit",
+    "start.delete": "Start bulk delete"
 }
