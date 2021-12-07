@@ -20,7 +20,6 @@ export const BulkEditList = () => {
 
   const [fileUploadedName, setFileUploadedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
-  const [jobId, setJobId] = useState('');
 
   const paneTitle = isFileUploaded ?
     <FormattedMessage
@@ -40,7 +39,6 @@ export const BulkEditList = () => {
           setFileUploadedName={setFileUploadedName}
           setIsFileUploaded={setIsFileUploaded}
           isFileUploaded={isFileUploaded}
-          setJobId={setJobId}
         />
       </Pane>
       <Pane
@@ -52,7 +50,6 @@ export const BulkEditList = () => {
       >
         <BulkEditListResult
           fileUploadedName={fileUploadedName}
-          jobId={jobId}
         />
       </Pane>
     </Paneset>

@@ -7,7 +7,7 @@ import { useOkapiKy } from '@folio/stripes/core';
 export const useJobCommand = () => {
   const ky = useOkapiKy();
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync: requestJobId, isLoading } = useMutation({
     mutationFn: ({ recordIdentifier }) => {
       const json = {
         type: 'BULK_EDIT_IDENTIFIERS',
@@ -21,7 +21,8 @@ export const useJobCommand = () => {
   });
 
   return {
-    requestJobId: mutateAsync,
+    requestJobId,
+    isLoading,
   };
 };
 

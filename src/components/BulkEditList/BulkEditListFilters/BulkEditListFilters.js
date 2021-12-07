@@ -9,7 +9,7 @@ import {
   Accordion,
   Badge,
 } from '@folio/stripes/components';
-import { AcqCheckboxFilter } from '@folio/stripes-acq-components';
+import { AcqCheckboxFilter, useShowCallout } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
 import { ListFileUploader } from './ListFileUploader/ListFileUploader';
@@ -18,74 +18,37 @@ import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
 import { getFileInfo } from './utils/getFileInfo';
 import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
 
-export const BulkEditListFilters = (
-  {
-    setFileUploadedName,
-    setIsFileUploaded,
-    isFileUploaded,
-    setJobId,
-  },
-) => {
-  const [criteria, setCriteria] = useState('identifier');
-  const [isLoading, setLoading] = useState(false);
+export const BulkEditListFilters = ({
+  setFileUploadedName,
+  isFileUploaded,
+}) => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
-  const [filters, setFilter] = useState({
+  const [{ criteria, capabilities, recordIdentifier }, setFilters] = useState({
+    criteria: 'identifier',
     capabilities: ['users'],
     recordIdentifier: '',
   });
+  const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
-  const { requestJobId } = useJobCommand();
+  const { requestJobId, isLoading } = useJobCommand();
   const { fileUpload } = useFileUploadComand();
-
-
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
 
   useEffect(() => {
-    if (isFileUploaded || !filters.recordIdentifier) {
+    if (isFileUploaded || !recordIdentifier) {
       setIsDropZoneDisabled(true);
     } else setIsDropZoneDisabled(false);
-  }, [filters.recordIdentifier, isFileUploaded]);
+  }, [recordIdentifier, isFileUploaded]);
 
   useEffect(() => {
     const fileName = new URLSearchParams(location.search).get('fileName');
 
     setFileUploadedName(fileName);
   }, [location.search, setFileUploadedName]);
-  const renderIdentifierButton = () => {
-    return (
-      <Button
-        buttonStyle={criteria === 'identifier' ? 'primary' : 'default'}
-        onClick={() => { setCriteria('identifier'); }}
-      >
-        <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
-      </Button>
-    );
-  };
-
-  const renderQueryButton = () => {
-    return (
-      <Button
-        buttonStyle={criteria === 'query' ? 'primary' : 'default'}
-        onClick={() => { setCriteria('query'); }}
-      >
-        <FormattedMessage id="ui-bulk-edit.list.filters.query" />
-      </Button>
-    );
-  };
-
-  const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
-
-  const handleDragEnter = () => {
-    setDropZoneActive(true);
-  };
-
-  const handleDragLeave = () => {
-    setDropZoneActive(false);
-  };
 
   const showFileExtensionModal = () => {
     setFileExtensionModalOpen(true);
@@ -95,68 +58,83 @@ export const BulkEditListFilters = (
     setFileExtensionModalOpen(false);
   };
 
-  async function handleDrop(acceptedFiles) {
+  const handleChange = (event, field) => setFilters(prev => ({
+    ...prev, [field]: event.target.value,
+  }));
+
+  const uploadFileFlow = async (fileToUpload) => {
+    setFileUploadedName(fileToUpload.name);
+    setDropZoneActive(false);
+
+    try {
+      const { id } = await requestJobId({ recordIdentifier });
+
+      await fileUpload({ id, fileToUpload });
+
+      history.replace({
+        pathname: `/bulk-edit/${id}`,
+        search: `?fileName=${fileToUpload.name}`,
+      });
+    } catch ({ message }) {
+      showCallout({ message });
+    }
+  };
+
+  const handleDrop = async (acceptedFiles) => {
     const fileToUpload = acceptedFiles[0];
-
-    if (!fileToUpload) return;
-
     const { isTypeSupported } = getFileInfo(fileToUpload);
 
-    if (!isTypeSupported) {
-      showFileExtensionModal();
+    if (isTypeSupported) {
+      await uploadFileFlow(fileToUpload);
     } else {
-      setFileUploadedName(fileToUpload.name);
-      setIsFileUploaded(true);
-      setDropZoneActive(false);
-      setLoading(true);
-      requestJobId({ recordIdentifier: filters.recordIdentifier })
-        .then(({ id }) => {
-          history.push({
-            pathname: `bulk-edit/${id}`,
-            search: `?fileName=${fileToUpload.name}`,
-          });
-          fileUpload({ id, fileToUpload });
-          setJobId(id);
-          setLoading(false);
-        });
+      showFileExtensionModal();
     }
-  }
+  };
 
-  const hanldeCapabilityChange = (event) => setFilter({
-    ...filters, capabilities: event.values,
-  });
+  const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
 
-  const hanldeRecordIdentifierChange = (event) => setFilter({
-    ...filters, recordIdentifier: event.target.value,
-  });
+  const renderTopButtons = () => {
+    return (
+      <>
+        <Button
+          buttonStyle={criteria === 'identifier' ? 'primary' : 'default'}
+          onClick={() => setFilters(prev => ({ ...prev, criteria: 'identifier' }))}
+        >
+          <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
+        </Button>
+        <Button
+          buttonStyle={criteria === 'query' ? 'primary' : 'default'}
+          onClick={() => setFilters(prev => ({ ...prev, criteria: 'query' }))}
+        >
+          <FormattedMessage id="ui-bulk-edit.list.filters.query" />
+        </Button>
+      </>
+    );
+  };
 
   return (
     <>
       <ButtonGroup fullWidth>
-        {renderIdentifierButton()}
-        {renderQueryButton()}
+        {renderTopButtons()}
       </ButtonGroup>
       <ListSelect
-        hanldeRecordIdentifier={hanldeRecordIdentifierChange}
+        hanldeRecordIdentifier={e => handleChange(e, 'recordIdentifier')}
       />
       <ListFileUploader
         isLoading={isLoading}
         isDropZoneActive={isDropZoneActive}
-        handleDragEnter={handleDragEnter}
         handleDrop={handleDrop}
-        handleDragLeave={handleDragLeave}
         fileExtensionModalOpen={fileExtensionModalOpen}
-        setFileExtensionModalOpen={setFileExtensionModalOpen}
         hideFileExtensionModal={hideFileExtensionModal}
         isDropZoneDisabled={isDropZoneDisabled}
-        recordIdentifier={filters.recordIdentifier}
+        recordIdentifier={recordIdentifier}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
         options={capabilitiesFilterOptions}
         name="capabilities"
-        activeFilters={filters.capabilities}
-        onChange={hanldeCapabilityChange}
+        activeFilters={capabilities}
+        onChange={e => handleChange(e, 'capabilities')}
         closedByDefault={false}
       />
       <Accordion
@@ -171,7 +149,5 @@ export const BulkEditListFilters = (
 
 BulkEditListFilters.propTypes = {
   setFileUploadedName: PropTypes.func.isRequired,
-  setIsFileUploaded: PropTypes.func.isRequired,
   isFileUploaded: PropTypes.bool.isRequired,
-  setJobId: PropTypes.func.isRequired,
 };

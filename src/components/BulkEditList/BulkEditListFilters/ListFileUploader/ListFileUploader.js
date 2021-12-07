@@ -10,11 +10,11 @@ import {
   Preloader,
 } from '@folio/stripes-data-transfer-components';
 
+import css from './ListFileUploader.css';
+
 export const ListFileUploader = (
   { isDropZoneActive,
     isLoading,
-    handleDragEnter,
-    handleDragLeave,
     handleDrop,
     fileExtensionModalOpen,
     hideFileExtensionModal,
@@ -36,17 +36,14 @@ export const ListFileUploader = (
   );
 
   return (
-    <div style={{ marginBottom: '15px' }}>
+    <div className={css.FileUploaderContainer}>
       <FileUploader
         disabled={isDropZoneDisabled}
         multiple={false}
         title={uploaderTitle}
         uploadButtonText={<FormattedMessage id="ui-bulk-edit.uploaderBtnText" />}
         isDropZoneActive={isDropZoneActive}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        marginBottom
       >
         {openDialogWindow => (
           <>
@@ -82,8 +79,6 @@ export const ListFileUploader = (
 ListFileUploader.propTypes = {
   isDropZoneActive: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  handleDragEnter: PropTypes.func.isRequired,
-  handleDragLeave: PropTypes.func.isRequired,
   handleDrop: PropTypes.func.isRequired,
   fileExtensionModalOpen: PropTypes.bool.isRequired,
   hideFileExtensionModal: PropTypes.func.isRequired,
