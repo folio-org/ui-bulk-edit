@@ -4,6 +4,7 @@ import {
   render,
   fireEvent,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import '../../../../../test/jest/__mock__';
 
@@ -14,7 +15,13 @@ const onDragLeaveMock = jest.fn();
 const onDropMock = jest.fn();
 const hideFileExtensionModalMock = jest.fn();
 
-const renderListFileUploader = (isDropZoneActive = false, isLoading = false) => {
+const renderListFileUploader = ({
+  isDropZoneActive = false,
+  isLoading = false,
+  recordIdentifier = '',
+  isDropZoneDisabled = false,
+  fileExtensionModalOpen = false,
+}) => {
   render(
     <ListFileUploader
       handleDragEnter={onDragEnterMock}
@@ -23,7 +30,9 @@ const renderListFileUploader = (isDropZoneActive = false, isLoading = false) => 
       isDropZoneActive={isDropZoneActive}
       hideFileExtensionModal={hideFileExtensionModalMock}
       isLoading={isLoading}
-      fileExtensionModalOpen={false}
+      fileExtensionModalOpen={fileExtensionModalOpen}
+      recordIdentifier={recordIdentifier}
+      disabled={isDropZoneDisabled}
     />,
   );
 };
@@ -83,7 +92,11 @@ function mockData(files) {
 describe('FileUploader', () => {
   afterEach(() => jest.clearAllMocks());
   it('should display FileUploader', () => {
-    renderListFileUploader();
+    renderListFileUploader(
+      {
+        isDropZoneActive: false,
+      },
+    );
 
     expect(screen.getByText(/uploaderTitle/)).toBeVisible();
     expect(screen.getByText(/uploaderSubTitle/)).toBeVisible();
@@ -91,13 +104,21 @@ describe('FileUploader', () => {
   });
 
   it('should display FileUploader with loading state', () => {
-    renderListFileUploader(true, true);
+    renderListFileUploader(
+      {
+        isDropZoneActive: true,
+        isLoading: true,
+      },
+    );
 
     expect(screen.getByText(/uploading/)).toBeEnabled();
   });
 
   it('should display FileUploader without loading state', () => {
-    renderListFileUploader(true, false);
+    renderListFileUploader({
+      isDropZoneActive: true,
+      isLoading: false,
+    });
 
     expect(screen.getByText(/uploaderActiveTitle/)).toBeEnabled();
   });
@@ -108,7 +129,11 @@ describe('FileUploader', () => {
     ], 'ping.json', { type: 'application/json' });
     const data = mockData([file]);
 
-    renderListFileUploader();
+    renderListFileUploader(
+      {
+        isDropZoneActive: false,
+      },
+    );
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
@@ -124,7 +149,11 @@ describe('FileUploader', () => {
     const event = createDtWithFiles(file);
     const data = mockData([file]);
 
-    renderListFileUploader();
+    renderListFileUploader(
+      {
+        isDropZoneActive: false,
+      },
+    );
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
@@ -137,5 +166,24 @@ describe('FileUploader', () => {
     await flushPromises();
 
     expect(onDropMock).toHaveBeenCalled();
+  });
+
+  it('should display FileUploader modal', () => {
+    renderListFileUploader({
+      isDropZoneActive: true,
+      isLoading: false,
+      fileExtensionModalOpen: true,
+    });
+
+    const modalText = [
+      /modal.fileExtensions.blocked.header/,
+      /modal.fileExtensions.blocked.message/,
+    ];
+
+    modalText.forEach((el) => expect(screen.getByText(el)).toBeVisible());
+
+    userEvent.click(screen.getByRole('button', { name: /fileExtensions.actionButton/ }));
+
+    expect(hideFileExtensionModalMock).toHaveBeenCalled();
   });
 });

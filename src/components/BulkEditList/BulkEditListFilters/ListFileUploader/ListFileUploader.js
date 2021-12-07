@@ -18,12 +18,22 @@ export const ListFileUploader = (
     handleDrop,
     fileExtensionModalOpen,
     hideFileExtensionModal,
-    isDropZoneDisabled },
+    isDropZoneDisabled,
+    recordIdentifier },
 ) => {
   const uploaderTitle = isDropZoneActive ? isLoading
     ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
     : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />
     : <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
+
+  const usploderSubTitle = (
+    <FormattedMessage
+      id="ui-bulk-edit.uploaderSubTitle"
+      values={{
+        identifier: recordIdentifier,
+      }}
+    />
+  );
 
   return (
     <div style={{ marginBottom: '15px' }}>
@@ -42,7 +52,7 @@ export const ListFileUploader = (
           <>
             <Layout className="padding-top-gutter padding-start-gutter padding-end-gutter textCentered">
               <span data-test-sub-title>
-                <FormattedMessage id="ui-bulk-edit.uploaderSubTitle" />
+                {usploderSubTitle}
               </span>
             </Layout>
             <ConfirmationModal
@@ -78,4 +88,5 @@ ListFileUploader.propTypes = {
   fileExtensionModalOpen: PropTypes.bool.isRequired,
   hideFileExtensionModal: PropTypes.func.isRequired,
   isDropZoneDisabled: PropTypes.bool.isRequired,
+  recordIdentifier: PropTypes.string.isRequired,
 };

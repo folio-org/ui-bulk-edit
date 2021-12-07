@@ -2,18 +2,40 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { useOkapiKy } from '@folio/stripes/core';
+
 
 import '../../test/jest/__mock__';
 
 import BulkEdit from './BulkEdit';
 
+jest.mock('@folio/stripes/core', () => ({
+  ...jest.requireActual('@folio/stripes/core'),
+  useNamespace: () => ['namespace'],
+  useOkapiKy: jest.fn(),
+}));
+
+const history = createMemoryHistory();
+
 const renderBulkEdit = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        // ✅ turns retries off
+        retry: false,
+      },
+    },
+  });
   window.history.pushState({}, 'Test page', '/bulk-edit');
 
   render(
-    <BrowserRouter>
-      <BulkEdit />
-    </BrowserRouter>,
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <BulkEdit />
+      </BrowserRouter>,
+    </QueryClientProvider>,
   );
 };
 
@@ -70,6 +92,17 @@ function dispatchEvt(node, type, data) {
 }
 
 describe('BulkEdit', () => {
+  beforeEach(() => {
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        post: () => ({
+          json: () => ({
+            id: '1',
+          }),
+        }),
+      });
+  });
   it('displays Bulk edit', () => {
     renderBulkEdit();
 
@@ -203,6 +236,10 @@ describe('BulkEdit', () => {
 
     fireEvent.drop(fileInput, event);
     await flushPromises();
+
+    history.push({
+      pathname: 'bulk-edit/1',
+    });
 
     expect(screen.getByText(/meta.title/)).toBeVisible();
   });

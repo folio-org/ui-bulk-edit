@@ -3,15 +3,24 @@ import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
-
 import { noop } from 'lodash/util';
+
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult/BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu/BulkEditActionMenu';
 
 export const BulkEditList = () => {
+  const renderActionMenu = () => (
+    <BulkEditActionMenu
+      onEdit={noop}
+      onDelete={noop}
+      onToggle={noop}
+    />
+  );
+
   const [fileUploadedName, setFileUploadedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const [jobId, setJobId] = useState('');
 
   const paneTitle = isFileUploaded ?
     <FormattedMessage
@@ -20,14 +29,6 @@ export const BulkEditList = () => {
     />
     :
     <FormattedMessage id="ui-bulk-edit.meta.title" />;
-
-  const renderActionMenu = () => (
-    <BulkEditActionMenu
-      onEdit={noop}
-      onDelete={noop}
-      onToggle={noop}
-    />
-  );
 
   return (
     <Paneset>
@@ -39,6 +40,7 @@ export const BulkEditList = () => {
           setFileUploadedName={setFileUploadedName}
           setIsFileUploaded={setIsFileUploaded}
           isFileUploaded={isFileUploaded}
+          setJobId={setJobId}
         />
       </Pane>
       <Pane
@@ -50,6 +52,7 @@ export const BulkEditList = () => {
       >
         <BulkEditListResult
           fileUploadedName={fileUploadedName}
+          jobId={jobId}
         />
       </Pane>
     </Paneset>

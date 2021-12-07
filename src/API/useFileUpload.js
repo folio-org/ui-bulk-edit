@@ -4,36 +4,48 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const useFileUploadComand = (options) => {
+export const useJobCommand = () => {
   const ky = useOkapiKy();
 
-  const { isLoading, mutateAsync } = useMutation({
-    mutationFn: () => {
+  const { mutateAsync } = useMutation({
+    mutationFn: ({ recordIdentifier }) => {
       const json = {
-        type: 'CIRCULATION_LOG',
-        exportTypeSpecificParameters: options.recordIdentifier,
+        type: 'BULK_EDIT_IDENTIFIERS',
+        identifierType: recordIdentifier,
+        entityType: 'USER',
+        exportTypeSpecificParameters: {},
       };
 
-      return ky.post('data-export-spring/jobs', { json });
+      return ky.post('data-export-spring/jobs', { json }).json();
     },
-    ...options,
-  });
-
-  const { data } = useMutation({
-    mutationFn: () => {
-      const json = {
-        type: 'CIRCULATION_LOG',
-        exportTypeSpecificParameters: options.recordIdentifier,
-      };
-
-      return ky.post('data-export-spring/jobs', { json });
-    },
-    ...options,
   });
 
   return {
-    isLoading,
-    requestJobId: data,
+    requestJobId: mutateAsync,
   };
 };
+
+export const useFileUploadComand = () => {
+  const ky = useOkapiKy();
+
+  const { mutateAsync } = useMutation({ mutationFn: ({ id, fileToUpload }) => {
+    const formData = new FormData();
+
+    formData.append('file', fileToUpload);
+
+    return ky.post(`bulk-edit/${id}/upload`, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      body: formData,
+    });
+  } });
+
+  return {
+    fileUpload: mutateAsync,
+  };
+};
+
+
+
 

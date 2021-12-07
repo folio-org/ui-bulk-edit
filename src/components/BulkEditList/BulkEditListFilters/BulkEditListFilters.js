@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import {
   Button,
@@ -16,13 +16,14 @@ import { ListFileUploader } from './ListFileUploader/ListFileUploader';
 import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
 import { getFileInfo } from './utils/getFileInfo';
-import { useFileUploadComand } from '../../../API/useFileUpload';
+import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
 
 export const BulkEditListFilters = (
   {
     setFileUploadedName,
     setIsFileUploaded,
     isFileUploaded,
+    setJobId,
   },
 ) => {
   const [criteria, setCriteria] = useState('identifier');
@@ -34,7 +35,12 @@ export const BulkEditListFilters = (
     recordIdentifier: '',
   });
   const history = useHistory();
+  const location = useLocation();
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
+
+  const { requestJobId } = useJobCommand();
+  const { fileUpload } = useFileUploadComand();
+
 
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
 
@@ -43,6 +49,12 @@ export const BulkEditListFilters = (
       setIsDropZoneDisabled(true);
     } else setIsDropZoneDisabled(false);
   }, [filters.recordIdentifier, isFileUploaded]);
+
+  useEffect(() => {
+    const fileName = new URLSearchParams(location.search).get('fileName');
+
+    setFileUploadedName(fileName);
+  }, [location.search, setFileUploadedName]);
   const renderIdentifierButton = () => {
     return (
       <Button
@@ -96,7 +108,17 @@ export const BulkEditListFilters = (
       setFileUploadedName(fileToUpload.name);
       setIsFileUploaded(true);
       setDropZoneActive(false);
-      history.push('bulk-edit/preview');
+      setLoading(true);
+      requestJobId({ recordIdentifier: filters.recordIdentifier })
+        .then(({ id }) => {
+          history.push({
+            pathname: `bulk-edit/${id}`,
+            search: `?fileName=${fileToUpload.name}`,
+          });
+          fileUpload({ id, fileToUpload });
+          setJobId(id);
+          setLoading(false);
+        });
     }
   }
 
@@ -127,6 +149,7 @@ export const BulkEditListFilters = (
         setFileExtensionModalOpen={setFileExtensionModalOpen}
         hideFileExtensionModal={hideFileExtensionModal}
         isDropZoneDisabled={isDropZoneDisabled}
+        recordIdentifier={filters.recordIdentifier}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
@@ -150,4 +173,5 @@ BulkEditListFilters.propTypes = {
   setFileUploadedName: PropTypes.func.isRequired,
   setIsFileUploaded: PropTypes.func.isRequired,
   isFileUploaded: PropTypes.bool.isRequired,
+  setJobId: PropTypes.func.isRequired,
 };
