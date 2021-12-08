@@ -13,7 +13,8 @@ import {
 import css from './ListFileUploader.css';
 
 export const ListFileUploader = (
-  { isDropZoneActive,
+  {
+    isDropZoneActive,
     isLoading,
     handleDrop,
     fileExtensionModalOpen,
