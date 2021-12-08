@@ -21,7 +21,7 @@ export const BulkEditList = () => {
   const [fileUploadedName, setFileUploadedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
 
-  const paneTitle = isFileUploaded ?
+  const paneTitle = fileUploadedName ?
     <FormattedMessage
       id="ui-bulk-edit.meta.title.uploadedFile"
       values={{ fileName: fileUploadedName }}

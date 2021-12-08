@@ -21,6 +21,7 @@ import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
 export const BulkEditListFilters = ({
   setFileUploadedName,
   isFileUploaded,
+  setIsFileUploaded,
 }) => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
@@ -58,8 +59,21 @@ export const BulkEditListFilters = ({
     setFileExtensionModalOpen(false);
   };
 
+  const handleDragEnter = () => {
+    setDropZoneActive(true);
+  };
+
+  const handleDragLeave = () => {
+    setDropZoneActive(false);
+  };
+
+
   const handleChange = (event, field) => setFilters(prev => ({
     ...prev, [field]: event.target.value,
+  }));
+
+  const hanldeCapabilityChange = (event) => setFilters(prev => ({
+    ...prev, capabilities: event.values,
   }));
 
   const uploadFileFlow = async (fileToUpload) => {
@@ -75,6 +89,8 @@ export const BulkEditListFilters = ({
         pathname: `/bulk-edit/${id}`,
         search: `?fileName=${fileToUpload.name}`,
       });
+
+      setIsFileUploaded(true);
     } catch ({ message }) {
       showCallout({ message });
     }
@@ -128,13 +144,15 @@ export const BulkEditListFilters = ({
         hideFileExtensionModal={hideFileExtensionModal}
         isDropZoneDisabled={isDropZoneDisabled}
         recordIdentifier={recordIdentifier}
+        handleDragLeave={handleDragLeave}
+        handleDragEnter={handleDragEnter}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
         options={capabilitiesFilterOptions}
         name="capabilities"
         activeFilters={capabilities}
-        onChange={e => handleChange(e, 'capabilities')}
+        onChange={hanldeCapabilityChange}
         closedByDefault={false}
       />
       <Accordion
@@ -150,4 +168,5 @@ export const BulkEditListFilters = ({
 BulkEditListFilters.propTypes = {
   setFileUploadedName: PropTypes.func.isRequired,
   isFileUploaded: PropTypes.bool.isRequired,
+  setIsFileUploaded: PropTypes.func.isRequired,
 };

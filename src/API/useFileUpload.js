@@ -29,21 +29,18 @@ export const useJobCommand = () => {
 export const useFileUploadComand = () => {
   const ky = useOkapiKy();
 
-  const { mutateAsync } = useMutation({ mutationFn: ({ id, fileToUpload }) => {
+  const { mutateAsync: fileUpload } = useMutation({ mutationFn: ({ id, fileToUpload }) => {
     const formData = new FormData();
 
     formData.append('file', fileToUpload);
 
     return ky.post(`bulk-edit/${id}/upload`, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
       body: formData,
     });
   } });
 
   return {
-    fileUpload: mutateAsync,
+    fileUpload,
   };
 };
 

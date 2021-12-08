@@ -19,7 +19,9 @@ export const ListFileUploader = (
     fileExtensionModalOpen,
     hideFileExtensionModal,
     isDropZoneDisabled,
-    recordIdentifier },
+    recordIdentifier,
+    handleDragEnter,
+    handleDragLeave },
 ) => {
   const uploaderTitle = isDropZoneActive ? isLoading
     ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
@@ -44,6 +46,8 @@ export const ListFileUploader = (
         uploadButtonText={<FormattedMessage id="ui-bulk-edit.uploaderBtnText" />}
         isDropZoneActive={isDropZoneActive}
         onDrop={handleDrop}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
       >
         {openDialogWindow => (
           <>
@@ -84,4 +88,6 @@ ListFileUploader.propTypes = {
   hideFileExtensionModal: PropTypes.func.isRequired,
   isDropZoneDisabled: PropTypes.bool.isRequired,
   recordIdentifier: PropTypes.string.isRequired,
+  handleDragEnter: PropTypes.func.isRequired,
+  handleDragLeave: PropTypes.func.isRequired,
 };
