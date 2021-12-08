@@ -1,23 +1,106 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, logDOM } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../test/jest/__mock__';
 
 import BulkEdit from './BulkEdit';
 
+jest.mock('@folio/stripes/core', () => ({
+  ...jest.requireActual('@folio/stripes/core'),
+  useNamespace: () => ['namespace'],
+  useOkapiKy: jest.fn(),
+}));
+
+const history = createMemoryHistory();
+
 const renderBulkEdit = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
   window.history.pushState({}, 'Test page', '/bulk-edit');
 
   render(
-    <BrowserRouter>
-      <BulkEdit />
-    </BrowserRouter>,
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <BulkEdit />
+      </BrowserRouter>,
+    </QueryClientProvider>,
   );
 };
 
+function mockData(files) {
+  return {
+    dataTransfer: {
+      files,
+      items: files.map(file => ({
+        kind: 'file',
+        type: file.type,
+        getAsFile: () => file,
+      })),
+      types: ['Files'],
+    },
+  };
+}
+
+function createDtWithFiles(files = []) {
+  return {
+    dataTransfer: {
+      files,
+      items: files.map(file => ({
+        kind: 'file',
+        size: file.size,
+        type: file.type,
+        getAsFile: () => file,
+      })),
+      types: ['Files'],
+    },
+  };
+}
+
+function createFile(name, size, type) {
+  const file = new File([], name, { type });
+  Object.defineProperty(file, 'size', {
+    get() {
+      return size;
+    },
+  });
+  return file;
+}
+
+function flushPromises(container) {
+  return new Promise(resolve => setImmediate(() => {
+    resolve(container);
+  }));
+}
+
+function dispatchEvt(node, type, data) {
+  const event = new Event(type, { bubbles: true });
+
+  Object.assign(event, data);
+  fireEvent(node, event);
+}
+
 describe('BulkEdit', () => {
+  beforeEach(() => {
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        post: () => ({
+          json: () => ({
+            id: '1',
+          }),
+        }),
+      });
+  });
   it('displays Bulk edit', () => {
     renderBulkEdit();
 
@@ -77,30 +160,21 @@ describe('BulkEdit', () => {
       /filters.recordIdentifier.usernames/,
     ];
 
+    const userUUIDs = screen.getByRole('option', { name: /filters.recordIdentifier.userUUIDs/ });
+
+    const selectRecordIdentifier = screen.getByRole('combobox');
+
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+
+    userEvent.selectOptions(
+      selectRecordIdentifier,
+      userUUIDs,
+    );
+
+    expect(userUUIDs.selected).toBe(true);
   });
 
   it('should trigger the drag and drop', async () => {
-    function dispatchEvt(node, type, data) {
-      const event = new Event(type, { bubbles: true });
-
-      Object.assign(event, data);
-      fireEvent(node, event);
-    }
-
-    function mockData(files) {
-      return {
-        dataTransfer: {
-          files,
-          items: files.map(file => ({
-            kind: 'file',
-            type: file.type,
-            getAsFile: () => file,
-          })),
-          types: ['Files'],
-        },
-      };
-    }
     const file = new File([
       JSON.stringify({ ping: true }),
     ], 'ping.json', { type: 'application/json' });
@@ -143,5 +217,45 @@ describe('BulkEdit', () => {
     renderBulkEdit();
 
     expect(screen.getByRole('button', { name: /Icon ui-bulk-edit.list.savedQueries.title/ })).toBeEnabled();
+  });
+
+  it('should update title with uploaded name', async () => {
+    const file = [createFile('SearchHoldings.csv', 1111, 'application/csv')];
+
+    const event = createDtWithFiles(file);
+    const data = mockData([file]);
+
+    renderBulkEdit();
+
+    const fileInput = screen.getByTestId('fileUploader-input');
+
+    dispatchEvt(fileInput, 'dragenter', data);
+    await flushPromises();
+
+    fireEvent.drop(fileInput, event);
+    await flushPromises();
+
+    history.push({
+      pathname: 'bulk-edit/1',
+    });
+
+    expect(screen.getByText(/meta.title/)).toBeVisible();
+  });
+
+  it('should update unsupported type of file', async () => {
+    const file = [createFile('SearchHoldings.pdf', 1111, 'application/pdf')];
+
+    const event = createDtWithFiles(file);
+    const data = mockData([file]);
+
+    renderBulkEdit();
+
+    const fileInput = screen.getByTestId('fileUploader-input');
+
+    dispatchEvt(fileInput, 'dragenter', data);
+    await flushPromises();
+
+    fireEvent.drop(fileInput, event);
+    await flushPromises();
   });
 });
