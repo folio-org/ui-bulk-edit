@@ -30,10 +30,7 @@ export const ListFileUploader = (
 
   const usploderSubTitle = (
     <FormattedMessage
-      id="ui-bulk-edit.uploaderSubTitle"
-      values={{
-        identifier: recordIdentifier,
-      }}
+      id={`ui-bulk-edit.uploaderSubTitle${recordIdentifier ? `.${recordIdentifier}` : ''}`}
     />
   );
 

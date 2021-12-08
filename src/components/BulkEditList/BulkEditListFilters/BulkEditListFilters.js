@@ -9,7 +9,7 @@ import {
   Accordion,
   Badge,
 } from '@folio/stripes/components';
-import { AcqCheckboxFilter, useShowCallout } from '@folio/stripes-acq-components';
+import { AcqCheckboxFilter, useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
 import { ListFileUploader } from './ListFileUploader/ListFileUploader';
@@ -28,7 +28,7 @@ export const BulkEditListFilters = ({
   const [{ criteria, capabilities, recordIdentifier }, setFilters] = useState({
     criteria: 'identifier',
     capabilities: ['users'],
-    recordIdentifier: '',
+    recordIdentifier: null,
   });
   const showCallout = useShowCallout();
   const history = useHistory();
@@ -72,6 +72,14 @@ export const BulkEditListFilters = ({
     ...prev, [field]: event.target.value,
   }));
 
+  const hanldeRecordIdentifier = (e) => {
+    handleChange(e, 'recordIdentifier');
+    history.replace({
+      pathname: location.pathname,
+      search: buildSearch({ identifier: e.target.value }, location.search),
+    });
+  };
+
   const hanldeCapabilityChange = (event) => setFilters(prev => ({
     ...prev, capabilities: event.values,
   }));
@@ -87,7 +95,7 @@ export const BulkEditListFilters = ({
 
       history.replace({
         pathname: `/bulk-edit/${id}`,
-        search: `?fileName=${fileToUpload.name}`,
+        search: buildSearch({ fileName: fileToUpload.name }, location.search),
       });
 
       setIsFileUploaded(true);
@@ -134,7 +142,7 @@ export const BulkEditListFilters = ({
         {renderTopButtons()}
       </ButtonGroup>
       <ListSelect
-        hanldeRecordIdentifier={e => handleChange(e, 'recordIdentifier')}
+        hanldeRecordIdentifier={hanldeRecordIdentifier}
       />
       <ListFileUploader
         isLoading={isLoading}
