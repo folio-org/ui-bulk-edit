@@ -12,3 +12,4 @@
 * [UIBULKED-23](https://issues.folio.org/browse/UIBULKED-23) Add "Drop to continue" label to the Drag and drop area
 * [UIBULKED-10](https://issues.folio.org/browse/UIBULKED-10) Actions menu
 * [UIBULKED-24](https://issues.folio.org/browse/UIBULKED-24) Link record identifier with the drag and drop area on the landing page
+* [UIBULKED-24](https://issues.folio.org/browse/UIBULKED-9) Uploading the file with identifiers

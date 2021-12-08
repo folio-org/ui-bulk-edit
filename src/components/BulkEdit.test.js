@@ -23,7 +23,6 @@ const renderBulkEdit = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        // ✅ turns retries off
         retry: false,
       },
     },
