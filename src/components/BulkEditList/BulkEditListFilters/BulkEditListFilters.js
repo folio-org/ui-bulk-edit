@@ -92,7 +92,7 @@ export const BulkEditListFilters = ({
 
       setIsFileUploaded(true);
     } catch ({ message }) {
-      showCallout({ message });
+      showCallout({ message: <FormattedMessage id="ui-bulk-edit.error.uploadedFile" /> });
     }
   };
 

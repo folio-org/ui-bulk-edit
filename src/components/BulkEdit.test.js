@@ -1,11 +1,10 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, logDOM } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
-
 
 import '../../test/jest/__mock__';
 
@@ -241,5 +240,22 @@ describe('BulkEdit', () => {
     });
 
     expect(screen.getByText(/meta.title/)).toBeVisible();
+  });
+
+  it('should update unsupported type of file', async () => {
+    const file = [createFile('SearchHoldings.pdf', 1111, 'application/pdf')];
+
+    const event = createDtWithFiles(file);
+    const data = mockData([file]);
+
+    renderBulkEdit();
+
+    const fileInput = screen.getByTestId('fileUploader-input');
+
+    dispatchEvt(fileInput, 'dragenter', data);
+    await flushPromises();
+
+    fireEvent.drop(fileInput, event);
+    await flushPromises();
   });
 });

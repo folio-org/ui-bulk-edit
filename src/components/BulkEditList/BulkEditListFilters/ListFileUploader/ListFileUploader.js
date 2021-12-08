@@ -58,6 +58,7 @@ export const ListFileUploader = (
             </Layout>
             <ConfirmationModal
               id="file-extension-modal"
+              data-testid="file-extension-modal"
               open={fileExtensionModalOpen}
               heading={(
                 <span data-test-file-extension-modal-header>

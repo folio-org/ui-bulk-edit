@@ -32,5 +32,7 @@
   "modal.fileExtensions.actionButton": "Choose other file to upload",
 
   "start.edit": "Start bulk edit",
-  "start.delete": "Start bulk delete"
+  "start.delete": "Start bulk delete",
+
+  "error.uploadedFile": "Fail to upload file"
 }
