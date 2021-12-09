@@ -10,8 +10,9 @@ export const NoResultsMessage = () => {
 
   const message = useMemo(() => {
     const identifier = new URLSearchParams(location.search).get('identifier');
+    const messagePrefix = identifier ? `.${identifier}` : '';
 
-    return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${identifier ? `.${identifier}` : ''}`} />;
+    return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${messagePrefix}`} />;
   }, [location.search]);
 
   return (

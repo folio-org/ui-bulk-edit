@@ -11,6 +11,7 @@ import {
 } from '@folio/stripes-data-transfer-components';
 
 import css from './ListFileUploader.css';
+import { useMemo } from 'react';
 
 export const ListFileUploader = (
   { isDropZoneActive,
@@ -28,11 +29,11 @@ export const ListFileUploader = (
     : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />
     : <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
 
-  const usploderSubTitle = (
-    <FormattedMessage
-      id={`ui-bulk-edit.uploaderSubTitle${recordIdentifier ? `.${recordIdentifier}` : ''}`}
-    />
-  );
+  const usploderSubTitle = useMemo(() => {
+    const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
+
+    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />;
+  }, [recordIdentifier]);
 
   return (
     <div className={css.FileUploaderContainer}>
