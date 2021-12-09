@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -11,7 +12,6 @@ import {
 } from '@folio/stripes-data-transfer-components';
 
 import css from './ListFileUploader.css';
-import { useMemo } from 'react';
 
 export const ListFileUploader = (
   { isDropZoneActive,
