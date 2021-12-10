@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useStripes } from '@folio/stripes/core';
 
 import {
   Button,
@@ -30,6 +31,7 @@ export const BulkEditListFilters = ({
     capabilities: ['users'],
     recordIdentifier: '',
   });
+  const stripes = useStripes();
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
@@ -37,6 +39,7 @@ export const BulkEditListFilters = ({
 
   const { requestJobId, isLoading } = useJobCommand();
   const { fileUpload } = useFileUploadComand();
+  const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
 
   useEffect(() => {
@@ -134,6 +137,7 @@ export const BulkEditListFilters = ({
         {renderTopButtons()}
       </ButtonGroup>
       <ListSelect
+        disabled={!hasEditOrDeletePerms}
         hanldeRecordIdentifier={e => handleChange(e, 'recordIdentifier')}
       />
       <ListFileUploader
@@ -146,6 +150,7 @@ export const BulkEditListFilters = ({
         recordIdentifier={recordIdentifier}
         handleDragLeave={handleDragLeave}
         handleDragEnter={handleDragEnter}
+        disableUploader={!hasEditOrDeletePerms}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
@@ -154,6 +159,7 @@ export const BulkEditListFilters = ({
         activeFilters={capabilities}
         onChange={hanldeCapabilityChange}
         closedByDefault={false}
+        disabled={!hasEditOrDeletePerms}
       />
       <Accordion
         closedByDefault

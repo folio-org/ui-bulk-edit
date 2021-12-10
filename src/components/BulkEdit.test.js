@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, logDOM } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
@@ -9,12 +9,6 @@ import { useOkapiKy } from '@folio/stripes/core';
 import '../../test/jest/__mock__';
 
 import BulkEdit from './BulkEdit';
-
-jest.mock('@folio/stripes/core', () => ({
-  ...jest.requireActual('@folio/stripes/core'),
-  useNamespace: () => ['namespace'],
-  useOkapiKy: jest.fn(),
-}));
 
 const history = createMemoryHistory();
 

@@ -21,6 +21,7 @@ export const ListFileUploader = (
     isDropZoneDisabled,
     recordIdentifier,
     handleDragEnter,
+    disableUploader,
     handleDragLeave },
 ) => {
   const uploaderTitle = isDropZoneActive ? isLoading
@@ -40,7 +41,7 @@ export const ListFileUploader = (
   return (
     <div className={css.FileUploaderContainer}>
       <FileUploader
-        disabled={isDropZoneDisabled}
+        disabled={isDropZoneDisabled || disableUploader}
         multiple={false}
         title={uploaderTitle}
         uploadButtonText={<FormattedMessage id="ui-bulk-edit.uploaderBtnText" />}
@@ -83,6 +84,7 @@ export const ListFileUploader = (
 
 ListFileUploader.propTypes = {
   isDropZoneActive: PropTypes.bool.isRequired,
+  disableUploader: PropTypes.bool,
   isLoading: PropTypes.bool.isRequired,
   handleDrop: PropTypes.func.isRequired,
   fileExtensionModalOpen: PropTypes.bool.isRequired,
