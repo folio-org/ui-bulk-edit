@@ -1,24 +1,24 @@
-import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
 import {
-  MultiColumnList,
-  Layout,
-} from '@folio/stripes/components';
+  Switch,
+  Route,
+} from 'react-router-dom';
 
 import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
+import { Preview } from './Preview/Preview';
 
-export const BulkEditListResult = () => {
-  const resultsStatusMessage = (
-    <Layout className="display-flex centerContent">
-      <NoResultsMessage data-testid="empty-message">
-        <FormattedMessage id="ui-bulk-edit.list.result.emptyMessage" />
-      </NoResultsMessage>
-    </Layout>
-  );
-
+export const BulkEditListResult = ({ fileUploadedName }) => {
   return (
-    <MultiColumnList
-      autosize
-      isEmptyMessage={resultsStatusMessage}
-    />
+    <Switch>
+      <Route path="/bulk-edit" exact component={NoResultsMessage} />
+      <Route
+        path="/bulk-edit/:id"
+        component={() => <Preview fileUploadedName={fileUploadedName} />}
+      />
+    </Switch>
   );
+};
+
+BulkEditListResult.propTypes = {
+  fileUploadedName: PropTypes.string,
 };

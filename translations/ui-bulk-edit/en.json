@@ -1,5 +1,6 @@
 {
   "meta.title": "Bulk edit",
+  "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
 
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
@@ -27,9 +28,11 @@
   "cancel": "Cancel",
 
   "modal.fileExtensions.blocked.header": "Invalid file",
-  "modal.fileExtensions.blocked.message": "Only file with .csv or .cql extension can be uploaded",
+  "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded",
   "modal.fileExtensions.actionButton": "Choose other file to upload",
 
   "start.edit": "Start bulk edit",
-  "start.delete": "Start bulk delete"
+  "start.delete": "Start bulk delete",
+
+  "error.uploadedFile": "Fail to upload file"
 }

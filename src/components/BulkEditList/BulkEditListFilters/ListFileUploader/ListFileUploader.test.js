@@ -1,7 +1,10 @@
 import React from 'react';
 import {
-  screen, render, fireEvent,
+  screen,
+  render,
+  fireEvent,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import '../../../../../test/jest/__mock__';
 
@@ -15,8 +18,10 @@ const hideFileExtensionModalMock = jest.fn();
 const renderListFileUploader = ({
   isDropZoneActive = false,
   isLoading = false,
-  selectedIdentifier = null,
-} = {}) => {
+  recordIdentifier = '',
+  isDropZoneDisabled = false,
+  fileExtensionModalOpen = false,
+}) => {
   render(
     <ListFileUploader
       handleDragEnter={onDragEnterMock}
@@ -25,15 +30,40 @@ const renderListFileUploader = ({
       isDropZoneActive={isDropZoneActive}
       hideFileExtensionModal={hideFileExtensionModalMock}
       isLoading={isLoading}
-      fileExtensionModalOpen={false}
-      selectedIdentifier={selectedIdentifier}
+      fileExtensionModalOpen={fileExtensionModalOpen}
+      recordIdentifier={recordIdentifier}
+      disabled={isDropZoneDisabled}
     />,
   );
 };
 
+function createDtWithFiles(files = []) {
+  return {
+    dataTransfer: {
+      files,
+      items: files.map(file => ({
+        kind: 'file',
+        size: file.size,
+        type: file.type,
+        getAsFile: () => file,
+      })),
+      types: ['Files'],
+    },
+  };
+}
+
+function createFile(name, size, type) {
+  const file = new File([], name, { type });
+  Object.defineProperty(file, 'size', {
+    get() {
+      return size;
+    },
+  });
+  return file;
+}
+
 function flushPromises(container) {
   return new Promise(resolve => setImmediate(() => {
-    renderListFileUploader();
     resolve(container);
   }));
 }
@@ -62,21 +92,33 @@ function mockData(files) {
 describe('FileUploader', () => {
   afterEach(() => jest.clearAllMocks());
   it('should display FileUploader', () => {
-    renderListFileUploader();
+    renderListFileUploader(
+      {
+        isDropZoneActive: false,
+      },
+    );
 
     expect(screen.getByText(/uploaderTitle/)).toBeVisible();
     expect(screen.getByText(/uploaderSubTitle/)).toBeVisible();
-    expect(screen.getByRole('button', { name: /uploaderBtnText/ })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /uploaderBtnText/ })).toBeEnabled();
   });
 
   it('should display FileUploader with loading state', () => {
-    renderListFileUploader({ isDropZoneActive: true, isLoading: true });
+    renderListFileUploader(
+      {
+        isDropZoneActive: true,
+        isLoading: true,
+      },
+    );
 
     expect(screen.getByText(/uploading/)).toBeEnabled();
   });
 
   it('should display FileUploader without loading state', () => {
-    renderListFileUploader({ isDropZoneActive: true, isLoading: false });
+    renderListFileUploader({
+      isDropZoneActive: true,
+      isLoading: false,
+    });
 
     expect(screen.getByText(/uploaderActiveTitle/)).toBeEnabled();
   });
@@ -87,7 +129,11 @@ describe('FileUploader', () => {
     ], 'ping.json', { type: 'application/json' });
     const data = mockData([file]);
 
-    renderListFileUploader({ selectedIdentifier: 'Users UUIDs' });
+    renderListFileUploader(
+      {
+        isDropZoneActive: false,
+      },
+    );
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
@@ -95,5 +141,49 @@ describe('FileUploader', () => {
     await flushPromises();
 
     expect(onDragEnterMock).toHaveBeenCalled();
+  });
+
+  it('should call onDrop', async () => {
+    const file = [createFile('file1.pdf', 1111, 'application/pdf')];
+
+    const event = createDtWithFiles(file);
+    const data = mockData([file]);
+
+    renderListFileUploader(
+      {
+        isDropZoneActive: false,
+      },
+    );
+
+    const fileInput = screen.getByTestId('fileUploader-input');
+
+    dispatchEvt(fileInput, 'dragenter', data);
+    await flushPromises();
+
+    expect(onDragEnterMock).toHaveBeenCalled();
+
+    fireEvent.drop(fileInput, event);
+    await flushPromises();
+
+    expect(onDropMock).toHaveBeenCalled();
+  });
+
+  it('should display FileUploader modal', () => {
+    renderListFileUploader({
+      isDropZoneActive: true,
+      isLoading: false,
+      fileExtensionModalOpen: true,
+    });
+
+    const modalText = [
+      /modal.fileExtensions.blocked.header/,
+      /modal.fileExtensions.blocked.message/,
+    ];
+
+    modalText.forEach((el) => expect(screen.getByText(el)).toBeVisible());
+
+    userEvent.click(screen.getByRole('button', { name: /fileExtensions.actionButton/ }));
+
+    expect(hideFileExtensionModalMock).toHaveBeenCalled();
   });
 });
