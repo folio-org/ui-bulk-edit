@@ -10,12 +10,6 @@ import '../../test/jest/__mock__';
 
 import BulkEdit from './BulkEdit';
 
-jest.mock('@folio/stripes/core', () => ({
-  ...jest.requireActual('@folio/stripes/core'),
-  useNamespace: () => ['namespace'],
-  useOkapiKy: jest.fn(),
-}));
-
 const history = createMemoryHistory();
 
 const renderBulkEdit = () => {

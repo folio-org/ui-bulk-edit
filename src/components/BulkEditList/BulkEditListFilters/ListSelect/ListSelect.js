@@ -3,11 +3,11 @@ import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Select } from '@folio/stripes-acq-components';
+import { Select } from '@folio/stripes/components';
 
 import { identifierOptions } from '../../../../constants/optionsRecordIdentifiers';
 
-export const ListSelect = ({ hanldeRecordIdentifier }) => {
+export const ListSelect = ({ disabled, hanldeRecordIdentifier }) => {
   const intl = useIntl();
   const location = useLocation();
 
@@ -31,10 +31,12 @@ export const ListSelect = ({ hanldeRecordIdentifier }) => {
       label={<FormattedMessage id="ui-bulk-edit.list.filters.recordIdentifier" />}
       defaultValue={defaultIdentifier}
       onChange={hanldeRecordIdentifier}
+      disabled={disabled}
     />
   );
 };
 
 ListSelect.propTypes = {
   hanldeRecordIdentifier: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
