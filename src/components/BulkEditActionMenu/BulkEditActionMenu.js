@@ -20,7 +20,7 @@ export const BulkEditActionMenu = ({
 
   return (
     <>
-      <IfPermission perm="bulk-edit.edit">
+      <IfPermission perm="ui-bulk-edit.edit">
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onEdit)}
@@ -30,7 +30,7 @@ export const BulkEditActionMenu = ({
           </Icon>
         </Button>
       </IfPermission>
-      <IfPermission perm="bulk-edit.delete">
+      <IfPermission perm="ui-bulk-edit.delete">
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onDelete)}

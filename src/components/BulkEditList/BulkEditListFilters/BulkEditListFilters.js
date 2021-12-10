@@ -31,6 +31,7 @@ export const BulkEditListFilters = ({
     capabilities: ['users'],
     recordIdentifier: '',
   });
+  const stripes = useStripes();
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
@@ -38,7 +39,6 @@ export const BulkEditListFilters = ({
 
   const { requestJobId, isLoading } = useJobCommand();
   const { fileUpload } = useFileUploadComand();
-  const stripes = useStripes();
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
 
