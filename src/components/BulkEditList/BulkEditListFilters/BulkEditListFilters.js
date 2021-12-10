@@ -38,6 +38,9 @@ export const BulkEditListFilters = ({
   const { requestJobId, isLoading } = useJobCommand();
   const { fileUpload } = useFileUploadComand();
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
+  const handleChange = (value, field) => setFilters(prev => ({
+    ...prev, [field]: value,
+  }));
 
   useEffect(() => {
     if (isFileUploaded || !recordIdentifier) {
@@ -47,9 +50,15 @@ export const BulkEditListFilters = ({
 
   useEffect(() => {
     const fileName = new URLSearchParams(location.search).get('fileName');
+    const identifier = new URLSearchParams(location.search).get('identifier');
+
+    if (identifier) {
+      handleChange(identifier, 'recordIdentifier');
+    }
 
     setFileUploadedName(fileName);
-  }, [location.search, setFileUploadedName]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
 
   const showFileExtensionModal = () => {
     setFileExtensionModalOpen(true);
@@ -67,13 +76,8 @@ export const BulkEditListFilters = ({
     setDropZoneActive(false);
   };
 
-
-  const handleChange = (event, field) => setFilters(prev => ({
-    ...prev, [field]: event.target.value,
-  }));
-
   const hanldeRecordIdentifier = (e) => {
-    handleChange(e, 'recordIdentifier');
+    handleChange(e.target.value, 'recordIdentifier');
     history.replace({
       pathname: location.pathname,
       search: buildSearch({ identifier: e.target.value }, location.search),
