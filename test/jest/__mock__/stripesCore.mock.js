@@ -112,5 +112,3 @@ jest.mock('@folio/stripes/core', () => {
     useStripes,
   };
 }, { virtual: true });
-
-export default buildStripes;
