@@ -36,14 +36,18 @@
       {
         "permissionName": "ui-bulk-edit.view",
         "displayName": "Bulk Edit: View permissions",
-        "visible": true
+        "visible": true,
+        "subPermissions": [
+          "bulk-edit.preview.get"
+        ]
       },
       {
         "permissionName": "ui-bulk-edit.edit",
         "displayName": "Bulk Edit: Edit permissions",
         "subPermissions": [
+          "ui-bulk-edit.view",
           "bulk-edit.upload.post",
-          "bulk-edit.preview.get"
+          "bulk-edit.item.post"
         ],
         "visible": true
       },
@@ -51,8 +55,7 @@
         "permissionName": "ui-bulk-edit.delete",
         "displayName": "Bulk Edit: Delete permissions",
         "subPermissions": [
-          "bulk-edit.upload.post",
-          "bulk-edit.preview.get"
+          "ui-bulk-edit.edit"
         ],
         "visible": true
       }
