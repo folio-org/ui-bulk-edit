@@ -38,6 +38,7 @@
         "displayName": "Bulk Edit: View permissions",
         "visible": true,
         "subPermissions": [
+          "module.bulk-edit.enabled",
           "bulk-edit.preview.get"
         ]
       },
