@@ -10,7 +10,7 @@ import {
   Accordion,
   Badge,
 } from '@folio/stripes/components';
-import { AcqCheckboxFilter, useShowCallout } from '@folio/stripes-acq-components';
+import { AcqCheckboxFilter, useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
 import { ListFileUploader } from './ListFileUploader/ListFileUploader';
@@ -29,7 +29,7 @@ export const BulkEditListFilters = ({
   const [{ criteria, capabilities, recordIdentifier }, setFilters] = useState({
     criteria: 'identifier',
     capabilities: ['users'],
-    recordIdentifier: '',
+    recordIdentifier: null,
   });
   const stripes = useStripes();
   const showCallout = useShowCallout();
@@ -41,6 +41,9 @@ export const BulkEditListFilters = ({
   const { fileUpload } = useFileUploadComand();
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
+  const handleChange = (value, field) => setFilters(prev => ({
+    ...prev, [field]: value,
+  }));
 
   useEffect(() => {
     if (isFileUploaded || !recordIdentifier) {
@@ -50,9 +53,15 @@ export const BulkEditListFilters = ({
 
   useEffect(() => {
     const fileName = new URLSearchParams(location.search).get('fileName');
+    const identifier = new URLSearchParams(location.search).get('identifier');
+
+    if (identifier) {
+      handleChange(identifier, 'recordIdentifier');
+    }
 
     setFileUploadedName(fileName);
-  }, [location.search, setFileUploadedName]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
 
   const showFileExtensionModal = () => {
     setFileExtensionModalOpen(true);
@@ -70,10 +79,13 @@ export const BulkEditListFilters = ({
     setDropZoneActive(false);
   };
 
-
-  const handleChange = (event, field) => setFilters(prev => ({
-    ...prev, [field]: event.target.value,
-  }));
+  const hanldeRecordIdentifier = (e) => {
+    handleChange(e.target.value, 'recordIdentifier');
+    history.replace({
+      pathname: location.pathname,
+      search: buildSearch({ identifier: e.target.value }, location.search),
+    });
+  };
 
   const hanldeCapabilityChange = (event) => setFilters(prev => ({
     ...prev, capabilities: event.values,
@@ -90,7 +102,7 @@ export const BulkEditListFilters = ({
 
       history.replace({
         pathname: `/bulk-edit/${id}`,
-        search: `?fileName=${fileToUpload.name}`,
+        search: buildSearch({ fileName: fileToUpload.name }, location.search),
       });
 
       setIsFileUploaded(true);
@@ -138,7 +150,7 @@ export const BulkEditListFilters = ({
       </ButtonGroup>
       <ListSelect
         disabled={!hasEditOrDeletePerms}
-        hanldeRecordIdentifier={e => handleChange(e, 'recordIdentifier')}
+        hanldeRecordIdentifier={hanldeRecordIdentifier}
       />
       <ListFileUploader
         isLoading={isLoading}
