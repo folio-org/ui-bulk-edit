@@ -1,6 +1,4 @@
 import { FormattedMessage } from 'react-intl';
-import { matchPath } from 'react-router';
-import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { IfPermission } from '@folio/stripes/core';
 
@@ -9,19 +7,13 @@ import {
   Icon,
 } from '@folio/stripes/components';
 import { useDownloadErrors } from '../../API/useErrorDownload';
+import { useParams } from '../../hooks/useParams';
 
 export const BulkEditActionMenu = ({
   onEdit,
   onDelete,
   onToggle,
 }) => {
-  function useParams(path) {
-    const { pathname } = useLocation();
-    const match = matchPath(pathname, { path });
-
-    return match?.params || {};
-  }
-
   const { id } = useParams('/bulk-edit/:id');
 
   const buildButtonClickHandler = buttonClickHandler => () => {
