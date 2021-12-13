@@ -13,7 +13,6 @@ export const BulkEditList = () => {
   const stripes = useStripes();
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
 
-
   const renderActionMenu = () => (
     hasEditOrDeletePerms && (
     <BulkEditActionMenu
