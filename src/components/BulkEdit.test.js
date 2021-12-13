@@ -31,6 +31,7 @@ const renderBulkEdit = () => {
   );
 };
 
+
 function mockData(files) {
   return {
     dataTransfer: {

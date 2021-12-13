@@ -41,6 +41,7 @@
 
   "start.edit": "Start bulk edit",
   "start.delete": "Start bulk delete",
+  "start.downloadErrors": "Download errors (CSV)",
 
   "error.uploadedFile": "Fail to upload file"
 }
