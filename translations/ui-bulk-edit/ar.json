@@ -18,7 +18,7 @@
     "uploading": "تحميل",
     "cancel": "إلغاء",
     "modal.fileExtensions.blocked.header": "ملف غير صالح",
-    "modal.fileExtensions.blocked.message": "يمكن فقط تحميل الملفات ذات امتداد .csv أو .cql",
+    "modal.fileExtensions.blocked.message": "يمكن فقط تحميل الملفات ذات امتداد .csv",
     "modal.fileExtensions.actionButton": "اختر ملفات أخرى للتحميل",
     "list.filters.capabilities.title": "تطبيقات ذات إمكانيات تحرير مجمّع",
     "list.filters.capabilities.users": "المستخدمين",
@@ -27,5 +27,15 @@
     "list.filters.capabilities.acquisition": "التزويد",
     "list.savedQueries.title": "استعلامات محفوظة",
     "start.edit": "بدء التحرير بالدفعة",
-    "start.delete": "بدء الحذف بالدفعة"
+    "start.delete": "بدء الحذف بالدفعة",
+    "meta.title.uploadedFile": "تحرير <b>{fileName}</b> بالدفعة",
+    "error.uploadedFile": "فشل تحميل الملف",
+    "list.result.emptyMessage.ID": "قم بالسحب والإفلات أو اختيار ملف بمعرفات المستخدمين العمومية الفريدة",
+    "list.result.emptyMessage.BARCODE": "قم بالسحب والإفلات أو اختيار ملف بأرقام باركود المستخدمين",
+    "list.result.emptyMessage.External IDs": "قم بالسحب والإفلات أو اختيار ملف بمعرفات خارجية",
+    "list.result.emptyMessage.Usernames": "قم بالسحب والإفلات أو اختيار ملف بأسماء المستخدمين",
+    "uploaderSubTitle.ID": "اختر ملف بمعرفات المستخدم العمومية الفريدة",
+    "uploaderSubTitle.BARCODE": "اختر ملف بأرقام باركود المستخدمين",
+    "uploaderSubTitle.External IDs": "اختر ملف بمعرفات خارجية",
+    "uploaderSubTitle.Usernames": "اختر ملف بأسماء مستخدمين"
 }
