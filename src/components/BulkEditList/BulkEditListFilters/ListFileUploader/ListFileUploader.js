@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -29,14 +30,11 @@ export const ListFileUploader = (
     : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />
     : <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
 
-  const usploderSubTitle = (
-    <FormattedMessage
-      id="ui-bulk-edit.uploaderSubTitle"
-      values={{
-        identifier: recordIdentifier,
-      }}
-    />
-  );
+  const usploderSubTitle = useMemo(() => {
+    const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
+
+    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />;
+  }, [recordIdentifier]);
 
   return (
     <div className={css.FileUploaderContainer}>
