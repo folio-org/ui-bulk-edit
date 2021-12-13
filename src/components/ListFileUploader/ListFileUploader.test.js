@@ -6,7 +6,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import '../../../../../test/jest/__mock__';
+import '../../../test/jest/__mock__';
 
 import { ListFileUploader } from './ListFileUploader';
 

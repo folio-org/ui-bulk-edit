@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -13,31 +12,28 @@ import {
 
 import css from './ListFileUploader.css';
 
-export const ListFileUploader = (
-  { isDropZoneActive,
+const ListFileUploader = (
+  {
+    isDropZoneActive,
     isLoading,
     handleDrop,
     fileExtensionModalOpen,
     hideFileExtensionModal,
     isDropZoneDisabled,
-    recordIdentifier,
     handleDragEnter,
     disableUploader,
-    handleDragLeave },
+    handleDragLeave,
+    uploderSubTitle,
+    className,
+  },
 ) => {
   const uploaderTitle = isDropZoneActive ? isLoading
     ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
     : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />
     : <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
 
-  const usploderSubTitle = useMemo(() => {
-    const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
-
-    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />;
-  }, [recordIdentifier]);
-
   return (
-    <div className={css.FileUploaderContainer}>
+    <div className={css[className]}>
       <FileUploader
         disabled={isDropZoneDisabled || disableUploader}
         multiple={false}
@@ -52,7 +48,7 @@ export const ListFileUploader = (
           <>
             <Layout className="padding-top-gutter padding-start-gutter padding-end-gutter textCentered">
               <span data-test-sub-title>
-                {usploderSubTitle}
+                {uploderSubTitle}
               </span>
             </Layout>
             <ConfirmationModal
@@ -88,7 +84,10 @@ ListFileUploader.propTypes = {
   fileExtensionModalOpen: PropTypes.bool.isRequired,
   hideFileExtensionModal: PropTypes.func.isRequired,
   isDropZoneDisabled: PropTypes.bool.isRequired,
-  recordIdentifier: PropTypes.string.isRequired,
   handleDragEnter: PropTypes.func.isRequired,
   handleDragLeave: PropTypes.func.isRequired,
+  uploderSubTitle: PropTypes.object.isRequired,
+  className: PropTypes.string.isRequired,
 };
+
+export default ListFileUploader;

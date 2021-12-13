@@ -7,7 +7,7 @@ import {
   Icon,
 } from '@folio/stripes/components';
 
-export const BulkEditActionMenu = ({
+const BulkEditActionMenu = ({
   onEdit,
   onDelete,
   onToggle,
@@ -49,3 +49,5 @@ BulkEditActionMenu.propTypes = {
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
+
+export default BulkEditActionMenu;
