@@ -5,7 +5,7 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const useDownloadErrors = (id) => {
+export const useDownloadLinks = (id) => {
   const ky = useOkapiKy();
 
   const { data } = useQuery('error-download', { queryFn: () => {

@@ -6,15 +6,15 @@ import {
   Button,
   Icon,
 } from '@folio/stripes/components';
-import { useDownloadErrors } from '../../API/useErrorDownload';
-import { useParams } from '../../hooks/useParams';
+import { useDownloadLinks } from '../../API/useDownloadLinks';
+import { usePathParams } from '../../hooks/usePathParams';
 
 export const BulkEditActionMenu = ({
   onEdit,
   onDelete,
   onToggle,
 }) => {
-  const { id } = useParams('/bulk-edit/:id');
+  const { id } = usePathParams('/bulk-edit/:id');
 
   const buildButtonClickHandler = buttonClickHandler => () => {
     buttonClickHandler();
@@ -22,24 +22,28 @@ export const BulkEditActionMenu = ({
     onToggle();
   };
 
-  const { data } = useDownloadErrors(id);
+  const { data } = useDownloadLinks(id);
+
+  // eslint-disable-next-line no-unused-vars
+  const [successCsvLink, errorCsvLink] = data?.files || [];
 
   return (
     <>
-      {data?.files[1] ?
-        <IfPermission perm="ui-bulk-edit.edit">
-          <a href={data.files[1]} download>
-            <Button
-              buttonStyle="dropdownItem"
-              data-testid="download-link-test"
-            >
-              <Icon icon="download">
-                <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />
-              </Icon>
-            </Button>
-          </a>
-        </IfPermission>
-        : null}
+      {
+       errorCsvLink &&
+       <IfPermission perm="ui-bulk-edit.edit">
+         <a href={data.files[1]} download>
+           <Button
+             buttonStyle="dropdownItem"
+             data-testid="download-link-test"
+           >
+             <Icon icon="download">
+               <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />
+             </Icon>
+           </Button>
+         </a>
+       </IfPermission>
+      }
       <IfPermission perm="ui-bulk-edit.edit">
         <Button
           buttonStyle="dropdownItem"
