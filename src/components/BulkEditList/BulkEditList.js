@@ -19,13 +19,13 @@ export const BulkEditList = () => {
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
 
   const renderActionMenu = () => (
-    // hasEditOrDeletePerms && (
+    hasEditOrDeletePerms && (
     <BulkEditActionMenu
       onEdit={() => setIsBulkEditModalOpen(true)}
       onDelete={noop}
       onToggle={noop}
     />
-    // )
+    )
   );
 
   const cancelBulkEditStart = () => {
