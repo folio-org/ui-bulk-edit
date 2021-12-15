@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -27,10 +28,15 @@ const ListFileUploader = (
     className,
   },
 ) => {
-  const uploaderTitle = isDropZoneActive ? isLoading
-    ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
-    : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />
-    : <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
+  const uploaderTitle = useMemo(() => {
+    if (isDropZoneActive) {
+      return isLoading
+        ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
+        : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />;
+    } else {
+      return <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
+    }
+  }, [isDropZoneActive, isLoading]);
 
   return (
     <div className={css[className]}>
