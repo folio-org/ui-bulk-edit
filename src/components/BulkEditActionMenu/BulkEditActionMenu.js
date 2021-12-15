@@ -34,7 +34,7 @@ const BulkEditActionMenu = ({
          <a href={successCsvLink} download>
            <Button
              buttonStyle="dropdownItem"
-             data-testid="download-link-test"
+             data-testid="download-link-matched"
            >
              <Icon icon="download">
                <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />
@@ -49,7 +49,7 @@ const BulkEditActionMenu = ({
          <a href={errorCsvLink} download>
            <Button
              buttonStyle="dropdownItem"
-             data-testid="download-link-test"
+             data-testid="download-link-error"
            >
              <Icon icon="download">
                <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />
