@@ -40,11 +40,15 @@ const BulkEditStartModal = ({
     setDropZoneActive(false);
   };
 
+  const onStartbulkEdit = () => {
+    onCancel();
+  };
+
   const footer = (
     <ModalFooter>
       <Button
         disabled
-        onClick={() => {}}
+        onClick={onStartbulkEdit}
       >
         {confirmLabel}
       </Button>
@@ -67,7 +71,7 @@ const BulkEditStartModal = ({
         className="Centered"
         isLoading={isLoading}
         isDropZoneActive={isDropZoneActive}
-        handleDrop={() => {}}
+        handleDrop={() => setDropZoneActive(false)}
         fileExtensionModalOpen={fileExtensionModalOpen}
         hideFileExtensionModal={hideFileExtensionModal}
         isDropZoneDisabled
@@ -82,7 +86,6 @@ const BulkEditStartModal = ({
 BulkEditStartModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
-  // onDelete: PropTypes.func.isRequired,
 };
 
 export default BulkEditStartModal;
