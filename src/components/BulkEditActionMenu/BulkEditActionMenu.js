@@ -9,7 +9,7 @@ import {
 import { useDownloadLinks } from '../../API/useDownloadLinks';
 import { usePathParams } from '../../hooks/usePathParams';
 
-export const BulkEditActionMenu = ({
+const BulkEditActionMenu = ({
   onEdit,
   onDelete,
   onToggle,
@@ -73,3 +73,5 @@ BulkEditActionMenu.propTypes = {
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
+
+export default BulkEditActionMenu;

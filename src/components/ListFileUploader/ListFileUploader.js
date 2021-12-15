@@ -13,31 +13,33 @@ import {
 
 import css from './ListFileUploader.css';
 
-export const ListFileUploader = (
-  { isDropZoneActive,
+const ListFileUploader = (
+  {
+    isDropZoneActive,
     isLoading,
     handleDrop,
     fileExtensionModalOpen,
     hideFileExtensionModal,
     isDropZoneDisabled,
-    recordIdentifier,
     handleDragEnter,
     disableUploader,
-    handleDragLeave },
+    handleDragLeave,
+    uploaderSubTitle,
+    className,
+  },
 ) => {
-  const uploaderTitle = isDropZoneActive ? isLoading
-    ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
-    : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />
-    : <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
-
-  const usploderSubTitle = useMemo(() => {
-    const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
-
-    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />;
-  }, [recordIdentifier]);
+  const uploaderTitle = useMemo(() => {
+    if (isDropZoneActive) {
+      return isLoading
+        ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
+        : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />;
+    } else {
+      return <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
+    }
+  }, [isDropZoneActive, isLoading]);
 
   return (
-    <div className={css.FileUploaderContainer}>
+    <div className={css[className]}>
       <FileUploader
         disabled={isDropZoneDisabled || disableUploader}
         multiple={false}
@@ -52,7 +54,7 @@ export const ListFileUploader = (
           <>
             <Layout className="padding-top-gutter padding-start-gutter padding-end-gutter textCentered">
               <span data-test-sub-title>
-                {usploderSubTitle}
+                {uploaderSubTitle}
               </span>
             </Layout>
             <ConfirmationModal
@@ -88,7 +90,10 @@ ListFileUploader.propTypes = {
   fileExtensionModalOpen: PropTypes.bool.isRequired,
   hideFileExtensionModal: PropTypes.func.isRequired,
   isDropZoneDisabled: PropTypes.bool.isRequired,
-  recordIdentifier: PropTypes.string.isRequired,
   handleDragEnter: PropTypes.func.isRequired,
   handleDragLeave: PropTypes.func.isRequired,
+  uploaderSubTitle: PropTypes.object.isRequired,
+  className: PropTypes.string.isRequired,
 };
+
+export default ListFileUploader;
