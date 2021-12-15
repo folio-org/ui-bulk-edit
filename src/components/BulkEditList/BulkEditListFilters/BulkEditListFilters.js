@@ -124,7 +124,7 @@ export const BulkEditListFilters = ({
 
   const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
 
-  const uploderSubTitle = useMemo(() => {
+  const uploaderSubTitle = useMemo(() => {
     const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
 
     return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />;
@@ -170,7 +170,7 @@ export const BulkEditListFilters = ({
         handleDragLeave={handleDragLeave}
         handleDragEnter={handleDragEnter}
         disableUploader={!hasEditOrDeletePerms}
-        uploderSubTitle={uploderSubTitle}
+        uploaderSubTitle={uploaderSubTitle}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"

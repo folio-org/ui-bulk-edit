@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 
 import '../../../test/jest/__mock__';
 
-import { ListFileUploader } from './ListFileUploader';
+import ListFileUploader from './ListFileUploader';
 
 const onDragEnterMock = jest.fn();
 const onDragLeaveMock = jest.fn();
@@ -21,6 +21,7 @@ const renderListFileUploader = ({
   recordIdentifier = '',
   isDropZoneDisabled = false,
   fileExtensionModalOpen = false,
+  uploaderSubTitle = 'uploaderSubTitle',
 }) => {
   render(
     <ListFileUploader
@@ -33,6 +34,7 @@ const renderListFileUploader = ({
       fileExtensionModalOpen={fileExtensionModalOpen}
       recordIdentifier={recordIdentifier}
       disabled={isDropZoneDisabled}
+      uploaderSubTitle={uploaderSubTitle}
     />,
   );
 };

@@ -23,7 +23,7 @@ const ListFileUploader = (
     handleDragEnter,
     disableUploader,
     handleDragLeave,
-    uploderSubTitle,
+    uploaderSubTitle,
     className,
   },
 ) => {
@@ -48,7 +48,7 @@ const ListFileUploader = (
           <>
             <Layout className="padding-top-gutter padding-start-gutter padding-end-gutter textCentered">
               <span data-test-sub-title>
-                {uploderSubTitle}
+                {uploaderSubTitle}
               </span>
             </Layout>
             <ConfirmationModal
@@ -86,7 +86,7 @@ ListFileUploader.propTypes = {
   isDropZoneDisabled: PropTypes.bool.isRequired,
   handleDragEnter: PropTypes.func.isRequired,
   handleDragLeave: PropTypes.func.isRequired,
-  uploderSubTitle: PropTypes.object.isRequired,
+  uploaderSubTitle: PropTypes.object.isRequired,
   className: PropTypes.string.isRequired,
 };
 

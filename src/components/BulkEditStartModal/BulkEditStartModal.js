@@ -26,7 +26,7 @@ const BulkEditStartModal = ({
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title' });
   const confirmLabel = intl.formatMessage({ id: 'stripes-components.saveAndClose' });
   const cancelLabel = intl.formatMessage({ id: 'stripes-components.cancel' });
-  const uploderSubTitle = intl.formatMessage({ id: 'ui-bulk-edit.uploaderSubTitle.records' });
+  const uploaderSubTitle = intl.formatMessage({ id: 'ui-bulk-edit.uploaderSubTitle.records' });
 
   const hideFileExtensionModal = () => {
     setFileExtensionModalOpen(false);
@@ -73,7 +73,7 @@ const BulkEditStartModal = ({
         isDropZoneDisabled
         handleDragLeave={handleDragLeave}
         handleDragEnter={handleDragEnter}
-        uploderSubTitle={uploderSubTitle}
+        uploaderSubTitle={uploaderSubTitle}
       />
     </Modal>
   );
