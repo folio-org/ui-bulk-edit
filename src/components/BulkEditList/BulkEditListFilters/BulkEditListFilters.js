@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -13,7 +13,7 @@ import {
 import { AcqCheckboxFilter, useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
-import { ListFileUploader } from './ListFileUploader/ListFileUploader';
+import { ListFileUploader } from '../../ListFileUploader';
 import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
 import { getFileInfo } from './utils/getFileInfo';
@@ -26,6 +26,7 @@ export const BulkEditListFilters = ({
 }) => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
+  const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
   const [{ criteria, capabilities, recordIdentifier }, setFilters] = useState({
     criteria: 'identifier',
     capabilities: ['users'],
@@ -35,7 +36,6 @@ export const BulkEditListFilters = ({
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
-  const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
   const { requestJobId, isLoading } = useJobCommand();
   const { fileUpload } = useFileUploadComand();
@@ -127,6 +127,12 @@ export const BulkEditListFilters = ({
 
   const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
 
+  const uploaderSubTitle = useMemo(() => {
+    const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
+
+    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />;
+  }, [recordIdentifier]);
+
   const renderTopButtons = () => {
     return (
       <>
@@ -156,6 +162,7 @@ export const BulkEditListFilters = ({
         hanldeRecordIdentifier={hanldeRecordIdentifier}
       />
       <ListFileUploader
+        className="FileUploaderContainer"
         isLoading={isLoading}
         isDropZoneActive={isDropZoneActive}
         handleDrop={handleDrop}
@@ -166,6 +173,7 @@ export const BulkEditListFilters = ({
         handleDragLeave={handleDragLeave}
         handleDragEnter={handleDragEnter}
         disableUploader={!hasEditOrDeletePerms}
+        uploaderSubTitle={uploaderSubTitle}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"

@@ -5,6 +5,7 @@
     "list.filters.identifier": "Identifier",
     "list.filters.query": "Query",
     "list.result.emptyMessage": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "list.result.emptyMessage.selected": "Drag and drop or choose file with {identifier}",
     "list.filters.recordIdentifier": "Record identifier",
     "list.filters.recordIdentifier.placeholder": "Select record identifier",
     "list.filters.recordIdentifier.userUUIDs": "User UUIDs",

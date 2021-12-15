@@ -30,6 +30,7 @@
   "uploaderSubTitle.BARCODE": "Select a file with User Barcodes",
   "uploaderSubTitle.External IDs": "Select a file with External IDs",
   "uploaderSubTitle.Usernames": "Select a file with Usernames",
+  "uploaderSubTitle.records": "Upload CSV file with edited records",
   "uploaderTitle": "Drag and drop",
   "uploaderActiveTitle": "Drop to continue",
   "uploading": "Uploading",
