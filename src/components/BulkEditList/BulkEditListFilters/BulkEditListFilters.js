@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useStripes } from '@folio/stripes/core';
 
 import {
   Button,
@@ -7,48 +10,68 @@ import {
   Accordion,
   Badge,
 } from '@folio/stripes/components';
-import { AcqCheckboxFilter } from '@folio/stripes-acq-components';
+import { AcqCheckboxFilter, useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
-import { ListFileUploader } from './ListFileUploader/ListFileUploader';
 import { QueryTextArea } from './QueryTextArea/QueryTextArea';
-import { buildCheckboxFilterOptions } from './utils';
+import { ListFileUploader } from '../../ListFileUploader';
+import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
+import { getFileInfo } from './utils/getFileInfo';
+import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
 
-export const BulkEditListFilters = () => {
-  const [criteria, setCriteria] = useState('identifier');
-  const [isLoading, setLoading] = useState(false);
+export const BulkEditListFilters = ({
+  setFileUploadedName,
+  isFileUploaded,
+  setIsFileUploaded,
+}) => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
-  const [filters, setFilter] = useState({
+  const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
+  const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
+  const [{ criteria, capabilities, recordIdentifier }, setFilters] = useState({
+    criteria: 'identifier',
     capabilities: ['users'],
     queryText: '',
+    recordIdentifier: null,
   });
+  const stripes = useStripes();
+  const showCallout = useShowCallout();
+  const history = useHistory();
+  const location = useLocation();
 
+  const { requestJobId, isLoading } = useJobCommand();
+  const { fileUpload } = useFileUploadComand();
+  const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
+  const handleChange = (value, field) => setFilters(prev => ({
+    ...prev, [field]: value,
+  }));
 
-  const renderIdentifierButton = () => {
-    return (
-      <Button
-        buttonStyle={criteria === 'identifier' ? 'primary' : 'default'}
-        onClick={() => { setCriteria('identifier'); }}
-      >
-        <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
-      </Button>
-    );
+  useEffect(() => {
+    if (isFileUploaded || !recordIdentifier) {
+      setIsDropZoneDisabled(true);
+    } else setIsDropZoneDisabled(false);
+  }, [recordIdentifier, isFileUploaded]);
+
+  useEffect(() => {
+    const fileName = new URLSearchParams(location.search).get('fileName');
+    const identifier = new URLSearchParams(location.search).get('identifier');
+
+    if (identifier) {
+      handleChange(identifier, 'recordIdentifier');
+    }
+
+    setFileUploadedName(fileName);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
+
+  const showFileExtensionModal = () => {
+    setFileExtensionModalOpen(true);
   };
 
-  const renderQueryButton = () => {
-    return (
-      <Button
-        buttonStyle={criteria === 'query' ? 'primary' : 'default'}
-        onClick={() => { setCriteria('query'); }}
-      >
-        <FormattedMessage id="ui-bulk-edit.list.filters.query" />
-      </Button>
-    );
+  const hideFileExtensionModal = () => {
+    setFileExtensionModalOpen(false);
   };
-
-  const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
 
   const handleDragEnter = () => {
     setDropZoneActive(true);
@@ -58,37 +81,111 @@ export const BulkEditListFilters = () => {
     setDropZoneActive(false);
   };
 
-  const handleDrop = () => {
-    setLoading(false);
-    setDropZoneActive(false);
+  const hanldeRecordIdentifier = (e) => {
+    handleChange(e.target.value, 'recordIdentifier');
+    history.replace({
+      pathname: location.pathname,
+      search: buildSearch({ identifier: e.target.value }, location.search),
+    });
   };
 
-  const hanldeCapabilityChange = (event) => setFilter({
-    ...filters, capabilities: event.values,
-  });
+  const hanldeCapabilityChange = (event) => setFilters(prev => ({
+    ...prev, capabilities: event.values,
+  }));
+
+  const uploadFileFlow = async (fileToUpload) => {
+    setFileUploadedName(fileToUpload.name);
+    setDropZoneActive(false);
+
+    try {
+      const { id } = await requestJobId({ recordIdentifier });
+
+      await fileUpload({ id, fileToUpload });
+
+      history.replace({
+        pathname: `/bulk-edit/${id}`,
+        search: buildSearch({ fileName: fileToUpload.name }, location.search),
+      });
+
+      setIsFileUploaded(true);
+    } catch ({ message }) {
+      showCallout({
+        message: <FormattedMessage id="ui-bulk-edit.error.uploadedFile" />,
+        type: 'error',
+      });
+    }
+  };
+
+  const handleDrop = async (acceptedFiles) => {
+    const fileToUpload = acceptedFiles[0];
+    const { isTypeSupported } = getFileInfo(fileToUpload);
+
+    if (isTypeSupported) {
+      await uploadFileFlow(fileToUpload);
+    } else {
+      showFileExtensionModal();
+    }
+  };
+
+  const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
+
+  const uploaderSubTitle = useMemo(() => {
+    const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
+
+    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />;
+  }, [recordIdentifier]);
+
+  const renderTopButtons = () => {
+    return (
+      <>
+        <Button
+          buttonStyle={criteria === 'identifier' ? 'primary' : 'default'}
+          onClick={() => setFilters(prev => ({ ...prev, criteria: 'identifier' }))}
+        >
+          <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
+        </Button>
+        <Button
+          buttonStyle={criteria === 'query' ? 'primary' : 'default'}
+          onClick={() => setFilters(prev => ({ ...prev, criteria: 'query' }))}
+        >
+          <FormattedMessage id="ui-bulk-edit.list.filters.query" />
+        </Button>
+      </>
+    );
+  };
 
   return (
     <>
       <ButtonGroup fullWidth>
-        {renderIdentifierButton()}
-        {renderQueryButton()}
+        {renderTopButtons()}
       </ButtonGroup>
       {criteria === 'query' ? <QueryTextArea filters={filters} setQueryText={setFilter} /> : null}
-      <ListSelect />
+      <ListSelect
+        disabled={!hasEditOrDeletePerms}
+        hanldeRecordIdentifier={hanldeRecordIdentifier}
+      />
       <ListFileUploader
+        className="FileUploaderContainer"
         isLoading={isLoading}
         isDropZoneActive={isDropZoneActive}
-        handleDragEnter={handleDragEnter}
         handleDrop={handleDrop}
+        fileExtensionModalOpen={fileExtensionModalOpen}
+        hideFileExtensionModal={hideFileExtensionModal}
+        isDropZoneDisabled={isDropZoneDisabled}
+        recordIdentifier={recordIdentifier}
         handleDragLeave={handleDragLeave}
+        handleDragEnter={handleDragEnter}
+        disableUploader={!hasEditOrDeletePerms}
+        uploaderSubTitle={uploaderSubTitle}
       />
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
         options={capabilitiesFilterOptions}
         name="capabilities"
-        activeFilters={filters.capabilities}
+        activeFilters={capabilities}
         onChange={hanldeCapabilityChange}
         closedByDefault={false}
+        disabled={!hasEditOrDeletePerms}
       />
       <Accordion
         closedByDefault
@@ -98,4 +195,10 @@ export const BulkEditListFilters = () => {
       />
     </>
   );
+};
+
+BulkEditListFilters.propTypes = {
+  setFileUploadedName: PropTypes.func.isRequired,
+  isFileUploaded: PropTypes.bool.isRequired,
+  setIsFileUploaded: PropTypes.func.isRequired,
 };

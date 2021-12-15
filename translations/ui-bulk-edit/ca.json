@@ -5,6 +5,7 @@
     "list.filters.identifier": "Identifier",
     "list.filters.query": "Query",
     "list.result.emptyMessage": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "list.result.emptyMessage.selected": "Drag and drop or choose file with {identifier}",
     "list.filters.recordIdentifier": "Record identifier",
     "list.filters.recordIdentifier.placeholder": "Select record identifier",
     "list.filters.recordIdentifier.userUUIDs": "User UUIDs",
@@ -12,7 +13,7 @@
     "list.filters.recordIdentifier.externalIDs": "External IDs",
     "list.filters.recordIdentifier.usernames": "Usernames",
     "uploaderBtnText": "or choose file",
-    "uploaderSubTitle": "Select a file with record identifiers",
+    "uploaderSubTitle": "Select a file with {identifier, select, null {record identifiers} other {{identifier}}}",
     "uploaderTitle": "Drag and drop",
     "uploaderActiveTitle": "Drop to continue",
     "uploading": "Uploading",
@@ -25,5 +26,7 @@
     "list.filters.capabilities.inventory": "Inventory",
     "list.filters.capabilities.circulation": "Circulation",
     "list.filters.capabilities.acquisition": "Acquisition",
-    "list.savedQueries.title": "Saved queries"
+    "list.savedQueries.title": "Saved queries",
+    "start.edit": "Start bulk edit",
+    "start.delete": "Start bulk delete"
 }

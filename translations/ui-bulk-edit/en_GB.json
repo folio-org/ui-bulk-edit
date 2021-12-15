@@ -25,5 +25,7 @@
     "list.filters.capabilities.inventory": "Inventory",
     "list.filters.capabilities.circulation": "Circulation",
     "list.filters.capabilities.acquisition": "Acquisition",
-    "list.savedQueries.title": "Saved queries"
+    "list.savedQueries.title": "Saved queries",
+    "start.edit": "Start bulk edit",
+    "start.delete": "Start bulk delete"
 }

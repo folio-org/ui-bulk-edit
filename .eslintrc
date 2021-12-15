@@ -5,6 +5,14 @@
     "no-multiple-empty-lines": "off",
     "react/react-in-jsx-scope": "off"
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
+  },
   "overrides": [
     {
       "files": ["*test.*", "test/**"],

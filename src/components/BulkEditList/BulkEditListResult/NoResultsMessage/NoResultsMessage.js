@@ -1,21 +1,32 @@
-import PropTypes from 'prop-types';
-
-import { Icon } from '@folio/stripes/components';
+import { useMemo } from 'react';
+import { useLocation } from 'react-router';
+import { FormattedMessage } from 'react-intl';
+import { Layout, Icon } from '@folio/stripes/components';
 
 import css from './NoResultsMessage.css';
 
-export const NoResultsMessage = ({ children, ...rest }) => {
+export const NoResultsMessage = () => {
+  const location = useLocation();
+
+  const message = useMemo(() => {
+    const identifier = new URLSearchParams(location.search).get('identifier');
+    const messagePrefix = identifier ? `.${identifier}` : '';
+
+    return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${messagePrefix}`} />;
+  }, [location.search]);
+
   return (
-    <div className={css.noResultsMessage} {...rest}>
-      <div className={css.noResultsMessageLabelWrap}>
-        <Icon iconRootClass={css.noResultsMessageIcon} icon="arrow-left" />
-        <span className={css.noResultsMessageLabel}>{children}</span>
-      </div>
-    </div>
+    <>
+      <Layout className="display-flex centerContent">
+        <div className={css.noResultsMessage} data-testid="empty-message">
+          <div className={css.noResultsMessageLabelWrap}>
+            <Icon iconRootClass={css.noResultsMessageIcon} icon="arrow-left" />
+            <span className={css.noResultsMessageLabel}>
+              {message}
+            </span>
+          </div>
+        </div>
+      </Layout>
+    </>
   );
 };
-
-NoResultsMessage.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
