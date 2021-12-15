@@ -15,3 +15,4 @@
 * [UIBULKED-9](https://issues.folio.org/browse/UIBULKED-9) Uploading the file with identifiers
 * [UIBULKED-11](https://issues.folio.org/browse/UIBULKED-11) Bulk Edit app - permissions 
 * [UIBULKED-19](https://issues.folio.org/browse/UIBULKED-19) Download errors (CSV)
+* [UIBULKED-18](https://issues.folio.org/browse/UIBULKED-18) Download matched records (CSV)
