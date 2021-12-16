@@ -74,7 +74,6 @@ const BulkEditStartModal = ({
         handleDrop={() => setDropZoneActive(false)}
         fileExtensionModalOpen={fileExtensionModalOpen}
         hideFileExtensionModal={hideFileExtensionModal}
-        isDropZoneDisabled
         handleDragLeave={handleDragLeave}
         handleDragEnter={handleDragEnter}
         uploaderSubTitle={uploaderSubTitle}
