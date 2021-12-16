@@ -23,6 +23,13 @@
   "list.filters.capabilities.circulation": "Circulation",
   "list.filters.capabilities.acquisition": "Acquisition",
   "list.savedQueries.title": "Saved queries",
+  "list.preview.title": "Preview of record matched",
+  "list.preview.table.status": "Status",
+  "list.preview.table.lastName": "Last name",
+  "list.preview.table.firstName": "First name",
+  "list.preview.table.barcode": "Barcode",
+  "list.preview.table.patronGroup": "Patron group",
+  "list.preview.table.username": "Username",
 
   "uploaderBtnText": "or choose file",
   "uploaderSubTitle": "Select a file with record identifiers",
