@@ -137,7 +137,7 @@ describe('BulkEdit', () => {
     expect(identifierButton).toHaveAttribute('class', 'button primary');
   });
 
-  it('should change display text area on query tab ', () => {
+  it('should change display text area on query tab ', async () => {
     renderBulkEdit();
 
     const queryButton = screen.getByRole('button', { name: /list.filters.query/ });
@@ -155,9 +155,9 @@ describe('BulkEdit', () => {
     expect(searchButton).toBeDisabled();
     expect(resetButton).toBeDisabled();
 
-    userEvent.type(textArea, 'text');
+    await userEvent.type(textArea, '12', { delay: 10 });
 
-    expect(textArea).toHaveValue('text');
+    expect(textArea).toHaveValue('12');
 
     expect(searchButton).toBeEnabled();
     expect(resetButton).toBeEnabled();

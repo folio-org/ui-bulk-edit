@@ -10,26 +10,24 @@ import {
 import { ResetButton } from '@folio/stripes-acq-components';
 
 
-export const QueryTextArea = ({ filters, setQueryText }) => {
+export const QueryTextArea = ({ queryText, setQueryText }) => {
   const [isDisabled, setIsDisabled] = useState(true);
 
-  useEffect(() => (filters.queryText === '' ? setIsDisabled(true) : setIsDisabled(false)),
-    [filters.queryText]);
+  useEffect(() => (queryText === '' ? setIsDisabled(true) : setIsDisabled(false)),
+    [queryText]);
 
-  const resetButtonHandler = () => {
-    setQueryText({
-      ...filters, queryText: '',
-    });
-  };
+  const resetButtonHandler = () => setQueryText(prev => ({
+    ...prev, queryText: '',
+  }));
 
-  const onChangeTextAreaHandler = (event) => setQueryText({
-    ...filters, queryText: event.target.value,
-  });
+  const onChangeTextAreaHandler = (event) => setQueryText(prev => ({
+    ...prev, queryText: event.target.value,
+  }));
 
   return (
     <>
       <TextArea
-        value={filters.queryText}
+        value={queryText}
         onChange={onChangeTextAreaHandler}
       />
       <Button buttonStyle="primary" fullWidth disabled={isDisabled}>
@@ -45,6 +43,6 @@ export const QueryTextArea = ({ filters, setQueryText }) => {
 };
 
 QueryTextArea.propTypes = {
-  filters: PropTypes.object.isRequired,
+  queryText: PropTypes.string.isRequired,
   setQueryText: PropTypes.func.isRequired,
 };

@@ -28,7 +28,7 @@ export const BulkEditListFilters = ({
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
-  const [{ criteria, capabilities, recordIdentifier }, setFilters] = useState({
+  const [{ criteria, capabilities, recordIdentifier, queryText }, setFilters] = useState({
     criteria: 'identifier',
     capabilities: ['users'],
     queryText: '',
@@ -159,7 +159,7 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
-      {criteria === 'query' ? <QueryTextArea filters={filters} setQueryText={setFilter} /> : null}
+      {criteria === 'query' ? <QueryTextArea queryText={queryText} setQueryText={setFilters} /> : null}
       <ListSelect
         disabled={!hasEditOrDeletePerms}
         hanldeRecordIdentifier={hanldeRecordIdentifier}
