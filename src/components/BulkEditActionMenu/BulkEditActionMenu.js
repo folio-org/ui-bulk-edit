@@ -15,7 +15,7 @@ import { useDownloadLinks } from '../../API/useDownloadLinks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { DEFAULT_COLUMNS } from '../../constants/constants';
 
-export const BulkEditActionMenu = ({
+const BulkEditActionMenu = ({
   onEdit,
   onDelete,
   onToggle,
@@ -110,3 +110,5 @@ BulkEditActionMenu.propTypes = {
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
+
+export default BulkEditActionMenu;
