@@ -5,7 +5,7 @@ import '../../../test/jest/__mock__';
 
 import { MemoryRouter } from 'react-router';
 import { noop } from 'lodash';
-import { BulkEditActionMenu } from './BulkEditActionMenu';
+import BulkEditActionMenu from './BulkEditActionMenu';
 import * as useDownloadLinks from '../../API/useDownloadLinks';
 import { DEFAULT_COLUMNS } from '../../constants/constants';
 
