@@ -180,9 +180,7 @@ export const BulkEditListFilters = ({
           disableUploader={!hasEditOrDeletePerms}
           uploaderSubTitle={uploaderSubTitle}
         />
-
       </>
-
   }
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
