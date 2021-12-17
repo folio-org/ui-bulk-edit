@@ -13,6 +13,7 @@ import {
 import { AcqCheckboxFilter, useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
+import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
 import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
@@ -27,9 +28,10 @@ export const BulkEditListFilters = ({
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
-  const [{ criteria, capabilities, recordIdentifier }, setFilters] = useState({
+  const [{ criteria, capabilities, recordIdentifier, queryText }, setFilters] = useState({
     criteria: 'identifier',
     capabilities: ['users'],
+    queryText: '',
     recordIdentifier: null,
   });
   const stripes = useStripes();
@@ -157,6 +159,7 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
+      {criteria === 'query' ? <QueryTextArea queryText={queryText} setQueryText={setFilters} /> : null}
       <ListSelect
         disabled={!hasEditOrDeletePerms}
         hanldeRecordIdentifier={hanldeRecordIdentifier}

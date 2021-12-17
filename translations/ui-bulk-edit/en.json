@@ -42,6 +42,10 @@
 
   "start.edit": "Start bulk edit",
   "start.delete": "Start bulk delete",
+
+  "textArea.search": "Search",
+  "textArea.resetAll": "Reset all",
+
   "start.downloadErrors": "Download errors (CSV)",
   "start.downloadMathcedRecords": "Download matched records (CSV)",
 

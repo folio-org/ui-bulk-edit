@@ -17,3 +17,4 @@
 * [UIBULKED-19](https://issues.folio.org/browse/UIBULKED-19) Download errors (CSV)
 * [UIBULKED-17](https://issues.folio.org/browse/UIBULKED-17) Start bulk edit
 * [UIBULKED-18](https://issues.folio.org/browse/UIBULKED-18) Download matched records (CSV)
+* [UIBULKED-15](https://issues.folio.org/browse/UIBULKED-15) Add Query textarea
