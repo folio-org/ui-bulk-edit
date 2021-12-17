@@ -19,7 +19,6 @@ import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
 import { getFileInfo } from './utils/getFileInfo';
 import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
-import css from './BulkEditListFilters.css';
 
 export const BulkEditListFilters = ({
   setFileUploadedName,
@@ -160,8 +159,9 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
-      {criteria === 'query' ? <QueryTextArea queryText={queryText} setQueryText={setFilters} /> : null}
-      <div className={criteria === 'query' ? css.hidden : null}>
+      {criteria === 'query' ? <QueryTextArea queryText={queryText} setQueryText={setFilters} />
+        :
+      <>
         <ListSelect
           disabled={!hasEditOrDeletePerms}
           hanldeRecordIdentifier={hanldeRecordIdentifier}
@@ -180,7 +180,10 @@ export const BulkEditListFilters = ({
           disableUploader={!hasEditOrDeletePerms}
           uploaderSubTitle={uploaderSubTitle}
         />
-      </div>
+
+      </>
+
+  }
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
         options={capabilitiesFilterOptions}
