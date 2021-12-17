@@ -24,18 +24,32 @@ const BulkEditActionMenu = ({
 
   const { data } = useDownloadLinks(id);
 
-  // eslint-disable-next-line no-unused-vars
   const [successCsvLink, errorCsvLink] = data?.files || [];
 
   return (
     <>
       {
-       errorCsvLink &&
+       successCsvLink &&
        <IfPermission perm="ui-bulk-edit.edit">
-         <a href={data.files[1]} download>
+         <a href={successCsvLink} download>
            <Button
              buttonStyle="dropdownItem"
-             data-testid="download-link-test"
+             data-testid="download-link-matched"
+           >
+             <Icon icon="download">
+               <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />
+             </Icon>
+           </Button>
+         </a>
+       </IfPermission>
+      }
+      {
+       errorCsvLink &&
+       <IfPermission perm="ui-bulk-edit.edit">
+         <a href={errorCsvLink} download>
+           <Button
+             buttonStyle="dropdownItem"
+             data-testid="download-link-error"
            >
              <Icon icon="download">
                <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />
