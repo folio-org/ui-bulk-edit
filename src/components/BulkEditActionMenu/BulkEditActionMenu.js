@@ -26,7 +26,7 @@ const BulkEditActionMenu = ({
 
   const { id } = usePathParams('/bulk-edit/:id');
   const { data } = useDownloadLinks(id);
-  const [, errorCsvLink] = data?.files || [];
+  const [successCsvLink, errorCsvLink] = data?.files || [];
 
   const handleChange = ({ values }) => {
     setSelectedValues(values);
@@ -57,12 +57,27 @@ const BulkEditActionMenu = ({
     <>
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}>
         <>
+          {
+              successCsvLink &&
+              <IfPermission perm="ui-bulk-edit.edit">
+                <a href={successCsvLink} download>
+                  <Button
+                    buttonStyle="dropdownItem"
+                    data-testid="download-link-matched"
+                  >
+                    <Icon icon="download">
+                      <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />
+                    </Icon>
+                  </Button>
+                </a>
+              </IfPermission>
+          }
           {errorCsvLink &&
           <IfPermission perm="ui-bulk-edit.edit">
             <a href={errorCsvLink} download>
               <Button
                 buttonStyle="dropdownItem"
-                data-testid="download-link-test"
+                data-testid="download-link-error"
               >
                 <Icon icon="download">
                   <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />

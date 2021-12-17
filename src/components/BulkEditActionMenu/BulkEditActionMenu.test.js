@@ -1,10 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
-import '../../../test/jest/__mock__';
 
 import { MemoryRouter } from 'react-router';
 import { noop } from 'lodash';
+import { useOkapiKy } from '@folio/stripes/core';
+
+import '../../../test/jest/__mock__';
+
 import BulkEditActionMenu from './BulkEditActionMenu';
 import * as useDownloadLinks from '../../API/useDownloadLinks';
 import { DEFAULT_COLUMNS } from '../../constants/constants';
@@ -29,6 +32,32 @@ describe('BulkEditActionMenu', () => {
         files: ['file1.csv', 'file2.csv'],
       },
     }));
+
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        get: () => ({
+          json: () => ({
+            files: [
+              'donwloadMathcedRecords.com',
+              'donwloadError.com',
+            ],
+          }),
+        }),
+      });
+  });
+
+  it('displays Bulk edit', async () => {
+    renderActionMenu({
+      initialEntries: ['/bulk-edit/1'],
+    });
+
+    const downloadButtons = [
+      'download-link-matched',
+      'download-link-error',
+    ];
+
+    await waitFor(() => downloadButtons.forEach((el) => expect(screen.getByTestId(el)).toBeVisible()));
   });
 
   it('should render correct default columns', async () => {
