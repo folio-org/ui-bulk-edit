@@ -49,5 +49,18 @@
   "start.downloadErrors": "Download errors (CSV)",
   "start.downloadMathcedRecords": "Download matched records (CSV)",
 
-  "error.uploadedFile": "Fail to upload file"
+  "error.uploadedFile": "Fail to upload file",
+
+  "columns.active": "Status",
+  "columns.lastName": "Last name",
+  "columns.firstName": "First name",
+  "columns.barcode": "Barcode",
+  "columns.patronGroup": "Patron group",
+  "columns.username": "Username",
+  "columns.email": "Email",
+  "columns.expirationDate": "Expiration date",
+
+  "menuGroup.actions": "Actions",
+  "menuGroup.showColumns": "Show columns"
+
 }

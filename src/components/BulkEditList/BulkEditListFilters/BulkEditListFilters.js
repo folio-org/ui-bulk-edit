@@ -32,7 +32,7 @@ export const BulkEditListFilters = ({
     criteria: 'identifier',
     capabilities: ['users'],
     queryText: '',
-    recordIdentifier: null,
+    recordIdentifier: '',
   });
   const stripes = useStripes();
   const showCallout = useShowCallout();
@@ -192,7 +192,9 @@ export const BulkEditListFilters = ({
         displayWhenClosed={renderBadge()}
         displayWhenOpen={renderBadge()}
         label={<FormattedMessage id="ui-bulk-edit.list.savedQueries.title" />}
-      />
+      >
+        <div />
+      </Accordion>
     </>
   );
 };
