@@ -159,25 +159,29 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
-      {criteria === 'query' ? <QueryTextArea queryText={queryText} setQueryText={setFilters} /> : null}
-      <ListSelect
-        disabled={!hasEditOrDeletePerms}
-        hanldeRecordIdentifier={hanldeRecordIdentifier}
-      />
-      <ListFileUploader
-        className="FileUploaderContainer"
-        isLoading={isLoading}
-        isDropZoneActive={isDropZoneActive}
-        handleDrop={handleDrop}
-        fileExtensionModalOpen={fileExtensionModalOpen}
-        hideFileExtensionModal={hideFileExtensionModal}
-        isDropZoneDisabled={isDropZoneDisabled}
-        recordIdentifier={recordIdentifier}
-        handleDragLeave={handleDragLeave}
-        handleDragEnter={handleDragEnter}
-        disableUploader={!hasEditOrDeletePerms}
-        uploaderSubTitle={uploaderSubTitle}
-      />
+      {criteria === 'query' && <QueryTextArea queryText={queryText} setQueryText={setFilters} />}
+      {criteria === 'identifier' &&
+      <>
+        <ListSelect
+          disabled={!hasEditOrDeletePerms}
+          hanldeRecordIdentifier={hanldeRecordIdentifier}
+        />
+        <ListFileUploader
+          className="FileUploaderContainer"
+          isLoading={isLoading}
+          isDropZoneActive={isDropZoneActive}
+          handleDrop={handleDrop}
+          fileExtensionModalOpen={fileExtensionModalOpen}
+          hideFileExtensionModal={hideFileExtensionModal}
+          isDropZoneDisabled={isDropZoneDisabled}
+          recordIdentifier={recordIdentifier}
+          handleDragLeave={handleDragLeave}
+          handleDragEnter={handleDragEnter}
+          disableUploader={!hasEditOrDeletePerms}
+          uploaderSubTitle={uploaderSubTitle}
+        />
+      </>
+  }
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
         options={capabilitiesFilterOptions}
