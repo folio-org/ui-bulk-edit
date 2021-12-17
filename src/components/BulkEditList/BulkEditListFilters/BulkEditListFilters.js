@@ -19,6 +19,7 @@ import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
 import { getFileInfo } from './utils/getFileInfo';
 import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
+import css from './BulkEditListFilters.css';
 
 export const BulkEditListFilters = ({
   setFileUploadedName,
@@ -160,24 +161,26 @@ export const BulkEditListFilters = ({
         {renderTopButtons()}
       </ButtonGroup>
       {criteria === 'query' ? <QueryTextArea queryText={queryText} setQueryText={setFilters} /> : null}
-      <ListSelect
-        disabled={!hasEditOrDeletePerms}
-        hanldeRecordIdentifier={hanldeRecordIdentifier}
-      />
-      <ListFileUploader
-        className="FileUploaderContainer"
-        isLoading={isLoading}
-        isDropZoneActive={isDropZoneActive}
-        handleDrop={handleDrop}
-        fileExtensionModalOpen={fileExtensionModalOpen}
-        hideFileExtensionModal={hideFileExtensionModal}
-        isDropZoneDisabled={isDropZoneDisabled}
-        recordIdentifier={recordIdentifier}
-        handleDragLeave={handleDragLeave}
-        handleDragEnter={handleDragEnter}
-        disableUploader={!hasEditOrDeletePerms}
-        uploaderSubTitle={uploaderSubTitle}
-      />
+      <div className={criteria === 'query' ? css.hidden : null}>
+        <ListSelect
+          disabled={!hasEditOrDeletePerms}
+          hanldeRecordIdentifier={hanldeRecordIdentifier}
+        />
+        <ListFileUploader
+          className="FileUploaderContainer"
+          isLoading={isLoading}
+          isDropZoneActive={isDropZoneActive}
+          handleDrop={handleDrop}
+          fileExtensionModalOpen={fileExtensionModalOpen}
+          hideFileExtensionModal={hideFileExtensionModal}
+          isDropZoneDisabled={isDropZoneDisabled}
+          recordIdentifier={recordIdentifier}
+          handleDragLeave={handleDragLeave}
+          handleDragEnter={handleDragEnter}
+          disableUploader={!hasEditOrDeletePerms}
+          uploaderSubTitle={uploaderSubTitle}
+        />
+      </div>
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
         options={capabilitiesFilterOptions}
