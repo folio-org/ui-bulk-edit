@@ -159,8 +159,8 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
-      {criteria === 'query' ? <QueryTextArea queryText={queryText} setQueryText={setFilters} />
-        :
+      {criteria === 'query' && <QueryTextArea queryText={queryText} setQueryText={setFilters} />}
+      {criteria === 'identifier' &&
       <>
         <ListSelect
           disabled={!hasEditOrDeletePerms}
