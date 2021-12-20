@@ -13,6 +13,7 @@ import {
 import { AcqCheckboxFilter, useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
+import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
 import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
@@ -27,10 +28,11 @@ export const BulkEditListFilters = ({
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
-  const [{ criteria, capabilities, recordIdentifier }, setFilters] = useState({
+  const [{ criteria, capabilities, recordIdentifier, queryText }, setFilters] = useState({
     criteria: 'identifier',
     capabilities: ['users'],
-    recordIdentifier: null,
+    queryText: '',
+    recordIdentifier: '',
   });
   const stripes = useStripes();
   const showCallout = useShowCallout();
@@ -157,24 +159,29 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
-      <ListSelect
-        disabled={!hasEditOrDeletePerms}
-        hanldeRecordIdentifier={hanldeRecordIdentifier}
-      />
-      <ListFileUploader
-        className="FileUploaderContainer"
-        isLoading={isLoading}
-        isDropZoneActive={isDropZoneActive}
-        handleDrop={handleDrop}
-        fileExtensionModalOpen={fileExtensionModalOpen}
-        hideFileExtensionModal={hideFileExtensionModal}
-        isDropZoneDisabled={isDropZoneDisabled}
-        recordIdentifier={recordIdentifier}
-        handleDragLeave={handleDragLeave}
-        handleDragEnter={handleDragEnter}
-        disableUploader={!hasEditOrDeletePerms}
-        uploaderSubTitle={uploaderSubTitle}
-      />
+      {criteria === 'query' && <QueryTextArea queryText={queryText} setQueryText={setFilters} />}
+      {criteria === 'identifier' &&
+      <>
+        <ListSelect
+          disabled={!hasEditOrDeletePerms}
+          hanldeRecordIdentifier={hanldeRecordIdentifier}
+        />
+        <ListFileUploader
+          className="FileUploaderContainer"
+          isLoading={isLoading}
+          isDropZoneActive={isDropZoneActive}
+          handleDrop={handleDrop}
+          fileExtensionModalOpen={fileExtensionModalOpen}
+          hideFileExtensionModal={hideFileExtensionModal}
+          isDropZoneDisabled={isDropZoneDisabled}
+          recordIdentifier={recordIdentifier}
+          handleDragLeave={handleDragLeave}
+          handleDragEnter={handleDragEnter}
+          disableUploader={!hasEditOrDeletePerms}
+          uploaderSubTitle={uploaderSubTitle}
+        />
+      </>
+  }
       <AcqCheckboxFilter
         labelId="ui-bulk-edit.list.filters.capabilities.title"
         options={capabilitiesFilterOptions}
@@ -189,7 +196,9 @@ export const BulkEditListFilters = ({
         displayWhenClosed={renderBadge()}
         displayWhenOpen={renderBadge()}
         label={<FormattedMessage id="ui-bulk-edit.list.savedQueries.title" />}
-      />
+      >
+        <div />
+      </Accordion>
     </>
   );
 };

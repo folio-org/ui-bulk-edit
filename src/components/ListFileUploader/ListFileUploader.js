@@ -92,7 +92,10 @@ ListFileUploader.propTypes = {
   isDropZoneDisabled: PropTypes.bool.isRequired,
   handleDragEnter: PropTypes.func.isRequired,
   handleDragLeave: PropTypes.func.isRequired,
-  uploaderSubTitle: PropTypes.object.isRequired,
+  uploaderSubTitle: PropTypes.oneOfType([
+    PropTypes.object.isRequired,
+    PropTypes.string.isRequired,
+  ]),
   className: PropTypes.string.isRequired,
 };
 
