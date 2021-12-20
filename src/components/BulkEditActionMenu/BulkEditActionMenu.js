@@ -13,7 +13,7 @@ import { buildSearch } from '@folio/stripes-acq-components';
 import { usePathParams } from '../../hooks/usePathParams';
 import { useDownloadLinks } from '../../API/useDownloadLinks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
-import { DEFAULT_COLUMNS } from '../../constants/constants';
+import { DEFAULT_COLUMNS } from '../../constants';
 
 const BulkEditActionMenu = ({
   onEdit,

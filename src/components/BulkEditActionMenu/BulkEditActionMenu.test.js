@@ -10,7 +10,7 @@ import '../../../test/jest/__mock__';
 
 import BulkEditActionMenu from './BulkEditActionMenu';
 import * as useDownloadLinks from '../../API/useDownloadLinks';
-import { DEFAULT_COLUMNS } from '../../constants/constants';
+import { DEFAULT_COLUMNS } from '../../constants';
 
 const renderActionMenu = ({
   onEdit = noop,
