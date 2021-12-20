@@ -30,6 +30,8 @@
   "list.preview.table.barcode": "Barcode",
   "list.preview.table.patronGroup": "Patron group",
   "list.preview.table.username": "Username",
+  "list.preview.table.active": "Active",
+  "list.preview.table.inactive": "Inactive",
 
   "uploaderBtnText": "or choose file",
   "uploaderSubTitle": "Select a file with record identifiers",

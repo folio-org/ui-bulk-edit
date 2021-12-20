@@ -16,3 +16,4 @@
 * [UIBULKED-11](https://issues.folio.org/browse/UIBULKED-11) Bulk Edit app - permissions 
 * [UIBULKED-19](https://issues.folio.org/browse/UIBULKED-19) Download errors (CSV)
 * [UIBULKED-17](https://issues.folio.org/browse/UIBULKED-17) Start bulk edit
+* [UIBULKED-12](https://issues.folio.org/browse/UIBULKED-12) Populating preview of matched records based on identifiers search
