@@ -28,8 +28,7 @@ export const usePreviewRecords = (id) => {
         });
       },
     },
-    { enabled: !id },
-  );
+    { enabled: !id });
 
   return ({
     users: data,
