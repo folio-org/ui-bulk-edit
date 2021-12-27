@@ -8,9 +8,9 @@ export const useJobCommand = () => {
   const ky = useOkapiKy();
 
   const { mutateAsync: requestJobId, isLoading } = useMutation({
-    mutationFn: ({ recordIdentifier }) => {
+    mutationFn: ({ recordIdentifier, editType }) => {
       const json = {
-        type: 'BULK_EDIT_IDENTIFIERS',
+        type: editType,
         identifierType: recordIdentifier,
         entityType: 'USER',
         exportTypeSpecificParameters: {},

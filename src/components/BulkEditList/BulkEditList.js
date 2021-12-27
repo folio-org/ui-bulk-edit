@@ -9,12 +9,15 @@ import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult/BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
+import { BulkEditConformationModal } from '../BulkEditConformationModal';
 
 export const BulkEditList = () => {
   const stripes = useStripes();
   const [fileUploadedName, setFileUploadedName] = useState();
+  const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
+  const [isBulkEditConformationModal, setIsBulkConformationModal] = useState(false);
 
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
 
@@ -30,6 +33,10 @@ export const BulkEditList = () => {
 
   const cancelBulkEditStart = () => {
     setIsBulkEditModalOpen(false);
+  };
+
+  const cancelBulkEditConformation = () => {
+    setIsBulkConformationModal(false);
   };
 
   const paneTitle = fileUploadedName ?
@@ -66,8 +73,15 @@ export const BulkEditList = () => {
         </Pane>
       </Paneset>
       <BulkEditStartModal
+        setFileUploadedMatchedName={setFileUploadedMatchedName}
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
+        setIsBulkConformationModal={setIsBulkConformationModal}
+      />
+      <BulkEditConformationModal
+        open={isBulkEditConformationModal}
+        onCancel={cancelBulkEditConformation}
+        fileName={fileUploadedMatchedName}
       />
     </>
   );

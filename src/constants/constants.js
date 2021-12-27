@@ -2,6 +2,10 @@ import { FormattedMessage } from 'react-intl';
 
 export const SUPPORTED_FILE_EXTENSIONS = ['csv'];
 
+export const BULK_EDIT_IDENTIFIERS = 'BULK_EDIT_IDENTIFIERS';
+
+export const BULK_EDIT_UPDATE = 'BULK_EDIT_UPDATE';
+
 export const DEFAULT_COLUMNS = [
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.active" />,
