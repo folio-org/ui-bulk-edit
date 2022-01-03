@@ -4,6 +4,10 @@ import '../../../../../test/jest/__mock__';
 
 import { Preview } from './Preview';
 
+jest.mock('./PreviewList', () => ({
+  PreviewList: () => 'PreviewList',
+}));
+
 const renderPreview = () => {
   render(
     <Preview fileUploadedName="Mock.csv" />,
@@ -15,5 +19,6 @@ describe('Preview', () => {
     renderPreview();
 
     expect(screen.getByText('FileName: Mock.csv')).toBeVisible();
+    expect(screen.getByText('PreviewList')).toBeVisible();
   });
 });

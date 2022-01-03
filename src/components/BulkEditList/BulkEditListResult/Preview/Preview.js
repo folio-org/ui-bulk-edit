@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Headline,
@@ -7,22 +6,11 @@ import {
   Col,
   AccordionStatus,
   Row,
-  MultiColumnList,
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import { PreviewList } from './PreviewList';
 
 export const Preview = ({ fileUploadedName }) => {
-  const [contentData] = useState([{
-    identifier: 1,
-    reason: 2,
-  }]);
-
-  const columnWidths = {
-    identifier: '15%',
-    reason: '85%',
-  };
-
   return (
     <AccordionStatus>
       <Row>
@@ -51,18 +39,7 @@ export const Preview = ({ fileUploadedName }) => {
 
           <Row>
             <Col xs={12}>
-              <MultiColumnList
-                striped
-                contentData={contentData}
-                columnWidths={columnWidths}
-                columnMapping={{
-                  identifier: <FormattedMessage id="ui-bulk-edit.list.errors.table.identifier" />,
-                  reason: <FormattedMessage id="ui-bulk-edit.list.errors.table.reason" />,
-                }}
-                visibleColumns={[
-                  'identifier', 'reason',
-                ]}
-              />
+             Errors
             </Col>
           </Row>
 

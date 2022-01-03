@@ -4,7 +4,11 @@ import { createMemoryHistory } from 'history';
 
 import '../../../../test/jest/__mock__';
 
-import { BulkEditListResult } from './BulkEditListResult';
+import BulkEditListResult from './BulkEditListResult';
+
+jest.mock('./Preview/PreviewList', () => ({
+  PreviewList: () => 'PreviewList',
+}));
 
 const renderBulkEditResult = (history, fileName = undefined) => {
   render(

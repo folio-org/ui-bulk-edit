@@ -7,7 +7,7 @@ import {
 import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
 import { Preview } from './Preview/Preview';
 
-export const BulkEditListResult = ({ fileUploadedName }) => {
+const BulkEditListResult = ({ fileUploadedName }) => {
   return (
     <Switch>
       <Route path="/bulk-edit" exact component={NoResultsMessage} />
@@ -18,6 +18,8 @@ export const BulkEditListResult = ({ fileUploadedName }) => {
     </Switch>
   );
 };
+
+export default BulkEditListResult;
 
 BulkEditListResult.propTypes = {
   fileUploadedName: PropTypes.string,

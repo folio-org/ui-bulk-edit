@@ -6,7 +6,7 @@ import { AppIcon, useStripes } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
-import { BulkEditListResult } from './BulkEditListResult/BulkEditListResult';
+import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
 

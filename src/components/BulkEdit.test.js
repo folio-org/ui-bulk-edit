@@ -10,6 +10,10 @@ import '../../test/jest/__mock__';
 
 import BulkEdit from './BulkEdit';
 
+jest.mock('./BulkEditList/BulkEditListResult', () => ({
+  BulkEditListResult: () => 'BulkEditListResult',
+}));
+
 const history = createMemoryHistory();
 
 const renderBulkEdit = () => {
@@ -111,7 +115,7 @@ describe('BulkEdit', () => {
   it('should display empty result list', () => {
     renderBulkEdit();
 
-    expect(screen.getByText(/list.result.emptyMessage/)).toBeVisible();
+    expect(screen.getByText(/BulkEditListResult/)).toBeVisible();
   });
 
   it('should display option buttons', () => {
