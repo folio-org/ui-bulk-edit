@@ -10,7 +10,7 @@ export const usePreviewRecords = (id) => {
   const { data } = useQuery('previewRecords',
     {
       queryFn: async () => {
-        const { users } = await ky.get(`bulk-edit/${id}/preview`, { searchParams: { limit: 10 } }).json();
+        const { users } = await ky.get(`bulk-edit/${id}/preview`, { searchParams: { limit: 11 } }).json();
         const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
 
         const groupsMap = usergroups.reduce((acc, curr) => (
@@ -27,8 +27,8 @@ export const usePreviewRecords = (id) => {
           };
         });
       },
-    },
-    { enabled: !id });
+      enabled: !!id,
+    });
 
   return ({
     users: data,

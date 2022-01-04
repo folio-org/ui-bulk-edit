@@ -4,8 +4,8 @@ import '../../../../../test/jest/__mock__';
 
 import { Preview } from './Preview';
 
-jest.mock('./PreviewList', () => ({
-  PreviewList: () => 'PreviewList',
+jest.mock('./PreviewAccordion', () => ({
+  PreviewAccordion: () => 'PreviewAccordion',
 }));
 
 const renderPreview = () => {
@@ -19,6 +19,6 @@ describe('Preview', () => {
     renderPreview();
 
     expect(screen.getByText('FileName: Mock.csv')).toBeVisible();
-    expect(screen.getByText('PreviewList')).toBeVisible();
+    expect(screen.getByText('PreviewAccordion')).toBeVisible();
   });
 });

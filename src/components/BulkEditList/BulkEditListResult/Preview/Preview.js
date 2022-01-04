@@ -8,7 +8,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
-import { PreviewList } from './PreviewList';
+import { PreviewAccordion } from './PreviewAccordion';
 
 export const Preview = ({ fileUploadedName }) => {
   return (
@@ -21,13 +21,7 @@ export const Preview = ({ fileUploadedName }) => {
         </Col>
       </Row>
       <AccordionSet>
-        <Accordion label={<FormattedMessage id="ui-bulk-edit.list.preview.title" />}>
-          <Row>
-            <Col xs={12}>
-              <PreviewList />
-            </Col>
-          </Row>
-        </Accordion>
+        <PreviewAccordion />
         <Accordion label={<FormattedMessage id="ui-bulk-edit.list.errors.title" />}>
           <Row>
             <Col xs={12}>

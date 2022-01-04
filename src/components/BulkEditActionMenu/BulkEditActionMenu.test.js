@@ -9,8 +9,18 @@ import { useOkapiKy } from '@folio/stripes/core';
 import '../../../test/jest/__mock__';
 
 import BulkEditActionMenu from './BulkEditActionMenu';
-import * as useDownloadLinks from '../../API/useDownloadLinks';
 import { DEFAULT_COLUMNS } from '../../constants';
+
+jest.mock('../../API', () => ({
+  useDownloadLinks: () => ({
+    data: {
+      files: ['file1.csv', 'file2.csv'],
+    },
+  }),
+  usePreviewRecords: () => ({
+    users: [{ id: 1 }],
+  }),
+}));
 
 const renderActionMenu = ({
   onEdit = noop,
@@ -27,12 +37,6 @@ const renderActionMenu = ({
 
 describe('BulkEditActionMenu', () => {
   beforeEach(() => {
-    jest.spyOn(useDownloadLinks, 'useDownloadLinks').mockImplementation(() => ({
-      data: {
-        files: ['file1.csv', 'file2.csv'],
-      },
-    }));
-
     useOkapiKy
       .mockClear()
       .mockReturnValue({

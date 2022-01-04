@@ -6,8 +6,8 @@ import '../../../../test/jest/__mock__';
 
 import BulkEditListResult from './BulkEditListResult';
 
-jest.mock('./Preview/PreviewList', () => ({
-  PreviewList: () => 'PreviewList',
+jest.mock('./Preview/PreviewAccordion', () => ({
+  PreviewAccordion: () => 'PreviewAccordion',
 }));
 
 const renderBulkEditResult = (history, fileName = undefined) => {

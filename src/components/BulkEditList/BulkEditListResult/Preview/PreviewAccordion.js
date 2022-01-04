@@ -1,7 +1,12 @@
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { MultiColumnList } from '@folio/stripes/components';
+import {
+  Accordion,
+  Col,
+  Row,
+  MultiColumnList,
+} from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 
 import { usePreviewRecords } from '../../../../API';
@@ -9,7 +14,7 @@ import { usePathParams } from '../../../../hooks';
 import { DEFAULT_COLUMNS } from '../../../../constants';
 import { FormattedTime } from './FormattedTime';
 
-export const PreviewList = () => {
+export const PreviewAccordion = () => {
   const location = useLocation();
   const { id } = usePathParams('/bulk-edit/:id');
   const { users } = usePreviewRecords(id);
@@ -56,12 +61,22 @@ export const PreviewList = () => {
   };
 
   return (
-    <MultiColumnList
-      striped
-      contentData={users}
-      columnMapping={columnMapping}
-      formatter={resultsFormatter}
-      visibleColumns={visibleColumns}
-    />
+    <Accordion
+      closedByDefault
+      open={users?.length}
+      label={<FormattedMessage id="ui-bulk-edit.list.preview.title" />}
+    >
+      <Row>
+        <Col xs={12}>
+          <MultiColumnList
+            striped
+            contentData={users}
+            columnMapping={columnMapping}
+            formatter={resultsFormatter}
+            visibleColumns={visibleColumns}
+          />
+        </Col>
+      </Row>
+    </Accordion>
   );
 };
