@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import {
   Headline,
   Accordion,
@@ -7,7 +8,6 @@ import {
   AccordionStatus,
   Row,
 } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
 import { PreviewAccordion } from './PreviewAccordion';
 
 export const Preview = ({ fileUploadedName }) => {

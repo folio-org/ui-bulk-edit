@@ -9,12 +9,12 @@ import {
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 
-import { usePreviewRecords } from '../../../../API';
-import { usePathParams } from '../../../../hooks';
-import { DEFAULT_COLUMNS } from '../../../../constants';
+import { usePreviewRecords } from '../../../../../API';
+import { usePathParams } from '../../../../../hooks';
+import { DEFAULT_COLUMNS } from '../../../../../constants';
 import { FormattedTime } from './FormattedTime';
 
-export const PreviewAccordion = () => {
+const PreviewAccordion = () => {
   const location = useLocation();
   const { id } = usePathParams('/bulk-edit/:id');
   const { users } = usePreviewRecords(id);
@@ -41,8 +41,8 @@ export const PreviewAccordion = () => {
         }
       </AppIcon>
     ),
-    lastName: user => user.personal.lastName,
-    firstName: user => user.personal.firstName,
+    lastName: user => user.personal?.lastName,
+    firstName: user => user.personal?.firstName,
     barcode: user => user.barcode,
     patronGroup: user => user.patronGroup,
     username: user => user.username,
@@ -63,7 +63,7 @@ export const PreviewAccordion = () => {
   return (
     <Accordion
       closedByDefault
-      open={users?.length}
+      open={!!users.length}
       label={<FormattedMessage id="ui-bulk-edit.list.preview.title" />}
     >
       <Row>
@@ -80,3 +80,5 @@ export const PreviewAccordion = () => {
     </Accordion>
   );
 };
+
+export default PreviewAccordion;
