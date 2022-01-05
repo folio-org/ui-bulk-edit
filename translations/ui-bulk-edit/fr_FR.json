@@ -48,9 +48,9 @@
     "columns.firstName": "Prénom",
     "columns.barcode": "Code-barres",
     "columns.patronGroup": "Patron group",
-    "columns.username": "Username",
+    "columns.username": "Nom d'utilisateur",
     "columns.email": "Email",
-    "columns.expirationDate": "Expiration date",
+    "columns.expirationDate": "Date d'expiration",
     "menuGroup.actions": "Actions",
     "menuGroup.showColumns": "Show columns"
 }
