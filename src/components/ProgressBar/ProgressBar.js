@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Icon, Loading } from '@folio/stripes/components';
 import css from './ProgressBar.css';
 
-export const ProgressBar = ({ progress = 0, title }) => {
+export const ProgressBar = ({ progress, title }) => {
   return (
     <div className={css.progressBar}>
       <div className={css.progressBarTitle}>
@@ -26,7 +26,7 @@ export const ProgressBar = ({ progress = 0, title }) => {
 };
 
 ProgressBar.propTypes = {
-  progress: PropTypes.number,
+  progress: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
 };
 
