@@ -1,25 +1,42 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useOkapiKy } from '@folio/stripes/core';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import '../../../test/jest/__mock__';
 
 import BulkEditConformationModal from './BulkEditConformationModal';
 
-const onCancelMock = jest.fn();
 const fileNameMock = 'test.csv';
 
 const renderBulkEditConformationModal = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
   render(
-    <BulkEditConformationModal
-      onCancel={onCancelMock}
-      open
-      fileName={fileNameMock}
-    />,
+    <QueryClientProvider client={queryClient}>
+      <BulkEditConformationModal
+        open
+        fileName={fileNameMock}
+      />
+    </QueryClientProvider>,
   );
 };
 
 describe('BulkEditActionMenu', () => {
+  beforeEach(() => {
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        post: () => ({
+        }),
+      });
+  });
   it('should displays BulkEditConformationModal title', async () => {
     renderBulkEditConformationModal();
 
@@ -47,15 +64,11 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditConformationModal();
 
     userEvent.click(screen.getByRole('button', { name: /stripes-components.cancel/ }));
-
-    expect(onCancelMock).toHaveBeenCalled();
   });
 
   it('should call onStart callback', async () => {
     renderBulkEditConformationModal();
 
     userEvent.click(screen.getByRole('button', { name: /stripes-components.saveAndClose/ }));
-
-    expect(onCancelMock).toHaveBeenCalled();
   });
 });

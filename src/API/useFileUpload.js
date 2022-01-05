@@ -36,7 +36,7 @@ export const useFileUploadComand = () => {
 
     return ky.post(`bulk-edit/${id}/upload`, {
       body: formData,
-    });
+    }).json();
   } });
 
   return {
@@ -44,6 +44,28 @@ export const useFileUploadComand = () => {
   };
 };
 
+export const useLaunchJob = () => {
+  const ky = useOkapiKy();
 
+  const { mutateAsync: startJob } = useMutation({ mutationFn: ({ id }) => {
+    return ky.post(`bulk-edit/${id}/start`);
+  } });
+
+  return {
+    startJob,
+  };
+};
+
+export const useRollBack = () => {
+  const ky = useOkapiKy();
+
+  const { mutateAsync: rollBackJob } = useMutation({ mutationFn: ({ id }) => {
+    return ky.post(`bulk-edit/${id}/roll-back`);
+  } });
+
+  return {
+    rollBackJob,
+  };
+};
 
 

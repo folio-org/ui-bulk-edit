@@ -14,12 +14,13 @@ import { useJobCommand, useFileUploadComand } from '../../API/useFileUpload';
 import { ListFileUploader } from '../ListFileUploader';
 import { BULK_EDIT_UPDATE } from '../../constants/constants';
 
-
 const BulkEditStartModal = ({
   open,
   onCancel,
-  setFileUploadedMatchedName,
+  setFileName,
   setIsBulkConformationModal,
+  setCountOfRecords,
+  setUpdatedId,
 }) => {
   const intl = useIntl();
   const showCallout = useShowCallout();
@@ -29,6 +30,7 @@ const BulkEditStartModal = ({
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
+  const [isConformationButton, setConformationButton] = useState(true);
 
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title' });
   const confirmLabel = intl.formatMessage({ id: 'stripes-components.saveAndClose' });
@@ -49,13 +51,19 @@ const BulkEditStartModal = ({
   };
 
   const uploadFileFlow = async (fileToUpload) => {
-    setFileUploadedMatchedName(fileToUpload.name);
+    setFileName(fileToUpload.name);
     setDropZoneActive(false);
 
     try {
       const { id } = await requestJobId({ recordIdentifier: 'BARCODE', editType: BULK_EDIT_UPDATE });
 
-      await fileUpload({ id, fileToUpload });
+      const data = await fileUpload({ id, fileToUpload });
+
+      await setUpdatedId(id);
+
+      setCountOfRecords(data);
+
+      setConformationButton(false);
     } catch ({ message }) {
       showCallout({
         message: errorMessage,
@@ -75,13 +83,14 @@ const BulkEditStartModal = ({
   const onStartbulkEdit = () => {
     onCancel();
     setIsBulkConformationModal(true);
+    setConformationButton(true);
   };
 
   const footer = (
     <ModalFooter>
       <Button
-        disabled={false}
         onClick={onStartbulkEdit}
+        disabled={isConformationButton}
       >
         {confirmLabel}
       </Button>
@@ -118,8 +127,10 @@ const BulkEditStartModal = ({
 BulkEditStartModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
-  setFileUploadedMatchedName: PropTypes.func.isRequired,
-  setIsBulkConformationModal: PropTypes.func.isRequired,
+  setFileName: PropTypes.func,
+  setIsBulkConformationModal: PropTypes.func,
+  setCountOfRecords: PropTypes.func,
+  setUpdatedId: PropTypes.func,
 };
 
 export default BulkEditStartModal;
