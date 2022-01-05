@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Icon, Loading } from '@folio/stripes/components';
+import { FormattedMessage } from 'react-intl';
 import css from './ProgressBar.css';
 
 export const ProgressBar = ({ progress, title }) => {
@@ -17,7 +18,7 @@ export const ProgressBar = ({ progress, title }) => {
           <div data-testid="progress-line" style={{ width: `${progress}%` }} />
         </div>
         <div className={css.progressBarLineStatus}>
-          <span>Uploading</span>
+          <span><FormattedMessage id="ui-bulk-edit.uploading" /></span>
           <Loading />
         </div>
       </div>
