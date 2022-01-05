@@ -1,0 +1,50 @@
+@import "@folio/stripes-components/lib/variables.css";
+
+.progressBar {
+    border: 1px solid var(--color-border-p2);
+    border-radius: var(--radius);
+}
+
+.progressBarTitle {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid var(--color-border-p2);
+    font-size: var(--font-size-medium);
+    font-weight: var(--text-weight-bold);
+    letter-spacing: 0.04em;
+    color: var(--color-text);
+}
+
+.progressBarTitleText {
+    margin-left: 6px;
+}
+
+.progressBarBody {
+    padding: 20px 12px 16px;
+}
+
+.progressBarLine {
+    height: 14px;
+    border: 1px solid var(--color-border-p2);
+    border-radius: 15px;
+    overflow: hidden;
+}
+.progressBarLine div {
+    border-radius: 15px;
+    background-color: var( --primary);
+    width: 60%;
+    height: 100%;
+    transition: width .2s linear;
+}
+
+
+.progressBarLineStatus {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.progressBarLineStatus span {
+    margin-right: 6px;
+}
