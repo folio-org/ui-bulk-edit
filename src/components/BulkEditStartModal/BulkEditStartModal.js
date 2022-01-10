@@ -12,7 +12,7 @@ import { useShowCallout } from '@folio/stripes-acq-components';
 import { useJobCommand, useFileUploadComand } from '../../API/useFileUpload';
 
 import { ListFileUploader } from '../ListFileUploader';
-import { BULK_EDIT_UPDATE } from '../../constants/constants';
+import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants/constants';
 
 const BulkEditStartModal = ({
   open,
@@ -55,7 +55,7 @@ const BulkEditStartModal = ({
     setDropZoneActive(false);
 
     try {
-      const { id } = await requestJobId({ recordIdentifier: 'BARCODE', editType: BULK_EDIT_UPDATE });
+      const { id } = await requestJobId({ recordIdentifier: BULK_EDIT_BARCODE, editType: BULK_EDIT_UPDATE });
 
       const data = await fileUpload({ id, fileToUpload });
 
@@ -64,7 +64,7 @@ const BulkEditStartModal = ({
       setCountOfRecords(data);
 
       setConformationButton(false);
-    } catch ({ message }) {
+    } catch {
       showCallout({
         message: errorMessage,
         type: 'error',

@@ -40,9 +40,9 @@ export function createFile(name, size, type) {
 }
 
 export function flushPromises(container) {
-  return new Promise(resolve => setImmediate(() => {
+  return new Promise(resolve => setTimeout(() => {
     resolve(container);
-  }));
+  }, 0));
 }
 
 export function dispatchEvt(node, type, data) {
