@@ -47,10 +47,12 @@
     "columns.lastName": "Nom",
     "columns.firstName": "Prénom",
     "columns.barcode": "Code-barres",
-    "columns.patronGroup": "Patron group",
+    "columns.patronGroup": "Groupe / Catégorie d'utilisateurs",
     "columns.username": "Nom d'utilisateur",
     "columns.email": "Email",
     "columns.expirationDate": "Date d'expiration",
     "menuGroup.actions": "Actions",
-    "menuGroup.showColumns": "Show columns"
+    "menuGroup.showColumns": "Show columns",
+    "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
+    "conformationModal.message": "{count} records will be changed if the Save & close button is cliked."
 }
