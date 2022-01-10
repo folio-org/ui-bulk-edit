@@ -3,7 +3,7 @@ import { Icon, Loading } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import css from './ProgressBar.css';
 
-export const ProgressBar = ({ progress, title }) => {
+export const ProgressBar = ({ progress = 100, title }) => {
   return (
     <div className={css.progressBar}>
       <div className={css.progressBarTitle}>

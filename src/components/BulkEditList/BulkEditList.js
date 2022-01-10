@@ -21,9 +21,8 @@ export const BulkEditList = () => {
   const [isBulkEditConformationModal, setIsBulkConformationModal] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [updatedId, setUpdatedId] = useState();
-  const [refetchInterval, setRefetchInterval] = useState(500);
 
-  const { data } = useProgressStatus(updatedId, refetchInterval, setRefetchInterval);
+  const { data } = useProgressStatus(updatedId, 500);
 
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
 
@@ -41,17 +40,19 @@ export const BulkEditList = () => {
     setIsBulkEditModalOpen(false);
   };
 
-  const paneTitle = fileUploadedName ?
-    <FormattedMessage
-      id="ui-bulk-edit.meta.title.uploadedFile"
-      values={{ fileName: fileUploadedName }}
-    />
-    : fileUploadedMatchedName ?
-      <FormattedMessage
+  const paneTitle = () => {
+    if (fileUploadedName) {
+      return <FormattedMessage
+        id="ui-bulk-edit.meta.title.uploadedFile"
+        values={{ fileName: fileUploadedName }}
+             />;
+    } else if (fileUploadedMatchedName) {
+      return <FormattedMessage
         id="ui-bulk-edit.meta.title.uploadedFile"
         values={{ fileName: fileUploadedMatchedName }}
-      /> :
-      <FormattedMessage id="ui-bulk-edit.meta.title" />;
+             />;
+    } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
+  };
 
   return (
     <>
@@ -68,7 +69,7 @@ export const BulkEditList = () => {
         </Pane>
         <Pane
           defaultWidth="fill"
-          paneTitle={paneTitle}
+          paneTitle={paneTitle()}
           paneSub={<FormattedMessage id="ui-bulk-edit.list.logSubTitle" />}
           appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
           actionMenu={renderActionMenu}

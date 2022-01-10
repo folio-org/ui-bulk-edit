@@ -72,10 +72,10 @@ const BulkEditStartModal = ({
     }
   };
 
-  const handleDrop = (acceptedFiles) => {
+  const handleDrop = async (acceptedFiles) => {
     const fileToUpload = acceptedFiles[0];
 
-    uploadFileFlow(fileToUpload);
+    await uploadFileFlow(fileToUpload);
 
     setDropZoneActive(false);
   };
