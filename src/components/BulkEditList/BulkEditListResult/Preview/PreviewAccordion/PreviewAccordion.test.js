@@ -11,7 +11,7 @@ jest.mock('../../../../../API', () => ({
 
 const renderPreviewAccordion = () => {
   render(
-    <MemoryRouter initialEntries={['/bulk-edit/1']}>
+    <MemoryRouter initialEntries={['/bulk-edit/1?selectedColumns=%5B"username"%5D']}>
       <PreviewAccordion />
     </MemoryRouter>,
   );
