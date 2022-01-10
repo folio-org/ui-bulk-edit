@@ -13,6 +13,11 @@ jest.mock('../../../../../API', () => ({
       barcode: '789',
       createdDate: 1641779462295,
     },
+    {
+      username: 'user',
+      active: false,
+      barcode: '123',
+    },
   ] }),
 }));
 
