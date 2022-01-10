@@ -31,6 +31,6 @@ export const usePreviewRecords = (id) => {
     });
 
   return ({
-    users: data,
+    users: data || [],
   });
 };

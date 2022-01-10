@@ -6,12 +6,19 @@ import '../../../../../../test/jest/__mock__';
 import PreviewAccordion from './PreviewAccordion';
 
 jest.mock('../../../../../API', () => ({
-  usePreviewRecords: () => ({ users: [{ username: 'username' }] }),
+  usePreviewRecords: () => ({ users: [
+    {
+      username: 'username',
+      active: true,
+      barcode: '789',
+      createdDate: 1641779462295,
+    },
+  ] }),
 }));
 
 const renderPreviewAccordion = () => {
   render(
-    <MemoryRouter initialEntries={['/bulk-edit/1?selectedColumns=%5B"username"%5D']}>
+    <MemoryRouter initialEntries={['/bulk-edit/1']}>
       <PreviewAccordion />
     </MemoryRouter>,
   );
