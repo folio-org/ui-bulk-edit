@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 
 import {
   Button,
@@ -24,12 +25,18 @@ const BulkEditConformationModal = ({
   const cancelLabel = intl.formatMessage({ id: 'stripes-components.cancel' });
   const modalContent = intl.formatMessage({ id: 'ui-bulk-edit.conformationModal.message' }, { count: countOfRecords });
 
+  const history = useHistory();
+
   const { startJob } = useLaunchJob();
   const { rollBackJob } = useRollBack();
 
   const onStartJob = async () => {
     await startJob({ id: updatedId });
     setIsBulkConformationModal(false);
+
+    history.replace({
+      pathname: '/bulk-edit/progress',
+    });
   };
 
   const onCancelJob = async () => {

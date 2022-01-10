@@ -1,12 +1,16 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
 import { useOkapiKy } from '@folio/stripes/core';
+import { createMemoryHistory } from 'history';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import '../../../test/jest/__mock__';
 
 import BulkEditConformationModal from './BulkEditConformationModal';
+
+const history = createMemoryHistory();
 
 const fileNameMock = 'test.csv';
 
@@ -20,10 +24,12 @@ const renderBulkEditConformationModal = () => {
   });
   render(
     <QueryClientProvider client={queryClient}>
-      <BulkEditConformationModal
-        open
-        fileName={fileNameMock}
-      />
+      <BrowserRouter history={history}>
+        <BulkEditConformationModal
+          open
+          fileName={fileNameMock}
+        />
+      </BrowserRouter>
     </QueryClientProvider>,
   );
 };
