@@ -9,12 +9,17 @@ import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult/BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
+import { BulkEditConformationModal } from '../BulkEditConformationModal';
 
 export const BulkEditList = () => {
   const stripes = useStripes();
   const [fileUploadedName, setFileUploadedName] = useState();
+  const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
+  const [isBulkEditConformationModal, setIsBulkConformationModal] = useState(false);
+  const [countOfRecords, setCountOfRecords] = useState(0);
+  const [updatedId, setUpdatedId] = useState();
 
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
 
@@ -66,8 +71,19 @@ export const BulkEditList = () => {
         </Pane>
       </Paneset>
       <BulkEditStartModal
+        setFileName={setFileUploadedMatchedName}
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
+        setIsBulkConformationModal={setIsBulkConformationModal}
+        setCountOfRecords={setCountOfRecords}
+        setUpdatedId={setUpdatedId}
+      />
+      <BulkEditConformationModal
+        open={isBulkEditConformationModal}
+        setIsBulkConformationModal={setIsBulkConformationModal}
+        fileName={fileUploadedMatchedName}
+        countOfRecords={countOfRecords}
+        updatedId={updatedId}
       />
     </>
   );
