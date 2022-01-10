@@ -17,6 +17,7 @@ import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
 import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
+import { BULK_EDIT_IDENTIFIERS } from '../../../constants/constants';
 import { getFileInfo } from './utils/getFileInfo';
 import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
 
@@ -98,7 +99,7 @@ export const BulkEditListFilters = ({
     setDropZoneActive(false);
 
     try {
-      const { id } = await requestJobId({ recordIdentifier });
+      const { id } = await requestJobId({ recordIdentifier, editType: BULK_EDIT_IDENTIFIERS });
 
       await fileUpload({ id, fileToUpload });
 

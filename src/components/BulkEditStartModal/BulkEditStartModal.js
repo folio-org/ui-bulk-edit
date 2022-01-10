@@ -7,26 +7,36 @@ import {
   Modal,
   ModalFooter,
 } from '@folio/stripes/components';
+import { useShowCallout } from '@folio/stripes-acq-components';
 
-import { useJobCommand } from '../../API/useFileUpload';
+import { useJobCommand, useFileUploadComand } from '../../API/useFileUpload';
 
 import { ListFileUploader } from '../ListFileUploader';
+import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants/constants';
 
 const BulkEditStartModal = ({
   open,
   onCancel,
+  setFileName,
+  setIsBulkConformationModal,
+  setCountOfRecords,
+  setUpdatedId,
 }) => {
   const intl = useIntl();
+  const showCallout = useShowCallout();
 
-  const { isLoading } = useJobCommand();
+  const { requestJobId, isLoading } = useJobCommand();
+  const { fileUpload } = useFileUploadComand();
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
+  const [isConformationButton, setConformationButton] = useState(true);
 
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title' });
   const confirmLabel = intl.formatMessage({ id: 'stripes-components.saveAndClose' });
   const cancelLabel = intl.formatMessage({ id: 'stripes-components.cancel' });
   const uploaderSubTitle = intl.formatMessage({ id: 'ui-bulk-edit.uploaderSubTitle.records' });
+  const errorMessage = intl.formatMessage({ id: 'ui-bulk-edit.error.uploadedFile' });
 
   const hideFileExtensionModal = () => {
     setFileExtensionModalOpen(false);
@@ -40,15 +50,47 @@ const BulkEditStartModal = ({
     setDropZoneActive(false);
   };
 
+  const uploadFileFlow = async (fileToUpload) => {
+    setFileName(fileToUpload.name);
+    setDropZoneActive(false);
+
+    try {
+      const { id } = await requestJobId({ recordIdentifier: BULK_EDIT_BARCODE, editType: BULK_EDIT_UPDATE });
+
+      const data = await fileUpload({ id, fileToUpload });
+
+      await setUpdatedId(id);
+
+      setCountOfRecords(data);
+
+      setConformationButton(false);
+    } catch {
+      showCallout({
+        message: errorMessage,
+        type: 'error',
+      });
+    }
+  };
+
+  const handleDrop = async (acceptedFiles) => {
+    const fileToUpload = acceptedFiles[0];
+
+    await uploadFileFlow(fileToUpload);
+
+    setDropZoneActive(false);
+  };
+
   const onStartbulkEdit = () => {
     onCancel();
+    setIsBulkConformationModal(true);
+    setConformationButton(true);
   };
 
   const footer = (
     <ModalFooter>
       <Button
-        disabled
         onClick={onStartbulkEdit}
+        disabled={isConformationButton}
       >
         {confirmLabel}
       </Button>
@@ -71,7 +113,7 @@ const BulkEditStartModal = ({
         className="Centered"
         isLoading={isLoading}
         isDropZoneActive={isDropZoneActive}
-        handleDrop={() => setDropZoneActive(false)}
+        handleDrop={handleDrop}
         fileExtensionModalOpen={fileExtensionModalOpen}
         hideFileExtensionModal={hideFileExtensionModal}
         handleDragLeave={handleDragLeave}
@@ -85,6 +127,10 @@ const BulkEditStartModal = ({
 BulkEditStartModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
+  setFileName: PropTypes.func,
+  setIsBulkConformationModal: PropTypes.func,
+  setCountOfRecords: PropTypes.func,
+  setUpdatedId: PropTypes.func,
 };
 
 export default BulkEditStartModal;
