@@ -1,6 +1,7 @@
 {
   "meta.title": "Bulk edit",
   "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
+  "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
 
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
@@ -72,6 +73,7 @@
   "columns.expirationDate": "Expiration date",
 
   "menuGroup.actions": "Actions",
-  "menuGroup.showColumns": "Show columns"
-
+  "menuGroup.showColumns": "Show columns",
+ 
+  "conformationModal.message": "{count} records will be changed if the Save & close button is cliked."
 }

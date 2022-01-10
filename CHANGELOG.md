@@ -18,4 +18,5 @@
 * [UIBULKED-17](https://issues.folio.org/browse/UIBULKED-17) Start bulk edit
 * [UIBULKED-18](https://issues.folio.org/browse/UIBULKED-18) Download matched records (CSV)
 * [UIBULKED-15](https://issues.folio.org/browse/UIBULKED-15) Add Query textarea
+* [UIBULKED-20](https://issues.folio.org/browse/UIBULKED-20) Bulk edit confirmation modal
 * [UIBULKED-12](https://issues.folio.org/browse/UIBULKED-12) Populating preview of matched records based on identifiers search
