@@ -6,10 +6,10 @@ import '../../../../test/jest/__mock__';
 
 import { BulkEditListResult } from './BulkEditListResult';
 
-const renderBulkEditResult = (history, fileName = undefined) => {
+const renderBulkEditResult = (history, fileName = undefined, fileUpdatedName = undefined) => {
   render(
     <Router history={history}>
-      <BulkEditListResult fileUploadedName={fileName} />
+      <BulkEditListResult fileUploadedName={fileName} fileUpdatedName={fileUpdatedName} />
     </Router>,
   );
 };
@@ -33,5 +33,15 @@ describe('BulkEditListResult', () => {
     renderBulkEditResult(history, 'Mock.cvs');
 
     expect(screen.getByText(/Mock.cvs/)).toBeVisible();
+  });
+
+  it('displays fileName field', () => {
+    const history = createMemoryHistory();
+
+    history.push('/bulk-edit/progress');
+
+    renderBulkEditResult(history, undefined, 'TestTitle');
+
+    expect(screen.getByText(/TestTitle/)).toBeVisible();
   });
 });

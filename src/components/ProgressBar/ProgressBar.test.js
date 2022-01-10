@@ -13,6 +13,10 @@ describe('ProgressBar', () => {
     progress: 10,
   };
 
+  const emptyProps = {
+    title: 'title',
+  };
+
   it('should display correct title', async () => {
     renderProgressBar(props);
 
@@ -28,5 +32,14 @@ describe('ProgressBar', () => {
 
     expect(progressLine).toBeVisible();
     expect(progressLine.getAttribute('style')).toBe(`width: ${props.progress}%;`);
+  });
+
+  it('should display correct full width percentage', async () => {
+    renderProgressBar(emptyProps);
+
+    const progressLine = await screen.findByTestId('progress-line');
+
+    expect(progressLine).toBeVisible();
+    expect(progressLine.getAttribute('style')).toBe('width: 100%;');
   });
 });
