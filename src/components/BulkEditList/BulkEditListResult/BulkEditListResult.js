@@ -8,17 +8,17 @@ import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
 import { Preview } from './Preview/Preview';
 import { ProgressBar } from '../../ProgressBar/ProgressBar';
 
-export const BulkEditListResult = ({ fileUploadedName, fileUpdatedName, progress }) => {
+export const BulkEditListResult = ({ fileUploadedName, fileUpdatedName, updatedId, processedRecords }) => {
   return (
     <Switch>
       <Route
-        path="/bulk-edit/progress"
-        component={() => <ProgressBar title={fileUpdatedName} progress={progress} />}
+        path="/bulk-edit/:id/progress"
+        component={() => <ProgressBar title={fileUpdatedName} updatedId={updatedId} />}
       />
       <Route path="/bulk-edit" exact component={NoResultsMessage} />
       <Route
         path="/bulk-edit/:id"
-        component={() => <Preview fileUploadedName={fileUploadedName} />}
+        component={() => <Preview fileUploadedName={fileUploadedName} processedRecords={processedRecords} />}
       />
     </Switch>
   );
@@ -27,5 +27,6 @@ export const BulkEditListResult = ({ fileUploadedName, fileUpdatedName, progress
 BulkEditListResult.propTypes = {
   fileUploadedName: PropTypes.string,
   fileUpdatedName: PropTypes.string,
-  progress: PropTypes.number,
+  updatedId: PropTypes.string,
+  processedRecords: PropTypes.number,
 };

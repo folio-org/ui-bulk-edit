@@ -52,6 +52,7 @@
   "start.downloadMathcedRecords": "Download matched records (CSV)",
 
   "error.uploadedFile": "Fail to upload file",
+  "error.sww": "Something went wrong",
 
   "columns.active": "Status",
   "columns.lastName": "Last name",

@@ -35,7 +35,7 @@ const BulkEditConformationModal = ({
     setIsBulkConformationModal(false);
 
     history.replace({
-      pathname: '/bulk-edit/progress',
+      pathname: `/bulk-edit/${updatedId}/progress`,
     });
   };
 
@@ -74,7 +74,7 @@ const BulkEditConformationModal = ({
 BulkEditConformationModal.propTypes = {
   open: PropTypes.bool.isRequired,
   setIsBulkConformationModal: PropTypes.func.isRequired,
-  fileName: PropTypes.string.isRequired,
+  fileName: PropTypes.string,
   countOfRecords: PropTypes.number,
   updatedId: PropTypes.string,
 };

@@ -1,6 +1,7 @@
 import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
+import * as useProgressStatus from '../../../API/useProgressStatus';
 
 import '../../../../test/jest/__mock__';
 
@@ -9,12 +10,25 @@ import { BulkEditListResult } from './BulkEditListResult';
 const renderBulkEditResult = (history, fileName = undefined, fileUpdatedName = undefined) => {
   render(
     <Router history={history}>
-      <BulkEditListResult fileUploadedName={fileName} fileUpdatedName={fileUpdatedName} />
+      <BulkEditListResult
+        fileUploadedName={fileName}
+        fileUpdatedName={fileUpdatedName}
+        updatedId="1"
+        processedRecords={2}
+      />
     </Router>,
   );
 };
 
 describe('BulkEditListResult', () => {
+  jest.spyOn(useProgressStatus, 'useProgressStatus').mockImplementation(() => ({
+    data: {
+      progress: {
+        progress: 55,
+      },
+    },
+  }));
+
   it('displays empty message', () => {
     const history = createMemoryHistory();
 
@@ -38,7 +52,7 @@ describe('BulkEditListResult', () => {
   it('displays fileName field', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/progress');
+    history.push('/bulk-edit/1/progress');
 
     renderBulkEditResult(history, undefined, 'TestTitle');
 
