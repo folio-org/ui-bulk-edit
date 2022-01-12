@@ -52,5 +52,7 @@
     "columns.email": "Email",
     "columns.expirationDate": "Expiration date",
     "menuGroup.actions": "Actions",
-    "menuGroup.showColumns": "Show columns"
+    "menuGroup.showColumns": "Show columns",
+    "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
+    "conformationModal.message": "{count} records will be changed if the Save & close button is cliked."
 }
