@@ -52,5 +52,7 @@
     "columns.email": "البريد الإلكتروني",
     "columns.expirationDate": "تاريخ الانتهاء",
     "menuGroup.actions": "الإجراءات",
-    "menuGroup.showColumns": "عرض الأعمدة"
+    "menuGroup.showColumns": "عرض الأعمدة",
+    "meta.title.conformationModal": "تحرير بالدفعة:<b>{fileName}</b>",
+    "conformationModal.message": "سيتم تغيير {count} تسجيلة إذا تم النقر على زر حفظ وإغلاق."
 }
