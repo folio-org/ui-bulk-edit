@@ -1,12 +1,13 @@
 import React from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
 
 import '../../../test/jest/__mock__';
 
 import { BulkEditStartModal } from '.';
 import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../../test/jest/utils/fileUpload';
+import { queryClient } from '../../../test/jest/utils/queryClient';
 
 const openMock = jest.fn();
 
@@ -15,14 +16,6 @@ const onCancelMock = jest.fn();
 const setFileNameMock = jest.fn();
 
 const renderStartModal = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
-
   render(
     <QueryClientProvider client={queryClient}>
       <BulkEditStartModal

@@ -1,21 +1,40 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { useOkapiKy } from '@folio/stripes/core';
+import { QueryClientProvider } from 'react-query';
 import { ProgressBar } from './ProgressBar';
+import { queryClient } from '../../../test/jest/utils/queryClient';
 
 const renderProgressBar = (props) => {
-  render(<ProgressBar {...props} />);
+  render(
+    <QueryClientProvider client={queryClient}>
+      <ProgressBar {...props} />
+    </QueryClientProvider>,
+  );
 };
 
 
 describe('ProgressBar', () => {
+  const progress = 55;
   const props = {
     title: 'title',
-    progress: 10,
+    updatedId: '1',
   };
 
-  const emptyProps = {
-    title: 'title',
-  };
+  beforeEach(() => {
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        get: () => ({
+          json: () => ({
+            progress: {
+              progress,
+            },
+            status: 'SUCCESSFUL',
+          }),
+        }),
+      });
+  });
 
   it('should display correct title', async () => {
     renderProgressBar(props);
@@ -31,15 +50,6 @@ describe('ProgressBar', () => {
     const progressLine = await screen.findByTestId('progress-line');
 
     expect(progressLine).toBeVisible();
-    expect(progressLine.getAttribute('style')).toBe(`width: ${props.progress}%;`);
-  });
-
-  it('should display correct full width percentage', async () => {
-    renderProgressBar(emptyProps);
-
-    const progressLine = await screen.findByTestId('progress-line');
-
-    expect(progressLine).toBeVisible();
-    expect(progressLine.getAttribute('style')).toBe('width: 100%;');
+    expect(progressLine.getAttribute('style')).toBe(`width: ${progress}%;`);
   });
 });

@@ -2,8 +2,11 @@ import PropTypes from 'prop-types';
 import { Icon, Loading } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import css from './ProgressBar.css';
+import { useProgressStatus } from '../../API/useProgressStatus';
 
-export const ProgressBar = ({ progress = 100, title }) => {
+export const ProgressBar = ({ updatedId, title }) => {
+  const { data } = useProgressStatus(updatedId);
+
   return (
     <div className={css.progressBar}>
       <div className={css.progressBarTitle}>
@@ -15,7 +18,7 @@ export const ProgressBar = ({ progress = 100, title }) => {
       </div>
       <div className={css.progressBarBody}>
         <div className={css.progressBarLine}>
-          <div data-testid="progress-line" style={{ width: `${progress}%` }} />
+          <div data-testid="progress-line" style={{ width: `${data?.progress?.progress}%` }} />
         </div>
         <div className={css.progressBarLineStatus}>
           <span><FormattedMessage id="ui-bulk-edit.uploading" /></span>
@@ -27,7 +30,7 @@ export const ProgressBar = ({ progress = 100, title }) => {
 };
 
 ProgressBar.propTypes = {
-  progress: PropTypes.number.isRequired,
+  updatedId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 
