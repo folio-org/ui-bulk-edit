@@ -8,12 +8,14 @@ export const useJobCommand = () => {
   const ky = useOkapiKy();
 
   const { mutateAsync: requestJobId, isLoading } = useMutation({
-    mutationFn: ({ recordIdentifier, editType }) => {
+    mutationFn: ({ recordIdentifier, editType, specificParameters }) => {
       const json = {
         type: editType,
-        identifierType: recordIdentifier,
         entityType: 'USER',
-        exportTypeSpecificParameters: {},
+        exportTypeSpecificParameters: specificParameters || {},
+        ...(
+          recordIdentifier && { identifierType: recordIdentifier }
+        ),
       };
 
       return ky.post('data-export-spring/jobs', { json }).json();

@@ -10,7 +10,7 @@ import {
 import { ResetButton } from '@folio/stripes-acq-components';
 
 
-export const QueryTextArea = ({ queryText, setQueryText }) => {
+export const QueryTextArea = ({ queryText, setQueryText, handleQuerySearch }) => {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => (queryText === '' ? setIsDisabled(true) : setIsDisabled(false)),
@@ -24,13 +24,18 @@ export const QueryTextArea = ({ queryText, setQueryText }) => {
     ...prev, queryText: event.target.value,
   }));
 
+  const onSearch = () => {
+    setIsDisabled(true);
+    handleQuerySearch();
+  };
+
   return (
     <>
       <TextArea
         value={queryText}
         onChange={onChangeTextAreaHandler}
       />
-      <Button buttonStyle="primary" fullWidth disabled={isDisabled}>
+      <Button buttonStyle="primary" fullWidth disabled={isDisabled} onClick={onSearch}>
         <FormattedMessage id="ui-bulk-edit.textArea.search" />
       </Button>
       <ResetButton
@@ -45,4 +50,5 @@ export const QueryTextArea = ({ queryText, setQueryText }) => {
 QueryTextArea.propTypes = {
   queryText: PropTypes.string.isRequired,
   setQueryText: PropTypes.func.isRequired,
+  handleQuerySearch: PropTypes.func.isRequired,
 };

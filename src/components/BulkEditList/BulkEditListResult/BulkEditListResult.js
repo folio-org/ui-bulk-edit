@@ -9,7 +9,7 @@ import { Preview } from './Preview/Preview';
 import { ProgressBar } from '../../ProgressBar/ProgressBar';
 
 
-const BulkEditListResult = ({ fileUploadedName, fileUpdatedName, progress }) => {
+const BulkEditListResult = ({ fileUpdatedName, progress }) => {
   return (
     <Switch>
       <Route
@@ -19,7 +19,7 @@ const BulkEditListResult = ({ fileUploadedName, fileUpdatedName, progress }) => 
       <Route path="/bulk-edit" exact component={NoResultsMessage} />
       <Route
         path="/bulk-edit/:id"
-        component={() => <Preview fileUploadedName={fileUploadedName} />}
+        component={() => <Preview />}
       />
     </Switch>
   );
@@ -28,7 +28,6 @@ const BulkEditListResult = ({ fileUploadedName, fileUpdatedName, progress }) => 
 export default BulkEditListResult;
 
 BulkEditListResult.propTypes = {
-  fileUploadedName: PropTypes.string,
   fileUpdatedName: PropTypes.string,
   progress: PropTypes.number,
 };

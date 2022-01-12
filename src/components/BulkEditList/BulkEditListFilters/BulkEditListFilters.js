@@ -16,8 +16,11 @@ import { ListSelect } from './ListSelect/ListSelect';
 import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
 import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
-import { EDIT_CAPABILITIES } from '../../../constants/optionsRecordIdentifiers';
-import { BULK_EDIT_IDENTIFIERS } from '../../../constants/constants';
+import {
+  BULK_EDIT_IDENTIFIERS,
+  EDIT_CAPABILITIES,
+  BULK_EDIT_QUERY,
+} from '../../../constants';
 import { getFileInfo } from './utils/getFileInfo';
 import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
 
@@ -103,9 +106,11 @@ export const BulkEditListFilters = ({
 
       await fileUpload({ id, fileToUpload });
 
+      const locationParams = new URLSearchParams(location.search).delete('queryText');
+
       history.replace({
         pathname: `/bulk-edit/${id}`,
-        search: buildSearch({ fileName: fileToUpload.name }, location.search),
+        search: buildSearch({ fileName: fileToUpload.name }, locationParams),
       });
 
       setIsFileUploaded(true);
@@ -126,6 +131,21 @@ export const BulkEditListFilters = ({
     } else {
       showFileExtensionModal();
     }
+  };
+
+  const handleQuerySearch = async () => {
+    const { id } = await requestJobId({
+      recordIdentifier,
+      editType: BULK_EDIT_QUERY,
+      specificParameters: { query: queryText },
+    });
+
+    const locationParams = new URLSearchParams(location.search).delete('fileName');
+
+    history.replace({
+      pathname: `/bulk-edit/${id}`,
+      search: buildSearch({ queryText }, locationParams),
+    });
   };
 
   const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
@@ -160,7 +180,13 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
-      {criteria === 'query' && <QueryTextArea queryText={queryText} setQueryText={setFilters} />}
+      {criteria === 'query' && (
+        <QueryTextArea
+          queryText={queryText}
+          setQueryText={setFilters}
+          handleQuerySearch={handleQuerySearch}
+        />
+      )}
       {criteria === 'identifier' &&
       <>
         <ListSelect

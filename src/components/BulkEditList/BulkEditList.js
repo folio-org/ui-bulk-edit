@@ -41,15 +41,10 @@ export const BulkEditList = () => {
   };
 
   const paneTitle = () => {
-    if (fileUploadedName) {
+    if (fileUploadedMatchedName || fileUploadedName) {
       return <FormattedMessage
         id="ui-bulk-edit.meta.title.uploadedFile"
-        values={{ fileName: fileUploadedName }}
-             />;
-    } else if (fileUploadedMatchedName) {
-      return <FormattedMessage
-        id="ui-bulk-edit.meta.title.uploadedFile"
-        values={{ fileName: fileUploadedMatchedName }}
+        values={{ fileName: fileUploadedMatchedName || fileUploadedName }}
              />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
   };

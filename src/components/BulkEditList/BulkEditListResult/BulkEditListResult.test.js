@@ -32,14 +32,24 @@ describe('BulkEditListResult', () => {
   it('displays fileName field', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1');
+    history.push('/bulk-edit/1?fileName=Mock.csv');
 
-    renderBulkEditResult(history, 'Mock.cvs');
+    renderBulkEditResult(history);
 
-    expect(screen.getByText(/Mock.cvs/)).toBeVisible();
+    expect(screen.getByText(/preview.file.title/)).toBeVisible();
   });
 
   it('displays fileName field', () => {
+    const history = createMemoryHistory();
+
+    history.push('/bulk-edit/1?queryText=%28patronGroup%3D%3D"1"');
+
+    renderBulkEditResult(history);
+
+    expect(screen.getByText(/preview.query.title/)).toBeVisible();
+  });
+
+  it('displays title', () => {
     const history = createMemoryHistory();
 
     history.push('/bulk-edit/progress');
