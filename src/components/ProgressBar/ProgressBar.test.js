@@ -1,27 +1,40 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { useOkapiKy } from '@folio/stripes/core';
+import { QueryClientProvider } from 'react-query';
 import { ProgressBar } from './ProgressBar';
-import * as useProgressStatus from '../../API/useProgressStatus';
+import { queryClient } from '../../../test/jest/utils/queryClient';
 
 const renderProgressBar = (props) => {
-  render(<ProgressBar {...props} />);
+  render(
+    <QueryClientProvider client={queryClient}>
+      <ProgressBar {...props} />
+    </QueryClientProvider>,
+  );
 };
 
 
 describe('ProgressBar', () => {
   const progress = 55;
-
-  jest.spyOn(useProgressStatus, 'useProgressStatus').mockImplementation(() => ({
-    data: {
-      progress: {
-        progress,
-      },
-    },
-  }));
-
   const props = {
     title: 'title',
+    updatedId: '1',
   };
+
+  beforeEach(() => {
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        get: () => ({
+          json: () => ({
+            progress: {
+              progress,
+            },
+            status: 'SUCCESSFUL',
+          }),
+        }),
+      });
+  });
 
   it('should display correct title', async () => {
     renderProgressBar(props);

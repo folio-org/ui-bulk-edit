@@ -1,4 +1,5 @@
 import { fireEvent } from '@testing-library/react';
+import { QueryClient } from 'react-query';
 
 export function mockData(files) {
   return {

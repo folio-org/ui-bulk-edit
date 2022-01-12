@@ -4,24 +4,18 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { useOkapiKy } from '@folio/stripes/core';
 import { createMemoryHistory } from 'history';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
 
 import '../../../test/jest/__mock__';
 
 import BulkEditConformationModal from './BulkEditConformationModal';
+import { queryClient } from '../../../test/jest/utils/queryClient';
 
 const history = createMemoryHistory();
 
 const fileNameMock = 'test.csv';
 
 const renderBulkEditConformationModal = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
   render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter history={history}>

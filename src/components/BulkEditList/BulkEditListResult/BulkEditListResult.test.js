@@ -1,33 +1,44 @@
 import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
-import * as useProgressStatus from '../../../API/useProgressStatus';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../../../test/jest/__mock__';
 
+import { QueryClientProvider } from 'react-query';
 import { BulkEditListResult } from './BulkEditListResult';
+import { queryClient } from '../../../../test/jest/utils/queryClient';
 
 const renderBulkEditResult = (history, fileName = undefined, fileUpdatedName = undefined) => {
   render(
     <Router history={history}>
-      <BulkEditListResult
-        fileUploadedName={fileName}
-        fileUpdatedName={fileUpdatedName}
-        updatedId="1"
-        processedRecords={2}
-      />
+      <QueryClientProvider client={queryClient}>
+        <BulkEditListResult
+          fileUploadedName={fileName}
+          fileUpdatedName={fileUpdatedName}
+          updatedId="1"
+          processedRecords={2}
+        />
+      </QueryClientProvider>
     </Router>,
   );
 };
 
 describe('BulkEditListResult', () => {
-  jest.spyOn(useProgressStatus, 'useProgressStatus').mockImplementation(() => ({
-    data: {
-      progress: {
-        progress: 55,
-      },
-    },
-  }));
+  beforeEach(() => {
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        get: () => ({
+          json: () => ({
+            progress: {
+              progress: 55,
+            },
+          }),
+        }),
+      });
+  });
+
 
   it('displays empty message', () => {
     const history = createMemoryHistory();
