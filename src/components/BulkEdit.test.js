@@ -3,13 +3,14 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../test/jest/__mock__';
 
 import BulkEdit from './BulkEdit';
 import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../test/jest/utils/fileUpload';
+import { queryClient } from '../../test/jest/utils/queryClient';
 
 jest.mock('./BulkEditList/BulkEditListResult', () => ({
   BulkEditListResult: () => 'BulkEditListResult',
@@ -18,13 +19,6 @@ jest.mock('./BulkEditList/BulkEditListResult', () => ({
 const history = createMemoryHistory();
 
 const renderBulkEdit = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  });
   window.history.pushState({}, 'Test page', '/bulk-edit');
 
   render(
@@ -48,6 +42,7 @@ describe('BulkEdit', () => {
         }),
       });
   });
+
   it('displays Bulk edit', () => {
     renderBulkEdit();
 

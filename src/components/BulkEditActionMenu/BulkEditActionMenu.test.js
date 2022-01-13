@@ -29,7 +29,13 @@ const renderActionMenu = ({
 }) => {
   render(
     <MemoryRouter initialEntries={initialEntries}>
-      <BulkEditActionMenu onEdit={onEdit} onDelete={onDelete} onToggle={onToggle} />,
+      <BulkEditActionMenu
+        onEdit={onEdit}
+        onDelete={onDelete}
+        onToggle={onToggle}
+        errorCsvLink="file1.csv"
+        successCsvLink="file2.csv"
+      />,
     </MemoryRouter>,
   );
 };

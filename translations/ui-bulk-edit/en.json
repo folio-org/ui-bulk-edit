@@ -48,6 +48,7 @@
   "uploaderActiveTitle": "Drop to continue",
   "uploading": "Uploading",
   "cancel": "Cancel",
+  "recordsSuccessfullyChanged": "{value} records have benn successfully changed",
 
   "modal.fileExtensions.blocked.header": "Invalid file",
   "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded",
@@ -63,6 +64,7 @@
   "start.downloadMathcedRecords": "Download matched records (CSV)",
 
   "error.uploadedFile": "Fail to upload file",
+  "error.sww": "Something went wrong",
 
   "columns.active": "Status",
   "columns.lastName": "Last name",

@@ -13,21 +13,19 @@ import { buildSearch } from '@folio/stripes-acq-components';
 import { usePathParams } from '../../hooks/usePathParams';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { DEFAULT_COLUMNS } from '../../constants';
-import { useDownloadLinks, usePreviewRecords } from '../../API';
+import { usePreviewRecords } from '../../API';
 
 const BulkEditActionMenu = ({
   onEdit,
   onDelete,
   onToggle,
+  successCsvLink,
+  errorCsvLink,
 }) => {
   const history = useHistory();
   const location = useLocation();
-
   const { id } = usePathParams('/bulk-edit/:id');
-  const { data } = useDownloadLinks(id);
   const { users } = usePreviewRecords(id);
-
-  const [successCsvLink, errorCsvLink] = data?.files || [];
 
   const handleChange = ({ values }) => {
     history.replace({
@@ -123,6 +121,8 @@ BulkEditActionMenu.propTypes = {
   onToggle: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
+  successCsvLink: PropTypes.string,
+  errorCsvLink: PropTypes.string,
 };
 
 export default BulkEditActionMenu;

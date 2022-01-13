@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
-import { useIntl } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import {
   Headline,
   Accordion,
@@ -8,16 +9,18 @@ import {
   Col,
   AccordionStatus,
   Row,
+  MessageBanner,
 } from '@folio/stripes/components';
 import { PreviewAccordion } from './PreviewAccordion';
 
-export const Preview = () => {
+export const Preview = ({ processedRecords }) => {
   const intl = useIntl();
   const location = useLocation();
 
+  const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
+
   const title = useMemo(() => {
     const queryText = new URLSearchParams(location.search).get('queryText');
-    const fileUploadedName = new URLSearchParams(location.search).get('fileName');
 
     return fileUploadedName
       ? intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName })
@@ -27,13 +30,19 @@ export const Preview = () => {
 
   return (
     <AccordionStatus>
-      <Row>
-        <Col xs={12}>
-          <Headline size="large" margin="medium" tag="h3">
-            {title}
-          </Headline>
-        </Col>
-      </Row>
+      {processedRecords && (
+        <MessageBanner type="success" contentClassName="SuccessBanner">
+          <FormattedMessage
+            id="ui-bulk-edit.recordsSuccessfullyChanged"
+            values={{ value: processedRecords }}
+          />
+        </MessageBanner>)
+      }
+      {fileUploadedName && (
+        <Headline size="large" margin="medium" tag="h3">
+          {title}
+        </Headline>
+      )}
       <AccordionSet>
         <PreviewAccordion />
         <Accordion label={intl.formatMessage({ id: 'ui-bulk-edit.list.errors.title' })}>
@@ -55,4 +64,8 @@ export const Preview = () => {
       </AccordionSet>
     </AccordionStatus>
   );
+};
+
+Preview.propTypes = {
+  processedRecords: PropTypes.number,
 };
