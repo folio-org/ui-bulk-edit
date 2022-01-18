@@ -54,5 +54,7 @@
     "menuGroup.actions": "操作",
     "menuGroup.showColumns": "显示列",
     "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
-    "conformationModal.message": "{count} records will be changed if the Save & close button is cliked."
+    "conformationModal.message": "{count} records will be changed if the Save & close button is cliked.",
+    "recordsSuccessfullyChanged": "{value} records have benn successfully changed",
+    "error.sww": "Something went wrong"
 }
