@@ -1,15 +1,22 @@
 import PropTypes from 'prop-types';
 import { Headline, MessageBanner } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
+import { useParams } from 'react-router';
+import { useDownloadLinks } from '../../../../API/useDownloadLinks';
 
-export const Preview = ({ fileUploadedName, processedRecords }) => {
+export const Preview = ({ fileUploadedName }) => {
+  const { id } = useParams();
+  const { data } = useDownloadLinks(id);
+
+  const processed = data?.progress?.processed;
+
   return (
     <>
-      {processedRecords && (
+      {processed && (
       <MessageBanner type="success" contentClassName="SuccessBanner">
         <FormattedMessage
           id="ui-bulk-edit.recordsSuccessfullyChanged"
-          values={{ value: processedRecords }}
+          values={{ value: processed }}
         />
       </MessageBanner>)
       }
@@ -24,5 +31,4 @@ export const Preview = ({ fileUploadedName, processedRecords }) => {
 
 Preview.propTypes = {
   fileUploadedName: PropTypes.string,
-  processedRecords: PropTypes.number,
 };
