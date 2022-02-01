@@ -53,6 +53,8 @@
     "columns.expirationDate": "失效日期",
     "menuGroup.actions": "操作",
     "menuGroup.showColumns": "显示列",
-    "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
-    "conformationModal.message": "{count} records will be changed if the Save & close button is cliked."
+    "meta.title.conformationModal": "批量编辑：<b>{fileName}</b>",
+    "conformationModal.message": "点击“保存并关闭”按钮，将更改{count}条记录。",
+    "recordsSuccessfullyChanged": "{value}条记录更改成功",
+    "error.sww": "出问题了"
 }

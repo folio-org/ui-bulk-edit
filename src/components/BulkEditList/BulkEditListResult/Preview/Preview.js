@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router';
 import { useIntl, FormattedMessage } from 'react-intl';
 import {
   Headline,
@@ -12,11 +12,15 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 import { PreviewAccordion } from './PreviewAccordion';
+import { useDownloadLinks } from '../../../../API/useDownloadLinks';
 
-export const Preview = ({ processedRecords }) => {
+export const Preview = () => {
   const intl = useIntl();
   const location = useLocation();
+  const { id } = useParams();
+  const { data } = useDownloadLinks(id);
 
+  const processed = data?.progress?.processed;
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
 
   const title = useMemo(() => {
@@ -30,11 +34,11 @@ export const Preview = ({ processedRecords }) => {
 
   return (
     <AccordionStatus>
-      {processedRecords && (
+      {processed && (
         <MessageBanner type="success" contentClassName="SuccessBanner">
           <FormattedMessage
             id="ui-bulk-edit.recordsSuccessfullyChanged"
-            values={{ value: processedRecords }}
+            values={{ value: processed }}
           />
         </MessageBanner>)
       }
@@ -66,6 +70,3 @@ export const Preview = ({ processedRecords }) => {
   );
 };
 
-Preview.propTypes = {
-  processedRecords: PropTypes.number,
-};

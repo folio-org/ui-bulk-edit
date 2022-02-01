@@ -78,7 +78,6 @@ export const BulkEditList = () => {
             fileUploadedName={fileUploadedName}
             fileUpdatedName={fileUploadedMatchedName}
             updatedId={updatedId}
-            processedRecords={data?.progress?.processed}
           />
         </Pane>
       </Paneset>
