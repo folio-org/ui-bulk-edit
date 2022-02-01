@@ -3,12 +3,10 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { useOkapiKy } from '@folio/stripes/core';
 import { QueryClientProvider } from 'react-query';
-import { BulkEditListResult } from './BulkEditListResult';
+import BulkEditListResult from './BulkEditListResult';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 
 import '../../../../test/jest/__mock__';
-
-import BulkEditListResult from './BulkEditListResult';
 
 jest.mock('./Preview/PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',

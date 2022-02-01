@@ -4,7 +4,6 @@ import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../../../../test/jest/__mock__';
 
-import { MemoryRouter } from 'react-router';
 import { QueryClientProvider } from 'react-query';
 import { Preview } from './Preview';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
@@ -17,7 +16,7 @@ const renderPreview = () => {
   render(
     <MemoryRouter initialEntries={['/bulk-edit/1?queryText=%28patronGroup%3D%3D"1"']}>
       <QueryClientProvider client={queryClient}>
-        <Preview />,
+        <Preview />
       </QueryClientProvider>
     </MemoryRouter>,
   );

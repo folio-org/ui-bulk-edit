@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useParams, useLocation } from 'react-router';
 import { useIntl, FormattedMessage } from 'react-intl';
 import {
