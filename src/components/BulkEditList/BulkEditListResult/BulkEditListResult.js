@@ -4,6 +4,7 @@ import {
   Route,
 } from 'react-router-dom';
 
+import { memo } from 'react';
 import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
 import { Preview } from './Preview/Preview';
 import { ProgressBar } from '../../ProgressBar/ProgressBar';
@@ -24,7 +25,7 @@ const BulkEditListResult = ({ fileUpdatedName, updatedId }) => {
   );
 };
 
-export default BulkEditListResult;
+export default memo(BulkEditListResult);
 
 BulkEditListResult.propTypes = {
   fileUpdatedName: PropTypes.string,
