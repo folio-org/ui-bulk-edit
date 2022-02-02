@@ -63,16 +63,6 @@ describe('BulkEditListResult', () => {
     expect(screen.getByText(/preview.file.title/)).toBeVisible();
   });
 
-  it('displays fileName field', () => {
-    const history = createMemoryHistory();
-
-    history.push('/bulk-edit/1?queryText=%28patronGroup%3D%3D"1"');
-
-    renderBulkEditResult(history);
-
-    expect(screen.getByText(/preview.query.title/)).toBeVisible();
-  });
-
   it('displays title', () => {
     const history = createMemoryHistory();
 

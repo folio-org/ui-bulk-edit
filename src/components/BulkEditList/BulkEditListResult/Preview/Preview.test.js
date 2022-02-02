@@ -14,7 +14,7 @@ jest.mock('./PreviewAccordion', () => ({
 
 const renderPreview = () => {
   render(
-    <MemoryRouter initialEntries={['/bulk-edit/1?queryText=%28patronGroup%3D%3D"1"']}>
+    <MemoryRouter initialEntries={['/bulk-edit/1?queryText=patronGroup%3D%3D"1"']}>
       <QueryClientProvider client={queryClient}>
         <Preview />
       </QueryClientProvider>

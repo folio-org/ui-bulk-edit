@@ -11,7 +11,7 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 import { PreviewAccordion } from './PreviewAccordion';
-import { useDownloadLinks } from '../../../../API/useDownloadLinks';
+import { useDownloadLinks } from '../../../../API';
 
 export const Preview = () => {
   const intl = useIntl();
@@ -24,6 +24,8 @@ export const Preview = () => {
 
   const title = useMemo(() => {
     const queryText = new URLSearchParams(location.search).get('queryText');
+
+    console.log('queryTextqueryTextqueryTextqueryText', fileUploadedName);
 
     return fileUploadedName
       ? intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName })
@@ -41,11 +43,9 @@ export const Preview = () => {
           />
         </MessageBanner>)
       }
-      {fileUploadedName && (
-        <Headline size="large" margin="medium" tag="h3">
-          {title}
-        </Headline>
-      )}
+      <Headline size="large" margin="medium" tag="h3">
+        {title}
+      </Headline>
       <AccordionSet>
         <PreviewAccordion />
         <Accordion label={intl.formatMessage({ id: 'ui-bulk-edit.list.errors.title' })}>
