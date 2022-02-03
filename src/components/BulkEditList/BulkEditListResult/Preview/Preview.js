@@ -25,8 +25,6 @@ export const Preview = () => {
   const title = useMemo(() => {
     const queryText = new URLSearchParams(location.search).get('queryText');
 
-    console.log('queryTextqueryTextqueryTextqueryText', fileUploadedName);
-
     return fileUploadedName
       ? intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName })
       : intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText });
@@ -48,7 +46,7 @@ export const Preview = () => {
       </Headline>
       <AccordionSet>
         <PreviewAccordion />
-        <Accordion label={intl.formatMessage({ id: 'ui-bulk-edit.list.errors.title' })}>
+        {/* <Accordion label={intl.formatMessage({ id: 'ui-bulk-edit.list.errors.title' })}>
           <Row>
             <Col xs={12}>
               <Headline size="medium" margin="xx-small" tag="h4">
@@ -63,7 +61,7 @@ export const Preview = () => {
             </Col>
           </Row>
 
-        </Accordion>
+        </Accordion> */}
       </AccordionSet>
     </AccordionStatus>
   );

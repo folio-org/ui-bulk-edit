@@ -14,6 +14,35 @@ import { usePathParams } from '../../../../../hooks';
 import { DEFAULT_COLUMNS } from '../../../../../constants';
 import { FormattedTime } from './FormattedTime';
 
+const resultsFormatter = {
+  active: user => (
+    <AppIcon app="users" size="small">
+      {
+      user.active
+        ? <FormattedMessage id="ui-bulk-edit.list.preview.table.active" />
+        : <FormattedMessage id="ui-bulk-edit.list.preview.table.inactive" />
+      }
+    </AppIcon>
+  ),
+  lastName: user => user.personal?.lastName,
+  firstName: user => user.personal?.firstName,
+  barcode: user => user.barcode,
+  patronGroup: user => user.patronGroup,
+  username: user => user.username,
+  email: user => user.personal.email,
+  expirationDate: user => <FormattedTime dateString={user.expirationDate} />,
+};
+const columnMapping = {
+  active: <FormattedMessage id="ui-bulk-edit.list.preview.table.status" />,
+  lastName: <FormattedMessage id="ui-bulk-edit.list.preview.table.lastName" />,
+  firstName: <FormattedMessage id="ui-bulk-edit.list.preview.table.firstName" />,
+  barcode: <FormattedMessage id="ui-bulk-edit.list.preview.table.barcode" />,
+  patronGroup: <FormattedMessage id="ui-bulk-edit.list.preview.table.patronGroup" />,
+  username: <FormattedMessage id="ui-bulk-edit.list.preview.table.username" />,
+  email: <FormattedMessage id="ui-bulk-edit.list.preview.table.email" />,
+  expirationDate: <FormattedMessage id="ui-bulk-edit.list.preview.table.expirationDate" />,
+};
+
 const PreviewAccordion = () => {
   const location = useLocation();
   const { id } = usePathParams('/bulk-edit/:id');
@@ -30,35 +59,6 @@ const PreviewAccordion = () => {
 
     return paramsColumns ? existingColumns : defaultColumns;
   }, [location.search]);
-
-  const resultsFormatter = {
-    active: user => (
-      <AppIcon app="users" size="small">
-        {
-        user.active
-          ? <FormattedMessage id="ui-bulk-edit.list.preview.table.active" />
-          : <FormattedMessage id="ui-bulk-edit.list.preview.table.inactive" />
-        }
-      </AppIcon>
-    ),
-    lastName: user => user.personal?.lastName,
-    firstName: user => user.personal?.firstName,
-    barcode: user => user.barcode,
-    patronGroup: user => user.patronGroup,
-    username: user => user.username,
-    email: user => user.personal.email,
-    expirationDate: user => <FormattedTime dateString={user.expirationDate} />,
-  };
-  const columnMapping = {
-    active: <FormattedMessage id="ui-bulk-edit.list.preview.table.status" />,
-    lastName: <FormattedMessage id="ui-bulk-edit.list.preview.table.lastName" />,
-    firstName: <FormattedMessage id="ui-bulk-edit.list.preview.table.firstName" />,
-    barcode: <FormattedMessage id="ui-bulk-edit.list.preview.table.barcode" />,
-    patronGroup: <FormattedMessage id="ui-bulk-edit.list.preview.table.patronGroup" />,
-    username: <FormattedMessage id="ui-bulk-edit.list.preview.table.username" />,
-    email: <FormattedMessage id="ui-bulk-edit.list.preview.table.email" />,
-    expirationDate: <FormattedMessage id="ui-bulk-edit.list.preview.table.expirationDate" />,
-  };
 
   return (
     <Accordion

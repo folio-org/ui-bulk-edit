@@ -7,10 +7,10 @@ import { useOkapiKy } from '@folio/stripes/core';
 
 export const usePreviewRecords = (id) => {
   const ky = useOkapiKy();
-  const { data } = useQuery('previewRecords',
+  const { data } = useQuery(['previewRecords'],
     {
       queryFn: async () => {
-        const { users } = await ky.get(`bulk-edit/${id}/preview`, { searchParams: { limit: 11 } }).json();
+        const { users, totalRecords } = await ky.get(`bulk-edit/${id}/preview`, { searchParams: { limit: 10 } }).json();
         const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
 
         const groupsMap = usergroups.reduce((acc, curr) => (
@@ -20,17 +20,21 @@ export const usePreviewRecords = (id) => {
           }
         ), {});
 
-        return users.map(user => {
-          return {
-            ...user,
-            patronGroup: groupsMap[user.patronGroup],
-          };
-        });
+        return {
+          users: users.map(user => {
+            return {
+              ...user,
+              patronGroup: groupsMap[user.patronGroup],
+            };
+          }),
+          totalRecords,
+        };
       },
       enabled: !!id,
     });
 
   return ({
-    users: data || [],
+    users: data?.users || [],
+    totalRecords: data?.totalRecords,
   });
 };

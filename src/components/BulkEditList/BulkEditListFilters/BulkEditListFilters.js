@@ -28,6 +28,7 @@ export const BulkEditListFilters = ({
   setFileUploadedName,
   isFileUploaded,
   setIsFileUploaded,
+  setCountOfRecords,
 }) => {
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
@@ -104,7 +105,9 @@ export const BulkEditListFilters = ({
     try {
       const { id } = await requestJobId({ recordIdentifier, editType: BULK_EDIT_IDENTIFIERS });
 
-      await fileUpload({ id, fileToUpload });
+      const recordsCount = await fileUpload({ id, fileToUpload });
+
+      setCountOfRecords(recordsCount);
 
       const locationParams = new URLSearchParams(location.search).delete('queryText');
 
@@ -234,4 +237,5 @@ BulkEditListFilters.propTypes = {
   setFileUploadedName: PropTypes.func.isRequired,
   isFileUploaded: PropTypes.bool.isRequired,
   setIsFileUploaded: PropTypes.func.isRequired,
+  setCountOfRecords: PropTypes.func.isRequired,
 };

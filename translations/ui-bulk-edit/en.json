@@ -6,6 +6,7 @@
   
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
+  "list.logSubTitle.matched": "{count} records match",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
   "list.filters.recordIdentifier": "Record identifier",
