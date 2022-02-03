@@ -7,11 +7,13 @@ import {
   Icon,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { buildSearch } from '@folio/stripes-acq-components';
+import { usePathParams } from '../../hooks/usePathParams';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
-import { DEFAULT_COLUMNS } from '../../constants/constants';
+import { DEFAULT_COLUMNS } from '../../constants';
+import { usePreviewRecords } from '../../API';
 
 const BulkEditActionMenu = ({
   onEdit,
@@ -20,13 +22,12 @@ const BulkEditActionMenu = ({
   successCsvLink,
   errorCsvLink,
 }) => {
-  const [selectedValues, setSelectedValues] = useState([]);
   const history = useHistory();
   const location = useLocation();
+  const { id } = usePathParams('/bulk-edit/:id');
+  const { users } = usePreviewRecords(id);
 
   const handleChange = ({ values }) => {
-    setSelectedValues(values);
-
     history.replace({
       search: buildSearch({ selectedColumns: JSON.stringify(values) }, location.search),
     });
@@ -38,16 +39,16 @@ const BulkEditActionMenu = ({
     onToggle();
   };
 
-  useEffect(() => {
+  const columnsOptions = useMemo(() => DEFAULT_COLUMNS.map(item => ({ ...item, disabled: !users?.length })), [users]);
+
+  const selectedValues = useMemo(() => {
     const paramsColumns = new URLSearchParams(location.search).get('selectedColumns');
     const defaultColumns = DEFAULT_COLUMNS
       .filter(item => item.selected)
       .map(item => item.value);
 
-    const values = paramsColumns ? JSON.parse(paramsColumns) : defaultColumns;
-
-    setSelectedValues(values);
-  }, []);
+    return paramsColumns ? JSON.parse(paramsColumns) : defaultColumns;
+  }, [location.search]);
 
   return (
     <>
@@ -106,7 +107,7 @@ const BulkEditActionMenu = ({
       </ActionMenuGroup>
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
         <CheckboxFilter
-          dataOptions={DEFAULT_COLUMNS}
+          dataOptions={columnsOptions}
           name="filter"
           onChange={handleChange}
           selectedValues={selectedValues}

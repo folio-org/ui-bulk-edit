@@ -3,8 +3,10 @@
   "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
   "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
 
+  
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
+  "list.logSubTitle.matched": "{count} records match",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
   "list.filters.recordIdentifier": "Record identifier",
@@ -24,6 +26,17 @@
   "list.filters.capabilities.circulation": "Circulation",
   "list.filters.capabilities.acquisition": "Acquisition",
   "list.savedQueries.title": "Saved queries",
+  "list.preview.title": "Preview of record matched",
+  "list.preview.table.status": "Status",
+  "list.preview.table.lastName": "Last name",
+  "list.preview.table.firstName": "First name",
+  "list.preview.table.barcode": "Barcode",
+  "list.preview.table.patronGroup": "Patron group",
+  "list.preview.table.username": "Username",
+  "list.preview.table.email": "email",
+  "list.preview.table.expirationDate": "Expiration date",
+  "list.preview.table.active": "Active",
+  "list.preview.table.inactive": "Inactive",
 
   "uploaderBtnText": "or choose file",
   "uploaderSubTitle": "Select a file with record identifiers",
@@ -65,6 +78,9 @@
 
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
+ 
+  "conformationModal.message": "{count} records will be changed if the Save & close button is cliked.",
 
-  "conformationModal.message": "{count} records will be changed if the Save & close button is cliked."
+  "preview.file.title": "Filename: {fileUploadedName}",
+  "preview.query.title": "Query: {queryText}"
 }

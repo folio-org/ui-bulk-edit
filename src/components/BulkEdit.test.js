@@ -12,6 +12,10 @@ import BulkEdit from './BulkEdit';
 import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../test/jest/utils/fileUpload';
 import { queryClient } from '../../test/jest/utils/queryClient';
 
+jest.mock('./BulkEditList/BulkEditListResult', () => ({
+  BulkEditListResult: () => 'BulkEditListResult',
+}));
+
 const history = createMemoryHistory();
 
 const renderBulkEdit = () => {
@@ -55,7 +59,7 @@ describe('BulkEdit', () => {
   it('should display empty result list', () => {
     renderBulkEdit();
 
-    expect(screen.getByText(/list.result.emptyMessage/)).toBeVisible();
+    expect(screen.getByText(/BulkEditListResult/)).toBeVisible();
   });
 
   it('should display option buttons', () => {

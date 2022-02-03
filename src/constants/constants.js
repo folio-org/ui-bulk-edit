@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 export const SUPPORTED_FILE_EXTENSIONS = ['csv'];
 
 export const BULK_EDIT_IDENTIFIERS = 'BULK_EDIT_IDENTIFIERS';
+export const BULK_EDIT_QUERY = 'BULK_EDIT_QUERY';
 
 export const BULK_EDIT_BARCODE = 'BARCODE';
 

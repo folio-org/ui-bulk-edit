@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset } from '@folio/stripes/components';
@@ -6,7 +6,7 @@ import { AppIcon, useStripes } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
-import { BulkEditListResult } from './BulkEditListResult/BulkEditListResult';
+import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../BulkEditConformationModal';
@@ -45,19 +45,20 @@ export const BulkEditList = () => {
     setIsBulkEditModalOpen(false);
   };
 
-  const paneTitle = () => {
-    if (fileUploadedName) {
+  const paneTitle = useMemo(() => {
+    if (fileUploadedMatchedName || fileUploadedName) {
       return <FormattedMessage
         id="ui-bulk-edit.meta.title.uploadedFile"
-        values={{ fileName: fileUploadedName }}
-             />;
-    } else if (fileUploadedMatchedName) {
-      return <FormattedMessage
-        id="ui-bulk-edit.meta.title.uploadedFile"
-        values={{ fileName: fileUploadedMatchedName }}
+        values={{ fileName: fileUploadedMatchedName || fileUploadedName }}
              />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  };
+  }, [fileUploadedMatchedName, fileUploadedName]);
+
+  const paneSubtitle = useMemo(() => (
+    countOfRecords
+      ? <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
+      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
+  ), [countOfRecords]);
 
   return (
     <>
@@ -70,17 +71,17 @@ export const BulkEditList = () => {
             setFileUploadedName={setFileUploadedName}
             setIsFileUploaded={setIsFileUploaded}
             isFileUploaded={isFileUploaded}
+            setCountOfRecords={setCountOfRecords}
           />
         </Pane>
         <Pane
           defaultWidth="fill"
-          paneTitle={paneTitle()}
-          paneSub={<FormattedMessage id="ui-bulk-edit.list.logSubTitle" />}
+          paneTitle={paneTitle}
+          paneSub={paneSubtitle}
           appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
           actionMenu={renderActionMenu}
         >
           <BulkEditListResult
-            fileUploadedName={fileUploadedName}
             fileUpdatedName={fileUploadedMatchedName}
             updatedId={updatedId}
           />

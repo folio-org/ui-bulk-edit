@@ -2,12 +2,15 @@ import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { useOkapiKy } from '@folio/stripes/core';
+import { QueryClientProvider } from 'react-query';
+import BulkEditListResult from './BulkEditListResult';
+import { queryClient } from '../../../../test/jest/utils/queryClient';
 
 import '../../../../test/jest/__mock__';
 
-import { QueryClientProvider } from 'react-query';
-import { BulkEditListResult } from './BulkEditListResult';
-import { queryClient } from '../../../../test/jest/utils/queryClient';
+jest.mock('./Preview/PreviewAccordion', () => ({
+  PreviewAccordion: () => 'PreviewAccordion',
+}));
 
 const renderBulkEditResult = (history, fileName = undefined, fileUpdatedName = undefined) => {
   render(
@@ -53,14 +56,14 @@ describe('BulkEditListResult', () => {
   it('displays fileName field', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1');
+    history.push('/bulk-edit/1?fileName=Mock.csv');
 
-    renderBulkEditResult(history, 'Mock.cvs');
+    renderBulkEditResult(history);
 
-    expect(screen.getByText(/Mock.cvs/)).toBeVisible();
+    expect(screen.getByText(/preview.file.title/)).toBeVisible();
   });
 
-  it('displays fileName field', () => {
+  it('displays title', () => {
     const history = createMemoryHistory();
 
     history.push('/bulk-edit/1/progress');

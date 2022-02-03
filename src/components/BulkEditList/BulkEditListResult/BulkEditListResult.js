@@ -4,11 +4,12 @@ import {
   Route,
 } from 'react-router-dom';
 
+import { memo } from 'react';
 import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
 import { Preview } from './Preview/Preview';
 import { ProgressBar } from '../../ProgressBar/ProgressBar';
 
-export const BulkEditListResult = ({ fileUploadedName, fileUpdatedName, updatedId }) => {
+const BulkEditListResult = ({ fileUpdatedName, updatedId }) => {
   return (
     <Switch>
       <Route
@@ -18,14 +19,15 @@ export const BulkEditListResult = ({ fileUploadedName, fileUpdatedName, updatedI
       <Route path="/bulk-edit" exact component={NoResultsMessage} />
       <Route
         path="/bulk-edit/:id"
-        component={() => <Preview fileUploadedName={fileUploadedName} />}
+        component={() => <Preview />}
       />
     </Switch>
   );
 };
 
+export default memo(BulkEditListResult);
+
 BulkEditListResult.propTypes = {
-  fileUploadedName: PropTypes.string,
   fileUpdatedName: PropTypes.string,
   updatedId: PropTypes.string,
 };
