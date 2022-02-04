@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { PropTypes } from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -9,8 +10,6 @@ import {
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 
-import { usePreviewRecords } from '../../../../../API';
-import { usePathParams } from '../../../../../hooks';
 import { DEFAULT_COLUMNS } from '../../../../../constants';
 import { FormattedTime } from './FormattedTime';
 
@@ -43,10 +42,8 @@ const columnMapping = {
   expirationDate: <FormattedMessage id="ui-bulk-edit.list.preview.table.expirationDate" />,
 };
 
-const PreviewAccordion = () => {
+const PreviewAccordion = ({ users }) => {
   const location = useLocation();
-  const { id } = usePathParams('/bulk-edit/:id');
-  const { users } = usePreviewRecords(id);
 
   const visibleColumns = useMemo(() => {
     const paramsColumns = new URLSearchParams(location.search).get('selectedColumns');
@@ -79,6 +76,10 @@ const PreviewAccordion = () => {
       </Row>
     </Accordion>
   );
+};
+
+PreviewAccordion.propTypes = {
+  errors: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PreviewAccordion;

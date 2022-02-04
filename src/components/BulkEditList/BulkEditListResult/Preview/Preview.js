@@ -3,21 +3,21 @@ import { useParams, useLocation } from 'react-router';
 import { useIntl, FormattedMessage } from 'react-intl';
 import {
   Headline,
-  Accordion,
   AccordionSet,
-  Col,
   AccordionStatus,
-  Row,
   MessageBanner,
 } from '@folio/stripes/components';
 import { PreviewAccordion } from './PreviewAccordion';
-import { useDownloadLinks } from '../../../../API';
+import { ErrorsAccordion } from './ErrorsAccordion';
+import { useDownloadLinks, useErrorsList, usePreviewRecords } from '../../../../API';
 
 export const Preview = () => {
   const intl = useIntl();
   const location = useLocation();
   const { id } = useParams();
   const { data } = useDownloadLinks(id);
+  const { errors } = useErrorsList(id);
+  const { users } = usePreviewRecords(id);
 
   const processed = data?.progress?.processed;
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
@@ -45,23 +45,8 @@ export const Preview = () => {
         {title}
       </Headline>
       <AccordionSet>
-        <PreviewAccordion />
-        {/* <Accordion label={intl.formatMessage({ id: 'ui-bulk-edit.list.errors.title' })}>
-          <Row>
-            <Col xs={12}>
-              <Headline size="medium" margin="xx-small" tag="h4">
-                  User-UUIDs.csv: 302 entries * 300 records matched
-              </Headline>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs={12}>
-             Errors
-            </Col>
-          </Row>
-
-        </Accordion> */}
+        <PreviewAccordion users={users} />
+        <ErrorsAccordion errors={errors} />
       </AccordionSet>
     </AccordionStatus>
   );

@@ -25,7 +25,7 @@ const BulkEditListResult = ({ fileUpdatedName, updatedId }) => {
   );
 };
 
-export default memo(BulkEditListResult);
+export default BulkEditListResult;
 
 BulkEditListResult.propTypes = {
   fileUpdatedName: PropTypes.string,

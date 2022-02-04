@@ -59,14 +59,13 @@ export const BulkEditListFilters = ({
   }, [recordIdentifier, isFileUploaded]);
 
   useEffect(() => {
-    const fileName = new URLSearchParams(location.search).get('fileName');
     const identifier = new URLSearchParams(location.search).get('identifier');
 
     if (identifier) {
       handleChange(identifier, 'recordIdentifier');
     }
 
-    setFileUploadedName(fileName);
+    // setFileUploadedName(fileName);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
@@ -99,7 +98,7 @@ export const BulkEditListFilters = ({
   }));
 
   const uploadFileFlow = async (fileToUpload) => {
-    setFileUploadedName(fileToUpload.name);
+    // setFileUploadedName(fileToUpload.name);
     setDropZoneActive(false);
 
     try {
