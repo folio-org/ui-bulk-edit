@@ -25,28 +25,37 @@ export const Preview = () => {
   const title = useMemo(() => {
     const queryText = new URLSearchParams(location.search).get('queryText');
 
-    return fileUploadedName
-      ? intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName })
-      : intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.search]);
+    if (queryText) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText });
+
+    if (fileUploadedName) return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName });
+
+    return null;
+  }, [fileUploadedName]);
 
   return (
     <AccordionStatus>
       {processed && (
+      <Headline size="large" margin="small">
         <MessageBanner type="success" contentClassName="SuccessBanner">
           <FormattedMessage
             id="ui-bulk-edit.recordsSuccessfullyChanged"
             values={{ value: processed }}
           />
-        </MessageBanner>)
-      }
-      <Headline size="large" margin="medium" tag="h3">
-        {title}
+        </MessageBanner>
       </Headline>
+      )}
+      {title && (
+        <Headline size="large" margin="medium">
+          {title}
+        </Headline>
+      )}
       <AccordionSet>
         <PreviewAccordion users={users} />
-        <ErrorsAccordion errors={errors} />
+        <ErrorsAccordion
+          errors={errors}
+          entries={data?.progress?.total}
+          matched={data?.progress?.processed}
+        />
       </AccordionSet>
     </AccordionStatus>
   );

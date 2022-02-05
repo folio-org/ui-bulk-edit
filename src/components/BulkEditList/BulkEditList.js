@@ -5,6 +5,7 @@ import { Pane, Paneset } from '@folio/stripes/components';
 import { AppIcon, useStripes } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
+import { useLocation } from 'react-router-dom';
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
@@ -15,6 +16,7 @@ import { usePathParams } from '../../hooks/usePathParams';
 
 export const BulkEditList = () => {
   const stripes = useStripes();
+  const location = useLocation();
   // const [fileUploadedName, setFileUploadedName] = useState();
   const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
