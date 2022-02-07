@@ -26,7 +26,7 @@ describe('PreviewAccordion', () => {
   it('should render preview accordion', () => {
     renderPreviewAccordion();
 
-    expect(screen.getByText('code')).toBeVisible();
+    expect(screen.getByText(/errors.table.code/)).toBeVisible();
     expect(screen.getByText('error')).toBeVisible();
   });
 });
