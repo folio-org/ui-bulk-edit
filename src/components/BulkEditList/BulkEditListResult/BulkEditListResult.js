@@ -13,19 +13,24 @@ const BulkEditListResult = ({ fileUpdatedName, updatedId }) => {
   return (
     <Switch>
       <Route
-        path="/bulk-edit/:id/progress"
-        component={() => <ProgressBar title={fileUpdatedName} updatedId={updatedId} />}
+        path="/bulk-edit"
+        component={NoResultsMessage}
+        exact
       />
-      <Route path="/bulk-edit" exact component={NoResultsMessage} />
       <Route
         path="/bulk-edit/:id"
-        component={() => <Preview />}
+        component={Preview}
+        exact
+      />
+      <Route
+        path="/bulk-edit/:id/progress"
+        render={() => <ProgressBar title={fileUpdatedName} updatedId={updatedId} />}
       />
     </Switch>
   );
 };
 
-export default memo(BulkEditListResult);
+export default BulkEditListResult;
 
 BulkEditListResult.propTypes = {
   fileUpdatedName: PropTypes.string,

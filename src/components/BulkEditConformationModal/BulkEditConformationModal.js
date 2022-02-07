@@ -9,6 +9,7 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 
+import { useLocation } from 'react-router-dom';
 import { useRollBack, useLaunchJob } from '../../API/useFileUpload';
 
 const BulkEditConformationModal = ({
@@ -19,6 +20,7 @@ const BulkEditConformationModal = ({
   updatedId,
 }) => {
   const intl = useIntl();
+  const location = useLocation();
 
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title.conformationModal' }, { fileName });
   const confirmLabel = intl.formatMessage({ id: 'stripes-components.saveAndClose' });
@@ -36,6 +38,7 @@ const BulkEditConformationModal = ({
 
     history.replace({
       pathname: `/bulk-edit/${updatedId}/progress`,
+      search: location.search,
     });
   };
 

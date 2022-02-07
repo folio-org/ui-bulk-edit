@@ -3,26 +3,21 @@ import { MemoryRouter } from 'react-router';
 
 import '../../../../../../test/jest/__mock__';
 
-import PreviewAccordion from './PreviewAccordion';
+import ErrorsAccordion from './ErrorsAccordion';
 
-const users = [
+const errors = [
   {
-    username: 'username',
-    active: true,
-    barcode: '789',
-    createdDate: 1641779462295,
-  },
-  {
-    username: 'user',
-    active: false,
-    barcode: '123',
+    code: 'code',
+    message: 'error',
+    parameters: null,
+    type: 'BULK_EDIT_ERROR',
   },
 ];
 
 const renderPreviewAccordion = () => {
   render(
     <MemoryRouter initialEntries={['/bulk-edit/1']}>
-      <PreviewAccordion users={users} />
+      <ErrorsAccordion errors={errors} />
     </MemoryRouter>,
   );
 };
@@ -31,6 +26,7 @@ describe('PreviewAccordion', () => {
   it('should render preview accordion', () => {
     renderPreviewAccordion();
 
-    expect(screen.getByText('username'));
+    expect(screen.getByText(/errors.table.code/)).toBeVisible();
+    expect(screen.getByText('error')).toBeVisible();
   });
 });

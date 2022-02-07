@@ -3,8 +3,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
-import { BulkEditListContainter } from './BulkEditList/BulkEditListContainer';
+import { BulkEditList } from './BulkEditList/BulkEditList';
 
 const queryClient = new QueryClient();
 
@@ -14,7 +13,7 @@ const BulkEdit = () => {
       <Switch>
         <Route
           path="/bulk-edit"
-          component={BulkEditListContainter}
+          component={BulkEditList}
         />
       </Switch>
     </QueryClientProvider>

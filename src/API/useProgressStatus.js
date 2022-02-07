@@ -17,13 +17,17 @@ export const useProgressStatus = (id) => {
 
   const ky = useOkapiKy();
 
-  const clearIntervalAndRedirect = (path) => {
+  const clearIntervalAndRedirect = (pathname) => {
     setRefetchInterval(0);
 
-    history.replace(path);
+    history.replace({
+      pathname,
+      search: history.location.search,
+    });
   };
 
-  const { data } = useQuery('progress', {
+  const { data } = useQuery({
+    queryKey: ['progress', id],
     queryFn: () => ky.get(`data-export-spring/jobs/${id}`).json(),
     enabled: !!id,
     refetchInterval,
