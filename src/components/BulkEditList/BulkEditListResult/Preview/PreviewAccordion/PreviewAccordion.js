@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { PropTypes } from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -9,16 +10,13 @@ import {
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 
-import { usePreviewRecords } from '../../../../../API';
-import { usePathParams } from '../../../../../hooks';
 import { DEFAULT_COLUMNS } from '../../../../../constants';
 import { FormattedTime } from './FormattedTime';
 
 const resultsFormatter = {
   active: user => (
     <AppIcon app="users" size="small">
-      {
-      user.active
+      {user.active
         ? <FormattedMessage id="ui-bulk-edit.list.preview.table.active" />
         : <FormattedMessage id="ui-bulk-edit.list.preview.table.inactive" />
       }
@@ -43,10 +41,8 @@ const columnMapping = {
   expirationDate: <FormattedMessage id="ui-bulk-edit.list.preview.table.expirationDate" />,
 };
 
-const PreviewAccordion = () => {
+const PreviewAccordion = ({ users = [] }) => {
   const location = useLocation();
-  const { id } = usePathParams('/bulk-edit/:id');
-  const { users } = usePreviewRecords(id);
 
   const visibleColumns = useMemo(() => {
     const paramsColumns = new URLSearchParams(location.search).get('selectedColumns');
@@ -62,8 +58,6 @@ const PreviewAccordion = () => {
 
   return (
     <Accordion
-      closedByDefault
-      open={!!users.length}
       label={<FormattedMessage id="ui-bulk-edit.list.preview.title" />}
     >
       <Row>
@@ -79,6 +73,10 @@ const PreviewAccordion = () => {
       </Row>
     </Accordion>
   );
+};
+
+PreviewAccordion.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PreviewAccordion;

@@ -7,8 +7,9 @@ import {
   Modal,
   ModalFooter,
 } from '@folio/stripes/components';
-import { useShowCallout } from '@folio/stripes-acq-components';
+import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 
+import { useHistory } from 'react-router-dom';
 import { useJobCommand, useFileUploadComand } from '../../API/useFileUpload';
 
 import { ListFileUploader } from '../ListFileUploader';
@@ -22,6 +23,7 @@ const BulkEditStartModal = ({
   setCountOfRecords,
   setUpdatedId,
 }) => {
+  const history = useHistory();
   const intl = useIntl();
   const showCallout = useShowCallout();
 
@@ -60,6 +62,10 @@ const BulkEditStartModal = ({
       const data = await fileUpload({ id, fileToUpload });
 
       await setUpdatedId(id);
+
+      history.replace({
+        search: buildSearch({ fileName: fileToUpload.name }),
+      });
 
       setCountOfRecords(data);
 

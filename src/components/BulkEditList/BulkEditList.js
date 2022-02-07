@@ -5,6 +5,7 @@ import { Pane, Paneset } from '@folio/stripes/components';
 import { AppIcon, useStripes } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
+import { useLocation } from 'react-router-dom';
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
@@ -15,7 +16,8 @@ import { usePathParams } from '../../hooks/usePathParams';
 
 export const BulkEditList = () => {
   const stripes = useStripes();
-  const [fileUploadedName, setFileUploadedName] = useState();
+  const location = useLocation();
+  // const [fileUploadedName, setFileUploadedName] = useState();
   const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
@@ -46,13 +48,15 @@ export const BulkEditList = () => {
   };
 
   const paneTitle = useMemo(() => {
+    const fileUploadedName = new URLSearchParams(location.search).get('fileName');
+
     if (fileUploadedMatchedName || fileUploadedName) {
       return <FormattedMessage
         id="ui-bulk-edit.meta.title.uploadedFile"
         values={{ fileName: fileUploadedMatchedName || fileUploadedName }}
              />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [fileUploadedMatchedName, fileUploadedName]);
+  }, [fileUploadedMatchedName]);
 
   const paneSubtitle = useMemo(() => (
     countOfRecords
@@ -68,7 +72,7 @@ export const BulkEditList = () => {
           paneTitle={<FormattedMessage id="ui-bulk-edit.list.criteriaTitle" />}
         >
           <BulkEditListFilters
-            setFileUploadedName={setFileUploadedName}
+            // setFileUploadedName={setFileUploadedName}
             setIsFileUploaded={setIsFileUploaded}
             isFileUploaded={isFileUploaded}
             setCountOfRecords={setCountOfRecords}

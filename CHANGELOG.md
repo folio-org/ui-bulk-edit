@@ -20,3 +20,4 @@
 * [UIBULKED-15](https://issues.folio.org/browse/UIBULKED-15) Add Query textarea
 * [UIBULKED-20](https://issues.folio.org/browse/UIBULKED-20) Bulk edit confirmation modal
 * [UIBULKED-12](https://issues.folio.org/browse/UIBULKED-12) Populating preview of matched records based on identifiers search
+* [UIBULKED-13](https://issues.folio.org/browse/UIBULKED-13) Populating error accordion

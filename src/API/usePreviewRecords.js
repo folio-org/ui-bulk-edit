@@ -7,8 +7,9 @@ import { useOkapiKy } from '@folio/stripes/core';
 
 export const usePreviewRecords = (id) => {
   const ky = useOkapiKy();
-  const { data } = useQuery(['previewRecords'],
+  const { data } = useQuery(
     {
+      queryKey: ['previewRecords', id],
       queryFn: async () => {
         const { users, totalRecords } = await ky.get(`bulk-edit/${id}/preview`, { searchParams: { limit: 10 } }).json();
         const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
@@ -31,7 +32,8 @@ export const usePreviewRecords = (id) => {
         };
       },
       enabled: !!id,
-    });
+    },
+  );
 
   return ({
     users: data?.users || [],

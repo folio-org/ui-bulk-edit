@@ -3,7 +3,7 @@
   "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
   "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
 
-  
+
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
   "list.logSubTitle.matched": "{count} records match",
@@ -37,6 +37,11 @@
   "list.preview.table.expirationDate": "Expiration date",
   "list.preview.table.active": "Active",
   "list.preview.table.inactive": "Inactive",
+
+  "list.errors.title": "Errors",
+  "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
+  "list.errors.table.code": "Record identifier",
+  "list.errors.table.message": "Reason for error",
 
   "uploaderBtnText": "or choose file",
   "uploaderSubTitle": "Select a file with record identifiers",
@@ -78,7 +83,7 @@
 
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
- 
+
   "conformationModal.message": "{count} records will be changed if the Save & close button is cliked.",
 
   "preview.file.title": "Filename: {fileUploadedName}",
