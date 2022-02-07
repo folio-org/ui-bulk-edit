@@ -19,6 +19,16 @@ export const Preview = () => {
   const { errors } = useErrorsList(id);
   const { users } = usePreviewRecords(id);
 
+  const mappedErrors = errors?.map(e => {
+    const [identifier, message] = e.message.split(',');
+
+    return {
+      ...e,
+      identifier,
+      message,
+    };
+  });
+
   const processed = data?.progress?.processed;
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
 
@@ -52,7 +62,7 @@ export const Preview = () => {
       <AccordionSet>
         <PreviewAccordion users={users} />
         <ErrorsAccordion
-          errors={errors}
+          errors={mappedErrors}
           entries={data?.progress?.total}
           matched={data?.progress?.processed}
         />

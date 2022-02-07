@@ -9,31 +9,33 @@ import {
   Headline,
 } from '@folio/stripes/components';
 
-const visibleColumns = ['message', 'code'];
+const visibleColumns = ['identifier', 'message'];
 
 const resultsFormatter = {
+  identifier: error => error.identifier,
   message: error => error.message,
-  code: error => error.code,
 };
 
 const columnMapping = {
-  code: <FormattedMessage id="ui-bulk-edit.list.errors.table.code" />,
+  identifier: <FormattedMessage id="ui-bulk-edit.list.errors.table.code" />,
   message: <FormattedMessage id="ui-bulk-edit.list.errors.table.message" />,
 };
 
-const ErrorsAccordion = ({ errors = [], entries, matched }) => {
+const ErrorsAccordion = ({ errors = [], entries }) => {
   const location = useLocation();
-
   const fileName = new URLSearchParams(location.search).get('fileName');
+  const errorLength = errors.length;
+
+  const matched = entries - errorLength;
 
   return (
     <>
       <Accordion
-        open={errors.length}
+        open={errorLength}
         label={<FormattedMessage id="ui-bulk-edit.list.errors.title" />}
       >
 
-        {!!errors.length && (
+        {!!errorLength && (
           <Row>
             <Col xs={12}>
               <Headline size="medium" margin="small">
@@ -43,7 +45,7 @@ const ErrorsAccordion = ({ errors = [], entries, matched }) => {
                     fileName,
                     entries,
                     matched,
-                    errors: errors.length,
+                    errors: errorLength,
                   }}
                 />
               </Headline>
@@ -68,7 +70,6 @@ const ErrorsAccordion = ({ errors = [], entries, matched }) => {
 ErrorsAccordion.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.object),
   entries: PropTypes.number,
-  matched: PropTypes.number,
 };
 
 export default ErrorsAccordion;
