@@ -233,7 +233,7 @@ export const BulkEditListFilters = ({
 };
 
 BulkEditListFilters.propTypes = {
-  setFileUploadedName: PropTypes.func.isRequired,
+  setFileUploadedName: PropTypes.func,
   isFileUploaded: PropTypes.bool.isRequired,
   setIsFileUploaded: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func.isRequired,

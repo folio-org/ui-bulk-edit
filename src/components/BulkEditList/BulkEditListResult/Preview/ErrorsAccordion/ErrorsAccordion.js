@@ -31,7 +31,7 @@ const ErrorsAccordion = ({ errors = [], entries }) => {
   return (
     <>
       <Accordion
-        open={errorLength}
+        open={!!errorLength}
         label={<FormattedMessage id="ui-bulk-edit.list.errors.title" />}
       >
 
