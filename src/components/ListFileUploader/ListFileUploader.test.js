@@ -102,7 +102,7 @@ describe('FileUploader', () => {
 
     expect(screen.getByText(/uploaderTitle/)).toBeVisible();
     expect(screen.getByText(/uploaderSubTitle/)).toBeVisible();
-    expect(screen.getByRole('button', { name: /uploaderBtnText/ })).toBeEnabled();
+    expect(document.querySelector('[data-test-upload-btn]')).toBeEnabled();
   });
 
   it('should display FileUploader with loading state', () => {
