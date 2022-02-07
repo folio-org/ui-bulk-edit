@@ -15,7 +15,11 @@
     "displayName": "ui-bulk-edit.meta.title",
     "route": "/bulk-edit",
     "home": "/bulk-edit",
-    "okapiInterfaces": {},
+    "okapiInterfaces": {
+      "bulk-edit": "1.0",
+      "data-export-spring": "1.0",
+      "users": "15.4"
+    },
     "optionalOkapiInterfaces": {},
     "icons": [
       {

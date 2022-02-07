@@ -12,6 +12,9 @@ Congratulations on creating a new Stripes UI app module!  Follow the instruction
 
 In order to view and log into the platform being served up, a suitable Okapi backend will need to be running. The [Folio testing-backend](https://app.vagrantup.com/folio/boxes/testing-backend) Vagrant box should work if your app does not yet have its own backend module.
 
+### Code of Conduct
+
+Refer to the Wiki [FOLIO Code of Conduct](https://wiki.folio.org/display/COMMUNITY/FOLIO+Code+of+Conduct).
 ## Run your new app
 
 Run the following from the ui-bulk-edit directory to serve your new app using a development server:
