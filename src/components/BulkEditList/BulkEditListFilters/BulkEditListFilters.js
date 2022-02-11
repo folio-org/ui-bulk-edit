@@ -25,7 +25,6 @@ import { getFileInfo } from './utils/getFileInfo';
 import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
 
 export const BulkEditListFilters = ({
-  setFileUploadedName,
   isFileUploaded,
   setIsFileUploaded,
   setCountOfRecords,
@@ -56,7 +55,7 @@ export const BulkEditListFilters = ({
     if (isFileUploaded || !recordIdentifier) {
       setIsDropZoneDisabled(true);
     } else setIsDropZoneDisabled(false);
-  }, [recordIdentifier, isFileUploaded]);
+  }, [isFileUploaded]);
 
   useEffect(() => {
     const identifier = new URLSearchParams(location.search).get('identifier');
@@ -85,8 +84,11 @@ export const BulkEditListFilters = ({
     setDropZoneActive(false);
   };
 
-  const hanldeRecordIdentifier = (e) => {
+  const handleRecordIdentifierChange = (e) => {
     handleChange(e.target.value, 'recordIdentifier');
+
+    setIsDropZoneDisabled(false);
+
     history.replace({
       pathname: location.pathname,
       search: buildSearch({ identifier: e.target.value }, location.search),
@@ -98,7 +100,6 @@ export const BulkEditListFilters = ({
   }));
 
   const uploadFileFlow = async (fileToUpload) => {
-    // setFileUploadedName(fileToUpload.name);
     setDropZoneActive(false);
 
     try {
@@ -193,7 +194,7 @@ export const BulkEditListFilters = ({
       <>
         <ListSelect
           disabled={!hasEditOrDeletePerms}
-          hanldeRecordIdentifier={hanldeRecordIdentifier}
+          onChange={handleRecordIdentifierChange}
         />
         <ListFileUploader
           className="FileUploaderContainer"
