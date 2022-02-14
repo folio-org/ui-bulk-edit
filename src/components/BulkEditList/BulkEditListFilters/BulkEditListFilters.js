@@ -55,7 +55,7 @@ export const BulkEditListFilters = ({
     if (isFileUploaded || !recordIdentifier) {
       setIsDropZoneDisabled(true);
     } else setIsDropZoneDisabled(false);
-  }, [isFileUploaded]);
+  }, [isFileUploaded, recordIdentifier]);
 
   useEffect(() => {
     const identifier = new URLSearchParams(location.search).get('identifier');
@@ -234,7 +234,6 @@ export const BulkEditListFilters = ({
 };
 
 BulkEditListFilters.propTypes = {
-  setFileUploadedName: PropTypes.func,
   isFileUploaded: PropTypes.bool.isRequired,
   setIsFileUploaded: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func.isRequired,

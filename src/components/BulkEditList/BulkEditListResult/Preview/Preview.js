@@ -40,7 +40,7 @@ export const Preview = () => {
     if (fileUploadedName) return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName });
 
     return null;
-  }, [fileUploadedName]);
+  }, [fileUploadedName, intl, location.search]);
 
   return (
     <AccordionStatus>
