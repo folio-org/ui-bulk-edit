@@ -22,10 +22,10 @@ import {
   BULK_EDIT_QUERY,
 } from '../../../constants';
 import { getFileInfo } from './utils/getFileInfo';
-import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
+import { useJobCommand, useFileUploadComand, useUserGroupsMap } from '../../../API';
+import { buildQuery } from '../../../hooks';
 
 export const BulkEditListFilters = ({
-  setFileUploadedName,
   isFileUploaded,
   setIsFileUploaded,
   setCountOfRecords,
@@ -43,6 +43,7 @@ export const BulkEditListFilters = ({
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
+  const { userGroups } = useUserGroupsMap();
 
   const { requestJobId, isLoading } = useJobCommand();
   const { fileUpload } = useFileUploadComand();
@@ -136,10 +137,13 @@ export const BulkEditListFilters = ({
   };
 
   const handleQuerySearch = async () => {
+    const parsedQuery = buildQuery(queryText, userGroups);
+
+    console.log('parsedQuery', parsedQuery);
     const { id } = await requestJobId({
       recordIdentifier,
       editType: BULK_EDIT_QUERY,
-      specificParameters: { query: queryText },
+      specificParameters: { query: parsedQuery },
     });
 
     const locationParams = new URLSearchParams(location.search).delete('fileName');

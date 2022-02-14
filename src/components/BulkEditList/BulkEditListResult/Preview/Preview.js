@@ -9,7 +9,12 @@ import {
 } from '@folio/stripes/components';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
-import { useDownloadLinks, useErrorsList, usePreviewRecords } from '../../../../API';
+import {
+  useDownloadLinks,
+  useErrorsList,
+  usePreviewRecords,
+  useUserGroupsMap,
+} from '../../../../API';
 
 export const Preview = () => {
   const intl = useIntl();
@@ -18,6 +23,7 @@ export const Preview = () => {
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
   const { users } = usePreviewRecords(id);
+  const { userGroups } = useUserGroupsMap();
 
   const mappedErrors = errors?.map(e => {
     const [identifier, message] = e.message.split(',');
@@ -40,7 +46,7 @@ export const Preview = () => {
     if (fileUploadedName) return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName });
 
     return null;
-  }, [fileUploadedName]);
+  }, [fileUploadedName, intl, location.search]);
 
   return (
     <AccordionStatus>
@@ -60,7 +66,7 @@ export const Preview = () => {
         </Headline>
       )}
       <AccordionSet>
-        <PreviewAccordion users={users} />
+        <PreviewAccordion users={users} userGroups={userGroups} />
         <ErrorsAccordion
           errors={mappedErrors}
           entries={data?.progress?.total}
