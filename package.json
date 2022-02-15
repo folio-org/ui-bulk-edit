@@ -52,7 +52,10 @@
         "subPermissions": [
           "ui-bulk-edit.view",
           "bulk-edit.upload.post",
-          "bulk-edit.item.post"
+          "bulk-edit.item.post",
+          "bulk-edit.roll-back.item.post",
+          "bulk-edit.preview.collection.get",
+          "bulk-edit.errors.collection.get"
         ],
         "visible": true
       },
