@@ -7,7 +7,7 @@ import { Select } from '@folio/stripes/components';
 
 import { identifierOptions } from '../../../../constants/optionsRecordIdentifiers';
 
-export const ListSelect = ({ disabled, hanldeRecordIdentifier }) => {
+export const ListSelect = ({ disabled, onChange }) => {
   const intl = useIntl();
   const location = useLocation();
 
@@ -30,13 +30,13 @@ export const ListSelect = ({ disabled, hanldeRecordIdentifier }) => {
       arial-label={intl.formatMessage({ id: 'ui-bulk-edit.list.filters.recordIdentifier' })}
       label={<FormattedMessage id="ui-bulk-edit.list.filters.recordIdentifier" />}
       defaultValue={defaultIdentifier}
-      onChange={hanldeRecordIdentifier}
+      onChange={onChange}
       disabled={disabled}
     />
   );
 };
 
 ListSelect.propTypes = {
-  hanldeRecordIdentifier: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
 };

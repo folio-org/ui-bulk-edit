@@ -56,7 +56,7 @@ export const BulkEditList = () => {
         values={{ fileName: fileUploadedMatchedName || fileUploadedName }}
              />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [fileUploadedMatchedName]);
+  }, [fileUploadedMatchedName, location.search]);
 
   const paneSubtitle = useMemo(() => (
     countOfRecords
