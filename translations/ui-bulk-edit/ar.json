@@ -72,7 +72,7 @@
     "preview.file.title": "اسم الملف: {fileUploadedName}",
     "preview.query.title": "استعلام: {queryText}",
     "list.errors.title": "أخطاء",
-    "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
+    "list.errors.info": "<b>{fileName}: {entries} مدخلاً * {matched} تسجيلة متطابقة * {errors} خطأً</b>",
     "list.errors.table.code": "معرّف التسجيلة",
     "list.errors.table.message": "سبب الخطأ"
 }
