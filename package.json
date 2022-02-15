@@ -43,7 +43,10 @@
         "visible": true,
         "subPermissions": [
           "module.bulk-edit.enabled",
-          "bulk-edit.preview.get"
+          "bulk-edit.preview.get",
+          "bulk-edit.preview.collection.get",
+          "bulk-edit.errors.collection.get",
+          "usergroups.collection.get"
         ]
       },
       {
@@ -53,9 +56,7 @@
           "ui-bulk-edit.view",
           "bulk-edit.upload.post",
           "bulk-edit.item.post",
-          "bulk-edit.roll-back.item.post",
-          "bulk-edit.preview.collection.get",
-          "bulk-edit.errors.collection.get"
+          "bulk-edit.roll-back.item.post"
         ],
         "visible": true
       },
