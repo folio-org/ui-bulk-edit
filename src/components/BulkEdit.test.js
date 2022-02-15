@@ -105,8 +105,6 @@ describe('BulkEdit', () => {
 
     await userEvent.type(textArea, '12', { delay: 10 });
 
-    expect(textArea).toHaveValue('12');
-
     expect(searchButton).toBeEnabled();
     expect(resetButton).toBeEnabled();
 

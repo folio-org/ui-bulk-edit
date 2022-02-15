@@ -56,6 +56,7 @@ export const BulkEditList = () => {
         values={{ fileName: fileUploadedMatchedName || fileUploadedName }}
              />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileUploadedMatchedName]);
 
   const paneSubtitle = useMemo(() => (

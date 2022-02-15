@@ -65,8 +65,6 @@ export const BulkEditListFilters = ({
     if (identifier) {
       handleChange(identifier, 'recordIdentifier');
     }
-
-    // setFileUploadedName(fileName);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
@@ -99,7 +97,6 @@ export const BulkEditListFilters = ({
   }));
 
   const uploadFileFlow = async (fileToUpload) => {
-    // setFileUploadedName(fileToUpload.name);
     setDropZoneActive(false);
 
     try {
@@ -139,7 +136,6 @@ export const BulkEditListFilters = ({
   const handleQuerySearch = async () => {
     const parsedQuery = buildQuery(queryText, userGroups);
 
-    console.log('parsedQuery', parsedQuery);
     const { id } = await requestJobId({
       recordIdentifier,
       editType: BULK_EDIT_QUERY,
@@ -237,7 +233,6 @@ export const BulkEditListFilters = ({
 };
 
 BulkEditListFilters.propTypes = {
-  setFileUploadedName: PropTypes.func,
   isFileUploaded: PropTypes.bool.isRequired,
   setIsFileUploaded: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func.isRequired,
