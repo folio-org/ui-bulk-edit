@@ -34,10 +34,10 @@ export const useProgressStatus = (id) => {
     onSuccess: () => {
       switch (data?.status) {
         case 'SUCCESSFUL':
-          clearIntervalAndRedirect(`/bulk-edit/${id}`);
+          clearIntervalAndRedirect(`/bulk-edit/${id}/processed`);
           break;
         case 'FAILED':
-          clearIntervalAndRedirect('/bulk-edit');
+          clearIntervalAndRedirect(`/bulk-edit/${id}/initial`);
 
           callout({
             type: 'error',

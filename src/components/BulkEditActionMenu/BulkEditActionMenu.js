@@ -10,7 +10,8 @@ import { CheckboxFilter } from '@folio/stripes/smart-components';
 import React, { useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { buildSearch } from '@folio/stripes-acq-components';
-import { usePathParams } from '../../hooks/usePathParams';
+import { Preloader } from '@folio/stripes-data-transfer-components';
+import { usePathParams } from '../../hooks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { DEFAULT_COLUMNS } from '../../constants';
 import { usePreviewRecords } from '../../API';
@@ -21,6 +22,7 @@ const BulkEditActionMenu = ({
   onToggle,
   successCsvLink,
   errorCsvLink,
+  isLoading,
 }) => {
   const history = useHistory();
   const location = useLocation();
@@ -50,39 +52,48 @@ const BulkEditActionMenu = ({
     return paramsColumns ? JSON.parse(paramsColumns) : defaultColumns;
   }, [location.search]);
 
+  const renderLinkButtons = () => {
+    if (isLoading) return <Preloader />;
+
+    return (
+      <>
+        {successCsvLink &&
+        <IfPermission perm="ui-bulk-edit.edit">
+          <a href={successCsvLink} download>
+            <Button
+              buttonStyle="dropdownItem"
+              data-testid="download-link-matched"
+            >
+              <Icon icon="download">
+                <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />
+              </Icon>
+            </Button>
+          </a>
+        </IfPermission>
+        }
+        {errorCsvLink &&
+        <IfPermission perm="ui-bulk-edit.edit">
+          <a href={errorCsvLink} download>
+            <Button
+              buttonStyle="dropdownItem"
+              data-testid="download-link-error"
+            >
+              <Icon icon="download">
+                <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />
+              </Icon>
+            </Button>
+          </a>
+        </IfPermission>
+        }
+      </>
+    );
+  };
+
   return (
     <>
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}>
         <>
-          {
-              successCsvLink &&
-              <IfPermission perm="ui-bulk-edit.edit">
-                <a href={successCsvLink} download>
-                  <Button
-                    buttonStyle="dropdownItem"
-                    data-testid="download-link-matched"
-                  >
-                    <Icon icon="download">
-                      <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />
-                    </Icon>
-                  </Button>
-                </a>
-              </IfPermission>
-          }
-          {errorCsvLink &&
-          <IfPermission perm="ui-bulk-edit.edit">
-            <a href={errorCsvLink} download>
-              <Button
-                buttonStyle="dropdownItem"
-                data-testid="download-link-error"
-              >
-                <Icon icon="download">
-                  <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />
-                </Icon>
-              </Button>
-            </a>
-          </IfPermission>
-          }
+          {renderLinkButtons()}
           <IfPermission perm="ui-bulk-edit.edit">
             <Button
               buttonStyle="dropdownItem"
@@ -123,6 +134,7 @@ BulkEditActionMenu.propTypes = {
   onDelete: PropTypes.func.isRequired,
   successCsvLink: PropTypes.string,
   errorCsvLink: PropTypes.string,
+  isLoading: PropTypes.bool,
 };
 
 export default BulkEditActionMenu;

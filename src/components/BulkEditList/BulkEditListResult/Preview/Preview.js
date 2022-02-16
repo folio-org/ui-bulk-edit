@@ -1,23 +1,21 @@
-import { useMemo } from 'react';
-import { useParams, useLocation } from 'react-router';
-import { useIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import {
   Headline,
   AccordionSet,
   AccordionStatus,
   MessageBanner,
 } from '@folio/stripes/components';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
 import { useDownloadLinks, useErrorsList, usePreviewRecords } from '../../../../API';
 
-export const Preview = () => {
-  const intl = useIntl();
-  const location = useLocation();
-  const { id } = useParams();
+export const Preview = ({ id, title }) => {
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
   const { users } = usePreviewRecords(id);
+  const [processedRecords, setProcessedRecords] = useState(0);
 
   const mappedErrors = errors?.map(e => {
     const [identifier, message] = e.message.split(',');
@@ -29,27 +27,21 @@ export const Preview = () => {
     };
   });
 
-  const processed = data?.progress?.processed;
-  const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
+  useEffect(() => {
+    if (errors?.length && data?.progress) {
+      setProcessedRecords(data.progress.total - errors.length);
+    }
+  }, [errors, data?.progress]);
 
-  const title = useMemo(() => {
-    const queryText = new URLSearchParams(location.search).get('queryText');
-
-    if (queryText) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText });
-
-    if (fileUploadedName) return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName });
-
-    return null;
-  }, [fileUploadedName, intl, location.search]);
 
   return (
     <AccordionStatus>
-      {processed && (
+      {!!processedRecords && (
       <Headline size="large" margin="small">
         <MessageBanner type="success" contentClassName="SuccessBanner">
           <FormattedMessage
             id="ui-bulk-edit.recordsSuccessfullyChanged"
-            values={{ value: processed }}
+            values={{ value: processedRecords }}
           />
         </MessageBanner>
       </Headline>
@@ -60,14 +52,20 @@ export const Preview = () => {
         </Headline>
       )}
       <AccordionSet>
-        <PreviewAccordion users={users} />
-        <ErrorsAccordion
-          errors={mappedErrors}
-          entries={data?.progress?.total}
-          matched={data?.progress?.processed}
-        />
+        {!!users?.length && <PreviewAccordion users={users} />}
+        {!!mappedErrors?.length && (
+          <ErrorsAccordion
+            errors={mappedErrors}
+            entries={data?.progress?.total}
+            matched={processedRecords}
+          />
+        )}
       </AccordionSet>
     </AccordionStatus>
   );
 };
 
+Preview.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+};

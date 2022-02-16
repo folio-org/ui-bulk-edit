@@ -10,15 +10,14 @@ import {
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 
 import { useHistory } from 'react-router-dom';
-import { useJobCommand, useFileUploadComand } from '../../API/useFileUpload';
+import { useJobCommand, useFileUploadComand } from '../../API';
 
 import { ListFileUploader } from '../ListFileUploader';
-import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants/constants';
+import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants';
 
 const BulkEditStartModal = ({
   open,
   onCancel,
-  setFileName,
   setIsBulkConformationModal,
   setCountOfRecords,
   setUpdatedId,
@@ -53,7 +52,6 @@ const BulkEditStartModal = ({
   };
 
   const uploadFileFlow = async (fileToUpload) => {
-    setFileName(fileToUpload.name);
     setDropZoneActive(false);
 
     try {
@@ -64,7 +62,7 @@ const BulkEditStartModal = ({
       await setUpdatedId(id);
 
       history.replace({
-        search: buildSearch({ fileName: fileToUpload.name }),
+        search: buildSearch({ processedFileName: fileToUpload.name }, history.location.search),
       });
 
       setCountOfRecords(data);
@@ -86,7 +84,7 @@ const BulkEditStartModal = ({
     setDropZoneActive(false);
   };
 
-  const onStartbulkEdit = () => {
+  const onStartBulkEdit = () => {
     onCancel();
     setIsBulkConformationModal(true);
     setConformationButton(true);
@@ -95,7 +93,7 @@ const BulkEditStartModal = ({
   const footer = (
     <ModalFooter>
       <Button
-        onClick={onStartbulkEdit}
+        onClick={onStartBulkEdit}
         disabled={isConformationButton}
       >
         {confirmLabel}

@@ -22,7 +22,7 @@ import {
   BULK_EDIT_QUERY,
 } from '../../../constants';
 import { getFileInfo } from './utils/getFileInfo';
-import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
+import { useJobCommand, useFileUploadComand } from '../../../API';
 
 export const BulkEditListFilters = ({
   isFileUploaded,
@@ -112,7 +112,7 @@ export const BulkEditListFilters = ({
       const locationParams = new URLSearchParams(location.search).delete('queryText');
 
       history.replace({
-        pathname: `/bulk-edit/${id}`,
+        pathname: `/bulk-edit/${id}/initial`,
         search: buildSearch({ fileName: fileToUpload.name }, locationParams),
       });
 
@@ -146,7 +146,7 @@ export const BulkEditListFilters = ({
     const locationParams = new URLSearchParams(location.search).delete('fileName');
 
     history.replace({
-      pathname: `/bulk-edit/${id}`,
+      pathname: `/bulk-edit/${id}/initial`,
       search: buildSearch({ queryText }, locationParams),
     });
   };
