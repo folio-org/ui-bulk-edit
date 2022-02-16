@@ -1,4 +1,4 @@
-export const buildQuery = (query, userGroups) => {
+export const buildQuery = (query, userGroups = {}) => {
   const swappedEntries = Object.entries(userGroups).map(([key, value]) => [value, key]);
   const groupsMap = Object.fromEntries(swappedEntries);
 
