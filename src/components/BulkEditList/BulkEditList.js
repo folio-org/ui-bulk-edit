@@ -17,7 +17,6 @@ import { usePathParams } from '../../hooks/usePathParams';
 export const BulkEditList = () => {
   const stripes = useStripes();
   const location = useLocation();
-  // const [fileUploadedName, setFileUploadedName] = useState();
   const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
@@ -56,7 +55,7 @@ export const BulkEditList = () => {
         values={{ fileName: fileUploadedMatchedName || fileUploadedName }}
              />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [fileUploadedMatchedName]);
+  }, [fileUploadedMatchedName, location.search]);
 
   const paneSubtitle = useMemo(() => (
     countOfRecords

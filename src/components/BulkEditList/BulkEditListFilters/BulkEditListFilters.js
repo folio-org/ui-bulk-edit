@@ -22,10 +22,10 @@ import {
   BULK_EDIT_QUERY,
 } from '../../../constants';
 import { getFileInfo } from './utils/getFileInfo';
-import { useJobCommand, useFileUploadComand } from '../../../API/useFileUpload';
+import { useJobCommand, useFileUploadComand, useUserGroupsMap } from '../../../API';
+import { buildQuery } from '../../../hooks';
 
 export const BulkEditListFilters = ({
-  setFileUploadedName,
   isFileUploaded,
   setIsFileUploaded,
   setCountOfRecords,
@@ -43,6 +43,7 @@ export const BulkEditListFilters = ({
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
+  const { userGroups } = useUserGroupsMap();
 
   const { requestJobId, isLoading } = useJobCommand();
   const { fileUpload } = useFileUploadComand();
@@ -56,7 +57,7 @@ export const BulkEditListFilters = ({
     if (isFileUploaded || !recordIdentifier) {
       setIsDropZoneDisabled(true);
     } else setIsDropZoneDisabled(false);
-  }, [recordIdentifier, isFileUploaded]);
+  }, [isFileUploaded, recordIdentifier]);
 
   useEffect(() => {
     const identifier = new URLSearchParams(location.search).get('identifier');
@@ -64,8 +65,6 @@ export const BulkEditListFilters = ({
     if (identifier) {
       handleChange(identifier, 'recordIdentifier');
     }
-
-    // setFileUploadedName(fileName);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
@@ -85,8 +84,11 @@ export const BulkEditListFilters = ({
     setDropZoneActive(false);
   };
 
-  const hanldeRecordIdentifier = (e) => {
+  const handleRecordIdentifierChange = (e) => {
     handleChange(e.target.value, 'recordIdentifier');
+
+    setIsDropZoneDisabled(false);
+
     history.replace({
       pathname: location.pathname,
       search: buildSearch({ identifier: e.target.value }, location.search),
@@ -98,7 +100,6 @@ export const BulkEditListFilters = ({
   }));
 
   const uploadFileFlow = async (fileToUpload) => {
-    // setFileUploadedName(fileToUpload.name);
     setDropZoneActive(false);
 
     try {
@@ -136,10 +137,12 @@ export const BulkEditListFilters = ({
   };
 
   const handleQuerySearch = async () => {
+    const parsedQuery = buildQuery(queryText, userGroups);
+
     const { id } = await requestJobId({
       recordIdentifier,
       editType: BULK_EDIT_QUERY,
-      specificParameters: { query: queryText },
+      specificParameters: { query: parsedQuery },
     });
 
     const locationParams = new URLSearchParams(location.search).delete('fileName');
@@ -193,7 +196,7 @@ export const BulkEditListFilters = ({
       <>
         <ListSelect
           disabled={!hasEditOrDeletePerms}
-          hanldeRecordIdentifier={hanldeRecordIdentifier}
+          onChange={handleRecordIdentifierChange}
         />
         <ListFileUploader
           className="FileUploaderContainer"
@@ -233,7 +236,6 @@ export const BulkEditListFilters = ({
 };
 
 BulkEditListFilters.propTypes = {
-  setFileUploadedName: PropTypes.func,
   isFileUploaded: PropTypes.bool.isRequired,
   setIsFileUploaded: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func.isRequired,

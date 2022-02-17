@@ -13,23 +13,6 @@ import { AppIcon } from '@folio/stripes/core';
 import { DEFAULT_COLUMNS } from '../../../../../constants';
 import { FormattedTime } from './FormattedTime';
 
-const resultsFormatter = {
-  active: user => (
-    <AppIcon app="users" size="small">
-      {user.active
-        ? <FormattedMessage id="ui-bulk-edit.list.preview.table.active" />
-        : <FormattedMessage id="ui-bulk-edit.list.preview.table.inactive" />
-      }
-    </AppIcon>
-  ),
-  lastName: user => user.personal?.lastName,
-  firstName: user => user.personal?.firstName,
-  barcode: user => user.barcode,
-  patronGroup: user => user.patronGroup,
-  username: user => user.username,
-  email: user => user.personal.email,
-  expirationDate: user => <FormattedTime dateString={user.expirationDate} />,
-};
 const columnMapping = {
   active: <FormattedMessage id="ui-bulk-edit.list.preview.table.status" />,
   lastName: <FormattedMessage id="ui-bulk-edit.list.preview.table.lastName" />,
@@ -41,8 +24,26 @@ const columnMapping = {
   expirationDate: <FormattedMessage id="ui-bulk-edit.list.preview.table.expirationDate" />,
 };
 
-const PreviewAccordion = ({ users = [] }) => {
+const PreviewAccordion = ({ users = [], userGroups = {} }) => {
   const location = useLocation();
+
+  const resultsFormatter = {
+    active: user => (
+      <AppIcon app="users" size="small">
+        {user.active
+          ? <FormattedMessage id="ui-bulk-edit.list.preview.table.active" />
+          : <FormattedMessage id="ui-bulk-edit.list.preview.table.inactive" />
+        }
+      </AppIcon>
+    ),
+    lastName: user => user.personal?.lastName,
+    firstName: user => user.personal?.firstName,
+    barcode: user => user.barcode,
+    patronGroup: user => userGroups[user.patronGroup],
+    username: user => user.username,
+    email: user => user.personal.email,
+    expirationDate: user => <FormattedTime dateString={user.expirationDate} />,
+  };
 
   const visibleColumns = useMemo(() => {
     const paramsColumns = new URLSearchParams(location.search).get('selectedColumns');
@@ -77,6 +78,7 @@ const PreviewAccordion = ({ users = [] }) => {
 
 PreviewAccordion.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object),
+  userGroups: PropTypes.object,
 };
 
 export default PreviewAccordion;

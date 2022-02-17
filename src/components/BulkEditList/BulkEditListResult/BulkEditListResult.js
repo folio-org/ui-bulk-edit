@@ -4,7 +4,6 @@ import {
   Route,
 } from 'react-router-dom';
 
-import { memo } from 'react';
 import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
 import { Preview } from './Preview/Preview';
 import { ProgressBar } from '../../ProgressBar/ProgressBar';
