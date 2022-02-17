@@ -57,7 +57,7 @@ export const BulkEditListFilters = ({
     if (isFileUploaded || !recordIdentifier) {
       setIsDropZoneDisabled(true);
     } else setIsDropZoneDisabled(false);
-  }, [isFileUploaded, recordIdentifier]);
+  }, [isFileUploaded]);
 
   useEffect(() => {
     const identifier = new URLSearchParams(location.search).get('identifier');
@@ -182,6 +182,10 @@ export const BulkEditListFilters = ({
 
   return (
     <>
+      <pre>
+        {JSON.stringify(isDropZoneActive)}
+        {JSON.stringify(isDropZoneDisabled)}
+      </pre>
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
