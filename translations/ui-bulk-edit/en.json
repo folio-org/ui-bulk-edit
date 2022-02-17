@@ -59,6 +59,8 @@
   "modal.fileExtensions.blocked.header": "Invalid file",
   "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded",
   "modal.fileExtensions.actionButton": "Choose other file to upload",
+  "modal.successfullMessage": "{fileName} succesfully uploaded.",
+  "modal.next": "Next",
 
   "start.edit": "Start bulk edit",
   "start.delete": "Start bulk delete",
@@ -84,7 +86,8 @@
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
 
-  "conformationModal.message": "{count} records will be changed if the Save & close button is cliked.",
+  "conformationModal.message": "{count} records will be updated if the <b>Commit changes</b> button is cliked.",
+  "conformationModal.commitChanges": "Commit changes",
 
   "preview.file.title": "Filename: {fileUploadedName}",
   "preview.query.title": "Query: {queryText}"

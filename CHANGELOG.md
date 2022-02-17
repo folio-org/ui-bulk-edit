@@ -23,3 +23,4 @@
 * [UIBULKED-13](https://issues.folio.org/browse/UIBULKED-13) Populating error accordion
 * [UIBULKED-48](https://issues.folio.org/browse/UIBULKED-48) Refactor permissions
 * [UIBULKED-16](https://issues.folio.org/browse/UIBULKED-16) Populating preview of matched records based on query search
+* [UIBULKED-52](https://issues.folio.org/browse/UIBULKED-52) Modify behavior after user starts bulk edit
