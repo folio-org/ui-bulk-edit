@@ -53,7 +53,7 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditConformationModal();
 
     const buttons = [
-      /stripes-components.saveAndClose/,
+      /conformationModal.commitChanges/,
       /stripes-components.cancel/,
     ];
 
@@ -69,6 +69,6 @@ describe('BulkEditActionMenu', () => {
   it('should call onStart callback', async () => {
     renderBulkEditConformationModal();
 
-    userEvent.click(screen.getByRole('button', { name: /stripes-components.saveAndClose/ }));
+    userEvent.click(screen.getByRole('button', { name: /conformationModal.commitChanges/ }));
   });
 });
