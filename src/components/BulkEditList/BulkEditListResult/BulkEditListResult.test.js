@@ -24,8 +24,8 @@ jest.mock('../../../API', () => ({
   useErrorsList: () => ({
     errors: [{ message: 'id,text' }],
   }),
-
   useProgressStatus: jest.fn,
+  useUserGroupsMap: () => ({}),
 }));
 
 const renderBulkEditResult = (history, fileName = undefined, fileUpdatedName = undefined) => {
