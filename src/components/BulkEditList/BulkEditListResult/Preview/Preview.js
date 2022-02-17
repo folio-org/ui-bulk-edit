@@ -9,12 +9,18 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
-import { useDownloadLinks, useErrorsList, usePreviewRecords } from '../../../../API';
+import {
+  useDownloadLinks,
+  useErrorsList,
+  usePreviewRecords,
+  useUserGroupsMap,
+} from '../../../../API';
 
 export const Preview = ({ id, title }) => {
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
   const { users } = usePreviewRecords(id);
+  const { userGroups } = useUserGroupsMap();
   const [processedRecords, setProcessedRecords] = useState(0);
 
   const mappedErrors = errors?.map(e => {
@@ -52,7 +58,7 @@ export const Preview = ({ id, title }) => {
         </Headline>
       )}
       <AccordionSet>
-        {!!users?.length && <PreviewAccordion users={users} />}
+        {!!users?.length && <PreviewAccordion users={users} userGroups={userGroups} />}
         {!!mappedErrors?.length && (
           <ErrorsAccordion
             errors={mappedErrors}
