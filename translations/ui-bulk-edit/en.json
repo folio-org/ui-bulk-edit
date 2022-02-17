@@ -54,7 +54,7 @@
   "uploaderActiveTitle": "Drop to continue",
   "uploading": "Uploading",
   "cancel": "Cancel",
-  "recordsSuccessfullyChanged": "{value} records have benn successfully changed",
+  "recordsSuccessfullyChanged": "{value} records have been successfully changed",
 
   "modal.fileExtensions.blocked.header": "Invalid file",
   "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded",
@@ -84,7 +84,7 @@
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
 
-  "conformationModal.message": "{count} records will be changed if the Save & close button is cliked.",
+  "conformationModal.message": "{count} records will be changed if the Save & close button is clicked.",
 
   "preview.file.title": "Filename: {fileUploadedName}",
   "preview.query.title": "Query: {queryText}"
