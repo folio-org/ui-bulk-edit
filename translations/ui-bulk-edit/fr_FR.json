@@ -54,8 +54,8 @@
     "menuGroup.actions": "Actions",
     "menuGroup.showColumns": "Show columns",
     "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
-    "conformationModal.message": "{count} records will be changed if the Save & close button is cliked.",
-    "recordsSuccessfullyChanged": "{value} records have benn successfully changed",
+    "conformationModal.message": "{count} records will be updated if the <b>Commit changes</b> button is clicked.",
+    "recordsSuccessfullyChanged": "{value} records have been successfully changed",
     "error.sww": "Something went wrong",
     "list.logSubTitle.matched": "{count} records match",
     "list.preview.title": "Preview of record matched",
@@ -74,5 +74,8 @@
     "list.errors.title": "Erreurs",
     "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
     "list.errors.table.code": "Record identifier",
-    "list.errors.table.message": "Motif de l'erreur"
+    "list.errors.table.message": "Motif de l'erreur",
+    "modal.successfullMessage": "{fileName} succesfully uploaded.",
+    "modal.next": "Next",
+    "conformationModal.commitChanges": "Commit changes"
 }

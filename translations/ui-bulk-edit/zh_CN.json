@@ -74,5 +74,8 @@
     "list.errors.title": "错误",
     "list.errors.info": "<b>{fileName}: {entries} 实体 * {matched} 记录匹配 * {errors} 错误</b>",
     "list.errors.table.code": "记录标识符",
-    "list.errors.table.message": "错误原因"
+    "list.errors.table.message": "错误原因",
+    "modal.successfullMessage": "{fileName} succesfully uploaded.",
+    "modal.next": "Next",
+    "conformationModal.commitChanges": "Commit changes"
 }
