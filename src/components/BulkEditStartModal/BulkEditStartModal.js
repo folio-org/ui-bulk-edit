@@ -6,10 +6,11 @@ import {
   Button,
   Modal,
   ModalFooter,
+  MessageBanner,
 } from '@folio/stripes/components';
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useJobCommand, useFileUploadComand } from '../../API';
 
 import { ListFileUploader } from '../ListFileUploader';
@@ -23,6 +24,7 @@ const BulkEditStartModal = ({
   setUpdatedId,
 }) => {
   const history = useHistory();
+  const location = useLocation();
   const intl = useIntl();
   const showCallout = useShowCallout();
 
@@ -30,11 +32,14 @@ const BulkEditStartModal = ({
   const { fileUpload } = useFileUploadComand();
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
 
+  const fileName = new URLSearchParams(location.search).get('fileName');
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title' });
-  const confirmLabel = intl.formatMessage({ id: 'stripes-components.saveAndClose' });
+  const modalLabelMessage = intl.formatMessage({ id: 'ui-bulk-edit.modal.successfullMessage' }, { fileName });
+  const confirmLabel = intl.formatMessage({ id: 'ui-bulk-edit.modal.next' });
   const cancelLabel = intl.formatMessage({ id: 'stripes-components.cancel' });
   const uploaderSubTitle = intl.formatMessage({ id: 'ui-bulk-edit.uploaderSubTitle.records' });
   const errorMessage = intl.formatMessage({ id: 'ui-bulk-edit.error.uploadedFile' });
@@ -67,6 +72,8 @@ const BulkEditStartModal = ({
 
       setCountOfRecords(data);
 
+      setIsFileUploaded(true);
+
       setConformationButton(false);
     } catch {
       showCallout({
@@ -95,6 +102,7 @@ const BulkEditStartModal = ({
       <Button
         onClick={onStartBulkEdit}
         disabled={isConformationButton}
+        buttonStyle="primary"
       >
         {confirmLabel}
       </Button>
@@ -113,17 +121,21 @@ const BulkEditStartModal = ({
       aria-label={modalLabel}
       footer={footer}
     >
-      <ListFileUploader
-        className="Centered"
-        isLoading={isLoading}
-        isDropZoneActive={isDropZoneActive}
-        handleDrop={handleDrop}
-        fileExtensionModalOpen={fileExtensionModalOpen}
-        hideFileExtensionModal={hideFileExtensionModal}
-        handleDragLeave={handleDragLeave}
-        handleDragEnter={handleDragEnter}
-        uploaderSubTitle={uploaderSubTitle}
-      />
+      {!isFileUploaded ?
+        <ListFileUploader
+          className="Centered"
+          isLoading={isLoading}
+          isDropZoneActive={isDropZoneActive}
+          handleDrop={handleDrop}
+          fileExtensionModalOpen={fileExtensionModalOpen}
+          hideFileExtensionModal={hideFileExtensionModal}
+          handleDragLeave={handleDragLeave}
+          handleDragEnter={handleDragEnter}
+          uploaderSubTitle={uploaderSubTitle}
+        />
+        :
+        <MessageBanner type="success">{modalLabelMessage}</MessageBanner>
+      }
     </Modal>
   );
 };

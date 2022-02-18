@@ -23,7 +23,7 @@ const BulkEditConformationModal = ({
   const location = useLocation();
 
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title.conformationModal' }, { fileName });
-  const confirmLabel = intl.formatMessage({ id: 'stripes-components.saveAndClose' });
+  const confirmLabel = intl.formatMessage({ id: 'ui-bulk-edit.conformationModal.commitChanges' });
   const cancelLabel = intl.formatMessage({ id: 'stripes-components.cancel' });
   const modalContent = intl.formatMessage({ id: 'ui-bulk-edit.conformationModal.message' }, { count: countOfRecords });
 
@@ -50,6 +50,7 @@ const BulkEditConformationModal = ({
   const footer = (
     <ModalFooter>
       <Button
+        buttonStyle="primary"
         onClick={onStartJob}
       >
         {confirmLabel}
