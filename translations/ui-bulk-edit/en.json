@@ -54,7 +54,7 @@
   "uploaderActiveTitle": "Drop to continue",
   "uploading": "Uploading",
   "cancel": "Cancel",
-  "recordsSuccessfullyChanged": "{value} records have benn successfully changed",
+  "recordsSuccessfullyChanged": "{value} records have been successfully changed",
 
   "modal.fileExtensions.blocked.header": "Invalid file",
   "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded",
