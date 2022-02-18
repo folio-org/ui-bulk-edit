@@ -182,10 +182,6 @@ export const BulkEditListFilters = ({
 
   return (
     <>
-      <pre>
-        {JSON.stringify(isDropZoneActive)}
-        {JSON.stringify(isDropZoneDisabled)}
-      </pre>
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
