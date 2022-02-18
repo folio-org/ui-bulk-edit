@@ -12,11 +12,11 @@ jest.mock('./PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
 }));
 
-const renderPreview = () => {
+const renderPreview = ({ title }) => {
   render(
     <MemoryRouter initialEntries={['/bulk-edit/1?queryText=patronGroup%3D%3D"1"']}>
       <QueryClientProvider client={queryClient}>
-        <Preview />
+        <Preview title={title} id="1" />
       </QueryClientProvider>
     </MemoryRouter>,
   );
@@ -39,9 +39,8 @@ describe('Preview', () => {
   });
 
   it('displays Bulk edit', () => {
-    renderPreview();
+    renderPreview({ title: 'preview.query.title' });
 
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
-    expect(screen.getByText('PreviewAccordion')).toBeVisible();
   });
 });

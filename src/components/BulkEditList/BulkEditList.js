@@ -11,8 +11,8 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../BulkEditConformationModal';
-import { useDownloadLinks } from '../../API/useDownloadLinks';
-import { usePathParams } from '../../hooks/usePathParams';
+import { useDownloadLinks } from '../../API';
+import { usePathParams } from '../../hooks';
 
 export const BulkEditList = () => {
   const stripes = useStripes();
@@ -25,7 +25,7 @@ export const BulkEditList = () => {
   const [updatedId, setUpdatedId] = useState();
 
   const { id } = usePathParams('/bulk-edit/:id');
-  const { data } = useDownloadLinks(id);
+  const { data, isLoading } = useDownloadLinks(id);
   const [successCsvLink, errorCsvLink] = data?.files || [];
 
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
@@ -38,6 +38,7 @@ export const BulkEditList = () => {
       onToggle={noop}
       successCsvLink={successCsvLink}
       errorCsvLink={errorCsvLink}
+      isLoading={isLoading}
     />
     )
   );
@@ -85,7 +86,6 @@ export const BulkEditList = () => {
           actionMenu={renderActionMenu}
         >
           <BulkEditListResult
-            fileUpdatedName={fileUploadedMatchedName}
             updatedId={updatedId}
           />
         </Pane>
