@@ -115,7 +115,8 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.3",
-    "testing-library-selector": "^0.2.1"
+    "testing-library-selector": "^0.2.1",
+    "use-deep-compare": "^1.1.0"
   },
   "dependencies": {
     "@folio/stripes-acq-components": "^3.0.0",
