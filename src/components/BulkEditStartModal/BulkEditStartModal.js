@@ -98,6 +98,11 @@ const BulkEditStartModal = ({
     setIsFileUploaded(false);
   };
 
+  const onCancelHandlde = () => {
+    onCancel();
+    setIsFileUploaded(false);
+  };
+
   const footer = (
     <ModalFooter>
       <Button
@@ -108,7 +113,7 @@ const BulkEditStartModal = ({
         {confirmLabel}
       </Button>
       <Button
-        onClick={onCancel}
+        onClick={onCancelHandlde}
       >
         {cancelLabel}
       </Button>
