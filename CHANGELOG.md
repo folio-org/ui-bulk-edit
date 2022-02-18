@@ -2,7 +2,7 @@
 
 ## (IN PROGRESS)
 
-## [1.0.0](https://github.com/folio-org/ui-remote-storage/tree/v0.1.0) (2022-02-18)
+## [1.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v0.1.0) (2022-02-18)
 
 * [UIBULKED-2](https://issues.folio.org/browse/UIBULKED-2) Project Setup
 * [UIBULKED-1](https://issues.folio.org/browse/UIBULKED-1) Landing page
