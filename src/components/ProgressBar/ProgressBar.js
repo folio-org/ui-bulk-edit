@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import { Icon, Loading } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
+import { useLocation } from 'react-router-dom';
 import css from './ProgressBar.css';
 import { useProgressStatus } from '../../API/useProgressStatus';
 
-export const ProgressBar = ({ updatedId, title }) => {
+export const ProgressBar = ({ updatedId }) => {
+  const location = useLocation();
   const { data } = useProgressStatus(updatedId);
+  const title = new URLSearchParams(location.search).get('processedFileName');
 
   return (
     <div className={css.progressBar}>
@@ -31,6 +34,5 @@ export const ProgressBar = ({ updatedId, title }) => {
 
 ProgressBar.propTypes = {
   updatedId: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
 };
 
