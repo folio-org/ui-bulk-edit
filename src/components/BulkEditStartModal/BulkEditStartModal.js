@@ -143,7 +143,6 @@ const BulkEditStartModal = ({
 BulkEditStartModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
-  setFileName: PropTypes.func,
   setIsBulkConformationModal: PropTypes.func,
   setCountOfRecords: PropTypes.func,
   setUpdatedId: PropTypes.func,
