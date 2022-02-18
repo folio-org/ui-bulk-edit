@@ -36,7 +36,7 @@ const BulkEditStartModal = ({
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
 
-  const fileName = new URLSearchParams(location.search).get('fileName');
+  const fileName = new URLSearchParams(location.search).get('processedFileName');
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title' });
   const modalLabelMessage = intl.formatMessage({ id: 'ui-bulk-edit.modal.successfullMessage' }, { fileName });
   const confirmLabel = intl.formatMessage({ id: 'ui-bulk-edit.modal.next' });
