@@ -56,7 +56,8 @@
           "ui-bulk-edit.view",
           "bulk-edit.upload.post",
           "bulk-edit.item.post",
-          "bulk-edit.roll-back.item.post"
+          "bulk-edit.roll-back.item.post",
+          "data-export.job.item.post"
         ],
         "visible": true
       },
