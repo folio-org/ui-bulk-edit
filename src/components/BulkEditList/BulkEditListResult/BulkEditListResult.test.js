@@ -24,19 +24,20 @@ jest.mock('../../../API', () => ({
   useErrorsList: () => ({
     errors: [{ message: 'id,text' }],
   }),
-  useProgressStatus: jest.fn,
+  useProgressStatus: () => ({
+    data: {
+      progress: 10,
+    },
+  }),
   useUserGroupsMap: () => ({}),
 }));
 
-const renderBulkEditResult = (history, fileName = undefined, fileUpdatedName = undefined) => {
+const renderBulkEditResult = (history) => {
   render(
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
         <BulkEditListResult
-          fileUploadedName={fileName}
-          fileUpdatedName={fileUpdatedName}
           updatedId="1"
-          processedRecords={2}
         />
       </QueryClientProvider>
     </Router>,
@@ -77,10 +78,10 @@ describe('BulkEditListResult', () => {
   it('displays title', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/progress');
+    history.push('/bulk-edit/1/progress?processedFileName=Mock.csv');
 
-    renderBulkEditResult(history, undefined, 'TestTitle');
+    renderBulkEditResult(history);
 
-    expect(screen.getByText(/TestTitle/)).toBeVisible();
+    expect(screen.getByText(/Mock.csv/)).toBeVisible();
   });
 });

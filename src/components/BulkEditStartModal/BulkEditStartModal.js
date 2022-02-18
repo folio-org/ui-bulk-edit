@@ -95,6 +95,7 @@ const BulkEditStartModal = ({
     onCancel();
     setIsBulkConformationModal(true);
     setConformationButton(true);
+    setIsFileUploaded(false);
   };
 
   const footer = (

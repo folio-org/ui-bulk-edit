@@ -86,7 +86,6 @@ export const BulkEditList = () => {
           actionMenu={renderActionMenu}
         >
           <BulkEditListResult
-            fileUpdatedName={fileUploadedMatchedName}
             updatedId={updatedId}
           />
         </Pane>

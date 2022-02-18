@@ -9,7 +9,7 @@ import { ProgressBar } from '../../ProgressBar/ProgressBar';
 import PreviewInitial from './PreviewInitial/PreviewInitial';
 import PreviewProcessed from './PreviewProcessed/PreviewProcessed';
 
-const BulkEditListResult = ({ fileUpdatedName, updatedId }) => {
+const BulkEditListResult = ({ updatedId }) => {
   return (
     <Switch>
       <Route
@@ -29,7 +29,7 @@ const BulkEditListResult = ({ fileUpdatedName, updatedId }) => {
       />
       <Route
         path="/bulk-edit/:id/progress"
-        render={() => <ProgressBar title={fileUpdatedName} updatedId={updatedId} />}
+        render={() => <ProgressBar updatedId={updatedId} />}
       />
     </Switch>
   );
@@ -38,6 +38,5 @@ const BulkEditListResult = ({ fileUpdatedName, updatedId }) => {
 export default BulkEditListResult;
 
 BulkEditListResult.propTypes = {
-  fileUpdatedName: PropTypes.string,
   updatedId: PropTypes.string,
 };
