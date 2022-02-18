@@ -16,7 +16,6 @@
     "route": "/bulk-edit",
     "home": "/bulk-edit",
     "okapiInterfaces": {
-      "bulk-edit": "1.0",
       "data-export-spring": "1.0",
       "users": "15.4"
     },
