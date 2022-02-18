@@ -86,7 +86,7 @@
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
 
-  "conformationModal.message": "{count} records will be updated if the <b>Commit changes</b> button is cliked.",
+  "conformationModal.message": "{count} records will be updated if the <b>Commit changes</b> button is clicked.",
   "conformationModal.commitChanges": "Commit changes",
 
   "preview.file.title": "Filename: {fileUploadedName}",
