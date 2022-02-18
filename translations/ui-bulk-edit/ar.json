@@ -54,7 +54,7 @@
     "menuGroup.actions": "الإجراءات",
     "menuGroup.showColumns": "عرض الأعمدة",
     "meta.title.conformationModal": "تحرير بالدفعة:<b>{fileName}</b>",
-    "conformationModal.message": "سيتم تغيير {count} تسجيلة إذا تم النقر على زر حفظ وإغلاق.",
+    "conformationModal.message": "سيتم تحديث {count} تسجيلة إذا تم النقر على زر <b>تنفيذ التغييرات</b>.",
     "recordsSuccessfullyChanged": "تم تغيير {value} تسجيلة بنجاح",
     "error.sww": "لقد حدث خطأ ما",
     "list.logSubTitle.matched": "{count} تسجيلة متطابقة",
@@ -74,5 +74,8 @@
     "list.errors.title": "أخطاء",
     "list.errors.info": "<b>{fileName}: {entries} مدخلاً * {matched} تسجيلة متطابقة * {errors} خطأً</b>",
     "list.errors.table.code": "معرّف التسجيلة",
-    "list.errors.table.message": "سبب الخطأ"
+    "list.errors.table.message": "سبب الخطأ",
+    "modal.successfullMessage": "تم تحميل {fileName} بنجاح.",
+    "modal.next": "التالي",
+    "conformationModal.commitChanges": "تنفيذ التغييرات"
 }
