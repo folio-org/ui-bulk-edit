@@ -55,6 +55,10 @@ export const Preview = ({ id, title }) => {
       {title && (
         <Headline size="large" margin="medium">
           {title}
+          <FormattedMessage
+            id="ui-bulk-edit.recordsSuccessfullyChanged"
+            values={{ value: 55 }}
+          />
         </Headline>
       )}
       <AccordionSet>
