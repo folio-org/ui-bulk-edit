@@ -72,7 +72,6 @@ export const BulkEditList = () => {
           paneTitle={<FormattedMessage id="ui-bulk-edit.list.criteriaTitle" />}
         >
           <BulkEditListFilters
-            // setFileUploadedName={setFileUploadedName}
             setIsFileUploaded={setIsFileUploaded}
             isFileUploaded={isFileUploaded}
             setCountOfRecords={setCountOfRecords}
