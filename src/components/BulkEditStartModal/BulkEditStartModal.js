@@ -11,15 +11,14 @@ import {
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 
 import { useHistory, useLocation } from 'react-router-dom';
-import { useJobCommand, useFileUploadComand } from '../../API/useFileUpload';
+import { useJobCommand, useFileUploadComand } from '../../API';
 
 import { ListFileUploader } from '../ListFileUploader';
-import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants/constants';
+import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants';
 
 const BulkEditStartModal = ({
   open,
   onCancel,
-  setFileName,
   setIsBulkConformationModal,
   setCountOfRecords,
   setUpdatedId,
@@ -37,7 +36,7 @@ const BulkEditStartModal = ({
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
 
-  const fileName = new URLSearchParams(location.search).get('fileName');
+  const fileName = new URLSearchParams(location.search).get('processedFileName');
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title' });
   const modalLabelMessage = intl.formatMessage({ id: 'ui-bulk-edit.modal.successfullMessage' }, { fileName });
   const confirmLabel = intl.formatMessage({ id: 'ui-bulk-edit.modal.next' });
@@ -58,7 +57,6 @@ const BulkEditStartModal = ({
   };
 
   const uploadFileFlow = async (fileToUpload) => {
-    setFileName(fileToUpload.name);
     setDropZoneActive(false);
 
     try {
@@ -69,7 +67,7 @@ const BulkEditStartModal = ({
       await setUpdatedId(id);
 
       history.replace({
-        search: buildSearch({ fileName: fileToUpload.name }),
+        search: buildSearch({ processedFileName: fileToUpload.name }, history.location.search),
       });
 
       setCountOfRecords(data);
@@ -93,23 +91,29 @@ const BulkEditStartModal = ({
     setDropZoneActive(false);
   };
 
-  const onStartbulkEdit = () => {
+  const onStartBulkEdit = () => {
     onCancel();
     setIsBulkConformationModal(true);
     setConformationButton(true);
+    setIsFileUploaded(false);
+  };
+
+  const onCancelHandlde = () => {
+    onCancel();
+    setIsFileUploaded(false);
   };
 
   const footer = (
     <ModalFooter>
       <Button
-        onClick={onStartbulkEdit}
+        onClick={onStartBulkEdit}
         disabled={isConformationButton}
         buttonStyle="primary"
       >
         {confirmLabel}
       </Button>
       <Button
-        onClick={onCancel}
+        onClick={onCancelHandlde}
       >
         {cancelLabel}
       </Button>
@@ -145,7 +149,6 @@ const BulkEditStartModal = ({
 BulkEditStartModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
-  setFileName: PropTypes.func,
   setIsBulkConformationModal: PropTypes.func,
   setCountOfRecords: PropTypes.func,
   setUpdatedId: PropTypes.func,

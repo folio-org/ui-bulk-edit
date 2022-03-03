@@ -2,14 +2,17 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { useOkapiKy } from '@folio/stripes/core';
 import { QueryClientProvider } from 'react-query';
+import { MemoryRouter } from 'react-router';
 import { ProgressBar } from './ProgressBar';
 import { queryClient } from '../../../test/jest/utils/queryClient';
 
 const renderProgressBar = (props) => {
   render(
-    <QueryClientProvider client={queryClient}>
-      <ProgressBar {...props} />
-    </QueryClientProvider>,
+    <MemoryRouter initialEntries={['/bulk-edit/1/progress?processedFileName=some.scv']}>
+      <QueryClientProvider client={queryClient}>
+        <ProgressBar {...props} />
+      </QueryClientProvider>
+    </MemoryRouter>,
   );
 };
 
@@ -39,7 +42,7 @@ describe('ProgressBar', () => {
   it('should display correct title', async () => {
     renderProgressBar(props);
 
-    const title = await screen.findByText(props.title);
+    const title = await screen.findByText(/some.scv/);
 
     expect(title).toBeVisible();
   });
