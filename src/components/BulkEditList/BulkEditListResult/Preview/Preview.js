@@ -34,11 +34,8 @@ export const Preview = ({ id, title }) => {
   });
 
   useEffect(() => {
-    if (errors?.length && data?.progress) {
-      setProcessedRecords(data.progress.total - errors.length);
-    } else if (errors?.length === 0 && data?.progress) {
-      setProcessedRecords(data.progress.total);
-    }
+    if (errors?.length === 0 && data?.progress) setProcessedRecords(data.progress.total);
+    if (errors?.length && data?.progress) setProcessedRecords(data.progress.total - errors.length);
   }, [errors, data?.progress]);
 
 
