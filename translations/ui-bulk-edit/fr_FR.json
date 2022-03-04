@@ -75,7 +75,7 @@
     "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
     "list.errors.table.code": "Record identifier",
     "list.errors.table.message": "Motif de l'erreur",
-    "modal.successfullMessage": "{fileName} succesfully uploaded.",
-    "modal.next": "Next",
+    "modal.successfullMessage": "{fileName} a été téléchargé avec succès.",
+    "modal.next": "Suivant :",
     "conformationModal.commitChanges": "Commit changes"
 }
