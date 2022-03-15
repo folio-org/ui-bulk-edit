@@ -54,7 +54,7 @@
     "menuGroup.actions": "操作",
     "menuGroup.showColumns": "显示列",
     "meta.title.conformationModal": "批量编辑：<b>{fileName}</b>",
-    "conformationModal.message": "点击“保存并关闭”按钮，将更改{count}条记录。",
+    "conformationModal.message": "如果单击<b> 提交更改 </b>按钮，将更新{count}条记录。",
     "recordsSuccessfullyChanged": "{value}条记录更改成功",
     "error.sww": "出问题了",
     "list.logSubTitle.matched": "{count}条记录匹配",
@@ -75,7 +75,7 @@
     "list.errors.info": "<b>{fileName}: {entries} 实体 * {matched} 记录匹配 * {errors} 错误</b>",
     "list.errors.table.code": "记录标识符",
     "list.errors.table.message": "错误原因",
-    "modal.successfullMessage": "{fileName} succesfully uploaded.",
-    "modal.next": "Next",
-    "conformationModal.commitChanges": "Commit changes"
+    "modal.successfullMessage": "{fileName}已成功上传。",
+    "modal.next": "下一个",
+    "conformationModal.commitChanges": "提交更改"
 }
