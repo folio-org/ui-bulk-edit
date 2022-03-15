@@ -43,7 +43,6 @@
         "visible": true,
         "subPermissions": [
           "module.bulk-edit.enabled",
-          "bulk-edit.preview.get",
           "bulk-edit.preview.collection.get",
           "bulk-edit.errors.collection.get",
           "usergroups.collection.get"
@@ -54,8 +53,8 @@
         "displayName": "Bulk Edit: Edit permissions",
         "subPermissions": [
           "ui-bulk-edit.view",
-          "bulk-edit.upload.post",
           "bulk-edit.item.post",
+          "bulk-edit.start.item.post",
           "bulk-edit.roll-back.item.post",
           "data-export.job.item.post"
         ],

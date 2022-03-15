@@ -1,7 +1,5 @@
 # Change history for ui-bulk-edit
 
-## (IN PROGRESS)
-
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
 * [UIBULKED-2](https://issues.folio.org/browse/UIBULKED-2) Project Setup
@@ -27,4 +25,4 @@
 * [UIBULKED-48](https://issues.folio.org/browse/UIBULKED-48) Refactor permissions
 * [UIBULKED-16](https://issues.folio.org/browse/UIBULKED-16) Populating preview of matched records based on query search
 * [UIBULKED-52](https://issues.folio.org/browse/UIBULKED-52) Modify behavior after user starts bulk edit
-* [UIBULKED-42](https://issues.folio.org/browse/UIBULKED-42) Fix success banner
+* [UIBULKED-53](https://issues.folio.org/browse/UIBULKED-53) Undefined permission 'bulk-edit.upload.post', ...
