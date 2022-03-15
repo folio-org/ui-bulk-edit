@@ -32,7 +32,7 @@ export const EDIT_CAPABILITIES = [
   {
     value: 'inventory',
     label: 'ui-bulk-edit.list.filters.capabilities.inventory',
-    disabled: true,
+    disabled: false,
   },
   {
     value: 'circulation',

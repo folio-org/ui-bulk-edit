@@ -132,27 +132,16 @@ describe('BulkEdit', () => {
   it('should display capability accordion with right options', () => {
     renderBulkEdit();
 
-    const enabledOption = screen.getByRole('checkbox', { name: /capabilities.users/ });
+    const enabledOption = screen.getByRole('radio', { name: /capabilities.users/ });
 
     const disabledOptions = [
-      /filters.capabilities.inventory/,
       /filters.capabilities.circulation/,
       /filters.capabilities.acquisition/,
     ];
 
-    disabledOptions.forEach((el) => expect(screen.getByRole('checkbox', { name: el })).toBeDisabled());
+    disabledOptions.forEach((el) => expect(screen.getByRole('radio', { name: el })).toBeDisabled());
 
     expect(enabledOption).toBeEnabled();
-  });
-
-  it('should display unchecked option', () => {
-    renderBulkEdit();
-
-    const enabledOption = screen.getByRole('checkbox', { name: /capabilities.users/ });
-
-    userEvent.click(enabledOption);
-
-    expect(enabledOption).not.toBeChecked();
   });
 
   it('should display Saved queries', () => {
