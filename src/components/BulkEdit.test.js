@@ -91,8 +91,10 @@ describe('BulkEdit', () => {
     expect(screen.getByRole('combobox', { name: 'ui-bulk-edit.list.filters.recordIdentifier' })).toBeEnabled();
   });
 
-  it('should display select right select options', () => {
+  it('should display select right select options on users tab', () => {
     renderBulkEdit();
+
+    userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.users/ }));
 
     const options = [
       /filters.recordIdentifier.placeholder/,
@@ -114,6 +116,32 @@ describe('BulkEdit', () => {
     );
 
     expect(userUUIDs.selected).toBe(true);
+  });
+
+  it('should display select right select options on inventory tab', () => {
+    renderBulkEdit();
+
+    const options = [
+      /filters.recordIdentifier.item.barcode/,
+      /filters.recordIdentifier.item.UUID/,
+      /filters.recordIdentifier.item.ItemHRIDs/,
+      /filters.recordIdentifier.item.former/,
+      /filters.recordIdentifier.item.accession/,
+      /filters.recordIdentifier.item.holdingsUUID/,
+    ];
+
+    const itemFormer = screen.getByRole('option', { name: /filters.recordIdentifier.item.former/ });
+
+    const selectRecordIdentifier = screen.getByRole('combobox');
+
+    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+
+    userEvent.selectOptions(
+      selectRecordIdentifier,
+      itemFormer,
+    );
+
+    expect(itemFormer.selected).toBe(true);
   });
 
   it('should trigger the drag and drop', async () => {
