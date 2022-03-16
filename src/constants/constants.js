@@ -59,3 +59,8 @@ export const DEFAULT_COLUMNS = [
     selected: false,
   },
 ];
+
+export const CRITERIES = {
+  IDENTIFIER: 'identifier',
+  QUERY: 'query',
+};

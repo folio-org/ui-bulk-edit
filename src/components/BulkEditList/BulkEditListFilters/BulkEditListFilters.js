@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -9,8 +9,11 @@ import {
   ButtonGroup,
   Accordion,
   Badge,
+  RadioButtonGroup,
+  RadioButton,
+  FilterAccordionHeader,
 } from '@folio/stripes/components';
-import { AcqCheckboxFilter, useShowCallout, buildSearch } from '@folio/stripes-acq-components';
+import { useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
 import { QueryTextArea } from './QueryTextArea/QueryTextArea';
@@ -20,6 +23,7 @@ import {
   BULK_EDIT_IDENTIFIERS,
   EDIT_CAPABILITIES,
   BULK_EDIT_QUERY,
+  CRITERIES,
 } from '../../../constants';
 import { getFileInfo } from './utils/getFileInfo';
 import { useJobCommand, useFileUploadComand, useUserGroupsMap } from '../../../API';
@@ -34,8 +38,8 @@ export const BulkEditListFilters = ({
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
   const [{ criteria, capabilities, recordIdentifier, queryText }, setFilters] = useState({
-    criteria: 'identifier',
-    capabilities: ['users'],
+    criteria: CRITERIES.IDENTIFIER,
+    capabilities: 'inventory',
     queryText: '',
     recordIdentifier: '',
   });
@@ -95,8 +99,8 @@ export const BulkEditListFilters = ({
     });
   };
 
-  const hanldeCapabilityChange = (event) => setFilters(prev => ({
-    ...prev, capabilities: event.values,
+  const hanldeCapabilityChange = (e) => setFilters(prev => ({
+    ...prev, capabilities: e.target.value,
   }));
 
   const uploadFileFlow = async (fileToUpload) => {
@@ -165,13 +169,13 @@ export const BulkEditListFilters = ({
     return (
       <>
         <Button
-          buttonStyle={criteria === 'identifier' ? 'primary' : 'default'}
+          buttonStyle={criteria === CRITERIES.IDENTIFIER ? 'primary' : 'default'}
           onClick={() => setFilters(prev => ({ ...prev, criteria: 'identifier' }))}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
         </Button>
         <Button
-          buttonStyle={criteria === 'query' ? 'primary' : 'default'}
+          buttonStyle={criteria === CRITERIES.QUERY ? 'primary' : 'default'}
           onClick={() => setFilters(prev => ({ ...prev, criteria: 'query' }))}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.query" />
@@ -185,14 +189,14 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
-      {criteria === 'query' && (
+      {criteria === CRITERIES.QUERY && (
         <QueryTextArea
           queryText={queryText}
           setQueryText={setFilters}
           handleQuerySearch={handleQuerySearch}
         />
       )}
-      {criteria === 'identifier' &&
+      {criteria === CRITERIES.IDENTIFIER &&
       <>
         <ListSelect
           disabled={!hasEditOrDeletePerms}
@@ -214,15 +218,27 @@ export const BulkEditListFilters = ({
         />
       </>
   }
-      <AcqCheckboxFilter
-        labelId="ui-bulk-edit.list.filters.capabilities.title"
-        options={capabilitiesFilterOptions}
-        name="capabilities"
-        activeFilters={capabilities}
-        onChange={hanldeCapabilityChange}
+      <Accordion
         closedByDefault={false}
-        disabled={!hasEditOrDeletePerms}
-      />
+        displayClearButton={!hasEditOrDeletePerms}
+        header={FilterAccordionHeader}
+        label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
+      >
+        <RadioButtonGroup>
+          {capabilitiesFilterOptions.map(option => (
+            <RadioButton
+              key={option.value}
+              label={option.label}
+              name="capabilities"
+              value={option.value}
+              disabled={option.disabled}
+              onChange={hanldeCapabilityChange}
+              checked={option.value === capabilities}
+            />
+          ))}
+        </RadioButtonGroup>
+      </Accordion>
+
       <Accordion
         closedByDefault
         displayWhenClosed={renderBadge()}
