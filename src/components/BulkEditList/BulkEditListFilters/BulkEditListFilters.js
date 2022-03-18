@@ -201,6 +201,7 @@ export const BulkEditListFilters = ({
         <ListSelect
           disabled={!hasEditOrDeletePerms}
           onChange={handleRecordIdentifierChange}
+          capabilities={capabilities}
         />
         <ListFileUploader
           className="FileUploaderContainer"
