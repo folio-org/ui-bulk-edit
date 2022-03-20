@@ -3,7 +3,6 @@ export const identifierOptions = {
     {
       value: '',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
-      disabled: true,
     },
     {
       value: 'ID',
@@ -26,7 +25,6 @@ export const identifierOptions = {
     {
       value: '',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
-      disabled: true,
     },
     {
       value: 'ItemBarcode',

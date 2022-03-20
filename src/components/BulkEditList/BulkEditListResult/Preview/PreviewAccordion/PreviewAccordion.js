@@ -1,6 +1,5 @@
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { PropTypes } from 'prop-types';
-import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
   Accordion,
@@ -8,54 +7,37 @@ import {
   Row,
   MultiColumnList,
 } from '@folio/stripes/components';
-import { AppIcon } from '@folio/stripes/core';
+import { useCurrentEntityInfo } from '../../../../../hooks/currentEntity';
 
-import { DEFAULT_COLUMNS } from '../../../../../constants';
-import { FormattedTime } from './FormattedTime';
-
-const columnMapping = {
-  active: <FormattedMessage id="ui-bulk-edit.list.preview.table.status" />,
-  lastName: <FormattedMessage id="ui-bulk-edit.list.preview.table.lastName" />,
-  firstName: <FormattedMessage id="ui-bulk-edit.list.preview.table.firstName" />,
-  barcode: <FormattedMessage id="ui-bulk-edit.list.preview.table.barcode" />,
-  patronGroup: <FormattedMessage id="ui-bulk-edit.list.preview.table.patronGroup" />,
-  username: <FormattedMessage id="ui-bulk-edit.list.preview.table.username" />,
-  email: <FormattedMessage id="ui-bulk-edit.list.preview.table.email" />,
-  expirationDate: <FormattedMessage id="ui-bulk-edit.list.preview.table.expirationDate" />,
-};
 
 const PreviewAccordion = ({ users = [], userGroups = {} }) => {
-  const location = useLocation();
+  const {
+    location,
+    columns,
+    resultsFormatter,
+    searchParams,
+  } = useCurrentEntityInfo({ userGroups });
 
-  const resultsFormatter = {
-    active: user => (
-      <AppIcon app="users" size="small">
-        {user.active
-          ? <FormattedMessage id="ui-bulk-edit.list.preview.table.active" />
-          : <FormattedMessage id="ui-bulk-edit.list.preview.table.inactive" />
-        }
-      </AppIcon>
-    ),
-    lastName: user => user.personal?.lastName,
-    firstName: user => user.personal?.firstName,
-    barcode: user => user.barcode,
-    patronGroup: user => userGroups[user.patronGroup],
-    username: user => user.username,
-    email: user => user.personal.email,
-    expirationDate: user => <FormattedTime dateString={user.expirationDate} />,
-  };
+  const columnMapping = columns.reduce((acc, el) => {
+    acc[el.value] = el.label;
+
+    return acc;
+  }, {});
 
   const visibleColumns = useMemo(() => {
-    const paramsColumns = new URLSearchParams(location.search).get('selectedColumns');
-    const defaultColumns = DEFAULT_COLUMNS
+    const paramsColumns = searchParams.get('selectedColumns');
+
+    const defaultColumns = columns
       .filter(item => item.selected)
       .map(item => item.value);
-    const existingColumns = DEFAULT_COLUMNS.reduce((acc, { value }) => {
+
+    const existingColumns = columns.reduce((acc, { value }) => {
       return paramsColumns?.includes(value) ? [...acc, value] : acc;
     }, []);
 
     return paramsColumns ? existingColumns : defaultColumns;
   }, [location.search]);
+
 
   return (
     <Accordion
@@ -81,4 +63,4 @@ PreviewAccordion.propTypes = {
   userGroups: PropTypes.object,
 };
 
-export default PreviewAccordion;
+export default memo(PreviewAccordion);

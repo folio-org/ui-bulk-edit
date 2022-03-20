@@ -9,7 +9,7 @@ export const BULK_EDIT_BARCODE = 'BARCODE';
 
 export const BULK_EDIT_UPDATE = 'BULK_EDIT_UPDATE';
 
-export const DEFAULT_COLUMNS = [
+export const USER_COLUMNS = [
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.active" />,
     value: 'active',
@@ -60,7 +60,117 @@ export const DEFAULT_COLUMNS = [
   },
 ];
 
+export const INVENTORY_COLUMNS = [
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.barcode" />,
+    value: 'barcode',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.status" />,
+    value: 'status',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.effectiveLocation" />,
+    value: 'effectiveLocation',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.callNumber" />,
+    value: 'callNumber',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.hrid" />,
+    value: 'hrid',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.materialType" />,
+    value: 'materialType',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.permanentLoanType" />,
+    value: 'permanentLoanType',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.temporaryLoanType" />,
+    value: 'temporaryLoanType',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.id" />,
+    value: 'id',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.formerIds" />,
+    value: 'formerIds',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.accessionNumber" />,
+    value: 'accessionNumber',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.permanentLocation" />,
+    value: 'permanentLocation',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.temporaryLocation" />,
+    value: 'temporaryLocation',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.copyNumber" />,
+    value: 'copyNumber',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.enumeration" />,
+    value: 'enumeration',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.chronology" />,
+    value: 'chronology',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.volume" />,
+    value: 'volume',
+    disabled: false,
+    selected: false,
+  },
+];
+
 export const CRITERIES = {
   IDENTIFIER: 'identifier',
   QUERY: 'query',
+};
+
+export const CAPABILITIES = {
+  INVENTORY: 'inventory',
+  USERS: 'users',
 };
