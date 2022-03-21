@@ -16,7 +16,7 @@ import {
   useUserGroupsMap,
 } from '../../../../API';
 
-export const Preview = ({ id, title }) => {
+export const Preview = ({ id, title, initial }) => {
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
   const { items } = usePreviewRecords(id);
@@ -42,7 +42,7 @@ export const Preview = ({ id, title }) => {
 
   return (
     <AccordionStatus>
-      {!!processedRecords && (
+      {(!!processedRecords && !initial) && (
       <Headline size="large" margin="small">
         <MessageBanner type="success" contentClassName="SuccessBanner">
           <FormattedMessage
@@ -74,4 +74,5 @@ export const Preview = ({ id, title }) => {
 Preview.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
+  initial: PropTypes.bool,
 };
