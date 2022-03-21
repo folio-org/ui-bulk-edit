@@ -23,11 +23,22 @@ const inventoryItems = [
   {
     active: true,
     barcode: '222',
-    createdDate: 1641779462295,
-  },
-  {
-    active: false,
-    barcode: '333',
+    status: { name: 'active' },
+    effectiveLocation: { name: 'effectiveLocation' },
+    callNumber: 'callNumber',
+    hrid: 'hrid',
+    materialType: { name: 'materialType' },
+    permanentLoanType: { name: 'permanentLoanType' },
+    temporaryLoanType: { name: 'temporaryLoanType' },
+    id: 'id',
+    formerIds: [1, 2, 3],
+    accessionNumber: 'accessionNumber',
+    permanentLocation: { name: 'permanentLocation' },
+    temporaryLocation: { name: 'temporaryLocation' },
+    copyNumber: 'copyNumber',
+    enumeration: 'enumeration',
+    chronology: 'chronology',
+    volume: 'volume',
   },
 ];
 
@@ -43,12 +54,21 @@ describe('PreviewAccordion', () => {
   it('should render preview accordion with users', () => {
     renderPreviewAccordion({ capabilities: 'USER', items: users });
 
-    expect(screen.getByText('username'));
+    expect(screen.getByText('username')).toBeVisible();
+    expect(screen.getByText('000')).toBeVisible();
+    expect(screen.queryByText('1641779462295')).not.toBeInTheDocument();
   });
 
   it('should render preview accordion with inventory items', () => {
-    renderPreviewAccordion({ capabilities: 'USER', items: inventoryItems });
+    renderPreviewAccordion({ capabilities: 'ITEM', items: inventoryItems });
 
-    expect(screen.getByText('222'));
+    expect(screen.getByText('222')).toBeVisible();
+    expect(screen.getByText('active')).toBeVisible();
+    expect(screen.getByText('effectiveLocation')).toBeVisible();
+    expect(screen.getByText('callNumber')).toBeVisible();
+    expect(screen.getByText('hrid')).toBeVisible();
+    expect(screen.getByText('materialType')).toBeVisible();
+    expect(screen.queryByText('id')).not.toBeInTheDocument();
+    expect(screen.queryByText('1,2,3')).not.toBeInTheDocument();
   });
 });
