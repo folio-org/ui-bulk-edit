@@ -22,31 +22,21 @@ export const getUserResultsFormatter = (userGroups) => ({
 
 
 export const getInventoryResultsFormatter = () => ({
-  status: item => item.status,
-  effectiveLocation: item => item.effectiveLocation,
+  barcode: item => item.barcode,
+  status: item => item.status.name ?? '',
+  effectiveLocation: item => item.effectiveLocation?.name || '',
   callNumber: item => item.callNumber,
   hrid: item => item.hrid,
-  materialType: item => item.materialType,
-  permanentLoanType: item => item.permanentLoanType,
-  temporaryLoanType: item => item.temporaryLoanType,
+  materialType: item => item.materialType?.name || '',
+  permanentLoanType: item => item.permanentLoanType?.name || '',
+  temporaryLoanType: item => item.temporaryLoanType?.name || '',
   id: item => item.id,
   formerIds: item => item.formerIds?.join(','),
   accessionNumber: item => item.accessionNumber,
-  permanentLocation: item => item.permanentLocation,
-  temporaryLocation: item => item.temporaryLocation,
+  permanentLocation: item => item.permanentLocation?.name || '',
+  temporaryLocation: item => item.temporaryLocation?.name || '',
   copyNumber: item => item.copyNumber,
   enumeration: item => item.enumeration,
   chronology: item => item.chronology,
   volume: item => item.volume,
 });
-
-export const userColumnMappings = {
-  active: <FormattedMessage id="ui-bulk-edit.list.preview.table.status" />,
-  lastName: <FormattedMessage id="ui-bulk-edit.list.preview.table.lastName" />,
-  firstName: <FormattedMessage id="ui-bulk-edit.list.preview.table.firstName" />,
-  barcode: <FormattedMessage id="ui-bulk-edit.list.preview.table.barcode" />,
-  patronGroup: <FormattedMessage id="ui-bulk-edit.list.preview.table.patronGroup" />,
-  username: <FormattedMessage id="ui-bulk-edit.list.preview.table.username" />,
-  email: <FormattedMessage id="ui-bulk-edit.list.preview.table.email" />,
-  expirationDate: <FormattedMessage id="ui-bulk-edit.list.preview.table.expirationDate" />,
-};

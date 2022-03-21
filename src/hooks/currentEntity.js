@@ -13,11 +13,11 @@ export const useCurrentEntityInfo = ({ userGroups } = {}) => {
   let resultsFormatter;
 
   switch (searchParams.get('capabilities')) {
-    case CAPABILITIES.INVENTORY:
+    case CAPABILITIES.ITEM:
       columns = INVENTORY_COLUMNS;
       resultsFormatter = getInventoryResultsFormatter();
       break;
-    case CAPABILITIES.USERS:
+    case CAPABILITIES.USER:
     default:
       columns = USER_COLUMNS;
       resultsFormatter = getUserResultsFormatter(userGroups);

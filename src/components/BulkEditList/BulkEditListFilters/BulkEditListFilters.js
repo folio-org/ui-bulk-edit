@@ -40,7 +40,7 @@ export const BulkEditListFilters = ({
   const location = useLocation();
 
   const search = new URLSearchParams(location.search);
-  const defaultCapability = search.get('capabilities') || CAPABILITIES.USERS;
+  const defaultCapability = search.get('capabilities') || CAPABILITIES.USER;
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
@@ -53,7 +53,7 @@ export const BulkEditListFilters = ({
     recordIdentifier: '',
   });
   const { userGroups } = useUserGroupsMap();
-  const { requestJobId, isLoading } = useJobCommand();
+  const { requestJobId, isLoading } = useJobCommand({ entityType: capabilities });
   const { fileUpload } = useFileUploadComand();
   const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
 
@@ -84,6 +84,8 @@ export const BulkEditListFilters = ({
       pathname: location.pathname,
       search: buildSearch({ identifier: e.target.value }, location.search),
     });
+
+    setIsFileUploaded(false);
   }, [location.search]);
 
   const hanldeCapabilityChange = (e) => {

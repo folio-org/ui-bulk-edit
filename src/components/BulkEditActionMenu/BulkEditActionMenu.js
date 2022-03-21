@@ -26,7 +26,7 @@ const BulkEditActionMenu = ({
 }) => {
   const history = useHistory();
   const { id } = usePathParams('/bulk-edit/:id');
-  const { users } = usePreviewRecords(id);
+  const { items } = usePreviewRecords(id);
   const {
     location,
     columns,
@@ -45,7 +45,7 @@ const BulkEditActionMenu = ({
     onToggle();
   };
 
-  const columnsOptions = useMemo(() => columns.map(item => ({ ...item, disabled: !users?.length })), [users]);
+  const columnsOptions = columns.map(item => ({ ...item, disabled: !items?.length }));
 
   const selectedValues = useMemo(() => {
     const paramsColumns = searchParams.get('selectedColumns');

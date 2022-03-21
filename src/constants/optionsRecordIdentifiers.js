@@ -1,5 +1,5 @@
 export const identifierOptions = {
-  users: [
+  USER: [
     {
       value: '',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
@@ -21,33 +21,33 @@ export const identifierOptions = {
       label: 'ui-bulk-edit.list.filters.recordIdentifier.usernames',
     },
   ],
-  inventory: [
+  ITEM: [
     {
       value: '',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
     },
     {
-      value: 'ItemBarcode',
+      value: 'BARCODE',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.item.barcode',
     },
     {
-      value: 'ItemUUID',
+      value: 'ID',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.item.UUID',
     },
     {
-      value: 'ItemHRIDs',
+      value: 'HRID',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.item.ItemHRIDs',
     },
     {
-      value: 'ItemformerIdentifier',
+      value: 'FORMER_IDS',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.item.former',
     },
     {
-      value: 'ItemAccessionNumber',
+      value: 'ACCESSION_NUMBER',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.item.accession',
     },
     {
-      value: 'HoldingsUUIDs',
+      value: 'HOLDINGS_RECORD_ID',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.item.holdingsUUID',
     },
   ],
@@ -55,22 +55,22 @@ export const identifierOptions = {
 
 export const EDIT_CAPABILITIES = [
   {
-    value: 'users',
+    value: 'USER',
     label: 'ui-bulk-edit.list.filters.capabilities.users',
     disabled: false,
   },
   {
-    value: 'inventory',
+    value: 'ITEM',
     label: 'ui-bulk-edit.list.filters.capabilities.inventory',
     disabled: false,
   },
   {
-    value: 'circulation',
+    value: 'CIRCULATION',
     label: 'ui-bulk-edit.list.filters.capabilities.circulation',
     disabled: true,
   },
   {
-    value: 'acquisition',
+    value: 'ACQUESTION',
     label: 'ui-bulk-edit.list.filters.capabilities.acquisition',
     disabled: true,
   },

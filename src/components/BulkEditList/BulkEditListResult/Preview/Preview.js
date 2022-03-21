@@ -19,7 +19,7 @@ import {
 export const Preview = ({ id, title }) => {
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
-  const { users } = usePreviewRecords(id);
+  const { items } = usePreviewRecords(id);
   const { userGroups } = useUserGroupsMap();
   const [processedRecords, setProcessedRecords] = useState(0);
 
@@ -58,7 +58,7 @@ export const Preview = ({ id, title }) => {
         </Headline>
       )}
       <AccordionSet>
-        {!!users?.length && <PreviewAccordion users={users} userGroups={userGroups} />}
+        {!!items?.length && <PreviewAccordion items={items} userGroups={userGroups} />}
         {!!mappedErrors?.length && (
           <ErrorsAccordion
             errors={mappedErrors}

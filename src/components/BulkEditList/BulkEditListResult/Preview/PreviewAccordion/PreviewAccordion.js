@@ -10,7 +10,7 @@ import {
 import { useCurrentEntityInfo } from '../../../../../hooks/currentEntity';
 
 
-const PreviewAccordion = ({ users = [], userGroups = {} }) => {
+const PreviewAccordion = ({ items = [], userGroups = {} }) => {
   const {
     location,
     columns,
@@ -47,7 +47,7 @@ const PreviewAccordion = ({ users = [], userGroups = {} }) => {
         <Col xs={12}>
           <MultiColumnList
             striped
-            contentData={users}
+            contentData={items}
             columnMapping={columnMapping}
             formatter={resultsFormatter}
             visibleColumns={visibleColumns}
@@ -59,7 +59,7 @@ const PreviewAccordion = ({ users = [], userGroups = {} }) => {
 };
 
 PreviewAccordion.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.object),
   userGroups: PropTypes.object,
 };
 

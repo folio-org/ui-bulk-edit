@@ -171,6 +171,6 @@ export const CRITERIES = {
 };
 
 export const CAPABILITIES = {
-  INVENTORY: 'inventory',
-  USERS: 'users',
+  ITEM: 'ITEM',
+  USER: 'USER',
 };

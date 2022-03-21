@@ -27,8 +27,9 @@ const BulkEditStartModal = ({
   const location = useLocation();
   const intl = useIntl();
   const showCallout = useShowCallout();
+  const entityType = new URLSearchParams(location.search).get('capabilities');
 
-  const { requestJobId, isLoading } = useJobCommand();
+  const { requestJobId, isLoading } = useJobCommand({ entityType });
   const { fileUpload } = useFileUploadComand();
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
