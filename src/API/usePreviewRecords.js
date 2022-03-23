@@ -10,10 +10,11 @@ export const usePreviewRecords = (id) => {
     {
       queryKey: ['previewRecords', id],
       queryFn: async () => {
-        const { users, totalRecords } = await ky.get(`bulk-edit/${id}/preview`, { searchParams: { limit: 10 } }).json();
+        const { users, items, totalRecords } = await ky.get(`bulk-edit/${id}/preview`, { searchParams: { limit: 10 } }).json();
 
         return {
           users,
+          items,
           totalRecords,
         };
       },
@@ -22,7 +23,7 @@ export const usePreviewRecords = (id) => {
   );
 
   return ({
-    users: data?.users || [],
+    items: data?.users || data?.items || [],
     totalRecords: data?.totalRecords,
   });
 };

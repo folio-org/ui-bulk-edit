@@ -121,6 +121,8 @@ describe('BulkEdit', () => {
   it('should display select right select options on inventory tab', () => {
     renderBulkEdit();
 
+    userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.inventory/ }));
+
     const options = [
       /filters.recordIdentifier.item.barcode/,
       /filters.recordIdentifier.item.UUID/,
