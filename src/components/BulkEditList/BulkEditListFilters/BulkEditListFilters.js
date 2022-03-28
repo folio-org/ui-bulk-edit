@@ -213,26 +213,6 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
-      <Accordion
-        closedByDefault={false}
-        displayClearButton={!hasEditOrDeletePerms}
-        header={FilterAccordionHeader}
-        label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
-      >
-        <RadioButtonGroup>
-          {capabilitiesFilterOptions.map(option => (
-            <RadioButton
-              key={option.value}
-              label={option.label}
-              name="capabilities"
-              value={option.value}
-              disabled={option.disabled}
-              onChange={hanldeCapabilityChange}
-              checked={option.value === capabilities}
-            />
-          ))}
-        </RadioButtonGroup>
-      </Accordion>
       {criteria === CRITERIES.QUERY && (
         <QueryTextArea
           queryText={queryText}
@@ -264,7 +244,27 @@ export const BulkEditListFilters = ({
         />
       </>
   }
-
+      <Accordion
+        separator={false}
+        closedByDefault={false}
+        displayClearButton={!hasEditOrDeletePerms}
+        header={FilterAccordionHeader}
+        label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
+      >
+        <RadioButtonGroup>
+          {capabilitiesFilterOptions.map(option => (
+            <RadioButton
+              key={option.value}
+              label={option.label}
+              name="capabilities"
+              value={option.value}
+              disabled={option.disabled}
+              onChange={hanldeCapabilityChange}
+              checked={option.value === capabilities}
+            />
+          ))}
+        </RadioButtonGroup>
+      </Accordion>
       <Accordion
         closedByDefault
         displayWhenClosed={renderBadge()}
