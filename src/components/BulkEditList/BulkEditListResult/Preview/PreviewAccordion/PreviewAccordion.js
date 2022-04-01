@@ -32,11 +32,11 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
       .map(item => item.value);
 
     const existingColumns = columns.reduce((acc, { value }) => {
-      return paramsColumns?.includes(value) ? [...acc, value] : acc;
+      return paramsColumns?.includes(`"${value}"`) ? [...acc, value] : acc;
     }, []);
 
     return paramsColumns ? existingColumns : defaultColumns;
-  }, [location.search]);
+  }, [location.search, columns]);
 
 
   return (
