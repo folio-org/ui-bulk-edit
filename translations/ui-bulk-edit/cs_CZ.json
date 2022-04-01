@@ -94,5 +94,21 @@
     "uploaderSubTitle.ItemHRIDs": "Select a file with item HRIDs",
     "uploaderSubTitle.ItemformerIdentifier": "Select a file with item former identifier",
     "uploaderSubTitle.ItemAccessionNumber": "Select a file with item accession number",
-    "uploaderSubTitle.HoldingsUUIDs": "Select a file with holdings UUIDs"
+    "uploaderSubTitle.HoldingsUUIDs": "Select a file with holdings UUIDs",
+    "columns.status": "Status",
+    "columns.effectiveLocation": "Item effective location",
+    "columns.callNumber": "Effective call number",
+    "columns.hrid": "Item HRID",
+    "columns.materialType": "Material type",
+    "columns.permanentLoanType": "Permanent loan type",
+    "columns.temporaryLoanType": "Temporary loan type",
+    "columns.id": "Item UUID",
+    "columns.formerIds": "Former identifiers",
+    "columns.accessionNumber": "Accession number",
+    "columns.permanentLocation": "Item permanent location",
+    "columns.temporaryLocation": "Item temporary location",
+    "columns.copyNumber": "Copy number",
+    "columns.enumeration": "Enumeration",
+    "columns.chronology": "Chronology",
+    "columns.volume": "Volume"
 }
