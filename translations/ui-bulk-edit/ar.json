@@ -94,5 +94,21 @@
     "uploaderSubTitle.ItemHRIDs": "اختر ملف بأرقام تعريف قابلة للقراءة بشريًا",
     "uploaderSubTitle.ItemformerIdentifier": "اختر ملف بمعرّف المادة السابق",
     "uploaderSubTitle.ItemAccessionNumber": "اختر ملف برقم انضمام المادة",
-    "uploaderSubTitle.HoldingsUUIDs": "اختر ملف بمعرفات المقتنيات العمومية الفريدة"
+    "uploaderSubTitle.HoldingsUUIDs": "اختر ملف بمعرفات المقتنيات العمومية الفريدة",
+    "columns.status": "الحالة",
+    "columns.effectiveLocation": "الموقع النشط للمادة",
+    "columns.callNumber": "رقم الاستدعاء النشط",
+    "columns.hrid": "رقم التعريف القابل للقراءة بشريًا للمادة",
+    "columns.materialType": "نوع المادة",
+    "columns.permanentLoanType": "نوع الإعارة الدائمة",
+    "columns.temporaryLoanType": "نوع الإعارة المؤقتة",
+    "columns.id": "المعرّف الفريد العمومي للمادة",
+    "columns.formerIds": "معرفات سابقة",
+    "columns.accessionNumber": "رقم الانضمام",
+    "columns.permanentLocation": "موقع المادة الدائم",
+    "columns.temporaryLocation": "موقع المادة المؤقت",
+    "columns.copyNumber": "رقم النسخة",
+    "columns.enumeration": "الترقيم",
+    "columns.chronology": "التسلسل الزمني",
+    "columns.volume": "المجلد"
 }
