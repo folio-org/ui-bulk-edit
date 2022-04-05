@@ -21,7 +21,7 @@ const PreviewInitial = () => {
   }, [fileUploadedName, intl, location.search]);
 
   return (
-    <Preview title={title} id={id} />
+    <Preview title={title} id={id} initial />
   );
 };
 

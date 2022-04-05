@@ -1,5 +1,10 @@
 # Change history for ui-bulk-edit
 
+## In progress
+
+* [UIBULKED-30] (https://issues.folio.org/browse/UIBULKED-30) Record identifiers dropdown
+* [UIBULKED-55] Replace or remove react-hot-loader
+
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
 * [UIBULKED-2](https://issues.folio.org/browse/UIBULKED-2) Project Setup

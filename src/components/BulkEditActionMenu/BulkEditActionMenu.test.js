@@ -8,7 +8,7 @@ import { useOkapiKy } from '@folio/stripes/core';
 import '../../../test/jest/__mock__';
 
 import BulkEditActionMenu from './BulkEditActionMenu';
-import { DEFAULT_COLUMNS } from '../../constants';
+import { INVENTORY_COLUMNS, USER_COLUMNS } from '../../constants';
 
 jest.mock('../../API', () => ({
   useDownloadLinks: () => ({
@@ -17,7 +17,7 @@ jest.mock('../../API', () => ({
     },
   }),
   usePreviewRecords: () => ({
-    users: [{ id: 1 }],
+    items: [{ id: 1 }],
   }),
 }));
 
@@ -48,8 +48,8 @@ describe('BulkEditActionMenu', () => {
         get: () => ({
           json: () => ({
             files: [
-              'donwloadMathcedRecords.com',
-              'donwloadError.com',
+              'donwloadMathcedRecords.csv',
+              'donwloadError.csv',
             ],
           }),
         }),
@@ -69,12 +69,24 @@ describe('BulkEditActionMenu', () => {
     await waitFor(() => downloadButtons.forEach((el) => expect(screen.getByTestId(el)).toBeVisible()));
   });
 
-  it('should render correct default columns', async () => {
+  it('should render correct default columns for users', async () => {
     renderActionMenu({
-      initialEntries: ['/bulk-edit/1'],
+      initialEntries: ['/bulk-edit/1?capabilities=USER'],
     });
 
-    for (const col of DEFAULT_COLUMNS) {
+    for (const col of USER_COLUMNS) {
+      const checkbox = await screen.findByLabelText(`ui-bulk-edit.columns.${col.value}`);
+
+      expect(checkbox.checked).toBe(col.selected);
+    }
+  });
+
+  it('should render correct default columns for inventory', async () => {
+    renderActionMenu({
+      initialEntries: ['/bulk-edit/1?capabilities=ITEM'],
+    });
+
+    for (const col of INVENTORY_COLUMNS) {
       const checkbox = await screen.findByLabelText(`ui-bulk-edit.columns.${col.value}`);
 
       expect(checkbox.checked).toBe(col.selected);
@@ -92,7 +104,7 @@ describe('BulkEditActionMenu', () => {
     expect(usernameCheckbox.checked).toBeTruthy();
 
     // other columns should be unchecked
-    for (const col of DEFAULT_COLUMNS.filter(i => i.value !== 'username')) {
+    for (const col of USER_COLUMNS.filter(i => i.value !== 'username')) {
       const checkbox = await screen.findByLabelText(`ui-bulk-edit.columns.${col.value}`);
 
       expect(checkbox.checked).toBeFalsy();

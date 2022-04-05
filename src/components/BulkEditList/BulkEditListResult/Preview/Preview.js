@@ -16,10 +16,10 @@ import {
   useUserGroupsMap,
 } from '../../../../API';
 
-export const Preview = ({ id, title }) => {
+export const Preview = ({ id, title, initial }) => {
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
-  const { users } = usePreviewRecords(id);
+  const { items } = usePreviewRecords(id);
   const { userGroups } = useUserGroupsMap();
   const [processedRecords, setProcessedRecords] = useState(0);
 
@@ -42,7 +42,7 @@ export const Preview = ({ id, title }) => {
 
   return (
     <AccordionStatus>
-      {!!processedRecords && (
+      {(!!processedRecords && !initial) && (
       <Headline size="large" margin="small">
         <MessageBanner type="success" contentClassName="SuccessBanner">
           <FormattedMessage
@@ -58,7 +58,7 @@ export const Preview = ({ id, title }) => {
         </Headline>
       )}
       <AccordionSet>
-        {!!users?.length && <PreviewAccordion users={users} userGroups={userGroups} />}
+        {!!items?.length && <PreviewAccordion items={items} userGroups={userGroups} />}
         {!!mappedErrors?.length && (
           <ErrorsAccordion
             errors={mappedErrors}
@@ -74,4 +74,5 @@ export const Preview = ({ id, title }) => {
 Preview.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
+  initial: PropTypes.bool,
 };

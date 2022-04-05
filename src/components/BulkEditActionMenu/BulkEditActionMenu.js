@@ -8,13 +8,13 @@ import {
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 import React, { useMemo } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { buildSearch } from '@folio/stripes-acq-components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { usePathParams } from '../../hooks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
-import { DEFAULT_COLUMNS } from '../../constants';
 import { usePreviewRecords } from '../../API';
+import { useCurrentEntityInfo } from '../../hooks/currentEntity';
 
 const BulkEditActionMenu = ({
   onEdit,
@@ -25,9 +25,13 @@ const BulkEditActionMenu = ({
   isLoading,
 }) => {
   const history = useHistory();
-  const location = useLocation();
   const { id } = usePathParams('/bulk-edit/:id');
-  const { users } = usePreviewRecords(id);
+  const { items } = usePreviewRecords(id);
+  const {
+    location,
+    columns,
+    searchParams,
+  } = useCurrentEntityInfo();
 
   const handleChange = ({ values }) => {
     history.replace({
@@ -41,11 +45,11 @@ const BulkEditActionMenu = ({
     onToggle();
   };
 
-  const columnsOptions = useMemo(() => DEFAULT_COLUMNS.map(item => ({ ...item, disabled: !users?.length })), [users]);
+  const columnsOptions = columns.map(item => ({ ...item, disabled: !items?.length }));
 
   const selectedValues = useMemo(() => {
-    const paramsColumns = new URLSearchParams(location.search).get('selectedColumns');
-    const defaultColumns = DEFAULT_COLUMNS
+    const paramsColumns = searchParams.get('selectedColumns');
+    const defaultColumns = columns
       .filter(item => item.selected)
       .map(item => item.value);
 

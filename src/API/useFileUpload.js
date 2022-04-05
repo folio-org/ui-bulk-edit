@@ -4,14 +4,14 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const useJobCommand = () => {
+export const useJobCommand = ({ entityType }) => {
   const ky = useOkapiKy();
 
   const { mutateAsync: requestJobId, isLoading } = useMutation({
     mutationFn: ({ recordIdentifier, editType, specificParameters }) => {
       const json = {
         type: editType,
-        entityType: 'USER',
+        entityType,
         exportTypeSpecificParameters: specificParameters || {},
         ...(
           recordIdentifier && { identifierType: recordIdentifier }
