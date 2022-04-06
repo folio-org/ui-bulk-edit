@@ -99,7 +99,7 @@
     "columns.effectiveLocation": "Item effective location",
     "columns.callNumber": "Effective call number",
     "columns.hrid": "Item HRID",
-    "columns.materialType": "Material type",
+    "columns.materialType": "資料種別",
     "columns.permanentLoanType": "Permanent loan type",
     "columns.temporaryLoanType": "Temporary loan type",
     "columns.id": "Item UUID",
