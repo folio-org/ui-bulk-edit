@@ -39,7 +39,7 @@
       },
       {
         "permissionName": "ui-bulk-edit.view",
-        "displayName": "Bulk Edit: View permissions",
+        "displayName": "Bulk Edit: (CSV) View",
         "visible": true,
         "subPermissions": [
           "module.bulk-edit.enabled",
@@ -50,7 +50,7 @@
       },
       {
         "permissionName": "ui-bulk-edit.edit",
-        "displayName": "Bulk Edit: Edit permissions",
+        "displayName": "Bulk Edit: (CSV) Edit",
         "subPermissions": [
           "ui-bulk-edit.view",
           "bulk-edit.item.post",
@@ -62,10 +62,28 @@
       },
       {
         "permissionName": "ui-bulk-edit.delete",
-        "displayName": "Bulk Edit: Delete permissions",
+        "displayName": "Bulk Edit: (CSV) Delete",
         "subPermissions": [
           "ui-bulk-edit.edit"
         ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-bulk-edit.app-view",
+        "displayName": "Bulk Edit: In app - View",
+        "subPermissions": [],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-bulk-edit.app-edit",
+        "displayName": "Bulk Edit: In app - Edit",
+        "subPermissions": [],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-bulk-edit.app-delete",
+        "displayName": "Bulk Edit: In app - Delete",
+        "subPermissions": [],
         "visible": true
       }
     ]
