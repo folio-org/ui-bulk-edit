@@ -14,6 +14,7 @@ import { queryClient } from '../../../test/jest/utils/queryClient';
 const history = createMemoryHistory();
 
 const fileNameMock = 'test.csv';
+const mockSetIsConformotaionalModal = jest.fn();
 
 const renderBulkEditConformationModal = () => {
   render(
@@ -22,6 +23,7 @@ const renderBulkEditConformationModal = () => {
         <BulkEditConformationModal
           open
           fileName={fileNameMock}
+          setIsBulkConformationModal={mockSetIsConformotaionalModal}
         />
       </BrowserRouter>
     </QueryClientProvider>,
