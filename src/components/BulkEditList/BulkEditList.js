@@ -13,6 +13,7 @@ import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../BulkEditConformationModal';
 import { useDownloadLinks, useLaunchJob } from '../../API';
 import { usePathParams } from '../../hooks';
+import { CAPABILITIES } from '../../constants';
 
 export const BulkEditList = () => {
   const stripes = useStripes();
@@ -32,7 +33,7 @@ export const BulkEditList = () => {
   useEffect(() => {
     const capabilities = new URLSearchParams(location.search).get('capabilities');
 
-    if (!isLoading && capabilities === 'ITEM') { startJob({ id }); }
+    if (!isLoading && capabilities === CAPABILITIES.ITEM) { startJob({ id }); }
   }, [startJob, id, isLoading, location.search]);
 
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
