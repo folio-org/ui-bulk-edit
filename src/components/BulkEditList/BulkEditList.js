@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset } from '@folio/stripes/components';
@@ -11,8 +11,9 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../BulkEditConformationModal';
-import { useDownloadLinks } from '../../API';
+import { useDownloadLinks, useLaunchJob } from '../../API';
 import { usePathParams } from '../../hooks';
+import { CAPABILITIES } from '../../constants';
 
 export const BulkEditList = () => {
   const stripes = useStripes();
@@ -26,7 +27,14 @@ export const BulkEditList = () => {
 
   const { id } = usePathParams('/bulk-edit/:id');
   const { data, isLoading } = useDownloadLinks(id);
+  const { startJob } = useLaunchJob(id);
   const [successCsvLink, errorCsvLink] = data?.files || [];
+
+  useEffect(() => {
+    const capabilities = new URLSearchParams(location.search).get('capabilities');
+
+    if (!isLoading && capabilities === CAPABILITIES.ITEM) { startJob({ id }); }
+  }, [startJob, id, isLoading, location.search]);
 
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
 
