@@ -17,7 +17,6 @@ import { usePreviewRecords } from '../../API';
 import { useCurrentEntityInfo } from '../../hooks/currentEntity';
 import { CAPABILITIES } from '../../constants';
 
-
 const BulkEditActionMenu = ({
   onEdit,
   onDelete,
