@@ -4,6 +4,8 @@
 
 * [UIBULKED-30] (https://issues.folio.org/browse/UIBULKED-30) Record identifiers dropdown
 * [UIBULKED-55] Replace or remove react-hot-loader
+* [UIBULKED-60] Download matched records (CSV) - Items
+* [UIBULKED-29] Modify bulk edit permissions.
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
