@@ -98,7 +98,7 @@ const BulkEditActionMenu = ({
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}>
         <>
           {renderLinkButtons()}
-          <IfPermission perm="ui-bulk-edit.edit">
+          <IfPermission perm="ui-bulk-edit.app-edit">
             <Button
               buttonStyle="dropdownItem"
               onClick={buildButtonClickHandler(onEdit)}

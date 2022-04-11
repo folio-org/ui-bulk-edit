@@ -1,3 +1,6 @@
+import { FormattedMessage } from 'react-intl';
+import React from 'react';
+
 export const identifierOptions = {
   USER: [
     {
@@ -56,22 +59,22 @@ export const identifierOptions = {
 export const EDIT_CAPABILITIES = [
   {
     value: 'USER',
-    label: 'ui-bulk-edit.list.filters.capabilities.users',
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.users" />,
     disabled: false,
   },
   {
     value: 'ITEM',
-    label: 'ui-bulk-edit.list.filters.capabilities.inventory',
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.inventory" />,
     disabled: false,
   },
   {
     value: 'CIRCULATION',
-    label: 'ui-bulk-edit.list.filters.capabilities.circulation',
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.circulation" />,
     disabled: true,
   },
   {
     value: 'ACQUESTION',
-    label: 'ui-bulk-edit.list.filters.capabilities.acquisition',
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.acquisition" />,
     disabled: true,
   },
 ];

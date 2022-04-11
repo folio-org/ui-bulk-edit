@@ -29,6 +29,11 @@ export const BulkEditList = () => {
   const { data, isLoading } = useDownloadLinks(id);
   const { startJob } = useLaunchJob(id);
   const [successCsvLink, errorCsvLink] = data?.files || [];
+  const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
+  const hasEditPermsInApp = stripes.hasPerm('ui-bulk-edit.app-edit');
+
+  const isActionMenuVisible = (successCsvLink || errorCsvLink) || // should show menu in case of existing preview/errors in any case
+      (hasEditOrDeletePerms && !hasEditPermsInApp);
 
   useEffect(() => {
     const capabilities = new URLSearchParams(location.search).get('capabilities');
@@ -36,18 +41,16 @@ export const BulkEditList = () => {
     if (!isLoading && capabilities === CAPABILITIES.ITEM) { startJob({ id }); }
   }, [startJob, id, isLoading, location.search]);
 
-  const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
-
   const renderActionMenu = () => (
-    hasEditOrDeletePerms && (
-    <BulkEditActionMenu
-      onEdit={() => setIsBulkEditModalOpen(true)}
-      onDelete={noop}
-      onToggle={noop}
-      successCsvLink={successCsvLink}
-      errorCsvLink={errorCsvLink}
-      isLoading={isLoading}
-    />
+    isActionMenuVisible && (
+      <BulkEditActionMenu
+        onEdit={() => setIsBulkEditModalOpen(true)}
+        onDelete={noop}
+        onToggle={noop}
+        successCsvLink={successCsvLink}
+        errorCsvLink={errorCsvLink}
+        isLoading={isLoading}
+      />
     )
   );
 
