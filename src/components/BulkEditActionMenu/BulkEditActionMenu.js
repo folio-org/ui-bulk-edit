@@ -15,6 +15,8 @@ import { usePathParams } from '../../hooks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { usePreviewRecords } from '../../API';
 import { useCurrentEntityInfo } from '../../hooks/currentEntity';
+import { CAPABILITIES } from '../../constants';
+
 
 const BulkEditActionMenu = ({
   onEdit,
@@ -55,6 +57,8 @@ const BulkEditActionMenu = ({
 
     return paramsColumns ? JSON.parse(paramsColumns) : defaultColumns;
   }, [location.search]);
+
+  const capabilities = new URLSearchParams(location.search).get('capabilities');
 
   const renderLinkButtons = () => {
     if (isLoading) return <Preloader />;
@@ -98,16 +102,29 @@ const BulkEditActionMenu = ({
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}>
         <>
           {renderLinkButtons()}
-          <IfPermission perm="ui-bulk-edit.edit">
-            <Button
-              buttonStyle="dropdownItem"
-              onClick={buildButtonClickHandler(onEdit)}
-            >
-              <Icon icon="edit">
-                <FormattedMessage id="ui-bulk-edit.start.edit" />
-              </Icon>
-            </Button>
-          </IfPermission>
+          {capabilities === CAPABILITIES.USER ?
+            <IfPermission perm="ui-bulk-edit.edit">
+              <Button
+                buttonStyle="dropdownItem"
+                onClick={buildButtonClickHandler(onEdit)}
+              >
+                <Icon icon="edit">
+                  <FormattedMessage id="ui-bulk-edit.start.edit" />
+                </Icon>
+              </Button>
+            </IfPermission>
+            :
+            <IfPermission perm="ui-bulk-edit.app-edit">
+              <Button
+                buttonStyle="dropdownItem"
+                onClick={buildButtonClickHandler(onEdit)}
+              >
+                <Icon icon="edit">
+                  <FormattedMessage id="ui-bulk-edit.start.edit" />
+                </Icon>
+              </Button>
+            </IfPermission>
+        }
           <IfPermission perm="ui-bulk-edit.delete">
             <Button
               buttonStyle="dropdownItem"
