@@ -24,7 +24,7 @@
     "list.filters.capabilities.users": "Users",
     "list.filters.capabilities.inventory": "Inventory - items",
     "list.filters.capabilities.circulation": "Circulation",
-    "list.filters.capabilities.acquisition": "Acquisition",
+    "list.filters.capabilities.acquisition": "収集",
     "list.savedQueries.title": "Saved queries",
     "start.edit": "Start bulk edit",
     "start.delete": "Start bulk delete",
@@ -110,5 +110,11 @@
     "columns.copyNumber": "Copy number",
     "columns.enumeration": "Enumeration",
     "columns.chronology": "Chronology",
-    "columns.volume": "Volume"
+    "columns.volume": "Volume",
+    "view": "Bulk Edit: (CSV) View",
+    "edit": "Bulk Edit: (CSV) Edit",
+    "delete": "Bulk Edit: (CSV) Delete",
+    "app-view": "Bulk Edit: In app - View",
+    "app-edit": "Bulk Edit: In app - Edit",
+    "app-delete": "Bulk Edit: In app - Delete"
 }

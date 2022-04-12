@@ -110,5 +110,11 @@
     "columns.copyNumber": "复本数",
     "columns.enumeration": "期数",
     "columns.chronology": "年表",
-    "columns.volume": "卷"
+    "columns.volume": "卷",
+    "view": "Bulk Edit: (CSV) View",
+    "edit": "Bulk Edit: (CSV) Edit",
+    "delete": "Bulk Edit: (CSV) Delete",
+    "app-view": "Bulk Edit: In app - View",
+    "app-edit": "Bulk Edit: In app - Edit",
+    "app-delete": "Bulk Edit: In app - Delete"
 }
