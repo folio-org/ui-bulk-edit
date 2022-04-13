@@ -18,7 +18,6 @@ import { useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 import { ListSelect } from './ListSelect/ListSelect';
 import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
-import { buildCheckboxFilterOptions } from './utils/optionsRecordIdentifiers';
 import {
   BULK_EDIT_IDENTIFIERS,
   EDIT_CAPABILITIES,
@@ -40,8 +39,15 @@ export const BulkEditListFilters = ({
   const location = useLocation();
 
   const search = new URLSearchParams(location.search);
-  const defaultCapability = search.get('capabilities') || CAPABILITIES.USER;
-  const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
+  const hasEditPermsInApp = stripes.hasPerm('ui-bulk-edit.app-edit');
+  const getDefaultCapabilities = () => {
+    if (hasEditPermsInApp) {
+      return CAPABILITIES.ITEM;
+    }
+
+    return search.get('capabilities') || CAPABILITIES.USER;
+  };
+  const defaultCapability = getDefaultCapabilities();
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
@@ -55,7 +61,11 @@ export const BulkEditListFilters = ({
   const { userGroups } = useUserGroupsMap();
   const { requestJobId, isLoading } = useJobCommand({ entityType: capabilities });
   const { fileUpload } = useFileUploadComand();
-  const capabilitiesFilterOptions = buildCheckboxFilterOptions(EDIT_CAPABILITIES);
+
+  const capabilitiesFilterOptions = EDIT_CAPABILITIES.map(capability => ({
+    ...capability,
+    disabled: capability.value === CAPABILITIES.USER ? hasEditPermsInApp : capability.disabled,
+  }));
 
   const handleChange = (value, field) => setFilters(prev => ({
     ...prev, [field]: value,
@@ -88,7 +98,7 @@ export const BulkEditListFilters = ({
     setIsFileUploaded(false);
   }, [location.search]);
 
-  const hanldeCapabilityChange = (e) => {
+  const handleCapabilityChange = (e) => {
     setFilters(prev => ({
       ...prev,
       capabilities: e.target.value,
@@ -224,7 +234,7 @@ export const BulkEditListFilters = ({
       <>
         <ListSelect
           value={recordIdentifier}
-          disabled={!hasEditOrDeletePerms}
+          disabled={!hasEditPermsInApp}
           onChange={handleRecordIdentifierChange}
           capabilities={capabilities}
         />
@@ -239,7 +249,7 @@ export const BulkEditListFilters = ({
           recordIdentifier={recordIdentifier}
           handleDragLeave={handleDragLeave}
           handleDragEnter={handleDragEnter}
-          disableUploader={!hasEditOrDeletePerms}
+          disableUploader={!hasEditPermsInApp}
           uploaderSubTitle={uploaderSubTitle}
         />
       </>
@@ -247,7 +257,7 @@ export const BulkEditListFilters = ({
       <Accordion
         separator={false}
         closedByDefault={false}
-        displayClearButton={!hasEditOrDeletePerms}
+        displayClearButton={!hasEditPermsInApp}
         header={FilterAccordionHeader}
         label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
       >
@@ -259,7 +269,7 @@ export const BulkEditListFilters = ({
               name="capabilities"
               value={option.value}
               disabled={option.disabled}
-              onChange={hanldeCapabilityChange}
+              onChange={handleCapabilityChange}
               checked={option.value === capabilities}
             />
           ))}

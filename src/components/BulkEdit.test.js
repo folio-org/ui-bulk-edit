@@ -91,33 +91,6 @@ describe('BulkEdit', () => {
     expect(screen.getByRole('combobox', { name: 'ui-bulk-edit.list.filters.recordIdentifier' })).toBeEnabled();
   });
 
-  it('should display select right select options on users tab', () => {
-    renderBulkEdit();
-
-    userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.users/ }));
-
-    const options = [
-      /filters.recordIdentifier.placeholder/,
-      /filters.recordIdentifier.userUUIDs/,
-      /filters.recordIdentifier.userBarcodes/,
-      /filters.recordIdentifier.externalIDs/,
-      /filters.recordIdentifier.usernames/,
-    ];
-
-    const userUUIDs = screen.getByRole('option', { name: /filters.recordIdentifier.userUUIDs/ });
-
-    const selectRecordIdentifier = screen.getByRole('combobox');
-
-    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
-
-    userEvent.selectOptions(
-      selectRecordIdentifier,
-      userUUIDs,
-    );
-
-    expect(userUUIDs.selected).toBe(true);
-  });
-
   it('should display select right select options on inventory tab', () => {
     renderBulkEdit();
 
@@ -157,21 +130,6 @@ describe('BulkEdit', () => {
     const fileInput = screen.getByTestId('fileUploader-input');
 
     dispatchEvt(fileInput, 'dragenter', data);
-  });
-
-  it('should display capability accordion with right options', () => {
-    renderBulkEdit();
-
-    const enabledOption = screen.getByRole('radio', { name: /capabilities.users/ });
-
-    const disabledOptions = [
-      /filters.capabilities.circulation/,
-      /filters.capabilities.acquisition/,
-    ];
-
-    disabledOptions.forEach((el) => expect(screen.getByRole('radio', { name: el })).toBeDisabled());
-
-    expect(enabledOption).toBeEnabled();
   });
 
   it('should display Saved queries', () => {
