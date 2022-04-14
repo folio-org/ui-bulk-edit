@@ -40,8 +40,10 @@ export const BulkEditListFilters = ({
 
   const search = new URLSearchParams(location.search);
   const hasEditPermsInApp = stripes.hasPerm('ui-bulk-edit.app-edit');
+  const hasEditPermsCSV = stripes.hasPerm('ui-bulk-edit.edit');
+
   const getDefaultCapabilities = () => {
-    if (hasEditPermsInApp) {
+    if (hasEditPermsInApp && !hasEditPermsCSV) {
       return CAPABILITIES.ITEM;
     }
 
@@ -62,9 +64,22 @@ export const BulkEditListFilters = ({
   const { requestJobId, isLoading } = useJobCommand({ entityType: capabilities });
   const { fileUpload } = useFileUploadComand();
 
+  const isCapabilityDisabled = (capabilityValue) => {
+    const isCSVandInAppPerms = hasEditPermsInApp && hasEditPermsCSV;
+
+    switch (capabilityValue) {
+      case CAPABILITIES.USER:
+        return hasEditPermsInApp && !isCSVandInAppPerms;
+      case CAPABILITIES.ITEM:
+        return hasEditPermsCSV && !isCSVandInAppPerms;
+      default:
+        return true;
+    }
+  };
+
   const capabilitiesFilterOptions = EDIT_CAPABILITIES.map(capability => ({
     ...capability,
-    disabled: capability.value === CAPABILITIES.USER ? hasEditPermsInApp : capability.disabled,
+    disabled: isCapabilityDisabled(capability.value),
   }));
 
   const handleChange = (value, field) => setFilters(prev => ({
@@ -234,7 +249,7 @@ export const BulkEditListFilters = ({
       <>
         <ListSelect
           value={recordIdentifier}
-          disabled={!hasEditPermsInApp}
+          disabled={isCapabilityDisabled(capabilities)}
           onChange={handleRecordIdentifierChange}
           capabilities={capabilities}
         />
@@ -249,7 +264,7 @@ export const BulkEditListFilters = ({
           recordIdentifier={recordIdentifier}
           handleDragLeave={handleDragLeave}
           handleDragEnter={handleDragEnter}
-          disableUploader={!hasEditPermsInApp}
+          disableUploader={isCapabilityDisabled(capabilities)}
           uploaderSubTitle={uploaderSubTitle}
         />
       </>
