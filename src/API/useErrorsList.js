@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 export const useErrorsList = (id) => {
   const ky = useOkapiKy();
-  const [refetchInterval, setRefetchInterval] = useState(300);
+  const [refetchInterval, setRefetchInterval] = useState(1000);
   const refetchingTimeout = 20000;
 
   let timeout;
