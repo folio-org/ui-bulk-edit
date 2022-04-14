@@ -61,7 +61,7 @@ export const BulkEditListFilters = ({
     recordIdentifier: '',
   });
   const { userGroups } = useUserGroupsMap();
-  const { requestJobId, isLoading } = useJobCommand({ entityType: capabilities });
+  const { requestJobId, isLoading } = useJobCommand({ entityType: capabilities.slice(0, -1) });
   const { fileUpload } = useFileUploadComand();
 
   const isCapabilityDisabled = (capabilityValue) => {

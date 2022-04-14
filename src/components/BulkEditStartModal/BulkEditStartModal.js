@@ -27,7 +27,7 @@ const BulkEditStartModal = ({
   const location = useLocation();
   const intl = useIntl();
   const showCallout = useShowCallout();
-  const entityType = new URLSearchParams(location.search).get('capabilities');
+  const entityType = new URLSearchParams(location.search).get('capabilities')?.slice(0, -1);
 
   const { requestJobId, isLoading } = useJobCommand({ entityType });
   const { fileUpload } = useFileUploadComand();

@@ -12,6 +12,7 @@ import BulkEditConformationModal from './BulkEditConformationModal';
 import { queryClient } from '../../../test/jest/utils/queryClient';
 
 const history = createMemoryHistory();
+history.push('/bulk-edit/1?fileName=Mock.csv&capabilities=USERS');
 
 const fileNameMock = 'test.csv';
 const mockSetIsConformotaionalModal = jest.fn();
