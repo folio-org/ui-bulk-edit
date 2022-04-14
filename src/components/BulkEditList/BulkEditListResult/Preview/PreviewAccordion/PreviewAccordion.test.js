@@ -52,7 +52,7 @@ const renderPreviewAccordion = ({ capabilities, items }) => {
 
 describe('PreviewAccordion', () => {
   it('should render preview accordion with users', () => {
-    renderPreviewAccordion({ capabilities: 'USER', items: users });
+    renderPreviewAccordion({ capabilities: 'USERS', items: users });
 
     expect(screen.getByText('username')).toBeVisible();
     expect(screen.getByText('000')).toBeVisible();
@@ -60,7 +60,7 @@ describe('PreviewAccordion', () => {
   });
 
   it('should render preview accordion with inventory items', () => {
-    renderPreviewAccordion({ capabilities: 'ITEM', items: inventoryItems });
+    renderPreviewAccordion({ capabilities: 'ITEMS', items: inventoryItems });
 
     expect(screen.getByText('222')).toBeVisible();
     expect(screen.getByText('active')).toBeVisible();

@@ -25,14 +25,15 @@ const BulkEditActionMenu = ({
   errorCsvLink,
   isLoading,
 }) => {
-  const history = useHistory();
-  const { id } = usePathParams('/bulk-edit/:id');
-  const { items } = usePreviewRecords(id);
   const {
     location,
     columns,
     searchParams,
   } = useCurrentEntityInfo();
+  const capabilities = new URLSearchParams(location.search).get('capabilities');
+  const history = useHistory();
+  const { id } = usePathParams('/bulk-edit/:id');
+  const { items } = usePreviewRecords(id, capabilities.toLowerCase());
 
   const handleChange = ({ values }) => {
     history.replace({
@@ -56,8 +57,6 @@ const BulkEditActionMenu = ({
 
     return paramsColumns ? JSON.parse(paramsColumns) : defaultColumns;
   }, [location.search]);
-
-  const capabilities = new URLSearchParams(location.search).get('capabilities');
 
   const renderLinkButtons = () => {
     if (isLoading) return <Preloader />;

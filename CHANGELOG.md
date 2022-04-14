@@ -7,6 +7,7 @@
 * [UIBULKED-60] Download matched records (CSV) - Items
 * [UIBULKED-29] Modify bulk edit permissions.
 * [UIBULKED-33] Starting bulk edit - in app approach
+* [UIBULKED-56] Change bulk-edit preview endpoint
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 

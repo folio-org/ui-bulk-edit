@@ -4,13 +4,13 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const usePreviewRecords = (id) => {
+export const usePreviewRecords = (id, capabilities) => {
   const ky = useOkapiKy();
   const { data } = useQuery(
     {
       queryKey: ['previewRecords', id],
       queryFn: async () => {
-        const { users, items, totalRecords } = await ky.get(`bulk-edit/${id}/preview`, { searchParams: { limit: 10 } }).json();
+        const { users, items, totalRecords } = await ky.get(`bulk-edit/${id}/preview/${capabilities}`, { searchParams: { limit: 10 } }).json();
 
         return {
           users,
