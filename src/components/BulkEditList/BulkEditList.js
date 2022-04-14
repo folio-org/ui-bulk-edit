@@ -31,9 +31,10 @@ export const BulkEditList = () => {
   const [successCsvLink, errorCsvLink] = data?.files || [];
   const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
   const hasEditPermsInApp = stripes.hasPerm('ui-bulk-edit.app-edit');
+  const hasViewCSVPerms = stripes.hasPerm('ui-bulk-edit.view');
 
   const isActionMenuVisible = (successCsvLink || errorCsvLink) || // should show menu in case of existing preview/errors in any case
-      (hasEditOrDeletePerms && !hasEditPermsInApp);
+      (hasEditOrDeletePerms && !hasEditPermsInApp) || !hasViewCSVPerms;
 
   useEffect(() => {
     const capabilities = new URLSearchParams(location.search).get('capabilities');
@@ -45,7 +46,6 @@ export const BulkEditList = () => {
     isActionMenuVisible && (
       <BulkEditActionMenu
         onEdit={() => setIsBulkEditModalOpen(true)}
-        onDelete={noop}
         onToggle={noop}
         successCsvLink={successCsvLink}
         errorCsvLink={errorCsvLink}
