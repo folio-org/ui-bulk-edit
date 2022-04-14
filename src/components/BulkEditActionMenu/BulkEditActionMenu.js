@@ -19,7 +19,6 @@ import { CAPABILITIES } from '../../constants';
 
 const BulkEditActionMenu = ({
   onEdit,
-  onDelete,
   onToggle,
   successCsvLink,
   errorCsvLink,
@@ -123,6 +122,7 @@ const BulkEditActionMenu = ({
               </Button>
             </IfPermission>
         }
+          {/* Hide till it isn't used in app
           <IfPermission perm="ui-bulk-edit.delete">
             <Button
               buttonStyle="dropdownItem"
@@ -132,7 +132,7 @@ const BulkEditActionMenu = ({
                 <FormattedMessage id="ui-bulk-edit.start.delete" />
               </Icon>
             </Button>
-          </IfPermission>
+          </IfPermission> */}
         </>
       </ActionMenuGroup>
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
@@ -150,7 +150,6 @@ const BulkEditActionMenu = ({
 BulkEditActionMenu.propTypes = {
   onToggle: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
   successCsvLink: PropTypes.string,
   errorCsvLink: PropTypes.string,
   isLoading: PropTypes.bool,
