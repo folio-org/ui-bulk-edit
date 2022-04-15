@@ -15,6 +15,7 @@
 * [UIBULKED-33](https://issues.folio.org/browse/UIBULKED-33) Starting bulk edit - in app approach
 * [UIBULKED-57](https://issues.folio.org/browse/UIBULKED-57) In-app bulk edit permissions only
 * [UIBULKED-58](https://issues.folio.org/browse/UIBULKED-58) CSV bulk edit permissions only
+* [UIBULKED-32](https://issues.folio.org/browse/UIBULKED-32) Error accordion - Items
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
