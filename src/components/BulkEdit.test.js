@@ -19,7 +19,7 @@ jest.mock('./BulkEditList/BulkEditListResult', () => ({
 const history = createMemoryHistory();
 
 const renderBulkEdit = () => {
-  window.history.pushState({}, 'Test page', '/bulk-edit');
+  window.history.pushState({}, 'Test page', '/bulk-edit?capabilities=USERS');
 
   render(
     <QueryClientProvider client={queryClient}>

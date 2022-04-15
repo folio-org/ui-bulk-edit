@@ -2,6 +2,12 @@
 
 ## In progress
 
+* [UIBULKED-30] (https://issues.folio.org/browse/UIBULKED-30) Record identifiers dropdown
+* [UIBULKED-55] Replace or remove react-hot-loader
+* [UIBULKED-60] Download matched records (CSV) - Items
+* [UIBULKED-29] Modify bulk edit permissions.
+* [UIBULKED-33] Starting bulk edit - in app approach
+* 
 * [UIBULKED-30](https://issues.folio.org/browse/UIBULKED-30) Record identifiers dropdown
 * [UIBULKED-55](https://issues.folio.org/browse/UIBULKED-55) Replace or remove react-hot-loader
 * [UIBULKED-60](https://issues.folio.org/browse/UIBULKED-60) Download matched records (CSV) - Items

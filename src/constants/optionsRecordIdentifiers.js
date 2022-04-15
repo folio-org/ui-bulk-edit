@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import React from 'react';
 
 export const identifierOptions = {
-  USER: [
+  USERS: [
     {
       value: '',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
@@ -24,7 +24,7 @@ export const identifierOptions = {
       label: 'ui-bulk-edit.list.filters.recordIdentifier.usernames',
     },
   ],
-  ITEM: [
+  ITEMS: [
     {
       value: '',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
@@ -58,12 +58,12 @@ export const identifierOptions = {
 
 export const EDIT_CAPABILITIES = [
   {
-    value: 'USER',
+    value: 'USERS',
     label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.users" />,
     disabled: false,
   },
   {
-    value: 'ITEM',
+    value: 'ITEMS',
     label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.inventory" />,
     disabled: false,
   },

@@ -9,6 +9,8 @@ const PreviewInitial = () => {
   const { id } = useParams();
 
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
+  const capabilities = useMemo(() => new URLSearchParams(location.search).get('capabilities').toLocaleLowerCase(), [location.search]);
+
 
   const title = useMemo(() => {
     const queryText = new URLSearchParams(location.search).get('queryText');
@@ -21,7 +23,7 @@ const PreviewInitial = () => {
   }, [fileUploadedName, intl, location.search]);
 
   return (
-    <Preview title={title} id={id} initial />
+    <Preview title={title} id={id} capabilities={capabilities} initial />
   );
 };
 
