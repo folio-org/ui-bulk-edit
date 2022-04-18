@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset } from '@folio/stripes/components';
-import { AppIcon, useStripes } from '@folio/stripes/core';
+import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
 import { useLocation } from 'react-router-dom';
@@ -14,9 +14,9 @@ import { BulkEditConformationModal } from '../BulkEditConformationModal';
 import { useDownloadLinks, useLaunchJob } from '../../API';
 import { usePathParams } from '../../hooks';
 import { CAPABILITIES } from '../../constants';
+import { useBulkPermissions } from '../../hooks/bulkPermissions';
 
 export const BulkEditList = () => {
-  const stripes = useStripes();
   const location = useLocation();
   const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
@@ -29,12 +29,9 @@ export const BulkEditList = () => {
   const { data, isLoading } = useDownloadLinks(id);
   const { startJob } = useLaunchJob(id);
   const [successCsvLink, errorCsvLink] = data?.files || [];
-  const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
-  const hasEditPermsInApp = stripes.hasPerm('ui-bulk-edit.app-edit');
-  const hasViewCSVPerms = stripes.hasPerm('ui-bulk-edit.view');
+  const { isActionMenuShown } = useBulkPermissions();
 
-  const isActionMenuVisible = (successCsvLink || errorCsvLink) || // should show menu in case of existing preview/errors in any case
-      (hasEditOrDeletePerms && !hasEditPermsInApp) || !hasViewCSVPerms;
+  const isActionMenuVisible = successCsvLink || errorCsvLink || isActionMenuShown;
 
   useEffect(() => {
     const capabilities = new URLSearchParams(location.search).get('capabilities');
