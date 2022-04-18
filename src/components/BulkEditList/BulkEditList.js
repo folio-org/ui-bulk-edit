@@ -36,7 +36,7 @@ export const BulkEditList = () => {
   useEffect(() => {
     const capabilities = new URLSearchParams(location.search).get('capabilities');
 
-    if (!isLoading && capabilities === CAPABILITIES.ITEM) { startJob({ id }); }
+    if (!isLoading && id && capabilities === CAPABILITIES.ITEM) { startJob({ id }); }
   }, [startJob, id, isLoading, location.search]);
 
   const renderActionMenu = () => (
