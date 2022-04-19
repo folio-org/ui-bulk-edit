@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useStripes } from '@folio/stripes/core';
 
 import {
   Button,
@@ -27,28 +26,34 @@ import {
 import { getFileInfo } from './utils/getFileInfo';
 import { useJobCommand, useFileUploadComand, useUserGroupsMap } from '../../../API';
 import { buildQuery } from '../../../hooks';
+import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
 
 export const BulkEditListFilters = ({
   isFileUploaded,
   setIsFileUploaded,
   setCountOfRecords,
 }) => {
-  const stripes = useStripes();
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
-
+  const {
+    isDropZoneDisabled: isDropZoneDisabledPerm,
+    hasOnlyInAppViewPerms,
+    isInventoryRadioDisabled,
+    isUserRadioDisabled,
+    hasInAppEditPerms,
+    isSelectIdentifiersDisabled,
+  } = useBulkPermissions();
   const search = new URLSearchParams(location.search);
-  const hasEditPermsInApp = stripes.hasPerm('ui-bulk-edit.app-edit');
-  const hasEditPermsCSV = stripes.hasPerm('ui-bulk-edit.edit');
 
   const getDefaultCapabilities = () => {
-    if (hasEditPermsInApp && !hasEditPermsCSV) {
+    if (hasOnlyInAppViewPerms) {
       return CAPABILITIES.ITEM;
     }
 
     return search.get('capabilities') || CAPABILITIES.USER;
   };
+
   const defaultCapability = getDefaultCapabilities();
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
@@ -65,13 +70,11 @@ export const BulkEditListFilters = ({
   const { fileUpload } = useFileUploadComand();
 
   const isCapabilityDisabled = (capabilityValue) => {
-    const isCSVandInAppPerms = hasEditPermsInApp && hasEditPermsCSV;
-
     switch (capabilityValue) {
       case CAPABILITIES.USER:
-        return hasEditPermsInApp && !isCSVandInAppPerms;
+        return isUserRadioDisabled;
       case CAPABILITIES.ITEM:
-        return hasEditPermsCSV && !isCSVandInAppPerms;
+        return isInventoryRadioDisabled;
       default:
         return true;
     }
@@ -249,7 +252,7 @@ export const BulkEditListFilters = ({
       <>
         <ListSelect
           value={recordIdentifier}
-          disabled={isCapabilityDisabled(capabilities)}
+          disabled={isSelectIdentifiersDisabled}
           onChange={handleRecordIdentifierChange}
           capabilities={capabilities}
         />
@@ -260,7 +263,7 @@ export const BulkEditListFilters = ({
           handleDrop={handleDrop}
           fileExtensionModalOpen={fileExtensionModalOpen}
           hideFileExtensionModal={hideFileExtensionModal}
-          isDropZoneDisabled={isDropZoneDisabled}
+          isDropZoneDisabled={isDropZoneDisabled || isDropZoneDisabledPerm}
           recordIdentifier={recordIdentifier}
           handleDragLeave={handleDragLeave}
           handleDragEnter={handleDragEnter}
@@ -272,7 +275,7 @@ export const BulkEditListFilters = ({
       <Accordion
         separator={false}
         closedByDefault={false}
-        displayClearButton={!hasEditPermsInApp}
+        displayClearButton={!hasInAppEditPerms}
         header={FilterAccordionHeader}
         label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
       >
