@@ -1,6 +1,5 @@
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import { IfPermission } from '@folio/stripes/core';
 
 import {
   Button,
@@ -15,7 +14,7 @@ import { usePathParams } from '../../hooks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { usePreviewRecords } from '../../API';
 import { useCurrentEntityInfo } from '../../hooks/currentEntity';
-import { CAPABILITIES } from '../../constants';
+import { useBulkPermissions } from '../../hooks/bulkPermissions';
 
 const BulkEditActionMenu = ({
   onEdit,
@@ -33,6 +32,7 @@ const BulkEditActionMenu = ({
   const history = useHistory();
   const { id } = usePathParams('/bulk-edit/:id');
   const { items } = usePreviewRecords(id, capabilities?.toLowerCase());
+  const { hasAnyEditPermissions } = useBulkPermissions();
 
   const handleChange = ({ values }) => {
     history.replace({
@@ -62,33 +62,29 @@ const BulkEditActionMenu = ({
 
     return (
       <>
-        {successCsvLink &&
-        <IfPermission perm="ui-bulk-edit.edit">
-          <a href={successCsvLink} download>
-            <Button
-              buttonStyle="dropdownItem"
-              data-testid="download-link-matched"
-            >
-              <Icon icon="download">
-                <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />
-              </Icon>
-            </Button>
-          </a>
-        </IfPermission>
+        {(successCsvLink && hasAnyEditPermissions) &&
+        <a href={successCsvLink} download>
+          <Button
+            buttonStyle="dropdownItem"
+            data-testid="download-link-matched"
+          >
+            <Icon icon="download">
+              <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />
+            </Icon>
+          </Button>
+        </a>
         }
-        {errorCsvLink &&
-        <IfPermission perm="ui-bulk-edit.edit">
-          <a href={errorCsvLink} download>
-            <Button
-              buttonStyle="dropdownItem"
-              data-testid="download-link-error"
-            >
-              <Icon icon="download">
-                <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />
-              </Icon>
-            </Button>
-          </a>
-        </IfPermission>
+        {(errorCsvLink && hasAnyEditPermissions) &&
+        <a href={errorCsvLink} download>
+          <Button
+            buttonStyle="dropdownItem"
+            data-testid="download-link-error"
+          >
+            <Icon icon="download">
+              <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />
+            </Icon>
+          </Button>
+        </a>
         }
       </>
     );
@@ -99,29 +95,19 @@ const BulkEditActionMenu = ({
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}>
         <>
           {renderLinkButtons()}
-          {capabilities === CAPABILITIES.USER ?
-            <IfPermission perm="ui-bulk-edit.edit">
-              <Button
-                buttonStyle="dropdownItem"
-                onClick={buildButtonClickHandler(onEdit)}
-              >
-                <Icon icon="edit">
-                  <FormattedMessage id="ui-bulk-edit.start.edit" />
-                </Icon>
-              </Button>
-            </IfPermission>
-            :
-            <IfPermission perm="ui-bulk-edit.app-edit">
-              <Button
-                buttonStyle="dropdownItem"
-                onClick={buildButtonClickHandler(onEdit)}
-              >
-                <Icon icon="edit">
-                  <FormattedMessage id="ui-bulk-edit.start.edit" />
-                </Icon>
-              </Button>
-            </IfPermission>
-        }
+
+          {hasAnyEditPermissions && (
+          <Button
+            buttonStyle="dropdownItem"
+            onClick={buildButtonClickHandler(onEdit)}
+          >
+            <Icon icon="edit">
+              <FormattedMessage id="ui-bulk-edit.start.edit" />
+            </Icon>
+          </Button>
+          )}
+
+
           {/* Hide till it isn't used in app
           <IfPermission perm="ui-bulk-edit.delete">
             <Button

@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset } from '@folio/stripes/components';
@@ -26,18 +26,22 @@ export const BulkEditList = () => {
   const [updatedId, setUpdatedId] = useState();
 
   const { id } = usePathParams('/bulk-edit/:id');
-  const { data, isLoading } = useDownloadLinks(id);
+  const { data, isLoading, refetch } = useDownloadLinks(id);
   const { startJob } = useLaunchJob(id);
   const [successCsvLink, errorCsvLink] = data?.files || [];
   const { isActionMenuShown } = useBulkPermissions();
 
   const isActionMenuVisible = successCsvLink || errorCsvLink || isActionMenuShown;
 
+  const runJob = useCallback(() => startJob({ id }), [id]);
+
   useEffect(() => {
     const capabilities = new URLSearchParams(location.search).get('capabilities');
 
-    if (!isLoading && id && capabilities === CAPABILITIES.ITEM) { startJob({ id }); }
-  }, [startJob, id, isLoading, location.search]);
+    if (!isLoading && id && capabilities === CAPABILITIES.ITEM) {
+      runJob().finally(() => refetch());
+    }
+  }, [id, isLoading, location.search]);
 
   const renderActionMenu = () => (
     isActionMenuVisible && (

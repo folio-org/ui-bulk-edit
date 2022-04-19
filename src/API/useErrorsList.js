@@ -4,13 +4,17 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 import { useEffect, useState } from 'react';
+import { usePulling } from './usePulling';
 
 export const useErrorsList = (id) => {
   const ky = useOkapiKy();
-  const [refetchInterval, setRefetchInterval] = useState(1000);
-  const refetchingTimeout = 20000;
 
-  let timeout;
+  const [errors, setErrors] = useState();
+
+  const { refetchInterval } = usePulling({
+    dependencies: [errors],
+    stopCondition: errors?.length,
+  });
 
   const { data } = useQuery(
     {
@@ -22,20 +26,12 @@ export const useErrorsList = (id) => {
   );
 
   useEffect(() => {
-    timeout = setTimeout(() => {
-      setRefetchInterval(0);
-    }, refetchingTimeout);
-
-    if (data?.errors.length) {
-      setRefetchInterval(0);
+    if (data?.errors) {
+      setErrors(data.errors);
     }
-
-    return () => {
-      clearTimeout(timeout);
-    };
   }, [data]);
 
   return ({
-    errors: data?.errors,
+    errors,
   });
 };
