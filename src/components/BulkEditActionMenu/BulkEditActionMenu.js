@@ -32,7 +32,7 @@ const BulkEditActionMenu = ({
   const capabilities = new URLSearchParams(location.search).get('capabilities');
   const history = useHistory();
   const { id } = usePathParams('/bulk-edit/:id');
-  const { items } = usePreviewRecords(id, capabilities.toLowerCase());
+  const { items } = usePreviewRecords(id, capabilities?.toLowerCase());
 
   const handleChange = ({ values }) => {
     history.replace({

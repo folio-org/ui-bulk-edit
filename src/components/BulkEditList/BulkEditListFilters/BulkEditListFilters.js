@@ -40,7 +40,9 @@ export const BulkEditListFilters = ({
 
   const search = new URLSearchParams(location.search);
   const hasEditPermsInApp = stripes.hasPerm('ui-bulk-edit.app-edit');
+  const hasViewPermsInApp = stripes.hasPerm('ui-bulk-edit.app-view');
   const hasEditPermsCSV = stripes.hasPerm('ui-bulk-edit.edit');
+  const hasViewPermsCSV = stripes.hasPerm('ui-bulk-edit.view');
 
   const getDefaultCapabilities = () => {
     if (hasEditPermsInApp && !hasEditPermsCSV) {
@@ -69,13 +71,24 @@ export const BulkEditListFilters = ({
 
     switch (capabilityValue) {
       case CAPABILITIES.USER:
-        return hasEditPermsInApp && !isCSVandInAppPerms;
+        return !hasViewPermsCSV;
       case CAPABILITIES.ITEM:
-        return hasEditPermsCSV && !isCSVandInAppPerms;
+        return !hasViewPermsInApp;
       default:
         return true;
     }
   };
+
+  const isIdentifierDisabled = useMemo(() => {
+    switch (search.get('capabilities')) {
+      case CAPABILITIES.USER:
+        return hasViewPermsCSV && !hasEditPermsCSV;
+      case CAPABILITIES.ITEM:
+        return hasViewPermsInApp && !hasEditPermsInApp;
+      default:
+        return true;
+    }
+  }, [search]);
 
   const capabilitiesFilterOptions = EDIT_CAPABILITIES.map(capability => ({
     ...capability,
@@ -249,7 +262,7 @@ export const BulkEditListFilters = ({
       <>
         <ListSelect
           value={recordIdentifier}
-          disabled={isCapabilityDisabled(capabilities)}
+          disabled={isIdentifierDisabled}
           onChange={handleRecordIdentifierChange}
           capabilities={capabilities}
         />
@@ -264,7 +277,7 @@ export const BulkEditListFilters = ({
           recordIdentifier={recordIdentifier}
           handleDragLeave={handleDragLeave}
           handleDragEnter={handleDragEnter}
-          disableUploader={isCapabilityDisabled(capabilities)}
+          disableUploader={isIdentifierDisabled}
           uploaderSubTitle={uploaderSubTitle}
         />
       </>

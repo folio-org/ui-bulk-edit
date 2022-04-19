@@ -56,7 +56,9 @@
           "bulk-edit.item.post",
           "bulk-edit.start.item.post",
           "bulk-edit.roll-back.item.post",
-          "data-export.job.item.post"
+          "data-export.job.item.post",
+          "data-export.job.item.get",
+          "bulk-edit.preview-users.collection.get"
         ],
         "visible": true
       },
@@ -77,7 +79,10 @@
       {
         "permissionName": "ui-bulk-edit.app-edit",
         "displayName": "Bulk Edit: In app - Edit",
-        "subPermissions": [],
+        "subPermissions": [
+          "data-export.job.item.get",
+          "bulk-edit.preview-items.collection.get"
+        ],
         "visible": true
       },
       {

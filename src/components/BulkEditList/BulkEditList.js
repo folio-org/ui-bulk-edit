@@ -29,12 +29,10 @@ export const BulkEditList = () => {
   const { data, isLoading } = useDownloadLinks(id);
   const { startJob } = useLaunchJob(id);
   const [successCsvLink, errorCsvLink] = data?.files || [];
-  const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
-  const hasEditPermsInApp = stripes.hasPerm('ui-bulk-edit.app-edit');
-  const hasViewCSVPerms = stripes.hasPerm('ui-bulk-edit.view');
+  const hasEditPerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.app-edit');
 
-  const isActionMenuVisible = (successCsvLink || errorCsvLink) || // should show menu in case of existing preview/errors in any case
-      (hasEditOrDeletePerms && !hasEditPermsInApp) || !hasViewCSVPerms;
+  // should show menu in case of existing preview/errors in any case
+  const isActionMenuVisible = (successCsvLink || errorCsvLink) || hasEditPerms;
 
   useEffect(() => {
     const capabilities = new URLSearchParams(location.search).get('capabilities');
