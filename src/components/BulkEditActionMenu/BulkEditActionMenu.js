@@ -14,7 +14,7 @@ import { usePathParams } from '../../hooks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { usePreviewRecords } from '../../API';
 import { useCurrentEntityInfo } from '../../hooks/currentEntity';
-import { useBulkPermissions } from '../../hooks/bulkPermissions';
+import { useBulkPermissions } from '../../hooks/useBulkPermissions';
 
 const BulkEditActionMenu = ({
   onEdit,

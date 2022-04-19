@@ -4,7 +4,7 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 import { useEffect, useState } from 'react';
-import { usePulling } from './usePulling';
+import { usePulling } from '../hooks/usePulling';
 
 export const useErrorsList = (id) => {
   const ky = useOkapiKy();

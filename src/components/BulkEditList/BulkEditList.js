@@ -14,7 +14,7 @@ import { BulkEditConformationModal } from '../BulkEditConformationModal';
 import { useDownloadLinks, useLaunchJob } from '../../API';
 import { usePathParams } from '../../hooks';
 import { CAPABILITIES } from '../../constants';
-import { useBulkPermissions } from '../../hooks/bulkPermissions';
+import { useBulkPermissions } from '../../hooks/useBulkPermissions';
 
 export const BulkEditList = () => {
   const location = useLocation();

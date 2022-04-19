@@ -26,7 +26,7 @@ import {
 import { getFileInfo } from './utils/getFileInfo';
 import { useJobCommand, useFileUploadComand, useUserGroupsMap } from '../../../API';
 import { buildQuery } from '../../../hooks';
-import { useBulkPermissions } from '../../../hooks/bulkPermissions';
+import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
 
 export const BulkEditListFilters = ({
   isFileUploaded,
