@@ -58,7 +58,7 @@ describe('BulkEditActionMenu', () => {
 
   it('displays Bulk edit', async () => {
     renderActionMenu({
-      initialEntries: ['/bulk-edit/1'],
+      initialEntries: ['/bulk-edit/1?capabilities=USERS'],
     });
 
     const downloadButtons = [
@@ -71,7 +71,7 @@ describe('BulkEditActionMenu', () => {
 
   it('should render correct default columns for users', async () => {
     renderActionMenu({
-      initialEntries: ['/bulk-edit/1?capabilities=USER'],
+      initialEntries: ['/bulk-edit/1?capabilities=USERS'],
     });
 
     for (const col of USER_COLUMNS) {
@@ -83,7 +83,7 @@ describe('BulkEditActionMenu', () => {
 
   it('should render correct default columns for inventory', async () => {
     renderActionMenu({
-      initialEntries: ['/bulk-edit/1?capabilities=ITEM'],
+      initialEntries: ['/bulk-edit/1?capabilities=ITEMS'],
     });
 
     for (const col of INVENTORY_COLUMNS) {
@@ -95,7 +95,7 @@ describe('BulkEditActionMenu', () => {
 
   it('should render correct columns state based on queryParams', async () => {
     renderActionMenu({
-      initialEntries: ['/bulk-edit/1?selectedColumns=%5B"username"%5D'],
+      initialEntries: ['/bulk-edit/1?selectedColumns=%5B"username"%5D&capabilities=USERS'],
     });
 
     // username should be checked

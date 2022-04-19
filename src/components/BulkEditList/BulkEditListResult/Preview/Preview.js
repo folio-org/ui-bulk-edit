@@ -16,10 +16,10 @@ import {
   useUserGroupsMap,
 } from '../../../../API';
 
-export const Preview = ({ id, title, initial }) => {
+export const Preview = ({ id, title, initial, capabilities }) => {
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
-  const { items } = usePreviewRecords(id);
+  const { items } = usePreviewRecords(id, capabilities);
   const { userGroups } = useUserGroupsMap();
   const [processedRecords, setProcessedRecords] = useState(0);
 
@@ -75,4 +75,5 @@ Preview.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   initial: PropTypes.bool,
+  capabilities: PropTypes.string,
 };

@@ -7,7 +7,7 @@ import {
   Row,
   MultiColumnList,
 } from '@folio/stripes/components';
-import { useCurrentEntityInfo } from '../../../../../hooks/currentEntity';
+import { useCurrentEntityInfo } from '../../../../../hooks';
 
 
 const PreviewAccordion = ({ items = [], userGroups = {} }) => {

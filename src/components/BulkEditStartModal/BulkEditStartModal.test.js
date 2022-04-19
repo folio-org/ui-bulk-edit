@@ -12,7 +12,7 @@ import { queryClient } from '../../../test/jest/utils/queryClient';
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useLocation: () => ({
-    pathname: 'localhost:3000/test.csv',
+    pathname: 'localhost:3000/test.csv?capabilities=USERS',
   }),
 }));
 

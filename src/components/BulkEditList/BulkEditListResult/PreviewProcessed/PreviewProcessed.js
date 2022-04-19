@@ -9,6 +9,7 @@ const PreviewProcessed = () => {
   const { id } = useParams();
 
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('processedFileName'), [location.search]);
+  const capabilities = useMemo(() => new URLSearchParams(location.search).get('capabilities').toLowerCase(), [location.search]);
 
   const title = useMemo(() => {
     if (fileUploadedName) return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName });
@@ -17,7 +18,7 @@ const PreviewProcessed = () => {
   }, [fileUploadedName, intl, location.search]);
 
   return (
-    <Preview title={title} id={id} />
+    <Preview title={title} id={id} capabilities={capabilities} />
   );
 };
 
