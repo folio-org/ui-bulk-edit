@@ -28,7 +28,9 @@ const BulkEditActionMenu = ({
     columns,
     searchParams,
   } = useCurrentEntityInfo();
-  const capabilities = new URLSearchParams(location.search).get('capabilities');
+  const search = new URLSearchParams(location.search);
+  const capabilities = search.get('capabilities');
+  const processedFileName = search.get('processedFileName');
   const history = useHistory();
   const { id } = usePathParams('/bulk-edit/:id');
   const { items } = usePreviewRecords(id, capabilities?.toLowerCase());
@@ -69,7 +71,7 @@ const BulkEditActionMenu = ({
             data-testid="download-link-matched"
           >
             <Icon icon="download">
-              <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />
+              <FormattedMessage id={processedFileName ? 'ui-bulk-edit.start.downloadChangedRecords' : 'ui-bulk-edit.start.downloadMathcedRecords'} />
             </Icon>
           </Button>
         </a>

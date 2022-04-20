@@ -43,6 +43,7 @@
     "textArea.search": "Search",
     "textArea.resetAll": "Reset all",
     "start.downloadMathcedRecords": "Download matched records (CSV)",
+    "start.downloadChangedRecords": "Download changed records (CSV)",
     "columns.active": "Status",
     "columns.lastName": "Last name",
     "columns.firstName": "First name",
