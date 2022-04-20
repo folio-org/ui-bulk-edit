@@ -87,6 +87,7 @@
   "modal.next": "Next",
 
   "start.edit": "Start bulk edit",
+  "start.edit.csv": "Start bulk edit (CSV)",
   "start.delete": "Start bulk delete",
 
   "textArea.search": "Search",

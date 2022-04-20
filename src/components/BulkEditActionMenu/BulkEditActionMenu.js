@@ -32,7 +32,7 @@ const BulkEditActionMenu = ({
   const history = useHistory();
   const { id } = usePathParams('/bulk-edit/:id');
   const { items } = usePreviewRecords(id, capabilities?.toLowerCase());
-  const { hasAnyEditPermissions } = useBulkPermissions();
+  const { hasCsvEditPerms, hasInAppEditPerms, hasAnyEditPermissions } = useBulkPermissions();
 
   const handleChange = ({ values }) => {
     history.replace({
@@ -90,35 +90,42 @@ const BulkEditActionMenu = ({
     );
   };
 
+  const renderStartBulkEditButtons = () => {
+    return (
+      <>
+        {hasInAppEditPerms && (
+        <Button
+          buttonStyle="dropdownItem"
+          onClick={buildButtonClickHandler(onEdit)}
+        >
+          <Icon icon="edit">
+            <FormattedMessage id="ui-bulk-edit.start.edit" />
+          </Icon>
+        </Button>
+        )}
+
+        {hasCsvEditPerms && (
+        <Button
+          buttonStyle="dropdownItem"
+          onClick={buildButtonClickHandler(onEdit)}
+        >
+          <Icon icon="edit">
+            <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
+          </Icon>
+        </Button>
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}>
         <>
           {renderLinkButtons()}
 
-          {hasAnyEditPermissions && (
-          <Button
-            buttonStyle="dropdownItem"
-            onClick={buildButtonClickHandler(onEdit)}
-          >
-            <Icon icon="edit">
-              <FormattedMessage id="ui-bulk-edit.start.edit" />
-            </Icon>
-          </Button>
-          )}
+          {renderStartBulkEditButtons()}
 
-
-          {/* Hide till it isn't used in app
-          <IfPermission perm="ui-bulk-edit.delete">
-            <Button
-              buttonStyle="dropdownItem"
-              onClick={buildButtonClickHandler(onDelete)}
-            >
-              <Icon icon="trash">
-                <FormattedMessage id="ui-bulk-edit.start.delete" />
-              </Icon>
-            </Button>
-          </IfPermission> */}
         </>
       </ActionMenuGroup>
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
