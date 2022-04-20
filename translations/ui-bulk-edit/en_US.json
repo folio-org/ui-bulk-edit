@@ -27,6 +27,7 @@
     "list.filters.capabilities.acquisition": "Acquisition",
     "list.savedQueries.title": "Saved queries",
     "start.edit": "Start bulk edit",
+    "start.edit.csv": "Start bulk edit (CSV)",
     "start.delete": "Start bulk delete",
     "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
     "error.uploadedFile": "Fail to upload file",
