@@ -116,5 +116,7 @@
     "delete": "Bulk Edit: (CSV) Delete",
     "app-view": "Bulk Edit: In app - View",
     "app-edit": "Bulk Edit: In app - Edit",
-    "app-delete": "Bulk Edit: In app - Delete"
+    "app-delete": "Bulk Edit: In app - Delete",
+    "start.edit.csv": "Start bulk edit (CSV)",
+    "start.downloadChangedRecords": "Download changed records (CSV)"
 }

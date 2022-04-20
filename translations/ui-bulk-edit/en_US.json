@@ -27,7 +27,6 @@
     "list.filters.capabilities.acquisition": "Acquisition",
     "list.savedQueries.title": "Saved queries",
     "start.edit": "Start bulk edit",
-    "start.edit.csv": "Start bulk edit (CSV)",
     "start.delete": "Start bulk delete",
     "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
     "error.uploadedFile": "Fail to upload file",
@@ -43,7 +42,6 @@
     "textArea.search": "Search",
     "textArea.resetAll": "Reset all",
     "start.downloadMathcedRecords": "Download matched records (CSV)",
-    "start.downloadChangedRecords": "Download changed records (CSV)",
     "columns.active": "Status",
     "columns.lastName": "Last name",
     "columns.firstName": "First name",
@@ -118,5 +116,7 @@
     "delete": "Bulk Edit: (CSV) Delete",
     "app-view": "Bulk Edit: In app - View",
     "app-edit": "Bulk Edit: In app - Edit",
-    "app-delete": "Bulk Edit: In app - Delete"
+    "app-delete": "Bulk Edit: In app - Delete",
+    "start.edit.csv": "Start bulk edit (CSV)",
+    "start.downloadChangedRecords": "Download changed records (CSV)"
 }
