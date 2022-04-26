@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import '../../../../../test/jest/__mock__';
@@ -38,34 +38,52 @@ describe('BulkEditInApp', () => {
     renderBulkEditInApp(titleMock);
 
     const plusButton = screen.getByLabelText('plus-sign');
-    const removeButton = screen.getAllByLabelText('trash');
 
     userEvent.click(plusButton);
 
     options.forEach((el) => expect(screen.getByTestId(el)).toBeVisible());
 
-    removeButton.forEach((el) => userEvent.click(el));
+    const removeButton = screen.getAllByLabelText('trash');
 
-    options.forEach((el) => expect(screen.getByTestId(el)).toBeVisible());
+    userEvent.click(removeButton[1]);
+
+
+    expect(screen.queryByTestId('select-option-1')).not.toBeInTheDocument();
   });
 
   it('should display select right select options on inventory tab', () => {
     renderBulkEditInApp(titleMock);
 
-    userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.inventory/ }));
-
     const options = [
-      /filters.recordIdentifier.item.barcode/,
-      /filters.recordIdentifier.item.UUID/,
-      /filters.recordIdentifier.item.ItemHRIDs/,
-      /filters.recordIdentifier.item.former/,
-      /filters.recordIdentifier.item.accession/,
-      /filters.recordIdentifier.item.holdingsUUID/,
+      /layer.options.permanent/,
+      /layer.options.temporary/,
     ];
 
-    const itemFormer = screen.getByRole('option', { name: /filters.recordIdentifier.item.former/ });
+    const itemFormer = screen.getByRole('option', { name: /layer.options.permanent/ });
 
-    const selectRecordIdentifier = screen.getByRole('combobox');
+    const selectRecordIdentifier = screen.getByTestId('select-option-0');
+
+    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+
+    userEvent.selectOptions(
+      selectRecordIdentifier,
+      itemFormer,
+    );
+
+    expect(itemFormer.selected).toBe(true);
+  });
+
+  it('should display select correct options in action select', () => {
+    renderBulkEditInApp(titleMock);
+
+    const options = [
+      /layer.action.replace/,
+      /layer.action.clear/,
+    ];
+
+    const itemFormer = screen.getByRole('option', { name: /layer.action.replace/ });
+
+    const selectRecordIdentifier = screen.getByTestId('select-actions-0');
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
 
