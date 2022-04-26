@@ -95,7 +95,7 @@ const BulkEditActionMenu = ({
   const renderStartBulkEditButtons = () => {
     return (
       <>
-        {hasInAppEditPerms && (
+        {hasInAppEditPerms && successCsvLink && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onEdit)}
