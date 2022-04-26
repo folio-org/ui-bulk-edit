@@ -15,6 +15,7 @@ import { useDownloadLinks, useLaunchJob } from '../../API';
 import { usePathParams } from '../../hooks';
 import { CAPABILITIES } from '../../constants';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
+import PreviewModal from '../modals/PreviewModal/PreviewModal';
 
 export const BulkEditList = () => {
   const location = useLocation();
@@ -78,6 +79,7 @@ export const BulkEditList = () => {
 
   return (
     <>
+      <PreviewModal />
       <Paneset>
         <Pane
           defaultWidth="20%"

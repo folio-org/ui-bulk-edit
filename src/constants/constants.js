@@ -60,7 +60,7 @@ export const USER_COLUMNS = [
   },
 ];
 
-export const INVENTORY_COLUMNS = [
+export const INVENTORY_COLUMNS_BASE = [
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.barcode" />,
     value: 'barcode',
@@ -109,6 +109,10 @@ export const INVENTORY_COLUMNS = [
     disabled: false,
     selected: true,
   },
+];
+
+export const INVENTORY_COLUMNS = [
+  ...INVENTORY_COLUMNS_BASE,
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.id" />,
     value: 'id',

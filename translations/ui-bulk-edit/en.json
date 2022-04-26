@@ -133,5 +133,11 @@
   "conformationModal.commitChanges": "Commit changes",
 
   "preview.file.title": "Filename: {fileUploadedName}",
-  "preview.query.title": "Query: {queryText}"
+  "preview.query.title": "Query: {queryText}",
+
+  "previewModal.message": "{count} records will be changed if the Save & close button is clicked. You may choose Download preview to review all changes prior to saving.",
+  "previewModal.previewToBeChanged": "Preview of records to be changed",
+  "previewModal.keepEditing": "Keep editing",
+  "previewModal.downloadPreview": "Download preview",
+  "previewModal.saveAndClose": "Save & close"
 }

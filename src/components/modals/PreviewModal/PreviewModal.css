@@ -1,0 +1,14 @@
+.previewModal {
+    max-width: 1024px;
+}
+
+.previewModalFooter {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.previewModalSubtitle {
+    display: inline-block;
+    margin: 20px 0 10px;
+}
