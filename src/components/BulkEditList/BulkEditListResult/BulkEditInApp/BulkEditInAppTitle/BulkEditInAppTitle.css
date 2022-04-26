@@ -1,0 +1,17 @@
+@import "@folio/stripes-components/lib/variables";
+
+.header {
+}
+
+.headerCell {
+  padding: 10px 10px 5px;
+  font-weight: var(--text-weight-bold);
+  border-bottom: 5px solid var(--primary);
+}
+
+.emptyHeaderCell {
+  width: 100%;
+  padding: 10px 10px 5px;
+  font-weight: var(--text-weight-bold);
+  border-bottom: 5px solid var(--primary);
+}
