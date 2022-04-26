@@ -6,7 +6,7 @@ import {
   Icon,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
-import React, { useMemo } from 'react';
+import React, { useMemo, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { buildSearch } from '@folio/stripes-acq-components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
@@ -15,6 +15,8 @@ import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { usePreviewRecords } from '../../API';
 import { useCurrentEntityInfo } from '../../hooks/currentEntity';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
+import { PreviewContext } from '../../contexts';
+import { CAPABILITIES } from '../../constants';
 
 const BulkEditActionMenu = ({
   onEdit,
@@ -35,6 +37,9 @@ const BulkEditActionMenu = ({
   const { id } = usePathParams('/bulk-edit/:id');
   const { items } = usePreviewRecords(id, capabilities?.toLowerCase());
   const { hasCsvEditPerms, hasInAppEditPerms, hasAnyEditPermissions } = useBulkPermissions();
+  const [contextPreview] = useContext(PreviewContext);
+  const itemsChecked = capabilities === CAPABILITIES.ITEM && !!contextPreview;
+  const usersChecked = capabilities === CAPABILITIES.USER;
 
   const handleChange = ({ values }) => {
     history.replace({
@@ -95,7 +100,7 @@ const BulkEditActionMenu = ({
   const renderStartBulkEditButtons = () => {
     return (
       <>
-        {hasInAppEditPerms && (
+        {hasInAppEditPerms && itemsChecked && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onEdit)}
@@ -106,7 +111,7 @@ const BulkEditActionMenu = ({
         </Button>
         )}
 
-        {hasCsvEditPerms && (
+        {hasCsvEditPerms && usersChecked && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onEdit)}

@@ -15,6 +15,7 @@ import { useDownloadLinks, useLaunchJob } from '../../API';
 import { usePathParams } from '../../hooks';
 import { CAPABILITIES } from '../../constants';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
+import { PreviewContext } from '../../contexts';
 
 export const BulkEditList = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ export const BulkEditList = () => {
   const [isBulkEditConformationModal, setIsBulkConformationModal] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [updatedId, setUpdatedId] = useState();
+  const [contextPreview, setContextPreview] = useState(null);
 
   const { id } = usePathParams('/bulk-edit/:id');
   const { data, isLoading, refetch } = useDownloadLinks(id);
@@ -77,7 +79,7 @@ export const BulkEditList = () => {
   ), [countOfRecords]);
 
   return (
-    <>
+    <PreviewContext.Provider value={[contextPreview, setContextPreview]}>
       <Paneset>
         <Pane
           defaultWidth="20%"
@@ -116,6 +118,6 @@ export const BulkEditList = () => {
         countOfRecords={countOfRecords}
         updatedId={updatedId}
       />
-    </>
+    </PreviewContext.Provider>
   );
 };

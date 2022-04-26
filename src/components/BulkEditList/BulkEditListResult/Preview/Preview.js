@@ -1,3 +1,4 @@
+import { useContext, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   Headline,
@@ -6,7 +7,7 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
 import {
@@ -15,6 +16,7 @@ import {
   usePreviewRecords,
   useUserGroupsMap,
 } from '../../../../API';
+import { PreviewContext } from '../../../../contexts';
 
 export const Preview = ({ id, title, initial, capabilities }) => {
   const { data } = useDownloadLinks(id);
@@ -22,6 +24,7 @@ export const Preview = ({ id, title, initial, capabilities }) => {
   const { items } = usePreviewRecords(id, capabilities);
   const { userGroups } = useUserGroupsMap();
   const [processedRecords, setProcessedRecords] = useState(0);
+  const [constextPreview, setContextPreview] = useContext(PreviewContext);
 
   const mappedErrors = errors?.map(e => {
     const [identifier, message] = e.message.split(',');
@@ -38,6 +41,12 @@ export const Preview = ({ id, title, initial, capabilities }) => {
       setProcessedRecords(data.progress.total - (errors?.length || 0));
     }
   }, [errors, data?.progress]);
+
+  useEffect(() => {
+    if (items?.length !== 0) {
+      setContextPreview(items?.length);
+    }
+  }, [items?.length]);
 
 
   return (
