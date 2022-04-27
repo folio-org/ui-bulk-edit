@@ -46,8 +46,6 @@ export const BulkEditList = () => {
   const runJob = useCallback(() => startJob({ id }), [id]);
 
   useEffect(() => {
-    const capabilities = new URLSearchParams(location.search).get('capabilities');
-
     if (!isLoading && id && capabilities === CAPABILITIES.ITEM) {
       runJob().finally(() => refetch());
     }

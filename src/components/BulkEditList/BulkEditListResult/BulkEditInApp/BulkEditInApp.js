@@ -20,16 +20,14 @@ import css from './BulkEditInApp.css';
 export const BulkEditInApp = ({ title }) => {
   const intl = useIntl();
 
-  const itemsActions = ITEMS_ACTION.map((el) => ({
+  const getItems = (items) => items.map((el) => ({
     value: el.value,
     label: intl.formatMessage({ id: el.label }),
     disabled: el.disabled,
   }));
-  const itemsOptions = ITEMS_OPTIONS.map((el) => ({
-    value: el.value,
-    label: intl.formatMessage({ id: el.label }),
-    disabled: el.disabled,
-  }));
+
+  const itemsActions = getItems(ITEMS_ACTION);
+  const itemsOptions = getItems(ITEMS_OPTIONS);
 
   const selectedOption = itemsOptions[0].value;
   const selectedAction = itemsActions[0].value;
