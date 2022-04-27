@@ -11,6 +11,7 @@ import { Headline,
   Select,
   RepeatableField,
   TextField } from '@folio/stripes/components';
+
 import { LocationLookup } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ITEMS_OPTIONS, ITEMS_ACTION } from '../../../../constants';
@@ -19,16 +20,14 @@ import css from './BulkEditInApp.css';
 export const BulkEditInApp = ({ title }) => {
   const intl = useIntl();
 
-  const itemsActions = ITEMS_ACTION.map((el) => ({
+  const getItems = (items) => items.map((el) => ({
     value: el.value,
     label: intl.formatMessage({ id: el.label }),
     disabled: el.disabled,
   }));
-  const itemsOptions = ITEMS_OPTIONS.map((el) => ({
-    value: el.value,
-    label: intl.formatMessage({ id: el.label }),
-    disabled: el.disabled,
-  }));
+
+  const itemsActions = getItems(ITEMS_ACTION);
+  const itemsOptions = getItems(ITEMS_OPTIONS);
 
   const selectedOption = itemsOptions[0].value;
   const selectedAction = itemsActions[0].value;
@@ -44,7 +43,7 @@ export const BulkEditInApp = ({ title }) => {
     '',
   ]);
 
-  const selectLocation = useCallback(
+  const handleSelectLocation = useCallback(
     (location, index) => {
       setLocation(locationName.map((loc, i) => {
         let newLoc = loc;
@@ -98,12 +97,13 @@ export const BulkEditInApp = ({ title }) => {
           className={css.row}
           onAdd={noop}
           renderField={(field, index) => (
-            <Row>
+            <Row data-testid={`row-${index}`}>
               <Col xs={6} sm={3}>
                 <Select
                   dataOptions={field.options}
                   value={field.selectedOption}
                   onChange={(e) => handleSelectChange(e, index, 'selectedOption')}
+                  data-testid={`select-option-${index}`}
                 />
               </Col>
               <Col xs={6} sm={3}>
@@ -111,6 +111,7 @@ export const BulkEditInApp = ({ title }) => {
                   dataOptions={field.actions}
                   value={field.selectedAction}
                   onChange={(e) => handleSelectChange(e, index, 'selectedAction')}
+                  data-testid={`select-actions-${index}`}
                 />
               </Col>
 
@@ -123,7 +124,8 @@ export const BulkEditInApp = ({ title }) => {
                 />
                 <LocationLookup
                   marginBottom0
-                  onLocationSelected={(location) => selectLocation(location, index)}
+                  onLocationSelected={(location) => handleSelectLocation(location, index)}
+                  data-testid={`locationLookup-${index}`}
                 />
               </Col>
               }
@@ -132,11 +134,13 @@ export const BulkEditInApp = ({ title }) => {
                   icon="plus-sign"
                   size="large"
                   onClick={handleAdd}
+                  data-testid={`add-button-${index}`}
                 />
                 <IconButton
                   icon="trash"
                   onClick={() => handleRemove(index)}
                   disabled={index === 0}
+                  data-testid={`remove-button-${index}`}
                 />
               </div>
             </Row>
