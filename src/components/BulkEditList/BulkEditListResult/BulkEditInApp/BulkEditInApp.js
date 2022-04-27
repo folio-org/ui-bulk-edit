@@ -11,6 +11,7 @@ import { Headline,
   Select,
   RepeatableField,
   TextField } from '@folio/stripes/components';
+
 import { LocationLookup } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ITEMS_OPTIONS, ITEMS_ACTION } from '../../../../constants';
