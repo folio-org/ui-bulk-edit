@@ -116,5 +116,7 @@
     "delete": "التحرير بالدفعة: (CSV) احذف",
     "app-view": "التحرير بالدفعة: داخل التطبيق - اعرض",
     "app-edit": "التحرير بالدفعة: داخل التطبيق - حرّر",
-    "app-delete": "التحرير بالدفعة: داخل التطبيق - احذف"
+    "app-delete": "التحرير بالدفعة: داخل التطبيق - احذف",
+    "start.edit.csv": "Start bulk edit (CSV)",
+    "start.downloadChangedRecords": "Download changed records (CSV)"
 }

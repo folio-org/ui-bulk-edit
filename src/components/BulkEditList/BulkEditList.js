@@ -1,8 +1,8 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset, Layer, PaneFooter, Button } from '@folio/stripes/components';
-import { AppIcon, useStripes } from '@folio/stripes/core';
+import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
 import { useLocation } from 'react-router-dom';
@@ -15,9 +15,10 @@ import { useDownloadLinks, useLaunchJob } from '../../API';
 import { usePathParams } from '../../hooks';
 import { CAPABILITIES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
+import { useBulkPermissions } from '../../hooks/useBulkPermissions';
+
 
 export const BulkEditList = () => {
-  const stripes = useStripes();
   const location = useLocation();
   const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
@@ -28,15 +29,11 @@ export const BulkEditList = () => {
   const [updatedId, setUpdatedId] = useState();
 
   const { id } = usePathParams('/bulk-edit/:id');
-  const { data, isLoading } = useDownloadLinks(id);
+  const { data, isLoading, refetch } = useDownloadLinks(id);
   const { startJob } = useLaunchJob(id);
   const [successCsvLink, errorCsvLink] = data?.files || [];
-  const hasEditOrDeletePerms = stripes.hasPerm('ui-bulk-edit.edit') || stripes.hasPerm('ui-bulk-edit.delete');
-  const hasEditPermsInApp = stripes.hasPerm('ui-bulk-edit.app-edit');
-  const hasViewCSVPerms = stripes.hasPerm('ui-bulk-edit.view');
+  const { isActionMenuShown } = useBulkPermissions();
 
-  const isActionMenuVisible = (successCsvLink || errorCsvLink) || // should show menu in case of existing preview/errors in any case
-      (hasEditOrDeletePerms && !hasEditPermsInApp) || !hasViewCSVPerms;
   const capabilities = new URLSearchParams(location.search).get('capabilities');
   const handleStartBulkEdit = () => {
     if (capabilities === CAPABILITIES.ITEM) {
@@ -44,9 +41,17 @@ export const BulkEditList = () => {
     } else setIsBulkEditModalOpen(true);
   };
 
+  const isActionMenuVisible = successCsvLink || errorCsvLink || isActionMenuShown;
+
+  const runJob = useCallback(() => startJob({ id }), [id]);
+
   useEffect(() => {
-    if (!isLoading && id && capabilities === CAPABILITIES.ITEM) { startJob({ id }); }
-  }, [startJob, id, isLoading, location.search]);
+    const capabilities = new URLSearchParams(location.search).get('capabilities');
+
+    if (!isLoading && id && capabilities === CAPABILITIES.ITEM) {
+      runJob().finally(() => refetch());
+    }
+  }, [id, isLoading, location.search]);
 
   const renderActionMenu = () => (
     isActionMenuVisible && (

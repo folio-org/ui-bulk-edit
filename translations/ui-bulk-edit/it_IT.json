@@ -14,7 +14,7 @@
     "uploaderBtnText": "or choose file",
     "uploaderSubTitle": "Select a file with record identifiers",
     "uploaderTitle": "Trascina e rilascia",
-    "uploaderActiveTitle": "Drop to continue",
+    "uploaderActiveTitle": "Rilascia per continuare",
     "uploading": "Caricamento",
     "cancel": "Cancel",
     "modal.fileExtensions.blocked.header": "Invalid file",
@@ -42,7 +42,7 @@
     "textArea.search": "Search",
     "textArea.resetAll": "Reset all",
     "start.downloadMathcedRecords": "Download matched records (CSV)",
-    "columns.active": "Status",
+    "columns.active": "Stato",
     "columns.lastName": "Last name",
     "columns.firstName": "First name",
     "columns.barcode": "Barcode",
@@ -66,8 +66,8 @@
     "list.preview.table.username": "Username",
     "list.preview.table.email": "email",
     "list.preview.table.expirationDate": "Expiration date",
-    "list.preview.table.active": "Active",
-    "list.preview.table.inactive": "Inactive",
+    "list.preview.table.active": "Attivo",
+    "list.preview.table.inactive": "Inattivo",
     "preview.file.title": "Filename: {fileUploadedName}",
     "preview.query.title": "Query: {queryText}",
     "list.errors.title": "Errors",
@@ -116,5 +116,7 @@
     "delete": "Bulk Edit: (CSV) Delete",
     "app-view": "Bulk Edit: In app - View",
     "app-edit": "Bulk Edit: In app - Edit",
-    "app-delete": "Bulk Edit: In app - Delete"
+    "app-delete": "Bulk Edit: In app - Delete",
+    "start.edit.csv": "Start bulk edit (CSV)",
+    "start.downloadChangedRecords": "Download changed records (CSV)"
 }
