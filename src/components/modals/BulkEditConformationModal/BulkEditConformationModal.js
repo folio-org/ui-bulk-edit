@@ -10,7 +10,7 @@ import {
 } from '@folio/stripes/components';
 
 import { useLocation } from 'react-router-dom';
-import { useRollBack, useLaunchJob } from '../../API/useFileUpload';
+import { useRollBack, useLaunchJob } from '../../../API/useFileUpload';
 
 const BulkEditConformationModal = ({
   open,

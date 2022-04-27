@@ -179,6 +179,11 @@ export const CAPABILITIES = {
   USER: 'USERS',
 };
 
+export const CAPABILITIES_PARAMS = {
+  ITEM: 'ITEM',
+  USER: 'USER',
+};
+
 export const ITEMS_ACTION = [
   {
     value: '',

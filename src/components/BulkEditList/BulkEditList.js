@@ -10,11 +10,12 @@ import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
-import { BulkEditConformationModal } from '../BulkEditConformationModal';
+import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
 import { useDownloadLinks, useLaunchJob } from '../../API';
 import { usePathParams } from '../../hooks';
 import { CAPABILITIES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
+import PreviewModal from '../modals/PreviewModal/PreviewModal';
 
 export const BulkEditList = () => {
   const stripes = useStripes();
@@ -26,6 +27,7 @@ export const BulkEditList = () => {
   const [isBulkEditConformationModal, setIsBulkConformationModal] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [updatedId, setUpdatedId] = useState();
+  const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
 
   const { id } = usePathParams('/bulk-edit/:id');
   const { data, isLoading } = useDownloadLinks(id);
@@ -64,8 +66,12 @@ export const BulkEditList = () => {
     setIsBulkEditModalOpen(false);
   };
 
-  const handleClickLayerFooter = () => {
+  const handleBulkEditLayerClose = () => {
     setIsBulkEditLayerOpen(false);
+  };
+
+  const handlePreviewModalOpen = () => {
+    setPreviewModalOpened(true);
   };
 
   const paneTitle = useMemo(() => {
@@ -97,25 +103,25 @@ export const BulkEditList = () => {
   const renderPaneFooter = () => {
     return (
       <PaneFooter
-        renderEnd={(
-          <Button
-            buttonStyle="primary mega"
-            id="clickable-create-widget"
-            marginBottom0
-            onClick={handleClickLayerFooter}
-            type="submit"
-          >
-            <FormattedMessage id="stripes-components.saveAndClose" />
-          </Button>
-        )}
         renderStart={(
           <Button
             buttonStyle="default mega"
             id="clickable-cancel"
             marginBottom0
-            onClick={handleClickLayerFooter}
+            onClick={handleBulkEditLayerClose}
           >
             <FormattedMessage id="stripes-components.cancel" />
+          </Button>
+        )}
+        renderEnd={(
+          <Button
+            buttonStyle="primary mega"
+            id="clickable-create-widget"
+            marginBottom0
+            onClick={handlePreviewModalOpen}
+            type="submit"
+          >
+            <FormattedMessage id="stripes-components.saveAndClose" />
           </Button>
         )}
       />
@@ -174,6 +180,11 @@ export const BulkEditList = () => {
         fileName={fileUploadedMatchedName}
         countOfRecords={countOfRecords}
         updatedId={updatedId}
+      />
+      <PreviewModal
+        jobId={id}
+        open={isPreviewModalOpened}
+        onKeepEditing={() => setPreviewModalOpened(false)}
       />
 
     </>
