@@ -14,7 +14,7 @@ import { Headline,
 
 import { LocationLookup } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
-import { ITEMS_OPTIONS, ITEMS_ACTION } from '../../../../constants';
+import { ITEMS_OPTIONS, ITEMS_ACTION, ACTIONS } from '../../../../constants';
 import css from './BulkEditInApp.css';
 
 export const BulkEditInApp = ({ title }) => {
@@ -29,41 +29,49 @@ export const BulkEditInApp = ({ title }) => {
   const itemsActions = getItems(ITEMS_ACTION);
   const itemsOptions = getItems(ITEMS_OPTIONS);
 
-  const selectedOption = itemsOptions[0].value;
-  const selectedAction = itemsActions[0].value;
+  const defaultOption = itemsOptions[0].value;
+  const defaultAction = itemsActions[0].value;
 
   const [fields, setFields] = useState([{
     actions: itemsActions,
     options: itemsOptions,
-    selectedOption,
-    selectedAction,
+    selectedOption: defaultOption,
+    selectedAction: defaultAction,
   }]);
 
-  const [locationName, setLocation] = useState([
-    '',
-  ]);
+  const [contentUpdates, setContentUpdates] = useState([{
+    option: defaultOption,
+    action: defaultAction,
+  }]);
 
   const handleSelectLocation = useCallback(
     (location, index) => {
-      setLocation(locationName.map((loc, i) => {
-        let newLoc = loc;
-
+      setContentUpdates(contentUpdates.map((loc, i) => {
         if (i === index) {
-          newLoc = location.code;
+          return Object.assign(loc, {
+            value: location.code,
+          });
         }
 
-        return newLoc;
+        return loc;
       }));
     },
-    [locationName],
+    [contentUpdates],
   );
 
   const handleSelectChange = (e, index, type) => {
-    setFields(fields.map((field, i) => {
+    setContentUpdates(contentUpdates.map((field, i) => {
       if (i === index) {
-        return Object.assign(field, {
-          [type]: e.target.value,
-        });
+        if (e.target.value === ACTIONS.CLEAR) {
+          return Object.assign(field, {
+            [type]: e.target.value,
+            value: '',
+          });
+        } else {
+          return Object.assign(field, {
+            [type]: e.target.value,
+          });
+        }
       }
 
       return field;
@@ -72,15 +80,16 @@ export const BulkEditInApp = ({ title }) => {
 
   const handleRemove = (index) => {
     setFields([...fields.slice(0, index), ...fields.slice(index + 1, fields.length)]);
-    setLocation([...locationName.slice(0, index), ...locationName.slice(index + 1, locationName.length)]);
+    setContentUpdates([...contentUpdates.slice(0, index), ...contentUpdates.slice(index + 1, contentUpdates.length)]);
   };
 
   const handleAdd = () => {
     setFields(prevState => [...prevState, { actions: itemsActions,
-      options: itemsOptions,
-      selectedOption,
-      selectedAction }]);
-    setLocation(prevState => [...prevState, '']);
+      options: itemsOptions }]);
+    setContentUpdates(prevState => [...prevState, {
+      option: defaultOption,
+      action: defaultAction,
+    }]);
   };
 
   return (
@@ -101,25 +110,25 @@ export const BulkEditInApp = ({ title }) => {
               <Col xs={6} sm={3}>
                 <Select
                   dataOptions={field.options}
-                  value={field.selectedOption}
-                  onChange={(e) => handleSelectChange(e, index, 'selectedOption')}
+                  value={contentUpdates[index].options}
+                  onChange={(e) => handleSelectChange(e, index, 'option')}
                   data-testid={`select-option-${index}`}
                 />
               </Col>
               <Col xs={6} sm={3}>
                 <Select
                   dataOptions={field.actions}
-                  value={field.selectedAction}
-                  onChange={(e) => handleSelectChange(e, index, 'selectedAction')}
+                  value={contentUpdates[index].action}
+                  onChange={(e) => handleSelectChange(e, index, 'action')}
                   data-testid={`select-actions-${index}`}
                 />
               </Col>
 
-              {field.selectedAction === 'replace' &&
+              {contentUpdates[index].action === ACTIONS.REPLACE &&
               <Col xs={6} sm={3}>
                 <TextField
                   type="text"
-                  value={locationName[index]}
+                  value={contentUpdates[index].value || ''}
                   disabled
                 />
                 <LocationLookup
