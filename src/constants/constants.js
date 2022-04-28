@@ -191,25 +191,30 @@ export const ITEMS_ACTION = [
     disabled: true,
   },
   {
-    value: 'replace',
+    value: 'REPLACE_WITH',
     label: 'ui-bulk-edit.layer.action.replace',
     disabled: false,
   },
   {
-    value: 'clear',
+    value: 'CLEAR_FIELD',
     label: 'ui-bulk-edit.layer.action.clear',
     disabled: false,
   },
 ];
 
+export const ACTIONS = {
+  REPLACE: 'REPLACE_WITH',
+  CLEAR: 'CLEAR_FIELD',
+};
+
 export const ITEMS_OPTIONS = [
   {
-    value: 'temporaryLocation',
+    value: 'TEMPORARY_LOCATION',
     label: 'ui-bulk-edit.layer.options.permanent',
     disabled: false,
   },
   {
-    value: 'permanentLocation',
+    value: 'PERMANENT_LOCATION',
     label: 'ui-bulk-edit.layer.options.temporary',
     disabled: false,
   },
