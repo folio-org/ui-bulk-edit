@@ -1,14 +1,20 @@
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import { getInventoryResultsFormatterBase } from '../../../constants/formatters';
 import { INVENTORY_COLUMNS_BASE } from '../../../constants';
 import css from './PreviewModal.css';
+import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
+import { useLaunchJob } from '../../../API';
 
-const PreviewModal = ({ open, jobId, onKeepEditing, onSave }) => {
+const PreviewModal = ({ open, jobId, onKeepEditing }) => {
+  const history = useHistory();
+  const location = useLocation();
   const formatter = getInventoryResultsFormatterBase();
   const visibleColumns = Object.keys(formatter);
   const columnMapping = INVENTORY_COLUMNS_BASE.reduce((acc, el) => {
@@ -25,11 +31,32 @@ const PreviewModal = ({ open, jobId, onKeepEditing, onSave }) => {
     temporaryLoanType: '120px',
   };
 
-  const [downloadClicked, setDownloadClicked] = useState(false);
+  const [previewItems, setPreviewItems] = useState([]);
 
-  const query = useInAppDownloadPreview(jobId, downloadClicked);
+  const { startJob } = useLaunchJob();
+  const { inAppUpload, isLoading: isUploading } = useInAppUpload();
+  const { refetch: downloadPreviewCSV, isLoading: isDownloading } = useInAppDownloadPreview(jobId);
 
-  console.log(query);
+  useEffect(() => {
+    if (jobId) {
+      inAppUpload({ jobId }).then(response => setPreviewItems(response));
+    }
+  }, [jobId]);
+
+  const handleStartJob = async () => {
+    try {
+      await startJob(jobId);
+
+      history.replace({
+        pathname: `/bulk-edit/${jobId}/progress`,
+        search: location.search,
+      });
+    } catch {
+      history.replace({
+        pathname: '/bulk-edit',
+      });
+    }
+  };
 
 
   return (
@@ -40,9 +67,10 @@ const PreviewModal = ({ open, jobId, onKeepEditing, onSave }) => {
       aria-label="PreviewModal"
       footer={
         <PreviewModalFooter
-          onDownloadPreview={() => setDownloadClicked(true)}
+          isDownloading={isDownloading}
+          onDownloadPreview={() => downloadPreviewCSV()}
+          onSave={handleStartJob}
           onKeepEditing={onKeepEditing}
-          onSave={onSave}
         />
     }
       dismissible
@@ -55,7 +83,7 @@ const PreviewModal = ({ open, jobId, onKeepEditing, onSave }) => {
       <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
 
       <MultiColumnList
-        contentData={[{
+        contentData={previewItems || [{
           active: true,
           barcode: '222',
           status: { name: 'active' },
@@ -70,6 +98,7 @@ const PreviewModal = ({ open, jobId, onKeepEditing, onSave }) => {
         columnMapping={columnMapping}
         formatter={formatter}
         visibleColumns={visibleColumns}
+        loading={isUploading}
       />
     </Modal>
   );
@@ -78,9 +107,7 @@ const PreviewModal = ({ open, jobId, onKeepEditing, onSave }) => {
 PreviewModal.propTypes = {
   open: PropTypes.bool,
   jobId: PropTypes.string,
-  onDownloadPreview: PropTypes.func,
   onKeepEditing: PropTypes.func,
-  onSave: PropTypes.func,
 };
 
 export default PreviewModal;

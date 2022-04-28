@@ -85,6 +85,7 @@ export const BulkEditInApp = ({ title }) => {
 
   return (
     <>
+      <pre>{JSON.stringify(fields, null, 2)}</pre>
       <Headline size="large" margin="medium">
         {title}
       </Headline>
