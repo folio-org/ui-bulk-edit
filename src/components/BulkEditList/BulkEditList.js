@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect, useCallback } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset, Layer, PaneFooter, Button } from '@folio/stripes/components';
@@ -31,9 +31,9 @@ export const BulkEditList = () => {
   const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
   const [contentUpdates, setContentUpdates] = useState(null);
 
-  const { id } = usePathParams('/bulk-edit/:id');
-  const { data, isLoading, refetch } = useDownloadLinks(id);
-  const { startJob } = useLaunchJob(id);
+  const { id: jobId } = usePathParams('/bulk-edit/:id');
+  const { data, isLoading, refetch } = useDownloadLinks(jobId);
+  const { startJob } = useLaunchJob();
   const [successCsvLink, errorCsvLink] = data?.files || [];
   const { isActionMenuShown } = useBulkPermissions();
 
@@ -46,13 +46,12 @@ export const BulkEditList = () => {
 
   const isActionMenuVisible = successCsvLink || errorCsvLink || isActionMenuShown;
 
-  const runJob = useCallback(() => startJob({ id }), [id]);
 
   useEffect(() => {
-    if (!isLoading && id && capabilities === CAPABILITIES.ITEM) {
-      runJob().finally(() => refetch());
+    if (!isLoading && jobId && capabilities === CAPABILITIES.ITEM) {
+      startJob({ jobId }).finally(() => refetch());
     }
-  }, [id, isLoading, location.search]);
+  }, [jobId, isLoading, location.search]);
 
   const renderActionMenu = () => (
     isActionMenuVisible && (
@@ -191,7 +190,7 @@ export const BulkEditList = () => {
         updatedId={updatedId}
       />
       <PreviewModal
-        jobId={id}
+        jobId={jobId}
         open={isPreviewModalOpened}
         contentUpdates={contentUpdates}
         onJobStarted={handleJobStart}
