@@ -155,6 +155,7 @@
   },
   "dependencies": {
     "@folio/stripes-acq-components": "^3.0.0",
+    "file-saver": "^2.0.5",
     "history": "^5.1.0",
     "lodash": "^4.17.5",
     "moment": "^2.29.1",

@@ -209,12 +209,12 @@ export const ACTIONS = {
 
 export const ITEMS_OPTIONS = [
   {
-    value: 'TEMPORARY_LOCATION',
+    value: 'PERMANENT_LOCATION',
     label: 'ui-bulk-edit.layer.options.permanent',
     disabled: false,
   },
   {
-    value: 'PERMANENT_LOCATION',
+    value: 'TEMPORARY_LOCATION',
     label: 'ui-bulk-edit.layer.options.temporary',
     disabled: false,
   },

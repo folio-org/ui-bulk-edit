@@ -1,9 +1,11 @@
+import { saveAs } from 'file-saver';
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
+import { useShowCallout } from '@folio/stripes-acq-components';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import { getInventoryResultsFormatterBase } from '../../../constants/formatters';
 import { INVENTORY_COLUMNS_BASE } from '../../../constants';
@@ -12,7 +14,8 @@ import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 import { useLaunchJob } from '../../../API';
 
-const PreviewModal = ({ open, jobId, onKeepEditing }) => {
+const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted }) => {
+  const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
   const formatter = getInventoryResultsFormatterBase();
@@ -35,28 +38,41 @@ const PreviewModal = ({ open, jobId, onKeepEditing }) => {
 
   const { startJob } = useLaunchJob();
   const { inAppUpload, isLoading: isUploading } = useInAppUpload();
-  const { refetch: downloadPreviewCSV, isLoading: isDownloading } = useInAppDownloadPreview(jobId);
-
-  useEffect(() => {
-    if (jobId) {
-      inAppUpload({ jobId }).then(response => setPreviewItems(response));
-    }
-  }, [jobId]);
+  const { data: fileData, refetch: downloadPreviewCSV, isLoading: isDownloading } = useInAppDownloadPreview(jobId);
 
   const handleStartJob = async () => {
     try {
-      await startJob(jobId);
+      await startJob({ jobId });
+
+      onJobStarted();
 
       history.replace({
         pathname: `/bulk-edit/${jobId}/progress`,
         search: location.search,
       });
-    } catch {
-      history.replace({
-        pathname: '/bulk-edit',
+    } catch (e) {
+      showCallout({
+        message: e.message,
+        type: 'error',
       });
     }
   };
+
+  useEffect(() => {
+    if (jobId && contentUpdates && open) {
+      inAppUpload({ jobId, contentUpdates }).then(response => {
+        setPreviewItems(response.items);
+      });
+    }
+  }, [jobId, contentUpdates, open]);
+
+  useEffect(() => {
+    if (fileData) {
+      fileData.blob().then(blob => {
+        saveAs(blob, 'preview.csv');
+      });
+    }
+  }, [fileData]);
 
 
   return (
@@ -68,7 +84,7 @@ const PreviewModal = ({ open, jobId, onKeepEditing }) => {
       footer={
         <PreviewModalFooter
           isDownloading={isDownloading}
-          onDownloadPreview={() => downloadPreviewCSV()}
+          onDownloadPreview={downloadPreviewCSV}
           onSave={handleStartJob}
           onKeepEditing={onKeepEditing}
         />
@@ -77,23 +93,13 @@ const PreviewModal = ({ open, jobId, onKeepEditing }) => {
       onClose={onKeepEditing}
     >
       <MessageBanner type="warning">
-        <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: 248 }} />
+        <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: contentUpdates?.length }} />
       </MessageBanner>
 
       <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
 
       <MultiColumnList
-        contentData={previewItems || [{
-          active: true,
-          barcode: '222',
-          status: { name: 'active' },
-          effectiveLocation: { name: 'effectiveLocation' },
-          callNumber: 'callNumber',
-          hrid: 'hrid',
-          materialType: { name: 'materialType' },
-          permanentLoanType: { name: 'permanentLoanType' },
-          temporaryLoanType: { name: 'temporaryLoanType' },
-        }]}
+        contentData={previewItems}
         columnWidths={columnWidths}
         columnMapping={columnMapping}
         formatter={formatter}
@@ -108,6 +114,8 @@ PreviewModal.propTypes = {
   open: PropTypes.bool,
   jobId: PropTypes.string,
   onKeepEditing: PropTypes.func,
+  onJobStarted: PropTypes.func,
+  contentUpdates: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PreviewModal;

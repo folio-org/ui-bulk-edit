@@ -11,9 +11,11 @@ export const PreviewModalFooter = memo(({ onKeepEditing, onDownloadPreview, onSa
       <Button onClick={onKeepEditing}>
         <FormattedMessage id="ui-bulk-edit.previewModal.keepEditing" />
       </Button>
-      <Button onClick={onDownloadPreview}>
-        {isDownloading ? <Preloader /> : <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />}
-      </Button>
+      {isDownloading ? <Preloader /> : (
+        <Button onClick={onDownloadPreview}>
+          <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />
+        </Button>
+      )}
       <Button onClick={onSave} buttonStyle="primary">
         <FormattedMessage id="ui-bulk-edit.previewModal.saveAndClose" />
       </Button>

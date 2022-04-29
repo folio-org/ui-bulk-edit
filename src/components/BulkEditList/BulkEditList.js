@@ -29,6 +29,7 @@ export const BulkEditList = () => {
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [updatedId, setUpdatedId] = useState();
   const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
+  const [contentUpdates, setContentUpdates] = useState(null);
 
   const { id } = usePathParams('/bulk-edit/:id');
   const { data, isLoading, refetch } = useDownloadLinks(id);
@@ -75,6 +76,11 @@ export const BulkEditList = () => {
 
   const handlePreviewModalOpen = () => {
     setPreviewModalOpened(true);
+  };
+
+  const handleJobStart = () => {
+    setPreviewModalOpened(false);
+    setIsBulkEditLayerOpen(false);
   };
 
   const paneTitle = useMemo(() => {
@@ -165,7 +171,7 @@ export const BulkEditList = () => {
             dismissible
             onClose={() => setIsBulkEditLayerOpen(false)}
           >
-            <BulkEditInApp title={fileNameTitle()} />
+            <BulkEditInApp title={fileNameTitle()} onContentUpdatesChanged={setContentUpdates} />
           </Pane>
         </Layer>
       </Paneset>
@@ -187,6 +193,8 @@ export const BulkEditList = () => {
       <PreviewModal
         jobId={id}
         open={isPreviewModalOpened}
+        contentUpdates={contentUpdates}
+        onJobStarted={handleJobStart}
         onKeepEditing={() => setPreviewModalOpened(false)}
       />
 
