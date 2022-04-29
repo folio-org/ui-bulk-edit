@@ -174,3 +174,40 @@ export const CAPABILITIES = {
   ITEM: 'ITEMS',
   USER: 'USERS',
 };
+
+export const ITEMS_ACTION = [
+  {
+    value: '',
+    label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
+    disabled: true,
+  },
+  {
+    value: 'REPLACE_WITH',
+    label: 'ui-bulk-edit.layer.action.replace',
+    disabled: false,
+  },
+  {
+    value: 'CLEAR_FIELD',
+    label: 'ui-bulk-edit.layer.action.clear',
+    disabled: false,
+  },
+];
+
+export const ACTIONS = {
+  REPLACE: 'REPLACE_WITH',
+  CLEAR: 'CLEAR_FIELD',
+};
+
+export const ITEMS_OPTIONS = [
+  {
+    value: 'TEMPORARY_LOCATION',
+    label: 'ui-bulk-edit.layer.options.permanent',
+    disabled: false,
+  },
+  {
+    value: 'PERMANENT_LOCATION',
+    label: 'ui-bulk-edit.layer.options.temporary',
+    disabled: false,
+  },
+];
+

@@ -133,5 +133,14 @@
   "conformationModal.commitChanges": "Commit changes",
 
   "preview.file.title": "Filename: {fileUploadedName}",
-  "preview.query.title": "Query: {queryText}"
+  "preview.query.title": "Query: {queryText}",
+
+  "layer.title": "Bulk edits",
+  "layer.column.options": "Options",
+  "layer.column.actions": "Actions",
+  "layer.action.replace": "Replace with",
+  "layer.action.clear": "Clear field",
+  "layer.options.permanent": "Permanent item location",
+  "layer.options.temporary": "Temporary item location"
+
 }
