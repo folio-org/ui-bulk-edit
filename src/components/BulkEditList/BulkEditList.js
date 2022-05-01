@@ -195,6 +195,7 @@ export const BulkEditList = () => {
         contentUpdates={contentUpdates}
         onJobStarted={handleJobStart}
         onKeepEditing={() => setPreviewModalOpened(false)}
+        setUpdatedId={setUpdatedId}
       />
 
     </>

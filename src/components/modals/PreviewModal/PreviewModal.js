@@ -14,7 +14,7 @@ import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 import { useLaunchJob } from '../../../API';
 
-const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted }) => {
+const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted, setUpdatedId }) => {
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
@@ -44,6 +44,7 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
     try {
       await startJob({ jobId });
 
+      setUpdatedId(jobId);
       onJobStarted();
 
       history.replace({
@@ -115,6 +116,7 @@ PreviewModal.propTypes = {
   jobId: PropTypes.string,
   onKeepEditing: PropTypes.func,
   onJobStarted: PropTypes.func,
+  setUpdatedId: PropTypes.func,
   contentUpdates: PropTypes.arrayOf(PropTypes.object),
 };
 

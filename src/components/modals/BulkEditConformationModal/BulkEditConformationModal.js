@@ -33,7 +33,7 @@ const BulkEditConformationModal = ({
   const { rollBackJob } = useRollBack();
 
   const onStartJob = async () => {
-    await startJob({ id: updatedId });
+    await startJob({ jobId: updatedId });
     setIsBulkConformationModal(false);
 
     history.replace({
