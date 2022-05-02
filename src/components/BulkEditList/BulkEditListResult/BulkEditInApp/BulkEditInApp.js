@@ -98,7 +98,6 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
   return (
     <>
-      <pre>{JSON.stringify(contentUpdates, null, 2)}</pre>
       <Headline size="large" margin="medium">
         {title}
       </Headline>
