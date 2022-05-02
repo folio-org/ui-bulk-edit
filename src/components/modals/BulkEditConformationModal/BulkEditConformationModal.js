@@ -10,7 +10,7 @@ import {
 } from '@folio/stripes/components';
 
 import { useLocation } from 'react-router-dom';
-import { useRollBack, useLaunchJob } from '../../API/useFileUpload';
+import { useRollBack, useLaunchJob } from '../../../API/useFileUpload';
 
 const BulkEditConformationModal = ({
   open,
@@ -33,7 +33,7 @@ const BulkEditConformationModal = ({
   const { rollBackJob } = useRollBack();
 
   const onStartJob = async () => {
-    await startJob({ id: updatedId });
+    await startJob({ jobId: updatedId });
     setIsBulkConformationModal(false);
 
     history.replace({

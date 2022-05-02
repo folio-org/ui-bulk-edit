@@ -1,6 +1,6 @@
 import { AppIcon } from '@folio/stripes/core';
 import { FormattedMessage } from 'react-intl';
-import { FormattedTime } from './FormattedTime';
+import { FormattedTime } from '../components/BulkEditList/BulkEditListResult/Preview/PreviewAccordion/FormattedTime';
 
 export const getUserResultsFormatter = (userGroups) => ({
   active: user => (
@@ -20,8 +20,7 @@ export const getUserResultsFormatter = (userGroups) => ({
   expirationDate: user => <FormattedTime dateString={user.expirationDate} />,
 });
 
-
-export const getInventoryResultsFormatter = () => ({
+export const getInventoryResultsFormatterBase = () => ({
   barcode: item => item.barcode,
   status: item => item.status.name ?? '',
   effectiveLocation: item => item.effectiveLocation?.name || '',
@@ -30,6 +29,10 @@ export const getInventoryResultsFormatter = () => ({
   materialType: item => item.materialType?.name || '',
   permanentLoanType: item => item.permanentLoanType?.name || '',
   temporaryLoanType: item => item.temporaryLoanType?.name || '',
+});
+
+export const getInventoryResultsFormatter = () => ({
+  ...getInventoryResultsFormatterBase(),
   id: item => item.id,
   formerIds: item => item.formerIds?.join(','),
   accessionNumber: item => item.accessionNumber,

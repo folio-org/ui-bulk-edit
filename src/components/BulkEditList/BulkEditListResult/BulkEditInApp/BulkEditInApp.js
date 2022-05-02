@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import noop from 'lodash/noop';
@@ -17,7 +17,7 @@ import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ITEMS_OPTIONS, ITEMS_ACTION, ACTIONS } from '../../../../constants';
 import css from './BulkEditInApp.css';
 
-export const BulkEditInApp = ({ title }) => {
+export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   const intl = useIntl();
 
   const getItems = (items) => items.map((el) => ({
@@ -49,7 +49,7 @@ export const BulkEditInApp = ({ title }) => {
       setContentUpdates(contentUpdates.map((loc, i) => {
         if (i === index) {
           return Object.assign(loc, {
-            value: location.code,
+            value: location.name,
           });
         }
 
@@ -91,6 +91,10 @@ export const BulkEditInApp = ({ title }) => {
       action: defaultAction,
     }]);
   };
+
+  useEffect(() => {
+    onContentUpdatesChanged(contentUpdates);
+  }, [contentUpdates]);
 
   return (
     <>
@@ -161,5 +165,6 @@ export const BulkEditInApp = ({ title }) => {
 };
 
 BulkEditInApp.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  onContentUpdatesChanged: PropTypes.func,
 };

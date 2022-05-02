@@ -60,7 +60,7 @@ export const USER_COLUMNS = [
   },
 ];
 
-export const INVENTORY_COLUMNS = [
+export const INVENTORY_COLUMNS_BASE = [
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.barcode" />,
     value: 'barcode',
@@ -109,6 +109,10 @@ export const INVENTORY_COLUMNS = [
     disabled: false,
     selected: true,
   },
+];
+
+export const INVENTORY_COLUMNS = [
+  ...INVENTORY_COLUMNS_BASE,
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.id" />,
     value: 'id',
@@ -175,6 +179,11 @@ export const CAPABILITIES = {
   USER: 'USERS',
 };
 
+export const CAPABILITIES_PARAMS = {
+  ITEM: 'ITEM',
+  USER: 'USER',
+};
+
 export const ITEMS_ACTION = [
   {
     value: '',
@@ -200,12 +209,12 @@ export const ACTIONS = {
 
 export const ITEMS_OPTIONS = [
   {
-    value: 'TEMPORARY_LOCATION',
+    value: 'PERMANENT_LOCATION',
     label: 'ui-bulk-edit.layer.options.permanent',
     disabled: false,
   },
   {
-    value: 'PERMANENT_LOCATION',
+    value: 'TEMPORARY_LOCATION',
     label: 'ui-bulk-edit.layer.options.temporary',
     disabled: false,
   },

@@ -3,7 +3,7 @@ import { CAPABILITIES, INVENTORY_COLUMNS, USER_COLUMNS } from '../constants';
 import {
   getInventoryResultsFormatter,
   getUserResultsFormatter,
-} from '../components/BulkEditList/BulkEditListResult/Preview/PreviewAccordion/formatters';
+} from '../constants/formatters';
 
 export const useCurrentEntityInfo = ({ userGroups } = {}) => {
   const location = useLocation();

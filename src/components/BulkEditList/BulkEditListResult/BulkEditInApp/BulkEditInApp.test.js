@@ -6,7 +6,7 @@ import { BulkEditInApp } from './BulkEditInApp';
 
 const renderBulkEditInApp = (title) => {
   render(
-    <BulkEditInApp title={title} />,
+    <BulkEditInApp title={title} onContentUpdatesChanged={() => {}} />,
   );
 };
 

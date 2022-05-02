@@ -30,6 +30,9 @@ yarn-error.log*
 **/node_modules/*
 *.idea*
 *.DS_Store
+.yarnrc
+stripes.config.js
+
 
 # stripes
 .stripesclirc

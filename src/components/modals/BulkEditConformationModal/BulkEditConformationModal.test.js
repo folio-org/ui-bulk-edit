@@ -6,10 +6,10 @@ import { useOkapiKy } from '@folio/stripes/core';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
 
-import '../../../test/jest/__mock__';
+import '../../../../test/jest/__mock__';
 
 import BulkEditConformationModal from './BulkEditConformationModal';
-import { queryClient } from '../../../test/jest/utils/queryClient';
+import { queryClient } from '../../../../test/jest/utils/queryClient';
 
 const history = createMemoryHistory();
 history.push('/bulk-edit/1?fileName=Mock.csv&capabilities=USERS');
