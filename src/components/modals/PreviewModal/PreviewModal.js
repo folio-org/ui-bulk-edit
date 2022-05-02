@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import { useShowCallout } from '@folio/stripes-acq-components';
+import moment from 'moment';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import { getInventoryResultsFormatterBase } from '../../../constants/formatters';
 import { INVENTORY_COLUMNS_BASE } from '../../../constants';
@@ -69,8 +70,11 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
 
   useEffect(() => {
     if (fileData) {
+      const date = moment().format('YYYY-MM-DD');
+      const fileName = new URLSearchParams(location.search).get('fileName');
+
       fileData.blob().then(blob => {
-        saveAs(blob, 'preview.csv');
+        saveAs(blob, `${date}-Updates- Preview-${fileName}`);
       });
     }
   }, [fileData]);
