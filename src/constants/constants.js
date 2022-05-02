@@ -187,7 +187,7 @@ export const CAPABILITIES_PARAMS = {
 export const ITEMS_ACTION = [
   {
     value: '',
-    label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
+    label: 'ui-bulk-edit.actions.placeholder',
     disabled: true,
   },
   {

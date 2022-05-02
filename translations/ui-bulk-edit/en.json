@@ -136,6 +136,8 @@
   "preview.query.title": "Query: {queryText}",
 
   "layer.title": "Bulk edits",
+  "layer.confirmChanges": "Confirm changes",
+  "actions.placeholder": "Select action",
   "layer.column.options": "Options",
   "layer.column.actions": "Actions",
   "layer.action.replace": "Replace with",
