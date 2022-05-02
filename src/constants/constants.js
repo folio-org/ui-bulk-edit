@@ -178,7 +178,7 @@ export const CAPABILITIES = {
 export const ITEMS_ACTION = [
   {
     value: '',
-    label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
+    label: 'ui-bulk-edit.actions.placeholder',
     disabled: true,
   },
   {

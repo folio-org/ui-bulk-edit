@@ -108,7 +108,7 @@ export const BulkEditList = () => {
             onClick={handleClickLayerFooter}
             type="submit"
           >
-            <FormattedMessage id="stripes-components.saveAndClose" />
+            <FormattedMessage id="ui-bulk-edit.layer.confirmChanges" />
           </Button>
         )}
         renderStart={(
