@@ -117,6 +117,20 @@
     "app-view": "Bulk Edit: In app - View",
     "app-edit": "Bulk Edit: In app - Edit",
     "app-delete": "Bulk Edit: In app - Delete",
-    "start.edit.csv": "Start bulk edit (CSV)",
-    "start.downloadChangedRecords": "Download changed records (CSV)"
+    "start.edit.csv": "開始批量編輯 (CSV)",
+    "start.downloadChangedRecords": "下載已變動的紀錄 (CSV)",
+    "layer.title": "Bulk edits",
+    "layer.column.options": "Options",
+    "layer.column.actions": "Actions",
+    "layer.action.replace": "Replace with",
+    "layer.action.clear": "Clear field",
+    "layer.options.permanent": "Permanent item location",
+    "layer.options.temporary": "Temporary item location",
+    "layer.confirmChanges": "Confirm changes",
+    "actions.placeholder": "Select action",
+    "previewModal.message": "{count} records will be changed if the Save & close button is clicked. You may choose Download preview to review all changes prior to saving.",
+    "previewModal.previewToBeChanged": "Preview of records to be changed",
+    "previewModal.keepEditing": "Keep editing",
+    "previewModal.downloadPreview": "Download preview",
+    "previewModal.saveAndClose": "Save & close"
 }

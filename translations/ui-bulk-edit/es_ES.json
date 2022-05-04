@@ -118,5 +118,19 @@
     "app-edit": "Bulk Edit: In app - Edit",
     "app-delete": "Bulk Edit: In app - Delete",
     "start.edit.csv": "Start bulk edit (CSV)",
-    "start.downloadChangedRecords": "Download changed records (CSV)"
+    "start.downloadChangedRecords": "Download changed records (CSV)",
+    "layer.title": "Bulk edits",
+    "layer.column.options": "Options",
+    "layer.column.actions": "Actions",
+    "layer.action.replace": "Replace with",
+    "layer.action.clear": "Clear field",
+    "layer.options.permanent": "Permanent item location",
+    "layer.options.temporary": "Temporary item location",
+    "layer.confirmChanges": "Confirm changes",
+    "actions.placeholder": "Select action",
+    "previewModal.message": "Los registros de {count} se modificarán si se hace clic en el botón Guardar y cerrar. Puede elegir Descargar vista previa para revisar todos los cambios antes de guardar.",
+    "previewModal.previewToBeChanged": "Vista previa de los registros a modificar",
+    "previewModal.keepEditing": "Seguir editando",
+    "previewModal.downloadPreview": "Descargar vista previa",
+    "previewModal.saveAndClose": "Guardar y cerrar"
 }
