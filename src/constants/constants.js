@@ -60,7 +60,7 @@ export const USER_COLUMNS = [
   },
 ];
 
-export const INVENTORY_COLUMNS = [
+export const INVENTORY_COLUMNS_BASE = [
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.barcode" />,
     value: 'barcode',
@@ -109,6 +109,10 @@ export const INVENTORY_COLUMNS = [
     disabled: false,
     selected: true,
   },
+];
+
+export const INVENTORY_COLUMNS = [
+  ...INVENTORY_COLUMNS_BASE,
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.id" />,
     value: 'id',
@@ -174,3 +178,45 @@ export const CAPABILITIES = {
   ITEM: 'ITEMS',
   USER: 'USERS',
 };
+
+export const CAPABILITIES_PARAMS = {
+  ITEM: 'ITEM',
+  USER: 'USER',
+};
+
+export const ITEMS_ACTION = [
+  {
+    value: '',
+    label: 'ui-bulk-edit.actions.placeholder',
+    disabled: true,
+  },
+  {
+    value: 'REPLACE_WITH',
+    label: 'ui-bulk-edit.layer.action.replace',
+    disabled: false,
+  },
+  {
+    value: 'CLEAR_FIELD',
+    label: 'ui-bulk-edit.layer.action.clear',
+    disabled: false,
+  },
+];
+
+export const ACTIONS = {
+  REPLACE: 'REPLACE_WITH',
+  CLEAR: 'CLEAR_FIELD',
+};
+
+export const ITEMS_OPTIONS = [
+  {
+    value: 'PERMANENT_LOCATION',
+    label: 'ui-bulk-edit.layer.options.permanent',
+    disabled: false,
+  },
+  {
+    value: 'TEMPORARY_LOCATION',
+    label: 'ui-bulk-edit.layer.options.temporary',
+    disabled: false,
+  },
+];
+

@@ -6,7 +6,7 @@ jest.mock('@folio/stripes/components', () => ({
     contentLabel,
     isOpen,
     children,
-  }) => <div contentLabel={contentLabel} isOpen={isOpen}>{children}</div>),
+  }) => <div contentLabel={contentLabel} isOpen={isOpen}>Layer</div>),
   MultiColumnList: jest.fn(({
     visibleColumns,
     columnMapping,

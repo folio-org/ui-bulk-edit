@@ -116,5 +116,21 @@
     "delete": "التحرير بالدفعة: (CSV) احذف",
     "app-view": "التحرير بالدفعة: داخل التطبيق - اعرض",
     "app-edit": "التحرير بالدفعة: داخل التطبيق - حرّر",
-    "app-delete": "التحرير بالدفعة: داخل التطبيق - احذف"
+    "app-delete": "التحرير بالدفعة: داخل التطبيق - احذف",
+    "start.edit.csv": "بدء التحرير بالدفعة (CSV)",
+    "start.downloadChangedRecords": "تنزيل التسجيلات المتغيرة (CSV)",
+    "layer.title": "تحرير بالجملة",
+    "layer.column.options": "الخيارات",
+    "layer.column.actions": "الإجراءات",
+    "layer.action.replace": "استبدال بـ",
+    "layer.action.clear": "مسح الحقل",
+    "layer.options.permanent": "موقع المادة الدائم",
+    "layer.options.temporary": "موقع المادة المؤقت",
+    "layer.confirmChanges": "تأكيد التغييرات",
+    "actions.placeholder": "اختر إجراء",
+    "previewModal.message": "سيتم تغيير {count} تسجيلة إذا تم النقر على زر حفظ وإغلاق. يمكنك اختيار تنزيل معاينة لمراجعة كل التغييرات قبل الحفظ.",
+    "previewModal.previewToBeChanged": "معاينة التسجيلات المراد تغييرها",
+    "previewModal.keepEditing": "استمر في التحرير",
+    "previewModal.downloadPreview": "تنزيل معاينة",
+    "previewModal.saveAndClose": "حفظ وإغلاق"
 }

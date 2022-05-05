@@ -49,8 +49,8 @@ export const useFileUploadComand = () => {
 export const useLaunchJob = () => {
   const ky = useOkapiKy();
 
-  const { mutateAsync: startJob } = useMutation({ mutationFn: ({ id }) => {
-    return ky.post(`bulk-edit/${id}/start`);
+  const { mutateAsync: startJob } = useMutation({ mutationFn: ({ jobId }) => {
+    return ky.post(`bulk-edit/${jobId}/start`);
   } });
 
   return {

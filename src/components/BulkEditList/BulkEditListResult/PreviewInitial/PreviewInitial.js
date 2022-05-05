@@ -9,7 +9,7 @@ const PreviewInitial = () => {
   const { id } = useParams();
 
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
-  const capabilities = useMemo(() => new URLSearchParams(location.search).get('capabilities').toLocaleLowerCase(), [location.search]);
+  const capabilities = useMemo(() => new URLSearchParams(location.search).get('capabilities')?.toLocaleLowerCase(), [location.search]);
 
 
   const title = useMemo(() => {

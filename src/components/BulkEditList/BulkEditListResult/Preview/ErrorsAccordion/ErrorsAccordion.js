@@ -26,7 +26,7 @@ const ErrorsAccordion = ({ errors = [], entries }) => {
   const fileName = new URLSearchParams(location.search).get('fileName');
   const errorLength = errors.length;
 
-  const matched = entries - errorLength;
+  const matched = (entries - errorLength) || 0;
 
   return (
     <>

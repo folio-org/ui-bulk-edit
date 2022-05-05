@@ -87,6 +87,7 @@
   "modal.next": "Next",
 
   "start.edit": "Start bulk edit",
+  "start.edit.csv": "Start bulk edit (CSV)",
   "start.delete": "Start bulk delete",
 
   "textArea.search": "Search",
@@ -94,6 +95,7 @@
 
   "start.downloadErrors": "Download errors (CSV)",
   "start.downloadMathcedRecords": "Download matched records (CSV)",
+  "start.downloadChangedRecords": "Download changed records (CSV)",
 
   "error.uploadedFile": "Fail to upload file",
   "error.sww": "Something went wrong",
@@ -131,5 +133,21 @@
   "conformationModal.commitChanges": "Commit changes",
 
   "preview.file.title": "Filename: {fileUploadedName}",
-  "preview.query.title": "Query: {queryText}"
+  "preview.query.title": "Query: {queryText}",
+
+  "layer.title": "Bulk edits",
+  "layer.confirmChanges": "Confirm changes",
+  "actions.placeholder": "Select action",
+  "layer.column.options": "Options",
+  "layer.column.actions": "Actions",
+  "layer.action.replace": "Replace with",
+  "layer.action.clear": "Clear field",
+  "layer.options.permanent": "Permanent item location",
+  "layer.options.temporary": "Temporary item location",
+
+  "previewModal.message": "{count} records will be changed if the Save & close button is clicked. You may choose Download preview to review all changes prior to saving.",
+  "previewModal.previewToBeChanged": "Preview of records to be changed",
+  "previewModal.keepEditing": "Keep editing",
+  "previewModal.downloadPreview": "Download preview",
+  "previewModal.saveAndClose": "Save & close"
 }

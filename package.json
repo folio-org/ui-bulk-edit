@@ -43,9 +43,12 @@
         "visible": true,
         "subPermissions": [
           "module.bulk-edit.enabled",
-          "bulk-edit.preview.collection.get",
+          "bulk-edit.preview.users.collection.get",
+          "bulk-edit.preview.updated-items.download.get",
           "bulk-edit.errors.collection.get",
-          "usergroups.collection.get"
+          "usergroups.collection.get",
+          "data-export.job.item.get",
+          "bulk-edit.preview-users.collection.get"
         ]
       },
       {
@@ -54,6 +57,7 @@
         "subPermissions": [
           "ui-bulk-edit.view",
           "bulk-edit.item.post",
+          "bulk-edit.items.content-update.upload.post",
           "bulk-edit.start.item.post",
           "bulk-edit.roll-back.item.post",
           "data-export.job.item.post"
@@ -71,13 +75,28 @@
       {
         "permissionName": "ui-bulk-edit.app-view",
         "displayName": "Bulk Edit: In app - View",
-        "subPermissions": [],
+        "subPermissions": [
+          "module.bulk-edit.enabled",
+          "bulk-edit.preview.items.collection.get",
+          "bulk-edit.preview.updated-items.download.get",
+          "bulk-edit.errors.collection.get",
+          "usergroups.collection.get",
+          "data-export.job.item.get",
+          "bulk-edit.preview-items.collection.get"
+        ],
         "visible": true
       },
       {
         "permissionName": "ui-bulk-edit.app-edit",
         "displayName": "Bulk Edit: In app - Edit",
-        "subPermissions": [],
+        "subPermissions": [
+          "ui-bulk-edit.app-view",
+          "bulk-edit.item.post",
+          "bulk-edit.items.content-update.upload.post",
+          "bulk-edit.start.item.post",
+          "bulk-edit.roll-back.item.post",
+          "data-export.job.item.post"
+        ],
         "visible": true
       },
       {
@@ -136,6 +155,7 @@
   },
   "dependencies": {
     "@folio/stripes-acq-components": "^3.0.0",
+    "file-saver": "^2.0.5",
     "history": "^5.1.0",
     "lodash": "^4.17.5",
     "moment": "^2.29.1",
