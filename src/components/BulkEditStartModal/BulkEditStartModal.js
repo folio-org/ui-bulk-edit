@@ -38,7 +38,7 @@ const BulkEditStartModal = ({
   const [isConformationButton, setConformationButton] = useState(true);
 
   const fileName = new URLSearchParams(location.search).get('processedFileName');
-  const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title' });
+  const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title.uploadedFile' }, { fileName });
   const modalLabelMessage = intl.formatMessage({ id: 'ui-bulk-edit.modal.successfullMessage' }, { fileName });
   const confirmLabel = intl.formatMessage({ id: 'ui-bulk-edit.modal.next' });
   const cancelLabel = intl.formatMessage({ id: 'stripes-components.cancel' });
@@ -102,6 +102,7 @@ const BulkEditStartModal = ({
   const onCancelHandlde = () => {
     onCancel();
     setIsFileUploaded(false);
+    setConformationButton(true);
   };
 
   const footer = (
