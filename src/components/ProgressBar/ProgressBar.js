@@ -11,16 +11,17 @@ export const ProgressBar = ({ updatedId }) => {
   const location = useLocation();
   const history = useHistory();
   const { data } = useProgressStatus(updatedId);
-  const title = new URLSearchParams(location.search).get('processedFileName');
+  const processedTitle = new URLSearchParams(location.search).get('processedFileName');
+  const title = new URLSearchParams(location.search).get('fileName');
 
   useEffect(() => {
-    if (!title) {
+    if (!processedTitle) {
       history.replace({
         pathname: location.pathname,
         search: buildSearch({ isCompleted: true }, location.search),
       });
     }
-  }, [history, location.pathname, location.search, title]);
+  }, [history, location.pathname, location.search, processedTitle]);
 
 
   return (
@@ -30,14 +31,19 @@ export const ProgressBar = ({ updatedId }) => {
           icon="edit"
           size="small"
         />
-        <div className={css.progressBarTitleText}>{title}</div>
+        <div className={css.progressBarTitleText}>
+          <FormattedMessage
+            id="ui-bulk-edit.progressBar.title"
+            values={{ title: processedTitle || title }}
+          />
+        </div>
       </div>
       <div className={css.progressBarBody}>
         <div className={css.progressBarLine}>
           <div data-testid="progress-line" style={{ width: `${data?.progress?.progress}%` }} />
         </div>
         <div className={css.progressBarLineStatus}>
-          <span><FormattedMessage id="ui-bulk-edit.uploading" /></span>
+          <span><FormattedMessage id="ui-bulk-edit.progresssBar.retrieving" /></span>
           <Loading />
         </div>
       </div>

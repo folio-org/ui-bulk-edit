@@ -42,7 +42,7 @@ describe('ProgressBar', () => {
   it('should display correct title', async () => {
     renderProgressBar(props);
 
-    const title = await screen.findByText(/some.scv/);
+    const title = await screen.findByText(/progressBar.title/);
 
     expect(title).toBeVisible();
   });
