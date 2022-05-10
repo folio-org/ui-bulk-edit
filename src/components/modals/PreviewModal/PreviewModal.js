@@ -36,6 +36,7 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
   };
 
   const [previewItems, setPreviewItems] = useState([]);
+  const [countOfChangedRecords, setCountOfChangedRecords] = useState(0);
 
   const { startJob } = useLaunchJob();
   const { inAppUpload, isLoading: isUploading } = useInAppUpload();
@@ -64,6 +65,7 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
     if (jobId && contentUpdates && open) {
       inAppUpload({ jobId, contentUpdates }).then(response => {
         setPreviewItems(response.items);
+        setCountOfChangedRecords(response.totalRecords);
       });
     }
   }, [jobId, contentUpdates, open]);
@@ -98,7 +100,7 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
       onClose={onKeepEditing}
     >
       <MessageBanner type="warning">
-        <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: contentUpdates?.length }} />
+        <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: countOfChangedRecords }} />
       </MessageBanner>
 
       <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
