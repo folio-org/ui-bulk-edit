@@ -2,9 +2,12 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { useOkapiKy } from '@folio/stripes/core';
 import { QueryClientProvider } from 'react-query';
+import { createMemoryHistory } from 'history';
 import { MemoryRouter } from 'react-router';
 import { ProgressBar } from './ProgressBar';
 import { queryClient } from '../../../test/jest/utils/queryClient';
+
+const history = createMemoryHistory();
 
 const renderProgressBar = (props) => {
   render(
@@ -40,6 +43,10 @@ describe('ProgressBar', () => {
   });
 
   it('should display correct title', async () => {
+    history.push({
+      search: '?fileName=Mock.csv',
+    });
+
     renderProgressBar(props);
 
     const title = await screen.findByText(/progressBar.title/);
@@ -48,6 +55,10 @@ describe('ProgressBar', () => {
   });
 
   it('should display correct width percentage', async () => {
+    history.push({
+      search: '?processedFileName=Mock.csv',
+    });
+
     renderProgressBar(props);
 
     const progressLine = await screen.findByTestId('progress-line');

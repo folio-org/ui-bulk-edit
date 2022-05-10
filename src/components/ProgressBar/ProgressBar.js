@@ -34,7 +34,7 @@ export const ProgressBar = ({ updatedId }) => {
         <div className={css.progressBarTitleText}>
           <FormattedMessage
             id="ui-bulk-edit.progressBar.title"
-            values={{ title: processedTitle || title }}
+            values={{ title: title || processedTitle }}
           />
         </div>
       </div>

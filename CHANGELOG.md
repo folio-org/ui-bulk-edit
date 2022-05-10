@@ -18,6 +18,7 @@
 * [UIBULKED-32](https://issues.folio.org/browse/UIBULKED-32) Error accordion - Items
 * [UIBULKED-34](https://issues.folio.org/browse/UIBULKED-34) In-app bulk edit form.
 * [UIBULKED-36](https://issues.folio.org/browse/UIBULKED-36) Completion of the in-app bulk edit.
+* [UIBULKED-66](https://issues.folio.org/browse/UIBULKED-66) Progress bar for uploading identifier files and retrieving relevant data.
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
