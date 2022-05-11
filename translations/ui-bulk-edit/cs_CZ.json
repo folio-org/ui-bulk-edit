@@ -132,5 +132,7 @@
     "previewModal.previewToBeChanged": "Náhled záznamů, které mají být změněny",
     "previewModal.keepEditing": "Pokračovat v úpravách",
     "previewModal.downloadPreview": "Stáhnout náhled",
-    "previewModal.saveAndClose": "Uložit a zavřít"
+    "previewModal.saveAndClose": "Uložit a zavřít",
+    "progressBar.title": "Uploading {title} and retrieving relevant data",
+    "progresssBar.retrieving": "Retrieving"
 }
