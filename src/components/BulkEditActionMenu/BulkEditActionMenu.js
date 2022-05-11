@@ -13,6 +13,7 @@ import { Preloader } from '@folio/stripes-data-transfer-components';
 import { usePathParams } from '../../hooks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { usePreviewRecords } from '../../API';
+import { CAPABILITIES } from '../../constants';
 import { useCurrentEntityInfo } from '../../hooks/currentEntity';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
 
@@ -93,10 +94,13 @@ const BulkEditActionMenu = ({
     );
   };
 
+  const isStartBulkCsvActive = hasCsvEditPerms && capabilities === CAPABILITIES.USER;
+  const isStartBulkInAppActive = hasInAppEditPerms && successCsvLink && capabilities === CAPABILITIES.ITEM;
+
   const renderStartBulkEditButtons = () => {
     return (
       <>
-        {hasInAppEditPerms && successCsvLink && (
+        {isStartBulkInAppActive && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onEdit)}
@@ -107,7 +111,7 @@ const BulkEditActionMenu = ({
         </Button>
         )}
 
-        {hasCsvEditPerms && (
+        {isStartBulkCsvActive && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onEdit)}
