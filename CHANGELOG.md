@@ -2,6 +2,10 @@
 
 ## In progress
 
+* [UIBULKED-55](https://issues.folio.org/browse/UIBULKED-55) Replace or remove react-hot-loader
+* [UIBULKED-60](https://issues.folio.org/browse/UIBULKED-60) Download matched records (CSV) - Items
+* [UIBULKED-29](https://issues.folio.org/browse/UIBULKED-29) Modify bulk edit permissions.
+* [UIBULKED-33](https://issues.folio.org/browse/UIBULKED-33) Starting bulk edit - in app approach
 * [UIBULKED-30](https://issues.folio.org/browse/UIBULKED-30) Record identifiers dropdown
 * [UIBULKED-55](https://issues.folio.org/browse/UIBULKED-55) Replace or remove react-hot-loader
 * [UIBULKED-60](https://issues.folio.org/browse/UIBULKED-60) Download matched records (CSV) - Items
@@ -11,6 +15,9 @@
 * [UIBULKED-58](https://issues.folio.org/browse/UIBULKED-58) CSV bulk edit permissions only
 * [UIBULKED-32](https://issues.folio.org/browse/UIBULKED-32) Error accordion - Items
 * [UIBULKED-34](https://issues.folio.org/browse/UIBULKED-34) In-app bulk edit form.
+* [UIBULKED-36](https://issues.folio.org/browse/UIBULKED-36) Completion of the in-app bulk edit.
+* [UIBULKED-66](https://issues.folio.org/browse/UIBULKED-66) Progress bar for uploading identifier files and retrieving relevant data.
+* [UIBULKED-59](https://issues.folio.org/browse/UIBULKED-59) CSV and In app bulk edit permissions.
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 

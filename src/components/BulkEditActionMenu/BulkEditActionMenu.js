@@ -13,6 +13,7 @@ import { Preloader } from '@folio/stripes-data-transfer-components';
 import { usePathParams } from '../../hooks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { usePreviewRecords } from '../../API';
+import { CAPABILITIES } from '../../constants';
 import { useCurrentEntityInfo } from '../../hooks/currentEntity';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
 
@@ -30,6 +31,7 @@ const BulkEditActionMenu = ({
   } = useCurrentEntityInfo();
   const search = new URLSearchParams(location.search);
   const capabilities = search.get('capabilities');
+  const isCompleted = search.get('isCompleted');
   const processedFileName = search.get('processedFileName');
   const history = useHistory();
   const { id } = usePathParams('/bulk-edit/:id');
@@ -71,7 +73,7 @@ const BulkEditActionMenu = ({
             data-testid="download-link-matched"
           >
             <Icon icon="download">
-              <FormattedMessage id={processedFileName ? 'ui-bulk-edit.start.downloadChangedRecords' : 'ui-bulk-edit.start.downloadMathcedRecords'} />
+              <FormattedMessage id={processedFileName || !!isCompleted ? 'ui-bulk-edit.start.downloadChangedRecords' : 'ui-bulk-edit.start.downloadMathcedRecords'} />
             </Icon>
           </Button>
         </a>
@@ -92,10 +94,13 @@ const BulkEditActionMenu = ({
     );
   };
 
+  const isStartBulkCsvActive = hasCsvEditPerms && capabilities === CAPABILITIES.USER;
+  const isStartBulkInAppActive = hasInAppEditPerms && successCsvLink && capabilities === CAPABILITIES.ITEM;
+
   const renderStartBulkEditButtons = () => {
     return (
       <>
-        {hasInAppEditPerms && successCsvLink && (
+        {isStartBulkInAppActive && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onEdit)}
@@ -106,7 +111,7 @@ const BulkEditActionMenu = ({
         </Button>
         )}
 
-        {hasCsvEditPerms && (
+        {isStartBulkCsvActive && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onEdit)}

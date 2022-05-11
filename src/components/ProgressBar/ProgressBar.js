@@ -1,14 +1,28 @@
 import PropTypes from 'prop-types';
 import { Icon, Loading } from '@folio/stripes/components';
+import { buildSearch } from '@folio/stripes-acq-components';
 import { FormattedMessage } from 'react-intl';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 import css from './ProgressBar.css';
 import { useProgressStatus } from '../../API/useProgressStatus';
 
 export const ProgressBar = ({ updatedId }) => {
   const location = useLocation();
+  const history = useHistory();
   const { data } = useProgressStatus(updatedId);
-  const title = new URLSearchParams(location.search).get('processedFileName');
+  const processedTitle = new URLSearchParams(location.search).get('processedFileName');
+  const title = new URLSearchParams(location.search).get('fileName');
+
+  useEffect(() => {
+    if (!processedTitle) {
+      history.replace({
+        pathname: location.pathname,
+        search: buildSearch({ isCompleted: true }, location.search),
+      });
+    }
+  }, [history, location.pathname, location.search, processedTitle]);
+
 
   return (
     <div className={css.progressBar}>
@@ -17,14 +31,19 @@ export const ProgressBar = ({ updatedId }) => {
           icon="edit"
           size="small"
         />
-        <div className={css.progressBarTitleText}>{title}</div>
+        <div className={css.progressBarTitleText}>
+          <FormattedMessage
+            id="ui-bulk-edit.progressBar.title"
+            values={{ title: title || processedTitle }}
+          />
+        </div>
       </div>
       <div className={css.progressBarBody}>
         <div className={css.progressBarLine}>
           <div data-testid="progress-line" style={{ width: `${data?.progress?.progress}%` }} />
         </div>
         <div className={css.progressBarLineStatus}>
-          <span><FormattedMessage id="ui-bulk-edit.uploading" /></span>
+          <span><FormattedMessage id="ui-bulk-edit.progresssBar.retrieving" /></span>
           <Loading />
         </div>
       </div>

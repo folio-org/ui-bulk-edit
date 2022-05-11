@@ -82,6 +82,6 @@ describe('BulkEditListResult', () => {
 
     renderBulkEditResult(history);
 
-    expect(screen.getByText(/Mock.csv/)).toBeVisible();
+    expect(screen.getByText(/progressBar.title/)).toBeVisible();
   });
 });
