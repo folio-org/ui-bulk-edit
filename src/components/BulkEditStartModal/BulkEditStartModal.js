@@ -22,6 +22,7 @@ const BulkEditStartModal = ({
   setIsBulkConformationModal,
   setCountOfRecords,
   setUpdatedId,
+  setFileName,
 }) => {
   const history = useHistory();
   const location = useLocation();
@@ -90,6 +91,8 @@ const BulkEditStartModal = ({
     await uploadFileFlow(fileToUpload);
 
     setDropZoneActive(false);
+
+    setFileName(fileName);
   };
 
   const onStartBulkEdit = () => {
@@ -154,6 +157,7 @@ BulkEditStartModal.propTypes = {
   setIsBulkConformationModal: PropTypes.func,
   setCountOfRecords: PropTypes.func,
   setUpdatedId: PropTypes.func,
+  setFileName: PropTypes.func,
 };
 
 export default BulkEditStartModal;

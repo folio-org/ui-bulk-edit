@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useShowCallout } from '@folio/stripes-acq-components';
 import { useIntl } from 'react-intl';
 
-export const useProgressStatus = (id) => {
+export const useProgressStatus = (id, typeOfProgress) => {
   const [refetchInterval, setRefetchInterval] = useState(500);
   const callout = useShowCallout();
   const intl = useIntl();
@@ -34,7 +34,7 @@ export const useProgressStatus = (id) => {
     onSuccess: () => {
       switch (data?.status) {
         case 'SUCCESSFUL':
-          clearIntervalAndRedirect(`/bulk-edit/${id}/processed`);
+          clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
           break;
         case 'FAILED':
           clearIntervalAndRedirect(`/bulk-edit/${id}/initial`);
