@@ -97,8 +97,6 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
   const getIsTemporaryLocation = ({ option }) => option === OPTIONS.TEMPORARY_LOCATION;
 
-
-
   useEffect(() => {
     onContentUpdatesChanged(contentUpdates);
   }, [contentUpdates]);

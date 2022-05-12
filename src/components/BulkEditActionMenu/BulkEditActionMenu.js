@@ -100,7 +100,7 @@ const BulkEditActionMenu = ({
   const renderStartBulkEditButtons = () => {
     return (
       <>
-        {isStartBulkInAppActive && (
+        {isStartBulkInAppActive && !isCompleted && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onEdit)}
