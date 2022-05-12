@@ -17,7 +17,7 @@ export const useDownloadLinks = (id) => {
   });
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: 'error-download',
+    queryKey: 'getJob',
     queryFn: () => ky.get(`data-export-spring/jobs/${id}`).json(),
     enabled: !!id,
     refetchInterval,

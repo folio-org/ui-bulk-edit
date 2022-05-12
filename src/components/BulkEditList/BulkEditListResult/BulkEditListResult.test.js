@@ -6,6 +6,7 @@ import BulkEditListResult from './BulkEditListResult';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 
 import '../../../../test/jest/__mock__';
+import { RootContext } from '../../../context/RootContext';
 
 jest.mock('./Preview/PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
@@ -36,9 +37,11 @@ const renderBulkEditResult = (history) => {
   render(
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
-        <BulkEditListResult
-          updatedId="1"
-        />
+        <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn() }}>
+          <BulkEditListResult
+            updatedId="1"
+          />
+        </RootContext.Provider>
       </QueryClientProvider>
     </Router>,
   );
