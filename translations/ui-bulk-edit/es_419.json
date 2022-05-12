@@ -132,5 +132,7 @@
     "previewModal.previewToBeChanged": "Preview of records to be changed",
     "previewModal.keepEditing": "Keep editing",
     "previewModal.downloadPreview": "Download preview",
-    "previewModal.saveAndClose": "Guardar & cerrar"
+    "previewModal.saveAndClose": "Guardar & cerrar",
+    "progressBar.title": "Uploading {title} and retrieving relevant data",
+    "progresssBar.retrieving": "Retrieving"
 }
