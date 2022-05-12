@@ -82,7 +82,9 @@
           "bulk-edit.errors.collection.get",
           "usergroups.collection.get",
           "data-export.job.item.get",
-          "bulk-edit.preview-items.collection.get"
+          "bulk-edit.preview-items.collection.get",
+          "bulk-edit.items-content-update.collection.post",
+          "bulk-edit.preview.updated-items.collection.get"
         ],
         "visible": true
       },
