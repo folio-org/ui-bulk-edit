@@ -134,5 +134,6 @@
     "previewModal.downloadPreview": "Baixar pré-visualização",
     "previewModal.saveAndClose": "Salvar e fechar",
     "progressBar.title": "Fazendo upload do(a) {title} e recuperando dados relevantes",
-    "progresssBar.retrieving": "Recuperando"
+    "progresssBar.retrieving": "Recuperando",
+    "previewModal.areYouSure": "Are you sure?"
 }

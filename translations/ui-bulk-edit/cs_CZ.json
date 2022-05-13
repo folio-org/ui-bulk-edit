@@ -134,5 +134,6 @@
     "previewModal.downloadPreview": "Stáhnout náhled",
     "previewModal.saveAndClose": "Uložit a zavřít",
     "progressBar.title": "Nahrání {title} a načtení relevantních dat",
-    "progresssBar.retrieving": "Získávání"
+    "progresssBar.retrieving": "Získávání",
+    "previewModal.areYouSure": "Are you sure?"
 }
