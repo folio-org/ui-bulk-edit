@@ -207,6 +207,11 @@ export const ACTIONS = {
   CLEAR: 'CLEAR_FIELD',
 };
 
+export const OPTIONS = {
+  TEMPORARY_LOCATION: 'TEMPORARY_LOCATION',
+  PERMANENT_LOCATION: 'PERMANENT_LOCATION',
+};
+
 export const ITEMS_OPTIONS = [
   {
     value: 'PERMANENT_LOCATION',
@@ -219,4 +224,9 @@ export const ITEMS_OPTIONS = [
     disabled: false,
   },
 ];
+
+export const TYPE_OF_PROGRESS = {
+  INITIAL: 'initial',
+  PROCESSED: 'processed',
+};
 

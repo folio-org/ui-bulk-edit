@@ -158,6 +158,7 @@ export const BulkEditList = () => {
         >
           <BulkEditListResult
             updatedId={updatedId}
+            jobId={jobId}
           />
         </Pane>
         <Layer isOpen={isBulkEditLayerOpen} inRootSet>

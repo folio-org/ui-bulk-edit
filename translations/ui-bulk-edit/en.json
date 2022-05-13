@@ -150,6 +150,7 @@
   "previewModal.keepEditing": "Keep editing",
   "previewModal.downloadPreview": "Download preview",
   "previewModal.saveAndClose": "Save & close",
+  "previewModal.areYouSure": "Are you sure?",
 
   "progressBar.title": "Uploading {title} and retrieving relevant data",
   "progresssBar.retrieving": "Retrieving"

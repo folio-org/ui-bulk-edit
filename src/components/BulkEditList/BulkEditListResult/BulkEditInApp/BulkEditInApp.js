@@ -14,7 +14,10 @@ import { Headline,
 
 import { LocationLookup } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
-import { ITEMS_OPTIONS, ITEMS_ACTION, ACTIONS } from '../../../../constants';
+import { ITEMS_OPTIONS,
+  ITEMS_ACTION,
+  ACTIONS,
+  OPTIONS } from '../../../../constants';
 import css from './BulkEditInApp.css';
 
 export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
@@ -92,6 +95,8 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     }]);
   };
 
+  const getIsTemporaryLocation = ({ option }) => option === OPTIONS.TEMPORARY_LOCATION;
+
   useEffect(() => {
     onContentUpdatesChanged(contentUpdates);
   }, [contentUpdates]);
@@ -139,6 +144,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                   marginBottom0
                   onLocationSelected={(location) => handleSelectLocation(location, index)}
                   data-testid={`locationLookup-${index}`}
+                  isTemporaryLocation={getIsTemporaryLocation(contentUpdates[index])}
                 />
               </Col>
               }
