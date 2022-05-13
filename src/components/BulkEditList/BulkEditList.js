@@ -157,10 +157,9 @@ export const BulkEditList = () => {
            />;
   };
 
-  const renderNewBulkFooter = () => (
-    newBulkFooterShown &&
-      <PaneFooter renderEnd={<Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega"><FormattedMessage id="ui-bulk-edit.start.newBulkEdit" /></Button>} />
-  );
+  const renderNewBulkFooter = newBulkFooterShown
+    ? <PaneFooter renderEnd={<Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega"><FormattedMessage id="ui-bulk-edit.start.newBulkEdit" /></Button>} />
+    : null;
 
   const renderPaneFooter = () => {
     return (
@@ -211,7 +210,7 @@ export const BulkEditList = () => {
           paneSub={paneSubtitle}
           appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
           actionMenu={renderActionMenu}
-          footer={renderNewBulkFooter()}
+          footer={renderNewBulkFooter}
         >
           <BulkEditListResult
             updatedId={updatedId}
