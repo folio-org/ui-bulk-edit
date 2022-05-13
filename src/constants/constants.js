@@ -207,6 +207,11 @@ export const ACTIONS = {
   CLEAR: 'CLEAR_FIELD',
 };
 
+export const OPTIONS = {
+  LOCATIONS: 'LOCATIONS',
+  ITEM_STATUS: 'ITEM_STATUS',
+};
+
 export const ITEMS_OPTIONS = [
   {
     value: 'PERMANENT_LOCATION',
@@ -216,6 +221,34 @@ export const ITEMS_OPTIONS = [
   {
     value: 'TEMPORARY_LOCATION',
     label: 'ui-bulk-edit.layer.options.temporary',
+    disabled: false,
+  },
+  {
+    value: 'ITEM_STATUS',
+    label: 'ui-bulk-edit.layer.options.itemStatus',
+    disabled: false,
+  },
+];
+
+export const ITEMS_STATUSES = [
+  {
+    value: 'PERMANENT_LOCATION',
+    label: 'ui-bulk-edit.layer.options.permanent',
+    disabled: false,
+  },
+  {
+    value: 'PERMANENT_LOCATION',
+    label: 'ui-bulk-edit.layer.options.permanent',
+    disabled: false,
+  },
+  {
+    value: 'TEMPORARY_LOCATION',
+    label: 'ui-bulk-edit.layer.options.temporary',
+    disabled: false,
+  },
+  {
+    value: 'ITEM_STATUS',
+    label: 'ui-bulk-edit.layer.options.itemStatus',
     disabled: false,
   },
 ];
