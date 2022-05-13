@@ -15,7 +15,7 @@ export const ProgressBar = ({ updatedId, typeOfProgress }) => {
   const title = new URLSearchParams(location.search).get('fileName');
 
   useEffect(() => {
-    if (processedTitle) {
+    if (!processedTitle && location.pathname.includes('processed')) {
       history.replace({
         pathname: location.pathname,
         search: buildSearch({ isCompleted: true }, location.search),

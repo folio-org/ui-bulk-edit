@@ -1,7 +1,7 @@
 import { useOkapiKy } from '@folio/stripes/core';
 
 import { QueryClientProvider } from 'react-query';
-import { render, screen, logDOM, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import { MemoryRouter } from 'react-router';
 import '../../../../test/jest/__mock__';
@@ -91,8 +91,6 @@ describe('PreviewModal', () => {
     expect(screen.getByText('ui-bulk-edit.previewModal.keepEditing')).toBeVisible();
     expect(screen.getByText('ui-bulk-edit.previewModal.downloadPreview')).toBeVisible();
     expect(screen.getByText('ui-bulk-edit.previewModal.saveAndClose')).toBeVisible();
-
-    logDOM();
   });
 
   it('should call all footer handlers', async () => {
@@ -100,8 +98,5 @@ describe('PreviewModal', () => {
 
     fireEvent.click(screen.getByText('ui-bulk-edit.previewModal.keepEditing'));
     expect(onKeepEditing).toHaveBeenCalled();
-
-
-    logDOM();
   });
 });

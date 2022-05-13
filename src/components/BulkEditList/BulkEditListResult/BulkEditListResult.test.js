@@ -90,7 +90,7 @@ describe('BulkEditListResult', () => {
   it('displays processed title', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/processedProgress?fileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/processedProgress?processedFileName=Mock.csv&capabilities=USERS');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
