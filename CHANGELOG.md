@@ -18,6 +18,7 @@
 * [UIBULKED-36](https://issues.folio.org/browse/UIBULKED-36) Completion of the in-app bulk edit.
 * [UIBULKED-66](https://issues.folio.org/browse/UIBULKED-66) Progress bar for uploading identifier files and retrieving relevant data.
 * [UIBULKED-59](https://issues.folio.org/browse/UIBULKED-59) CSV and In app bulk edit permissions.
+* [UIBULKED-38](https://issues.folio.org/browse/UIBULKED-38) Add item status to In-app bulk edit form.
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 

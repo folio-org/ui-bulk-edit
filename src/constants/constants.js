@@ -208,7 +208,8 @@ export const ACTIONS = {
 };
 
 export const OPTIONS = {
-  LOCATIONS: 'LOCATIONS',
+  TEMPORARY_LOCATION: 'TEMPORARY_LOCATION',
+  PERMANENT_LOCATION: 'PERMANENT_LOCATION',
   ITEM_STATUS: 'ITEM_STATUS',
 };
 
@@ -231,6 +232,11 @@ export const ITEMS_OPTIONS = [
 ];
 
 export const ITEMS_STATUSES = [
+  {
+    value: '',
+    label: 'ui-bulk-edit.layer.options.itemStatus.placeholder',
+    disabled: true,
+  },
   {
     value: 'Available',
     label: 'ui-bulk-edit.layer.options.itemStatus.available',
