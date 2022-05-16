@@ -134,5 +134,6 @@
     "previewModal.downloadPreview": "تنزيل معاينة",
     "previewModal.saveAndClose": "حفظ وإغلاق",
     "progressBar.title": "جاري تحميل {title} واسترجاع البيانات ذات الصلة",
-    "progresssBar.retrieving": "استرجاع"
+    "progresssBar.retrieving": "استرجاع",
+    "previewModal.areYouSure": "Are you sure?"
 }

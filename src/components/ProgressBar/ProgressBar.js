@@ -7,15 +7,15 @@ import { useEffect } from 'react';
 import css from './ProgressBar.css';
 import { useProgressStatus } from '../../API/useProgressStatus';
 
-export const ProgressBar = ({ updatedId }) => {
+export const ProgressBar = ({ updatedId, typeOfProgress }) => {
   const location = useLocation();
   const history = useHistory();
-  const { data } = useProgressStatus(updatedId);
+  const { data } = useProgressStatus(updatedId, typeOfProgress);
   const processedTitle = new URLSearchParams(location.search).get('processedFileName');
   const title = new URLSearchParams(location.search).get('fileName');
 
   useEffect(() => {
-    if (!processedTitle) {
+    if (!processedTitle && location.pathname.includes('processed')) {
       history.replace({
         pathname: location.pathname,
         search: buildSearch({ isCompleted: true }, location.search),
@@ -53,5 +53,6 @@ export const ProgressBar = ({ updatedId }) => {
 
 ProgressBar.propTypes = {
   updatedId: PropTypes.string.isRequired,
+  typeOfProgress: PropTypes.string.isRequired,
 };
 

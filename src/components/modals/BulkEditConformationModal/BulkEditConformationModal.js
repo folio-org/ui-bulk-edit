@@ -37,7 +37,7 @@ const BulkEditConformationModal = ({
     setIsBulkConformationModal(false);
 
     history.replace({
-      pathname: `/bulk-edit/${updatedId}/progress`,
+      pathname: `/bulk-edit/${updatedId}/processedProgress`,
       search: location.search,
     });
   };

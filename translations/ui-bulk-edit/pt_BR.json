@@ -126,13 +126,14 @@
     "layer.action.clear": "Limpar campo(s)",
     "layer.options.permanent": "Localização permanente do exemplar",
     "layer.options.temporary": "Localização temporária do exemplar",
-    "layer.confirmChanges": "Confirm changes",
-    "actions.placeholder": "Select action",
-    "previewModal.message": "{count} records will be changed if the Save & close button is clicked. You may choose Download preview to review all changes prior to saving.",
-    "previewModal.previewToBeChanged": "Preview of records to be changed",
-    "previewModal.keepEditing": "Keep editing",
-    "previewModal.downloadPreview": "Download preview",
-    "previewModal.saveAndClose": "Save & close",
-    "progressBar.title": "Uploading {title} and retrieving relevant data",
-    "progresssBar.retrieving": "Retrieving"
+    "layer.confirmChanges": "Confirmar alterações",
+    "actions.placeholder": "Selecione a ação",
+    "previewModal.message": "{count} registros serão alterados se o botão Salvar e fechar for clicado. Você pode escolher Baixar visualização para revisar todas as alterações antes de salvar.",
+    "previewModal.previewToBeChanged": "Pré-visualização de registros a serem alterados",
+    "previewModal.keepEditing": "Continue editando",
+    "previewModal.downloadPreview": "Baixar pré-visualização",
+    "previewModal.saveAndClose": "Salvar e fechar",
+    "progressBar.title": "Fazendo upload do(a) {title} e recuperando dados relevantes",
+    "progresssBar.retrieving": "Recuperando",
+    "previewModal.areYouSure": "Are you sure?"
 }

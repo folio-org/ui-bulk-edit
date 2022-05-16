@@ -133,6 +133,7 @@
     "previewModal.keepEditing": "Pokračovat v úpravách",
     "previewModal.downloadPreview": "Stáhnout náhled",
     "previewModal.saveAndClose": "Uložit a zavřít",
-    "progressBar.title": "Uploading {title} and retrieving relevant data",
-    "progresssBar.retrieving": "Retrieving"
+    "progressBar.title": "Nahrání {title} a načtení relevantních dat",
+    "progresssBar.retrieving": "Získávání",
+    "previewModal.areYouSure": "Are you sure?"
 }

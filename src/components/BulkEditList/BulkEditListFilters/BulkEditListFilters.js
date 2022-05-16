@@ -132,7 +132,7 @@ export const BulkEditListFilters = ({
       search.delete('queryText');
 
       history.replace({
-        pathname: `/bulk-edit/${id}/initial`,
+        pathname: `/bulk-edit/${id}/initialProgress`,
         search: buildSearch({ fileName: fileToUpload.name }, location.search),
       });
 
