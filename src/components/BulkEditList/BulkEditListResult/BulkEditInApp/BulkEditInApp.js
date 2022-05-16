@@ -53,9 +53,9 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   }]);
 
   const isLocation = (index) => contentUpdates[index].action === ACTIONS.REPLACE &&
-  contentUpdates[index].option !== 'STATUS';
+  contentUpdates[index].option !== OPTIONS.STATUS;
   const isItemStatus = (index) => contentUpdates[index].action === ACTIONS.REPLACE &&
-  contentUpdates[index].option === 'STATUS';
+  contentUpdates[index].option === OPTIONS.STATUS;
 
   const handleSelectLocation = useCallback(
     (location, index) => {

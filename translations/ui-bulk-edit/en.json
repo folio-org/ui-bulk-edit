@@ -145,7 +145,7 @@
   "layer.action.clear": "Clear field",
   "layer.options.permanent": "Permanent item location",
   "layer.options.temporary": "Temporary item location",
-  "layer.options.itemStatus": "Item status",
+  "layer.options.statusLabel": "Item status",
   "layer.options.available": "Available",
   "layer.options.missing": "Missing",
   "layer.options.withdrawn": "Withdrawn",

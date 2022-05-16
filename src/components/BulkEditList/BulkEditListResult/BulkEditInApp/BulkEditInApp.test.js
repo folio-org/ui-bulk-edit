@@ -60,7 +60,7 @@ describe('BulkEditInApp', () => {
     const options = [
       /layer.options.permanent/,
       /layer.options.temporary/,
-      /layer.options.itemStatus/,
+      /layer.options.statusLabel/,
     ];
     const permanentLocation = screen.getByRole('option', { name: /layer.options.permanent/ });
     const selectOption = screen.getByTestId('select-option-0');
@@ -89,7 +89,7 @@ describe('BulkEditInApp', () => {
       /layer.options.unavailable/,
       /layer.options.unknown/,
     ];
-    const optionStatus = screen.getByRole('option', { name: /layer.options.itemStatus/ });
+    const optionStatus = screen.getByRole('option', { name: /layer.options.statusLabel/ });
     const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
     const selectOption = screen.getByTestId('select-option-0');
     const selectAction = screen.getByTestId('select-actions-0');
