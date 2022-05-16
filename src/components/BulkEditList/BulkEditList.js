@@ -6,6 +6,9 @@ import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
 import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router';
+import { useQueryClient } from 'react-query';
+import { buildSearch } from '@folio/stripes-acq-components';
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
@@ -13,14 +16,19 @@ import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
 import { useDownloadLinks, useLaunchJob } from '../../API';
 import { usePathParams } from '../../hooks';
-import { CAPABILITIES } from '../../constants';
+import { CAPABILITIES, CRITERIES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import PreviewModal from '../modals/PreviewModal/PreviewModal';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
+import { RootContext } from '../../context/RootContext';
 
 
 export const BulkEditList = () => {
+  const queryClient = useQueryClient();
   const location = useLocation();
+  const history = useHistory();
+  const search = new URLSearchParams(location.search);
+
   const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
@@ -30,16 +38,38 @@ export const BulkEditList = () => {
   const [updatedId, setUpdatedId] = useState();
   const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
   const [contentUpdates, setContentUpdates] = useState(null);
+  const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
 
   const { id: jobId } = usePathParams('/bulk-edit/:id');
   const { data, isLoading, refetch } = useDownloadLinks(jobId);
   const { startJob } = useLaunchJob();
-  const [successCsvLink, errorCsvLink] = data?.files || [];
-  const { isActionMenuShown } = useBulkPermissions();
 
-  const capabilities = new URLSearchParams(location.search).get('capabilities');
+  const [successCsvLink, errorCsvLink] = data?.files || [];
+  const { isActionMenuShown, hasOnlyInAppViewPerms } = useBulkPermissions();
+
+  const capabilitiesUrl = search.get('capabilities');
+
+  const getDefaultCapabilities = () => {
+    if (hasOnlyInAppViewPerms) {
+      return CAPABILITIES.ITEM;
+    }
+
+    return capabilitiesUrl || CAPABILITIES.USER;
+  };
+
+  const defaultCapability = getDefaultCapabilities();
+
+  const initialFiltersState = {
+    criteria: CRITERIES.IDENTIFIER,
+    capabilities: defaultCapability,
+    queryText: '',
+    recordIdentifier: '',
+  };
+
+  const [filters, setFilters] = useState(initialFiltersState);
+
   const handleStartBulkEdit = () => {
-    if (capabilities === CAPABILITIES.ITEM) {
+    if (capabilitiesUrl === CAPABILITIES.ITEM) {
       setIsBulkEditLayerOpen(true);
     } else setIsBulkEditModalOpen(true);
   };
@@ -48,7 +78,7 @@ export const BulkEditList = () => {
 
 
   useEffect(() => {
-    if (!isLoading && jobId && capabilities === CAPABILITIES.ITEM) {
+    if (!isLoading && jobId && capabilitiesUrl === CAPABILITIES.ITEM) {
       startJob({ jobId }).finally(() => refetch());
     }
   }, [jobId, isLoading, location.search]);
@@ -82,8 +112,27 @@ export const BulkEditList = () => {
     setIsBulkEditLayerOpen(false);
   };
 
+  const handleStartNewBulkEdit = () => {
+    // reset count of records
+    setCountOfRecords(0);
+
+    // reset filters
+    setFilters(initialFiltersState);
+
+    // clear job information
+    queryClient.setQueryData('getJob', () => ({ data: undefined }));
+
+    // redirect to initial state with saved capabilities in search
+    history.replace({
+      pathname: '/bulk-edit',
+      search: buildSearch({ capabilities: capabilitiesUrl }),
+    });
+
+    setNewBulkFooterShown(false);
+  };
+
   const paneTitle = useMemo(() => {
-    const fileUploadedName = new URLSearchParams(location.search).get('fileName');
+    const fileUploadedName = search.get('fileName');
 
     if (fileUploadedMatchedName || fileUploadedName) {
       return <FormattedMessage
@@ -100,13 +149,17 @@ export const BulkEditList = () => {
   ), [countOfRecords]);
 
   const fileNameTitle = () => {
-    const fileUploadedName = new URLSearchParams(location.search).get('fileName');
+    const fileUploadedName = search.get('fileName');
 
     return <FormattedMessage
       id="ui-bulk-edit.preview.file.title"
       values={{ fileUploadedName }}
            />;
   };
+
+  const renderNewBulkFooter = newBulkFooterShown
+    ? <PaneFooter renderEnd={<Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega"><FormattedMessage id="ui-bulk-edit.start.newBulkEdit" /></Button>} />
+    : null;
 
   const renderPaneFooter = () => {
     return (
@@ -137,13 +190,15 @@ export const BulkEditList = () => {
   };
 
   return (
-    <>
+    <RootContext.Provider value={{ setNewBulkFooterShown }}>
       <Paneset>
         <Pane
           defaultWidth="20%"
           paneTitle={<FormattedMessage id="ui-bulk-edit.list.criteriaTitle" />}
         >
           <BulkEditListFilters
+            filters={filters}
+            setFilters={setFilters}
             setIsFileUploaded={setIsFileUploaded}
             isFileUploaded={isFileUploaded}
             setCountOfRecords={setCountOfRecords}
@@ -155,6 +210,7 @@ export const BulkEditList = () => {
           paneSub={paneSubtitle}
           appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
           actionMenu={renderActionMenu}
+          footer={renderNewBulkFooter}
         >
           <BulkEditListResult
             updatedId={updatedId}
@@ -199,6 +255,6 @@ export const BulkEditList = () => {
         setUpdatedId={setUpdatedId}
       />
 
-    </>
+    </RootContext.Provider>
   );
 };

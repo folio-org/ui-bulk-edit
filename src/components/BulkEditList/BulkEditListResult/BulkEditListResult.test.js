@@ -7,6 +7,7 @@ import { queryClient } from '../../../../test/jest/utils/queryClient';
 import { TYPE_OF_PROGRESS } from '../../../constants';
 
 import '../../../../test/jest/__mock__';
+import { RootContext } from '../../../context/RootContext';
 
 jest.mock('./Preview/PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
@@ -37,10 +38,12 @@ const renderBulkEditResult = (history, typeOfProgress = TYPE_OF_PROGRESS.INITIAL
   render(
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
-        <BulkEditListResult
-          updatedId="1"
-          typeOfProgress={typeOfProgress}
-        />
+        <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn() }}>
+          <BulkEditListResult
+            updatedId="1"
+            typeOfProgress={typeOfProgress}
+          />
+        </RootContext.Provider>
       </QueryClientProvider>
     </Router>,
   );

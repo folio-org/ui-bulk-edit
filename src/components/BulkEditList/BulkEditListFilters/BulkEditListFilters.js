@@ -29,6 +29,8 @@ import { buildQuery } from '../../../hooks';
 import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
 
 export const BulkEditListFilters = ({
+  filters,
+  setFilters,
   isFileUploaded,
   setIsFileUploaded,
   setCountOfRecords,
@@ -38,7 +40,6 @@ export const BulkEditListFilters = ({
   const location = useLocation();
   const {
     isDropZoneDisabled: isDropZoneDisabledPerm,
-    hasOnlyInAppViewPerms,
     isInventoryRadioDisabled,
     isUserRadioDisabled,
     hasInAppEditPerms,
@@ -46,25 +47,12 @@ export const BulkEditListFilters = ({
   } = useBulkPermissions();
   const search = new URLSearchParams(location.search);
 
-  const getDefaultCapabilities = () => {
-    if (hasOnlyInAppViewPerms) {
-      return CAPABILITIES.ITEM;
-    }
-
-    return search.get('capabilities') || CAPABILITIES.USER;
-  };
-
-  const defaultCapability = getDefaultCapabilities();
+  const { criteria, capabilities, recordIdentifier, queryText } = filters;
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
-  const [{ criteria, capabilities, recordIdentifier, queryText }, setFilters] = useState({
-    criteria: CRITERIES.IDENTIFIER,
-    capabilities: defaultCapability,
-    queryText: '',
-    recordIdentifier: '',
-  });
+
   const { userGroups } = useUserGroupsMap();
   const { requestJobId, isLoading } = useJobCommand({ entityType: capabilities.slice(0, -1) });
   const { fileUpload } = useFileUploadComand();
@@ -306,6 +294,8 @@ export const BulkEditListFilters = ({
 };
 
 BulkEditListFilters.propTypes = {
+  filters: PropTypes.object.isRequired,
+  setFilters: PropTypes.func.isRequired,
   isFileUploaded: PropTypes.bool.isRequired,
   setIsFileUploaded: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func.isRequired,
