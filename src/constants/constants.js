@@ -232,23 +232,48 @@ export const ITEMS_OPTIONS = [
 
 export const ITEMS_STATUSES = [
   {
-    value: 'PERMANENT_LOCATION',
-    label: 'ui-bulk-edit.layer.options.permanent',
+    value: 'Available',
+    label: 'ui-bulk-edit.layer.options.itemStatus.available',
     disabled: false,
   },
   {
-    value: 'PERMANENT_LOCATION',
-    label: 'ui-bulk-edit.layer.options.permanent',
+    value: 'Missing',
+    label: 'ui-bulk-edit.layer.options.itemStatus.missing',
     disabled: false,
   },
   {
-    value: 'TEMPORARY_LOCATION',
-    label: 'ui-bulk-edit.layer.options.temporary',
+    value: 'Withdrawn',
+    label: 'ui-bulk-edit.layer.options.itemStatus.withdrawn',
     disabled: false,
   },
   {
-    value: 'ITEM_STATUS',
-    label: 'ui-bulk-edit.layer.options.itemStatus',
+    value: 'In process (non-requestable)',
+    label: 'ui-bulk-edit.layer.options.itemStatus.non-requestable',
+    disabled: false,
+  },
+  {
+    value: 'Intellectual item"',
+    label: 'ui-bulk-edit.layer.options.itemStatus.intellectual',
+    disabled: false,
+  },
+  {
+    value: 'Long missing',
+    label: 'ui-bulk-edit.layer.options.itemStatus.longMissing',
+    disabled: false,
+  },
+  {
+    value: 'Restricted',
+    label: 'ui-bulk-edit.layer.options.itemStatus.restricted',
+    disabled: false,
+  },
+  {
+    value: 'Unavailable',
+    label: 'ui-bulk-edit.layer.options.itemStatus.unavailable',
+    disabled: false,
+  },
+  {
+    value: 'Unknown',
+    label: 'ui-bulk-edit.layer.options.itemStatus.unknown',
     disabled: false,
   },
 ];

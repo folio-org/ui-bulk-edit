@@ -145,7 +145,16 @@
   "layer.options.permanent": "Permanent item location",
   "layer.options.temporary": "Temporary item location",
   "layer.options.itemStatus": "Item status",
-
+  "layer.options.itemStatus.available": "Available",
+  "layer.options.itemStatus.missing": "Missing",
+  "layer.options.itemStatus.withdrawn": "Withdrawn",
+  "layer.options.itemStatus.non-requestable": "In process (non-requestable)",
+  "layer.options.itemStatus.intellectual": "Intellectual item",
+  "layer.options.itemStatus.longMissing": "Long missing",
+  "layer.options.itemStatus.restricted": "Restricted",
+  "layer.options.itemStatus.unavailable": "Unavailable",
+  "layer.options.itemStatus.unknown": "Unknown",
+  
   "previewModal.message": "{count} records will be changed if the Save & close button is clicked. You may choose Download preview to review all changes prior to saving.",
   "previewModal.previewToBeChanged": "Preview of records to be changed",
   "previewModal.keepEditing": "Keep editing",
