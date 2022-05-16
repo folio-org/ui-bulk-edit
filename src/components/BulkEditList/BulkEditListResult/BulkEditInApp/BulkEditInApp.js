@@ -16,7 +16,7 @@ import { LocationLookup } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ITEMS_OPTIONS,
   ITEMS_ACTION,
-  ITEMS_STATUSES,
+  STATUS_OPTIONS,
   ACTIONS,
   OPTIONS } from '../../../../constants';
 import css from './BulkEditInApp.css';
@@ -32,7 +32,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
   const itemsActions = getItems(ITEMS_ACTION);
   const itemsOptions = getItems(ITEMS_OPTIONS);
-  const itemStatus = getItems(ITEMS_STATUSES);
+  const itemStatus = getItems(STATUS_OPTIONS);
 
   const defaultOption = itemsOptions[0].value;
   const defaultAction = itemsActions[0].value;

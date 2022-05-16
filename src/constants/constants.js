@@ -231,7 +231,7 @@ export const ITEMS_OPTIONS = [
   },
 ];
 
-export const ITEMS_STATUSES = [
+export const STATUS_OPTIONS = [
   {
     value: '',
     label: 'ui-bulk-edit.layer.options.itemStatus.placeholder',
