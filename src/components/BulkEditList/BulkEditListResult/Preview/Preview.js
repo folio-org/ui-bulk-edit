@@ -6,7 +6,7 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
 import {
@@ -15,8 +15,10 @@ import {
   usePreviewRecords,
   useUserGroupsMap,
 } from '../../../../API';
+import { RootContext } from '../../../../context/RootContext';
 
 export const Preview = ({ id, title, initial, capabilities }) => {
+  const { setNewBulkFooterShown } = useContext(RootContext);
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
   const { items } = usePreviewRecords(id, capabilities);
@@ -34,8 +36,12 @@ export const Preview = ({ id, title, initial, capabilities }) => {
   });
 
   useEffect(() => {
-    if (data?.progress) {
-      setProcessedRecords(data.progress.total - (errors?.length || 0));
+    if (data?.progress || errors?.length) {
+      setNewBulkFooterShown(true);
+
+      if (data?.progress) {
+        setProcessedRecords(data.progress.total - (errors?.length || 0));
+      }
     }
   }, [errors, data?.progress]);
 

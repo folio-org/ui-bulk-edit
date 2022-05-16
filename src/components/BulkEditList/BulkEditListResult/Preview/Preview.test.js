@@ -7,6 +7,7 @@ import '../../../../../test/jest/__mock__';
 import { QueryClientProvider } from 'react-query';
 import { Preview } from './Preview';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
+import { RootContext } from '../../../../context/RootContext';
 
 jest.mock('./PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
@@ -16,7 +17,9 @@ const renderPreview = ({ title, initial }) => {
   render(
     <MemoryRouter initialEntries={['/bulk-edit/1?queryText=patronGroup%3D%3D"1"']}>
       <QueryClientProvider client={queryClient}>
-        <Preview title={title} id="1" initial={initial} />
+        <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn() }}>
+          <Preview title={title} id="1" initial={initial} />
+        </RootContext.Provider>
       </QueryClientProvider>
     </MemoryRouter>,
   );
