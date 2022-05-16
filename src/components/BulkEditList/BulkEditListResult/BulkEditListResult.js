@@ -8,8 +8,9 @@ import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
 import { ProgressBar } from '../../ProgressBar/ProgressBar';
 import PreviewInitial from './PreviewInitial/PreviewInitial';
 import PreviewProcessed from './PreviewProcessed/PreviewProcessed';
+import { TYPE_OF_PROGRESS } from '../../../constants';
 
-const BulkEditListResult = ({ updatedId }) => {
+const BulkEditListResult = ({ updatedId, jobId }) => {
   return (
     <Switch>
       <Route
@@ -28,8 +29,12 @@ const BulkEditListResult = ({ updatedId }) => {
         exact
       />
       <Route
-        path="/bulk-edit/:id/progress"
-        render={() => <ProgressBar updatedId={updatedId} />}
+        path="/bulk-edit/:id/processedProgress"
+        render={() => <ProgressBar updatedId={updatedId} typeOfProgress={TYPE_OF_PROGRESS.PROCESSED} />}
+      />
+      <Route
+        path="/bulk-edit/:id/initialProgress"
+        render={() => <ProgressBar updatedId={jobId} typeOfProgress={TYPE_OF_PROGRESS.INITIAL} />}
       />
     </Switch>
   );
@@ -39,4 +44,5 @@ export default BulkEditListResult;
 
 BulkEditListResult.propTypes = {
   updatedId: PropTypes.string,
+  jobId: PropTypes.string,
 };

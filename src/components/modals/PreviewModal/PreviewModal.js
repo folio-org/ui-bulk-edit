@@ -50,7 +50,7 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
       onJobStarted();
 
       history.replace({
-        pathname: `/bulk-edit/${jobId}/progress`,
+        pathname: `/bulk-edit/${jobId}/processedProgress`,
         search: location.search,
       });
     } catch (e) {

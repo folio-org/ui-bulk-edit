@@ -95,7 +95,10 @@ const BulkEditActionMenu = ({
   };
 
   const isStartBulkCsvActive = hasCsvEditPerms && capabilities === CAPABILITIES.USER;
-  const isStartBulkInAppActive = hasInAppEditPerms && successCsvLink && capabilities === CAPABILITIES.ITEM;
+  const isStartBulkInAppActive = hasInAppEditPerms
+  && successCsvLink
+  && !isCompleted
+  && capabilities === CAPABILITIES.ITEM;
 
   const renderStartBulkEditButtons = () => {
     return (

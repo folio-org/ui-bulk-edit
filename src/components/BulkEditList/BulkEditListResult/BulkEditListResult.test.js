@@ -4,6 +4,7 @@ import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
 import BulkEditListResult from './BulkEditListResult';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
+import { TYPE_OF_PROGRESS } from '../../../constants';
 
 import '../../../../test/jest/__mock__';
 
@@ -32,12 +33,13 @@ jest.mock('../../../API', () => ({
   useUserGroupsMap: () => ({}),
 }));
 
-const renderBulkEditResult = (history) => {
+const renderBulkEditResult = (history, typeOfProgress = TYPE_OF_PROGRESS.INITIAL) => {
   render(
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
         <BulkEditListResult
           updatedId="1"
+          typeOfProgress={typeOfProgress}
         />
       </QueryClientProvider>
     </Router>,
@@ -78,9 +80,19 @@ describe('BulkEditListResult', () => {
   it('displays title', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/progress?processedFileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/initialProgress?fileName=Mock.csv&capabilities=USERS');
 
-    renderBulkEditResult(history);
+    renderBulkEditResult(history, TYPE_OF_PROGRESS.INITIAL);
+
+    expect(screen.getByText(/progressBar.title/)).toBeVisible();
+  });
+
+  it('displays processed title', () => {
+    const history = createMemoryHistory();
+
+    history.push('/bulk-edit/1/processedProgress?processedFileName=Mock.csv&capabilities=USERS');
+
+    renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
     expect(screen.getByText(/progressBar.title/)).toBeVisible();
   });

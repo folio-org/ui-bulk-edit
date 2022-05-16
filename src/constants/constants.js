@@ -278,3 +278,8 @@ export const ITEMS_STATUSES = [
   },
 ];
 
+export const TYPE_OF_PROGRESS = {
+  INITIAL: 'initial',
+  PROCESSED: 'processed',
+};
+

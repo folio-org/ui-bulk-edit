@@ -115,6 +115,8 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     }]);
   };
 
+  const getIsTemporaryLocation = ({ option }) => option === OPTIONS.TEMPORARY_LOCATION;
+
   useEffect(() => {
     onContentUpdatesChanged(contentUpdates);
   }, [contentUpdates]);
@@ -163,6 +165,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                   marginBottom0
                   onLocationSelected={(location) => handleSelectLocation(location, index)}
                   data-testid={`locationLookup-${index}`}
+                  isTemporaryLocation={getIsTemporaryLocation(contentUpdates[index])}
                 />
               </Col>
               }
