@@ -210,7 +210,7 @@ export const ACTIONS = {
 export const OPTIONS = {
   TEMPORARY_LOCATION: 'TEMPORARY_LOCATION',
   PERMANENT_LOCATION: 'PERMANENT_LOCATION',
-  STATUS: 'STATUS',
+  ITEM_STATUS: 'STATUS',
 };
 
 export const ITEMS_OPTIONS = [
@@ -231,7 +231,7 @@ export const ITEMS_OPTIONS = [
   },
 ];
 
-export const STATUS_OPTIONS = [
+export const ITEM_STATUS_OPTIONS = [
   {
     value: '',
     label: 'ui-bulk-edit.layer.options.placeholder',
