@@ -76,15 +76,15 @@ describe('BulkEditInApp', () => {
     renderBulkEditInApp(titleMock);
 
     const options = [
-      /layer.options.itemStatus.available/,
-      /layer.options.itemStatus.missing/,
-      /layer.options.itemStatus.withdrawn/,
-      /layer.options.itemStatus.non-requestable/,
-      /layer.options.itemStatus.intellectual/,
-      /layer.options.itemStatus.longMissing/,
-      /layer.options.itemStatus.restricted/,
-      /layer.options.itemStatus.unavailable/,
-      /layer.options.itemStatus.unknown/,
+      /layer.options.available/,
+      /layer.options.missing/,
+      /layer.options.withdrawn/,
+      /layer.options.non-requestable/,
+      /layer.options.intellectual/,
+      /layer.options.longMissing/,
+      /layer.options.restricted/,
+      /layer.options.unavailable/,
+      /layer.options.unknown/,
     ];
     const optionStatus = screen.getByRole('option', { name: /layer.options.itemStatus/ });
     const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
@@ -105,7 +105,7 @@ describe('BulkEditInApp', () => {
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
 
     const selectStatus = screen.getByTestId('select-status-0');
-    const itemStatus = screen.getByRole('option', { name: /layer.options.itemStatus.missing/ });
+    const itemStatus = screen.getByRole('option', { name: /layer.options.missing/ });
 
     userEvent.selectOptions(
       selectStatus,
