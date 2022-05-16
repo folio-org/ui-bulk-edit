@@ -3,10 +3,13 @@ import userEvent from '@testing-library/user-event';
 
 import '../../../../../test/jest/__mock__';
 import { BulkEditInApp } from './BulkEditInApp';
+import { RootContext } from '../../../../context/RootContext';
 
 const renderBulkEditInApp = (title) => {
   render(
-    <BulkEditInApp title={title} onContentUpdatesChanged={() => {}} />,
+    <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn() }}>
+      <BulkEditInApp title={title} onContentUpdatesChanged={() => {}} />,
+    </RootContext.Provider>,
   );
 };
 

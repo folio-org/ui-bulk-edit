@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
@@ -18,14 +18,12 @@ jest.mock('./BulkEditList/BulkEditListResult', () => ({
 
 const history = createMemoryHistory();
 
-const renderBulkEdit = () => {
-  window.history.pushState({}, 'Test page', '/bulk-edit?capabilities=USERS');
-
+const renderBulkEdit = (type = 'USERS') => {
   render(
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}`]}>
         <BulkEdit />
-      </BrowserRouter>,
+      </MemoryRouter>,
     </QueryClientProvider>,
   );
 };
