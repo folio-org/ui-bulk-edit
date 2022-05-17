@@ -119,7 +119,6 @@
     "app-delete": "Bulk Edit: In app - Delete",
     "start.edit.csv": "Start bulk edit (CSV)",
     "start.downloadChangedRecords": "Download changed records (CSV)",
-    "start.newBulkEdit": "New bulk edit",
     "layer.title": "Bulk edits",
     "layer.column.options": "Options",
     "layer.column.actions": "Actions",
@@ -136,5 +135,6 @@
     "previewModal.saveAndClose": "Save & close",
     "progressBar.title": "Uploading {title} and retrieving relevant data",
     "progresssBar.retrieving": "Retrieving",
-    "previewModal.areYouSure": "Are you sure?"
+    "previewModal.areYouSure": "Are you sure?",
+    "start.newBulkEdit": "New bulk edit"
 }
