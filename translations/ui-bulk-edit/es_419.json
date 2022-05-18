@@ -135,5 +135,6 @@
     "previewModal.saveAndClose": "Guardar & cerrar",
     "progressBar.title": "Uploading {title} and retrieving relevant data",
     "progresssBar.retrieving": "Retrieving",
-    "previewModal.areYouSure": "Are you sure?"
+    "previewModal.areYouSure": "Are you sure?",
+    "start.newBulkEdit": "New bulk edit"
 }

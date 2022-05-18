@@ -135,5 +135,6 @@
     "previewModal.saveAndClose": "Uložit a zavřít",
     "progressBar.title": "Nahrání {title} a načtení relevantních dat",
     "progresssBar.retrieving": "Získávání",
-    "previewModal.areYouSure": "Are you sure?"
+    "previewModal.areYouSure": "Jste si jistý?",
+    "start.newBulkEdit": "Nová hromadná úprava"
 }

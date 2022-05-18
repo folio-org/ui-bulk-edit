@@ -135,5 +135,6 @@
     "previewModal.saveAndClose": "Salvar e fechar",
     "progressBar.title": "Fazendo upload do(a) {title} e recuperando dados relevantes",
     "progresssBar.retrieving": "Recuperando",
-    "previewModal.areYouSure": "Are you sure?"
+    "previewModal.areYouSure": "Are you sure?",
+    "start.newBulkEdit": "New bulk edit"
 }
