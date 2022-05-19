@@ -36,14 +36,16 @@ export const Preview = ({ id, title, initial, capabilities }) => {
   });
 
   useEffect(() => {
-    if (data?.progress || errors?.length) {
-      setNewBulkFooterShown(true);
-
-      if (data?.progress) {
-        setProcessedRecords(data.progress.total - (errors?.length || 0));
-      }
+    if (data?.progress) {
+      setProcessedRecords(data.progress.total - (errors?.length || 0));
     }
   }, [errors, data?.progress]);
+
+  useEffect(() => {
+    if (items?.length || errors?.length) {
+      setNewBulkFooterShown(true);
+    }
+  }, [items, errors]);
 
 
   return (

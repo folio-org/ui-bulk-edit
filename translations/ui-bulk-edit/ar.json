@@ -135,5 +135,6 @@
     "previewModal.saveAndClose": "حفظ وإغلاق",
     "progressBar.title": "جاري تحميل {title} واسترجاع البيانات ذات الصلة",
     "progresssBar.retrieving": "استرجاع",
-    "previewModal.areYouSure": "Are you sure?"
+    "previewModal.areYouSure": "هل أنت متأكد؟",
+    "start.newBulkEdit": "تحرير جديد بالجملة"
 }
