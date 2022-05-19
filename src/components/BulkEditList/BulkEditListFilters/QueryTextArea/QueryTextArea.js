@@ -14,8 +14,11 @@ export const QueryTextArea = ({ queryText, setQueryText, handleQuerySearch }) =>
   const [isSearchBtnDisabled, setIsSearchDisabled] = useState(true);
   const isResetButtonDisabled = queryText === '';
 
-  useEffect(() => (queryText === '' ? setIsSearchDisabled(true) : setIsSearchDisabled(false)),
-    [queryText]);
+  useEffect(() => {
+    const isDisabled = queryText === '';
+
+    setIsSearchDisabled(isDisabled);
+  }, [queryText]);
 
   const resetButtonHandler = () => setQueryText(prev => ({
     ...prev, queryText: '',
