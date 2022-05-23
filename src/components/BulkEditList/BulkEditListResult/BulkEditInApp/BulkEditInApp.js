@@ -169,12 +169,14 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
               </Col>
               }
               {isItemStatus(index) &&
-                <Select
-                  dataOptions={field.status}
-                  value={contentUpdates[index].value}
-                  onChange={(e) => handleSelectStatus(e, index)}
-                  data-testid={`select-status-${index}`}
-                />
+                <Col xs={6} sm={3}>
+                  <Select
+                    dataOptions={field.status}
+                    value={contentUpdates[index].value}
+                    onChange={(e) => handleSelectStatus(e, index)}
+                    data-testid={`select-status-${index}`}
+                  />
+                </Col>
               }
               <div className={css.iconButtonWrapper}>
                 <IconButton

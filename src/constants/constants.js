@@ -215,13 +215,13 @@ export const OPTIONS = {
 
 export const ITEMS_OPTIONS = [
   {
-    value: 'PERMANENT_LOCATION',
-    label: 'ui-bulk-edit.layer.options.permanent',
+    value: 'TEMPORARY_LOCATION',
+    label: 'ui-bulk-edit.layer.options.temporary',
     disabled: false,
   },
   {
-    value: 'TEMPORARY_LOCATION',
-    label: 'ui-bulk-edit.layer.options.temporary',
+    value: 'PERMANENT_LOCATION',
+    label: 'ui-bulk-edit.layer.options.permanent',
     disabled: false,
   },
   {
@@ -243,13 +243,13 @@ export const ITEM_STATUS_OPTIONS = [
     disabled: false,
   },
   {
-    value: 'Missing',
-    label: 'ui-bulk-edit.layer.options.missing',
+    value: 'Withdrawn',
+    label: 'ui-bulk-edit.layer.options.withdrawn',
     disabled: false,
   },
   {
-    value: 'Withdrawn',
-    label: 'ui-bulk-edit.layer.options.withdrawn',
+    value: 'Missing',
+    label: 'ui-bulk-edit.layer.options.missing',
     disabled: false,
   },
   {
