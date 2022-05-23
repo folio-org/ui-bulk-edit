@@ -20,6 +20,7 @@
 * [UIBULKED-59](https://issues.folio.org/browse/UIBULKED-59) CSV and In app bulk edit permissions.
 * [UIBULKED-73](https://issues.folio.org/browse/UIBULKED-73) New bulk edit button
 * [UIBULKED-69](https://issues.folio.org/browse/UIBULKED-69) "Reset all" button is disabled after Query execution
+* [UIBULKED-38](https://issues.folio.org/browse/UIBULKED-38) Add item status to In-app bulk edit form.
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 

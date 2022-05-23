@@ -16,6 +16,7 @@ import { LocationLookup } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ITEMS_OPTIONS,
   ITEMS_ACTION,
+  ITEM_STATUS_OPTIONS,
   ACTIONS,
   OPTIONS } from '../../../../constants';
 import css from './BulkEditInApp.css';
@@ -31,21 +32,30 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
   const itemsActions = getItems(ITEMS_ACTION);
   const itemsOptions = getItems(ITEMS_OPTIONS);
+  const itemStatus = getItems(ITEM_STATUS_OPTIONS);
 
   const defaultOption = itemsOptions[0].value;
   const defaultAction = itemsActions[0].value;
+  const defaultStatus = itemStatus[0].value;
 
   const [fields, setFields] = useState([{
     actions: itemsActions,
     options: itemsOptions,
+    status: itemStatus,
     selectedOption: defaultOption,
     selectedAction: defaultAction,
+    selectedStatus: defaultStatus,
   }]);
 
   const [contentUpdates, setContentUpdates] = useState([{
     option: defaultOption,
     action: defaultAction,
   }]);
+
+  const isLocation = (index) => contentUpdates[index].action === ACTIONS.REPLACE &&
+  contentUpdates[index].option !== OPTIONS.STATUS;
+  const isItemStatus = (index) => contentUpdates[index].action === ACTIONS.REPLACE &&
+  contentUpdates[index].option === OPTIONS.STATUS;
 
   const handleSelectLocation = useCallback(
     (location, index) => {
@@ -62,19 +72,28 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     [contentUpdates],
   );
 
+  const handleSelectStatus = useCallback(
+    (e, index) => {
+      setContentUpdates(contentUpdates.map((loc, i) => {
+        if (i === index) {
+          return Object.assign(loc, {
+            value: e.target.value,
+          });
+        }
+
+        return loc;
+      }));
+    },
+    [contentUpdates],
+  );
+
   const handleSelectChange = (e, index, type) => {
     setContentUpdates(contentUpdates.map((field, i) => {
       if (i === index) {
-        if (e.target.value === ACTIONS.CLEAR) {
-          return Object.assign(field, {
-            [type]: e.target.value,
-            value: '',
-          });
-        } else {
-          return Object.assign(field, {
-            [type]: e.target.value,
-          });
-        }
+        return Object.assign(field, {
+          [type]: e.target.value,
+          value: '',
+        });
       }
 
       return field;
@@ -88,7 +107,8 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
   const handleAdd = () => {
     setFields(prevState => [...prevState, { actions: itemsActions,
-      options: itemsOptions }]);
+      options: itemsOptions,
+      status: itemStatus }]);
     setContentUpdates(prevState => [...prevState, {
       option: defaultOption,
       action: defaultAction,
@@ -133,7 +153,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                 />
               </Col>
 
-              {contentUpdates[index].action === ACTIONS.REPLACE &&
+              {isLocation(index) &&
               <Col xs={6} sm={3}>
                 <TextField
                   type="text"
@@ -147,6 +167,16 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                   isTemporaryLocation={getIsTemporaryLocation(contentUpdates[index])}
                 />
               </Col>
+              }
+              {isItemStatus(index) &&
+                <Col xs={6} sm={3}>
+                  <Select
+                    dataOptions={field.status}
+                    value={contentUpdates[index].value}
+                    onChange={(e) => handleSelectStatus(e, index)}
+                    data-testid={`select-status-${index}`}
+                  />
+                </Col>
               }
               <div className={css.iconButtonWrapper}>
                 <IconButton
