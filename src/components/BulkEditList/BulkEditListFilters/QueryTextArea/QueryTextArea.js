@@ -11,10 +11,12 @@ import { ResetButton } from '@folio/stripes-acq-components';
 
 
 export const QueryTextArea = ({ queryText, setQueryText, handleQuerySearch }) => {
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isSearchBtnDisabled, setIsSearchDisabled] = useState(true);
+  const isSearchFieldEmpty = !queryText.length;
 
-  useEffect(() => (queryText === '' ? setIsDisabled(true) : setIsDisabled(false)),
-    [queryText]);
+  useEffect(() => {
+    setIsSearchDisabled(isSearchFieldEmpty);
+  }, [isSearchFieldEmpty, queryText]);
 
   const resetButtonHandler = () => setQueryText(prev => ({
     ...prev, queryText: '',
@@ -25,7 +27,7 @@ export const QueryTextArea = ({ queryText, setQueryText, handleQuerySearch }) =>
   }));
 
   const onSearch = () => {
-    setIsDisabled(true);
+    setIsSearchDisabled(true);
     handleQuerySearch();
   };
 
@@ -35,12 +37,12 @@ export const QueryTextArea = ({ queryText, setQueryText, handleQuerySearch }) =>
         value={queryText}
         onChange={onChangeTextAreaHandler}
       />
-      <Button buttonStyle="primary" fullWidth disabled={isDisabled} onClick={onSearch}>
+      <Button buttonStyle="primary" fullWidth disabled={isSearchBtnDisabled} onClick={onSearch}>
         <FormattedMessage id="ui-bulk-edit.textArea.search" />
       </Button>
       <ResetButton
         label={<FormattedMessage id="ui-bulk-edit.textArea.resetAll" />}
-        disabled={isDisabled}
+        disabled={isSearchFieldEmpty}
         reset={resetButtonHandler}
       />
     </>
