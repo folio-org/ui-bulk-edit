@@ -109,10 +109,6 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
             value: '',
           });
         }
-        return Object.assign(field, {
-          [type]: e.target.value,
-          value: '',
-        });
       }
 
       return field;
