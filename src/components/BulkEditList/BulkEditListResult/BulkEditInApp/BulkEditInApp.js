@@ -56,6 +56,8 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   contentUpdates[index].option !== OPTIONS.STATUS;
   const isItemStatus = (index) => contentUpdates[index].action === ACTIONS.REPLACE &&
   contentUpdates[index].option === OPTIONS.STATUS;
+  const isDisabled = (index) => contentUpdates[index].option === OPTIONS.STATUS;
+
 
   const handleSelectLocation = useCallback(
     (location, index) => {
@@ -90,10 +92,24 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   const handleSelectChange = (e, index, type) => {
     setContentUpdates(contentUpdates.map((field, i) => {
       if (i === index) {
-        return Object.assign(field, {
-          [type]: e.target.value,
-          value: '',
-        });
+        if (e.target.value === OPTIONS.STATUS) {
+          return Object.assign(field, {
+            option: e.target.value,
+            action: ACTIONS.REPLACE,
+            value: '',
+          });
+        } else if (e.target.value !== OPTIONS.STATUS && type === 'option') {
+          return Object.assign(field, {
+            option: e.target.value,
+            action: '',
+            value: '',
+          });
+        } else {
+          return Object.assign(field, {
+            [type]: e.target.value,
+            value: '',
+          });
+        }
       }
 
       return field;
@@ -150,6 +166,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                   value={contentUpdates[index].action}
                   onChange={(e) => handleSelectChange(e, index, 'action')}
                   data-testid={`select-actions-${index}`}
+                  disabled={isDisabled(index)}
                 />
               </Col>
 
