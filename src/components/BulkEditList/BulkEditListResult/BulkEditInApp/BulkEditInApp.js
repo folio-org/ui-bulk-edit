@@ -91,20 +91,13 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   const handleSelectChange = (e, index, type) => {
     setContentUpdates(contentUpdates.map((field, i) => {
       if (i === index) {
-        if (e.target.value === OPTIONS.STATUS) {
-          return Object.assign(field, {
+        switch (e.target.value) {
+          case OPTIONS.STATUS: return Object.assign(field, {
             option: e.target.value,
             action: ACTIONS.REPLACE,
             value: '',
           });
-        } else if (e.target.value !== OPTIONS.STATUS && type === 'option') {
-          return Object.assign(field, {
-            option: e.target.value,
-            action: '',
-            value: '',
-          });
-        } else {
-          return Object.assign(field, {
+          default: return Object.assign(field, {
             [type]: e.target.value,
             value: '',
           });
