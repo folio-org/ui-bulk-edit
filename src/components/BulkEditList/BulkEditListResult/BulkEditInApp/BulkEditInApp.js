@@ -58,7 +58,6 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   contentUpdates[index].option === OPTIONS.STATUS;
   const isDisabled = (index) => contentUpdates[index].option === OPTIONS.STATUS;
 
-
   const handleSelectLocation = useCallback(
     (location, index) => {
       setContentUpdates(contentUpdates.map((loc, i) => {
@@ -110,6 +109,10 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
             value: '',
           });
         }
+        return Object.assign(field, {
+          [type]: e.target.value,
+          value: '',
+        });
       }
 
       return field;
