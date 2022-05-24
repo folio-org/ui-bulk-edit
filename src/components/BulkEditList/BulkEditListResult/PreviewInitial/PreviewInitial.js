@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { useLocation, useParams } from 'react-router';
 import { Preview } from '../Preview/Preview';
 
-const PreviewInitial = () => {
+const PreviewInitial = ({ setCountOfRecords }) => {
   const intl = useIntl();
   const location = useLocation();
   const { id } = useParams();
@@ -23,8 +24,12 @@ const PreviewInitial = () => {
   }, [fileUploadedName, intl, location.search]);
 
   return (
-    <Preview title={title} id={id} capabilities={capabilities} initial />
+    <Preview title={title} id={id} capabilities={capabilities} initial setCountOfRecords={setCountOfRecords} />
   );
+};
+
+PreviewInitial.propTypes = {
+  setCountOfRecords: PropTypes.func,
 };
 
 export default PreviewInitial;

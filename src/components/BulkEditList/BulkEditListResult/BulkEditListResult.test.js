@@ -34,6 +34,8 @@ jest.mock('../../../API', () => ({
   useUserGroupsMap: () => ({}),
 }));
 
+const setCountOfRecordsMock = jest.fn();
+
 const renderBulkEditResult = (history, typeOfProgress = TYPE_OF_PROGRESS.INITIAL) => {
   render(
     <Router history={history}>
@@ -42,6 +44,7 @@ const renderBulkEditResult = (history, typeOfProgress = TYPE_OF_PROGRESS.INITIAL
           <BulkEditListResult
             updatedId="1"
             typeOfProgress={typeOfProgress}
+            setCountOfRecords={setCountOfRecordsMock}
           />
         </RootContext.Provider>
       </QueryClientProvider>

@@ -17,7 +17,7 @@ import {
 } from '../../../../API';
 import { RootContext } from '../../../../context/RootContext';
 
-export const Preview = ({ id, title, initial, capabilities }) => {
+export const Preview = ({ id, title, initial, capabilities, setCountOfRecords }) => {
   const { setNewBulkFooterShown } = useContext(RootContext);
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
@@ -38,6 +38,7 @@ export const Preview = ({ id, title, initial, capabilities }) => {
   useEffect(() => {
     if (data?.progress) {
       setProcessedRecords(data.progress.total - (errors?.length || 0));
+      setCountOfRecords(data.progress.total);
     }
   }, [errors, data?.progress]);
 
@@ -70,7 +71,7 @@ export const Preview = ({ id, title, initial, capabilities }) => {
         {!!mappedErrors?.length && (
           <ErrorsAccordion
             errors={mappedErrors}
-            entries={data?.progress?.total}
+            entries={data?.progress?.processed}
             matched={processedRecords}
           />
         )}
@@ -84,4 +85,5 @@ Preview.propTypes = {
   title: PropTypes.string,
   initial: PropTypes.bool,
   capabilities: PropTypes.string,
+  setCountOfRecords: PropTypes.func,
 };
