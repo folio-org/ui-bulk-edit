@@ -40,11 +40,10 @@ const renderBulkEditResult = (history, typeOfProgress = TYPE_OF_PROGRESS.INITIAL
   render(
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
-        <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn() }}>
+        <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn(), setCountOfRecords: setCountOfRecordsMock }}>
           <BulkEditListResult
             updatedId="1"
             typeOfProgress={typeOfProgress}
-            setCountOfRecords={setCountOfRecordsMock}
           />
         </RootContext.Provider>
       </QueryClientProvider>

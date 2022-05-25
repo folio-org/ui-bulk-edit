@@ -10,7 +10,7 @@ import PreviewInitial from './PreviewInitial/PreviewInitial';
 import PreviewProcessed from './PreviewProcessed/PreviewProcessed';
 import { TYPE_OF_PROGRESS } from '../../../constants';
 
-const BulkEditListResult = ({ updatedId, jobId, setCountOfRecords }) => {
+const BulkEditListResult = ({ updatedId, jobId }) => {
   return (
     <Switch>
       <Route
@@ -20,12 +20,12 @@ const BulkEditListResult = ({ updatedId, jobId, setCountOfRecords }) => {
       />
       <Route
         path="/bulk-edit/:id/initial"
-        render={() => <PreviewInitial setCountOfRecords={setCountOfRecords} />}
+        component={PreviewInitial}
         exact
       />
       <Route
         path="/bulk-edit/:id/processed"
-        render={() => <PreviewProcessed setCountOfRecords={setCountOfRecords} />}
+        component={PreviewProcessed}
         exact
       />
       <Route
@@ -45,5 +45,4 @@ export default BulkEditListResult;
 BulkEditListResult.propTypes = {
   updatedId: PropTypes.string,
   jobId: PropTypes.string,
-  setCountOfRecords: PropTypes.func,
 };

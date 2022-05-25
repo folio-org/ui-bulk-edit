@@ -190,7 +190,7 @@ export const BulkEditList = () => {
   };
 
   return (
-    <RootContext.Provider value={{ setNewBulkFooterShown }}>
+    <RootContext.Provider value={{ setNewBulkFooterShown, setCountOfRecords }}>
       <Paneset>
         <Pane
           defaultWidth="20%"
