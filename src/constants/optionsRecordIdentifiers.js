@@ -16,11 +16,11 @@ export const identifierOptions = {
       label: 'ui-bulk-edit.list.filters.recordIdentifier.userBarcodes',
     },
     {
-      value: 'External IDs',
+      value: 'EXTERNAL_SYSTEM_ID',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.externalIDs',
     },
     {
-      value: 'Usernames',
+      value: 'USER_NAME',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.usernames',
     },
   ],
