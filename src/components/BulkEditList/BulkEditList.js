@@ -190,7 +190,7 @@ export const BulkEditList = () => {
   };
 
   return (
-    <RootContext.Provider value={{ setNewBulkFooterShown }}>
+    <RootContext.Provider value={{ setNewBulkFooterShown, setCountOfRecords }}>
       <Paneset>
         <Pane
           defaultWidth="20%"
@@ -201,7 +201,6 @@ export const BulkEditList = () => {
             setFilters={setFilters}
             setIsFileUploaded={setIsFileUploaded}
             isFileUploaded={isFileUploaded}
-            setCountOfRecords={setCountOfRecords}
           />
         </Pane>
         <Pane
@@ -215,6 +214,7 @@ export const BulkEditList = () => {
           <BulkEditListResult
             updatedId={updatedId}
             jobId={jobId}
+            setCountOfRecords={setCountOfRecords}
           />
         </Pane>
         <Layer isOpen={isBulkEditLayerOpen} inRootSet>
