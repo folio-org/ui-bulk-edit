@@ -19,6 +19,7 @@
 * [UIBULKED-66](https://issues.folio.org/browse/UIBULKED-66) Progress bar for uploading identifier files and retrieving relevant data.
 * [UIBULKED-59](https://issues.folio.org/browse/UIBULKED-59) CSV and In app bulk edit permissions.
 * [UIBULKED-73](https://issues.folio.org/browse/UIBULKED-73) New bulk edit button
+* [UIBULKED-90](https://issues.folio.org/browse/UIBULKED-90) Replace history only if the search params are different.
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
@@ -33,7 +34,7 @@
 * [UIBULKED-10](https://issues.folio.org/browse/UIBULKED-10) Actions menu
 * [UIBULKED-24](https://issues.folio.org/browse/UIBULKED-24) Link record identifier with the drag and drop area on the landing page
 * [UIBULKED-9](https://issues.folio.org/browse/UIBULKED-9) Uploading the file with identifiers
-* [UIBULKED-11](https://issues.folio.org/browse/UIBULKED-11) Bulk Edit app - permissions 
+* [UIBULKED-11](https://issues.folio.org/browse/UIBULKED-11) Bulk Edit app - permissions
 * [UIBULKED-19](https://issues.folio.org/browse/UIBULKED-19) Download errors (CSV)
 * [UIBULKED-17](https://issues.folio.org/browse/UIBULKED-17) Start bulk edit
 * [UIBULKED-18](https://issues.folio.org/browse/UIBULKED-18) Download matched records (CSV)
