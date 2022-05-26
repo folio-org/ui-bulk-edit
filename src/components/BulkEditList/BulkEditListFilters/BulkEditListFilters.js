@@ -28,7 +28,6 @@ import { useJobCommand, useFileUploadComand, useUserGroupsMap } from '../../../A
 import { buildQuery } from '../../../hooks';
 import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
 
-
 export const BulkEditListFilters = ({
   filters,
   setFilters,
@@ -193,7 +192,6 @@ export const BulkEditListFilters = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
-
 
   useEffect(() => {
     const search = buildSearch({ capabilities }, location.search);
