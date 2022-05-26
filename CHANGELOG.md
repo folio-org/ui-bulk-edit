@@ -23,6 +23,7 @@
 * [UIBULKED-38](https://issues.folio.org/browse/UIBULKED-38) Add item status to In-app bulk edit form.
 * [UIBULKED-62](https://issues.folio.org/browse/UIBULKED-62) Incorrect matched records count when reporting errors.
 * [UIBULKED-81](https://issues.folio.org/browse/UIBULKED-81) Change Usernames and External IDs behavior
+* [UIBULKED-90](https://issues.folio.org/browse/UIBULKED-90) Replace history only if the search params are different.
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
@@ -37,7 +38,7 @@
 * [UIBULKED-10](https://issues.folio.org/browse/UIBULKED-10) Actions menu
 * [UIBULKED-24](https://issues.folio.org/browse/UIBULKED-24) Link record identifier with the drag and drop area on the landing page
 * [UIBULKED-9](https://issues.folio.org/browse/UIBULKED-9) Uploading the file with identifiers
-* [UIBULKED-11](https://issues.folio.org/browse/UIBULKED-11) Bulk Edit app - permissions 
+* [UIBULKED-11](https://issues.folio.org/browse/UIBULKED-11) Bulk Edit app - permissions
 * [UIBULKED-19](https://issues.folio.org/browse/UIBULKED-19) Download errors (CSV)
 * [UIBULKED-17](https://issues.folio.org/browse/UIBULKED-17) Start bulk edit
 * [UIBULKED-18](https://issues.folio.org/browse/UIBULKED-18) Download matched records (CSV)

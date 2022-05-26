@@ -194,10 +194,17 @@ export const BulkEditListFilters = ({
   }, [location.search]);
 
   useEffect(() => {
-    history.replace({
-      pathname: location.pathname,
-      search: buildSearch({ capabilities }, location.search),
-    });
+    const search = buildSearch({ capabilities }, location.search);
+
+    // Replace history only if the search params are different from
+    // the current location search params.
+    // https://issues.folio.org/browse/UIBULKED-90
+    if (location.search !== `?${search}`) {
+      history.replace({
+        pathname: location.pathname,
+        search,
+      });
+    }
   }, [capabilities]);
 
   const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
