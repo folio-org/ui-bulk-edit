@@ -60,23 +60,65 @@ describe('BulkEditInApp', () => {
     const options = [
       /layer.options.permanent/,
       /layer.options.temporary/,
+      /layer.options.statusLabel/,
     ];
-
-    const itemFormer = screen.getByRole('option', { name: /layer.options.permanent/ });
-
-    const selectRecordIdentifier = screen.getByTestId('select-option-0');
+    const permanentLocation = screen.getByRole('option', { name: /layer.options.permanent/ });
+    const selectOption = screen.getByTestId('select-option-0');
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
 
     userEvent.selectOptions(
-      selectRecordIdentifier,
-      itemFormer,
+      selectOption,
+      permanentLocation,
     );
 
-    expect(itemFormer.selected).toBe(true);
+    expect(permanentLocation.selected).toBe(true);
   });
 
   it('should display select correct options in action select', () => {
+    renderBulkEditInApp(titleMock);
+
+    const options = [
+      /layer.options.available/,
+      /layer.options.missing/,
+      /layer.options.withdrawn/,
+      /layer.options.non-requestable/,
+      /layer.options.intellectual/,
+      /layer.options.longMissing/,
+      /layer.options.restricted/,
+      /layer.options.unavailable/,
+      /layer.options.unknown/,
+    ];
+    const optionStatus = screen.getByRole('option', { name: /layer.options.statusLabel/ });
+    const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
+    const selectOption = screen.getByTestId('select-option-0');
+    const selectAction = screen.getByTestId('select-actions-0');
+
+
+    userEvent.selectOptions(
+      selectOption,
+      optionStatus,
+    );
+
+    userEvent.selectOptions(
+      selectAction,
+      actionReplace,
+    );
+
+    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+
+    const selectStatus = screen.getByTestId('select-status-0');
+    const itemStatus = screen.getByRole('option', { name: /layer.options.missing/ });
+
+    userEvent.selectOptions(
+      selectStatus,
+      itemStatus,
+    );
+
+    expect(itemStatus.selected).toBe(true);
+  });
+
+  it('should display item status location', () => {
     renderBulkEditInApp(titleMock);
 
     const options = [
@@ -84,17 +126,16 @@ describe('BulkEditInApp', () => {
       /layer.action.clear/,
     ];
 
-    const itemFormer = screen.getByRole('option', { name: /layer.action.replace/ });
-
-    const selectRecordIdentifier = screen.getByTestId('select-actions-0');
+    const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
+    const selectAction = screen.getByTestId('select-actions-0');
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
 
     userEvent.selectOptions(
-      selectRecordIdentifier,
-      itemFormer,
+      selectAction,
+      optionReplace,
     );
 
-    expect(itemFormer.selected).toBe(true);
+    expect(optionReplace.selected).toBe(true);
   });
 });

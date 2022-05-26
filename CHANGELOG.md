@@ -19,6 +19,10 @@
 * [UIBULKED-66](https://issues.folio.org/browse/UIBULKED-66) Progress bar for uploading identifier files and retrieving relevant data.
 * [UIBULKED-59](https://issues.folio.org/browse/UIBULKED-59) CSV and In app bulk edit permissions.
 * [UIBULKED-73](https://issues.folio.org/browse/UIBULKED-73) New bulk edit button
+* [UIBULKED-69](https://issues.folio.org/browse/UIBULKED-69) "Reset all" button is disabled after Query execution
+* [UIBULKED-38](https://issues.folio.org/browse/UIBULKED-38) Add item status to In-app bulk edit form.
+* [UIBULKED-62](https://issues.folio.org/browse/UIBULKED-62) Incorrect matched records count when reporting errors.
+* [UIBULKED-81](https://issues.folio.org/browse/UIBULKED-81) Change Usernames and External IDs behavior
 * [UIBULKED-90](https://issues.folio.org/browse/UIBULKED-90) Replace history only if the search params are different.
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)

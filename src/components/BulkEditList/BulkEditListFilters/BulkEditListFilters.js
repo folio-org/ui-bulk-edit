@@ -34,7 +34,6 @@ export const BulkEditListFilters = ({
   setFilters,
   isFileUploaded,
   setIsFileUploaded,
-  setCountOfRecords,
 }) => {
   const showCallout = useShowCallout();
   const history = useHistory();
@@ -126,9 +125,7 @@ export const BulkEditListFilters = ({
     try {
       const { id } = await requestJobId({ recordIdentifier, editType: BULK_EDIT_IDENTIFIERS });
 
-      const recordsCount = await fileUpload({ id, fileToUpload });
-
-      setCountOfRecords(recordsCount);
+      await fileUpload({ id, fileToUpload });
 
       search.delete('queryText');
 
@@ -307,5 +304,4 @@ BulkEditListFilters.propTypes = {
   setFilters: PropTypes.func.isRequired,
   isFileUploaded: PropTypes.bool.isRequired,
   setIsFileUploaded: PropTypes.func.isRequired,
-  setCountOfRecords: PropTypes.func.isRequired,
 };
