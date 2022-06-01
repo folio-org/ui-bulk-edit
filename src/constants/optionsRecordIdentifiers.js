@@ -67,14 +67,15 @@ export const EDIT_CAPABILITIES = [
     label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.inventory" />,
     disabled: false,
   },
-  {
-    value: 'CIRCULATION',
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.circulation" />,
-    disabled: true,
-  },
-  {
-    value: 'ACQUESTION',
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.acquisition" />,
-    disabled: true,
-  },
+  // Commented in scope of story UIBULKED-68//
+  // {
+  //   value: 'CIRCULATION',
+  //   label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.circulation" />,
+  //   disabled: true,
+  // },
+  // {
+  //   value: 'ACQUESTION',
+  //   label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.acquisition" />,
+  //   disabled: true,
+  // },
 ];
