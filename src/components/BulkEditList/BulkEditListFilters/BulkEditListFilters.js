@@ -173,7 +173,9 @@ export const BulkEditListFilters = ({
   const uploaderSubTitle = useMemo(() => {
     const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
 
-    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />;
+    return capabilities === CAPABILITIES.USER ? <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />
+      :
+    <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle.item${messagePrefix}`} />;
   }, [recordIdentifier]);
 
   useEffect(() => {

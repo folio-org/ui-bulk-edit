@@ -25,6 +25,7 @@
 * [UIBULKED-81](https://issues.folio.org/browse/UIBULKED-81) Change Usernames and External IDs behavior
 * [UIBULKED-90](https://issues.folio.org/browse/UIBULKED-90) Replace history only if the search params are different.
 * [UIBULKED-75](https://issues.folio.org/browse/UIBULKED-75) Enable type ahead in location look-up.
+* [UIBULKED-82](https://issues.folio.org/browse/UIBULKED-82) The labels on the Drag and drop and the body areas don't match selected Item identifiers.
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
