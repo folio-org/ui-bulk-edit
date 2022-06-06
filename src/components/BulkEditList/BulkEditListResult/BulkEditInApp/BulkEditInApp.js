@@ -105,6 +105,17 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     }));
   };
 
+  const handleTypLocation = (e, index) => {
+    setContentUpdates(contentUpdates.map((field, i) => {
+      if (i === index) {
+        return { ...field,
+          value: e.target.value };
+      }
+
+      return field;
+    }));
+  };
+
   const handleRemove = (index) => {
     setFields([...fields.slice(0, index), ...fields.slice(index + 1, fields.length)]);
     setContentUpdates([...contentUpdates.slice(0, index), ...contentUpdates.slice(index + 1, contentUpdates.length)]);
@@ -164,7 +175,8 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                 <TextField
                   type="text"
                   value={contentUpdates[index].value || ''}
-                  disabled
+                  onChange={(e) => handleTypLocation(e, index)}
+                  data-test-id={`textField-${index}`}
                 />
                 <LocationLookup
                   marginBottom0

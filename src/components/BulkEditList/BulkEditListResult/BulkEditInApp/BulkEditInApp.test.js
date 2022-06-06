@@ -137,5 +137,11 @@ describe('BulkEditInApp', () => {
     );
 
     expect(optionReplace.selected).toBe(true);
+
+    const textField = screen.getByRole('textbox');
+
+    userEvent.type(textField, 'Test');
+
+    expect(textField).toHaveValue('Test');
   });
 });
