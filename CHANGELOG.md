@@ -24,6 +24,7 @@
 * [UIBULKED-62](https://issues.folio.org/browse/UIBULKED-62) Incorrect matched records count when reporting errors.
 * [UIBULKED-81](https://issues.folio.org/browse/UIBULKED-81) Change Usernames and External IDs behavior
 * [UIBULKED-90](https://issues.folio.org/browse/UIBULKED-90) Replace history only if the search params are different.
+* [UIBULKED-68](https://issues.folio.org/browse/UIBULKED-68) Changes to the Bulk edit left pane.
 * [UIBULKED-75](https://issues.folio.org/browse/UIBULKED-75) Enable type ahead in location look-up.
 * [UIBULKED-82](https://issues.folio.org/browse/UIBULKED-82) The labels on the Drag and drop and the body areas don't match selected Item identifiers.
 
