@@ -28,6 +28,8 @@ import { useJobCommand, useFileUploadComand, useUserGroupsMap } from '../../../A
 import { buildQuery } from '../../../hooks';
 import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
 
+import css from './BulkEditListFilters.css';
+
 export const BulkEditListFilters = ({
   filters,
   setFilters,
@@ -286,6 +288,7 @@ export const BulkEditListFilters = ({
         </RadioButtonGroup>
       </Accordion>
       <Accordion
+        className={css.accordionHidden}
         closedByDefault
         displayWhenClosed={renderBadge()}
         displayWhenOpen={renderBadge()}

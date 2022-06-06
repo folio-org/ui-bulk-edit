@@ -20,7 +20,7 @@
     "modal.fileExtensions.blocked.header": "Invalid file",
     "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded",
     "modal.fileExtensions.actionButton": "Choose other file to upload",
-    "list.filters.capabilities.title": "Apps with bulk edit capabilities",
+    "list.filters.capabilities.title": "Record types",
     "list.filters.capabilities.users": "Users",
     "list.filters.capabilities.inventory": "Inventory - items",
     "list.filters.capabilities.circulation": "Circulation",
