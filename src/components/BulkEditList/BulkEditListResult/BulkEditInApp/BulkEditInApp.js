@@ -9,10 +9,9 @@ import { Headline,
   Row,
   Accordion,
   Select,
-  RepeatableField,
-  TextField } from '@folio/stripes/components';
+  RepeatableField } from '@folio/stripes/components';
 
-import { LocationLookup } from '@folio/stripes/smart-components';
+import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ITEMS_OPTIONS,
   ITEMS_ACTION,
@@ -47,6 +46,10 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     selectedStatus: defaultStatus,
   }]);
 
+  const [locationsState, setLocationState] = useState([{
+    locationId: '',
+  }]);
+
   const [contentUpdates, setContentUpdates] = useState([{
     option: defaultOption,
     action: defaultAction,
@@ -64,6 +67,15 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
         if (i === index) {
           return Object.assign(loc, {
             value: location.name,
+          });
+        }
+
+        return loc;
+      }));
+      setLocationState(locationsState.map((loc, i) => {
+        if (i === index) {
+          return Object.assign(loc, {
+            locationId: location.id,
           });
         }
 
@@ -105,20 +117,10 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     }));
   };
 
-  const handleTypLocation = (e, index) => {
-    setContentUpdates(contentUpdates.map((field, i) => {
-      if (i === index) {
-        return { ...field,
-          value: e.target.value };
-      }
-
-      return field;
-    }));
-  };
-
   const handleRemove = (index) => {
     setFields([...fields.slice(0, index), ...fields.slice(index + 1, fields.length)]);
     setContentUpdates([...contentUpdates.slice(0, index), ...contentUpdates.slice(index + 1, contentUpdates.length)]);
+    setLocationState([...locationsState.slice(0, index), ...locationsState.slice(index + 1, locationsState.length)]);
   };
 
   const handleAdd = () => {
@@ -129,6 +131,9 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
       option: defaultOption,
       action: defaultAction,
     }]);
+    setLocationState(prevState => [...prevState, {
+      locationId: '',
+    }]);
   };
 
   const getIsTemporaryLocation = ({ option }) => option === OPTIONS.TEMPORARY_LOCATION;
@@ -136,6 +141,8 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   useEffect(() => {
     onContentUpdatesChanged(contentUpdates);
   }, [contentUpdates]);
+
+  console.log(contentUpdates);
 
   return (
     <>
@@ -172,11 +179,11 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
               {isLocation(index) &&
               <Col xs={6} sm={3}>
-                <TextField
-                  type="text"
-                  value={contentUpdates[index].value || ''}
-                  onChange={(e) => handleTypLocation(e, index)}
+                <LocationSelection
+                  value={locationsState[index].locationId}
+                  onSelect={(location) => handleSelectLocation(location, index)}
                   data-test-id={`textField-${index}`}
+                  placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
                 />
                 <LocationLookup
                   marginBottom0
