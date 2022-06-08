@@ -137,7 +137,7 @@
     "list.result.emptyMessage.USER_NAME": "Drag and drop or choose file with Usernames",
     "uploaderSubTitle.EXTERNAL_SYSTEM_ID": "Select a file with External IDs",
     "uploaderSubTitle.USER_NAME": "Select a file with Usernames",
-    "layer.selectLocation": "Select location"
+    "layer.selectLocation": "Select location",
     "list.result.emptyMessage.item": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab",
     "list.result.emptyMessage.item.BARCODE": "Drag and drop or choose file with item barcodes",
     "list.result.emptyMessage.item.ID": "Drag and drop or choose file with item UUID",
