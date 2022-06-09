@@ -12,7 +12,7 @@ import { Headline,
   RepeatableField,
   TextField } from '@folio/stripes/components';
 
-import { LocationLookup } from '@folio/stripes/smart-components';
+import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ITEMS_OPTIONS,
   ITEMS_ACTION,
@@ -45,10 +45,10 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     option: defaultOption,
     action: defaultAction,
     value: defaultValue,
+    locationId: defaultValue,
   };
 
   const [fields, setFields] = useState([fieldTemplate]);
-  const [contentUpdates, setContentUpdates] = useState([]);
 
   const isLocation = (index) => fields[index].action === ACTIONS.REPLACE &&
   fields[index].option !== OPTIONS.STATUS;
@@ -67,6 +67,8 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
       };
     });
   };
+
+
 
   const handleSelectChange = (e, index, type) => {
     const mappedFields = fields.map((field, i) => {
@@ -91,6 +93,20 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     } else {
       setFields(mappedFields);
     }
+  };
+
+  const handleLocationChange = (location, index) => {
+    setFields(prevFields => prevFields.map((field, i) => {
+      if (i === index) {
+        return {
+          ...field,
+          locationId: location.id,
+          value: location.name,
+        };
+      }
+
+      return field;
+    }));
   };
 
   const handleValueChange = (value, index) => {
@@ -132,7 +148,6 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   useEffect(() => {
     const mappedContentUpdates = fields.map(({ option, action, value }) => ({ option, action, value }));
 
-    setContentUpdates(mappedContentUpdates);
     onContentUpdatesChanged(mappedContentUpdates);
   }, [fields]);
 
@@ -171,15 +186,15 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
               {isLocation(index) &&
               <Col xs={6} sm={3}>
-                <TextField
-                  type="text"
-                  value={field.value}
-                  onChange={(e) => handleValueChange(e.target.value, index)}
+                <LocationSelection
+                  value={field.locationId}
+                  onSelect={(location) => handleLocationChange(location, index)}
+                  placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
                   data-test-id={`textField-${index}`}
                 />
                 <LocationLookup
                   marginBottom0
-                  onLocationSelected={(location) => handleValueChange(location.name, index)}
+                  onLocationSelected={(location) => handleLocationChange(location, index)}
                   data-testid={`locationLookup-${index}`}
                   isTemporaryLocation={getIsTemporaryLocation(field)}
                 />
