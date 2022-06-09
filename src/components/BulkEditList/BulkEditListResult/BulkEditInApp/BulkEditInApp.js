@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import noop from 'lodash/noop';
@@ -9,9 +9,10 @@ import { Headline,
   Row,
   Accordion,
   Select,
-  RepeatableField } from '@folio/stripes/components';
+  RepeatableField,
+  TextField } from '@folio/stripes/components';
 
-import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
+import { LocationLookup } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ITEMS_OPTIONS,
   ITEMS_ACTION,
@@ -30,87 +31,75 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   }));
 
   const itemsActions = getItems(ITEMS_ACTION);
+  const itemStatuses = getItems(ITEM_STATUS_OPTIONS);
   const itemsOptions = getItems(ITEMS_OPTIONS);
-  const itemStatus = getItems(ITEM_STATUS_OPTIONS);
 
   const defaultOption = itemsOptions[0].value;
   const defaultAction = itemsActions[0].value;
-  const defaultStatus = itemStatus[0].value;
+  const defaultValue = '';
 
-  const [fields, setFields] = useState([{
+  const fieldTemplate = {
     actions: itemsActions,
     options: itemsOptions,
-    status: itemStatus,
-    selectedOption: defaultOption,
-    selectedAction: defaultAction,
-    selectedStatus: defaultStatus,
-  }]);
-
-  const [locationsState, setLocationState] = useState([{
-    locationId: '',
-  }]);
-
-  const [contentUpdates, setContentUpdates] = useState([{
+    statuses: itemStatuses,
     option: defaultOption,
     action: defaultAction,
-  }]);
+    value: defaultValue,
+  };
 
-  const isLocation = (index) => contentUpdates[index].action === ACTIONS.REPLACE &&
-  contentUpdates[index].option !== OPTIONS.STATUS;
-  const isItemStatus = (index) => contentUpdates[index].action === ACTIONS.REPLACE &&
-  contentUpdates[index].option === OPTIONS.STATUS;
-  const isDisabled = (index) => contentUpdates[index].option === OPTIONS.STATUS;
+  const [fields, setFields] = useState([fieldTemplate]);
+  const [contentUpdates, setContentUpdates] = useState([]);
 
-  const handleSelectLocation = useCallback(
-    (location, index) => {
-      setContentUpdates(contentUpdates.map((loc, i) => {
-        if (i === index) {
-          return Object.assign(loc, {
-            value: location.name,
-          });
-        }
+  const isLocation = (index) => fields[index].action === ACTIONS.REPLACE &&
+  fields[index].option !== OPTIONS.STATUS;
+  const isItemStatus = (index) => fields[index].action === ACTIONS.REPLACE &&
+  fields[index].option === OPTIONS.STATUS;
+  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS;
 
-        return loc;
-      }));
-      setLocationState(locationsState.map((loc, i) => {
-        if (i === index) {
-          return Object.assign(loc, {
-            locationId: location.id,
-          });
-        }
+  const getFilteredFields = (initialFields) => {
+    return initialFields.map(f => {
+      const uniqOptions = new Set(initialFields.map(i => i.option));
+      const optionsExceptCurrent = [...uniqOptions].filter(u => u !== f.option);
 
-        return loc;
-      }));
-    },
-    [contentUpdates],
-  );
-
-  const handleSelectStatus = useCallback(
-    (e, index) => {
-      setContentUpdates(contentUpdates.map((loc, i) => {
-        if (i === index) {
-          return Object.assign(loc, {
-            value: e.target.value,
-          });
-        }
-
-        return loc;
-      }));
-    },
-    [contentUpdates],
-  );
+      return {
+        ...f,
+        options: f.options.filter(o => !optionsExceptCurrent.includes(o.value)),
+      };
+    });
+  };
 
   const handleSelectChange = (e, index, type) => {
-    setContentUpdates(contentUpdates.map((field, i) => {
+    const mappedFields = fields.map((field, i) => {
       if (i === index) {
-        const isOptionStatus = e.target.value === OPTIONS.STATUS;
         const value = e.target.value;
 
-        return Object.assign(field, {
+        return {
+          ...field,
           action: ACTIONS.REPLACE,
-          value: '',
-          ...(isOptionStatus ? { option: value } : { [type]: value }),
-        });
+          [type]: value,
+        };
+      }
+
+      return field;
+    });
+
+    if (type === 'option') {
+      const recoveredFields = mappedFields.map(f => ({ ...f, options: itemsOptions }));
+      const finalizedFields = getFilteredFields(recoveredFields);
+
+      setFields(finalizedFields);
+    } else {
+      setFields(mappedFields);
+    }
+  };
+
+  const handleValueChange = (value, index) => {
+    setFields(prevFields => prevFields.map((field, i) => {
+      if (i === index) {
+        return {
+          ...field,
+          value,
+        };
       }
 
       return field;
@@ -118,31 +107,34 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   };
 
   const handleRemove = (index) => {
-    setFields([...fields.slice(0, index), ...fields.slice(index + 1, fields.length)]);
-    setContentUpdates([...contentUpdates.slice(0, index), ...contentUpdates.slice(index + 1, contentUpdates.length)]);
-    setLocationState([...locationsState.slice(0, index), ...locationsState.slice(index + 1, locationsState.length)]);
+    const filteredFields = fields.filter((_, i) => i !== index);
+    const recoveredFields = filteredFields.map(f => ({ ...f, options: itemsOptions }));
+    const finalizedFields = getFilteredFields(recoveredFields);
+
+    setFields(finalizedFields);
   };
 
   const handleAdd = () => {
-    setFields(prevState => [...prevState, { actions: itemsActions,
-      options: itemsOptions,
-      status: itemStatus }]);
-    setContentUpdates(prevState => [...prevState, {
-      option: defaultOption,
-      action: defaultAction,
-    }]);
-    setLocationState(prevState => [...prevState, {
-      locationId: '',
-    }]);
+    const filteredFields = getFilteredFields([...fields, { ...fieldTemplate, action: ACTIONS.REPLACE, option: '' }]);
+    const initializedFields = filteredFields.map((f, i) => {
+      return i === filteredFields.length - 1
+        ? ({ ...f, option: f.options[0].value })
+        : f;
+    });
+
+    const finalizedFields = getFilteredFields(initializedFields);
+
+    setFields(finalizedFields);
   };
 
   const getIsTemporaryLocation = ({ option }) => option === OPTIONS.TEMPORARY_LOCATION;
 
   useEffect(() => {
-    onContentUpdatesChanged(contentUpdates);
-  }, [contentUpdates]);
+    const mappedContentUpdates = fields.map(({ option, action, value }) => ({ option, action, value }));
 
-  console.log(contentUpdates);
+    setContentUpdates(mappedContentUpdates);
+    onContentUpdatesChanged(mappedContentUpdates);
+  }, [fields]);
 
   return (
     <>
@@ -162,7 +154,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
               <Col xs={6} sm={3}>
                 <Select
                   dataOptions={field.options}
-                  value={contentUpdates[index].options}
+                  value={field.option}
                   onChange={(e) => handleSelectChange(e, index, 'option')}
                   data-testid={`select-option-${index}`}
                 />
@@ -170,7 +162,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
               <Col xs={6} sm={3}>
                 <Select
                   dataOptions={field.actions}
-                  value={contentUpdates[index].action}
+                  value={field.action}
                   onChange={(e) => handleSelectChange(e, index, 'action')}
                   data-testid={`select-actions-${index}`}
                   disabled={isDisabled(index)}
@@ -179,41 +171,43 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
               {isLocation(index) &&
               <Col xs={6} sm={3}>
-                <LocationSelection
-                  value={locationsState[index].locationId}
-                  onSelect={(location) => handleSelectLocation(location, index)}
+                <TextField
+                  type="text"
+                  value={field.value}
+                  onChange={(e) => handleValueChange(e.target.value, index)}
                   data-test-id={`textField-${index}`}
-                  placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
                 />
                 <LocationLookup
                   marginBottom0
-                  onLocationSelected={(location) => handleSelectLocation(location, index)}
+                  onLocationSelected={(location) => handleValueChange(location.name, index)}
                   data-testid={`locationLookup-${index}`}
-                  isTemporaryLocation={getIsTemporaryLocation(contentUpdates[index])}
+                  isTemporaryLocation={getIsTemporaryLocation(field)}
                 />
               </Col>
               }
               {isItemStatus(index) &&
                 <Col xs={6} sm={3}>
                   <Select
-                    dataOptions={field.status}
-                    value={contentUpdates[index].value}
-                    onChange={(e) => handleSelectStatus(e, index)}
+                    dataOptions={field.statuses}
+                    value={field.value}
+                    onChange={(e) => handleValueChange(e.target.value, index)}
                     data-testid={`select-status-${index}`}
                   />
                 </Col>
               }
               <div className={css.iconButtonWrapper}>
-                <IconButton
-                  icon="plus-sign"
-                  size="large"
-                  onClick={handleAdd}
-                  data-testid={`add-button-${index}`}
-                />
+                {(index === fields.length - 1 && fields.length !== itemsOptions.length) && (
+                  <IconButton
+                    icon="plus-sign"
+                    size="large"
+                    onClick={handleAdd}
+                    data-testid={`add-button-${index}`}
+                  />
+                )}
                 <IconButton
                   icon="trash"
                   onClick={() => handleRemove(index)}
-                  disabled={index === 0}
+                  disabled={fields.length === 1}
                   data-testid={`remove-button-${index}`}
                 />
               </div>
