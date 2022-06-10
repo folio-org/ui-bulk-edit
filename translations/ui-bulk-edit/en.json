@@ -40,7 +40,7 @@
   "list.result.emptyMessage.item.FORMER_IDS": "Drag and drop or choose file with item former identifier",
   "list.result.emptyMessage.item.ACCESSION_NUMBER": "Drag and drop or choose file with item accession number",
   "list.result.emptyMessage.item.HOLDINGS_RECORD_ID": "Drag and drop or choose file with holdings UUIDs",
-  "list.filters.capabilities.title": "Apps with bulk edit capabilities",
+  "list.filters.capabilities.title": "Record types",
   "list.filters.capabilities.users": "Users",
   "list.filters.capabilities.inventory": "Inventory - items",
   "list.filters.capabilities.circulation": "Circulation",
