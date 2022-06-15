@@ -142,14 +142,18 @@ export const BulkEditList = () => {
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
   }, [fileUploadedMatchedName, location.search]);
 
-  const paneSubtitle = useMemo(() => (
-    history.location.pathname !== '/bulk-edit'
-      ?
-      history.location.pathname === '/bulk-edit/:id/initial' ?
-        <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
-        : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
-      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
+  const changedPaneSubTitle = useMemo(() => (
+    history.location.pathname.includes('initial') ?
+      <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
+      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
   ), [countOfRecords, history.location.pathname]);
+
+  const paneSubtitle = useMemo(() => (
+    history.location.pathname !== '/bulk-edit' && !history.location.pathname.includes('initialProgress')
+      ?
+      changedPaneSubTitle
+      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
+  ), [changedPaneSubTitle, history.location.pathname]);
 
   const fileNameTitle = () => {
     const fileUploadedName = search.get('fileName');
@@ -191,6 +195,8 @@ export const BulkEditList = () => {
       />
     );
   };
+
+  console.log(history.location.pathname);
 
   return (
     <RootContext.Provider value={{ setNewBulkFooterShown, setCountOfRecords }}>

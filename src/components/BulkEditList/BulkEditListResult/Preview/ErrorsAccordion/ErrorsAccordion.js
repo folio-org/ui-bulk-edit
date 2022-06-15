@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { PropTypes } from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -31,6 +32,28 @@ const ErrorsAccordion = (
   const fileName = new URLSearchParams(location.search).get('fileName');
   const errorLength = errors.length;
 
+  const infoHeadline = useMemo(() => (
+    location.pathname.includes('initial') ?
+      <FormattedMessage
+        id="ui-bulk-edit.list.errors.info"
+        values={{
+          fileName,
+          entries,
+          matched,
+          errors: countOfErrors,
+        }}
+      /> :
+      <FormattedMessage
+        id="ui-bulk-edit.list.errors.infoProccessed"
+        values={{
+          fileName,
+          entries,
+          matched,
+          errors: countOfErrors,
+        }}
+      />
+  ), [countOfErrors, entries, fileName, location.pathname, matched]);
+
   return (
     <>
       <Accordion
@@ -42,25 +65,7 @@ const ErrorsAccordion = (
           <Row>
             <Col xs={12}>
               <Headline size="medium" margin="small">
-                {location.pathname === '/bulk-edit/:id/initial' ?
-                  <FormattedMessage
-                    id="ui-bulk-edit.list.errors.info"
-                    values={{
-                      fileName,
-                      entries,
-                      matched,
-                      errors: countOfErrors,
-                    }}
-                  /> :
-                  <FormattedMessage
-                    id="ui-bulk-edit.list.errors.infoProccessed"
-                    values={{
-                      fileName,
-                      entries,
-                      matched,
-                      errors: countOfErrors,
-                    }}
-                  />}
+                {infoHeadline}
               </Headline>
             </Col>
           </Row>
