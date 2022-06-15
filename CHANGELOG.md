@@ -28,6 +28,7 @@
 * [UIBULKED-75](https://issues.folio.org/browse/UIBULKED-75) Enable type ahead in location look-up.
 * [UIBULKED-82](https://issues.folio.org/browse/UIBULKED-82) The labels on the Drag and drop and the body areas don't match selected Item identifiers.
 * [UIBULKED-76](https://issues.folio.org/browse/UIBULKED-76) Narrow down options dropdown choices on in-app bulk edit form
+* [UIBULKED-100](https://issues.folio.org/browse/UIBULKED-100) Matched records label cleanup - Morning Glory
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 

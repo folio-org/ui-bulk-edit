@@ -151,5 +151,7 @@
     "uploaderSubTitle.item.HRID": "Select a file with item HRIDs",
     "uploaderSubTitle.item.FORMER_IDS": "Select a file with item former identifier",
     "uploaderSubTitle.item.ACCESSION_NUMBER": "Select a file with item accession number",
-    "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "Select a file with holdings UUIDs"
+    "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "Select a file with holdings UUIDs",
+    "list.logSubTitle.changed": "{count} records changed",
+    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>"
 }

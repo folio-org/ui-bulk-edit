@@ -14,6 +14,7 @@
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
   "list.logSubTitle.matched": "{count} records match",
+  "list.logSubTitle.changed": "{count} records changed",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
   "list.filters.recordIdentifier": "Record identifier",
@@ -60,6 +61,7 @@
 
   "list.errors.title": "Errors",
   "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
+  "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
   "list.errors.table.code": "Record identifier",
   "list.errors.table.message": "Reason for error",
 

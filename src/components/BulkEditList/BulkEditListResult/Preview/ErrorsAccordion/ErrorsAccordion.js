@@ -21,12 +21,15 @@ const columnMapping = {
   message: <FormattedMessage id="ui-bulk-edit.list.errors.table.message" />,
 };
 
-const ErrorsAccordion = ({ errors = [], entries }) => {
+const ErrorsAccordion = (
+  { errors = [],
+    entries,
+    countOfErrors,
+    matched },
+) => {
   const location = useLocation();
   const fileName = new URLSearchParams(location.search).get('fileName');
   const errorLength = errors.length;
-
-  const matched = (entries - errorLength) || 0;
 
   return (
     <>
@@ -39,15 +42,25 @@ const ErrorsAccordion = ({ errors = [], entries }) => {
           <Row>
             <Col xs={12}>
               <Headline size="medium" margin="small">
-                <FormattedMessage
-                  id="ui-bulk-edit.list.errors.info"
-                  values={{
-                    fileName,
-                    entries,
-                    matched,
-                    errors: errorLength,
-                  }}
-                />
+                {location.pathname === '/bulk-edit/:id/initial' ?
+                  <FormattedMessage
+                    id="ui-bulk-edit.list.errors.info"
+                    values={{
+                      fileName,
+                      entries,
+                      matched,
+                      errors: countOfErrors,
+                    }}
+                  /> :
+                  <FormattedMessage
+                    id="ui-bulk-edit.list.errors.infoProccessed"
+                    values={{
+                      fileName,
+                      entries,
+                      matched,
+                      errors: countOfErrors,
+                    }}
+                  />}
               </Headline>
             </Col>
           </Row>
@@ -70,6 +83,8 @@ const ErrorsAccordion = ({ errors = [], entries }) => {
 ErrorsAccordion.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.object),
   entries: PropTypes.number,
+  countOfErrors: PropTypes.number,
+  matched: PropTypes.number,
 };
 
 export default ErrorsAccordion;
