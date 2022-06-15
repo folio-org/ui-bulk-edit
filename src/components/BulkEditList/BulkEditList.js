@@ -196,8 +196,6 @@ export const BulkEditList = () => {
     );
   };
 
-  console.log(history.location.pathname);
-
   return (
     <RootContext.Provider value={{ setNewBulkFooterShown, setCountOfRecords }}>
       <Paneset>
