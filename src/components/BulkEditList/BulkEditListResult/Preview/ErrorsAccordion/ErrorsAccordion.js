@@ -10,6 +10,8 @@ import {
   Headline,
 } from '@folio/stripes/components';
 
+import { usePathParams } from '../../../../../hooks';
+
 const visibleColumns = ['identifier', 'message'];
 
 const resultsFormatter = {
@@ -31,9 +33,10 @@ const ErrorsAccordion = (
   const location = useLocation();
   const fileName = new URLSearchParams(location.search).get('fileName');
   const errorLength = errors.length;
+  const { id: jobId } = usePathParams('/bulk-edit/:id');
 
   const infoHeadline = useMemo(() => (
-    location.pathname.includes('initial') ?
+    location.pathname === `/bulk-edit/${jobId}/initial` ?
       <FormattedMessage
         id="ui-bulk-edit.list.errors.info"
         values={{

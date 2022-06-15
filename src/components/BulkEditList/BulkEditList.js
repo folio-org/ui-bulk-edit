@@ -143,13 +143,13 @@ export const BulkEditList = () => {
   }, [fileUploadedMatchedName, location.search]);
 
   const changedPaneSubTitle = useMemo(() => (
-    history.location.pathname.includes('initial') ?
+    history.location.pathname === `/bulk-edit/${jobId}/initial` ?
       <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
   ), [countOfRecords, history.location.pathname]);
 
   const paneSubtitle = useMemo(() => (
-    history.location.pathname !== '/bulk-edit' && !history.location.pathname.includes('initialProgress')
+    history.location.pathname !== '/bulk-edit' && history.location.pathname !== `/bulk-edit/${jobId}/initialProgress`
       ?
       changedPaneSubTitle
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />

@@ -7,7 +7,7 @@ import {
   Row,
   MultiColumnList,
 } from '@folio/stripes/components';
-import { useCurrentEntityInfo } from '../../../../../hooks';
+import { useCurrentEntityInfo, usePathParams } from '../../../../../hooks';
 
 
 const PreviewAccordion = ({ items = [], userGroups = {} }) => {
@@ -18,6 +18,14 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
     searchParams,
   } = useCurrentEntityInfo({ userGroups });
 
+  const { id: jobId } = usePathParams('/bulk-edit/:id');
+
+  const accordionLabel = useMemo(() => (
+    location.pathname === `/bulk-edit/${jobId}/initial` ?
+    <FormattedMessage id="ui-bulk-edit.list.preview.title" />
+    :
+    <FormattedMessage id="ui-bulk-edit.list.preview.titleChanged" />
+  ), [location.pathname]);
   const columnMapping = columns.reduce((acc, el) => {
     acc[el.value] = el.label;
 
@@ -41,7 +49,7 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
 
   return (
     <Accordion
-      label={<FormattedMessage id="ui-bulk-edit.list.preview.title" />}
+      label={accordionLabel}
     >
       <Row>
         <Col xs={12}>

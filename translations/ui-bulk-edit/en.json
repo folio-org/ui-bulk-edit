@@ -48,6 +48,7 @@
   "list.filters.capabilities.acquisition": "Acquisition",
   "list.savedQueries.title": "Saved queries",
   "list.preview.title": "Preview of record matched",
+  "list.preview.titleChanged": "Preview of record changed",
   "list.preview.table.status": "Status",
   "list.preview.table.lastName": "Last name",
   "list.preview.table.firstName": "First name",
