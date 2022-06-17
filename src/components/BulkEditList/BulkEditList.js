@@ -83,6 +83,23 @@ export const BulkEditList = () => {
     }
   }, [jobId, isLoading, location.search]);
 
+  useEffect(() => {
+    const initialRoute = '/bulk-edit';
+
+    if (location.pathname === initialRoute) {
+      // reset count of records
+      setCountOfRecords(0);
+
+      // reset filters
+      setFilters(initialFiltersState);
+
+      // clear job information
+      queryClient.setQueryData('getJob', () => ({ data: undefined }));
+
+      setNewBulkFooterShown(false);
+    }
+  }, [location.pathname]);
+
   const renderActionMenu = () => (
     isActionMenuVisible && (
       <BulkEditActionMenu
@@ -113,22 +130,11 @@ export const BulkEditList = () => {
   };
 
   const handleStartNewBulkEdit = () => {
-    // reset count of records
-    setCountOfRecords(0);
-
-    // reset filters
-    setFilters(initialFiltersState);
-
-    // clear job information
-    queryClient.setQueryData('getJob', () => ({ data: undefined }));
-
     // redirect to initial state with saved capabilities in search
     history.replace({
       pathname: '/bulk-edit',
       search: buildSearch({ capabilities: capabilitiesUrl }),
     });
-
-    setNewBulkFooterShown(false);
   };
 
   const paneTitle = useMemo(() => {
