@@ -37,8 +37,8 @@ export const Preview = ({ id, title, initial, capabilities }) => {
 
   useEffect(() => {
     if (data?.progress) {
-      setProcessedRecords(data.progress.total - (errors?.length || 0));
-      setCountOfRecords(data.progress.total);
+      setProcessedRecords(data.progress.success);
+      setCountOfRecords(data.progress.success);
     }
   }, [errors, data?.progress]);
 
@@ -51,7 +51,7 @@ export const Preview = ({ id, title, initial, capabilities }) => {
 
   return (
     <AccordionStatus>
-      {(!!processedRecords && !initial) && (
+      {!initial && (
       <Headline size="large" margin="small">
         <MessageBanner type="success" contentClassName="SuccessBanner">
           <FormattedMessage
@@ -71,8 +71,9 @@ export const Preview = ({ id, title, initial, capabilities }) => {
         {!!mappedErrors?.length && (
           <ErrorsAccordion
             errors={mappedErrors}
-            entries={data?.progress?.processed}
-            matched={processedRecords}
+            entries={data?.progress?.total}
+            matched={data?.progress?.success}
+            countOfErrors={data?.progress?.errors}
           />
         )}
       </AccordionSet>
