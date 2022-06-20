@@ -145,6 +145,12 @@ export const BulkEditListFilters = ({
   };
 
   const handleDrop = async (acceptedFiles) => {
+    if (!acceptedFiles.length) {
+      setDropZoneActive(false);
+
+      return showFileExtensionModal();
+    }
+
     const fileToUpload = acceptedFiles[0];
     const { isTypeSupported } = getFileInfo(fileToUpload);
 

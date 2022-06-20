@@ -20,12 +20,14 @@ const ListFileUploader = (
     handleDrop,
     fileExtensionModalOpen,
     hideFileExtensionModal,
+    extensionModalMessage = 'ui-bulk-edit.modal.fileExtensions.blocked.header',
     isDropZoneDisabled,
     handleDragEnter,
     disableUploader,
     handleDragLeave,
     uploaderSubTitle,
     className,
+
   },
 ) => {
   const uploaderTitle = useMemo(() => {
@@ -63,7 +65,7 @@ const ListFileUploader = (
               open={fileExtensionModalOpen}
               heading={(
                 <span data-test-file-extension-modal-header>
-                  <FormattedMessage id="ui-bulk-edit.modal.fileExtensions.blocked.header" />
+                  <FormattedMessage id={extensionModalMessage} />
                 </span>
               )}
               message={<FormattedMessage id="ui-bulk-edit.modal.fileExtensions.blocked.message" />}
@@ -97,6 +99,7 @@ ListFileUploader.propTypes = {
     PropTypes.string.isRequired,
   ]),
   className: PropTypes.string.isRequired,
+  extensionModalMessage: PropTypes.string.isRequired,
 };
 
 export default ListFileUploader;
