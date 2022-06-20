@@ -86,7 +86,7 @@ export const BulkEditList = () => {
   useEffect(() => {
     const initialRoute = '/bulk-edit';
 
-    if (location.pathname === initialRoute) {
+    if (location.pathname === initialRoute && !location.search) {
       // reset count of records
       setCountOfRecords(0);
 
@@ -97,8 +97,13 @@ export const BulkEditList = () => {
       queryClient.setQueryData('getJob', () => ({ data: undefined }));
 
       setNewBulkFooterShown(false);
+
+      // set user capability by default
+      history.replace({
+        search: buildSearch({ capabilities: CAPABILITIES.USER }),
+      });
     }
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
 
   const renderActionMenu = () => (
     isActionMenuVisible && (
@@ -133,7 +138,6 @@ export const BulkEditList = () => {
     // redirect to initial state with saved capabilities in search
     history.replace({
       pathname: '/bulk-edit',
-      search: buildSearch({ capabilities: capabilitiesUrl }),
     });
   };
 
