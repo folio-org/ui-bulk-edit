@@ -37,6 +37,9 @@ describe('Preview', () => {
             files: ['success.csv', 'error.csv'],
             progress: {
               progress: 55,
+              total: 50,
+              errors: 10,
+              succsess: 40,
             },
           }),
         }),

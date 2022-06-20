@@ -152,11 +152,18 @@ export const BulkEditList = () => {
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
   }, [fileUploadedMatchedName, location.search]);
 
+  const changedPaneSubTitle = useMemo(() => (
+    history.location.pathname === `/bulk-edit/${jobId}/initial` ?
+      <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
+      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
+  ), [countOfRecords, history.location.pathname]);
+
   const paneSubtitle = useMemo(() => (
-    countOfRecords
-      ? <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
+    history.location.pathname !== '/bulk-edit' && history.location.pathname !== `/bulk-edit/${jobId}/initialProgress`
+      ?
+      changedPaneSubTitle
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
-  ), [countOfRecords]);
+  ), [changedPaneSubTitle, history.location.pathname]);
 
   const fileNameTitle = () => {
     const fileUploadedName = search.get('fileName');
