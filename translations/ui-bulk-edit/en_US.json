@@ -52,7 +52,6 @@
     "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
     "conformationModal.message": "{count} records will be updated if the <b>Commit changes</b> button is clicked.",
     "recordsSuccessfullyChanged": "{value} records have been successfully changed",
-    "list.logSubTitle.changed": "{count} records changed",
     "error.sww": "Something went wrong",
     "list.logSubTitle.matched": "{count} records match",
     "list.preview.title": "Preview of record matched",
@@ -138,7 +137,6 @@
     "list.result.emptyMessage.USER_NAME": "Drag and drop or choose file with Usernames",
     "uploaderSubTitle.EXTERNAL_SYSTEM_ID": "Select a file with External IDs",
     "uploaderSubTitle.USER_NAME": "Select a file with Usernames",
-    "layer.selectLocation": "Select location",
     "list.result.emptyMessage.item": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab",
     "list.result.emptyMessage.item.BARCODE": "Drag and drop or choose file with item barcode",
     "list.result.emptyMessage.item.ID": "Drag and drop or choose file with item UUIDs",
@@ -153,6 +151,8 @@
     "uploaderSubTitle.item.FORMER_IDS": "Select a file with item former identifier",
     "uploaderSubTitle.item.ACCESSION_NUMBER": "Select a file with item accession number",
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "Select a file with holdings UUIDs",
-    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
-    "list.preview.titleChanged": "Preview of record changed"
+    "layer.selectLocation": "Select location",
+    "list.logSubTitle.changed": "{count} records changed",
+    "list.preview.titleChanged": "Preview of record changed",
+    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>"
 }
