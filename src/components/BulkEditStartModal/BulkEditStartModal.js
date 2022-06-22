@@ -15,7 +15,7 @@ import { useJobCommand, useFileUploadComand } from '../../API';
 
 import { ListFileUploader } from '../ListFileUploader';
 import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants';
-import { getFileInfo } from '../BulkEditList/BulkEditListFilters/utils/getFileInfo';
+
 
 const BulkEditStartModal = ({
   open,
@@ -36,9 +36,7 @@ const BulkEditStartModal = ({
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
-  const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
-  const [fileExtensionModalMessage, setFileExtensionModalMessage] = useState('');
 
   const fileName = new URLSearchParams(location.search).get('processedFileName');
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title.uploadedFile' }, { fileName });
@@ -47,11 +45,6 @@ const BulkEditStartModal = ({
   const cancelLabel = intl.formatMessage({ id: 'stripes-components.cancel' });
   const uploaderSubTitle = intl.formatMessage({ id: 'ui-bulk-edit.uploaderSubTitle.records' });
   const errorMessage = intl.formatMessage({ id: 'ui-bulk-edit.error.uploadedFile' });
-
-  const hideFileExtensionModal = () => {
-    setFileExtensionModalOpen(false);
-    setFileExtensionModalMessage(null);
-  };
 
   const handleDragEnter = () => {
     setDropZoneActive(true);
@@ -88,30 +81,13 @@ const BulkEditStartModal = ({
     }
   };
 
-  const showFileExtensionModal = (message) => {
-    setFileExtensionModalMessage(message);
-    setFileExtensionModalOpen(true);
-  };
-
-  const handleDrop = async (acceptedFiles) => {
-    if (!acceptedFiles.length) {
-      setDropZoneActive(false);
-
-      showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message2');
-    }
-
-    const fileToUpload = acceptedFiles[0];
-    const { isTypeSupported } = getFileInfo(fileToUpload);
-
-    if (isTypeSupported) {
-      await uploadFileFlow(fileToUpload);
-    } else {
-      showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message');
-    }
-
+  const handleDrop = async (fileToUpload) => {
     setDropZoneActive(false);
 
-    setFileName(fileName);
+    if (fileToUpload) {
+      setFileName(fileName);
+      await uploadFileFlow(fileToUpload);
+    }
   };
 
   const onStartBulkEdit = () => {
@@ -157,15 +133,11 @@ const BulkEditStartModal = ({
           isLoading={isLoading}
           isDropZoneActive={isDropZoneActive}
           handleDrop={handleDrop}
-          fileExtensionModalOpen={fileExtensionModalOpen}
-          fileExtensionModalMessage={fileExtensionModalMessage}
-          hideFileExtensionModal={hideFileExtensionModal}
           handleDragLeave={handleDragLeave}
           handleDragEnter={handleDragEnter}
           uploaderSubTitle={uploaderSubTitle}
         />
-        :
-        <MessageBanner type="success">{modalLabelMessage}</MessageBanner>
+        : <MessageBanner type="success">{modalLabelMessage}</MessageBanner>
       }
     </Modal>
   );
