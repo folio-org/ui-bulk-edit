@@ -20,6 +20,7 @@ const ListFileUploader = (
     handleDrop,
     fileExtensionModalOpen,
     hideFileExtensionModal,
+    fileExtensionModalMessage = 'ui-bulk-edit.modal.fileExtensions.blocked.message',
     extensionModalMessage = 'ui-bulk-edit.modal.fileExtensions.blocked.header',
     isDropZoneDisabled,
     handleDragEnter,
@@ -68,7 +69,7 @@ const ListFileUploader = (
                   <FormattedMessage id={extensionModalMessage} />
                 </span>
               )}
-              message={<FormattedMessage id="ui-bulk-edit.modal.fileExtensions.blocked.message" />}
+              message={<FormattedMessage id={fileExtensionModalMessage} />}
               confirmLabel={<FormattedMessage id="ui-bulk-edit.modal.fileExtensions.actionButton" />}
               cancelLabel={<FormattedMessage id="ui-bulk-edit.cancel" />}
               onConfirm={() => {
@@ -90,6 +91,7 @@ ListFileUploader.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   handleDrop: PropTypes.func.isRequired,
   fileExtensionModalOpen: PropTypes.bool.isRequired,
+  fileExtensionModalMessage: PropTypes.string,
   hideFileExtensionModal: PropTypes.func.isRequired,
   isDropZoneDisabled: PropTypes.bool,
   handleDragEnter: PropTypes.func.isRequired,
@@ -99,7 +101,7 @@ ListFileUploader.propTypes = {
     PropTypes.string.isRequired,
   ]),
   className: PropTypes.string.isRequired,
-  extensionModalMessage: PropTypes.string.isRequired,
+  extensionModalMessage: PropTypes.string,
 };
 
 export default ListFileUploader;

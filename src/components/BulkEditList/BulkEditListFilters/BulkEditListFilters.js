@@ -52,6 +52,7 @@ export const BulkEditListFilters = ({
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
+  const [fileExtensionModalMessage, setFileExtensionModalMessage] = useState('');
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
   const { userGroups } = useUserGroupsMap();
@@ -78,12 +79,14 @@ export const BulkEditListFilters = ({
     ...prev, [field]: value,
   }));
 
-  const showFileExtensionModal = () => {
+  const showFileExtensionModal = (message) => {
+    setFileExtensionModalMessage(message);
     setFileExtensionModalOpen(true);
   };
 
   const hideFileExtensionModal = () => {
     setFileExtensionModalOpen(false);
+    setFileExtensionModalMessage(null);
   };
 
   const handleDragEnter = () => {
@@ -148,7 +151,7 @@ export const BulkEditListFilters = ({
     if (!acceptedFiles.length) {
       setDropZoneActive(false);
 
-      return showFileExtensionModal();
+      showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message2');
     }
 
     const fileToUpload = acceptedFiles[0];
@@ -157,7 +160,9 @@ export const BulkEditListFilters = ({
     if (isTypeSupported) {
       await uploadFileFlow(fileToUpload);
     } else {
-      showFileExtensionModal();
+      setDropZoneActive(false);
+
+      showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message');
     }
   };
 
@@ -263,6 +268,7 @@ export const BulkEditListFilters = ({
           isLoading={isLoading}
           isDropZoneActive={isDropZoneActive}
           handleDrop={handleDrop}
+          fileExtensionModalMessage={fileExtensionModalMessage}
           fileExtensionModalOpen={fileExtensionModalOpen}
           hideFileExtensionModal={hideFileExtensionModal}
           isDropZoneDisabled={isDropZoneDisabled || isDropZoneDisabledPerm}

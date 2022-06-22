@@ -15,6 +15,7 @@ import { useJobCommand, useFileUploadComand } from '../../API';
 
 import { ListFileUploader } from '../ListFileUploader';
 import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants';
+import { getFileInfo } from '../BulkEditList/BulkEditListFilters/utils/getFileInfo';
 
 const BulkEditStartModal = ({
   open,
@@ -37,6 +38,7 @@ const BulkEditStartModal = ({
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
+  const [fileExtensionModalMessage, setFileExtensionModalMessage] = useState('');
 
   const fileName = new URLSearchParams(location.search).get('processedFileName');
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title.uploadedFile' }, { fileName });
@@ -48,6 +50,7 @@ const BulkEditStartModal = ({
 
   const hideFileExtensionModal = () => {
     setFileExtensionModalOpen(false);
+    setFileExtensionModalMessage(null);
   };
 
   const handleDragEnter = () => {
@@ -85,10 +88,26 @@ const BulkEditStartModal = ({
     }
   };
 
-  const handleDrop = async (acceptedFiles) => {
-    const fileToUpload = acceptedFiles[0];
+  const showFileExtensionModal = (message) => {
+    setFileExtensionModalMessage(message);
+    setFileExtensionModalOpen(true);
+  };
 
-    await uploadFileFlow(fileToUpload);
+  const handleDrop = async (acceptedFiles) => {
+    if (!acceptedFiles.length) {
+      setDropZoneActive(false);
+
+      showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message2');
+    }
+
+    const fileToUpload = acceptedFiles[0];
+    const { isTypeSupported } = getFileInfo(fileToUpload);
+
+    if (isTypeSupported) {
+      await uploadFileFlow(fileToUpload);
+    } else {
+      showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message');
+    }
 
     setDropZoneActive(false);
 
@@ -139,6 +158,7 @@ const BulkEditStartModal = ({
           isDropZoneActive={isDropZoneActive}
           handleDrop={handleDrop}
           fileExtensionModalOpen={fileExtensionModalOpen}
+          fileExtensionModalMessage={fileExtensionModalMessage}
           hideFileExtensionModal={hideFileExtensionModal}
           handleDragLeave={handleDragLeave}
           handleDragEnter={handleDragEnter}
