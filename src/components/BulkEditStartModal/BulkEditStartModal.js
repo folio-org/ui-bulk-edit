@@ -16,6 +16,7 @@ import { useJobCommand, useFileUploadComand } from '../../API';
 import { ListFileUploader } from '../ListFileUploader';
 import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants';
 
+
 const BulkEditStartModal = ({
   open,
   onCancel,
@@ -35,7 +36,6 @@ const BulkEditStartModal = ({
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
-  const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
 
   const fileName = new URLSearchParams(location.search).get('processedFileName');
@@ -45,10 +45,6 @@ const BulkEditStartModal = ({
   const cancelLabel = intl.formatMessage({ id: 'stripes-components.cancel' });
   const uploaderSubTitle = intl.formatMessage({ id: 'ui-bulk-edit.uploaderSubTitle.records' });
   const errorMessage = intl.formatMessage({ id: 'ui-bulk-edit.error.uploadedFile' });
-
-  const hideFileExtensionModal = () => {
-    setFileExtensionModalOpen(false);
-  };
 
   const handleDragEnter = () => {
     setDropZoneActive(true);
@@ -85,14 +81,13 @@ const BulkEditStartModal = ({
     }
   };
 
-  const handleDrop = async (acceptedFiles) => {
-    const fileToUpload = acceptedFiles[0];
-
-    await uploadFileFlow(fileToUpload);
-
+  const handleDrop = async (fileToUpload) => {
     setDropZoneActive(false);
 
-    setFileName(fileName);
+    if (fileToUpload) {
+      setFileName(fileName);
+      await uploadFileFlow(fileToUpload);
+    }
   };
 
   const onStartBulkEdit = () => {
@@ -138,14 +133,11 @@ const BulkEditStartModal = ({
           isLoading={isLoading}
           isDropZoneActive={isDropZoneActive}
           handleDrop={handleDrop}
-          fileExtensionModalOpen={fileExtensionModalOpen}
-          hideFileExtensionModal={hideFileExtensionModal}
           handleDragLeave={handleDragLeave}
           handleDragEnter={handleDragEnter}
           uploaderSubTitle={uploaderSubTitle}
         />
-        :
-        <MessageBanner type="success">{modalLabelMessage}</MessageBanner>
+        : <MessageBanner type="success">{modalLabelMessage}</MessageBanner>
       }
     </Modal>
   );

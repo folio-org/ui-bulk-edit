@@ -58,3 +58,24 @@ describe('Preview', () => {
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
   });
 });
+
+describe('Preview Query', () => {
+  beforeEach(() => {
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        get: () => ({
+          json: () => ({
+            files: ['success.csv', 'error.csv'],
+            totalRecords: 10,
+          }),
+        }),
+      });
+  });
+
+  it('displays Bulk edit', () => {
+    renderPreview({ title: 'preview.query.title' });
+
+    expect(screen.getByText(/preview.query.title/)).toBeVisible();
+  });
+});

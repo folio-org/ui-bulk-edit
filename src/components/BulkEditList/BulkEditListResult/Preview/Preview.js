@@ -21,7 +21,7 @@ export const Preview = ({ id, title, initial, capabilities }) => {
   const { setNewBulkFooterShown, setCountOfRecords } = useContext(RootContext);
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
-  const { items } = usePreviewRecords(id, capabilities);
+  const { items, totalRecords } = usePreviewRecords(id, capabilities);
   const { userGroups } = useUserGroupsMap();
   const [processedRecords, setProcessedRecords] = useState(0);
 
@@ -39,8 +39,10 @@ export const Preview = ({ id, title, initial, capabilities }) => {
     if (data?.progress) {
       setProcessedRecords(data.progress.success);
       setCountOfRecords(data.progress.success);
+    } else if (!data?.progress && totalRecords) {
+      setCountOfRecords(totalRecords);
     }
-  }, [errors, data?.progress]);
+  }, [errors, data?.progress, totalRecords]);
 
   useEffect(() => {
     if (items?.length || errors?.length) {
