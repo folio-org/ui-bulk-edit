@@ -87,7 +87,8 @@
   "recordsSuccessfullyChanged": "{value} records have been successfully changed",
 
   "modal.fileExtensions.blocked.header": "Invalid file",
-  "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded",
+  "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded.",
+  "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded.",
   "modal.fileExtensions.actionButton": "Choose other file to upload",
   "modal.successfullMessage": "{fileName} succesfully uploaded.",
   "modal.next": "Next",
