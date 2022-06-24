@@ -100,7 +100,7 @@ export const BulkEditList = () => {
 
       // set user capability by default
       history.replace({
-        search: buildSearch({ capabilities: CAPABILITIES.USER }),
+        search: buildSearch({ capabilities: getDefaultCapabilities() }),
       });
     }
   }, [location.pathname, location.search]);
