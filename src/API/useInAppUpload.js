@@ -8,6 +8,7 @@ export const useInAppUpload = () => {
 
   const { mutateAsync: inAppUpload, isLoading } = useMutation({ mutationFn: ({ jobId, contentUpdates }) => {
     return ky.post(`bulk-edit/${jobId}/items-content-update/upload`, {
+      searchParams: { limit: 10 },
       json: {
         entityType: CAPABILITIES_PARAMS.ITEM,
         contentUpdates,
