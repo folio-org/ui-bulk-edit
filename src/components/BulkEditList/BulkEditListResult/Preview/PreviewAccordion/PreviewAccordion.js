@@ -39,9 +39,9 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
       .filter(item => item.selected)
       .map(item => item.value);
 
-    const existingColumns = columns.reduce((acc, { value }) => (
-      paramsColumns?.includes(`"${value}"`) ? [...acc, value] : acc
-    ), []);
+    const existingColumns = columns.reduce((acc, { value }) => {
+      return paramsColumns?.includes(`"${value}"`) ? [...acc, value] : acc;
+    }, []);
 
     return paramsColumns ? existingColumns : defaultColumns;
   }, [location.search, columns]);
