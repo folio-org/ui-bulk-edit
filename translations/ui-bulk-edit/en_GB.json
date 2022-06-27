@@ -4,7 +4,7 @@
     "list.logSubTitle": "Set criteria to start bulk edit",
     "list.filters.identifier": "Identifier",
     "list.filters.query": "Query",
-    "list.result.emptyMessage": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "list.result.emptyMessage": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab",
     "list.filters.recordIdentifier": "Record identifier",
     "list.filters.recordIdentifier.placeholder": "Select record identifier",
     "list.filters.recordIdentifier.userUUIDs": "User UUIDs",
@@ -18,8 +18,7 @@
     "uploading": "Uploading",
     "cancel": "Cancel",
     "modal.fileExtensions.blocked.header": "Invalid file",
-    "modal.fileExtensions.blocked.message": "Only file with .csv or .cql extension can be uploaded.",
-    "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded.",
+    "modal.fileExtensions.blocked.message": "Only file with .csv or .cql extension can be uploaded",
     "modal.fileExtensions.actionButton": "Choose other file to upload",
     "list.filters.capabilities.title": "Apps with bulk edit capabilities",
     "list.filters.capabilities.users": "Users",
@@ -138,7 +137,7 @@
     "list.result.emptyMessage.USER_NAME": "Drag and drop or choose file with Usernames",
     "uploaderSubTitle.EXTERNAL_SYSTEM_ID": "Select a file with External IDs",
     "uploaderSubTitle.USER_NAME": "Select a file with Usernames",
-    "list.result.emptyMessage.item": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "list.result.emptyMessage.item": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab",
     "list.result.emptyMessage.item.BARCODE": "Drag and drop or choose file with item barcodes",
     "list.result.emptyMessage.item.ID": "Drag and drop or choose file with item UUID",
     "list.result.emptyMessage.item.HRID": "Drag and drop or choose file with item HRIDs",
@@ -155,5 +154,6 @@
     "layer.selectLocation": "Select location",
     "list.logSubTitle.changed": "{count} records changed",
     "list.preview.titleChanged": "Preview of record changed",
-    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>"
+    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
+    "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded."
 }

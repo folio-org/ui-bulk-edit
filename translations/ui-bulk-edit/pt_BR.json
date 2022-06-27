@@ -154,5 +154,6 @@
     "layer.selectLocation": "Selecionar localização",
     "list.logSubTitle.changed": "{count} records changed",
     "list.preview.titleChanged": "Preview of record changed",
-    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>"
+    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
+    "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded."
 }
