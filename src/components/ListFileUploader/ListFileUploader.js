@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -12,23 +12,26 @@ import {
 } from '@folio/stripes-data-transfer-components';
 
 import css from './ListFileUploader.css';
+import { getFileInfo } from '../BulkEditList/BulkEditListFilters/utils/getFileInfo';
 
 const ListFileUploader = (
   {
     isDropZoneActive,
     isLoading,
     handleDrop,
-    fileExtensionModalOpen,
-    hideFileExtensionModal,
     isDropZoneDisabled,
     handleDragEnter,
     disableUploader,
     handleDragLeave,
     uploaderSubTitle,
     className,
+
   },
 ) => {
-  const uploaderTitle = useMemo(() => {
+  const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
+  const [fileExtensionModalMessage, setFileExtensionModalMessage] = useState('');
+
+  const uploaderTitle = () => {
     if (isDropZoneActive) {
       return isLoading
         ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
@@ -36,17 +39,46 @@ const ListFileUploader = (
     } else {
       return <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
     }
-  }, [isDropZoneActive, isLoading]);
+  };
+
+  const showFileExtensionModal = (message) => {
+    setFileExtensionModalMessage(message);
+    setFileExtensionModalOpen(true);
+  };
+
+  const hideFileExtensionModal = () => {
+    setFileExtensionModalOpen(false);
+    setFileExtensionModalMessage(null);
+  };
+
+  const onDrop = (acceptedFiles) => {
+    if (!acceptedFiles?.length) {
+      handleDrop();
+
+      return showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message2');
+    } else {
+      const fileToUpload = acceptedFiles[0];
+
+      const { isTypeSupported } = getFileInfo(fileToUpload);
+
+      if (!isTypeSupported) {
+        handleDrop();
+        showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message');
+      } else {
+        handleDrop(fileToUpload);
+      }
+    }
+  };
 
   return (
     <div className={css[className]}>
       <FileUploader
         disabled={isDropZoneDisabled || disableUploader}
         multiple={false}
-        title={uploaderTitle}
+        title={uploaderTitle()}
         uploadButtonText={<FormattedMessage id="ui-bulk-edit.uploaderBtnText" />}
         isDropZoneActive={isDropZoneActive}
-        onDrop={handleDrop}
+        onDrop={onDrop}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
       >
@@ -66,7 +98,7 @@ const ListFileUploader = (
                   <FormattedMessage id="ui-bulk-edit.modal.fileExtensions.blocked.header" />
                 </span>
               )}
-              message={<FormattedMessage id="ui-bulk-edit.modal.fileExtensions.blocked.message" />}
+              message={<FormattedMessage id={fileExtensionModalMessage} />}
               confirmLabel={<FormattedMessage id="ui-bulk-edit.modal.fileExtensions.actionButton" />}
               cancelLabel={<FormattedMessage id="ui-bulk-edit.cancel" />}
               onConfirm={() => {
@@ -87,8 +119,6 @@ ListFileUploader.propTypes = {
   disableUploader: PropTypes.bool,
   isLoading: PropTypes.bool.isRequired,
   handleDrop: PropTypes.func.isRequired,
-  fileExtensionModalOpen: PropTypes.bool.isRequired,
-  hideFileExtensionModal: PropTypes.func.isRequired,
   isDropZoneDisabled: PropTypes.bool,
   handleDragEnter: PropTypes.func.isRequired,
   handleDragLeave: PropTypes.func.isRequired,

@@ -4,7 +4,6 @@ import {
   render,
   fireEvent,
 } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import '../../../test/jest/__mock__';
 
@@ -13,14 +12,12 @@ import ListFileUploader from './ListFileUploader';
 const onDragEnterMock = jest.fn();
 const onDragLeaveMock = jest.fn();
 const onDropMock = jest.fn();
-const hideFileExtensionModalMock = jest.fn();
 
 const renderListFileUploader = ({
   isDropZoneActive = false,
   isLoading = false,
   recordIdentifier = '',
   isDropZoneDisabled = false,
-  fileExtensionModalOpen = false,
   uploaderSubTitle = 'uploaderSubTitle',
 }) => {
   render(
@@ -29,9 +26,7 @@ const renderListFileUploader = ({
       handleDragLeave={onDragLeaveMock}
       handleDrop={onDropMock}
       isDropZoneActive={isDropZoneActive}
-      hideFileExtensionModal={hideFileExtensionModalMock}
       isLoading={isLoading}
-      fileExtensionModalOpen={fileExtensionModalOpen}
       recordIdentifier={recordIdentifier}
       disabled={isDropZoneDisabled}
       uploaderSubTitle={uploaderSubTitle}
@@ -168,24 +163,5 @@ describe('FileUploader', () => {
     await flushPromises();
 
     expect(onDropMock).toHaveBeenCalled();
-  });
-
-  it('should display FileUploader modal', () => {
-    renderListFileUploader({
-      isDropZoneActive: true,
-      isLoading: false,
-      fileExtensionModalOpen: true,
-    });
-
-    const modalText = [
-      /modal.fileExtensions.blocked.header/,
-      /modal.fileExtensions.blocked.message/,
-    ];
-
-    modalText.forEach((el) => expect(screen.getByText(el)).toBeVisible());
-
-    userEvent.click(screen.getByRole('button', { name: /fileExtensions.actionButton/ }));
-
-    expect(hideFileExtensionModalMock).toHaveBeenCalled();
   });
 });

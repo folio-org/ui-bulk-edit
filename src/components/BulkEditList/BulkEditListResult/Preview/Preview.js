@@ -21,7 +21,7 @@ export const Preview = ({ id, title, initial, capabilities }) => {
   const { setNewBulkFooterShown, setCountOfRecords } = useContext(RootContext);
   const { data } = useDownloadLinks(id);
   const { errors } = useErrorsList(id);
-  const { items } = usePreviewRecords(id, capabilities);
+  const { items, totalRecords } = usePreviewRecords(id, capabilities);
   const { userGroups } = useUserGroupsMap();
   const [processedRecords, setProcessedRecords] = useState(0);
 
@@ -37,10 +37,12 @@ export const Preview = ({ id, title, initial, capabilities }) => {
 
   useEffect(() => {
     if (data?.progress) {
-      setProcessedRecords(data.progress.total - (errors?.length || 0));
-      setCountOfRecords(data.progress.total);
+      setProcessedRecords(data.progress.success);
+      setCountOfRecords(data.progress.success);
+    } else if (!data?.progress && totalRecords) {
+      setCountOfRecords(totalRecords);
     }
-  }, [errors, data?.progress]);
+  }, [errors, data?.progress, totalRecords]);
 
   useEffect(() => {
     if (items?.length || errors?.length) {
@@ -51,7 +53,7 @@ export const Preview = ({ id, title, initial, capabilities }) => {
 
   return (
     <AccordionStatus>
-      {(!!processedRecords && !initial) && (
+      {!initial && (
       <Headline size="large" margin="small">
         <MessageBanner type="success" contentClassName="SuccessBanner">
           <FormattedMessage
@@ -71,8 +73,9 @@ export const Preview = ({ id, title, initial, capabilities }) => {
         {!!mappedErrors?.length && (
           <ErrorsAccordion
             errors={mappedErrors}
-            entries={data?.progress?.processed}
-            matched={processedRecords}
+            entries={data?.progress?.total}
+            matched={data?.progress?.success}
+            countOfErrors={data?.progress?.errors}
           />
         )}
       </AccordionSet>

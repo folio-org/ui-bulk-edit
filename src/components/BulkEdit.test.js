@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
@@ -21,7 +21,7 @@ const history = createMemoryHistory();
 const renderBulkEdit = (type = 'USERS') => {
   render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}`]}>
+      <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}&identifier=BARCODE`]}>
         <BulkEdit />
       </MemoryRouter>,
     </QueryClientProvider>,
@@ -174,5 +174,41 @@ describe('BulkEdit', () => {
 
     fireEvent.drop(fileInput, event);
     await flushPromises();
+  });
+
+  describe('Should show expected messages if files are not valid', () => {
+    const setupTest = async (files, expectedMessages) => {
+      renderBulkEdit();
+
+      const fileInput = screen.getByTestId('fileUploader-input');
+
+      const file = [...files];
+
+      const event = createDtWithFiles(file);
+      const data = mockData([file]);
+
+      dispatchEvt(fileInput, 'dragenter', data);
+
+      fireEvent.drop(fileInput, event);
+
+      await waitFor(() => expect(screen.getByText(expectedMessages)).toBeInTheDocument());
+    };
+
+    it('should show modal when file is unsupported', async () => {
+      await setupTest(
+        [createFile('SearchHoldings.pdf', 1111, 'application/pdf')],
+        'ui-bulk-edit.modal.fileExtensions.blocked.message',
+      );
+    });
+
+    it('should show modal when files count > 1', async () => {
+      await setupTest(
+        [
+          createFile('SearchHoldings.pdf', 1111, 'application/pdf'),
+          createFile('SearchHoldings2.pdf', 2222, 'application/pdf'),
+        ],
+        'ui-bulk-edit.modal.fileExtensions.blocked.message2',
+      );
+    });
   });
 });

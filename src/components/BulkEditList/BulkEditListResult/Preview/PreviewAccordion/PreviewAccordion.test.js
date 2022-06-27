@@ -42,25 +42,34 @@ const inventoryItems = [
   },
 ];
 
-const renderPreviewAccordion = ({ capabilities, items }) => {
+const renderPreviewAccordion = ({ capabilities, items, step }) => {
   render(
-    <MemoryRouter initialEntries={[`/bulk-edit/1?capabilities=${capabilities}`]}>
+    <MemoryRouter initialEntries={[`/bulk-edit/1/${step}?capabilities=${capabilities}`]}>
       <PreviewAccordion items={items} />
     </MemoryRouter>,
   );
 };
 
 describe('PreviewAccordion', () => {
-  it('should render preview accordion with users', () => {
-    renderPreviewAccordion({ capabilities: 'USERS', items: users });
+  it('should render preview accordion with users on initial step', () => {
+    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'initial' });
 
     expect(screen.getByText('username')).toBeVisible();
+    expect(screen.getByText(/list.preview.title/)).toBeVisible();
     expect(screen.getByText('000')).toBeVisible();
     expect(screen.queryByText('1641779462295')).not.toBeInTheDocument();
   });
 
+  it('should render preview accordion with users on processed step', () => {
+    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'processed' });
+
+    expect(screen.getByText('username')).toBeVisible();
+    expect(screen.getByText(/list.preview.title/)).toBeVisible();
+    expect(screen.getByText('000')).toBeVisible();
+    expect(screen.queryByText('1641779462295')).not.toBeInTheDocument();
+  });
   it('should render preview accordion with inventory items', () => {
-    renderPreviewAccordion({ capabilities: 'ITEMS', items: inventoryItems });
+    renderPreviewAccordion({ capabilities: 'ITEMS', items: inventoryItems, step: 'initial' });
 
     expect(screen.getByText('222')).toBeVisible();
     expect(screen.getByText('active')).toBeVisible();

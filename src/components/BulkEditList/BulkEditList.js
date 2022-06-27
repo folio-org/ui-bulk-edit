@@ -83,6 +83,28 @@ export const BulkEditList = () => {
     }
   }, [jobId, isLoading, location.search]);
 
+  useEffect(() => {
+    const initialRoute = '/bulk-edit';
+
+    if (location.pathname === initialRoute && !location.search) {
+      // reset count of records
+      setCountOfRecords(0);
+
+      // reset filters
+      setFilters(initialFiltersState);
+
+      // clear job information
+      queryClient.setQueryData('getJob', () => ({ data: undefined }));
+
+      setNewBulkFooterShown(false);
+
+      // set user capability by default
+      history.replace({
+        search: buildSearch({ capabilities: getDefaultCapabilities() }),
+      });
+    }
+  }, [location.pathname, location.search]);
+
   const renderActionMenu = () => (
     isActionMenuVisible && (
       <BulkEditActionMenu
@@ -113,22 +135,10 @@ export const BulkEditList = () => {
   };
 
   const handleStartNewBulkEdit = () => {
-    // reset count of records
-    setCountOfRecords(0);
-
-    // reset filters
-    setFilters(initialFiltersState);
-
-    // clear job information
-    queryClient.setQueryData('getJob', () => ({ data: undefined }));
-
     // redirect to initial state with saved capabilities in search
     history.replace({
       pathname: '/bulk-edit',
-      search: buildSearch({ capabilities: capabilitiesUrl }),
     });
-
-    setNewBulkFooterShown(false);
   };
 
   const paneTitle = useMemo(() => {
@@ -142,11 +152,18 @@ export const BulkEditList = () => {
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
   }, [fileUploadedMatchedName, location.search]);
 
+  const changedPaneSubTitle = useMemo(() => (
+    history.location.pathname === `/bulk-edit/${jobId}/initial` ?
+      <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
+      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
+  ), [countOfRecords, history.location.pathname]);
+
   const paneSubtitle = useMemo(() => (
-    countOfRecords
-      ? <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
+    history.location.pathname !== '/bulk-edit' && history.location.pathname !== `/bulk-edit/${jobId}/initialProgress`
+      ?
+      changedPaneSubTitle
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
-  ), [countOfRecords]);
+  ), [changedPaneSubTitle, history.location.pathname]);
 
   const fileNameTitle = () => {
     const fileUploadedName = search.get('fileName');

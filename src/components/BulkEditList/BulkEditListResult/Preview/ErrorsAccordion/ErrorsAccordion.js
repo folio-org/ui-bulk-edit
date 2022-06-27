@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { PropTypes } from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -8,6 +9,8 @@ import {
   MultiColumnList,
   Headline,
 } from '@folio/stripes/components';
+
+import { usePathParams } from '../../../../../hooks';
 
 const visibleColumns = ['identifier', 'message'];
 
@@ -21,12 +24,38 @@ const columnMapping = {
   message: <FormattedMessage id="ui-bulk-edit.list.errors.table.message" />,
 };
 
-const ErrorsAccordion = ({ errors = [], entries }) => {
+const ErrorsAccordion = (
+  { errors = [],
+    entries,
+    countOfErrors,
+    matched },
+) => {
   const location = useLocation();
   const fileName = new URLSearchParams(location.search).get('fileName');
   const errorLength = errors.length;
+  const { id: jobId } = usePathParams('/bulk-edit/:id');
 
-  const matched = (entries - errorLength) || 0;
+  const infoHeadline = useMemo(() => (
+    location.pathname === `/bulk-edit/${jobId}/initial` ?
+      <FormattedMessage
+        id="ui-bulk-edit.list.errors.info"
+        values={{
+          fileName,
+          entries,
+          matched,
+          errors: countOfErrors,
+        }}
+      /> :
+      <FormattedMessage
+        id="ui-bulk-edit.list.errors.infoProccessed"
+        values={{
+          fileName,
+          entries,
+          matched,
+          errors: countOfErrors,
+        }}
+      />
+  ), [countOfErrors, entries, fileName, location.pathname, matched]);
 
   return (
     <>
@@ -39,15 +68,7 @@ const ErrorsAccordion = ({ errors = [], entries }) => {
           <Row>
             <Col xs={12}>
               <Headline size="medium" margin="small">
-                <FormattedMessage
-                  id="ui-bulk-edit.list.errors.info"
-                  values={{
-                    fileName,
-                    entries,
-                    matched,
-                    errors: errorLength,
-                  }}
-                />
+                {infoHeadline}
               </Headline>
             </Col>
           </Row>
@@ -70,6 +91,8 @@ const ErrorsAccordion = ({ errors = [], entries }) => {
 ErrorsAccordion.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.object),
   entries: PropTypes.number,
+  countOfErrors: PropTypes.number,
+  matched: PropTypes.number,
 };
 
 export default ErrorsAccordion;
