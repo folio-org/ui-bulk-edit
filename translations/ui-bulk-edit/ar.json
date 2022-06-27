@@ -152,7 +152,8 @@
     "uploaderSubTitle.item.ACCESSION_NUMBER": "اختر ملف برقم انضمام المادة",
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "اختر ملف بمعرفات المقتنيات العمومية الفريدة",
     "layer.selectLocation": "اختر الموقع",
-    "list.logSubTitle.changed": "{count} records changed",
+    "list.logSubTitle.changed": "تم تغيير {count} تسجيلة",
     "list.preview.titleChanged": "Preview of record changed",
-    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>"
+    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
+    "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded."
 }
