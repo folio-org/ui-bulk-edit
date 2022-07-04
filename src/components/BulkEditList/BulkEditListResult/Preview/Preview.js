@@ -16,7 +16,7 @@ import {
 } from '../../../../API';
 import { RootContext } from '../../../../context/RootContext';
 
-export const Preview = ({ id, title, initial, capabilities, setStatus, data }) => {
+export const Preview = ({ id, title, initial, capabilities, data }) => {
   const { setNewBulkFooterShown, setCountOfRecords } = useContext(RootContext);
 
   const { errors } = useErrorsList(id);
@@ -87,7 +87,6 @@ Preview.propTypes = {
   title: PropTypes.string,
   initial: PropTypes.bool,
   capabilities: PropTypes.string,
-  setStatus: PropTypes.func,
   data: PropTypes.shape({
     progress: PropTypes.object,
   }),

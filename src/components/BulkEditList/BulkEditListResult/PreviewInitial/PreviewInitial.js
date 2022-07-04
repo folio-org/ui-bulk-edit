@@ -18,7 +18,6 @@ const PreviewInitial = () => {
 
   const isComplited = data?.status === 'SUCCESSFUL';
 
-
   const title = useMemo(() => {
     const queryText = new URLSearchParams(location.search).get('queryText');
 
