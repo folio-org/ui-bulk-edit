@@ -137,7 +137,7 @@
     "list.result.emptyMessage.USER_NAME": "拖放或选择带用户名的文件",
     "uploaderSubTitle.EXTERNAL_SYSTEM_ID": "选择带外部ID的文件",
     "uploaderSubTitle.USER_NAME": "选择带有用户名的文件",
-    "list.result.emptyMessage.item": "Select a \"record identifier\"when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "list.result.emptyMessage.item": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
     "list.result.emptyMessage.item.BARCODE": "Drag and drop or choose file with item barcode",
     "list.result.emptyMessage.item.ID": "Drag and drop or choose file with item UUIDs",
     "list.result.emptyMessage.item.HRID": "Drag and drop or choose file with item HRIDs",
@@ -154,5 +154,6 @@
     "layer.selectLocation": "Select location",
     "list.logSubTitle.changed": "{count} records changed",
     "list.preview.titleChanged": "Preview of record changed",
-    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>"
+    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
+    "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded."
 }

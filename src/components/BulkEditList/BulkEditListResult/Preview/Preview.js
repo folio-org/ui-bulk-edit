@@ -41,7 +41,7 @@ export const Preview = ({ id, title, initial, capabilities, setStatus, data }) =
     } else if (!data?.progress && totalRecords) {
       setCountOfRecords(totalRecords);
     }
-  }, [data?.progress, setStatus, totalRecords]);
+  }, [errors, data?.progress, totalRecords]);
 
   useEffect(() => {
     if (items?.length || errors?.length) {
