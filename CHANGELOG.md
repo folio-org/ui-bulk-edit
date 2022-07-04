@@ -30,6 +30,7 @@
 * [UIBULKED-76](https://issues.folio.org/browse/UIBULKED-76) Narrow down options dropdown choices on in-app bulk edit form
 * [UIBULKED-78](https://issues.folio.org/browse/UIBULKED-78) Clicking on Bulk Edit app icon does not fully rest the screen
 * [UIBULKED-100](https://issues.folio.org/browse/UIBULKED-100) Matched records label cleanup - Morning Glory
+* [UIBULKED-95](https://issues.folio.org/browse/UIBULKED-95) Missing "Download matched records (CSV)" action menu after query search
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 

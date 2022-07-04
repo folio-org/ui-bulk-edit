@@ -69,7 +69,7 @@ describe('BulkEditListResult', () => {
 
     renderBulkEditResult(history);
 
-    expect(screen.getByText(/preview.file.title/)).toBeVisible();
+    expect(screen.getByTestId('spiner')).toBeVisible();
   });
 
   it('displays fileName field for processed preview', () => {

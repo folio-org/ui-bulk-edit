@@ -10,16 +10,15 @@ import { useContext, useEffect, useState } from 'react';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
 import {
-  useDownloadLinks,
   useErrorsList,
   usePreviewRecords,
   useUserGroupsMap,
 } from '../../../../API';
 import { RootContext } from '../../../../context/RootContext';
 
-export const Preview = ({ id, title, initial, capabilities }) => {
+export const Preview = ({ id, title, initial, capabilities, setStatus, data }) => {
   const { setNewBulkFooterShown, setCountOfRecords } = useContext(RootContext);
-  const { data } = useDownloadLinks(id);
+
   const { errors } = useErrorsList(id);
   const { items, totalRecords } = usePreviewRecords(id, capabilities);
   const { userGroups } = useUserGroupsMap();
@@ -42,7 +41,7 @@ export const Preview = ({ id, title, initial, capabilities }) => {
     } else if (!data?.progress && totalRecords) {
       setCountOfRecords(totalRecords);
     }
-  }, [errors, data?.progress, totalRecords]);
+  }, [data?.progress, setStatus, totalRecords]);
 
   useEffect(() => {
     if (items?.length || errors?.length) {
@@ -88,4 +87,8 @@ Preview.propTypes = {
   title: PropTypes.string,
   initial: PropTypes.bool,
   capabilities: PropTypes.string,
+  setStatus: PropTypes.func,
+  data: PropTypes.shape({
+    progress: PropTypes.object,
+  }),
 };

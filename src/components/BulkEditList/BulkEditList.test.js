@@ -18,6 +18,7 @@ jest.mock('../../API', () => ({
   useDownloadLinks: () => ({
     data: {
       files: ['file1.csv', 'file2.csv'],
+      status: 'SUCCESSFUL',
     },
     isLoading: false,
     refetch: jest.fn(),

@@ -1,15 +1,22 @@
 import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useLocation, useParams } from 'react-router';
+
 import { Preview } from '../Preview/Preview';
+import { Loader } from '../Loader/Loader';
+
+import { useDownloadLinks } from '../../../../API';
 
 const PreviewInitial = () => {
   const intl = useIntl();
   const location = useLocation();
   const { id } = useParams();
+  const { data } = useDownloadLinks(id);
 
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
   const capabilities = useMemo(() => new URLSearchParams(location.search).get('capabilities')?.toLocaleLowerCase(), [location.search]);
+
+  const isComplited = data?.status === 'SUCCESSFUL';
 
 
   const title = useMemo(() => {
@@ -23,7 +30,12 @@ const PreviewInitial = () => {
   }, [fileUploadedName, intl, location.search]);
 
   return (
-    <Preview title={title} id={id} capabilities={capabilities} initial />
+    <>
+      {isComplited ?
+        <Preview title={title} id={id} capabilities={capabilities} data={data} initial /> :
+        <Loader />
+      }
+    </>
   );
 };
 
