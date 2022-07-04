@@ -5,6 +5,7 @@ import { QueryClientProvider } from 'react-query';
 
 import '../../../test/jest/__mock__';
 
+import { BrowserRouter } from 'react-router-dom';
 import { BulkEditStartModal } from '.';
 import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../../test/jest/utils/fileUpload';
 import { queryClient } from '../../../test/jest/utils/queryClient';
@@ -16,23 +17,29 @@ jest.mock('react-router-dom', () => ({
   }),
 }));
 
-const openMock = jest.fn();
-
 const onCancelMock = jest.fn();
 
 const setFileNameMock = jest.fn();
 
-const renderStartModal = () => {
-  render(
-    <QueryClientProvider client={queryClient}>
-      <BulkEditStartModal
-        open={openMock}
-        onCancel={onCancelMock}
-        setFileName={setFileNameMock}
-      />
-    </QueryClientProvider>,
-  );
+const file = 'file.csv';
+
+const currentRoute = `/bulk-edit/1/initial?capabilities=ITEMS&processedFileName=${file}`;
+
+const renderWithRouter = (ui, { route } = {}) => {
+  window.history.pushState({}, 'Test page', route);
+
+  return render(ui, { wrapper: BrowserRouter });
 };
+
+const startModal = (
+  <QueryClientProvider client={queryClient}>
+    <BulkEditStartModal
+      open
+      onCancel={onCancelMock}
+      setFileName={setFileNameMock}
+    />
+  </QueryClientProvider>
+);
 
 describe('BulkEditActionMenu', () => {
   beforeEach(() => {
@@ -44,7 +51,7 @@ describe('BulkEditActionMenu', () => {
       });
   });
   it('should displays BulkEditConformationModal title', async () => {
-    renderStartModal();
+    renderWithRouter(startModal, { route: currentRoute });
 
     expect(screen.getByText(/meta.title/)).toBeVisible();
   });
@@ -55,7 +62,7 @@ describe('BulkEditActionMenu', () => {
     const event = createDtWithFiles(file);
     const data = mockData([file]);
 
-    renderStartModal();
+    renderWithRouter(startModal, { route: currentRoute });
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
@@ -64,5 +71,19 @@ describe('BulkEditActionMenu', () => {
 
     fireEvent.drop(fileInput, event);
     await flushPromises();
+  });
+
+  it('should call cancel handler', async () => {
+    renderWithRouter(startModal);
+
+    expect(window.location.search).toContain('processedFileName');
+
+    const cancelButton = screen.getByText(/stripes-components.cancel/i);
+
+    fireEvent.click(cancelButton);
+
+    expect(onCancelMock).toHaveBeenCalled();
+
+    expect(window.location.search).not.toContain('processedFileName');
   });
 });

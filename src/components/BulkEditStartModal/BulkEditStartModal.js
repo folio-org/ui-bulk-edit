@@ -29,7 +29,9 @@ const BulkEditStartModal = ({
   const location = useLocation();
   const intl = useIntl();
   const showCallout = useShowCallout();
-  const entityType = new URLSearchParams(location.search).get('capabilities')?.slice(0, -1);
+  const search = new URLSearchParams(location.search);
+
+  const entityType = search.get('capabilities')?.slice(0, -1);
 
   const { requestJobId, isLoading } = useJobCommand({ entityType });
   const { fileUpload } = useFileUploadComand();
@@ -38,7 +40,7 @@ const BulkEditStartModal = ({
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
 
-  const fileName = new URLSearchParams(location.search).get('processedFileName');
+  const fileName = search.get('processedFileName');
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title.uploadedFile' }, { fileName });
   const modalLabelMessage = intl.formatMessage({ id: 'ui-bulk-edit.modal.successfullMessage' }, { fileName });
   const confirmLabel = intl.formatMessage({ id: 'ui-bulk-edit.modal.next' });
@@ -90,15 +92,25 @@ const BulkEditStartModal = ({
     }
   };
 
-  const onStartBulkEdit = () => {
+  const handleStartBulkEdit = () => {
     onCancel();
     setIsBulkConformationModal(true);
     setConformationButton(true);
     setIsFileUploaded(false);
   };
 
-  const onCancelHandlde = () => {
+  const handleCancel = () => {
     onCancel();
+
+    search.delete('processedFileName');
+
+    const searchStr = `?${search.toString()}`;
+
+    history.replace({
+      search: buildSearch({}, searchStr),
+    });
+
+    setFileName('');
     setIsFileUploaded(false);
     setConformationButton(true);
   };
@@ -106,14 +118,14 @@ const BulkEditStartModal = ({
   const footer = (
     <ModalFooter>
       <Button
-        onClick={onStartBulkEdit}
+        onClick={handleStartBulkEdit}
         disabled={isConformationButton}
         buttonStyle="primary"
       >
         {confirmLabel}
       </Button>
       <Button
-        onClick={onCancelHandlde}
+        onClick={handleCancel}
       >
         {cancelLabel}
       </Button>
