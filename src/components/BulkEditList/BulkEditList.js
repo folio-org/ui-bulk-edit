@@ -98,6 +98,9 @@ export const BulkEditList = () => {
 
       setNewBulkFooterShown(false);
 
+      // reset file uploaded matched name
+      setFileUploadedMatchedName(null);
+
       // set user capability by default
       history.replace({
         search: buildSearch({ capabilities: getDefaultCapabilities() }),
@@ -249,6 +252,7 @@ export const BulkEditList = () => {
         </Layer>
       </Paneset>
       <BulkEditStartModal
+        fileName={fileUploadedMatchedName}
         setFileName={setFileUploadedMatchedName}
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
@@ -257,6 +261,7 @@ export const BulkEditList = () => {
         setUpdatedId={setUpdatedId}
       />
       <BulkEditConformationModal
+        setFileName={setFileUploadedMatchedName}
         open={isBulkEditConformationModal}
         setIsBulkConformationModal={setIsBulkConformationModal}
         fileName={fileUploadedMatchedName}
