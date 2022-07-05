@@ -14,7 +14,7 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
-import { useDownloadLinks, useLaunchJob } from '../../API';
+import { useDownloadLinks } from '../../API';
 import { usePathParams } from '../../hooks';
 import { CAPABILITIES, CRITERIES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
@@ -41,8 +41,7 @@ export const BulkEditList = () => {
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
 
   const { id: jobId } = usePathParams('/bulk-edit/:id');
-  const { data, isLoading, refetch } = useDownloadLinks(jobId);
-  const { startJob } = useLaunchJob();
+  const { data, isLoading } = useDownloadLinks(jobId);
 
   const [successCsvLink, errorCsvLink] = data?.files || [];
   const { isActionMenuShown, hasOnlyInAppViewPerms } = useBulkPermissions();
@@ -76,12 +75,6 @@ export const BulkEditList = () => {
 
   const isActionMenuVisible = successCsvLink || errorCsvLink || isActionMenuShown;
 
-
-  useEffect(() => {
-    if (!isLoading && jobId && capabilitiesUrl === CAPABILITIES.ITEM) {
-      startJob({ jobId }).finally(() => refetch());
-    }
-  }, [jobId, isLoading, location.search]);
 
   useEffect(() => {
     const initialRoute = '/bulk-edit';
