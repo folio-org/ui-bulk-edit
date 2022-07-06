@@ -20,6 +20,7 @@ import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants';
 const BulkEditStartModal = ({
   open,
   onCancel,
+  fileName,
   setIsBulkConformationModal,
   setCountOfRecords,
   setUpdatedId,
@@ -40,7 +41,6 @@ const BulkEditStartModal = ({
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
 
-  const fileName = search.get('processedFileName');
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title.uploadedFile' }, { fileName });
   const modalLabelMessage = intl.formatMessage({ id: 'ui-bulk-edit.modal.successfullMessage' }, { fileName });
   const confirmLabel = intl.formatMessage({ id: 'ui-bulk-edit.modal.next' });
@@ -69,6 +69,8 @@ const BulkEditStartModal = ({
       history.replace({
         search: buildSearch({ processedFileName: fileToUpload.name }, history.location.search),
       });
+
+      setFileName(fileToUpload.name);
 
       setCountOfRecords(data);
 
@@ -162,6 +164,7 @@ BulkEditStartModal.propTypes = {
   setCountOfRecords: PropTypes.func,
   setUpdatedId: PropTypes.func,
   setFileName: PropTypes.func,
+  fileName: PropTypes.string,
 };
 
 export default BulkEditStartModal;
