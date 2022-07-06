@@ -136,13 +136,13 @@ describe('BulkEdit', () => {
     expect(screen.getByRole('button', { name: /Icon ui-bulk-edit.list.savedQueries.title/ })).toBeEnabled();
   });
 
-  it('should update title with uploaded name', async () => {
-    const file = [createFile('SearchHoldings.csv', 1111, 'application/csv')];
+  it('should update title with uploaded name and call startJob in case of ITEM capability', async () => {
+    const file = [createFile('SearchHoldings.csv', 1111, 'text/csv')];
 
     const event = createDtWithFiles(file);
     const data = mockData([file]);
 
-    renderBulkEdit();
+    renderBulkEdit('ITEMS');
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
