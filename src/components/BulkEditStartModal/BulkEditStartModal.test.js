@@ -57,10 +57,10 @@ describe('BulkEditActionMenu', () => {
   });
 
   it('should update title with uploaded name', async () => {
-    const file = [createFile('SearchHoldings.csv', 1111, 'application/csv')];
+    const fileData = [createFile('SearchHoldings.csv', 1111, 'application/csv')];
 
-    const event = createDtWithFiles(file);
-    const data = mockData([file]);
+    const event = createDtWithFiles(fileData);
+    const data = mockData([fileData]);
 
     renderWithRouter(startModal, { route: currentRoute });
 

@@ -2,8 +2,11 @@
   "parser": "babel-eslint",
   "extends": ["@folio/eslint-config-stripes/acquisitions"],
   "rules": {
-    "no-multiple-empty-lines": "off",
-    "react/react-in-jsx-scope": "off"
+    "no-multiple-empty-lines": 0,
+    "react/react-in-jsx-scope": 0,
+    "template-curly-spacing" : 0,
+    "indent" : 0,
+    "react-hooks/exhaustive-deps": 0
   },
   "settings": {
     "import/resolver": {

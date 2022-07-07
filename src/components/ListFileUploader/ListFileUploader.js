@@ -55,7 +55,7 @@ const ListFileUploader = (
     if (!acceptedFiles?.length) {
       handleDrop();
 
-      return showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message2');
+      showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message2');
     } else {
       const fileToUpload = acceptedFiles[0];
 
@@ -63,6 +63,7 @@ const ListFileUploader = (
 
       if (!isTypeSupported) {
         handleDrop();
+
         showFileExtensionModal('ui-bulk-edit.modal.fileExtensions.blocked.message');
       } else {
         handleDrop(fileToUpload);
