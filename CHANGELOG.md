@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [2.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.0) (2022-07-08)
+
 * [UIBULKED-55](https://issues.folio.org/browse/UIBULKED-55) Replace or remove react-hot-loader
 * [UIBULKED-60](https://issues.folio.org/browse/UIBULKED-60) Download matched records (CSV) - Items
 * [UIBULKED-29](https://issues.folio.org/browse/UIBULKED-29) Modify bulk edit permissions.
