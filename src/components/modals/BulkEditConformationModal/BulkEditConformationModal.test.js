@@ -16,6 +16,7 @@ history.push('/bulk-edit/1?fileName=Mock.csv&capabilities=USERS');
 
 const fileNameMock = 'test.csv';
 const mockSetIsConformotaionalModal = jest.fn();
+const setFileName = jest.fn();
 
 const renderBulkEditConformationModal = () => {
   render(
@@ -23,6 +24,7 @@ const renderBulkEditConformationModal = () => {
       <BrowserRouter history={history}>
         <BulkEditConformationModal
           open
+          setFileName={setFileName}
           fileName={fileNameMock}
           setIsBulkConformationModal={mockSetIsConformotaionalModal}
         />
