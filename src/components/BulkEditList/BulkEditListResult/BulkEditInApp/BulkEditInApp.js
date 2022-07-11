@@ -55,6 +55,8 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   fields[index].option === OPTIONS.STATUS;
   const isDisabled = (index) => fields[index].option === OPTIONS.STATUS;
 
+  const getDefaultAction = value => (value === OPTIONS.STATUS ? { action: ACTIONS.REPLACE } : {});
+
   const getFilteredFields = (initialFields) => {
     return initialFields.map(f => {
       const uniqOptions = new Set(initialFields.map(i => i.option));
@@ -77,6 +79,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
         return {
           ...field,
           [type]: value,
+          ...getDefaultAction(value),
         };
       }
 
@@ -131,8 +134,10 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   const handleAdd = () => {
     const filteredFields = getFilteredFields([...fields, { ...fieldTemplate, action: '', option: '' }]);
     const initializedFields = filteredFields.map((f, i) => {
+      const value = f.options[0].value;
+
       return i === filteredFields.length - 1
-        ? ({ ...f, option: f.options[0].value })
+        ? ({ ...f, option: value, ...getDefaultAction(value) })
         : f;
     });
 
