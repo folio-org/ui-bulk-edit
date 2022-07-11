@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import '../../../../../test/jest/__mock__';
 import { BulkEditInApp } from './BulkEditInApp';
 import { RootContext } from '../../../../context/RootContext';
+import { flushPromises } from '../../../../../test/jest/utils/fileUpload';
 
 const renderBulkEditInApp = (title) => {
   render(
@@ -75,7 +76,7 @@ describe('BulkEditInApp', () => {
     expect(permanentLocation.selected).toBe(true);
   });
 
-  it('should display select correct options in action select', () => {
+  it('should display select correct options in action select', async () => {
     renderBulkEditInApp(titleMock);
 
     const options = [
@@ -96,14 +97,16 @@ describe('BulkEditInApp', () => {
 
 
     userEvent.selectOptions(
+      selectAction,
+      actionReplace,
+    );
+
+    userEvent.selectOptions(
       selectOption,
       optionStatus,
     );
 
-    userEvent.selectOptions(
-      selectAction,
-      actionReplace,
-    );
+    await flushPromises();
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
 

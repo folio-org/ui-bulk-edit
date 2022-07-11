@@ -9,8 +9,7 @@ import { Headline,
   Row,
   Accordion,
   Select,
-  RepeatableField,
-  TextField } from '@folio/stripes/components';
+  RepeatableField } from '@folio/stripes/components';
 
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
@@ -77,7 +76,6 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
         return {
           ...field,
-          action: ACTIONS.REPLACE,
           [type]: value,
         };
       }
@@ -131,7 +129,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   };
 
   const handleAdd = () => {
-    const filteredFields = getFilteredFields([...fields, { ...fieldTemplate, action: ACTIONS.REPLACE, option: '' }]);
+    const filteredFields = getFilteredFields([...fields, { ...fieldTemplate, action: '', option: '' }]);
     const initializedFields = filteredFields.map((f, i) => {
       return i === filteredFields.length - 1
         ? ({ ...f, option: f.options[0].value })

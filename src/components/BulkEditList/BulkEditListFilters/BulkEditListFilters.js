@@ -190,15 +190,15 @@ export const BulkEditListFilters = ({
   }, [location.search]);
 
   useEffect(() => {
-    const search = buildSearch({ capabilities }, location.search);
+    const searchStr = buildSearch({ capabilities }, location.search);
 
     // Replace history only if the search params are different from
     // the current location search params.
     // https://issues.folio.org/browse/UIBULKED-90
-    if (location.search !== `?${search}`) {
+    if (location.search !== `?${searchStr}`) {
       history.replace({
         pathname: location.pathname,
-        search,
+        search: searchStr,
       });
     }
   }, [capabilities]);

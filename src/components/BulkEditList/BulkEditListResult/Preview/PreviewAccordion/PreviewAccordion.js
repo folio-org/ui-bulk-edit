@@ -22,9 +22,9 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
 
   const accordionLabel = useMemo(() => (
     location.pathname === `/bulk-edit/${jobId}/initial` ?
-    <FormattedMessage id="ui-bulk-edit.list.preview.title" />
+      <FormattedMessage id="ui-bulk-edit.list.preview.title" />
     :
-    <FormattedMessage id="ui-bulk-edit.list.preview.titleChanged" />
+      <FormattedMessage id="ui-bulk-edit.list.preview.titleChanged" />
   ), [location.pathname]);
   const columnMapping = columns.reduce((acc, el) => {
     acc[el.value] = el.label;
