@@ -2,41 +2,44 @@
 
 ## In progress
 
+* [UIBULKED-121](https://issues.folio.org/browse/UIBULKED-121) Duplicate request to /bulk-edit/{UUID}/start
+* [UIBULKED-111](https://issues.folio.org/browse/UIBULKED-111) Added row's action by default should be "Select action"
+
 ## [2.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.0) (2022-07-08)
 
-* [UIBULKED-55](https://issues.folio.org/browse/UIBULKED-55) Replace or remove react-hot-loader
-* [UIBULKED-60](https://issues.folio.org/browse/UIBULKED-60) Download matched records (CSV) - Items
-* [UIBULKED-29](https://issues.folio.org/browse/UIBULKED-29) Modify bulk edit permissions.
-* [UIBULKED-33](https://issues.folio.org/browse/UIBULKED-33) Starting bulk edit - in app approach
+* [UIBULKED-53](https://issues.folio.org/browse/UIBULKED-53) Undefined permission 'bulk-edit.upload.post'
+* [UIBULKED-28](https://issues.folio.org/browse/UIBULKED-28) Replace checkboxes with radio buttons on the lading page
 * [UIBULKED-30](https://issues.folio.org/browse/UIBULKED-30) Record identifiers dropdown
+* [UIBULKED-31](https://issues.folio.org/browse/UIBULKED-31) Item record - preview of matched records
 * [UIBULKED-55](https://issues.folio.org/browse/UIBULKED-55) Replace or remove react-hot-loader
-* [UIBULKED-60](https://issues.folio.org/browse/UIBULKED-60) Download matched records (CSV) - Items
 * [UIBULKED-29](https://issues.folio.org/browse/UIBULKED-29) Modify bulk edit permissions.
-* [UIBULKED-33](https://issues.folio.org/browse/UIBULKED-33) Starting bulk edit - in app approach
+* [UIBULKED-60](https://issues.folio.org/browse/UIBULKED-60) Download matched records (CSV) - Items
 * [UIBULKED-57](https://issues.folio.org/browse/UIBULKED-57) In-app bulk edit permissions only
+* [UIBULKED-33](https://issues.folio.org/browse/UIBULKED-33) Starting bulk edit - in app approach
 * [UIBULKED-58](https://issues.folio.org/browse/UIBULKED-58) CSV bulk edit permissions only
+* [UIBULKED-56](https://issues.folio.org/browse/UIBULKED-56) Change bulk-edit preview endpoint
 * [UIBULKED-32](https://issues.folio.org/browse/UIBULKED-32) Error accordion - Items
 * [UIBULKED-34](https://issues.folio.org/browse/UIBULKED-34) In-app bulk edit form.
+* [UIBULKED-35](https://issues.folio.org/browse/UIBULKED-35) Are you sure form
 * [UIBULKED-36](https://issues.folio.org/browse/UIBULKED-36) Completion of the in-app bulk edit.
-* [UIBULKED-66](https://issues.folio.org/browse/UIBULKED-66) Progress bar for uploading identifier files and retrieving relevant data.
 * [UIBULKED-59](https://issues.folio.org/browse/UIBULKED-59) CSV and In app bulk edit permissions.
+* [UIBULKED-66](https://issues.folio.org/browse/UIBULKED-66) Progress bar for uploading identifier files and retrieving relevant data.
 * [UIBULKED-73](https://issues.folio.org/browse/UIBULKED-73) New bulk edit button
-* [UIBULKED-69](https://issues.folio.org/browse/UIBULKED-69) "Reset all" button is disabled after Query execution
 * [UIBULKED-38](https://issues.folio.org/browse/UIBULKED-38) Add item status to In-app bulk edit form.
-* [UIBULKED-62](https://issues.folio.org/browse/UIBULKED-62) Incorrect matched records count when reporting errors.
+* [UIBULKED-69](https://issues.folio.org/browse/UIBULKED-69) "Reset all" button is disabled after Query execution
 * [UIBULKED-81](https://issues.folio.org/browse/UIBULKED-81) Change Usernames and External IDs behavior
+* [UIBULKED-62](https://issues.folio.org/browse/UIBULKED-62) Incorrect matched records count when reporting errors.
 * [UIBULKED-90](https://issues.folio.org/browse/UIBULKED-90) Replace history only if the search params are different.
-* [UIBULKED-68](https://issues.folio.org/browse/UIBULKED-68) Changes to the Bulk edit left pane.
 * [UIBULKED-75](https://issues.folio.org/browse/UIBULKED-75) Enable type ahead in location look-up.
 * [UIBULKED-82](https://issues.folio.org/browse/UIBULKED-82) The labels on the Drag and drop and the body areas don't match selected Item identifiers.
 * [UIBULKED-76](https://issues.folio.org/browse/UIBULKED-76) Narrow down options dropdown choices on in-app bulk edit form
+* [UIBULKED-68](https://issues.folio.org/browse/UIBULKED-68) Changes to the Bulk edit left pane.
 * [UIBULKED-78](https://issues.folio.org/browse/UIBULKED-78) Clicking on Bulk Edit app icon does not fully rest the screen
-* [UIBULKED-89](https://issues.folio.org/browse/UIBULKED-89) The name of previously uploaded file is not reset when user clicks Cancel button on the Confirmation modal
 * [UIBULKED-100](https://issues.folio.org/browse/UIBULKED-100) Matched records label cleanup - Morning Glory
-* [UIBULKED-102](https://issues.folio.org/browse/UIBULKED-102) Inconsistent behavior when repeating updates on the same records - item locations
 * [UIBULKED-117](https://issues.folio.org/browse/UIBULKED-117) The "Invalid file" modal is not displayed in case of dragging multiple files on "Drag & drop" area
-* [UIBULKED-111](https://issues.folio.org/browse/UIBULKED-111) Added row's action by default should be "Select action"
-* [UIBULKED-121](https://issues.folio.org/browse/UIBULKED-121) Duplicate request to /bulk-edit/{UUID}/start
+* [UIBULKED-102](https://issues.folio.org/browse/UIBULKED-102) Inconsistent behavior when repeating updates on the same records - item locations
+* [UIBULKED-89](https://issues.folio.org/browse/UIBULKED-89) The name of previously uploaded file is not reset when user clicks Cancel button on the Confirmation modal
+
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
@@ -63,4 +66,3 @@
 * [UIBULKED-48](https://issues.folio.org/browse/UIBULKED-48) Refactor permissions
 * [UIBULKED-16](https://issues.folio.org/browse/UIBULKED-16) Populating preview of matched records based on query search
 * [UIBULKED-52](https://issues.folio.org/browse/UIBULKED-52) Modify behavior after user starts bulk edit
-* [UIBULKED-53](https://issues.folio.org/browse/UIBULKED-53) Undefined permission 'bulk-edit.upload.post', ...
