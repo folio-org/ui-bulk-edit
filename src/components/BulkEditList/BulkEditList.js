@@ -14,7 +14,7 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
-import { useDownloadLinks, useLaunchJob } from '../../API';
+import { useDownloadLinks } from '../../API';
 import { usePathParams } from '../../hooks';
 import { CAPABILITIES, CRITERIES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
@@ -41,8 +41,7 @@ export const BulkEditList = () => {
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
 
   const { id: jobId } = usePathParams('/bulk-edit/:id');
-  const { data, isLoading, refetch } = useDownloadLinks(jobId);
-  const { startJob } = useLaunchJob();
+  const { data, isLoading } = useDownloadLinks(jobId);
 
   const [successCsvLink, errorCsvLink] = data?.files || [];
   const { isActionMenuShown, hasOnlyInAppViewPerms } = useBulkPermissions();
@@ -78,12 +77,6 @@ export const BulkEditList = () => {
 
 
   useEffect(() => {
-    if (!isLoading && jobId && capabilitiesUrl === CAPABILITIES.ITEM) {
-      startJob({ jobId }).finally(() => refetch());
-    }
-  }, [jobId, isLoading, location.search]);
-
-  useEffect(() => {
     const initialRoute = '/bulk-edit';
 
     if (location.pathname === initialRoute && !location.search) {
@@ -97,6 +90,9 @@ export const BulkEditList = () => {
       queryClient.setQueryData('getJob', () => ({ data: undefined }));
 
       setNewBulkFooterShown(false);
+
+      // reset file uploaded matched name
+      setFileUploadedMatchedName(null);
 
       // set user capability by default
       history.replace({
@@ -249,6 +245,7 @@ export const BulkEditList = () => {
         </Layer>
       </Paneset>
       <BulkEditStartModal
+        fileName={fileUploadedMatchedName}
         setFileName={setFileUploadedMatchedName}
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
@@ -257,6 +254,7 @@ export const BulkEditList = () => {
         setUpdatedId={setUpdatedId}
       />
       <BulkEditConformationModal
+        setFileName={setFileUploadedMatchedName}
         open={isBulkEditConformationModal}
         setIsBulkConformationModal={setIsBulkConformationModal}
         fileName={fileUploadedMatchedName}

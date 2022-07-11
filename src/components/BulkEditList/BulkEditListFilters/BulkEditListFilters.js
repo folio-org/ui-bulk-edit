@@ -23,7 +23,7 @@ import {
   BULK_EDIT_QUERY,
   CRITERIES, CAPABILITIES,
 } from '../../../constants';
-import { useJobCommand, useFileUploadComand, useUserGroupsMap } from '../../../API';
+import { useJobCommand, useFileUploadComand, useUserGroupsMap, useLaunchJob } from '../../../API';
 import { buildQuery } from '../../../hooks';
 import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
 
@@ -51,7 +51,7 @@ export const BulkEditListFilters = ({
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
-
+  const { startJob } = useLaunchJob();
   const { userGroups } = useUserGroupsMap();
   const { requestJobId, isLoading } = useJobCommand({ entityType: capabilities.slice(0, -1) });
   const { fileUpload } = useFileUploadComand();
@@ -117,6 +117,11 @@ export const BulkEditListFilters = ({
       const { id } = await requestJobId({ recordIdentifier, editType: BULK_EDIT_IDENTIFIERS });
 
       await fileUpload({ id, fileToUpload });
+
+      // start job manually for ITEM capability only
+      if (capabilities === CAPABILITIES.ITEM) {
+        await startJob({ jobId: id });
+      }
 
       search.delete('queryText');
 
@@ -185,15 +190,15 @@ export const BulkEditListFilters = ({
   }, [location.search]);
 
   useEffect(() => {
-    const search = buildSearch({ capabilities }, location.search);
+    const searchStr = buildSearch({ capabilities }, location.search);
 
     // Replace history only if the search params are different from
     // the current location search params.
     // https://issues.folio.org/browse/UIBULKED-90
-    if (location.search !== `?${search}`) {
+    if (location.search !== `?${searchStr}`) {
       history.replace({
         pathname: location.pathname,
-        search,
+        search: searchStr,
       });
     }
   }, [capabilities]);
