@@ -155,5 +155,5 @@
     "list.logSubTitle.changed": "تم تغيير {count} تسجيلة",
     "list.preview.titleChanged": "Preview of record changed",
     "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
-    "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded."
+    "modal.fileExtensions.blocked.message2": "يمكن فقط تحميل ملف واحد بامتداد .csv"
 }
