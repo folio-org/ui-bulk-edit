@@ -125,7 +125,7 @@
     "layer.options.statusLabel": "Stav jednotky",
     "layer.options.available": "Dostupné",
     "layer.options.missing": "Chybějící",
-    "layer.options.withdrawn": "Vyřazeno",
+    "layer.options.withdrawn": "Staženo",
     "layer.options.non-requestable": "Probíhá (nevyžadováno)",
     "layer.options.intellectual": "Duševní jednotka",
     "layer.options.longMissing": "Dlouho chybí",

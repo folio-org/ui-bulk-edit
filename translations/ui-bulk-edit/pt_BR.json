@@ -152,8 +152,8 @@
     "uploaderSubTitle.item.ACCESSION_NUMBER": "Selecione um arquivo com o número de acesso do exemplar",
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "Selecione um arquivo com os UUIDs de holdings",
     "layer.selectLocation": "Selecionar localização",
-    "list.logSubTitle.changed": "{count} records changed",
-    "list.preview.titleChanged": "Preview of record changed",
-    "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
-    "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded."
+    "list.logSubTitle.changed": "{count} registros alterados",
+    "list.preview.titleChanged": "Pré-visualização do registro alterado",
+    "list.errors.infoProccessed": "<b> {fileName} : {entries} entradas * {matched} registros alterados * {errors} erros </b>",
+    "modal.fileExtensions.blocked.message2": "Apenas um arquivo com extensão .csv pode ser carregado."
 }
