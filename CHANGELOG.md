@@ -4,6 +4,7 @@
 
 * [UIBULKED-121](https://issues.folio.org/browse/UIBULKED-121) Duplicate request to /bulk-edit/{UUID}/start
 * [UIBULKED-111](https://issues.folio.org/browse/UIBULKED-111) Added row's action by default should be "Select action"
+* [UIBULKED-131](https://issues.folio.org/browse/UIBULKED-131) Increase maximal upload file size
 
 ## [2.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.0) (2022-07-08)
 

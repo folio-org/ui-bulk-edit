@@ -42,23 +42,16 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
   const { inAppUpload, isLoading: isUploading } = useInAppUpload();
   const { data: fileData, refetch: downloadPreviewCSV, isLoading: isDownloading } = useInAppDownloadPreview(jobId);
 
-  const handleStartJob = async () => {
-    try {
-      await startJob({ jobId });
+  const handleStartJob = () => {
+    startJob({ jobId });
 
-      setUpdatedId(jobId);
-      onJobStarted();
+    setUpdatedId(jobId);
+    onJobStarted();
 
-      history.replace({
-        pathname: `/bulk-edit/${jobId}/processedProgress`,
-        search: location.search,
-      });
-    } catch (e) {
-      showCallout({
-        message: e.message,
-        type: 'error',
-      });
-    }
+    history.replace({
+      pathname: `/bulk-edit/${jobId}/processedProgress`,
+      search: location.search,
+    });
   };
 
   useEffect(() => {
