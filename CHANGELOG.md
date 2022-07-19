@@ -4,6 +4,7 @@
 
 * [UIBULKED-121](https://issues.folio.org/browse/UIBULKED-121) Duplicate request to /bulk-edit/{UUID}/start
 * [UIBULKED-111](https://issues.folio.org/browse/UIBULKED-111) Added row's action by default should be "Select action"
+* [UIBULKED-95](https://issues.folio.org/browse/UIBULKED-95) Missing "Download matched records (CSV)" action menu after query search
 
 ## [2.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.0) (2022-07-08)
 
@@ -36,7 +37,6 @@
 * [UIBULKED-68](https://issues.folio.org/browse/UIBULKED-68) Changes to the Bulk edit left pane.
 * [UIBULKED-78](https://issues.folio.org/browse/UIBULKED-78) Clicking on Bulk Edit app icon does not fully rest the screen
 * [UIBULKED-100](https://issues.folio.org/browse/UIBULKED-100) Matched records label cleanup - Morning Glory
-* [UIBULKED-95](https://issues.folio.org/browse/UIBULKED-95) Missing "Download matched records (CSV)" action menu after query search
 * [UIBULKED-117](https://issues.folio.org/browse/UIBULKED-117) The "Invalid file" modal is not displayed in case of dragging multiple files on "Drag & drop" area
 * [UIBULKED-102](https://issues.folio.org/browse/UIBULKED-102) Inconsistent behavior when repeating updates on the same records - item locations
 * [UIBULKED-89](https://issues.folio.org/browse/UIBULKED-89) The name of previously uploaded file is not reset when user clicks Cancel button on the Confirmation modal
