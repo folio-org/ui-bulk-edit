@@ -1,8 +1,5 @@
 @import "@folio/stripes-components/lib/variables";
 
-.header {
-}
-
 .headerCell {
   padding: 10px 10px 5px;
   font-weight: var(--text-weight-bold);
