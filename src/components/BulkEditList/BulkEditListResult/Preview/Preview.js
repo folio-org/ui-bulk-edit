@@ -10,16 +10,15 @@ import { useContext, useEffect, useState } from 'react';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
 import {
-  useDownloadLinks,
   useErrorsList,
   usePreviewRecords,
   useUserGroupsMap,
 } from '../../../../API';
 import { RootContext } from '../../../../context/RootContext';
 
-export const Preview = ({ id, title, initial, capabilities }) => {
+export const Preview = ({ id, title, initial, capabilities, data }) => {
   const { setNewBulkFooterShown, setCountOfRecords } = useContext(RootContext);
-  const { data } = useDownloadLinks(id);
+
   const { errors } = useErrorsList(id);
   const { items, totalRecords } = usePreviewRecords(id, capabilities);
   const { userGroups } = useUserGroupsMap();
@@ -88,4 +87,7 @@ Preview.propTypes = {
   title: PropTypes.string,
   initial: PropTypes.bool,
   capabilities: PropTypes.string,
+  data: PropTypes.shape({
+    progress: PropTypes.object,
+  }),
 };
