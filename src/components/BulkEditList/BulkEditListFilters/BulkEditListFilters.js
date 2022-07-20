@@ -120,7 +120,7 @@ export const BulkEditListFilters = ({
 
       // start job manually for ITEM capability only
       if (capabilities === CAPABILITIES.ITEM) {
-        await startJob({ jobId: id });
+        startJob({ jobId: id });
       }
 
       search.delete('queryText');

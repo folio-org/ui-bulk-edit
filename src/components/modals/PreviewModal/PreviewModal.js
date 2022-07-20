@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
-import { useShowCallout } from '@folio/stripes-acq-components';
 import moment from 'moment';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import { getInventoryResultsFormatterBase } from '../../../constants/formatters';
@@ -16,7 +15,6 @@ import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 import { useLaunchJob } from '../../../API';
 
 const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted, setUpdatedId }) => {
-  const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
   const formatter = getInventoryResultsFormatterBase();
@@ -42,23 +40,16 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
   const { inAppUpload, isLoading: isUploading } = useInAppUpload();
   const { data: fileData, refetch: downloadPreviewCSV, isLoading: isDownloading } = useInAppDownloadPreview(jobId);
 
-  const handleStartJob = async () => {
-    try {
-      await startJob({ jobId });
+  const handleStartJob = () => {
+    startJob({ jobId });
 
-      setUpdatedId(jobId);
-      onJobStarted();
+    setUpdatedId(jobId);
+    onJobStarted();
 
-      history.replace({
-        pathname: `/bulk-edit/${jobId}/processedProgress`,
-        search: location.search,
-      });
-    } catch (e) {
-      showCallout({
-        message: e.message,
-        type: 'error',
-      });
-    }
+    history.replace({
+      pathname: `/bulk-edit/${jobId}/processedProgress`,
+      search: location.search,
+    });
   };
 
   useEffect(() => {
