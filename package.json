@@ -141,7 +141,6 @@
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^5.1.0",
     "@testing-library/user-event": "^12.8.3",
-    "babel-eslint": "^10.0.0",
     "babel-jest": "^26.3.0",
     "core-js": "^3.6.1",
     "eslint": "^6.2.1",
@@ -162,6 +161,7 @@
     "testing-library-selector": "^0.2.1"
   },
   "dependencies": {
+    "@babel/eslint-parser": "^7.18.9",
     "@folio/stripes-acq-components": "^3.0.0",
     "file-saver": "^2.0.5",
     "history": "^5.1.0",
