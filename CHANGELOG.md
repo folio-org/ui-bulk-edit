@@ -6,6 +6,7 @@
 * [UIBULKED-111](https://issues.folio.org/browse/UIBULKED-111) Added row's action by default should be "Select action"
 * [UIBULKED-95](https://issues.folio.org/browse/UIBULKED-95) Missing "Download matched records (CSV)" action menu after query search
 * [UIBULKED-131](https://issues.folio.org/browse/UIBULKED-131) Increase maximal upload file size
+* [UIBULKED-64](https://issues.folio.org/browse/UIBULKED-64) Replace babel-eslint with @babel/eslint-parser
 * [UIBULKED-132](https://issues.folio.org/browse/UIBULKED-132) Rename "Save and close" button to "Commit changes"
 
 ## [2.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.0) (2022-07-08)
