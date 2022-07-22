@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [2.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.1) (2022-07-22)
+
 * [UIBULKED-121](https://issues.folio.org/browse/UIBULKED-121) Duplicate request to /bulk-edit/{UUID}/start
 * [UIBULKED-111](https://issues.folio.org/browse/UIBULKED-111) Added row's action by default should be "Select action"
 * [UIBULKED-95](https://issues.folio.org/browse/UIBULKED-95) Missing "Download matched records (CSV)" action menu after query search
