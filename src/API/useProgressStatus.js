@@ -26,7 +26,7 @@ export const useProgressStatus = (id, typeOfProgress) => {
     });
   };
 
-  const { data } = useQuery({
+  const { data, remove } = useQuery({
     queryKey: ['progress', id],
     queryFn: () => ky.get(`data-export-spring/jobs/${id}`).json(),
     enabled: !!id,
@@ -51,5 +51,6 @@ export const useProgressStatus = (id, typeOfProgress) => {
 
   return {
     data,
+    remove,
   };
 };
