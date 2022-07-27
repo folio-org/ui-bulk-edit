@@ -10,19 +10,21 @@ import { useProgressStatus } from '../../API/useProgressStatus';
 export const ProgressBar = ({ updatedId, typeOfProgress }) => {
   const location = useLocation();
   const history = useHistory();
-  const { data } = useProgressStatus(updatedId, typeOfProgress);
+  const { data, remove } = useProgressStatus(updatedId, typeOfProgress);
   const processedTitle = new URLSearchParams(location.search).get('processedFileName');
   const title = new URLSearchParams(location.search).get('fileName');
 
   useEffect(() => {
     if (!processedTitle && location.pathname.includes('processed')) {
+      remove();
       history.replace({
         pathname: location.pathname,
         search: buildSearch({ isCompleted: true }, location.search),
       });
     }
-  }, [history, location.pathname, location.search, processedTitle]);
+  }, [location.pathname, location.search, processedTitle]);
 
+  const progressValue = data?.progress?.progress || 1;
 
   return (
     <div className={css.progressBar}>
@@ -40,7 +42,7 @@ export const ProgressBar = ({ updatedId, typeOfProgress }) => {
       </div>
       <div className={css.progressBarBody}>
         <div className={css.progressBarLine}>
-          <div data-testid="progress-line" style={{ width: `${data?.progress?.progress}%` }} />
+          <div data-testid="progress-line" style={{ width: `${progressValue}%` }} />
         </div>
         <div className={css.progressBarLineStatus}>
           <span><FormattedMessage id="ui-bulk-edit.progresssBar.retrieving" /></span>
