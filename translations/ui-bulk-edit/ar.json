@@ -18,7 +18,7 @@
     "uploading": "تحميل",
     "cancel": "إلغاء",
     "modal.fileExtensions.blocked.header": "ملف غير صالح",
-    "modal.fileExtensions.blocked.message": "يمكن فقط تحميل الملفات ذات امتداد .csv",
+    "modal.fileExtensions.blocked.message": "يمكن تحميل الملفات ذات امتداد .csv فقط.",
     "modal.fileExtensions.actionButton": "اختر ملفات أخرى للتحميل",
     "list.filters.capabilities.title": "أنواع التسجيلات",
     "list.filters.capabilities.users": "المستخدمين",
@@ -153,7 +153,7 @@
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "اختر ملف بمعرفات المقتنيات العمومية الفريدة",
     "layer.selectLocation": "اختر الموقع",
     "list.logSubTitle.changed": "تم تغيير {count} تسجيلة",
-    "list.preview.titleChanged": "Preview of record changed",
+    "list.preview.titleChanged": "تم تغيير معاينة التسجيلة",
     "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
     "modal.fileExtensions.blocked.message2": "يمكن فقط تحميل ملف واحد بامتداد .csv"
 }
