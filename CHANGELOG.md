@@ -3,6 +3,7 @@
 ## In progress
 
 * [UIBULKED-130](https://issues.folio.org/browse/UIBULKED-130) Progress bar blinks (reloads) on the first run
+* [UIBULKED-127](https://issues.folio.org/browse/UIBULKED-127) Type non existing location and press enter. Error while bulk edit items.
 
 ## [2.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.1) (2022-07-22)
 
