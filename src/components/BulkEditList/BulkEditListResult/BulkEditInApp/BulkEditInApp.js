@@ -99,11 +99,13 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   const handleLocationChange = (location, index) => {
     setFields(prevFields => prevFields.map((field, i) => {
       if (i === index) {
-        return {
-          ...field,
-          locationId: location.id,
-          value: location.name,
-        };
+        if (location) {
+          return {
+            ...field,
+            locationId: location.id,
+            value: location.name,
+          };
+        }
       }
 
       return field;
