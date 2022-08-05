@@ -117,7 +117,7 @@
     "previewModal.previewToBeChanged": "预览要更改的记录",
     "previewModal.keepEditing": "继续编辑",
     "previewModal.downloadPreview": "下载预览",
-    "previewModal.saveAndClose": "保存并关闭",
+    "previewModal.saveAndClose": "承诺改变",
     "progressBar.title": "上传{title}并检索相关数据",
     "progresssBar.retrieving": "检索",
     "previewModal.areYouSure": "是否确定？",
