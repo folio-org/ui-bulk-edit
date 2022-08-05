@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [2.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-08-05)
+
 * [UIBULKED-130](https://issues.folio.org/browse/UIBULKED-130) Progress bar blinks (reloads) on the first run
 
 ## [2.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.1) (2022-07-22)
