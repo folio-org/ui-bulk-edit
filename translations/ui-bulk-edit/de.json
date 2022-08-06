@@ -68,7 +68,7 @@
     "preview.file.title": "Dateiname: {fileUploadedName}",
     "preview.query.title": "Abfrage: {queryText}",
     "list.errors.title": "Fehler",
-    "list.errors.info": "<b>{Dateiname}: {entries} Einträge * {matched} übereinstimmende Datensätze * {errors} Fehler</b>",
+    "list.errors.info": "<b>{fileName}: {entries} Einträge * {matched} übereinstimmende Datensätze * {errors} Fehler</b>",
     "list.errors.table.code": "Datensatzidentifikator",
     "list.errors.table.message": "Fehlergrund",
     "modal.successfullMessage": "{fileName} erfolgreich hochgeladen.",
