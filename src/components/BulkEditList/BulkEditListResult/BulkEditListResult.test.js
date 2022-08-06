@@ -14,7 +14,7 @@ jest.mock('./Preview/PreviewAccordion', () => ({
 }));
 
 jest.mock('../../../API', () => ({
-  useDownloadLinks: () => ({
+  useJob: () => ({
     data: {
       files: ['file1.csv', 'file2.csv'],
       progress: 55,

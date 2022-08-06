@@ -6,9 +6,7 @@ import {
   Icon,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
-import React, { useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
-import { buildSearch } from '@folio/stripes-acq-components';
+import React, { useContext, useMemo } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { usePathParams } from '../../hooks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
@@ -16,6 +14,7 @@ import { usePreviewRecords } from '../../API';
 import { CAPABILITIES } from '../../constants';
 import { useCurrentEntityInfo } from '../../hooks/currentEntity';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
+import { RootContext } from '../../context/RootContext';
 
 const BulkEditActionMenu = ({
   onEdit,
@@ -27,21 +26,21 @@ const BulkEditActionMenu = ({
   const {
     location,
     columns,
-    searchParams,
   } = useCurrentEntityInfo();
   const search = new URLSearchParams(location.search);
   const capabilities = search.get('capabilities');
   const isCompleted = search.get('isCompleted');
   const processedFileName = search.get('processedFileName');
-  const history = useHistory();
   const { id } = usePathParams('/bulk-edit/:id');
   const { items } = usePreviewRecords(id, capabilities?.toLowerCase());
   const { hasCsvEditPerms, hasInAppEditPerms, hasAnyEditPermissions } = useBulkPermissions();
+  const { visibleColumns, setVisibleColumns } = useContext(RootContext);
 
   const handleChange = ({ values }) => {
-    history.replace({
-      search: buildSearch({ selectedColumns: JSON.stringify(values) }, location.search),
-    });
+    const stringifiedValues = JSON.stringify(values);
+
+    setVisibleColumns(stringifiedValues);
+    localStorage.setItem('visibleColumns', stringifiedValues);
   };
 
   const buildButtonClickHandler = buttonClickHandler => () => {
@@ -53,13 +52,12 @@ const BulkEditActionMenu = ({
   const columnsOptions = columns.map(item => ({ ...item, disabled: !items?.length }));
 
   const selectedValues = useMemo(() => {
-    const paramsColumns = searchParams.get('selectedColumns');
     const defaultColumns = columns
       .filter(item => item.selected)
       .map(item => item.value);
 
-    return paramsColumns ? JSON.parse(paramsColumns) : defaultColumns;
-  }, [location.search]);
+    return visibleColumns ? JSON.parse(visibleColumns) : defaultColumns;
+  }, [visibleColumns]);
 
   const renderLinkButtons = () => {
     if (isLoading) return <Preloader />;
@@ -133,9 +131,7 @@ const BulkEditActionMenu = ({
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}>
         <>
           {renderLinkButtons()}
-
           {renderStartBulkEditButtons()}
-
         </>
       </ActionMenuGroup>
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>

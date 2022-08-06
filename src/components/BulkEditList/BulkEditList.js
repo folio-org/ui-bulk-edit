@@ -14,7 +14,7 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
-import { useDownloadLinks } from '../../API';
+import { useJob } from '../../API';
 import { usePathParams } from '../../hooks';
 import { CAPABILITIES, CRITERIES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
@@ -39,9 +39,10 @@ export const BulkEditList = () => {
   const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
   const [contentUpdates, setContentUpdates] = useState(null);
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
+  const [visibleColumns, setVisibleColumns] = useState(null);
 
   const { id: jobId } = usePathParams('/bulk-edit/:id');
-  const { data, isLoading } = useDownloadLinks(jobId);
+  const { data, isLoading } = useJob(jobId);
 
   const [successCsvLink, errorCsvLink] = data?.files || [];
   const { isActionMenuShown, hasOnlyInAppViewPerms } = useBulkPermissions();
@@ -75,6 +76,13 @@ export const BulkEditList = () => {
 
   const isActionMenuVisible = successCsvLink || errorCsvLink || isActionMenuShown;
 
+  useEffect(() => {
+    const columns = localStorage.getItem('visibleColumns');
+
+    if (columns) {
+      setVisibleColumns(columns);
+    }
+  }, []);
 
   useEffect(() => {
     const initialRoute = '/bulk-edit';
@@ -89,15 +97,19 @@ export const BulkEditList = () => {
       // clear job information
       queryClient.setQueryData('getJob', () => ({ data: undefined }));
 
-      setNewBulkFooterShown(false);
-
       // reset file uploaded matched name
       setFileUploadedMatchedName(null);
+
+      // clear visibleColumns preset
+      localStorage.removeItem('visibleColumns');
+      setVisibleColumns(null);
 
       // set user capability by default
       history.replace({
         search: buildSearch({ capabilities: getDefaultCapabilities() }),
       });
+
+      setNewBulkFooterShown(false);
     }
   }, [location.pathname, location.search]);
 
@@ -203,7 +215,13 @@ export const BulkEditList = () => {
   };
 
   return (
-    <RootContext.Provider value={{ setNewBulkFooterShown, setCountOfRecords }}>
+    <RootContext.Provider value={{
+      setNewBulkFooterShown,
+      setCountOfRecords,
+      visibleColumns,
+      setVisibleColumns,
+    }}
+    >
       <Paneset>
         <Pane
           defaultWidth="20%"
@@ -214,6 +232,7 @@ export const BulkEditList = () => {
             setFilters={setFilters}
             setIsFileUploaded={setIsFileUploaded}
             isFileUploaded={isFileUploaded}
+            setVisibleColumns={setVisibleColumns}
           />
         </Pane>
         <Pane

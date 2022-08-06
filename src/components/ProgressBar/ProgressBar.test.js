@@ -6,6 +6,7 @@ import { createMemoryHistory } from 'history';
 import { MemoryRouter } from 'react-router';
 import { ProgressBar } from './ProgressBar';
 import { queryClient } from '../../../test/jest/utils/queryClient';
+import { JOB_STATUSES } from '../../constants';
 
 const history = createMemoryHistory();
 
@@ -36,7 +37,7 @@ describe('ProgressBar', () => {
             progress: {
               progress,
             },
-            status: 'SUCCESSFUL',
+            status: JOB_STATUSES.SUCCESSFUL,
           }),
         }),
       });

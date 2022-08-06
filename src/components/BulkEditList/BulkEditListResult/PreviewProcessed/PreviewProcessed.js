@@ -3,13 +3,13 @@ import { useIntl } from 'react-intl';
 import { useLocation, useParams } from 'react-router';
 import { Preview } from '../Preview/Preview';
 
-import { useDownloadLinks } from '../../../../API';
+import { useJob } from '../../../../API';
 
 const PreviewProcessed = () => {
   const intl = useIntl();
   const location = useLocation();
   const { id } = useParams();
-  const { data } = useDownloadLinks(id);
+  const { data } = useJob(id);
 
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('processedFileName'), [location.search]);
   const capabilities = useMemo(() => new URLSearchParams(location.search).get('capabilities').toLowerCase(), [location.search]);

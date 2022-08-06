@@ -4,6 +4,8 @@ import { MemoryRouter } from 'react-router';
 import '../../../../../../test/jest/__mock__';
 
 import PreviewAccordion from './PreviewAccordion';
+import { RootContext } from '../../../../../context/RootContext';
+import { getInventoryResultsFormatterBase, getUserResultsFormatterBase } from '../../../../../constants/formatters';
 
 const users = [
   {
@@ -42,17 +44,30 @@ const inventoryItems = [
   },
 ];
 
-const renderPreviewAccordion = ({ capabilities, items, step }) => {
+const renderPreviewAccordion = ({
+  capabilities,
+  items,
+  step,
+  visibleColumns,
+}) => {
   render(
     <MemoryRouter initialEntries={[`/bulk-edit/1/${step}?capabilities=${capabilities}`]}>
-      <PreviewAccordion items={items} />
+      <RootContext.Provider value={{
+        setNewBulkFooterShown: jest.fn(),
+        setCountOfRecords: jest.fn(),
+        setVisibleColumns: jest.fn(),
+        visibleColumns,
+      }}
+      >
+        <PreviewAccordion items={items} />
+      </RootContext.Provider>
     </MemoryRouter>,
   );
 };
 
 describe('PreviewAccordion', () => {
   it('should render preview accordion with users on initial step', () => {
-    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'initial' });
+    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'initial', visibleColumns: JSON.stringify(Object.keys(getUserResultsFormatterBase())) });
 
     expect(screen.getByText('username')).toBeVisible();
     expect(screen.getByText(/list.preview.title/)).toBeVisible();
@@ -61,7 +76,7 @@ describe('PreviewAccordion', () => {
   });
 
   it('should render preview accordion with users on processed step', () => {
-    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'processed' });
+    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'processed', visibleColumns: JSON.stringify(Object.keys(getUserResultsFormatterBase())) });
 
     expect(screen.getByText('username')).toBeVisible();
     expect(screen.getByText(/list.preview.title/)).toBeVisible();
@@ -69,7 +84,7 @@ describe('PreviewAccordion', () => {
     expect(screen.queryByText('1641779462295')).not.toBeInTheDocument();
   });
   it('should render preview accordion with inventory items', () => {
-    renderPreviewAccordion({ capabilities: 'ITEMS', items: inventoryItems, step: 'initial' });
+    renderPreviewAccordion({ capabilities: 'ITEMS', items: inventoryItems, step: 'initial', visibleColumns: JSON.stringify(Object.keys(getInventoryResultsFormatterBase())) });
 
     expect(screen.getByText('222')).toBeVisible();
     expect(screen.getByText('active')).toBeVisible();

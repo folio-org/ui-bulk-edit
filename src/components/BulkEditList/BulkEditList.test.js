@@ -15,7 +15,7 @@ jest.mock('../../API', () => ({
   useFileUploadComand: () => ({ fileUpload: jest.fn() }),
   useJobCommand: () => ({ requestJobId: '1', isLoading: false }),
   useUserGroupsMap: () => ({ data: {} }),
-  useDownloadLinks: () => ({
+  useJob: () => ({
     data: {
       files: ['file1.csv', 'file2.csv'],
       status: 'SUCCESSFUL',
