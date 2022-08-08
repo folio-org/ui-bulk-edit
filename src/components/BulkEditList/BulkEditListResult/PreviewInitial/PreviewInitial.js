@@ -5,18 +5,19 @@ import { useLocation, useParams } from 'react-router';
 import { Preview } from '../Preview/Preview';
 import { Loader } from '../Loader/Loader';
 
-import { useDownloadLinks } from '../../../../API';
+import { useJob } from '../../../../API';
+import { JOB_STATUSES } from '../../../../constants';
 
 const PreviewInitial = () => {
   const intl = useIntl();
   const location = useLocation();
   const { id } = useParams();
-  const { data } = useDownloadLinks(id);
+  const { data } = useJob(id);
 
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
   const capabilities = useMemo(() => new URLSearchParams(location.search).get('capabilities')?.toLocaleLowerCase(), [location.search]);
 
-  const isComplited = data?.status === 'SUCCESSFUL';
+  const isComplited = data?.status === JOB_STATUSES.SUCCESSFUL;
 
   const title = useMemo(() => {
     const queryText = new URLSearchParams(location.search).get('queryText');

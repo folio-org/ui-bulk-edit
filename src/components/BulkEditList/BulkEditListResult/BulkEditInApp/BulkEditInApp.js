@@ -23,28 +23,23 @@ import css from './BulkEditInApp.css';
 export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   const intl = useIntl();
 
-  const getItems = (items) => items.map((el) => ({
-    value: el.value,
-    label: intl.formatMessage({ id: el.label }),
-    disabled: el.disabled,
-  }));
+  const fieldsTypes = {
+    ACTION: 'action',
+    OPTION: 'option',
+  };
 
-  const itemsActions = getItems(ITEMS_ACTION);
-  const itemStatuses = getItems(ITEM_STATUS_OPTIONS);
-  const itemsOptions = getItems(ITEMS_OPTIONS);
-
-  const defaultOption = itemsOptions[0].value;
-  const defaultAction = itemsActions[0].value;
-  const defaultValue = '';
+  const actions = ITEMS_ACTION(intl.formatMessage);
+  const options = ITEMS_OPTIONS(intl.formatMessage);
+  const statuses = ITEM_STATUS_OPTIONS(intl.formatMessage);
 
   const fieldTemplate = {
-    actions: itemsActions,
-    options: itemsOptions,
-    statuses: itemStatuses,
-    option: defaultOption,
-    action: defaultAction,
-    value: defaultValue,
-    locationId: defaultValue,
+    actions,
+    options,
+    statuses,
+    option: options[0].value,
+    action: actions[0].value,
+    value: '',
+    locationId: '',
   };
 
   const [fields, setFields] = useState([fieldTemplate]);
@@ -86,8 +81,8 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
       return field;
     });
 
-    if (type === 'option') {
-      const recoveredFields = mappedFields.map(f => ({ ...f, options: itemsOptions }));
+    if (type === fieldsTypes.OPTION) {
+      const recoveredFields = mappedFields.map(f => ({ ...f, options }));
       const finalizedFields = getFilteredFields(recoveredFields);
 
       setFields(finalizedFields);
@@ -127,7 +122,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 
   const handleRemove = (index) => {
     const filteredFields = fields.filter((_, i) => i !== index);
-    const recoveredFields = filteredFields.map(f => ({ ...f, options: itemsOptions }));
+    const recoveredFields = filteredFields.map(f => ({ ...f, options }));
     const finalizedFields = getFilteredFields(recoveredFields);
 
     setFields(finalizedFields);
@@ -148,7 +143,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     setFields(finalizedFields);
   };
 
-  const getIsTemporaryLocation = ({ option }) => option === OPTIONS.TEMPORARY_LOCATION;
+  const getIsTemporaryLocation = ({ option }) => option === options.TEMPORARY_LOCATION;
 
   useEffect(() => {
     const mappedContentUpdates = fields.map(({ option, action, value }) => ({ option, action, value }));
@@ -175,7 +170,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                 <Select
                   dataOptions={field.options}
                   value={field.option}
-                  onChange={(e) => handleSelectChange(e, index, 'option')}
+                  onChange={(e) => handleSelectChange(e, index, fieldsTypes.OPTION)}
                   data-testid={`select-option-${index}`}
                 />
               </Col>
@@ -183,7 +178,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                 <Select
                   dataOptions={field.actions}
                   value={field.action}
-                  onChange={(e) => handleSelectChange(e, index, 'action')}
+                  onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
                   data-testid={`select-actions-${index}`}
                   disabled={isDisabled(index)}
                 />
@@ -216,7 +211,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                 </Col>
               }
               <div className={css.iconButtonWrapper}>
-                {(index === fields.length - 1 && fields.length !== itemsOptions.length) && (
+                {(index === fields.length - 1 && fields.length !== options.length) && (
                   <IconButton
                     icon="plus-sign"
                     size="large"

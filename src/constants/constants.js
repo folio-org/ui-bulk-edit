@@ -1,4 +1,5 @@
 import { FormattedMessage } from 'react-intl';
+import React from 'react';
 
 export const SUPPORTED_FILE_EXTENSIONS = ['csv'];
 
@@ -184,20 +185,20 @@ export const CAPABILITIES_PARAMS = {
   USER: 'USER',
 };
 
-export const ITEMS_ACTION = [
+export const ITEMS_ACTION = (formatMessage) => [
   {
     value: '',
-    label: 'ui-bulk-edit.actions.placeholder',
+    label: formatMessage({ id: 'ui-bulk-edit.actions.placeholder' }),
     disabled: true,
   },
   {
     value: 'REPLACE_WITH',
-    label: 'ui-bulk-edit.layer.action.replace',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.action.replace' }),
     disabled: false,
   },
   {
     value: 'CLEAR_FIELD',
-    label: 'ui-bulk-edit.layer.action.clear',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.action.clear' }),
     disabled: false,
   },
 ];
@@ -213,73 +214,73 @@ export const OPTIONS = {
   STATUS: 'STATUS',
 };
 
-export const ITEMS_OPTIONS = [
+export const ITEMS_OPTIONS = (formatMessage) => [
   {
     value: 'TEMPORARY_LOCATION',
-    label: 'ui-bulk-edit.layer.options.temporary',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporary' }),
     disabled: false,
   },
   {
     value: 'PERMANENT_LOCATION',
-    label: 'ui-bulk-edit.layer.options.permanent',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanent' }),
     disabled: false,
   },
   {
     value: 'STATUS',
-    label: 'ui-bulk-edit.layer.options.statusLabel',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.statusLabel' }),
     disabled: false,
   },
 ];
 
-export const ITEM_STATUS_OPTIONS = [
+export const ITEM_STATUS_OPTIONS = (formatMessage) => [
   {
     value: '',
-    label: 'ui-bulk-edit.layer.options.placeholder',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.placeholder' }),
     disabled: true,
   },
   {
     value: 'Available',
-    label: 'ui-bulk-edit.layer.options.available',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.available' }),
     disabled: false,
   },
   {
     value: 'Withdrawn',
-    label: 'ui-bulk-edit.layer.options.withdrawn',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.withdrawn' }),
     disabled: false,
   },
   {
     value: 'Missing',
-    label: 'ui-bulk-edit.layer.options.missing',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.missing' }),
     disabled: false,
   },
   {
     value: 'In process (non-requestable)',
-    label: 'ui-bulk-edit.layer.options.non-requestable',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.non-requestable' }),
     disabled: false,
   },
   {
     value: 'Intellectual item"',
-    label: 'ui-bulk-edit.layer.options.intellectual',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.intellectual' }),
     disabled: false,
   },
   {
     value: 'Long missing',
-    label: 'ui-bulk-edit.layer.options.longMissing',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.longMissing' }),
     disabled: false,
   },
   {
     value: 'Restricted',
-    label: 'ui-bulk-edit.layer.options.restricted',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.restricted' }),
     disabled: false,
   },
   {
     value: 'Unavailable',
-    label: 'ui-bulk-edit.layer.options.unavailable',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.unavailable' }),
     disabled: false,
   },
   {
     value: 'Unknown',
-    label: 'ui-bulk-edit.layer.options.unknown',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.unknown' }),
     disabled: false,
   },
 ];
@@ -289,3 +290,16 @@ export const TYPE_OF_PROGRESS = {
   PROCESSED: 'processed',
 };
 
+export const JOB_STATUSES = {
+  SUCCESSFUL: 'SUCCESSFUL',
+  FAILED: 'FAILED',
+};
+
+export const itemColumnInAppWidths = {
+  barcode: '110px',
+  status: '110px',
+  effectiveLocation: '160px',
+  materialType: '100px',
+  permanentLoanType: '120px',
+  temporaryLoanType: '120px',
+};

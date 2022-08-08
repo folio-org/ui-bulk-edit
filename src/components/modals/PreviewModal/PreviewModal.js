@@ -7,31 +7,29 @@ import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import moment from 'moment';
 import { PreviewModalFooter } from './PreviewModalFooter';
-import { getInventoryResultsFormatterBase } from '../../../constants/formatters';
-import { INVENTORY_COLUMNS_BASE } from '../../../constants';
 import css from './PreviewModal.css';
+import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
+import { useLaunchJob } from '../../../API';
 import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
-import { useLaunchJob } from '../../../API';
 
-const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted, setUpdatedId }) => {
+const PreviewModal = ({
+    open,
+    jobId,
+    contentUpdates,
+    onKeepEditing,
+    onJobStarted,
+    setUpdatedId,
+  }) => {
   const history = useHistory();
   const location = useLocation();
-  const formatter = getInventoryResultsFormatterBase();
-  const visibleColumns = Object.keys(formatter);
-  const columnMapping = INVENTORY_COLUMNS_BASE.reduce((acc, el) => {
-    acc[el.value] = el.label;
-
-    return acc;
-  }, {});
-  const columnWidths = {
-    barcode: '110px',
-    status: '110px',
-    effectiveLocation: '160px',
-    materialType: '100px',
-    permanentLoanType: '120px',
-    temporaryLoanType: '120px',
-  };
+  const capability = new URLSearchParams(location.search).get('capabilities');
+  const {
+    visibleColumns,
+    columnMapping,
+    columnWidths,
+    formatter,
+  } = useInAppColumnsInfo({ capability });
 
   const [previewItems, setPreviewItems] = useState([]);
   const [countOfChangedRecords, setCountOfChangedRecords] = useState(0);
@@ -86,7 +84,7 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
           onSave={handleStartJob}
           onKeepEditing={onKeepEditing}
         />
-    }
+      }
       dismissible
       onClose={onKeepEditing}
     >

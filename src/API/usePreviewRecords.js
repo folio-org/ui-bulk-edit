@@ -4,7 +4,7 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const usePreviewRecords = (id, capabilities) => {
+export const usePreviewRecords = (id, capabilities, options = {}) => {
   const ky = useOkapiKy();
   const { data } = useQuery(
     {
@@ -19,6 +19,7 @@ export const usePreviewRecords = (id, capabilities) => {
         };
       },
       enabled: !!id,
+      ...options,
     },
   );
 

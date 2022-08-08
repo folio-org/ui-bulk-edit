@@ -5,7 +5,13 @@ import {
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BulkEditList } from './BulkEditList/BulkEditList';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const BulkEdit = () => {
   return (

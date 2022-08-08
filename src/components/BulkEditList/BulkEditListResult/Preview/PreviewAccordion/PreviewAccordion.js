@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { PropTypes } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -8,6 +8,7 @@ import {
   MultiColumnList,
 } from '@folio/stripes/components';
 import { useCurrentEntityInfo, usePathParams } from '../../../../../hooks';
+import { RootContext } from '../../../../../context/RootContext';
 
 
 const PreviewAccordion = ({ items = [], userGroups = {} }) => {
@@ -15,8 +16,8 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
     location,
     columns,
     resultsFormatter,
-    searchParams,
   } = useCurrentEntityInfo({ userGroups });
+  const { visibleColumns } = useContext(RootContext);
 
   const { id: jobId } = usePathParams('/bulk-edit/:id');
 
@@ -32,19 +33,17 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
     return acc;
   }, {});
 
-  const visibleColumns = useMemo(() => {
-    const paramsColumns = searchParams.get('selectedColumns');
-
+  const finalColumns = useMemo(() => {
     const defaultColumns = columns
       .filter(item => item.selected)
       .map(item => item.value);
 
     const existingColumns = columns.reduce((acc, { value }) => {
-      return paramsColumns?.includes(`"${value}"`) ? [...acc, value] : acc;
+      return visibleColumns?.includes(`"${value}"`) ? [...acc, value] : acc;
     }, []);
 
-    return paramsColumns ? existingColumns : defaultColumns;
-  }, [location.search, columns]);
+    return visibleColumns ? existingColumns : defaultColumns;
+  }, [visibleColumns, columns]);
 
 
   return (
@@ -58,7 +57,7 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
             contentData={items}
             columnMapping={columnMapping}
             formatter={resultsFormatter}
-            visibleColumns={visibleColumns}
+            visibleColumns={finalColumns}
           />
         </Col>
       </Row>
@@ -71,4 +70,4 @@ PreviewAccordion.propTypes = {
   userGroups: PropTypes.object,
 };
 
-export default memo(PreviewAccordion);
+export default PreviewAccordion;

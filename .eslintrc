@@ -1,5 +1,8 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false
+  },
   "extends": ["@folio/eslint-config-stripes/acquisitions"],
   "rules": {
     "no-multiple-empty-lines": 0,
@@ -9,12 +12,15 @@
     "react-hooks/exhaustive-deps": 0
   },
   "settings": {
+    "react": {
+      "version": "detect"
+    },
     "import/resolver": {
       "node": {
         "paths": ["src"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
-    },
+    }
   },
   "overrides": [
     {

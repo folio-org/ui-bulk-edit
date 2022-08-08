@@ -9,9 +9,14 @@ import '../../../test/jest/__mock__';
 
 import BulkEditActionMenu from './BulkEditActionMenu';
 import { INVENTORY_COLUMNS, USER_COLUMNS } from '../../constants';
+import {
+  getInventoryResultsFormatterBase,
+  getUserResultsFormatterBase,
+} from '../../constants/formatters';
+import { RootContext } from '../../context/RootContext';
 
 jest.mock('../../API', () => ({
-  useDownloadLinks: () => ({
+  useJob: () => ({
     data: {
       files: ['file1.csv', 'file2.csv'],
     },
@@ -26,16 +31,26 @@ const renderActionMenu = ({
   onDelete = noop,
   onToggle = noop,
   initialEntries,
+  visibleColumns = JSON.stringify(Object.keys(getInventoryResultsFormatterBase()))
+  ,
 }) => {
   render(
     <MemoryRouter initialEntries={initialEntries}>
-      <BulkEditActionMenu
-        onEdit={onEdit}
-        onDelete={onDelete}
-        onToggle={onToggle}
-        errorCsvLink="file1.csv"
-        successCsvLink="file2.csv"
-      />,
+      <RootContext.Provider value={{
+        setNewBulkFooterShown: jest.fn(),
+        setCountOfRecords: jest.fn(),
+        setVisibleColumns: jest.fn(),
+        visibleColumns,
+      }}
+      >
+        <BulkEditActionMenu
+          onEdit={onEdit}
+          onDelete={onDelete}
+          onToggle={onToggle}
+          errorCsvLink="file1.csv"
+          successCsvLink="file2.csv"
+        />,
+      </RootContext.Provider>
     </MemoryRouter>,
   );
 };
@@ -72,6 +87,7 @@ describe('BulkEditActionMenu', () => {
   it('should render correct default columns for users', async () => {
     renderActionMenu({
       initialEntries: ['/bulk-edit/1?capabilities=USERS'],
+      visibleColumns: JSON.stringify(Object.keys(getUserResultsFormatterBase())),
     });
 
     for (const col of USER_COLUMNS) {
@@ -90,24 +106,6 @@ describe('BulkEditActionMenu', () => {
       const checkbox = await screen.findByLabelText(`ui-bulk-edit.columns.${col.value}`);
 
       expect(checkbox.checked).toBe(col.selected);
-    }
-  });
-
-  it('should render correct columns state based on queryParams', async () => {
-    renderActionMenu({
-      initialEntries: ['/bulk-edit/1?selectedColumns=%5B"username"%5D&capabilities=USERS'],
-    });
-
-    // username should be checked
-    const usernameCheckbox = await screen.findByLabelText('ui-bulk-edit.columns.username');
-
-    expect(usernameCheckbox.checked).toBeTruthy();
-
-    // other columns should be unchecked
-    for (const col of USER_COLUMNS.filter(i => i.value !== 'username')) {
-      const checkbox = await screen.findByLabelText(`ui-bulk-edit.columns.${col.value}`);
-
-      expect(checkbox.checked).toBeFalsy();
     }
   });
 });

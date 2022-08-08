@@ -2,13 +2,13 @@ import { AppIcon } from '@folio/stripes/core';
 import { FormattedMessage } from 'react-intl';
 import { FormattedTime } from '../components/BulkEditList/BulkEditListResult/Preview/PreviewAccordion/FormattedTime';
 
-export const getUserResultsFormatter = (userGroups) => ({
+export const getUserResultsFormatterBase = (userGroups) => ({
   active: user => (
     <AppIcon app="users" size="small">
       {user.active
         ? <FormattedMessage id="ui-bulk-edit.list.preview.table.active" />
         : <FormattedMessage id="ui-bulk-edit.list.preview.table.inactive" />
-        }
+      }
     </AppIcon>
   ),
   lastName: user => user.personal?.lastName,
@@ -16,6 +16,10 @@ export const getUserResultsFormatter = (userGroups) => ({
   barcode: user => user.barcode,
   patronGroup: user => userGroups[user.patronGroup],
   username: user => user.username,
+});
+
+export const getUserResultsFormatter = (userGroups) => ({
+  ...getUserResultsFormatterBase(userGroups),
   email: user => user.personal.email,
   expirationDate: user => <FormattedTime dateString={user.expirationDate} />,
 });

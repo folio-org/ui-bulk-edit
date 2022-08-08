@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -28,6 +28,7 @@ import { buildQuery } from '../../../hooks';
 import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
 
 import css from './BulkEditListFilters.css';
+import { RootContext } from '../../../context/RootContext';
 
 export const BulkEditListFilters = ({
   filters,
@@ -55,6 +56,7 @@ export const BulkEditListFilters = ({
   const { userGroups } = useUserGroupsMap();
   const { requestJobId, isLoading } = useJobCommand({ entityType: capabilities.slice(0, -1) });
   const { fileUpload } = useFileUploadComand();
+  const { setVisibleColumns } = useContext(RootContext);
 
   const isCapabilityDisabled = (capabilityValue) => {
     switch (capabilityValue) {
@@ -108,6 +110,10 @@ export const BulkEditListFilters = ({
     });
 
     setIsFileUploaded(false);
+
+    // clear visibleColumns preset
+    localStorage.removeItem('visibleColumns');
+    setVisibleColumns(null);
   };
 
   const uploadFileFlow = async (fileToUpload) => {
