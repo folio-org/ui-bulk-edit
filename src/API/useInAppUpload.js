@@ -9,7 +9,7 @@ export const useInAppUpload = () => {
     return ky.post(`bulk-edit/${jobId}/item-content-update/upload`, {
       searchParams: { limit: 10 },
       json: {
-        contentUpdates,
+        itemContentUpdates: contentUpdates,
         totalRecords: contentUpdates.length,
       },
     }).json();
