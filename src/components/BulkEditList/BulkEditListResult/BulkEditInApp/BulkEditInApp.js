@@ -9,6 +9,7 @@ import { Headline,
   Row,
   Accordion,
   Select,
+  Selection,
   RepeatableField } from '@folio/stripes/components';
 
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
@@ -19,6 +20,7 @@ import { ITEMS_OPTIONS,
   ACTIONS,
   OPTIONS } from '../../../../constants';
 import css from './BulkEditInApp.css';
+import { useLoanTypes } from '../../../../hooks/useLoanTypes';
 
 export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   const intl = useIntl();
@@ -42,12 +44,15 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     locationId: '',
   };
 
+  const { loanTypes, isLoading } = useLoanTypes();
   const [fields, setFields] = useState([fieldTemplate]);
 
   const isLocation = (index) => fields[index].action === ACTIONS.REPLACE &&
-  fields[index].option !== OPTIONS.STATUS;
+  (fields[index].option === OPTIONS.PERMANENT_LOCATION || fields[index].option === OPTIONS.TEMPORARY_LOCATION);
   const isItemStatus = (index) => fields[index].action === ACTIONS.REPLACE &&
   fields[index].option === OPTIONS.STATUS;
+  const isLoanType = (index) => fields[index].action === ACTIONS.REPLACE &&
+    (fields[index].option === OPTIONS.TEMPORARY_LOAN_TYPE || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE);
   const isDisabled = (index) => fields[index].option === OPTIONS.STATUS;
 
   const getDefaultAction = value => (value === OPTIONS.STATUS ? { action: ACTIONS.REPLACE } : {});
@@ -200,6 +205,17 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                 />
               </Col>
               }
+              {isLoanType(index) && (
+                <Col xs={6} sm={3}>
+                  <Selection
+                    id="loanType"
+                    loading={isLoading}
+                    onChange={(value) => handleValueChange(value, index)}
+                    placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
+                    dataOptions={loanTypes}
+                  />
+                </Col>
+              )}
               {isItemStatus(index) &&
                 <Col xs={6} sm={3}>
                   <Select
