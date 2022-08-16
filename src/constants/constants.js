@@ -219,12 +219,12 @@ export const OPTIONS = {
 export const ITEMS_OPTIONS = (formatMessage) => [
   {
     value: OPTIONS.TEMPORARY_LOCATION,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporary' }),
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLocation' }),
     disabled: false,
   },
   {
     value: OPTIONS.PERMANENT_LOCATION,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanent' }),
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLocation' }),
     disabled: false,
   },
   {
