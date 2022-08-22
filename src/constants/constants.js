@@ -203,6 +203,14 @@ export const ITEMS_ACTION = (formatMessage) => [
   },
 ];
 
+export const USER_OPTIONS = (formatMessage) => [
+  {
+    value: 'EXPIRATION_DATE',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.expirationDate' }),
+    disabled: false,
+  },
+];
+
 export const ACTIONS = {
   REPLACE: 'REPLACE_WITH',
   CLEAR: 'CLEAR_FIELD',
@@ -212,6 +220,7 @@ export const OPTIONS = {
   TEMPORARY_LOCATION: 'TEMPORARY_LOCATION',
   PERMANENT_LOCATION: 'PERMANENT_LOCATION',
   STATUS: 'STATUS',
+  EXPIRATION_DATE: 'EXPIRATION_DATE',
 };
 
 export const ITEMS_OPTIONS = (formatMessage) => [
