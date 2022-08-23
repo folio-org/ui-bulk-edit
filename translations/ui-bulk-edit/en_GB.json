@@ -152,6 +152,7 @@
     "uploaderSubTitle.item.ACCESSION_NUMBER": "Select a file with item accession number",
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "Select a file with holdings UUIDs",
     "layer.selectLocation": "Select location",
+    "layer.options.expirationDate": "Expiration date",
     "list.logSubTitle.changed": "{count} records changed",
     "list.preview.titleChanged": "Preview of record changed",
     "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",

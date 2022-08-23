@@ -9,18 +9,21 @@ import { Headline,
   Row,
   Accordion,
   Select,
-  RepeatableField } from '@folio/stripes/components';
+  RepeatableField,
+  Datepicker } from '@folio/stripes/components';
 
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ITEMS_OPTIONS,
   ITEMS_ACTION,
+  USER_OPTIONS,
   ITEM_STATUS_OPTIONS,
   ACTIONS,
-  OPTIONS } from '../../../../constants';
+  OPTIONS,
+  CAPABILITIES } from '../../../../constants';
 import css from './BulkEditInApp.css';
 
-export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
+export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) => {
   const intl = useIntl();
 
   const fieldsTypes = {
@@ -31,8 +34,9 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
   const actions = ITEMS_ACTION(intl.formatMessage);
   const options = ITEMS_OPTIONS(intl.formatMessage);
   const statuses = ITEM_STATUS_OPTIONS(intl.formatMessage);
+  const optionsUSer = USER_OPTIONS(intl.formatMessage);
 
-  const fieldTemplate = {
+  const fieldTemplate = typeOfBulk === CAPABILITIES.ITEM ? {
     actions,
     options,
     statuses,
@@ -40,15 +44,25 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
     action: actions[0].value,
     value: '',
     locationId: '',
+  }
+  :
+  {
+    options: optionsUSer,
+    actions,
+    option: optionsUSer[0].value,
+    action: actions[0].value,
+    value: '',
   };
 
   const [fields, setFields] = useState([fieldTemplate]);
 
   const isLocation = (index) => fields[index].action === ACTIONS.REPLACE &&
-  fields[index].option !== OPTIONS.STATUS;
+  fields[index].option !== OPTIONS.STATUS && fields[index].option !== OPTIONS.EXPIRATION_DATE;
   const isItemStatus = (index) => fields[index].action === ACTIONS.REPLACE &&
   fields[index].option === OPTIONS.STATUS;
   const isDisabled = (index) => fields[index].option === OPTIONS.STATUS;
+  const isExperationDate = (index) => fields[index].option === OPTIONS.EXPIRATION_DATE &&
+  fields[index].action === ACTIONS.REPLACE;
 
   const getDefaultAction = value => (value === OPTIONS.STATUS ? { action: ACTIONS.REPLACE } : {});
 
@@ -210,6 +224,14 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
                   />
                 </Col>
               }
+              {isExperationDate(index) &&
+              <Col xs={6} sm={3}>
+                <Datepicker
+                  value={field.value}
+                  onChange={(e) => handleValueChange(e.target.value, index)}
+                  data-testid={`dataPicker-experation-date-${index}`}
+                />
+              </Col>}
               <div className={css.iconButtonWrapper}>
                 {(index === fields.length - 1 && fields.length !== options.length) && (
                   <IconButton
@@ -237,4 +259,5 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged }) => {
 BulkEditInApp.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   onContentUpdatesChanged: PropTypes.func,
+  typeOfBulk: PropTypes.string,
 };
