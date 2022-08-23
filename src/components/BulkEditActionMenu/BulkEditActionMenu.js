@@ -117,7 +117,7 @@ const BulkEditActionMenu = ({
           </Icon>
         </Button>
         )}
-        {isStartBulkCsvActive && (
+        {hasInAppUsersEditPerms && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onUserEdit)}
@@ -136,9 +136,6 @@ const BulkEditActionMenu = ({
             <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
           </Icon>
         </Button>
-        )}
-        {hasInAppUsersEditPerms && (
-          // users in app button
         )}
       </>
     );
