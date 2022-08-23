@@ -10,9 +10,10 @@ export const useBulkPermissions = () => {
   // In-app perms
   const hasInAppViewPerms = stripes.hasPerm('ui-bulk-edit.app-view');
   const hasInAppEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit');
+  const hasInAppUsersEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit.users');
 
   // derived pages
-  const hasAnyEditPermissions = hasCsvEditPerms || hasInAppEditPerms;
+  const hasAnyEditPermissions = hasCsvEditPerms || hasInAppEditPerms || hasInAppUsersEditPerms;
   const isActionMenuShown = hasCsvEditPerms;
   const isSelectIdentifiersDisabled = !hasAnyEditPermissions;
   const isDropZoneDisabled = !hasAnyEditPermissions;
