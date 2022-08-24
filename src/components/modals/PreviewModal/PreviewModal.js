@@ -52,7 +52,7 @@ const PreviewModal = ({
 
   useEffect(() => {
     if (jobId && contentUpdates && open) {
-      inAppUpload({ jobId, contentUpdates }).then(response => {
+      inAppUpload({ jobId, contentUpdates, capability }).then(response => {
         setPreviewItems(response.items);
         setCountOfChangedRecords(response.totalRecords);
       });

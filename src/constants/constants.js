@@ -185,6 +185,11 @@ export const CAPABILITIES_PARAMS = {
   USER: 'USER',
 };
 
+export const CAPABILITIES_VALUE = {
+  ITEM: 'item',
+  USER: 'user',
+};
+
 export const ITEMS_ACTION = (formatMessage) => [
   {
     value: '',
