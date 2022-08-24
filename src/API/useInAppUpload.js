@@ -17,9 +17,7 @@ export const useInAppUpload = () => {
               {
                 itemContentUpdate: contentUpdates,
                 totalRecords: contentUpdates.length,
-              }
-              :
-              {
+              } : {
                 userContentUpdate: contentUpdates,
                 totalRecords: contentUpdates.length,
               },
