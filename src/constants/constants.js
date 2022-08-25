@@ -186,8 +186,8 @@ export const CAPABILITIES_PARAMS = {
 };
 
 export const CAPABILITIES_VALUE = {
-  ITEM: 'item',
-  USER: 'user',
+  ITEMS: 'item',
+  USERS: 'user',
 };
 
 export const ITEMS_ACTION = (formatMessage) => [

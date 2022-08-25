@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import noop from 'lodash/noop';
 
-import { Headline,
-  IconButton,
-  Col,
-  Row,
-  Accordion,
-  Select,
-  RepeatableField,
-  Datepicker } from '@folio/stripes/components';
+import {
+    Headline,
+    IconButton,
+    Col,
+    Row,
+    Accordion,
+    Select,
+    RepeatableField,
+    Datepicker,
+  } from '@folio/stripes/components';
 
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
