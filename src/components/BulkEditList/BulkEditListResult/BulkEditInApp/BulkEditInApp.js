@@ -46,9 +46,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
     action: actions[0].value,
     value: '',
     locationId: '',
-  }
-  :
-  {
+  } : {
     options: optionsUSer,
     actions,
     option: optionsUSer[0].value,

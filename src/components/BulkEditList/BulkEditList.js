@@ -1,11 +1,13 @@
 import { useMemo, useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Pane,
+import {
+  Pane,
   Paneset,
   Layer,
   PaneFooter,
-  Button } from '@folio/stripes/components';
+  Button,
+} from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 

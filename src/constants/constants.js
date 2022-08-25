@@ -180,11 +180,6 @@ export const CAPABILITIES = {
   USER: 'USERS',
 };
 
-export const CAPABILITIES_PARAMS = {
-  ITEM: 'ITEM',
-  USER: 'USER',
-};
-
 export const CAPABILITIES_VALUE = {
   ITEMS: 'item',
   USERS: 'user',
