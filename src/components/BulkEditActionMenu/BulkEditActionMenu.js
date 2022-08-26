@@ -22,6 +22,7 @@ const BulkEditActionMenu = ({
   successCsvLink,
   errorCsvLink,
   isLoading,
+  onUserEdit,
 }) => {
   const {
     location,
@@ -111,7 +112,16 @@ const BulkEditActionMenu = ({
           </Icon>
         </Button>
         )}
-
+        {isStartBulkCsvActive && (
+        <Button
+          buttonStyle="dropdownItem"
+          onClick={buildButtonClickHandler(onUserEdit)}
+        >
+          <Icon icon="edit">
+            <FormattedMessage id="ui-bulk-edit.start.edit" />
+          </Icon>
+        </Button>
+        )}
         {isStartBulkCsvActive && (
         <Button
           buttonStyle="dropdownItem"
@@ -152,6 +162,7 @@ BulkEditActionMenu.propTypes = {
   successCsvLink: PropTypes.string,
   errorCsvLink: PropTypes.string,
   isLoading: PropTypes.bool,
+  onUserEdit: PropTypes.func,
 };
 
 export default BulkEditActionMenu;

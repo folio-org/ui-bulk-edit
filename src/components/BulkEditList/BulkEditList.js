@@ -1,7 +1,13 @@
 import { useMemo, useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Pane, Paneset, Layer, PaneFooter, Button } from '@folio/stripes/components';
+import {
+  Pane,
+  Paneset,
+  Layer,
+  PaneFooter,
+  Button,
+} from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
@@ -121,6 +127,7 @@ export const BulkEditList = () => {
         successCsvLink={successCsvLink}
         errorCsvLink={errorCsvLink}
         isLoading={isLoading}
+        onUserEdit={() => setIsBulkEditLayerOpen(true)}
       />
     )
   );
@@ -259,7 +266,11 @@ export const BulkEditList = () => {
             dismissible
             onClose={() => setIsBulkEditLayerOpen(false)}
           >
-            <BulkEditInApp title={fileNameTitle()} onContentUpdatesChanged={setContentUpdates} />
+            <BulkEditInApp
+              title={fileNameTitle()}
+              onContentUpdatesChanged={setContentUpdates}
+              typeOfBulk={capabilitiesUrl}
+            />
           </Pane>
         </Layer>
       </Paneset>
