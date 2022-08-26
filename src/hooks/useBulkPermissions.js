@@ -18,7 +18,7 @@ export const useBulkPermissions = () => {
   const isSelectIdentifiersDisabled = !hasAnyEditPermissions;
   const isDropZoneDisabled = !hasAnyEditPermissions;
   const isInventoryRadioDisabled = !hasInAppViewPerms;
-  const isUserRadioDisabled = !hasCsvViewPerms;
+  const isUserRadioDisabled = !hasCsvViewPerms && !hasInAppUsersEditPerms;
   const hasOnlyInAppViewPerms = hasInAppViewPerms && !hasCsvEditPerms;
 
 
