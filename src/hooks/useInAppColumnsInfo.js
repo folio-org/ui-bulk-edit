@@ -2,8 +2,8 @@ import { getInventoryResultsFormatterBase } from '../constants/formatters';
 import { CAPABILITIES, INVENTORY_COLUMNS_BASE, itemColumnInAppWidths } from '../constants';
 
 export const useInAppColumnsInfo = ({
-    capability,
-  }) => {
+  capability,
+}) => {
   let formatter;
   let baseColumns;
   let columnWidths;
