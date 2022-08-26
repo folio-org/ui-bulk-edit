@@ -16,13 +16,15 @@ import {
 
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
-import { ITEMS_OPTIONS,
+import {
+  ITEMS_OPTIONS,
   ITEMS_ACTION,
   USER_OPTIONS,
   ITEM_STATUS_OPTIONS,
   ACTIONS,
   OPTIONS,
-  CAPABILITIES } from '../../../../constants';
+  CAPABILITIES,
+} from '../../../../constants';
 import css from './BulkEditInApp.css';
 
 export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) => {
