@@ -118,6 +118,7 @@ const BulkEditActionMenu = ({
         </Button>
         )}
         {hasInAppUsersEditPerms && (
+        {isStartBulkCsvActive && (
         <Button
           buttonStyle="dropdownItem"
           onClick={buildButtonClickHandler(onUserEdit)}

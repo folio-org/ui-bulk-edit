@@ -14,13 +14,13 @@ import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 
 const PreviewModal = ({
-    open,
-    jobId,
-    contentUpdates,
-    onKeepEditing,
-    onJobStarted,
-    setUpdatedId,
-  }) => {
+  open,
+  jobId,
+  contentUpdates,
+  onKeepEditing,
+  onJobStarted,
+  setUpdatedId,
+}) => {
   const history = useHistory();
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
@@ -52,7 +52,7 @@ const PreviewModal = ({
 
   useEffect(() => {
     if (jobId && contentUpdates && open) {
-      inAppUpload({ jobId, contentUpdates }).then(response => {
+      inAppUpload({ jobId, contentUpdates, capability }).then(response => {
         setPreviewItems(response.items);
         setCountOfChangedRecords(response.totalRecords);
       });

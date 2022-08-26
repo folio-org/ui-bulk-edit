@@ -3,24 +3,29 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import noop from 'lodash/noop';
 
-import { Headline,
+import {
+  Headline,
   IconButton,
   Col,
   Row,
   Accordion,
   Select,
   RepeatableField,
-  Datepicker } from '@folio/stripes/components';
+  Datepicker,
+} from '@folio/stripes/components';
+
 
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
-import { ITEMS_OPTIONS,
+import {
+  ITEMS_OPTIONS,
   ITEMS_ACTION,
   USER_OPTIONS,
   ITEM_STATUS_OPTIONS,
   ACTIONS,
   OPTIONS,
-  CAPABILITIES } from '../../../../constants';
+  CAPABILITIES,
+} from '../../../../constants';
 import css from './BulkEditInApp.css';
 
 export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) => {
@@ -44,9 +49,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
     action: actions[0].value,
     value: '',
     locationId: '',
-  }
-  :
-  {
+  } : {
     options: optionsUSer,
     actions,
     option: optionsUSer[0].value,
