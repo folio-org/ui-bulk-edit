@@ -34,12 +34,12 @@ const BulkEditActionMenu = ({
   const processedFileName = search.get('processedFileName');
   const { id } = usePathParams('/bulk-edit/:id');
   const { items } = usePreviewRecords(id, capabilities?.toLowerCase());
-  const { 
+  const {
     hasCsvEditPerms,
     hasInAppEditPerms,
     hasInAppUsersEditPerms,
-    hasAnyEditPermissions
- } = useBulkPermissions();
+    hasAnyEditPermissions,
+  } = useBulkPermissions();
   const { visibleColumns, setVisibleColumns } = useContext(RootContext);
 
   const handleChange = ({ values }) => {
@@ -125,7 +125,7 @@ const BulkEditActionMenu = ({
             <Icon icon="edit">
               <FormattedMessage id="ui-bulk-edit.start.edit" />
             </Icon>
-        </Button>
+          </Button>
         )}
         {hasInAppUsersEditPerms && (
           <Button
