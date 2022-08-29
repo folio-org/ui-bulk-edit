@@ -107,6 +107,15 @@
         "visible": true
       },
       {
+        "permissionName": "ui-bulk-edit.app-edit.users",
+        "displayName": "Bulk edit: In app - Update user records",
+        "subPermissions": [
+          "ui-bulk-edit.app-view",
+          "bulk-edit.users.content-update.upload.post"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "ui-bulk-edit.app-delete",
         "displayName": "Bulk Edit: In app - Delete",
         "subPermissions": [],
