@@ -62,7 +62,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
   const [fields, setFields] = useState([fieldTemplate]);
 
   const isLocation = (index) => fields[index].action === ACTIONS.REPLACE &&
-  fields[index].option !== OPTIONS.STATUS && fields[index].option !== OPTIONS.EXPIRATION_DATE;
+  (fields[index].option === OPTIONS.PERMANENT_LOCATION || fields[index].option === OPTIONS.TEMPORARY_LOCATION);
   const isItemStatus = (index) => fields[index].action === ACTIONS.REPLACE &&
   fields[index].option === OPTIONS.STATUS;
   const isLoanType = (index) => fields[index].action === ACTIONS.REPLACE &&
