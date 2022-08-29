@@ -203,14 +203,6 @@ export const ITEMS_ACTION = (formatMessage) => [
   },
 ];
 
-export const USER_OPTIONS = (formatMessage) => [
-  {
-    value: 'EXPIRATION_DATE',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.expirationDate' }),
-    disabled: false,
-  },
-];
-
 export const ACTIONS = {
   REPLACE: 'REPLACE_WITH',
   CLEAR: 'CLEAR_FIELD',
@@ -224,6 +216,14 @@ export const OPTIONS = {
   TEMPORARY_LOAN_TYPE: 'TEMPORARY_LOAN_TYPE',
   PERMANENT_LOAN_TYPE: 'PERMANENT_LOAN_TYPE',
 };
+
+export const USER_OPTIONS = (formatMessage) => [
+  {
+    value: OPTIONS.EXPIRATION_DATE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.expirationDate' }),
+    disabled: false,
+  },
+];
 
 export const ITEMS_OPTIONS = (formatMessage) => [
   {
