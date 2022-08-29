@@ -13,7 +13,7 @@ export const useLoanTypes = () => {
 
   if (data) {
     return {
-      loanTypes: data.loantypes.map(type => ({ label: type.name, value: type.id })),
+      loanTypes: data.loantypes.map(type => ({ label: type.name, value: type.name })),
       isLoading,
     };
   }

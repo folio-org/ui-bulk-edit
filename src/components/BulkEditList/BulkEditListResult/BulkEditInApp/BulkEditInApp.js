@@ -67,11 +67,17 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
   fields[index].option === OPTIONS.STATUS;
   const isLoanType = (index) => fields[index].action === ACTIONS.REPLACE &&
     (fields[index].option === OPTIONS.TEMPORARY_LOAN_TYPE || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE);
-  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS;
+  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE;
   const isExperationDate = (index) => fields[index].option === OPTIONS.EXPIRATION_DATE &&
   fields[index].action === ACTIONS.REPLACE;
 
-  const getDefaultAction = value => (value === OPTIONS.STATUS ? { action: ACTIONS.REPLACE } : {});
+  const getDefaultAction = value => {
+    if (value === OPTIONS.STATUS || value === OPTIONS.PERMANENT_LOAN_TYPE) {
+      return { action: ACTIONS.REPLACE };
+    }
+
+    return {};
+  };
 
   const getFilteredFields = (initialFields) => {
     return initialFields.map(f => {
