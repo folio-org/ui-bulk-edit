@@ -154,6 +154,7 @@
     "uploaderSubTitle.item.ACCESSION_NUMBER": "Select a file with item accession number",
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "Select a file with holdings UUIDs",
     "layer.selectLocation": "Select location",
+    "layer.options.expirationDate": "Expiration date",
     "layer.selectLoanType": "Select loan type",
     "list.logSubTitle.changed": "{count} records changed",
     "list.preview.titleChanged": "Preview of record changed",

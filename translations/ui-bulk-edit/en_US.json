@@ -130,6 +130,7 @@
     "layer.options.withdrawn": "Withdrawn",
     "layer.options.non-requestable": "In process (non-requestable)",
     "layer.options.intellectual": "Intellectual item",
+    "layer.options.expirationDate": "Expiration date",
     "layer.options.longMissing": "Long missing",
     "layer.options.restricted": "Restricted",
     "layer.options.unavailable": "Unavailable",

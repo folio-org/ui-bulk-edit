@@ -5,15 +5,16 @@ import '../../../../../test/jest/__mock__';
 import { BulkEditInApp } from './BulkEditInApp';
 import { RootContext } from '../../../../context/RootContext';
 import { flushPromises } from '../../../../../test/jest/utils/fileUpload';
+import { CAPABILITIES } from '../../../../constants';
 
 jest.mock('../../../../hooks/useLoanTypes', () => ({
   useLoanTypes: () => ({ isLoading: false, loanTypes: [] }),
 }));
 
-const renderBulkEditInApp = (title) => {
+const renderBulkEditInApp = (title, typeOfBulk) => {
   render(
     <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn() }}>
-      <BulkEditInApp title={title} onContentUpdatesChanged={() => {}} />,
+      <BulkEditInApp title={title} onContentUpdatesChanged={() => {}} typeOfBulk={typeOfBulk} />,
     </RootContext.Provider>,
   );
 };
@@ -24,7 +25,7 @@ const titleMock = 'Mock.csv';
 
 describe('BulkEditInApp', () => {
   it('should display correct title', () => {
-    renderBulkEditInApp(titleMock);
+    renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
 
     expect(screen.getByText(/Mock/)).toBeVisible();
   });
@@ -34,7 +35,7 @@ describe('BulkEditInApp', () => {
       /layer.column.options/,
       /layer.column.actions/,
     ];
-    renderBulkEditInApp(titleMock);
+    renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
 
     titles.forEach((el) => expect(screen.getByText(el)).toBeVisible());
   });
@@ -45,7 +46,7 @@ describe('BulkEditInApp', () => {
       'select-option-1',
     ];
 
-    renderBulkEditInApp(titleMock);
+    renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
 
     const plusButton = screen.getByLabelText('plus-sign');
 
@@ -62,7 +63,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display select right select options on inventory tab', () => {
-    renderBulkEditInApp(titleMock);
+    renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
 
     const options = [
       /layer.options.permanentLocation/,
@@ -85,7 +86,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display select correct options in action select', async () => {
-    renderBulkEditInApp(titleMock);
+    renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
 
     const options = [
       /layer.options.available/,
@@ -130,7 +131,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display item status location', () => {
-    renderBulkEditInApp(titleMock);
+    renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
 
     const options = [
       /layer.action.replace/,
@@ -148,5 +149,38 @@ describe('BulkEditInApp', () => {
     );
 
     expect(optionReplace.selected).toBe(true);
+  });
+
+  it('should display experation date', () => {
+    renderBulkEditInApp(titleMock, CAPABILITIES.USER);
+
+    const options = [
+      /layer.action.replace/,
+      /layer.action.clear/,
+    ];
+
+    const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
+    const selectAction = screen.getByTestId('select-actions-0');
+    const selectOption = screen.getByTestId('select-option-0');
+    const optionStatus = screen.getByRole('option', { name: /layer.options.expirationDate/ });
+
+    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+
+    userEvent.selectOptions(
+      selectAction,
+      optionReplace,
+    );
+
+    userEvent.selectOptions(
+      selectOption,
+      optionStatus,
+    );
+
+    const dataPicker = screen.getByTestId('dataPicker-experation-date-0');
+
+    userEvent.type(dataPicker, '04/05/2022');
+
+    expect(optionReplace.selected).toBe(true);
+    expect(dataPicker).toHaveValue('04/05/2022');
   });
 });

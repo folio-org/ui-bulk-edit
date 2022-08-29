@@ -152,6 +152,7 @@
   "layer.action.clear": "Clear field",
   "layer.options.permanentLocation": "Permanent item location",
   "layer.options.temporaryLocation": "Temporary item location",
+  "layer.options.expirationDate": "Expiration date",
   "layer.options.statusLabel": "Item status",
   "layer.options.temporaryLoanTypeLabel": "Temporary loan type",
   "layer.options.permanentLoanType": "Permanent loan type",
