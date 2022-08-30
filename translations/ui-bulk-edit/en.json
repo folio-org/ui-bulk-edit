@@ -153,6 +153,7 @@
   "layer.options.permanent": "Permanent item location",
   "layer.options.temporary": "Temporary item location",
   "layer.options.expirationDate": "Expiration date",
+  "layer.options.patronGroup": "Patron group",
   "layer.options.statusLabel": "Item status",
   "layer.options.available": "Available",
   "layer.options.missing": "Missing",
@@ -165,6 +166,7 @@
   "layer.options.unknown": "Unknown",
   "layer.options.placeholder": "Select item status",
   "layer.selectLocation": "Select location",
+  "layer.selectPatronGroup": "Select patron group",
 
   "previewModal.message": "{count} records will be changed if the Save & close button is clicked. You may choose Download preview to review all changes prior to saving.",
   "previewModal.previewToBeChanged": "Preview of records to be changed",

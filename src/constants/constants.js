@@ -209,6 +209,11 @@ export const USER_OPTIONS = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.expirationDate' }),
     disabled: false,
   },
+  {
+    value: 'PATRON_GROUP',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.patronGroup' }),
+    disabled: false,
+  },
 ];
 
 export const ACTIONS = {
@@ -221,6 +226,7 @@ export const OPTIONS = {
   PERMANENT_LOCATION: 'PERMANENT_LOCATION',
   STATUS: 'STATUS',
   EXPIRATION_DATE: 'EXPIRATION_DATE',
+  PATRON_GROUP: 'PATRON_GROUP',
 };
 
 export const ITEMS_OPTIONS = (formatMessage) => [

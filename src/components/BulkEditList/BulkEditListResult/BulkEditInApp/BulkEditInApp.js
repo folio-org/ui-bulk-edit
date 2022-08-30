@@ -26,8 +26,15 @@ import {
   CAPABILITIES,
 } from '../../../../constants';
 import css from './BulkEditInApp.css';
+import { usePatronGroup } from '../../../../API';
 
-export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) => {
+export const BulkEditInApp = (
+  {
+    title,
+    onContentUpdatesChanged,
+    typeOfBulk,
+  },
+) => {
   const intl = useIntl();
 
   const fieldsTypes = {
@@ -38,7 +45,7 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
   const actions = ITEMS_ACTION(intl.formatMessage);
   const options = ITEMS_OPTIONS(intl.formatMessage);
   const statuses = ITEM_STATUS_OPTIONS(intl.formatMessage);
-  const optionsUSer = USER_OPTIONS(intl.formatMessage);
+  const optionsUser = USER_OPTIONS(intl.formatMessage);
 
   const fieldTemplate = typeOfBulk === CAPABILITIES.ITEM ? {
     actions,
@@ -49,28 +56,54 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
     value: '',
     locationId: '',
   } : {
-    options: optionsUSer,
+    options: optionsUser,
     actions,
-    option: optionsUSer[0].value,
-    action: actions[0].value,
+    option: optionsUser[0].value,
+    action: actions[1].value,
     value: '',
   };
 
   const [fields, setFields] = useState([fieldTemplate]);
 
   const isLocation = (index) => fields[index].action === ACTIONS.REPLACE &&
-  fields[index].option !== OPTIONS.STATUS && fields[index].option !== OPTIONS.EXPIRATION_DATE;
+  fields[index].option !== OPTIONS.STATUS && typeOfBulk === CAPABILITIES.ITEM;
   const isItemStatus = (index) => fields[index].action === ACTIONS.REPLACE &&
   fields[index].option === OPTIONS.STATUS;
-  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS;
+  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS ||
+  typeOfBulk === CAPABILITIES.USER;
   const isExperationDate = (index) => fields[index].option === OPTIONS.EXPIRATION_DATE &&
   fields[index].action === ACTIONS.REPLACE;
+  const isPatronGroup = (index) => fields[index].option === OPTIONS.PATRON_GROUP &&
+  fields[index].action === ACTIONS.REPLACE;
 
-  const getDefaultAction = value => (value === OPTIONS.STATUS ? { action: ACTIONS.REPLACE } : {});
+  const getDefaultAction = value => (value === OPTIONS.STATUS ||
+  OPTIONS.PATRON_GROUP ? { action: ACTIONS.REPLACE } : {});
+
+  const { userGroups } = usePatronGroup();
+
+  const patronGroups = Object.values(userGroups).reduce(
+    (acc, { group, desc = '' }) => {
+      const groupObject = {
+        value: group,
+        label: `${group} (${desc})`,
+      };
+
+      acc.push(groupObject);
+
+      return acc;
+    },
+    [
+      {
+        value: '',
+        label: intl.formatMessage({ id: 'ui-bulk-edit.layer.selectPatronGroup' }),
+      },
+    ],
+  );
 
   const getFilteredFields = (initialFields) => {
     return initialFields.map(f => {
       const uniqOptions = new Set(initialFields.map(i => i.option));
+
       const optionsExceptCurrent = [...uniqOptions].filter(u => u !== f.option);
 
       return {
@@ -79,7 +112,6 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
       };
     });
   };
-
 
 
   const handleSelectChange = (e, index, type) => {
@@ -98,7 +130,9 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
     });
 
     if (type === fieldsTypes.OPTION) {
-      const recoveredFields = mappedFields.map(f => ({ ...f, options }));
+      const recoveredFields = typeOfBulk === CAPABILITIES.ITEM ?
+        mappedFields.map(f => ({ ...f, options }))
+        : mappedFields.map(f => ({ ...f, options: optionsUser }));
       const finalizedFields = getFilteredFields(recoveredFields);
 
       setFields(finalizedFields);
@@ -138,7 +172,9 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
 
   const handleRemove = (index) => {
     const filteredFields = fields.filter((_, i) => i !== index);
-    const recoveredFields = filteredFields.map(f => ({ ...f, options }));
+    const recoveredFields = typeOfBulk === CAPABILITIES.ITEM ?
+      filteredFields.map(f => ({ ...f, options }))
+      : filteredFields.map(f => ({ ...f, options: optionsUser }));
     const finalizedFields = getFilteredFields(recoveredFields);
 
     setFields(finalizedFields);
@@ -234,6 +270,16 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
                   data-testid={`dataPicker-experation-date-${index}`}
                 />
               </Col>}
+              {isPatronGroup(index) &&
+              <Col xs={6} sm={3}>
+                <Select
+                  dataOptions={patronGroups}
+                  value={field.value}
+                  onChange={(e) => handleValueChange(e.target.value, index)}
+                  data-testid={`select-patronGroup-${index}`}
+                />
+              </Col>
+              }
               <div className={css.iconButtonWrapper}>
                 {(index === fields.length - 1 && fields.length !== options.length) && (
                   <IconButton
