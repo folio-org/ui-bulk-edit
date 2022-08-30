@@ -34,7 +34,12 @@ const BulkEditActionMenu = ({
   const processedFileName = search.get('processedFileName');
   const { id } = usePathParams('/bulk-edit/:id');
   const { items } = usePreviewRecords(id, capabilities?.toLowerCase());
-  const { hasCsvEditPerms, hasInAppEditPerms, hasAnyEditPermissions } = useBulkPermissions();
+  const {
+    hasCsvEditPerms,
+    hasInAppEditPerms,
+    hasInAppUsersEditPerms,
+    hasAnyEditPermissions,
+  } = useBulkPermissions();
   const { visibleColumns, setVisibleColumns } = useContext(RootContext);
 
   const handleChange = ({ values }) => {
@@ -103,34 +108,34 @@ const BulkEditActionMenu = ({
     return (
       <>
         {isStartBulkInAppActive && (
-        <Button
-          buttonStyle="dropdownItem"
-          onClick={buildButtonClickHandler(onEdit)}
-        >
-          <Icon icon="edit">
-            <FormattedMessage id="ui-bulk-edit.start.edit" />
-          </Icon>
-        </Button>
+          <Button
+            buttonStyle="dropdownItem"
+            onClick={buildButtonClickHandler(onEdit)}
+          >
+            <Icon icon="edit">
+              <FormattedMessage id="ui-bulk-edit.start.edit" />
+            </Icon>
+          </Button>
         )}
         {isStartBulkCsvActive && (
-        <Button
-          buttonStyle="dropdownItem"
-          onClick={buildButtonClickHandler(onUserEdit)}
-        >
-          <Icon icon="edit">
-            <FormattedMessage id="ui-bulk-edit.start.edit" />
-          </Icon>
-        </Button>
+          <Button
+            buttonStyle="dropdownItem"
+            onClick={buildButtonClickHandler(onUserEdit)}
+          >
+            <Icon icon="edit">
+              <FormattedMessage id="ui-bulk-edit.start.edit" />
+            </Icon>
+          </Button>
         )}
-        {isStartBulkCsvActive && (
-        <Button
-          buttonStyle="dropdownItem"
-          onClick={buildButtonClickHandler(onEdit)}
-        >
-          <Icon icon="edit">
-            <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
-          </Icon>
-        </Button>
+        {hasInAppUsersEditPerms && (
+          <Button
+            buttonStyle="dropdownItem"
+            onClick={buildButtonClickHandler(onEdit)}
+          >
+            <Icon icon="edit">
+              <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
+            </Icon>
+          </Button>
         )}
       </>
     );

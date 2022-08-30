@@ -14,6 +14,10 @@ jest.mock('../../../../hooks/useLoanTypes', () => ({
   useLoanTypes: () => ({ isLoading: false, loanTypes: [] }),
 }));
 
+jest.mock('../../../../hooks/useLoanTypes', () => ({
+  useLoanTypes: () => ({ isLoading: false, loanTypes: [] }),
+}));
+
 const renderBulkEditInApp = (title, typeOfBulk) => {
   render(
     <QueryClientProvider client={queryClient}>
@@ -23,6 +27,8 @@ const renderBulkEditInApp = (title, typeOfBulk) => {
     </QueryClientProvider>,
   );
 };
+
+
 
 const titleMock = 'Mock.csv';
 
@@ -82,11 +88,14 @@ describe('BulkEditInApp', () => {
     renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
 
     const options = [
-      'ui-bulk-edit.layer.options.permanent',
-      'ui-bulk-edit.layer.options.temporary',
+      /layer.options.permanentLocation/,
+      /layer.options.temporaryLocation/,
       /layer.options.statusLabel/,
+      /layer.options.permanentLoanType/,
+      /layer.options.temporaryLoanType/,
     ];
-    const permanentLocation = screen.getByRole('option', { name: 'ui-bulk-edit.layer.options.permanent' });
+
+    const permanentLocation = screen.getByRole('option', { name: /layer.options.permanentLocation/ });
     const selectOption = screen.getByTestId('select-option-0');
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
