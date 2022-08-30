@@ -10,6 +10,10 @@ import { flushPromises } from '../../../../../test/jest/utils/fileUpload';
 import { CAPABILITIES } from '../../../../constants';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
+jest.mock('../../../../hooks/useLoanTypes', () => ({
+  useLoanTypes: () => ({ isLoading: false, loanTypes: [] }),
+}));
+
 const renderBulkEditInApp = (title, typeOfBulk) => {
   render(
     <QueryClientProvider client={queryClient}>
@@ -78,11 +82,11 @@ describe('BulkEditInApp', () => {
     renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
 
     const options = [
-      /layer.options.permanent/,
-      /layer.options.temporary/,
+      'ui-bulk-edit.layer.options.permanent',
+      'ui-bulk-edit.layer.options.temporary',
       /layer.options.statusLabel/,
     ];
-    const permanentLocation = screen.getByRole('option', { name: /layer.options.permanent/ });
+    const permanentLocation = screen.getByRole('option', { name: 'ui-bulk-edit.layer.options.permanent' });
     const selectOption = screen.getByTestId('select-option-0');
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());

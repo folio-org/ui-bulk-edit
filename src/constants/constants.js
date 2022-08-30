@@ -227,22 +227,34 @@ export const OPTIONS = {
   STATUS: 'STATUS',
   EXPIRATION_DATE: 'EXPIRATION_DATE',
   PATRON_GROUP: 'PATRON_GROUP',
+  TEMPORARY_LOAN_TYPE: 'TEMPORARY_LOAN_TYPE',
+  PERMANENT_LOAN_TYPE: 'PERMANENT_LOAN_TYPE',
 };
 
 export const ITEMS_OPTIONS = (formatMessage) => [
   {
-    value: 'TEMPORARY_LOCATION',
+    value: OPTIONS.TEMPORARY_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporary' }),
     disabled: false,
   },
   {
-    value: 'PERMANENT_LOCATION',
+    value: OPTIONS.PERMANENT_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanent' }),
     disabled: false,
   },
   {
     value: 'STATUS',
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.statusLabel' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.TEMPORARY_LOAN_TYPE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLoanTypeLabel' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.PERMANENT_LOAN_TYPE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLoanType' }),
     disabled: false,
   },
 ];

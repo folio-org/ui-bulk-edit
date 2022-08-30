@@ -18,7 +18,7 @@ export const useInAppUpload = () => {
         };
       } else {
         return {
-          userContentUpdate: contentUpdates,
+          userContentUpdates: contentUpdates,
           totalRecords: contentUpdates.length,
         };
       }
