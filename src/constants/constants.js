@@ -203,19 +203,6 @@ export const ITEMS_ACTION = (formatMessage) => [
   },
 ];
 
-export const USER_OPTIONS = (formatMessage) => [
-  {
-    value: 'EXPIRATION_DATE',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.expirationDate' }),
-    disabled: false,
-  },
-  {
-    value: 'PATRON_GROUP',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.patronGroup' }),
-    disabled: false,
-  },
-];
-
 export const ACTIONS = {
   REPLACE: 'REPLACE_WITH',
   CLEAR: 'CLEAR_FIELD',
@@ -235,6 +222,11 @@ export const USER_OPTIONS = (formatMessage) => [
   {
     value: OPTIONS.EXPIRATION_DATE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.expirationDate' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.PATRON_GROUP,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.patronGroup' }),
     disabled: false,
   },
 ];

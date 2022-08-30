@@ -51,8 +51,6 @@ export const BulkEditInAppUserForm = (
 
   const [fields, setFields] = useState([fieldTemplate]);
 
-  console.log(fields);
-
   const isDisabled = (index) => fields[index].option === OPTIONS.STATUS ||
         typeOfBulk === CAPABILITIES.USER;
   const isExperationDate = (index) => fields[index].option === OPTIONS.EXPIRATION_DATE &&
@@ -166,7 +164,10 @@ export const BulkEditInAppUserForm = (
   };
 
   useEffect(() => {
-    const mappedContentUpdates = fields.map(({ option, action, value }) => ({ option, action, value }));
+    const mappedContentUpdates = fields.map(
+      // eslint-disable-next-line no-shadow
+      ({ option, actions, value }) => ({ option, actions, value }),
+    );
 
     onContentUpdatesChanged(mappedContentUpdates);
   }, [fields]);
