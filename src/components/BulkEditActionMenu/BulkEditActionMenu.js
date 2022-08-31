@@ -98,16 +98,18 @@ const BulkEditActionMenu = ({
     );
   };
 
-  const isStartBulkCsvActive = hasCsvEditPerms && capabilities === CAPABILITIES.USER;
-  const isStartBulkInAppActive = hasInAppEditPerms
-  && successCsvLink
-  && !isCompleted
-  && capabilities === CAPABILITIES.ITEM;
-
   const renderStartBulkEditButtons = () => {
+    const isStartBulkCsvActive = hasCsvEditPerms && capabilities === CAPABILITIES.USER;
+    const getIsStartBulkInAppActive = (requiredPermission, capability) => (
+      requiredPermission &&
+      successCsvLink &&
+      !isCompleted &&
+      capabilities === capability
+    );
+
     return (
       <>
-        {isStartBulkInAppActive && (
+        {getIsStartBulkInAppActive(hasInAppEditPerms, CAPABILITIES.ITEM) && (
           <Button
             buttonStyle="dropdownItem"
             onClick={buildButtonClickHandler(onEdit)}
@@ -117,7 +119,7 @@ const BulkEditActionMenu = ({
             </Icon>
           </Button>
         )}
-        {isStartBulkCsvActive && (
+        {getIsStartBulkInAppActive(hasInAppUsersEditPerms, CAPABILITIES.USER) && (
           <Button
             buttonStyle="dropdownItem"
             onClick={buildButtonClickHandler(onUserEdit)}
@@ -127,7 +129,7 @@ const BulkEditActionMenu = ({
             </Icon>
           </Button>
         )}
-        {hasInAppUsersEditPerms && (
+        {isStartBulkCsvActive && (
           <Button
             buttonStyle="dropdownItem"
             onClick={buildButtonClickHandler(onEdit)}
