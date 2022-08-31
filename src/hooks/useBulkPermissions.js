@@ -28,6 +28,7 @@ export const useBulkPermissions = () => {
     hasCsvEditPerms,
     hasInAppViewPerms,
     hasInAppEditPerms,
+    hasInAppUsersEditPerms,
 
     // derived
     isActionMenuShown,
