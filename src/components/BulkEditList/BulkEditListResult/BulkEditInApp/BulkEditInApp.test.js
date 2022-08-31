@@ -1,11 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../../../../test/jest/__mock__';
+import { QueryClientProvider } from 'react-query';
 import { BulkEditInApp } from './BulkEditInApp';
 import { RootContext } from '../../../../context/RootContext';
 import { flushPromises } from '../../../../../test/jest/utils/fileUpload';
 import { CAPABILITIES } from '../../../../constants';
+import { queryClient } from '../../../../../test/jest/utils/queryClient';
+
+jest.mock('../../../../hooks/useLoanTypes', () => ({
+  useLoanTypes: () => ({ isLoading: false, loanTypes: [] }),
+}));
 
 jest.mock('../../../../hooks/useLoanTypes', () => ({
   useLoanTypes: () => ({ isLoading: false, loanTypes: [] }),
@@ -13,9 +20,11 @@ jest.mock('../../../../hooks/useLoanTypes', () => ({
 
 const renderBulkEditInApp = (title, typeOfBulk) => {
   render(
-    <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn() }}>
-      <BulkEditInApp title={title} onContentUpdatesChanged={() => {}} typeOfBulk={typeOfBulk} />,
-    </RootContext.Provider>,
+    <QueryClientProvider client={queryClient}>
+      <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn() }}>
+        <BulkEditInApp title={title} onContentUpdatesChanged={() => {}} typeOfBulk={typeOfBulk} />,
+      </RootContext.Provider>,
+    </QueryClientProvider>,
   );
 };
 
@@ -24,6 +33,19 @@ const renderBulkEditInApp = (title, typeOfBulk) => {
 const titleMock = 'Mock.csv';
 
 describe('BulkEditInApp', () => {
+  beforeEach(() => {
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        get: () => ({
+          usergroups: [{
+            value: 'Test',
+            desc: 'Test',
+          }],
+        }),
+      });
+  });
+
   it('should display correct title', () => {
     renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
 
@@ -72,6 +94,7 @@ describe('BulkEditInApp', () => {
       /layer.options.permanentLoanType/,
       /layer.options.temporaryLoanType/,
     ];
+
     const permanentLocation = screen.getByRole('option', { name: /layer.options.permanentLocation/ });
     const selectOption = screen.getByTestId('select-option-0');
 
@@ -182,5 +205,36 @@ describe('BulkEditInApp', () => {
 
     expect(optionReplace.selected).toBe(true);
     expect(dataPicker).toHaveValue('04/05/2022');
+  });
+
+  it('should display patron group', () => {
+    renderBulkEditInApp(titleMock, CAPABILITIES.USER);
+
+    const options = /layer.action.replace/;
+
+    const optionReplace = screen.getByRole('option', { name: options });
+    const selectAction = screen.getByTestId('select-actions-0');
+    const selectOption = screen.getByTestId('select-option-0');
+    const optionStatus = screen.getByRole('option', { name: /layer.options.patronGroup/ });
+
+    userEvent.selectOptions(
+      selectAction,
+      optionReplace,
+    );
+
+    userEvent.selectOptions(
+      selectOption,
+      optionStatus,
+    );
+
+    const selectPatronGroup = screen.getByTestId('select-patronGroup-0');
+    const optionPatronGroup = screen.getByRole('option', { name: /layer.selectPatronGroup/ });
+
+    userEvent.selectOptions(
+      selectPatronGroup,
+      optionPatronGroup,
+    );
+
+    expect(optionPatronGroup.selected).toBe(true);
   });
 });
