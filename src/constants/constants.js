@@ -203,14 +203,6 @@ export const ITEMS_ACTION = (formatMessage) => [
   },
 ];
 
-export const USER_OPTIONS = (formatMessage) => [
-  {
-    value: 'EXPIRATION_DATE',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.expirationDate' }),
-    disabled: false,
-  },
-];
-
 export const ACTIONS = {
   REPLACE: 'REPLACE_WITH',
   CLEAR: 'CLEAR_FIELD',
@@ -221,22 +213,42 @@ export const OPTIONS = {
   PERMANENT_LOCATION: 'PERMANENT_LOCATION',
   STATUS: 'STATUS',
   EXPIRATION_DATE: 'EXPIRATION_DATE',
+  TEMPORARY_LOAN_TYPE: 'TEMPORARY_LOAN_TYPE',
+  PERMANENT_LOAN_TYPE: 'PERMANENT_LOAN_TYPE',
 };
+
+export const USER_OPTIONS = (formatMessage) => [
+  {
+    value: OPTIONS.EXPIRATION_DATE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.expirationDate' }),
+    disabled: false,
+  },
+];
 
 export const ITEMS_OPTIONS = (formatMessage) => [
   {
-    value: 'TEMPORARY_LOCATION',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporary' }),
+    value: OPTIONS.TEMPORARY_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLocation' }),
     disabled: false,
   },
   {
-    value: 'PERMANENT_LOCATION',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanent' }),
+    value: OPTIONS.PERMANENT_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLocation' }),
     disabled: false,
   },
   {
-    value: 'STATUS',
+    value: OPTIONS.STATUS,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.statusLabel' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.TEMPORARY_LOAN_TYPE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLoanTypeLabel' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.PERMANENT_LOAN_TYPE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLoanType' }),
     disabled: false,
   },
 ];

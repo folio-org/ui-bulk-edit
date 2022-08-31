@@ -10,6 +10,7 @@ import {
   Row,
   Accordion,
   Select,
+  Selection,
   RepeatableField,
   Datepicker,
 } from '@folio/stripes/components';
@@ -27,6 +28,7 @@ import {
   CAPABILITIES,
 } from '../../../../constants';
 import css from './BulkEditInApp.css';
+import { useLoanTypes } from '../../../../hooks/useLoanTypes';
 
 export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) => {
   const intl = useIntl();
@@ -57,17 +59,26 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
     value: '',
   };
 
+  const { loanTypes, isLoading } = useLoanTypes();
   const [fields, setFields] = useState([fieldTemplate]);
 
   const isLocation = (index) => fields[index].action === ACTIONS.REPLACE &&
-  fields[index].option !== OPTIONS.STATUS && fields[index].option !== OPTIONS.EXPIRATION_DATE;
+  (fields[index].option === OPTIONS.PERMANENT_LOCATION || fields[index].option === OPTIONS.TEMPORARY_LOCATION);
   const isItemStatus = (index) => fields[index].action === ACTIONS.REPLACE &&
   fields[index].option === OPTIONS.STATUS;
-  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS;
+  const isLoanType = (index) => fields[index].action === ACTIONS.REPLACE &&
+    (fields[index].option === OPTIONS.TEMPORARY_LOAN_TYPE || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE);
+  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE;
   const isExperationDate = (index) => fields[index].option === OPTIONS.EXPIRATION_DATE &&
   fields[index].action === ACTIONS.REPLACE;
 
-  const getDefaultAction = value => (value === OPTIONS.STATUS ? { action: ACTIONS.REPLACE } : {});
+  const getDefaultAction = value => {
+    if (value === OPTIONS.STATUS || value === OPTIONS.PERMANENT_LOAN_TYPE) {
+      return { action: ACTIONS.REPLACE };
+    }
+
+    return {};
+  };
 
   const getFilteredFields = (initialFields) => {
     return initialFields.map(f => {
@@ -217,6 +228,17 @@ export const BulkEditInApp = ({ title, onContentUpdatesChanged, typeOfBulk }) =>
                 />
               </Col>
               }
+              {isLoanType(index) && (
+                <Col xs={6} sm={3}>
+                  <Selection
+                    id="loanType"
+                    loading={isLoading}
+                    onChange={(value) => handleValueChange(value, index)}
+                    placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
+                    dataOptions={loanTypes}
+                  />
+                </Col>
+              )}
               {isItemStatus(index) &&
                 <Col xs={6} sm={3}>
                   <Select
