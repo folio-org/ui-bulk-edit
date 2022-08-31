@@ -58,8 +58,6 @@ export const BulkEditListFilters = ({
   const { fileUpload } = useFileUploadComand();
   const { setVisibleColumns } = useContext(RootContext);
 
-  console.log('isInventoryRadioDisabled', isInventoryRadioDisabled);
-  console.log('isUserRadioDisabled', isUserRadioDisabled)
   const isCapabilityDisabled = (capabilityValue) => {
     switch (capabilityValue) {
       case CAPABILITIES.USER:

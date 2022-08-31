@@ -12,7 +12,6 @@ export const useBulkPermissions = () => {
   const hasInAppEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit');
   const hasInAppUsersEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit.users');
 
-  console.log('hasInAppViewPerms', hasInAppViewPerms)
   // derived pages
   const hasAnyEditPermissions = hasCsvEditPerms || hasInAppEditPerms || hasInAppUsersEditPerms;
   const isActionMenuShown = hasCsvEditPerms;
@@ -29,6 +28,7 @@ export const useBulkPermissions = () => {
     hasCsvEditPerms,
     hasInAppViewPerms,
     hasInAppEditPerms,
+    hasInAppUsersEditPerms,
 
     // derived
     isActionMenuShown,

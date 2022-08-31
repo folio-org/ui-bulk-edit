@@ -111,6 +111,7 @@
         "displayName": "Bulk edit: In app - Update user records",
         "subPermissions": [
           "ui-bulk-edit.view",
+          "bulk-edit.item.post",
           "data-export.job.item.post",
           "bulk-edit.users.content-update.upload.post"
         ],
