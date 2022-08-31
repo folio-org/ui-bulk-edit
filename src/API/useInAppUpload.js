@@ -13,7 +13,7 @@ export const useInAppUpload = () => {
     const getBody = () => {
       if (typeOfBulk === CAPABILITIES_VALUE.ITEMS) {
         return {
-          itemContentUpdate: contentUpdates,
+          itemContentUpdates: contentUpdates,
           totalRecords: contentUpdates.length,
         };
       } else {
