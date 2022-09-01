@@ -10,12 +10,13 @@ import { flushPromises } from '../../../../../test/jest/utils/fileUpload';
 import { CAPABILITIES } from '../../../../constants';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
+
 jest.mock('../../../../hooks/useLoanTypes', () => ({
   useLoanTypes: () => ({ isLoading: false, loanTypes: [] }),
 }));
 
-jest.mock('../../../../hooks/useLoanTypes', () => ({
-  useLoanTypes: () => ({ isLoading: false, loanTypes: [] }),
+jest.mock('../../../../API/usePatronGroup', () => ({
+  usePatronGroup: () => ({ userGroups: {} }),
 }));
 
 const renderBulkEditInApp = (title, typeOfBulk) => {
@@ -177,22 +178,10 @@ describe('BulkEditInApp', () => {
   it('should display experation date', () => {
     renderBulkEditInApp(titleMock, CAPABILITIES.USER);
 
-    const options = [
-      /layer.action.replace/,
-      /layer.action.clear/,
-    ];
 
     const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
-    const selectAction = screen.getByTestId('select-actions-0');
     const selectOption = screen.getByTestId('select-option-0');
     const optionStatus = screen.getByRole('option', { name: /layer.options.expirationDate/ });
-
-    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
-
-    userEvent.selectOptions(
-      selectAction,
-      optionReplace,
-    );
 
     userEvent.selectOptions(
       selectOption,
@@ -210,17 +199,8 @@ describe('BulkEditInApp', () => {
   it('should display patron group', () => {
     renderBulkEditInApp(titleMock, CAPABILITIES.USER);
 
-    const options = /layer.action.replace/;
-
-    const optionReplace = screen.getByRole('option', { name: options });
-    const selectAction = screen.getByTestId('select-actions-0');
     const selectOption = screen.getByTestId('select-option-0');
     const optionStatus = screen.getByRole('option', { name: /layer.options.patronGroup/ });
-
-    userEvent.selectOptions(
-      selectAction,
-      optionReplace,
-    );
 
     userEvent.selectOptions(
       selectOption,

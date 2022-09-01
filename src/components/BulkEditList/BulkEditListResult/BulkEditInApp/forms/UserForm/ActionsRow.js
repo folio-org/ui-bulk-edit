@@ -35,6 +35,7 @@ export const ActionsRow = ({ actions, onChange }) => {
           value={action.name}
           onChange={(e) => onChange({ actionIndex, actionValue: e.target.value, actionFieldName: 'name' })}
           disabled={action.actionsList.length === 1}
+          data-testid={`select-actions-${actionIndex}`}
         />
       </Col>
       <Col xs={2} sm={2}>
@@ -42,6 +43,7 @@ export const ActionsRow = ({ actions, onChange }) => {
           <TextField
             value={action.value}
             onChange={e => onChange({ actionIndex, actionValue: e.target.value, actionFieldName: 'value' })}
+            data-testid={`input-email-${actionIndex}`}
           />
         )}
         {action.type === controlTypes.SELECT && (
