@@ -15,19 +15,18 @@ import {
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import {
   ITEMS_OPTIONS,
-  ITEMS_ACTION,
+  BASE_ACTIONS,
   ITEM_STATUS_OPTIONS,
   ACTIONS,
   OPTIONS,
   CAPABILITIES,
-} from '../../../../constants';
-import css from './BulkEditInApp.css';
-import { useLoanTypes } from '../../../../hooks/useLoanTypes';
+} from '../../../../../../constants';
+import css from '../../BulkEditInApp.css';
+import { useLoanTypes } from '../../../../../../hooks/useLoanTypes';
 
-export const BulkEditInAppItemForm = (
+export const ItemForm = (
   {
     onContentUpdatesChanged,
-    typeOfBulk,
     getFilteredFields,
   },
 ) => {
@@ -39,7 +38,7 @@ export const BulkEditInAppItemForm = (
     OPTION: 'option',
   };
 
-  const actions = ITEMS_ACTION(intl.formatMessage);
+  const actions = BASE_ACTIONS(intl.formatMessage);
   const options = ITEMS_OPTIONS(intl.formatMessage);
   const statuses = ITEM_STATUS_OPTIONS(intl.formatMessage);
 
@@ -59,8 +58,7 @@ export const BulkEditInAppItemForm = (
       (fields[index].option === OPTIONS.PERMANENT_LOCATION || fields[index].option === OPTIONS.TEMPORARY_LOCATION);
   const isItemStatus = (index) => fields[index].action === ACTIONS.REPLACE &&
         fields[index].option === OPTIONS.STATUS;
-  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS ||
-        typeOfBulk === CAPABILITIES.USER;
+  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE;
   const isLoanType = (index) => fields[index].action === ACTIONS.REPLACE &&
       (fields[index].option === OPTIONS.TEMPORARY_LOAN_TYPE || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE);
   const getDefaultAction = value => {
@@ -242,7 +240,7 @@ export const BulkEditInAppItemForm = (
   );
 };
 
-BulkEditInAppItemForm.propTypes = {
+ItemForm.propTypes = {
   onContentUpdatesChanged: PropTypes.func,
   typeOfBulk: PropTypes.string,
   getFilteredFields: PropTypes.func,
