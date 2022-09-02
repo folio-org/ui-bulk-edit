@@ -7,8 +7,8 @@ import {
 } from '@folio/stripes/components';
 
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
-import { BulkEditInAppItemForm } from './BulkEditInAppItemForm';
-import { BulkEditInAppUserForm } from './BulkEditInAppUserForm';
+import { ItemForm } from './forms/ItemForm/ItemForm';
+import { UserForm } from './forms/UserForm/UserForm';
 import { CAPABILITIES } from '../../../../constants';
 
 export const BulkEditInApp = (
@@ -40,18 +40,22 @@ export const BulkEditInApp = (
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
       >
         <BulkEditInAppTitle />
-        {typeOfBulk === CAPABILITIES.ITEM ?
-          <BulkEditInAppItemForm
-            onContentUpdatesChanged={onContentUpdatesChanged}
-            typeOfBulk={typeOfBulk}
-            getFilteredFields={getFilteredFields}
-          /> :
-          <BulkEditInAppUserForm
+
+        {typeOfBulk === CAPABILITIES.ITEM && (
+          <ItemForm
             onContentUpdatesChanged={onContentUpdatesChanged}
             typeOfBulk={typeOfBulk}
             getFilteredFields={getFilteredFields}
           />
-          }
+        )}
+
+        {typeOfBulk === CAPABILITIES.USER && (
+          <UserForm
+            onContentUpdatesChanged={onContentUpdatesChanged}
+            typeOfBulk={typeOfBulk}
+            getFilteredFields={getFilteredFields}
+          />
+        )}
       </Accordion>
     </>
   );

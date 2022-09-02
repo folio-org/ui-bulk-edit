@@ -12,6 +12,7 @@ import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
 import { useLaunchJob } from '../../../API';
 import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
+import { OPTIONS } from '../../../constants';
 
 const PreviewModal = ({
   open,
@@ -52,7 +53,21 @@ const PreviewModal = ({
 
   useEffect(() => {
     if (jobId && contentUpdates && open) {
-      inAppUpload({ jobId, contentUpdates, capability }).then(response => {
+      const formattedContentUpdates = contentUpdates.map(item => {
+        if (item.option === OPTIONS.EXPIRATION_DATE) {
+          const DATE_RFC2822 = 'YYYY-MM-DD HH:mm:ss';
+          const getFormattedDate = (value) => `${moment(`${value} 23:59:59`).format(DATE_RFC2822)}.000Z`;
+
+          return {
+            ...item,
+            actions: item.actions.map(action => ({ ...action, value: getFormattedDate(action.value) })),
+          };
+        }
+
+        return item;
+      });
+
+      inAppUpload({ jobId, contentUpdates: formattedContentUpdates, capability }).then(response => {
         setPreviewItems(response.items);
         setCountOfChangedRecords(response.totalRecords);
       });
