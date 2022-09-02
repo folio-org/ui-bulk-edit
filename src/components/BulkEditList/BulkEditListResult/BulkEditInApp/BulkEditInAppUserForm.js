@@ -202,7 +202,11 @@ export const BulkEditInAppUserForm = (
             <Col xs={6} sm={3}>
               <Datepicker
                 value={field.value}
-                onChange={(e) => handleValueChange(moment.utc(e.target.value), index, field.actions[0].name)}
+                onChange={(e) => handleValueChange(moment(e.target.value)
+                  .toISOString()
+                  .replace('T', ' '),
+                index,
+                field.actions[0].name)}
                 data-testid={`dataPicker-experation-date-${index}`}
               />
             </Col>}
