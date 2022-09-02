@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import noop from 'lodash/noop';
+import moment from 'moment';
 
 import {
   IconButton,
@@ -201,7 +202,7 @@ export const BulkEditInAppUserForm = (
             <Col xs={6} sm={3}>
               <Datepicker
                 value={field.value}
-                onChange={(e) => handleValueChange(e.target.value, index, field.actions[0].name)}
+                onChange={(e) => handleValueChange(moment.utc(e.target.value), index, field.actions[0].name)}
                 data-testid={`dataPicker-experation-date-${index}`}
               />
             </Col>}
