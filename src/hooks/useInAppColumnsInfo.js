@@ -1,16 +1,29 @@
-import { getInventoryResultsFormatterBase } from '../constants/formatters';
-import { CAPABILITIES, INVENTORY_COLUMNS_BASE, itemColumnInAppWidths } from '../constants';
+import {
+  getInventoryResultsFormatterBase,
+  getUserResultsFormatterBase,
+} from '../constants/formatters';
+import {
+  CAPABILITIES,
+  INVENTORY_COLUMNS_BASE,
+  itemColumnInAppWidths,
+  USER_COLUMNS,
+  userColumnInAppWidths,
+} from '../constants';
 
 export const useInAppColumnsInfo = ({
   capability,
+  userGroups,
 }) => {
   let formatter;
   let baseColumns;
   let columnWidths;
 
   switch (capability) {
-    /* case CAPABILITIES.USER: */
-
+    case CAPABILITIES.USER:
+      formatter = getUserResultsFormatterBase(userGroups);
+      baseColumns = USER_COLUMNS;
+      columnWidths = userColumnInAppWidths;
+      break;
     case CAPABILITIES.ITEM:
     default:
       formatter = getInventoryResultsFormatterBase();

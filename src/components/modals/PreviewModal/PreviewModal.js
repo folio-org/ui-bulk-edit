@@ -9,7 +9,7 @@ import moment from 'moment';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import css from './PreviewModal.css';
 import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
-import { useLaunchJob } from '../../../API';
+import { useLaunchJob, useUserGroupsMap } from '../../../API';
 import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 
@@ -24,12 +24,13 @@ const PreviewModal = ({
   const history = useHistory();
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
+  const { userGroups } = useUserGroupsMap();
   const {
     visibleColumns,
     columnMapping,
     columnWidths,
     formatter,
-  } = useInAppColumnsInfo({ capability });
+  } = useInAppColumnsInfo({ capability, userGroups });
 
   const [previewItems, setPreviewItems] = useState([]);
   const [countOfChangedRecords, setCountOfChangedRecords] = useState(0);
@@ -53,7 +54,7 @@ const PreviewModal = ({
   useEffect(() => {
     if (jobId && contentUpdates && open) {
       inAppUpload({ jobId, contentUpdates, capability }).then(response => {
-        setPreviewItems(response.items);
+        setPreviewItems(response[capability.toLowerCase()]);
         setCountOfChangedRecords(response.totalRecords);
       });
     }

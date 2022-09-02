@@ -1,6 +1,7 @@
 import { useIntl } from 'react-intl';
 import { Col, Datepicker, Select, TextField } from '@folio/stripes/components';
 import { Fragment } from 'react';
+import moment from 'moment';
 import { usePatronGroup } from '../../../../../../API';
 import { controlTypes } from '../../../../../../constants';
 
@@ -26,6 +27,9 @@ export const ActionsRow = ({ actions, onChange }) => {
       },
     ],
   );
+
+  const DATE_RFC2822 = 'YYYY-MM-DD HH:mm:ss';
+  const templateString = (value) => `${moment(`${value}`).format(DATE_RFC2822)}.000Z`;
 
   return actions.map((action, actionIndex) => (
     <Fragment key={actionIndex}>
@@ -57,7 +61,7 @@ export const ActionsRow = ({ actions, onChange }) => {
         {action.type === controlTypes.DATE && (
           <Datepicker
             value={action.value}
-            onChange={e => onChange({ actionIndex, actionValue: e.target.value, actionFieldName: 'value' })}
+            onChange={e => onChange({ actionIndex, actionValue: templateString(e.target.value), actionFieldName: 'value' })}
             data-testid={`dataPicker-experation-date-${actionIndex}`}
           />
         )}
