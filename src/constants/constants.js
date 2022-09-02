@@ -185,27 +185,10 @@ export const CAPABILITIES_VALUE = {
   USERS: 'user',
 };
 
-export const ITEMS_ACTION = (formatMessage) => [
-  {
-    value: '',
-    label: formatMessage({ id: 'ui-bulk-edit.actions.placeholder' }),
-    disabled: true,
-  },
-  {
-    value: 'REPLACE_WITH',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.action.replace' }),
-    disabled: false,
-  },
-  {
-    value: 'CLEAR_FIELD',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.action.clear' }),
-    disabled: false,
-  },
-];
-
 export const ACTIONS = {
   REPLACE: 'REPLACE_WITH',
   CLEAR: 'CLEAR_FIELD',
+  FIND: 'FIND',
 };
 
 export const OPTIONS = {
@@ -213,14 +196,72 @@ export const OPTIONS = {
   PERMANENT_LOCATION: 'PERMANENT_LOCATION',
   STATUS: 'STATUS',
   EXPIRATION_DATE: 'EXPIRATION_DATE',
+  EMAIL_ADDRESS: 'EMAIL_ADDRESS',
+  PATRON_GROUP: 'PATRON_GROUP',
   TEMPORARY_LOAN_TYPE: 'TEMPORARY_LOAN_TYPE',
   PERMANENT_LOAN_TYPE: 'PERMANENT_LOAN_TYPE',
 };
 
+export const getPlaceholder = (formatMessage) => ({
+  value: '',
+  label: formatMessage({ id: 'ui-bulk-edit.actions.placeholder' }),
+  disabled: true,
+});
+
+export const getFindAction = (formatMessage) => ({
+  value: ACTIONS.FIND,
+  label: formatMessage({ id: 'ui-bulk-edit.actions.find' }),
+  disabled: false,
+});
+
+export const getReplaceAction = (formatMessage) => ({
+  value: ACTIONS.REPLACE,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.action.replace' }),
+  disabled: false,
+});
+
+export const getClearAction = (formatMessage) => ({
+  value: ACTIONS.CLEAR,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.action.clear' }),
+  disabled: false,
+});
+
+export const PATRON_ACTIONS = (formatMessage) => [
+  getReplaceAction(formatMessage),
+];
+
+export const EXPIRATION_ACTIONS = (formatMessage) => [
+  getReplaceAction(formatMessage),
+];
+
+export const EMAIL_ACTIONS_FIRST = (formatMessage) => [
+  getFindAction(formatMessage),
+];
+
+export const EMAIL_ACTIONS_SECOND = (formatMessage) => [
+  getReplaceAction(formatMessage),
+];
+
+export const BASE_ACTIONS = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getReplaceAction(formatMessage),
+  getClearAction(formatMessage),
+];
+
 export const USER_OPTIONS = (formatMessage) => [
+  {
+    value: OPTIONS.EMAIL_ADDRESS,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.email' }),
+    disabled: false,
+  },
   {
     value: OPTIONS.EXPIRATION_DATE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.expirationDate' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.PATRON_GROUP,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.patronGroup' }),
     disabled: false,
   },
 ];
@@ -323,4 +364,10 @@ export const itemColumnInAppWidths = {
   materialType: '100px',
   permanentLoanType: '120px',
   temporaryLoanType: '120px',
+};
+
+export const controlTypes = {
+  SELECT: 'SELECT',
+  DATE: 'DATE',
+  INPUT: 'INPUT',
 };
