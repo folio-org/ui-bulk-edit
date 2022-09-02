@@ -102,6 +102,7 @@
           "inventory-storage.location-units.campuses.collection.get",
           "inventory-storage.location-units.libraries.collection.get",
           "inventory-storage.locations.collection.get",
+          "inventory-storage.loan-types.collection.get",
           "remote-storage.mappings.collection.get"
         ],
         "visible": true
