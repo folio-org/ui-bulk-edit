@@ -109,8 +109,6 @@
     "layer.column.actions": "Aktionen",
     "layer.action.replace": "Ersetzen durch",
     "layer.action.clear": "Feld leeren",
-    "layer.options.permanent": "Exemplarstandort dauerhaft",
-    "layer.options.temporary": "Exemplarstandort temporär",
     "layer.confirmChanges": "Änderungen bestätigen",
     "actions.placeholder": "Aktion auswählen",
     "previewModal.message": "{count} Datensätze werden geändert, wenn auf die Schaltfläche Speichern & Schließen geklickt wird. Mit \"Vorschau herunterladen\" können alle Änderungen vor dem Speichern heruntergeladen und geprüft werden.",
@@ -155,5 +153,15 @@
     "list.logSubTitle.changed": "{count} Datensätze geändert",
     "list.preview.titleChanged": "Preview of record changed",
     "list.errors.infoProccessed": "<b>{Dateiname}: {entries} Einträge * {matched} Datensätze geändert * {errors} Fehler</b>",
-    "modal.fileExtensions.blocked.message2": "Es kann nur eine Datei mit der Erweiterung .csv hochgeladen werden."
+    "modal.fileExtensions.blocked.message2": "Es kann nur eine Datei mit der Erweiterung .csv hochgeladen werden.",
+    "layer.options.expirationDate": "Expiration date",
+    "layer.options.permanentLocation": "Permanent item location",
+    "layer.options.temporaryLocation": "Temporary item location",
+    "layer.options.temporaryLoanTypeLabel": "Temporary loan type",
+    "layer.options.permanentLoanType": "Permanent loan type",
+    "layer.selectLoanType": "Select loan type",
+    "layer.options.patronGroup": "Patron group",
+    "layer.selectPatronGroup": "Select patron group",
+    "actions.find": "Find",
+    "layer.options.email": "Email"
 }

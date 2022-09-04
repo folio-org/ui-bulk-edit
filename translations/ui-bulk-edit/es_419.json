@@ -109,8 +109,6 @@
     "layer.column.actions": "Actions",
     "layer.action.replace": "Replace with",
     "layer.action.clear": "Clear field",
-    "layer.options.permanent": "Permanent item location",
-    "layer.options.temporary": "Temporary item location",
     "layer.confirmChanges": "Confirmar cambios",
     "actions.placeholder": "Seleccionar acción",
     "previewModal.message": "{count} records will be changed if the Save & close button is clicked. You may choose Download preview to review all changes prior to saving.",
@@ -155,5 +153,15 @@
     "list.logSubTitle.changed": "{count} records changed",
     "list.preview.titleChanged": "Preview of record changed",
     "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
-    "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded."
+    "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded.",
+    "layer.options.expirationDate": "Expiration date",
+    "layer.options.permanentLocation": "Permanent item location",
+    "layer.options.temporaryLocation": "Temporary item location",
+    "layer.options.temporaryLoanTypeLabel": "Temporary loan type",
+    "layer.options.permanentLoanType": "Permanent loan type",
+    "layer.selectLoanType": "Select loan type",
+    "layer.options.patronGroup": "Patron group",
+    "layer.selectPatronGroup": "Select patron group",
+    "actions.find": "Find",
+    "layer.options.email": "Email"
 }

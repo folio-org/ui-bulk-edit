@@ -109,8 +109,6 @@
     "layer.column.actions": "操作",
     "layer.action.replace": "替换为",
     "layer.action.clear": "清除字段",
-    "layer.options.permanent": "永久单件馆藏地",
-    "layer.options.temporary": "临时单件馆藏地",
     "layer.confirmChanges": "确认更改",
     "actions.placeholder": "选择操作",
     "previewModal.message": "如果单击“保存并关闭”按钮，将更改{count}条记录。可以选择下载预览以在保存之前查看所有更改。",
@@ -155,5 +153,15 @@
     "list.logSubTitle.changed": "{count}条记录已更改",
     "list.preview.titleChanged": "记录预览已更改",
     "list.errors.infoProccessed": "<b> {fileName} : {entries}个条目 * {matched}条记录已更改 * {errors}个错误</b>",
-    "modal.fileExtensions.blocked.message2": "只能上传一个扩展名为 .csv 的文件。"
+    "modal.fileExtensions.blocked.message2": "只能上传一个扩展名为 .csv 的文件。",
+    "layer.options.expirationDate": "失效日期",
+    "layer.options.permanentLocation": "Permanent item location",
+    "layer.options.temporaryLocation": "Temporary item location",
+    "layer.options.temporaryLoanTypeLabel": "Temporary loan type",
+    "layer.options.permanentLoanType": "Permanent loan type",
+    "layer.selectLoanType": "Select loan type",
+    "layer.options.patronGroup": "Patron group",
+    "layer.selectPatronGroup": "Select patron group",
+    "actions.find": "Find",
+    "layer.options.email": "Email"
 }
