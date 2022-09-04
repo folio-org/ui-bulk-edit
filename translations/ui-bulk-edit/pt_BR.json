@@ -109,8 +109,6 @@
     "layer.column.actions": "Ações",
     "layer.action.replace": "Substituir por",
     "layer.action.clear": "Limpar campo(s)",
-    "layer.options.permanent": "Localização permanente do exemplar",
-    "layer.options.temporary": "Localização temporária do exemplar",
     "layer.confirmChanges": "Confirmar alterações",
     "actions.placeholder": "Selecione a ação",
     "previewModal.message": "{count} registros serão alterados se o botão Salvar e fechar for clicado. Você pode escolher Baixar visualização para revisar todas as alterações antes de salvar.",
@@ -155,5 +153,15 @@
     "list.logSubTitle.changed": "{count} registros alterados",
     "list.preview.titleChanged": "Pré-visualização do registro alterado",
     "list.errors.infoProccessed": "<b> {fileName} : {entries} entradas * {matched} registros alterados * {errors} erros </b>",
-    "modal.fileExtensions.blocked.message2": "Apenas um arquivo com extensão .csv pode ser carregado."
+    "modal.fileExtensions.blocked.message2": "Apenas um arquivo com extensão .csv pode ser carregado.",
+    "layer.options.expirationDate": "Expiration date",
+    "layer.options.permanentLocation": "Permanent item location",
+    "layer.options.temporaryLocation": "Temporary item location",
+    "layer.options.temporaryLoanTypeLabel": "Temporary loan type",
+    "layer.options.permanentLoanType": "Permanent loan type",
+    "layer.selectLoanType": "Select loan type",
+    "layer.options.patronGroup": "Patron group",
+    "layer.selectPatronGroup": "Select patron group",
+    "actions.find": "Find",
+    "layer.options.email": "Email"
 }

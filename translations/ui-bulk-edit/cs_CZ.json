@@ -109,8 +109,6 @@
     "layer.column.actions": "Akce",
     "layer.action.replace": "Nahradit za",
     "layer.action.clear": "Vymazat pole",
-    "layer.options.permanent": "Trvalé umístění jednotky",
-    "layer.options.temporary": "Umístění dočasné jednotky",
     "layer.confirmChanges": "Potvrďte změny",
     "actions.placeholder": "Vyberte akci",
     "previewModal.message": "{count} záznamy se změní, pokud kliknete na tlačítko Uložit a zavřít. Můžete zvolit Stáhnout náhled a zkontrolovat všechny změny před uložením.",
@@ -155,5 +153,15 @@
     "list.logSubTitle.changed": "{count} záznamů změněno",
     "list.preview.titleChanged": "Náhled záznamu změněn",
     "list.errors.infoProccessed": "<b>{fileName}: {entries} záznamy * {matched} záznamů změněno * {errors} chyby</b>",
-    "modal.fileExtensions.blocked.message2": "Lze nahrát pouze jeden soubor s příponou .csv."
+    "modal.fileExtensions.blocked.message2": "Lze nahrát pouze jeden soubor s příponou .csv.",
+    "layer.options.expirationDate": "Datum vypršení",
+    "layer.options.permanentLocation": "Trvalé umístění jednotky",
+    "layer.options.temporaryLocation": "Dočasné umístění jednotky",
+    "layer.options.temporaryLoanTypeLabel": "Typ dočasné výpůjčky",
+    "layer.options.permanentLoanType": "Typ trvalé výpůjčky",
+    "layer.selectLoanType": "Vyberte typ výpůjčky",
+    "layer.options.patronGroup": "Skupina čtenáře",
+    "layer.selectPatronGroup": "Vyberte skupinu čtenáře",
+    "actions.find": "Najít",
+    "layer.options.email": "E-mail"
 }

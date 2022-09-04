@@ -109,8 +109,6 @@
     "layer.column.actions": "الإجراءات",
     "layer.action.replace": "استبدال بـ",
     "layer.action.clear": "مسح الحقل",
-    "layer.options.permanent": "موقع المادة الدائم",
-    "layer.options.temporary": "موقع المادة المؤقت",
     "layer.confirmChanges": "تأكيد التغييرات",
     "actions.placeholder": "اختر إجراء",
     "previewModal.message": "سيتم تغيير {count} تسجيلة إذا تم النقر على زر حفظ وإغلاق. يمكنك اختيار تنزيل معاينة لمراجعة كل التغييرات قبل الحفظ.",
@@ -155,5 +153,15 @@
     "list.logSubTitle.changed": "تم تغيير {count} تسجيلة",
     "list.preview.titleChanged": "تم تغيير معاينة التسجيلة",
     "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
-    "modal.fileExtensions.blocked.message2": "يمكن فقط تحميل ملف واحد بامتداد .csv"
+    "modal.fileExtensions.blocked.message2": "يمكن فقط تحميل ملف واحد بامتداد .csv",
+    "layer.options.expirationDate": "تاريخ الانتهاء",
+    "layer.options.permanentLocation": "موقع المادة الدائم",
+    "layer.options.temporaryLocation": "موقع المادة المؤقت",
+    "layer.options.temporaryLoanTypeLabel": "نوع الإعارة المؤقتة",
+    "layer.options.permanentLoanType": "نوع الإعارة الدائمة",
+    "layer.selectLoanType": "حدد نوع الإعارة",
+    "layer.options.patronGroup": "مجموعة المستفيدين",
+    "layer.selectPatronGroup": "حدد مجموعة المستفيد",
+    "actions.find": "بحث",
+    "layer.options.email": "البريد الإلكتروني"
 }
