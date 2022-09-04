@@ -114,7 +114,9 @@
           "ui-bulk-edit.view",
           "bulk-edit.item.post",
           "data-export.job.item.post",
-          "bulk-edit.users.content-update.upload.post"
+          "bulk-edit.users.content-update.upload.post",
+          "bulk-edit.users-content-update.collection.post",
+          "bulk-edit.start.item.post"
         ],
         "visible": true
       },

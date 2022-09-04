@@ -6,6 +6,7 @@
 * [UIBULKED-140](https://issues.folio.org/browse/UIBULKED-140) Update ITEMS content update
 * [UIBULKED-107](https://issues.folio.org/browse/UIBULKED-107) Expiration date - User records - in app approach.
 * [UIBULKED-104](https://issues.folio.org/browse/UIBULKED-104) Bulk edit user records - in app permission -landing page.
+* [UIBULKED-125](https://issues.folio.org/browse/UIBULKED-125) User-records - commit changes - in app
 
 ## [2.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-08-05)
 * [UIBULKED-130](https://issues.folio.org/browse/UIBULKED-130) Progress bar blinks (reloads) on the first run
