@@ -1,6 +1,6 @@
 import {
   getInventoryResultsFormatterBase,
-  getUserResultsFormatterBase,
+  getUserResultsFormatter,
 } from '../constants/formatters';
 import {
   CAPABILITIES,
@@ -20,7 +20,7 @@ export const useInAppColumnsInfo = ({
 
   switch (capability) {
     case CAPABILITIES.USER:
-      formatter = getUserResultsFormatterBase(userGroups);
+      formatter = getUserResultsFormatter(userGroups);
       baseColumns = USER_COLUMNS;
       columnWidths = userColumnInAppWidths;
       break;

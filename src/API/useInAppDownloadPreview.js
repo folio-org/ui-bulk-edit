@@ -4,12 +4,12 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const useInAppDownloadPreview = (id) => {
+export const useInAppDownloadPreview = (id, capability) => {
   const ky = useOkapiKy();
   const { data, refetch, isLoading } = useQuery(
     {
       queryKey: ['InAppDownloadPreview', id],
-      queryFn: () => ky.get(`bulk-edit/${id}/preview/updated-items/download`),
+      queryFn: () => ky.get(`bulk-edit/${id}/preview/updated-${capability}/download`),
       enabled: false,
     },
   );

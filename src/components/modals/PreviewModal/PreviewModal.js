@@ -37,7 +37,11 @@ const PreviewModal = ({
 
   const { startJob } = useLaunchJob();
   const { inAppUpload, isLoading: isUploading } = useInAppUpload();
-  const { data: fileData, refetch: downloadPreviewCSV, isLoading: isDownloading } = useInAppDownloadPreview(jobId);
+  const {
+    data: fileData,
+    refetch: downloadPreviewCSV,
+    isLoading: isDownloading,
+  } = useInAppDownloadPreview(jobId, capability?.toLowerCase());
 
   const handleStartJob = () => {
     startJob({ jobId });

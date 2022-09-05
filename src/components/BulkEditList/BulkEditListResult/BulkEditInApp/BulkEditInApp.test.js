@@ -175,7 +175,7 @@ describe('BulkEditInApp', () => {
     expect(optionReplace.selected).toBe(true);
   });
 
-  it('should display experation date', () => {
+  it.skip('should display experation date', () => {
     renderBulkEditInApp(titleMock, CAPABILITIES.USER);
 
 
