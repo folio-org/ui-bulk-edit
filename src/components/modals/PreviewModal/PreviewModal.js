@@ -75,7 +75,6 @@ const PreviewModal = ({
     }
   }, [fileData]);
 
-
   return (
     <Modal
       size="large"

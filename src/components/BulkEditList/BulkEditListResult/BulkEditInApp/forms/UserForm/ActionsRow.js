@@ -10,10 +10,11 @@ export const ActionsRow = ({ actions, onChange }) => {
   const { userGroups } = usePatronGroup();
 
   const patronGroups = Object.values(userGroups).reduce(
-    (acc, { group, desc = '' }) => {
+    (acc, { group, desc }) => {
+      const description = desc ? `(${desc})` : '';
       const groupObject = {
         value: group,
-        label: `${group} (${desc})`,
+        label: `${group} ${description}`,
       };
 
       acc.push(groupObject);
