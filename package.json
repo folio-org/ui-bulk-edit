@@ -102,6 +102,7 @@
           "inventory-storage.location-units.campuses.collection.get",
           "inventory-storage.location-units.libraries.collection.get",
           "inventory-storage.locations.collection.get",
+          "inventory-storage.loan-types.collection.get",
           "remote-storage.mappings.collection.get"
         ],
         "visible": true
@@ -113,7 +114,9 @@
           "ui-bulk-edit.view",
           "bulk-edit.item.post",
           "data-export.job.item.post",
-          "bulk-edit.users.content-update.upload.post"
+          "bulk-edit.users.content-update.upload.post",
+          "bulk-edit.users-content-update.collection.post",
+          "bulk-edit.start.item.post"
         ],
         "visible": true
       },
