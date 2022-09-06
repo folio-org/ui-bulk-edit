@@ -190,10 +190,10 @@ describe('BulkEditInApp', () => {
 
     const dataPicker = screen.getByTestId('dataPicker-experation-date-0');
 
-    userEvent.type(dataPicker, '04/05/2022');
+    userEvent.type(dataPicker, '2000-01-01 00:00:00.000Z');
 
     expect(optionReplace.selected).toBe(true);
-    expect(dataPicker).toHaveValue('04/05/2022');
+    expect(dataPicker).toHaveValue('2000-01-01 00:00:00.000Z');
   });
 
   it('should display patron group', () => {

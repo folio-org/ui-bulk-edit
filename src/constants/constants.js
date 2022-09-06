@@ -366,6 +366,17 @@ export const itemColumnInAppWidths = {
   temporaryLoanType: '120px',
 };
 
+export const userColumnInAppWidths = {
+  active: '110px',
+  lastName: '110px',
+  firstName: '160px',
+  barcode: '100px',
+  patronGroup: '120px',
+  username: '120px',
+  email: '120px',
+  expirationDate: '120px',
+};
+
 export const controlTypes = {
   SELECT: 'SELECT',
   DATE: 'DATE',

@@ -9,7 +9,7 @@ import moment from 'moment';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import css from './PreviewModal.css';
 import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
-import { useLaunchJob } from '../../../API';
+import { useLaunchJob, useUserGroupsMap } from '../../../API';
 import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 import { OPTIONS } from '../../../constants';
@@ -25,19 +25,24 @@ const PreviewModal = ({
   const history = useHistory();
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
+  const { userGroups } = useUserGroupsMap();
   const {
     visibleColumns,
     columnMapping,
     columnWidths,
     formatter,
-  } = useInAppColumnsInfo({ capability });
+  } = useInAppColumnsInfo({ capability, userGroups });
 
   const [previewItems, setPreviewItems] = useState([]);
   const [countOfChangedRecords, setCountOfChangedRecords] = useState(0);
 
   const { startJob } = useLaunchJob();
   const { inAppUpload, isLoading: isUploading } = useInAppUpload();
-  const { data: fileData, refetch: downloadPreviewCSV, isLoading: isDownloading } = useInAppDownloadPreview(jobId);
+  const {
+    data: fileData,
+    refetch: downloadPreviewCSV,
+    isLoading: isDownloading,
+  } = useInAppDownloadPreview(jobId, capability?.toLowerCase());
 
   const handleStartJob = () => {
     startJob({ jobId });
@@ -68,7 +73,7 @@ const PreviewModal = ({
       });
 
       inAppUpload({ jobId, contentUpdates: formattedContentUpdates, capability }).then(response => {
-        setPreviewItems(response.items);
+        setPreviewItems(response[capability.toLowerCase()]);
         setCountOfChangedRecords(response.totalRecords);
       });
     }
@@ -84,7 +89,6 @@ const PreviewModal = ({
       });
     }
   }, [fileData]);
-
 
   return (
     <Modal
