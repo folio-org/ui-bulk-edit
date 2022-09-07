@@ -111,7 +111,7 @@
     "layer.action.clear": "Vymazat pole",
     "layer.confirmChanges": "Potvrďte změny",
     "actions.placeholder": "Vyberte akci",
-    "previewModal.message": "{count} záznamy se změní, pokud kliknete na tlačítko Uložit a zavřít. Můžete zvolit Stáhnout náhled a zkontrolovat všechny změny před uložením.",
+    "previewModal.message": "{count} záznamů se změní, pokud kliknete na tlačítko Uložit a zavřít. Můžete zvolit Stáhnout náhled a zkontrolovat všechny změny před uložením.",
     "previewModal.previewToBeChanged": "Náhled záznamů, které mají být změněny",
     "previewModal.keepEditing": "Pokračovat v úpravách",
     "previewModal.downloadPreview": "Stáhnout náhled",
