@@ -146,6 +146,7 @@
     "uploaderSubTitle.EXTERNAL_SYSTEM_ID": "Select a file with External IDs",
     "uploaderSubTitle.USER_NAME": "Select a file with Usernames",
     "list.result.emptyMessage.item": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "list.result.emptyMessage.holdings": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
     "list.result.emptyMessage.item.BARCODE": "Drag and drop or choose file with item barcode",
     "list.result.emptyMessage.item.ID": "Drag and drop or choose file with item UUIDs",
     "list.result.emptyMessage.item.HRID": "Drag and drop or choose file with item HRIDs",
