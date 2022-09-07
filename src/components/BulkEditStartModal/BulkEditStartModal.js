@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -31,12 +31,14 @@ const BulkEditStartModal = ({
   const intl = useIntl();
   const showCallout = useShowCallout();
   const search = new URLSearchParams(location.search);
+  const controller = useRef();
 
   const entityType = search.get('capabilities')?.slice(0, -1);
 
-  const { requestJobId, isLoading } = useJobCommand({ entityType });
-  const { fileUpload } = useFileUploadComand();
+  const { requestJobId } = useJobCommand({ entityType });
+  const { fileUpload, isLoading } = useFileUploadComand();
 
+  // console.log('rest', rest)
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
@@ -57,12 +59,11 @@ const BulkEditStartModal = ({
   };
 
   const uploadFileFlow = async (fileToUpload) => {
-    setDropZoneActive(false);
-
+    controller.current = new AbortController();
     try {
       const { id } = await requestJobId({ recordIdentifier: BULK_EDIT_BARCODE, editType: BULK_EDIT_UPDATE });
 
-      const data = await fileUpload({ id, fileToUpload });
+      const data = await fileUpload({ id, fileToUpload, controller: controller.current });
 
       await setUpdatedId(id);
 
@@ -77,11 +78,13 @@ const BulkEditStartModal = ({
       setIsFileUploaded(true);
 
       setConformationButton(false);
-    } catch {
-      showCallout({
-        message: errorMessage,
-        type: 'error',
-      });
+    } catch (error) {
+      if (!controller.current.signal.aborted) {
+        showCallout({
+          message: errorMessage,
+          type: 'error',
+        });
+      }
     }
   };
 
@@ -103,7 +106,8 @@ const BulkEditStartModal = ({
 
   const handleCancel = () => {
     onCancel();
-
+    // console.log('ontroller?.signal', controller?.signal)
+    controller.current.abort();
     search.delete('processedFileName');
 
     const searchStr = `?${search.toString()}`;

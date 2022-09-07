@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -25,21 +25,18 @@ const ListFileUploader = (
     handleDragLeave,
     uploaderSubTitle,
     className,
-
   },
 ) => {
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [fileExtensionModalMessage, setFileExtensionModalMessage] = useState('');
 
-  const uploaderTitle = () => {
-    if (isDropZoneActive) {
-      return isLoading
-        ? <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />
-        : <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />;
-    } else {
-      return <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
-    }
-  };
+  const uploaderTitle = useMemo(() => {
+    if (isLoading) return <Preloader message={<FormattedMessage id="ui-bulk-edit.uploading" />} />;
+
+    if (isDropZoneActive) return <FormattedMessage id="ui-bulk-edit.uploaderActiveTitle" />;
+
+    return <FormattedMessage id="ui-bulk-edit.uploaderTitle" />;
+  }, [isLoading, isDropZoneActive]);
 
   const showFileExtensionModal = (message) => {
     setFileExtensionModalMessage(message);
@@ -76,9 +73,9 @@ const ListFileUploader = (
       <FileUploader
         disabled={isDropZoneDisabled || disableUploader}
         multiple={false}
-        title={uploaderTitle()}
+        title={uploaderTitle}
         uploadButtonText={<FormattedMessage id="ui-bulk-edit.uploaderBtnText" />}
-        isDropZoneActive={isDropZoneActive}
+        isDropZoneActive={isDropZoneActive || isLoading}
         onDrop={onDrop}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
