@@ -21,7 +21,7 @@ import {
   BULK_EDIT_IDENTIFIERS,
   EDIT_CAPABILITIES,
   BULK_EDIT_QUERY,
-  CRITERIES, CAPABILITIES,
+  CRITERIES, CAPABILITIES, translationSuffix,
 } from '../../../constants';
 import { useJobCommand, useFileUploadComand, useUserGroupsMap, useLaunchJob } from '../../../API';
 import { buildQuery } from '../../../hooks';
@@ -59,17 +59,16 @@ export const BulkEditListFilters = ({
   const { setVisibleColumns } = useContext(RootContext);
 
   const isCapabilityDisabled = (capabilityValue) => {
-    switch (capabilityValue) {
-      case CAPABILITIES.USER:
-        return isUserRadioDisabled;
-      case CAPABILITIES.ITEM:
-        return isInventoryRadioDisabled;
-      default:
-        return true;
-    }
+    const capabilitiesMap = {
+      [CAPABILITIES.USER]: isUserRadioDisabled,
+      [CAPABILITIES.ITEM]: isInventoryRadioDisabled,
+      [CAPABILITIES.HOLDINGS]: isInventoryRadioDisabled,
+    };
+
+    return capabilitiesMap[capabilityValue];
   };
 
-  const capabilitiesFilterOptions = EDIT_CAPABILITIES.map(capability => ({
+  const capabilitiesFilterOptions = EDIT_CAPABILITIES?.map(capability => ({
     ...capability,
     disabled: isCapabilityDisabled(capability.value),
   }));
@@ -173,9 +172,7 @@ export const BulkEditListFilters = ({
   const uploaderSubTitle = useMemo(() => {
     const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
 
-    return capabilities === CAPABILITIES.USER ? <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${messagePrefix}`} />
-      :
-    <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle.item${messagePrefix}`} />;
+    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${translationSuffix[capabilities]}${messagePrefix}`} />;
   }, [recordIdentifier]);
 
   useEffect(() => {
@@ -272,7 +269,7 @@ export const BulkEditListFilters = ({
         label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
       >
         <RadioButtonGroup>
-          {capabilitiesFilterOptions.map(option => (
+          {capabilitiesFilterOptions?.map(option => (
             <RadioButton
               key={option.value}
               label={option.label}

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { Layout, Icon } from '@folio/stripes/components';
 
-import { CAPABILITIES } from '../../../../constants/constants';
+import { translationSuffix } from '../../../../constants';
 
 import css from './NoResultsMessage.css';
 
@@ -16,9 +16,7 @@ export const NoResultsMessage = () => {
     const identifier = new URLSearchParams(location.search).get('identifier');
     const messagePrefix = identifier ? `.${identifier}` : '';
 
-    return capabilities === CAPABILITIES.USER ? <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${messagePrefix}`} />
-      :
-    <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage.item${messagePrefix}`} />;
+    return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${translationSuffix[capabilities]}${messagePrefix}`} />;
   }, [location.search]);
 
   return (
