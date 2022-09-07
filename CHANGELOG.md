@@ -2,6 +2,10 @@
 
 ## In progress
 
+## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.3) (2022-09-09)
+
+* [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
+
 ## [2.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-08-05)
 
 * [UIBULKED-130](https://issues.folio.org/browse/UIBULKED-130) Progress bar blinks (reloads) on the first run
@@ -49,8 +53,6 @@
 * [UIBULKED-117](https://issues.folio.org/browse/UIBULKED-117) The "Invalid file" modal is not displayed in case of dragging multiple files on "Drag & drop" area
 * [UIBULKED-102](https://issues.folio.org/browse/UIBULKED-102) Inconsistent behavior when repeating updates on the same records - item locations
 * [UIBULKED-89](https://issues.folio.org/browse/UIBULKED-89) The name of previously uploaded file is not reset when user clicks Cancel button on the Confirmation modal
-
-
 
 ## [1.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v1.0.1) (2022-03-04)
 
