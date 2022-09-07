@@ -8,7 +8,7 @@ export const usePatronGroup = () => {
   const ky = useOkapiKy();
   const { data } = useQuery(
     {
-      queryKey: ['userGroupsMap'],
+      queryKey: ['userPatronGroup'],
       queryFn: async () => {
         const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
 
