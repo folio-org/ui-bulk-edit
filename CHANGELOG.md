@@ -8,6 +8,7 @@
 * [UIBULKED-104](https://issues.folio.org/browse/UIBULKED-104) Bulk edit user records - in app permission -landing page.
 * [UIBULKED-125](https://issues.folio.org/browse/UIBULKED-125) User-records - commit changes - in app
 * [UIBULKED-124](https://issues.folio.org/browse/UIBULKED-124) User-records - confirm changes - in app.
+* [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
 
 ## [2.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-08-05)
 * [UIBULKED-130](https://issues.folio.org/browse/UIBULKED-130) Progress bar blinks (reloads) on the first run
