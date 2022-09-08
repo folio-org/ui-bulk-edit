@@ -178,6 +178,7 @@ export const CRITERIES = {
 export const CAPABILITIES = {
   ITEM: 'ITEMS',
   USER: 'USERS',
+  HOLDINGS: 'HOLDINGS_RECORD',
 };
 
 export const CAPABILITIES_VALUE = {
@@ -381,4 +382,10 @@ export const controlTypes = {
   SELECT: 'SELECT',
   DATE: 'DATE',
   INPUT: 'INPUT',
+};
+
+export const translationSuffix = {
+  [CAPABILITIES.USER]: '',
+  [CAPABILITIES.ITEM]: '.item',
+  [CAPABILITIES.HOLDINGS]: '.holdings',
 };
