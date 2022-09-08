@@ -14,6 +14,7 @@ export const useInAppUpload = () => {
         contentUpdates,
         totalRecords: contentUpdates.length,
       },
+      timeout: false,
     }).json();
   } });
 
