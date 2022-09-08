@@ -56,6 +56,14 @@ export const BulkEditInApp = (
             getFilteredFields={getFilteredFields}
           />
         )}
+
+        {typeOfBulk === CAPABILITIES.HOLDINGS && (
+          <UserForm
+            onContentUpdatesChanged={onContentUpdatesChanged}
+            typeOfBulk={typeOfBulk}
+            getFilteredFields={getFilteredFields}
+          />
+        )}
       </Accordion>
     </>
   );

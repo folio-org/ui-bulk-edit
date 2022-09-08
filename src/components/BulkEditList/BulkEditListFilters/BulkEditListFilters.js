@@ -54,7 +54,8 @@ export const BulkEditListFilters = ({
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
   const { startJob } = useLaunchJob();
   const { userGroups } = useUserGroupsMap();
-  const { requestJobId, isLoading } = useJobCommand({ entityType: capabilities.slice(0, -1) });
+  const entityType = capabilities === CAPABILITIES.HOLDINGS ? capabilities : capabilities.slice(0, -1);
+  const { requestJobId, isLoading } = useJobCommand({ entityType });
   const { fileUpload } = useFileUploadComand();
   const { setVisibleColumns } = useContext(RootContext);
 
