@@ -78,7 +78,7 @@ const BulkEditStartModal = ({
 
       setConformationButton(false);
     } catch (error) {
-      if (!controller.current.signal.aborted) {
+      if (error.name !== 'AbortError') {
         showCallout({
           message: errorMessage,
           type: 'error',
