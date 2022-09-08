@@ -38,7 +38,6 @@ const BulkEditStartModal = ({
   const { requestJobId } = useJobCommand({ entityType });
   const { fileUpload, isLoading } = useFileUploadComand();
 
-  // console.log('rest', rest)
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isConformationButton, setConformationButton] = useState(true);
@@ -106,8 +105,7 @@ const BulkEditStartModal = ({
 
   const handleCancel = () => {
     onCancel();
-    // console.log('ontroller?.signal', controller?.signal)
-    controller.current.abort();
+    if (controller.current) controller.current.abort();
     search.delete('processedFileName');
 
     const searchStr = `?${search.toString()}`;
