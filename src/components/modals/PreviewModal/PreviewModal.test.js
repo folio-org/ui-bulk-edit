@@ -6,8 +6,10 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import '../../../../test/jest/__mock__';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
+import { RootContext } from '../../../context/RootContext';
 
 import PreviewModal from './PreviewModal';
+import { getInventoryResultsFormatterBase } from '../../../constants/formatters';
 
 const startJob = jest.fn();
 const inAppUpload = jest.fn().mockReturnValue(() => ({ response: { items: [] } }));
@@ -18,6 +20,8 @@ jest.doMock('../../../API', () => ({
   useInAppUpload: () => ({ inAppUpload, isLoading: false }),
   useInAppDownloadPreview: () => ({ data: [], refetch, isLoading: false }),
 }));
+
+const visibleColumns = JSON.stringify(Object.keys(getInventoryResultsFormatterBase()));
 
 const renderPreviewModal = ({
   open,
@@ -30,14 +34,19 @@ const renderPreviewModal = ({
   render(
     <MemoryRouter initialEntries={['/bulk-edit/1/initial?capabilities=ITEMS&fileName=barcodes.csv&identifier=BARCODE']}>
       <QueryClientProvider client={queryClient}>
-        <PreviewModal
-          open={open}
-          jobId={jobId}
-          contentUpdates={contentUpdates}
-          onKeepEditing={onKeepEditing}
-          onJobStarted={onJobStarted}
-          setUpdatedId={setUpdatedId}
-        />,
+        <RootContext.Provider value={{
+          visibleColumns,
+        }}
+        >
+          <PreviewModal
+            open={open}
+            jobId={jobId}
+            contentUpdates={contentUpdates}
+            onKeepEditing={onKeepEditing}
+            onJobStarted={onJobStarted}
+            setUpdatedId={setUpdatedId}
+          />,
+        </RootContext.Provider>
       </QueryClientProvider>
     </MemoryRouter>,
   );
