@@ -27,6 +27,7 @@ export const useInAppUpload = () => {
     return ky.post(`bulk-edit/${jobId}/${typeOfBulk}-content-update/upload`, {
       searchParams: { limit: 10 },
       json: getBody(),
+      timeout: false,
     }).json();
   } });
 
