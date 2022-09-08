@@ -116,7 +116,6 @@
     "layer.action.clear": "Clear field",
     "layer.confirmChanges": "Confirm changes",
     "actions.placeholder": "Select action",
-    "actions.find": "Find",
     "previewModal.message": "{count} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
     "previewModal.previewToBeChanged": "Preview of records to be changed",
     "previewModal.keepEditing": "Keep editing",
@@ -132,10 +131,6 @@
     "layer.options.withdrawn": "Withdrawn",
     "layer.options.non-requestable": "In process (non-requestable)",
     "layer.options.intellectual": "Intellectual item",
-
-    "layer.options.expirationDate": "Expiration date",
-    "layer.options.email": "Email",
-
     "layer.options.longMissing": "Long missing",
     "layer.options.restricted": "Restricted",
     "layer.options.unavailable": "Unavailable",
