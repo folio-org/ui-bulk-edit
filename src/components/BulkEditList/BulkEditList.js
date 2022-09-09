@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -34,6 +34,7 @@ export const BulkEditList = () => {
   const location = useLocation();
   const history = useHistory();
   const search = new URLSearchParams(location.search);
+  const controller = useRef();
 
   const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
@@ -141,12 +142,18 @@ export const BulkEditList = () => {
   };
 
   const handlePreviewModalOpen = () => {
+    controller.current = new AbortController();
     setPreviewModalOpened(true);
   };
 
   const handleJobStart = () => {
     setPreviewModalOpened(false);
     setIsBulkEditLayerOpen(false);
+  };
+
+  const handleOnKeepEditing = () => {
+    if (controller.current) controller.current.abort();
+    setPreviewModalOpened(false);
   };
 
   const handleStartNewBulkEdit = () => {
@@ -296,8 +303,9 @@ export const BulkEditList = () => {
         open={isPreviewModalOpened}
         contentUpdates={contentUpdates}
         onJobStarted={handleJobStart}
-        onKeepEditing={() => setPreviewModalOpened(false)}
+        onKeepEditing={handleOnKeepEditing}
         setUpdatedId={setUpdatedId}
+        controller={controller.current}
       />
 
     </RootContext.Provider>
