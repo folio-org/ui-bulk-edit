@@ -170,6 +170,85 @@ export const INVENTORY_COLUMNS = [
   },
 ];
 
+export const HOLDINGS_COLUMNS_BASE = [
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsHRID" />,
+    value: 'hrid',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsPermanentLocation" />,
+    value: 'permanentLocation',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsTemporaryLocation" />,
+    value: 'temporaryLocationId',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsCallNumberPrefix" />,
+    value: 'callNumberPrefix',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsCallNumber" />,
+    value: 'callNumber',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsCallNumberSuffix" />,
+    value: 'callNumberSuffix',
+    disabled: false,
+    selected: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsType" />,
+    value: 'holdingsTypeId',
+    disabled: false,
+    selected: true,
+  },
+];
+
+export const HOLDINGS_COLUMNS = [
+  ...HOLDINGS_COLUMNS_BASE,
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsEffectiveLocation" />,
+    value: 'effectiveLocationId',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsUUID" />,
+    value: 'id',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsSource" />,
+    value: 'sourceId',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsDiscoverySuppress" />,
+    value: 'discoverySuppress',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.holdingsCallNumberType" />,
+    value: 'callNumberTypeId',
+    disabled: false,
+    selected: false,
+  },
+];
+
 export const CRITERIES = {
   IDENTIFIER: 'identifier',
   QUERY: 'query',
@@ -184,6 +263,7 @@ export const CAPABILITIES = {
 export const CAPABILITIES_VALUE = {
   ITEMS: 'item',
   USERS: 'user',
+  HOLDINGS: 'holdings',
 };
 
 export const ACTIONS = {

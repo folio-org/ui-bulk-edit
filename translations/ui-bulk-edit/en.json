@@ -150,6 +150,19 @@
   "columns.chronology": "Chronology",
   "columns.volume": "Volume",
 
+  "columns.holdingsHRID": "Holdings HRID",
+  "columns.holdingsPermanentLocation": "Permanent Location",
+  "columns.holdingsTemporaryLocation": "Temporary Location",
+  "columns.holdingsCallNumberPrefix": "Call number prefix",
+  "columns.holdingsCallNumber": "Call number",
+  "columns.holdingsCallNumberSuffix": "Call number suffix",
+  "columns.holdingsType": "Holdings type",
+  "columns.holdingsEffectiveLocation": "Effective location",
+  "columns.holdingsUUID": "Holdings UUID",
+  "columns.holdingsSource": "Source",
+  "columns.holdingsDiscoverySuppress": "Discovery suppress",
+  "columns.holdingsCallNumberType": "Call number type",
+
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
 

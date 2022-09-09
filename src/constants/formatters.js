@@ -47,3 +47,19 @@ export const getInventoryResultsFormatter = () => ({
   chronology: item => item.chronology,
   volume: item => item.volume,
 });
+
+export const getHoldingsResultsFormatter = () => ({
+  hrid: item => item.hrid,
+  permanentLocation: item => item.permanentLocation?.name || '',
+  temporaryLocationId: item => item.temporaryLocationId,
+  callNumberPrefix: item => item.callNumberPrefix,
+  callNumber: item => item.callNumber,
+  callNumberSuffix: item => item.callNumberSuffix,
+  holdingsTypeId: item => item.holdingsTypeId,
+
+  effectiveLocationId: item => item.effectiveLocationId,
+  id: item => item.id,
+  sourceId: item => item.sourceId,
+  discoverySuppress: item => item.discoverySuppress?.name || '',
+  callNumberTypeId: item => item.callNumberTypeId,
+});
