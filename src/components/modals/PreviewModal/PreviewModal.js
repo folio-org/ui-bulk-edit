@@ -21,6 +21,7 @@ const PreviewModal = ({
   onKeepEditing,
   onJobStarted,
   setUpdatedId,
+  controller,
 }) => {
   const history = useHistory();
   const location = useLocation();
@@ -37,7 +38,7 @@ const PreviewModal = ({
   const [countOfChangedRecords, setCountOfChangedRecords] = useState(0);
 
   const { startJob } = useLaunchJob();
-  const { inAppUpload, isLoading: isUploading } = useInAppUpload();
+  const { inAppUpload, isLoading: isUploading } = useInAppUpload(controller?.signal);
   const {
     data: fileData,
     refetch: downloadPreviewCSV,
@@ -132,6 +133,7 @@ PreviewModal.propTypes = {
   onJobStarted: PropTypes.func,
   setUpdatedId: PropTypes.func,
   contentUpdates: PropTypes.arrayOf(PropTypes.object),
+  controller: PropTypes.object,
 };
 
 export default PreviewModal;
