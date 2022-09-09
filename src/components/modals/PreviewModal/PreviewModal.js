@@ -133,6 +133,7 @@ PreviewModal.propTypes = {
   onJobStarted: PropTypes.func,
   setUpdatedId: PropTypes.func,
   contentUpdates: PropTypes.arrayOf(PropTypes.object),
+  controller: PropTypes.object,
 };
 
 export default PreviewModal;

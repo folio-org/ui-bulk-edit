@@ -152,9 +152,9 @@ export const BulkEditList = () => {
   };
 
   const handleOnKeepEditing = () => {
-    controller.current?.abort();
-    setPreviewModalOpened(false)
-  }
+    if (controller.current) controller.current.abort();
+    setPreviewModalOpened(false);
+  };
 
   const handleStartNewBulkEdit = () => {
     // redirect to initial state with saved capabilities in search
