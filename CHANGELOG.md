@@ -9,6 +9,7 @@
 * [UIBULKED-125](https://issues.folio.org/browse/UIBULKED-125) User-records - commit changes - in app
 * [UIBULKED-124](https://issues.folio.org/browse/UIBULKED-124) User-records - confirm changes - in app.
 * [UIBULKED-110](https://issues.folio.org/browse/UIBULKED-110) Populate holdings record identifiers dropdown
+* [UIBULKED-129](https://issues.folio.org/browse/UIBULKED-129) Preserve column selection from preview to Are you sure? form and confirmation page
 
 ## [2.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-08-05)
 * [UIBULKED-130](https://issues.folio.org/browse/UIBULKED-130) Progress bar blinks (reloads) on the first run
