@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import { CAPABILITIES_PARAMS } from '../constants';
 
-export const useInAppUpload = () => {
+export const useInAppUpload = (signal) => {
   const ky = useOkapiKy();
 
   const { mutateAsync: inAppUpload, isLoading } = useMutation({ mutationFn: ({ jobId, contentUpdates }) => {
@@ -15,6 +15,7 @@ export const useInAppUpload = () => {
         totalRecords: contentUpdates.length,
       },
       timeout: false,
+      signal,
     }).json();
   } });
 

@@ -14,7 +14,15 @@ import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 import { useLaunchJob } from '../../../API';
 
-const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted, setUpdatedId }) => {
+const PreviewModal = ({
+  open,
+  jobId,
+  contentUpdates,
+  onKeepEditing,
+  onJobStarted,
+  setUpdatedId,
+  controller,
+}) => {
   const history = useHistory();
   const location = useLocation();
   const formatter = getInventoryResultsFormatterBase();
@@ -37,7 +45,7 @@ const PreviewModal = ({ open, jobId, contentUpdates, onKeepEditing, onJobStarted
   const [countOfChangedRecords, setCountOfChangedRecords] = useState(0);
 
   const { startJob } = useLaunchJob();
-  const { inAppUpload, isLoading: isUploading } = useInAppUpload();
+  const { inAppUpload, isLoading: isUploading } = useInAppUpload(controller?.signal);
   const { data: fileData, refetch: downloadPreviewCSV, isLoading: isDownloading } = useInAppDownloadPreview(jobId);
 
   const handleStartJob = () => {
