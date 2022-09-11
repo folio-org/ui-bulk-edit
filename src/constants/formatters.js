@@ -48,7 +48,7 @@ export const getInventoryResultsFormatter = () => ({
   volume: item => item.volume,
 });
 
-export const getHoldingsResultsFormatter = () => ({
+export const getHoldingsResultsFormatterBase = () => ({
   hrid: item => item.hrid,
   permanentLocation: item => item.permanentLocation,
   temporaryLocation: item => item.temporaryLocation,
@@ -56,7 +56,10 @@ export const getHoldingsResultsFormatter = () => ({
   callNumber: item => item.callNumber,
   callNumberSuffix: item => item.callNumberSuffix,
   holdingsTypeId: item => item.holdingsTypeId,
+});
 
+export const getHoldingsResultsFormatter = () => ({
+  ...getHoldingsResultsFormatterBase(),
   effectiveLocation: item => item.effectiveLocation,
   id: item => item.id,
   sourceId: item => item.sourceId,
