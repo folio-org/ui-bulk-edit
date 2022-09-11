@@ -12,7 +12,6 @@
 * [UIBULKED-129](https://issues.folio.org/browse/UIBULKED-129) Preserve column selection from preview to Are you sure? form and confirmation page
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
 
-
 ## [2.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-08-05)
 * [UIBULKED-130](https://issues.folio.org/browse/UIBULKED-130) Progress bar blinks (reloads) on the first run
 
