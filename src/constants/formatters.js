@@ -50,14 +50,14 @@ export const getInventoryResultsFormatter = () => ({
 
 export const getHoldingsResultsFormatter = () => ({
   hrid: item => item.hrid,
-  permanentLocation: item => item.permanentLocation?.name || '',
-  temporaryLocationId: item => item.temporaryLocationId,
+  permanentLocation: item => item.permanentLocation,
+  temporaryLocation: item => item.temporaryLocation,
   callNumberPrefix: item => item.callNumberPrefix,
   callNumber: item => item.callNumber,
   callNumberSuffix: item => item.callNumberSuffix,
   holdingsTypeId: item => item.holdingsTypeId,
 
-  effectiveLocationId: item => item.effectiveLocationId,
+  effectiveLocation: item => item.effectiveLocation,
   id: item => item.id,
   sourceId: item => item.sourceId,
   discoverySuppress: item => item.discoverySuppress?.name || '',

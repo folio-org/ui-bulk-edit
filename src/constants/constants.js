@@ -185,7 +185,7 @@ export const HOLDINGS_COLUMNS_BASE = [
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.holdingsTemporaryLocation" />,
-    value: 'temporaryLocationId',
+    value: 'temporaryLocation',
     disabled: false,
     selected: true,
   },
@@ -219,7 +219,7 @@ export const HOLDINGS_COLUMNS = [
   ...HOLDINGS_COLUMNS_BASE,
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.holdingsEffectiveLocation" />,
-    value: 'effectiveLocationId',
+    value: 'effectiveLocation',
     disabled: false,
     selected: false,
   },
