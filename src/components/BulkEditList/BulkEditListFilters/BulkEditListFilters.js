@@ -54,7 +54,7 @@ export const BulkEditListFilters = ({
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
   const { startJob } = useLaunchJob();
   const { userGroups } = useUserGroupsMap();
-  const { requestJobId } = useJobCommand({ entityType: capabilities.slice(0, -1) });
+  const { requestJobId } = useJobCommand({ entityType: capabilities });
   const { fileUpload, isLoading } = useFileUploadComand();
   const { setVisibleColumns } = useContext(RootContext);
 
@@ -62,7 +62,7 @@ export const BulkEditListFilters = ({
     const capabilitiesMap = {
       [CAPABILITIES.USER]: isUserRadioDisabled,
       [CAPABILITIES.ITEM]: isInventoryRadioDisabled,
-      [CAPABILITIES.HOLDINGS]: isInventoryRadioDisabled,
+      [CAPABILITIES.HOLDINGS]: false, // TODO: disable it based on permissions
     };
 
     return capabilitiesMap[capabilityValue];
