@@ -184,6 +184,7 @@ export const CAPABILITIES = {
 export const CAPABILITIES_VALUE = {
   ITEMS: 'item',
   USERS: 'user',
+  HOLDINGS_RECORD: 'holdings',
 };
 
 export const ACTIONS = {
@@ -201,6 +202,8 @@ export const OPTIONS = {
   PATRON_GROUP: 'PATRON_GROUP',
   TEMPORARY_LOAN_TYPE: 'TEMPORARY_LOAN_TYPE',
   PERMANENT_LOAN_TYPE: 'PERMANENT_LOAN_TYPE',
+  TEMPORARY_HOLDINGS_LOCATION: 'TEMPORARY_LOCATION',
+  PERMANENT_HOLDINGS_LOCATION: 'PERMANENT_LOCATION',
 };
 
 export const getPlaceholder = (formatMessage) => ({
@@ -263,6 +266,17 @@ export const USER_OPTIONS = (formatMessage) => [
   {
     value: OPTIONS.PATRON_GROUP,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.patronGroup' }),
+    disabled: false,
+  },
+];
+
+export const HOLDINGS_OPTIONS = (formatMessage) => [
+  { value: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.temporaryLocation' }),
+    disabled: false },
+  {
+    value: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.permanentLocation' }),
     disabled: false,
   },
 ];
