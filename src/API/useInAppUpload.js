@@ -4,7 +4,7 @@ import { useOkapiKy } from '@folio/stripes/core';
 
 import { CAPABILITIES_VALUE } from '../constants';
 
-export const useInAppUpload = () => {
+export const useInAppUpload = (signal) => {
   const ky = useOkapiKy();
 
   const { mutateAsync: inAppUpload, isLoading } = useMutation({ mutationFn: ({ jobId, contentUpdates, capability }) => {
@@ -33,6 +33,8 @@ export const useInAppUpload = () => {
     return ky.post(`bulk-edit/${jobId}/${typeOfBulk}-content-update/upload`, {
       searchParams: { limit: 10 },
       json: getBody(),
+      timeout: false,
+      signal,
     }).json();
   } });
 

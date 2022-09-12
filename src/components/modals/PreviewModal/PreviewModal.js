@@ -2,7 +2,7 @@ import { saveAs } from 'file-saver';
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import moment from 'moment';
@@ -13,6 +13,7 @@ import { useLaunchJob, useUserGroupsMap } from '../../../API';
 import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 import { OPTIONS } from '../../../constants';
+import { RootContext } from '../../../context/RootContext';
 
 const PreviewModal = ({
   open,
@@ -21,23 +22,28 @@ const PreviewModal = ({
   onKeepEditing,
   onJobStarted,
   setUpdatedId,
+  controller,
 }) => {
   const history = useHistory();
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
   const { userGroups } = useUserGroupsMap();
   const {
-    visibleColumns,
+    columns,
     columnMapping,
     columnWidths,
     formatter,
   } = useInAppColumnsInfo({ capability, userGroups });
 
+  const { visibleColumns } = useContext(RootContext);
+
+  const finalColumns = JSON.parse(visibleColumns) || columns;
+
   const [previewItems, setPreviewItems] = useState([]);
   const [countOfChangedRecords, setCountOfChangedRecords] = useState(0);
 
   const { startJob } = useLaunchJob();
-  const { inAppUpload, isLoading: isUploading } = useInAppUpload();
+  const { inAppUpload, isLoading: isUploading } = useInAppUpload(controller?.signal);
   const {
     data: fileData,
     refetch: downloadPreviewCSV,
@@ -118,7 +124,7 @@ const PreviewModal = ({
         columnWidths={columnWidths}
         columnMapping={columnMapping}
         formatter={formatter}
-        visibleColumns={visibleColumns}
+        visibleColumns={finalColumns}
         loading={isUploading}
       />
     </Modal>
@@ -132,6 +138,7 @@ PreviewModal.propTypes = {
   onJobStarted: PropTypes.func,
   setUpdatedId: PropTypes.func,
   contentUpdates: PropTypes.arrayOf(PropTypes.object),
+  controller: PropTypes.object,
 };
 
 export default PreviewModal;

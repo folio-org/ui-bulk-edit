@@ -5,7 +5,11 @@ import '../../../../../../test/jest/__mock__';
 
 import PreviewAccordion from './PreviewAccordion';
 import { RootContext } from '../../../../../context/RootContext';
-import { getInventoryResultsFormatterBase, getUserResultsFormatterBase } from '../../../../../constants/formatters';
+import {
+  getHoldingsResultsFormatterBase,
+  getInventoryResultsFormatterBase,
+  getUserResultsFormatterBase,
+} from '../../../../../constants/formatters';
 
 const users = [
   {
@@ -41,6 +45,49 @@ const inventoryItems = [
     enumeration: 'enumeration',
     chronology: 'chronology',
     volume: 'volume',
+  },
+];
+
+const holdingsItems = [
+  {
+    id: 'e3ff6133-b9a2-4d4c-a1c9-dc1867d4df19',
+    _version: 1,
+    hrid: 'hrid',
+    holdingsTypeId: 'holdingsTypeId',
+    formerIds: [],
+    instanceId: '5bf370e0-8cca-4d9c-82e4-5170ab2a0a39',
+    permanentLocationId: 'fcd64ce1-6995-48f0-840e-89ffa2288371',
+    permanentLocation: 'permanentLocation',
+    temporaryLocationId: null,
+    effectiveLocationId: null,
+    electronicAccess: [],
+    callNumberTypeId: '512173a7-bd09-490e-b773-17d83f2b63fe',
+    callNumberPrefix: 'callNumberPrefix',
+    callNumber: 'callNumber',
+    callNumberSuffix: 'callNumberSuffix',
+    shelvingTitle: ' TK5105.88815',
+    acquisitionFormat: null,
+    acquisitionMethod: null,
+    receiptStatus: null,
+    administrativeNotes: [],
+    notes: [],
+    illPolicyId: '46970b40-918e-47a4-a45d-b1677a2d3d46',
+    illPolicy: null,
+    retentionPolicy: null,
+    digitizationPolicy: null,
+    holdingsStatements: [],
+    holdingsStatementsForIndexes: [],
+    holdingsStatementsForSupplements: [],
+    copyNumber: null,
+    numberOfItems: null,
+    receivingHistory: null,
+    discoverySuppress: null,
+    statisticalCodeIds: [
+      'b5968c9e-cddc-4576-99e3-8e60aed8b0dd',
+    ],
+    tags: null,
+    metadata: null,
+    sourceId: null,
   },
 ];
 
@@ -94,5 +141,16 @@ describe('PreviewAccordion', () => {
     expect(screen.getByText('materialType')).toBeVisible();
     expect(screen.queryByText('id')).not.toBeInTheDocument();
     expect(screen.queryByText('1,2,3')).not.toBeInTheDocument();
+  });
+
+  it('should render preview accordion with holdings items', () => {
+    renderPreviewAccordion({ capabilities: 'HOLDINGS_RECORD', items: holdingsItems, step: 'initial', visibleColumns: JSON.stringify(Object.keys(getHoldingsResultsFormatterBase())) });
+
+    expect(screen.getByText('hrid')).toBeVisible();
+    expect(screen.getByText('permanentLocation')).toBeVisible();
+    expect(screen.getByText('callNumberPrefix')).toBeVisible();
+    expect(screen.getByText('callNumberSuffix')).toBeVisible();
+    expect(screen.getByText('holdingsTypeId')).toBeVisible();
+    expect(screen.getByText('callNumber')).toBeVisible();
   });
 });

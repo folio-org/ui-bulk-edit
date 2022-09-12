@@ -31,7 +31,7 @@ export const useInAppColumnsInfo = ({
       columnWidths = itemColumnInAppWidths;
   }
 
-  const visibleColumns = Object.keys(formatter);
+  const columns = Object.keys(formatter);
   const columnMapping = baseColumns.reduce((acc, el) => {
     acc[el.value] = el.label;
 
@@ -39,7 +39,7 @@ export const useInAppColumnsInfo = ({
   }, {});
 
   return {
-    visibleColumns,
+    columns,
     columnMapping,
     columnWidths,
     formatter,
