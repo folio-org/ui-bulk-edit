@@ -263,7 +263,6 @@ export const CAPABILITIES = {
 export const CAPABILITIES_VALUE = {
   ITEMS: 'item',
   USERS: 'user',
-  HOLDINGS_RECORD: 'holdings',
   HOLDINGS: 'holdings',
 };
 

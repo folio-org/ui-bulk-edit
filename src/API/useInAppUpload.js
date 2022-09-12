@@ -17,7 +17,7 @@ export const useInAppUpload = (signal) => {
             itemContentUpdates: contentUpdates,
             totalRecords: contentUpdates.length,
           };
-        case CAPABILITIES_VALUE.HOLDINGS_RECORD:
+        case CAPABILITIES_VALUE.HOLDINGS:
           return {
             holdingsContentUpdates: contentUpdates,
             totalRecords: contentUpdates.length,
