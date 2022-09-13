@@ -55,14 +55,14 @@ export const getHoldingsResultsFormatterBase = () => ({
   callNumberPrefix: item => item.callNumberPrefix,
   callNumber: item => item.callNumber,
   callNumberSuffix: item => item.callNumberSuffix,
-  holdingsTypeId: item => item.holdingsTypeId,
+  holdingsType: item => item.holdingsType,
 });
 
 export const getHoldingsResultsFormatter = () => ({
   ...getHoldingsResultsFormatterBase(),
   effectiveLocation: item => item.effectiveLocation,
   id: item => item.id,
-  sourceId: item => item.sourceId,
+  source: item => item.source,
   discoverySuppress: item => item.discoverySuppress?.name || '',
-  callNumberTypeId: item => item.callNumberTypeId,
+  callNumberType: item => item.callNumberType,
 });

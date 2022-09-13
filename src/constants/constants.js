@@ -209,7 +209,7 @@ export const HOLDINGS_COLUMNS_BASE = [
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.holdingsType" />,
-    value: 'holdingsTypeId',
+    value: 'holdingsType',
     disabled: false,
     selected: true,
   },
@@ -231,7 +231,7 @@ export const HOLDINGS_COLUMNS = [
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.holdingsSource" />,
-    value: 'sourceId',
+    value: 'source',
     disabled: false,
     selected: false,
   },
@@ -243,7 +243,7 @@ export const HOLDINGS_COLUMNS = [
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.holdingsCallNumberType" />,
-    value: 'callNumberTypeId',
+    value: 'callNumberType',
     disabled: false,
     selected: false,
   },
