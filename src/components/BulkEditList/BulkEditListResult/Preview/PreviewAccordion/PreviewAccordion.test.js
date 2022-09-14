@@ -150,7 +150,6 @@ describe('PreviewAccordion', () => {
     expect(screen.getByText('permanentLocation')).toBeVisible();
     expect(screen.getByText('callNumberPrefix')).toBeVisible();
     expect(screen.getByText('callNumberSuffix')).toBeVisible();
-    expect(screen.getByText('holdingsTypeId')).toBeVisible();
     expect(screen.getByText('callNumber')).toBeVisible();
   });
 });
