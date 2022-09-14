@@ -64,7 +64,7 @@ export const identifierOptions = {
       label: 'ui-bulk-edit.list.filters.recordIdentifier.holdings.holdingsUUID',
     },
     {
-      value: 'HOLDINGS_RECORD_ID',
+      value: 'HRID',
       label: 'ui-bulk-edit.list.filters.recordIdentifier.holdings.holdingsHRID',
     },
     {
