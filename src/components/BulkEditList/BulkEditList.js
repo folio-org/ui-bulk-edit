@@ -22,7 +22,7 @@ import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
 import { useJob } from '../../API';
 import { usePathParams } from '../../hooks';
-import { CAPABILITIES, CRITERIES } from '../../constants';
+import { ACTIONS, CAPABILITIES, CRITERIES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import PreviewModal from '../modals/PreviewModal/PreviewModal';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
@@ -47,6 +47,7 @@ export const BulkEditList = () => {
   const [contentUpdates, setContentUpdates] = useState(null);
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState(null);
+  const [isInAppFormValid, setIsInAppFormValid] = useState(true);
 
   const { id: jobId } = usePathParams('/bulk-edit/:id');
   const { data, isLoading } = useJob(jobId);
@@ -90,6 +91,26 @@ export const BulkEditList = () => {
       setVisibleColumns(columns);
     }
   }, []);
+
+  useEffect(() => {
+    const isFormValid = () => {
+      return contentUpdates?.every(({ actions, action, option, value }) => {
+        // USERS inApp approach
+        if (actions) {
+          return actions.every(act => !!act.value);
+        }
+
+        // ITEMS inApp approach
+        if (action === ACTIONS.CLEAR) { // for clear field 'value' is not required
+          return action && option;
+        }
+
+        return action && option && value;
+      });
+    };
+
+    setIsInAppFormValid(isFormValid());
+  }, [contentUpdates]);
 
   useEffect(() => {
     const initialRoute = '/bulk-edit';
@@ -220,6 +241,7 @@ export const BulkEditList = () => {
             marginBottom0
             onClick={handlePreviewModalOpen}
             type="submit"
+            disabled={!isInAppFormValid}
           >
             <FormattedMessage id="ui-bulk-edit.layer.confirmChanges" />
           </Button>
