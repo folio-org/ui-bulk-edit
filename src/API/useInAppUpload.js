@@ -11,16 +11,22 @@ export const useInAppUpload = (signal) => {
     const typeOfBulk = CAPABILITIES_VALUE[capability];
 
     const getBody = () => {
-      if (typeOfBulk === CAPABILITIES_VALUE.ITEMS) {
-        return {
-          itemContentUpdates: contentUpdates,
-          totalRecords: contentUpdates.length,
-        };
-      } else {
-        return {
-          userContentUpdates: contentUpdates,
-          totalRecords: contentUpdates.length,
-        };
+      switch (typeOfBulk) {
+        case CAPABILITIES_VALUE.ITEMS:
+          return {
+            itemContentUpdates: contentUpdates,
+            totalRecords: contentUpdates.length,
+          };
+        case CAPABILITIES_VALUE.HOLDINGS:
+          return {
+            holdingsContentUpdates: contentUpdates,
+            totalRecords: contentUpdates.length,
+          };
+        default:
+          return {
+            userContentUpdates: contentUpdates,
+            totalRecords: contentUpdates.length,
+          };
       }
     };
 

@@ -25,12 +25,12 @@ export const getUserResultsFormatter = (userGroups) => ({
 });
 
 export const getInventoryResultsFormatterBase = () => ({
-  barcode: item => item.barcode,
-  status: item => item.status.name ?? '',
-  effectiveLocation: item => item.effectiveLocation?.name || '',
-  callNumber: item => item.callNumber,
-  hrid: item => item.hrid,
-  materialType: item => item.materialType?.name || '',
+  barcode: item => item?.barcode,
+  status: item => item.status?.name ?? '',
+  effectiveLocation: item => item?.effectiveLocation?.name || '',
+  callNumber: item => item?.callNumber,
+  hrid: item => item?.hrid,
+  materialType: item => item?.materialType?.name || '',
   permanentLoanType: item => item.permanentLoanType?.name || '',
   temporaryLoanType: item => item.temporaryLoanType?.name || '',
 });

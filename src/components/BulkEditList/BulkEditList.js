@@ -76,7 +76,7 @@ export const BulkEditList = () => {
   const [filters, setFilters] = useState(initialFiltersState);
 
   const handleStartBulkEdit = () => {
-    if (capabilitiesUrl === CAPABILITIES.ITEM) {
+    if (capabilitiesUrl === CAPABILITIES.ITEM || capabilitiesUrl === CAPABILITIES.HOLDINGS) {
       setIsBulkEditLayerOpen(true);
     } else setIsBulkEditModalOpen(true);
   };
