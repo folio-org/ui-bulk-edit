@@ -8,11 +8,10 @@ import {
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 import React, { useContext, useMemo } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { usePathParams } from '../../hooks';
+import { usePathParams, useCurrentEntityInfo } from '../../hooks';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import { usePreviewRecords } from '../../API';
 import { CAPABILITIES } from '../../constants';
-import { useCurrentEntityInfo } from '../../hooks/currentEntity';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
 import { RootContext } from '../../context/RootContext';
 
@@ -118,6 +117,16 @@ const BulkEditActionMenu = ({
               <FormattedMessage id="ui-bulk-edit.start.edit" />
             </Icon>
           </Button>
+        )}
+        {getIsStartBulkInAppActive(true, CAPABILITIES.HOLDINGS) && (
+        <Button
+          buttonStyle="dropdownItem"
+          onClick={buildButtonClickHandler(onEdit)}
+        >
+          <Icon icon="edit">
+            <FormattedMessage id="ui-bulk-edit.start.edit" />
+          </Icon>
+        </Button>
         )}
         {getIsStartBulkInAppActive(hasInAppUsersEditPerms, CAPABILITIES.USER) && (
           <Button

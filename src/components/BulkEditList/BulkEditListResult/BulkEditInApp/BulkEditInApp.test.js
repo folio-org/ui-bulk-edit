@@ -217,4 +217,47 @@ describe('BulkEditInApp', () => {
 
     expect(optionPatronGroup.selected).toBe(true);
   });
+
+  it('should display holdings permanent location', () => {
+    renderBulkEditInApp(titleMock, CAPABILITIES.HOLDINGS);
+
+    const selectOption = screen.getByTestId('select-option-0');
+    const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.permanentLocation/ });
+    const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
+    const selectAction = screen.getByTestId('select-actions-0');
+
+    userEvent.selectOptions(
+      selectOption,
+      optionStatus,
+    );
+
+    userEvent.selectOptions(
+      selectAction,
+      actionReplace,
+    );
+
+    expect(optionStatus.selected).toBe(true);
+  });
+
+  it('should display added row after plus button click in holdings tab', () => {
+    const options = [
+      'select-option-0',
+      'select-option-1',
+    ];
+
+    renderBulkEditInApp(titleMock, CAPABILITIES.HOLDINGS);
+
+    const plusButton = screen.getByLabelText('plus-sign');
+
+    userEvent.click(plusButton);
+
+    options.forEach((el) => expect(screen.getByTestId(el)).toBeVisible());
+
+    const removeButton = screen.getAllByLabelText('trash');
+
+    userEvent.click(removeButton[1]);
+
+
+    expect(screen.queryByTestId('select-option-1')).not.toBeInTheDocument();
+  });
 });
