@@ -27,6 +27,7 @@ import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp'
 import PreviewModal from '../modals/PreviewModal/PreviewModal';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
 import { RootContext } from '../../context/RootContext';
+import { useFormValid } from '../../hooks/useFormValid';
 
 
 export const BulkEditList = () => {
@@ -47,6 +48,8 @@ export const BulkEditList = () => {
   const [contentUpdates, setContentUpdates] = useState(null);
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState(null);
+
+  const { isInAppFormValid } = useFormValid(contentUpdates);
 
   const { id: jobId } = usePathParams('/bulk-edit/:id');
   const { data, isLoading } = useJob(jobId);
@@ -220,6 +223,7 @@ export const BulkEditList = () => {
             marginBottom0
             onClick={handlePreviewModalOpen}
             type="submit"
+            disabled={!isInAppFormValid}
           >
             <FormattedMessage id="ui-bulk-edit.layer.confirmChanges" />
           </Button>
