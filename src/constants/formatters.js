@@ -20,13 +20,13 @@ export const getUserResultsFormatterBase = (userGroups) => ({
 
 export const getUserResultsFormatter = (userGroups) => ({
   ...getUserResultsFormatterBase(userGroups),
-  email: user => user.personal.email,
+  email: user => user.personal?.email,
   expirationDate: user => <FormattedTime dateString={user.expirationDate} />,
 });
 
 export const getInventoryResultsFormatterBase = () => ({
   barcode: item => item?.barcode,
-  status: item => item.status?.name ?? '',
+  status: item => item?.status?.name ?? '',
   effectiveLocation: item => item?.effectiveLocation?.name || '',
   callNumber: item => item?.callNumber,
   hrid: item => item?.hrid,

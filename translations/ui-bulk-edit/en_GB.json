@@ -165,7 +165,7 @@
     "actions.find": "Find",
     "layer.options.email": "Email",
     "layer.options.holdings.temporaryLocation": "Temporary holdings location",
-    "layer.options.holdings.permanentLocation": "Permanent holdings location"
+    "layer.options.holdings.permanentLocation": "Permanent holdings location",
     "list.filters.recordIdentifier.holdings.holdingsUUID": "Holdings UUIDs",
     "list.filters.recordIdentifier.holdings.holdingsHRID": "Holdings HRIDs",
     "list.filters.recordIdentifier.holdings.instanceHRID": "Instance HRIDs",
