@@ -12,7 +12,7 @@ import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
 import { useLaunchJob, useUserGroupsMap } from '../../../API';
 import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
-import { OPTIONS } from '../../../constants';
+import { CAPABILITES_PREVIEW, OPTIONS } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
 
 const PreviewModal = ({
@@ -48,7 +48,7 @@ const PreviewModal = ({
     data: fileData,
     refetch: downloadPreviewCSV,
     isLoading: isDownloading,
-  } = useInAppDownloadPreview(jobId, capability?.toLowerCase());
+  } = useInAppDownloadPreview(jobId, CAPABILITES_PREVIEW[capability]);
 
   const handleStartJob = () => {
     startJob({ jobId });

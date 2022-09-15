@@ -1,11 +1,10 @@
 import {
-  getInventoryResultsFormatterBase,
+  getInventoryResultsFormatter,
   getUserResultsFormatter,
   getHoldingsResultsFormatterBase,
 } from '../constants/formatters';
 import {
-  CAPABILITIES,
-  INVENTORY_COLUMNS_BASE,
+  CAPABILITIES, INVENTORY_COLUMNS,
   itemColumnInAppWidths,
   USER_COLUMNS,
   userColumnInAppWidths,
@@ -28,8 +27,8 @@ export const useInAppColumnsInfo = ({
       columnWidths = userColumnInAppWidths;
       break;
     case CAPABILITIES.ITEM:
-      formatter = getInventoryResultsFormatterBase();
-      baseColumns = INVENTORY_COLUMNS_BASE;
+      formatter = getInventoryResultsFormatter();
+      baseColumns = INVENTORY_COLUMNS;
       columnWidths = itemColumnInAppWidths;
       break;
     case CAPABILITIES.HOLDINGS:

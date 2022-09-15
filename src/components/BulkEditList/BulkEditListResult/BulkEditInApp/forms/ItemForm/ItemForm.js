@@ -57,9 +57,8 @@ export const ItemForm = (
       (fields[index].option === OPTIONS.PERMANENT_LOCATION || fields[index].option === OPTIONS.TEMPORARY_LOCATION);
   const isItemStatus = (index) => fields[index].action === ACTIONS.REPLACE &&
         fields[index].option === OPTIONS.STATUS;
-  const isDisabled = (index) => (
-    fields[index].option === OPTIONS.STATUS || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE
-  );
+  const isDisabled = (index) => fields[index].option === OPTIONS.STATUS
+    || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE;
   const isLoanType = (index) => fields[index].action === ACTIONS.REPLACE &&
       (fields[index].option === OPTIONS.TEMPORARY_LOAN_TYPE || fields[index].option === OPTIONS.PERMANENT_LOAN_TYPE);
   const getDefaultAction = value => {
