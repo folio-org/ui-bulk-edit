@@ -263,7 +263,7 @@ export const CAPABILITIES = {
 export const CAPABILITIES_VALUE = {
   ITEMS: 'item',
   USERS: 'user',
-  HOLDINGS: 'holdings',
+  HOLDINGS_RECORD: 'holdings',
 };
 
 export const ACTIONS = {
@@ -469,6 +469,16 @@ export const userColumnInAppWidths = {
   username: '120px',
   email: '120px',
   expirationDate: '120px',
+};
+
+export const holdingsColumnInAppWidths = {
+  hrid: '110px',
+  permanentLocation: '160px',
+  temporaryLocation: '100px',
+  callNumberPrefix: '120px',
+  callNumber: '120px',
+  callNumberSuffix: '120px',
+  holdingsType: '120px',
 };
 
 export const controlTypes = {
