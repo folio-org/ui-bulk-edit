@@ -267,6 +267,11 @@ export const CAPABILITIES_VALUE = {
   HOLDINGS_RECORD: 'holdings',
 };
 
+export const CAPABILITES_PREVIEW = {
+  ITEMS: 'items',
+  USERS: 'users',
+  HOLDINGS_RECORD: 'holdings',
+};
 export const ACTIONS = {
   REPLACE: 'REPLACE_WITH',
   CLEAR: 'CLEAR_FIELD',
