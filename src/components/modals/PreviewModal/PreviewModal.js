@@ -79,7 +79,9 @@ const PreviewModal = ({
       });
 
       inAppUpload({ jobId, contentUpdates: formattedContentUpdates, capability }).then(response => {
-        setPreviewItems(response[capability.toLowerCase()]);
+        const listKey = Object.keys(response)[0];
+
+        setPreviewItems(response[listKey]);
         setCountOfChangedRecords(response.totalRecords);
       });
     }

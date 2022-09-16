@@ -119,14 +119,14 @@ const BulkEditActionMenu = ({
           </Button>
         )}
         {getIsStartBulkInAppActive(true, CAPABILITIES.HOLDINGS) && (
-        <Button
-          buttonStyle="dropdownItem"
-          onClick={buildButtonClickHandler(onEdit)}
-        >
-          <Icon icon="edit">
-            <FormattedMessage id="ui-bulk-edit.start.edit" />
-          </Icon>
-        </Button>
+          <Button
+            buttonStyle="dropdownItem"
+            onClick={buildButtonClickHandler(onEdit)}
+          >
+            <Icon icon="edit">
+              <FormattedMessage id="ui-bulk-edit.start.edit" />
+            </Icon>
+          </Button>
         )}
         {getIsStartBulkInAppActive(hasInAppUsersEditPerms, CAPABILITIES.USER) && (
           <Button

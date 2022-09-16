@@ -5,6 +5,7 @@ import {
 import { useOkapiKy } from '@folio/stripes/core';
 
 export const useInAppDownloadPreview = (id, capability) => {
+  // console.log('capability', capability)
   const ky = useOkapiKy();
   const { data, refetch, isLoading } = useQuery(
     {
