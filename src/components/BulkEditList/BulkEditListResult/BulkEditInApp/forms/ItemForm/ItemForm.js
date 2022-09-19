@@ -86,7 +86,11 @@ export const ItemForm = (
     });
 
     if (type === fieldsTypes.OPTION) {
-      const recoveredFields = mappedFields.map(f => ({ ...f, options }));
+      const recoveredFields = mappedFields.map((f, i) => ({
+        ...f,
+        options,
+        ...(i === index && { value: '', locationId: '' }),
+      }));
       const finalizedFields = getFilteredFields(recoveredFields);
 
       setFields(finalizedFields);
