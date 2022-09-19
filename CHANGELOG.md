@@ -10,6 +10,10 @@
 * [UIBULKED-124](https://issues.folio.org/browse/UIBULKED-124) User-records - confirm changes - in app.
 * [UIBULKED-110](https://issues.folio.org/browse/UIBULKED-110) Populate holdings record identifiers dropdown
 * [UIBULKED-129](https://issues.folio.org/browse/UIBULKED-129) Preserve column selection from preview to Are you sure? form and confirmation page
+* [UIBULKED-115](https://issues.folio.org/browse/UIBULKED-115) In-app bulk edit form - holdings location.
+* [UIBULKED-146](https://issues.folio.org/browse/UIBULKED-146) Disable "Confirm changes" till form isn't filled - in app approach
+* [UIBULKED-115](https://issues.folio.org/browse/UIBULKED-115) In-app bulk edit form - holdings location.
+* [UIBULKED-142](https://issues.folio.org/browse/UIBULKED-142) Bulk edit holdings locations - Are you sure? form.
 * [UIBULKED-146](https://issues.folio.org/browse/UIBULKED-146) Disable "Confirm changes" till form isn't filled - in app approach
 
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-09-09)

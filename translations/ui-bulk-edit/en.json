@@ -182,6 +182,8 @@
   "layer.action.clear": "Clear field",
   "layer.options.permanentLocation": "Permanent item location",
   "layer.options.temporaryLocation": "Temporary item location",
+  "layer.options.holdings.temporaryLocation": "Temporary holdings location",
+  "layer.options.holdings.permanentLocation": "Permanent holdings location",
   "layer.options.expirationDate": "Expiration date",
   "layer.options.email": "Email",
   "layer.options.patronGroup": "Patron group",

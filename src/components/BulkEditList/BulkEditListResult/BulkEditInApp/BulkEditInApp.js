@@ -9,6 +9,7 @@ import {
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ItemForm } from './forms/ItemForm/ItemForm';
 import { UserForm } from './forms/UserForm/UserForm';
+import { HoldingsForm } from './forms/HoldingsForm/HoldingsForm';
 import { CAPABILITIES } from '../../../../constants';
 
 export const BulkEditInApp = (
@@ -53,6 +54,13 @@ export const BulkEditInApp = (
           <UserForm
             onContentUpdatesChanged={onContentUpdatesChanged}
             typeOfBulk={typeOfBulk}
+            getFilteredFields={getFilteredFields}
+          />
+        )}
+
+        {typeOfBulk === CAPABILITIES.HOLDINGS && (
+          <HoldingsForm
+            onContentUpdatesChanged={onContentUpdatesChanged}
             getFilteredFields={getFilteredFields}
           />
         )}

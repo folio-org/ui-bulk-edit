@@ -20,17 +20,17 @@ export const getUserResultsFormatterBase = (userGroups) => ({
 
 export const getUserResultsFormatter = (userGroups) => ({
   ...getUserResultsFormatterBase(userGroups),
-  email: user => user.personal.email,
+  email: user => user.personal?.email,
   expirationDate: user => <FormattedTime dateString={user.expirationDate} />,
 });
 
 export const getInventoryResultsFormatterBase = () => ({
-  barcode: item => item.barcode,
-  status: item => item.status.name ?? '',
-  effectiveLocation: item => item.effectiveLocation?.name || '',
-  callNumber: item => item.callNumber,
-  hrid: item => item.hrid,
-  materialType: item => item.materialType?.name || '',
+  barcode: item => item?.barcode,
+  status: item => item?.status?.name ?? '',
+  effectiveLocation: item => item?.effectiveLocation?.name || '',
+  callNumber: item => item?.callNumber,
+  hrid: item => item?.hrid,
+  materialType: item => item?.materialType?.name || '',
   permanentLoanType: item => item.permanentLoanType?.name || '',
   temporaryLoanType: item => item.temporaryLoanType?.name || '',
 });

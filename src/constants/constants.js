@@ -263,9 +263,14 @@ export const CAPABILITIES = {
 export const CAPABILITIES_VALUE = {
   ITEMS: 'item',
   USERS: 'user',
-  HOLDINGS: 'holdings',
+  HOLDINGS_RECORD: 'holdings',
 };
 
+export const CAPABILITES_PREVIEW = {
+  ITEMS: 'items',
+  USERS: 'users',
+  HOLDINGS_RECORD: 'holdings',
+};
 export const ACTIONS = {
   REPLACE: 'REPLACE_WITH',
   CLEAR: 'CLEAR_FIELD',
@@ -281,6 +286,8 @@ export const OPTIONS = {
   PATRON_GROUP: 'PATRON_GROUP',
   TEMPORARY_LOAN_TYPE: 'TEMPORARY_LOAN_TYPE',
   PERMANENT_LOAN_TYPE: 'PERMANENT_LOAN_TYPE',
+  TEMPORARY_HOLDINGS_LOCATION: 'TEMPORARY_LOCATION',
+  PERMANENT_HOLDINGS_LOCATION: 'PERMANENT_LOCATION',
 };
 
 export const getPlaceholder = (formatMessage) => ({
@@ -343,6 +350,17 @@ export const USER_OPTIONS = (formatMessage) => [
   {
     value: OPTIONS.PATRON_GROUP,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.patronGroup' }),
+    disabled: false,
+  },
+];
+
+export const HOLDINGS_OPTIONS = (formatMessage) => [
+  { value: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.temporaryLocation' }),
+    disabled: false },
+  {
+    value: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.permanentLocation' }),
     disabled: false,
   },
 ];
@@ -456,6 +474,16 @@ export const userColumnInAppWidths = {
   username: '120px',
   email: '120px',
   expirationDate: '120px',
+};
+
+export const holdingsColumnInAppWidths = {
+  hrid: '110px',
+  permanentLocation: '160px',
+  temporaryLocation: '100px',
+  callNumberPrefix: '120px',
+  callNumber: '120px',
+  callNumberSuffix: '120px',
+  holdingsType: '120px',
 };
 
 export const controlTypes = {
