@@ -88,10 +88,7 @@ export const ItemForm = (
       const recoveredFields = mappedFields.map((f, i) => ({
         ...f,
         options,
-        ...(i === index && {
-          value: '',
-          locationId: '',
-        }),
+        ...(i === index && { value: '', locationId: '' }),
       }));
       const finalizedFields = getFilteredFields(recoveredFields);
 
