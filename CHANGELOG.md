@@ -14,6 +14,7 @@
 * [UIBULKED-146](https://issues.folio.org/browse/UIBULKED-146) Disable "Confirm changes" till form isn't filled - in app approach
 * [UIBULKED-115](https://issues.folio.org/browse/UIBULKED-115) In-app bulk edit form - holdings location.
 * [UIBULKED-142](https://issues.folio.org/browse/UIBULKED-142) Bulk edit holdings locations - Are you sure? form.
+* [UIBULKED-143](https://issues.folio.org/browse/UIBULKED-143) Prevent user from clicking on "Commit changes" in "Are you sure" form until preview is completed
 
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-09-09)
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
