@@ -22,6 +22,7 @@ import {
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
 import { useLoanTypes } from '../../../../../../hooks/useLoanTypes';
+import { handleAdd } from '../utils';
 
 export const ItemForm = (
   {
@@ -85,7 +86,11 @@ export const ItemForm = (
     });
 
     if (type === fieldsTypes.OPTION) {
-      const recoveredFields = mappedFields.map(f => ({ ...f, options }));
+      const recoveredFields = mappedFields.map((f, i) => ({
+        ...f,
+        options,
+        ...(i === index && { value: '', locationId: '' }),
+      }));
       const finalizedFields = getFilteredFields(recoveredFields);
 
       setFields(finalizedFields);
@@ -127,21 +132,6 @@ export const ItemForm = (
     const filteredFields = fields.filter((_, i) => i !== index);
     const recoveredFields = filteredFields.map(f => ({ ...f, options }));
     const finalizedFields = getFilteredFields(recoveredFields);
-
-    setFields(finalizedFields);
-  };
-
-  const handleAdd = () => {
-    const filteredFields = getFilteredFields([...fields, { ...fieldTemplate, action: '', option: '' }]);
-    const initializedFields = filteredFields.map((f, i) => {
-      const value = f.options[0].value;
-
-      return i === filteredFields.length - 1
-        ? ({ ...f, option: value, ...getDefaultAction(value) })
-        : f;
-    });
-
-    const finalizedFields = getFilteredFields(initializedFields);
 
     setFields(finalizedFields);
   };
@@ -222,7 +212,15 @@ export const ItemForm = (
                 <IconButton
                   icon="plus-sign"
                   size="large"
-                  onClick={handleAdd}
+                  onClick={() => handleAdd(
+                    {
+                      getDefaultAction,
+                      getFilteredFields,
+                      fieldTemplate,
+                      setFields,
+                      fields,
+                    },
+                  )}
                   data-testid={`add-button-${index}`}
                 />
               )}

@@ -18,6 +18,7 @@ import {
   HOLDINGS_OPTIONS, OPTIONS,
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
+import { handleAdd } from '../utils';
 
 export const HoldingsForm = (
   {
@@ -49,6 +50,14 @@ export const HoldingsForm = (
   const isLocation = (index) => fields[index].action === ACTIONS.REPLACE &&
       (fields[index].option === OPTIONS.PERMANENT_HOLDINGS_LOCATION ||
           fields[index].option === OPTIONS.TEMPORARY_HOLDINGS_LOCATION);
+  const isDisabled = (index) => fields[index].option === OPTIONS.PERMANENT_HOLDINGS_LOCATION;
+  const getDefaultAction = value => {
+    if (value === OPTIONS.PERMANENT_HOLDINGS_LOCATION) {
+      return { action: ACTIONS.REPLACE };
+    }
+
+    return {};
+  };
 
   const handleSelectChange = (e, index, type) => {
     const mappedFields = fields.map((field, i) => {
@@ -58,6 +67,7 @@ export const HoldingsForm = (
         return {
           ...field,
           [type]: value,
+          ...getDefaultAction(value),
         };
       }
 
@@ -98,21 +108,6 @@ export const HoldingsForm = (
     setFields(finalizedFields);
   };
 
-  const handleAdd = () => {
-    const filteredFields = getFilteredFields([...fields, { ...fieldTemplate, action: '', option: '' }]);
-    const initializedFields = filteredFields.map((f, i) => {
-      const value = f.options[0].value;
-
-      return i === filteredFields.length - 1
-        ? ({ ...f, option: value })
-        : f;
-    });
-
-    const finalizedFields = getFilteredFields(initializedFields);
-
-    setFields(finalizedFields);
-  };
-
   useEffect(() => {
     const mappedContentUpdates = fields.map(({ option, action, value }) => ({ option, action, value }));
 
@@ -140,6 +135,7 @@ export const HoldingsForm = (
               value={field.action}
               onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
               data-testid={`select-actions-${index}`}
+              disabled={isDisabled(index)}
             />
           </Col>
           {isLocation(index) &&
@@ -162,7 +158,15 @@ export const HoldingsForm = (
             <IconButton
               icon="plus-sign"
               size="large"
-              onClick={handleAdd}
+              onClick={() => handleAdd(
+                {
+                  getDefaultAction,
+                  getFilteredFields,
+                  fieldTemplate,
+                  setFields,
+                  fields,
+                },
+              )}
               data-testid={`add-button-${index}`}
             />
             )}
