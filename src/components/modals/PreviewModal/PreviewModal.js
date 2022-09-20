@@ -106,7 +106,7 @@ const PreviewModal = ({
       aria-label="PreviewModal"
       footer={
         <PreviewModalFooter
-          isPreviewLoaded={!!previewItems.length}
+          previewItems={previewItems}
           isDownloading={isDownloading}
           onDownloadPreview={downloadPreviewCSV}
           onSave={handleStartJob}

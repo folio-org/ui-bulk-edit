@@ -10,7 +10,7 @@ export const PreviewModalFooter = memo(({
   onDownloadPreview,
   onSave,
   isDownloading,
-  isPreviewLoaded,
+  previewItems,
 }) => {
   return (
     <div className={css.previewModalFooter}>
@@ -22,7 +22,7 @@ export const PreviewModalFooter = memo(({
           <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />
         </Button>
       )}
-      <Button onClick={onSave} buttonStyle="primary" disabled={!isPreviewLoaded}>
+      <Button onClick={onSave} buttonStyle="primary" disabled={!previewItems.length}>
         <FormattedMessage id="ui-bulk-edit.previewModal.saveAndClose" />
       </Button>
     </div>
@@ -31,7 +31,7 @@ export const PreviewModalFooter = memo(({
 
 PreviewModalFooter.propTypes = {
   isDownloading: PropTypes.bool,
-  isPreviewLoaded: PropTypes.bool,
+  previewItems: PropTypes.array,
   onKeepEditing: PropTypes.func,
   onDownloadPreview: PropTypes.func,
   onSave: PropTypes.func,
