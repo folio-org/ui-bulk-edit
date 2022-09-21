@@ -190,6 +190,7 @@ export const ItemForm = (
             <Col xs={6} sm={3}>
               <Selection
                 id="loanType"
+                value={field.value}
                 loading={isLoading}
                 onChange={(value) => handleValueChange(value, index)}
                 placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
