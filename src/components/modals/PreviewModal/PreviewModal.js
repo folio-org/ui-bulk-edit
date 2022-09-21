@@ -84,7 +84,9 @@ const PreviewModal = ({
         const listKey = Object.keys(response)[0];
 
         // for holdings items should be additionally mapped
-        setPreviewItems(listKey === 'holdingsRecords' ? await getMappedHoldings(ky, response[listKey]) : response[listKey]);
+        const mappedPreviewItems = listKey === 'holdingsRecords' ? await getMappedHoldings(ky, response[listKey]) : response[listKey];
+
+        setPreviewItems(mappedPreviewItems);
         setCountOfChangedRecords(response.totalRecords);
       });
     }
