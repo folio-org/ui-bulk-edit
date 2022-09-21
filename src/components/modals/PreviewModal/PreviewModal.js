@@ -6,10 +6,11 @@ import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import moment from 'moment';
+import { useOkapiKy } from '@folio/stripes/core';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import css from './PreviewModal.css';
 import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
-import { useLaunchJob, useUserGroupsMap } from '../../../API';
+import { getMappedHoldings, useLaunchJob, useUserGroupsMap } from '../../../API';
 import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 import { CAPABILITES_PREVIEW, OPTIONS } from '../../../constants';
@@ -24,6 +25,7 @@ const PreviewModal = ({
   setUpdatedId,
   controller,
 }) => {
+  const ky = useOkapiKy();
   const history = useHistory();
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
@@ -78,10 +80,11 @@ const PreviewModal = ({
         return item;
       });
 
-      inAppUpload({ jobId, contentUpdates: formattedContentUpdates, capability }).then(response => {
+      inAppUpload({ jobId, contentUpdates: formattedContentUpdates, capability }).then(async response => {
         const listKey = Object.keys(response)[0];
 
-        setPreviewItems(response[listKey]);
+        // for holdings items should be additionally mapped
+        setPreviewItems(listKey === 'holdingsRecords' ? await getMappedHoldings(ky, response[listKey]) : response[listKey]);
         setCountOfChangedRecords(response.totalRecords);
       });
     }
