@@ -22,6 +22,7 @@ import {
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
 import { useLoanTypes } from '../../../../../../hooks/useLoanTypes';
+import { handleAdd } from '../utils';
 
 export const ItemForm = (
   {
@@ -135,21 +136,6 @@ export const ItemForm = (
     setFields(finalizedFields);
   };
 
-  const handleAdd = () => {
-    const filteredFields = getFilteredFields([...fields, { ...fieldTemplate, action: '', option: '' }]);
-    const initializedFields = filteredFields.map((f, i) => {
-      const value = f.options[0].value;
-
-      return i === filteredFields.length - 1
-        ? ({ ...f, option: value, ...getDefaultAction(value) })
-        : f;
-    });
-
-    const finalizedFields = getFilteredFields(initializedFields);
-
-    setFields(finalizedFields);
-  };
-
   const getIsTemporaryLocation = ({ option }) => option === options.TEMPORARY_LOCATION;
 
   useEffect(() => {
@@ -227,7 +213,15 @@ export const ItemForm = (
                 <IconButton
                   icon="plus-sign"
                   size="large"
-                  onClick={handleAdd}
+                  onClick={() => handleAdd(
+                    {
+                      getDefaultAction,
+                      getFilteredFields,
+                      fieldTemplate,
+                      setFields,
+                      fields,
+                    },
+                  )}
                   data-testid={`add-button-${index}`}
                 />
               )}
