@@ -34,12 +34,12 @@ export const HoldingsForm = (
   };
 
   const actions = BASE_ACTIONS(intl.formatMessage);
-  const optionsHoldings = HOLDINGS_OPTIONS(intl.formatMessage);
+  const options = HOLDINGS_OPTIONS(intl.formatMessage);
 
   const fieldTemplate = {
-    options: optionsHoldings,
+    options,
     actions,
-    option: optionsHoldings[0].value,
+    option: options[0].value,
     action: actions[0].value,
     value: '',
     locationId: '',
@@ -75,7 +75,7 @@ export const HoldingsForm = (
     });
 
     if (type === fieldsTypes.OPTION) {
-      const recoveredFields = mappedFields.map(f => ({ ...f, optionsHoldings }));
+      const recoveredFields = mappedFields.map(f => ({ ...f, optionsHoldings: options }));
       const finalizedFields = getFilteredFields(recoveredFields);
 
       setFields(finalizedFields);
@@ -102,11 +102,13 @@ export const HoldingsForm = (
 
   const handleRemove = (index) => {
     const filteredFields = fields.filter((_, i) => i !== index);
-    const recoveredFields = filteredFields.map(f => ({ ...f, optionsHoldings }));
+    const recoveredFields = filteredFields.map(f => ({ ...f, options }));
     const finalizedFields = getFilteredFields(recoveredFields);
 
     setFields(finalizedFields);
   };
+
+  const getIsTemporaryLocation = ({ option }) => option === OPTIONS.TEMPORARY_HOLDINGS_LOCATION;
 
   useEffect(() => {
     const mappedContentUpdates = fields.map(({ option, action, value }) => ({ option, action, value }));
@@ -150,11 +152,12 @@ export const HoldingsForm = (
               marginBottom0
               onLocationSelected={(location) => handleLocationChange(location, index)}
               data-testid={`locationLookup-${index}`}
+              isTemporaryLocation={getIsTemporaryLocation(field)}
             />
           </Col>
           }
           <div className={css.iconButtonWrapper}>
-            {(index === fields.length - 1 && fields.length !== optionsHoldings.length) && (
+            {(index === fields.length - 1 && fields.length !== options.length) && (
             <IconButton
               icon="plus-sign"
               size="large"
