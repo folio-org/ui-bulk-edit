@@ -33,7 +33,7 @@ const BulkEditStartModal = ({
   const search = new URLSearchParams(location.search);
   const controller = useRef();
 
-  const entityType = search.get('capabilities')?.slice(0, -1);
+  const entityType = search.get('capabilities');
 
   const { requestJobId } = useJobCommand({ entityType });
   const { fileUpload, isLoading } = useFileUploadComand();
