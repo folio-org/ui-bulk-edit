@@ -102,7 +102,7 @@ export const HoldingsForm = (
 
   const handleRemove = (index) => {
     const filteredFields = fields.filter((_, i) => i !== index);
-    const recoveredFields = filteredFields.map(f => ({ ...f, optionsHoldings }));
+    const recoveredFields = filteredFields.map(f => ({ ...f, options: optionsHoldings }));
     const finalizedFields = getFilteredFields(recoveredFields);
 
     setFields(finalizedFields);
@@ -139,36 +139,36 @@ export const HoldingsForm = (
             />
           </Col>
           {isLocation(index) &&
-          <Col xs={6} sm={3}>
-            <LocationSelection
-              value={field.locationId}
-              onSelect={(location) => handleLocationChange(location, index)}
-              placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
-              data-test-id={`textField-${index}`}
-            />
-            <LocationLookup
-              marginBottom0
-              onLocationSelected={(location) => handleLocationChange(location, index)}
-              data-testid={`locationLookup-${index}`}
-            />
-          </Col>
-          }
+            <Col xs={6} sm={3}>
+              <LocationSelection
+                value={field.locationId}
+                onSelect={(location) => handleLocationChange(location, index)}
+                placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
+                data-test-id={`textField-${index}`}
+              />
+              <LocationLookup
+                marginBottom0
+                onLocationSelected={(location) => handleLocationChange(location, index)}
+                data-testid={`locationLookup-${index}`}
+              />
+            </Col>
+                }
           <div className={css.iconButtonWrapper}>
             {(index === fields.length - 1 && fields.length !== optionsHoldings.length) && (
-            <IconButton
-              icon="plus-sign"
-              size="large"
-              onClick={() => handleAdd(
-                {
-                  getDefaultAction,
-                  getFilteredFields,
-                  fieldTemplate,
-                  setFields,
-                  fields,
-                },
-              )}
-              data-testid={`add-button-${index}`}
-            />
+              <IconButton
+                icon="plus-sign"
+                size="large"
+                onClick={() => handleAdd(
+                  {
+                    getDefaultAction,
+                    getFilteredFields,
+                    fieldTemplate,
+                    setFields,
+                    fields,
+                  },
+                )}
+                data-testid={`add-button-${index}`}
+              />
             )}
             <IconButton
               icon="trash"
