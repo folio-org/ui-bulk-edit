@@ -2,10 +2,11 @@ import { saveAs } from 'file-saver';
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import moment from 'moment';
+import { Preloader } from '@folio/stripes-data-transfer-components';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import css from './PreviewModal.css';
 import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
@@ -106,7 +107,7 @@ const PreviewModal = ({
       aria-label="PreviewModal"
       footer={
         <PreviewModalFooter
-          previewItems={previewItems}
+          isUploading={isUploading}
           isDownloading={isDownloading}
           onDownloadPreview={downloadPreviewCSV}
           onSave={handleStartJob}
@@ -122,14 +123,16 @@ const PreviewModal = ({
 
       <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
 
-      <MultiColumnList
-        contentData={previewItems}
-        columnWidths={columnWidths}
-        columnMapping={columnMapping}
-        formatter={formatter}
-        visibleColumns={finalColumns}
-        loading={isUploading}
-      />
+      {!isUploading ? (
+        <MultiColumnList
+          contentData={previewItems}
+          columnWidths={columnWidths}
+          columnMapping={columnMapping}
+          formatter={formatter}
+          visibleColumns={finalColumns}
+        />
+      ) : <Preloader />}
+
     </Modal>
   );
 };
