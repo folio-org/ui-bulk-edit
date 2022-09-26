@@ -75,7 +75,9 @@ export const HoldingsForm = (
     });
 
     if (type === fieldsTypes.OPTION) {
-      const recoveredFields = mappedFields.map(f => ({ ...f, optionsHoldings }));
+      const recoveredFields = mappedFields.map((f, i) => ({ ...f,
+        optionsHoldings,
+        ...(i === index && { value: '', locationId: '' }) }));
       const finalizedFields = getFilteredFields(recoveredFields);
 
       setFields(finalizedFields);
