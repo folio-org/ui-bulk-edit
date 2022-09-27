@@ -114,7 +114,7 @@ const BulkEditStartModal = ({
       search: buildSearch({}, searchStr),
     });
 
-    setFileName('');
+    setFileName(null);
     setIsFileUploaded(false);
     setConformationButton(true);
   };

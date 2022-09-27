@@ -72,16 +72,6 @@ describe('BulkEditListResult', () => {
     expect(screen.getByTestId('spiner')).toBeVisible();
   });
 
-  it('displays fileName field for processed preview', () => {
-    const history = createMemoryHistory();
-
-    history.push('/bulk-edit/1/processed?processedFileName=Mock.csv&capabilities=USERS');
-
-    renderBulkEditResult(history);
-
-    expect(screen.getByText(/preview.file.title/)).toBeVisible();
-  });
-
   it('displays title', () => {
     const history = createMemoryHistory();
 
