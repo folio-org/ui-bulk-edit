@@ -8,7 +8,7 @@ import {
   itemColumnInAppWidths,
   USER_COLUMNS,
   userColumnInAppWidths,
-  HOLDINGS_COLUMNS_BASE,
+  HOLDINGS_COLUMNS,
   holdingsColumnInAppWidths,
 } from '../constants';
 
@@ -34,7 +34,7 @@ export const useInAppColumnsInfo = ({
     case CAPABILITIES.HOLDINGS:
     default:
       formatter = getHoldingsResultsFormatterBase();
-      baseColumns = HOLDINGS_COLUMNS_BASE;
+      baseColumns = HOLDINGS_COLUMNS;
       columnWidths = holdingsColumnInAppWidths;
       break;
   }
