@@ -16,6 +16,7 @@
 * [UIBULKED-142](https://issues.folio.org/browse/UIBULKED-142) Bulk edit holdings locations - Are you sure? form.
 * [UIBULKED-143](https://issues.folio.org/browse/UIBULKED-143) Prevent user from clicking on "Commit changes" in "Are you sure" form until preview is completed
 * [UIBULKED-149](https://issues.folio.org/browse/UIBULKED-149) The progressbar freezes when file with edited Users records uploading
+* [UIBULKED-133](https://issues.folio.org/browse/UIBULKED-133) The Bulk edit modal displays previous filename starting Bulk Edit from confirmation screen
 
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-09-09)
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records

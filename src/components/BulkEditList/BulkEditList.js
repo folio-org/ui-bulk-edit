@@ -37,7 +37,6 @@ export const BulkEditList = () => {
   const search = new URLSearchParams(location.search);
   const controller = useRef();
 
-  const [fileUploadedMatchedName, setFileUploadedMatchedName] = useState();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
   const [isBulkEditLayerOpen, setIsBulkEditLayerOpen] = useState(false);
@@ -48,6 +47,8 @@ export const BulkEditList = () => {
   const [contentUpdates, setContentUpdates] = useState(null);
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState(null);
+  const [processedFileName, setProcessedFileName] = useState(null);
+  const [confirmedFileName, setConfirmedFileName] = useState(null);
 
   const { isInAppFormValid } = useFormValid(contentUpdates);
 
@@ -107,8 +108,8 @@ export const BulkEditList = () => {
       // clear job information
       queryClient.setQueryData('getJob', () => ({ data: undefined }));
 
-      // reset file uploaded matched name
-      setFileUploadedMatchedName(null);
+      // reset confirmed file name
+      setConfirmedFileName(null);
 
       // clear visibleColumns preset
       localStorage.removeItem('visibleColumns');
@@ -169,13 +170,13 @@ export const BulkEditList = () => {
   const paneTitle = useMemo(() => {
     const fileUploadedName = search.get('fileName');
 
-    if (fileUploadedMatchedName || fileUploadedName) {
+    if (confirmedFileName || fileUploadedName) {
       return <FormattedMessage
         id="ui-bulk-edit.meta.title.uploadedFile"
-        values={{ fileName: fileUploadedMatchedName || fileUploadedName }}
+        values={{ fileName: confirmedFileName || fileUploadedName }}
              />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [fileUploadedMatchedName, location.search]);
+  }, [confirmedFileName, location.search]);
 
   const changedPaneSubTitle = useMemo(() => (
     history.location.pathname === `/bulk-edit/${jobId}/initial` ?
@@ -238,6 +239,7 @@ export const BulkEditList = () => {
       setCountOfRecords,
       visibleColumns,
       setVisibleColumns,
+      confirmedFileName,
     }}
     >
       <Paneset>
@@ -286,8 +288,8 @@ export const BulkEditList = () => {
         </Layer>
       </Paneset>
       <BulkEditStartModal
-        fileName={fileUploadedMatchedName}
-        setFileName={setFileUploadedMatchedName}
+        fileName={processedFileName}
+        setFileName={setProcessedFileName}
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
         setIsBulkConformationModal={setIsBulkConformationModal}
@@ -295,10 +297,11 @@ export const BulkEditList = () => {
         setUpdatedId={setUpdatedId}
       />
       <BulkEditConformationModal
-        setFileName={setFileUploadedMatchedName}
+        setConfirmedFileName={setConfirmedFileName}
+        setProcessedFileName={setProcessedFileName}
         open={isBulkEditConformationModal}
         setIsBulkConformationModal={setIsBulkConformationModal}
-        fileName={fileUploadedMatchedName}
+        fileName={processedFileName}
         countOfRecords={countOfRecords}
         updatedId={updatedId}
       />
