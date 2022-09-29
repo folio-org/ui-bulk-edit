@@ -18,7 +18,8 @@ const BulkEditConformationModal = ({
   setIsBulkConformationModal,
   fileName,
   countOfRecords,
-  setFileName,
+  setConfirmedFileName,
+  setProcessedFileName,
   updatedId,
 }) => {
   const intl = useIntl();
@@ -35,8 +36,12 @@ const BulkEditConformationModal = ({
   const { startJob } = useLaunchJob();
   const { rollBackJob } = useRollBack();
 
-  const onStartJob = () => {
-    startJob({ jobId: updatedId });
+  const onStartJob = async () => {
+    await startJob({ jobId: updatedId });
+
+    setConfirmedFileName(fileName);
+    setProcessedFileName(null);
+
     setIsBulkConformationModal(false);
 
     history.replace({
@@ -56,7 +61,7 @@ const BulkEditConformationModal = ({
       search: buildSearch({}, searchStr),
     });
 
-    setFileName('');
+    setProcessedFileName(null);
 
     setIsBulkConformationModal(false);
   };
@@ -95,7 +100,8 @@ BulkEditConformationModal.propTypes = {
   fileName: PropTypes.string,
   countOfRecords: PropTypes.number,
   updatedId: PropTypes.string,
-  setFileName: PropTypes.func,
+  setConfirmedFileName: PropTypes.func,
+  setProcessedFileName: PropTypes.func,
 };
 
 export default BulkEditConformationModal;
