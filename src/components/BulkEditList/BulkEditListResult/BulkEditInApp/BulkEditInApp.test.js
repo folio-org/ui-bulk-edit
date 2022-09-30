@@ -179,7 +179,6 @@ describe('BulkEditInApp', () => {
     renderBulkEditInApp(titleMock, CAPABILITIES.USER);
 
 
-    const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
     const selectOption = screen.getByTestId('select-option-0');
     const optionStatus = screen.getByRole('option', { name: /layer.options.expirationDate/ });
 
@@ -192,7 +191,6 @@ describe('BulkEditInApp', () => {
 
     userEvent.type(dataPicker, '2000-01-01 00:00:00.000Z');
 
-    expect(optionReplace.selected).toBe(true);
     expect(dataPicker).toHaveValue('2000-01-01 00:00:00.000Z');
   });
 
