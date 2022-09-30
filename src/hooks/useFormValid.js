@@ -4,7 +4,7 @@ export const useFormValid = (contentUpdates) => {
   const isInAppFormValid = contentUpdates?.every(({ actions, action, option, value }) => {
     // USERS inApp approach
     if (actions) {
-      return actions.every(act => !!act.value);
+      return option && actions.every(act => act.name && act.value);
     }
 
     // ITEMS inApp approach
