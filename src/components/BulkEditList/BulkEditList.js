@@ -139,6 +139,17 @@ export const BulkEditList = () => {
 
   const cancelBulkEditStart = () => {
     setIsBulkEditModalOpen(false);
+
+    // remove data from url, only in case if there is no confirmed file
+    if (!confirmedFileName) {
+      search.delete('processedFileName');
+
+      const searchStr = `?${search.toString()}`;
+
+      history.replace({
+        search: buildSearch({}, searchStr),
+      });
+    }
   };
 
   const handleBulkEditLayerClose = () => {
@@ -295,8 +306,10 @@ export const BulkEditList = () => {
         setIsBulkConformationModal={setIsBulkConformationModal}
         setCountOfRecords={setCountOfRecords}
         setUpdatedId={setUpdatedId}
+        setIsBulkEditModalOpen={setIsBulkEditModalOpen}
       />
       <BulkEditConformationModal
+        onCancel={cancelBulkEditStart}
         setConfirmedFileName={setConfirmedFileName}
         setProcessedFileName={setProcessedFileName}
         open={isBulkEditConformationModal}

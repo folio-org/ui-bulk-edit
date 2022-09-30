@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const onCancelMock = jest.fn();
-
+const setIsBulkEditModalOpen = jest.fn();
 const setFileNameMock = jest.fn();
 
 const file = 'file.csv';
@@ -37,6 +37,7 @@ const startModal = (
       open
       onCancel={onCancelMock}
       setFileName={setFileNameMock}
+      setIsBulkEditModalOpen={setIsBulkEditModalOpen}
     />
   </QueryClientProvider>
 );
@@ -83,7 +84,5 @@ describe('BulkEditActionMenu', () => {
     fireEvent.click(cancelButton);
 
     expect(onCancelMock).toHaveBeenCalled();
-
-    expect(window.location.search).not.toContain('processedFileName');
   });
 });
