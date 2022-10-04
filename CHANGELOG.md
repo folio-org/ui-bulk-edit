@@ -19,6 +19,7 @@
 * [UIBULKED-149](https://issues.folio.org/browse/UIBULKED-149) The progressbar freezes when file with edited Users records uploading
 * [UIBULKED-133](https://issues.folio.org/browse/UIBULKED-133) The Bulk edit modal displays previous filename starting Bulk Edit from confirmation screen
 * [UIBULKED-139](https://issues.folio.org/browse/UIBULKED-139) Preview of matched records reloads when User select any other Identifier type
+* [UIBULKED-150](https://issues.folio.org/browse/UIBULKED-150) Remove record count on the Are you sure? form until the loading of data is done
 
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-09-09)
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
