@@ -18,6 +18,7 @@ const fileNameMock = 'test.csv';
 const mockSetIsConformotaionalModal = jest.fn();
 const setConfirmedFileName = jest.fn();
 const setProcessedFileName = jest.fn();
+const onCancel = jest.fn();
 
 const renderBulkEditConformationModal = () => {
   render(
@@ -29,6 +30,7 @@ const renderBulkEditConformationModal = () => {
           setProcessedFileName={setProcessedFileName}
           fileName={fileNameMock}
           setIsBulkConformationModal={mockSetIsConformotaionalModal}
+          onCancel={onCancel}
         />
       </BrowserRouter>
     </QueryClientProvider>,
