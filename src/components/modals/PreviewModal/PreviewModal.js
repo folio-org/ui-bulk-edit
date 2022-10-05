@@ -122,20 +122,22 @@ const PreviewModal = ({
       dismissible
       onClose={onKeepEditing}
     >
-      <MessageBanner type="warning">
-        <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: countOfChangedRecords }} />
-      </MessageBanner>
-
-      <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
-
       {!isUploading ? (
-        <MultiColumnList
-          contentData={previewItems}
-          columnWidths={columnWidths}
-          columnMapping={columnMapping}
-          formatter={formatter}
-          visibleColumns={finalColumns}
-        />
+        <>
+          <MessageBanner type="warning">
+            <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: countOfChangedRecords }} />
+          </MessageBanner>
+
+          <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
+
+          <MultiColumnList
+            contentData={previewItems}
+            columnWidths={columnWidths}
+            columnMapping={columnMapping}
+            formatter={formatter}
+            visibleColumns={finalColumns}
+          />
+        </>
       ) : <Preloader />}
 
     </Modal>
