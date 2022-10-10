@@ -175,6 +175,7 @@
   "layer.title": "Bulk edits",
   "layer.confirmChanges": "Confirm changes",
   "actions.placeholder": "Select action",
+  "options.placeholder": "Select option",
   "actions.find": "Find",
   "layer.column.options": "Options",
   "layer.column.actions": "Actions",

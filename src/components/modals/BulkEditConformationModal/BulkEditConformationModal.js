@@ -10,11 +10,11 @@ import {
 } from '@folio/stripes/components';
 
 import { useLocation } from 'react-router-dom';
-import { buildSearch } from '@folio/stripes-acq-components';
 import { useRollBack, useLaunchJob } from '../../../API/useFileUpload';
 
 const BulkEditConformationModal = ({
   open,
+  onCancel,
   setIsBulkConformationModal,
   fileName,
   countOfRecords,
@@ -24,7 +24,6 @@ const BulkEditConformationModal = ({
 }) => {
   const intl = useIntl();
   const location = useLocation();
-  const search = new URLSearchParams(location.search);
 
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title.conformationModal' }, { fileName });
   const confirmLabel = intl.formatMessage({ id: 'ui-bulk-edit.conformationModal.commitChanges' });
@@ -53,17 +52,11 @@ const BulkEditConformationModal = ({
   const onCancelJob = async () => {
     await rollBackJob({ id: updatedId });
 
-    search.delete('processedFileName');
-
-    const searchStr = `?${search.toString()}`;
-
-    history.replace({
-      search: buildSearch({}, searchStr),
-    });
-
     setProcessedFileName(null);
 
     setIsBulkConformationModal(false);
+
+    onCancel();
   };
 
   const footer = (
@@ -102,6 +95,7 @@ BulkEditConformationModal.propTypes = {
   updatedId: PropTypes.string,
   setConfirmedFileName: PropTypes.func,
   setProcessedFileName: PropTypes.func,
+  onCancel: PropTypes.func,
 };
 
 export default BulkEditConformationModal;

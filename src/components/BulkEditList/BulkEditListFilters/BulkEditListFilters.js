@@ -89,8 +89,8 @@ export const BulkEditListFilters = ({
     handleChange(e.target.value, 'recordIdentifier');
 
     history.replace({
-      pathname: location.pathname,
-      search: buildSearch({ identifier: e.target.value }, location.search),
+      pathname: '/bulk-edit',
+      search: buildSearch({ identifier: e.target.value, capabilities }),
     });
 
     setIsFileUploaded(false);

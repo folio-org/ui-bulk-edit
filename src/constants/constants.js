@@ -338,6 +338,11 @@ export const BASE_ACTIONS = (formatMessage) => [
 
 export const USER_OPTIONS = (formatMessage) => [
   {
+    value: '',
+    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
+    disabled: true,
+  },
+  {
     value: OPTIONS.EMAIL_ADDRESS,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.email' }),
     disabled: false,
@@ -355,6 +360,11 @@ export const USER_OPTIONS = (formatMessage) => [
 ];
 
 export const HOLDINGS_OPTIONS = (formatMessage) => [
+  {
+    value: '',
+    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
+    disabled: true,
+  },
   { value: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.temporaryLocation' }),
     disabled: false },
@@ -366,6 +376,11 @@ export const HOLDINGS_OPTIONS = (formatMessage) => [
 ];
 
 export const ITEMS_OPTIONS = (formatMessage) => [
+  {
+    value: '',
+    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
+    disabled: true,
+  },
   {
     value: OPTIONS.TEMPORARY_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLocation' }),

@@ -25,6 +25,7 @@ const BulkEditStartModal = ({
   setCountOfRecords,
   setUpdatedId,
   setFileName,
+  setIsBulkEditModalOpen,
 }) => {
   const history = useHistory();
   const location = useLocation();
@@ -97,7 +98,7 @@ const BulkEditStartModal = ({
   };
 
   const handleStartBulkEdit = () => {
-    onCancel();
+    setIsBulkEditModalOpen(false);
     setIsBulkConformationModal(true);
     setConformationButton(true);
     setIsFileUploaded(false);
@@ -106,13 +107,6 @@ const BulkEditStartModal = ({
   const handleCancel = () => {
     onCancel();
     if (controller.current) controller.current.abort();
-    search.delete('processedFileName');
-
-    const searchStr = `?${search.toString()}`;
-
-    history.replace({
-      search: buildSearch({}, searchStr),
-    });
 
     setFileName(null);
     setIsFileUploaded(false);
@@ -166,6 +160,7 @@ BulkEditStartModal.propTypes = {
   setCountOfRecords: PropTypes.func,
   setUpdatedId: PropTypes.func,
   setFileName: PropTypes.func,
+  setIsBulkEditModalOpen: PropTypes.func,
   fileName: PropTypes.string,
 };
 
