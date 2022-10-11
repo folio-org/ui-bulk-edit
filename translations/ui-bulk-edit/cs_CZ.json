@@ -192,5 +192,6 @@
     "list.result.emptyMessage.holdings.HRID": "Přetáhněte nebo vyberte soubor s HRID holdingů",
     "uploaderSubTitle.holdings.HRID": "Vyberte soubor s HRID holdingů",
     "layer.options.holdings.temporaryLocation": "Dočasné umístění holdingů",
-    "layer.options.holdings.permanentLocation": "Trvalé umístění holdingů"
+    "layer.options.holdings.permanentLocation": "Trvalé umístění holdingů",
+    "options.placeholder": "Vyberte možnost"
 }
