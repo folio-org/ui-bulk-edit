@@ -230,6 +230,27 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
+      <Accordion
+        separator={false}
+        closedByDefault={false}
+        displayClearButton={!hasInAppEditPerms}
+        header={FilterAccordionHeader}
+        label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
+      >
+        <RadioButtonGroup>
+          {capabilitiesFilterOptions?.map(option => (
+            <RadioButton
+              key={option.value}
+              label={option.label}
+              name="capabilities"
+              value={option.value}
+              disabled={option.disabled}
+              onChange={handleCapabilityChange}
+              checked={option.value === capabilities}
+            />
+          ))}
+        </RadioButtonGroup>
+      </Accordion>
       {criteria === CRITERIES.QUERY && (
         <QueryTextArea
           queryText={queryText}
@@ -259,27 +280,6 @@ export const BulkEditListFilters = ({
         />
       </>
   }
-      <Accordion
-        separator={false}
-        closedByDefault={false}
-        displayClearButton={!hasInAppEditPerms}
-        header={FilterAccordionHeader}
-        label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
-      >
-        <RadioButtonGroup>
-          {capabilitiesFilterOptions?.map(option => (
-            <RadioButton
-              key={option.value}
-              label={option.label}
-              name="capabilities"
-              value={option.value}
-              disabled={option.disabled}
-              onChange={handleCapabilityChange}
-              checked={option.value === capabilities}
-            />
-          ))}
-        </RadioButtonGroup>
-      </Accordion>
       <Accordion
         className={css.accordionHidden}
         closedByDefault
