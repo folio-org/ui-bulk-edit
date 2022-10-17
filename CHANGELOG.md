@@ -22,6 +22,7 @@
 * [UIBULKED-147](https://issues.folio.org/browse/UIBULKED-147) The "Options" dropdown on the in-app bulk edit form does not contain placeholder
 * [UIBULKED-150](https://issues.folio.org/browse/UIBULKED-150) Remove record count on the Are you sure? form until the loading of data is done
 * [UIBULKED-153](https://issues.folio.org/browse/UIBULKED-153) Rearrange elements in the left pane.
+* [UIBULKED-154](https://issues.folio.org/browse/UIBULKED-154) Missing bulk edit Inventory-holdings permissions.
 
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-09-09)
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
