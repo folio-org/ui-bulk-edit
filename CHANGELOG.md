@@ -21,6 +21,7 @@
 * [UIBULKED-139](https://issues.folio.org/browse/UIBULKED-139) Preview of matched records reloads when User select any other Identifier type
 * [UIBULKED-147](https://issues.folio.org/browse/UIBULKED-147) The "Options" dropdown on the in-app bulk edit form does not contain placeholder
 * [UIBULKED-150](https://issues.folio.org/browse/UIBULKED-150) Remove record count on the Are you sure? form until the loading of data is done
+* [UIBULKED-153](https://issues.folio.org/browse/UIBULKED-153) Rearrange elements in the left pane.
 
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-09-09)
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
