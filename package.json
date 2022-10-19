@@ -82,9 +82,7 @@
           "bulk-edit.errors.collection.get",
           "usergroups.collection.get",
           "data-export.job.item.get",
-          "bulk-edit.preview-items.collection.get",
-          "bulk-edit.items-content-update.collection.post",
-          "bulk-edit.preview.updated-items.collection.get"
+          "bulk-edit.preview-items.collection.get"
         ],
         "visible": true
       },
@@ -103,7 +101,14 @@
           "inventory-storage.location-units.libraries.collection.get",
           "inventory-storage.locations.collection.get",
           "inventory-storage.loan-types.collection.get",
-          "remote-storage.mappings.collection.get"
+          "remote-storage.mappings.collection.get",
+          "inventory-storage.holdings.item.get",
+          "inventory-storage.holdings.collection.get",
+          "bulk-edit.preview-holdings.collection.get",
+          "bulk-edit.preview-items.collection.get",
+          "bulk-edit.items-content-update.collection.post",
+          "bulk-edit.holdings-content-update.collection.post",
+          "inventory.items.collection.get"
         ],
         "visible": true
       },
