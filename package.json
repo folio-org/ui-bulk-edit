@@ -82,9 +82,7 @@
           "bulk-edit.errors.collection.get",
           "usergroups.collection.get",
           "data-export.job.item.get",
-          "bulk-edit.preview-items.collection.get",
-          "bulk-edit.items-content-update.collection.post",
-          "bulk-edit.preview.updated-items.collection.get"
+          "bulk-edit.preview-items.collection.get"
         ],
         "visible": true
       },
@@ -103,7 +101,14 @@
           "inventory-storage.location-units.libraries.collection.get",
           "inventory-storage.locations.collection.get",
           "inventory-storage.loan-types.collection.get",
-          "remote-storage.mappings.collection.get"
+          "remote-storage.mappings.collection.get",
+          "inventory-storage.holdings.item.get",
+          "inventory-storage.holdings.collection.get",
+          "bulk-edit.preview-holdings.collection.get",
+          "bulk-edit.preview-items.collection.get",
+          "bulk-edit.items-content-update.collection.post",
+          "bulk-edit.holdings-content-update.collection.post",
+          "inventory.items.collection.get"
         ],
         "visible": true
       },
@@ -173,10 +178,10 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.3",
-    "testing-library-selector": "^0.2.1"
+    "testing-library-selector": "^0.2.1",
+    "@babel/eslint-parser": "^7.18.9"
   },
   "dependencies": {
-    "@babel/eslint-parser": "^7.18.9",
     "@folio/stripes-acq-components": "^3.0.0",
     "file-saver": "^2.0.5",
     "history": "^5.1.0",
