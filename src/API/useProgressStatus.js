@@ -37,11 +37,13 @@ export const useProgressStatus = (id, typeOfProgress, options = {}) => {
     refetchInterval,
     onSuccess: () => {
       const isProgress = data?.progress?.progress === 100;
+      const isSuccessful = data?.status === JOB_STATUSES.SUCCESSFUL;
+      const isFailed = data?.status === JOB_STATUSES.FAILED;
 
       if (data?.type === BULK_EDIT_IDENTIFIERS) {
-        if (data?.status === JOB_STATUSES.SUCCESSFUL && isProgress) {
+        if (isSuccessful && isProgress) {
           clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
-        } else if (data?.status === JOB_STATUSES.FAILED) {
+        } else if (isFailed) {
           clearIntervalAndRedirect(`/bulk-edit/${id}/initial`);
 
           callout({
@@ -49,9 +51,9 @@ export const useProgressStatus = (id, typeOfProgress, options = {}) => {
             message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
           });
         }
-      } else if (data?.status === JOB_STATUSES.SUCCESSFUL) {
+      } else if (isSuccessful) {
         clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
-      } else if (data?.status === JOB_STATUSES.FAILED) {
+      } else if (isFailed) {
         clearIntervalAndRedirect(`/bulk-edit/${id}/initial`);
 
         callout({
