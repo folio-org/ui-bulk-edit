@@ -108,6 +108,8 @@
           "bulk-edit.preview-items.collection.get",
           "bulk-edit.items-content-update.collection.post",
           "bulk-edit.holdings-content-update.collection.post",
+          "bulk-edit.preview.updated-items.collection.get",
+          "bulk-edit.preview.updated-holdings.collection.get",
           "inventory.items.collection.get"
         ],
         "visible": true
