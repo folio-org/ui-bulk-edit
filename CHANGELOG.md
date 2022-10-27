@@ -2,6 +2,7 @@
 
 ## In progress
 
+* [UIBULKED-151](https://issues.folio.org/browse/UIBULKED-151) Incorrect data on confirmation screen after the holdings location update.
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.3) (2022-09-09)
 
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
