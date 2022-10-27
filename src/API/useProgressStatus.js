@@ -38,11 +38,13 @@ export const useProgressStatus = (id, typeOfProgress, options = {}) => {
     onSuccess: () => {
       const isProgress = data?.progress?.progress === 100;
 
-      switch (data?.status) {
-        case JOB_STATUSES.SUCCESSFUL:
-          if (data?.type === BULK_EDIT_IDENTIFIERS && isProgress) {
-            clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
-          } else clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
+      switch (true) {
+        case data?.status === JOB_STATUSES.SUCCESSFUL && data?.type === BULK_EDIT_IDENTIFIERS && isProgress:
+          clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
+
+          break;
+        case data?.status === JOB_STATUSES.SUCCESSFUL:
+          clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
 
           break;
         case JOB_STATUSES.FAILED:
