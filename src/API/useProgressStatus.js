@@ -47,7 +47,7 @@ export const useProgressStatus = (id, typeOfProgress, options = {}) => {
           clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
 
           break;
-        case JOB_STATUSES.FAILED:
+        case data?.status === JOB_STATUSES.FAILED:
           clearIntervalAndRedirect(`/bulk-edit/${id}/initial`);
 
           callout({
