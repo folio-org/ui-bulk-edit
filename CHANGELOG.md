@@ -10,6 +10,7 @@
 * [UIBULKED-124](https://issues.folio.org/browse/UIBULKED-124) User-records - confirm changes - in app.
 * [UIBULKED-110](https://issues.folio.org/browse/UIBULKED-110) Populate holdings record identifiers dropdown
 * [UIBULKED-129](https://issues.folio.org/browse/UIBULKED-129) Preserve column selection from preview to Are you sure? form and confirmation page
+* [UIBULKED-151](https://issues.folio.org/browse/UIBULKED-151) Incorrect data on confirmation screen after the holdings location update.
 
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-09-09)
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
