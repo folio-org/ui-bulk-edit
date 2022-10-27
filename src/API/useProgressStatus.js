@@ -7,7 +7,10 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { useShowCallout } from '@folio/stripes-acq-components';
 import { useIntl } from 'react-intl';
-import { JOB_STATUSES } from '../constants';
+import {
+  JOB_STATUSES,
+  BULK_EDIT_IDENTIFIERS,
+} from '../constants';
 
 export const useProgressStatus = (id, typeOfProgress, options = {}) => {
   const [refetchInterval, setRefetchInterval] = useState(500);
@@ -33,11 +36,18 @@ export const useProgressStatus = (id, typeOfProgress, options = {}) => {
     enabled: !!id,
     refetchInterval,
     onSuccess: () => {
-      switch (data?.status) {
-        case JOB_STATUSES.SUCCESSFUL:
+      const isProgress = data?.progress?.progress === 100;
+
+      switch (true) {
+        case data?.status === JOB_STATUSES.SUCCESSFUL && data?.type === BULK_EDIT_IDENTIFIERS && isProgress:
           clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
+
           break;
-        case JOB_STATUSES.FAILED:
+        case data?.status === JOB_STATUSES.SUCCESSFUL:
+          clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
+
+          break;
+        case data?.status === JOB_STATUSES.FAILED:
           clearIntervalAndRedirect(`/bulk-edit/${id}/initial`);
 
           callout({
