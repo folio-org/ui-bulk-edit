@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [2.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.0) (2022-10-28)
+
 * [UIBULKED-135](https://issues.folio.org/browse/UIBULKED-135) Upgrade Users interface to 16.0
 * [UIBULKED-127](https://issues.folio.org/browse/UIBULKED-127) Type non existing location and press enter. Error while bulk edit items.
 * [UIBULKED-140](https://issues.folio.org/browse/UIBULKED-140) Update ITEMS content update
