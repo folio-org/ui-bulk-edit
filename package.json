@@ -107,6 +107,11 @@
           "bulk-edit.holdings-content-update.collection.post",
           "bulk-edit.preview.updated-items.collection.get",
           "bulk-edit.preview.updated-holdings.collection.get",
+          "inventory-storage.holdings-sources.collection.get",
+          "inventory-storage.call-number-types.item.get",
+          "inventory-storage.call-number-types.collection.get",
+          "inventory-storage.holdings-sources.collection.get",
+          "inventory-storage.holdings-types.item.get",
           "inventory.items.collection.get"
         ],
         "visible": true
