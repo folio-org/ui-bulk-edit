@@ -112,6 +112,7 @@
           "inventory-storage.call-number-types.collection.get",
           "inventory-storage.holdings-sources.collection.get",
           "inventory-storage.holdings-types.item.get",
+          "inventory-storage.holdings-types.collection.get",
           "inventory.items.collection.get"
         ],
         "visible": true
