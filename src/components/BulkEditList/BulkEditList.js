@@ -35,7 +35,7 @@ export const BulkEditList = () => {
   const location = useLocation();
   const history = useHistory();
   const search = new URLSearchParams(location.search);
-  const controller = useRef();
+  const controller = useRef(null);
 
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
@@ -280,7 +280,7 @@ export const BulkEditList = () => {
             setCountOfRecords={setCountOfRecords}
           />
         </Pane>
-        <Layer isOpen={isBulkEditLayerOpen} inRootSet>
+        <Layer isOpen={isBulkEditLayerOpen} inRootSet contentLabel="Bulk edit in app">
           <Pane
             defaultWidth="fill"
             paneTitle={paneTitle}
