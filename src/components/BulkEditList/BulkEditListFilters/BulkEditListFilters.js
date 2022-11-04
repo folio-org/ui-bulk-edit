@@ -45,6 +45,7 @@ export const BulkEditListFilters = ({
     isUserRadioDisabled,
     hasInAppEditPerms,
     isSelectIdentifiersDisabled,
+    hasLogViewPerms,
   } = useBulkPermissions();
   const search = new URLSearchParams(location.search);
 
@@ -221,6 +222,14 @@ export const BulkEditListFilters = ({
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.query" />
         </Button>
+        {hasLogViewPerms &&
+        <Button
+          buttonStyle={criteria === CRITERIES.LOGS ? 'primary' : 'default'}
+          onClick={() => setFilters(prev => ({ ...prev, criteria: 'logs' }))}
+        >
+          <FormattedMessage id="ui-bulk-edit.list.filters.logs" />
+        </Button>
+        }
       </>
     );
   };
@@ -230,6 +239,7 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
+      {criteria !== CRITERIES.LOGS && (
       <Accordion
         separator={false}
         closedByDefault={false}
@@ -251,6 +261,7 @@ export const BulkEditListFilters = ({
           ))}
         </RadioButtonGroup>
       </Accordion>
+      )}
       {criteria === CRITERIES.QUERY && (
         <QueryTextArea
           queryText={queryText}

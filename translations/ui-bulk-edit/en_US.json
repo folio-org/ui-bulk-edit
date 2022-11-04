@@ -193,5 +193,6 @@
     "uploaderSubTitle.holdings.HRID": "Select a file with holdings HRIDs",
     "layer.options.holdings.temporaryLocation": "Temporary holdings location",
     "layer.options.holdings.permanentLocation": "Permanent holdings location",
-    "options.placeholder": "Select option"
+    "options.placeholder": "Select option",
+    "list.filters.logs": "Logs"
 }

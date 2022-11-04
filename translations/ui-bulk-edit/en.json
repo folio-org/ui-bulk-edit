@@ -17,6 +17,7 @@
   "list.logSubTitle.changed": "{count} records changed",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
+  "list.filters.logs": "Logs",
   "list.filters.recordIdentifier": "Record identifier",
   "list.filters.recordIdentifier.placeholder": "Select record identifier",
   "list.filters.recordIdentifier.userUUIDs": "User UUIDs",

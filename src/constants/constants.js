@@ -252,6 +252,7 @@ export const HOLDINGS_COLUMNS = [
 export const CRITERIES = {
   IDENTIFIER: 'identifier',
   QUERY: 'query',
+  LOGS: 'logs',
 };
 
 export const CAPABILITIES = {
