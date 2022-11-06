@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [UIBULKED-175](https://issues.folio.org/browse/UIBULKED-175) 400 Error when user change Item's status to "Intellectual item" via Bulk edit
+
 ## [2.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.0) (2022-10-28)
 
 * [UIBULKED-135](https://issues.folio.org/browse/UIBULKED-135) Upgrade Users interface to 16.0
