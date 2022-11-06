@@ -50,6 +50,9 @@ export const BulkEditListFilters = ({
   const search = new URLSearchParams(location.search);
 
   const { criteria, capabilities, recordIdentifier, queryText } = filters;
+  const isQuery = criteria === CRITERIES.QUERY;
+  const isLogs = criteria === CRITERIES.LOGS;
+  const isIdentifier = criteria === CRITERIES.IDENTIFIER;
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
@@ -211,20 +214,20 @@ export const BulkEditListFilters = ({
     return (
       <>
         <Button
-          buttonStyle={criteria === CRITERIES.IDENTIFIER ? 'primary' : 'default'}
+          buttonStyle={isIdentifier ? 'primary' : 'default'}
           onClick={() => setFilters(prev => ({ ...prev, criteria: 'identifier' }))}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
         </Button>
         <Button
-          buttonStyle={criteria === CRITERIES.QUERY ? 'primary' : 'default'}
+          buttonStyle={isQuery ? 'primary' : 'default'}
           onClick={() => setFilters(prev => ({ ...prev, criteria: 'query' }))}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.query" />
         </Button>
         {hasLogViewPerms &&
         <Button
-          buttonStyle={criteria === CRITERIES.LOGS ? 'primary' : 'default'}
+          buttonStyle={isLogs ? 'primary' : 'default'}
           onClick={() => setFilters(prev => ({ ...prev, criteria: 'logs' }))}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.logs" />
@@ -239,7 +242,7 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
-      {criteria !== CRITERIES.LOGS && (
+      {!isLogs && (
       <Accordion
         separator={false}
         closedByDefault={false}
@@ -262,14 +265,14 @@ export const BulkEditListFilters = ({
         </RadioButtonGroup>
       </Accordion>
       )}
-      {criteria === CRITERIES.QUERY && (
+      {isQuery && (
         <QueryTextArea
           queryText={queryText}
           setQueryText={setFilters}
           handleQuerySearch={handleQuerySearch}
         />
       )}
-      {criteria === CRITERIES.IDENTIFIER &&
+      {isIdentifier &&
       <>
         <ListSelect
           value={recordIdentifier}
