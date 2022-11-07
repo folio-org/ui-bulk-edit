@@ -435,7 +435,7 @@ export const ITEM_STATUS_OPTIONS = (formatMessage) => [
     disabled: false,
   },
   {
-    value: 'Intellectual item"',
+    value: 'Intellectual item',
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.intellectual' }),
     disabled: false,
   },
