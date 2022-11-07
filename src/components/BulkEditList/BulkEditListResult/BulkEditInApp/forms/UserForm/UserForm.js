@@ -126,38 +126,42 @@ export const UserForm = (
       fields={fields}
       className={css.row}
       onAdd={noop}
-      renderField={(field, index) => (
-        <Row data-testid={`row-${index}`}>
-          <Col xs={3} sm={3}>
-            <Select
-              dataOptions={field.options}
-              value={field.option}
-              onChange={(e) => handleOptionChange(e, index)}
-              data-testid={`select-option-${index}`}
-            />
-          </Col>
-          <ActionsRow
-            actions={field.actions}
-            onChange={(values) => handleActionsChange({ ...values, rowIndex: index })}
-          />
-          <div className={css.iconButtonWrapper}>
-            {(index === fields.length - 1 && fields.length !== optionsUser.length) && (
-              <IconButton
-                icon="plus-sign"
-                size="large"
-                onClick={handleAdd}
-                data-testid={`add-button-${index}`}
+      renderField={(field, index) => {
+        const isAddButtonShown = index === fields.length - 1 && fields.length !== optionsUser.length - 1;
+
+        return (
+          <Row data-testid={`row-${index}`}>
+            <Col xs={3} sm={3}>
+              <Select
+                dataOptions={field.options}
+                value={field.option}
+                onChange={(e) => handleOptionChange(e, index)}
+                data-testid={`select-option-${index}`}
               />
-            )}
-            <IconButton
-              icon="trash"
-              onClick={() => handleRemove(index)}
-              disabled={fields.length === 1}
-              data-testid={`remove-button-${index}`}
+            </Col>
+            <ActionsRow
+              actions={field.actions}
+              onChange={(values) => handleActionsChange({ ...values, rowIndex: index })}
             />
-          </div>
-        </Row>
-      )}
+            <div className={css.iconButtonWrapper}>
+              {isAddButtonShown && (
+                <IconButton
+                  icon="plus-sign"
+                  size="large"
+                  onClick={handleAdd}
+                  data-testid={`add-button-${index}`}
+                />
+              )}
+              <IconButton
+                icon="trash"
+                onClick={() => handleRemove(index)}
+                disabled={fields.length === 1}
+                data-testid={`remove-button-${index}`}
+              />
+            </div>
+          </Row>
+        );
+      }}
     />
   );
 };

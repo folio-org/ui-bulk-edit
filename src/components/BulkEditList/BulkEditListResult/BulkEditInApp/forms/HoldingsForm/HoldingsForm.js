@@ -121,66 +121,70 @@ export const HoldingsForm = (
       fields={fields}
       className={css.row}
       onAdd={noop}
-      renderField={(field, index) => (
-        <Row data-testid={`row-${index}`}>
-          <Col xs={3} sm={3}>
-            <Select
-              dataOptions={field.options}
-              value={field.option}
-              onChange={(e) => handleSelectChange(e, index, fieldsTypes.OPTION)}
-              data-testid={`select-option-${index}`}
-            />
-          </Col>
-          <Col xs={2} sm={2}>
-            <Select
-              dataOptions={field.actions}
-              value={field.action}
-              onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
-              data-testid={`select-actions-${index}`}
-              disabled={isDisabled(index)}
-            />
-          </Col>
-          {isLocation(index) &&
-            <Col xs={6} sm={3}>
-              <LocationSelection
-                value={field.locationId}
-                onSelect={(location) => handleLocationChange(location, index)}
-                placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
-                data-test-id={`textField-${index}`}
-              />
-              <LocationLookup
-                marginBottom0
-                onLocationSelected={(location) => handleLocationChange(location, index)}
-                data-testid={`locationLookup-${index}`}
+      renderField={(field, index) => {
+        const isAddButtonShown = index === fields.length - 1 && fields.length !== optionsHoldings.length - 1;
+
+        return (
+          <Row data-testid={`row-${index}`}>
+            <Col xs={3} sm={3}>
+              <Select
+                dataOptions={field.options}
+                value={field.option}
+                onChange={(e) => handleSelectChange(e, index, fieldsTypes.OPTION)}
+                data-testid={`select-option-${index}`}
               />
             </Col>
-                }
-          <div className={css.iconButtonWrapper}>
-            {(index === fields.length - 1 && fields.length !== optionsHoldings.length) && (
-              <IconButton
-                icon="plus-sign"
-                size="large"
-                onClick={() => handleAdd(
-                  {
-                    getDefaultAction,
-                    getFilteredFields,
-                    fieldTemplate,
-                    setFields,
-                    fields,
-                  },
-                )}
-                data-testid={`add-button-${index}`}
+            <Col xs={2} sm={2}>
+              <Select
+                dataOptions={field.actions}
+                value={field.action}
+                onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
+                data-testid={`select-actions-${index}`}
+                disabled={isDisabled(index)}
               />
-            )}
-            <IconButton
-              icon="trash"
-              onClick={() => handleRemove(index)}
-              disabled={fields.length === 1}
-              data-testid={`remove-button-${index}`}
-            />
-          </div>
-        </Row>
-      )}
+            </Col>
+            {isLocation(index) &&
+              <Col xs={6} sm={3}>
+                <LocationSelection
+                  value={field.locationId}
+                  onSelect={(location) => handleLocationChange(location, index)}
+                  placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
+                  data-test-id={`textField-${index}`}
+                />
+                <LocationLookup
+                  marginBottom0
+                  onLocationSelected={(location) => handleLocationChange(location, index)}
+                  data-testid={`locationLookup-${index}`}
+                />
+              </Col>
+            }
+            <div className={css.iconButtonWrapper}>
+              {isAddButtonShown && (
+                <IconButton
+                  icon="plus-sign"
+                  size="large"
+                  onClick={() => handleAdd(
+                    {
+                      getDefaultAction,
+                      getFilteredFields,
+                      fieldTemplate,
+                      setFields,
+                      fields,
+                    },
+                  )}
+                  data-testid={`add-button-${index}`}
+                />
+              )}
+              <IconButton
+                icon="trash"
+                onClick={() => handleRemove(index)}
+                disabled={fields.length === 1}
+                data-testid={`remove-button-${index}`}
+              />
+            </div>
+          </Row>
+        );
+      }}
     />
   );
 };
