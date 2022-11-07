@@ -513,3 +513,72 @@ export const translationSuffix = {
   [CAPABILITIES.ITEM]: '.item',
   [CAPABILITIES.HOLDINGS]: '.holdings',
 };
+
+export const FILTERS = {
+  STATUS: 'status',
+  CAPABILITY: 'capability',
+  OPERATION_TYPE: 'operation_type',
+  START_DATE: 'start_date',
+  END_DATE: 'end_date',
+};
+
+export const FILTER_OPTIONS = {
+  STATUS: [
+    {
+      value: 'New',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.new" />,
+    },
+    {
+      value: 'Retrieving records',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.retrieving" />,
+    },
+    {
+      value: 'Saving records',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.saving" />,
+    },
+    {
+      value: 'Data modification',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.data" />,
+    },
+    {
+      value: 'Reviewing changes',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.reviewing" />,
+    },
+    {
+      value: 'Completed',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.completed" />,
+    },
+    {
+      value: 'Completed with errors',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.completedWithErrors" />,
+    },
+    {
+      value: 'Failed',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.failed" />,
+    },
+  ],
+  CAPABILITY: [
+    {
+      value: 'holdings',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.holdings" />,
+    },
+    {
+      value: 'items',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.items" />,
+    },
+    {
+      value: 'users',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.users" />,
+    },
+  ],
+  OPERATION_TYPE: [
+    {
+      value: 'edit',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.edit" />,
+    },
+    {
+      value: 'delete',
+      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.delete" />,
+    },
+  ],
+};

@@ -10,6 +10,7 @@
   "app-edit": "Bulk Edit: In app - Edit",
   "app-delete": "Bulk Edit: In app - Delete",
   "logs.view": "Bulk edit - Can view logs",
+  "resetFilters": "Reset all",
 
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
@@ -214,5 +215,24 @@
   "previewModal.areYouSure": "Are you sure?",
 
   "progressBar.title": "Uploading {title} and retrieving relevant data",
-  "progresssBar.retrieving": "Retrieving"
+  "progresssBar.retrieving": "Retrieving",
+
+  "logs.filter.title.status": "Statuses",
+  "logs.filter.title.capability": "Record types",
+  "logs.filter.title.types": "Bulk operation type",
+  "logs.filter.option.new": "New",
+  "logs.filter.option.retrieving": "Retrieving records",
+  "logs.filter.option.saving": "Saving records",
+  "logs.filter.option.data": "Data modification",
+  "logs.filter.option.reviewing": "Reviewing changes",
+  "logs.filter.option.completed": "Completed",
+  "logs.filter.option.completedWithErrors": "Completed with errors",
+  "logs.filter.option.failed": "Failed",
+  "logs.filter.option.holdings": "Inventory-holdings",
+  "logs.filter.option.items": "Inventory-items",
+  "logs.filter.option.users": "Users",
+  "logs.filter.option.edit": "Edit",
+  "logs.filter.option.delete": "Delete",
+  "logs.filter.startDate": "Start date",
+  "logs.filter.endDate": "End date"
 }

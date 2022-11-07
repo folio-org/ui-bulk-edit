@@ -117,7 +117,7 @@ export const BulkEditList = () => {
 
       // set user capability by default
       history.replace({
-        search: buildSearch({ capabilities: getDefaultCapabilities() }),
+        search: buildSearch({ capabilities: getDefaultCapabilities(), criteria: CRITERION.IDENTIFIER }),
       });
 
       setNewBulkFooterShown(false);
