@@ -21,7 +21,9 @@ import {
   BULK_EDIT_IDENTIFIERS,
   EDIT_CAPABILITIES,
   BULK_EDIT_QUERY,
-  CRITERION, CAPABILITIES, translationSuffix,
+  CRITERION,
+  CAPABILITIES,
+  translationSuffix,
 } from '../../../constants';
 import { useJobCommand, useFileUploadComand, useUserGroupsMap, useLaunchJob } from '../../../API';
 import { buildQuery } from '../../../hooks';
