@@ -162,7 +162,7 @@ export const HoldingsForm = (
               {isAddButtonShown && (
                 <IconButton
                   icon="plus-sign"
-                  size="large"
+                  size="medium"
                   onClick={() => handleAdd(
                     {
                       getDefaultAction,
