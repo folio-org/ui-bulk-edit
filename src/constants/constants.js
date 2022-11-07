@@ -249,7 +249,7 @@ export const HOLDINGS_COLUMNS = [
   },
 ];
 
-export const CRITERIES = {
+export const CRITERION = {
   IDENTIFIER: 'identifier',
   QUERY: 'query',
   LOGS: 'logs',

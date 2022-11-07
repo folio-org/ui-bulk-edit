@@ -21,7 +21,7 @@ import {
   BULK_EDIT_IDENTIFIERS,
   EDIT_CAPABILITIES,
   BULK_EDIT_QUERY,
-  CRITERIES, CAPABILITIES, translationSuffix,
+  CRITERION, CAPABILITIES, translationSuffix,
 } from '../../../constants';
 import { useJobCommand, useFileUploadComand, useUserGroupsMap, useLaunchJob } from '../../../API';
 import { buildQuery } from '../../../hooks';
@@ -50,9 +50,9 @@ export const BulkEditListFilters = ({
   const search = new URLSearchParams(location.search);
 
   const { criteria, capabilities, recordIdentifier, queryText } = filters;
-  const isQuery = criteria === CRITERIES.QUERY;
-  const isLogs = criteria === CRITERIES.LOGS;
-  const isIdentifier = criteria === CRITERIES.IDENTIFIER;
+  const isQuery = criteria === CRITERION.QUERY;
+  const isLogs = criteria === CRITERION.LOGS;
+  const isIdentifier = criteria === CRITERION.IDENTIFIER;
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);

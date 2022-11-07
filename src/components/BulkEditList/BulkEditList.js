@@ -22,7 +22,7 @@ import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
 import { useJob } from '../../API';
 import { usePathParams } from '../../hooks';
-import { CAPABILITIES, CRITERIES } from '../../constants';
+import { CAPABILITIES, CRITERION } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import PreviewModal from '../modals/PreviewModal/PreviewModal';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
@@ -71,7 +71,7 @@ export const BulkEditList = () => {
   const defaultCapability = getDefaultCapabilities();
 
   const initialFiltersState = {
-    criteria: CRITERIES.IDENTIFIER,
+    criteria: CRITERION.IDENTIFIER,
     capabilities: defaultCapability,
     queryText: '',
     recordIdentifier: '',
