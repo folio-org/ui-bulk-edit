@@ -29,6 +29,7 @@
 * [UIBULKED-152](https://issues.folio.org/browse/UIBULKED-152) @babel/eslint-parser is incorrectly listed as a direct dependency.
 * [UIBULKED-154](https://issues.folio.org/browse/UIBULKED-154) Missing bulk edit Inventory-holdings permissions.
 * [UIBULKED-151](https://issues.folio.org/browse/UIBULKED-151) Incorrect data on confirmation screen after the holdings location update.
+* [UIBULKED-170](https://issues.folio.org/browse/UIBULKED-170) "Something went wrong" appears after modifying Holdings record.
 
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-09-09)
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
