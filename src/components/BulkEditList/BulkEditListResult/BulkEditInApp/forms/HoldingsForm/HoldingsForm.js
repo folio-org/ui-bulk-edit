@@ -159,7 +159,7 @@ export const HoldingsForm = (
             {(index === fields.length - 1 && fields.length !== optionsHoldings.length) && (
               <IconButton
                 icon="plus-sign"
-                size="large"
+                size="medium"
                 onClick={() => handleAdd(
                   {
                     getDefaultAction,

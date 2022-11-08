@@ -1,6 +1,6 @@
 import { saveAs } from 'file-saver';
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { useLocation } from 'react-router';
 import moment from 'moment';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useOkapiKy } from '@folio/stripes/core';
+import { useShowCallout } from '@folio/stripes-acq-components';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import css from './PreviewModal.css';
 import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
@@ -26,6 +27,8 @@ const PreviewModal = ({
   setUpdatedId,
   controller,
 }) => {
+  const callout = useShowCallout();
+  const intl = useIntl();
   const ky = useOkapiKy();
   const history = useHistory();
   const location = useLocation();
@@ -38,9 +41,22 @@ const PreviewModal = ({
     formatter,
   } = useInAppColumnsInfo({ capability, userGroups });
 
+  const swwCallout = () => {
+    callout({
+      type: 'error',
+      message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
+    });
+  };
+
   const { visibleColumns } = useContext(RootContext);
 
-  const finalColumns = JSON.parse(visibleColumns) || columns;
+  let finalColumns;
+
+  try {
+    finalColumns = JSON.parse(visibleColumns) || columns;
+  } catch {
+    swwCallout();
+  }
 
   const [previewItems, setPreviewItems] = useState([]);
   const [countOfChangedRecords, setCountOfChangedRecords] = useState(0);
@@ -53,16 +69,22 @@ const PreviewModal = ({
     isLoading: isDownloading,
   } = useInAppDownloadPreview(jobId, CAPABILITES_PREVIEW[capability]);
 
-  const handleStartJob = () => {
-    startJob({ jobId });
+  const handleStartJob = async () => {
+    try {
+      if (jobId) {
+        await startJob({ jobId });
 
-    setUpdatedId(jobId);
-    onJobStarted();
+        setUpdatedId(jobId);
+        onJobStarted();
 
-    history.replace({
-      pathname: `/bulk-edit/${jobId}/processedProgress`,
-      search: location.search,
-    });
+        history.replace({
+          pathname: `/bulk-edit/${jobId}/processedProgress`,
+          search: location.search,
+        });
+      }
+    } catch {
+      swwCallout();
+    }
   };
 
   useEffect(() => {
@@ -89,7 +111,7 @@ const PreviewModal = ({
 
         setPreviewItems(mappedPreviewItems);
         setCountOfChangedRecords(response.totalRecords);
-      });
+      }).catch(() => swwCallout());
     }
   }, [jobId, contentUpdates, open]);
 
