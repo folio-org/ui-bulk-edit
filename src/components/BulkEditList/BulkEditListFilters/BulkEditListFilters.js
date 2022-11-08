@@ -56,16 +56,15 @@ export const BulkEditListFilters = ({
     criteria: 'logs',
   };
 
-  const resetData = () => {};
+  const onResetData = () => {};
 
   const [
     activeFilters,
-    searchQuery,
     applyFilters,
     resetFilters,
-  ] = useLocationFilters(location, history, resetData, initialFilter);
+  ] = useLocationFilters(location, history, onResetData, initialFilter);
 
-  const applyFiltersAdapter = () => ({ name, values }) => applyFilters(name, values);
+  const applyFiltersAdapter = (callBack) => ({ name, values }) => callBack(name, values);
   const adaptedApplyFilters = useCallback(
     applyFiltersAdapter(applyFilters),
     [applyFilters],
@@ -233,7 +232,7 @@ export const BulkEditListFilters = ({
 
   const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
 
-  const handleChangeSegment = (value) => {
+  const handleChangeCriteria = (value) => {
     setFilters(prev => ({ ...prev, criteria: value }));
     history.replace({
       search: buildSearch({ criteria: value }, location.search),
@@ -245,20 +244,20 @@ export const BulkEditListFilters = ({
       <>
         <Button
           buttonStyle={isIdentifier ? 'primary' : 'default'}
-          onClick={() => handleChangeSegment('identifier')}
+          onClick={() => handleChangeCriteria('identifier')}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
         </Button>
         <Button
           buttonStyle={isQuery ? 'primary' : 'default'}
-          onClick={() => handleChangeSegment('query')}
+          onClick={() => handleChangeCriteria('query')}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.query" />
         </Button>
         {hasLogViewPerms &&
         <Button
           buttonStyle={isLogs ? 'primary' : 'default'}
-          onClick={() => handleChangeSegment('logs')}
+          onClick={() => handleChangeCriteria('logs')}
 
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.logs" />

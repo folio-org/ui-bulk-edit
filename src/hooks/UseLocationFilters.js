@@ -2,17 +2,14 @@ import useFilters from '@folio/stripes-acq-components/lib/AcqList/hooks/useFilte
 import { useCallback, useEffect } from 'react';
 import { buildFiltersObj } from '@folio/stripes-acq-components/lib/AcqList/utils';
 import { buildSearch } from '@folio/stripes-acq-components';
-import { SEARCH_INDEX_PARAMETER, SEARCH_PARAMETER } from '@folio/stripes-acq-components/lib/AcqList/constants';
+import { SEARCH_INDEX_PARAMETER } from '@folio/stripes-acq-components/lib/AcqList/constants';
 
 export const useLocationFilters = (location, history, resetData, initialFilter) => {
   const {
     filters,
-    searchQuery,
     applyFilters,
-    changeSearch,
     resetFilters,
     setFilters,
-    setSearchQuery,
     setSearchIndex,
     searchIndex,
   } = useFilters(resetData, initialFilter);
@@ -22,7 +19,6 @@ export const useLocationFilters = (location, history, resetData, initialFilter) 
       const initialFilters = buildFiltersObj(location.search);
 
       setFilters(initialFilters);
-      setSearchQuery(initialFilters[SEARCH_PARAMETER] || '');
       setSearchIndex(initialFilters[SEARCH_INDEX_PARAMETER] || '');
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,7 +56,6 @@ export const useLocationFilters = (location, history, resetData, initialFilter) 
 
   return [
     filters,
-    searchQuery,
     applyLocationFilters,
     resetLocationFilters,
     searchIndex,
