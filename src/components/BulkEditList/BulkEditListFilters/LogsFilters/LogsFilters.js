@@ -20,7 +20,10 @@ import {
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
-import { FILTERS, FILTER_OPTIONS } from '../../../../constants';
+import {
+  FILTERS,
+  FILTER_OPTIONS,
+} from '../../../../constants';
 
 export const LogsFilters = ({
   onChange,
@@ -61,7 +64,7 @@ export const LogsFilters = ({
   const getIsDisabled = () => Object.values(FILTERS).some((el) => location.search.includes(el));
 
   return (
-    <div data-testid="viewAllLogsFilters">
+    <div data-testid="logsFilters">
       <AccordionSet>
         <ResetButton
           id="reset-export-filters"
