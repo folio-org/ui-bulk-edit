@@ -2,6 +2,7 @@
   "meta.title": "Bulk edit",
   "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
   "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
+  "meta.logs.title": "Bulk edit logs",
 
   "view": "Bulk Edit: (CSV) View",
   "edit": "Bulk Edit: (CSV) Edit",
@@ -234,5 +235,7 @@
   "logs.filter.option.edit": "Edit",
   "logs.filter.option.delete": "Delete",
   "logs.filter.startDate": "Start date",
-  "logs.filter.endDate": "End date"
+  "logs.filter.endDate": "End date",
+  "logs.logSubTitle": "Enter search criteria to start search",
+  "list.result.emptyMessage.logs": "Choose a filter to show results."
 }
