@@ -22,7 +22,7 @@ import {
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
 import { useLoanTypes } from '../../../../../../hooks/useLoanTypes';
-import { handleAdd } from '../utils';
+import { handleAdd, isAddButtonShown } from '../utils';
 
 export const ItemForm = (
   {
@@ -151,8 +151,6 @@ export const ItemForm = (
         className={css.row}
         onAdd={noop}
         renderField={(field, index) => {
-          const isAddButtonShown = index === fields.length - 1 && fields.length !== options.length - 1;
-
           return (
             <Row data-testid={`row-${index}`}>
               <Col xs={6} sm={3}>
@@ -212,7 +210,7 @@ export const ItemForm = (
                 </Col>
               }
               <div className={css.iconButtonWrapper}>
-                {isAddButtonShown && (
+                {isAddButtonShown(index, fields, options) && (
                   <IconButton
                     icon="plus-sign"
                     size="large"

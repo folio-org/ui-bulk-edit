@@ -18,7 +18,7 @@ import {
   HOLDINGS_OPTIONS, OPTIONS,
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
-import { handleAdd } from '../utils';
+import { handleAdd, isAddButtonShown } from '../utils';
 
 export const HoldingsForm = (
   {
@@ -122,8 +122,6 @@ export const HoldingsForm = (
       className={css.row}
       onAdd={noop}
       renderField={(field, index) => {
-        const isAddButtonShown = index === fields.length - 1 && fields.length !== optionsHoldings.length - 1;
-
         return (
           <Row data-testid={`row-${index}`}>
             <Col xs={3} sm={3}>
@@ -159,7 +157,7 @@ export const HoldingsForm = (
               </Col>
             }
             <div className={css.iconButtonWrapper}>
-              {isAddButtonShown && (
+              {isAddButtonShown(index, fields, optionsHoldings) && (
                 <IconButton
                   icon="plus-sign"
                   size="medium"
