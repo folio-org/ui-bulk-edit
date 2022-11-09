@@ -22,7 +22,7 @@ import {
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
 import { useLoanTypes } from '../../../../../../hooks/useLoanTypes';
-import { handleAdd } from '../utils';
+import { handleAdd, isAddButtonShown } from '../utils';
 
 export const ItemForm = (
   {
@@ -150,90 +150,92 @@ export const ItemForm = (
         fields={fields}
         className={css.row}
         onAdd={noop}
-        renderField={(field, index) => (
-          <Row data-testid={`row-${index}`}>
-            <Col xs={6} sm={3}>
-              <Select
-                dataOptions={field.options}
-                value={field.option}
-                onChange={(e) => handleSelectChange(e, index, fieldsTypes.OPTION)}
-                data-testid={`select-option-${index}`}
-              />
-            </Col>
-            <Col xs={6} sm={3}>
-              <Select
-                dataOptions={field.actions}
-                value={field.action}
-                onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
-                data-testid={`select-actions-${index}`}
-                disabled={isDisabled(index)}
-              />
-            </Col>
-
-            {isLocation(index) &&
-            <Col xs={6} sm={3}>
-              <LocationSelection
-                value={field.locationId}
-                onSelect={(location) => handleLocationChange(location, index)}
-                placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
-                data-test-id={`textField-${index}`}
-              />
-              <LocationLookup
-                marginBottom0
-                onLocationSelected={(location) => handleLocationChange(location, index)}
-                data-testid={`locationLookup-${index}`}
-                isTemporaryLocation={getIsTemporaryLocation(field)}
-              />
-            </Col>
-            }
-            {isLoanType(index) && (
-            <Col xs={6} sm={3}>
-              <Selection
-                id="loanType"
-                value={field.value}
-                loading={isLoading}
-                onChange={(value) => handleValueChange(value, index)}
-                placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
-                dataOptions={loanTypes}
-              />
-            </Col>
-            )}
-            {isItemStatus(index) &&
-            <Col xs={6} sm={3}>
-              <Select
-                dataOptions={field.statuses}
-                value={field.value}
-                onChange={(e) => handleValueChange(e.target.value, index)}
-                data-testid={`select-status-${index}`}
-              />
-            </Col>
-            }
-            <div className={css.iconButtonWrapper}>
-              {(index === fields.length - 1 && fields.length !== options.length) && (
-                <IconButton
-                  icon="plus-sign"
-                  size="large"
-                  onClick={() => handleAdd(
-                    {
-                      getDefaultAction,
-                      getFilteredFields,
-                      fieldTemplate,
-                      setFields,
-                      fields,
-                    },
-                  )}
-                  data-testid={`add-button-${index}`}
+        renderField={(field, index) => {
+          return (
+            <Row data-testid={`row-${index}`}>
+              <Col xs={6} sm={3}>
+                <Select
+                  dataOptions={field.options}
+                  value={field.option}
+                  onChange={(e) => handleSelectChange(e, index, fieldsTypes.OPTION)}
+                  data-testid={`select-option-${index}`}
                 />
+              </Col>
+              <Col xs={6} sm={3}>
+                <Select
+                  dataOptions={field.actions}
+                  value={field.action}
+                  onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
+                  data-testid={`select-actions-${index}`}
+                  disabled={isDisabled(index)}
+                />
+              </Col>
+
+              {isLocation(index) &&
+                <Col xs={6} sm={3}>
+                  <LocationSelection
+                    value={field.locationId}
+                    onSelect={(location) => handleLocationChange(location, index)}
+                    placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
+                    data-test-id={`textField-${index}`}
+                  />
+                  <LocationLookup
+                    marginBottom0
+                    onLocationSelected={(location) => handleLocationChange(location, index)}
+                    data-testid={`locationLookup-${index}`}
+                    isTemporaryLocation={getIsTemporaryLocation(field)}
+                  />
+                </Col>
+              }
+              {isLoanType(index) && (
+                <Col xs={6} sm={3}>
+                  <Selection
+                    id="loanType"
+                    value={field.value}
+                    loading={isLoading}
+                    onChange={(value) => handleValueChange(value, index)}
+                    placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
+                    dataOptions={loanTypes}
+                  />
+                </Col>
               )}
-              <IconButton
-                icon="trash"
-                onClick={() => handleRemove(index)}
-                disabled={fields.length === 1}
-                data-testid={`remove-button-${index}`}
-              />
-            </div>
-          </Row>
-        )}
+              {isItemStatus(index) &&
+                <Col xs={6} sm={3}>
+                  <Select
+                    dataOptions={field.statuses}
+                    value={field.value}
+                    onChange={(e) => handleValueChange(e.target.value, index)}
+                    data-testid={`select-status-${index}`}
+                  />
+                </Col>
+              }
+              <div className={css.iconButtonWrapper}>
+                {isAddButtonShown(index, fields, options) && (
+                  <IconButton
+                    icon="plus-sign"
+                    size="large"
+                    onClick={() => handleAdd(
+                      {
+                        getDefaultAction,
+                        getFilteredFields,
+                        fieldTemplate,
+                        setFields,
+                        fields,
+                      },
+                    )}
+                    data-testid={`add-button-${index}`}
+                  />
+                )}
+                <IconButton
+                  icon="trash"
+                  onClick={() => handleRemove(index)}
+                  disabled={fields.length === 1}
+                  data-testid={`remove-button-${index}`}
+                />
+              </div>
+            </Row>
+          );
+        }}
       />
     </>
   );
