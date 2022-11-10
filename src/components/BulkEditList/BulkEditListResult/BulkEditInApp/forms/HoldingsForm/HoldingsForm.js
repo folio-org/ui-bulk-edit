@@ -132,15 +132,17 @@ export const HoldingsForm = (
                 data-testid={`select-option-${index}`}
               />
             </Col>
-            <Col xs={2} sm={2}>
-              <Select
-                dataOptions={field.actions}
-                value={field.action}
-                onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
-                data-testid={`select-actions-${index}`}
-                disabled={isDisabled(index)}
-              />
-            </Col>
+            {fields[0].option && (
+              <Col xs={2} sm={2}>
+                <Select
+                  dataOptions={field.actions}
+                  value={field.action}
+                  onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
+                  data-testid={`select-actions-${index}`}
+                  disabled={isDisabled(index)}
+                />
+              </Col>
+            )}
             {isLocation(index) &&
               <Col xs={6} sm={3}>
                 <LocationSelection

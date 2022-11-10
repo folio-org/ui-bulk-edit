@@ -161,15 +161,17 @@ export const ItemForm = (
                   data-testid={`select-option-${index}`}
                 />
               </Col>
-              <Col xs={6} sm={3}>
-                <Select
-                  dataOptions={field.actions}
-                  value={field.action}
-                  onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
-                  data-testid={`select-actions-${index}`}
-                  disabled={isDisabled(index)}
-                />
-              </Col>
+              {fields[0].option && (
+                <Col xs={6} sm={3}>
+                  <Select
+                    dataOptions={field.actions}
+                    value={field.action}
+                    onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
+                    data-testid={`select-actions-${index}`}
+                    disabled={isDisabled(index)}
+                  />
+                </Col>
+              )}
 
               {isLocation(index) &&
                 <Col xs={6} sm={3}>
