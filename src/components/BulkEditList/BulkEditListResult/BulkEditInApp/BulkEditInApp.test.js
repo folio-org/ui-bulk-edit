@@ -126,18 +126,12 @@ describe('BulkEditInApp', () => {
     const optionStatus = screen.getByRole('option', { name: /layer.options.statusLabel/ });
     const selectOption = screen.getByTestId('select-option-0');
 
-    userEvent.selectOptions(
-      selectOption,
-      optionStatus,
-    );
+    userEvent.selectOptions(selectOption, optionStatus);
 
     const selectAction = screen.getByTestId('select-actions-0');
     const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
 
-    userEvent.selectOptions(
-      selectAction,
-      actionReplace,
-    );
+    userEvent.selectOptions(selectAction, actionReplace);
 
 
     await flushPromises();
