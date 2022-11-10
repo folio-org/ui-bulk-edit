@@ -12,3 +12,7 @@ export const handleAdd = ({ getFilteredFields, fields, fieldTemplate, getDefault
 
   setFields(finalizedFields);
 };
+
+export const isAddButtonShown = (index, fields, options) => {
+  return index === fields.length - 1 && fields.length !== options.length - 1;
+};
