@@ -3,6 +3,8 @@
 ## In progress
 
 * [UIBULKED-175](https://issues.folio.org/browse/UIBULKED-175) 400 Error when user change Item's status to "Intellectual item" via Bulk edit
+* [UIBULKED-156](https://issues.folio.org/browse/UIBULKED-156) Add Logs tab to the landing page
+* [UIBULKED-156](https://issues.folio.org/browse/UIBULKED-158) Add search and filters pane to bulk edit logs
 
 ## [2.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.0) (2022-10-28)
 

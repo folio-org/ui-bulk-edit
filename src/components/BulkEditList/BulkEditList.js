@@ -22,7 +22,7 @@ import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
 import { useJob } from '../../API';
 import { usePathParams } from '../../hooks';
-import { CAPABILITIES, CRITERIES } from '../../constants';
+import { CAPABILITIES, CRITERIA } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import PreviewModal from '../modals/PreviewModal/PreviewModal';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
@@ -59,6 +59,7 @@ export const BulkEditList = () => {
   const { isActionMenuShown, hasOnlyInAppViewPerms } = useBulkPermissions();
 
   const capabilitiesUrl = search.get('capabilities');
+  const criteria = search.get('criteria');
 
   const getDefaultCapabilities = () => {
     if (hasOnlyInAppViewPerms) {
@@ -71,7 +72,7 @@ export const BulkEditList = () => {
   const defaultCapability = getDefaultCapabilities();
 
   const initialFiltersState = {
-    criteria: CRITERIES.IDENTIFIER,
+    criteria: CRITERIA.IDENTIFIER,
     capabilities: defaultCapability,
     queryText: '',
     recordIdentifier: '',
@@ -117,7 +118,7 @@ export const BulkEditList = () => {
 
       // set user capability by default
       history.replace({
-        search: buildSearch({ capabilities: getDefaultCapabilities() }),
+        search: buildSearch({ capabilities: getDefaultCapabilities(), criteria: CRITERIA.IDENTIFIER }),
       });
 
       setNewBulkFooterShown(false);
@@ -186,6 +187,8 @@ export const BulkEditList = () => {
         id="ui-bulk-edit.meta.title.uploadedFile"
         values={{ fileName: confirmedFileName || fileUploadedName }}
              />;
+    } else if (criteria === CRITERIA.LOGS) {
+      return <FormattedMessage id="ui-bulk-edit.meta.logs.title" />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
   }, [confirmedFileName, location.search]);
 
@@ -195,12 +198,19 @@ export const BulkEditList = () => {
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
   ), [countOfRecords, history.location.pathname]);
 
+  const defaultPaneSubtitle = useMemo(() => (
+    criteria === CRITERIA.LOGS ?
+      <FormattedMessage id="ui-bulk-edit.logs.logSubTitle" />
+      :
+      <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
+  ), [location.search]);
+
   const paneSubtitle = useMemo(() => (
     history.location.pathname !== '/bulk-edit' && history.location.pathname !== `/bulk-edit/${jobId}/initialProgress`
       ?
       changedPaneSubTitle
-      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
-  ), [changedPaneSubTitle, history.location.pathname]);
+      : defaultPaneSubtitle
+  ), [changedPaneSubTitle, history.location.pathname, defaultPaneSubtitle]);
 
   const fileNameTitle = () => {
     const fileUploadedName = search.get('fileName');
