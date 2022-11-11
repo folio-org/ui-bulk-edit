@@ -2,6 +2,7 @@
   "meta.title": "Bulk edit",
   "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
   "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
+  "meta.logs.title": "Bulk edit logs",
 
   "view": "Bulk Edit: (CSV) View",
   "edit": "Bulk Edit: (CSV) Edit",
@@ -9,7 +10,8 @@
   "app-view": "Bulk Edit: In app - View",
   "app-edit": "Bulk Edit: In app - Edit",
   "app-delete": "Bulk Edit: In app - Delete",
-
+  "logs.view": "Bulk edit - Can view logs",
+  "resetFilters": "Reset all",
 
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
@@ -17,6 +19,7 @@
   "list.logSubTitle.changed": "{count} records changed",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
+  "list.filters.logs": "Logs",
   "list.filters.recordIdentifier": "Record identifier",
   "list.filters.recordIdentifier.placeholder": "Select record identifier",
   "list.filters.recordIdentifier.userUUIDs": "User UUIDs",
@@ -213,5 +216,36 @@
   "previewModal.areYouSure": "Are you sure?",
 
   "progressBar.title": "Uploading {title} and retrieving relevant data",
-  "progresssBar.retrieving": "Retrieving"
+  "progresssBar.retrieving": "Retrieving",
+
+  "logs.filter.title.status": "Statuses",
+  "logs.filter.title.capability": "Record types",
+  "logs.filter.title.types": "Bulk operation type",
+  "logs.filter.option.new": "New",
+  "logs.filter.option.retrieving": "Retrieving records",
+  "logs.filter.option.saving": "Saving records",
+  "logs.filter.option.data": "Data modification",
+  "logs.filter.option.reviewing": "Reviewing changes",
+  "logs.filter.option.completed": "Completed",
+  "logs.filter.option.completedWithErrors": "Completed with errors",
+  "logs.filter.option.failed": "Failed",
+  "logs.filter.option.holdings": "Inventory-holdings",
+  "logs.filter.option.items": "Inventory-items",
+  "logs.filter.option.users": "Users",
+  "logs.filter.option.edit": "Edit",
+  "logs.filter.option.delete": "Delete",
+  "logs.filter.startDate": "Start date",
+  "logs.filter.endDate": "End date",
+  "logs.logSubTitle": "Enter search criteria to start search",
+  "list.result.emptyMessage.logs": "Choose a filter to show results.",
+
+  "permission.module.bulk-edit.enabled": "UI: Bulk edit module is enabled",
+  "permission.view": "Bulk Edit: (CSV) View",
+  "permission.edit": "Bulk Edit: (CSV) Edit",
+  "permission.delete": "Bulk Edit: (CSV) Delete",
+  "permission.app-view": "Bulk Edit: In app - View",
+  "permission.app-edit": "Bulk Edit: In app - Edit",
+  "permission.app-edit.users": "Bulk edit: In app - Update user records",
+  "permission.app-delete": "Bulk Edit: In app - Delete",
+  "permission.logs.view": "Bulk edit - Can view logs"
 }
