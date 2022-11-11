@@ -5,6 +5,7 @@
 * [UIBULKED-175](https://issues.folio.org/browse/UIBULKED-175) 400 Error when user change Item's status to "Intellectual item" via Bulk edit
 * [UIBULKED-156](https://issues.folio.org/browse/UIBULKED-156) Add Logs tab to the landing page
 * [UIBULKED-156](https://issues.folio.org/browse/UIBULKED-158) Add search and filters pane to bulk edit logs
+* [UIBULKED-177](https://issues.folio.org/browse/UIBULKED-177) permissions from package.json are missing in translations files
 
 ## [2.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.0) (2022-10-28)
 
@@ -33,7 +34,6 @@
 * [UIBULKED-151](https://issues.folio.org/browse/UIBULKED-151) Incorrect data on confirmation screen after the holdings location update.
 * [UIBULKED-170](https://issues.folio.org/browse/UIBULKED-170) "Something went wrong" appears after modifying Holdings record.
 * [UIBULKED-163](https://issues.folio.org/browse/UIBULKED-163) User can add more rows than supported options
-* [UIBULKED-177](https://issues.folio.org/browse/UIBULKED-177) permissions from package.json are missing in translations files
 
 ## [2.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.2) (2022-09-09)
 * [UIBULKED-144](https://issues.folio.org/browse/UIBULKED-144) Update behavior of uploading CSV file with updated records
