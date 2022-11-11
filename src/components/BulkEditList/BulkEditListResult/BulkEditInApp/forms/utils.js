@@ -16,3 +16,5 @@ export const handleAdd = ({ getFilteredFields, fields, fieldTemplate, getDefault
 export const isAddButtonShown = (index, fields, options) => {
   return index === fields.length - 1 && fields.length !== options.length - 1;
 };
+
+export const isActionsVisible = (field) => field.option;

@@ -22,7 +22,7 @@ import {
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
 import { useLoanTypes } from '../../../../../../hooks/useLoanTypes';
-import { handleAdd, isAddButtonShown } from '../utils';
+import { handleAdd, isAddButtonShown, isActionsVisible } from '../utils';
 
 export const ItemForm = (
   {
@@ -161,7 +161,7 @@ export const ItemForm = (
                   data-testid={`select-option-${index}`}
                 />
               </Col>
-              {fields[0].option && (
+              {isActionsVisible(field) && (
                 <Col xs={6} sm={3}>
                   <Select
                     dataOptions={field.actions}

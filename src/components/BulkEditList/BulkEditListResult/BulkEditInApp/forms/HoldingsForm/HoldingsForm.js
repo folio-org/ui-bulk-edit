@@ -18,7 +18,7 @@ import {
   HOLDINGS_OPTIONS, OPTIONS,
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
-import { handleAdd, isAddButtonShown } from '../utils';
+import { handleAdd, isAddButtonShown, isActionsVisible } from '../utils';
 
 export const HoldingsForm = (
   {
@@ -132,7 +132,7 @@ export const HoldingsForm = (
                 data-testid={`select-option-${index}`}
               />
             </Col>
-            {fields[0].option && (
+            {isActionsVisible(field) && (
               <Col xs={2} sm={2}>
                 <Select
                   dataOptions={field.actions}
