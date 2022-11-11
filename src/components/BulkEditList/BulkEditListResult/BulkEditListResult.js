@@ -10,7 +10,7 @@ import PreviewInitial from './PreviewInitial/PreviewInitial';
 import PreviewProcessed from './PreviewProcessed/PreviewProcessed';
 import { TYPE_OF_PROGRESS } from '../../../constants';
 
-const BulkEditListResult = ({ updatedId, jobId }) => {
+const BulkEditListResult = ({ updatedId, jobId, data }) => {
   return (
     <Switch>
       <Route
@@ -25,7 +25,7 @@ const BulkEditListResult = ({ updatedId, jobId }) => {
       />
       <Route
         path="/bulk-edit/:id/processed"
-        component={PreviewProcessed}
+        render={() => <PreviewProcessed data={data} />}
         exact
       />
       <Route

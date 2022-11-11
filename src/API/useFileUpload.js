@@ -38,17 +38,23 @@ export const useJobCommand = ({ entityType }) => {
 export const useFileUploadComand = () => {
   const ky = useOkapiKy();
 
-  const { mutateAsync: fileUpload, isLoading } = useMutation({ mutationFn: ({ id, fileToUpload, controller }) => {
-    const formData = new FormData();
+  const { mutateAsync: fileUpload, isLoading } = useMutation(
+    {
+      mutationFn: ({ id, fileToUpload, controller }) => {
+        const formData = new FormData();
 
-    formData.append('file', fileToUpload);
+        formData.append('file', fileToUpload);
 
-    return ky.post(`bulk-edit/${id}/upload`, {
-      body: formData,
-      timeout: false,
-      signal: controller?.signal,
-    }).json();
-  } });
+        return ky.post(`bulk-edit/${id}/upload`, {
+          body: formData,
+          timeout: false,
+          signal: controller?.signal,
+        }).json();
+      },
+      retry: 30,
+      retryDelay: 2000,
+    },
+  );
 
   return {
     fileUpload,
