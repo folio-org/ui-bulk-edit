@@ -4,6 +4,7 @@
 
 * [UIBULKED-175](https://issues.folio.org/browse/UIBULKED-175) 400 Error when user change Item's status to "Intellectual item" via Bulk edit
 * [UIBULKED-156](https://issues.folio.org/browse/UIBULKED-156) Add Logs tab to the landing page
+* [UIBULKED-162](https://issues.folio.org/browse/UIBULKED-162) Make In-app Options selection consistent 
 * [UIBULKED-158](https://issues.folio.org/browse/UIBULKED-158) Add search and filters pane to bulk edit logs
 * [UIBULKED-177](https://issues.folio.org/browse/UIBULKED-177) permissions from package.json are missing in translations files
 

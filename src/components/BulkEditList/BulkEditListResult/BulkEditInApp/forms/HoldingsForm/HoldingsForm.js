@@ -18,7 +18,7 @@ import {
   HOLDINGS_OPTIONS, OPTIONS,
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
-import { handleAdd, isAddButtonShown } from '../utils';
+import { handleAdd, isAddButtonShown, isActionsVisible } from '../utils';
 
 export const HoldingsForm = (
   {
@@ -132,15 +132,17 @@ export const HoldingsForm = (
                 data-testid={`select-option-${index}`}
               />
             </Col>
-            <Col xs={2} sm={2}>
-              <Select
-                dataOptions={field.actions}
-                value={field.action}
-                onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
-                data-testid={`select-actions-${index}`}
-                disabled={isDisabled(index)}
-              />
-            </Col>
+            {isActionsVisible(field) && (
+              <Col xs={2} sm={2}>
+                <Select
+                  dataOptions={field.actions}
+                  value={field.action}
+                  onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
+                  data-testid={`select-actions-${index}`}
+                  disabled={isDisabled(index)}
+                />
+              </Col>
+            )}
             {isLocation(index) &&
               <Col xs={6} sm={3}>
                 <LocationSelection
