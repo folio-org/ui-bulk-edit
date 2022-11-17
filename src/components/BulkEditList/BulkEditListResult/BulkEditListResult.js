@@ -45,4 +45,5 @@ export default BulkEditListResult;
 BulkEditListResult.propTypes = {
   updatedId: PropTypes.string,
   jobId: PropTypes.string,
+  data: PropTypes.object,
 };
