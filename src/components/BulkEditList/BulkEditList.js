@@ -234,6 +234,7 @@ export const BulkEditList = () => {
           <BulkEditListResult
             updatedId={updatedId}
             jobId={jobId}
+            data={data}
             setCountOfRecords={setCountOfRecords}
           />
         </Pane>
