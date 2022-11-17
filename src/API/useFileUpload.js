@@ -41,7 +41,9 @@ export const useFileUploadComand = () => {
       timeout: false,
       signal: controller?.signal,
     }).json();
-  } });
+  },
+  retry: 10,
+  retryDelay: 2000 });
 
   return {
     fileUpload,
