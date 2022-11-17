@@ -49,7 +49,6 @@ export const Preview = ({ id, title, initial, capabilities, data }) => {
     }
   }, [items, errors]);
 
-
   return (
     <AccordionStatus>
       {!initial && (
