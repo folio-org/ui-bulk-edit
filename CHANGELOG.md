@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [UIBULKED-182](https://issues.folio.org/browse/UIBULKED-182) 404 Error occurred uploading file with identifiers for Bulk Edit on Nolana bugfest env.
+
 ## [2.1.1](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.1) (2022-11-11)
 
 * [UIBULKED-170](https://issues.folio.org/browse/UIBULKED-170) "Something went wrong" appears after modifying Holdings record.
