@@ -79,29 +79,6 @@ describe('PreviewModal', () => {
       });
   });
 
-  it('should render PreviewModal correctly', () => {
-    renderPreviewModal(props);
-
-    expect(screen.getByText('ui-bulk-edit.previewModal.areYouSure')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.previewModal.message')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.previewModal.previewToBeChanged')).toBeVisible();
-
-    // columns
-    expect(screen.getByText('ui-bulk-edit.columns.barcode')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.columns.status')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.columns.effectiveLocation')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.columns.callNumber')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.columns.hrid')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.columns.materialType')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.columns.permanentLoanType')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.columns.temporaryLoanType')).toBeVisible();
-
-    // buttons
-    expect(screen.getByText('ui-bulk-edit.previewModal.keepEditing')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.previewModal.downloadPreview')).toBeVisible();
-    expect(screen.getByText('ui-bulk-edit.previewModal.saveAndClose')).toBeVisible();
-  });
-
   it('should call all footer handlers', async () => {
     renderPreviewModal(props);
 
