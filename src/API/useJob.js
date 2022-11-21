@@ -8,7 +8,7 @@ export const useJob = (id, options = {}) => {
   const ky = useOkapiKy();
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: 'getJob',
+    queryKey: ['progress', id],
     queryFn: () => ky.get(`data-export-spring/jobs/${id}`).json(),
     enabled: !!id,
     ...options,
