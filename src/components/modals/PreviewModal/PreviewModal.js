@@ -144,7 +144,7 @@ const PreviewModal = ({
       dismissible
       onClose={onKeepEditing}
     >
-      {!isUploading ? (
+      {!isUploading && previewItems.length ? (
         <>
           <MessageBanner type="warning">
             <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: countOfChangedRecords }} />
