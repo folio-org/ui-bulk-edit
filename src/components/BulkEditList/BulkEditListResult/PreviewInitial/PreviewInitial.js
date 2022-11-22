@@ -1,18 +1,17 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { useLocation, useParams } from 'react-router';
 
 import { Preview } from '../Preview/Preview';
 import { Loader } from '../Loader/Loader';
 
-import { useJob } from '../../../../API';
 import { JOB_STATUSES } from '../../../../constants';
 
-const PreviewInitial = () => {
+const PreviewInitial = ({ data }) => {
   const intl = useIntl();
   const location = useLocation();
   const { id } = useParams();
-  const { data } = useJob(id);
 
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
   const capabilities = useMemo(() => new URLSearchParams(location.search).get('capabilities')?.toLocaleLowerCase(), [location.search]);
@@ -37,6 +36,10 @@ const PreviewInitial = () => {
       }
     </>
   );
+};
+
+PreviewInitial.propTypes = {
+  data: PropTypes.object,
 };
 
 export default PreviewInitial;
