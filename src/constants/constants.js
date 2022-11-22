@@ -582,3 +582,72 @@ export const FILTER_OPTIONS = {
     },
   ],
 };
+
+export const LOGS_COLUMNS = [
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsJobId" />,
+    value: 'jobId',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsBulkOperationType" />,
+    value: 'bulkOperationType',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsRecordType" />,
+    value: 'recordType',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsStatus" />,
+    value: 'status',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsRunBy" />,
+    value: 'runBy',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsStartedRunning" />,
+    value: 'startedRunning',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsEndedRunning" />,
+    value: 'endedRunning',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsNumberOfRecords" />,
+    value: 'numberOfRecords',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsProcessed" />,
+    value: 'processed',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsEditing" />,
+    value: 'editing',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logsActions" />,
+    value: 'actions',
+    disabled: false,
+    selected: false,
+  },
+];

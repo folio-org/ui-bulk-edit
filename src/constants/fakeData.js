@@ -1,0 +1,26 @@
+export const bulkEditLogsData = Array(50).fill(null).map((_, index) => [
+  {
+    jobId: index,
+    bulkOperationType: 'Edit',
+    recordType: 'Item',
+    status: 'New',
+    runBy: 'Smith, Josh S',
+    startedRunning: '11/12/2023 2:35AM',
+    endedRunning: '10/12/2022 7:34AM',
+    numberOfRecords: 100,
+    processed: 55,
+    editing: 'In app',
+  },
+  {
+    jobId: index + 1,
+    bulkOperationType: 'Delete',
+    recordType: 'Holdings',
+    status: 'Completed',
+    runBy: 'Brown, Marry',
+    startedRunning: '12/12/2022 7:34AM',
+    endedRunning: '12/12/2022 7:34AM',
+    numberOfRecords: 65,
+    processed: 12,
+    editing: 'In app',
+  },
+]).flat();
