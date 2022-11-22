@@ -20,7 +20,7 @@ const BulkEditListResult = ({ updatedId, jobId }) => {
       />
       <Route
         path="/bulk-edit/:id/initial"
-        component={PreviewInitial}
+        render={() => <PreviewInitial data={data} />}
         exact
       />
       <Route
