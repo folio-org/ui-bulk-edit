@@ -3,7 +3,7 @@ import { Col, MultiColumnList, Row } from '@folio/stripes/components';
 import { useLocation } from 'react-router-dom';
 import { LOGS_COLUMNS } from '../../constants';
 import { getLogsResultsFormatter } from '../../constants/formatters';
-import { useBulkEditLogs } from '../../hooks/useBulkEditLogs';
+import { useBulkEditLogs } from '../../API/useBulkEditLogs';
 
 const BulkEditLogs = () => {
   const location = useLocation();

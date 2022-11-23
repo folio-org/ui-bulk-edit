@@ -289,11 +289,12 @@ export const BulkEditList = () => {
             <BulkEditListResult
               updatedId={updatedId}
               jobId={jobId}
-              data={data}setCountOfRecords={setCountOfRecords}
+              data={data}
+              setCountOfRecords={setCountOfRecords}
             />
           )}
         </Pane>
-        <Layer isOpen={isBulkEditLayerOpen} inRootSet contentLabel="Bulk edit in app">
+        <Layer isOpen={isBulkEditLayerOpen} inRootSet>
           <Pane
             defaultWidth="fill"
             paneTitle={paneTitle}

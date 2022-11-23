@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { bulkEditLogsData } from '../constants/fakeData';
+import { bulkEditLogsData } from '../../test/jest/__mock__/fakeData';
 
 
 export const useBulkEditLogs = ({ search }) => {
