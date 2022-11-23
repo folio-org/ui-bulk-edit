@@ -8,6 +8,7 @@
 * [UIBULKED-182](https://issues.folio.org/browse/UIBULKED-182) 404 Error occurred uploading file with identifiers for Bulk Edit on Nolana bugfest env.
 * [UIBULKED-174](https://issues.folio.org/browse/UIBULKED-174) Confirmation screen requires manual refresh
 * [UIBULKED-176](https://issues.folio.org/browse/UIBULKED-176) Loader disappears before data is loaded
+* [UIBULKED-157](https://issues.folio.org/browse/UIBULKED-157) Display logs of bulk edit jobs
 
 ## [2.1.1](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.1) (2022-11-11)
 
