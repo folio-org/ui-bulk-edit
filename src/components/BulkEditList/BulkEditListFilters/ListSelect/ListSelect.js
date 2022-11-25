@@ -5,13 +5,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Select } from '@folio/stripes/components';
 
-import { identifierOptions } from '../../../../constants/optionsRecordIdentifiers';
+import { identifierOptions } from '../../../../constants';
 
 export const ListSelect = memo(({ value, disabled, onChange, capabilities }) => {
   const intl = useIntl();
   const location = useLocation();
 
-  const options = identifierOptions[capabilities].map((el) => ({
+  const options = identifierOptions[capabilities]?.map((el) => ({
     value: el.value,
     label: intl.formatMessage({ id: el.label }),
     disabled: el.disabled,

@@ -166,6 +166,18 @@
   "columns.holdingsDiscoverySuppress": "Discovery suppress",
   "columns.holdingsCallNumberType": "Call number type",
 
+  "columns.logs.jobId": "ID",
+  "columns.logs.bulkOperationType": "Bulk operation type",
+  "columns.logs.recordType": "Record type",
+  "columns.logs.status": "Status",
+  "columns.logs.runBy": "Run by",
+  "columns.logs.startedRunning": "Started running",
+  "columns.logs.endedRunning": "Ended running",
+  "columns.logs.numberOfRecords": "# of records",
+  "columns.logs.processed": "Processed",
+  "columns.logs.editing": "Editing",
+  "columns.logs.actions": "Actions",
+
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
 
@@ -238,6 +250,8 @@
   "logs.filter.endDate": "End date",
   "logs.logSubTitle": "Enter search criteria to start search",
   "list.result.emptyMessage.logs": "Choose a filter to show results.",
+  "list.info.filesUnavailable": "Files are unavailable for download because 30 days have elapsed since the date the job was run.",
+  "list.actions.download": "Download",
 
   "permission.module.bulk-edit.enabled": "UI: Bulk edit module is enabled",
   "permission.view": "Bulk Edit: (CSV) View",

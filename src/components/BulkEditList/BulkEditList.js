@@ -28,6 +28,7 @@ import PreviewModal from '../modals/PreviewModal/PreviewModal';
 import { useBulkPermissions } from '../../hooks/useBulkPermissions';
 import { RootContext } from '../../context/RootContext';
 import { useFormValid } from '../../hooks/useFormValid';
+import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
 
 
 export const BulkEditList = () => {
@@ -284,14 +285,16 @@ export const BulkEditList = () => {
           actionMenu={renderActionMenu}
           footer={renderNewBulkFooter}
         >
-          <BulkEditListResult
-            updatedId={updatedId}
-            jobId={jobId}
-            data={data}
-            setCountOfRecords={setCountOfRecords}
-          />
+          {criteria === CRITERIA.LOGS ? <BulkEditLogs /> : (
+            <BulkEditListResult
+              updatedId={updatedId}
+              jobId={jobId}
+              data={data}
+              setCountOfRecords={setCountOfRecords}
+            />
+          )}
         </Pane>
-        <Layer isOpen={isBulkEditLayerOpen} inRootSet contentLabel="Bulk edit in app">
+        <Layer isOpen={isBulkEditLayerOpen} inRootSet>
           <Pane
             defaultWidth="fill"
             paneTitle={paneTitle}
