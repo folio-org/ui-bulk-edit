@@ -87,7 +87,8 @@ export const BulkEditList = () => {
     } else setIsBulkEditModalOpen(true);
   };
 
-  const isActionMenuVisible = successCsvLink || errorCsvLink || isActionMenuShown;
+  const isLogsTab = criteria === CRITERIA.LOGS;
+  const isActionMenuVisible = (successCsvLink || errorCsvLink || isActionMenuShown) && !isLogsTab;
 
   useEffect(() => {
     const columns = localStorage.getItem('visibleColumns');
