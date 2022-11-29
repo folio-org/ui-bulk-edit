@@ -286,14 +286,14 @@ export const BulkEditList = () => {
           actionMenu={renderActionMenu}
           footer={renderNewBulkFooter}
         >
-        {criteria === CRITERIA.LOGS ? <BulkEditLogs /> : (
-          <BulkEditListResult
-            updatedId={updatedId}
-            jobId={jobId}
-            data={data}
-            setCountOfRecords={setCountOfRecords}
-          />
-        )}
+          {criteria === CRITERIA.LOGS ? <BulkEditLogs /> : (
+            <BulkEditListResult
+              updatedId={updatedId}
+              jobId={jobId}
+              data={data}
+              setCountOfRecords={setCountOfRecords}
+            />
+          )}
         </Pane>
         <Layer isOpen={isBulkEditLayerOpen} inRootSet>
           <Pane
