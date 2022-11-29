@@ -6,7 +6,7 @@
 * [UIBULKED-162](https://issues.folio.org/browse/UIBULKED-162) Make In-app Options selection consistent
 * [UIBULKED-158](https://issues.folio.org/browse/UIBULKED-158) Add search and filters pane to bulk edit logs
 * [UIBULKED-157](https://issues.folio.org/browse/UIBULKED-157) Display logs of bulk edit jobs
-* [UIBULKED-157](https://issues.folio.org/browse/UIBULKED-186) Hide actions button on Logs form
+* [UIBULKED-186](https://issues.folio.org/browse/UIBULKED-186) Hide actions button on Logs form
 
 ## [2.1.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.2) (2022-11-29)
 
