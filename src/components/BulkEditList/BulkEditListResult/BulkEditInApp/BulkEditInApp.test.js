@@ -124,20 +124,15 @@ describe('BulkEditInApp', () => {
       /layer.options.unknown/,
     ];
     const optionStatus = screen.getByRole('option', { name: /layer.options.statusLabel/ });
-    const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
     const selectOption = screen.getByTestId('select-option-0');
+
+    userEvent.selectOptions(selectOption, optionStatus);
+
     const selectAction = screen.getByTestId('select-actions-0');
+    const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
 
+    userEvent.selectOptions(selectAction, actionReplace);
 
-    userEvent.selectOptions(
-      selectAction,
-      actionReplace,
-    );
-
-    userEvent.selectOptions(
-      selectOption,
-      optionStatus,
-    );
 
     await flushPromises();
 
@@ -160,17 +155,20 @@ describe('BulkEditInApp', () => {
     const options = [
       /layer.action.replace/,
       /layer.action.clear/,
+      /layer.options.temporaryLocation/,
     ];
+
+    const selectOption = screen.getByTestId('select-option-0');
+    const optionStatus = screen.getByRole('option', { name: /layer.options.temporaryLocation/ });
+
+    userEvent.selectOptions(selectOption, optionStatus);
 
     const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
     const selectAction = screen.getByTestId('select-actions-0');
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
 
-    userEvent.selectOptions(
-      selectAction,
-      optionReplace,
-    );
+    userEvent.selectOptions(selectAction, optionReplace);
 
     expect(optionReplace.selected).toBe(true);
   });
@@ -221,18 +219,13 @@ describe('BulkEditInApp', () => {
 
     const selectOption = screen.getByTestId('select-option-0');
     const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.permanentLocation/ });
+
+    userEvent.selectOptions(selectOption, optionStatus);
+
     const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
     const selectAction = screen.getByTestId('select-actions-0');
 
-    userEvent.selectOptions(
-      selectOption,
-      optionStatus,
-    );
-
-    userEvent.selectOptions(
-      selectAction,
-      actionReplace,
-    );
+    userEvent.selectOptions(selectAction, actionReplace);
 
     expect(optionStatus.selected).toBe(true);
   });

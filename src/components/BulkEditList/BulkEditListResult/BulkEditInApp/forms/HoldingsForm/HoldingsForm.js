@@ -18,7 +18,7 @@ import {
   HOLDINGS_OPTIONS, OPTIONS,
 } from '../../../../../../constants';
 import css from '../../BulkEditInApp.css';
-import { handleAdd } from '../utils';
+import { handleAdd, isAddButtonShown, isActionsVisible } from '../utils';
 
 export const HoldingsForm = (
   {
@@ -121,66 +121,70 @@ export const HoldingsForm = (
       fields={fields}
       className={css.row}
       onAdd={noop}
-      renderField={(field, index) => (
-        <Row data-testid={`row-${index}`}>
-          <Col xs={3} sm={3}>
-            <Select
-              dataOptions={field.options}
-              value={field.option}
-              onChange={(e) => handleSelectChange(e, index, fieldsTypes.OPTION)}
-              data-testid={`select-option-${index}`}
-            />
-          </Col>
-          <Col xs={2} sm={2}>
-            <Select
-              dataOptions={field.actions}
-              value={field.action}
-              onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
-              data-testid={`select-actions-${index}`}
-              disabled={isDisabled(index)}
-            />
-          </Col>
-          {isLocation(index) &&
-            <Col xs={6} sm={3}>
-              <LocationSelection
-                value={field.locationId}
-                onSelect={(location) => handleLocationChange(location, index)}
-                placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
-                data-test-id={`textField-${index}`}
-              />
-              <LocationLookup
-                marginBottom0
-                onLocationSelected={(location) => handleLocationChange(location, index)}
-                data-testid={`locationLookup-${index}`}
+      renderField={(field, index) => {
+        return (
+          <Row data-testid={`row-${index}`}>
+            <Col xs={3} sm={3}>
+              <Select
+                dataOptions={field.options}
+                value={field.option}
+                onChange={(e) => handleSelectChange(e, index, fieldsTypes.OPTION)}
+                data-testid={`select-option-${index}`}
               />
             </Col>
-                }
-          <div className={css.iconButtonWrapper}>
-            {(index === fields.length - 1 && fields.length !== optionsHoldings.length) && (
-              <IconButton
-                icon="plus-sign"
-                size="medium"
-                onClick={() => handleAdd(
-                  {
-                    getDefaultAction,
-                    getFilteredFields,
-                    fieldTemplate,
-                    setFields,
-                    fields,
-                  },
-                )}
-                data-testid={`add-button-${index}`}
-              />
+            {isActionsVisible(field) && (
+              <Col xs={2} sm={2}>
+                <Select
+                  dataOptions={field.actions}
+                  value={field.action}
+                  onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
+                  data-testid={`select-actions-${index}`}
+                  disabled={isDisabled(index)}
+                />
+              </Col>
             )}
-            <IconButton
-              icon="trash"
-              onClick={() => handleRemove(index)}
-              disabled={fields.length === 1}
-              data-testid={`remove-button-${index}`}
-            />
-          </div>
-        </Row>
-      )}
+            {isLocation(index) &&
+              <Col xs={6} sm={3}>
+                <LocationSelection
+                  value={field.locationId}
+                  onSelect={(location) => handleLocationChange(location, index)}
+                  placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
+                  data-test-id={`textField-${index}`}
+                />
+                <LocationLookup
+                  marginBottom0
+                  onLocationSelected={(location) => handleLocationChange(location, index)}
+                  data-testid={`locationLookup-${index}`}
+                />
+              </Col>
+            }
+            <div className={css.iconButtonWrapper}>
+              {isAddButtonShown(index, fields, optionsHoldings) && (
+                <IconButton
+                  icon="plus-sign"
+                  size="medium"
+                  onClick={() => handleAdd(
+                    {
+                      getDefaultAction,
+                      getFilteredFields,
+                      fieldTemplate,
+                      setFields,
+                      fields,
+                    },
+                  )}
+                  data-testid={`add-button-${index}`}
+                />
+              )}
+              <IconButton
+                icon="trash"
+                onClick={() => handleRemove(index)}
+                disabled={fields.length === 1}
+                data-testid={`remove-button-${index}`}
+              />
+            </div>
+          </Row>
+        );
+      }}
     />
   );
 };

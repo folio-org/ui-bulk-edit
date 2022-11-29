@@ -21,14 +21,15 @@ import {
   BULK_EDIT_IDENTIFIERS,
   EDIT_CAPABILITIES,
   BULK_EDIT_QUERY,
-  CRITERIES, CAPABILITIES, translationSuffix,
+  CRITERIA, CAPABILITIES, translationSuffix,
 } from '../../../constants';
 import { useJobCommand, useFileUploadComand, useUserGroupsMap, useLaunchJob } from '../../../API';
-import { buildQuery } from '../../../hooks';
+import { buildQuery, useLocationFilters } from '../../../hooks';
 import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
 
 import css from './BulkEditListFilters.css';
 import { RootContext } from '../../../context/RootContext';
+import { LogsFilters } from './LogsFilters/LogsFilters';
 
 export const BulkEditListFilters = ({
   filters,
@@ -39,16 +40,41 @@ export const BulkEditListFilters = ({
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
+
   const {
     isDropZoneDisabled: isDropZoneDisabledPerm,
     isInventoryRadioDisabled,
     isUserRadioDisabled,
     hasInAppEditPerms,
     isSelectIdentifiersDisabled,
+    hasLogViewPerms,
   } = useBulkPermissions();
   const search = new URLSearchParams(location.search);
 
-  const { criteria, capabilities, recordIdentifier, queryText } = filters;
+  const initialFilter = {
+    capabilities: search.get('capabilities'),
+    criteria: 'logs',
+  };
+
+  const onResetData = () => {};
+
+  const [
+    activeFilters,
+    applyFilters,
+    resetFilters,
+  ] = useLocationFilters(location, history, onResetData, initialFilter);
+
+  const applyFiltersAdapter = (callBack) => ({ name, values }) => callBack(name, values);
+  const adaptedApplyFilters = useCallback(
+    applyFiltersAdapter(applyFilters),
+    [applyFilters],
+  );
+
+  const { capabilities, recordIdentifier, queryText } = filters;
+  const criteria = search.get('criteria');
+  const isQuery = criteria === CRITERIA.QUERY;
+  const isLogs = criteria === CRITERIA.LOGS;
+  const isIdentifier = criteria === CRITERIA.IDENTIFIER;
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
@@ -90,7 +116,7 @@ export const BulkEditListFilters = ({
 
     history.replace({
       pathname: '/bulk-edit',
-      search: buildSearch({ identifier: e.target.value, capabilities }),
+      search: buildSearch({ identifier: e.target.value, capabilities, criteria }),
     });
 
     setIsFileUploaded(false);
@@ -105,7 +131,7 @@ export const BulkEditListFilters = ({
 
     history.replace({
       pathname: '/bulk-edit',
-      search: buildSearch({ capabilities }),
+      search: buildSearch({ capabilities }, location.search),
     });
 
     setIsFileUploaded(false);
@@ -206,21 +232,37 @@ export const BulkEditListFilters = ({
 
   const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
 
+  const handleChangeCriteria = (value) => {
+    setFilters(prev => ({ ...prev, criteria: value }));
+    history.replace({
+      search: buildSearch({ criteria: value }, location.search),
+    });
+  };
+
   const renderTopButtons = () => {
     return (
       <>
         <Button
-          buttonStyle={criteria === CRITERIES.IDENTIFIER ? 'primary' : 'default'}
-          onClick={() => setFilters(prev => ({ ...prev, criteria: 'identifier' }))}
+          buttonStyle={isIdentifier ? 'primary' : 'default'}
+          onClick={() => handleChangeCriteria('identifier')}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
         </Button>
         <Button
-          buttonStyle={criteria === CRITERIES.QUERY ? 'primary' : 'default'}
-          onClick={() => setFilters(prev => ({ ...prev, criteria: 'query' }))}
+          buttonStyle={isQuery ? 'primary' : 'default'}
+          onClick={() => handleChangeCriteria('query')}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.query" />
         </Button>
+        {hasLogViewPerms &&
+        <Button
+          buttonStyle={isLogs ? 'primary' : 'default'}
+          onClick={() => handleChangeCriteria('logs')}
+
+        >
+          <FormattedMessage id="ui-bulk-edit.list.filters.logs" />
+        </Button>
+        }
       </>
     );
   };
@@ -230,6 +272,7 @@ export const BulkEditListFilters = ({
       <ButtonGroup fullWidth>
         {renderTopButtons()}
       </ButtonGroup>
+      {!isLogs && (
       <Accordion
         separator={false}
         closedByDefault={false}
@@ -251,14 +294,15 @@ export const BulkEditListFilters = ({
           ))}
         </RadioButtonGroup>
       </Accordion>
-      {criteria === CRITERIES.QUERY && (
+      )}
+      {isQuery && (
         <QueryTextArea
           queryText={queryText}
           setQueryText={setFilters}
           handleQuerySearch={handleQuerySearch}
         />
       )}
-      {criteria === CRITERIES.IDENTIFIER &&
+      {isIdentifier &&
       <>
         <ListSelect
           value={recordIdentifier}
@@ -280,6 +324,15 @@ export const BulkEditListFilters = ({
         />
       </>
   }
+      {
+        isLogs && (
+        <LogsFilters
+          activeFilters={activeFilters}
+          onChange={adaptedApplyFilters}
+          resetFilter={resetFilters}
+        />
+        )
+      }
       <Accordion
         className={css.accordionHidden}
         closedByDefault

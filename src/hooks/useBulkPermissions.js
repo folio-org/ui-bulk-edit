@@ -21,6 +21,10 @@ export const useBulkPermissions = () => {
   const isUserRadioDisabled = !hasCsvViewPerms && !hasInAppUsersEditPerms;
   const hasOnlyInAppViewPerms = hasInAppViewPerms && !hasCsvEditPerms;
 
+  // Logs perms
+
+  const hasLogViewPerms = stripes.hasPerm('ui-bulk-edit.logs.view');
+
 
   return {
     // base
@@ -29,6 +33,7 @@ export const useBulkPermissions = () => {
     hasInAppViewPerms,
     hasInAppEditPerms,
     hasInAppUsersEditPerms,
+    hasLogViewPerms,
 
     // derived
     isActionMenuShown,

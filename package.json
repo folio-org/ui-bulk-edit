@@ -138,6 +138,12 @@
         "displayName": "Bulk Edit: In app - Delete",
         "subPermissions": [],
         "visible": true
+      },
+      {
+        "permissionName": "ui-bulk-edit.logs.view",
+        "displayName": "Bulk edit - Can view logs",
+        "subPermissions": [],
+        "visible": true
       }
     ]
   },
