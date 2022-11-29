@@ -289,3 +289,7 @@ export const TYPE_OF_PROGRESS = {
   PROCESSED: 'processed',
 };
 
+export const JOB_STATUSES = {
+  SUCCESSFUL: 'SUCCESSFUL',
+  FAILED: 'FAILED',
+};
