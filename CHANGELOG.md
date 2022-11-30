@@ -9,6 +9,7 @@
 * [UIBULKED-174](https://issues.folio.org/browse/UIBULKED-174) Confirmation screen requires manual refresh
 * [UIBULKED-176](https://issues.folio.org/browse/UIBULKED-176) Loader disappears before data is loaded
 * [UIBULKED-157](https://issues.folio.org/browse/UIBULKED-157) Display logs of bulk edit jobs
+* [UIBULKED-184](https://issues.folio.org/browse/UIBULKED-184)Increase unit test code coverage for ui-bulk-edit
 
 ## [2.1.1](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.1) (2022-11-11)
 
