@@ -2,7 +2,7 @@
 
 ## In progress
 
-## [2.0.4](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.4) (2022-11-29)
+## [2.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v2.0.5) (2022-11-30)
 
 * [UIBULKED-174](https://issues.folio.org/browse/UIBULKED-174) Confirmation screen requires manual refresh
 * [UIBULKED-182](https://issues.folio.org/browse/UIBULKED-182) 404 Error occurred uploading file with identifiers for Bulk Edit on Nolana bugfest env.
