@@ -1,7 +1,6 @@
 import { Button } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Preloader } from '@folio/stripes-data-transfer-components';
 import React, { memo } from 'react';
 import css from './PreviewModal.css';
 
@@ -28,7 +27,6 @@ export const PreviewModalFooter = memo(({
 });
 
 PreviewModalFooter.propTypes = {
-  isDownloading: PropTypes.bool,
   isUploading: PropTypes.bool,
   onKeepEditing: PropTypes.func,
   onDownloadPreview: PropTypes.func,
