@@ -66,7 +66,6 @@ const PreviewModal = ({
   const {
     data: fileData,
     refetch: downloadPreviewCSV,
-    isLoading: isDownloading,
   } = useInAppDownloadPreview(jobId, CAPABILITES_PREVIEW[capability]);
 
   const handleStartJob = async () => {
@@ -126,6 +125,8 @@ const PreviewModal = ({
     }
   }, [fileData]);
 
+  const isPreviewReady = !isUploading && previewItems.length;
+
   return (
     <Modal
       size="large"
@@ -134,8 +135,7 @@ const PreviewModal = ({
       aria-label="PreviewModal"
       footer={
         <PreviewModalFooter
-          isUploading={isUploading && previewItems.length}
-          isDownloading={isDownloading}
+          isUploading={isPreviewReady}
           onDownloadPreview={downloadPreviewCSV}
           onSave={handleStartJob}
           onKeepEditing={onKeepEditing}
@@ -144,7 +144,7 @@ const PreviewModal = ({
       dismissible
       onClose={onKeepEditing}
     >
-      {!isUploading && previewItems.length ? (
+      {isPreviewReady ? (
         <>
           <MessageBanner type="warning">
             <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: countOfChangedRecords }} />
@@ -161,7 +161,6 @@ const PreviewModal = ({
           />
         </>
       ) : <Preloader />}
-
     </Modal>
   );
 };

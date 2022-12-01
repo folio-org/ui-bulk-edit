@@ -7,6 +7,7 @@
 * [UIBULKED-158](https://issues.folio.org/browse/UIBULKED-158) Add search and filters pane to bulk edit logs
 * [UIBULKED-157](https://issues.folio.org/browse/UIBULKED-157) Display logs of bulk edit jobs
 * [UIBULKED-186](https://issues.folio.org/browse/UIBULKED-186) Hide actions button on Logs form
+* [UIBULKED-202](https://issues.folio.org/browse/UIBULKED-202) The "Commit changes" button is enabled before Preview of records to be changed displayed
 
 ## [2.1.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.2) (2022-11-29)
 
