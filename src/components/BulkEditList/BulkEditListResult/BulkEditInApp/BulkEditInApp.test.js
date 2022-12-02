@@ -10,11 +10,6 @@ import { flushPromises } from '../../../../../test/jest/utils/fileUpload';
 import { CAPABILITIES } from '../../../../constants';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
-
-jest.mock('../../../../hooks/useLoanTypes', () => ({
-  useLoanTypes: () => ({ isLoading: false, loanTypes: [] }),
-}));
-
 jest.mock('../../../../API/usePatronGroup', () => ({
   usePatronGroup: () => ({ userGroups: {} }),
 }));
@@ -29,8 +24,6 @@ const renderBulkEditInApp = (title, typeOfBulk) => {
   );
 };
 
-
-
 const titleMock = 'Mock.csv';
 
 describe('BulkEditInApp', () => {
@@ -43,6 +36,7 @@ describe('BulkEditInApp', () => {
             value: 'Test',
             desc: 'Test',
           }],
+          loanTypes: [],
         }),
       });
   });
