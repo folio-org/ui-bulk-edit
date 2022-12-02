@@ -40,7 +40,10 @@ const renderBulkEditResult = (history, typeOfProgress = TYPE_OF_PROGRESS.INITIAL
   render(
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
-        <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn(), setCountOfRecords: setCountOfRecordsMock }}>
+        <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn(),
+          setCountOfRecords: setCountOfRecordsMock,
+          fileName: 'TestMock.cvs' }}
+        >
           <BulkEditListResult
             updatedId="1"
             typeOfProgress={typeOfProgress}
@@ -90,5 +93,15 @@ describe('BulkEditListResult', () => {
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
     expect(screen.getByText(/progressBar.title/)).toBeVisible();
+  });
+
+  it('displays processed preview', () => {
+    const history = createMemoryHistory();
+
+    history.push('/bulk-edit/1/processed?processedFileName=Mock.csv&capabilities=USERS');
+
+    renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
+
+    expect(screen.getByText(/recordsSuccessfullyChanged/)).toBeVisible();
   });
 });

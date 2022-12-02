@@ -21,7 +21,7 @@ const history = createMemoryHistory();
 const renderBulkEdit = (type = 'USERS') => {
   render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}&identifier=BARCODE`]}>
+      <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}&identifier=BARCODE&criteria=identifier`]}>
         <BulkEdit />
       </MemoryRouter>,
     </QueryClientProvider>,

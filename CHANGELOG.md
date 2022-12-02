@@ -1,10 +1,18 @@
 # Change history for ui-bulk-edit
 
 ## In progress
+* [UIBULKED-163](https://issues.folio.org/browse/UIBULKED-163) User can add more rows than supported options
+* [UIBULKED-156](https://issues.folio.org/browse/UIBULKED-156) Add Logs tab to the landing page
+* [UIBULKED-162](https://issues.folio.org/browse/UIBULKED-162) Make In-app Options selection consistent
+* [UIBULKED-158](https://issues.folio.org/browse/UIBULKED-158) Add search and filters pane to bulk edit logs
+* [UIBULKED-157](https://issues.folio.org/browse/UIBULKED-157) Display logs of bulk edit jobs
+* [UIBULKED-186](https://issues.folio.org/browse/UIBULKED-186) Hide actions button on Logs form
+* [UIBULKED-184](https://issues.folio.org/browse/UIBULKED-184)Increase unit test code coverage for ui-bulk-edit
 
 ## [2.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.3) (2022-12-02)
 
 * [UIBULKED-202](https://issues.folio.org/browse/UIBULKED-202) The "Commit changes" button is enabled before Preview of records to be changed displayed
+
 
 ## [2.1.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.2) (2022-11-29)
 
