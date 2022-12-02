@@ -13,7 +13,6 @@
 
 * [UIBULKED-202](https://issues.folio.org/browse/UIBULKED-202) The "Commit changes" button is enabled before Preview of records to be changed displayed
 
-
 ## [2.1.2](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.2) (2022-11-29)
 
 * [UIBULKED-182](https://issues.folio.org/browse/UIBULKED-182) 404 Error occurred uploading file with identifiers for Bulk Edit on Nolana bugfest env.
