@@ -1,7 +1,6 @@
 import { Button } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Preloader } from '@folio/stripes-data-transfer-components';
 import React, { memo } from 'react';
 import css from './PreviewModal.css';
 
@@ -9,7 +8,7 @@ export const PreviewModalFooter = memo(({
   onKeepEditing,
   onDownloadPreview,
   onSave,
-  isDownloading,
+  // isDownloading,
   isUploading,
 }) => {
   return (
@@ -17,12 +16,10 @@ export const PreviewModalFooter = memo(({
       <Button onClick={onKeepEditing}>
         <FormattedMessage id="ui-bulk-edit.previewModal.keepEditing" />
       </Button>
-      {isDownloading ? <Preloader /> : (
-        <Button onClick={onDownloadPreview}>
-          <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />
-        </Button>
-      )}
-      <Button onClick={onSave} buttonStyle="primary" disabled={isUploading}>
+      <Button onClick={onDownloadPreview} disabled={!isUploading}>
+        <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />
+      </Button>
+      <Button onClick={onSave} buttonStyle="primary" disabled={!isUploading}>
         <FormattedMessage id="ui-bulk-edit.previewModal.saveAndClose" />
       </Button>
     </div>
@@ -30,7 +27,6 @@ export const PreviewModalFooter = memo(({
 });
 
 PreviewModalFooter.propTypes = {
-  isDownloading: PropTypes.bool,
   isUploading: PropTypes.bool,
   onKeepEditing: PropTypes.func,
   onDownloadPreview: PropTypes.func,
