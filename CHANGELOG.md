@@ -8,6 +8,7 @@
 * [UIBULKED-157](https://issues.folio.org/browse/UIBULKED-157) Display logs of bulk edit jobs
 * [UIBULKED-186](https://issues.folio.org/browse/UIBULKED-186) Hide actions button on Logs form
 * [UIBULKED-184](https://issues.folio.org/browse/UIBULKED-184)Increase unit test code coverage for ui-bulk-edit
+* [UIBULKED-197](https://issues.folio.org/browse/UIBULKED-197) Bulk Edit app loses state when navigating to another app and back, and remembers filename but not record type
 
 ## [2.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.3) (2022-12-02)
 
