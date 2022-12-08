@@ -7,7 +7,8 @@
 * [UIBULKED-158](https://issues.folio.org/browse/UIBULKED-158) Add search and filters pane to bulk edit logs
 * [UIBULKED-157](https://issues.folio.org/browse/UIBULKED-157) Display logs of bulk edit jobs
 * [UIBULKED-186](https://issues.folio.org/browse/UIBULKED-186) Hide actions button on Logs form
-* [UIBULKED-184](https://issues.folio.org/browse/UIBULKED-184)Increase unit test code coverage for ui-bulk-edit
+* [UIBULKED-184](https://issues.folio.org/browse/UIBULKED-184) Increase unit test code coverage for ui-bulk-edit
+* [UIBULKED-178](https://issues.folio.org/browse/UIBULKED-178) Displaying retrieved data
 
 ## [2.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.3) (2022-12-02)
 
