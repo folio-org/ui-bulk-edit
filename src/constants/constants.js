@@ -473,7 +473,7 @@ export const JOB_STATUSES = {
 };
 
 export const itemColumnInAppWidths = {
-  barcode: '110px',
+  barcode: '170px',
   status: '110px',
   effectiveLocation: '160px',
   materialType: '100px',
@@ -493,7 +493,7 @@ export const userColumnInAppWidths = {
 };
 
 export const holdingsColumnInAppWidths = {
-  hrid: '110px',
+  hrid: '170px',
   permanentLocation: '160px',
   temporaryLocation: '100px',
   callNumberPrefix: '120px',

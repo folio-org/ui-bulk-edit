@@ -11,11 +11,11 @@ import {
   HOLDINGS_COLUMNS,
   holdingsColumnInAppWidths,
 } from '../constants';
+import { useUserGroupsMap } from '../API';
 
-export const useInAppColumnsInfo = ({
-  capability,
-  userGroups,
-}) => {
+export const useInAppColumnsInfo = ({ capability }) => {
+  const { userGroups } = useUserGroupsMap();
+
   let formatter;
   let baseColumns;
   let columnWidths;
