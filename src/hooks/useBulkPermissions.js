@@ -19,7 +19,7 @@ export const useBulkPermissions = () => {
   const isDropZoneDisabled = !hasAnyEditPermissions;
   const isInventoryRadioDisabled = !hasInAppViewPerms;
   const isUserRadioDisabled = !hasCsvViewPerms && !hasInAppUsersEditPerms;
-  const hasOnlyInAppViewPerms = hasInAppViewPerms && !hasCsvEditPerms;
+  const hasOnlyInAppViewPerms = hasInAppViewPerms && !hasCsvEditPerms && !hasInAppEditPerms && !hasInAppUsersEditPerms;
 
   // Logs perms
 
