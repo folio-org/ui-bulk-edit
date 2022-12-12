@@ -253,6 +253,8 @@
   "list.info.filesUnavailable": "Files are unavailable for download because 30 days have elapsed since the date the job was run.",
   "list.actions.download": "Download",
 
+  "retrievedDataList.title": "{matched} matching {capability} records found.",
+
   "permission.module.bulk-edit.enabled": "UI: Bulk edit module is enabled",
   "permission.view": "Bulk Edit: (CSV) View",
   "permission.edit": "Bulk Edit: (CSV) Edit",

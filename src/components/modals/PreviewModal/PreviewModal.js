@@ -12,7 +12,7 @@ import { useShowCallout } from '@folio/stripes-acq-components';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import css from './PreviewModal.css';
 import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
-import { getMappedHoldings, useLaunchJob, useUserGroupsMap } from '../../../API';
+import { getMappedHoldings, useLaunchJob } from '../../../API';
 import { useInAppUpload } from '../../../API/useInAppUpload';
 import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
 import { CAPABILITES_PREVIEW, OPTIONS } from '../../../constants';
@@ -33,13 +33,12 @@ const PreviewModal = ({
   const history = useHistory();
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
-  const { userGroups } = useUserGroupsMap();
   const {
     columns,
     columnMapping,
     columnWidths,
     formatter,
-  } = useInAppColumnsInfo({ capability, userGroups });
+  } = useInAppColumnsInfo({ capability });
 
   const swwCallout = () => {
     callout({
