@@ -226,5 +226,19 @@
     "permission.app-edit": "Edición masiva: En la aplicación - Editar",
     "permission.app-edit.users": "Edición masiva: In app - Actualizar los registros de los usuarios",
     "permission.app-delete": "Edición masiva: In app - Borrar",
-    "permission.logs.view": "Edición masiva - Puede ver los registros"
+    "permission.logs.view": "Edición masiva - Puede ver los registros",
+    "columns.logs.jobId": "ID",
+    "columns.logs.bulkOperationType": "Tipo de operación a granel",
+    "columns.logs.recordType": "Tipo de registro",
+    "columns.logs.status": "Estado",
+    "columns.logs.runBy": "Contener",
+    "columns.logs.startedRunning": "Empezó a correr",
+    "columns.logs.endedRunning": "Fin de la carrera",
+    "columns.logs.numberOfRecords": "# Número de registros",
+    "columns.logs.processed": "Procesada",
+    "columns.logs.editing": "Edición de",
+    "columns.logs.actions": "Comportamiento",
+    "list.info.filesUnavailable": "Los archivos no están disponibles para su descarga porque han transcurrido 30 días desde la fecha en que se ejecutó el trabajo.",
+    "list.actions.download": "Descargar",
+    "retrievedDataList.title": "{matched} matching {capability} records found."
 }
