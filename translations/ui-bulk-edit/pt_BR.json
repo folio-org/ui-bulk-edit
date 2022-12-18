@@ -226,5 +226,19 @@
     "permission.app-edit": "Edição em lote: Na app - Editar",
     "permission.app-edit.users": "Edição em lote: Na app - Atualizar registros de usuários",
     "permission.app-delete": "Edição em lote: Na app - Deletar",
-    "permission.logs.view": "Edição em lote - Pode visualizar logs"
+    "permission.logs.view": "Edição em lote - Pode visualizar logs",
+    "columns.logs.jobId": "ID",
+    "columns.logs.bulkOperationType": "Tipo de operação em lote",
+    "columns.logs.recordType": "Tipo de registro",
+    "columns.logs.status": "Status",
+    "columns.logs.runBy": "Executado por",
+    "columns.logs.startedRunning": "Execução iniciada",
+    "columns.logs.endedRunning": "Terminou a execução",
+    "columns.logs.numberOfRecords": "Núm. de registros",
+    "columns.logs.processed": "Processado",
+    "columns.logs.editing": "Editando",
+    "columns.logs.actions": "Ações",
+    "list.info.filesUnavailable": "Os arquivos estão indisponíveis para download porque 30 dias se passaram desde a data em que o trabalho foi executado.",
+    "list.actions.download": "Baixar",
+    "retrievedDataList.title": "{matched} correspondente {capability} registros encontrados."
 }

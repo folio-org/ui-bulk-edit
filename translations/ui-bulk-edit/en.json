@@ -4,13 +4,6 @@
   "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
   "meta.logs.title": "Bulk edit logs",
 
-  "view": "Bulk Edit: (CSV) View",
-  "edit": "Bulk Edit: (CSV) Edit",
-  "delete": "Bulk Edit: (CSV) Delete",
-  "app-view": "Bulk Edit: In app - View",
-  "app-edit": "Bulk Edit: In app - Edit",
-  "app-delete": "Bulk Edit: In app - Delete",
-  "logs.view": "Bulk edit - Can view logs",
   "resetFilters": "Reset all",
 
   "list.criteriaTitle": "Set criteria",
