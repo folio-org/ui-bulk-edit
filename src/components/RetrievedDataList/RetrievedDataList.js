@@ -5,35 +5,14 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { CAPABILITIES_VALUE } from '../../constants';
 import { useRetrievedDataList } from '../../API/useReatrievedDataList';
+import { getMappedTableData } from '../../../test/jest/utils/mappers';
 
 const RetrievedDataList = (props) => {
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
   const data = useRetrievedDataList({ capability });
 
-  const columns = data.header.map((cell) => ({
-    label: cell.value,
-    value: cell.value,
-    disabled: false,
-    selected: true,
-    visible: cell.visible,
-  }));
-
-  const formatter = columns.reduce((acc, { value }) => {
-    acc[value] = item => item[value];
-
-    return acc;
-  }, {});
-
-  const visibleColumns = columns.filter(col => col.visible).map(col => col.value);
-
-  const contentData = data.rows.map(({ row }) => {
-    return row.reduce((acc, item, index) => {
-      acc[data.header[index].value] = item;
-
-      return acc;
-    }, {});
-  });
+  const { contentData, formatter, columns, visibleColumns } = getMappedTableData(data);
 
   return (
     <>

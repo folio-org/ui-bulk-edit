@@ -28,11 +28,11 @@ const BulkEditActionMenu = ({
     columns,
   } = useCurrentEntityInfo();
   const search = new URLSearchParams(location.search);
-  const capabilities = search.get('capabilities');
+  const capability = search.get('capabilities');
   const isCompleted = search.get('isCompleted');
   const processedFileName = search.get('processedFileName');
   const { id } = usePathParams('/bulk-edit/:id');
-  const { items } = usePreviewRecords(id, capabilities?.toLowerCase());
+  const { items } = usePreviewRecords(id, capability?.toLowerCase());
   const {
     hasCsvEditPerms,
     hasInAppEditPerms,
@@ -40,6 +40,11 @@ const BulkEditActionMenu = ({
     hasAnyEditPermissions,
   } = useBulkPermissions();
   const { visibleColumns, setVisibleColumns } = useContext(RootContext);
+
+  // should be uncommented once BE returns real data
+
+  /* const data = useRetrievedDataList({ capability });
+  const { columns: RetrievedColumns } = getMappedTableData(data); */
 
   const handleChange = ({ values }) => {
     const stringifiedValues = JSON.stringify(values);
@@ -98,12 +103,12 @@ const BulkEditActionMenu = ({
   };
 
   const renderStartBulkEditButtons = () => {
-    const isStartBulkCsvActive = hasCsvEditPerms && capabilities === CAPABILITIES.USER;
-    const getIsStartBulkInAppActive = (requiredPermission, capability) => (
+    const isStartBulkCsvActive = hasCsvEditPerms && capability === CAPABILITIES.USER;
+    const getIsStartBulkInAppActive = (requiredPermission, currentCapability) => (
       requiredPermission &&
       successCsvLink &&
       !isCompleted &&
-      capabilities === capability
+      currentCapability === capability
     );
 
     return (
