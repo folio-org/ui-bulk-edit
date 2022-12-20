@@ -12,6 +12,7 @@
 * [UIBULKED-178](https://issues.folio.org/browse/UIBULKED-178) Displaying retrieved data
 * [UIBULKED-200](https://issues.folio.org/browse/UIBULKED-200) Some translations for permissions are missing
 * [UIBULKED-179](https://issues.folio.org/browse/UIBULKED-179) Provide list of columns
+* [UIBULKED-180](https://issues.folio.org/browse/UIBULKED-180) Paginate through results sets
 
 ## [2.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.3) (2022-12-02)
 
