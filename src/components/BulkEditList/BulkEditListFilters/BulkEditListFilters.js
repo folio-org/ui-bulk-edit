@@ -21,15 +21,16 @@ import {
   BULK_EDIT_IDENTIFIERS,
   EDIT_CAPABILITIES,
   BULK_EDIT_QUERY,
-  CRITERIA, CAPABILITIES, translationSuffix,
+  CRITERIA, CAPABILITIES, translationSuffix, TYPE_OF_PROGRESS,
 } from '../../../constants';
-import { useJobCommand, useFileUploadComand, useUserGroupsMap, useLaunchJob } from '../../../API';
+import { useJobCommand, useFileUploadCommand, useUserGroupsMap, useLaunchJob } from '../../../API';
 import { buildQuery, useLocationFilters } from '../../../hooks';
 import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
 
 import css from './BulkEditListFilters.css';
 import { RootContext } from '../../../context/RootContext';
 import { LogsFilters } from './LogsFilters/LogsFilters';
+import { useProgressStatus } from '../../../API/useProgressStatus';
 
 export const BulkEditListFilters = ({
   filters,
@@ -81,8 +82,20 @@ export const BulkEditListFilters = ({
   const { startJob } = useLaunchJob();
   const { userGroups } = useUserGroupsMap();
   const { requestJobId } = useJobCommand({ entityType: capabilities });
-  const { fileUpload, isLoading } = useFileUploadComand();
+  const { fileUpload, isLoading } = useFileUploadCommand();
   const { setVisibleColumns } = useContext(RootContext);
+
+  const [jobId, setJobId] = useState(null);
+
+  useProgressStatus(jobId, TYPE_OF_PROGRESS.INITIAL, () => {
+    search.delete('fileName');
+
+    history.replace({
+      search: buildSearch({ queryText }, location.search),
+    });
+
+    setJobId(null);
+  });
 
   const isCapabilityDisabled = (capabilityValue) => {
     const capabilitiesMap = {
@@ -185,12 +198,7 @@ export const BulkEditListFilters = ({
       specificParameters: { query: parsedQuery },
     });
 
-    search.delete('fileName');
-
-    history.replace({
-      pathname: `/bulk-edit/${id}/initial`,
-      search: buildSearch({ queryText }, location.search),
-    });
+    setJobId(id);
   };
 
   const uploaderSubTitle = useMemo(() => {

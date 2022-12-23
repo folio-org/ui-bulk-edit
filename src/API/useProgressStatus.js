@@ -12,7 +12,7 @@ import {
   BULK_EDIT_IDENTIFIERS,
 } from '../constants';
 
-export const useProgressStatus = (id, typeOfProgress, options = {}) => {
+export const useProgressStatus = (id, typeOfProgress, onStatusSuccess, onStatusFailed, options = {}) => {
   const [refetchInterval, setRefetchInterval] = useState(500);
   const callout = useShowCallout();
   const intl = useIntl();
@@ -41,14 +41,17 @@ export const useProgressStatus = (id, typeOfProgress, options = {}) => {
       switch (true) {
         case data?.status === JOB_STATUSES.SUCCESSFUL && data?.type === BULK_EDIT_IDENTIFIERS && isProgress:
           clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
+          if (onStatusSuccess) onStatusSuccess();
 
           break;
         case data?.status === JOB_STATUSES.SUCCESSFUL:
           clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
+          if (onStatusSuccess) onStatusSuccess();
 
           break;
         case data?.status === JOB_STATUSES.FAILED:
-          clearIntervalAndRedirect(`/bulk-edit/${id}/initial`);
+          clearIntervalAndRedirect('/bulk-edit');
+          if (onStatusFailed) onStatusFailed();
 
           callout({
             type: 'error',

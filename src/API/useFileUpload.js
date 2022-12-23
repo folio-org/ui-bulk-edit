@@ -35,7 +35,7 @@ export const useJobCommand = ({ entityType }) => {
   };
 };
 
-export const useFileUploadComand = () => {
+export const useFileUploadCommand = () => {
   const ky = useOkapiKy();
 
   const { mutateAsync: fileUpload, isLoading } = useMutation({ mutationFn: ({ id, fileToUpload, controller }) => {

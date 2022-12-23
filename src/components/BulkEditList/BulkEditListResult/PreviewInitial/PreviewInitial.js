@@ -16,7 +16,7 @@ const PreviewInitial = ({ data }) => {
   const fileUploadedName = useMemo(() => new URLSearchParams(location.search).get('fileName'), [location.search]);
   const capabilities = useMemo(() => new URLSearchParams(location.search).get('capabilities')?.toLocaleLowerCase(), [location.search]);
 
-  const isComplited = data?.status === JOB_STATUSES.SUCCESSFUL;
+  const isCompleted = data?.status === JOB_STATUSES.SUCCESSFUL;
 
   const title = useMemo(() => {
     const queryText = new URLSearchParams(location.search).get('queryText');
@@ -30,7 +30,7 @@ const PreviewInitial = ({ data }) => {
 
   return (
     <>
-      {isComplited ?
+      {isCompleted ?
         <Preview title={title} id={id} capabilities={capabilities} data={data} initial /> :
         <Loader />
       }
