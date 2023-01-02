@@ -11,7 +11,7 @@ import {
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 
 import { useHistory, useLocation } from 'react-router-dom';
-import { useJobCommand, useFileUploadComand } from '../../API';
+import { useJobCommand, useFileUploadCommand } from '../../API';
 
 import { ListFileUploader } from '../ListFileUploader';
 import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants';
@@ -37,7 +37,7 @@ const BulkEditStartModal = ({
   const entityType = search.get('capabilities');
 
   const { requestJobId } = useJobCommand({ entityType });
-  const { fileUpload, isLoading } = useFileUploadComand();
+  const { fileUpload, isLoading } = useFileUploadCommand();
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isFileUploaded, setIsFileUploaded] = useState(false);

@@ -13,6 +13,7 @@
 * [UIBULKED-200](https://issues.folio.org/browse/UIBULKED-200) Some translations for permissions are missing
 * [UIBULKED-179](https://issues.folio.org/browse/UIBULKED-179) Provide list of columns
 * [UIBULKED-180](https://issues.folio.org/browse/UIBULKED-180) Paginate through results sets
+* [UIBULKED-206](https://issues.folio.org/browse/UIBULKED-206) [FE] Query search isn't working
 
 ## [2.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.3) (2022-12-02)
 
