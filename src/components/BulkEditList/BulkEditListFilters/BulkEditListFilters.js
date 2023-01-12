@@ -144,7 +144,10 @@ export const BulkEditListFilters = ({
 
     history.replace({
       pathname: '/bulk-edit',
-      search: buildSearch({ capabilities }, location.search),
+      search: buildSearch({
+        capabilities,
+        identifier: null,
+      }, location.search),
     });
 
     setIsFileUploaded(false);
