@@ -87,18 +87,14 @@ export const BulkEditListFilters = ({
 
   const [jobId, setJobId] = useState(null);
 
-  const { setRefetchInterval } = useProgressStatus({
-    id: jobId,
-    typeOfProgress: TYPE_OF_PROGRESS.INITIAL,
-    onStatusSuccess: () => {
-      search.delete('fileName');
+  const { setRefetchInterval } = useProgressStatus(jobId, TYPE_OF_PROGRESS.INITIAL, () => {
+    search.delete('fileName');
 
-      history.replace({
-        search: buildSearch({ queryText }, location.search),
-      });
+    history.replace({
+      search: buildSearch({ queryText }, location.search),
+    });
 
-      setJobId(null);
-    },
+    setJobId(null);
   });
 
   const isCapabilityDisabled = (capabilityValue) => {

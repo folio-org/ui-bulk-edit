@@ -13,7 +13,7 @@ import {
   BULK_EDIT_QUERY,
 } from '../constants';
 
-export const useProgressStatus = ({ id, typeOfProgress, onStatusSuccess, onStatusFailed, options = {} }) => {
+export const useProgressStatus = (id, typeOfProgress, onStatusSuccess, onStatusFailed, options = {}) => {
   const [refetchInterval, setRefetchInterval] = useState(500);
   const callout = useShowCallout();
   const intl = useIntl();
