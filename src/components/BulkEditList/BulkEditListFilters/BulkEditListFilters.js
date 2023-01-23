@@ -316,13 +316,11 @@ export const BulkEditListFilters = ({
       </Accordion>
       )}
       {isQuery && (
-        <>
-          <QueryTextArea
-            queryText={queryText}
-            setQueryText={setFilters}
-            handleQuerySearch={handleQuerySearch}
-          />
-        </>
+        <QueryTextArea
+          queryText={queryText}
+          setQueryText={setFilters}
+          handleQuerySearch={handleQuerySearch}
+        />
       )}
       {isIdentifier &&
       <>
