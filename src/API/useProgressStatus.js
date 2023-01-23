@@ -10,6 +10,7 @@ import { useIntl } from 'react-intl';
 import {
   JOB_STATUSES,
   BULK_EDIT_IDENTIFIERS,
+  BULK_EDIT_QUERY,
 } from '../constants';
 
 export const useProgressStatus = (id, typeOfProgress, onStatusSuccess, onStatusFailed, options = {}) => {
@@ -44,9 +45,16 @@ export const useProgressStatus = (id, typeOfProgress, onStatusSuccess, onStatusF
           if (onStatusSuccess) onStatusSuccess();
 
           break;
-        case data?.status === JOB_STATUSES.SUCCESSFUL:
-          clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
-          if (onStatusSuccess) onStatusSuccess();
+        case data?.status !== JOB_STATUSES.SUCCESSFUL && data?.type === BULK_EDIT_QUERY:
+          history.replace({
+            pathname: `/bulk-edit/${id}/${typeOfProgress}`,
+            search: history.location.search,
+          });
+
+          break;
+        case data?.status === JOB_STATUSES.SUCCESSFUL && data?.type === BULK_EDIT_QUERY:
+          setRefetchInterval(0);
+          onStatusSuccess();
 
           break;
         case data?.status === JOB_STATUSES.FAILED:
