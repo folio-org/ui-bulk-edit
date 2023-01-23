@@ -87,14 +87,18 @@ export const BulkEditListFilters = ({
 
   const [jobId, setJobId] = useState(null);
 
-  useProgressStatus(jobId, TYPE_OF_PROGRESS.INITIAL, () => {
-    search.delete('fileName');
+  const { setRefetchInterval } = useProgressStatus({
+    id: jobId,
+    typeOfProgress: TYPE_OF_PROGRESS.INITIAL,
+    onStatusSuccess: () => {
+      search.delete('fileName');
 
-    history.replace({
-      search: buildSearch({ queryText }, location.search),
-    });
+      history.replace({
+        search: buildSearch({ queryText }, location.search),
+      });
 
-    setJobId(null);
+      setJobId(null);
+    },
   });
 
   const isCapabilityDisabled = (capabilityValue) => {
@@ -165,7 +169,7 @@ export const BulkEditListFilters = ({
 
       // start job manually for ITEM capability only
       if (capabilities === CAPABILITIES.ITEM) {
-        startJob({ jobId: id });
+        await startJob({ jobId: id });
       }
 
       search.delete('queryText');
@@ -201,6 +205,11 @@ export const BulkEditListFilters = ({
       specificParameters: { query: parsedQuery },
     });
 
+    history.replace({
+      search: buildSearch({ queryText }, location.search),
+    });
+
+    setRefetchInterval(500);
     setJobId(id);
   };
 
@@ -307,11 +316,13 @@ export const BulkEditListFilters = ({
       </Accordion>
       )}
       {isQuery && (
-        <QueryTextArea
-          queryText={queryText}
-          setQueryText={setFilters}
-          handleQuerySearch={handleQuerySearch}
-        />
+        <>
+          <QueryTextArea
+            queryText={queryText}
+            setQueryText={setFilters}
+            handleQuerySearch={handleQuerySearch}
+          />
+        </>
       )}
       {isIdentifier &&
       <>
