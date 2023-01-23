@@ -17,7 +17,7 @@
 * [UIBULKED-219](https://issues.folio.org/browse/UIBULKED-219) Users record type is selected by default with only In-app permissions
 * [UIBULKED-220](https://issues.folio.org/browse/UIBULKED-220) Bulk edit state isn't reset to its default value when the Record type is changed
 * [UIBULKED-229](https://issues.folio.org/browse/UIBULKED-229) Query search doesn't work twice in a row
-
+* [UIBULKED-230](https://issues.folio.org/browse/UIBULKED-230) Missing spinner for long executing query
 
 ## [2.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.3) (2022-12-02)
 
