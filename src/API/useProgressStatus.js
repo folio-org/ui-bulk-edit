@@ -75,5 +75,6 @@ export const useProgressStatus = (id, typeOfProgress, onStatusSuccess, onStatusF
   return {
     data,
     remove,
+    setRefetchInterval,
   };
 };

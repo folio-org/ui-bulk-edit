@@ -87,7 +87,7 @@ export const BulkEditListFilters = ({
 
   const [jobId, setJobId] = useState(null);
 
-  useProgressStatus(jobId, TYPE_OF_PROGRESS.INITIAL, () => {
+  const { setRefetchInterval } = useProgressStatus(jobId, TYPE_OF_PROGRESS.INITIAL, () => {
     search.delete('fileName');
 
     history.replace({
@@ -165,7 +165,7 @@ export const BulkEditListFilters = ({
 
       // start job manually for ITEM capability only
       if (capabilities === CAPABILITIES.ITEM) {
-        startJob({ jobId: id });
+        await startJob({ jobId: id });
       }
 
       search.delete('queryText');
@@ -201,6 +201,11 @@ export const BulkEditListFilters = ({
       specificParameters: { query: parsedQuery },
     });
 
+    history.replace({
+      search: buildSearch({ queryText }, location.search),
+    });
+
+    setRefetchInterval(500);
     setJobId(id);
   };
 
