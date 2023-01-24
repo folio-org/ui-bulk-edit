@@ -57,6 +57,11 @@ export const useProgressStatus = (id, typeOfProgress, onStatusSuccess, onStatusF
           onStatusSuccess();
 
           break;
+        case data?.status === JOB_STATUSES.SUCCESSFUL:
+          clearIntervalAndRedirect(`/bulk-edit/${id}/${typeOfProgress}`);
+          if (onStatusSuccess) onStatusSuccess();
+
+          break;
         case data?.status === JOB_STATUSES.FAILED:
           clearIntervalAndRedirect('/bulk-edit');
           if (onStatusFailed) onStatusFailed();
