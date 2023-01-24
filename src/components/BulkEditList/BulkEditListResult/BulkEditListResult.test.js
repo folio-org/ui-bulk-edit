@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
 import { runAxeTest } from '@folio/stripes-testing';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 import { TYPE_OF_PROGRESS } from '../../../constants';
