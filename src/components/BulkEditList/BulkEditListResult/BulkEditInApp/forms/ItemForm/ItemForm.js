@@ -159,6 +159,7 @@ export const ItemForm = (
                   value={field.option}
                   onChange={(e) => handleSelectChange(e, index, fieldsTypes.OPTION)}
                   data-testid={`select-option-${index}`}
+                  aria-label={`select-option-${index}`}
                 />
               </Col>
               {isActionsVisible(field) && (
@@ -168,6 +169,7 @@ export const ItemForm = (
                     value={field.action}
                     onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
                     data-testid={`select-actions-${index}`}
+                    aria-label={`select-actions-${index}`}
                     disabled={isDisabled(index)}
                   />
                 </Col>
@@ -208,6 +210,7 @@ export const ItemForm = (
                     value={field.value}
                     onChange={(e) => handleValueChange(e.target.value, index)}
                     data-testid={`select-status-${index}`}
+                    aria-label={`select-status-${index}`}
                   />
                 </Col>
               }

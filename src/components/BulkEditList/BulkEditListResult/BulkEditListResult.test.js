@@ -2,12 +2,15 @@ import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
-import BulkEditListResult from './BulkEditListResult';
+import { runAxeTest } from '@folio/stripes-testing';
+
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 import { TYPE_OF_PROGRESS } from '../../../constants';
 
 import '../../../../test/jest/__mock__';
 import { RootContext } from '../../../context/RootContext';
+import BulkEditListResult from './BulkEditListResult';
+
 
 jest.mock('./Preview/PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
@@ -103,5 +106,17 @@ describe('BulkEditListResult', () => {
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
     expect(screen.getByText(/recordsSuccessfullyChanged/)).toBeVisible();
+  });
+
+  it('should render with no axe errors', async () => {
+    const history = createMemoryHistory();
+
+    history.push('/bulk-edit/1/processed?processedFileName=Mock.csv&capabilities=USERS');
+
+    renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 });

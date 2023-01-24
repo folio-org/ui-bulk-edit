@@ -37,6 +37,7 @@ export const ActionsRow = ({ actions, onChange }) => {
           onChange={(e) => onChange({ actionIndex, actionValue: e.target.value, actionFieldName: 'name' })}
           disabled={action.actionsList.length === 1}
           data-testid={`select-actions-${actionIndex}`}
+          aria-label={`select-actions-${actionIndex}`}
         />
       </Col>
       <Col xs={2} sm={2}>
@@ -53,6 +54,7 @@ export const ActionsRow = ({ actions, onChange }) => {
             value={action.value}
             onChange={e => onChange({ actionIndex, actionValue: e.target.value, actionFieldName: 'value' })}
             data-testid={`select-patronGroup-${actionIndex}`}
+            aria-label={`select-patronGroup-${actionIndex}`}
           />
         )}
         {action.type === controlTypes.DATE && (
@@ -60,6 +62,8 @@ export const ActionsRow = ({ actions, onChange }) => {
             value={action.value}
             onChange={e => onChange({ actionIndex, actionValue: e.target.value, actionFieldName: 'value' })}
             data-testid={`dataPicker-experation-date-${actionIndex}`}
+            y
+            aria-label={`dataPicker-experation-date-${actionIndex}`}
           />
         )}
       </Col>
