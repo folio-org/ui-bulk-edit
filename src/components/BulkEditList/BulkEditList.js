@@ -57,14 +57,14 @@ export const BulkEditList = () => {
   const { data, isLoading } = useJob(jobId);
 
   const [successCsvLink, errorCsvLink] = data?.files || [];
-  const { isActionMenuShown, hasOnlyInAppViewPerms } = useBulkPermissions();
+  const { isActionMenuShown, hasOnlyInAppViewPerms, hasInAppEditPerms } = useBulkPermissions();
 
   const capabilitiesUrl = search.get('capabilities');
   const criteria = search.get('criteria');
 
   const getDefaultCapabilities = () => {
-    if (hasOnlyInAppViewPerms) {
-      return CAPABILITIES.ITEM;
+    if (hasOnlyInAppViewPerms || hasInAppEditPerms) {
+      return capabilitiesUrl || CAPABILITIES.ITEM;
     }
 
     return capabilitiesUrl || CAPABILITIES.USER;
