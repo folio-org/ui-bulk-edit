@@ -5,10 +5,11 @@ import { LOGS_COLUMNS } from '../../constants';
 import { getLogsResultsFormatter } from '../../constants/formatters';
 import { useBulkEditLogs } from '../../API/useBulkEditLogs';
 
+
 const BulkEditLogs = () => {
   const location = useLocation();
   const search = new URLSearchParams(location.search);
-  const { logs } = useBulkEditLogs({ search });
+  const { logs, userNamesMap } = useBulkEditLogs({ search, location });
 
   const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
     acc[el.value] = el.label;
@@ -18,20 +19,6 @@ const BulkEditLogs = () => {
 
   const visibleColumns = LOGS_COLUMNS.map(i => i.value);
 
-  const columnWidths = {
-    jobId: '3%',
-    bulkOperationType: '12%',
-    recordType: '8%',
-    status: '12%',
-    runBy: '12%',
-    startedRunning: '12%',
-    endedRunning: '12%',
-    numberOfRecords: '7%',
-    processed: '7%',
-    editing: '7%',
-    actions: '6%',
-  };
-
   return (
     <Row>
       <Col xs={12}>
@@ -39,10 +26,9 @@ const BulkEditLogs = () => {
           striped
           contentData={logs}
           columnMapping={columnMapping}
-          formatter={getLogsResultsFormatter()}
           visibleColumns={visibleColumns}
+          formatter={getLogsResultsFormatter(userNamesMap)}
           pagingType="prev-next"
-          columnWidths={columnWidths}
         />
       </Col>
     </Row>
