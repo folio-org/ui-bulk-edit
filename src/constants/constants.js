@@ -585,19 +585,19 @@ export const FILTER_OPTIONS = {
 
 export const LOGS_COLUMNS = [
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.jobId" />,
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.id" />,
     value: 'id',
     disabled: false,
     selected: false,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.bulkOperationType" />,
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.operationType" />,
     value: 'operationType',
     disabled: false,
     selected: false,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.recordType" />,
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.entityType" />,
     value: 'entityType',
     disabled: false,
     selected: false,
@@ -609,31 +609,31 @@ export const LOGS_COLUMNS = [
     selected: false,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.runBy" />,
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.userId" />,
     value: 'userId',
     disabled: false,
     selected: false,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.startedRunning" />,
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.startTime" />,
     value: 'startTime',
     disabled: false,
     selected: false,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.endedRunning" />,
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.endTime" />,
     value: 'endTime',
     disabled: false,
     selected: false,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.numberOfRecords" />,
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.totalNumOfRecords" />,
     value: 'totalNumOfRecords',
     disabled: false,
     selected: false,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.processed" />,
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.processedNumOfRecords" />,
     value: 'processedNumOfRecords',
     disabled: false,
     selected: false,
