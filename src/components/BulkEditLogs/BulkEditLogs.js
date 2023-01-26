@@ -8,8 +8,7 @@ import { useBulkEditLogs } from '../../API/useBulkEditLogs';
 
 const BulkEditLogs = () => {
   const location = useLocation();
-  const search = new URLSearchParams(location.search);
-  const { logs, userNamesMap } = useBulkEditLogs({ search, location });
+  const { logs, userNamesMap } = useBulkEditLogs({ location });
 
   const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
     acc[el.value] = el.label;

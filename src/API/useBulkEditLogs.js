@@ -54,6 +54,7 @@ export const useBulkEditLogs = ({ location }) => {
             userNamesMap,
           };
         }),
+      enabled: !!Object.keys(queryParams).length,
       retry: false,
     },
   );
