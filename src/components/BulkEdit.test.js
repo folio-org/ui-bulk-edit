@@ -4,7 +4,9 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
+
 import { useOkapiKy } from '@folio/stripes/core';
+import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../test/jest/__mock__';
 
@@ -58,6 +60,15 @@ describe('BulkEdit', () => {
     renderBulkEdit();
 
     expect(screen.getByText(/BulkEditListResult/)).toBeVisible();
+  });
+
+  // This test will be passing after fixing problem in stripes-data-transfer-components
+  it.skip('should render with no axe errors', async () => {
+    renderBulkEdit();
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 
   it('should display option buttons', () => {
