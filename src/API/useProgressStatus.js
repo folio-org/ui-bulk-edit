@@ -53,6 +53,12 @@ export const useProgressStatus = (id, typeOfProgress, onStatusSuccess, onStatusF
 
           break;
         case data?.status === JOB_STATUSES.SUCCESSFUL && data?.type === BULK_EDIT_QUERY:
+          if (!history.location.pathname.includes(`/bulk-edit/${id}/${typeOfProgress}`)) {
+            history.replace({
+              pathname: `/bulk-edit/${id}/${typeOfProgress}`,
+              search: history.location.search,
+            });
+          }
           setRefetchInterval(0);
           onStatusSuccess();
 
