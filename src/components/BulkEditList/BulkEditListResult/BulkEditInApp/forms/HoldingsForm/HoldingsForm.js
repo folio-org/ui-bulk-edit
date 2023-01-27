@@ -130,6 +130,7 @@ export const HoldingsForm = (
                 value={field.option}
                 onChange={(e) => handleSelectChange(e, index, fieldsTypes.OPTION)}
                 data-testid={`select-option-${index}`}
+                aria-label={`select-option-${index}`}
               />
             </Col>
             {isActionsVisible(field) && (
@@ -139,6 +140,7 @@ export const HoldingsForm = (
                   value={field.action}
                   onChange={(e) => handleSelectChange(e, index, fieldsTypes.ACTION)}
                   data-testid={`select-actions-${index}`}
+                  aria-label={`select-actions-${index}`}
                   disabled={isDisabled(index)}
                 />
               </Col>
@@ -150,6 +152,7 @@ export const HoldingsForm = (
                   onSelect={(location) => handleLocationChange(location, index)}
                   placeholder={intl.formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
                   data-test-id={`textField-${index}`}
+                  aria-label={`textField-${index}`}
                 />
                 <LocationLookup
                   marginBottom0

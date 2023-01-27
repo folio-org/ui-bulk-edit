@@ -1,9 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { useOkapiKy } from '@folio/stripes/core';
 import { QueryClientProvider } from 'react-query';
 import { createMemoryHistory } from 'history';
 import { MemoryRouter } from 'react-router';
+
+import { useOkapiKy } from '@folio/stripes/core';
+import { runAxeTest } from '@folio/stripes-testing';
+
 import { ProgressBar } from './ProgressBar';
 import { queryClient } from '../../../test/jest/utils/queryClient';
 import { JOB_STATUSES } from '../../constants';
@@ -53,6 +56,14 @@ describe('ProgressBar', () => {
     const title = await screen.findByText(/progressBar.title/);
 
     expect(title).toBeVisible();
+  });
+
+  it('should render with no axe errors', async () => {
+    renderProgressBar(props);
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 
   it('should display correct width percentage', async () => {

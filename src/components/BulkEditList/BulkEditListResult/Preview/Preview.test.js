@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
+
 import { useOkapiKy } from '@folio/stripes/core';
+import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
 
@@ -77,5 +79,13 @@ describe('Preview Query', () => {
     renderPreview({ title: 'preview.query.title' });
 
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
+  });
+
+  it('should render with no axe errors', async () => {
+    renderPreview({ title: 'preview.query.title' });
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 });
