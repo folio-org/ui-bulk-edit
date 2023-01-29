@@ -9,7 +9,7 @@ import { queryClient } from '../../../../test/jest/utils/queryClient';
 import { RootContext } from '../../../context/RootContext';
 
 import PreviewModal from './PreviewModal';
-import { getInventoryResultsFormatterBase } from '../../../constants/formatters';
+import { getInventoryResultsFormatterBase } from '../../../utills/formatters';
 
 const startJob = jest.fn();
 const inAppUpload = jest.fn().mockReturnValue(() => ({ response: { items: [] } }));

@@ -1,30 +1,50 @@
-import PropTypes from 'prop-types';
 import { Icon, Loading } from '@folio/stripes/components';
-import { buildSearch } from '@folio/stripes-acq-components';
-import { FormattedMessage } from 'react-intl';
-import { useLocation, useHistory } from 'react-router-dom';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { useEffect } from 'react';
+import { useShowCallout } from '@folio/stripes-acq-components';
 import css from './ProgressBar.css';
-import { useProgressStatus } from '../../API/useProgressStatus';
+import { useBulkOperationDetails } from '../../hooks/api/useBulkOperationDetails';
+import { EDITING_STEPS, JOB_STATUSES } from '../../constants';
 
-export const ProgressBar = ({ updatedId, typeOfProgress }) => {
+export const ProgressBar = () => {
+  const callout = useShowCallout();
+  const intl = useIntl();
   const location = useLocation();
-  const history = useHistory();
-  const { data, remove } = useProgressStatus(updatedId, typeOfProgress);
+  const { id } = useParams();
+  const { bulkDetails, clearIntervalAndRedirect } = useBulkOperationDetails({
+    id,
+    interval: 500,
+  });
+
   const processedTitle = new URLSearchParams(location.search).get('processedFileName');
   const title = new URLSearchParams(location.search).get('fileName');
+  const status = bulkDetails?.status;
+  const progressPercentage = bulkDetails ? bulkDetails.processedNumOfRecords / bulkDetails.totalNumOfRecords : 0;
 
   useEffect(() => {
-    if (!processedTitle && location.pathname.includes('processed')) {
-      remove();
-      history.replace({
-        pathname: location.pathname,
-        search: buildSearch({ isCompleted: true }, location.search),
+    if (status === JOB_STATUSES.DATA_MODIFICATION) {
+      clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, {
+        step: EDITING_STEPS.EDIT,
       });
     }
-  }, [location.pathname, location.search, processedTitle]);
 
-  const progressValue = data?.progress?.progress || 1;
+    if (status === JOB_STATUSES.COMPLETED) {
+      clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, {
+        step: EDITING_STEPS.COMMIT,
+      });
+    }
+
+    if (status === JOB_STATUSES.FAILED) {
+      callout({
+        type: 'error',
+        message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
+      });
+
+      clearIntervalAndRedirect('/bulk-edit', '');
+    }
+  }, [status]);
 
   return (
     <div className={css.progressBar}>
@@ -42,7 +62,7 @@ export const ProgressBar = ({ updatedId, typeOfProgress }) => {
       </div>
       <div className={css.progressBarBody}>
         <div className={css.progressBarLine}>
-          <div data-testid="progress-line" style={{ width: `${progressValue}%` }} />
+          <div data-testid="progress-line" style={{ width: `${progressPercentage}%` }} />
         </div>
         <div className={css.progressBarLineStatus}>
           <span><FormattedMessage id="ui-bulk-edit.progresssBar.retrieving" /></span>
@@ -51,10 +71,5 @@ export const ProgressBar = ({ updatedId, typeOfProgress }) => {
       </div>
     </div>
   );
-};
-
-ProgressBar.propTypes = {
-  updatedId: PropTypes.string.isRequired,
-  typeOfProgress: PropTypes.string.isRequired,
 };
 

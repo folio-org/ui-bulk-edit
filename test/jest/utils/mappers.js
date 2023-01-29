@@ -1,9 +1,28 @@
+import moment from 'moment/moment';
+import { baseFormat } from '../../../src/constants';
+
+window.moment = moment;
+
+const DATA_TYPES = {
+  NUMERIC: 'NUMERIC',
+  DATE_TIME: 'DATE_TIME',
+  STRING: 'STRING',
+};
+
 export const getMappedTableData = (data) => {
+  if (!data) {
+    return {
+      contentData: null,
+      formatter: null,
+      columns: [],
+    };
+  }
+
   const columns = data.header.map((cell) => ({
     label: cell.value,
     value: cell.value,
     disabled: false,
-    selected: cell.visible,
+    selected: !cell.visible,
   }));
 
   const formatter = columns.reduce((acc, { value }) => {
@@ -12,11 +31,15 @@ export const getMappedTableData = (data) => {
     return acc;
   }, {});
 
-  const visibleColumns = columns.filter(col => col.selected).map(col => col.value);
 
   const contentData = data.rows.map(({ row }) => {
     return row.reduce((acc, item, index) => {
-      acc[data.header[index].value] = item;
+      const column = data.header[index];
+      // it's required format the dates on FE side
+      acc[column.value] =
+        column.dataType === DATA_TYPES.DATE_TIME
+          ? moment(item).format(`${baseFormat} HH:mm:ss`)
+          : item;
 
       return acc;
     }, {});
@@ -24,7 +47,6 @@ export const getMappedTableData = (data) => {
 
   return {
     formatter,
-    visibleColumns,
     columns,
     contentData,
   };

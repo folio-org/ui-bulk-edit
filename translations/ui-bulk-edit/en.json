@@ -69,7 +69,7 @@
 
   "list.errors.title": "Errors",
   "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
-  "list.errors.infoProccessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
+  "list.errors.infoProcessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
   "list.errors.table.code": "Record identifier",
   "list.errors.table.message": "Reason for error",
 

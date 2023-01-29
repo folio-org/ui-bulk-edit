@@ -13,7 +13,8 @@ export const useBulkPermissions = () => {
   const hasInAppUsersEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit.users');
 
   // derived pages
-  const hasAnyEditPermissions = hasCsvEditPerms || hasInAppEditPerms || hasInAppUsersEditPerms;
+  const hasAnyInAppEditPermissions = hasInAppEditPerms || hasInAppUsersEditPerms;
+  const hasAnyEditPermissions = hasCsvEditPerms || hasAnyInAppEditPermissions;
   const isActionMenuShown = hasCsvEditPerms;
   const isSelectIdentifiersDisabled = !hasAnyEditPermissions;
   const isDropZoneDisabled = !hasAnyEditPermissions;
@@ -43,5 +44,6 @@ export const useBulkPermissions = () => {
     isUserRadioDisabled,
     hasOnlyInAppViewPerms,
     hasAnyEditPermissions,
+    hasAnyInAppEditPermissions,
   };
 };

@@ -42,7 +42,7 @@ jest.doMock('react-query', () => ({
 const renderBulkEdit = () => {
   return render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={['/bulk-edit/1/initial?capabilities=ITEMS&fileName=barcodes.csv&identifier=BARCODE']}>2
+      <MemoryRouter initialEntries={['/bulk-edit/1/preview?capabilities=ITEMS&fileName=barcodes.csv&identifier=BARCODE']}>2
         <BulkEdit />
       </MemoryRouter>,
     </QueryClientProvider>,

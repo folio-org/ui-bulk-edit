@@ -1,157 +1,133 @@
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
+import { saveAs } from 'file-saver';
 
 import {
   Button,
   Icon,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useState } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { usePathParams, useCurrentEntityInfo } from '../../hooks';
+import { useLocation } from 'react-router-dom';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
-import { usePreviewRecords } from '../../API';
-import { CAPABILITIES } from '../../constants';
-import { useBulkPermissions } from '../../hooks/useBulkPermissions';
+import { APPROACHES, CAPABILITIES, JOB_STATUSES, getDownloadLinks, dateNow } from '../../constants';
+import { useBulkPermissions, usePathParams } from '../../hooks';
 import { RootContext } from '../../context/RootContext';
+import { useBulkOperationDetails } from '../../hooks/api/useBulkOperationDetails';
+
+
+import { useFileDownload } from '../../hooks/api/useFileDownload';
+
 
 const BulkEditActionMenu = ({
   onEdit,
   onToggle,
-  successCsvLink,
-  errorCsvLink,
-  isLoading,
-  onUserEdit,
 }) => {
-  const {
-    location,
-    columns,
-  } = useCurrentEntityInfo();
+  const location = useLocation();
+  const perms = useBulkPermissions();
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
-  const isCompleted = search.get('isCompleted');
-  const processedFileName = search.get('processedFileName');
-  const { id } = usePathParams('/bulk-edit/:id');
-  const { items } = usePreviewRecords(id, capability?.toLowerCase());
+
   const {
     hasCsvEditPerms,
-    hasInAppEditPerms,
-    hasInAppUsersEditPerms,
-    hasAnyEditPermissions,
-  } = useBulkPermissions();
+    hasAnyInAppEditPermissions,
+  } = perms;
+
+  const { id } = usePathParams('/bulk-edit/:id');
+  const { bulkDetails, isLoading } = useBulkOperationDetails({ id });
+
+  const [fileInfo, setFileInfo] = useState(null);
+
+  useFileDownload({
+    id,
+    fileInfo,
+    onSuccess: data => {
+      saveAs(new Blob([data]), fileInfo?.fileName);
+      setFileInfo(null);
+    },
+  });
+
   const { visibleColumns, setVisibleColumns } = useContext(RootContext);
+  const columns = visibleColumns || [];
+  const selectedValues = columns.filter(item => !item.selected).map(item => item.value);
 
-  // should be uncommented once BE returns real data
-
-  /* const data = useRetrievedDataList({ capability });
-  const { columns: RetrievedColumns } = getMappedTableData(data); */
-
-  const handleChange = ({ values }) => {
-    const stringifiedValues = JSON.stringify(values);
-
-    setVisibleColumns(stringifiedValues);
-    localStorage.setItem('visibleColumns', stringifiedValues);
+  const isLastUnselectedColumn = (value) => {
+    return selectedValues?.length === 1 && selectedValues?.[0] === value;
   };
 
-  const buildButtonClickHandler = buttonClickHandler => () => {
-    buttonClickHandler();
+  const columnsOptions = columns.map(item => ({
+    ...item,
+    disabled: isLastUnselectedColumn(item.value),
+  }));
 
+  const handleColumnChange = ({ values }) => {
+    const changedColumns = columns.map(col => {
+      return ({
+        ...col,
+        selected: !values.includes(col.value),
+      });
+    });
+
+    setVisibleColumns(changedColumns);
+    localStorage.setItem('visibleColumns', JSON.stringify(changedColumns));
+  };
+
+  const handleOnStartEdit = (approach) => {
+    onEdit(approach);
     onToggle();
   };
 
-  const columnsOptions = columns.map(item => ({ ...item, disabled: !items?.length }));
-
-  const selectedValues = useMemo(() => {
-    const defaultColumns = columns
-      .filter(item => item.selected)
-      .map(item => item.value);
-
-    return visibleColumns ? JSON.parse(visibleColumns) : defaultColumns;
-  }, [visibleColumns]);
+  const handleFileSave = (info) => {
+    setFileInfo(info);
+  };
 
   const renderLinkButtons = () => {
     if (isLoading) return <Preloader />;
 
-    return (
-      <>
-        {(successCsvLink && hasAnyEditPermissions) &&
-        <a href={successCsvLink} download>
-          <Button
-            buttonStyle="dropdownItem"
-            data-testid="download-link-matched"
-          >
-            <Icon icon="download">
-              <FormattedMessage id={processedFileName || !!isCompleted ? 'ui-bulk-edit.start.downloadChangedRecords' : 'ui-bulk-edit.start.downloadMathcedRecords'} />
-            </Icon>
-          </Button>
-        </a>
-        }
-        {(errorCsvLink && hasAnyEditPermissions) &&
-        <a href={errorCsvLink} download>
-          <Button
-            buttonStyle="dropdownItem"
-            data-testid="download-link-error"
-          >
-            <Icon icon="download">
-              <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />
-            </Icon>
-          </Button>
-        </a>
-        }
-      </>
-    );
+    const downloadLinks = getDownloadLinks(perms, dateNow);
+
+    return downloadLinks.map(l => bulkDetails && Object.hasOwn(bulkDetails, l.KEY) && l.PERMS && (
+      <Button
+        key={l.SEARCH_PARAM}
+        buttonStyle="dropdownItem"
+        data-testid={l.SEARCH_PARAM}
+        onClick={() => handleFileSave({ fileContentType: l.SEARCH_PARAM, fileName: l.SAVE_FILE_NAME })}
+      >
+        <Icon icon="download">
+          {l.LINK_NAME}
+        </Icon>
+      </Button>
+    ));
   };
 
   const renderStartBulkEditButtons = () => {
     const isStartBulkCsvActive = hasCsvEditPerms && capability === CAPABILITIES.USER;
-    const getIsStartBulkInAppActive = (requiredPermission, currentCapability) => (
-      requiredPermission &&
-      successCsvLink &&
-      !isCompleted &&
-      currentCapability === capability
-    );
+
+    const isModificationStep = bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION;
+    const isStartBulkInAppActive = hasAnyInAppEditPermissions && isModificationStep;
 
     return (
       <>
-        {getIsStartBulkInAppActive(hasInAppEditPerms, CAPABILITIES.ITEM) && (
-          <Button
-            buttonStyle="dropdownItem"
-            onClick={buildButtonClickHandler(onEdit)}
-          >
-            <Icon icon="edit">
-              <FormattedMessage id="ui-bulk-edit.start.edit" />
-            </Icon>
-          </Button>
-        )}
-        {getIsStartBulkInAppActive(true, CAPABILITIES.HOLDINGS) && (
-          <Button
-            buttonStyle="dropdownItem"
-            onClick={buildButtonClickHandler(onEdit)}
-          >
-            <Icon icon="edit">
-              <FormattedMessage id="ui-bulk-edit.start.edit" />
-            </Icon>
-          </Button>
-        )}
-        {getIsStartBulkInAppActive(hasInAppUsersEditPerms, CAPABILITIES.USER) && (
-          <Button
-            buttonStyle="dropdownItem"
-            onClick={buildButtonClickHandler(onUserEdit)}
-          >
-            <Icon icon="edit">
-              <FormattedMessage id="ui-bulk-edit.start.edit" />
-            </Icon>
-          </Button>
+        {isStartBulkInAppActive && (
+        <Button
+          buttonStyle="dropdownItem"
+          onClick={() => handleOnStartEdit(APPROACHES.IN_APP)}
+        >
+          <Icon icon="edit">
+            <FormattedMessage id="ui-bulk-edit.start.edit" />
+          </Icon>
+        </Button>
         )}
         {isStartBulkCsvActive && (
-          <Button
-            buttonStyle="dropdownItem"
-            onClick={buildButtonClickHandler(onEdit)}
-          >
-            <Icon icon="edit">
-              <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
-            </Icon>
-          </Button>
+        <Button
+          buttonStyle="dropdownItem"
+          onClick={() => handleOnStartEdit(APPROACHES.CSV)}
+        >
+          <Icon icon="edit">
+            <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
+          </Icon>
+        </Button>
         )}
       </>
     );
@@ -160,19 +136,20 @@ const BulkEditActionMenu = ({
   return (
     <>
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}>
-        <>
-          {renderLinkButtons()}
-          {renderStartBulkEditButtons()}
-        </>
+        {renderLinkButtons()}
+        {renderStartBulkEditButtons()}
       </ActionMenuGroup>
-      <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
-        <CheckboxFilter
-          dataOptions={columnsOptions}
-          name="filter"
-          onChange={handleChange}
-          selectedValues={selectedValues}
-        />
-      </ActionMenuGroup>
+
+      {!!columnsOptions?.length && (
+        <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
+          <CheckboxFilter
+            dataOptions={columnsOptions}
+            name="filter"
+            onChange={handleColumnChange}
+            selectedValues={selectedValues}
+          />
+        </ActionMenuGroup>
+      )}
     </>
   );
 };
@@ -180,10 +157,6 @@ const BulkEditActionMenu = ({
 BulkEditActionMenu.propTypes = {
   onToggle: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
-  successCsvLink: PropTypes.string,
-  errorCsvLink: PropTypes.string,
-  isLoading: PropTypes.bool,
-  onUserEdit: PropTypes.func,
 };
 
 export default BulkEditActionMenu;

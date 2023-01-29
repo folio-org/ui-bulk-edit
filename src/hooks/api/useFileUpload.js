@@ -3,22 +3,16 @@ import {
 } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
-import { CAPABILITIES } from '../constants';
+import { CAPABILITIES } from '../../constants';
 
 export const useJobCommand = ({ entityType }) => {
   const ky = useOkapiKy();
 
   const { mutateAsync: requestJobId, isLoading } = useMutation({
     mutationFn: ({ recordIdentifier, editType, specificParameters }) => {
-      const entityTypeMap = {
-        [CAPABILITIES.ITEM]: 'ITEM',
-        [CAPABILITIES.USER]: 'USER',
-        [CAPABILITIES.HOLDINGS]: 'HOLDINGS_RECORD',
-      };
-
       const json = {
         type: editType,
-        entityType: entityTypeMap[entityType],
+        entityType: CAPABILITIES[entityType],
         exportTypeSpecificParameters: specificParameters || {},
         ...(
           recordIdentifier && { identifierType: recordIdentifier }

@@ -11,13 +11,13 @@ import {
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 
 import { useHistory, useLocation } from 'react-router-dom';
-import { useJobCommand, useFileUploadCommand } from '../../API';
+import { useJobCommand, useFileUploadCommand } from '../../hooks/api';
 
 import { ListFileUploader } from '../ListFileUploader';
 import { BULK_EDIT_UPDATE, BULK_EDIT_BARCODE } from '../../constants';
 
 
-const BulkEditStartModal = ({
+const BulkEditUploadModal = ({
   open,
   onCancel,
   fileName,
@@ -32,7 +32,7 @@ const BulkEditStartModal = ({
   const intl = useIntl();
   const showCallout = useShowCallout();
   const search = new URLSearchParams(location.search);
-  const controller = useRef();
+  const controller = useRef(null);
 
   const entityType = search.get('capabilities');
 
@@ -153,7 +153,7 @@ const BulkEditStartModal = ({
   );
 };
 
-BulkEditStartModal.propTypes = {
+BulkEditUploadModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
   setIsBulkConformationModal: PropTypes.func,
@@ -164,4 +164,4 @@ BulkEditStartModal.propTypes = {
   fileName: PropTypes.string,
 };
 
-export default BulkEditStartModal;
+export default BulkEditUploadModal;

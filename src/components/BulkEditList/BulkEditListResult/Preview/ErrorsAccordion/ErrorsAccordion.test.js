@@ -24,7 +24,7 @@ const renderPreviewAccordion = (history) => {
 
 describe('PreviewAccordion', () => {
   it('should render preview accordion', () => {
-    const mockHistory = ['/bulk-edit/1/initial'];
+    const mockHistory = ['/bulk-edit/1/preview'];
     renderPreviewAccordion(mockHistory);
 
     expect(screen.getByText(/errors.info/)).toBeVisible();
@@ -33,7 +33,7 @@ describe('PreviewAccordion', () => {
   });
 
   it('should render preview accordion', () => {
-    const mockHistory = ['/bulk-edit/1/processed'];
+    const mockHistory = ['/bulk-edit/1/preview'];
     renderPreviewAccordion(mockHistory);
 
     expect(screen.getByText(/errors.infoProccessed/)).toBeVisible();

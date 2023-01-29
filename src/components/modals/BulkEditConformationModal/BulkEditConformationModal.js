@@ -10,7 +10,7 @@ import {
 } from '@folio/stripes/components';
 
 import { useLocation } from 'react-router-dom';
-import { useRollBack, useLaunchJob } from '../../../API/useFileUpload';
+import { useRollBack, useLaunchJob } from '../../../hooks/api';
 
 const BulkEditConformationModal = ({
   open,
@@ -44,7 +44,7 @@ const BulkEditConformationModal = ({
     setIsBulkConformationModal(false);
 
     history.replace({
-      pathname: `/bulk-edit/${updatedId}/processedProgress`,
+      pathname: `/bulk-edit/${updatedId}/progress`,
       search: location.search,
     });
   };

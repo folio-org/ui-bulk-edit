@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
   Headline,
@@ -7,29 +7,20 @@ import {
 } from '@folio/stripes/components';
 
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
-import { ItemForm } from './forms/ItemForm/ItemForm';
-import { UserForm } from './forms/UserForm/UserForm';
-import { HoldingsForm } from './forms/HoldingsForm/HoldingsForm';
-import { CAPABILITIES } from '../../../../constants';
+import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
+import { CAPABILITIES, getHoldingsOptions, getItemsOptions, getUserOptions } from '../../../../constants';
 
-export const BulkEditInApp = (
-  {
-    title,
-    onContentUpdatesChanged,
-    typeOfBulk,
-  },
-) => {
-  const getFilteredFields = (initialFields) => {
-    return initialFields.map(f => {
-      const uniqOptions = new Set(initialFields.map(i => i.option));
+export const BulkEditInApp = ({
+  title,
+  onContentUpdatesChanged,
+  capabilities,
+}) => {
+  const intl = useIntl();
 
-      const optionsExceptCurrent = [...uniqOptions].filter(u => u !== f.option);
-
-      return {
-        ...f,
-        options: f.options.filter(o => !optionsExceptCurrent.includes(o.value)),
-      };
-    });
+  const optionsMap = {
+    [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage),
+    [CAPABILITIES.USER]: getUserOptions(intl.formatMessage),
+    [CAPABILITIES.HOLDING]: getHoldingsOptions(intl.formatMessage),
   };
 
   return (
@@ -41,29 +32,10 @@ export const BulkEditInApp = (
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
       >
         <BulkEditInAppTitle />
-
-        {typeOfBulk === CAPABILITIES.ITEM && (
-          <ItemForm
-            onContentUpdatesChanged={onContentUpdatesChanged}
-            typeOfBulk={typeOfBulk}
-            getFilteredFields={getFilteredFields}
-          />
-        )}
-
-        {typeOfBulk === CAPABILITIES.USER && (
-          <UserForm
-            onContentUpdatesChanged={onContentUpdatesChanged}
-            typeOfBulk={typeOfBulk}
-            getFilteredFields={getFilteredFields}
-          />
-        )}
-
-        {typeOfBulk === CAPABILITIES.HOLDINGS && (
-          <HoldingsForm
-            onContentUpdatesChanged={onContentUpdatesChanged}
-            getFilteredFields={getFilteredFields}
-          />
-        )}
+        <ContentUpdatesForm
+          options={optionsMap[capabilities]}
+          onContentUpdatesChanged={onContentUpdatesChanged}
+        />
       </Accordion>
     </>
   );
@@ -71,6 +43,6 @@ export const BulkEditInApp = (
 
 BulkEditInApp.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  capabilities: PropTypes.string,
   onContentUpdatesChanged: PropTypes.func,
-  typeOfBulk: PropTypes.string,
 };

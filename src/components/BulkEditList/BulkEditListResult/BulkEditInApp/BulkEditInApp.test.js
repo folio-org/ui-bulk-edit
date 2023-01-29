@@ -209,7 +209,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display holdings permanent location', () => {
-    renderBulkEditInApp(titleMock, CAPABILITIES.HOLDINGS);
+    renderBulkEditInApp(titleMock, CAPABILITIES.HOLDING);
 
     const selectOption = screen.getByTestId('select-option-0');
     const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.permanentLocation/ });
@@ -230,7 +230,7 @@ describe('BulkEditInApp', () => {
       'select-option-1',
     ];
 
-    renderBulkEditInApp(titleMock, CAPABILITIES.HOLDINGS);
+    renderBulkEditInApp(titleMock, CAPABILITIES.HOLDING);
 
     const plusButton = screen.getByLabelText('plus-sign');
 

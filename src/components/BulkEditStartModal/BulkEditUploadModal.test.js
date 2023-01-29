@@ -23,7 +23,7 @@ const setFileNameMock = jest.fn();
 
 const file = 'file.csv';
 
-const currentRoute = `/bulk-edit/1/initial?capabilities=ITEMS&processedFileName=${file}`;
+const currentRoute = `/bulk-edit/1/preview?capabilities=ITEMS&processedFileName=${file}`;
 
 const renderWithRouter = (ui, { route } = {}) => {
   window.history.pushState({}, 'Test page', route);

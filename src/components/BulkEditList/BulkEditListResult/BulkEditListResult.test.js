@@ -26,11 +26,6 @@ jest.mock('../../../API', () => ({
   useErrorsList: () => ({
     errors: [{ message: 'id,text' }],
   }),
-  useProgressStatus: () => ({
-    data: {
-      progress: 10,
-    },
-  }),
   useUserGroupsMap: () => ({}),
 }));
 
@@ -68,7 +63,7 @@ describe('BulkEditListResult', () => {
   it('displays fileName field for initial preview', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/initial?fileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/preview?fileName=Mock.csv&capabilities=USERS');
 
     renderBulkEditResult(history);
 
@@ -78,7 +73,7 @@ describe('BulkEditListResult', () => {
   it('displays title', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/initialProgress?fileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/progress?fileName=Mock.csv&capabilities=USERS');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.INITIAL);
 
@@ -88,7 +83,7 @@ describe('BulkEditListResult', () => {
   it('displays processed title', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/processedProgress?processedFileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/progress?processedFileName=Mock.csv&capabilities=USERS');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
@@ -98,7 +93,7 @@ describe('BulkEditListResult', () => {
   it('displays processed preview', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/processed?processedFileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/preview?processedFileName=Mock.csv&capabilities=USERS');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 

@@ -3,7 +3,7 @@ import { useLocation } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { Layout, Icon } from '@folio/stripes/components';
 
-import { CRITERIA, translationSuffix } from '../../../../constants';
+import { CRITERIA, TRANSLATION_SUFFIX } from '../../../../constants';
 
 import css from './NoResultsMessage.css';
 
@@ -19,7 +19,7 @@ export const NoResultsMessage = () => {
 
     if (criteria === CRITERIA.LOGS) {
       return <FormattedMessage id="ui-bulk-edit.list.result.emptyMessage.logs" />;
-    } else return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${translationSuffix[capabilities]}${messagePrefix}`} />;
+    } else return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${TRANSLATION_SUFFIX[capabilities]}${messagePrefix}`} />;
   }, [location.search]);
 
   return (

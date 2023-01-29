@@ -24,7 +24,7 @@ const renderRetrievedDataList = (capability) => {
 
 describe('Render RetrievedDataList', () => {
   it('Should render user list if match capabilities', () => {
-    [CAPABILITIES.USER, CAPABILITIES.ITEM, CAPABILITIES.HOLDINGS].forEach(capability => {
+    [CAPABILITIES.USER, CAPABILITIES.ITEM, CAPABILITIES.HOLDING].forEach(capability => {
       renderRetrievedDataList(capability);
 
       waitFor(() => {
@@ -38,7 +38,7 @@ describe('Render RetrievedDataList', () => {
   });
 
   it('Should render correct title info', () => {
-    [CAPABILITIES.USER, CAPABILITIES.ITEM, CAPABILITIES.HOLDINGS].forEach(capability => {
+    [CAPABILITIES.USER, CAPABILITIES.ITEM, CAPABILITIES.HOLDING].forEach(capability => {
       renderRetrievedDataList(capability);
 
       waitFor(() => {

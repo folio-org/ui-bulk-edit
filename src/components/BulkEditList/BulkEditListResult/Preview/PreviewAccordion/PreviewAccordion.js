@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { PropTypes } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -7,43 +7,16 @@ import {
   Row,
   MultiColumnList,
 } from '@folio/stripes/components';
-import { useCurrentEntityInfo, usePathParams } from '../../../../../hooks';
-import { RootContext } from '../../../../../context/RootContext';
 
 
-const PreviewAccordion = ({ items = [], userGroups = {} }) => {
-  const {
-    location,
-    columns,
-    resultsFormatter,
-  } = useCurrentEntityInfo({ userGroups });
-  const { visibleColumns } = useContext(RootContext);
+const PreviewAccordion = ({ contentData, formatter, columns, visibleColumns, isInitial }) => {
+  const translationKey = isInitial ? 'title' : 'titleChanged';
 
-  const { id: jobId } = usePathParams('/bulk-edit/:id');
+  const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
 
-  const accordionLabel = useMemo(() => (
-    location.pathname === `/bulk-edit/${jobId}/initial` ?
-      <FormattedMessage id="ui-bulk-edit.list.preview.title" />
-      :
-      <FormattedMessage id="ui-bulk-edit.list.preview.titleChanged" />
-  ), [location.pathname]);
-  const columnMapping = columns.reduce((acc, el) => {
-    acc[el.value] = el.label;
-
-    return acc;
-  }, {});
-
-  const finalColumns = useMemo(() => {
-    const defaultColumns = columns
-      .filter(item => item.selected)
-      .map(item => item.value);
-
-    const existingColumns = columns.reduce((acc, { value }) => {
-      return visibleColumns?.includes(`"${value}"`) ? [...acc, value] : acc;
-    }, []);
-
-    return visibleColumns ? existingColumns : defaultColumns;
-  }, [visibleColumns, columns]);
+  const visibleColumnKeys = useMemo(() => {
+    return visibleColumns?.filter(item => !item.selected).map(item => item.value);
+  }, [visibleColumns]);
 
 
   return (
@@ -54,10 +27,10 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
         <Col xs={12}>
           <MultiColumnList
             striped
-            contentData={items}
-            columnMapping={columnMapping}
-            formatter={resultsFormatter}
-            visibleColumns={finalColumns}
+            contentData={contentData}
+            formatter={formatter}
+            columnMapping={columns}
+            visibleColumns={visibleColumnKeys}
           />
         </Col>
       </Row>
@@ -66,8 +39,11 @@ const PreviewAccordion = ({ items = [], userGroups = {} }) => {
 };
 
 PreviewAccordion.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
-  userGroups: PropTypes.object,
+  contentData: PropTypes.arrayOf(PropTypes.object),
+  formatter: PropTypes.object,
+  columns: PropTypes.object,
+  visibleColumns: PropTypes.arrayOf(PropTypes.object),
+  isInitial: PropTypes.bool,
 };
 
-export default PreviewAccordion;
+export default memo(PreviewAccordion);

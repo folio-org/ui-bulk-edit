@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect, useRef } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -11,7 +11,6 @@ import {
 import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
-import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { useQueryClient } from 'react-query';
 import { buildSearch } from '@folio/stripes-acq-components';
@@ -20,30 +19,26 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
-import { useJob } from '../../API';
-import { usePathParams } from '../../hooks';
-import { CAPABILITIES, CRITERIA } from '../../constants';
+import { usePathParams, useBulkPermissions } from '../../hooks';
+import { CAPABILITIES, CRITERIA, APPROACHES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import PreviewModal from '../modals/PreviewModal/PreviewModal';
-import { useBulkPermissions } from '../../hooks/useBulkPermissions';
+
 import { RootContext } from '../../context/RootContext';
-import { useFormValid } from '../../hooks/useFormValid';
 import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
+import { isContentUpdatesFormValid } from './BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 
 
 export const BulkEditList = () => {
   const queryClient = useQueryClient();
-  const location = useLocation();
   const history = useHistory();
-  const search = new URLSearchParams(location.search);
-  const controller = useRef(null);
+  const search = new URLSearchParams(history.location.search);
 
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
   const [isBulkEditLayerOpen, setIsBulkEditLayerOpen] = useState(false);
   const [isBulkEditConformationModal, setIsBulkConformationModal] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
-  const [updatedId, setUpdatedId] = useState();
   const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
   const [contentUpdates, setContentUpdates] = useState(null);
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
@@ -51,23 +46,20 @@ export const BulkEditList = () => {
   const [processedFileName, setProcessedFileName] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
 
-  const { isInAppFormValid } = useFormValid(contentUpdates);
 
-  const { id: jobId } = usePathParams('/bulk-edit/:id');
-  const { data, isLoading } = useJob(jobId);
+  const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
 
-  const [successCsvLink, errorCsvLink] = data?.files || [];
   const { isActionMenuShown, hasOnlyInAppViewPerms, hasInAppEditPerms } = useBulkPermissions();
 
-  const capabilitiesUrl = search.get('capabilities');
+  const capabilities = search.get('capabilities');
   const criteria = search.get('criteria');
 
   const getDefaultCapabilities = () => {
     if (hasOnlyInAppViewPerms || hasInAppEditPerms) {
-      return capabilitiesUrl || CAPABILITIES.ITEM;
+      return capabilities || CAPABILITIES.ITEM;
     }
 
-    return capabilitiesUrl || CAPABILITIES.USER;
+    return capabilities || CAPABILITIES.USER;
   };
 
   const defaultCapability = getDefaultCapabilities();
@@ -81,27 +73,43 @@ export const BulkEditList = () => {
 
   const [filters, setFilters] = useState(initialFiltersState);
 
-  const handleStartBulkEdit = () => {
-    if (capabilitiesUrl === CAPABILITIES.ITEM || capabilitiesUrl === CAPABILITIES.HOLDINGS) {
-      setIsBulkEditLayerOpen(true);
-    } else setIsBulkEditModalOpen(true);
+  const handleBulkEditLayerOpen = () => {
+    setIsBulkEditLayerOpen(true);
+  };
+  const handleBulkEditLayerClose = () => {
+    setIsBulkEditLayerOpen(false);
+  };
+
+  const handlePreviewModalOpen = () => {
+    setPreviewModalOpened(true);
+  };
+
+  const handlePreviewModalClose = () => {
+    setPreviewModalOpened(false);
+  };
+
+  const handleChangesCommited = () => {
+    handlePreviewModalClose();
+    handleBulkEditLayerClose();
+  };
+
+  const handleStartBulkEdit = (approach) => {
+    if (approach === APPROACHES.IN_APP) {
+      handleBulkEditLayerOpen();
+    }
+
+    if (approach === APPROACHES.CSV) {
+      setIsBulkEditModalOpen(true);
+    }
   };
 
   const isLogsTab = criteria === CRITERIA.LOGS;
-  const isActionMenuVisible = (successCsvLink || errorCsvLink || isActionMenuShown) && !isLogsTab;
-
-  useEffect(() => {
-    const columns = localStorage.getItem('visibleColumns');
-
-    if (columns) {
-      setVisibleColumns(columns);
-    }
-  }, []);
+  const isActionMenuVisible = isActionMenuShown && !isLogsTab;
 
   useEffect(() => {
     const initialRoute = '/bulk-edit';
 
-    if (location.pathname === initialRoute && !location.search) {
+    if (history.location.pathname === initialRoute && !history.location.search) {
       // reset count of records
       setCountOfRecords(0);
 
@@ -125,17 +133,13 @@ export const BulkEditList = () => {
 
       setNewBulkFooterShown(false);
     }
-  }, [location.pathname, location.search]);
+  }, [history.location]);
 
   const renderActionMenu = () => (
     isActionMenuVisible && (
       <BulkEditActionMenu
         onEdit={handleStartBulkEdit}
         onToggle={noop}
-        successCsvLink={successCsvLink}
-        errorCsvLink={errorCsvLink}
-        isLoading={isLoading}
-        onUserEdit={() => setIsBulkEditLayerOpen(true)}
       />
     )
   );
@@ -155,24 +159,7 @@ export const BulkEditList = () => {
     }
   };
 
-  const handleBulkEditLayerClose = () => {
-    setIsBulkEditLayerOpen(false);
-  };
 
-  const handlePreviewModalOpen = () => {
-    controller.current = new AbortController();
-    setPreviewModalOpened(true);
-  };
-
-  const handleJobStart = () => {
-    setPreviewModalOpened(false);
-    setIsBulkEditLayerOpen(false);
-  };
-
-  const handleOnKeepEditing = () => {
-    if (controller.current) controller.current.abort();
-    setPreviewModalOpened(false);
-  };
 
   const handleStartNewBulkEdit = () => {
     // redirect to initial state with saved capabilities in search
@@ -192,10 +179,10 @@ export const BulkEditList = () => {
     } else if (criteria === CRITERIA.LOGS) {
       return <FormattedMessage id="ui-bulk-edit.meta.logs.title" />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [confirmedFileName, location.search]);
+  }, [confirmedFileName, history.location.search]);
 
   const changedPaneSubTitle = useMemo(() => (
-    history.location.pathname === `/bulk-edit/${jobId}/initial` ?
+    history.location.pathname === `/bulk-edit/${bulkOperationId}/initial` ?
       <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
   ), [countOfRecords, history.location.pathname]);
@@ -205,10 +192,10 @@ export const BulkEditList = () => {
       <FormattedMessage id="ui-bulk-edit.logs.logSubTitle" />
       :
       <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
-  ), [location.search]);
+  ), [history.location.search]);
 
   const paneSubtitle = useMemo(() => (
-    history.location.pathname !== '/bulk-edit' && history.location.pathname !== `/bulk-edit/${jobId}/initialProgress`
+    history.location.pathname !== '/bulk-edit' && history.location.pathname !== `/bulk-edit/${bulkOperationId}/progress`
       ?
       changedPaneSubTitle
       : defaultPaneSubtitle
@@ -223,9 +210,15 @@ export const BulkEditList = () => {
            />;
   };
 
-  const renderNewBulkFooter = newBulkFooterShown
-    ? <PaneFooter renderEnd={<Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega"><FormattedMessage id="ui-bulk-edit.start.newBulkEdit" /></Button>} />
-    : null;
+  const renderNewBulkFooter = () => (newBulkFooterShown ? (
+    <PaneFooter
+      renderEnd={(
+        <Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega">
+          <FormattedMessage id="ui-bulk-edit.start.newBulkEdit" />
+        </Button>
+      )}
+    />
+  ) : null);
 
   const renderPaneFooter = () => {
     return (
@@ -247,7 +240,7 @@ export const BulkEditList = () => {
             marginBottom0
             onClick={handlePreviewModalOpen}
             type="submit"
-            disabled={!isInAppFormValid}
+            disabled={!isContentUpdatesFormValid(contentUpdates)}
           >
             <FormattedMessage id="ui-bulk-edit.layer.confirmChanges" />
           </Button>
@@ -284,16 +277,9 @@ export const BulkEditList = () => {
           paneSub={paneSubtitle}
           appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
           actionMenu={renderActionMenu}
-          footer={renderNewBulkFooter}
+          footer={renderNewBulkFooter()}
         >
-          {criteria === CRITERIA.LOGS ? <BulkEditLogs /> : (
-            <BulkEditListResult
-              updatedId={updatedId}
-              jobId={jobId}
-              data={data}
-              setCountOfRecords={setCountOfRecords}
-            />
-          )}
+          {criteria === CRITERIA.LOGS ? <BulkEditLogs /> : <BulkEditListResult />}
         </Pane>
         <Layer isOpen={isBulkEditLayerOpen} inRootSet>
           <Pane
@@ -308,7 +294,7 @@ export const BulkEditList = () => {
             <BulkEditInApp
               title={fileNameTitle()}
               onContentUpdatesChanged={setContentUpdates}
-              typeOfBulk={capabilitiesUrl}
+              capabilities={capabilities}
             />
           </Pane>
         </Layer>
@@ -320,7 +306,6 @@ export const BulkEditList = () => {
         onCancel={cancelBulkEditStart}
         setIsBulkConformationModal={setIsBulkConformationModal}
         setCountOfRecords={setCountOfRecords}
-        setUpdatedId={setUpdatedId}
         setIsBulkEditModalOpen={setIsBulkEditModalOpen}
       />
       <BulkEditConformationModal
@@ -331,16 +316,13 @@ export const BulkEditList = () => {
         setIsBulkConformationModal={setIsBulkConformationModal}
         fileName={processedFileName}
         countOfRecords={countOfRecords}
-        updatedId={updatedId}
       />
       <PreviewModal
-        jobId={jobId}
+        bulkOperationId={bulkOperationId}
         open={isPreviewModalOpened}
         contentUpdates={contentUpdates}
-        onJobStarted={handleJobStart}
-        onKeepEditing={handleOnKeepEditing}
-        setUpdatedId={setUpdatedId}
-        controller={controller.current}
+        onKeepEditing={handlePreviewModalClose}
+        onChangesCommited={handleChangesCommited}
       />
 
     </RootContext.Provider>

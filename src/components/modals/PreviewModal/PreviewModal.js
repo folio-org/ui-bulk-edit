@@ -5,126 +5,116 @@ import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
-import moment from 'moment';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { useOkapiKy } from '@folio/stripes/core';
 import { useShowCallout } from '@folio/stripes-acq-components';
+import { useQueryClient } from 'react-query';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import css from './PreviewModal.css';
-import { useInAppColumnsInfo } from '../../../hooks/useInAppColumnsInfo';
-import { getMappedHoldings, useLaunchJob } from '../../../API';
-import { useInAppUpload } from '../../../API/useInAppUpload';
-import { useInAppDownloadPreview } from '../../../API/useInAppDownloadPreview';
-import { CAPABILITES_PREVIEW, OPTIONS } from '../../../constants';
+import { APPROACHES, dateNow, FILE_KEYS, FILE_SEARCH_PARAMS } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
+import { useRecordsPreview } from '../../../hooks/api/useRecordsPreview';
+import { getContentUpdatesBody } from '../../BulkEditList/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
+import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
+import { useBulkOperationDetails } from '../../../hooks/api/useBulkOperationDetails';
+import { useContentUpdate } from '../../../hooks/api/useContentUpdate';
+import { useFileDownload } from '../../../hooks/api/useFileDownload';
+
 
 const PreviewModal = ({
   open,
-  jobId,
+  bulkOperationId,
   contentUpdates,
   onKeepEditing,
-  onJobStarted,
-  setUpdatedId,
-  controller,
+  onChangesCommited,
 }) => {
+  const queryClient = useQueryClient();
   const callout = useShowCallout();
   const intl = useIntl();
-  const ky = useOkapiKy();
   const history = useHistory();
   const location = useLocation();
-  const capability = new URLSearchParams(location.search).get('capabilities');
-  const {
-    columns,
-    columnMapping,
-    columnWidths,
-    formatter,
-  } = useInAppColumnsInfo({ capability });
+  const { visibleColumns } = useContext(RootContext);
 
-  const swwCallout = () => {
+  const swwCallout = () => (
     callout({
       type: 'error',
       message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
-    });
-  };
+    })
+  );
 
-  const { visibleColumns } = useContext(RootContext);
+  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
 
-  let finalColumns;
+  const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
 
-  try {
-    finalColumns = JSON.parse(visibleColumns) || columns;
-  } catch {
-    swwCallout();
-  }
+  const { bulkOperationStart } = useBulkOperationStart({ approachType: APPROACHES.IN_APP });
 
-  const [previewItems, setPreviewItems] = useState([]);
-  const [countOfChangedRecords, setCountOfChangedRecords] = useState(0);
-
-  const { startJob } = useLaunchJob();
-  const { inAppUpload, isLoading: isUploading } = useInAppUpload(controller?.signal);
   const {
-    data: fileData,
-    refetch: downloadPreviewCSV,
-  } = useInAppDownloadPreview(jobId, CAPABILITES_PREVIEW[capability]);
+    contentData,
+    columns,
+    formatter,
+    refetch: fetchPreview,
+  } = useRecordsPreview({
+    id: bulkOperationId,
+    queryKey: 'recordsPreviewModal',
+    enabled: false,
+    onError: () => {
+      swwCallout();
+      onKeepEditing();
+    },
+  });
 
-  const handleStartJob = async () => {
+  const { refetch } = useFileDownload({
+    enabled: false, // to prevent automatic file fetch in preview modal
+    id: bulkOperationId,
+    fileInfo: {
+      fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
+    },
+    onSuccess: data => {
+      const fileName = new URLSearchParams(location.search).get('fileName');
+
+      saveAs(new Blob([data]), `${dateNow}-Updates-Preview-${fileName}`);
+    },
+  });
+
+  const visibleColumnKeys = visibleColumns?.filter(item => !item.selected).map(item => item.value);
+
+  const isChangedPreviewReady = bulkDetails && Object.hasOwn(bulkDetails, FILE_KEYS.PROPOSED_CHANGES_LINK);
+
+  // TODO: need to add on BE
+  const [countOfChangedRecords] = useState(0);
+
+  const handleBulkOperationStart = async () => {
     try {
-      if (jobId) {
-        await startJob({ jobId });
+      await bulkOperationStart({ id: bulkOperationId });
 
-        setUpdatedId(jobId);
-        onJobStarted();
+      onChangesCommited();
 
-        history.replace({
-          pathname: `/bulk-edit/${jobId}/processedProgress`,
-          search: location.search,
-        });
-      }
+      history.replace({
+        pathname: `/bulk-edit/${bulkOperationId}/progress`,
+        search: location.search,
+      });
     } catch {
       swwCallout();
     }
   };
 
   useEffect(() => {
-    if (jobId && contentUpdates && open) {
-      const formattedContentUpdates = contentUpdates.map(item => {
-        if (item.option === OPTIONS.EXPIRATION_DATE) {
-          const DATE_RFC2822 = 'YYYY-MM-DD HH:mm:ss';
-          const getFormattedDate = (value) => `${moment(`${value} 23:59:59`).format(DATE_RFC2822)}.000Z`;
-
-          return {
-            ...item,
-            actions: item.actions.map(action => ({ ...action, value: getFormattedDate(action.value) })),
-          };
-        }
-
-        return item;
+    if (contentUpdates && open) {
+      const contentUpdatesBody = getContentUpdatesBody({
+        bulkOperationId,
+        contentUpdates,
+        totalRecords: bulkDetails.totalNumOfRecords,
       });
 
-      inAppUpload({ jobId, contentUpdates: formattedContentUpdates, capability }).then(async response => {
-        const listKey = Object.keys(response)[0];
-
-        // for holdings items should be additionally mapped
-        const mappedPreviewItems = listKey === 'holdingsRecords' ? await getMappedHoldings(ky, response[listKey]) : response[listKey];
-
-        setPreviewItems(mappedPreviewItems);
-        setCountOfChangedRecords(response.totalRecords);
-      }).catch(() => swwCallout());
+      contentUpdate({ contentUpdates: contentUpdatesBody })
+        .then(() => bulkOperationStart({ id: bulkOperationId }))
+        .then(() => fetchPreview())
+        .then(() => queryClient.invalidateQueries('bulkOperationDetails'))
+        .catch(() => {
+          swwCallout();
+          onKeepEditing();
+        });
     }
-  }, [jobId, contentUpdates, open]);
-
-  useEffect(() => {
-    if (fileData) {
-      const date = moment().format('YYYY-MM-DD');
-      const fileName = new URLSearchParams(location.search).get('fileName');
-
-      fileData.blob().then(blob => {
-        saveAs(blob, `${date}-Updates- Preview-${fileName}`);
-      });
-    }
-  }, [fileData]);
-
-  const isPreviewReady = !isUploading && previewItems.length;
+  }, [contentUpdates, open]);
 
   return (
     <Modal
@@ -134,16 +124,16 @@ const PreviewModal = ({
       aria-label="PreviewModal"
       footer={
         <PreviewModalFooter
-          isUploading={isPreviewReady}
-          onDownloadPreview={downloadPreviewCSV}
-          onSave={handleStartJob}
+          isChangedPreviewReady={isChangedPreviewReady}
+          onDownloadPreview={refetch}
+          onSave={handleBulkOperationStart}
           onKeepEditing={onKeepEditing}
         />
       }
       dismissible
       onClose={onKeepEditing}
     >
-      {isPreviewReady ? (
+      {contentData ? (
         <>
           <MessageBanner type="warning">
             <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: countOfChangedRecords }} />
@@ -152,11 +142,10 @@ const PreviewModal = ({
           <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
 
           <MultiColumnList
-            contentData={previewItems}
-            columnWidths={columnWidths}
-            columnMapping={columnMapping}
+            contentData={contentData}
+            columnMapping={columns}
             formatter={formatter}
-            visibleColumns={finalColumns}
+            visibleColumns={visibleColumnKeys}
           />
         </>
       ) : <Preloader />}
@@ -166,12 +155,10 @@ const PreviewModal = ({
 
 PreviewModal.propTypes = {
   open: PropTypes.bool,
-  jobId: PropTypes.string,
+  bulkOperationId: PropTypes.string,
   onKeepEditing: PropTypes.func,
-  onJobStarted: PropTypes.func,
-  setUpdatedId: PropTypes.func,
+  onChangesCommited: PropTypes.func,
   contentUpdates: PropTypes.arrayOf(PropTypes.object),
-  controller: PropTypes.object,
 };
 
 export default PreviewModal;

@@ -18,19 +18,21 @@ import { ListSelect } from './ListSelect/ListSelect';
 import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
 import {
-  BULK_EDIT_IDENTIFIERS,
-  EDIT_CAPABILITIES,
+  EDIT_CAPABILITIES_OPTIONS,
   BULK_EDIT_QUERY,
-  CRITERIA, CAPABILITIES, translationSuffix, TYPE_OF_PROGRESS,
+  CRITERIA, CAPABILITIES,
+  TRANSLATION_SUFFIX,
+  APPROACHES,
 } from '../../../constants';
-import { useJobCommand, useFileUploadCommand, useUserGroupsMap, useLaunchJob } from '../../../API';
-import { buildQuery, useLocationFilters } from '../../../hooks';
-import { useBulkPermissions } from '../../../hooks/useBulkPermissions';
+import { useJobCommand, useUserGroupsMap } from '../../../hooks/api';
+import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 
 import css from './BulkEditListFilters.css';
 import { RootContext } from '../../../context/RootContext';
 import { LogsFilters } from './LogsFilters/LogsFilters';
-import { useProgressStatus } from '../../../API/useProgressStatus';
+import { useUpload } from '../../../hooks/api/useUpload';
+import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
+import { buildQuery } from '../../../utills/buildQuery';
 
 export const BulkEditListFilters = ({
   filters,
@@ -54,7 +56,7 @@ export const BulkEditListFilters = ({
 
   const initialFilter = {
     capabilities: search.get('capabilities'),
-    criteria: 'logs',
+    criteria: CRITERIA.LOGS,
   };
 
   const onResetData = () => {};
@@ -79,35 +81,23 @@ export const BulkEditListFilters = ({
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
-  const { startJob } = useLaunchJob();
   const { userGroups } = useUserGroupsMap();
   const { requestJobId } = useJobCommand({ entityType: capabilities });
-  const { fileUpload, isLoading } = useFileUploadCommand();
+  const { fileUpload, isLoading } = useUpload();
+  const { bulkOperationStart } = useBulkOperationStart({ approachType: APPROACHES.IN_APP });
   const { setVisibleColumns } = useContext(RootContext);
-
-  const [jobId, setJobId] = useState(null);
-
-  const { setRefetchInterval } = useProgressStatus(jobId, TYPE_OF_PROGRESS.INITIAL, () => {
-    search.delete('fileName');
-
-    history.replace({
-      search: buildSearch({ queryText }, location.search),
-    });
-
-    setJobId(null);
-  });
 
   const isCapabilityDisabled = (capabilityValue) => {
     const capabilitiesMap = {
       [CAPABILITIES.USER]: isUserRadioDisabled,
       [CAPABILITIES.ITEM]: isInventoryRadioDisabled,
-      [CAPABILITIES.HOLDINGS]: false, // TODO: disable it based on permissions
+      [CAPABILITIES.HOLDING]: false, // TODO: disable it based on permissions
     };
 
     return capabilitiesMap[capabilityValue];
   };
 
-  const capabilitiesFilterOptions = EDIT_CAPABILITIES?.map(capability => ({
+  const capabilitiesFilterOptions = EDIT_CAPABILITIES_OPTIONS?.map(capability => ({
     ...capability,
     disabled: isCapabilityDisabled(capability.value),
   }));
@@ -159,19 +149,18 @@ export const BulkEditListFilters = ({
 
   const uploadFileFlow = async (fileToUpload) => {
     try {
-      const { id } = await requestJobId({ recordIdentifier, editType: BULK_EDIT_IDENTIFIERS });
+      const { id } = await fileUpload({
+        fileToUpload,
+        entityType: capabilities,
+        identifierType: recordIdentifier,
+      });
 
-      await fileUpload({ id, fileToUpload });
-
-      // start job manually for ITEM capability only
-      if (capabilities === CAPABILITIES.ITEM) {
-        await startJob({ jobId: id });
-      }
+      await bulkOperationStart({ id });
 
       search.delete('queryText');
 
       history.replace({
-        pathname: `/bulk-edit/${id}/initialProgress`,
+        pathname: `/bulk-edit/${id}/progress`,
         search: buildSearch({ fileName: fileToUpload.name }, location.search),
       });
 
@@ -195,7 +184,7 @@ export const BulkEditListFilters = ({
   const handleQuerySearch = async () => {
     const parsedQuery = buildQuery(queryText, userGroups);
 
-    const { id } = await requestJobId({
+    await requestJobId({
       recordIdentifier,
       editType: BULK_EDIT_QUERY,
       specificParameters: { query: parsedQuery },
@@ -204,15 +193,12 @@ export const BulkEditListFilters = ({
     history.replace({
       search: buildSearch({ queryText }, location.search),
     });
-
-    setRefetchInterval(500);
-    setJobId(id);
   };
 
   const uploaderSubTitle = useMemo(() => {
     const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
 
-    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${translationSuffix[capabilities]}${messagePrefix}`} />;
+    return <FormattedMessage id={`ui-bulk-edit.uploaderSubTitle${TRANSLATION_SUFFIX[capabilities]}${messagePrefix}`} />;
   }, [recordIdentifier]);
 
   useEffect(() => {

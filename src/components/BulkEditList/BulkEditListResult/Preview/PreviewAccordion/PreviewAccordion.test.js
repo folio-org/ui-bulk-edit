@@ -9,7 +9,7 @@ import {
   getHoldingsResultsFormatterBase,
   getInventoryResultsFormatterBase,
   getUserResultsFormatterBase,
-} from '../../../../../constants/formatters';
+} from '../../../../../utills/formatters';
 
 const users = [
   {
@@ -144,7 +144,7 @@ describe('PreviewAccordion', () => {
   });
 
   it('should render preview accordion with holdings items', () => {
-    renderPreviewAccordion({ capabilities: 'HOLDINGS_RECORD', items: holdingsItems, step: 'initial', visibleColumns: JSON.stringify(Object.keys(getHoldingsResultsFormatterBase())) });
+    renderPreviewAccordion({ capabilities: 'HOLDING', items: holdingsItems, step: 'initial', visibleColumns: JSON.stringify(Object.keys(getHoldingsResultsFormatterBase())) });
 
     expect(screen.getByText('hrid')).toBeVisible();
     expect(screen.getByText('permanentLocation')).toBeVisible();
