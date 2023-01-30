@@ -525,35 +525,35 @@ export const FILTERS = {
 export const FILTER_OPTIONS = {
   STATUS: [
     {
-      value: 'New',
+      value: 'NEW',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.new" />,
     },
     {
-      value: 'Retrieving records',
+      value: 'RETRIEVING_RECORDS',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.retrieving" />,
     },
     {
-      value: 'Saving records',
+      value: 'SAVING_RECORDS_LOCALLY',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.saving" />,
     },
     {
-      value: 'Data modification',
+      value: 'DATA_MODIFICATION',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.data" />,
     },
     {
-      value: 'Reviewing changes',
+      value: 'REVIEW_CHANGES',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.reviewing" />,
     },
     {
-      value: 'Completed',
+      value: 'COMPLETED',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.completed" />,
     },
     {
-      value: 'Completed with errors',
+      value: 'COMPLETED_WITH_ERRORS',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.completedWithErrors" />,
     },
     {
-      value: 'Failed',
+      value: 'FAILED',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.failed" />,
     },
   ],
@@ -573,11 +573,11 @@ export const FILTER_OPTIONS = {
   ],
   OPERATION_TYPE: [
     {
-      value: 'edit',
+      value: 'UPDATE',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.edit" />,
     },
     {
-      value: 'delete',
+      value: 'DELETE',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.delete" />,
     },
   ],

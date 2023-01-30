@@ -3,13 +3,10 @@ import { useOkapiKy } from '@folio/stripes/core';
 import queryString from 'query-string';
 import {
   buildFilterQuery,
-  buildSortingQuery,
   buildDateRangeQuery,
   buildArrayFieldQuery,
-  connectQuery,
-} from '@folio/stripes-acq-components';
+} from '../utils/queryUtils';
 import { FILTERS } from '../constants';
-
 
 
 export const useBulkEditLogs = ({ location }) => {
@@ -32,12 +29,11 @@ export const useBulkEditLogs = ({ location }) => {
     },
   );
   const filterQuery = queryParamsFilterQuery || 'cql.allRecords=1';
-  const sortingQuery = buildSortingQuery(queryParams) || 'sortby startTime/sort.descending';
 
   const { data, isLoading } = useQuery(
     {
       queryKey: ['bulkEditLogs', location.search],
-      queryFn: () => ky.get('bulk-operations', { searchParams: { query: connectQuery(filterQuery, sortingQuery) } }).json()
+      queryFn: () => ky.get('bulk-operations', { searchParams: { query: filterQuery } }).json()
         .then(async response => {
           let userNamesMap = {};
 
