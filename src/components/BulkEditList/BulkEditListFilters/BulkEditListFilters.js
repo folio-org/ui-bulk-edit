@@ -22,7 +22,7 @@ import {
   BULK_EDIT_QUERY,
   CRITERIA, CAPABILITIES,
   TRANSLATION_SUFFIX,
-  APPROACHES,
+  EDITING_STEPS,
 } from '../../../constants';
 import { useJobCommand, useUserGroupsMap } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
@@ -84,7 +84,7 @@ export const BulkEditListFilters = ({
   const { userGroups } = useUserGroupsMap();
   const { requestJobId } = useJobCommand({ entityType: capabilities });
   const { fileUpload, isLoading } = useUpload();
-  const { bulkOperationStart } = useBulkOperationStart({ approachType: APPROACHES.IN_APP });
+  const { bulkOperationStart } = useBulkOperationStart();
   const { setVisibleColumns } = useContext(RootContext);
 
   const isCapabilityDisabled = (capabilityValue) => {
@@ -155,7 +155,9 @@ export const BulkEditListFilters = ({
         identifierType: recordIdentifier,
       });
 
-      await bulkOperationStart({ id });
+      await bulkOperationStart({
+        step: EDITING_STEPS.UPLOAD,
+      });
 
       search.delete('queryText');
 
@@ -218,7 +220,7 @@ export const BulkEditListFilters = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const searchStr = buildSearch({ capabilities }, location.search);
 
     // Replace history only if the search params are different from
@@ -230,7 +232,7 @@ export const BulkEditListFilters = ({
         search: searchStr,
       });
     }
-  }, [capabilities]);
+  }, [capabilities]); */
 
   const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
 

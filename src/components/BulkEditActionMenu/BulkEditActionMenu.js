@@ -122,7 +122,7 @@ const BulkEditActionMenu = ({
         {isStartBulkCsvActive && (
         <Button
           buttonStyle="dropdownItem"
-          onClick={() => handleOnStartEdit(APPROACHES.CSV)}
+          onClick={() => handleOnStartEdit(APPROACHES.MANUAL)}
         >
           <Icon icon="edit">
             <FormattedMessage id="ui-bulk-edit.start.edit.csv" />

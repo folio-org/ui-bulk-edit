@@ -4,13 +4,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useLocation } from 'react-router';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useShowCallout } from '@folio/stripes-acq-components';
 import { useQueryClient } from 'react-query';
 import { PreviewModalFooter } from './PreviewModalFooter';
 import css from './PreviewModal.css';
-import { APPROACHES, dateNow, FILE_KEYS, FILE_SEARCH_PARAMS } from '../../../constants';
+import { APPROACHES, dateNow, EDITING_STEPS, FILE_KEYS, FILE_SEARCH_PARAMS } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
 import { useRecordsPreview } from '../../../hooks/api/useRecordsPreview';
 import { getContentUpdatesBody } from '../../BulkEditList/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
@@ -31,7 +30,6 @@ const PreviewModal = ({
   const callout = useShowCallout();
   const intl = useIntl();
   const history = useHistory();
-  const location = useLocation();
   const { visibleColumns } = useContext(RootContext);
 
   const swwCallout = () => (
@@ -45,7 +43,7 @@ const PreviewModal = ({
 
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
 
-  const { bulkOperationStart } = useBulkOperationStart({ approachType: APPROACHES.IN_APP });
+  const { bulkOperationStart } = useBulkOperationStart();
 
   const {
     contentData,
@@ -54,11 +52,13 @@ const PreviewModal = ({
     refetch: fetchPreview,
   } = useRecordsPreview({
     id: bulkOperationId,
-    queryKey: 'recordsPreviewModal',
-    enabled: false,
-    onError: () => {
-      swwCallout();
-      onKeepEditing();
+    step: EDITING_STEPS.EDIT,
+    queryOptions: {
+      enabled: false,
+      onError: () => {
+        swwCallout();
+        onKeepEditing();
+      },
     },
   });
 
@@ -69,7 +69,7 @@ const PreviewModal = ({
       fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
     },
     onSuccess: data => {
-      const fileName = new URLSearchParams(location.search).get('fileName');
+      const fileName = new URLSearchParams(history.location.search).get('fileName');
 
       saveAs(new Blob([data]), `${dateNow}-Updates-Preview-${fileName}`);
     },
@@ -84,13 +84,17 @@ const PreviewModal = ({
 
   const handleBulkOperationStart = async () => {
     try {
-      await bulkOperationStart({ id: bulkOperationId });
+      await bulkOperationStart({
+        id: bulkOperationId,
+        approach: APPROACHES.IN_APP,
+        step: EDITING_STEPS.COMMIT,
+      });
 
       onChangesCommited();
 
       history.replace({
         pathname: `/bulk-edit/${bulkOperationId}/progress`,
-        search: location.search,
+        search: history.location.search,
       });
     } catch {
       swwCallout();
@@ -106,7 +110,11 @@ const PreviewModal = ({
       });
 
       contentUpdate({ contentUpdates: contentUpdatesBody })
-        .then(() => bulkOperationStart({ id: bulkOperationId }))
+        .then(() => bulkOperationStart({
+          id: bulkOperationId,
+          approach: APPROACHES.IN_APP,
+          step: EDITING_STEPS.EDIT,
+        }))
         .then(() => fetchPreview())
         .then(() => queryClient.invalidateQueries('bulkOperationDetails'))
         .catch(() => {

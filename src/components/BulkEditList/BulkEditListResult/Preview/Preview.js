@@ -7,6 +7,7 @@ import {
 } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
 import {
@@ -16,8 +17,13 @@ import { RootContext } from '../../../../context/RootContext';
 import { useRecordsPreview } from '../../../../hooks/api/useRecordsPreview';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
+  const location = useLocation();
   const { setNewBulkFooterShown, setCountOfRecords, visibleColumns } = useContext(RootContext);
-  const { contentData, columns, formatter } = useRecordsPreview({ id });
+
+  const search = new URLSearchParams(location.search);
+  const step = search.get('step');
+
+  const { contentData, columns, formatter } = useRecordsPreview({ id, step });
   const { data } = useErrorsPreview({ id });
   const errors = data?.errors || [];
 

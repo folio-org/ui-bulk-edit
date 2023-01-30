@@ -8,8 +8,9 @@ export const PREVIEW_LIMITS = {
 };
 
 export const APPROACHES = {
-  CSV: 'CSV',
   IN_APP: 'IN_APP',
+  MANUAL: 'MANUAL',
+  QUERY: 'QUERY',
 };
 
 export const CAPABILITIES = {

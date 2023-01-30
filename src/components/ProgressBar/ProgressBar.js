@@ -26,7 +26,7 @@ export const ProgressBar = () => {
   useEffect(() => {
     if (status === JOB_STATUSES.DATA_MODIFICATION) {
       clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, {
-        step: EDITING_STEPS.EDIT,
+        step: EDITING_STEPS.UPLOAD,
       });
     }
 

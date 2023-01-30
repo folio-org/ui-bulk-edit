@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -12,7 +12,6 @@ import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
 import { useHistory } from 'react-router';
-import { useQueryClient } from 'react-query';
 import { buildSearch } from '@folio/stripes-acq-components';
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult';
@@ -20,17 +19,17 @@ import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditStartModal } from '../BulkEditStartModal';
 import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
 import { usePathParams, useBulkPermissions } from '../../hooks';
-import { CAPABILITIES, CRITERIA, APPROACHES } from '../../constants';
+import { CRITERIA, APPROACHES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import PreviewModal from '../modals/PreviewModal/PreviewModal';
 
 import { RootContext } from '../../context/RootContext';
 import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
 import { isContentUpdatesFormValid } from './BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
-
+import { getDefaultCapabilities } from '../../constants/filters';
+import { useResetAppState } from '../../hooks/useResetAppState';
 
 export const BulkEditList = () => {
-  const queryClient = useQueryClient();
   const history = useHistory();
   const search = new URLSearchParams(history.location.search);
 
@@ -47,22 +46,11 @@ export const BulkEditList = () => {
   const [confirmedFileName, setConfirmedFileName] = useState(null);
 
 
+  const { isActionMenuShown, ...restPerms } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-
-  const { isActionMenuShown, hasOnlyInAppViewPerms, hasInAppEditPerms } = useBulkPermissions();
-
   const capabilities = search.get('capabilities');
   const criteria = search.get('criteria');
-
-  const getDefaultCapabilities = () => {
-    if (hasOnlyInAppViewPerms || hasInAppEditPerms) {
-      return capabilities || CAPABILITIES.ITEM;
-    }
-
-    return capabilities || CAPABILITIES.USER;
-  };
-
-  const defaultCapability = getDefaultCapabilities();
+  const defaultCapability = getDefaultCapabilities(restPerms, capabilities);
 
   const initialFiltersState = {
     criteria: CRITERIA.IDENTIFIER,
@@ -72,6 +60,15 @@ export const BulkEditList = () => {
   };
 
   const [filters, setFilters] = useState(initialFiltersState);
+
+  useResetAppState({
+    initialFiltersState,
+    setFilters,
+    setConfirmedFileName,
+    setCountOfRecords,
+    setNewBulkFooterShown,
+    setVisibleColumns,
+  });
 
   const handleBulkEditLayerOpen = () => {
     setIsBulkEditLayerOpen(true);
@@ -98,7 +95,7 @@ export const BulkEditList = () => {
       handleBulkEditLayerOpen();
     }
 
-    if (approach === APPROACHES.CSV) {
+    if (approach === APPROACHES.MANUAL) {
       setIsBulkEditModalOpen(true);
     }
   };
@@ -106,36 +103,7 @@ export const BulkEditList = () => {
   const isLogsTab = criteria === CRITERIA.LOGS;
   const isActionMenuVisible = isActionMenuShown && !isLogsTab;
 
-  useEffect(() => {
-    const initialRoute = '/bulk-edit';
-
-    if (history.location.pathname === initialRoute && !history.location.search) {
-      // reset count of records
-      setCountOfRecords(0);
-
-      // reset filters
-      setFilters(initialFiltersState);
-
-      // clear job information
-      queryClient.setQueryData('getJob', () => ({ data: undefined }));
-
-      // reset confirmed file name
-      setConfirmedFileName(null);
-
-      // clear visibleColumns preset
-      localStorage.removeItem('visibleColumns');
-      setVisibleColumns(null);
-
-      // set user capability by default
-      history.replace({
-        search: buildSearch({ capabilities: getDefaultCapabilities(), criteria: CRITERIA.IDENTIFIER }),
-      });
-
-      setNewBulkFooterShown(false);
-    }
-  }, [history.location]);
-
-  const renderActionMenu = () => (
+  const actionMenu = () => (
     isActionMenuVisible && (
       <BulkEditActionMenu
         onEdit={handleStartBulkEdit}
@@ -158,8 +126,6 @@ export const BulkEditList = () => {
       });
     }
   };
-
-
 
   const handleStartNewBulkEdit = () => {
     // redirect to initial state with saved capabilities in search
@@ -188,10 +154,9 @@ export const BulkEditList = () => {
   ), [countOfRecords, history.location.pathname]);
 
   const defaultPaneSubtitle = useMemo(() => (
-    criteria === CRITERIA.LOGS ?
-      <FormattedMessage id="ui-bulk-edit.logs.logSubTitle" />
-      :
-      <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
+    criteria === CRITERIA.LOGS
+      ? <FormattedMessage id="ui-bulk-edit.logs.logSubTitle" />
+      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
   ), [history.location.search]);
 
   const paneSubtitle = useMemo(() => (
@@ -210,7 +175,7 @@ export const BulkEditList = () => {
            />;
   };
 
-  const renderNewBulkFooter = () => (newBulkFooterShown ? (
+  const renderNewBulkFooter = () => newBulkFooterShown && (
     <PaneFooter
       renderEnd={(
         <Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega">
@@ -218,7 +183,7 @@ export const BulkEditList = () => {
         </Button>
       )}
     />
-  ) : null);
+  );
 
   const renderPaneFooter = () => {
     return (
@@ -276,7 +241,7 @@ export const BulkEditList = () => {
           paneTitle={paneTitle}
           paneSub={paneSubtitle}
           appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
-          actionMenu={renderActionMenu}
+          actionMenu={actionMenu}
           footer={renderNewBulkFooter()}
         >
           {criteria === CRITERIA.LOGS ? <BulkEditLogs /> : <BulkEditListResult />}

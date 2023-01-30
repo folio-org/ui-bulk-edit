@@ -3,11 +3,11 @@ import React from 'react';
 
 // use as marks that files are ready
 export const FILE_KEYS = {
-  MATCHING_RECORDS_LINK: 'linkToMatchingRecordsFile',
-  MATCHING_ERRORS_LINK: 'linkToMatchingErrorsFile',
-  PROPOSED_CHANGES_LINK: 'linkToThePreviewFile',
-  UPDATED_RECORDS_LINK: 'linkToUpdatedRecordsFile',
-  UPDATED_ERRORS_LINK: 'linkToCommittingErrorsFile',
+  MATCHING_RECORDS_LINK: 'linkToMatchedRecordsCsvFile',
+  MATCHING_ERRORS_LINK: 'linkToMatchedRecordsErrorsCsvFile',
+  PROPOSED_CHANGES_LINK: 'linkToModifiedRecordsCsvFile',
+  UPDATED_RECORDS_LINK: 'linkToCommittedRecordsCsvFile',
+  UPDATED_ERRORS_LINK: 'linkToCommittedRecordsErrorsCsvFile',
 };
 
 // use as API key for /donwload

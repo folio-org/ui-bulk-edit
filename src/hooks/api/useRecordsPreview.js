@@ -5,14 +5,14 @@ import { PREVIEW_LIMITS } from '../../constants';
 import { getMappedTableData } from '../../../test/jest/utils/mappers';
 import { RootContext } from '../../context/RootContext';
 
-export const useRecordsPreview = ({ id, queryKey = 'recordsPreview', ...queryOptions }) => {
+export const useRecordsPreview = ({ id, step, queryOptions }) => {
   const { setVisibleColumns } = useContext(RootContext);
   const ky = useOkapiKy();
 
   const { data, refetch, isLoading } = useQuery(
     {
-      queryKey: [queryKey, id],
-      queryFn: () => ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS } }).json(),
+      queryKey: ['recordsPreview', id],
+      queryFn: () => ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json(),
       ...queryOptions,
     },
   );

@@ -9,7 +9,6 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 
-import { useLocation } from 'react-router-dom';
 import { useRollBack, useLaunchJob } from '../../../hooks/api';
 
 const BulkEditConformationModal = ({
@@ -23,14 +22,12 @@ const BulkEditConformationModal = ({
   updatedId,
 }) => {
   const intl = useIntl();
-  const location = useLocation();
+  const history = useHistory();
 
   const modalLabel = intl.formatMessage({ id: 'ui-bulk-edit.meta.title.conformationModal' }, { fileName });
   const confirmLabel = intl.formatMessage({ id: 'ui-bulk-edit.conformationModal.commitChanges' });
   const cancelLabel = intl.formatMessage({ id: 'stripes-components.cancel' });
   const modalContent = intl.formatMessage({ id: 'ui-bulk-edit.conformationModal.message' }, { count: countOfRecords });
-
-  const history = useHistory();
 
   const { startJob } = useLaunchJob();
   const { rollBackJob } = useRollBack();
@@ -45,7 +42,7 @@ const BulkEditConformationModal = ({
 
     history.replace({
       pathname: `/bulk-edit/${updatedId}/progress`,
-      search: location.search,
+      search: history.location.search,
     });
   };
 
