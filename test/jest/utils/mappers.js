@@ -32,7 +32,7 @@ export const getMappedTableData = (data) => {
   }, {});
 
 
-  const contentData = data.rows.map(({ row }) => {
+  const contentData = data.rows?.map(({ row }) => {
     return row.reduce((acc, item, index) => {
       const column = data.header[index];
       // it's required format the dates on FE side
@@ -43,7 +43,7 @@ export const getMappedTableData = (data) => {
 
       return acc;
     }, {});
-  });
+  }) || [];
 
   return {
     formatter,
