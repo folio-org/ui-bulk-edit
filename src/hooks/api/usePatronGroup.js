@@ -12,8 +12,9 @@ export const usePatronGroup = () => {
       queryFn: async () => {
         const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
 
-        return usergroups.reduce((acc, { group, desc }) => {
+        return usergroups.reduce((acc, { group, desc, id }) => {
           const patronGroup = {
+            id,
             group,
             desc,
           };

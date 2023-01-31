@@ -44,7 +44,7 @@ export const getDownloadLinks = (perms, date) => [
   {
     KEY: FILE_KEYS.UPDATED_ERRORS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTING_CHANGES_ERROR_FILE,
-    LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />,
+    LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadErrors.changed" />,
     PERMS: perms.hasAnyEditPermissions,
     SAVE_FILE_NAME: `${date}-Errors-bulk-ops.csv`,
   },

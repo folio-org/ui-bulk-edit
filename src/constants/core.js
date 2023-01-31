@@ -1,7 +1,6 @@
 export const SUPPORTED_FILE_EXTENSIONS = ['csv'];
 export const BULK_EDIT_QUERY = 'BULK_EDIT_QUERY';
-export const BULK_EDIT_BARCODE = 'BARCODE';
-export const BULK_EDIT_UPDATE = 'BULK_EDIT_UPDATE';
+
 export const PREVIEW_LIMITS = {
   ERRORS: 10,
   RECORDS: 10,
@@ -97,4 +96,9 @@ export const FILTERS = {
   OPERATION_TYPE: 'operation_type',
   START_DATE: 'start_date',
   END_DATE: 'end_date',
+};
+
+export const MANUAL_UPLOAD_STEPS = {
+  UPLOAD: 'UPLOAD',
+  CONFIRM: 'CONFIRM',
 };

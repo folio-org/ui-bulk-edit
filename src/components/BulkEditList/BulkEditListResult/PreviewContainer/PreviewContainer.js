@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useLocation, useParams } from 'react-router';
+import { Loading } from '@folio/stripes/components';
 import { Preview } from '../Preview/Preview';
 import { useBulkOperationDetails } from '../../../../hooks/api/useBulkOperationDetails';
 import { JOB_STATUSES } from '../../../../constants';
-import { Loader } from '../Loader/Loader';
+import css from '../../../BulkEdit.css';
 
 const PreviewContainer = () => {
   const intl = useIntl();
@@ -27,7 +28,11 @@ const PreviewContainer = () => {
 
   const isInitial = bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION;
 
-  return isLoading ? <Loader /> : (
+  return isLoading ? (
+    <div className={css.LoaderContainer}>
+      <Loading />
+    </div>
+  ) : (
     <Preview
       title={title}
       id={id}

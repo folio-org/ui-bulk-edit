@@ -7,8 +7,10 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
   const { mutateAsync: bulkOperationStart, isLoading } = useMutation({
     mutationFn: ({ id, approach, step }) => {
       return ky.post(`bulk-operations/${id}/start`, {
-        ...(step && { step }),
-        ...(approach && { approachType: approach }),
+        json: {
+          step,
+          ...(approach ? { approach } : {}),
+        },
       }).json();
     },
     ...mutationOptions,

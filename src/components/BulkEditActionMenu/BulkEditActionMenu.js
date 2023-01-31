@@ -15,8 +15,6 @@ import { APPROACHES, CAPABILITIES, JOB_STATUSES, getDownloadLinks, dateNow } fro
 import { useBulkPermissions, usePathParams } from '../../hooks';
 import { RootContext } from '../../context/RootContext';
 import { useBulkOperationDetails } from '../../hooks/api/useBulkOperationDetails';
-
-
 import { useFileDownload } from '../../hooks/api/useFileDownload';
 
 
@@ -52,14 +50,15 @@ const BulkEditActionMenu = ({
   const columns = visibleColumns || [];
   const selectedValues = columns.filter(item => !item.selected).map(item => item.value);
 
+  const isStartBulkCsvActive = hasCsvEditPerms && capability === CAPABILITIES.USER;
+  const isModificationStep = bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION;
+  const isStartBulkInAppActive = hasAnyInAppEditPermissions && isModificationStep;
+
   const isLastUnselectedColumn = (value) => {
     return selectedValues?.length === 1 && selectedValues?.[0] === value;
   };
 
-  const columnsOptions = columns.map(item => ({
-    ...item,
-    disabled: isLastUnselectedColumn(item.value),
-  }));
+  const columnsOptions = columns.map(item => ({ ...item, disabled: isLastUnselectedColumn(item.value) }));
 
   const handleColumnChange = ({ values }) => {
     const changedColumns = columns.map(col => {
@@ -102,11 +101,6 @@ const BulkEditActionMenu = ({
   };
 
   const renderStartBulkEditButtons = () => {
-    const isStartBulkCsvActive = hasCsvEditPerms && capability === CAPABILITIES.USER;
-
-    const isModificationStep = bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION;
-    const isStartBulkInAppActive = hasAnyInAppEditPermissions && isModificationStep;
-
     return (
       <>
         {isStartBulkInAppActive && (
@@ -133,23 +127,31 @@ const BulkEditActionMenu = ({
     );
   };
 
+  const renderColumnsFilter = () => {
+    if (!columnsOptions.length) return null;
+
+    return (
+      <CheckboxFilter
+        dataOptions={columnsOptions}
+        name="filter"
+        onChange={handleColumnChange}
+        selectedValues={selectedValues}
+      />
+    );
+  };
+
   return (
     <>
-      <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}>
+      <ActionMenuGroup
+        title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}
+      >
         {renderLinkButtons()}
         {renderStartBulkEditButtons()}
       </ActionMenuGroup>
+      <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
+        {renderColumnsFilter()}
+      </ActionMenuGroup>
 
-      {!!columnsOptions?.length && (
-        <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
-          <CheckboxFilter
-            dataOptions={columnsOptions}
-            name="filter"
-            onChange={handleColumnChange}
-            selectedValues={selectedValues}
-          />
-        </ActionMenuGroup>
-      )}
     </>
   );
 };

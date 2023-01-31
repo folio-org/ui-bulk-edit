@@ -6,16 +6,19 @@ import {
   Accordion,
 } from '@folio/stripes/components';
 
+import { useLocation } from 'react-router';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import { CAPABILITIES, getHoldingsOptions, getItemsOptions, getUserOptions } from '../../../../constants';
 
 export const BulkEditInApp = ({
-  title,
   onContentUpdatesChanged,
   capabilities,
 }) => {
   const intl = useIntl();
+  const location = useLocation();
+  const search = new URLSearchParams(location.search);
+  const fileUploadedName = search.get('fileName');
 
   const optionsMap = {
     [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage),
@@ -26,7 +29,7 @@ export const BulkEditInApp = ({
   return (
     <>
       <Headline size="large" margin="medium">
-        {title}
+        <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName }} />
       </Headline>
       <Accordion
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
@@ -42,7 +45,6 @@ export const BulkEditInApp = ({
 };
 
 BulkEditInApp.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   capabilities: PropTypes.string,
   onContentUpdatesChanged: PropTypes.func,
 };

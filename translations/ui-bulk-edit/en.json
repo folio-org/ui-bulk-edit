@@ -114,6 +114,7 @@
   "textArea.resetAll": "Reset all",
 
   "start.downloadErrors": "Download errors (CSV)",
+  "start.downloadErrors.changed": "Download errors changed (CSV)",
   "start.downloadMathcedRecords": "Download matched records (CSV)",
   "start.downloadChangedRecords": "Download changed records (CSV)",
 

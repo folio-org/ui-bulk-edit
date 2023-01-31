@@ -16,10 +16,10 @@ export const ActionsRow = ({ actions, onChange }) => {
   const statuses = getItemStatusOptions(intl.formatMessage);
 
   const patronGroups = Object.values(userGroups).reduce(
-    (acc, { group, desc }) => {
+    (acc, { id, group, desc }) => {
       const description = desc ? `(${desc})` : '';
       const groupObject = {
-        value: group,
+        value: id,
         label: `${group} ${description}`,
       };
 

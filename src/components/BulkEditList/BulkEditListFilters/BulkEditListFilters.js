@@ -18,9 +18,8 @@ import { ListSelect } from './ListSelect/ListSelect';
 import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
 import {
-  EDIT_CAPABILITIES_OPTIONS,
   BULK_EDIT_QUERY,
-  CRITERIA, CAPABILITIES,
+  CRITERIA,
   TRANSLATION_SUFFIX,
   EDITING_STEPS,
 } from '../../../constants';
@@ -33,6 +32,7 @@ import { LogsFilters } from './LogsFilters/LogsFilters';
 import { useUpload } from '../../../hooks/api/useUpload';
 import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
 import { buildQuery } from '../../../utills/buildQuery';
+import { getCapabilityOptions, isCapabilityDisabled } from '../../../utills/filters';
 
 export const BulkEditListFilters = ({
   filters,
@@ -43,6 +43,7 @@ export const BulkEditListFilters = ({
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
+  const search = new URLSearchParams(location.search);
 
   const {
     isDropZoneDisabled: isDropZoneDisabledPerm,
@@ -52,7 +53,11 @@ export const BulkEditListFilters = ({
     isSelectIdentifiersDisabled,
     hasLogViewPerms,
   } = useBulkPermissions();
-  const search = new URLSearchParams(location.search);
+
+  const capabilitiesFilterOptions = getCapabilityOptions({
+    isInventoryRadioDisabled,
+    isUserRadioDisabled,
+  });
 
   const initialFilter = {
     capabilities: search.get('capabilities'),
@@ -87,21 +92,6 @@ export const BulkEditListFilters = ({
   const { bulkOperationStart } = useBulkOperationStart();
   const { setVisibleColumns } = useContext(RootContext);
 
-  const isCapabilityDisabled = (capabilityValue) => {
-    const capabilitiesMap = {
-      [CAPABILITIES.USER]: isUserRadioDisabled,
-      [CAPABILITIES.ITEM]: isInventoryRadioDisabled,
-      [CAPABILITIES.HOLDING]: false, // TODO: disable it based on permissions
-    };
-
-    return capabilitiesMap[capabilityValue];
-  };
-
-  const capabilitiesFilterOptions = EDIT_CAPABILITIES_OPTIONS?.map(capability => ({
-    ...capability,
-    disabled: isCapabilityDisabled(capability.value),
-  }));
-
   const handleChange = (value, field) => setFilters(prev => ({
     ...prev, [field]: value,
   }));
@@ -126,22 +116,23 @@ export const BulkEditListFilters = ({
   }, [location.search]);
 
   const handleCapabilityChange = (e) => {
+    const value = e.target.value;
+
     setFilters(prev => ({
       ...prev,
-      capabilities: e.target.value,
+      capabilities: value,
       recordIdentifier: '',
     }));
 
     history.replace({
       pathname: '/bulk-edit',
       search: buildSearch({
-        capabilities,
+        capabilities: value,
         identifier: null,
       }, location.search),
     });
 
     setIsFileUploaded(false);
-
     // clear visibleColumns preset
     localStorage.removeItem('visibleColumns');
     setVisibleColumns(null);
@@ -156,6 +147,7 @@ export const BulkEditListFilters = ({
       });
 
       await bulkOperationStart({
+        id,
         step: EDITING_STEPS.UPLOAD,
       });
 

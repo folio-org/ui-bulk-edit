@@ -3,12 +3,12 @@ import { screen, render, fireEvent } from '@testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 import { QueryClientProvider } from 'react-query';
 
-import '../../../test/jest/__mock__';
+import '../../../../../test/jest/__mock__';
 
 import { BrowserRouter } from 'react-router-dom';
-import { BulkEditStartModal } from '.';
-import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../../test/jest/utils/fileUpload';
-import { queryClient } from '../../../test/jest/utils/queryClient';
+import { BulkEditManualUploadModal } from './index';
+import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../../../../test/jest/utils/fileUpload';
+import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -33,7 +33,7 @@ const renderWithRouter = (ui, { route } = {}) => {
 
 const startModal = (
   <QueryClientProvider client={queryClient}>
-    <BulkEditStartModal
+    <BulkEditManualUploadModal
       open
       onCancel={onCancelMock}
       setFileName={setFileNameMock}
@@ -51,7 +51,7 @@ describe('BulkEditActionMenu', () => {
         }),
       });
   });
-  it('should displays BulkEditConformationModal title', async () => {
+  it('should displays BulkEditManualConformationModal title', async () => {
     renderWithRouter(startModal, { route: currentRoute });
 
     expect(screen.getByText(/meta.title/)).toBeVisible();

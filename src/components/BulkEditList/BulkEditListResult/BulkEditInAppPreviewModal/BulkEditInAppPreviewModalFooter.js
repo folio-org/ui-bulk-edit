@@ -2,9 +2,9 @@ import { Button } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import React, { memo } from 'react';
-import css from './PreviewModal.css';
+import css from './BulkEditInAppPreviewModal.css';
 
-export const PreviewModalFooter = memo(({
+export const BulkEditInAppPreviewModalFooter = ({
   onKeepEditing,
   onDownloadPreview,
   onSave,
@@ -23,14 +23,16 @@ export const PreviewModalFooter = memo(({
       </Button>
     </div>
   );
-});
+};
 
-PreviewModalFooter.propTypes = {
+BulkEditInAppPreviewModalFooter.propTypes = {
   isChangedPreviewReady: PropTypes.bool,
   onKeepEditing: PropTypes.func,
   onDownloadPreview: PropTypes.func,
   onSave: PropTypes.func,
 };
+
+export default memo(BulkEditInAppPreviewModalFooter);
 
 
 

@@ -16,7 +16,12 @@ export const FIELDS_TYPES = {
   OPTION: 'option',
 };
 
-export const getFormattedDate = (value) => `${moment(`${value} 23:59:59`).format(`${baseFormat} HH:mm:ss`)}.000Z`;
+export const getFormattedDate = (value) => {
+  const date = `${value} 23:59:59`;
+  const format = `${baseFormat}[T]HH:mm:ss`;
+
+  return `${moment(date).format(format)}.000Z`;
+};
 
 export const isAddButtonShown = (index, fields, options) => {
   return index === fields.length - 1 && fields.length !== options.length - 1;
@@ -31,7 +36,7 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
         ...item,
         actions: item.actions.map(action => ({
           ...action,
-          value: isExpirationDate ? getFormattedDate(action.value) : action.value,
+          updated: isExpirationDate ? getFormattedDate(action.updated) : action.updated,
         })),
       };
     };

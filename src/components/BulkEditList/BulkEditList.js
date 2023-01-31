@@ -1,33 +1,25 @@
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
-  Pane,
-  Paneset,
-  Layer,
-  PaneFooter,
-  Button,
-} from '@folio/stripes/components';
+import { Pane, Paneset, PaneFooter, Button } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
 import { useHistory } from 'react-router';
-import { buildSearch } from '@folio/stripes-acq-components';
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
-import { BulkEditStartModal } from '../BulkEditStartModal';
-import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
+import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
 import { usePathParams, useBulkPermissions } from '../../hooks';
 import { CRITERIA, APPROACHES } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
-import PreviewModal from '../modals/PreviewModal/PreviewModal';
+import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
 
 import { RootContext } from '../../context/RootContext';
 import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
-import { isContentUpdatesFormValid } from './BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
-import { getDefaultCapabilities } from '../../constants/filters';
+import { getDefaultCapabilities } from '../../utills/filters';
 import { useResetAppState } from '../../hooks/useResetAppState';
+import BulkEditInAppLayer from './BulkEditListResult/BulkEditInAppLayer/BulkEditInAppLayer';
 
 export const BulkEditList = () => {
   const history = useHistory();
@@ -36,13 +28,11 @@ export const BulkEditList = () => {
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
   const [isBulkEditLayerOpen, setIsBulkEditLayerOpen] = useState(false);
-  const [isBulkEditConformationModal, setIsBulkConformationModal] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
   const [contentUpdates, setContentUpdates] = useState(null);
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState(null);
-  const [processedFileName, setProcessedFileName] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
 
 
@@ -50,7 +40,7 @@ export const BulkEditList = () => {
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
   const capabilities = search.get('capabilities');
   const criteria = search.get('criteria');
-  const defaultCapability = getDefaultCapabilities(restPerms, capabilities);
+  const defaultCapability = capabilities || getDefaultCapabilities(restPerms);
 
   const initialFiltersState = {
     criteria: CRITERIA.IDENTIFIER,
@@ -114,24 +104,6 @@ export const BulkEditList = () => {
 
   const cancelBulkEditStart = () => {
     setIsBulkEditModalOpen(false);
-
-    // remove data from url, only in case if there is no confirmed file
-    if (!confirmedFileName) {
-      search.delete('processedFileName');
-
-      const searchStr = `?${search.toString()}`;
-
-      history.replace({
-        search: buildSearch({}, searchStr),
-      });
-    }
-  };
-
-  const handleStartNewBulkEdit = () => {
-    // redirect to initial state with saved capabilities in search
-    history.replace({
-      pathname: '/bulk-edit',
-    });
   };
 
   const paneTitle = useMemo(() => {
@@ -166,48 +138,27 @@ export const BulkEditList = () => {
       : defaultPaneSubtitle
   ), [changedPaneSubTitle, history.location.pathname, defaultPaneSubtitle]);
 
-  const fileNameTitle = () => {
-    const fileUploadedName = search.get('fileName');
 
-    return <FormattedMessage
-      id="ui-bulk-edit.preview.file.title"
-      values={{ fileUploadedName }}
-           />;
+  const defaultPaneProps = {
+    efaultWidth: 'fill',
+    paneTitle,
+    paneSub: paneSubtitle,
+    appIcon: <AppIcon app="bulk-edit" iconKey="app" />,
   };
 
-  const renderNewBulkFooter = () => newBulkFooterShown && (
-    <PaneFooter
-      renderEnd={(
-        <Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega">
-          <FormattedMessage id="ui-bulk-edit.start.newBulkEdit" />
-        </Button>
-      )}
-    />
-  );
+  const renderNewBulkFooter = () => {
+    const handleStartNewBulkEdit = () => {
+      // redirect to initial state with saved capabilities in search
+      history.replace({
+        pathname: '/bulk-edit',
+      });
+    };
 
-  const renderPaneFooter = () => {
-    return (
+    return newBulkFooterShown && (
       <PaneFooter
-        renderStart={(
-          <Button
-            buttonStyle="default mega"
-            id="clickable-cancel"
-            marginBottom0
-            onClick={handleBulkEditLayerClose}
-          >
-            <FormattedMessage id="stripes-components.cancel" />
-          </Button>
-        )}
         renderEnd={(
-          <Button
-            buttonStyle="primary mega"
-            id="clickable-create-widget"
-            marginBottom0
-            onClick={handlePreviewModalOpen}
-            type="submit"
-            disabled={!isContentUpdatesFormValid(contentUpdates)}
-          >
-            <FormattedMessage id="ui-bulk-edit.layer.confirmChanges" />
+          <Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega">
+            <FormattedMessage id="ui-bulk-edit.start.newBulkEdit" />
           </Button>
         )}
       />
@@ -224,6 +175,7 @@ export const BulkEditList = () => {
     }}
     >
       <Paneset>
+        {/* FILTERS PANE */}
         <Pane
           defaultWidth="20%"
           paneTitle={<FormattedMessage id="ui-bulk-edit.list.criteriaTitle" />}
@@ -236,58 +188,44 @@ export const BulkEditList = () => {
             setVisibleColumns={setVisibleColumns}
           />
         </Pane>
+
+        {/* RESULT PANE */}
         <Pane
-          defaultWidth="fill"
-          paneTitle={paneTitle}
-          paneSub={paneSubtitle}
-          appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
+          {...defaultPaneProps}
           actionMenu={actionMenu}
           footer={renderNewBulkFooter()}
         >
           {criteria === CRITERIA.LOGS ? <BulkEditLogs /> : <BulkEditListResult />}
         </Pane>
-        <Layer isOpen={isBulkEditLayerOpen} inRootSet>
-          <Pane
-            defaultWidth="fill"
-            paneTitle={paneTitle}
-            paneSub={paneSubtitle}
-            footer={renderPaneFooter()}
-            appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
-            dismissible
-            onClose={() => setIsBulkEditLayerOpen(false)}
-          >
-            <BulkEditInApp
-              title={fileNameTitle()}
-              onContentUpdatesChanged={setContentUpdates}
-              capabilities={capabilities}
-            />
-          </Pane>
-        </Layer>
+
+        {/* IN_APP APPROACH */}
+        <BulkEditInAppLayer
+          isLayerOpen={isBulkEditLayerOpen}
+          onLayerClose={handleBulkEditLayerClose}
+          onConfirm={handlePreviewModalOpen}
+          contentUpdates={contentUpdates}
+          {...defaultPaneProps}
+        >
+          <BulkEditInApp
+            onContentUpdatesChanged={setContentUpdates}
+            capabilities={capabilities}
+          />
+        </BulkEditInAppLayer>
+
+        <BulkEditInAppPreviewModal
+          bulkOperationId={bulkOperationId}
+          open={isPreviewModalOpened}
+          contentUpdates={contentUpdates}
+          onKeepEditing={handlePreviewModalClose}
+          onChangesCommited={handleChangesCommited}
+        />
       </Paneset>
-      <BulkEditStartModal
-        fileName={processedFileName}
-        setFileName={setProcessedFileName}
+
+      <BulkEditManualUploadModal
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
-        setIsBulkConformationModal={setIsBulkConformationModal}
-        setCountOfRecords={setCountOfRecords}
-        setIsBulkEditModalOpen={setIsBulkEditModalOpen}
-      />
-      <BulkEditConformationModal
-        onCancel={cancelBulkEditStart}
-        setConfirmedFileName={setConfirmedFileName}
-        setProcessedFileName={setProcessedFileName}
-        open={isBulkEditConformationModal}
-        setIsBulkConformationModal={setIsBulkConformationModal}
-        fileName={processedFileName}
         countOfRecords={countOfRecords}
-      />
-      <PreviewModal
-        bulkOperationId={bulkOperationId}
-        open={isPreviewModalOpened}
-        contentUpdates={contentUpdates}
-        onKeepEditing={handlePreviewModalClose}
-        onChangesCommited={handleChangesCommited}
+        setCountOfRecords={setCountOfRecords}
       />
 
     </RootContext.Provider>

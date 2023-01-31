@@ -7,19 +7,19 @@ import { useHistory } from 'react-router-dom';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useShowCallout } from '@folio/stripes-acq-components';
 import { useQueryClient } from 'react-query';
-import { PreviewModalFooter } from './PreviewModalFooter';
-import css from './PreviewModal.css';
-import { APPROACHES, dateNow, EDITING_STEPS, FILE_KEYS, FILE_SEARCH_PARAMS } from '../../../constants';
-import { RootContext } from '../../../context/RootContext';
-import { useRecordsPreview } from '../../../hooks/api/useRecordsPreview';
-import { getContentUpdatesBody } from '../../BulkEditList/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
-import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
-import { useBulkOperationDetails } from '../../../hooks/api/useBulkOperationDetails';
-import { useContentUpdate } from '../../../hooks/api/useContentUpdate';
-import { useFileDownload } from '../../../hooks/api/useFileDownload';
+import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFooter';
+import css from './BulkEditInAppPreviewModal.css';
+import { APPROACHES, dateNow, EDITING_STEPS, FILE_KEYS, FILE_SEARCH_PARAMS } from '../../../../constants';
+import { RootContext } from '../../../../context/RootContext';
+import { useRecordsPreview } from '../../../../hooks/api/useRecordsPreview';
+import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
+import { useBulkOperationStart } from '../../../../hooks/api/useBulkOperationStart';
+import { useBulkOperationDetails } from '../../../../hooks/api/useBulkOperationDetails';
+import { useContentUpdate } from '../../../../hooks/api/useContentUpdate';
+import { useFileDownload } from '../../../../hooks/api/useFileDownload';
 
 
-const PreviewModal = ({
+const BulkEditInAppPreviewModal = ({
   open,
   bulkOperationId,
   contentUpdates,
@@ -39,10 +39,11 @@ const PreviewModal = ({
     })
   );
 
+  // TODO: need to add on BE
+  const [countOfChangedRecords] = useState(0);
+
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
-
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
-
   const { bulkOperationStart } = useBulkOperationStart();
 
   const {
@@ -78,9 +79,6 @@ const PreviewModal = ({
   const visibleColumnKeys = visibleColumns?.filter(item => !item.selected).map(item => item.value);
 
   const isChangedPreviewReady = bulkDetails && Object.hasOwn(bulkDetails, FILE_KEYS.PROPOSED_CHANGES_LINK);
-
-  // TODO: need to add on BE
-  const [countOfChangedRecords] = useState(0);
 
   const handleBulkOperationStart = async () => {
     try {
@@ -131,7 +129,7 @@ const PreviewModal = ({
       label={<FormattedMessage id="ui-bulk-edit.previewModal.areYouSure" />}
       aria-label="PreviewModal"
       footer={
-        <PreviewModalFooter
+        <BulkEditInAppPreviewModalFooter
           isChangedPreviewReady={isChangedPreviewReady}
           onDownloadPreview={refetch}
           onSave={handleBulkOperationStart}
@@ -161,7 +159,7 @@ const PreviewModal = ({
   );
 };
 
-PreviewModal.propTypes = {
+BulkEditInAppPreviewModal.propTypes = {
   open: PropTypes.bool,
   bulkOperationId: PropTypes.string,
   onKeepEditing: PropTypes.func,
@@ -169,4 +167,4 @@ PreviewModal.propTypes = {
   contentUpdates: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default PreviewModal;
+export default BulkEditInAppPreviewModal;

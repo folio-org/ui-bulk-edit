@@ -4,12 +4,11 @@ import { QueryClientProvider } from 'react-query';
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import { MemoryRouter } from 'react-router';
-import '../../../../test/jest/__mock__';
-import { queryClient } from '../../../../test/jest/utils/queryClient';
-import { RootContext } from '../../../context/RootContext';
+import '../../../../../test/jest/__mock__';
+import { queryClient } from '../../../../../test/jest/utils/queryClient';
+import { RootContext } from '../../../../context/RootContext';
 
-import PreviewModal from './PreviewModal';
-import { getInventoryResultsFormatterBase } from '../../../utills/formatters';
+import BulkEditInAppPreviewModal from './BulkEditInAppPreviewModal';
 
 const startJob = jest.fn();
 const inAppUpload = jest.fn().mockReturnValue(() => ({ response: { items: [] } }));
@@ -21,7 +20,7 @@ jest.doMock('../../../API', () => ({
   useInAppDownloadPreview: () => ({ data: [], refetch, isLoading: false }),
 }));
 
-const visibleColumns = JSON.stringify(Object.keys(getInventoryResultsFormatterBase()));
+const visibleColumns = [];
 
 const renderPreviewModal = ({
   open,
@@ -38,7 +37,7 @@ const renderPreviewModal = ({
           visibleColumns,
         }}
         >
-          <PreviewModal
+          <BulkEditInAppPreviewModal
             open={open}
             jobId={jobId}
             contentUpdates={contentUpdates}
@@ -65,7 +64,7 @@ const props = {
   setUpdatedId,
 };
 
-describe('PreviewModal', () => {
+describe('BulkEditInAppPreviewModal', () => {
   beforeEach(() => {
     useOkapiKy
       .mockClear()
