@@ -1,12 +1,8 @@
 import { useQuery } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import queryString from 'query-string';
-import {
-  buildFilterQuery,
-  buildDateRangeQuery,
-  buildArrayFieldQuery,
-} from '../utils/queryUtils';
-import { FILTERS } from '../constants';
+import { FILTERS } from '../../constants';
+import { buildFilterQuery, buildArrayFieldQuery, buildDateRangeQuery } from '../../utils/queryUtils';
 
 
 export const useBulkEditLogs = ({ location }) => {

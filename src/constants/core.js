@@ -92,10 +92,10 @@ export const TRANSLATION_SUFFIX = {
 
 export const FILTERS = {
   STATUS: 'status',
-  CAPABILITY: 'capability',
-  OPERATION_TYPE: 'operation_type',
-  START_DATE: 'start_date',
-  END_DATE: 'end_date',
+  CAPABILITY: 'entityType',
+  OPERATION_TYPE: 'operationType',
+  START_DATE: 'startTime',
+  END_DATE: 'endTime',
 };
 
 export const MANUAL_UPLOAD_STEPS = {
