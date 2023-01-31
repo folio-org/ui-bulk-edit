@@ -31,4 +31,47 @@ describe('queryUtils', () => {
       ).toEqual(`(date>="${start}" and date<="${end}")`);
     });
   });
+
+  describe('buildFilterQuery', () => {
+    it('buildFilterQuery with empty queryParams', () => {
+
+      expect(queryUtils.buildFilterQuery({}, () => {})).toBeFalsy();
+    });
+
+    it('buildFilterQuery with query in queryParams', () => {
+      const queryParams = {
+        sort: 'sort',
+        query: 'queryParams',
+      };
+
+      expect(queryUtils.buildFilterQuery(queryParams, () => 'queryParams')).toEqual('sort==\"sort\" and (queryParams)');
+    });
+
+    it('buildFilterQuery with customFilterMap', () => {
+      const queryParams = {
+        customSort: 'customSort',
+      };
+      const customFilterMap = {
+        customSort: () => 'customSort',
+      };
+
+      expect(queryUtils.buildFilterQuery(queryParams, () => {}, customFilterMap)).toEqual('customSort');
+    });
+
+    it('buildFilterQuery with array in queryParams', () => {
+      const queryParams = {
+        arrayQuery: ['array', 'query'],
+      };
+
+      expect(queryUtils.buildFilterQuery(queryParams, () => {})).toEqual('arrayQuery==(\"array\" or \"query\")');
+    });
+
+    it('buildFilterQuery with custom queryParams', () => {
+      const queryParams = {
+        customQueryParams: 'custom',
+      };
+
+      expect(queryUtils.buildFilterQuery(queryParams, () => {})).toEqual('customQueryParams==\"custom\"');
+    });
+  });
 });
