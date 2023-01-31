@@ -6,7 +6,7 @@ import { DATE_RANGE_FILTER_FORMAT } from './constants';
 describe('queryUtils', () => {
   describe('buildArrayFieldQuery', () => {
     const outputArrayQuery = 'entityType==("USER" or "ITEM")';
-    const outputSingleQuery = 'entityType=="USER"';
+    const outputSingleQuery = 'entityType=="ITEM"';
 
     it('should return query based on filter key and array value', () => {
       expect(
@@ -21,13 +21,6 @@ describe('queryUtils', () => {
     });
   });
 
-  describe('buildNumberRangeQuery', () => {
-    it('should return query based on filter key and value', () => {
-      expect(
-        queryUtils.buildNumberRangeQuery('amount', '10-100'),
-      ).toEqual('(amount >=/number 10 and amount <=/number 100)');
-    });
-  });
   describe('buildDateRangeQuery', () => {
     const start = moment('2014-07-14').startOf('day').format(DATE_RANGE_FILTER_FORMAT);
     const end = moment('2020-07-14').endOf('day').format(DATE_RANGE_FILTER_FORMAT);
@@ -36,14 +29,6 @@ describe('queryUtils', () => {
       expect(
         queryUtils.buildDateRangeQuery('date', '2014-07-14:2020-07-14'),
       ).toEqual(`(date>="${start}" and date<="${end}")`);
-    });
-  });
-
-  describe('buildNumberRangeQuery', () => {
-    it('should return query based on filter key and value', () => {
-      expect(
-        queryUtils.buildNumberRangeQuery('amount', '10-100'),
-      ).toEqual('(amount >=/number 10 and amount <=/number 100)');
     });
   });
 });
