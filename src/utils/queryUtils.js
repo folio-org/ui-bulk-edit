@@ -16,7 +16,7 @@ export const buildArrayFieldQuery = (filterKey, filterValue) => {
     return `${filterKey}==(${filterValue.map(v => `"${v}"`).join(' or ')})`;
   }
 
-  return `${filterKey}==${`"${filterValue}"`}`;
+  return `${filterKey}=="${filterValue}"`;
 };
 
 export const buildDateRangeQuery = (filterKey, filterValue) => {
