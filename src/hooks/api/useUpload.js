@@ -6,9 +6,10 @@ export const useUpload = () => {
 
   const { mutateAsync: fileUpload, isLoading } = useMutation({ mutationFn: ({
     fileToUpload,
+    operationId,
     entityType,
     identifierType,
-    step,
+    manual = false,
   }) => {
     const formData = new FormData();
 
@@ -17,7 +18,8 @@ export const useUpload = () => {
     const searchParams = new URLSearchParams({
       entityType,
       identifierType,
-      step,
+      manual,
+      ...(operationId ? { operationId } : {}),
     }).toString();
 
     return ky.post(`bulk-operations/upload?${searchParams}`, {

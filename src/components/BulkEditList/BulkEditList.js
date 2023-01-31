@@ -11,7 +11,7 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
 import { usePathParams, useBulkPermissions } from '../../hooks';
-import { CRITERIA, APPROACHES } from '../../constants';
+import { CRITERIA, APPROACHES, EDITING_STEPS } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
 
@@ -38,6 +38,7 @@ export const BulkEditList = () => {
 
   const { isActionMenuShown, ...restPerms } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
+  const step = search.get('step');
   const capabilities = search.get('capabilities');
   const criteria = search.get('criteria');
   const defaultCapability = capabilities || getDefaultCapabilities(restPerms);
@@ -91,7 +92,7 @@ export const BulkEditList = () => {
   };
 
   const isLogsTab = criteria === CRITERIA.LOGS;
-  const isActionMenuVisible = isActionMenuShown && !isLogsTab;
+  const isActionMenuVisible = visibleColumns?.length && isActionMenuShown && !isLogsTab;
 
   const actionMenu = () => (
     isActionMenuVisible && (
@@ -120,10 +121,10 @@ export const BulkEditList = () => {
   }, [confirmedFileName, history.location.search]);
 
   const changedPaneSubTitle = useMemo(() => (
-    history.location.pathname === `/bulk-edit/${bulkOperationId}/initial` ?
+    step === EDITING_STEPS.EDIT ?
       <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
-  ), [countOfRecords, history.location.pathname]);
+  ), [countOfRecords, step]);
 
   const defaultPaneSubtitle = useMemo(() => (
     isLogsTab
@@ -132,11 +133,10 @@ export const BulkEditList = () => {
   ), [history.location.search]);
 
   const paneSubtitle = useMemo(() => (
-    history.location.pathname !== '/bulk-edit' && history.location.pathname !== `/bulk-edit/${bulkOperationId}/progress`
-      ?
-      changedPaneSubTitle
+    step === EDITING_STEPS.UPLOAD || step === EDITING_STEPS.COMMIT
+      ? changedPaneSubTitle
       : defaultPaneSubtitle
-  ), [changedPaneSubTitle, history.location.pathname, defaultPaneSubtitle]);
+  ), [step, changedPaneSubTitle, defaultPaneSubtitle]);
 
 
   const defaultPaneProps = {
@@ -222,6 +222,7 @@ export const BulkEditList = () => {
       </Paneset>
 
       <BulkEditManualUploadModal
+        operationId={bulkOperationId}
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
         countOfRecords={countOfRecords}

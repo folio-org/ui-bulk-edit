@@ -144,7 +144,6 @@ export const BulkEditListFilters = ({
         fileToUpload,
         entityType: capabilities,
         identifierType: recordIdentifier,
-        step: EDITING_STEPS.UPLOAD,
       });
 
       await bulkOperationStart({

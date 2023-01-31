@@ -16,6 +16,7 @@ import { useBulkOperationStart } from '../../../../hooks/api/useBulkOperationSta
 
 
 const BulkEditManualUploadModal = ({
+  operationId,
   open,
   onCancel,
   setCountOfRecords,
@@ -31,7 +32,6 @@ const BulkEditManualUploadModal = ({
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
 
-  const [bulkOperationId, setBulkOperationId] = useState(null);
   const [fileName, setFileName] = useState('');
   const [currentStep, setCurrentStep] = useState(MANUAL_UPLOAD_STEPS.UPLOAD);
   const isDefaultStep = currentStep === MANUAL_UPLOAD_STEPS.UPLOAD;
@@ -83,13 +83,13 @@ const BulkEditManualUploadModal = ({
   const handleCommitChanges = async () => {
     try {
       await bulkOperationStart({
-        id: bulkOperationId,
+        id: operationId,
         step: EDITING_STEPS.COMMIT,
         approach: APPROACHES.MANUAL,
       });
 
       history.replace({
-        pathname: `/bulk-edit/${bulkOperationId}/progress`,
+        pathname: `/bulk-edit/${operationId}/progress`,
         search: buildSearch({ fileName }, history.location.search),
       });
     } catch {
@@ -103,14 +103,20 @@ const BulkEditManualUploadModal = ({
     controller.current = new AbortController();
 
     try {
-      const { id, totalNumOfRecords } = await fileUpload({
+      const { totalNumOfRecords } = await fileUpload({
+        operationId,
         fileToUpload,
         entityType: CAPABILITIES.USER,
         identifierType: IDENTIFIERS.BARCODE,
-        step: EDITING_STEPS.UPLOAD,
+        manual: true,
       });
 
-      setBulkOperationId(id);
+      await bulkOperationStart({
+        id: operationId,
+        step: EDITING_STEPS.EDIT,
+        approach: APPROACHES.MANUAL,
+      });
+
       setFileName(fileToUpload.name);
       setCountOfRecords(totalNumOfRecords);
     } catch (error) {
@@ -188,6 +194,7 @@ const BulkEditManualUploadModal = ({
 };
 
 BulkEditManualUploadModal.propTypes = {
+  operationId: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func,
