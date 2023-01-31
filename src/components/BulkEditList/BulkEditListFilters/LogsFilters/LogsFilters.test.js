@@ -6,6 +6,7 @@ import {
   screen,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
 import { MemoryRouter } from 'react-router';
@@ -73,5 +74,13 @@ describe('LogsFilters', () => {
 
     dateFrom.forEach(el => expect(el).toHaveValue('2021-20-01'));
     dateTo.forEach(el => expect(el).toHaveValue('2021-20-01'));
+  });
+
+  it('should render with no axe errors', async () => {
+    renderLogsFilters();
+
+    await runAxeTest({
+      rootNode: screen.getByTestId('logsFilters'),
+    });
   });
 });

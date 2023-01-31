@@ -1,9 +1,10 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-
 import { MemoryRouter } from 'react-router';
 import { noop } from 'lodash';
+
 import { useOkapiKy } from '@folio/stripes/core';
+import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../test/jest/__mock__';
 
@@ -95,6 +96,16 @@ describe('BulkEditActionMenu', () => {
 
       expect(checkbox.checked).toBe(col.selected);
     }
+  });
+
+  it('should render with no axe errors', async () => {
+    renderActionMenu({
+      initialEntries: ['/bulk-edit/1?capabilities=USERS'],
+    });
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 
   it('should render correct default columns for inventory', async () => {
