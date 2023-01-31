@@ -6,7 +6,7 @@ import { DATE_RANGE_FILTER_FORMAT } from './constants';
 describe('queryUtils', () => {
   describe('buildArrayFieldQuery', () => {
     const outputArrayQuery = 'entityType==("USER" or "ITEM")';
-    const outputSingleQuery = 'entityType=="ITEM"';
+    const outputSingleQuery = 'entityType=="USER"';
 
     it('should return query based on filter key and array value', () => {
       expect(
