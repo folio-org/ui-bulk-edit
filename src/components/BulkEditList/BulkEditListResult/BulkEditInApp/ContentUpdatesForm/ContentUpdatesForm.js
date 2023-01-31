@@ -172,6 +172,7 @@ export const ContentUpdatesForm = ({
                 value={field.option}
                 onChange={(e) => handleOptionChange(e, index)}
                 data-testid={`select-option-${index}`}
+                aria-label={`select-option-${index}`}
               />
             </Col>
             <ActionsRow

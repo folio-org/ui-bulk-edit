@@ -114,7 +114,7 @@ export const BulkEditList = () => {
         id="ui-bulk-edit.meta.title.uploadedFile"
         values={{ fileName: confirmedFileName || fileUploadedName }}
              />;
-    } else if (criteria === CRITERIA.LOGS) {
+    } else if (isLogsTab) {
       return <FormattedMessage id="ui-bulk-edit.meta.logs.title" />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
   }, [confirmedFileName, history.location.search]);
@@ -126,7 +126,7 @@ export const BulkEditList = () => {
   ), [countOfRecords, history.location.pathname]);
 
   const defaultPaneSubtitle = useMemo(() => (
-    criteria === CRITERIA.LOGS
+    isLogsTab
       ? <FormattedMessage id="ui-bulk-edit.logs.logSubTitle" />
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
   ), [history.location.search]);
@@ -195,7 +195,7 @@ export const BulkEditList = () => {
           actionMenu={actionMenu}
           footer={renderNewBulkFooter()}
         >
-          {criteria === CRITERIA.LOGS ? <BulkEditLogs /> : <BulkEditListResult />}
+          {isLogsTab ? <BulkEditLogs /> : <BulkEditListResult />}
         </Pane>
 
         {/* IN_APP APPROACH */}

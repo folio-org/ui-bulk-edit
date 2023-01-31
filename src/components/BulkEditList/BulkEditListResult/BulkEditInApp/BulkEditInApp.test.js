@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useOkapiKy } from '@folio/stripes/core';
+import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
 import { QueryClientProvider } from 'react-query';
@@ -244,5 +245,29 @@ describe('BulkEditInApp', () => {
 
 
     expect(screen.queryByTestId('select-option-1')).not.toBeInTheDocument();
+  });
+
+  it('should render with no axe errors in holding form', async () => {
+    renderBulkEditInApp(titleMock, CAPABILITIES.HOLDINGS);
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
+  });
+
+  it('should render with no axe errors in user form', async () => {
+    renderBulkEditInApp(titleMock, CAPABILITIES.USER);
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
+  });
+
+  it('should render with no axe errors in item form', async () => {
+    renderBulkEditInApp(titleMock, CAPABILITIES.ITEM);
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 });
