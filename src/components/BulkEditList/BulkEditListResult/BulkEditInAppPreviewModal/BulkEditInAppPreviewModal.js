@@ -2,7 +2,7 @@ import { saveAs } from 'file-saver';
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useShowCallout } from '@folio/stripes-acq-components';
@@ -38,9 +38,6 @@ const BulkEditInAppPreviewModal = ({
       message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
     })
   );
-
-  // TODO: need to add on BE
-  const [countOfChangedRecords] = useState(0);
 
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
@@ -142,7 +139,7 @@ const BulkEditInAppPreviewModal = ({
       {contentData ? (
         <>
           <MessageBanner type="warning">
-            <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: countOfChangedRecords }} />
+            <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: bulkDetails?.matchedNumOfRecords }} />
           </MessageBanner>
 
           <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>

@@ -11,7 +11,7 @@ import React, { useContext, useState } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useLocation } from 'react-router-dom';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
-import { APPROACHES, CAPABILITIES, JOB_STATUSES, getDownloadLinks, dateNow } from '../../constants';
+import { APPROACHES, CAPABILITIES, getDownloadLinks, dateNow, EDITING_STEPS } from '../../constants';
 import { useBulkPermissions, usePathParams } from '../../hooks';
 import { RootContext } from '../../context/RootContext';
 import { useBulkOperationDetails } from '../../hooks/api/useBulkOperationDetails';
@@ -26,6 +26,7 @@ const BulkEditActionMenu = ({
   const perms = useBulkPermissions();
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
+  const step = search.get('step');
 
   const {
     hasCsvEditPerms,
@@ -51,8 +52,8 @@ const BulkEditActionMenu = ({
   const selectedValues = columns.filter(item => !item.selected).map(item => item.value);
 
   const isStartBulkCsvActive = hasCsvEditPerms && capability === CAPABILITIES.USER;
-  const isModificationStep = bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION;
-  const isStartBulkInAppActive = hasAnyInAppEditPermissions && isModificationStep;
+  const isInitialStep = step === EDITING_STEPS.UPLOAD;
+  const isStartBulkInAppActive = hasAnyInAppEditPermissions && isInitialStep;
 
   const isLastUnselectedColumn = (value) => {
     return selectedValues?.length === 1 && selectedValues?.[0] === value;

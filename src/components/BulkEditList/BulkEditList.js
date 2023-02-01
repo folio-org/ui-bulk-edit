@@ -121,7 +121,7 @@ export const BulkEditList = () => {
   }, [confirmedFileName, history.location.search]);
 
   const changedPaneSubTitle = useMemo(() => (
-    step === EDITING_STEPS.EDIT ?
+    step === EDITING_STEPS.UPLOAD ?
       <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
   ), [countOfRecords, step]);
@@ -168,6 +168,7 @@ export const BulkEditList = () => {
   return (
     <RootContext.Provider value={{
       setNewBulkFooterShown,
+      countOfRecords,
       setCountOfRecords,
       visibleColumns,
       setVisibleColumns,

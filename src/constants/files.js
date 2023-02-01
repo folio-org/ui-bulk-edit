@@ -28,13 +28,6 @@ export const getDownloadLinks = (perms, date) => [
     SAVE_FILE_NAME: `${date}-Matched-Records.csv`,
   },
   {
-    KEY: FILE_KEYS.MATCHING_ERRORS_LINK,
-    SEARCH_PARAM: FILE_SEARCH_PARAMS.RECORD_MATCHING_ERROR_FILE,
-    LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />,
-    PERMS: perms.hasAnyEditPermissions,
-    SAVE_FILE_NAME: `${date}-Errors-bulk-ops.csv`,
-  },
-  {
     KEY: FILE_KEYS.UPDATED_RECORDS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadChangedRecords" />,
@@ -44,7 +37,7 @@ export const getDownloadLinks = (perms, date) => [
   {
     KEY: FILE_KEYS.UPDATED_ERRORS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTING_CHANGES_ERROR_FILE,
-    LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadErrors.changed" />,
+    LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />,
     PERMS: perms.hasAnyEditPermissions,
     SAVE_FILE_NAME: `${date}-Errors-bulk-ops.csv`,
   },

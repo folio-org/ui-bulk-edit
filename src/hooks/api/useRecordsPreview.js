@@ -21,10 +21,12 @@ export const useRecordsPreview = ({ id, step, queryOptions }) => {
 
   // set initial and visible columns
   useEffect(() => {
-    const storedVisibleColumns = localStorage.getItem('visibleColumns');
+    if (columns.length) {
+      const storedVisibleColumns = localStorage.getItem('visibleColumns');
 
-    // checking for columns from localStorage first
-    setVisibleColumns(storedVisibleColumns ? JSON.parse(storedVisibleColumns) : columns);
+      // checking for columns from localStorage first
+      setVisibleColumns(storedVisibleColumns ? JSON.parse(storedVisibleColumns) : columns);
+    }
   }, [columns]);
 
   return {

@@ -6,7 +6,7 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
@@ -15,10 +15,12 @@ import {
 } from '../../../../hooks/api';
 import { RootContext } from '../../../../context/RootContext';
 import { useRecordsPreview } from '../../../../hooks/api/useRecordsPreview';
+import { EDITING_STEPS } from '../../../../constants';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const location = useLocation();
-  const { setNewBulkFooterShown, setCountOfRecords, visibleColumns } = useContext(RootContext);
+  const { setNewBulkFooterShown, countOfRecords, setCountOfRecords, visibleColumns } = useContext(RootContext);
+  const [countOfErrors, setCountOfErrors] = useState(0);
 
   const search = new URLSearchParams(location.search);
   const step = search.get('step');
@@ -28,8 +30,19 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const errors = data?.errors || [];
 
   useEffect(() => {
-    setCountOfRecords(bulkDetails.totalNumOfRecords);
-  }, [bulkDetails]);
+    const isInitialPreview = step === EDITING_STEPS.UPLOAD;
+
+    const countRecords = isInitialPreview
+      ? bulkDetails.matchedNumOfRecords
+      : bulkDetails.committedNumOfRecords;
+
+    const countErrors = isInitialPreview
+      ? bulkDetails.matchedNumOfErrors
+      : bulkDetails.commitedNumOfErrors;
+
+    setCountOfErrors(countErrors);
+    setCountOfRecords(countRecords);
+  }, [bulkDetails, step]);
 
   useEffect(() => {
     if (contentData || errors?.length) {
@@ -45,7 +58,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
         <MessageBanner type="success" contentClassName="SuccessBanner">
           <FormattedMessage
             id="ui-bulk-edit.recordsSuccessfullyChanged"
-            values={{ value: bulkDetails.processedNumOfRecords }}
+            values={{ value: countOfRecords }}
           />
         </MessageBanner>
       </Headline>
@@ -56,7 +69,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
         </Headline>
       )}
       <AccordionSet>
-        {!!contentData && (
+        {!!contentData?.length && (
         <PreviewAccordion
           isInitial={isInitial}
           columns={columns}
@@ -69,8 +82,8 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
           <ErrorsAccordion
             errors={errors}
             entries={bulkDetails.totalNumOfRecords}
-            matched={bulkDetails.processedNumOfRecords}
-            countOfErrors={errors.length || 0}
+            matched={countOfRecords}
+            countOfErrors={countOfErrors}
           />
         )}
       </AccordionSet>
@@ -84,6 +97,10 @@ Preview.propTypes = {
   isInitial: PropTypes.bool,
   bulkDetails: PropTypes.shape({
     totalNumOfRecords: PropTypes.number,
+    matchedNumOfRecords: PropTypes.number,
+    committedNumOfRecords: PropTypes.number,
     processedNumOfRecords: PropTypes.number,
+    matchedNumOfErrors: PropTypes.number,
+    commitedNumOfErrors: PropTypes.number,
   }),
 };

@@ -82,11 +82,13 @@ const BulkEditManualUploadModal = ({
 
   const handleCommitChanges = async () => {
     try {
-      await bulkOperationStart({
+      const { committedNumOfRecords } = await bulkOperationStart({
         id: operationId,
         step: EDITING_STEPS.COMMIT,
         approach: APPROACHES.MANUAL,
       });
+
+      setCountOfRecords(committedNumOfRecords);
 
       history.replace({
         pathname: `/bulk-edit/${operationId}/progress`,
@@ -103,7 +105,7 @@ const BulkEditManualUploadModal = ({
     controller.current = new AbortController();
 
     try {
-      const { totalNumOfRecords } = await fileUpload({
+      await fileUpload({
         operationId,
         fileToUpload,
         entityType: CAPABILITIES.USER,
@@ -111,14 +113,14 @@ const BulkEditManualUploadModal = ({
         manual: true,
       });
 
-      await bulkOperationStart({
+      const { matchedNumOfRecords } = await bulkOperationStart({
         id: operationId,
         step: EDITING_STEPS.EDIT,
         approach: APPROACHES.MANUAL,
       });
 
       setFileName(fileToUpload.name);
-      setCountOfRecords(totalNumOfRecords);
+      setCountOfRecords(matchedNumOfRecords);
     } catch (error) {
       if (error.name !== 'AbortError') {
         swwCallout(uploadErrorMessage);

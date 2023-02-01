@@ -176,7 +176,7 @@ export const getDefaultActions = (option, formatMessage) => {
           null,
           {
             actionsList: statusActions,
-            type: CONTROL_TYPES.LOAN_TYPE,
+            type: CONTROL_TYPES.STATUS_SELECT,
             [ACTION_VALUE_KEY]: statusActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },

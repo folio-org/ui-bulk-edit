@@ -31,8 +31,7 @@ export const useResetAppState = ({
       setConfirmedFileName(null);
 
       // clear visibleColumns preset
-      localStorage.removeItem('visibleColumns');
-      setVisibleColumns([]);
+      setVisibleColumns(null);
 
       // set user capability by default
       history.replace({
