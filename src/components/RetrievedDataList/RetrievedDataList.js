@@ -4,13 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { PrevNextPagination, usePagination } from '@folio/stripes-acq-components';
-import { CAPABILITIES_VALUE } from '../../constants';
+import { CAPABILITIES_VALUE, EDITING_STEPS } from '../../constants';
 import { useRecordsPreview } from '../../hooks/api/useRecordsPreview';
 
 const RetrievedDataList = (props) => {
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
-  const { contentData, formatter, columns } = useRecordsPreview({ capability });
+  const { contentData, formatter, columns } = useRecordsPreview({ capability, step: EDITING_STEPS.EDIT });
   const { changePage, pagination } = usePagination({ limit: 100, offset: 0 });
 
   return (

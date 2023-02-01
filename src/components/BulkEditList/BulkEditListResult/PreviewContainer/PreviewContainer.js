@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router';
 import { Loading } from '@folio/stripes/components';
 import { Preview } from '../Preview/Preview';
 import { useBulkOperationDetails } from '../../../../hooks/api/useBulkOperationDetails';
-import { JOB_STATUSES } from '../../../../constants';
+import { EDITING_STEPS } from '../../../../constants';
 import css from '../../../BulkEdit.css';
 
 const PreviewContainer = () => {
@@ -16,6 +16,7 @@ const PreviewContainer = () => {
   const { id } = useParams();
   const { bulkDetails, isLoading } = useBulkOperationDetails({ id });
 
+  const step = search.get('step');
   const fileUploadedName = search.get('fileName');
   const capabilities = search.get('capabilities')?.toLocaleLowerCase();
   const queryText = search.get('queryText');
@@ -26,7 +27,7 @@ const PreviewContainer = () => {
     return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName });
   }, [queryText, fileUploadedName]);
 
-  const isInitial = bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION;
+  const isInitial = step === EDITING_STEPS.UPLOAD;
 
   return isLoading ? (
     <div className={css.LoaderContainer}>

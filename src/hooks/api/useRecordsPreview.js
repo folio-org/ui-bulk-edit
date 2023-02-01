@@ -11,7 +11,7 @@ export const useRecordsPreview = ({ id, step, queryOptions }) => {
 
   const { data, refetch, isLoading } = useQuery(
     {
-      queryKey: ['recordsPreview', id],
+      queryKey: ['records', id, step],
       queryFn: () => ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json(),
       ...queryOptions,
     },
