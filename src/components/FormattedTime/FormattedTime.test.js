@@ -12,3 +12,4 @@ describe('FormattedTime', () => {
     expect(FormattedTime({ dateString: null })).toStrictEqual(<NoValue />);
   });
 });
+

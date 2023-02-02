@@ -1,4 +1,7 @@
 export const SUPPORTED_FILE_EXTENSIONS = ['csv'];
+
+export const BULK_VISIBLE_COLUMNS = 'bulk-edit-visible-columns';
+
 export const PREVIEW_LIMITS = {
   ERRORS: 10,
   RECORDS: 10,

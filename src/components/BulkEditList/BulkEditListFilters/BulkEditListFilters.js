@@ -15,7 +15,7 @@ import { ListFileUploader } from '../../ListFileUploader';
 import {
   CRITERIA,
   TRANSLATION_SUFFIX,
-  EDITING_STEPS, APPROACHES,
+  EDITING_STEPS, APPROACHES, BULK_VISIBLE_COLUMNS,
 } from '../../../constants';
 import { useUserGroupsMap } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
@@ -24,8 +24,8 @@ import { RootContext } from '../../../context/RootContext';
 import { LogsFilters } from './LogsFilters/LogsFilters';
 import { useUpload } from '../../../hooks/api/useUpload';
 import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
-import { buildQuery } from '../../../utills/buildQuery';
-import { getCapabilityOptions, isCapabilityDisabled } from '../../../utills/filters';
+import { buildQuery } from '../../../utils/buildQuery';
+import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
 import FilterTabs from './FilterTabs/FilterTabs';
 import Capabilities from './Capabilities/Capabilities';
 
@@ -110,7 +110,7 @@ export const BulkEditListFilters = ({
 
     setIsFileUploaded(false);
     // clear visibleColumns preset
-    localStorage.removeItem('visibleColumns');
+    localStorage.removeItem(BULK_VISIBLE_COLUMNS);
     setVisibleColumns(null);
   };
 

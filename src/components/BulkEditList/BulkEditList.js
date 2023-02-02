@@ -17,7 +17,7 @@ import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreview
 
 import { RootContext } from '../../context/RootContext';
 import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
-import { getDefaultCapabilities } from '../../utills/filters';
+import { getDefaultCapabilities } from '../../utils/filters';
 import { useResetAppState } from '../../hooks/useResetAppState';
 import BulkEditInAppLayer from './BulkEditListResult/BulkEditInAppLayer/BulkEditInAppLayer';
 

@@ -13,7 +13,7 @@ import {
 } from '@folio/stripes-acq-components';
 
 import { LOGS_COLUMNS } from '../../constants';
-import { getLogsResultsFormatter } from '../../utills/formatters';
+import { getLogsResultsFormatter } from '../../utils/formatters';
 import { useBulkEditLogs } from '../../hooks/api/useBulkEditLogs';
 
 const resetData = () => {};
@@ -35,11 +35,13 @@ const BulkEditLogs = () => {
   const [
     filters,
   ] = useLocationFilters(location, history);
+
   const [
     sortingField,
     sortingDirection,
     changeSorting,
   ] = useLocationSorting(location, history, resetData, sortableFields);
+
   const {
     pagination,
     changePage,

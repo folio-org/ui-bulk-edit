@@ -2,7 +2,7 @@ import { InfoPopover } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import React from 'react';
 import BulkEditLogsActions from '../components/BulkEditLogs/BulkEditLogsActions/BulkEditLogsActions';
-import { FormattedTime } from '../utils/FormattedTime';
+import { FormattedTime } from '../components/FormattedTime/FormattedTime';
 
 export const getLogsResultsFormatter = (userNamesMap) => ({
   id: item => item.id,
