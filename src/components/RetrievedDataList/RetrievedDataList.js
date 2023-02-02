@@ -10,7 +10,7 @@ import { useRecordsPreview } from '../../hooks/api/useRecordsPreview';
 const RetrievedDataList = (props) => {
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
-  const { contentData, columnsMapping, columns } = useRecordsPreview({ capability, step: EDITING_STEPS.EDIT });
+  const { contentData, columnsMapping } = useRecordsPreview({ capability, step: EDITING_STEPS.EDIT });
   const { changePage, pagination } = usePagination({ limit: 100, offset: 0 });
 
   return (

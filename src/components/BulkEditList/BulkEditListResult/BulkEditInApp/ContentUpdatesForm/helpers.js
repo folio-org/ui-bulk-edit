@@ -3,7 +3,10 @@ import {
   CONTROL_TYPES,
   OPTIONS,
   ACTIONS,
-  baseFormat, getReplaceAction, getFindAction, getPlaceholder, getClearAction, getBaseActions,
+  baseFormat,
+  getReplaceAction,
+  getFindAction,
+  getBaseActions,
 } from '../../../../../constants';
 
 
