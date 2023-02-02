@@ -7,6 +7,7 @@ export const LOGS_COLUMNS = [
     value: 'id',
     disabled: false,
     selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.operationType" />,
@@ -37,24 +38,28 @@ export const LOGS_COLUMNS = [
     value: 'startTime',
     disabled: false,
     selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.endTime" />,
     value: 'endTime',
     disabled: false,
     selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.totalNumOfRecords" />,
     value: 'totalNumOfRecords',
     disabled: false,
     selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.processedNumOfRecords" />,
     value: 'processedNumOfRecords',
     disabled: false,
     selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.editing" />,
