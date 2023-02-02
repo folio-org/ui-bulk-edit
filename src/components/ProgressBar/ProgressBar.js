@@ -25,25 +25,32 @@ export const ProgressBar = () => {
     ? (bulkDetails.processedNumOfRecords / bulkDetails.totalNumOfRecords) * 100
     : 0;
 
-  useEffect(() => {
-    if (status === JOB_STATUSES.DATA_MODIFICATION) {
-      clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, {
-        step: EDITING_STEPS.UPLOAD,
-      });
-    }
+  const swwCallout = () => {
+    callout({
+      type: 'error',
+      message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
+    });
+  };
 
-    if (status === JOB_STATUSES.COMPLETED) {
+  useEffect(() => {
+    const mappedStatuses = {
+      [JOB_STATUSES.DATA_MODIFICATION]: { step: EDITING_STEPS.UPLOAD },
+      [JOB_STATUSES.COMPLETED]: { step: EDITING_STEPS.COMMIT },
+      [JOB_STATUSES.COMPLETED_WITH_ERRORS]: { step: EDITING_STEPS.UPLOAD },
+      [JOB_STATUSES.FAILED]: { step: null, callout: swwCallout },
+    };
+
+    const matched = mappedStatuses[status];
+
+    if (matched) {
       clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, {
-        step: EDITING_STEPS.COMMIT,
+        ...(matched.step ? { step: matched.step } : {}),
       });
+
+      if (matched.callout) matched.callout();
     }
 
     if (status === JOB_STATUSES.FAILED) {
-      callout({
-        type: 'error',
-        message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
-      });
-
       clearIntervalAndRedirect('/bulk-edit', '');
     }
   }, [status]);

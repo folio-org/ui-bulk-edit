@@ -85,9 +85,9 @@ const BulkEditActionMenu = ({
   const renderLinkButtons = () => {
     if (isLoading) return <Preloader />;
 
-    const downloadLinks = getDownloadLinks(perms, dateNow);
+    const downloadLinks = getDownloadLinks({ perms, step, date: dateNow });
 
-    return downloadLinks.map(l => bulkDetails && Object.hasOwn(bulkDetails, l.KEY) && l.PERMS && (
+    return downloadLinks.map(l => bulkDetails && Object.hasOwn(bulkDetails, l.KEY) && l.IS_VISIBLE && (
       <Button
         key={l.SEARCH_PARAM}
         buttonStyle="dropdownItem"

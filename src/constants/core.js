@@ -1,6 +1,4 @@
 export const SUPPORTED_FILE_EXTENSIONS = ['csv'];
-export const BULK_EDIT_QUERY = 'BULK_EDIT_QUERY';
-
 export const PREVIEW_LIMITS = {
   ERRORS: 10,
   RECORDS: 10,

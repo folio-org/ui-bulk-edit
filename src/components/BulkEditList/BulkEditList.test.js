@@ -12,8 +12,6 @@ import BulkEdit from '../BulkEdit';
 
 jest.mock('../../API', () => ({
   useLaunchJob: () => ({ startJob: jest.fn(() => Promise.resolve({ data: {} })) }),
-  useFileUploadCommand: () => ({ fileUpload: jest.fn() }),
-  useJobCommand: () => ({ requestJobId: '1', isLoading: false }),
   useUserGroupsMap: () => ({ data: {} }),
   useJob: () => ({
     data: {
