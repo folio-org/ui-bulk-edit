@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import queryString from 'query-string';
 import noop from 'lodash/noop';
 
 import {
@@ -9,25 +8,7 @@ import {
 import {
   makeQueryBuilder,
   getFiltersCount,
-  SORTING_PARAMETER,
-  SORTING_DIRECTION_PARAMETER,
 } from '@folio/stripes-acq-components';
-
-import { FILTERS } from '../../constants';
-
-const queryFields = [SORTING_PARAMETER, SORTING_DIRECTION_PARAMETER, ...Object.values(FILTERS)];
-
-const parseLogsSearch = (search) => {
-  const queryParams = queryString.parse(search);
-
-  return Object.keys(queryParams).reduce((acc, key) => {
-    if (queryFields.some(field => field === key)) {
-      acc[key] = queryParams[key];
-    }
-
-    return acc;
-  }, {});
-};
 
 const buildLogsQuery = makeQueryBuilder(
   'cql.allRecords=1',
@@ -35,13 +16,12 @@ const buildLogsQuery = makeQueryBuilder(
   'sortby startTime/sort.descending',
 );
 
-export const useBulkEditLogs = ({ search, pagination }) => {
+export const useBulkEditLogs = ({ filters, pagination }) => {
   const ky = useOkapiKy();
   const [namespace] = useNamespace({ key: 'bulk-edit-logs' });
 
-  const queryParams = parseLogsSearch(search);
-  const logsQuery = buildLogsQuery(queryParams);
-  const filtersCount = getFiltersCount(queryParams);
+  const logsQuery = buildLogsQuery(filters);
+  const filtersCount = getFiltersCount(filters);
 
   const searchParams = {
     query: logsQuery,

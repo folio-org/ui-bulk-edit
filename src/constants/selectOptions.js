@@ -129,7 +129,7 @@ export const FILTER_OPTIONS = {
   ],
   CAPABILITY: [
     {
-      value: 'HOLDING',
+      value: 'HOLDINGS_RECORD',
       label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.holdings" />,
     },
     {
