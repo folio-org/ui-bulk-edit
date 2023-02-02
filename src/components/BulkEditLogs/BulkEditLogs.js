@@ -1,34 +1,91 @@
 import React from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import noop from 'lodash/noop';
+
 import { Col, MultiColumnList, Row } from '@folio/stripes/components';
-import { useLocation } from 'react-router-dom';
+import {
+  RESULT_COUNT_INCREMENT,
+  NoResultsMessage,
+  PrevNextPagination,
+  useLocationFilters,
+  useLocationSorting,
+  usePagination,
+} from '@folio/stripes-acq-components';
+
 import { LOGS_COLUMNS } from '../../constants';
 import { getLogsResultsFormatter } from '../../utills/formatters';
 import { useBulkEditLogs } from '../../hooks/api/useBulkEditLogs';
 
+const resetData = () => {};
+
+const visibleColumns = LOGS_COLUMNS.map(i => i.value);
+const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
+  acc[el.value] = el.label;
+
+  return acc;
+}, {});
+const sortableFields = LOGS_COLUMNS
+  .filter(({ sortable }) => sortable)
+  .map(({ value }) => value);
 
 const BulkEditLogs = () => {
   const location = useLocation();
-  const { logs, userNamesMap } = useBulkEditLogs({ location });
+  const history = useHistory();
 
-  const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
-    acc[el.value] = el.label;
+  const [
+    filters,
+  ] = useLocationFilters(location, history);
+  const [
+    sortingField,
+    sortingDirection,
+    changeSorting,
+  ] = useLocationSorting(location, history, resetData, sortableFields);
+  const {
+    pagination,
+    changePage,
+  } = usePagination({ limit: RESULT_COUNT_INCREMENT, offset: 0 });
 
-    return acc;
-  }, {});
+  const {
+    userNamesMap,
+    logs,
+    logsCount,
+    isLoading,
+  } = useBulkEditLogs({ search: location.search, pagination });
 
-  const visibleColumns = LOGS_COLUMNS.map(i => i.value);
+  const resultsStatusMessage = (
+    <NoResultsMessage
+      isLoading={isLoading}
+      filters={filters}
+      isFiltersOpened
+      toggleFilters={noop}
+    />
+  );
 
   return (
     <Row>
       <Col xs={12}>
         <MultiColumnList
-          striped
           contentData={logs}
+          totalCount={logsCount}
           columnMapping={columnMapping}
           visibleColumns={visibleColumns}
           formatter={getLogsResultsFormatter(userNamesMap)}
-          pagingType="prev-next"
+          isEmptyMessage={resultsStatusMessage}
+          pagingType="none"
+          sortOrder={sortingField}
+          sortDirection={sortingDirection}
+          onHeaderClick={changeSorting}
+          onNeedMoreData={changePage}
         />
+
+        {logs.length > 0 && (
+          <PrevNextPagination
+            {...pagination}
+            totalCount={logsCount}
+            disabled={isLoading}
+            onChange={changePage}
+          />
+        )}
       </Col>
     </Row>
   );

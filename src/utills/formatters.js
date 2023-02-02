@@ -14,7 +14,7 @@ export const getLogsResultsFormatter = (userNamesMap) => ({
   endTime: item => <FormattedTime dateString={item.endTime} />,
   totalNumOfRecords: item => item.totalNumOfRecords,
   processedNumOfRecords: item => item.processedNumOfRecords,
-  editing: item => item.editing,
+  editing: item => item.approach,
   actions: (item) => (
     <>
       {item.processed === 12 ? (

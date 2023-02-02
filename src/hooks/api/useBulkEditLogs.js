@@ -1,59 +1,94 @@
 import { useQuery } from 'react-query';
-import { useOkapiKy } from '@folio/stripes/core';
 import queryString from 'query-string';
+import noop from 'lodash/noop';
+
+import {
+  useOkapiKy,
+  useNamespace,
+} from '@folio/stripes/core';
+import {
+  makeQueryBuilder,
+  getFiltersCount,
+  SORTING_PARAMETER,
+  SORTING_DIRECTION_PARAMETER,
+} from '@folio/stripes-acq-components';
+
 import { FILTERS } from '../../constants';
-import { buildFilterQuery, buildArrayFieldQuery, buildDateRangeQuery } from '../../utils/queryUtils';
 
+const queryFields = [SORTING_PARAMETER, SORTING_DIRECTION_PARAMETER, ...Object.values(FILTERS)];
 
-export const useBulkEditLogs = ({ location }) => {
+const parseLogsSearch = (search) => {
+  const queryParams = queryString.parse(search);
+
+  return Object.keys(queryParams).reduce((acc, key) => {
+    if (queryFields.some(field => field === key)) {
+      acc[key] = queryParams[key];
+    }
+
+    return acc;
+  }, {});
+};
+
+const buildLogsQuery = makeQueryBuilder(
+  'cql.allRecords=1',
+  noop,
+  'sortby startTime/sort.descending',
+);
+
+export const useBulkEditLogs = ({ search, pagination }) => {
   const ky = useOkapiKy();
+  const [namespace] = useNamespace({ key: 'bulk-edit-logs' });
 
-  const queryParams = queryString.parse(location.search);
+  const queryParams = parseLogsSearch(search);
+  const logsQuery = buildLogsQuery(queryParams);
+  const filtersCount = getFiltersCount(queryParams);
 
-  delete queryParams.capabilities;
-  delete queryParams.criteria;
+  const searchParams = {
+    query: logsQuery,
+    limit: pagination.limit,
+    offset: pagination.offset,
+  };
 
-  const queryParamsFilterQuery = buildFilterQuery(
-    queryParams,
-    null,
-    {
-      [FILTERS.STATUS]: buildArrayFieldQuery.bind(null, [FILTERS.STATUS]),
-      [FILTERS.CAPABILITY]: buildArrayFieldQuery.bind(null, [FILTERS.CAPABILITY]),
-      [FILTERS.OPERATION_TYPE]: buildArrayFieldQuery.bind(null, FILTERS.OPERATION_TYPE),
-      [FILTERS.START_DATE]: buildDateRangeQuery.bind(null, FILTERS.START_DATE),
-      [FILTERS.END_DATE]: buildDateRangeQuery.bind(null, FILTERS.END_DATE),
-    },
-  );
-  const filterQuery = queryParamsFilterQuery || 'cql.allRecords=1';
+  const queryKey = [namespace, pagination.timestamp, pagination.limit, pagination.offset];
+  const queryFn = () => {
+    if (!filtersCount) {
+      return { bulkOperations: [], totalRecords: 0 };
+    }
+
+    return ky.get('bulk-operations', { searchParams }).json()
+      .then(async response => {
+        const { bulkOperations = [], totalRecords } = response;
+        let userNamesMap = {};
+
+        for (const item of bulkOperations) {
+          if (item.userId) {
+            const user = await ky.get(`users/${item.userId}`).json();
+
+            userNamesMap = { ...userNamesMap, [item.userId]: `${user.personal?.firstName} ${user.personal?.lastName}` };
+          }
+        }
+
+        return {
+          bulkOperations,
+          userNamesMap,
+          totalRecords,
+        };
+      });
+  };
 
   const { data, isLoading } = useQuery(
+    queryKey,
+    queryFn,
     {
-      queryKey: ['bulkEditLogs', location.search],
-      queryFn: () => ky.get('bulk-operations', { searchParams: { query: filterQuery } }).json()
-        .then(async response => {
-          let userNamesMap = {};
-
-          for (const item of response.bulkOperations) {
-            if (item.userId) {
-              const user = await ky.get(`users/${item.userId}`).json();
-
-              userNamesMap = { ...userNamesMap, [item.userId]: `${user.personal?.firstName} ${user.personal?.lastName}` };
-            }
-          }
-
-          return {
-            bulkOperations: response.bulkOperations,
-            userNamesMap,
-          };
-        }),
-      enabled: !!Object.keys(queryParams).length,
-      retry: false,
+      enabled: Boolean(pagination.timestamp),
+      keepPreviousData: true,
     },
   );
 
   return {
-    logs: data?.bulkOperations || [],
     userNamesMap: data?.userNamesMap || {},
+    logs: data?.bulkOperations || [],
+    logsCount: data?.totalRecords || 0,
     isLoading,
   };
 };
