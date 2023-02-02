@@ -15,9 +15,9 @@ import {
   APPROACHES,
   CAPABILITIES,
   getDownloadLinks,
-  dateNow,
   EDITING_STEPS,
   BULK_VISIBLE_COLUMNS,
+  getFormattedFilePrefixDate,
 } from '../../constants';
 import { useBulkPermissions, usePathParams } from '../../hooks';
 import { RootContext } from '../../context/RootContext';
@@ -92,7 +92,7 @@ const BulkEditActionMenu = ({
   const renderLinkButtons = () => {
     if (isLoading) return <Preloader />;
 
-    const downloadLinks = getDownloadLinks({ perms, step, date: dateNow });
+    const downloadLinks = getDownloadLinks({ perms, step, date: getFormattedFilePrefixDate() });
 
     return downloadLinks.map(l => bulkDetails && Object.hasOwn(bulkDetails, l.KEY) && l.IS_VISIBLE && (
       <Button

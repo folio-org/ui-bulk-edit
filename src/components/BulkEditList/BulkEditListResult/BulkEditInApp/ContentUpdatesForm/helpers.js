@@ -3,7 +3,7 @@ import {
   CONTROL_TYPES,
   OPTIONS,
   ACTIONS,
-  baseFormat,
+  BASE_DATE_FORMAT,
   getReplaceAction,
   getFindAction,
   getBaseActions,
@@ -20,7 +20,7 @@ export const FIELDS_TYPES = {
 
 export const getFormattedDate = (value) => {
   const date = `${value} 23:59:59`;
-  const format = `${baseFormat}[T]HH:mm:ss`;
+  const format = `${BASE_DATE_FORMAT}[T]HH:mm:ss`;
 
   return `${moment(date).format(format)}.000Z`;
 };
