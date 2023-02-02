@@ -140,7 +140,7 @@ export const BulkEditList = () => {
 
 
   const defaultPaneProps = {
-    efaultWidth: 'fill',
+    defaultWidth: 'fill',
     paneTitle,
     paneSub: paneSubtitle,
     appIcon: <AppIcon app="bulk-edit" iconKey="app" />,
@@ -154,7 +154,7 @@ export const BulkEditList = () => {
       });
     };
 
-    return newBulkFooterShown && (
+    return newBulkFooterShown ? (
       <PaneFooter
         renderEnd={(
           <Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega">
@@ -162,7 +162,7 @@ export const BulkEditList = () => {
           </Button>
         )}
       />
-    );
+    ) : null;
   };
 
   return (

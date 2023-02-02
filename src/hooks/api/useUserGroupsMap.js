@@ -9,6 +9,8 @@ export const useUserGroupsMap = () => {
   const { data } = useQuery(
     {
       queryKey: ['userGroupsMap'],
+      cacheTime: Infinity,
+      staleTime: Infinity,
       queryFn: async () => {
         const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
 

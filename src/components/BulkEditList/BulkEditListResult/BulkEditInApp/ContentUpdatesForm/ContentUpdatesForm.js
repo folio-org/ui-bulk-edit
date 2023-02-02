@@ -183,7 +183,7 @@ export const ContentUpdatesForm = ({
               {isAddButtonShown(index, fields, options) && (
                 <IconButton
                   icon="plus-sign"
-                  size="large"
+                  size="medium"
                   onClick={handleAdd}
                   data-testid={`add-button-${index}`}
                 />

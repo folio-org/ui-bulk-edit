@@ -92,7 +92,7 @@ const BulkEditManualUploadModal = ({
 
       history.replace({
         pathname: `/bulk-edit/${operationId}/progress`,
-        search: buildSearch({ fileName }, history.location.search),
+        search: buildSearch({ fileName, step: EDITING_STEPS.COMMIT }, history.location.search),
       });
     } catch {
       swwCallout(swwErrorMessage);
@@ -196,7 +196,7 @@ const BulkEditManualUploadModal = ({
 };
 
 BulkEditManualUploadModal.propTypes = {
-  operationId: PropTypes.string.isRequired,
+  operationId: PropTypes.string,
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func,

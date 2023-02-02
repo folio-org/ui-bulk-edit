@@ -12,12 +12,13 @@ export const useRecordsPreview = ({ id, step, queryOptions }) => {
   const { data, refetch, isLoading } = useQuery(
     {
       queryKey: ['records', id, step],
+      cacheTime: 0,
       queryFn: () => ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json(),
       ...queryOptions,
     },
   );
 
-  const { contentData, formatter, columns } = useMemo(() => getMappedTableData(data), [data]);
+  const { contentData, columnsMapping, columns } = useMemo(() => getMappedTableData(data), [data]);
 
   // set initial and visible columns
   useEffect(() => {
@@ -34,7 +35,7 @@ export const useRecordsPreview = ({ id, step, queryOptions }) => {
     refetch,
 
     contentData,
-    formatter,
+    columnsMapping,
     columns,
   };
 };

@@ -10,7 +10,7 @@ export const FILE_KEYS = {
   UPDATED_ERRORS_LINK: 'linkToCommittedRecordsErrorsCsvFile',
 };
 
-// use as API key for /donwload
+// use as API key for /download
 export const FILE_SEARCH_PARAMS = {
   MATCHED_RECORDS_FILE: 'MATCHED_RECORDS_FILE',
   RECORD_MATCHING_ERROR_FILE: 'RECORD_MATCHING_ERROR_FILE',

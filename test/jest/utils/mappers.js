@@ -25,7 +25,7 @@ export const getMappedTableData = (data) => {
     selected: !cell.visible,
   }));
 
-  const formatter = columns.reduce((acc, { value }) => {
+  const columnsMapping = columns.reduce((acc, { value }) => {
     acc[value] = item => item[value];
 
     return acc;
@@ -46,7 +46,7 @@ export const getMappedTableData = (data) => {
   }) || [];
 
   return {
-    formatter,
+    columnsMapping,
     columns,
     contentData,
   };

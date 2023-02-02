@@ -18,5 +18,8 @@ export const ActionMenuGroup = ({
 
 ActionMenuGroup.propTypes = {
   title: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };

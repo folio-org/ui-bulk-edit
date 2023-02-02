@@ -7,6 +7,7 @@ import { buildSearch } from '@folio/stripes-acq-components';
 export const useBulkOperationDetails = ({
   id,
   interval = 0,
+  ...options
 }) => {
   const ky = useOkapiKy();
   const history = useHistory();
@@ -14,10 +15,12 @@ export const useBulkOperationDetails = ({
   const [refetchInterval, setRefetchInterval] = useState(interval);
 
   const { data, isLoading } = useQuery({
-    queryKey: ['bulkOperationDetails', id],
-    queryFn: () => ky.get(`bulk-operations/${id}`).json(),
+    queryKey: ['bulkOperationDetails', id, refetchInterval],
+    cacheTime: 0,
     enabled: !!id,
     refetchInterval,
+    queryFn: () => ky.get(`bulk-operations/${id}`).json(),
+    ...options,
   });
 
   const clearInterval = () => {

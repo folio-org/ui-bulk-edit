@@ -7,8 +7,9 @@ export const useErrorsPreview = ({ id }) => {
   const { data, isLoading } = useQuery(
     {
       queryKey: ['previewErrors', id],
-      queryFn: () => ky.get(`bulk-operations/${id}/errors`, { searchParams: { limit: 10 } }).json(),
+      cacheTime: 0,
       enabled: !!id,
+      queryFn: () => ky.get(`bulk-operations/${id}/errors`, { searchParams: { limit: 10 } }).json(),
     },
   );
 

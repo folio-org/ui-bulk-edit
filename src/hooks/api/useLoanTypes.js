@@ -7,6 +7,8 @@ export const useLoanTypes = () => {
   const { data, isLoading } = useQuery(
     {
       queryKey: 'loanTypes',
+      cacheTime: Infinity,
+      staleTime: Infinity,
       queryFn: () => ky.get('loan-types?query=cql.allRecords%3D1%20sortby%20name&limit=1000').json(),
     },
   );

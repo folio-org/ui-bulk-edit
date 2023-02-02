@@ -45,7 +45,7 @@ const BulkEditInAppPreviewModal = ({
 
   const {
     contentData,
-    columns,
+    columnsMapping,
     formatter,
     refetch: fetchPreview,
   } = useRecordsPreview({
@@ -146,7 +146,7 @@ const BulkEditInAppPreviewModal = ({
 
           <MultiColumnList
             contentData={contentData}
-            columnMapping={columns}
+            columnMapping={columnsMapping}
             formatter={formatter}
             visibleColumns={visibleColumnKeys}
           />

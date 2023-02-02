@@ -9,7 +9,7 @@ import {
 } from '@folio/stripes/components';
 
 
-const PreviewAccordion = ({ contentData, formatter, columns, visibleColumns, isInitial }) => {
+const PreviewAccordion = ({ contentData, columnsMapping, visibleColumns, isInitial }) => {
   const translationKey = isInitial ? 'title' : 'titleChanged';
 
   const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
@@ -28,8 +28,7 @@ const PreviewAccordion = ({ contentData, formatter, columns, visibleColumns, isI
           <MultiColumnList
             striped
             contentData={contentData}
-            formatter={formatter}
-            columnMapping={columns}
+            columnsMapping={columnsMapping}
             visibleColumns={visibleColumnKeys}
           />
         </Col>
@@ -40,8 +39,7 @@ const PreviewAccordion = ({ contentData, formatter, columns, visibleColumns, isI
 
 PreviewAccordion.propTypes = {
   contentData: PropTypes.arrayOf(PropTypes.object),
-  formatter: PropTypes.object,
-  columns: PropTypes.object,
+  columnsMapping: PropTypes.object,
   visibleColumns: PropTypes.arrayOf(PropTypes.object),
   isInitial: PropTypes.bool,
 };

@@ -21,7 +21,9 @@ export const ProgressBar = () => {
   const processedTitle = new URLSearchParams(location.search).get('processedFileName');
   const title = new URLSearchParams(location.search).get('fileName');
   const status = bulkDetails?.status;
-  const progressPercentage = bulkDetails ? bulkDetails.processedNumOfRecords / bulkDetails.totalNumOfRecords : 0;
+  const progressPercentage = bulkDetails
+    ? (bulkDetails.processedNumOfRecords / bulkDetails.totalNumOfRecords) * 100
+    : 0;
 
   useEffect(() => {
     if (status === JOB_STATUSES.DATA_MODIFICATION) {

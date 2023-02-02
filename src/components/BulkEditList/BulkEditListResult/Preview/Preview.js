@@ -25,7 +25,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const search = new URLSearchParams(location.search);
   const step = search.get('step');
 
-  const { contentData, columns, formatter } = useRecordsPreview({ id, step });
+  const { contentData, columns, columnsMapping } = useRecordsPreview({ id, step });
   const { data } = useErrorsPreview({ id });
   const errors = data?.errors || [];
 
@@ -74,7 +74,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
           isInitial={isInitial}
           columns={columns}
           contentData={contentData}
-          formatter={formatter}
+          columnsMapping={columnsMapping}
           visibleColumns={visibleColumns}
         />
         )}

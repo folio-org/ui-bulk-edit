@@ -60,7 +60,10 @@ BulkEditInAppLayer.propTypes = {
   isLayerOpen: PropTypes.bool,
   onLayerClose: PropTypes.func,
   onConfirm: PropTypes.func,
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default BulkEditInAppLayer;

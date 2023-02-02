@@ -31,32 +31,6 @@ export const getClearAction = (formatMessage) => ({
   disabled: false,
 });
 
-/* USER ACTIONS */
-export const getPatronActions = (formatMessage) => [
-  getReplaceAction(formatMessage),
-];
-
-export const getExpirationActions = (formatMessage) => [
-  getReplaceAction(formatMessage),
-];
-
-export const getEmailActionsFind = (formatMessage) => [
-  getFindAction(formatMessage),
-];
-
-export const getEmailActionsReplace = (formatMessage) => [
-  getReplaceAction(formatMessage),
-];
-
-/* ITEMS ACTIONS */
-export const getStatusActions = (formatMessage) => [
-  getReplaceAction(formatMessage),
-];
-
-export const getPermanentLoanTypeActions = (formatMessage) => [
-  getReplaceAction(formatMessage),
-];
-
 export const getBaseActions = (formatMessage) => [
   getPlaceholder(formatMessage),
   getReplaceAction(formatMessage),

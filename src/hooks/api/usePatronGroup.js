@@ -9,6 +9,8 @@ export const usePatronGroup = () => {
   const { data, isLoading } = useQuery(
     {
       queryKey: ['userPatronGroup'],
+      cacheTime: Infinity,
+      staleTime: Infinity,
       queryFn: async () => {
         const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
 

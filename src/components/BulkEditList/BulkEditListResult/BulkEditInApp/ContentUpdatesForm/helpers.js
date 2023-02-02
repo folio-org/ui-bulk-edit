@@ -1,11 +1,10 @@
 import moment from 'moment/moment';
-import { CONTROL_TYPES,
-  getEmailActionsFind,
-  getEmailActionsReplace,
-  getExpirationActions,
-  getPatronActions,
-  OPTIONS, getBaseActions, getStatusActions, getPermanentLoanTypeActions, ACTIONS,
-  baseFormat } from '../../../../../constants';
+import {
+  CONTROL_TYPES,
+  OPTIONS,
+  ACTIONS,
+  baseFormat, getReplaceAction, getFindAction, getPlaceholder, getClearAction, getBaseActions,
+} from '../../../../../constants';
 
 
 export const ACTION_VALUE_KEY = 'name';
@@ -57,15 +56,16 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
 };
 
 export const getDefaultActions = (option, formatMessage) => {
-  const emailActionsFind = getEmailActionsFind(formatMessage);
-  const emailActionsReplace = getEmailActionsReplace(formatMessage);
-  const patronActions = getPatronActions(formatMessage);
-  const expirationActions = getExpirationActions(formatMessage);
-  const statusActions = getStatusActions(formatMessage);
-  const permanentLoanTypeActions = getPermanentLoanTypeActions(formatMessage);
-  const baseActions = getBaseActions(formatMessage);
+  const emailActionsFind = [getFindAction(formatMessage)];
+  const emailActionsReplace = [getReplaceAction(formatMessage)];
+  const patronActions = [getReplaceAction(formatMessage)];
+  const expirationActions = [getReplaceAction(formatMessage)];
+  const statusActions = [getReplaceAction(formatMessage)];
+  const permanentLoanTypeActions = [getReplaceAction(formatMessage)];
+  const permanentHoldingsLocation = [getReplaceAction(formatMessage)];
+  const allActions = getBaseActions(formatMessage);
 
-  const baseActionsInitialVal = baseActions[0].value;
+  const allActionsInitialVal = allActions[0].value;
 
   switch (option) {
     /* USER OPTIONS */
@@ -121,9 +121,9 @@ export const getDefaultActions = (option, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: baseActions,
+            actionsList: allActions,
             type: CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: baseActionsInitialVal,
+            [ACTION_VALUE_KEY]: allActionsInitialVal,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -134,9 +134,9 @@ export const getDefaultActions = (option, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: baseActions,
+            actionsList: permanentHoldingsLocation,
             type: CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: baseActionsInitialVal,
+            [ACTION_VALUE_KEY]: permanentHoldingsLocation[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -149,9 +149,9 @@ export const getDefaultActions = (option, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: baseActions,
+            actionsList: allActions,
             type: CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: baseActionsInitialVal,
+            [ACTION_VALUE_KEY]: allActionsInitialVal,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -162,9 +162,9 @@ export const getDefaultActions = (option, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: baseActions,
+            actionsList: allActions,
             type: CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: baseActionsInitialVal,
+            [ACTION_VALUE_KEY]: allActionsInitialVal,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -188,9 +188,9 @@ export const getDefaultActions = (option, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: baseActions,
+            actionsList: allActions,
             type: CONTROL_TYPES.LOAN_TYPE,
-            [ACTION_VALUE_KEY]: baseActionsInitialVal,
+            [ACTION_VALUE_KEY]: allActionsInitialVal,
             [FIELD_VALUE_KEY]: '',
           },
         ],

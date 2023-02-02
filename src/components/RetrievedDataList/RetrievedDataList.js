@@ -10,7 +10,7 @@ import { useRecordsPreview } from '../../hooks/api/useRecordsPreview';
 const RetrievedDataList = (props) => {
   const location = useLocation();
   const capability = new URLSearchParams(location.search).get('capabilities');
-  const { contentData, formatter, columns } = useRecordsPreview({ capability, step: EDITING_STEPS.EDIT });
+  const { contentData, columnsMapping, columns } = useRecordsPreview({ capability, step: EDITING_STEPS.EDIT });
   const { changePage, pagination } = usePagination({ limit: 100, offset: 0 });
 
   return (
@@ -30,8 +30,7 @@ const RetrievedDataList = (props) => {
           <Col xs={12}>
             <MultiColumnList
               contentData={contentData}
-              formatter={formatter}
-              columnMapping={columns}
+              columnMapping={columnsMapping}
               visibleColumns={[]}
               onNeedMoreData={changePage}
               pagingType={null}
