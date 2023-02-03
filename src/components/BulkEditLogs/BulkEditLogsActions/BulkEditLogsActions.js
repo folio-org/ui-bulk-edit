@@ -15,7 +15,7 @@ import {
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import { useFileDownload } from '../../../hooks/api';
-import { linkNamesMap } from '../../../utils/constants';
+import { linkNamesMap } from '../../../constants';
 
 const BulkEditLogsActions = ({ item }) => {
   const [triggeredFile, setTriggeredFile] = useState(null);
