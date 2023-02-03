@@ -17,12 +17,14 @@ import {
   getFormattedFilePrefixDate,
 } from '../../../../constants';
 import { RootContext } from '../../../../context/RootContext';
-import { useRecordsPreview } from '../../../../hooks/api/useRecordsPreview';
+import {
+  useRecordsPreview,
+  useBulkOperationStart,
+  useBulkOperationDetails,
+  useContentUpdate,
+  useFileDownload,
+} from '../../../../hooks/api';
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
-import { useBulkOperationStart } from '../../../../hooks/api/useBulkOperationStart';
-import { useBulkOperationDetails } from '../../../../hooks/api/useBulkOperationDetails';
-import { useContentUpdate } from '../../../../hooks/api/useContentUpdate';
-import { useFileDownload } from '../../../../hooks/api/useFileDownload';
 
 
 const BulkEditInAppPreviewModal = ({
@@ -36,6 +38,8 @@ const BulkEditInAppPreviewModal = ({
   const callout = useShowCallout();
   const intl = useIntl();
   const history = useHistory();
+  const search = new URLSearchParams(history.location.search);
+  const capabilities = search.get('capabilities');
   const { visibleColumns } = useContext(RootContext);
 
   const swwCallout = () => (
@@ -56,6 +60,7 @@ const BulkEditInAppPreviewModal = ({
   } = useRecordsPreview({
     id: bulkOperationId,
     step: EDITING_STEPS.EDIT,
+    capabilities,
     queryOptions: {
       enabled: false,
       onError: () => {

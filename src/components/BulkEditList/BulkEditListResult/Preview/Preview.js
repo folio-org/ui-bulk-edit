@@ -10,11 +10,10 @@ import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
-import {
-  useErrorsPreview,
-} from '../../../../hooks/api';
+import { useErrorsPreview,
+  useRecordsPreview } from '../../../../hooks/api';
 import { RootContext } from '../../../../context/RootContext';
-import { useRecordsPreview } from '../../../../hooks/api/useRecordsPreview';
+
 import { EDITING_STEPS } from '../../../../constants';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
@@ -24,8 +23,9 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
   const search = new URLSearchParams(location.search);
   const step = search.get('step');
+  const capabilities = search.get('capabilities');
 
-  const { contentData, columns, columnsMapping } = useRecordsPreview({ id, step });
+  const { contentData, columns, columnsMapping } = useRecordsPreview({ id, step, capabilities });
   const { data } = useErrorsPreview({ id });
   const errors = data?.errors || [];
 

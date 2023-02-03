@@ -20,33 +20,33 @@ export const FILE_SEARCH_PARAMS = {
   PROPOSED_CHANGES_FILE: 'PROPOSED_CHANGES_FILE',
 };
 
-export const getDownloadLinks = ({ perms, date, step }) => [
+export const getDownloadLinks = ({ perms, date, fileName, step }) => [
   {
     KEY: FILE_KEYS.MATCHING_RECORDS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.MATCHED_RECORDS_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />,
     IS_VISIBLE: perms.hasAnyEditPermissions,
-    SAVE_FILE_NAME: `${date}-Matched-Records.csv`,
+    SAVE_FILE_NAME: `${date}-Matched-Records-${fileName}`,
   },
   {
     KEY: FILE_KEYS.UPDATED_RECORDS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadChangedRecords" />,
     IS_VISIBLE: perms.hasAnyEditPermissions,
-    SAVE_FILE_NAME: `${date}-Changed-Records.csv`,
+    SAVE_FILE_NAME: `${date}-Changed-Records-${fileName}`,
   },
   {
     KEY: FILE_KEYS.MATCHING_ERRORS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.RECORD_MATCHING_ERROR_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />,
     IS_VISIBLE: perms.hasAnyEditPermissions && step === EDITING_STEPS.UPLOAD,
-    SAVE_FILE_NAME: `${date}-Errors-bulk-ops.csv`,
+    SAVE_FILE_NAME: `${date}-Errors-${fileName}`,
   },
   {
     KEY: FILE_KEYS.UPDATED_ERRORS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTING_CHANGES_ERROR_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />,
     IS_VISIBLE: perms.hasAnyEditPermissions && step === EDITING_STEPS.COMMIT,
-    SAVE_FILE_NAME: `${date}-Errors-bulk-ops.csv`,
+    SAVE_FILE_NAME: `${date}-Errors-${fileName}`,
   },
 ];

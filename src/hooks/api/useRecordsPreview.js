@@ -1,11 +1,13 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
+import { useIntl } from 'react-intl';
 import { BULK_VISIBLE_COLUMNS, PREVIEW_LIMITS } from '../../constants';
 import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
 
-export const useRecordsPreview = ({ id, step, queryOptions }) => {
+export const useRecordsPreview = ({ id, step, queryOptions, capabilities }) => {
+  const intl = useIntl();
   const { setVisibleColumns } = useContext(RootContext);
   const ky = useOkapiKy();
 
@@ -18,7 +20,11 @@ export const useRecordsPreview = ({ id, step, queryOptions }) => {
     },
   );
 
-  const { contentData, columnsMapping, columns } = useMemo(() => getMappedTableData(data), [data]);
+  const { contentData, columnsMapping, columns } = useMemo(() => getMappedTableData({
+    data,
+    intl,
+    capabilities,
+  }), [data]);
 
   // set initial and visible columns
   useEffect(() => {

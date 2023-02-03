@@ -21,8 +21,8 @@ import {
 } from '../../constants';
 import { useBulkPermissions, usePathParams } from '../../hooks';
 import { RootContext } from '../../context/RootContext';
-import { useBulkOperationDetails } from '../../hooks/api/useBulkOperationDetails';
-import { useFileDownload } from '../../hooks/api/useFileDownload';
+import { useBulkOperationDetails, useFileDownload } from '../../hooks/api';
+
 
 
 const BulkEditActionMenu = ({
@@ -34,6 +34,7 @@ const BulkEditActionMenu = ({
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
   const step = search.get('step');
+  const fileName = search.get('fileName');
 
   const {
     hasCsvEditPerms,
@@ -92,7 +93,9 @@ const BulkEditActionMenu = ({
   const renderLinkButtons = () => {
     if (isLoading) return <Preloader />;
 
-    const downloadLinks = getDownloadLinks({ perms, step, date: getFormattedFilePrefixDate() });
+    const date = getFormattedFilePrefixDate();
+
+    const downloadLinks = getDownloadLinks({ perms, step, fileName, date });
 
     return downloadLinks.map(l => bulkDetails && Object.hasOwn(bulkDetails, l.KEY) && l.IS_VISIBLE && (
       <Button

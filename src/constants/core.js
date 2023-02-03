@@ -59,13 +59,7 @@ export const CRITERIA = {
   LOGS: 'logs',
 };
 
-export const CAPABILITIES_VALUE = {
-  [CAPABILITIES.USER]: 'user',
-  [CAPABILITIES.ITEM]: 'item',
-  [CAPABILITIES.HOLDING]: 'holdings',
-};
-
-export const CAPABILITIES_PREVIEW = {
+export const CAPABILITIES_TRANSLATION_VALUE = {
   [CAPABILITIES.USER]: 'users',
   [CAPABILITIES.ITEM]: 'items',
   [CAPABILITIES.HOLDING]: 'holdings',
