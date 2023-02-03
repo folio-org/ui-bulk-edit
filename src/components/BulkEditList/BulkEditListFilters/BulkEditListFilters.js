@@ -2,15 +2,10 @@ import React, { useState, useEffect, useMemo, useCallback, useContext } from 're
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
-  Button,
   ButtonGroup,
-  Accordion,
-  Badge,
-  RadioButtonGroup,
-  RadioButton,
-  FilterAccordionHeader,
 } from '@folio/stripes/components';
 import { useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
@@ -18,21 +13,21 @@ import { ListSelect } from './ListSelect/ListSelect';
 import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
 import {
-  BULK_EDIT_QUERY,
   CRITERIA,
   TRANSLATION_SUFFIX,
-  EDITING_STEPS,
+  EDITING_STEPS, APPROACHES, BULK_VISIBLE_COLUMNS,
 } from '../../../constants';
-import { useJobCommand, useUserGroupsMap } from '../../../hooks/api';
+import { useUserGroupsMap } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 
-import css from './BulkEditListFilters.css';
 import { RootContext } from '../../../context/RootContext';
 import { LogsFilters } from './LogsFilters/LogsFilters';
 import { useUpload } from '../../../hooks/api/useUpload';
 import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
 import { buildQuery } from '../../../utils/buildQuery';
 import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
+import FilterTabs from './FilterTabs/FilterTabs';
+import Capabilities from './Capabilities/Capabilities';
 
 export const BulkEditListFilters = ({
   filters,
@@ -40,11 +35,6 @@ export const BulkEditListFilters = ({
   isFileUploaded,
   setIsFileUploaded,
 }) => {
-  const showCallout = useShowCallout();
-  const history = useHistory();
-  const location = useLocation();
-  const search = new URLSearchParams(location.search);
-
   const {
     isDropZoneDisabled: isDropZoneDisabledPerm,
     isInventoryRadioDisabled,
@@ -53,6 +43,18 @@ export const BulkEditListFilters = ({
     isSelectIdentifiersDisabled,
     hasLogViewPerms,
   } = useBulkPermissions();
+  const showCallout = useShowCallout();
+  const history = useHistory();
+  const location = useLocation();
+
+  const search = new URLSearchParams(location.search);
+  const criteria = search.get('criteria');
+  const initialCapabilities = search.get('capabilities');
+
+  const isQuery = criteria === CRITERIA.QUERY;
+  const isLogs = criteria === CRITERIA.LOGS;
+  const isIdentifier = criteria === CRITERIA.IDENTIFIER;
+  const { capabilities, recordIdentifier, queryText } = filters;
 
   const capabilitiesFilterOptions = getCapabilityOptions({
     isInventoryRadioDisabled,
@@ -60,60 +62,34 @@ export const BulkEditListFilters = ({
   });
 
   const initialFilter = {
-    capabilities: search.get('capabilities'),
+    capabilities: initialCapabilities,
     criteria: CRITERIA.LOGS,
   };
-
-  const onResetData = () => {};
 
   const [
     activeFilters,
     applyFilters,
     resetFilters,
-  ] = useLocationFilters(location, history, onResetData, initialFilter);
+  ] = useLocationFilters({ location, history, initialFilter });
 
   const applyFiltersAdapter = (callBack) => ({ name, values }) => callBack(name, values);
+
   const adaptedApplyFilters = useCallback(
     applyFiltersAdapter(applyFilters),
     [applyFilters],
   );
 
-  const { capabilities, recordIdentifier, queryText } = filters;
-  const criteria = search.get('criteria');
-  const isQuery = criteria === CRITERIA.QUERY;
-  const isLogs = criteria === CRITERIA.LOGS;
-  const isIdentifier = criteria === CRITERIA.IDENTIFIER;
-
+  const { setVisibleColumns } = useContext(RootContext);
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
+
   const { userGroups } = useUserGroupsMap();
-  const { requestJobId } = useJobCommand({ entityType: capabilities });
   const { fileUpload, isLoading } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
-  const { setVisibleColumns } = useContext(RootContext);
 
   const handleChange = (value, field) => setFilters(prev => ({
     ...prev, [field]: value,
   }));
-
-  const handleDragEnter = () => {
-    setDropZoneActive(true);
-  };
-
-  const handleDragLeave = () => {
-    setDropZoneActive(false);
-  };
-
-  const handleRecordIdentifierChange = useCallback((e) => {
-    handleChange(e.target.value, 'recordIdentifier');
-
-    history.replace({
-      pathname: '/bulk-edit',
-      search: buildSearch({ identifier: e.target.value, capabilities, criteria }),
-    });
-
-    setIsFileUploaded(false);
-  }, [location.search]);
 
   const handleCapabilityChange = (e) => {
     const value = e.target.value;
@@ -134,9 +110,35 @@ export const BulkEditListFilters = ({
 
     setIsFileUploaded(false);
     // clear visibleColumns preset
-    localStorage.removeItem('visibleColumns');
+    localStorage.removeItem(BULK_VISIBLE_COLUMNS);
     setVisibleColumns(null);
   };
+
+  const handleCriteriaChange = (value) => {
+    setFilters(prev => ({ ...prev, criteria: value }));
+    history.replace({
+      search: buildSearch({ criteria: value }, location.search),
+    });
+  };
+
+  const handleDragEnter = () => {
+    setDropZoneActive(true);
+  };
+
+  const handleDragLeave = () => {
+    setDropZoneActive(false);
+  };
+
+  const handleRecordIdentifierChange = useCallback((e) => {
+    handleChange(e.target.value, 'recordIdentifier');
+
+    history.replace({
+      pathname: '/bulk-edit',
+      search: buildSearch({ identifier: e.target.value, capabilities, criteria }),
+    });
+
+    setIsFileUploaded(false);
+  }, [location.search]);
 
   const uploadFileFlow = async (fileToUpload) => {
     try {
@@ -150,8 +152,6 @@ export const BulkEditListFilters = ({
         id,
         step: EDITING_STEPS.UPLOAD,
       });
-
-      search.delete('queryText');
 
       history.replace({
         pathname: `/bulk-edit/${id}/progress`,
@@ -168,23 +168,25 @@ export const BulkEditListFilters = ({
   };
 
   const handleDrop = async (fileToUpload) => {
-    setDropZoneActive(false);
+    if (!fileToUpload) return;
 
-    if (fileToUpload) {
-      await uploadFileFlow(fileToUpload);
-    }
+    await uploadFileFlow(fileToUpload);
+
+    setDropZoneActive(false);
   };
 
   const handleQuerySearch = async () => {
     const parsedQuery = buildQuery(queryText, userGroups);
 
-    await requestJobId({
-      recordIdentifier,
-      editType: BULK_EDIT_QUERY,
-      specificParameters: { query: parsedQuery },
+    const { id } = await bulkOperationStart({
+      id: uuidv4(),
+      step: EDITING_STEPS.UPLOAD,
+      query: parsedQuery,
+      approach: APPROACHES.QUERY,
     });
 
     history.replace({
+      pathname: `/bulk-edit/${id}/progress`,
       search: buildSearch({ queryText }, location.search),
     });
   };
@@ -209,135 +211,86 @@ export const BulkEditListFilters = ({
     if (identifier) {
       handleChange(identifier, 'recordIdentifier');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
-  /* useEffect(() => {
-    const searchStr = buildSearch({ capabilities }, location.search);
+  const renderCapabilities = () => (
+    <Capabilities
+      capabilities={capabilities}
+      capabilitiesFilterOptions={capabilitiesFilterOptions}
+      onCapabilityChange={handleCapabilityChange}
+      hasInAppEditPerms={hasInAppEditPerms}
+    />
+  );
 
-    // Replace history only if the search params are different from
-    // the current location search params.
-    // https://issues.folio.org/browse/UIBULKED-90
-    if (location.search !== `?${searchStr}`) {
-      history.replace({
-        pathname: location.pathname,
-        search: searchStr,
-      });
-    }
-  }, [capabilities]); */
+  const renderQueryText = () => (
+    <QueryTextArea
+      queryText={queryText}
+      setQueryText={setFilters}
+      handleQuerySearch={handleQuerySearch}
+    />
+  );
 
-  const renderBadge = () => <Badge data-testid="filter-badge">0</Badge>;
+  const renderListSelect = () => (
+    <ListSelect
+      value={recordIdentifier}
+      disabled={isSelectIdentifiersDisabled}
+      onChange={handleRecordIdentifierChange}
+      capabilities={capabilities}
+    />
+  );
 
-  const handleChangeCriteria = (value) => {
-    setFilters(prev => ({ ...prev, criteria: value }));
-    history.replace({
-      search: buildSearch({ criteria: value }, location.search),
-    });
-  };
+  const renderListFileUploader = () => (
+    <ListFileUploader
+      className="FileUploaderContainer"
+      isLoading={isLoading}
+      isDropZoneActive={isDropZoneActive}
+      handleDrop={handleDrop}
+      isDropZoneDisabled={isDropZoneDisabled || isDropZoneDisabledPerm}
+      recordIdentifier={recordIdentifier}
+      handleDragLeave={handleDragLeave}
+      handleDragEnter={handleDragEnter}
+      disableUploader={isCapabilityDisabled(capabilities)}
+      uploaderSubTitle={uploaderSubTitle}
+    />
+  );
 
-  const renderTopButtons = () => {
-    return (
-      <>
-        <Button
-          buttonStyle={isIdentifier ? 'primary' : 'default'}
-          onClick={() => handleChangeCriteria('identifier')}
-        >
-          <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
-        </Button>
-        <Button
-          buttonStyle={isQuery ? 'primary' : 'default'}
-          onClick={() => handleChangeCriteria('query')}
-        >
-          <FormattedMessage id="ui-bulk-edit.list.filters.query" />
-        </Button>
-        {hasLogViewPerms &&
-        <Button
-          buttonStyle={isLogs ? 'primary' : 'default'}
-          onClick={() => handleChangeCriteria('logs')}
-
-        >
-          <FormattedMessage id="ui-bulk-edit.list.filters.logs" />
-        </Button>
-        }
-      </>
-    );
-  };
+  const renderLogsFilter = () => (
+    <LogsFilters
+      activeFilters={activeFilters}
+      onChange={adaptedApplyFilters}
+      resetFilter={resetFilters}
+    />
+  );
 
   return (
     <>
       <ButtonGroup fullWidth>
-        {renderTopButtons()}
+        <FilterTabs
+          criteria={criteria}
+          hasLogViewPerms={hasLogViewPerms}
+          onCriteriaChange={handleCriteriaChange}
+        />
       </ButtonGroup>
-      {!isLogs && (
-      <Accordion
-        separator={false}
-        closedByDefault={false}
-        displayClearButton={!hasInAppEditPerms}
-        header={FilterAccordionHeader}
-        label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
-      >
-        <RadioButtonGroup>
-          {capabilitiesFilterOptions?.map(option => (
-            <RadioButton
-              key={option.value}
-              label={option.label}
-              name="capabilities"
-              value={option.value}
-              disabled={option.disabled}
-              onChange={handleCapabilityChange}
-              checked={option.value === capabilities}
-            />
-          ))}
-        </RadioButtonGroup>
-      </Accordion>
+
+      {/* IDENTIFIER FILTER */}
+      {isIdentifier && (
+        <>
+          {renderCapabilities()}
+          {renderListSelect()}
+          {renderListFileUploader()}
+        </>
       )}
+
+      {/* QUERY FILTER */}
       {isQuery && (
-        <QueryTextArea
-          queryText={queryText}
-          setQueryText={setFilters}
-          handleQuerySearch={handleQuerySearch}
-        />
+        <>
+          {renderCapabilities()}
+          {renderQueryText()}
+        </>
       )}
-      {isIdentifier &&
-      <>
-        <ListSelect
-          value={recordIdentifier}
-          disabled={isSelectIdentifiersDisabled}
-          onChange={handleRecordIdentifierChange}
-          capabilities={capabilities}
-        />
-        <ListFileUploader
-          className="FileUploaderContainer"
-          isLoading={isLoading}
-          isDropZoneActive={isDropZoneActive}
-          handleDrop={handleDrop}
-          isDropZoneDisabled={isDropZoneDisabled || isDropZoneDisabledPerm}
-          recordIdentifier={recordIdentifier}
-          handleDragLeave={handleDragLeave}
-          handleDragEnter={handleDragEnter}
-          disableUploader={isCapabilityDisabled(capabilities)}
-          uploaderSubTitle={uploaderSubTitle}
-        />
-      </>
-  }
-      {
-        isLogs && (
-        <LogsFilters
-          activeFilters={activeFilters}
-          onChange={adaptedApplyFilters}
-          resetFilter={resetFilters}
-        />
-        )
-      }
-      <Accordion
-        className={css.accordionHidden}
-        closedByDefault
-        displayWhenClosed={renderBadge()}
-        displayWhenOpen={renderBadge()}
-        label={<FormattedMessage id="ui-bulk-edit.list.savedQueries.title" />}
-      >
-        <div />
-      </Accordion>
+
+      {/* LOGS FILTER */}
+      {isLogs && renderLogsFilter()}
     </>
   );
 };

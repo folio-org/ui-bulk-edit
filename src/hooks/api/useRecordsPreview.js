@@ -1,8 +1,8 @@
 import { useContext, useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
-import { PREVIEW_LIMITS } from '../../constants';
-import { getMappedTableData } from '../../../test/jest/utils/mappers';
+import { BULK_VISIBLE_COLUMNS, PREVIEW_LIMITS } from '../../constants';
+import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
 
 export const useRecordsPreview = ({ id, step, queryOptions }) => {
@@ -23,7 +23,7 @@ export const useRecordsPreview = ({ id, step, queryOptions }) => {
   // set initial and visible columns
   useEffect(() => {
     if (columns.length) {
-      const storedVisibleColumns = localStorage.getItem('visibleColumns');
+      const storedVisibleColumns = localStorage.getItem(BULK_VISIBLE_COLUMNS);
 
       // checking for columns from localStorage first
       setVisibleColumns(storedVisibleColumns ? JSON.parse(storedVisibleColumns) : columns);

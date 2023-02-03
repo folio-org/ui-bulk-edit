@@ -11,7 +11,14 @@ import React, { useContext, useState } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useLocation } from 'react-router-dom';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
-import { APPROACHES, CAPABILITIES, getDownloadLinks, dateNow, EDITING_STEPS } from '../../constants';
+import {
+  APPROACHES,
+  CAPABILITIES,
+  getDownloadLinks,
+  EDITING_STEPS,
+  BULK_VISIBLE_COLUMNS,
+  getFormattedFilePrefixDate,
+} from '../../constants';
 import { useBulkPermissions, usePathParams } from '../../hooks';
 import { RootContext } from '../../context/RootContext';
 import { useBulkOperationDetails } from '../../hooks/api/useBulkOperationDetails';
@@ -70,7 +77,7 @@ const BulkEditActionMenu = ({
     });
 
     setVisibleColumns(changedColumns);
-    localStorage.setItem('visibleColumns', JSON.stringify(changedColumns));
+    localStorage.setItem(BULK_VISIBLE_COLUMNS, JSON.stringify(changedColumns));
   };
 
   const handleOnStartEdit = (approach) => {
@@ -85,9 +92,9 @@ const BulkEditActionMenu = ({
   const renderLinkButtons = () => {
     if (isLoading) return <Preloader />;
 
-    const downloadLinks = getDownloadLinks(perms, dateNow);
+    const downloadLinks = getDownloadLinks({ perms, step, date: getFormattedFilePrefixDate() });
 
-    return downloadLinks.map(l => bulkDetails && Object.hasOwn(bulkDetails, l.KEY) && l.PERMS && (
+    return downloadLinks.map(l => bulkDetails && Object.hasOwn(bulkDetails, l.KEY) && l.IS_VISIBLE && (
       <Button
         key={l.SEARCH_PARAM}
         buttonStyle="dropdownItem"

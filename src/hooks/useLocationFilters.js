@@ -4,7 +4,12 @@ import { buildFiltersObj } from '@folio/stripes-acq-components/lib/AcqList/utils
 import { buildSearch } from '@folio/stripes-acq-components';
 import { SEARCH_INDEX_PARAMETER } from '@folio/stripes-acq-components/lib/AcqList/constants';
 
-export const useLocationFilters = (location, history, resetData, initialFilter) => {
+export const useLocationFilters = ({
+  resetData = () => {},
+  location,
+  history,
+  initialFilter,
+}) => {
   const {
     filters,
     applyFilters,

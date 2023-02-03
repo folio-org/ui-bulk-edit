@@ -111,12 +111,12 @@ export const BulkEditList = () => {
     const fileUploadedName = search.get('fileName');
 
     if (confirmedFileName || fileUploadedName) {
-      return <FormattedMessage
-        id="ui-bulk-edit.meta.title.uploadedFile"
-        values={{ fileName: confirmedFileName || fileUploadedName }}
-             />;
-    } else if (isLogsTab) {
-      return <FormattedMessage id="ui-bulk-edit.meta.logs.title" />;
+      return (
+        <FormattedMessage
+          id="ui-bulk-edit.meta.title.uploadedFile"
+          values={{ fileName: confirmedFileName || fileUploadedName }}
+        />
+      );
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
   }, [confirmedFileName, history.location.search]);
 
@@ -126,17 +126,13 @@ export const BulkEditList = () => {
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
   ), [countOfRecords, step]);
 
-  const defaultPaneSubtitle = useMemo(() => (
-    isLogsTab
-      ? <FormattedMessage id="ui-bulk-edit.logs.logSubTitle" />
-      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
-  ), [history.location.search]);
-
-  const paneSubtitle = useMemo(() => (
-    step === EDITING_STEPS.UPLOAD || step === EDITING_STEPS.COMMIT
-      ? changedPaneSubTitle
-      : defaultPaneSubtitle
-  ), [step, changedPaneSubTitle, defaultPaneSubtitle]);
+  const paneSubtitle = useMemo(() => {
+    return (
+      step === EDITING_STEPS.UPLOAD || step === EDITING_STEPS.COMMIT
+        ? changedPaneSubTitle
+        : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
+    );
+  }, [step, changedPaneSubTitle]);
 
 
   const defaultPaneProps = {
@@ -190,14 +186,21 @@ export const BulkEditList = () => {
           />
         </Pane>
 
-        {/* RESULT PANE */}
-        <Pane
-          {...defaultPaneProps}
-          actionMenu={actionMenu}
-          footer={renderNewBulkFooter()}
-        >
-          {isLogsTab ? <BulkEditLogs /> : <BulkEditListResult />}
-        </Pane>
+        {/* RESULT PANES */}
+        {
+          isLogsTab && <BulkEditLogs />
+        }
+        {
+          !isLogsTab && (
+            <Pane
+              {...defaultPaneProps}
+              actionMenu={actionMenu}
+              footer={renderNewBulkFooter()}
+            >
+              <BulkEditListResult />
+            </Pane>
+          )
+        }
 
         {/* IN_APP APPROACH */}
         <BulkEditInAppLayer

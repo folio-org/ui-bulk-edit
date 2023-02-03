@@ -1,6 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { CAPABILITIES, IDENTIFIERS } from './core';
+import {
+  CAPABILITIES,
+  IDENTIFIERS,
+  JOB_STATUSES,
+} from './core';
 
 export const OPTIONS = {
   TEMPORARY_LOCATION: 'TEMPORARY_LOCATION',
@@ -94,53 +98,22 @@ export const identifierOptions = {
 
 export const FILTER_OPTIONS = {
   STATUS: [
-    {
-      value: 'NEW',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.new" />,
-    },
-    {
-      value: 'RETRIEVING_RECORDS',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.retrieving" />,
-    },
-    {
-      value: 'SAVING_RECORDS_LOCALLY',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.saving" />,
-    },
-    {
-      value: 'DATA_MODIFICATION',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.data" />,
-    },
-    {
-      value: 'REVIEW_CHANGES',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.reviewing" />,
-    },
-    {
-      value: 'COMPLETED',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.completed" />,
-    },
-    {
-      value: 'COMPLETED_WITH_ERRORS',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.completedWithErrors" />,
-    },
-    {
-      value: 'FAILED',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.failed" />,
-    },
-  ],
-  CAPABILITY: [
-    {
-      value: 'HOLDING',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.holdings" />,
-    },
-    {
-      value: 'ITEM',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.items" />,
-    },
-    {
-      value: 'USER',
-      label: <FormattedMessage id="ui-bulk-edit.logs.filter.option.users" />,
-    },
-  ],
+    JOB_STATUSES.NEW,
+    JOB_STATUSES.RETRIEVING_RECORDS,
+    JOB_STATUSES.SAVING_RECORDS_LOCALLY,
+    JOB_STATUSES.DATA_MODIFICATION,
+    JOB_STATUSES.REVIEW_CHANGES,
+    JOB_STATUSES.COMPLETED,
+    JOB_STATUSES.COMPLETED_WITH_ERRORS,
+    JOB_STATUSES.FAILED,
+  ].map(status => ({
+    value: status,
+    label: <FormattedMessage id={`ui-bulk-edit.logs.status.${status}`} />,
+  })),
+  CAPABILITY: Object.values(CAPABILITIES).map(entityType => ({
+    value: entityType,
+    label: <FormattedMessage id={`ui-bulk-edit.logs.entityType.${entityType}`} />,
+  })),
   OPERATION_TYPE: [
     {
       value: 'UPDATE',

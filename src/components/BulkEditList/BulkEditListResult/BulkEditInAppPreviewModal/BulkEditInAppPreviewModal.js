@@ -9,7 +9,13 @@ import { useShowCallout } from '@folio/stripes-acq-components';
 import { useQueryClient } from 'react-query';
 import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFooter';
 import css from './BulkEditInAppPreviewModal.css';
-import { APPROACHES, dateNow, EDITING_STEPS, FILE_KEYS, FILE_SEARCH_PARAMS } from '../../../../constants';
+import {
+  APPROACHES,
+  EDITING_STEPS,
+  FILE_KEYS,
+  FILE_SEARCH_PARAMS,
+  getFormattedFilePrefixDate,
+} from '../../../../constants';
 import { RootContext } from '../../../../context/RootContext';
 import { useRecordsPreview } from '../../../../hooks/api/useRecordsPreview';
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
@@ -46,7 +52,6 @@ const BulkEditInAppPreviewModal = ({
   const {
     contentData,
     columnsMapping,
-    formatter,
     refetch: fetchPreview,
   } = useRecordsPreview({
     id: bulkOperationId,
@@ -69,7 +74,7 @@ const BulkEditInAppPreviewModal = ({
     onSuccess: data => {
       const fileName = new URLSearchParams(history.location.search).get('fileName');
 
-      saveAs(new Blob([data]), `${dateNow}-Updates-Preview-${fileName}`);
+      saveAs(new Blob([data]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
     },
   });
 
@@ -145,9 +150,9 @@ const BulkEditInAppPreviewModal = ({
           <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
 
           <MultiColumnList
+            striped
             contentData={contentData}
-            columnMapping={columnsMapping}
-            formatter={formatter}
+            columnsMapping={columnsMapping}
             visibleColumns={visibleColumnKeys}
           />
         </>

@@ -5,11 +5,6 @@ import '../../../../../../test/jest/__mock__';
 
 import PreviewAccordion from './PreviewAccordion';
 import { RootContext } from '../../../../../context/RootContext';
-import {
-  getHoldingsResultsFormatterBase,
-  getInventoryResultsFormatterBase,
-  getUserResultsFormatterBase,
-} from '../../../../../utils/formatters';
 
 const users = [
   {
@@ -114,7 +109,7 @@ const renderPreviewAccordion = ({
 
 describe('PreviewAccordion', () => {
   it('should render preview accordion with users on initial step', () => {
-    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'initial', visibleColumns: JSON.stringify(Object.keys(getUserResultsFormatterBase())) });
+    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'initial', visibleColumns: JSON.stringify(Object.keys({})) });
 
     expect(screen.getByText('username')).toBeVisible();
     expect(screen.getByText(/list.preview.title/)).toBeVisible();
@@ -123,7 +118,7 @@ describe('PreviewAccordion', () => {
   });
 
   it('should render preview accordion with users on processed step', () => {
-    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'processed', visibleColumns: JSON.stringify(Object.keys(getUserResultsFormatterBase())) });
+    renderPreviewAccordion({ capabilities: 'USERS', items: users, step: 'processed', visibleColumns: JSON.stringify(Object.keys({})) });
 
     expect(screen.getByText('username')).toBeVisible();
     expect(screen.getByText(/list.preview.title/)).toBeVisible();
@@ -131,7 +126,7 @@ describe('PreviewAccordion', () => {
     expect(screen.queryByText('1641779462295')).not.toBeInTheDocument();
   });
   it('should render preview accordion with inventory items', () => {
-    renderPreviewAccordion({ capabilities: 'ITEMS', items: inventoryItems, step: 'initial', visibleColumns: JSON.stringify(Object.keys(getInventoryResultsFormatterBase())) });
+    renderPreviewAccordion({ capabilities: 'ITEMS', items: inventoryItems, step: 'initial', visibleColumns: JSON.stringify(Object.keys({})) });
 
     expect(screen.getByText('222')).toBeVisible();
     expect(screen.getByText('active')).toBeVisible();
@@ -144,7 +139,7 @@ describe('PreviewAccordion', () => {
   });
 
   it('should render preview accordion with holdings items', () => {
-    renderPreviewAccordion({ capabilities: 'HOLDING', items: holdingsItems, step: 'initial', visibleColumns: JSON.stringify(Object.keys(getHoldingsResultsFormatterBase())) });
+    renderPreviewAccordion({ capabilities: 'HOLDING', items: holdingsItems, step: 'initial', visibleColumns: JSON.stringify(Object.keys({})) });
 
     expect(screen.getByText('hrid')).toBeVisible();
     expect(screen.getByText('permanentLocation')).toBeVisible();

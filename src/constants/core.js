@@ -1,5 +1,6 @@
 export const SUPPORTED_FILE_EXTENSIONS = ['csv'];
-export const BULK_EDIT_QUERY = 'BULK_EDIT_QUERY';
+
+export const BULK_VISIBLE_COLUMNS = 'bulk-edit-visible-columns';
 
 export const PREVIEW_LIMITS = {
   ERRORS: 10,
@@ -13,8 +14,8 @@ export const APPROACHES = {
 };
 
 export const CAPABILITIES = {
-  ITEM: 'ITEM',
   USER: 'USER',
+  ITEM: 'ITEM',
   HOLDING: 'HOLDINGS_RECORD',
 };
 
