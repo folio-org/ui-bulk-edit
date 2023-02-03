@@ -29,6 +29,19 @@ const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
 const sortableFields = LOGS_COLUMNS
   .filter(({ sortable }) => sortable)
   .map(({ value }) => value);
+const columnWidths = {
+  id: '15%',
+  operationType: '12%',
+  entityType: '8%',
+  status: '8%',
+  userId: '12%',
+  startTime: '10%',
+  endTime: '10%',
+  totalNumOfRecords: '7%',
+  processedNumOfRecords: '7%',
+  editing: '7%',
+  actions: '3%',
+};
 
 const BulkEditLogs = () => {
   const location = useLocation();
@@ -92,8 +105,8 @@ const BulkEditLogs = () => {
             hasMargin
             height={height - PrevNextPagination.HEIGHT}
             width={width}
+            columnWidths={columnWidths}
           />
-
           {logs.length > 0 && (
             <PrevNextPagination
               {...pagination}

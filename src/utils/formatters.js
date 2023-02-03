@@ -1,10 +1,11 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-
 import { InfoPopover, NoValue } from '@folio/stripes/components';
 import { FolioFormattedTime } from '@folio/stripes-acq-components';
-
+import { FormattedMessage } from 'react-intl';
 import BulkEditLogsActions from '../components/BulkEditLogs/BulkEditLogsActions/BulkEditLogsActions';
+import { linkNamesMap } from '../constants';
+
+const isActionsRendered = (item) => Object.keys(item).some(key => Object.keys(linkNamesMap).includes(key));
 
 export const getLogsResultsFormatter = (userNamesMap) => ({
   id: item => item.id,
@@ -23,8 +24,8 @@ export const getLogsResultsFormatter = (userNamesMap) => ({
   ),
   actions: (item) => (
     <>
-      {item.processed === 12 ? (
-        <BulkEditLogsActions />
+      {isActionsRendered(item) ? (
+        <BulkEditLogsActions item={item} />
       ) : (
         <InfoPopover
           iconSize="medium"
