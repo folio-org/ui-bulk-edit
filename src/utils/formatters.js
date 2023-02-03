@@ -1,7 +1,9 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import { InfoPopover, NoValue } from '@folio/stripes/components';
 import { FolioFormattedTime } from '@folio/stripes-acq-components';
-import { FormattedMessage } from 'react-intl';
+
 import BulkEditLogsActions from '../components/BulkEditLogs/BulkEditLogsActions/BulkEditLogsActions';
 import { linkNamesMap } from '../constants';
 
