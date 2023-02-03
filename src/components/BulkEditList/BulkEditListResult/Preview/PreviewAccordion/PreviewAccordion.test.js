@@ -9,7 +9,7 @@ import {
   getHoldingsResultsFormatterBase,
   getInventoryResultsFormatterBase,
   getUserResultsFormatterBase,
-} from '../../../../../utills/formatters';
+} from '../../../../../utils/formatters';
 
 const users = [
   {

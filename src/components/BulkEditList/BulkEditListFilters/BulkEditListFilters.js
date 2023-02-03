@@ -31,8 +31,8 @@ import { RootContext } from '../../../context/RootContext';
 import { LogsFilters } from './LogsFilters/LogsFilters';
 import { useUpload } from '../../../hooks/api/useUpload';
 import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
-import { buildQuery } from '../../../utills/buildQuery';
-import { getCapabilityOptions, isCapabilityDisabled } from '../../../utills/filters';
+import { buildQuery } from '../../../utils/buildQuery';
+import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
 
 export const BulkEditListFilters = ({
   filters,

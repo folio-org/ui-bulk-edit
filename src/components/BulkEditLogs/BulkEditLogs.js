@@ -13,7 +13,7 @@ import {
 } from '@folio/stripes-acq-components';
 
 import { LOGS_COLUMNS } from '../../constants';
-import { getLogsResultsFormatter } from '../../utills/formatters';
+import { getLogsResultsFormatter } from '../../utils/formatters';
 import { useBulkEditLogs } from '../../hooks/api/useBulkEditLogs';
 
 const resetData = () => {};
@@ -27,6 +27,19 @@ const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
 const sortableFields = LOGS_COLUMNS
   .filter(({ sortable }) => sortable)
   .map(({ value }) => value);
+const columnWidths = {
+  id: '14%',
+  operationType: '12%',
+  entityType: '8%',
+  status: '8%',
+  userId: '12%',
+  startTime: '10%',
+  endTime: '10%',
+  totalNumOfRecords: '7%',
+  processedNumOfRecords: '7%',
+  editing: '7%',
+  actions: '3%',
+};
 
 const BulkEditLogs = () => {
   const location = useLocation();
@@ -70,6 +83,7 @@ const BulkEditLogs = () => {
           columnMapping={columnMapping}
           visibleColumns={visibleColumns}
           formatter={getLogsResultsFormatter(userNamesMap)}
+          columnWidths={columnWidths}
           isEmptyMessage={resultsStatusMessage}
           pagingType="none"
           sortOrder={sortingField}
