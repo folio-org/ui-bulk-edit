@@ -14,8 +14,8 @@ export const APPROACHES = {
 };
 
 export const CAPABILITIES = {
-  ITEM: 'ITEM',
   USER: 'USER',
+  ITEM: 'ITEM',
   HOLDING: 'HOLDINGS_RECORD',
 };
 
