@@ -18,6 +18,7 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
         }
         : {
           step,
+          approach,
         };
 
       return ky.post(`bulk-operations/${id}/start`, {
