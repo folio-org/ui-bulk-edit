@@ -10,12 +10,6 @@ export const LOGS_COLUMNS = [
     sortable: true,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.operationType" />,
-    value: 'operationType',
-    disabled: false,
-    selected: false,
-  },
-  {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.entityType" />,
     value: 'entityType',
     disabled: false,

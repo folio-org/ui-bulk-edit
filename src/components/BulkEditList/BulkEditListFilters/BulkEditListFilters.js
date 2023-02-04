@@ -183,6 +183,7 @@ export const BulkEditListFilters = ({
       step: EDITING_STEPS.UPLOAD,
       query: parsedQuery,
       approach: APPROACHES.QUERY,
+      entityType: capabilities,
     });
 
     history.replace({

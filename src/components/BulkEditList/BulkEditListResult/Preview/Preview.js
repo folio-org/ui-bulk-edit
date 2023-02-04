@@ -38,7 +38,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
     const countErrors = isInitialPreview
       ? bulkDetails.matchedNumOfErrors
-      : bulkDetails.commitedNumOfErrors;
+      : bulkDetails.committedNumOfErrors;
 
     setCountOfErrors(countErrors);
     setCountOfRecords(countRecords);
@@ -101,6 +101,6 @@ Preview.propTypes = {
     committedNumOfRecords: PropTypes.number,
     processedNumOfRecords: PropTypes.number,
     matchedNumOfErrors: PropTypes.number,
-    commitedNumOfErrors: PropTypes.number,
+    committedNumOfErrors: PropTypes.number,
   }),
 };
