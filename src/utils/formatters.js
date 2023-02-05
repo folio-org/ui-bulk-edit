@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { InfoPopover, NoValue } from '@folio/stripes/components';
+import { NoValue } from '@folio/stripes/components';
 import { FolioFormattedTime } from '@folio/stripes-acq-components';
 
 import BulkEditLogsActions from '../components/BulkEditLogs/BulkEditLogsActions/BulkEditLogsActions';
@@ -24,16 +24,5 @@ export const getLogsResultsFormatter = (userNamesMap) => ({
       ? <FormattedMessage id={`ui-bulk-edit.logs.approach.${item.approach}`} />
       : <NoValue />
   ),
-  actions: (item) => (
-    <>
-      {isActionsRendered(item) ? (
-        <BulkEditLogsActions item={item} />
-      ) : (
-        <InfoPopover
-          iconSize="medium"
-          content={<FormattedMessage id="ui-bulk-edit.list.info.filesUnavailable" />}
-        />
-      )}
-    </>
-  ),
+  actions: (item) => isActionsRendered(item) && <BulkEditLogsActions item={item} />,
 });

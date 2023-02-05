@@ -56,7 +56,7 @@ export const useBulkEditLogs = ({ filters, pagination }) => {
       });
   };
 
-  const { data, isLoading } = useQuery(
+  const { data, isFetching } = useQuery(
     queryKey,
     queryFn,
     {
@@ -69,6 +69,6 @@ export const useBulkEditLogs = ({ filters, pagination }) => {
     userNamesMap: data?.userNamesMap || {},
     logs: data?.bulkOperations || [],
     logsCount: data?.totalRecords || 0,
-    isLoading,
+    isLoading: isFetching,
   };
 };

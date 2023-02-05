@@ -322,7 +322,6 @@
   "logs.filter.startDate": "Start date",
   "logs.filter.endDate": "End date",
   "list.result.emptyMessage.logs": "Choose a filter to show results.",
-  "list.info.filesUnavailable": "Files are unavailable for download because 30 days have elapsed since the date the job was run.",
   "list.actions.download": "Download",
 
   "retrievedDataList.title": "{matched} matching {capability} records found.",
