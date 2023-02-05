@@ -316,6 +316,7 @@
   "logs.entityType.USER": "Users",
   "logs.approach.IN_APP": "In app",
   "logs.approach.MANUAL": "CSV",
+  "logs.approach.QUERY": "Query",
   "logs.filter.option.edit": "Edit",
   "logs.filter.option.delete": "Delete",
   "logs.filter.startDate": "Start date",
