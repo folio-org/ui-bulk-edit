@@ -34,7 +34,7 @@ const BulkEditActionMenu = ({
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
   const step = search.get('step');
-  const fileName = search.get('fileName');
+  const fileName = search.get('fileName') || `${capability}-${search.get('criteria')}.csv`;
 
   const {
     hasCsvEditPerms,

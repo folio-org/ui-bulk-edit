@@ -77,7 +77,12 @@ const BulkEditInAppPreviewModal = ({
       fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
     },
     onSuccess: data => {
-      const fileName = new URLSearchParams(history.location.search).get('fileName');
+      const searchParams = new URLSearchParams(history.location.search);
+      let fileName = searchParams.get('fileName');
+
+      if (!fileName) {
+        fileName = `${capabilities}-${searchParams.get('criteria')}.csv`;
+      }
 
       saveAs(new Blob([data]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
     },

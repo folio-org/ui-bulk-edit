@@ -15,7 +15,9 @@ export const useRecordsPreview = ({ id, step, queryOptions, capabilities }) => {
     {
       queryKey: ['records', id, step],
       cacheTime: 0,
-      queryFn: () => ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json(),
+      queryFn: () => {
+        return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json();
+      },
       ...queryOptions,
     },
   );

@@ -15,7 +15,7 @@ export const ProgressBar = () => {
   const { id } = useParams();
   const { bulkDetails, clearIntervalAndRedirect } = useBulkOperationDetails({
     id,
-    interval: 500,
+    interval: 1000 * 3,
   });
 
   const processedTitle = new URLSearchParams(location.search).get('processedFileName');
@@ -81,4 +81,3 @@ export const ProgressBar = () => {
     </div>
   );
 };
-

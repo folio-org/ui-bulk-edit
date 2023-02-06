@@ -1,13 +1,42 @@
-import { useOkapiKy } from '@folio/stripes/core';
-import { useMutation } from 'react-query';
+import { useRef } from 'react';
+import { useMutation, useQuery } from 'react-query';
 
-import { IDENTIFIERS } from '../../constants';
+import { useOkapiKy } from '@folio/stripes/core';
+
+import {
+  IDENTIFIERS,
+  JOB_STATUSES,
+  EDITING_STEPS,
+} from '../../constants';
 
 export const useBulkOperationStart = (mutationOptions = {}) => {
+  const params = useRef({});
   const ky = useOkapiKy();
 
+  const { refetch: fetchBulkOperation } = useQuery({
+    queryFn: async () => {
+      const { id, step } = params.current;
+
+      const bulkOperation = await ky.get(`bulk-operations/${id}`).json();
+
+      if (
+        step === EDITING_STEPS.EDIT
+        && ![JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.FAILED].includes(bulkOperation.status)
+      ) {
+        return Promise.reject();
+      }
+
+      return bulkOperation;
+    },
+    cacheTime: 0,
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 15000),
+    retry: true,
+    enabled: false,
+  });
+
   const { mutateAsync: bulkOperationStart, isLoading } = useMutation({
-    mutationFn: ({ id, approach, entityType, step, query }) => {
+    mutationFn: async ({ id, approach, entityType, step, query }) => {
+      let response;
       const body = query
         ? {
           step,
@@ -21,9 +50,18 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
           approach,
         };
 
-      return ky.post(`bulk-operations/${id}/start`, {
-        json: body,
-      }).json();
+      params.current = { id, step };
+
+      try {
+        response = await ky.post(`bulk-operations/${id}/start`, {
+          json: body,
+          timeout: step === EDITING_STEPS.COMMIT ? 1000 : false,
+        }).json();
+      } catch {
+        response = fetchBulkOperation();
+      }
+
+      return response;
     },
     ...mutationOptions,
   });
