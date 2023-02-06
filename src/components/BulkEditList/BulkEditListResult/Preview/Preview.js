@@ -84,6 +84,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
             entries={bulkDetails.totalNumOfRecords}
             matched={countOfRecords}
             countOfErrors={countOfErrors}
+            isInitial={isInitial}
           />
         )}
       </AccordionSet>
