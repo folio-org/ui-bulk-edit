@@ -1,5 +1,7 @@
+import { useRef } from 'react';
 import { useQuery } from 'react-query';
 import noop from 'lodash/noop';
+import uniq from 'lodash/uniq';
 
 import {
   useOkapiKy,
@@ -8,6 +10,7 @@ import {
 import {
   makeQueryBuilder,
   getFiltersCount,
+  batchRequest,
 } from '@folio/stripes-acq-components';
 
 const buildLogsQuery = makeQueryBuilder(
@@ -17,6 +20,7 @@ const buildLogsQuery = makeQueryBuilder(
 );
 
 export const useBulkEditLogs = ({ filters, pagination }) => {
+  const usersMap = useRef({});
   const ky = useOkapiKy();
   const [namespace] = useNamespace({ key: 'bulk-edit-logs' });
 
@@ -30,30 +34,43 @@ export const useBulkEditLogs = ({ filters, pagination }) => {
   };
 
   const queryKey = [namespace, pagination.timestamp, pagination.limit, pagination.offset];
-  const queryFn = () => {
+  const queryFn = async () => {
     if (!filtersCount) {
       return { bulkOperations: [], totalRecords: 0 };
     }
 
-    return ky.get('bulk-operations', { searchParams }).json()
-      .then(async response => {
-        const { bulkOperations = [], totalRecords } = response;
-        let userNamesMap = {};
+    const { bulkOperations, totalRecords } = await ky.get('bulk-operations', { searchParams }).json();
+    const userIds = uniq(bulkOperations.map(({ userId }) => userId))
+      .filter(userId => userId && !usersMap.current[userId]);
+    const fetchedUsers = await batchRequest(
+      async ({ params }) => {
+        const usersResponse = await ky.get('users', { searchParams: params }).json();
 
-        for (const item of bulkOperations) {
-          if (item.userId) {
-            const user = await ky.get(`users/${item.userId}`).json();
+        return usersResponse.users;
+      },
+      userIds,
+    );
 
-            userNamesMap = { ...userNamesMap, [item.userId]: `${user.personal?.firstName} ${user.personal?.lastName}` };
-          }
-        }
+    if (fetchedUsers.length) {
+      usersMap.current = {
+        ...usersMap.current,
+        ...(
+          fetchedUsers.reduce((acc, { id, personal }) => {
+            acc[id] = `${personal?.firstName || ''} ${personal?.lastName || ''}`;
 
-        return {
-          bulkOperations,
-          userNamesMap,
-          totalRecords,
-        };
-      });
+            return acc;
+          }, {})
+        ),
+      };
+    }
+
+    return {
+      bulkOperations: bulkOperations.map(operation => ({
+        ...operation,
+        runBy: usersMap.current[operation.userId],
+      })),
+      totalRecords,
+    };
   };
 
   const { data, isFetching } = useQuery(
@@ -66,7 +83,6 @@ export const useBulkEditLogs = ({ filters, pagination }) => {
   );
 
   return {
-    userNamesMap: data?.userNamesMap || {},
     logs: data?.bulkOperations || [],
     logsCount: data?.totalRecords || 0,
     isLoading: isFetching,

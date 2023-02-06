@@ -48,7 +48,6 @@ const BulkEditLogs = () => {
   } = usePagination({ limit: RESULT_COUNT_INCREMENT, offset: 0 });
 
   const {
-    userNamesMap,
     logs,
     logsCount,
     isLoading,
@@ -82,7 +81,7 @@ const BulkEditLogs = () => {
             totalCount={logsCount}
             columnMapping={columnMapping}
             visibleColumns={visibleColumns}
-            formatter={getLogsResultsFormatter(userNamesMap)}
+            formatter={getLogsResultsFormatter()}
             isEmptyMessage={resultsStatusMessage}
             sortOrder={sortingField}
             sortDirection={sortingDirection}

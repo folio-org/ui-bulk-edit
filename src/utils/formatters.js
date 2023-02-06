@@ -9,12 +9,12 @@ import { linkNamesMap } from '../constants';
 
 const isActionsRendered = (item) => Object.keys(item).some(key => Object.keys(linkNamesMap).includes(key));
 
-export const getLogsResultsFormatter = (userNamesMap) => ({
+export const getLogsResultsFormatter = () => ({
   id: item => item.id,
   operationType: item => item.operationType,
   entityType: item => <FormattedMessage id={`ui-bulk-edit.logs.entityType.${item.entityType}`} />,
   status: item => <FormattedMessage id={`ui-bulk-edit.logs.status.${item.status}`} />,
-  userId: item => userNamesMap[item.userId],
+  userId: item => item.runBy,
   startTime: item => <FolioFormattedTime dateString={item.startTime} />,
   endTime: item => <FolioFormattedTime dateString={item.endTime} />,
   totalNumOfRecords: item => item.totalNumOfRecords,
