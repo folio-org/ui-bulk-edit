@@ -16,14 +16,13 @@ import {
   CAPABILITIES,
   getDownloadLinks,
   EDITING_STEPS,
+  JOB_STATUSES,
   BULK_VISIBLE_COLUMNS,
   getFormattedFilePrefixDate,
 } from '../../constants';
 import { useBulkPermissions, usePathParams } from '../../hooks';
 import { RootContext } from '../../context/RootContext';
 import { useBulkOperationDetails, useFileDownload } from '../../hooks/api';
-
-
 
 const BulkEditActionMenu = ({
   onEdit,
@@ -61,7 +60,10 @@ const BulkEditActionMenu = ({
 
   const isStartBulkCsvActive = hasCsvEditPerms && capability === CAPABILITIES.USER;
   const isInitialStep = step === EDITING_STEPS.UPLOAD;
-  const isStartBulkInAppActive = hasAnyInAppEditPermissions && isInitialStep;
+  const isStartBulkInAppActive =
+    hasAnyInAppEditPermissions
+    && isInitialStep
+    && bulkDetails.status === JOB_STATUSES.DATA_MODIFICATION;
 
   const isLastUnselectedColumn = (value) => {
     return selectedValues?.length === 1 && selectedValues?.[0] === value;
@@ -115,24 +117,24 @@ const BulkEditActionMenu = ({
     return (
       <>
         {isStartBulkInAppActive && (
-        <Button
-          buttonStyle="dropdownItem"
-          onClick={() => handleOnStartEdit(APPROACHES.IN_APP)}
-        >
-          <Icon icon="edit">
-            <FormattedMessage id="ui-bulk-edit.start.edit" />
-          </Icon>
-        </Button>
+          <Button
+            buttonStyle="dropdownItem"
+            onClick={() => handleOnStartEdit(APPROACHES.IN_APP)}
+          >
+            <Icon icon="edit">
+              <FormattedMessage id="ui-bulk-edit.start.edit" />
+            </Icon>
+          </Button>
         )}
         {isStartBulkCsvActive && (
-        <Button
-          buttonStyle="dropdownItem"
-          onClick={() => handleOnStartEdit(APPROACHES.MANUAL)}
-        >
-          <Icon icon="edit">
-            <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
-          </Icon>
-        </Button>
+          <Button
+            buttonStyle="dropdownItem"
+            onClick={() => handleOnStartEdit(APPROACHES.MANUAL)}
+          >
+            <Icon icon="edit">
+              <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
+            </Icon>
+          </Button>
         )}
       </>
     );
