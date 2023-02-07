@@ -63,7 +63,7 @@ const BulkEditActionMenu = ({
   const isStartBulkInAppActive =
     hasAnyInAppEditPermissions
     && isInitialStep
-    && bulkDetails.status === JOB_STATUSES.DATA_MODIFICATION;
+    && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails.status);
 
   const isLastUnselectedColumn = (value) => {
     return selectedValues?.length === 1 && selectedValues?.[0] === value;
