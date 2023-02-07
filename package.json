@@ -41,17 +41,36 @@
         ]
       },
       {
+        "permissionName": "ui-bulk-edit.view.base",
+        "displayName": "Bulk Edit: (CSV) View base permissions",
+        "visible": false,
+        "subPermissions": [
+          "module.bulk-edit.enabled",
+          "bulk-operations.item.preview.get",
+          "bulk-operations.item.preview.download.get",
+          "bulk-operations.item.errors.get",
+          "bulk-operations.collection.get",
+          "bulk-operations.item.get",
+          "usergroups.collection.get"
+        ]
+      },
+      {
+        "permissionName": "ui-bulk-edit.edit.base",
+        "displayName": "Bulk Edit: (CSV) View edit permissions",
+        "visible": false,
+        "subPermissions": [
+          "ui-bulk-edit.view.base",
+          "bulk-operations.item.upload.post",
+          "bulk-operations.item.content-update.post",
+          "bulk-operations.item.start.post"
+        ]
+      },
+      {
         "permissionName": "ui-bulk-edit.view",
         "displayName": "Bulk Edit: (CSV) View",
         "visible": true,
         "subPermissions": [
-          "module.bulk-edit.enabled",
-          "bulk-edit.preview.users.collection.get",
-          "bulk-edit.preview.updated-items.download.get",
-          "bulk-edit.errors.collection.get",
-          "usergroups.collection.get",
-          "data-export.job.item.get",
-          "bulk-edit.preview-users.collection.get"
+          "ui-bulk-edit.view.base"
         ]
       },
       {
@@ -59,11 +78,7 @@
         "displayName": "Bulk Edit: (CSV) Edit",
         "subPermissions": [
           "ui-bulk-edit.view",
-          "bulk-edit.item.post",
-          "bulk-edit.items.content-update.upload.post",
-          "bulk-edit.start.item.post",
-          "bulk-edit.roll-back.item.post",
-          "data-export.job.item.post"
+          "ui-bulk-edit.edit.base"
         ],
         "visible": true
       },
@@ -79,13 +94,7 @@
         "permissionName": "ui-bulk-edit.app-view",
         "displayName": "Bulk Edit: In app - View",
         "subPermissions": [
-          "module.bulk-edit.enabled",
-          "bulk-edit.preview.items.collection.get",
-          "bulk-edit.preview.updated-items.download.get",
-          "bulk-edit.errors.collection.get",
-          "usergroups.collection.get",
-          "data-export.job.item.get",
-          "bulk-edit.preview-items.collection.get"
+          "ui-bulk-edit.view.base"
         ],
         "visible": true
       },
@@ -94,31 +103,7 @@
         "displayName": "Bulk Edit: In app - Edit",
         "subPermissions": [
           "ui-bulk-edit.app-view",
-          "bulk-edit.item.post",
-          "bulk-edit.items.content-update.upload.post",
-          "bulk-edit.start.item.post",
-          "bulk-edit.roll-back.item.post",
-          "data-export.job.item.post",
-          "remote-storage.mappings.collection.get",
-          "inventory-storage.locations.collection.get",
-          "inventory-storage.location-units.institutions.collection.get",
-          "inventory-storage.location-units.campuses.collection.get",
-          "inventory-storage.location-units.libraries.collection.get",
-          "bulk-edit.preview-holdings.collection.get",
-          "bulk-edit.preview-items.collection.get",
-          "bulk-edit.items-content-update.collection.post",
-          "bulk-edit.holdings-content-update.collection.post",
-          "bulk-edit.preview.updated-items.collection.get",
-          "bulk-edit.preview.updated-holdings.collection.get",
-          "inventory-storage.call-number-types.item.get",
-          "inventory-storage.call-number-types.collection.get",
-          "inventory-storage.holdings-sources.collection.get",
-          "inventory-storage.holdings-sources.item.get",
-          "inventory-storage.holdings-types.item.get",
-          "inventory-storage.holdings-types.collection.get",
-          "inventory.items.collection.get",
-          "inventory-storage.loan-types.item.get",
-          "inventory-storage.loan-types.collection.get"
+          "ui-bulk-edit.edit.base"
         ],
         "visible": true
       },
@@ -126,13 +111,7 @@
         "permissionName": "ui-bulk-edit.app-edit.users",
         "displayName": "Bulk edit: In app - Update user records",
         "subPermissions": [
-          "ui-bulk-edit.view",
-          "bulk-edit.item.post",
-          "data-export.job.item.post",
-          "bulk-edit.users.content-update.upload.post",
-          "bulk-edit.users-content-update.collection.post",
-          "bulk-edit.preview.updated-users.collection.get",
-          "bulk-edit.start.item.post"
+          "ui-bulk-edit.edit.base"
         ],
         "visible": true
       },
