@@ -11,7 +11,7 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
 import { usePathParams, useBulkPermissions } from '../../hooks';
-import { CRITERIA, APPROACHES, EDITING_STEPS } from '../../constants';
+import { CRITERIA, APPROACHES, EDITING_STEPS, BULK_VISIBLE_COLUMNS } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
 
@@ -144,7 +144,7 @@ export const BulkEditList = () => {
 
   const renderNewBulkFooter = () => {
     const handleStartNewBulkEdit = () => {
-      localStorage.removeItem('bulk-edit-visible-columns');
+      localStorage.removeItem(BULK_VISIBLE_COLUMNS);
       setVisibleColumns(null);
       // redirect to initial state with saved capabilities in search
       history.replace({
