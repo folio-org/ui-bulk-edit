@@ -37,7 +37,6 @@
         "displayName": "UI: Bulk edit module is enabled",
         "visible": false,
         "subPermissions": [
-          "bulk-operations.all"
         ]
       },
       {
