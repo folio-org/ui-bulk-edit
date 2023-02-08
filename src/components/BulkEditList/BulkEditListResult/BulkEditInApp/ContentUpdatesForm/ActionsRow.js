@@ -35,7 +35,6 @@ export const ActionsRow = ({ actions, onChange }) => {
     ],
   );
 
-
   return actions.map((action, actionIndex) => {
     if (!action) return null;
 

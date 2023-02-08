@@ -25,7 +25,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const step = search.get('step');
   const capabilities = search.get('capabilities');
 
-  const { contentData, columns, columnsMapping } = useRecordsPreview({ id, step, capabilities });
+  const { contentData, columns, columnMapping } = useRecordsPreview({ id, step, capabilities });
   const { data } = useErrorsPreview({ id });
   const errors = data?.errors || [];
 
@@ -54,14 +54,14 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   return (
     <AccordionStatus>
       {!isInitial && (
-      <Headline size="large" margin="small">
-        <MessageBanner type="success" contentClassName="SuccessBanner">
-          <FormattedMessage
-            id="ui-bulk-edit.recordsSuccessfullyChanged"
-            values={{ value: countOfRecords }}
-          />
-        </MessageBanner>
-      </Headline>
+        <Headline size="large" margin="small">
+          <MessageBanner type="success" contentClassName="SuccessBanner">
+            <FormattedMessage
+              id="ui-bulk-edit.recordsSuccessfullyChanged"
+              values={{ value: countOfRecords }}
+            />
+          </MessageBanner>
+        </Headline>
       )}
       {title && (
         <Headline size="large" margin="medium">
@@ -70,13 +70,13 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
       )}
       <AccordionSet>
         {!!contentData?.length && (
-        <PreviewAccordion
-          isInitial={isInitial}
-          columns={columns}
-          contentData={contentData}
-          columnsMapping={columnsMapping}
-          visibleColumns={visibleColumns}
-        />
+          <PreviewAccordion
+            isInitial={isInitial}
+            columns={columns}
+            contentData={contentData}
+            columnMapping={columnMapping}
+            visibleColumns={visibleColumns}
+          />
         )}
         {!!errors?.length && (
           <ErrorsAccordion

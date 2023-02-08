@@ -1,90 +1,70 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
-import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../../test/jest/__mock__';
 
 import { queryClient } from '../../../test/jest/utils/queryClient';
-import BulkEdit from '../BulkEdit';
 
-jest.mock('../../API', () => ({
-  useLaunchJob: () => ({ startJob: jest.fn(() => Promise.resolve({ data: {} })) }),
-  useUserGroupsMap: () => ({ data: {} }),
-  useJob: () => ({
-    data: {
-      files: ['file1.csv', 'file2.csv'],
-      status: 'SUCCESSFUL',
-    },
-    isLoading: false,
-    refetch: jest.fn(),
-  }),
-  usePreviewRecords: () => ({
-    items: [],
-  }),
-  useErrorsList: () => ({ errors: [{ message: 'errorID ,errorMessage' }] }),
-}));
+import { CAPABILITIES, IDENTIFIERS, CRITERIA } from '../../constants';
 
-const setQueryData = jest.fn();
+import { BulkEditList } from './BulkEditList';
 
-jest.doMock('react-query', () => ({
-  ...jest.requireActual('react-query'),
-  useQueryClient: () => ({
-    setQueryData,
-  }),
-}));
+jest.mock('./BulkEditListFilters/BulkEditListFilters', () => {
+  return {
+    BulkEditListFilters: jest.fn().mockReturnValue('BulkEditListFilters'),
+  };
+});
+jest.mock('../BulkEditLogs/BulkEditLogs', () => {
+  return jest.fn().mockReturnValue('BulkEditLogs');
+});
+jest.mock('./BulkEditListResult', () => {
+  return {
+    BulkEditListResult: jest.fn().mockReturnValue('BulkEditListResult'),
+  };
+});
+jest.mock('./BulkEditListResult/BulkEditManualUploadModal', () => {
+  return {
+    BulkEditManualUploadModal: jest.fn().mockReturnValue('BulkEditManualUploadModal'),
+  };
+});
+jest.mock('./BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal', () => {
+  return jest.fn().mockReturnValue('BulkEditInAppPreviewModal');
+});
 
-
-const renderBulkEdit = () => {
+const renderBulkEditList = ({ criteria }) => {
+  const params = new URLSearchParams({
+    criteria,
+    capabilities: CAPABILITIES.USER,
+    identifier: IDENTIFIERS.ID,
+    fileName: 'barcodes.csv',
+  }).toString();
   return render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={['/bulk-edit/1/preview?capabilities=ITEMS&fileName=barcodes.csv&identifier=BARCODE']}>2
-        <BulkEdit />
+      <MemoryRouter initialEntries={[`/bulk-edit/1/preview?${params}`]}>2
+        <BulkEditList />
       </MemoryRouter>,
     </QueryClientProvider>,
   );
 };
 
-describe('BulkEdit', () => {
-  beforeEach(() => {
-    useOkapiKy
-      .mockClear()
-      .mockReturnValue({
-        post: () => ({
-          json: () => ({
-            id: '1',
-          }),
-        }),
-      });
+describe('BulkEditList', () => {
+  it('should display Filters pane', async () => {
+    renderBulkEditList({ criteria: CRITERIA.LOGS });
+
+    expect(screen.getByText('BulkEditListFilters')).toBeVisible();
   });
 
-  it('displays New bulk edit button, if errors or preview are present', async () => {
-    renderBulkEdit();
+  it('should display Logs pane when criteria is logs', async () => {
+    renderBulkEditList({ criteria: CRITERIA.LOGS });
 
-    const errrorID = await screen.findByText(/errorID/);
-    const errorMessage = await screen.findByText(/errorMessage/);
-
-    expect(errrorID).toBeVisible();
-    expect(errorMessage).toBeVisible();
-
-    const newBulkEditBtn = await screen.findByText(/ui-bulk-edit.start.newBulkEdit/);
-
-    expect(newBulkEditBtn).toBeVisible();
+    expect(screen.getByText(/BulkEditLogs/)).toBeVisible();
   });
 
-  it('should call handler if clicked on New bulk edit button', async () => {
-    renderBulkEdit();
+  it('should display Bulk edit preview container when criteria is not logs', async () => {
+    renderBulkEditList({ criteria: CRITERIA.IDENTIFIER });
 
-    const newBulkEditBtn = await screen.findByText(/ui-bulk-edit.start.newBulkEdit/);
-
-    expect(newBulkEditBtn).toBeVisible();
-
-    userEvent.click(newBulkEditBtn);
-
-    waitFor(() => {
-      expect(setQueryData).toHaveBeenCalled();
-    });
+    expect(screen.getByText(/BulkEditListResult/)).toBeVisible();
   });
 });

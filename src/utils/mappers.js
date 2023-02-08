@@ -23,7 +23,7 @@ export const getMappedTableData = ({ data, capabilities, intl }) => {
     selected: !cell.visible,
   }));
 
-  const columnsMapping = columns.reduce((acc, { value, label }) => {
+  const columnMapping = columns.reduce((acc, { value, label }) => {
     const mappedCapability = CAPABILITIES_TRANSLATION_VALUE[capabilities];
 
     acc[value] = intl.formatMessage({ id: `ui-bulk-edit.columns.${mappedCapability}.${label}` });
@@ -47,7 +47,7 @@ export const getMappedTableData = ({ data, capabilities, intl }) => {
   }) || [];
 
   return {
-    columnsMapping,
+    columnMapping,
     columns,
     contentData,
   };

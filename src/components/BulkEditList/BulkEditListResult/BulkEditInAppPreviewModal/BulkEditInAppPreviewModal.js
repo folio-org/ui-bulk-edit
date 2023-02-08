@@ -55,7 +55,7 @@ const BulkEditInAppPreviewModal = ({
 
   const {
     contentData,
-    columnsMapping,
+    columnMapping,
     refetch: fetchPreview,
   } = useRecordsPreview({
     id: bulkOperationId,
@@ -162,7 +162,7 @@ const BulkEditInAppPreviewModal = ({
           <MultiColumnList
             striped
             contentData={contentData}
-            columnsMapping={columnsMapping}
+            columnMapping={columnMapping}
             visibleColumns={visibleColumnKeys}
           />
         </>

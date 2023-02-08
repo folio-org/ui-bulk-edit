@@ -1,12 +1,16 @@
-import { Icon, Loading } from '@folio/stripes/components';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { useLocation } from 'react-router-dom';
-import { useParams } from 'react-router';
 import { useEffect } from 'react';
+import { useParams } from 'react-router';
+import { useLocation } from 'react-router-dom';
+import { FormattedMessage, useIntl } from 'react-intl';
+
+import { Icon, Loading } from '@folio/stripes/components';
+
 import { useShowCallout } from '@folio/stripes-acq-components';
-import css from './ProgressBar.css';
-import { useBulkOperationDetails } from '../../hooks/api/useBulkOperationDetails';
+
+import { useBulkOperationDetails } from '../../hooks/api';
 import { EDITING_STEPS, JOB_STATUSES } from '../../constants';
+
+import css from './ProgressBar.css';
 
 export const ProgressBar = () => {
   const callout = useShowCallout();

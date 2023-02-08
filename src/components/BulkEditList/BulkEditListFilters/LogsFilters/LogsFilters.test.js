@@ -1,15 +1,17 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router';
 import {
+  act,
   fireEvent,
-  logDOM,
   render,
   screen,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
 import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
-import { MemoryRouter } from 'react-router';
+
 import { LogsFilters } from './LogsFilters';
 
 const activeFiltersMock = {
@@ -41,7 +43,6 @@ describe('LogsFilters', () => {
     renderLogsFilters();
 
     expect(screen.getByTestId('logsFilters')).toBeInTheDocument();
-    logDOM();
   });
 
   it('should be enabled filter buttons', () => {
@@ -50,14 +51,13 @@ describe('LogsFilters', () => {
     const filterButton = [
       /logs.filter.title.status/,
       /logs.filter.title.capability/,
-      /logs.filter.title.types/,
       /logs.filter.startDate/,
       /logs.filter.endDate/,
     ];
 
     filterButton.forEach(el => expect(screen.getByRole('button', { name: el })).toBeEnabled());
     filterButton.forEach(el => {
-      userEvent.click(screen.getByRole('button', { name: el }));
+      act(() => userEvent.click(screen.getByRole('button', { name: el })));
     });
   });
 

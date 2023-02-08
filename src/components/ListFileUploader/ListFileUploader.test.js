@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  act,
   screen,
   render,
   fireEvent,
@@ -23,6 +24,7 @@ const renderListFileUploader = ({
 }) => {
   render(
     <ListFileUploader
+      className="FileUploader"
       handleDragEnter={onDragEnterMock}
       handleDragLeave={onDragLeaveMock}
       handleDrop={onDropMock}
@@ -38,6 +40,7 @@ const renderListFileUploader = ({
 
 describe('FileUploader', () => {
   afterEach(() => jest.clearAllMocks());
+
   it('should display FileUploader', () => {
     renderListFileUploader(
       {
@@ -84,8 +87,11 @@ describe('FileUploader', () => {
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
-    dispatchEvt(fileInput, 'dragenter', data);
-    await flushPromises();
+    await act(() => {
+      dispatchEvt(fileInput, 'dragenter', data);
+
+      return flushPromises();
+    });
 
     expect(onDragEnterMock).toHaveBeenCalled();
   });
@@ -104,13 +110,19 @@ describe('FileUploader', () => {
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
-    dispatchEvt(fileInput, 'dragenter', data);
-    await flushPromises();
+    await act(() => {
+      dispatchEvt(fileInput, 'dragenter', data);
+
+      return flushPromises();
+    });
 
     expect(onDragEnterMock).toHaveBeenCalled();
 
-    fireEvent.drop(fileInput, event);
-    await flushPromises();
+    await act(() => {
+      fireEvent.drop(fileInput, event);
+
+      return flushPromises();
+    });
 
     expect(onDropMock).toHaveBeenCalled();
   });

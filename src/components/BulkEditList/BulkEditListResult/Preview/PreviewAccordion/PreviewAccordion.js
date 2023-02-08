@@ -9,7 +9,7 @@ import {
 } from '@folio/stripes/components';
 
 
-const PreviewAccordion = ({ contentData, columnsMapping, visibleColumns, isInitial }) => {
+const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitial }) => {
   const translationKey = isInitial ? 'title' : 'titleChanged';
 
   const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
@@ -17,7 +17,6 @@ const PreviewAccordion = ({ contentData, columnsMapping, visibleColumns, isIniti
   const visibleColumnKeys = useMemo(() => {
     return visibleColumns?.filter(item => !item.selected).map(item => item.value);
   }, [visibleColumns]);
-
 
   return (
     <Accordion
@@ -28,7 +27,7 @@ const PreviewAccordion = ({ contentData, columnsMapping, visibleColumns, isIniti
           <MultiColumnList
             striped
             contentData={contentData}
-            columnsMapping={columnsMapping}
+            columnMapping={columnMapping}
             visibleColumns={visibleColumnKeys}
           />
         </Col>
@@ -39,7 +38,7 @@ const PreviewAccordion = ({ contentData, columnsMapping, visibleColumns, isIniti
 
 PreviewAccordion.propTypes = {
   contentData: PropTypes.arrayOf(PropTypes.object),
-  columnsMapping: PropTypes.object,
+  columnMapping: PropTypes.object,
   visibleColumns: PropTypes.arrayOf(PropTypes.object),
   isInitial: PropTypes.bool,
 };

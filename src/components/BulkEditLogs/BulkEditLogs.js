@@ -16,7 +16,7 @@ import {
 import { LOGS_COLUMNS } from '../../constants';
 import { getLogsResultsFormatter } from '../../utils/formatters';
 import { useLogsQueryParams } from '../../hooks';
-import { useBulkEditLogs } from '../../hooks/api/useBulkEditLogs';
+import { useBulkEditLogs } from '../../hooks/api';
 
 const resetData = () => {};
 

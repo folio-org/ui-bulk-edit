@@ -1,10 +1,13 @@
 import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useLocation, useParams } from 'react-router';
+
 import { Loading } from '@folio/stripes/components';
-import { Preview } from '../Preview/Preview';
-import { useBulkOperationDetails } from '../../../../hooks/api/useBulkOperationDetails';
+
+import { useBulkOperationDetails } from '../../../../hooks/api';
 import { EDITING_STEPS } from '../../../../constants';
+import { Preview } from '../Preview/Preview';
+
 import css from '../../../BulkEdit.css';
 
 const PreviewContainer = () => {

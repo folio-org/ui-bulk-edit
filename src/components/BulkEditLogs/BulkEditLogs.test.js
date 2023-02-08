@@ -1,51 +1,47 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { QueryClientProvider } from 'react-query';
-import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../../test/jest/__mock__';
-
-import BulkEdit from '../BulkEdit';
-import { queryClient } from '../../../test/jest/utils/queryClient';
-import { LOGS_COLUMNS } from '../../constants';
 import { bulkEditLogsData } from '../../../test/jest/__mock__/fakeData';
 
-jest.mock('../BulkEditList/BulkEditListResult', () => ({
-  BulkEditListResult: () => 'BulkEditListResult',
-}));
+import { LOGS_COLUMNS } from '../../constants';
+import { useBulkEditLogs } from '../../hooks/api';
 
-jest.doMock('../../API', () => ({
-  ...jest.requireActual('../../API'),
-  useBulkEditLogs: () => ({ isLoading: false, logs: bulkEditLogsData }),
-}));
+import BulkEditLogs from './BulkEditLogs';
 
+jest.mock('react-virtualized-auto-sizer', () => jest.fn(
+  (props) => <div>{props.children({ width: 100 })}</div>,
+));
+jest.mock('../../hooks/api', () => ({
+  ...jest.requireActual('../../hooks/api'),
+  useBulkEditLogs: jest.fn(),
+}));
 
 const renderBulkEditLogs = () => {
   render(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={['/bulk-edit?criteria=logs']}>
-        <BulkEdit />
-      </MemoryRouter>,
-    </QueryClientProvider>,
+    <MemoryRouter initialEntries={['/bulk-edit?criteria=logs']}>
+      <BulkEditLogs />
+    </MemoryRouter>,
   );
 };
 
 describe('Logs', () => {
   beforeEach(() => {
-    useOkapiKy
-      .mockClear()
-      .mockReturnValue({
-        post: () => ({
-          json: () => ({
-            id: '1',
-          }),
-        }),
-      });
+    useBulkEditLogs.mockClear().mockReturnValue({
+      isLoading: false,
+      logs: bulkEditLogsData,
+      logsCount: bulkEditLogsData.length,
+    });
   });
 
+  it('should fetch logs', () => {
+    renderBulkEditLogs();
 
-  it('Should render the logs table with correct columns', async () => {
+    expect(useBulkEditLogs).toHaveBeenCalled();
+  });
+
+  it('should render the logs table with correct columns', async () => {
     renderBulkEditLogs();
 
     for (const col of LOGS_COLUMNS) {

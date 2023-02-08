@@ -22,7 +22,7 @@ export const useRecordsPreview = ({ id, step, queryOptions, capabilities }) => {
     },
   );
 
-  const { contentData, columnsMapping, columns } = useMemo(() => getMappedTableData({
+  const { contentData, columnMapping, columns } = useMemo(() => getMappedTableData({
     data,
     intl,
     capabilities,
@@ -43,7 +43,7 @@ export const useRecordsPreview = ({ id, step, queryOptions, capabilities }) => {
     refetch,
 
     contentData,
-    columnsMapping,
+    columnMapping,
     columns,
   };
 };

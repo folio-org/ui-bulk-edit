@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, render, fireEvent } from '@testing-library/react';
+import { act, screen, render, fireEvent } from '@testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 import { QueryClientProvider } from 'react-query';
 
@@ -67,11 +67,15 @@ describe('BulkEditActionMenu', () => {
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
-    dispatchEvt(fileInput, 'dragenter', data);
-    await flushPromises();
+    await act(() => {
+      dispatchEvt(fileInput, 'dragenter', data);
+      return flushPromises();
+    });
 
-    fireEvent.drop(fileInput, event);
-    await flushPromises();
+    await act(() => {
+      fireEvent.drop(fileInput, event);
+      return flushPromises();
+    });
   });
 
   it('should call cancel handler', async () => {
@@ -81,7 +85,9 @@ describe('BulkEditActionMenu', () => {
 
     const cancelButton = screen.getByText(/stripes-components.cancel/i);
 
-    fireEvent.click(cancelButton);
+    act(() => {
+      fireEvent.click(cancelButton);
+    });
 
     expect(onCancelMock).toHaveBeenCalled();
   });

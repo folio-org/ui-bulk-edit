@@ -1,35 +1,40 @@
-import { useOkapiKy } from '@folio/stripes/core';
-
 import { QueryClientProvider } from 'react-query';
+import { MemoryRouter } from 'react-router';
+
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import { MemoryRouter } from 'react-router';
+import { useOkapiKy } from '@folio/stripes/core';
+
 import '../../../../../test/jest/__mock__';
+import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 import { RootContext } from '../../../../context/RootContext';
 
+import {
+  useBulkOperationDetails,
+} from '../../../../hooks/api';
 import BulkEditInAppPreviewModal from './BulkEditInAppPreviewModal';
 
-const startJob = jest.fn();
-const inAppUpload = jest.fn().mockReturnValue(() => ({ response: { items: [] } }));
-const refetch = jest.fn();
-
-jest.doMock('../../../API', () => ({
-  useLaunchJob: () => ({ startJob }),
-  useInAppUpload: () => ({ inAppUpload, isLoading: false }),
-  useInAppDownloadPreview: () => ({ data: [], refetch, isLoading: false }),
+jest.mock('../../../../hooks/api', () => ({
+  ...jest.requireActual('../../../../hooks/api'),
+  useBulkOperationDetails: jest.fn(),
 }));
 
+const bulkOperation = bulkEditLogsData[0];
 const visibleColumns = [];
+const onKeepEditing = jest.fn();
+const onJobStarted = jest.fn();
+const setUpdatedId = jest.fn();
 
-const renderPreviewModal = ({
-  open,
-  jobId,
-  contentUpdates = [],
+const defaultProps = {
+  open: true,
+  bulkOperationId: bulkOperation.id.toString(),
   onKeepEditing,
   onJobStarted,
   setUpdatedId,
-}) => {
+};
+
+const renderPreviewModal = (props = defaultProps) => {
   render(
     <MemoryRouter initialEntries={['/bulk-edit/1/initial?capabilities=ITEMS&fileName=barcodes.csv&identifier=BARCODE']}>
       <QueryClientProvider client={queryClient}>
@@ -37,35 +42,19 @@ const renderPreviewModal = ({
           visibleColumns,
         }}
         >
-          <BulkEditInAppPreviewModal
-            open={open}
-            jobId={jobId}
-            contentUpdates={contentUpdates}
-            onKeepEditing={onKeepEditing}
-            onJobStarted={onJobStarted}
-            setUpdatedId={setUpdatedId}
-          />,
+          <BulkEditInAppPreviewModal {...props} />
         </RootContext.Provider>
       </QueryClientProvider>
     </MemoryRouter>,
   );
 };
 
-const onKeepEditing = jest.fn();
-const onJobStarted = jest.fn();
-const setUpdatedId = jest.fn();
-
-const props = {
-  open: true,
-  jobId: '1',
-  contentUpdates: [],
-  onKeepEditing,
-  onJobStarted,
-  setUpdatedId,
-};
-
 describe('BulkEditInAppPreviewModal', () => {
   beforeEach(() => {
+    useBulkOperationDetails.mockClear().mockReturnValue(() => ({
+      bulkDetails: bulkOperation,
+    }));
+
     useOkapiKy
       .mockClear()
       .mockReturnValue({
@@ -79,7 +68,7 @@ describe('BulkEditInAppPreviewModal', () => {
   });
 
   it('should call all footer handlers', async () => {
-    renderPreviewModal(props);
+    renderPreviewModal();
 
     fireEvent.click(screen.getByText('ui-bulk-edit.previewModal.keepEditing'));
     expect(onKeepEditing).toHaveBeenCalled();

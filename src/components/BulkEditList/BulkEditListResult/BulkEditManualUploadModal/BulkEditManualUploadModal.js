@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import {
   Button,
   Modal,
@@ -8,12 +10,13 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
-import { useHistory } from 'react-router-dom';
+
 import { ListFileUploader } from '../../../ListFileUploader';
 import { APPROACHES, CAPABILITIES, EDITING_STEPS, IDENTIFIERS, MANUAL_UPLOAD_STEPS } from '../../../../constants';
-import { useUpload } from '../../../../hooks/api/useUpload';
-import { useBulkOperationStart } from '../../../../hooks/api/useBulkOperationStart';
-
+import {
+  useUpload,
+  useBulkOperationStart,
+} from '../../../../hooks/api';
 
 const BulkEditManualUploadModal = ({
   operationId,

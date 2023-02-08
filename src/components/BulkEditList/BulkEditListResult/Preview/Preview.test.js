@@ -1,28 +1,38 @@
-import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
+import { QueryClientProvider } from 'react-query';
+
+import { render, screen } from '@testing-library/react';
 
 import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
-
-import { QueryClientProvider } from 'react-query';
-import { Preview } from './Preview';
+import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
+
 import { RootContext } from '../../../../context/RootContext';
+import { Preview } from './Preview';
 
 jest.mock('./PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
 }));
 
+const bulkOperation = bulkEditLogsData[0];
 const setCountOfRecordsMock = jest.fn();
 
-const renderPreview = ({ title, initial }) => {
+const defaultProps = {
+  title: 'preview.query.title',
+  initial: false,
+  bulkDetails: bulkOperation,
+  id: bulkOperation.id,
+};
+
+const renderPreview = (props = defaultProps) => {
   render(
     <MemoryRouter initialEntries={['/bulk-edit/1?queryText=patronGroup%3D%3D"1"']}>
       <QueryClientProvider client={queryClient}>
         <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn(), setCountOfRecords: setCountOfRecordsMock }}>
-          <Preview title={title} id="1" initial={initial} />
+          <Preview {...props} />
         </RootContext.Provider>
       </QueryClientProvider>
     </MemoryRouter>,
@@ -35,27 +45,19 @@ describe('Preview', () => {
       .mockClear()
       .mockReturnValue({
         get: () => ({
-          json: () => ({
-            files: ['success.csv', 'error.csv'],
-            progress: {
-              progress: 55,
-              total: 50,
-              errors: 10,
-              succsess: 40,
-            },
-          }),
+          json: () => {},
         }),
       });
   });
 
   it('displays Bulk edit', () => {
-    renderPreview({ title: 'preview.query.title' });
+    renderPreview();
 
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
   });
 
   it('displays Bulk edit', () => {
-    renderPreview({ title: 'preview.query.title', initial: true });
+    renderPreview({ ...defaultProps, initial: true });
 
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
   });
@@ -67,22 +69,19 @@ describe('Preview Query', () => {
       .mockClear()
       .mockReturnValue({
         get: () => ({
-          json: () => ({
-            files: ['success.csv', 'error.csv'],
-            totalRecords: 10,
-          }),
+          json: () => {},
         }),
       });
   });
 
   it('displays Bulk edit', () => {
-    renderPreview({ title: 'preview.query.title' });
+    renderPreview();
 
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
   });
 
   it('should render with no axe errors', async () => {
-    renderPreview({ title: 'preview.query.title' });
+    renderPreview();
 
     await runAxeTest({
       rootNode: document.body,
