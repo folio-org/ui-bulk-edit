@@ -19,7 +19,7 @@ const buildLogsQuery = makeQueryBuilder(
   'sortby startTime/sort.descending',
 );
 
-export const useBulkEditLogs = ({ filters, pagination }) => {
+export const useBulkEditLogs = ({ filters = {}, pagination }) => {
   const usersMap = useRef({});
   const ky = useOkapiKy();
   const [namespace] = useNamespace({ key: 'bulk-edit-logs' });
