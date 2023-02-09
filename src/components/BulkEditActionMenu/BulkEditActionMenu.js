@@ -118,6 +118,7 @@ const BulkEditActionMenu = ({
       <>
         {isStartBulkInAppActive && (
           <Button
+            data-testid="startInAppAction"
             buttonStyle="dropdownItem"
             onClick={() => handleOnStartEdit(APPROACHES.IN_APP)}
           >
@@ -128,6 +129,7 @@ const BulkEditActionMenu = ({
         )}
         {isStartBulkCsvActive && (
           <Button
+            data-testid="startCsvAction"
             buttonStyle="dropdownItem"
             onClick={() => handleOnStartEdit(APPROACHES.MANUAL)}
           >
@@ -141,8 +143,6 @@ const BulkEditActionMenu = ({
   };
 
   const renderColumnsFilter = () => {
-    if (!columnsOptions.length) return null;
-
     return (
       <CheckboxFilter
         dataOptions={columnsOptions}
@@ -162,7 +162,7 @@ const BulkEditActionMenu = ({
         {renderStartBulkEditButtons()}
       </ActionMenuGroup>
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
-        {renderColumnsFilter()}
+        {Boolean(columnsOptions.length) && renderColumnsFilter()}
       </ActionMenuGroup>
 
     </>

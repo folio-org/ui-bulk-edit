@@ -13,7 +13,6 @@ import { TYPE_OF_PROGRESS } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
 import BulkEditListResult from './BulkEditListResult';
 
-
 jest.mock('./Preview/PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
 }));

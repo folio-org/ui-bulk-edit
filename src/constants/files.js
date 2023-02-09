@@ -9,6 +9,7 @@ export const FILE_KEYS = {
   PROPOSED_CHANGES_LINK: 'linkToModifiedRecordsCsvFile',
   UPDATED_RECORDS_LINK: 'linkToCommittedRecordsCsvFile',
   UPDATED_ERRORS_LINK: 'linkToCommittedRecordsErrorsCsvFile',
+  TRIGGERING_FILE: 'linkToTriggeringCsvFile',
 };
 
 // use as API key for /download

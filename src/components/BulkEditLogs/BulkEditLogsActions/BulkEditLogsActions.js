@@ -41,9 +41,7 @@ const BulkEditLogsActions = ({ item }) => {
     setTriggeredFile(file);
   };
 
-  const availableFiles = Object.keys(item).reduce((acc, key) => {
-    return linkNamesMap[key] ? [...acc, key] : acc;
-  }, []);
+  const availableFiles = Object.keys(linkNamesMap).filter(linkName => item[linkName]);
 
   const renderTrigger = useCallback(({ triggerRef, onToggle, ariaProps, keyHandler }) => (
     <IconButton
@@ -62,9 +60,10 @@ const BulkEditLogsActions = ({ item }) => {
       onToggle={onToggle}
     >
       <MenuSection label={<FormattedMessage id="ui-bulk-edit.list.actions.download" />}>
-        {availableFiles.map((file, index) => (
+        {availableFiles.map((file) => (
           <Button
-            key={index}
+            key={file}
+            data-testid={file}
             buttonStyle="dropdownItem"
             onClick={() => onLoadFile(file)}
           >
