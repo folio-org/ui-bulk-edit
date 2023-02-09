@@ -272,7 +272,7 @@ export const BulkEditListFilters = ({
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
         </Button>
-        {hasQueryPerms && (
+        {(hasQueryPerms || hasQueryAndUsersPerms) && (
           <Button
             buttonStyle={isQuery ? 'primary' : 'default'}
             onClick={() => handleChangeCriteria('query')}
