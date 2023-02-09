@@ -1,7 +1,7 @@
 import { QueryClientProvider } from 'react-query';
 import { MemoryRouter } from 'react-router';
 
-import { render, screen, fireEvent } from '@testing-library/react';
+import { act, render, screen, fireEvent } from '@testing-library/react';
 
 import { useOkapiKy } from '@folio/stripes/core';
 
@@ -10,6 +10,10 @@ import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 import { RootContext } from '../../../../context/RootContext';
 
+import {
+  ACTIONS,
+  OPTIONS,
+} from '../../../../constants';
 import {
   useBulkOperationDetails,
 } from '../../../../hooks/api';
@@ -22,24 +26,25 @@ jest.mock('../../../../hooks/api', () => ({
 
 const bulkOperation = bulkEditLogsData[0];
 const visibleColumns = [];
+const setVisibleColumns = jest.fn();
 const onKeepEditing = jest.fn();
-const onJobStarted = jest.fn();
-const setUpdatedId = jest.fn();
+const onChangesCommited = jest.fn();
 
 const defaultProps = {
   open: true,
   bulkOperationId: bulkOperation.id.toString(),
   onKeepEditing,
-  onJobStarted,
-  setUpdatedId,
+  onChangesCommited,
+  contentUpdates: undefined,
 };
 
 const renderPreviewModal = (props = defaultProps) => {
-  render(
+  return render(
     <MemoryRouter initialEntries={['/bulk-edit/1/initial?capabilities=ITEMS&fileName=barcodes.csv&identifier=BARCODE']}>
       <QueryClientProvider client={queryClient}>
         <RootContext.Provider value={{
           visibleColumns,
+          setVisibleColumns,
         }}
         >
           <BulkEditInAppPreviewModal {...props} />
@@ -49,17 +54,19 @@ const renderPreviewModal = (props = defaultProps) => {
   );
 };
 
+const getJsonMock = jest.fn().mockReturnValue({});
+
 describe('BulkEditInAppPreviewModal', () => {
   beforeEach(() => {
-    useBulkOperationDetails.mockClear().mockReturnValue(() => ({
+    useBulkOperationDetails.mockClear().mockReturnValue({
       bulkDetails: bulkOperation,
-    }));
+    });
 
     useOkapiKy
       .mockClear()
       .mockReturnValue({
         get: () => ({
-          json: () => ([]),
+          json: getJsonMock,
         }),
         post: () => ({
           json: () => ({}),
@@ -67,10 +74,41 @@ describe('BulkEditInAppPreviewModal', () => {
       });
   });
 
-  it('should call all footer handlers', async () => {
+  it('should call all footer handlers', () => {
     renderPreviewModal();
 
     fireEvent.click(screen.getByText('ui-bulk-edit.previewModal.keepEditing'));
     expect(onKeepEditing).toHaveBeenCalled();
+  });
+
+  it('should display preview records when available', async () => {
+    const contentUpdates = [
+      {
+        option: OPTIONS.STATUS,
+        actions: [{
+          type: ACTIONS.CLEAR_FIELD,
+        }],
+      },
+    ];
+    const uuidColumn = {
+      value: 'uuid',
+      label: 'uuid',
+      visible: true,
+      dataType: 'string',
+    };
+
+    getJsonMock.mockClear().mockReturnValue({
+      header: [uuidColumn],
+      rows: [{ row: ['uuid'] }],
+    });
+
+    await act(async () => {
+      renderPreviewModal({
+        ...defaultProps,
+        contentUpdates,
+      });
+    });
+
+    expect(screen.getByText('ui-bulk-edit.previewModal.previewToBeChanged')).toBeVisible();
   });
 });
