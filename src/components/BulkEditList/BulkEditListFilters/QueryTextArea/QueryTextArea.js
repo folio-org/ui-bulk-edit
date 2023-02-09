@@ -10,7 +10,7 @@ import {
 import { ResetButton } from '@folio/stripes-acq-components';
 
 
-export const QueryTextArea = ({ queryText, setQueryText, handleQuerySearch }) => {
+export const QueryTextArea = ({ queryText, setQueryText, handleQuerySearch, disabled }) => {
   const [isSearchBtnDisabled, setIsSearchDisabled] = useState(true);
   const isSearchFieldEmpty = !queryText.length;
 
@@ -36,8 +36,9 @@ export const QueryTextArea = ({ queryText, setQueryText, handleQuerySearch }) =>
       <TextArea
         value={queryText}
         onChange={onChangeTextAreaHandler}
+        disabled={disabled}
       />
-      <Button buttonStyle="primary" fullWidth disabled={isSearchBtnDisabled} onClick={onSearch}>
+      <Button buttonStyle="primary" fullWidth disabled={isSearchBtnDisabled || disabled} onClick={onSearch}>
         <FormattedMessage id="ui-bulk-edit.textArea.search" />
       </Button>
       <ResetButton
@@ -53,4 +54,5 @@ QueryTextArea.propTypes = {
   queryText: PropTypes.string.isRequired,
   setQueryText: PropTypes.func.isRequired,
   handleQuerySearch: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };

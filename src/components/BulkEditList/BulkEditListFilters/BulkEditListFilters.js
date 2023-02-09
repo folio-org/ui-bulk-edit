@@ -49,6 +49,10 @@ export const BulkEditListFilters = ({
     hasInAppEditPerms,
     isSelectIdentifiersDisabled,
     hasLogViewPerms,
+    hasQueryPerms,
+    hasQueryAndItemsPerms,
+    hasQueryAndHoldingsPerms,
+    hasQueryAndUsersPerms,
   } = useBulkPermissions();
   const search = new URLSearchParams(location.search);
 
@@ -77,6 +81,10 @@ export const BulkEditListFilters = ({
   const isLogs = criteria === CRITERIA.LOGS;
   const isIdentifier = criteria === CRITERIA.IDENTIFIER;
 
+  const hasAnyQueryEditPerms = hasQueryAndItemsPerms
+    || hasQueryAndHoldingsPerms
+    || hasQueryAndUsersPerms;
+
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
   const { startJob } = useLaunchJob();
@@ -99,9 +107,9 @@ export const BulkEditListFilters = ({
 
   const isCapabilityDisabled = (capabilityValue) => {
     const capabilitiesMap = {
-      [CAPABILITIES.USER]: isUserRadioDisabled,
-      [CAPABILITIES.ITEM]: isInventoryRadioDisabled,
-      [CAPABILITIES.HOLDINGS]: false, // TODO: disable it based on permissions
+      [CAPABILITIES.USER]: isQuery ? !hasQueryAndUsersPerms : isUserRadioDisabled,
+      [CAPABILITIES.ITEM]: isQuery ? !hasQueryAndItemsPerms : isInventoryRadioDisabled,
+      [CAPABILITIES.HOLDINGS]: isQuery ? !hasQueryAndHoldingsPerms : isInventoryRadioDisabled,
     };
 
     return capabilitiesMap[capabilityValue];
@@ -311,11 +319,12 @@ export const BulkEditListFilters = ({
         </RadioButtonGroup>
       </Accordion>
       )}
-      {isQuery && (
+      {(isQuery && hasQueryPerms) && (
         <QueryTextArea
           queryText={queryText}
           setQueryText={setFilters}
           handleQuerySearch={handleQuerySearch}
+          disabled={!hasAnyQueryEditPerms}
         />
       )}
       {isIdentifier &&
