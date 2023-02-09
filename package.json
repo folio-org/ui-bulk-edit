@@ -1,6 +1,6 @@
 {
   "name": "@folio/bulk-edit",
-  "version": "2.1.3",
+  "version": "3.0.0",
   "description": "Description for bulk edit",
   "main": "index.js",
   "repository": "",
