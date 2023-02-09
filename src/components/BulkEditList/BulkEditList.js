@@ -229,6 +229,7 @@ export const BulkEditList = () => {
 
       <BulkEditManualUploadModal
         operationId={bulkOperationId}
+        identifier={filters.recordIdentifier}
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
         countOfRecords={countOfRecords}

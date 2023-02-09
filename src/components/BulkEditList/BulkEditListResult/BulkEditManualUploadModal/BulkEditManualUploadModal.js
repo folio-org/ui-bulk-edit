@@ -20,6 +20,7 @@ import {
 
 const BulkEditManualUploadModal = ({
   operationId,
+  identifier,
   open,
   onCancel,
   setCountOfRecords,
@@ -112,7 +113,7 @@ const BulkEditManualUploadModal = ({
         operationId,
         fileToUpload,
         entityType: CAPABILITIES.USER,
-        identifierType: IDENTIFIERS.BARCODE,
+        identifierType: identifier,
         manual: true,
       });
 
@@ -200,10 +201,15 @@ const BulkEditManualUploadModal = ({
 
 BulkEditManualUploadModal.propTypes = {
   operationId: PropTypes.string,
+  identifier: PropTypes.string,
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func,
   countOfRecords: PropTypes.number,
+};
+
+BulkEditManualUploadModal.defaultProps = {
+  identifier: IDENTIFIERS.BARCODE,
 };
 
 export default BulkEditManualUploadModal;
