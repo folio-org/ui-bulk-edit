@@ -144,6 +144,12 @@
         "displayName": "Bulk edit - Can view logs",
         "subPermissions": [],
         "visible": true
+      },
+      {
+        "permissionName": "ui-bulk-edit.query",
+        "displayName": "Bulk edit: Query",
+        "subPermissions": [],
+        "visible": true
       }
     ]
   },

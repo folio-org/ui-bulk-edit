@@ -12,6 +12,16 @@ export const useBulkPermissions = () => {
   const hasInAppEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit');
   const hasInAppUsersEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit.users');
 
+  // Query perms
+  const hasQueryPerms = stripes.hasPerm('ui-bulk-edit.query');
+
+  // Inventory
+  const hasInventoryItemPerms = stripes.hasPerm('ui-inventory.item.edit');
+  const hasInventoryHoldingsPerms = stripes.hasPerm('ui-inventory.holdings.edit');
+
+  // Users
+  const hasUsersEditPerms = stripes.hasPerm('ui-users.edit');
+
   // derived pages
   const hasAnyEditPermissions = hasCsvEditPerms || hasInAppEditPerms || hasInAppUsersEditPerms;
   const isActionMenuShown = hasCsvEditPerms;
@@ -20,11 +30,12 @@ export const useBulkPermissions = () => {
   const isInventoryRadioDisabled = !hasInAppViewPerms;
   const isUserRadioDisabled = !hasCsvViewPerms && !hasInAppUsersEditPerms;
   const hasOnlyInAppViewPerms = hasInAppViewPerms && !hasCsvEditPerms && !hasInAppEditPerms && !hasInAppUsersEditPerms;
+  const hasQueryAndItemsPerms = hasQueryPerms && hasInventoryItemPerms;
+  const hasQueryAndHoldingsPerms = hasQueryPerms && hasInventoryHoldingsPerms;
+  const hasQueryAndUsersPerms = hasQueryPerms && hasUsersEditPerms;
 
   // Logs perms
-
   const hasLogViewPerms = stripes.hasPerm('ui-bulk-edit.logs.view');
-
 
   return {
     // base
@@ -34,6 +45,7 @@ export const useBulkPermissions = () => {
     hasInAppEditPerms,
     hasInAppUsersEditPerms,
     hasLogViewPerms,
+    hasQueryPerms,
 
     // derived
     isActionMenuShown,
@@ -43,5 +55,8 @@ export const useBulkPermissions = () => {
     isUserRadioDisabled,
     hasOnlyInAppViewPerms,
     hasAnyEditPermissions,
+    hasQueryAndItemsPerms,
+    hasQueryAndHoldingsPerms,
+    hasQueryAndUsersPerms,
   };
 };
