@@ -21,6 +21,8 @@
 * [UIBULKED-193](https://issues.folio.org/browse/UIBULKED-193) Filter and paginate logs of bulk edit jobs
 * [UIBULKED-234](https://issues.folio.org/browse/UIBULKED-234) bump stripes to 8.0.0 for Orchid/2023-R1
 * [UIBULKED-221](https://issues.folio.org/browse/UIBULKED-221) Add config files for TypeScript supporting
+* [UIBULKED-164](https://issues.folio.org/browse/UIBULKED-164) Query tab permissions
+* [UIBULKED-196](https://issues.folio.org/browse/UIBULKED-196) Integration with mod-bulk-operations
 
 ## [2.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.3) (2022-12-02)
 

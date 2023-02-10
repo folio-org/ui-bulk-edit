@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { CRITERIA } from '../../../../constants';
 
-const FilterTabs = ({ criteria, hasLogViewPerms, onCriteriaChange }) => {
+const FilterTabs = ({ criteria, hasLogViewPerms, hasQueryViewPerms, onCriteriaChange }) => {
   const buttonStyleActive = (criteriaToCompare) => (criteria === criteriaToCompare ? 'primary' : 'default');
 
   return (
@@ -15,20 +15,22 @@ const FilterTabs = ({ criteria, hasLogViewPerms, onCriteriaChange }) => {
       >
         <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
       </Button>
-      <Button
-        buttonStyle={buttonStyleActive(CRITERIA.QUERY)}
-        onClick={() => onCriteriaChange(CRITERIA.QUERY)}
-      >
-        <FormattedMessage id="ui-bulk-edit.list.filters.query" />
-      </Button>
-      {hasLogViewPerms &&
+      {hasQueryViewPerms && (
+        <Button
+          buttonStyle={buttonStyleActive(CRITERIA.QUERY)}
+          onClick={() => onCriteriaChange(CRITERIA.QUERY)}
+        >
+          <FormattedMessage id="ui-bulk-edit.list.filters.query" />
+        </Button>
+      )}
+      {hasLogViewPerms && (
         <Button
           buttonStyle={buttonStyleActive(CRITERIA.LOGS)}
           onClick={() => onCriteriaChange(CRITERIA.LOGS)}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.logs" />
         </Button>
-      }
+      )}
     </>
   );
 };
@@ -36,6 +38,7 @@ const FilterTabs = ({ criteria, hasLogViewPerms, onCriteriaChange }) => {
 FilterTabs.propTypes = {
   criteria: PropTypes.string,
   hasLogViewPerms: PropTypes.bool,
+  hasQueryViewPerms: PropTypes.bool,
   onCriteriaChange: PropTypes.func,
 };
 

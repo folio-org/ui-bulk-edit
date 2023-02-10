@@ -41,7 +41,7 @@ export const BulkEditList = () => {
   const step = search.get('step');
   const capabilities = search.get('capabilities');
   const criteria = search.get('criteria');
-  const defaultCapability = capabilities || getDefaultCapabilities(restPerms);
+  const defaultCapability = capabilities || getDefaultCapabilities(criteria, restPerms);
 
   const initialFiltersState = {
     criteria: CRITERIA.IDENTIFIER,

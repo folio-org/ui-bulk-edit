@@ -35,14 +35,14 @@ export const BulkEditListFilters = ({
   isFileUploaded,
   setIsFileUploaded,
 }) => {
+  const permissions = useBulkPermissions();
   const {
     isDropZoneDisabled: isDropZoneDisabledPerm,
-    isInventoryRadioDisabled,
-    isUserRadioDisabled,
     hasInAppEditPerms,
     isSelectIdentifiersDisabled,
     hasLogViewPerms,
-  } = useBulkPermissions();
+    hasQueryPerms,
+  } = permissions;
   const showCallout = useShowCallout();
   const history = useHistory();
   const location = useLocation();
@@ -56,10 +56,7 @@ export const BulkEditListFilters = ({
   const isIdentifier = criteria === CRITERIA.IDENTIFIER;
   const { capabilities, recordIdentifier, queryText } = filters;
 
-  const capabilitiesFilterOptions = getCapabilityOptions({
-    isInventoryRadioDisabled,
-    isUserRadioDisabled,
-  });
+  const capabilitiesFilterOptions = getCapabilityOptions(criteria, permissions);
 
   const initialFilter = {
     capabilities: initialCapabilities,
@@ -228,6 +225,7 @@ export const BulkEditListFilters = ({
       queryText={queryText}
       setQueryText={setFilters}
       handleQuerySearch={handleQuerySearch}
+      disabled={isCapabilityDisabled(capabilities, criteria, permissions)}
     />
   );
 
@@ -250,7 +248,7 @@ export const BulkEditListFilters = ({
       recordIdentifier={recordIdentifier}
       handleDragLeave={handleDragLeave}
       handleDragEnter={handleDragEnter}
-      disableUploader={isCapabilityDisabled(capabilities)}
+      disableUploader={isCapabilityDisabled(capabilities, criteria, permissions)}
       uploaderSubTitle={uploaderSubTitle}
     />
   );
@@ -269,6 +267,7 @@ export const BulkEditListFilters = ({
         <FilterTabs
           criteria={criteria}
           hasLogViewPerms={hasLogViewPerms}
+          hasQueryViewPerms={hasQueryPerms}
           onCriteriaChange={handleCriteriaChange}
         />
       </ButtonGroup>
@@ -283,7 +282,7 @@ export const BulkEditListFilters = ({
       )}
 
       {/* QUERY FILTER */}
-      {isQuery && (
+      {isQuery && hasQueryPerms && (
         <>
           {renderCapabilities()}
           {renderQueryText()}
