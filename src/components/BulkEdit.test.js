@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { act, render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
@@ -63,7 +63,7 @@ describe('BulkEdit', () => {
   });
 
   // This test will be passing after fixing problem in stripes-data-transfer-components
-  it.skip('should render with no axe errors', async () => {
+  it('should render with no axe errors', async () => {
     renderBulkEdit();
 
     await runAxeTest({
@@ -85,11 +85,15 @@ describe('BulkEdit', () => {
     const queryButton = screen.getByRole('button', { name: /list.filters.query/ });
     const identifierButton = screen.getByRole('button', { name: /list.filters.identifier/ });
 
-    userEvent.click(queryButton);
+    act(() => {
+      userEvent.click(queryButton);
+    });
 
     expect(queryButton).toHaveAttribute('class', 'button primary');
 
-    userEvent.click(identifierButton);
+    act(() => {
+      userEvent.click(identifierButton);
+    });
 
     expect(identifierButton).toHaveAttribute('class', 'button primary');
   });
@@ -103,7 +107,9 @@ describe('BulkEdit', () => {
   it('should display select right select options on inventory tab', () => {
     renderBulkEdit();
 
-    userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.inventory/ }));
+    act(() => {
+      userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.inventory/ }));
+    });
 
     const options = [
       /filters.recordIdentifier.item.barcode/,
@@ -120,10 +126,10 @@ describe('BulkEdit', () => {
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
 
-    userEvent.selectOptions(
+    act(() => userEvent.selectOptions(
       selectRecordIdentifier,
       itemFormer,
-    );
+    ));
 
     expect(itemFormer.selected).toBe(true);
   });
@@ -138,13 +144,10 @@ describe('BulkEdit', () => {
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
-    dispatchEvt(fileInput, 'dragenter', data);
-  });
-
-  it('should display Saved queries', () => {
-    renderBulkEdit();
-
-    expect(screen.getByRole('button', { name: /Icon ui-bulk-edit.list.savedQueries.title/ })).toBeEnabled();
+    await act(() => {
+      dispatchEvt(fileInput, 'dragenter', data);
+      return flushPromises();
+    });
   });
 
   it('should update title with uploaded name and call startJob in case of ITEM capability', async () => {
@@ -157,11 +160,15 @@ describe('BulkEdit', () => {
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
-    dispatchEvt(fileInput, 'dragenter', data);
-    await flushPromises();
+    await act(() => {
+      dispatchEvt(fileInput, 'dragenter', data);
+      return flushPromises();
+    });
 
-    fireEvent.drop(fileInput, event);
-    await flushPromises();
+    await act(() => {
+      fireEvent.drop(fileInput, event);
+      return flushPromises();
+    });
 
     history.push({
       pathname: 'bulk-edit/1',
@@ -180,11 +187,15 @@ describe('BulkEdit', () => {
 
     const fileInput = screen.getByTestId('fileUploader-input');
 
-    dispatchEvt(fileInput, 'dragenter', data);
-    await flushPromises();
+    await act(() => {
+      dispatchEvt(fileInput, 'dragenter', data);
+      return flushPromises();
+    });
 
-    fireEvent.drop(fileInput, event);
-    await flushPromises();
+    await act(() => {
+      fireEvent.drop(fileInput, event);
+      return flushPromises();
+    });
   });
 
   describe('Should show expected messages if files are not valid', () => {

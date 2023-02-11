@@ -1,76 +1,47 @@
-import { useMemo, useState, useEffect, useRef } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
-  Pane,
-  Paneset,
-  Layer,
-  PaneFooter,
-  Button,
-} from '@folio/stripes/components';
+import { Pane, Paneset, PaneFooter, Button } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
-import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { useQueryClient } from 'react-query';
-import { buildSearch } from '@folio/stripes-acq-components';
 import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
-import { BulkEditStartModal } from '../BulkEditStartModal';
-import { BulkEditConformationModal } from '../modals/BulkEditConformationModal';
-import { useJob } from '../../API';
-import { usePathParams } from '../../hooks';
-import { CAPABILITIES, CRITERIA } from '../../constants';
+import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
+import { usePathParams, useBulkPermissions } from '../../hooks';
+import { CRITERIA, APPROACHES, EDITING_STEPS, BULK_VISIBLE_COLUMNS } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
-import PreviewModal from '../modals/PreviewModal/PreviewModal';
-import { useBulkPermissions } from '../../hooks/useBulkPermissions';
-import { RootContext } from '../../context/RootContext';
-import { useFormValid } from '../../hooks/useFormValid';
-import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
+import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
 
+import { RootContext } from '../../context/RootContext';
+import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
+import { getDefaultCapabilities } from '../../utils/filters';
+import { useResetAppState } from '../../hooks/useResetAppState';
+import BulkEditInAppLayer from './BulkEditListResult/BulkEditInAppLayer/BulkEditInAppLayer';
 
 export const BulkEditList = () => {
-  const queryClient = useQueryClient();
-  const location = useLocation();
   const history = useHistory();
-  const search = new URLSearchParams(location.search);
-  const controller = useRef(null);
+  const search = new URLSearchParams(history.location.search);
 
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
   const [isBulkEditLayerOpen, setIsBulkEditLayerOpen] = useState(false);
-  const [isBulkEditConformationModal, setIsBulkConformationModal] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
-  const [updatedId, setUpdatedId] = useState();
   const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
   const [contentUpdates, setContentUpdates] = useState(null);
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState(null);
-  const [processedFileName, setProcessedFileName] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
 
-  const { isInAppFormValid } = useFormValid(contentUpdates);
 
-  const { id: jobId } = usePathParams('/bulk-edit/:id');
-  const { data, isLoading } = useJob(jobId);
-
-  const [successCsvLink, errorCsvLink] = data?.files || [];
-  const { isActionMenuShown, hasOnlyInAppViewPerms, hasInAppEditPerms } = useBulkPermissions();
-
-  const capabilitiesUrl = search.get('capabilities');
+  const { isActionMenuShown, ...restPerms } = useBulkPermissions();
+  const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
+  const step = search.get('step');
+  const capabilities = search.get('capabilities');
   const criteria = search.get('criteria');
-
-  const getDefaultCapabilities = () => {
-    if (hasOnlyInAppViewPerms || hasInAppEditPerms) {
-      return capabilitiesUrl || CAPABILITIES.ITEM;
-    }
-
-    return capabilitiesUrl || CAPABILITIES.USER;
-  };
-
-  const defaultCapability = getDefaultCapabilities();
+  const defaultCapability = capabilities || getDefaultCapabilities(criteria, restPerms);
 
   const initialFiltersState = {
     criteria: CRITERIA.IDENTIFIER,
@@ -81,184 +52,121 @@ export const BulkEditList = () => {
 
   const [filters, setFilters] = useState(initialFiltersState);
 
-  const handleStartBulkEdit = () => {
-    if (capabilitiesUrl === CAPABILITIES.ITEM || capabilitiesUrl === CAPABILITIES.HOLDINGS) {
-      setIsBulkEditLayerOpen(true);
-    } else setIsBulkEditModalOpen(true);
+  useResetAppState({
+    initialFiltersState,
+    setFilters,
+    setConfirmedFileName,
+    setCountOfRecords,
+    setNewBulkFooterShown,
+    setVisibleColumns,
+  });
+
+  const handleBulkEditLayerOpen = () => {
+    setIsBulkEditLayerOpen(true);
+  };
+  const handleBulkEditLayerClose = () => {
+    setIsBulkEditLayerOpen(false);
+  };
+
+  const handlePreviewModalOpen = () => {
+    setPreviewModalOpened(true);
+  };
+
+  const handlePreviewModalClose = () => {
+    setPreviewModalOpened(false);
+  };
+
+  const handleChangesCommited = () => {
+    handlePreviewModalClose();
+    handleBulkEditLayerClose();
+  };
+
+  const handleStartBulkEdit = (approach) => {
+    if (approach === APPROACHES.IN_APP) {
+      handleBulkEditLayerOpen();
+    }
+
+    if (approach === APPROACHES.MANUAL) {
+      setIsBulkEditModalOpen(true);
+    }
   };
 
   const isLogsTab = criteria === CRITERIA.LOGS;
-  const isActionMenuVisible = (successCsvLink || errorCsvLink || isActionMenuShown) && !isLogsTab;
+  const isActionMenuVisible = visibleColumns?.length && isActionMenuShown && !isLogsTab;
 
-  useEffect(() => {
-    const columns = localStorage.getItem('visibleColumns');
-
-    if (columns) {
-      setVisibleColumns(columns);
-    }
-  }, []);
-
-  useEffect(() => {
-    const initialRoute = '/bulk-edit';
-
-    if (location.pathname === initialRoute && !location.search) {
-      // reset count of records
-      setCountOfRecords(0);
-
-      // reset filters
-      setFilters(initialFiltersState);
-
-      // clear job information
-      queryClient.setQueryData('getJob', () => ({ data: undefined }));
-
-      // reset confirmed file name
-      setConfirmedFileName(null);
-
-      // clear visibleColumns preset
-      localStorage.removeItem('visibleColumns');
-      setVisibleColumns(null);
-
-      // set user capability by default
-      history.replace({
-        search: buildSearch({ capabilities: getDefaultCapabilities(), criteria: CRITERIA.IDENTIFIER }),
-      });
-
-      setNewBulkFooterShown(false);
-    }
-  }, [location.pathname, location.search]);
-
-  const renderActionMenu = () => (
+  const actionMenu = () => (
     isActionMenuVisible && (
       <BulkEditActionMenu
         onEdit={handleStartBulkEdit}
         onToggle={noop}
-        successCsvLink={successCsvLink}
-        errorCsvLink={errorCsvLink}
-        isLoading={isLoading}
-        onUserEdit={() => setIsBulkEditLayerOpen(true)}
       />
     )
   );
 
   const cancelBulkEditStart = () => {
     setIsBulkEditModalOpen(false);
-
-    // remove data from url, only in case if there is no confirmed file
-    if (!confirmedFileName) {
-      search.delete('processedFileName');
-
-      const searchStr = `?${search.toString()}`;
-
-      history.replace({
-        search: buildSearch({}, searchStr),
-      });
-    }
-  };
-
-  const handleBulkEditLayerClose = () => {
-    setIsBulkEditLayerOpen(false);
-  };
-
-  const handlePreviewModalOpen = () => {
-    controller.current = new AbortController();
-    setPreviewModalOpened(true);
-  };
-
-  const handleJobStart = () => {
-    setPreviewModalOpened(false);
-    setIsBulkEditLayerOpen(false);
-  };
-
-  const handleOnKeepEditing = () => {
-    if (controller.current) controller.current.abort();
-    setPreviewModalOpened(false);
-  };
-
-  const handleStartNewBulkEdit = () => {
-    // redirect to initial state with saved capabilities in search
-    history.replace({
-      pathname: '/bulk-edit',
-    });
   };
 
   const paneTitle = useMemo(() => {
     const fileUploadedName = search.get('fileName');
 
     if (confirmedFileName || fileUploadedName) {
-      return <FormattedMessage
-        id="ui-bulk-edit.meta.title.uploadedFile"
-        values={{ fileName: confirmedFileName || fileUploadedName }}
-             />;
-    } else if (isLogsTab) {
-      return <FormattedMessage id="ui-bulk-edit.meta.logs.title" />;
+      return (
+        <FormattedMessage
+          id="ui-bulk-edit.meta.title.uploadedFile"
+          values={{ fileName: confirmedFileName || fileUploadedName }}
+        />
+      );
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [confirmedFileName, location.search]);
+  }, [confirmedFileName, history.location.search]);
 
   const changedPaneSubTitle = useMemo(() => (
-    history.location.pathname === `/bulk-edit/${jobId}/initial` ?
+    step === EDITING_STEPS.UPLOAD ?
       <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
-  ), [countOfRecords, history.location.pathname]);
+  ), [countOfRecords, step]);
 
-  const defaultPaneSubtitle = useMemo(() => (
-    isLogsTab ?
-      <FormattedMessage id="ui-bulk-edit.logs.logSubTitle" />
-      :
-      <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
-  ), [location.search]);
+  const paneSubtitle = useMemo(() => {
+    return (
+      step === EDITING_STEPS.UPLOAD || step === EDITING_STEPS.COMMIT
+        ? changedPaneSubTitle
+        : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
+    );
+  }, [step, changedPaneSubTitle]);
 
-  const paneSubtitle = useMemo(() => (
-    history.location.pathname !== '/bulk-edit' && history.location.pathname !== `/bulk-edit/${jobId}/initialProgress`
-      ?
-      changedPaneSubTitle
-      : defaultPaneSubtitle
-  ), [changedPaneSubTitle, history.location.pathname, defaultPaneSubtitle]);
 
-  const fileNameTitle = () => {
-    const fileUploadedName = search.get('fileName');
-
-    return <FormattedMessage
-      id="ui-bulk-edit.preview.file.title"
-      values={{ fileUploadedName }}
-           />;
+  const defaultPaneProps = {
+    defaultWidth: 'fill',
+    paneTitle,
+    paneSub: paneSubtitle,
+    appIcon: <AppIcon app="bulk-edit" iconKey="app" />,
   };
 
-  const renderNewBulkFooter = newBulkFooterShown
-    ? <PaneFooter renderEnd={<Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega"><FormattedMessage id="ui-bulk-edit.start.newBulkEdit" /></Button>} />
-    : null;
+  const renderNewBulkFooter = () => {
+    const handleStartNewBulkEdit = () => {
+      localStorage.removeItem(BULK_VISIBLE_COLUMNS);
+      setVisibleColumns(null);
+      // redirect to initial state with saved capabilities in search
+      history.replace({
+        pathname: '/bulk-edit',
+      });
+    };
 
-  const renderPaneFooter = () => {
-    return (
+    return newBulkFooterShown ? (
       <PaneFooter
-        renderStart={(
-          <Button
-            buttonStyle="default mega"
-            id="clickable-cancel"
-            marginBottom0
-            onClick={handleBulkEditLayerClose}
-          >
-            <FormattedMessage id="stripes-components.cancel" />
-          </Button>
-        )}
         renderEnd={(
-          <Button
-            buttonStyle="primary mega"
-            id="clickable-create-widget"
-            marginBottom0
-            onClick={handlePreviewModalOpen}
-            type="submit"
-            disabled={!isInAppFormValid}
-          >
-            <FormattedMessage id="ui-bulk-edit.layer.confirmChanges" />
+          <Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega">
+            <FormattedMessage id="ui-bulk-edit.start.newBulkEdit" />
           </Button>
         )}
       />
-    );
+    ) : null;
   };
 
   return (
     <RootContext.Provider value={{
       setNewBulkFooterShown,
+      countOfRecords,
       setCountOfRecords,
       visibleColumns,
       setVisibleColumns,
@@ -266,6 +174,7 @@ export const BulkEditList = () => {
     }}
     >
       <Paneset>
+        {/* FILTERS PANE */}
         <Pane
           defaultWidth="20%"
           paneTitle={<FormattedMessage id="ui-bulk-edit.list.criteriaTitle" />}
@@ -278,69 +187,53 @@ export const BulkEditList = () => {
             setVisibleColumns={setVisibleColumns}
           />
         </Pane>
-        <Pane
-          defaultWidth="fill"
-          paneTitle={paneTitle}
-          paneSub={paneSubtitle}
-          appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
-          actionMenu={renderActionMenu}
-          footer={renderNewBulkFooter}
+
+        {/* RESULT PANES */}
+        {
+          isLogsTab && <BulkEditLogs />
+        }
+        {
+          !isLogsTab && (
+            <Pane
+              {...defaultPaneProps}
+              actionMenu={actionMenu}
+              footer={renderNewBulkFooter()}
+            >
+              <BulkEditListResult />
+            </Pane>
+          )
+        }
+
+        {/* IN_APP APPROACH */}
+        <BulkEditInAppLayer
+          isLayerOpen={isBulkEditLayerOpen}
+          onLayerClose={handleBulkEditLayerClose}
+          onConfirm={handlePreviewModalOpen}
+          contentUpdates={contentUpdates}
+          {...defaultPaneProps}
         >
-          {isLogsTab ? <BulkEditLogs /> : (
-            <BulkEditListResult
-              updatedId={updatedId}
-              jobId={jobId}
-              data={data}
-              setCountOfRecords={setCountOfRecords}
-            />
-          )}
-        </Pane>
-        <Layer isOpen={isBulkEditLayerOpen} inRootSet>
-          <Pane
-            defaultWidth="fill"
-            paneTitle={paneTitle}
-            paneSub={paneSubtitle}
-            footer={renderPaneFooter()}
-            appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
-            dismissible
-            onClose={() => setIsBulkEditLayerOpen(false)}
-          >
-            <BulkEditInApp
-              title={fileNameTitle()}
-              onContentUpdatesChanged={setContentUpdates}
-              typeOfBulk={capabilitiesUrl}
-            />
-          </Pane>
-        </Layer>
+          <BulkEditInApp
+            onContentUpdatesChanged={setContentUpdates}
+            capabilities={capabilities}
+          />
+        </BulkEditInAppLayer>
+
+        <BulkEditInAppPreviewModal
+          bulkOperationId={bulkOperationId}
+          open={isPreviewModalOpened}
+          contentUpdates={contentUpdates}
+          onKeepEditing={handlePreviewModalClose}
+          onChangesCommited={handleChangesCommited}
+        />
       </Paneset>
-      <BulkEditStartModal
-        fileName={processedFileName}
-        setFileName={setProcessedFileName}
+
+      <BulkEditManualUploadModal
+        operationId={bulkOperationId}
+        identifier={filters.recordIdentifier}
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
-        setIsBulkConformationModal={setIsBulkConformationModal}
-        setCountOfRecords={setCountOfRecords}
-        setUpdatedId={setUpdatedId}
-        setIsBulkEditModalOpen={setIsBulkEditModalOpen}
-      />
-      <BulkEditConformationModal
-        onCancel={cancelBulkEditStart}
-        setConfirmedFileName={setConfirmedFileName}
-        setProcessedFileName={setProcessedFileName}
-        open={isBulkEditConformationModal}
-        setIsBulkConformationModal={setIsBulkConformationModal}
-        fileName={processedFileName}
         countOfRecords={countOfRecords}
-        updatedId={updatedId}
-      />
-      <PreviewModal
-        jobId={jobId}
-        open={isPreviewModalOpened}
-        contentUpdates={contentUpdates}
-        onJobStarted={handleJobStart}
-        onKeepEditing={handleOnKeepEditing}
-        setUpdatedId={setUpdatedId}
-        controller={controller.current}
+        setCountOfRecords={setCountOfRecords}
       />
 
     </RootContext.Provider>

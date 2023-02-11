@@ -7,59 +7,61 @@ import {
 } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
-import {
-  useErrorsList,
-  usePreviewRecords,
-  useUserGroupsMap,
-} from '../../../../API';
+import { useErrorsPreview,
+  useRecordsPreview } from '../../../../hooks/api';
 import { RootContext } from '../../../../context/RootContext';
 
-export const Preview = ({ id, title, initial, capabilities, data }) => {
-  const { setNewBulkFooterShown, setCountOfRecords } = useContext(RootContext);
+import { EDITING_STEPS } from '../../../../constants';
 
-  const { errors } = useErrorsList(id);
-  const { items, totalRecords } = usePreviewRecords(id, capabilities);
-  const { userGroups } = useUserGroupsMap();
-  const [processedRecords, setProcessedRecords] = useState(0);
+export const Preview = ({ id, title, isInitial, bulkDetails }) => {
+  const location = useLocation();
+  const { setNewBulkFooterShown, countOfRecords, setCountOfRecords, visibleColumns } = useContext(RootContext);
+  const [countOfErrors, setCountOfErrors] = useState(0);
 
-  const mappedErrors = errors?.map(e => {
-    const [identifier, message] = e.message.split(',');
+  const search = new URLSearchParams(location.search);
+  const step = search.get('step');
+  const capabilities = search.get('capabilities');
 
-    return {
-      ...e,
-      identifier,
-      message,
-    };
-  });
+  const { contentData, columns, columnMapping } = useRecordsPreview({ id, step, capabilities });
+  const { data } = useErrorsPreview({ id });
+  const errors = data?.errors || [];
 
   useEffect(() => {
-    if (data?.progress) {
-      setProcessedRecords(data.progress.success);
-      setCountOfRecords(data.progress.success);
-    } else if (!data?.progress && totalRecords) {
-      setCountOfRecords(totalRecords);
-    }
-  }, [errors, data?.progress, totalRecords]);
+    const isInitialPreview = step === EDITING_STEPS.UPLOAD;
+
+    const countRecords = isInitialPreview
+      ? bulkDetails.matchedNumOfRecords
+      : bulkDetails.committedNumOfRecords;
+
+    const countErrors = isInitialPreview
+      ? bulkDetails.matchedNumOfErrors
+      : bulkDetails.committedNumOfErrors;
+
+    setCountOfErrors(countErrors);
+    setCountOfRecords(countRecords);
+  }, [bulkDetails, step]);
 
   useEffect(() => {
-    if (items?.length || errors?.length) {
+    if (contentData || errors?.length) {
       setNewBulkFooterShown(true);
     }
-  }, [items, errors]);
+  }, [contentData, errors]);
+
 
   return (
     <AccordionStatus>
-      {!initial && (
-      <Headline size="large" margin="small">
-        <MessageBanner type="success" contentClassName="SuccessBanner">
-          <FormattedMessage
-            id="ui-bulk-edit.recordsSuccessfullyChanged"
-            values={{ value: processedRecords }}
-          />
-        </MessageBanner>
-      </Headline>
+      {!isInitial && (
+        <Headline size="large" margin="small">
+          <MessageBanner type="success" contentClassName="SuccessBanner">
+            <FormattedMessage
+              id="ui-bulk-edit.recordsSuccessfullyChanged"
+              values={{ value: countOfRecords }}
+            />
+          </MessageBanner>
+        </Headline>
       )}
       {title && (
         <Headline size="large" margin="medium">
@@ -67,13 +69,22 @@ export const Preview = ({ id, title, initial, capabilities, data }) => {
         </Headline>
       )}
       <AccordionSet>
-        {!!items?.length && <PreviewAccordion items={items} userGroups={userGroups} />}
-        {!!mappedErrors?.length && (
+        {!!contentData?.length && (
+          <PreviewAccordion
+            isInitial={isInitial}
+            columns={columns}
+            contentData={contentData}
+            columnMapping={columnMapping}
+            visibleColumns={visibleColumns}
+          />
+        )}
+        {!!errors?.length && (
           <ErrorsAccordion
-            errors={mappedErrors}
-            entries={data?.progress?.total}
-            matched={data?.progress?.success}
-            countOfErrors={data?.progress?.errors}
+            errors={errors}
+            entries={bulkDetails.totalNumOfRecords}
+            matched={countOfRecords}
+            countOfErrors={countOfErrors}
+            isInitial={isInitial}
           />
         )}
       </AccordionSet>
@@ -84,9 +95,13 @@ export const Preview = ({ id, title, initial, capabilities, data }) => {
 Preview.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
-  initial: PropTypes.bool,
-  capabilities: PropTypes.string,
-  data: PropTypes.shape({
-    progress: PropTypes.object,
+  isInitial: PropTypes.bool,
+  bulkDetails: PropTypes.shape({
+    totalNumOfRecords: PropTypes.number,
+    matchedNumOfRecords: PropTypes.number,
+    committedNumOfRecords: PropTypes.number,
+    processedNumOfRecords: PropTypes.number,
+    matchedNumOfErrors: PropTypes.number,
+    committedNumOfErrors: PropTypes.number,
   }),
 };

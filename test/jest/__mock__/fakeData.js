@@ -1,6 +1,6 @@
 export const bulkEditLogsData = Array(50).fill(null).map((_, index) => [
   {
-    id: index,
+    id: index.toString(),
     operationType: 'Edit',
     entityType: 'Item',
     status: 'New',
@@ -9,10 +9,11 @@ export const bulkEditLogsData = Array(50).fill(null).map((_, index) => [
     endTime: '10/12/2022 7:34AM',
     totalNumOfRecords: 100,
     processedNumOfRecords: 55,
+    committedNumOfRecords: 20,
     editing: 'In app',
   },
   {
-    id: index + 1,
+    id: (index + 1).toString(),
     operationType: 'Delete',
     entityType: 'Holdings',
     status: 'Completed',
@@ -21,6 +22,7 @@ export const bulkEditLogsData = Array(50).fill(null).map((_, index) => [
     endTime: '12/12/2022 7:34AM',
     totalNumOfRecords: 65,
     processedNumOfRecords: 12,
+    committedNumOfRecords: 20,
     editing: 'In app',
   },
 ]).flat();
@@ -170,4 +172,18 @@ export const listHoldings = {
       'Physical',
     ],
   })),
+};
+
+export const errorsPreview = {
+  errors: [
+    {
+      message: 'No match found',
+      parameters: [
+        {
+          key: 'IDENTIFIER',
+          value: 'invalid1',
+        },
+      ],
+    },
+  ],
 };

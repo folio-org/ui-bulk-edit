@@ -2,42 +2,43 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
 import '../../../../../../test/jest/__mock__';
+import { errorsPreview } from '../../../../../../test/jest/__mock__/fakeData';
 
 import ErrorsAccordion from './ErrorsAccordion';
 
-const errors = [
-  {
-    code: 'code',
-    message: 'error',
-    parameters: null,
-    type: 'BULK_EDIT_ERROR',
-  },
-];
+const defaultProps = {
+  errors: errorsPreview.errors,
+  entries: 5,
+  countOfErrors: errorsPreview.errors.length,
+  matched: 4,
+};
 
-const renderPreviewAccordion = (history) => {
+const renderPreviewAccordion = (history, props = defaultProps) => {
   render(
     <MemoryRouter initialEntries={history}>
-      <ErrorsAccordion errors={errors} entries={5} countOfErrors={1} matched={4} />
+      <ErrorsAccordion {...props} />
     </MemoryRouter>,
   );
 };
 
-describe('PreviewAccordion', () => {
+describe('ErrorsAccordion', () => {
   it('should render preview accordion', () => {
-    const mockHistory = ['/bulk-edit/1/initial'];
-    renderPreviewAccordion(mockHistory);
+    const mockHistory = ['/bulk-edit/1/preview'];
+
+    renderPreviewAccordion(mockHistory, { ...defaultProps, initial: true });
 
     expect(screen.getByText(/errors.info/)).toBeVisible();
     expect(screen.getByText(/errors.table.code/)).toBeVisible();
-    expect(screen.getByText('error')).toBeVisible();
+    expect(screen.getByText(errorsPreview.errors[0].message)).toBeVisible();
   });
 
   it('should render preview accordion', () => {
-    const mockHistory = ['/bulk-edit/1/processed'];
-    renderPreviewAccordion(mockHistory);
+    const mockHistory = ['/bulk-edit/1/preview'];
 
-    expect(screen.getByText(/errors.infoProccessed/)).toBeVisible();
+    renderPreviewAccordion(mockHistory, { ...defaultProps, initial: false });
+
+    expect(screen.getByText(/errors.infoProcessed/)).toBeVisible();
     expect(screen.getByText(/errors.table.code/)).toBeVisible();
-    expect(screen.getByText('error')).toBeVisible();
+    expect(screen.getByText(errorsPreview.errors[0].message)).toBeVisible();
   });
 });

@@ -1,36 +1,109 @@
 import React from 'react';
-import { Col, MultiColumnList, Row } from '@folio/stripes/components';
-import { useLocation } from 'react-router-dom';
-import { LOGS_COLUMNS } from '../../constants';
-import { getLogsResultsFormatter } from '../../constants/formatters';
-import { useBulkEditLogs } from '../../API/useBulkEditLogs';
+import { useLocation, useHistory } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import noop from 'lodash/noop';
 
+import { MultiColumnList } from '@folio/stripes/components';
+import {
+  RESULT_COUNT_INCREMENT,
+  ResultsPane,
+  NoResultsMessage,
+  PrevNextPagination,
+  useLocationSorting,
+  usePagination,
+} from '@folio/stripes-acq-components';
+
+import { LOGS_COLUMNS } from '../../constants';
+import { getLogsResultsFormatter } from '../../utils/formatters';
+import { useLogsQueryParams } from '../../hooks';
+import { useBulkEditLogs } from '../../hooks/api';
+
+const resetData = () => {};
+
+const visibleColumns = LOGS_COLUMNS.map(i => i.value);
+const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
+  acc[el.value] = el.label;
+
+  return acc;
+}, {});
+const sortableFields = LOGS_COLUMNS
+  .filter(({ sortable }) => sortable)
+  .map(({ value }) => value);
 
 const BulkEditLogs = () => {
   const location = useLocation();
-  const { logs, userNamesMap } = useBulkEditLogs({ location });
+  const history = useHistory();
 
-  const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
-    acc[el.value] = el.label;
+  const { logsQueryParams } = useLogsQueryParams({ search: location.search });
 
-    return acc;
-  }, {});
+  const [
+    sortingField,
+    sortingDirection,
+    changeSorting,
+  ] = useLocationSorting(location, history, resetData, sortableFields);
 
-  const visibleColumns = LOGS_COLUMNS.map(i => i.value);
+  const {
+    pagination,
+    changePage,
+  } = usePagination({ limit: RESULT_COUNT_INCREMENT, offset: 0 });
+
+  const {
+    logs,
+    logsCount,
+    isLoading,
+  } = useBulkEditLogs({ filters: logsQueryParams, pagination });
+
+  const resultsStatusMessage = (
+    <NoResultsMessage
+      isLoading={isLoading}
+      filters={logsQueryParams}
+      isFiltersOpened
+      toggleFilters={noop}
+    />
+  );
 
   return (
-    <Row>
-      <Col xs={12}>
-        <MultiColumnList
-          striped
-          contentData={logs}
-          columnMapping={columnMapping}
-          visibleColumns={visibleColumns}
-          formatter={getLogsResultsFormatter(userNamesMap)}
-          pagingType="prev-next"
-        />
-      </Col>
-    </Row>
+    <ResultsPane
+      id="bulk-edit-logs-pane"
+      autosize
+      title={<FormattedMessage id="ui-bulk-edit.meta.logs.title" />}
+      count={logsCount}
+      toggleFiltersPane={noop}
+      filters={logsQueryParams}
+      isFiltersOpened
+      isLoading={isLoading}
+    >
+      {({ height, width }) => (
+        <>
+          <MultiColumnList
+            loading={isLoading}
+            contentData={logs}
+            totalCount={logsCount}
+            columnMapping={columnMapping}
+            visibleColumns={visibleColumns}
+            formatter={getLogsResultsFormatter()}
+            isEmptyMessage={resultsStatusMessage}
+            sortOrder={sortingField}
+            sortDirection={sortingDirection}
+            onHeaderClick={changeSorting}
+            onNeedMoreData={changePage}
+            pagingType="none"
+            hasMargin
+            height={height - PrevNextPagination.HEIGHT}
+            width={width}
+          />
+
+          {logs.length > 0 && (
+            <PrevNextPagination
+              {...pagination}
+              totalCount={logsCount}
+              disabled={isLoading}
+              onChange={changePage}
+            />
+          )}
+        </>
+      )}
+    </ResultsPane>
   );
 };
 

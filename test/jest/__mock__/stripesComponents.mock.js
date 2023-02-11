@@ -5,14 +5,14 @@ jest.mock('@folio/stripes/components', () => ({
   Layer: jest.fn(({
     contentLabel,
     isOpen,
-  }) => <div contentLabel={contentLabel} isOpen={isOpen}>Layer</div>),
+  }) => (isOpen ? <div>{contentLabel}</div> : null)),
   MultiColumnList: jest.fn(({
     visibleColumns,
     columnMapping,
     isEmptyMessage,
     totalCount,
     contentData,
-    formatter,
+    formatter = {},
     onRowClick,
   }) => {
     if (isEmptyMessage && !totalCount) {

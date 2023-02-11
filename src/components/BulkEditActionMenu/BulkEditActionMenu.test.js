@@ -1,122 +1,238 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
-import { noop } from 'lodash';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
+import { QueryClientProvider } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
-import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../test/jest/__mock__';
+import { bulkEditLogsData } from '../../../test/jest/__mock__/fakeData';
+import { queryClient } from '../../../test/jest/utils/queryClient';
+
+import { RootContext } from '../../context/RootContext';
+import {
+  APPROACHES,
+  CAPABILITIES,
+  IDENTIFIERS,
+  CRITERIA,
+  EDITING_STEPS,
+  JOB_STATUSES,
+  FILE_KEYS,
+  FILE_SEARCH_PARAMS,
+} from '../../constants';
+import { useBulkOperationDetails } from '../../hooks/api';
 
 import BulkEditActionMenu from './BulkEditActionMenu';
-import { INVENTORY_COLUMNS, USER_COLUMNS } from '../../constants';
-import {
-  getInventoryResultsFormatterBase,
-  getUserResultsFormatterBase,
-} from '../../constants/formatters';
-import { RootContext } from '../../context/RootContext';
 
-jest.mock('../../API', () => ({
-  useJob: () => ({
-    data: {
-      files: ['file1.csv', 'file2.csv'],
-    },
-  }),
-  usePreviewRecords: () => ({
-    items: [{ id: 1 }],
-  }),
+jest.mock('../../hooks/api', () => ({
+  ...jest.requireActual('../../hooks/api'),
+  useBulkOperationDetails: jest.fn(),
 }));
 
-const renderActionMenu = ({
-  onEdit = noop,
-  onDelete = noop,
-  onToggle = noop,
-  initialEntries,
-  visibleColumns = JSON.stringify(Object.keys(getInventoryResultsFormatterBase()))
-  ,
-}) => {
-  render(
-    <MemoryRouter initialEntries={initialEntries}>
-      <RootContext.Provider value={{
-        setNewBulkFooterShown: jest.fn(),
-        setCountOfRecords: jest.fn(),
-        setVisibleColumns: jest.fn(),
-        visibleColumns,
-      }}
-      >
-        <BulkEditActionMenu
-          onEdit={onEdit}
-          onDelete={onDelete}
-          onToggle={onToggle}
-          errorCsvLink="file1.csv"
-          successCsvLink="file2.csv"
-        />,
-      </RootContext.Provider>
-    </MemoryRouter>,
+const onEdit = jest.fn();
+const onToggle = jest.fn();
+const bulkOperation = {
+  ...bulkEditLogsData[0],
+  status: JOB_STATUSES.DATA_MODIFICATION,
+  [FILE_KEYS.MATCHING_RECORDS_LINK]: FILE_KEYS.MATCHING_RECORDS_LINK,
+  [FILE_KEYS.UPDATED_RECORDS_LINK]: FILE_KEYS.UPDATED_RECORDS_LINK,
+  [FILE_KEYS.MATCHING_ERRORS_LINK]: FILE_KEYS.MATCHING_ERRORS_LINK,
+  [FILE_KEYS.UPDATED_ERRORS_LINK]: FILE_KEYS.UPDATED_ERRORS_LINK,
+};
+const defaultProviderState = {
+  visibleColumns: [
+    {
+      value: 'uuid',
+      label: 'uuid',
+      selected: false,
+      disabled: false,
+    },
+    {
+      value: 'name',
+      label: 'name',
+      selected: false,
+      disabled: false,
+    },
+  ],
+  setVisibleColumns: jest.fn(),
+};
+
+const renderBulkEditActionMenu = ({ step, capability, providerState = defaultProviderState }) => {
+  const params = new URLSearchParams({
+    step,
+    capabilities: capability,
+    criteria: CRITERIA.IDENTIFIER,
+    identifier: IDENTIFIERS.ID,
+    fileName: 'barcodes.csv',
+  }).toString();
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter initialEntries={[`/bulk-edit/1/preview?${params}`]}>
+        <RootContext.Provider value={providerState}>
+          <BulkEditActionMenu onEdit={onEdit} onToggle={onToggle} />
+        </RootContext.Provider>
+      </MemoryRouter>,
+    </QueryClientProvider>,
   );
 };
 
 describe('BulkEditActionMenu', () => {
   beforeEach(() => {
-    useOkapiKy
-      .mockClear()
-      .mockReturnValue({
-        get: () => ({
-          json: () => ({
-            files: [
-              'donwloadMathcedRecords.csv',
-              'donwloadError.csv',
-            ],
-          }),
-        }),
-      });
+    useBulkOperationDetails.mockClear().mockReturnValue({ bulkDetails: bulkOperation });
+
+    useOkapiKy.mockClear().mockReturnValue({});
   });
 
-  it('displays Bulk edit', async () => {
-    renderActionMenu({
-      initialEntries: ['/bulk-edit/1?capabilities=USERS'],
+  it('should display actions group', async () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
     });
 
-    const downloadButtons = [
-      'download-link-matched',
-      'download-link-error',
-    ];
-
-    await waitFor(() => downloadButtons.forEach((el) => expect(screen.getByTestId(el)).toBeVisible()));
+    expect(screen.getByText('ui-bulk-edit.menuGroup.actions')).toBeVisible();
   });
 
-  it('should render correct default columns for users', async () => {
-    renderActionMenu({
-      initialEntries: ['/bulk-edit/1?capabilities=USERS'],
-      visibleColumns: JSON.stringify(Object.keys(getUserResultsFormatterBase())),
+  it('should display download matched records action when available', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
     });
 
-    for (const col of USER_COLUMNS) {
-      const checkbox = await screen.findByLabelText(`ui-bulk-edit.columns.${col.value}`);
-
-      expect(checkbox.checked).toBe(col.selected);
-    }
+    expect(screen.getByTestId(FILE_SEARCH_PARAMS.MATCHED_RECORDS_FILE)).toBeVisible();
   });
 
-  it('should render with no axe errors', async () => {
-    renderActionMenu({
-      initialEntries: ['/bulk-edit/1?capabilities=USERS'],
+  it('should display download changed records action when available', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.COMMIT,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
     });
 
-    await runAxeTest({
-      rootNode: document.body,
-    });
+    expect(screen.getByTestId(FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE)).toBeVisible();
   });
 
-  it('should render correct default columns for inventory', async () => {
-    renderActionMenu({
-      initialEntries: ['/bulk-edit/1?capabilities=ITEMS'],
+  it('should display download matched erros action when available', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
     });
 
-    for (const col of INVENTORY_COLUMNS) {
-      const checkbox = await screen.findByLabelText(`ui-bulk-edit.columns.${col.value}`);
+    expect(screen.getByTestId(FILE_SEARCH_PARAMS.RECORD_MATCHING_ERROR_FILE)).toBeVisible();
+  });
 
-      expect(checkbox.checked).toBe(col.selected);
-    }
+  it('should display download commit errors action when available', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.COMMIT,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.getByTestId(FILE_SEARCH_PARAMS.COMMITTING_CHANGES_ERROR_FILE)).toBeVisible();
+  });
+
+  it('should display start in-app edit action when it is available', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.ITEM,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.getByTestId('startInAppAction')).toBeVisible();
+  });
+
+  it('should start bulk edit when inn-app action was called', () => {
+    onEdit.mockClear();
+    onToggle.mockClear();
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.ITEM,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    userEvent.click(screen.getByTestId('startInAppAction'));
+
+    expect(onEdit).toHaveBeenCalledWith(APPROACHES.IN_APP);
+    expect(onToggle).toHaveBeenCalled();
+  });
+
+  it('should display start csv edit action when it is available', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.getByTestId('startCsvAction')).toBeVisible();
+  });
+
+  it('should start bulk edit when inn-app action was called', () => {
+    onEdit.mockClear();
+    onToggle.mockClear();
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    userEvent.click(screen.getByTestId('startCsvAction'));
+
+    expect(onEdit).toHaveBeenCalledWith(APPROACHES.MANUAL);
+    expect(onToggle).toHaveBeenCalled();
+  });
+
+  it('should display columns group', async () => {
+    renderBulkEditActionMenu({ step: EDITING_STEPS.UPLOAD, capability: CAPABILITIES.USER });
+
+    expect(screen.getByText('ui-bulk-edit.menuGroup.showColumns')).toBeVisible();
+  });
+
+  it('should display checkbox for column when provided', () => {
+    renderBulkEditActionMenu({ step: EDITING_STEPS.UPLOAD, capability: CAPABILITIES.USER });
+
+    expect(screen.getByText('uuid')).toBeVisible();
+  });
+
+  it('should change visibleColumns when checkbox is pressed ', () => {
+    const setVisibleColumns = jest.fn();
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, setVisibleColumns },
+    });
+
+    act(() => userEvent.click(screen.getByText('uuid')));
+
+    expect(setVisibleColumns).toHaveBeenCalledWith([
+      { ...defaultProviderState.visibleColumns[0], selected: true },
+      defaultProviderState.visibleColumns[1],
+    ]);
+  });
+
+  it('should not change visibleColumns when checkbox is pressed and only one option is selected ', () => {
+    const setVisibleColumns = jest.fn();
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: {
+        setVisibleColumns,
+        visibleColumns: [
+          defaultProviderState.visibleColumns[0],
+          { ...defaultProviderState.visibleColumns[1], selected: true },
+        ],
+      },
+    });
+
+    act(() => userEvent.click(screen.getByText('uuid')));
+
+    expect(setVisibleColumns).not.toHaveBeenCalledWith();
   });
 });

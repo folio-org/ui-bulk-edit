@@ -103,21 +103,6 @@ export const LogsFilters = ({
           />
         </Accordion>
         <Accordion
-          closedByDefault={false}
-          displayClearButton={!!activeFilters[FILTERS.OPERATION_TYPE]}
-          header={FilterAccordionHeader}
-          id={FILTERS.OPERATION_TYPE}
-          label={<FormattedMessage id="ui-bulk-edit.logs.filter.title.types" />}
-          onClearFilter={createClearFilterHandler(onChange, FILTERS.OPERATION_TYPE)}
-        >
-          <CheckboxFilter
-            dataOptions={FILTER_OPTIONS.OPERATION_TYPE}
-            name={FILTERS.OPERATION_TYPE}
-            selectedValues={activeFilters[FILTERS.OPERATION_TYPE]}
-            onChange={onChange}
-          />
-        </Accordion>
-        <Accordion
           closedByDefault
           displayClearButton={!!activeFilters[FILTERS.START_DATE]}
           header={FilterAccordionHeader}

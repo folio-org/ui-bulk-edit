@@ -1,39 +1,30 @@
 import { Router } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
+
+import { render, screen } from '@testing-library/react';
 import { runAxeTest } from '@folio/stripes-testing';
-import { useOkapiKy } from '@folio/stripes/core';
+
+import '../../../../test/jest/__mock__';
 
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 import { TYPE_OF_PROGRESS } from '../../../constants';
 
-import '../../../../test/jest/__mock__';
 import { RootContext } from '../../../context/RootContext';
 import BulkEditListResult from './BulkEditListResult';
-
 
 jest.mock('./Preview/PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
 }));
 
-jest.mock('../../../API', () => ({
-  useJob: () => ({
-    data: {
-      files: ['file1.csv', 'file2.csv'],
-      progress: 55,
-    },
+jest.mock('../../../hooks/api', () => ({
+  ...jest.requireActual('../../../hooks/api'),
+  useBulkOperationDetails: jest.fn().mockReturnValue({ bulkDetails: {} }),
+  useRecordsPreview: () => ({
+    contentData: [],
   }),
-  usePreviewRecords: () => ({
-    users: [{ id: 1 }, { id: 2 }],
-  }),
-  useErrorsList: () => ({
-    errors: [{ message: 'id,text' }],
-  }),
-  useProgressStatus: () => ({
-    data: {
-      progress: 10,
-    },
+  useErrorsPreview: () => ({
+    errors: [],
   }),
   useUserGroupsMap: () => ({}),
 }));
@@ -72,17 +63,17 @@ describe('BulkEditListResult', () => {
   it('displays fileName field for initial preview', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/initial?fileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/preview?fileName=Mock.csv&capabilities=USERS&step=UPLOAD');
 
     renderBulkEditResult(history);
 
-    expect(screen.getByTestId('spiner')).toBeVisible();
+    expect(screen.getByText('ui-bulk-edit.preview.file.title')).toBeVisible();
   });
 
   it('displays title', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/initialProgress?fileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/progress?fileName=Mock.csv&capabilities=USERS');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.INITIAL);
 
@@ -92,7 +83,7 @@ describe('BulkEditListResult', () => {
   it('displays processed title', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/processedProgress?processedFileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/progress?processedFileName=Mock.csv&capabilities=USERS');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
@@ -102,7 +93,7 @@ describe('BulkEditListResult', () => {
   it('displays processed preview', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/processed?processedFileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/preview?processedFileName=Mock.csv&capabilities=USERS');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
