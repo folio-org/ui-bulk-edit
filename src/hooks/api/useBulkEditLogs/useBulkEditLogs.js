@@ -39,7 +39,7 @@ export const useBulkEditLogs = ({ filters = {}, pagination }) => {
       return { bulkOperations: [], totalRecords: 0 };
     }
 
-    const { bulkOperations, totalRecords } = await ky.get('bulk-operations', { searchParams }).json();
+    const { bulkOperations = [], totalRecords } = await ky.get('bulk-operations', { searchParams }).json();
     const userIds = uniq(bulkOperations.map(({ userId }) => userId))
       .filter(userId => userId && !usersMap.current[userId]);
     const fetchedUsers = await batchRequest(
