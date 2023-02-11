@@ -25,7 +25,7 @@ export const useBulkPermissions = () => {
   // derived pages
   const hasAnyInAppEditPermissions = hasInAppEditPerms || hasInAppUsersEditPerms;
   const hasAnyEditPermissions = hasCsvEditPerms || hasAnyInAppEditPermissions;
-  const isActionMenuShown = hasCsvEditPerms;
+  const isActionMenuShown = hasCsvEditPerms || hasAnyInAppEditPermissions;
   const isSelectIdentifiersDisabled = !hasAnyEditPermissions;
   const isDropZoneDisabled = !hasAnyEditPermissions;
   const isInventoryRadioDisabled = !hasInAppViewPerms;
