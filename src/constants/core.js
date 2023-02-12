@@ -59,12 +59,6 @@ export const CRITERIA = {
   LOGS: 'logs',
 };
 
-export const CAPABILITIES_TRANSLATION_VALUE = {
-  [CAPABILITIES.USER]: 'users',
-  [CAPABILITIES.ITEM]: 'items',
-  [CAPABILITIES.HOLDING]: 'holdings',
-};
-
 export const TYPE_OF_PROGRESS = {
   INITIAL: 'initial',
   PROCESSED: 'processed',

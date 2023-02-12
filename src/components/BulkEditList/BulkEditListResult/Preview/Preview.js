@@ -20,6 +20,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const location = useLocation();
   const { setNewBulkFooterShown, countOfRecords, setCountOfRecords, visibleColumns } = useContext(RootContext);
   const [countOfErrors, setCountOfErrors] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
 
   const search = new URLSearchParams(location.search);
   const step = search.get('step');
@@ -42,6 +43,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
     setCountOfErrors(countErrors);
     setCountOfRecords(countRecords);
+    setTotalCount(isInitialPreview ? bulkDetails.totalNumOfRecords : bulkDetails.matchedNumOfRecords);
   }, [bulkDetails, step]);
 
   useEffect(() => {
@@ -69,7 +71,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
         </Headline>
       )}
       <AccordionSet>
-        {!!contentData?.length && (
+        {Boolean(contentData?.length) && (
           <PreviewAccordion
             isInitial={isInitial}
             columns={columns}
@@ -78,10 +80,10 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
             visibleColumns={visibleColumns}
           />
         )}
-        {!!errors?.length && (
+        {Boolean(errors?.length) && (
           <ErrorsAccordion
             errors={errors}
-            entries={bulkDetails.totalNumOfRecords}
+            entries={totalCount}
             matched={countOfRecords}
             countOfErrors={countOfErrors}
             isInitial={isInitial}

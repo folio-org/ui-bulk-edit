@@ -196,7 +196,7 @@ describe('BulkEditActionMenu', () => {
   it('should display checkbox for column when provided', () => {
     renderBulkEditActionMenu({ step: EDITING_STEPS.UPLOAD, capability: CAPABILITIES.USER });
 
-    expect(screen.getByText('uuid')).toBeVisible();
+    expect(screen.getByText('ui-bulk-edit.columns.USER.uuid')).toBeVisible();
   });
 
   it('should change visibleColumns when checkbox is pressed ', () => {
@@ -205,10 +205,10 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
       capability: CAPABILITIES.USER,
-      providerState: { ...defaultProviderState, setVisibleColumns },
+      providerState: { ...defaultProviderState, setVisibleColumns, countOfRecords: 1 },
     });
 
-    act(() => userEvent.click(screen.getByText('uuid')));
+    act(() => userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid')));
 
     expect(setVisibleColumns).toHaveBeenCalledWith([
       { ...defaultProviderState.visibleColumns[0], selected: true },
@@ -231,7 +231,7 @@ describe('BulkEditActionMenu', () => {
       },
     });
 
-    act(() => userEvent.click(screen.getByText('uuid')));
+    act(() => userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid')));
 
     expect(setVisibleColumns).not.toHaveBeenCalledWith();
   });

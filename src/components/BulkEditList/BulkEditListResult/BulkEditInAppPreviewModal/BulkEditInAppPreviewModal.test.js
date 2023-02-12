@@ -13,6 +13,7 @@ import { RootContext } from '../../../../context/RootContext';
 import {
   ACTIONS,
   OPTIONS,
+  JOB_STATUSES,
 } from '../../../../constants';
 import {
   useBulkOperationDetails,
@@ -98,8 +99,11 @@ describe('BulkEditInAppPreviewModal', () => {
     };
 
     getJsonMock.mockClear().mockReturnValue({
+      // preview data
       header: [uuidColumn],
       rows: [{ row: ['uuid'] }],
+      // bulk operation data
+      status: JOB_STATUSES.REVIEW_CHANGES,
     });
 
     await act(async () => {

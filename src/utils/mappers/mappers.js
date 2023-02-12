@@ -1,4 +1,3 @@
-import { CAPABILITIES_TRANSLATION_VALUE } from '../../constants';
 import { getFormattedColumnsDate } from '../date';
 
 export const DATA_TYPES = {
@@ -24,9 +23,7 @@ export const getMappedTableData = ({ data, capabilities, intl }) => {
   }));
 
   const columnMapping = columns.reduce((acc, { value, label }) => {
-    const mappedCapability = CAPABILITIES_TRANSLATION_VALUE[capabilities];
-
-    acc[value] = intl.formatMessage({ id: `ui-bulk-edit.columns.${mappedCapability}.${label}` });
+    acc[value] = intl.formatMessage({ id: `ui-bulk-edit.columns.${capabilities}.${label}` });
 
     return acc;
   }, {});
