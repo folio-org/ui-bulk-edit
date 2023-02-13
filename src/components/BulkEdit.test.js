@@ -209,9 +209,10 @@ describe('BulkEdit', () => {
       const event = createDtWithFiles(file);
       const data = mockData([file]);
 
-      dispatchEvt(fileInput, 'dragenter', data);
-
-      fireEvent.drop(fileInput, event);
+      act(() => {
+        dispatchEvt(fileInput, 'dragenter', data);
+        fireEvent.drop(fileInput, event);
+      });
 
       await waitFor(() => expect(screen.getByText(expectedMessages)).toBeInTheDocument());
     };
