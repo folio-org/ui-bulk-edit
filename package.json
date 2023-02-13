@@ -140,7 +140,15 @@
       {
         "permissionName": "ui-bulk-edit.query",
         "displayName": "Bulk edit: Query",
-        "subPermissions": [],
+        "subPermissions": [
+          "usergroups.item.get",
+          "addresstypes.item.get",
+          "inventory-storage.statistical-codes.item.get",
+          "inventory-storage.item-note-types.item.get",
+          "inventory-storage.call-number-types.item.get",
+          "inventory-storage.call-number-types.item.get",
+          "inventory-storage.electronic-access-relationships.item.get"
+        ],
         "visible": true
       }
     ]
