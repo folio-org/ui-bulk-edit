@@ -170,6 +170,7 @@
     "@folio/stripes-data-transfer-components": "^5.0.0",
     "@folio/stripes-testing": "^4.4.0",
     "@formatjs/cli": "^4.2.10",
+    "@testing-library/dom": "^8.19.0",
     "@testing-library/jest-dom": "^5.11.1",
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^5.1.0",
@@ -198,7 +199,6 @@
   },
   "dependencies": {
     "@folio/stripes-acq-components": "~4.0.0",
-    "@testing-library/dom": "^8.19.0",
     "file-saver": "^2.0.5",
     "history": "^5.1.0",
     "lodash": "^4.17.5",
