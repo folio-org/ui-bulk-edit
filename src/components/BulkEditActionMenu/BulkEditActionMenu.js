@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { saveAs } from 'file-saver';
 
@@ -28,6 +28,7 @@ const BulkEditActionMenu = ({
   onEdit,
   onToggle,
 }) => {
+  const intl = useIntl();
   const location = useLocation();
   const perms = useBulkPermissions();
   const search = new URLSearchParams(location.search);
@@ -54,7 +55,7 @@ const BulkEditActionMenu = ({
     },
   });
 
-  const { visibleColumns, setVisibleColumns } = useContext(RootContext);
+  const { countOfRecords, visibleColumns, setVisibleColumns } = useContext(RootContext);
   const columns = visibleColumns || [];
   const selectedValues = columns.filter(item => !item.selected).map(item => item.value);
 
@@ -69,7 +70,11 @@ const BulkEditActionMenu = ({
     return selectedValues?.length === 1 && selectedValues?.[0] === value;
   };
 
-  const columnsOptions = columns.map(item => ({ ...item, disabled: isLastUnselectedColumn(item.value) }));
+  const columnsOptions = columns.map(item => ({
+    ...item,
+    label: intl.formatMessage({ id: `ui-bulk-edit.columns.${capability}.${item.label}` }),
+    disabled: isLastUnselectedColumn(item.value) || !countOfRecords,
+  }));
 
   const handleColumnChange = ({ values }) => {
     const changedColumns = columns.map(col => {

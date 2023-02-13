@@ -36,7 +36,6 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
 
   const { mutateAsync: bulkOperationStart, isLoading } = useMutation({
     mutationFn: async ({ id, approach, entityType, step, query }) => {
-      let response;
       const body = query
         ? {
           step,
@@ -53,15 +52,16 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
       params.current = { id, step };
 
       try {
-        response = await ky.post(`bulk-operations/${id}/start`, {
+        await ky.post(`bulk-operations/${id}/start`, {
           json: body,
           timeout: step === EDITING_STEPS.COMMIT ? 1000 : false,
-        }).json();
-      } catch {
-        response = fetchBulkOperation();
-      }
+        });
+      // eslint-disable-next-line no-empty
+      } catch (e) {}
 
-      return response;
+      const { data } = await fetchBulkOperation();
+
+      return data;
     },
     ...mutationOptions,
   });

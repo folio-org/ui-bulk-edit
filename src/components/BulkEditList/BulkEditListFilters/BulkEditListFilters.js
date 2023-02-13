@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -14,13 +14,14 @@ import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
 import {
   CRITERIA,
+  JOB_STATUSES,
   TRANSLATION_SUFFIX,
-  EDITING_STEPS, APPROACHES, BULK_VISIBLE_COLUMNS,
+  EDITING_STEPS,
+  APPROACHES,
 } from '../../../constants';
 import { useUserGroupsMap } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 
-import { RootContext } from '../../../context/RootContext';
 import { LogsFilters } from './LogsFilters/LogsFilters';
 import { useUpload } from '../../../hooks/api/useUpload';
 import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
@@ -76,7 +77,6 @@ export const BulkEditListFilters = ({
     [applyFilters],
   );
 
-  const { setVisibleColumns } = useContext(RootContext);
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
@@ -106,9 +106,6 @@ export const BulkEditListFilters = ({
     });
 
     setIsFileUploaded(false);
-    // clear visibleColumns preset
-    localStorage.removeItem(BULK_VISIBLE_COLUMNS);
-    setVisibleColumns(null);
   };
 
   const handleCriteriaChange = (value) => {
@@ -145,10 +142,12 @@ export const BulkEditListFilters = ({
         identifierType: recordIdentifier,
       });
 
-      await bulkOperationStart({
+      const { status } = await bulkOperationStart({
         id,
         step: EDITING_STEPS.UPLOAD,
       });
+
+      if (status === JOB_STATUSES.FAILED) throw Error();
 
       history.replace({
         pathname: `/bulk-edit/${id}/progress`,
