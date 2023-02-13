@@ -54,7 +54,7 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
       try {
         await ky.post(`bulk-operations/${id}/start`, {
           json: body,
-          timeout: step === EDITING_STEPS.COMMIT ? 1000 : undefined,
+          timeout: step === EDITING_STEPS.COMMIT ? 1000 : false,
         });
       // eslint-disable-next-line no-empty
       } catch (e) {}
