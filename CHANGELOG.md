@@ -23,6 +23,7 @@
 * [UIBULKED-221](https://issues.folio.org/browse/UIBULKED-221) Add config files for TypeScript supporting
 * [UIBULKED-164](https://issues.folio.org/browse/UIBULKED-164) Query tab permissions
 * [UIBULKED-196](https://issues.folio.org/browse/UIBULKED-196) Integration with mod-bulk-operations
+* [UIBULKED-235](https://issues.folio.org/browse/UIBULKED-235) Move @testing-library/dom to dev-deps
 
 ## [2.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.3) (2022-12-02)
 
