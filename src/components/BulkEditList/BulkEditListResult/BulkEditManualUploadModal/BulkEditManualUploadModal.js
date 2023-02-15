@@ -12,7 +12,13 @@ import {
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 
 import { ListFileUploader } from '../../../ListFileUploader';
-import { APPROACHES, CAPABILITIES, EDITING_STEPS, IDENTIFIERS, MANUAL_UPLOAD_STEPS } from '../../../../constants';
+import {
+  APPROACHES,
+  CAPABILITIES,
+  EDITING_STEPS,
+  IDENTIFIERS,
+  MANUAL_UPLOAD_STEPS,
+} from '../../../../constants';
 import {
   useUpload,
   useBulkOperationStart,
@@ -113,7 +119,7 @@ const BulkEditManualUploadModal = ({
         operationId,
         fileToUpload,
         entityType: CAPABILITIES.USER,
-        identifierType: identifier,
+        identifierType: identifier || IDENTIFIERS.ID,
         manual: true,
       });
 
@@ -206,10 +212,6 @@ BulkEditManualUploadModal.propTypes = {
   onCancel: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func,
   countOfRecords: PropTypes.number,
-};
-
-BulkEditManualUploadModal.defaultProps = {
-  identifier: IDENTIFIERS.BARCODE,
 };
 
 export default BulkEditManualUploadModal;
