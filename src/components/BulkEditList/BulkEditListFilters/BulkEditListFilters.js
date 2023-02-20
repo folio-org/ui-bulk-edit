@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -19,6 +19,7 @@ import {
   EDITING_STEPS,
   APPROACHES,
 } from '../../../constants';
+import { RootContext } from '../../../context/RootContext';
 import { useUserGroupsMap } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 
@@ -77,6 +78,7 @@ export const BulkEditListFilters = ({
     [applyFilters],
   );
 
+  const { setVisibleColumns } = useContext(RootContext);
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
@@ -105,6 +107,7 @@ export const BulkEditListFilters = ({
       }, location.search),
     });
 
+    setVisibleColumns(null);
     setIsFileUploaded(false);
   };
 
