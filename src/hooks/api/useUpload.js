@@ -24,6 +24,7 @@ export const useUpload = () => {
 
     return ky.post(`bulk-operations/upload?${searchParams}`, {
       body: formData,
+      timeout: false,
     }).json();
   },
   retry: 10,

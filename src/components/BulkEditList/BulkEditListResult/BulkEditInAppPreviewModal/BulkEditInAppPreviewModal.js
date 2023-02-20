@@ -1,14 +1,15 @@
-import { saveAs } from 'file-saver';
-import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
+import React, { useContext, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import PropTypes from 'prop-types';
-import React, { useContext, useEffect } from 'react';
+import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { saveAs } from 'file-saver';
+
+import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useShowCallout } from '@folio/stripes-acq-components';
-import { useQueryClient } from 'react-query';
-import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFooter';
-import css from './BulkEditInAppPreviewModal.css';
+
+import { RootContext } from '../../../../context/RootContext';
 import {
   APPROACHES,
   EDITING_STEPS,
@@ -16,7 +17,6 @@ import {
   FILE_SEARCH_PARAMS,
   getFormattedFilePrefixDate,
 } from '../../../../constants';
-import { RootContext } from '../../../../context/RootContext';
 import {
   useRecordsPreview,
   useBulkOperationStart,
@@ -24,8 +24,11 @@ import {
   useContentUpdate,
   useFileDownload,
 } from '../../../../hooks/api';
-import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
 
+import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
+import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFooter';
+
+import css from './BulkEditInAppPreviewModal.css';
 
 const BulkEditInAppPreviewModal = ({
   open,
@@ -53,6 +56,7 @@ const BulkEditInAppPreviewModal = ({
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
   const { bulkOperationStart } = useBulkOperationStart();
 
+  const [isPreviewLoading, setIsLoadingPreview] = useState(false);
   const {
     contentData,
     columnMapping,
@@ -119,6 +123,8 @@ const BulkEditInAppPreviewModal = ({
         totalRecords: bulkDetails.totalNumOfRecords,
       });
 
+      setIsLoadingPreview(true);
+
       contentUpdate({ contentUpdates: contentUpdatesBody })
         .then(() => bulkOperationStart({
           id: bulkOperationId,
@@ -130,6 +136,9 @@ const BulkEditInAppPreviewModal = ({
         .catch(() => {
           swwCallout();
           onKeepEditing();
+        })
+        .finally(() => {
+          setIsLoadingPreview(false);
         });
     }
   }, [contentUpdates, open]);
@@ -142,7 +151,7 @@ const BulkEditInAppPreviewModal = ({
       aria-label="PreviewModal"
       footer={
         <BulkEditInAppPreviewModalFooter
-          isChangedPreviewReady={isChangedPreviewReady}
+          isChangedPreviewReady={isChangedPreviewReady && !isPreviewLoading}
           onDownloadPreview={refetch}
           onSave={handleBulkOperationStart}
           onKeepEditing={onKeepEditing}
@@ -151,7 +160,7 @@ const BulkEditInAppPreviewModal = ({
       dismissible
       onClose={onKeepEditing}
     >
-      {contentData ? (
+      {contentData && !isPreviewLoading ? (
         <>
           <MessageBanner type="warning">
             <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: bulkDetails?.matchedNumOfRecords }} />

@@ -35,8 +35,7 @@
         "permissionName": "module.bulk-edit.enabled",
         "displayName": "UI: Bulk edit module is enabled",
         "visible": false,
-        "subPermissions": [
-        ]
+        "subPermissions": []
       },
       {
         "permissionName": "ui-bulk-edit.view.base",

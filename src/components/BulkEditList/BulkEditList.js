@@ -144,6 +144,7 @@ export const BulkEditList = () => {
 
   const renderNewBulkFooter = () => {
     const handleStartNewBulkEdit = () => {
+      setVisibleColumns(null);
       // redirect to initial state with saved capabilities in search
       history.replace({
         pathname: '/bulk-edit',

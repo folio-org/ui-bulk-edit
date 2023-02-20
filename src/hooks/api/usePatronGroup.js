@@ -6,6 +6,7 @@ import { useOkapiKy } from '@folio/stripes/core';
 
 export const usePatronGroup = () => {
   const ky = useOkapiKy();
+
   const { data, isLoading } = useQuery(
     {
       queryKey: ['userPatronGroup'],
