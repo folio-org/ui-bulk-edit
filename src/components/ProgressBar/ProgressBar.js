@@ -15,15 +15,20 @@ import css from './ProgressBar.css';
 export const ProgressBar = () => {
   const callout = useShowCallout();
   const intl = useIntl();
+
   const location = useLocation();
+  const search = new URLSearchParams(location.search);
+  const processedTitle = search.get('processedFileName');
+  const title = search.get('fileName');
+  const step = search.get('step');
+
   const { id } = useParams();
   const { bulkDetails, clearIntervalAndRedirect } = useBulkOperationDetails({
     id,
     interval: 1000 * 3,
+    additionalQueryKeys: [step],
   });
 
-  const processedTitle = new URLSearchParams(location.search).get('processedFileName');
-  const title = new URLSearchParams(location.search).get('fileName');
   const status = bulkDetails?.status;
   const progressPercentage = bulkDetails
     ? (bulkDetails.processedNumOfRecords / bulkDetails.totalNumOfRecords) * 100

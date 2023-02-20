@@ -74,7 +74,7 @@ const BulkEditLogsActions = ({ item }) => {
         ))}
       </MenuSection>
     </DropdownMenu>
-  ), []);
+  ), [availableFiles]);
 
   return (
     <Dropdown
