@@ -310,5 +310,7 @@
     "columns.HOLDINGS_RECORD.Discovery suppress": "Suppressed from discovery",
     "columns.HOLDINGS_RECORD.Statistical codes": "Statistical codes",
     "columns.HOLDINGS_RECORD.Tags": "Tags",
-    "columns.HOLDINGS_RECORD.Source": "Source"
+    "columns.HOLDINGS_RECORD.Source": "Source",
+    "columns.HOLDINGS_RECORD.Instance HRID": "Instance HRID",
+    "columns.HOLDINGS_RECORD.Item barcode": "Item barcode"
 }
