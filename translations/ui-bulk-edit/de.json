@@ -294,7 +294,7 @@
     "columns.HOLDINGS_RECORD.Call number suffix": "Call number suffix",
     "columns.HOLDINGS_RECORD.Shelving title": "Shelving title",
     "columns.HOLDINGS_RECORD.Acquisition format": "Acquisition format",
-    "columns.HOLDINGS_RECORD.Acquisition method": "Acquisition method",
+    "columns.HOLDINGS_RECORD.Acquisition method": "Erwerbungsart",
     "columns.HOLDINGS_RECORD.Receipt status": "Receipt status",
     "columns.HOLDINGS_RECORD.Notes": "Notes",
     "columns.HOLDINGS_RECORD.Administrative notes": "Administrative notes",
@@ -310,5 +310,7 @@
     "columns.HOLDINGS_RECORD.Discovery suppress": "Suppressed from discovery",
     "columns.HOLDINGS_RECORD.Statistical codes": "Statistical codes",
     "columns.HOLDINGS_RECORD.Tags": "Tags",
-    "columns.HOLDINGS_RECORD.Source": "Source"
+    "columns.HOLDINGS_RECORD.Source": "Source",
+    "columns.HOLDINGS_RECORD.Instance HRID": "Instance HRID",
+    "columns.HOLDINGS_RECORD.Item barcode": "Item barcode"
 }
