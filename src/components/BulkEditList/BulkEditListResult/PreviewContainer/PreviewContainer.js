@@ -15,14 +15,13 @@ const PreviewContainer = () => {
 
   const location = useLocation();
   const search = new URLSearchParams(location.search);
-
-  const { id } = useParams();
-  const { bulkDetails, isLoading } = useBulkOperationDetails({ id });
-
   const step = search.get('step');
   const fileUploadedName = search.get('fileName');
   const capabilities = search.get('capabilities')?.toLocaleLowerCase();
   const queryText = search.get('queryText');
+
+  const { id } = useParams();
+  const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
 
   const title = useMemo(() => {
     if (queryText) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText });
