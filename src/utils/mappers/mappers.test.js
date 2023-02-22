@@ -1,13 +1,15 @@
 import {
+  FormattedUTCDate,
+} from '@folio/stripes/components';
+import {
+  FolioFormattedTime,
+} from '@folio/stripes-acq-components';
+
+import {
   CAPABILITIES,
 } from '../../constants';
-import { getFormattedColumnsDate } from '../date';
 
 import { getMappedTableData, DATA_TYPES } from './mappers';
-
-jest.mock('../date', () => ({
-  getFormattedColumnsDate: jest.fn().mockReturnValue('dateString'),
-}));
 
 const intl = {
   formatMessage: jest.fn(),
@@ -53,8 +55,7 @@ describe('mappers', () => {
       });
     });
 
-    it('should convert date string to format', () => {
-      const dateTranslation = 'Date';
+    it('should convert date string to FolioFormattedTime', () => {
       const dateColumn = {
         value: 'date',
         label: 'data',
@@ -67,12 +68,63 @@ describe('mappers', () => {
         rows: [{ row }],
       };
 
-      getFormattedColumnsDate.mockClear();
-      intl.formatMessage.mockClear().mockReturnValue(dateTranslation);
+      const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.USER });
 
-      getMappedTableData({ data, intl, capabilities: CAPABILITIES.USER });
+      expect(contentData[0][dateColumn.value].type).toEqual(FolioFormattedTime);
+    });
 
-      expect(getFormattedColumnsDate).toHaveBeenCalledWith(row[0]);
+    it('should convert user expiration date string to FormattedUTCDate', () => {
+      const expirationColumn = {
+        value: 'Expiration date',
+        label: 'data',
+        visible: true,
+        dataType: DATA_TYPES.DATE_TIME,
+      };
+      const row = ['2023-03-18 23:59:59.000Z'];
+      const data = {
+        header: [expirationColumn],
+        rows: [{ row }],
+      };
+
+      const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.USER });
+
+      expect(contentData[0][expirationColumn.value].type).toEqual(FormattedUTCDate);
+    });
+
+    it('should not convert date string to FolioFormattedTime when value is empty', () => {
+      const dateColumn = {
+        value: 'date',
+        label: 'data',
+        visible: true,
+        dataType: DATA_TYPES.DATE_TIME,
+      };
+      const row = [''];
+      const data = {
+        header: [dateColumn],
+        rows: [{ row }],
+      };
+
+      const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.USER });
+
+      expect(contentData[0][dateColumn.value]).toBe('');
+    });
+
+    it('should convert user status value to translated', () => {
+      const statusColumn = {
+        value: 'Active',
+        label: 'data',
+        visible: true,
+        dataType: DATA_TYPES.DATE_TIME,
+      };
+      const row = ['true'];
+      const data = {
+        header: [statusColumn],
+        rows: [{ row }],
+      };
+
+      const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.USER });
+
+      expect(contentData[0][statusColumn.value].props.id).toBe('ui-bulk-edit.list.preview.table.status.true');
     });
   });
 });
