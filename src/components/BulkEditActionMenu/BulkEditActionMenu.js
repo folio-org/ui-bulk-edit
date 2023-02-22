@@ -42,7 +42,7 @@ const BulkEditActionMenu = ({
   } = perms;
 
   const { id } = usePathParams('/bulk-edit/:id');
-  const { bulkDetails, isLoading } = useBulkOperationDetails({ id });
+  const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
 
   const [fileInfo, setFileInfo] = useState(null);
 
