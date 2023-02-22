@@ -9,6 +9,7 @@ import {
 
 import {
   CAPABILITIES,
+  CUSTOM_ENTITY_COLUMNS,
 } from '../../constants';
 
 export const DATA_TYPES = {
@@ -23,9 +24,9 @@ const formatData = ({ capability, column, data }) => {
   if (!data) return '';
 
   switch (true) {
-    case capability === CAPABILITIES.USER && field === 'Expiration date':
+    case capability === CAPABILITIES.USER && field === CUSTOM_ENTITY_COLUMNS.EXPIRATION_DATE:
       return <FormattedUTCDate value={data} />;
-    case capability === CAPABILITIES.USER && field === 'Active':
+    case capability === CAPABILITIES.USER && field === CUSTOM_ENTITY_COLUMNS.USER_STATUS:
       return <FormattedMessage id={`ui-bulk-edit.list.preview.table.status.${data}`} />;
     case dataType === DATA_TYPES.DATE_TIME:
       return <FolioFormattedTime dateString={data} />;

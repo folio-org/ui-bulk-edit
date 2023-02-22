@@ -7,6 +7,7 @@ import {
 
 import {
   CAPABILITIES,
+  CUSTOM_ENTITY_COLUMNS,
 } from '../../constants';
 
 import { getMappedTableData, DATA_TYPES } from './mappers';
@@ -58,7 +59,7 @@ describe('mappers', () => {
     it('should convert date string to FolioFormattedTime', () => {
       const dateColumn = {
         value: 'date',
-        label: 'data',
+        label: 'date',
         visible: true,
         dataType: DATA_TYPES.DATE_TIME,
       };
@@ -75,8 +76,8 @@ describe('mappers', () => {
 
     it('should convert user expiration date string to FormattedUTCDate', () => {
       const expirationColumn = {
-        value: 'Expiration date',
-        label: 'data',
+        value: CUSTOM_ENTITY_COLUMNS.EXPIRATION_DATE,
+        label: CUSTOM_ENTITY_COLUMNS.EXPIRATION_DATE,
         visible: true,
         dataType: DATA_TYPES.DATE_TIME,
       };
@@ -94,7 +95,7 @@ describe('mappers', () => {
     it('should not convert date string to FolioFormattedTime when value is empty', () => {
       const dateColumn = {
         value: 'date',
-        label: 'data',
+        label: 'date',
         visible: true,
         dataType: DATA_TYPES.DATE_TIME,
       };
@@ -111,8 +112,8 @@ describe('mappers', () => {
 
     it('should convert user status value to translated', () => {
       const statusColumn = {
-        value: 'Active',
-        label: 'data',
+        value: CUSTOM_ENTITY_COLUMNS.USER_STATUS,
+        label: CUSTOM_ENTITY_COLUMNS.USER_STATUS,
         visible: true,
         dataType: DATA_TYPES.DATE_TIME,
       };
