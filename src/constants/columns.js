@@ -68,3 +68,8 @@ export const LOGS_COLUMNS = [
     selected: false,
   },
 ];
+
+export const CUSTOM_ENTITY_COLUMNS = {
+  USER_STATUS: 'Active',
+  EXPIRATION_DATE: 'Expiration date',
+};
