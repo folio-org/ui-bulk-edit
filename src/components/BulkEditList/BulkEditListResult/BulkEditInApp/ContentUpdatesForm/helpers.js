@@ -18,6 +18,8 @@ export const FIELDS_TYPES = {
   OPTION: 'option',
 };
 
+export const TEMPORARY_LOCATIONS = [OPTIONS.TEMPORARY_LOCATION, OPTIONS.TEMPORARY_HOLDINGS_LOCATION];
+
 export const getFormattedDate = (value) => {
   const date = `${value} 23:59:59`;
   const format = `${BASE_DATE_FORMAT}[T]HH:mm:ss`;

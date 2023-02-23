@@ -1,13 +1,19 @@
-import { useIntl } from 'react-intl';
-import { Col, Datepicker, Select, Selection, TextField } from '@folio/stripes/components';
 import { Fragment } from 'react';
-import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
-import { usePatronGroup } from '../../../../../hooks/api';
-import { ACTIONS, CONTROL_TYPES, getItemStatusOptions } from '../../../../../constants';
-import { useLoanTypes } from '../../../../../hooks/api/useLoanTypes';
-import { ACTION_VALUE_KEY, FIELD_VALUE_KEY } from './helpers';
+import { useIntl } from 'react-intl';
 
-export const ActionsRow = ({ actions, onChange }) => {
+import { Col, Datepicker, Select, Selection, TextField } from '@folio/stripes/components';
+import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
+
+import { usePatronGroup, useLoanTypes } from '../../../../../hooks/api';
+import { ACTIONS, CONTROL_TYPES, getItemStatusOptions } from '../../../../../constants';
+
+import {
+  ACTION_VALUE_KEY,
+  FIELD_VALUE_KEY,
+  TEMPORARY_LOCATIONS,
+} from './helpers';
+
+export const ActionsRow = ({ option, actions, onChange }) => {
   const intl = useIntl();
 
   const { userGroups } = usePatronGroup();
@@ -88,6 +94,7 @@ export const ActionsRow = ({ actions, onChange }) => {
                 />
                 <LocationLookup
                   marginBottom0
+                  isTemporaryLocation={TEMPORARY_LOCATIONS.includes(option)}
                   onLocationSelected={(location) => onChange({
                     actionIndex, value: location.id, fieldName: FIELD_VALUE_KEY,
                   })}

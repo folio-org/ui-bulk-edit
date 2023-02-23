@@ -176,6 +176,7 @@ export const ContentUpdatesForm = ({
               />
             </Col>
             <ActionsRow
+              option={field.option}
               actions={field.actionsDetails.actions}
               onChange={(values) => handleChange({ ...values, rowIndex: index })}
             />
