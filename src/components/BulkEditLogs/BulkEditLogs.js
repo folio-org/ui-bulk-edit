@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import noop from 'lodash/noop';
 
+import { AppIcon } from '@folio/stripes/core';
 import { MultiColumnList } from '@folio/stripes/components';
 import {
   RESULT_COUNT_INCREMENT,
@@ -72,6 +73,7 @@ const BulkEditLogs = () => {
       filters={logsQueryParams}
       isFiltersOpened
       isLoading={isLoading}
+      appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
     >
       {({ height, width }) => (
         <>
