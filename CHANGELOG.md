@@ -1,6 +1,9 @@
 # Change history for ui-bulk-edit
 
 ## In progress
+
+## [3.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.0) (2022-02-24)
+
 * [UIBULKED-163](https://issues.folio.org/browse/UIBULKED-163) User can add more rows than supported options
 * [UIBULKED-156](https://issues.folio.org/browse/UIBULKED-156) Add Logs tab to the landing page
 * [UIBULKED-162](https://issues.folio.org/browse/UIBULKED-162) Make In-app Options selection consistent
