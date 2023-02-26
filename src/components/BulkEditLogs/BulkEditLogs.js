@@ -16,17 +16,21 @@ import {
 
 import { LOGS_COLUMNS } from '../../constants';
 import { getLogsResultsFormatter } from '../../utils/formatters';
-import { useLogsQueryParams } from '../../hooks';
+import { useBulkPermissions, useLogsQueryParams } from '../../hooks';
 import { useBulkEditLogs } from '../../hooks/api';
 
 const resetData = () => {};
 
-const visibleColumns = LOGS_COLUMNS.map(i => i.value);
+const getVisibleColumns = (perms) => LOGS_COLUMNS
+  .filter(col => perms.hasUsersViewPerms || col.value !== 'actions')
+  .map(i => i.value);
+
 const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
   acc[el.value] = el.label;
 
   return acc;
 }, {});
+
 const sortableFields = LOGS_COLUMNS
   .filter(({ sortable }) => sortable)
   .map(({ value }) => value);
@@ -34,6 +38,7 @@ const sortableFields = LOGS_COLUMNS
 const BulkEditLogs = () => {
   const location = useLocation();
   const history = useHistory();
+  const perms = useBulkPermissions();
 
   const { logsQueryParams } = useLogsQueryParams({ search: location.search });
 
@@ -82,7 +87,7 @@ const BulkEditLogs = () => {
             contentData={logs}
             totalCount={logsCount}
             columnMapping={columnMapping}
-            visibleColumns={visibleColumns}
+            visibleColumns={getVisibleColumns(perms)}
             formatter={getLogsResultsFormatter()}
             isEmptyMessage={resultsStatusMessage}
             sortOrder={sortingField}
