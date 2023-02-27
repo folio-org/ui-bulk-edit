@@ -21,15 +21,12 @@ import { useBulkEditLogs } from '../../hooks/api';
 
 const resetData = () => {};
 
-const visibleColumns = LOGS_COLUMNS
-  .map(i => i.value);
-
+const visibleColumns = LOGS_COLUMNS.map(i => i.value);
 const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
   acc[el.value] = el.label;
 
   return acc;
 }, {});
-
 const sortableFields = LOGS_COLUMNS
   .filter(({ sortable }) => sortable)
   .map(({ value }) => value);
