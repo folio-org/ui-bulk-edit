@@ -15,11 +15,11 @@ export const NoResultsMessage = () => {
 
   const message = useMemo(() => {
     const identifier = new URLSearchParams(location.search).get('identifier');
-    const messagePrefix = identifier ? `.${identifier}` : '';
+    const messagePrefix = criteria === CRITERIA.IDENTIFIER && identifier
+      ? `.${identifier}`
+      : '';
 
-    if (criteria === CRITERIA.LOGS) {
-      return <FormattedMessage id="ui-bulk-edit.list.result.emptyMessage.logs" />;
-    } else return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${TRANSLATION_SUFFIX[capabilities]}${messagePrefix}`} />;
+    return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${TRANSLATION_SUFFIX[capabilities]}${messagePrefix}`} />;
   }, [location.search]);
 
   return (
