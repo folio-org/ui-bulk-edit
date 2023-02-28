@@ -21,6 +21,7 @@ export const useBulkPermissions = () => {
 
   // Users
   const hasUsersPerms = stripes.hasPerm('ui-users.edit');
+  const hasUsersViewPerms = stripes.hasPerm('ui-users.view');
 
   // derived pages
   const hasAnyInAppEditPermissions = hasInAppEditPerms || hasInAppUsersEditPerms;
@@ -57,5 +58,6 @@ export const useBulkPermissions = () => {
     hasItemsPerms,
     hasHoldingsPerms,
     hasUsersPerms,
+    hasUsersViewPerms,
   };
 };
