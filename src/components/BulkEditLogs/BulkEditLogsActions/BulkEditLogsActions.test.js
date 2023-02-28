@@ -10,7 +10,7 @@ import {
   FILE_KEYS, CAPABILITIES,
 } from '../../../constants';
 import BulkEditLogsActions from './BulkEditLogsActions';
-import * as BulkPermissionsHook from '../../../hooks/useBulkPermissions';
+import { useBulkPermissions } from '../../../hooks';
 
 const bulkOperation = {
   ...bulkEditLogsData[0],
@@ -22,6 +22,11 @@ const bulkOperation = {
   [FILE_KEYS.PROPOSED_CHANGES_LINK]: FILE_KEYS.PROPOSED_CHANGES_LINK,
   [FILE_KEYS.TRIGGERING_FILE]: FILE_KEYS.TRIGGERING_FILE,
 };
+
+jest.mock('../../../hooks', () => ({
+  ...jest.requireActual('../../../hooks'),
+  useBulkPermissions: jest.fn(),
+}));
 
 const renderBulkEditLogsActions = ({ item = bulkOperation } = {}) => {
   return render(
@@ -37,14 +42,15 @@ describe('BulkEditLogsActions', () => {
   });
 
   it('should display actions', async () => {
+    useBulkPermissions.mockReturnValue({ hasUsersViewPerms: true });
+
     renderBulkEditLogsActions();
 
     expect(screen.queryByText('ui-bulk-edit.list.actions.download')).not.toBeNull();
   });
 
   it('should not display actions for USER entityType if there aren`t user view perms', async () => {
-    jest.spyOn(BulkPermissionsHook, 'useBulkPermissions')
-      .mockImplementation(() => ({ hasUsersViewPerms: false }));
+    useBulkPermissions.mockReturnValue({ hasUsersViewPerms: false });
 
     renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.USER } });
 
