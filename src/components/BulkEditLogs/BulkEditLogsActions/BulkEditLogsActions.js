@@ -15,9 +15,11 @@ import {
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import { useFileDownload } from '../../../hooks/api';
-import { linkNamesMap } from '../../../constants';
+import { CAPABILITIES, linkNamesMap } from '../../../constants';
+import { useBulkPermissions } from '../../../hooks';
 
 const BulkEditLogsActions = ({ item }) => {
+  const { hasUsersViewPerms } = useBulkPermissions();
   const [triggeredFile, setTriggeredFile] = useState(null);
   const { refetch } = useFileDownload({
     enabled: false,
@@ -75,6 +77,9 @@ const BulkEditLogsActions = ({ item }) => {
       </MenuSection>
     </DropdownMenu>
   ), [availableFiles]);
+
+
+  if (item.entityType === CAPABILITIES.USER && !hasUsersViewPerms) return null;
 
   return (
     <Dropdown
