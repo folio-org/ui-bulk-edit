@@ -13,6 +13,7 @@ const queryClient = new QueryClient({
   },
 });
 
+
 const BulkEdit = () => {
   return (
     <QueryClientProvider client={queryClient}>

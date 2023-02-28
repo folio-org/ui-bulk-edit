@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect, useMemo, useCallback } from 're
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 
 import {
   ButtonGroup,
@@ -11,23 +10,17 @@ import { Pluggable } from '@folio/stripes/core';
 import { useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
-import { QueryTextArea } from './QueryTextArea/QueryTextArea';
 import { ListFileUploader } from '../../ListFileUploader';
 import {
   CRITERIA,
   JOB_STATUSES,
   TRANSLATION_SUFFIX,
   EDITING_STEPS,
-  APPROACHES,
 } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
-import { useUserGroupsMap } from '../../../hooks/api';
+import { useUpload, useBulkOperationStart } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
-
 import { LogsFilters } from './LogsFilters/LogsFilters';
-import { useUpload } from '../../../hooks/api/useUpload';
-import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
-import { buildQuery } from '../../../utils/buildQuery';
 import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
 import FilterTabs from './FilterTabs/FilterTabs';
 import Capabilities from './Capabilities/Capabilities';
@@ -45,6 +38,8 @@ export const BulkEditListFilters = ({
     isSelectIdentifiersDisabled,
     hasLogViewPerms,
     hasQueryPerms,
+    hasUsersViewPerms,
+    hasInventoryInstanceViewPerms,
   } = permissions;
   const showCallout = useShowCallout();
   const history = useHistory();
@@ -57,7 +52,7 @@ export const BulkEditListFilters = ({
   const isQuery = criteria === CRITERIA.QUERY;
   const isLogs = criteria === CRITERIA.LOGS;
   const isIdentifier = criteria === CRITERIA.IDENTIFIER;
-  const { capabilities, recordIdentifier, queryText } = filters;
+  const { capabilities, recordIdentifier } = filters;
 
   const capabilitiesFilterOptions = getCapabilityOptions(criteria, permissions);
 
@@ -83,7 +78,6 @@ export const BulkEditListFilters = ({
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
-  const { userGroups } = useUserGroupsMap();
   const { fileUpload, isLoading } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
 
@@ -175,23 +169,6 @@ export const BulkEditListFilters = ({
     setDropZoneActive(false);
   };
 
-  const handleQuerySearch = async () => {
-    const parsedQuery = buildQuery(queryText, userGroups);
-
-    const { id } = await bulkOperationStart({
-      id: uuidv4(),
-      step: EDITING_STEPS.UPLOAD,
-      query: parsedQuery,
-      approach: APPROACHES.QUERY,
-      entityType: capabilities,
-    });
-
-    history.replace({
-      pathname: `/bulk-edit/${id}/progress`,
-      search: buildSearch({ queryText }, location.search),
-    });
-  };
-
   const uploaderSubTitle = useMemo(() => {
     const messagePrefix = recordIdentifier ? `.${recordIdentifier}` : '';
 
@@ -220,15 +197,6 @@ export const BulkEditListFilters = ({
       capabilitiesFilterOptions={capabilitiesFilterOptions}
       onCapabilityChange={handleCapabilityChange}
       hasInAppEditPerms={hasInAppEditPerms}
-    />
-  );
-
-  const renderQueryText = () => (
-    <QueryTextArea
-      queryText={queryText}
-      setQueryText={setFilters}
-      handleQuerySearch={handleQuerySearch}
-      disabled={isCapabilityDisabled(capabilities, criteria, permissions)}
     />
   );
 
@@ -288,10 +256,10 @@ export const BulkEditListFilters = ({
       {isQuery && hasQueryPerms && (
         <>
           {renderCapabilities()}
-          {renderQueryText()}
           <Pluggable
             componentType="builder"
             type="query-builder"
+            disabled={!hasUsersViewPerms && !hasInventoryInstanceViewPerms}
           />
         </>
       )}
