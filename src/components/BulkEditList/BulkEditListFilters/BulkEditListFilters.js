@@ -18,15 +18,17 @@ import {
   JOB_STATUSES,
   TRANSLATION_SUFFIX,
   EDITING_STEPS,
-  APPROACHES,
+  APPROACHES, FILTERS,
 } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
-import { useUserGroupsMap } from '../../../hooks/api';
+import {
+  useUserGroupsMap,
+  useUpload,
+  useBulkOperationStart,
+} from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 
 import { LogsFilters } from './LogsFilters/LogsFilters';
-import { useUpload } from '../../../hooks/api/useUpload';
-import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
 import { buildQuery } from '../../../utils/buildQuery';
 import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
 import FilterTabs from './FilterTabs/FilterTabs';
@@ -53,6 +55,7 @@ export const BulkEditListFilters = ({
   const search = new URLSearchParams(location.search);
   const criteria = search.get('criteria');
   const initialCapabilities = search.get('capabilities');
+  const logFilters = Object.values(FILTERS).map((el) => search.getAll(el));
 
   const isQuery = criteria === CRITERIA.QUERY;
   const isLogs = criteria === CRITERIA.LOGS;
@@ -129,10 +132,18 @@ export const BulkEditListFilters = ({
 
   const handleRecordIdentifierChange = useCallback((e) => {
     handleChange(e.target.value, 'recordIdentifier');
+    const [status, entityType, operationType, startTime, endTime] = logFilters;
 
     history.replace({
       pathname: '/bulk-edit',
-      search: buildSearch({ identifier: e.target.value, capabilities, criteria }),
+      search: buildSearch({ identifier: e.target.value,
+        capabilities,
+        criteria,
+        status,
+        entityType,
+        endTime,
+        startTime,
+        operationType }),
     });
 
     setIsFileUploaded(false);

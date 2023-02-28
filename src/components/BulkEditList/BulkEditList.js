@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Pane, Paneset, PaneFooter, Button } from '@folio/stripes/components';
@@ -11,7 +11,7 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
 import { usePathParams, useBulkPermissions } from '../../hooks';
-import { CRITERIA, APPROACHES, EDITING_STEPS } from '../../constants';
+import { CRITERIA, APPROACHES, EDITING_STEPS, FILTERS } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
 
@@ -34,14 +34,26 @@ export const BulkEditList = () => {
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
-
+  const [filtersTab, setFiltersTab] = useState({
+    logsTab: [],
+  });
 
   const { isActionMenuShown, ...restPerms } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
   const step = search.get('step');
   const capabilities = search.get('capabilities');
   const criteria = search.get('criteria');
+  const logsFilters = Object.values(FILTERS).map((el) => search.getAll(el));
   const defaultCapability = capabilities || getDefaultCapabilities(criteria, restPerms);
+
+  useEffect(() => {
+    if (history.location.search) {
+      setFiltersTab(prevState => ({
+        ...prevState,
+        logsTab: logsFilters,
+      }));
+    }
+  }, [history.location]);
 
   const initialFiltersState = {
     criteria: CRITERIA.IDENTIFIER,
@@ -59,6 +71,7 @@ export const BulkEditList = () => {
     setCountOfRecords,
     setNewBulkFooterShown,
     setVisibleColumns,
+    filtersTab,
   });
 
   const handleBulkEditLayerOpen = () => {
