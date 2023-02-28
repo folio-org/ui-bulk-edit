@@ -1,7 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Pane, Paneset, PaneFooter, Button } from '@folio/stripes/components';
+import {
+  Pane,
+  Paneset,
+  PaneFooter,
+  Button,
+} from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
@@ -11,7 +20,12 @@ import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
 import { usePathParams, useBulkPermissions } from '../../hooks';
-import { CRITERIA, APPROACHES, EDITING_STEPS, FILTERS } from '../../constants';
+import {
+  CRITERIA,
+  APPROACHES,
+  EDITING_STEPS,
+  FILTERS,
+} from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
 

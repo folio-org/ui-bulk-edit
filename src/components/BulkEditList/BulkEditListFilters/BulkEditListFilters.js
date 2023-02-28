@@ -18,7 +18,8 @@ import {
   JOB_STATUSES,
   TRANSLATION_SUFFIX,
   EDITING_STEPS,
-  APPROACHES, FILTERS,
+  APPROACHES,
+  FILTERS,
 } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
 import {
