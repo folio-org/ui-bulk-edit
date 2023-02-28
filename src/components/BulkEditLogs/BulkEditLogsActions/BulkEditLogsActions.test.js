@@ -1,19 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { QueryClientProvider } from 'react-query';
-
 import { useOkapiKy } from '@folio/stripes/core';
-
 import '../../../../test/jest/__mock__';
 import { bulkEditLogsData } from '../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
-
 import {
   JOB_STATUSES,
-  FILE_KEYS,
+  FILE_KEYS, CAPABILITIES,
 } from '../../../constants';
-
 import BulkEditLogsActions from './BulkEditLogsActions';
+import * as BulkPermissionsHook from '../../../hooks/useBulkPermissions';
 
 const bulkOperation = {
   ...bulkEditLogsData[0],
@@ -42,7 +39,16 @@ describe('BulkEditLogsActions', () => {
   it('should display actions', async () => {
     renderBulkEditLogsActions();
 
-    expect(screen.getByText('ui-bulk-edit.list.actions.download')).toBeDefined();
+    expect(screen.queryByText('ui-bulk-edit.list.actions.download')).not.toBeNull();
+  });
+
+  it('should not display actions for USER entityType if there aren`t user view perms', async () => {
+    jest.spyOn(BulkPermissionsHook, 'useBulkPermissions')
+      .mockImplementation(() => ({ hasUsersViewPerms: false }));
+
+    renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.USER } });
+
+    expect(screen.queryByText('ui-bulk-edit.list.actions.download')).toBeNull();
   });
 
   Object.values(FILE_KEYS).forEach((fileKey) => {
