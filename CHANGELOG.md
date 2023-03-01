@@ -2,6 +2,9 @@
 
 ## In progress
 
+* [UIBULKED-253](https://issues.folio.org/browse/UIBULKED-253) User without "Users: Can view user profile" permission can download file from "Logs" tab
+* [UIBULKED-262](https://issues.folio.org/browse/UIBULKED-262) "Clear" action is disabled for Item's permanent location
+
 ## [3.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.0) (2023-02-24)
 
 * [UIBULKED-163](https://issues.folio.org/browse/UIBULKED-163) User can add more rows than supported options
@@ -29,7 +32,6 @@
 * [UIBULKED-235](https://issues.folio.org/browse/UIBULKED-235) Move @testing-library/dom to dev-deps
 * [UIBULKED-256](https://issues.folio.org/browse/UIBULKED-256) "Expiration date +1 day" is shown on the "Are you sure" form
 * [UIBULKED-257](https://issues.folio.org/browse/UIBULKED-257) Text in the center of "Bulk edit" pane doesn't return to default state when switch from "Identifier" to "Query" tab
-* [UIBULKED-253](https://issues.folio.org/browse/UIBULKED-253) User without "Users: Can view user profile" permission can download file from "Logs" tab
 
 ## [2.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v2.1.3) (2022-12-02)
 
