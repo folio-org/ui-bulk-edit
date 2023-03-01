@@ -46,16 +46,6 @@
     "error.sww": "لقد حدث خطأ ما",
     "list.logSubTitle.matched": "{count} تسجيلة متطابقة",
     "list.preview.title": "معاينة التسجيلة المتطابقة",
-    "list.preview.table.status": "الحالة",
-    "list.preview.table.lastName": "اسم العائلة",
-    "list.preview.table.firstName": "الاسم الأول",
-    "list.preview.table.barcode": "الباركود",
-    "list.preview.table.patronGroup": "مجموعة المستفيد",
-    "list.preview.table.username": "اسم المستخدم",
-    "list.preview.table.email": "البريد الإلكتروني",
-    "list.preview.table.expirationDate": "تاريخ الانتهاء",
-    "list.preview.table.active": "نشط",
-    "list.preview.table.inactive": "غير نشط",
     "preview.file.title": "اسم الملف: {fileUploadedName}",
     "preview.query.title": "استعلام: {queryText}",
     "list.errors.title": "أخطاء",
@@ -312,5 +302,7 @@
     "columns.HOLDINGS_RECORD.Tags": "Tags",
     "columns.HOLDINGS_RECORD.Source": "Source",
     "columns.HOLDINGS_RECORD.Instance HRID": "Instance HRID",
-    "columns.HOLDINGS_RECORD.Item barcode": "Item barcode"
+    "columns.HOLDINGS_RECORD.Item barcode": "Item barcode",
+    "list.preview.table.status.true": "Active",
+    "list.preview.table.status.false": "Inactive"
 }
