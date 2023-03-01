@@ -46,16 +46,6 @@
     "error.sww": "Algo deu errado.",
     "list.logSubTitle.matched": "{count} registros correspondem",
     "list.preview.title": "Pré-visualização do registro encontrado",
-    "list.preview.table.status": "Estado",
-    "list.preview.table.lastName": "Sobrenome",
-    "list.preview.table.firstName": "Primeiro nome",
-    "list.preview.table.barcode": "Código de barras",
-    "list.preview.table.patronGroup": "Categoria do usuário",
-    "list.preview.table.username": "Nome de usuário",
-    "list.preview.table.email": "E-mail",
-    "list.preview.table.expirationDate": "Data de expiração",
-    "list.preview.table.active": "Ativo",
-    "list.preview.table.inactive": "Inativo",
     "preview.file.title": "Nome do arquivo: {fileUploadedName}",
     "preview.query.title": "Consulta: {queryText}",
     "list.errors.title": "Erros",
@@ -312,5 +302,7 @@
     "columns.HOLDINGS_RECORD.Tags": "Etiquetas",
     "columns.HOLDINGS_RECORD.Source": "Fonte",
     "columns.HOLDINGS_RECORD.Instance HRID": "HRID da instância",
-    "columns.HOLDINGS_RECORD.Item barcode": "Código de barras do item"
+    "columns.HOLDINGS_RECORD.Item barcode": "Código de barras do item",
+    "list.preview.table.status.true": "Ativo",
+    "list.preview.table.status.false": "Inativo"
 }
