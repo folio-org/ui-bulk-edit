@@ -29,7 +29,7 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
       return bulkOperation;
     },
     cacheTime: 0,
-    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 15000),
+    retryDelay: 2000,
     retry: true,
     enabled: false,
   });
