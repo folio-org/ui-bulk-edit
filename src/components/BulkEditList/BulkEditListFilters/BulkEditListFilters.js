@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   ButtonGroup,
 } from '@folio/stripes/components';
+import { Pluggable } from '@folio/stripes/core';
 import { useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
@@ -288,6 +289,10 @@ export const BulkEditListFilters = ({
         <>
           {renderCapabilities()}
           {renderQueryText()}
+          <Pluggable
+            componentType="builder"
+            type="query-builder"
+          />
         </>
       )}
 
