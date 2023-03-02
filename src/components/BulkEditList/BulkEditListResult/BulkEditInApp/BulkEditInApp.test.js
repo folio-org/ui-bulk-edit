@@ -124,7 +124,7 @@ describe('BulkEditInApp', () => {
     expect(permanentLocation.selected).toBeTruthy();
   });
 
-  it('should display select correct options in action select', async () => {
+  it('should display correct status options in action select', async () => {
     renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
 
     const options = [
@@ -165,7 +165,7 @@ describe('BulkEditInApp', () => {
     expect(itemStatus.selected).toBeTruthy();
   });
 
-  it('should display item status location', () => {
+  it('should display item temporary location options', () => {
     renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
 
     const options = [
@@ -176,6 +176,30 @@ describe('BulkEditInApp', () => {
 
     const selectOption = screen.getByTestId('select-option-0');
     const optionStatus = screen.getByRole('option', { name: /layer.options.temporaryLocation/ });
+
+    act(() => userEvent.selectOptions(selectOption, optionStatus));
+
+    const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
+    const selectAction = screen.getByTestId('select-actions-1');
+
+    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+
+    act(() => userEvent.selectOptions(selectAction, optionReplace));
+
+    expect(optionReplace.selected).toBeTruthy();
+  });
+
+  it('should display item permanent location options', () => {
+    renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+
+    const options = [
+      /layer.action.replace/,
+      /layer.action.clear/,
+      /layer.options.permanentLocation/,
+    ];
+
+    const selectOption = screen.getByTestId('select-option-0');
+    const optionStatus = screen.getByRole('option', { name: /layer.options.permanentLocation/ });
 
     act(() => userEvent.selectOptions(selectOption, optionStatus));
 
@@ -243,9 +267,34 @@ describe('BulkEditInApp', () => {
     const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
     const selectAction = screen.getByTestId('select-actions-1');
 
+    expect(screen.queryByRole('option', { name: /layer.action.clear/ })).not.toBeInTheDocument();
+
     act(() => userEvent.selectOptions(selectAction, actionReplace));
 
     expect(optionStatus.selected).toBeTruthy();
+  });
+
+  it('should display holding temporart location options', () => {
+    renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+
+    const options = [
+      /layer.action.replace/,
+      /layer.action.clear/,
+    ];
+
+    const selectOption = screen.getByTestId('select-option-0');
+    const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.temporaryLocation/ });
+
+    act(() => userEvent.selectOptions(selectOption, optionStatus));
+
+    const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
+    const selectAction = screen.getByTestId('select-actions-1');
+
+    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+
+    act(() => userEvent.selectOptions(selectAction, optionReplace));
+
+    expect(optionReplace.selected).toBeTruthy();
   });
 
   it('should display added row after plus button click in holdings tab', () => {
