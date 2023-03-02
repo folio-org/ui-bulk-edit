@@ -46,16 +46,6 @@
     "error.sww": "Something went wrong",
     "list.logSubTitle.matched": "{count} records match",
     "list.preview.title": "Preview of record matched",
-    "list.preview.table.status": "Statut",
-    "list.preview.table.lastName": "Nom",
-    "list.preview.table.firstName": "Prénom*",
-    "list.preview.table.barcode": "Code-barres",
-    "list.preview.table.patronGroup": "Groupe / Catégorie d'utilisateurs",
-    "list.preview.table.username": "Nom d'utilisateur",
-    "list.preview.table.email": "Email",
-    "list.preview.table.expirationDate": "Date d'échéance",
-    "list.preview.table.active": "Actif",
-    "list.preview.table.inactive": "Inactif",
     "preview.file.title": "Nom de fichier : {fileUploadedName}",
     "preview.query.title": "Query: {queryText}",
     "list.errors.title": "Erreurs",
@@ -312,5 +302,7 @@
     "columns.HOLDINGS_RECORD.Tags": "Tags",
     "columns.HOLDINGS_RECORD.Source": "Source",
     "columns.HOLDINGS_RECORD.Instance HRID": "Instance HRID",
-    "columns.HOLDINGS_RECORD.Item barcode": "Item barcode"
+    "columns.HOLDINGS_RECORD.Item barcode": "Item barcode",
+    "list.preview.table.status.true": "Active",
+    "list.preview.table.status.false": "Inactive"
 }
