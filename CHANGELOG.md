@@ -4,6 +4,7 @@
 
 * [UIBULKED-253](https://issues.folio.org/browse/UIBULKED-253) User without "Users: Can view user profile" permission can download file from "Logs" tab
 * [UIBULKED-262](https://issues.folio.org/browse/UIBULKED-262) "Clear" action is disabled for Item's permanent location
+* [UIBULKED-255](https://issues.folio.org/browse/UIBULKED-255) Incorrect message on the logs landing page.
 
 ## [3.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.0) (2023-02-24)
 
