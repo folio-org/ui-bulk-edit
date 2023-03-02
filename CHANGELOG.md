@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [UIBULKED-255](https://issues.folio.org/browse/UIBULKED-255) Incorrect message on the logs landing page.
+
 ## [3.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.0) (2023-02-24)
 
 * [UIBULKED-163](https://issues.folio.org/browse/UIBULKED-163) User can add more rows than supported options
