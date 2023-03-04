@@ -6,7 +6,6 @@ import { useOkapiKy } from '@folio/stripes/core';
 
 import {
   BULK_VISIBLE_COLUMNS,
-  EDITING_STEPS,
   PREVIEW_LIMITS,
 } from '../../constants';
 import { getMappedTableData } from '../../utils/mappers';
@@ -37,13 +36,15 @@ export const useRecordsPreview = ({ id, step, queryOptions, capabilities }) => {
   // set initial and visible columns
   useEffect(() => {
     if (columns.length) {
-      const storedVisibleColumns = step === EDITING_STEPS.UPLOAD
-        ? JSON.stringify(columns)
-        : localStorage.getItem(BULK_VISIBLE_COLUMNS);
+      const storageKey = `${BULK_VISIBLE_COLUMNS}_${capabilities}`;
+      let storedVisibleColumns = JSON.parse(localStorage.getItem(storageKey) || null);
 
-      localStorage.setItem(BULK_VISIBLE_COLUMNS, storedVisibleColumns);
+      if (columns.length !== storedVisibleColumns?.length) {
+        storedVisibleColumns = columns;
+        localStorage.setItem(storageKey, JSON.stringify(storedVisibleColumns));
+      }
 
-      setVisibleColumns(JSON.parse(storedVisibleColumns));
+      setVisibleColumns(storedVisibleColumns);
     }
   }, [columns]);
 

@@ -85,7 +85,7 @@ const BulkEditActionMenu = ({
     });
 
     setVisibleColumns(changedColumns);
-    localStorage.setItem(BULK_VISIBLE_COLUMNS, JSON.stringify(changedColumns));
+    localStorage.setItem(`${BULK_VISIBLE_COLUMNS}_${capability}`, JSON.stringify(changedColumns));
   };
 
   const handleOnStartEdit = (approach) => {

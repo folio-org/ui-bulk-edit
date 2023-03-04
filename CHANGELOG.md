@@ -3,6 +3,7 @@
 ## In progress
 
 * [UIBULKED-255](https://issues.folio.org/browse/UIBULKED-255) Incorrect message on the logs landing page.
+* [UIBULKED-265](https://issues.folio.org/browse/UIBULKED-265) Columns on the 'Are you sure' form are mixed in case simultaneously running jobs
 
 ## [3.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.2) (2023-03-02)
 
