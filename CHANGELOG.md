@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [UIBULKED-266](https://issues.folio.org/browse/UIBULKED-266) Confirmation screen is missing for completed with errors operations
+
 ## [3.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.2) (2023-03-02)
 
 * [UIBULKED-253](https://issues.folio.org/browse/UIBULKED-253) User without "Users: Can view user profile" permission can download file from "Logs" tab
