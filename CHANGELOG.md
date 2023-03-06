@@ -2,6 +2,7 @@
 
 ## In progress
 
+* [UIBULKED-265](https://issues.folio.org/browse/UIBULKED-265) Columns on the 'Are you sure' form are mixed in case simultaneously running jobs
 * [UIBULKED-266](https://issues.folio.org/browse/UIBULKED-266) Confirmation screen is missing for completed with errors operations
 
 ## [3.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.2) (2023-03-02)
