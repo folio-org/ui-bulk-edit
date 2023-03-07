@@ -10,6 +10,7 @@ export const useResetAppState = ({
   setVisibleColumns,
   setCountOfRecords,
   setNewBulkFooterShown,
+  filtersTab,
 }) => {
   const history = useHistory();
   const queryClient = useQueryClient();
@@ -33,12 +34,19 @@ export const useResetAppState = ({
       // clear visibleColumns preset
       setVisibleColumns(null);
 
+      const [status, entityType, operationType, startTime, endTime] = filtersTab.logsTab;
+
       // set user capability by default
       history.replace({
         search: buildSearch({
           criteria: initialFiltersState.criteria,
           identifier: initialFiltersState.identifier,
           capabilities: initialFiltersState.capabilities,
+          status,
+          entityType,
+          operationType,
+          startTime,
+          endTime,
         }),
       });
 
