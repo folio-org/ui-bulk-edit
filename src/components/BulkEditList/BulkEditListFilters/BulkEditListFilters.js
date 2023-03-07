@@ -16,19 +16,15 @@ import {
   JOB_STATUSES,
   TRANSLATION_SUFFIX,
   EDITING_STEPS,
-  APPROACHES,
   FILTERS,
 } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
 import {
-  useUserGroupsMap,
   useUpload,
   useBulkOperationStart,
 } from '../../../hooks/api';
-import { RootContext } from '../../../context/RootContext';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 import { LogsFilters } from './LogsFilters/LogsFilters';
-import { buildQuery } from '../../../utils/buildQuery';
 import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
 import FilterTabs from './FilterTabs/FilterTabs';
 import Capabilities from './Capabilities/Capabilities';
