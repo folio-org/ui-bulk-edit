@@ -18,6 +18,7 @@ export const useBulkPermissions = () => {
   // Inventory
   const hasItemsPerms = stripes.hasPerm('ui-inventory.item.edit');
   const hasHoldingsPerms = stripes.hasPerm('ui-inventory.holdings.edit');
+  const hasInventoryInstanceViewPerms = stripes.hasPerm('ui-inventory.instance.view');
 
   // Users
   const hasUsersPerms = stripes.hasPerm('ui-users.edit');
@@ -45,6 +46,7 @@ export const useBulkPermissions = () => {
     hasInAppUsersEditPerms,
     hasLogViewPerms,
     hasQueryPerms,
+    hasInventoryInstanceViewPerms,
 
     // derived
     isActionMenuShown,

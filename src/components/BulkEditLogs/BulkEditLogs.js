@@ -60,6 +60,7 @@ const BulkEditLogs = () => {
       filters={logsQueryParams}
       isFiltersOpened
       toggleFilters={noop}
+      notLoadedMessage={<FormattedMessage id="ui-bulk-edit.list.result.emptyMessage.logs" />}
     />
   );
 

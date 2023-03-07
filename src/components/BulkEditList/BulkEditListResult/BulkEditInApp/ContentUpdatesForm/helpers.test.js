@@ -112,5 +112,37 @@ describe('ContentUpdatesForm helpers', () => {
         totalRecords,
       });
     });
+
+    it('should covert holding location options to back-end options', () => {
+      const contentUpdates = [
+        {
+          option: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
+          actions: [{
+            type: ACTIONS.REPLACE_WITH,
+            updated: 'data',
+            initial: true,
+          }],
+        },
+      ];
+
+      expect(getContentUpdatesBody({
+        contentUpdates,
+        bulkOperationId,
+        totalRecords,
+      })).toEqual({
+        bulkOperationRules: [{
+          bulkOperationId,
+          rule_details: {
+            option: OPTIONS.TEMPORARY_LOCATION,
+            actions: [{
+              type: ACTIONS.REPLACE_WITH,
+              updated: 'data',
+              initial: true,
+            }],
+          },
+        }],
+        totalRecords,
+      });
+    });
   });
 });

@@ -9,7 +9,6 @@ import {
   getBaseActions,
 } from '../../../../../constants';
 
-
 export const ACTION_VALUE_KEY = 'name';
 export const FIELD_VALUE_KEY = 'value';
 
@@ -19,6 +18,11 @@ export const FIELDS_TYPES = {
 };
 
 export const TEMPORARY_LOCATIONS = [OPTIONS.TEMPORARY_LOCATION, OPTIONS.TEMPORARY_HOLDINGS_LOCATION];
+
+const OPTIONS_MAP = {
+  [OPTIONS.TEMPORARY_HOLDINGS_LOCATION]: OPTIONS.TEMPORARY_LOCATION,
+  [OPTIONS.PERMANENT_HOLDINGS_LOCATION]: OPTIONS.PERMANENT_LOCATION,
+};
 
 export const getFormattedDate = (value) => {
   const date = `${value} 23:59:59`;
@@ -37,7 +41,7 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
       const isExpirationDate = item.option === OPTIONS.EXPIRATION_DATE;
 
       return {
-        ...item,
+        option: OPTIONS_MAP[item.option] || item.option,
         actions: item.actions.map(action => ({
           ...action,
           updated: isExpirationDate ? getFormattedDate(action.updated) : action.updated,
