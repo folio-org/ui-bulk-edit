@@ -8,7 +8,7 @@ import { Icon, Loading } from '@folio/stripes/components';
 import { useShowCallout } from '@folio/stripes-acq-components';
 
 import { useBulkOperationDetails } from '../../hooks/api';
-import { EDITING_STEPS, JOB_STATUSES } from '../../constants';
+import { APPROACHES, EDITING_STEPS, JOB_STATUSES } from '../../constants';
 
 import css from './ProgressBar.css';
 
@@ -46,21 +46,22 @@ export const ProgressBar = () => {
       [JOB_STATUSES.DATA_MODIFICATION]: { step: EDITING_STEPS.UPLOAD },
       [JOB_STATUSES.COMPLETED]: { step: EDITING_STEPS.COMMIT },
       [JOB_STATUSES.COMPLETED_WITH_ERRORS]: { step: EDITING_STEPS.UPLOAD },
-      [JOB_STATUSES.FAILED]: { step: null, callout: swwCallout },
+      [JOB_STATUSES.FAILED]: { step: null },
     };
 
     const matched = mappedStatuses[status];
 
     if (matched) {
-      clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, {
-        ...(matched.step ? { step: matched.step } : {}),
-      });
-
-      if (matched.callout) matched.callout();
+      clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, matched);
     }
 
     if (status === JOB_STATUSES.FAILED) {
-      clearIntervalAndRedirect('/bulk-edit', '');
+      if (bulkDetails?.approach === APPROACHES.QUERY) {
+        clearIntervalAndRedirect('/bulk-edit', { noQueryResults: true });
+      } else {
+        swwCallout();
+        clearIntervalAndRedirect('/bulk-edit', null);
+      }
     }
   }, [status]);
 

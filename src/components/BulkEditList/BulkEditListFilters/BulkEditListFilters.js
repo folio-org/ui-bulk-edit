@@ -20,12 +20,12 @@ import {
   APPROACHES,
 } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
-import { useUserGroupsMap } from '../../../hooks/api';
+import { useUserGroupsMap, useUpload, useBulkOperationStart } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 
 import { LogsFilters } from './LogsFilters/LogsFilters';
-import { useUpload } from '../../../hooks/api/useUpload';
-import { useBulkOperationStart } from '../../../hooks/api/useBulkOperationStart';
+
+
 import { buildQuery } from '../../../utils/buildQuery';
 import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
 import FilterTabs from './FilterTabs/FilterTabs';
@@ -185,9 +185,11 @@ export const BulkEditListFilters = ({
       entityType: capabilities,
     });
 
+    search.delete('noQueryResults');
+
     history.replace({
       pathname: `/bulk-edit/${id}/progress`,
-      search: buildSearch({ queryText }, location.search),
+      search: buildSearch({ queryText }, search.toString()),
     });
   };
 
