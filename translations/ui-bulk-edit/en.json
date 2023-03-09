@@ -223,7 +223,7 @@
   "columns.HOLDINGS_RECORD.Instance HRID": "Instance HRID",
   "columns.HOLDINGS_RECORD.Item barcode": "Item barcode",
 
-  "columns.logs.id": "ID",
+  "columns.logs.hrId": "ID",
   "columns.logs.operationType": "Bulk operation type",
   "columns.logs.entityType": "Record type",
   "columns.logs.status": "Status",
