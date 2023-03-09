@@ -3,8 +3,8 @@ import React from 'react';
 
 export const LOGS_COLUMNS = [
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.id" />,
-    value: 'id',
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.hrId" />,
+    value: 'hrId',
     disabled: false,
     selected: false,
     sortable: true,
