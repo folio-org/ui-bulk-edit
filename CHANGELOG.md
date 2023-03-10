@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [3.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.3) (2023-03-10)
+
 * [UIBULKED-261](https://issues.folio.org/browse/UIBULKED-261) Replace UUID with HRID on Logs
 * [UIBULKED-265](https://issues.folio.org/browse/UIBULKED-265) Columns on the 'Are you sure' form are mixed in case simultaneously running jobs
 * [UIBULKED-266](https://issues.folio.org/browse/UIBULKED-266) Confirmation screen is missing for completed with errors operations
