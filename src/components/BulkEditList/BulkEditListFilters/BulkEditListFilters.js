@@ -44,6 +44,9 @@ export const BulkEditListFilters = ({
     hasQueryPerms,
     hasUsersViewPerms,
     hasInventoryInstanceViewPerms,
+    hasCsvViewPerms,
+    hasInAppUsersEditPerms,
+    hasInAppViewPerms,
   } = permissions;
   const showCallout = useShowCallout();
   const history = useHistory();
@@ -60,6 +63,10 @@ export const BulkEditListFilters = ({
   const { capabilities, recordIdentifier } = filters;
 
   const capabilitiesFilterOptions = getCapabilityOptions(criteria, permissions);
+
+  const isQueryBuilderEnabledForUsers = hasUsersViewPerms && (hasCsvViewPerms || hasInAppUsersEditPerms);
+  const isQueryBuilderEnabledForItems = hasInventoryInstanceViewPerms && hasInAppViewPerms;
+  const isQueryBuilderDisabled = !isQueryBuilderEnabledForUsers && !isQueryBuilderEnabledForItems;
 
   const initialFilter = {
     capabilities: initialCapabilities,
@@ -272,7 +279,7 @@ export const BulkEditListFilters = ({
           <Pluggable
             componentType="builder"
             type="query-builder"
-            disabled={!hasUsersViewPerms && !hasInventoryInstanceViewPerms}
+            disabled={isQueryBuilderDisabled}
           />
         </>
       )}
