@@ -12,12 +12,15 @@ export const NoResultsMessage = () => {
   const search = new URLSearchParams(location.search);
   const capabilities = search.get('capabilities');
   const criteria = search.get('criteria');
+  const noQueryResults = search.get('noQueryResults');
 
   const message = useMemo(() => {
-    const identifier = new URLSearchParams(location.search).get('identifier');
+    const identifier = search.get('identifier');
     const messagePrefix = criteria === CRITERIA.IDENTIFIER && identifier
       ? `.${identifier}`
       : '';
+
+    if (noQueryResults) return <FormattedMessage id="ui-bulk-edit.list.result.emptyMessage.query" />;
 
     return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${TRANSLATION_SUFFIX[capabilities]}${messagePrefix}`} />;
   }, [location.search]);
