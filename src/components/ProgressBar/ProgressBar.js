@@ -50,11 +50,13 @@ export const ProgressBar = () => {
     }
 
     if (status === JOB_STATUSES.FAILED) {
-      if (bulkDetails?.approach === APPROACHES.QUERY) {
+      const errorSign = 'BadRequest';
+
+      if (bulkDetails?.approach === APPROACHES.QUERY && !bulkDetails?.errorMessage?.includes(errorSign)) {
         clearIntervalAndRedirect('/bulk-edit', { noQueryResults: true });
       } else {
         swwCallout();
-        clearIntervalAndRedirect('/bulk-edit', '');
+        clearIntervalAndRedirect('/bulk-edit', {});
       }
     }
   }, [status]);

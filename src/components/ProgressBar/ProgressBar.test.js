@@ -109,7 +109,12 @@ describe('ProgressBar', () => {
 
   it('callout should be called for query approach', async () => {
     useBulkOperationDetails.mockReturnValue({
-      bulkDetails: { ...bulkOperation, status: JOB_STATUSES.FAILED, approach: APPROACHES.QUERY },
+      bulkDetails: {
+        ...bulkOperation,
+        status: JOB_STATUSES.FAILED,
+        approach: APPROACHES.QUERY,
+        errorMessage: 'some error message',
+      },
       clearIntervalAndRedirect,
     });
 
