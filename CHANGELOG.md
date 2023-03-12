@@ -1,6 +1,7 @@
 # Change history for ui-bulk-edit
 
 ## In progress
+* [UIBULKED-260](https://issues.folio.org/browse/UIBULKED-260) "Something went wrong" error message appears when search by Query is done by no-existing or no-result value
 
 ## [3.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.3) (2023-03-10)
 

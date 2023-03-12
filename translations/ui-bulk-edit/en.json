@@ -47,6 +47,7 @@
   "list.result.emptyMessage.holdings.HRID": "Drag and drop or choose file with holdings HRIDs",
   "list.result.emptyMessage.holdings.INSTANCE_HRID": "Drag and drop or choose file with instance HRIDs",
   "list.result.emptyMessage.holdings.ITEM_BARCODE": "Drag and drop or choose file with item barcode",
+  "list.result.emptyMessage.query": "No results found. Please check your filters",
   "list.filters.capabilities.title": "Record types",
   "list.filters.capabilities.users": "Users",
   "list.filters.capabilities.inventory": "Inventory - items",

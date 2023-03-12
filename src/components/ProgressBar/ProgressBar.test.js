@@ -5,13 +5,19 @@ import { render, screen } from '@testing-library/react';
 
 import { runAxeTest } from '@folio/stripes-testing';
 
-import { JOB_STATUSES } from '../../constants';
+import { APPROACHES, JOB_STATUSES } from '../../constants';
 import { useBulkOperationDetails } from '../../hooks/api';
 
 import { ProgressBar } from './ProgressBar';
 
 jest.mock('../../hooks/api', () => ({
   useBulkOperationDetails: jest.fn(),
+}));
+
+const mockShowCallout = jest.fn();
+jest.mock('@folio/stripes-acq-components', () => ({
+  ...jest.requireActual('@folio/stripes-acq-components'),
+  useShowCallout: jest.fn(() => mockShowCallout),
 }));
 
 const history = createMemoryHistory();
@@ -34,8 +40,8 @@ describe('ProgressBar', () => {
 
   beforeEach(() => {
     clearIntervalAndRedirect.mockClear();
-
     useBulkOperationDetails.mockClear();
+    mockShowCallout.mockClear();
   });
 
   it('should display correct title', async () => {
@@ -94,6 +100,27 @@ describe('ProgressBar', () => {
       renderProgressBar();
 
       expect(clearIntervalAndRedirect).toHaveBeenCalled();
+
+      if (status === JOB_STATUSES.FAILED) {
+        expect(mockShowCallout).toHaveBeenCalled();
+      }
     });
+  });
+
+  it('callout should be called for query approach', async () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: {
+        ...bulkOperation,
+        status: JOB_STATUSES.FAILED,
+        approach: APPROACHES.QUERY,
+        errorMessage: 'some error message',
+      },
+      clearIntervalAndRedirect,
+    });
+
+    renderProgressBar();
+
+    expect(clearIntervalAndRedirect).toHaveBeenCalled();
+    expect(mockShowCallout).not.toHaveBeenCalled();
   });
 });

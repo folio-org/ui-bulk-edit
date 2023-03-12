@@ -8,7 +8,7 @@ import { Icon, Loading } from '@folio/stripes/components';
 import { useShowCallout } from '@folio/stripes-acq-components';
 
 import { useBulkOperationDetails } from '../../hooks/api';
-import { JOB_STATUSES } from '../../constants';
+import { APPROACHES, JOB_STATUSES } from '../../constants';
 import { getBulkOperationStep } from './utils';
 
 import css from './ProgressBar.css';
@@ -50,8 +50,14 @@ export const ProgressBar = () => {
     }
 
     if (status === JOB_STATUSES.FAILED) {
-      swwCallout();
-      clearIntervalAndRedirect('/bulk-edit', '');
+      const errorSign = 'BadRequest';
+
+      if (bulkDetails?.approach === APPROACHES.QUERY && !bulkDetails?.errorMessage?.includes(errorSign)) {
+        clearIntervalAndRedirect('/bulk-edit', { noQueryResults: true });
+      } else {
+        swwCallout();
+        clearIntervalAndRedirect('/bulk-edit', {});
+      }
     }
   }, [status]);
 
