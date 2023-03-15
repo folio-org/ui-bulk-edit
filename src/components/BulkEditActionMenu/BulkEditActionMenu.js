@@ -132,7 +132,7 @@ const BulkEditActionMenu = ({
             </Icon>
           </Button>
         )}
-        {isStartBulkCsvActive && (
+        {isStartBulkCsvActive && isInitialStep && (
           <Button
             data-testid="startCsvAction"
             buttonStyle="dropdownItem"
