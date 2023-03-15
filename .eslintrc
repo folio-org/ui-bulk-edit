@@ -11,7 +11,11 @@
     "indent" : 2,
     "react-hooks/exhaustive-deps": 0,
     "import/no-unresolved": 0,
-    "no-unused-vars": 0
+    "no-unused-vars": 0,
+    "filenames/match-exported": 0,
+    "import/no-extraneous-dependencies": 0,
+    "no-undef": 0,
+    "no-use-before-define": 0
   },
   "settings": {
     "react": {

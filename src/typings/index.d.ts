@@ -8,5 +8,6 @@ declare module '@folio/stripes-acq-components' {
 }
 
 declare module '@folio/stripes/components' {
-
+    // eslint-disable-next-line no-undef
+    export = STCOM;
 }
