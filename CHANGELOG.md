@@ -7,6 +7,7 @@
 * [UIBULKED-266](https://issues.folio.org/browse/UIBULKED-266) Confirmation screen is missing for completed with errors operations
 * [UIBULKED-252](https://issues.folio.org/browse/UIBULKED-252) Selected filters are not reset on "Logs" tab
 * [UIBULKED-261](https://issues.folio.org/browse/UIBULKED-261) Replace UUID with HRID on Logs
+* [UIBULKED-264](https://issues.folio.org/browse/UIBULKED-264) "Download matched records (CSV)" option is enabled on the confirmation screen
 
 ## [3.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.2) (2023-03-02)
 
