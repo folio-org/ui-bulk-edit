@@ -165,7 +165,6 @@
     "columns.logs.actions": "Ações",
     "list.actions.download": "Baixar",
     "retrievedDataList.title": "{matched} correspondente {capability} registros encontrados.",
-    "columns.logs.id": "ID",
     "columns.logs.operationType": "Tipo de operação em lote",
     "columns.logs.entityType": "Tipo de registro",
     "columns.logs.userId": "Executado por",
@@ -304,5 +303,6 @@
     "columns.HOLDINGS_RECORD.Instance HRID": "HRID da instância",
     "columns.HOLDINGS_RECORD.Item barcode": "Código de barras do item",
     "list.preview.table.status.true": "Ativo",
-    "list.preview.table.status.false": "Inativo"
+    "list.preview.table.status.false": "Inativo",
+    "columns.logs.hrId": "ID"
 }
