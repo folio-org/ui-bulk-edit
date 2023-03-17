@@ -3,7 +3,7 @@
 ## In progress
 
 * [UIBULKED-264](https://issues.folio.org/browse/UIBULKED-264) "Download matched records (CSV)" option is enabled on the confirmation screen
-* [UIBULKED-270](https://issues.folio.org/browse/UIBULKED-270) Hide "Start bulk edit (CSV) option" on the confirmation screen
+* [UIBULKED-270](https://issues.folio.org/browse/UIBULKED-270) Hide "Start bulk edit (CSV)" option on the confirmation screen
 
 ## [3.0.4](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.4) (2023-03-16)
 
