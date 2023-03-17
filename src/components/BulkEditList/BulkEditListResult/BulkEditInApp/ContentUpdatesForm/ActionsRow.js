@@ -5,7 +5,12 @@ import { Col, Datepicker, Select, Selection, TextField } from '@folio/stripes/co
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 
 import { usePatronGroup, useLoanTypes } from '../../../../../hooks/api';
-import { ACTIONS, CONTROL_TYPES, getItemStatusOptions } from '../../../../../constants';
+import {
+  ACTIONS,
+  BASE_DATE_FORMAT,
+  CONTROL_TYPES,
+  getItemStatusOptions,
+} from '../../../../../constants';
 
 import {
   ACTION_VALUE_KEY,
@@ -79,8 +84,11 @@ export const ActionsRow = ({ option, actions, onChange }) => {
             {action.type === CONTROL_TYPES.DATE && (
               <Datepicker
                 value={action.value}
-                onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+                onChange={(e, value, formattedValue) => {
+                  onChange({ actionIndex, value: formattedValue, fieldName: FIELD_VALUE_KEY });
+                }}
                 data-testid={`dataPicker-experation-date-${actionIndex}`}
+                backendDateStandard={BASE_DATE_FORMAT}
               />
             )}
 
