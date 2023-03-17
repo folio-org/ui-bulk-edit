@@ -26,7 +26,7 @@ export const getDownloadLinks = ({ perms, date, fileName, step }) => [
     KEY: FILE_KEYS.MATCHING_RECORDS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.MATCHED_RECORDS_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />,
-    IS_VISIBLE: perms.hasAnyEditPermissions,
+    IS_VISIBLE: perms.hasAnyEditPermissions && step === EDITING_STEPS.UPLOAD,
     SAVE_FILE_NAME: `${date}-Matched-Records-${fileName}`,
   },
   {
