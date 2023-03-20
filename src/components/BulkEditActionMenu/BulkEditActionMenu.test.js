@@ -152,7 +152,7 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
       capability: CAPABILITIES.ITEM,
-      providerState: { ...defaultProviderState, visibleColumns: [] },
+      providerState: { ...defaultProviderState, visibleColumns: [], countOfRecords: 10 },
     });
 
     userEvent.click(screen.getByTestId('startInAppAction'));
@@ -165,7 +165,7 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
       capability: CAPABILITIES.USER,
-      providerState: { ...defaultProviderState, visibleColumns: [] },
+      providerState: { ...defaultProviderState, visibleColumns: [], countOfRecords: 10 },
     });
 
     expect(screen.getByTestId('startCsvAction')).toBeVisible();
@@ -178,7 +178,7 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
       capability: CAPABILITIES.USER,
-      providerState: { ...defaultProviderState, visibleColumns: [] },
+      providerState: { ...defaultProviderState, visibleColumns: [], countOfRecords: 10 },
     });
 
     userEvent.click(screen.getByTestId('startCsvAction'));
