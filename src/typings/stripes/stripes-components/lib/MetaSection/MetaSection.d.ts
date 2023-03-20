@@ -1,10 +1,21 @@
 import { FunctionComponent, ReactNode } from 'react';
 
+export interface User {
+  id: string;
+  username: string;
+  personal: {
+    lastName: string;
+    firstName?: string;
+    middleName?: string;
+    preferredFirstName?: string;
+  };
+}
+
 export interface MetaSectionProps {
   /** HTML id attribute assigned to accordion's content */
   contentId?: string;
   /** Name/record of the user who created the record. */
-  createdBy?: ReactNode;
+  createdBy?: ReactNode | User;
   /** Date/time a record was created. */
   createdDate?: string;
   /** Sets the heading level of the heading inside the accordion header. */
@@ -14,7 +25,7 @@ export interface MetaSectionProps {
   /** HTML id attribute assigned to accordion's root. */
   id?: string;
   /** Name/record of the last user who modified the record. */
-  lastUpdatedBy?: ReactNode;
+  lastUpdatedBy?: ReactNode | User;
   /** Latest date/time a record was modified. */
   lastUpdatedDate?: string;
   /** Should the user name link to the user record? Pass in permissions */
