@@ -165,7 +165,6 @@
     "columns.logs.actions": "操作",
     "list.actions.download": "下载",
     "retrievedDataList.title": "找到{matched}个匹配的{capability}记录。",
-    "columns.logs.id": "ID",
     "columns.logs.operationType": "批量操作类型",
     "columns.logs.entityType": "记录类型",
     "columns.logs.userId": "运行方",
@@ -304,5 +303,6 @@
     "columns.HOLDINGS_RECORD.Instance HRID": "实例HRID",
     "columns.HOLDINGS_RECORD.Item barcode": "单件条码",
     "list.preview.table.status.true": "激活",
-    "list.preview.table.status.false": "未激活"
+    "list.preview.table.status.false": "未激活",
+    "columns.logs.hrId": "ID"
 }

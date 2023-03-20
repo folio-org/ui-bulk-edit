@@ -165,7 +165,6 @@
     "columns.logs.actions": "Actions",
     "list.actions.download": "Download",
     "retrievedDataList.title": "{matched} matching {capability} records found.",
-    "columns.logs.id": "ID",
     "columns.logs.operationType": "Bulk operation type",
     "columns.logs.entityType": "Record type",
     "columns.logs.userId": "Run by",
@@ -304,5 +303,6 @@
     "columns.HOLDINGS_RECORD.Instance HRID": "Instance HRID",
     "columns.HOLDINGS_RECORD.Item barcode": "Item barcode",
     "list.preview.table.status.true": "Active",
-    "list.preview.table.status.false": "Inactive"
+    "list.preview.table.status.false": "Inactive",
+    "columns.logs.hrId": "ID"
 }
