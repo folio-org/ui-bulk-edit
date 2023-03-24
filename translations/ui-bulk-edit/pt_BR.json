@@ -263,7 +263,7 @@
     "columns.ITEM.Effective Location": "Localização efetiva do item",
     "columns.ITEM.In Transit Destination Service Point": "Ponto de serviço de destino em trânsito",
     "columns.ITEM.Statistical Codes": "Códigos estatísticos",
-    "columns.ITEM.Purchase Order Line Identifier": "Identificador de linha de ordem de compra",
+    "columns.ITEM.Purchase Order Line Identifier": "Identificador de linha do pedido de compra",
     "columns.ITEM.Tags": "Etiquetas",
     "columns.ITEM.Last CheckIn": "última devolução",
     "columns.ITEM.Electronic Access": "Acesso eletrônico",
