@@ -261,7 +261,7 @@
     "columns.ITEM.Permanent Location": "Trvalá lokace jednotky",
     "columns.ITEM.Temporary Location": "Dočasná lokace jednotky",
     "columns.ITEM.Effective Location": "Efektivní lokace jednotky",
-    "columns.ITEM.In Transit Destination Service Point": "V tranzitu, cílový pult služeb",
+    "columns.ITEM.In Transit Destination Service Point": "V přepravě, cílový pult služeb",
     "columns.ITEM.Statistical Codes": "Statistické kódy",
     "columns.ITEM.Purchase Order Line Identifier": "Identifikátor řádku nákupní objednávky",
     "columns.ITEM.Tags": "Štítky",
