@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, UseQueryOptions} from 'react-query';
 import { useIntl } from 'react-intl';
 
 import { useOkapiKy } from '@folio/stripes/core';
@@ -10,8 +10,19 @@ import {
 } from '../../constants';
 import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
+import { Step, UnifiedTableDto } from './types';
 
-export const useRecordsPreview = ({ id, step, queryOptions, capabilities }) => {
+export const useRecordsPreview = ({
+  id,
+  step,
+  queryOptions,
+  capabilities,
+} : {
+  id: string,
+  step: Step,
+  queryOptions?: UseQueryOptions,
+  capabilities: string,
+}) => {
   const intl = useIntl();
   const { setVisibleColumns } = useContext(RootContext);
   const ky = useOkapiKy();
@@ -21,7 +32,7 @@ export const useRecordsPreview = ({ id, step, queryOptions, capabilities }) => {
       queryKey: ['records', id, step],
       cacheTime: 0,
       queryFn: () => {
-        return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json();
+        return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json<UnifiedTableDto>();
       },
       ...queryOptions,
     },
@@ -37,7 +48,7 @@ export const useRecordsPreview = ({ id, step, queryOptions, capabilities }) => {
   useEffect(() => {
     if (columns.length) {
       const storageKey = `${BULK_VISIBLE_COLUMNS}_${capabilities}`;
-      let storedVisibleColumns = JSON.parse(localStorage.getItem(storageKey) || null);
+      let storedVisibleColumns = JSON.parse(localStorage.getItem(storageKey) || '');
 
       if (columns.length !== storedVisibleColumns?.length) {
         storedVisibleColumns = columns;

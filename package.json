@@ -182,6 +182,7 @@
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^5.1.0",
     "@testing-library/user-event": "^12.8.3",
+    "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "4.0.1",
     "@typescript-eslint/parser": "4.0.1",
     "babel-jest": "^26.3.0",
