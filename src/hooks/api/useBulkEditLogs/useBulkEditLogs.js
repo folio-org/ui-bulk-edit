@@ -13,6 +13,8 @@ import {
   batchRequest,
 } from '@folio/stripes-acq-components';
 
+import { getFullName } from '../../../utils/getFullName';
+
 const buildLogsQuery = makeQueryBuilder(
   'cql.allRecords=1',
   noop,
@@ -56,7 +58,7 @@ export const useBulkEditLogs = ({ filters = {}, pagination }) => {
         ...usersMap.current,
         ...(
           fetchedUsers.reduce((acc, { id, personal }) => {
-            acc[id] = `${personal?.firstName || ''} ${personal?.lastName || ''}`;
+            acc[id] = getFullName(personal);
 
             return acc;
           }, {})
