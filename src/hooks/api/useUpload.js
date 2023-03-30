@@ -1,6 +1,5 @@
 import { useOkapiKy } from '@folio/stripes/core';
 import { useMutation } from 'react-query';
-import { BulkOperationDto, EntityType } from './types';
 
 export const useUpload = () => {
   const ky = useOkapiKy();
@@ -11,12 +10,6 @@ export const useUpload = () => {
     entityType,
     identifierType,
     manual = false,
-  } : {
-    fileToUpload: any,
-    operationId: string,
-    entityType: EntityType,
-    identifierType: string,
-    manual: boolean,
   }) => {
     const formData = new FormData();
 
@@ -34,7 +27,7 @@ export const useUpload = () => {
     return ky.post(`bulk-operations/upload?${searchParams}`, {
       body: formData,
       timeout: false,
-    }).json<BulkOperationDto>();
+    }).json();
   },
   retry: 10,
   retryDelay: 2000 });

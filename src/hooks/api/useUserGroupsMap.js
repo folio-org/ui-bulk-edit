@@ -3,7 +3,6 @@ import {
 } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
-import { GroupsDto } from './types';
 
 export const useUserGroupsMap = () => {
   const ky = useOkapiKy();
@@ -13,7 +12,7 @@ export const useUserGroupsMap = () => {
       cacheTime: Infinity,
       staleTime: Infinity,
       queryFn: async () => {
-        const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json<GroupsDto>();
+        const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
 
         return usergroups.reduce((acc, curr) => (
           {

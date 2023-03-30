@@ -3,7 +3,6 @@ import {
 } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
-import { Group, GroupsDto } from './types';
 
 export const usePatronGroup = () => {
   const ky = useOkapiKy();
@@ -14,9 +13,9 @@ export const usePatronGroup = () => {
       cacheTime: Infinity,
       staleTime: Infinity,
       queryFn: async () => {
-        const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json<GroupsDto>();
+        const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
 
-        return usergroups.reduce((acc : Group[], { group, desc, id } : Group) => {
+        return usergroups.reduce((acc, { group, desc, id }) => {
           const patronGroup = {
             id,
             group,

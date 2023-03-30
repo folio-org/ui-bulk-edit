@@ -10,18 +10,12 @@ import {
 } from '../../constants';
 import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
-import { Step, UnifiedTableDto } from './types';
 
 export const useRecordsPreview = ({
   id,
   step,
   queryOptions,
   capabilities,
-} : {
-  id: string,
-  step: Step,
-  queryOptions?: UseQueryOptions,
-  capabilities: string,
 }) => {
   const intl = useIntl();
   const { setVisibleColumns } = useContext(RootContext);
@@ -32,7 +26,7 @@ export const useRecordsPreview = ({
       queryKey: ['records', id, step],
       cacheTime: 0,
       queryFn: () => {
-        return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json<UnifiedTableDto>();
+        return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json();
       },
       ...queryOptions,
     },

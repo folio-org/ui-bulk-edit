@@ -1,16 +1,11 @@
 import { useQuery } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
-import { FileInfo } from './types';
 
 export const useFileDownload = ({
   id,
   fileInfo,
   onSuccess,
-  ...queryProps,
-} : {
-  id: string,
-  fileInfo: FileInfo,
-  onSuccess: () => void;
+  ...queryProps
 }) => {
   const ky = useOkapiKy();
 

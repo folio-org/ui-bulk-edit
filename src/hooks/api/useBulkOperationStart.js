@@ -8,17 +8,16 @@ import {
   JOB_STATUSES,
   EDITING_STEPS,
 } from '../../constants';
-import { Approach, BulkOperationDto, EntityType, Params, Step } from './types';
 
 export const useBulkOperationStart = (mutationOptions = {}) => {
-  const params = useRef<Params>({});
+  const params = useRef({});
   const ky = useOkapiKy();
 
   const { refetch: fetchBulkOperation } = useQuery({
     queryFn: async () => {
       const { id, step } = params.current;
 
-      const bulkOperation = await ky.get(`bulk-operations/${id}`).json<BulkOperationDto>();
+      const bulkOperation = await ky.get(`bulk-operations/${id}`).json();
 
       if (
         step === EDITING_STEPS.EDIT
@@ -42,12 +41,6 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
       entityType,
       step,
       query,
-    } : {
-      id: string,
-      approach: Approach,
-      entityType: EntityType,
-      step: Step,
-      query : string,
     }) => {
       const body = query
         ? {

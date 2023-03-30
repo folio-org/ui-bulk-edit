@@ -1,11 +1,10 @@
 import { useQuery } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
-import { ErrorDto } from './types';
 
-export const useErrorsPreview = ({ id } : { id: string }) => {
+export const useErrorsPreview = ({ id }) => {
   const ky = useOkapiKy();
 
-  const { data, isLoading } = useQuery<ErrorDto>(
+  const { data, isLoading } = useQuery(
     {
       queryKey: ['previewErrors', id],
       cacheTime: 0,

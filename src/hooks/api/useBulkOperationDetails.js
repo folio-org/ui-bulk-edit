@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import { useHistory } from 'react-router-dom';
 import { buildSearch } from '@folio/stripes-acq-components';
-import { BulkOperationDto } from './types';
 
 export const useBulkOperationDetails = ({
   id,
@@ -16,7 +15,7 @@ export const useBulkOperationDetails = ({
 
   const [refetchInterval, setRefetchInterval] = useState(interval);
 
-  const { data, isLoading } = useQuery<BulkOperationDto>({
+  const { data, isLoading } = useQuery({
     queryKey: ['bulkOperationDetails', id, refetchInterval, ...additionalQueryKeys],
     enabled: !!id,
     refetchInterval,
@@ -27,7 +26,7 @@ export const useBulkOperationDetails = ({
   const clearInterval = () => {
     setRefetchInterval(0);
   };
-  const clearIntervalAndRedirect = (pathname: string, searchParams: object) => {
+  const clearIntervalAndRedirect = (pathname, searchParams) => {
     clearInterval();
 
     history.replace({

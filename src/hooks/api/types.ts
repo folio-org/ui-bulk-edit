@@ -110,4 +110,5 @@ export type LoanTypesDto = {
     id: string,
     name: string
   }[]
-}
+};
+
