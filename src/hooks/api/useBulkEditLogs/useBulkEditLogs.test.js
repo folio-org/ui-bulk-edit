@@ -7,6 +7,7 @@ import { bulkEditLogsData } from '../../../../test/jest/__mock__/fakeData';
 
 import { FILTERS, JOB_STATUSES } from '../../../constants';
 import { useBulkEditLogs } from './useBulkEditLogs';
+import { getFullName } from '../../../utils/getFullName';
 
 jest.mock('@folio/stripes/core', () => ({
   ...jest.requireActual('@folio/stripes/core'),
@@ -73,7 +74,7 @@ describe('useBulkEditLogs', () => {
     await waitFor(() => !result.current.isLoading);
 
     expect(result.current).toEqual({
-      logs: [{ ...bulkEditLog, runBy: `${users[0].personal.firstName} ${users[0].personal.lastName}` }],
+      logs: [{ ...bulkEditLog, runBy: getFullName(users[0].personal) }],
       logsCount: 1,
       isLoading: false,
     });
