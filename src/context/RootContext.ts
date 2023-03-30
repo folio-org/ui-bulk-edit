@@ -9,4 +9,4 @@ type RootContextType = {
   confirmedFileName: string,
 };
 
-export const RootContext = React.createContext<RootContextType>(null!);
+export const RootContext = React.createContext(null!);

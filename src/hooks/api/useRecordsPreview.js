@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo } from 'react';
-import { useQuery, UseQueryOptions} from 'react-query';
+import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
 
 import { useOkapiKy } from '@folio/stripes/core';
