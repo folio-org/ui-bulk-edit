@@ -1,4 +1,4 @@
-import { useRef, MutableRefObject } from 'react';
+import { useRef } from 'react';
 import { useMutation, useQuery } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
