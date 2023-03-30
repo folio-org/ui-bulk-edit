@@ -112,3 +112,8 @@ export type LoanTypesDto = {
   }[]
 };
 
+export type LogsDto = {
+  bulkOperations: BulkOperationDto[],
+  totalRecords: number,
+};
+
