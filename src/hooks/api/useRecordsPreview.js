@@ -42,7 +42,7 @@ export const useRecordsPreview = ({
   useEffect(() => {
     if (columns.length) {
       const storageKey = `${BULK_VISIBLE_COLUMNS}_${capabilities}`;
-      let storedVisibleColumns = JSON.parse(localStorage.getItem(storageKey) || '');
+      let storedVisibleColumns = JSON.parse(localStorage.getItem(storageKey) || null);
 
       if (columns.length !== storedVisibleColumns?.length) {
         storedVisibleColumns = columns;

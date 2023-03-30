@@ -1,34 +1,38 @@
-export type EntityCustomIdentifierType = 'ID'
-| 'BARCODE'
-| 'HRID'
-| 'FORMER_IDS'
-| 'ACCESSION_NUMBER'
-| 'HOLDINGS_RECORD_ID'
-| 'USER_NAME'
-| 'EXTERNAL_SYSTEM_ID'
-| 'INSTANCE_HRID'
-| 'ITEM_BARCODE';
+export enum EntityCustomIdentifierType {
+  'ID',
+ 'BARCODE',
+ 'HRID',
+ 'FORMER_IDS',
+ 'ACCESSION_NUMBER',
+ 'HOLDINGS_RECORD_ID',
+ 'USER_NAME',
+ 'EXTERNAL_SYSTEM_ID',
+ 'INSTANCE_HRID',
+ 'ITEM_BARCODE',
+}
 
-export type Status = 'NEW'
-|'RETRIEVING_RECORDS'
-|'SAVING_RECORDS_LOCALLY'
-|'DATA_MODIFICATION'
-|'REVIEW_CHANGES'
-|'APPLY_CHANGES'
-|'SUSPENDED'
-|'COMPLETED'
-|'COMPLETED_WITH_ERRORS'
-|'CANCELLED'
-|'SCHEDULED'
-|'FAILED';
+export enum Status {
+  'NEW',
+  'RETRIEVING_RECORDS',
+  'SAVING_RECORDS_LOCALLY',
+  'DATA_MODIFICATION',
+  'REVIEW_CHANGES',
+  'APPLY_CHANGES',
+  'SUSPENDED',
+  'COMPLETED',
+  'COMPLETED_WITH_ERRORS',
+  'CANCELLED',
+  'SCHEDULED',
+  'FAILED',
+}
 
-export type Approach = 'MANUAL' | 'IN_APP' | 'QUERY';
+export enum Approach { 'MANUAL', 'IN_APP', 'QUERY' }
 
-export type EntityType = 'USER' | 'ITEM' | 'HOLDINGS_RECORD';
+export enum EntityType { 'USER', 'ITEM', 'HOLDINGS_RECORD' }
 
-export type Step = 'UPLOAD' | 'EDIT' | 'COMMIT';
+export enum Step { 'UPLOAD', 'EDIT', 'COMMIT' }
 
-export type DataTypes = 'NUMERIC' | 'DATE_TIME' | 'STRING'
+export enum DataTypes { 'NUMERIC', 'DATE_TIME', 'STRING' }
 
 export type Params = {
   id?: string,
