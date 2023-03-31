@@ -35,7 +35,13 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
   });
 
   const { mutateAsync: bulkOperationStart, isLoading } = useMutation({
-    mutationFn: async ({ id, approach, entityType, step, query }) => {
+    mutationFn: async ({
+      id,
+      approach,
+      entityType,
+      step,
+      query,
+    }) => {
       const body = query
         ? {
           step,
