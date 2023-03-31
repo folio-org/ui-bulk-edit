@@ -276,6 +276,9 @@
   "layer.selectLocation": "Select location",
   "layer.selectPatronGroup": "Select patron group",
   "layer.selectLoanType": "Select loan type",
+  "layer.options.items.true": "Set true",
+  "layer.options.items.false": "Set false",
+  "layer.options.suppressFromDiscovery": "Suppress from discovery",
 
   "previewModal.message": "{count} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
   "previewModal.previewToBeChanged": "Preview of records to be changed",

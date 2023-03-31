@@ -1,15 +1,29 @@
 import { Fragment } from 'react';
 import { useIntl } from 'react-intl';
 
-import { Col, Datepicker, Select, Selection, TextField } from '@folio/stripes/components';
-import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
+import {
+  Col,
+  Datepicker,
+  Select,
+  Selection,
+  TextField,
+} from '@folio/stripes/components';
+import {
+  LocationLookup,
+  LocationSelection,
+} from '@folio/stripes/smart-components';
 
-import { usePatronGroup, useLoanTypes } from '../../../../../hooks/api';
+import {
+  usePatronGroup,
+  useLoanTypes,
+} from '../../../../../hooks/api';
 import {
   ACTIONS,
   BASE_DATE_FORMAT,
   CONTROL_TYPES,
   getItemStatusOptions,
+  getSuppressFromDiscoverOptions,
+  OPTIONS,
 } from '../../../../../constants';
 
 import {
@@ -25,6 +39,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
   const { loanTypes, isLoanTypesLoading } = useLoanTypes();
 
   const statuses = getItemStatusOptions(intl.formatMessage);
+  const suppressFromDiscoverOptions = getSuppressFromDiscoverOptions(intl.formatMessage);
 
   const patronGroups = Object.values(userGroups).reduce(
     (acc, { id, group, desc }) => {
@@ -51,6 +66,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
 
     return (
       <Fragment key={actionIndex}>
+        {option !== OPTIONS.SUPPRESS_FROM_DISCOVERY && (
         <Col xs={2} sm={2}>
           <Select
             dataOptions={action.actionsList}
@@ -60,6 +76,17 @@ export const ActionsRow = ({ option, actions, onChange }) => {
             data-testid={`select-actions-${actionIndex}`}
           />
         </Col>
+        )}
+        {option === OPTIONS.SUPPRESS_FROM_DISCOVERY && (
+        <Col xs={2} sm={2}>
+          <Select
+            dataOptions={suppressFromDiscoverOptions}
+            value={action.value}
+            onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+            data-testid={`select-patronGroup-${actionIndex}`}
+          />
+        </Col>
+        )}
         {/* Render value fields only in case if actions selected AND actions is not CLEAR_FIELD */}
         {action.name && action.name !== ACTIONS.CLEAR_FIELD && (
           <Col xs={2} sm={2}>

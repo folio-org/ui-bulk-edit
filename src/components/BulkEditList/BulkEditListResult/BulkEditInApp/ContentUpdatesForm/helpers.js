@@ -71,6 +71,7 @@ export const getDefaultActions = (option, formatMessage) => {
   const expirationActions = [getReplaceAction(formatMessage)];
   const statusActions = [getReplaceAction(formatMessage)];
   const permanentLoanTypeActions = [getReplaceAction(formatMessage)];
+  const suppressFromDiscActions = [getReplaceAction(formatMessage)];
   const permanentHoldingsLocation = [getReplaceAction(formatMessage)];
   const allActions = getBaseActions(formatMessage);
 
@@ -161,6 +162,19 @@ export const getDefaultActions = (option, formatMessage) => {
             actionsList: allActions,
             type: CONTROL_TYPES.LOCATION,
             [ACTION_VALUE_KEY]: allActionsInitialVal,
+            [FIELD_VALUE_KEY]: '',
+          },
+        ],
+      };
+    case OPTIONS.SUPPRESS_FROM_DISCOVERY:
+      return {
+        type: '',
+        actions: [
+          null,
+          {
+            actionsList: allActions,
+            type: '',
+            [ACTION_VALUE_KEY]: suppressFromDiscActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
