@@ -1,7 +1,12 @@
 import { useQuery } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const useFileDownload = ({ id, fileInfo, onSuccess, ...queryProps }) => {
+export const useFileDownload = ({
+  id,
+  fileInfo,
+  onSuccess,
+  ...queryProps
+}) => {
   const ky = useOkapiKy();
 
   const { refetch } = useQuery(

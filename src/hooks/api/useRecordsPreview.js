@@ -11,7 +11,12 @@ import {
 import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
 
-export const useRecordsPreview = ({ id, step, queryOptions, capabilities }) => {
+export const useRecordsPreview = ({
+  id,
+  step,
+  queryOptions,
+  capabilities,
+}) => {
   const intl = useIntl();
   const { setVisibleColumns } = useContext(RootContext);
   const ky = useOkapiKy();
