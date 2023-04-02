@@ -214,11 +214,6 @@ export const getItemsOptions = (formatMessage) => [
     disabled: false,
   },
   {
-    value: OPTIONS.PERMANENT_LOAN_TYPE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLoanType' }),
-    disabled: false,
-  },
-  {
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.suppressFromDiscovery' }),
     disabled: false,
