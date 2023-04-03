@@ -9,6 +9,7 @@ import {
 export const OPTIONS = {
   TEMPORARY_LOCATION: 'TEMPORARY_LOCATION',
   PERMANENT_LOCATION: 'PERMANENT_LOCATION',
+  SUPPRESS_FROM_DISCOVERY: 'SUPPRESS_FROM_DISCOVERY',
   STATUS: 'STATUS',
   EXPIRATION_DATE: 'EXPIRATION_DATE',
   EMAIL_ADDRESS: 'EMAIL_ADDRESS',
@@ -165,6 +166,22 @@ export const getHoldingsOptions = (formatMessage) => [
   },
 ];
 
+export const getSuppressFromDiscoverOptions = (formatMessage) => [
+  {
+    value: '',
+    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
+    disabled: true,
+  },
+  { value: true,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.true' }),
+    disabled: false },
+  {
+    value: false,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.false' }),
+    disabled: false,
+  },
+];
+
 export const getItemsOptions = (formatMessage) => [
   {
     value: '',
@@ -194,6 +211,11 @@ export const getItemsOptions = (formatMessage) => [
   {
     value: OPTIONS.PERMANENT_LOAN_TYPE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLoanType' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.suppressFromDiscovery' }),
     disabled: false,
   },
 ];
