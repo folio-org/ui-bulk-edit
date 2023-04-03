@@ -15,12 +15,10 @@ export const useUpload = () => {
 
     formData.append('file', fileToUpload);
 
-    const manualString = String(manual);
-
     const searchParams = new URLSearchParams({
       entityType,
       identifierType,
-      manualString,
+      manual: String(manual),
       ...(operationId ? { operationId } : {}),
     }).toString();
 
