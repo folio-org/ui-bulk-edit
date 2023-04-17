@@ -215,7 +215,6 @@
     "columns.USER.Preferred contact type id": "首选联系人类型ID",
     "columns.USER.Enrollment date": "注册日期",
     "columns.USER.Expiration date": "失效日期",
-    "columns.USER.Created cate": "记录已创建",
     "columns.USER.Updated date": "记录已更新",
     "columns.USER.Tags": "标签",
     "columns.USER.Custom fields": "自定义字段",
@@ -245,7 +244,6 @@
     "columns.ITEM.Number Of Pieces": "件数",
     "columns.ITEM.Description Of Pieces": "件的描述",
     "columns.ITEM.Number Of Missing Pieces": "遗失件数",
-    "columns.ITEM.Missing Peaces": "遗失件",
     "columns.ITEM.Missing Pieces Date": "遗失件日期",
     "columns.ITEM.Item Damaged Status": "单件损坏状态",
     "columns.ITEM.Item Damaged Status Date": "单件损坏状态日期",
@@ -269,7 +267,6 @@
     "columns.ITEM.Electronic Access": "电子访问",
     "columns.HOLDINGS_RECORD.Holdings record id": "馆藏ID",
     "columns.HOLDINGS_RECORD.Version": "版本",
-    "columns.HOLDINGS_RECORD.Hrid": "馆藏HRID",
     "columns.HOLDINGS_RECORD.Holdings type": "馆藏类型",
     "columns.HOLDINGS_RECORD.Former ids": "先前ID",
     "columns.HOLDINGS_RECORD.Instance": "实例",
@@ -304,5 +301,11 @@
     "columns.HOLDINGS_RECORD.Item barcode": "单件条码",
     "list.preview.table.status.true": "激活",
     "list.preview.table.status.false": "未激活",
-    "columns.logs.hrId": "ID"
+    "columns.logs.hrId": "ID",
+    "layer.options.items.true": "Set true",
+    "layer.options.items.false": "Set false",
+    "layer.options.suppressFromDiscovery": "Suppress from discovery",
+    "columns.USER.Created Date": "Record created",
+    "columns.ITEM.Missing Pieces": "Missing pieces",
+    "columns.HOLDINGS_RECORD.HRID": "Holdings HRID"
 }
