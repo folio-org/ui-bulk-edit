@@ -215,7 +215,6 @@
     "columns.USER.Preferred contact type id": "Preferred contact type id",
     "columns.USER.Enrollment date": "Date enrolled",
     "columns.USER.Expiration date": "Expiration date",
-    "columns.USER.Created cate": "Record created",
     "columns.USER.Updated date": "Record updated",
     "columns.USER.Tags": "Tags",
     "columns.USER.Custom fields": "Custom fields",
@@ -245,7 +244,6 @@
     "columns.ITEM.Number Of Pieces": "個数",
     "columns.ITEM.Description Of Pieces": "Description of pieces",
     "columns.ITEM.Number Of Missing Pieces": "Number of missing pieces",
-    "columns.ITEM.Missing Peaces": "Missing pieces",
     "columns.ITEM.Missing Pieces Date": "Missing pieces date",
     "columns.ITEM.Item Damaged Status": "Item damaged status",
     "columns.ITEM.Item Damaged Status Date": "Item damaged status date",
@@ -269,7 +267,6 @@
     "columns.ITEM.Electronic Access": "Electronic access",
     "columns.HOLDINGS_RECORD.Holdings record id": "Holdings ID",
     "columns.HOLDINGS_RECORD.Version": "Version",
-    "columns.HOLDINGS_RECORD.Hrid": "ホールディングスHRID",
     "columns.HOLDINGS_RECORD.Holdings type": "Holdings type",
     "columns.HOLDINGS_RECORD.Former ids": "Former ids",
     "columns.HOLDINGS_RECORD.Instance": "インスタンス",
@@ -304,5 +301,11 @@
     "columns.HOLDINGS_RECORD.Item barcode": "アイテム - バーコード",
     "list.preview.table.status.true": "アクティブ",
     "list.preview.table.status.false": "インアクティブ",
-    "columns.logs.hrId": "ID"
+    "columns.logs.hrId": "ID",
+    "layer.options.items.true": "Set true",
+    "layer.options.items.false": "Set false",
+    "layer.options.suppressFromDiscovery": "Suppress from discovery",
+    "columns.USER.Created Date": "Record created",
+    "columns.ITEM.Missing Pieces": "Missing pieces",
+    "columns.HOLDINGS_RECORD.HRID": "Holdings HRID"
 }

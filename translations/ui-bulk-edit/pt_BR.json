@@ -215,7 +215,6 @@
     "columns.USER.Preferred contact type id": "ID do tipo de contato preferido",
     "columns.USER.Enrollment date": "Data de inscrição",
     "columns.USER.Expiration date": "Data de validade",
-    "columns.USER.Created cate": "Registro criado",
     "columns.USER.Updated date": "Registro atualizado",
     "columns.USER.Tags": "Etiquetas",
     "columns.USER.Custom fields": "Campos personalizados",
@@ -245,7 +244,6 @@
     "columns.ITEM.Number Of Pieces": "Número de peças",
     "columns.ITEM.Description Of Pieces": "Descrição das peças",
     "columns.ITEM.Number Of Missing Pieces": "Número de peças que faltam",
-    "columns.ITEM.Missing Peaces": "Peças em falta",
     "columns.ITEM.Missing Pieces Date": "Data das peças faltantes",
     "columns.ITEM.Item Damaged Status": "Status de item danificado",
     "columns.ITEM.Item Damaged Status Date": "Data de status do item danificado",
@@ -269,7 +267,6 @@
     "columns.ITEM.Electronic Access": "Acesso eletrônico",
     "columns.HOLDINGS_RECORD.Holdings record id": "ID das coleções",
     "columns.HOLDINGS_RECORD.Version": "Versão",
-    "columns.HOLDINGS_RECORD.Hrid": "HRID de coleções",
     "columns.HOLDINGS_RECORD.Holdings type": "Tipo de coleções",
     "columns.HOLDINGS_RECORD.Former ids": "Ids anteriores",
     "columns.HOLDINGS_RECORD.Instance": "Instância",
@@ -304,5 +301,11 @@
     "columns.HOLDINGS_RECORD.Item barcode": "Código de barras do item",
     "list.preview.table.status.true": "Ativo",
     "list.preview.table.status.false": "Inativo",
-    "columns.logs.hrId": "ID"
+    "columns.logs.hrId": "ID",
+    "layer.options.items.true": "Definido como verdadeiro",
+    "layer.options.items.false": "Definido como falso",
+    "layer.options.suppressFromDiscovery": "Suprimir da descoberta",
+    "columns.USER.Created Date": "Registro criado",
+    "columns.ITEM.Missing Pieces": "Peças em falta",
+    "columns.HOLDINGS_RECORD.HRID": "HRID de coleções"
 }

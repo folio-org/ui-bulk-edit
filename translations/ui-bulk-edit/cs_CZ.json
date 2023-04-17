@@ -215,7 +215,6 @@
     "columns.USER.Preferred contact type id": "ID preferovaného typu kontaktu",
     "columns.USER.Enrollment date": "Datum zápisu",
     "columns.USER.Expiration date": "Datum platnosti",
-    "columns.USER.Created cate": "Záznam vytvořen",
     "columns.USER.Updated date": "Záznam aktualizován",
     "columns.USER.Tags": "Štítky",
     "columns.USER.Custom fields": "Vlastní pole",
@@ -245,7 +244,6 @@
     "columns.ITEM.Number Of Pieces": "Počet kusů",
     "columns.ITEM.Description Of Pieces": "Popis kusů",
     "columns.ITEM.Number Of Missing Pieces": "Počet chybějících kusů",
-    "columns.ITEM.Missing Peaces": "Chybějící kusy",
     "columns.ITEM.Missing Pieces Date": "Datum chybějících kusů",
     "columns.ITEM.Item Damaged Status": "Stav poškozené jednotky",
     "columns.ITEM.Item Damaged Status Date": "Datum poškozeného stavu jednotky",
@@ -269,7 +267,6 @@
     "columns.ITEM.Electronic Access": "Elektronický přístup",
     "columns.HOLDINGS_RECORD.Holdings record id": "ID holdingů",
     "columns.HOLDINGS_RECORD.Version": "Verze",
-    "columns.HOLDINGS_RECORD.Hrid": "HRID holdingů",
     "columns.HOLDINGS_RECORD.Holdings type": "Typ holdingů",
     "columns.HOLDINGS_RECORD.Former ids": "Bývalé ID",
     "columns.HOLDINGS_RECORD.Instance": "Titul",
@@ -304,5 +301,11 @@
     "columns.HOLDINGS_RECORD.Item barcode": "Čárový kód jednotky",
     "list.preview.table.status.true": "Aktivní",
     "list.preview.table.status.false": "Neaktivní",
-    "columns.logs.hrId": "ID"
+    "columns.logs.hrId": "ID",
+    "layer.options.items.true": "Nastavte true",
+    "layer.options.items.false": "Nastavit false",
+    "layer.options.suppressFromDiscovery": "Potlačit z vyhledávání",
+    "columns.USER.Created Date": "Záznam vytvořen",
+    "columns.ITEM.Missing Pieces": "Chybějící kusy",
+    "columns.HOLDINGS_RECORD.HRID": "HRID holdingů"
 }
