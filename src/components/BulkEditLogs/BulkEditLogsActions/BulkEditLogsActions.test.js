@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import '../../../../test/jest/__mock__';
-import { bulkEditLogsData } from '../../../../test/jest/__mock__/fakeData';
+import { bulkEditLogsData } from '../../../../test/jest/data/fakeData';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 import {
   JOB_STATUSES,

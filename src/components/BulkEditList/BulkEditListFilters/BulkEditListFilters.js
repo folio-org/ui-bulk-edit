@@ -28,6 +28,7 @@ import { LogsFilters } from './LogsFilters/LogsFilters';
 import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
 import FilterTabs from './FilterTabs/FilterTabs';
 import Capabilities from './Capabilities/Capabilities';
+import { runQueryDataSource, testQueryDataSource } from '../../../../test/jest/data/queryPlugin/sources';
 
 export const BulkEditListFilters = ({
   filters,
@@ -86,7 +87,7 @@ export const BulkEditListFilters = ({
     [applyFilters],
   );
 
-  const { setVisibleColumns } = useContext(RootContext);
+  const { setVisibleColumns, setQueryResult } = useContext(RootContext);
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
@@ -280,6 +281,9 @@ export const BulkEditListFilters = ({
             componentType="builder"
             type="query-builder"
             disabled={isQueryBuilderDisabled}
+            runQuerySource={runQueryDataSource}
+            testQuerySource={testQueryDataSource}
+            onQueryRun={setQueryResult}
           />
         </>
       )}

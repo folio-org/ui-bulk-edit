@@ -6,6 +6,7 @@ import {
 import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
 import { ProgressBar } from '../../ProgressBar/ProgressBar';
 import PreviewContainer from './PreviewContainer/PreviewContainer';
+import QueryPreviewContainer from './BulkEditQueryResults/BulkEditQueryResults';
 
 const BulkEditListResult = () => {
   return (
@@ -18,6 +19,11 @@ const BulkEditListResult = () => {
       <Route
         path="/bulk-edit/:id/preview"
         component={PreviewContainer}
+        exact
+      />
+      <Route
+        path="/bulk-edit/:id/preview/query"
+        component={QueryPreviewContainer}
         exact
       />
       <Route

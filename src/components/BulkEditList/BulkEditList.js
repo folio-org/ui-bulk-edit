@@ -34,6 +34,7 @@ import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
 import { getDefaultCapabilities } from '../../utils/filters';
 import { useResetAppState } from '../../hooks/useResetAppState';
 import BulkEditInAppLayer from './BulkEditListResult/BulkEditInAppLayer/BulkEditInAppLayer';
+import { BulkEditQueryResults } from './BulkEditListResult/BulkEditQueryResults/BulkEditQueryResults';
 
 export const BulkEditList = () => {
   const history = useHistory();
@@ -51,6 +52,7 @@ export const BulkEditList = () => {
   const [filtersTab, setFiltersTab] = useState({
     logsTab: [],
   });
+  const [queryResult, setQueryResult] = useState(null);
 
   const { isActionMenuShown, ...restPerms } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
@@ -119,6 +121,7 @@ export const BulkEditList = () => {
   };
 
   const isLogsTab = criteria === CRITERIA.LOGS;
+  const isQueryTab = criteria === CRITERIA.QUERY;
   const isActionMenuVisible = visibleColumns?.length && isActionMenuShown && !isLogsTab;
 
   const actionMenu = () => (
@@ -197,6 +200,8 @@ export const BulkEditList = () => {
       visibleColumns,
       setVisibleColumns,
       confirmedFileName,
+      queryResult,
+      setQueryResult,
     }}
     >
       <Paneset>
@@ -215,20 +220,19 @@ export const BulkEditList = () => {
         </Pane>
 
         {/* RESULT PANES */}
-        {
-          isLogsTab && <BulkEditLogs />
-        }
-        {
-          !isLogsTab && (
-            <Pane
-              {...defaultPaneProps}
-              actionMenu={actionMenu}
-              footer={renderNewBulkFooter()}
-            >
-              <BulkEditListResult />
-            </Pane>
-          )
-        }
+        {isLogsTab && <BulkEditLogs />}
+
+        {isQueryTab && <BulkEditQueryResults />}
+
+        {!isLogsTab && !isQueryTab && (
+          <Pane
+            {...defaultPaneProps}
+            actionMenu={actionMenu}
+            footer={renderNewBulkFooter()}
+          >
+            <BulkEditListResult />
+          </Pane>
+        )}
 
         {/* IN_APP APPROACH */}
         <BulkEditInAppLayer

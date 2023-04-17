@@ -7,7 +7,7 @@ import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
-import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
+import { bulkEditLogsData } from '../../../../../test/jest/data/fakeData';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
 import { RootContext } from '../../../../context/RootContext';

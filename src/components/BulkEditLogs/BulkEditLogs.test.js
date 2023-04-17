@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import '../../../test/jest/__mock__';
-import { bulkEditLogsData } from '../../../test/jest/__mock__/fakeData';
+import { bulkEditLogsData } from '../../../test/jest/data/fakeData';
 
 import { LOGS_COLUMNS } from '../../constants';
 import { useBulkEditLogs } from '../../hooks/api';

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
 import '../../../../../../test/jest/__mock__';
-import { errorsPreview } from '../../../../../../test/jest/__mock__/fakeData';
+import { errorsPreview } from '../../../../../../test/jest/data/fakeData';
 
 import ErrorsAccordion from './ErrorsAccordion';
 

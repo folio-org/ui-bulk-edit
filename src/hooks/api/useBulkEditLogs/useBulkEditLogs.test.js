@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-import { bulkEditLogsData } from '../../../../test/jest/__mock__/fakeData';
+import { bulkEditLogsData } from '../../../../test/jest/data/fakeData';
 
 import { FILTERS, JOB_STATUSES } from '../../../constants';
 import { useBulkEditLogs } from './useBulkEditLogs';

@@ -331,5 +331,9 @@
   "permission.app-edit": "Bulk Edit: In app - Edit",
   "permission.app-edit.users": "Bulk edit: In app - Update user records",
   "permission.app-delete": "Bulk Edit: In app - Delete",
-  "permission.logs.view": "Bulk edit - Can view logs"
+  "permission.logs.view": "Bulk edit - Can view logs",
+
+  "accordion.query.title": "Query: {query}",
+  "accordion.query.subtitle": "{count} matching user records found.",
+  "pane.query.show-columns": "Show columns"
 }
