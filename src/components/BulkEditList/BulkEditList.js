@@ -48,6 +48,7 @@ export const BulkEditList = () => {
   const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
+  const [inAppCommitted, setInAppCommitted] = useState(false);
   const [filtersTab, setFiltersTab] = useState({
     logsTab: [],
   });
@@ -106,6 +107,7 @@ export const BulkEditList = () => {
   const handleChangesCommited = () => {
     handlePreviewModalClose();
     handleBulkEditLayerClose();
+    setInAppCommitted(true);
   };
 
   const handleStartBulkEdit = (approach) => {
@@ -172,6 +174,7 @@ export const BulkEditList = () => {
   const renderNewBulkFooter = () => {
     const handleStartNewBulkEdit = () => {
       setVisibleColumns(null);
+      setInAppCommitted(false);
       // redirect to initial state with saved capabilities in search
       history.replace({
         pathname: '/bulk-edit',
@@ -197,6 +200,7 @@ export const BulkEditList = () => {
       visibleColumns,
       setVisibleColumns,
       confirmedFileName,
+      inAppCommitted,
     }}
     >
       <Paneset>

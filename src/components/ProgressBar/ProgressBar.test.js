@@ -9,6 +9,7 @@ import { JOB_STATUSES } from '../../constants';
 import { useBulkOperationDetails } from '../../hooks/api';
 
 import { ProgressBar } from './ProgressBar';
+import { RootContext } from '../../context/RootContext';
 
 jest.mock('../../hooks/api', () => ({
   useBulkOperationDetails: jest.fn(),
@@ -16,10 +17,12 @@ jest.mock('../../hooks/api', () => ({
 
 const history = createMemoryHistory();
 
-const renderProgressBar = () => {
+const renderProgressBar = (inAppCommitted = false) => {
   render(
     <MemoryRouter initialEntries={['/bulk-edit/1/progress?processedFileName=some.scv']}>
-      <ProgressBar />
+      <RootContext.Provider value={{ inAppCommitted }}>
+        <ProgressBar />
+      </RootContext.Provider>
     </MemoryRouter>,
   );
 };
@@ -60,6 +63,14 @@ describe('ProgressBar', () => {
     await runAxeTest({
       rootNode: document.body,
     });
+  });
+
+  it('should render with text after in app committing', async () => {
+    useBulkOperationDetails.mockReturnValue({ bulkDetails: bulkOperation });
+
+    renderProgressBar(true);
+
+    expect(screen.getByText(/progresssBar.processing/)).toBeVisible();
   });
 
   it('should display correct width percentage', async () => {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -12,9 +12,11 @@ import { JOB_STATUSES } from '../../constants';
 import { getBulkOperationStep } from './utils';
 
 import css from './ProgressBar.css';
+import { RootContext } from '../../context/RootContext';
 
 export const ProgressBar = () => {
   const callout = useShowCallout();
+  const { inAppCommitted } = useContext(RootContext);
   const intl = useIntl();
 
   const location = useLocation();
@@ -63,10 +65,15 @@ export const ProgressBar = () => {
           size="small"
         />
         <div className={css.progressBarTitleText}>
-          <FormattedMessage
-            id="ui-bulk-edit.progressBar.title"
-            values={{ title: title || processedTitle }}
-          />
+          {inAppCommitted ?
+            <FormattedMessage
+              id="ui-bulk-edit.progressBar.committing"
+            />
+            :
+            <FormattedMessage
+              id="ui-bulk-edit.progressBar.title"
+              values={{ title: title || processedTitle }}
+            />}
         </div>
       </div>
       <div className={css.progressBarBody}>
@@ -74,7 +81,13 @@ export const ProgressBar = () => {
           <div data-testid="progress-line" style={{ width: `${progressPercentage}%` }} />
         </div>
         <div className={css.progressBarLineStatus}>
-          <span><FormattedMessage id="ui-bulk-edit.progresssBar.retrieving" /></span>
+          <span>
+            {inAppCommitted ?
+              <FormattedMessage id="ui-bulk-edit.progresssBar.processing" />
+              :
+              <FormattedMessage id="ui-bulk-edit.progresssBar.retrieving" />
+            }
+          </span>
           <Loading />
         </div>
       </div>
