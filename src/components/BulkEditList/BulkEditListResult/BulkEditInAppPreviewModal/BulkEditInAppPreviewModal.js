@@ -173,6 +173,8 @@ const BulkEditInAppPreviewModal = ({
             contentData={contentData}
             columnMapping={columnMapping}
             visibleColumns={visibleColumnKeys}
+            height={300}
+            width="100%"
           />
         </>
       ) : <Preloader />}
