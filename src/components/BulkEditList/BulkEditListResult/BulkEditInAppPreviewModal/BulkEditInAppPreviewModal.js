@@ -173,7 +173,7 @@ const BulkEditInAppPreviewModal = ({
             contentData={contentData}
             columnMapping={columnMapping}
             visibleColumns={visibleColumnKeys}
-            height={300}
+            maxHeight={300}
             width="100%"
           />
         </>
