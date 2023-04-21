@@ -174,7 +174,6 @@ const BulkEditInAppPreviewModal = ({
             columnMapping={columnMapping}
             visibleColumns={visibleColumnKeys}
             maxHeight={300}
-            width="100%"
           />
         </>
       ) : <Preloader />}
