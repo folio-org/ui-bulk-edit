@@ -307,5 +307,7 @@
     "layer.options.suppressFromDiscovery": "Potlačit z vyhledávání",
     "columns.USER.Created Date": "Záznam vytvořen",
     "columns.ITEM.Missing Pieces": "Chybějící kusy",
-    "columns.HOLDINGS_RECORD.HRID": "HRID holdingů"
+    "columns.HOLDINGS_RECORD.HRID": "HRID holdingů",
+    "progressBar.committing": "Provádění změn",
+    "progresssBar.processing": "Zpracování"
 }
