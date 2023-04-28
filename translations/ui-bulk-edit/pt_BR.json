@@ -307,5 +307,7 @@
     "layer.options.suppressFromDiscovery": "Suprimir da descoberta",
     "columns.USER.Created Date": "Registro criado",
     "columns.ITEM.Missing Pieces": "Peças em falta",
-    "columns.HOLDINGS_RECORD.HRID": "HRID de coleções"
+    "columns.HOLDINGS_RECORD.HRID": "HRID de coleções",
+    "progressBar.committing": "Confirmando alterações",
+    "progresssBar.processing": "Em processamento"
 }

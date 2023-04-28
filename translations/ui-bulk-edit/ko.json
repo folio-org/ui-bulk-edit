@@ -307,5 +307,7 @@
     "layer.options.suppressFromDiscovery": "Suppress from discovery",
     "columns.USER.Created Date": "Record created",
     "columns.ITEM.Missing Pieces": "Missing pieces",
-    "columns.HOLDINGS_RECORD.HRID": "Holdings HRID"
+    "columns.HOLDINGS_RECORD.HRID": "Holdings HRID",
+    "progressBar.committing": "Committing changes",
+    "progresssBar.processing": "Processing"
 }

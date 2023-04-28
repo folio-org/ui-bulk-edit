@@ -302,10 +302,12 @@
     "list.preview.table.status.true": "激活",
     "list.preview.table.status.false": "未激活",
     "columns.logs.hrId": "ID",
-    "layer.options.items.true": "Set true",
-    "layer.options.items.false": "Set false",
-    "layer.options.suppressFromDiscovery": "Suppress from discovery",
-    "columns.USER.Created Date": "Record created",
-    "columns.ITEM.Missing Pieces": "Missing pieces",
-    "columns.HOLDINGS_RECORD.HRID": "Holdings HRID"
+    "layer.options.items.true": "设置为真",
+    "layer.options.items.false": "设置为假",
+    "layer.options.suppressFromDiscovery": "在发现中隐藏",
+    "columns.USER.Created Date": "记录已创建",
+    "columns.ITEM.Missing Pieces": "遗失件",
+    "columns.HOLDINGS_RECORD.HRID": "馆藏HRID",
+    "progressBar.committing": "提交更改",
+    "progresssBar.processing": "处理中"
 }
