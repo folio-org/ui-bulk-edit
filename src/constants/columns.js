@@ -3,13 +3,6 @@ import React from 'react';
 
 export const LOGS_COLUMNS = [
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.hrId" />,
-    value: 'hrId',
-    disabled: false,
-    selected: false,
-    sortable: true,
-  },
-  {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.entityType" />,
     value: 'entityType',
     disabled: false,
@@ -22,24 +15,10 @@ export const LOGS_COLUMNS = [
     selected: false,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.userId" />,
-    value: 'userId',
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.editing" />,
+    value: 'editing',
     disabled: false,
     selected: false,
-  },
-  {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.startTime" />,
-    value: 'startTime',
-    disabled: false,
-    selected: false,
-    sortable: true,
-  },
-  {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.endTime" />,
-    value: 'endTime',
-    disabled: false,
-    selected: false,
-    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.totalNumOfRecords" />,
@@ -56,10 +35,31 @@ export const LOGS_COLUMNS = [
     sortable: true,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.editing" />,
-    value: 'editing',
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.startTime" />,
+    value: 'startTime',
     disabled: false,
     selected: false,
+    sortable: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.endTime" />,
+    value: 'endTime',
+    disabled: false,
+    selected: false,
+    sortable: true,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.userId" />,
+    value: 'userId',
+    disabled: false,
+    selected: false,
+  },
+  {
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.hrId" />,
+    value: 'hrId',
+    disabled: false,
+    selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.actions" />,
