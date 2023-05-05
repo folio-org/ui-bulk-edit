@@ -16,7 +16,7 @@ import {
   JOB_STATUSES,
   TRANSLATION_SUFFIX,
   EDITING_STEPS,
-  FILTERS,
+  FILTERS, CAPABILITIES,
 } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
 import {
@@ -47,6 +47,8 @@ export const BulkEditListFilters = ({
     hasCsvViewPerms,
     hasInAppUsersEditPerms,
     hasInAppViewPerms,
+    hasViewInAppPerms,
+    hasOnlyViewCsvPerms,
   } = permissions;
   const showCallout = useShowCallout();
   const history = useHistory();
@@ -211,6 +213,45 @@ export const BulkEditListFilters = ({
     }
   }, [location.search]);
 
+
+  const getisDropzoneDisabled = (capabilitie) => {
+    switch (capabilitie) {
+      case CAPABILITIES.USER:
+        if (hasOnlyViewCsvPerms) {
+          return true;
+        } else return isDropZoneDisabledPerm;
+      case CAPABILITIES.ITEM:
+        if (hasViewInAppPerms) {
+          return true;
+        } else return isDropZoneDisabledPerm;
+      case CAPABILITIES.HOLDING:
+        if (hasViewInAppPerms) {
+          return true;
+        } else return isDropZoneDisabledPerm;
+
+      default: return isDropZoneDisabledPerm;
+    }
+  };
+
+  const getIsSelectIdentifiersDisable = (capabilitie) => {
+    switch (capabilitie) {
+      case CAPABILITIES.USER:
+        if (hasOnlyViewCsvPerms) {
+          return true;
+        } else return isSelectIdentifiersDisabled;
+      case CAPABILITIES.ITEM:
+        if (hasViewInAppPerms) {
+          return true;
+        } else return isSelectIdentifiersDisabled;
+      case CAPABILITIES.HOLDING:
+        if (hasViewInAppPerms) {
+          return true;
+        } else return isSelectIdentifiersDisabled;
+
+      default: return isSelectIdentifiersDisabled;
+    }
+  };
+
   const renderCapabilities = () => (
     <Capabilities
       capabilities={capabilities}
@@ -223,7 +264,7 @@ export const BulkEditListFilters = ({
   const renderListSelect = () => (
     <ListSelect
       value={recordIdentifier}
-      disabled={isSelectIdentifiersDisabled}
+      disabled={getIsSelectIdentifiersDisable(capabilities)}
       onChange={handleRecordIdentifierChange}
       capabilities={capabilities}
     />
@@ -235,7 +276,7 @@ export const BulkEditListFilters = ({
       isLoading={isLoading}
       isDropZoneActive={isDropZoneActive}
       handleDrop={handleDrop}
-      isDropZoneDisabled={isDropZoneDisabled || isDropZoneDisabledPerm}
+      isDropZoneDisabled={isDropZoneDisabled || getisDropzoneDisabled(capabilities)}
       recordIdentifier={recordIdentifier}
       handleDragLeave={handleDragLeave}
       handleDragEnter={handleDragEnter}

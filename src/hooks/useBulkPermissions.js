@@ -27,6 +27,8 @@ export const useBulkPermissions = () => {
   // derived pages
   const hasAnyInAppEditPermissions = hasInAppEditPerms || hasInAppUsersEditPerms;
   const hasAnyEditPermissions = hasCsvEditPerms || hasAnyInAppEditPermissions;
+  const hasOnlyViewCsvPerms = hasCsvViewPerms && !hasCsvEditPerms && !hasInAppUsersEditPerms;
+  const hasViewInAppPerms = hasInAppViewPerms && !hasInAppEditPerms && !hasInAppUsersEditPerms;
   const isActionMenuShown = hasCsvEditPerms || hasAnyInAppEditPermissions;
   const isSelectIdentifiersDisabled = !hasAnyEditPermissions;
   const isDropZoneDisabled = !hasAnyEditPermissions;
@@ -61,5 +63,7 @@ export const useBulkPermissions = () => {
     hasHoldingsPerms,
     hasUsersPerms,
     hasUsersViewPerms,
+    hasOnlyViewCsvPerms,
+    hasViewInAppPerms,
   };
 };
