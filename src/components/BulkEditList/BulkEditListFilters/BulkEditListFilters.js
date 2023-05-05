@@ -221,9 +221,6 @@ export const BulkEditListFilters = ({
           return true;
         } else return isDropZoneDisabledPerm;
       case CAPABILITIES.ITEM:
-        if (hasViewInAppPerms) {
-          return true;
-        } else return isDropZoneDisabledPerm;
       case CAPABILITIES.HOLDING:
         if (hasViewInAppPerms) {
           return true;
@@ -240,9 +237,6 @@ export const BulkEditListFilters = ({
           return true;
         } else return isSelectIdentifiersDisabled;
       case CAPABILITIES.ITEM:
-        if (hasViewInAppPerms) {
-          return true;
-        } else return isSelectIdentifiersDisabled;
       case CAPABILITIES.HOLDING:
         if (hasViewInAppPerms) {
           return true;
