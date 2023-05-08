@@ -1,4 +1,9 @@
-import React, { useContext, useState, useEffect, useMemo, useCallback } from 'react';
+import React,
+{ useContext,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -16,7 +21,7 @@ import {
   JOB_STATUSES,
   TRANSLATION_SUFFIX,
   EDITING_STEPS,
-  FILTERS, CAPABILITIES,
+  FILTERS,
 } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
 import {
@@ -28,6 +33,7 @@ import { LogsFilters } from './LogsFilters/LogsFilters';
 import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
 import FilterTabs from './FilterTabs/FilterTabs';
 import Capabilities from './Capabilities/Capabilities';
+import { getIsDisabledByPerm } from './utils/getIsDisabledByPerm';
 
 export const BulkEditListFilters = ({
   filters,
@@ -213,39 +219,6 @@ export const BulkEditListFilters = ({
     }
   }, [location.search]);
 
-
-  const getisDropzoneDisabled = (capabilitie) => {
-    switch (capabilitie) {
-      case CAPABILITIES.USER:
-        if (hasOnlyViewCsvPerms) {
-          return true;
-        } else return isDropZoneDisabledPerm;
-      case CAPABILITIES.ITEM:
-      case CAPABILITIES.HOLDING:
-        if (hasViewInAppPerms) {
-          return true;
-        } else return isDropZoneDisabledPerm;
-
-      default: return isDropZoneDisabledPerm;
-    }
-  };
-
-  const getIsSelectIdentifiersDisable = (capabilitie) => {
-    switch (capabilitie) {
-      case CAPABILITIES.USER:
-        if (hasOnlyViewCsvPerms) {
-          return true;
-        } else return isSelectIdentifiersDisabled;
-      case CAPABILITIES.ITEM:
-      case CAPABILITIES.HOLDING:
-        if (hasViewInAppPerms) {
-          return true;
-        } else return isSelectIdentifiersDisabled;
-
-      default: return isSelectIdentifiersDisabled;
-    }
-  };
-
   const renderCapabilities = () => (
     <Capabilities
       capabilities={capabilities}
@@ -258,7 +231,7 @@ export const BulkEditListFilters = ({
   const renderListSelect = () => (
     <ListSelect
       value={recordIdentifier}
-      disabled={getIsSelectIdentifiersDisable(capabilities)}
+      disabled={getIsDisabledByPerm(capabilities, isSelectIdentifiersDisabled, hasOnlyViewCsvPerms, hasViewInAppPerms)}
       onChange={handleRecordIdentifierChange}
       capabilities={capabilities}
     />
@@ -270,7 +243,9 @@ export const BulkEditListFilters = ({
       isLoading={isLoading}
       isDropZoneActive={isDropZoneActive}
       handleDrop={handleDrop}
-      isDropZoneDisabled={isDropZoneDisabled || getisDropzoneDisabled(capabilities)}
+      isDropZoneDisabled={isDropZoneDisabled
+          ||
+          getIsDisabledByPerm(capabilities, isDropZoneDisabledPerm, hasOnlyViewCsvPerms, hasViewInAppPerms)}
       recordIdentifier={recordIdentifier}
       handleDragLeave={handleDragLeave}
       handleDragEnter={handleDragEnter}
