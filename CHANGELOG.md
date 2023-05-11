@@ -12,7 +12,7 @@
 * [UIBULKED-269](https://issues.folio.org/browse/UIBULKED-269) Modify text when updates are committed
 * [UIBULKED-279](https://issues.folio.org/browse/UIBULKED-279) Reorder columns on Logs page to be consistent with other apps
 * [UIBULKED-273](https://issues.folio.org/browse/UIBULKED-273) User is able to bulk edit Users records with CSV view + In app Edit permissions
-
+* [UIBULKED-291](https://issues.folio.org/browse/UIBULKED-291) "Preview of record changed" and filename disappear after resetting filters on "Logs" tab
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 

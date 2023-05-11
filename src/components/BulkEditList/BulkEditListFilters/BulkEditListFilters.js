@@ -63,6 +63,8 @@ export const BulkEditListFilters = ({
   const search = new URLSearchParams(location.search);
   const criteria = search.get('criteria');
   const initialCapabilities = search.get('capabilities');
+  const initialFileName = search.get('fileName');
+  const initialStep = search.get('step');
   const logFilters = Object.values(FILTERS).map((el) => search.getAll(el));
 
   const isQuery = criteria === CRITERIA.QUERY;
@@ -79,6 +81,8 @@ export const BulkEditListFilters = ({
   const initialFilter = {
     capabilities: initialCapabilities,
     criteria: CRITERIA.LOGS,
+    fileName: initialFileName,
+    step: initialStep,
   };
 
   const [
