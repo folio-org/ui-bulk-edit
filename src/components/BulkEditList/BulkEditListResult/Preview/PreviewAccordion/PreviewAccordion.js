@@ -29,6 +29,7 @@ const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitia
             contentData={contentData}
             columnMapping={columnMapping}
             visibleColumns={visibleColumnKeys}
+            maxHeight={window.innerHeight * 0.4}
           />
         </Col>
       </Row>

@@ -68,6 +68,7 @@ const ErrorsAccordion = ({
               columnMapping={columnMapping}
               formatter={resultsFormatter}
               visibleColumns={visibleColumns}
+              maxHeight={window.innerHeight * 0.4}
             />
           </Col>
         </Row>
