@@ -36,10 +36,12 @@ export const useLocationFilters = ({
       const search = new URLSearchParams(location.search);
       const criteria = search.get('criteria');
       const capabilities = search.get('capabilities');
+      const fileName = search.get('fileName');
+      const step = search.get('step');
 
       history.replace({
         pathname: '',
-        search: `${buildSearch({ ...newFilters, capabilities, criteria }, location.search)}`,
+        search: `${buildSearch({ ...newFilters, capabilities, criteria, fileName, step }, location.search)}`,
       });
 
       return newFilters;
@@ -53,7 +55,12 @@ export const useLocationFilters = ({
 
       history.push({
         pathname: '',
-        search: buildSearch({ capabilities: initialFilter.capabilities, criteria: initialFilter.criteria }),
+        search: buildSearch({
+          capabilities: initialFilter.capabilities,
+          criteria: initialFilter.criteria,
+          step: initialFilter.step,
+          fileName: initialFilter.fileName,
+        }),
       });
     },
     [history, resetFilters],
