@@ -31,6 +31,7 @@ const ErrorsAccordion = ({
   const location = useLocation();
   const fileName = new URLSearchParams(location.search).get('fileName');
   const errorLength = errors.length;
+  const maxHeight = window.innerHeight * 0.4;
 
   const headLineTranslateKey = isInitial ? 'info' : 'infoProcessed';
   const headLine = (
@@ -68,7 +69,7 @@ const ErrorsAccordion = ({
               columnMapping={columnMapping}
               formatter={resultsFormatter}
               visibleColumns={visibleColumns}
-              maxHeight={window.innerHeight * 0.4}
+              maxHeight={maxHeight}
             />
           </Col>
         </Row>
