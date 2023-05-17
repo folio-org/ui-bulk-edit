@@ -11,6 +11,7 @@ import {
 
 const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitial }) => {
   const translationKey = isInitial ? 'title' : 'titleChanged';
+  const maxHeight = window.innerHeight * 0.4;
 
   const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
 
@@ -29,6 +30,7 @@ const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitia
             contentData={contentData}
             columnMapping={columnMapping}
             visibleColumns={visibleColumnKeys}
+            maxHeight={maxHeight}
           />
         </Col>
       </Row>
