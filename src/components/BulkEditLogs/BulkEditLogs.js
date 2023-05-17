@@ -6,7 +6,6 @@ import noop from 'lodash/noop';
 import { AppIcon } from '@folio/stripes/core';
 import { MultiColumnList } from '@folio/stripes/components';
 import {
-  RESULT_COUNT_INCREMENT,
   ResultsPane,
   NoResultsMessage,
   PrevNextPagination,
@@ -14,7 +13,7 @@ import {
   usePagination,
 } from '@folio/stripes-acq-components';
 
-import { LOGS_COLUMNS } from '../../constants';
+import { LOGS_COLUMNS, LOGS_PAGINATION_CONFIG } from '../../constants';
 import { getLogsResultsFormatter } from '../../utils/formatters';
 import { useLogsQueryParams } from '../../hooks';
 import { useBulkEditLogs } from '../../hooks/api';
@@ -46,7 +45,7 @@ const BulkEditLogs = () => {
   const {
     pagination,
     changePage,
-  } = usePagination({ limit: RESULT_COUNT_INCREMENT, offset: 0 });
+  } = usePagination(LOGS_PAGINATION_CONFIG);
 
   const {
     logs,
