@@ -11,13 +11,11 @@ import {
   PrevNextPagination,
   usePagination,
   useLocationSorting,
-} from '@folio/stripes-acq-components';
-
-import {
   DESC_DIRECTION,
   SORTING_DIRECTION_PARAMETER,
   SORTING_PARAMETER,
-} from '@folio/stripes-acq-components/lib/AcqList/constants';
+} from '@folio/stripes-acq-components';
+
 import { LOGS_COLUMNS, LOGS_PAGINATION_CONFIG } from '../../constants';
 import { getLogsResultsFormatter } from '../../utils/formatters';
 import { useLogsQueryParams } from '../../hooks';
