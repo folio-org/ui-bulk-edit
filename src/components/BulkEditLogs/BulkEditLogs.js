@@ -11,6 +11,7 @@ import {
   NoResultsMessage,
   PrevNextPagination,
   usePagination,
+  useLocationSorting,
 } from '@folio/stripes-acq-components';
 
 import {
@@ -20,7 +21,7 @@ import {
 } from '@folio/stripes-acq-components/lib/AcqList/constants';
 import { LOGS_COLUMNS } from '../../constants';
 import { getLogsResultsFormatter } from '../../utils/formatters';
-import { useLocationSorting, useLogsQueryParams } from '../../hooks';
+import { useLogsQueryParams } from '../../hooks';
 import { useBulkEditLogs } from '../../hooks/api';
 
 const resetData = () => {};
@@ -46,7 +47,7 @@ const BulkEditLogs = () => {
     sortingField,
     sortingDirection,
     changeSorting,
-  ] = useLocationSorting(location, history, resetData, sortableFields, DEFAULT_SORTING);
+  ] = useLocationSorting(location, history, resetData, sortableFields, DEFAULT_SORTING, [location.search, resetData]);
 
   const {
     pagination,
