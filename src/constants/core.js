@@ -91,3 +91,8 @@ export const MANUAL_UPLOAD_STEPS = {
   UPLOAD: 'UPLOAD',
   CONFIRM: 'CONFIRM',
 };
+
+export const LOGS_PAGINATION_CONFIG = {
+  limit: 100,
+  offset: 0,
+};
