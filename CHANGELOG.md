@@ -15,6 +15,8 @@
 * [UIBULKED-291](https://issues.folio.org/browse/UIBULKED-291) "Preview of record changed" and filename disappear after resetting filters on "Logs" tab
 * [UIBULKED-294](https://issues.folio.org/browse/UIBULKED-294) Log tab paginates by 50 records instead of 100
 * [UIBULKED-295](https://issues.folio.org/browse/UIBULKED-295) Make column names sticky for preview and confirmation screens
+* [UIBULKED-292](https://issues.folio.org/browse/UIBULKED-292) Arrow icons in "ID", "# of records" and "Processed" columns remain visible after resetting filters
+* [UIBULKED-293](https://issues.folio.org/browse/UIBULKED-293) Default sorting order on Logs tab
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 

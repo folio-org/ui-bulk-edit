@@ -9,8 +9,11 @@ import {
   ResultsPane,
   NoResultsMessage,
   PrevNextPagination,
-  useLocationSorting,
   usePagination,
+  useLocationSorting,
+  DESC_DIRECTION,
+  SORTING_DIRECTION_PARAMETER,
+  SORTING_PARAMETER,
 } from '@folio/stripes-acq-components';
 
 import { LOGS_COLUMNS, LOGS_PAGINATION_CONFIG } from '../../constants';
@@ -33,6 +36,7 @@ const sortableFields = LOGS_COLUMNS
 const BulkEditLogs = () => {
   const location = useLocation();
   const history = useHistory();
+  const DEFAULT_SORTING = { [SORTING_PARAMETER]: 'endTime', [SORTING_DIRECTION_PARAMETER]: DESC_DIRECTION };
 
   const { logsQueryParams } = useLogsQueryParams({ search: location.search });
 
@@ -40,7 +44,7 @@ const BulkEditLogs = () => {
     sortingField,
     sortingDirection,
     changeSorting,
-  ] = useLocationSorting(location, history, resetData, sortableFields);
+  ] = useLocationSorting(location, history, resetData, sortableFields, DEFAULT_SORTING, [location.search, resetData]);
 
   const {
     pagination,
