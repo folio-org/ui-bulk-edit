@@ -18,7 +18,7 @@ import { getFullName } from '../../../utils/getFullName';
 const buildLogsQuery = makeQueryBuilder(
   'cql.allRecords=1',
   noop,
-  'sortby startTime/sort.descending',
+  'sortby endTime/sort.descending',
 );
 
 export const useBulkEditLogs = ({ filters = {}, pagination }) => {
