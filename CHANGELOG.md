@@ -17,6 +17,7 @@
 * [UIBULKED-295](https://issues.folio.org/browse/UIBULKED-295) Make column names sticky for preview and confirmation screens
 * [UIBULKED-292](https://issues.folio.org/browse/UIBULKED-292) Arrow icons in "ID", "# of records" and "Processed" columns remain visible after resetting filters
 * [UIBULKED-293](https://issues.folio.org/browse/UIBULKED-293) Default sorting order on Logs tab
+* [UIBULKED-287](https://issues.folio.org/browse/UIBULKED-287) "Something went wrong" error occurred clicking "Bulk edit" icon from the bulk edit In app form
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 
