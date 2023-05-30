@@ -26,6 +26,8 @@ export const BulkEditInApp = ({
     [CAPABILITIES.HOLDING]: getHoldingsOptions(intl.formatMessage),
   };
 
+  const options = optionsMap[capabilities];
+
   return (
     <>
       <Headline size="large" margin="medium">
@@ -35,10 +37,12 @@ export const BulkEditInApp = ({
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
       >
         <BulkEditInAppTitle />
-        <ContentUpdatesForm
-          options={optionsMap[capabilities]}
-          onContentUpdatesChanged={onContentUpdatesChanged}
-        />
+        {options && (
+          <ContentUpdatesForm
+            options={options}
+            onContentUpdatesChanged={onContentUpdatesChanged}
+          />
+        )}
       </Accordion>
     </>
   );
