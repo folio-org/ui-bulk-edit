@@ -31,7 +31,7 @@ export const useUpload = () => {
       }).json();
     },
     retry: (_, error) => {
-      if (error.name === 'AbortError') return false;
+      if (error.name === 'AbortError') return 0;
 
       return 10;
     },
