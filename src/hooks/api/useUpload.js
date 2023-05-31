@@ -4,31 +4,39 @@ import { useMutation } from 'react-query';
 export const useUpload = () => {
   const ky = useOkapiKy();
 
-  const { mutateAsync: fileUpload, isLoading } = useMutation({ mutationFn: ({
-    fileToUpload,
-    operationId,
-    entityType,
-    identifierType,
-    manual = false,
-  }) => {
-    const formData = new FormData();
-
-    formData.append('file', fileToUpload);
-
-    const searchParams = new URLSearchParams({
+  const { mutateAsync: fileUpload, isLoading } = useMutation({
+    mutationFn: ({
+      manual = false,
+      fileToUpload,
+      operationId,
       entityType,
       identifierType,
-      manual: String(manual),
-      ...(operationId ? { operationId } : {}),
-    }).toString();
+      signal,
+    }) => {
+      const formData = new FormData();
 
-    return ky.post(`bulk-operations/upload?${searchParams}`, {
-      body: formData,
-      timeout: false,
-    }).json();
-  },
-  retry: 10,
-  retryDelay: 2000 });
+      formData.append('file', fileToUpload);
+
+      const searchParams = new URLSearchParams({
+        entityType,
+        identifierType,
+        manual: String(manual),
+        ...(operationId ? { operationId } : {}),
+      }).toString();
+
+      return ky.post(`bulk-operations/upload?${searchParams}`, {
+        body: formData,
+        timeout: false,
+        ...(signal ? { signal } : {}),
+      }).json();
+    },
+    retry: (_, error) => {
+      if (error.name === 'AbortError') return false;
+
+      return 10;
+    },
+    retryDelay: 2000,
+  });
 
   return {
     fileUpload,
