@@ -207,7 +207,7 @@ export const BulkEditList = () => {
       <Paneset>
         {/* FILTERS PANE */}
         <Pane
-          defaultWidth="20%"
+          defaultWidth="300px"
           paneTitle={<FormattedMessage id="ui-bulk-edit.list.criteriaTitle" />}
         >
           <BulkEditListFilters
