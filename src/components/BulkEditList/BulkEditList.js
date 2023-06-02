@@ -87,6 +87,7 @@ export const BulkEditList = () => {
     setNewBulkFooterShown,
     setVisibleColumns,
     filtersTab,
+    setIsBulkEditLayerOpen,
   });
 
   const handleBulkEditLayerOpen = () => {
