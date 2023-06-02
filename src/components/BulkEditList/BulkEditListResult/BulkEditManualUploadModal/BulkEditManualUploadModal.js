@@ -37,12 +37,13 @@ const BulkEditManualUploadModal = ({
   const callout = useShowCallout();
   const controller = useRef(null);
 
-  const { fileUpload, isLoading } = useUpload();
+  const { fileUpload } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
 
   const [fileName, setFileName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(MANUAL_UPLOAD_STEPS.UPLOAD);
   const isDefaultStep = currentStep === MANUAL_UPLOAD_STEPS.UPLOAD;
 
@@ -113,6 +114,7 @@ const BulkEditManualUploadModal = ({
 
   const uploadFileFlow = async (fileToUpload) => {
     controller.current = new AbortController();
+    setIsLoading(true);
 
     try {
       await fileUpload({
@@ -131,8 +133,10 @@ const BulkEditManualUploadModal = ({
       });
 
       setFileName(fileToUpload.name);
+      setIsLoading(false);
       setCountOfRecords(matchedNumOfRecords);
     } catch (error) {
+      setIsLoading(false);
       if (error.name !== 'AbortError') {
         swwCallout(uploadErrorMessage);
       }
