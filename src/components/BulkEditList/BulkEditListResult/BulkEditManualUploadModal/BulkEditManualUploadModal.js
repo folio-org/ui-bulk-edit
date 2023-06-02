@@ -123,6 +123,7 @@ const BulkEditManualUploadModal = ({
         entityType: CAPABILITIES.USER,
         identifierType: identifier || IDENTIFIERS.ID,
         manual: true,
+        signal: controller.current.signal,
       });
 
       const { matchedNumOfRecords } = await bulkOperationStart({

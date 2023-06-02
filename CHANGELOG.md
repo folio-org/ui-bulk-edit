@@ -6,7 +6,7 @@
 * [UIBULKED-252](https://issues.folio.org/browse/UIBULKED-252) Selected filters are not reset on "Logs" tab
 * [UIBULKED-267](https://issues.folio.org/browse/UIBULKED-267) User's names in "Run by" column of Bulk edit logs.
 * [UIBULKED-277](https://issues.folio.org/browse/UIBULKED-277) Birth date column shows time.
-* [UIBULKED-223](https://issues.folio.org/browse/UIBULKED-223) [FE] [TS] Add types for all backend entities
+* [UIBULKED-223](https://issues.folio.org/browse/UIBULKED-223) Add types for all backend entities
 * [UIBULKED-244](https://issues.folio.org/browse/UIBULKED-244) Add Suppress from discovery option
 * [UIBULKED-283](https://issues.folio.org/browse/UIBULKED-283) Make column names sticky
 * [UIBULKED-269](https://issues.folio.org/browse/UIBULKED-269) Modify text when updates are committed
@@ -17,6 +17,7 @@
 * [UIBULKED-295](https://issues.folio.org/browse/UIBULKED-295) Make column names sticky for preview and confirmation screens
 * [UIBULKED-292](https://issues.folio.org/browse/UIBULKED-292) Arrow icons in "ID", "# of records" and "Processed" columns remain visible after resetting filters
 * [UIBULKED-293](https://issues.folio.org/browse/UIBULKED-293) Default sorting order on Logs tab
+* [UIBULKED-308](https://issues.folio.org/browse/UIBULKED-308) CSV: Cancel button doesn't stop file uploading
 * [UIBULKED-306](https://issues.folio.org/browse/UIBULKED-306) "Next" button remains disabled for a while after uploading modified file for Bulk edit (CSV approach)
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)

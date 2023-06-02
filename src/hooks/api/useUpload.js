@@ -5,11 +5,12 @@ export const useUpload = () => {
   const ky = useOkapiKy();
 
   const { mutateAsync: fileUpload, isLoading } = useMutation({ mutationFn: ({
+    manual = false,
     fileToUpload,
     operationId,
     entityType,
     identifierType,
-    manual = false,
+    signal,
   }) => {
     const formData = new FormData();
 
@@ -25,9 +26,14 @@ export const useUpload = () => {
     return ky.post(`bulk-operations/upload?${searchParams}`, {
       body: formData,
       timeout: false,
+      ...(signal ? { signal } : {}),
     }).json();
   },
-  retry: 10,
+  retry: (_, error) => {
+    if (error.name === 'AbortError') return 0;
+
+    return 10;
+  },
   retryDelay: 2000 });
 
   return {
