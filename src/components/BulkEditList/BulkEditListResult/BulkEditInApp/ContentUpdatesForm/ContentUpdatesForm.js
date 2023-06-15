@@ -11,23 +11,32 @@ import {
   RepeatableField,
 } from '@folio/stripes/components';
 
-import { ACTIONS, getBaseActions } from '../../../../../constants';
+import { useLocation } from 'react-router-dom';
+import { ACTIONS, CAPABILITIES, OPTIONS } from '../../../../../constants';
 import css from '../BulkEditInApp.css';
 import { ActionsRow } from './ActionsRow';
-import { ACTION_VALUE_KEY, FIELD_VALUE_KEY, FIELDS_TYPES, getDefaultActions, isAddButtonShown } from './helpers';
+import {
+  ACTION_VALUE_KEY,
+  FIELD_VALUE_KEY,
+  FIELDS_TYPES,
+  WITH_ITEMS_VALUE_KEY,
+  getDefaultActions,
+  isAddButtonShown,
+} from './helpers';
 
 export const ContentUpdatesForm = ({
   onContentUpdatesChanged,
   options,
 }) => {
   const { formatMessage } = useIntl();
+  const location = useLocation();
+  const search = new URLSearchParams(location.search);
+  const capability = search.get('capabilities');
 
   const defaultOptionValue = options[0].value;
-  const actions = getBaseActions(formatMessage);
 
   const fieldTemplate = {
     options,
-    actionsList: actions,
     option: defaultOptionValue,
     actionsDetails: getDefaultActions(defaultOptionValue, formatMessage),
   };
@@ -69,7 +78,7 @@ export const ContentUpdatesForm = ({
   };
 
   const handleChange = ({ rowIndex, actionIndex, value, fieldName }) => {
-    setFields(prevFields => prevFields.map((field, i) => {
+    const formattedFields = fieldsArr => fieldsArr.map((field, i) => {
       if (i === rowIndex) {
         return {
           ...field,
@@ -93,7 +102,9 @@ export const ContentUpdatesForm = ({
       }
 
       return field;
-    }));
+    });
+
+    setFields(prevFields => formattedFields(prevFields));
   };
 
   const handleRemove = (index) => {
@@ -132,6 +143,23 @@ export const ContentUpdatesForm = ({
   };
 
   useEffect(() => {
+    const getActionType = (action, option) => {
+      const actionName = action?.name;
+      const isSuppressHolding = capability === CAPABILITIES.HOLDING && option === OPTIONS.SUPPRESS_FROM_DISCOVERY;
+      const isSetTrue = actionName === ACTIONS.SET_TO_TRUE;
+      const isSetToFalse = actionName === ACTIONS.SET_TO_FALSE;
+
+      if (isSuppressHolding && isSetTrue && action?.[WITH_ITEMS_VALUE_KEY]) {
+        return ACTIONS.SET_TO_TRUE_INCLUDING_ITEMS;
+      }
+
+      if (isSuppressHolding && isSetToFalse && action?.[WITH_ITEMS_VALUE_KEY]) {
+        return ACTIONS.SET_TO_FALSE_INCLUDING_ITEMS;
+      }
+
+      return actionName ?? null;
+    };
+
     const mappedContentUpdates = fields.map(
       // eslint-disable-next-line no-shadow
       ({ option, actionsDetails: { actions } }) => {
@@ -140,7 +168,7 @@ export const ContentUpdatesForm = ({
         // generate action type key with '_' delimiter
         const typeKey = actions
           .filter(Boolean)
-          .map(action => action?.name ?? null).join('_');
+          .map(action => getActionType(action, option) ?? null).join('_');
 
         const type = ACTIONS[typeKey];
 

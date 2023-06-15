@@ -12,6 +12,7 @@ export const useResetAppState = ({
   setNewBulkFooterShown,
   filtersTab,
   setIsBulkEditLayerOpen,
+  setInAppCommitted,
 }) => {
   const history = useHistory();
   const queryClient = useQueryClient();
@@ -52,8 +53,8 @@ export const useResetAppState = ({
       });
 
       setNewBulkFooterShown(false);
-
       setIsBulkEditLayerOpen(false);
+      setInAppCommitted(false);
     }
   }, [history.location]);
 };

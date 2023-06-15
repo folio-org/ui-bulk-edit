@@ -5,7 +5,20 @@ export const ACTIONS = {
   FIND_AND_REMOVE_THESE: 'FIND_AND_REMOVE_THESE',
   REPLACE_WITH: 'REPLACE_WITH',
   FIND_REPLACE_WITH: 'FIND_AND_REPLACE',
+  SET_TO_TRUE: 'SET_TO_TRUE',
+  SET_TO_FALSE: 'SET_TO_FALSE',
+  SET_TO_TRUE_INCLUDING_ITEMS: 'SET_TO_TRUE_INCLUDING_ITEMS',
+  SET_TO_FALSE_INCLUDING_ITEMS: 'SET_TO_FALSE_INCLUDING_ITEMS',
 };
+
+// FINAL_ACTIONS - final actions in scope of row. Not possible select anything after choosing it in row.
+export const FINAL_ACTIONS = [
+  ACTIONS.CLEAR_FIELD,
+  ACTIONS.SET_TO_TRUE,
+  ACTIONS.SET_TO_FALSE,
+  ACTIONS.SET_TO_TRUE_INCLUDING_ITEMS,
+  ACTIONS.SET_TO_FALSE_INCLUDING_ITEMS,
+];
 
 export const getPlaceholder = (formatMessage) => ({
   value: '',
@@ -28,6 +41,18 @@ export const getReplaceAction = (formatMessage) => ({
 export const getClearAction = (formatMessage) => ({
   value: ACTIONS.CLEAR_FIELD,
   label: formatMessage({ id: 'ui-bulk-edit.layer.action.clear' }),
+  disabled: false,
+});
+
+export const getSetToTrueAction = (formatMessage) => ({
+  value: ACTIONS.SET_TO_TRUE,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.true' }),
+  disabled: false,
+});
+
+export const getSetToFalseAction = (formatMessage) => ({
+  value: ACTIONS.SET_TO_FALSE,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.false' }),
   disabled: false,
 });
 
