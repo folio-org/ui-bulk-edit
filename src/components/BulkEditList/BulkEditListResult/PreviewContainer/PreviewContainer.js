@@ -5,10 +5,11 @@ import { useLocation, useParams } from 'react-router';
 import { Loading } from '@folio/stripes/components';
 
 import { useBulkOperationDetails } from '../../../../hooks/api';
-import { EDITING_STEPS } from '../../../../constants';
+import { CRITERIA, EDITING_STEPS } from '../../../../constants';
 import { Preview } from '../Preview/Preview';
 
 import css from '../../../BulkEdit.css';
+import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
 
 const PreviewContainer = () => {
   const intl = useIntl();
@@ -19,6 +20,7 @@ const PreviewContainer = () => {
   const fileUploadedName = search.get('fileName');
   const capabilities = search.get('capabilities')?.toLocaleLowerCase();
   const queryText = search.get('queryText');
+  const criteria = search.get('criteria');
 
   const { id } = useParams();
   const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
@@ -31,19 +33,24 @@ const PreviewContainer = () => {
 
   const isInitial = step === EDITING_STEPS.UPLOAD;
 
-  return isLoading ? (
-    <div className={css.LoaderContainer}>
-      <Loading />
-    </div>
-  ) : (
-    <Preview
-      title={title}
-      id={id}
-      capabilities={capabilities}
-      bulkDetails={bulkDetails}
-      isInitial={isInitial}
-    />
-  );
+  switch (criteria) {
+    case CRITERIA.IDENTIFIER:
+      return isLoading ? (
+        <div className={css.LoaderContainer}>
+          <Loading />
+        </div>
+      ) : (
+        <Preview
+          title={title}
+          id={id}
+          capabilities={capabilities}
+          bulkDetails={bulkDetails}
+          isInitial={isInitial}
+        />
+      );
+    default:
+      return <NoResultsMessage />;
+  }
 };
 
 export default PreviewContainer;
