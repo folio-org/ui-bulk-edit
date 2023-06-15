@@ -33,24 +33,21 @@ const PreviewContainer = () => {
 
   const isInitial = step === EDITING_STEPS.UPLOAD;
 
-  switch (criteria) {
-    case CRITERIA.IDENTIFIER:
-      return isLoading ? (
-        <div className={css.LoaderContainer}>
-          <Loading />
-        </div>
-      ) : (
-        <Preview
-          title={title}
-          id={id}
-          capabilities={capabilities}
-          bulkDetails={bulkDetails}
-          isInitial={isInitial}
-        />
-      );
-    default:
-      return <NoResultsMessage />;
-  }
+  if (criteria === CRITERIA.IDENTIFIER) {
+    return isLoading ? (
+      <div className={css.LoaderContainer}>
+        <Loading />
+      </div>
+    ) : (
+      <Preview
+        title={title}
+        id={id}
+        capabilities={capabilities}
+        bulkDetails={bulkDetails}
+        isInitial={isInitial}
+      />
+    );
+  } else return <NoResultsMessage />;
 };
 
 export default PreviewContainer;
