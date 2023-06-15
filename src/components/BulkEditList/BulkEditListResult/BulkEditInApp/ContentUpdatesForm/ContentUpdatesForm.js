@@ -78,7 +78,7 @@ export const ContentUpdatesForm = ({
   };
 
   const handleChange = ({ rowIndex, actionIndex, value, fieldName }) => {
-    const formattedFields = fieldsArr => fieldsArr.map((field, i) => {
+    setFields(fieldsArr => fieldsArr.map((field, i) => {
       if (i === rowIndex) {
         return {
           ...field,
@@ -102,9 +102,7 @@ export const ContentUpdatesForm = ({
       }
 
       return field;
-    });
-
-    setFields(prevFields => formattedFields(prevFields));
+    }));
   };
 
   const handleRemove = (index) => {

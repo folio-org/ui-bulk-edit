@@ -14,19 +14,21 @@ export const AdditionalActions = ({ action, actionIndex, onChange }) => {
 
   const renderSuppressCheckbox = () => {
     return capability === CAPABILITIES.HOLDING && action.type === CONTROL_TYPES.SUPPRESS_CHECKBOX && (
-      <Checkbox
-        label={formatMessage({ id: 'ui-bulk-edit.layer.action.applyItems' })}
-        value={action.value}
-        onChange={e => onChange({ actionIndex, value: e.target.checked, fieldName: WITH_ITEMS_VALUE_KEY })}
-      />
+      <Col xs={2} sm={2}>
+        <Checkbox
+          label={formatMessage({ id: 'ui-bulk-edit.layer.action.applyItems' })}
+          value={action.value}
+          onChange={e => onChange({ actionIndex, value: e.target.checked, fieldName: WITH_ITEMS_VALUE_KEY })}
+        />
+      </Col>
     );
   };
 
 
   return (
-    <Col xs={2} sm={2}>
+    <>
       {renderSuppressCheckbox()}
-    </Col>
+    </>
   );
 };
 
