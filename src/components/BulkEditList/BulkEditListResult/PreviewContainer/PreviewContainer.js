@@ -35,12 +35,14 @@ const PreviewContainer = () => {
 
   if (criteria !== CRITERIA.IDENTIFIER) {
     return <NoResultsMessage />;
-  } else {
-    return isLoading ? (
+  } else if (isLoading) {
+    return (
       <div className={css.LoaderContainer}>
         <Loading />
       </div>
-    ) : (
+    );
+  } else {
+    return (
       <Preview
         title={title}
         id={id}
