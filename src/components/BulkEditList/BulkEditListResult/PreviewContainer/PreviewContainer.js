@@ -33,7 +33,9 @@ const PreviewContainer = () => {
 
   const isInitial = step === EDITING_STEPS.UPLOAD;
 
-  if (criteria === CRITERIA.IDENTIFIER) {
+  if (criteria !== CRITERIA.IDENTIFIER) {
+    return <NoResultsMessage />;
+  } else {
     return isLoading ? (
       <div className={css.LoaderContainer}>
         <Loading />
@@ -47,7 +49,7 @@ const PreviewContainer = () => {
         isInitial={isInitial}
       />
     );
-  } else return <NoResultsMessage />;
+  }
 };
 
 export default PreviewContainer;
