@@ -25,11 +25,7 @@ export const AdditionalActions = ({ action, actionIndex, onChange }) => {
   };
 
 
-  return (
-    <>
-      {renderSuppressCheckbox()}
-    </>
-  );
+  return renderSuppressCheckbox();
 };
 
 AdditionalActions.propTypes = {
