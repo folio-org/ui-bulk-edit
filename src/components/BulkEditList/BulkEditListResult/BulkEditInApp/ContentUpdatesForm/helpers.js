@@ -2,15 +2,15 @@ import moment from 'moment/moment';
 import {
   CONTROL_TYPES,
   OPTIONS,
-  ACTIONS,
   BASE_DATE_FORMAT,
   getReplaceAction,
   getFindAction,
-  getBaseActions,
+  getBaseActions, getSetToTrueAction, getSetToFalseAction, getPlaceholder, FINAL_ACTIONS,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
 export const FIELD_VALUE_KEY = 'value';
+export const WITH_ITEMS_VALUE_KEY = 'withItems';
 
 export const FIELDS_TYPES = {
   ACTION: 'actions',
@@ -71,9 +71,13 @@ export const getDefaultActions = (option, formatMessage) => {
   const expirationActions = [getReplaceAction(formatMessage)];
   const statusActions = [getReplaceAction(formatMessage)];
   const permanentLoanTypeActions = [getReplaceAction(formatMessage)];
-  const suppressFromDiscActions = [getReplaceAction(formatMessage)];
   const permanentHoldingsLocation = [getReplaceAction(formatMessage)];
   const allActions = getBaseActions(formatMessage);
+  const suppressFromDiscActions = [
+    getPlaceholder(formatMessage),
+    getSetToTrueAction(formatMessage),
+    getSetToFalseAction(formatMessage),
+  ];
 
   const allActionsInitialVal = allActions[0].value;
 
@@ -172,8 +176,8 @@ export const getDefaultActions = (option, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: allActions,
-            type: '',
+            actionsList: suppressFromDiscActions,
+            type: CONTROL_TYPES.SUPPRESS_CHECKBOX,
             [ACTION_VALUE_KEY]: suppressFromDiscActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
@@ -245,8 +249,8 @@ export const isContentUpdatesFormValid = (contentUpdates) => {
     return option && actions.every(act => {
       const initial = act.initial ?? null;
 
-      // for CLEAR_FIELD 'updated' is not required
-      if (act.type === ACTIONS.CLEAR_FIELD) {
+      // for FINAL_ACTIONS 'updated' is not required
+      if (FINAL_ACTIONS.includes(act.type)) {
         return act.type;
       }
 

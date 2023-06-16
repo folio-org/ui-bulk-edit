@@ -18,7 +18,8 @@
     "filenames/match-exported": 0,
     "import/no-extraneous-dependencies": 0,
     "no-undef": 0,
-    "no-use-before-define": 0
+    "no-use-before-define": 0,
+    "no-shadow": 0
   },
   "settings": {
     "react": {

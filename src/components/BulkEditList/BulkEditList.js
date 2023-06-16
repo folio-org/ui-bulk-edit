@@ -88,6 +88,7 @@ export const BulkEditList = () => {
     setVisibleColumns,
     filtersTab,
     setIsBulkEditLayerOpen,
+    setInAppCommitted,
   });
 
   const handleBulkEditLayerOpen = () => {
