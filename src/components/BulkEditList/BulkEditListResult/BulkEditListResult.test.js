@@ -50,10 +50,20 @@ const renderBulkEditResult = (history, typeOfProgress = TYPE_OF_PROGRESS.INITIAL
 };
 
 describe('BulkEditListResult', () => {
-  it('displays empty message', () => {
+  it('displays empty message with identifier tab', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit?capabilities=USERS');
+    history.push('/bulk-edit?capabilities=USERS&criteria=identifier');
+
+    renderBulkEditResult(history);
+
+    expect(screen.getByText(/list.result.emptyMessage/)).toBeVisible();
+  });
+
+  it('displays empty message with query tab', () => {
+    const history = createMemoryHistory();
+
+    history.push('/bulk-edit?capabilities=USERS&criteria=query');
 
     renderBulkEditResult(history);
 
@@ -63,7 +73,7 @@ describe('BulkEditListResult', () => {
   it('displays fileName field for initial preview', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/preview?fileName=Mock.csv&capabilities=USERS&step=UPLOAD');
+    history.push('/bulk-edit/1/preview?fileName=Mock.csv&capabilities=USERS&step=UPLOAD&criteria=identifier');
 
     renderBulkEditResult(history);
 
@@ -73,7 +83,7 @@ describe('BulkEditListResult', () => {
   it('displays title', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/progress?fileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/progress?fileName=Mock.csv&capabilities=USERS&criteria=identifier');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.INITIAL);
 
@@ -83,7 +93,7 @@ describe('BulkEditListResult', () => {
   it('displays processed title', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/progress?processedFileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/progress?processedFileName=Mock.csv&capabilities=USERS&criteria=identifier');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
@@ -93,7 +103,7 @@ describe('BulkEditListResult', () => {
   it('displays processed preview', () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/preview?processedFileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/preview?processedFileName=Mock.csv&capabilities=USERS&criteria=identifier');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
@@ -103,7 +113,7 @@ describe('BulkEditListResult', () => {
   it('should render with no axe errors', async () => {
     const history = createMemoryHistory();
 
-    history.push('/bulk-edit/1/processed?processedFileName=Mock.csv&capabilities=USERS');
+    history.push('/bulk-edit/1/processed?processedFileName=Mock.csv&capabilities=USERS&criteria=identifier');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.PROCESSED);
 
