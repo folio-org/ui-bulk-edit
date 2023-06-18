@@ -48,14 +48,14 @@
     "list.preview.title": "Preview of record matched",
     "preview.file.title": "Filename: {fileUploadedName}",
     "preview.query.title": "Query: {queryText}",
-    "list.errors.title": "Errors",
+    "list.errors.title": "エラー",
     "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
     "list.errors.table.code": "Record identifier",
-    "list.errors.table.message": "Reason for error",
+    "list.errors.table.message": "エラーの理由",
     "modal.successfullMessage": "{fileName} succesfully uploaded.",
     "modal.next": "次",
     "conformationModal.commitChanges": "Commit changes",
-    "list.filters.recordIdentifier.item.barcode": "Item barcode",
+    "list.filters.recordIdentifier.item.barcode": "資料バーコード",
     "list.filters.recordIdentifier.item.UUID": "Item UUIDs",
     "list.filters.recordIdentifier.item.ItemHRIDs": "Item HRIDs",
     "list.filters.recordIdentifier.item.former": "Item former identifier",
@@ -309,5 +309,7 @@
     "columns.ITEM.Missing Pieces": "Missing pieces",
     "columns.HOLDINGS_RECORD.HRID": "Holdings HRID",
     "progressBar.committing": "Committing changes",
-    "progresssBar.processing": "Processing"
+    "progresssBar.processing": "Processing",
+    "layer.action.applyItems": "Apply to items records",
+    "layer.options.holdings.suppress": "Suppress from discovery"
 }
