@@ -309,5 +309,7 @@
     "columns.ITEM.Missing Pieces": "Peças em falta",
     "columns.HOLDINGS_RECORD.HRID": "HRID de coleções",
     "progressBar.committing": "Confirmando alterações",
-    "progresssBar.processing": "Em processamento"
+    "progresssBar.processing": "Em processamento",
+    "layer.action.applyItems": "Aplicar aos registros de itens",
+    "layer.options.holdings.suppress": "Ocultar na ferramenta de descoberta"
 }

@@ -35,7 +35,7 @@
     "uploaderSubTitle.BARCODE": "Select a file with User Barcodes",
     "start.downloadErrors": "Download errors (CSV)",
     "uploaderSubTitle.records": "Upload CSV file with edited records",
-    "textArea.search": "Search",
+    "textArea.search": "Buscar",
     "textArea.resetAll": "Restablecer todo",
     "start.downloadMathcedRecords": "Download matched records (CSV)",
     "menuGroup.actions": "Acciones",
@@ -309,5 +309,7 @@
     "columns.ITEM.Missing Pieces": "Missing pieces",
     "columns.HOLDINGS_RECORD.HRID": "Holdings HRID",
     "progressBar.committing": "Committing changes",
-    "progresssBar.processing": "Processing"
+    "progresssBar.processing": "Processing",
+    "layer.action.applyItems": "Apply to items records",
+    "layer.options.holdings.suppress": "Suppress from discovery"
 }
