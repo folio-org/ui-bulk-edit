@@ -309,5 +309,7 @@
     "columns.ITEM.Missing Pieces": "Missing pieces",
     "columns.HOLDINGS_RECORD.HRID": "Holdings HRID",
     "progressBar.committing": "Committing changes",
-    "progresssBar.processing": "Processing"
+    "progresssBar.processing": "Processing",
+    "layer.action.applyItems": "Apply to items records",
+    "layer.options.holdings.suppress": "Suppress from discovery"
 }

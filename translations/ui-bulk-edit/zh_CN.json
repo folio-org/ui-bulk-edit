@@ -309,5 +309,7 @@
     "columns.ITEM.Missing Pieces": "遗失件",
     "columns.HOLDINGS_RECORD.HRID": "馆藏HRID",
     "progressBar.committing": "提交更改",
-    "progresssBar.processing": "处理中"
+    "progresssBar.processing": "处理中",
+    "layer.action.applyItems": "Apply to items records",
+    "layer.options.holdings.suppress": "Suppress from discovery"
 }

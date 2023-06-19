@@ -309,5 +309,7 @@
     "columns.ITEM.Missing Pieces": "Chybějící kusy",
     "columns.HOLDINGS_RECORD.HRID": "HRID holdingů",
     "progressBar.committing": "Provádění změn",
-    "progresssBar.processing": "Zpracování"
+    "progresssBar.processing": "Zpracování",
+    "layer.action.applyItems": "Apply to items records",
+    "layer.options.holdings.suppress": "Potlačit z vyhledávání"
 }

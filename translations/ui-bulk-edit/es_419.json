@@ -309,5 +309,7 @@
     "columns.ITEM.Missing Pieces": "Piezas que faltan",
     "columns.HOLDINGS_RECORD.HRID": "Participaciones HRID",
     "progressBar.committing": "Comprometiendo cambios",
-    "progresssBar.processing": "Procesando"
+    "progresssBar.processing": "Procesando",
+    "layer.action.applyItems": "Apply to items records",
+    "layer.options.holdings.suppress": "Suppress from discovery"
 }
