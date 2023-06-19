@@ -274,6 +274,44 @@ describe('BulkEditInApp', () => {
     expect(optionStatus.selected).toBeTruthy();
   });
 
+  it('should display holdings set to true is checked by default', () => {
+    renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+
+    const selectOption = screen.getByTestId('select-option-0');
+    const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.suppress/ });
+
+    act(() => userEvent.selectOptions(selectOption, optionStatus));
+
+    const actionSetToTrue = screen.getByRole('option', { name: /layer.options.items.true/ });
+    const selectAction = screen.getByTestId('select-actions-1');
+
+    act(() => userEvent.selectOptions(selectAction, actionSetToTrue));
+
+    const checkbox = screen.getByRole('checkbox');
+
+    expect(optionStatus.selected).toBeTruthy();
+    expect(checkbox).toBeChecked();
+  });
+
+  it('should display holdings set to false is unchecked by default', () => {
+    renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+
+    const selectOption = screen.getByTestId('select-option-0');
+    const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.suppress/ });
+
+    act(() => userEvent.selectOptions(selectOption, optionStatus));
+
+    const actionSetToFalse = screen.getByRole('option', { name: /layer.options.items.false/ });
+    const selectAction = screen.getByTestId('select-actions-1');
+
+    act(() => userEvent.selectOptions(selectAction, actionSetToFalse));
+
+    const checkbox = screen.getByRole('checkbox');
+
+    expect(optionStatus.selected).toBeTruthy();
+    expect(checkbox).not.toBeChecked();
+  });
+
   it('should display holding temporart location options', () => {
     renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
 
