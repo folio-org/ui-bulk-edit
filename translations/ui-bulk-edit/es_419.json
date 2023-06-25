@@ -310,6 +310,6 @@
     "columns.HOLDINGS_RECORD.HRID": "Participaciones HRID",
     "progressBar.committing": "Comprometiendo cambios",
     "progresssBar.processing": "Procesando",
-    "layer.action.applyItems": "Apply to items records",
-    "layer.options.holdings.suppress": "Suppress from discovery"
+    "layer.action.applyItems": "Aplicar a los registros de artículos",
+    "layer.options.holdings.suppress": "Suprimir del descubrimiento"
 }
