@@ -23,6 +23,7 @@ import {
   getDefaultActions,
   isAddButtonShown,
 } from './helpers';
+import { convertArray } from '../../../../../utils/filters';
 
 export const ContentUpdatesForm = ({
   onContentUpdatesChanged,
@@ -184,6 +185,21 @@ export const ContentUpdatesForm = ({
     onContentUpdatesChanged(mappedContentUpdates);
   }, [fields]);
 
+  const renderOptions = (array) => {
+    return array.map(item => {
+      if (typeof item === 'object' && Object.keys(item).length === 1) {
+        const category = Object.keys(item)[0];
+        const categoryOptions = item[category].map(option => (
+          <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>
+        ));
+
+        return <optgroup key={category} label={category}>{categoryOptions}</optgroup>;
+      } else {
+        return <option key={item.value} value={item.value} disabled={item.disabled}>{item.label}</option>;
+      }
+    });
+  };
+
   return (
     <RepeatableField
       fields={fields}
@@ -194,12 +210,13 @@ export const ContentUpdatesForm = ({
           <Row data-testid={`row-${index}`}>
             <Col xs={3} sm={3}>
               <Select
-                dataOptions={field.options}
                 value={field.option}
                 onChange={(e) => handleOptionChange(e, index)}
                 data-testid={`select-option-${index}`}
                 aria-label={`select-option-${index}`}
-              />
+              >
+                {renderOptions(convertArray(field.options))}
+              </Select>
             </Col>
             <ActionsRow
               option={field.option}
