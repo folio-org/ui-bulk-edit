@@ -186,12 +186,14 @@ export const getItemsOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLocation' }),
     disabled: false,
     category: 'Location',
+    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.location' }),
   },
   {
     value: OPTIONS.PERMANENT_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLocation' }),
     disabled: false,
     category: 'Location',
+    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.location' }),
   },
   {
     value: OPTIONS.STATUS,
@@ -203,12 +205,14 @@ export const getItemsOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLoanTypeLabel' }),
     disabled: false,
     category: 'Loan type',
+    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
   },
   {
     value: OPTIONS.PERMANENT_LOAN_TYPE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLoanType' }),
     disabled: false,
     category: 'Loan type',
+    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
   },
   {
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,

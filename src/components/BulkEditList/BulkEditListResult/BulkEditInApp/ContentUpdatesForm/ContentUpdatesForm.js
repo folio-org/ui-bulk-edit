@@ -189,11 +189,22 @@ export const ContentUpdatesForm = ({
     return array.map(item => {
       if (typeof item === 'object' && Object.keys(item).length === 1) {
         const category = Object.keys(item)[0];
-        const categoryOptions = item[category].map(option => (
-          <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>
-        ));
+        let categoryLabel = '';
+        const categoryOptions = item[category].map(option => {
+          categoryLabel = option.categoryLabel;
 
-        return <optgroup key={category} label={category}>{categoryOptions}</optgroup>;
+          return (
+            <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>
+          );
+        });
+
+        return (
+          <optgroup
+            key={category}
+            label={categoryLabel}
+          >
+            {categoryOptions}
+          </optgroup>);
       } else {
         return <option key={item.value} value={item.value} disabled={item.disabled}>{item.label}</option>;
       }

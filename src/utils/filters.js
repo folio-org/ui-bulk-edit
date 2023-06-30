@@ -50,11 +50,12 @@ export const convertArray = (array) => {
     }
   }
 
-  // eslint-disable-next-line guard-for-in
   for (const category in categoryMap) {
-    const categoryArray = categoryMap[category];
+    if (Object.prototype.hasOwnProperty.call(categoryMap, category)) {
+      const categoryArray = categoryMap[category];
 
-    convertedArray.push({ [category]: categoryArray });
+      convertedArray.push({ [category]: categoryArray });
+    }
   }
 
   return convertedArray;
