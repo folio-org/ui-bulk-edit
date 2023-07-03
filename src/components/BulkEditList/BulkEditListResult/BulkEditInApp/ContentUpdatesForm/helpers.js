@@ -5,7 +5,13 @@ import {
   BASE_DATE_FORMAT,
   getReplaceAction,
   getFindAction,
-  getBaseActions, getSetToTrueAction, getSetToFalseAction, getPlaceholder, FINAL_ACTIONS,
+  getBaseActions,
+  getSetToTrueAction,
+  getSetToFalseAction,
+  getPlaceholder,
+  FINAL_ACTIONS,
+  getMarkAsStuffOnlyAction,
+  getRemoveMarkAsStuffOnlyAction,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -77,6 +83,11 @@ export const getDefaultActions = (option, formatMessage) => {
     getPlaceholder(formatMessage),
     getSetToTrueAction(formatMessage),
     getSetToFalseAction(formatMessage),
+  ];
+  const noteMarkActions = [
+    getPlaceholder(formatMessage),
+    getMarkAsStuffOnlyAction(formatMessage),
+    getRemoveMarkAsStuffOnlyAction(formatMessage),
   ];
 
   const allActionsInitialVal = allActions[0].value;
@@ -231,6 +242,27 @@ export const getDefaultActions = (option, formatMessage) => {
             actionsList: permanentLoanTypeActions,
             type: CONTROL_TYPES.LOAN_TYPE,
             [ACTION_VALUE_KEY]: permanentLoanTypeActions[0].value,
+            [FIELD_VALUE_KEY]: '',
+          },
+        ],
+      };
+
+    case OPTIONS.ACTION_NOTE:
+    case OPTIONS.BINDING_NOTE:
+    case OPTIONS.CHECKIN_NOTE:
+    case OPTIONS.CHECK_OUT_NOTE:
+    case OPTIONS.COPY_NOTE:
+    case OPTIONS.ELECTRONIC_BOOKPLATE:
+    case OPTIONS.NOTE:
+    case OPTIONS.PROVENANCE:
+    case OPTIONS.REPRODUCTION:
+      return {
+        type: '',
+        actions: [
+          {
+            actionsList: noteMarkActions,
+            type: CONTROL_TYPES.NOTE_SELECT,
+            [ACTION_VALUE_KEY]: noteMarkActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
