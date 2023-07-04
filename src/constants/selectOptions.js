@@ -20,7 +20,7 @@ export const OPTIONS = {
   PERMANENT_HOLDINGS_LOCATION: 'PERMANENT_HOLDINGS_LOCATION',
   ACTION_NOTE: 'ACTION_NOTE',
   BINDING_NOTE: 'BINDING_NOTE',
-  CHECKIN_NOTE: 'CHECKIN_NOTE',
+  CHECK_IN_NOTE: 'CHECK_IN_NOTE',
   CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
   COPY_NOTE: 'COPY_NOTE',
   ELECTRONIC_BOOKPLATE: 'ELECTRONIC_BOOKPLATE',
@@ -227,7 +227,7 @@ export const getItemsOptions = (formatMessage) => [
     disabled: false,
   },
   {
-    value: OPTIONS.CHECKIN_NOTE,
+    value: OPTIONS.CHECK_IN_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkinNote' }),
     disabled: false,
   },

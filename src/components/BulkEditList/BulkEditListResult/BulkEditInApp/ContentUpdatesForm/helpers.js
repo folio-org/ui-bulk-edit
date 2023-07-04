@@ -249,7 +249,7 @@ export const getDefaultActions = (option, formatMessage) => {
 
     case OPTIONS.ACTION_NOTE:
     case OPTIONS.BINDING_NOTE:
-    case OPTIONS.CHECKIN_NOTE:
+    case OPTIONS.CHECK_IN_NOTE:
     case OPTIONS.CHECK_OUT_NOTE:
     case OPTIONS.COPY_NOTE:
     case OPTIONS.ELECTRONIC_BOOKPLATE:

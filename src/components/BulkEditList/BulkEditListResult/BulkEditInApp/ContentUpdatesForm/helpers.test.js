@@ -337,7 +337,7 @@ describe('ContentUpdatesForm helpers', () => {
       const noteOptions = [
         OPTIONS.ACTION_NOTE,
         OPTIONS.BINDING_NOTE,
-        OPTIONS.CHECKIN_NOTE,
+        OPTIONS.CHECK_IN_NOTE,
         OPTIONS.CHECK_OUT_NOTE,
         OPTIONS.COPY_NOTE,
         OPTIONS.ELECTRONIC_BOOKPLATE,
