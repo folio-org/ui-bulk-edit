@@ -231,7 +231,7 @@ describe('BulkEditInApp', () => {
 
     userEvent.type(dataPicker, '2000-01-01 00:00:00.000Z');
 
-    expect(dataPicker).toHaveValue('01.01.2000 00:00:00.000Z');
+    expect(dataPicker).toHaveValue('01/01/2000 00:00:00.000Z');
   });
 
   it('should display patron group', () => {
