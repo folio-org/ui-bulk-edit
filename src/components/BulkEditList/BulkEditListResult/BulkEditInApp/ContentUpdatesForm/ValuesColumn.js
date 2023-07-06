@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Datepicker, Select, Selection, TextField } from '@folio/stripes/components';
+import { Col, Datepicker, Select, Selection, TextField, TextArea } from '@folio/stripes/components';
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
@@ -18,6 +18,16 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       value={action.value}
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       data-testid={`input-email-${actionIndex}`}
+      aria-label="Text field"
+    />
+  );
+
+  const renderTextArea = () => action.type === CONTROL_TYPES.TEXTAREA && (
+    <TextArea
+      value={action.value}
+      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+      data-testid={`input-textarea-${actionIndex}`}
+      aria-label="Text area"
     />
   );
 
@@ -48,6 +58,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
         value={action.value}
         onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
         data-testid={`select-patronGroup-${actionIndex}`}
+        aria-label="Patron group select"
       />
     );
   };
@@ -60,6 +71,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       }}
       data-testid={`dataPicker-experation-date-${actionIndex}`}
       backendDateStandard={BASE_DATE_FORMAT}
+      aria-label="Date"
     />
   );
 
@@ -70,6 +82,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
         onSelect={location => onChange({ actionIndex, value: location.id, fieldName: FIELD_VALUE_KEY })}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
         data-test-id={`textField-${actionIndex}`}
+        aria-label="Location"
       />
       <LocationLookup
         marginBottom0
@@ -88,6 +101,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       value={action.value}
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       data-testid={`select-statuses-${actionIndex}`}
+      aria-label="Status select"
     />
   );
 
@@ -99,12 +113,14 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       onChange={value => onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY })}
       placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
       dataOptions={loanTypes}
+      aria-label="Loan type select"
     />
   );
 
   return (
     <Col xs={2} sm={2}>
       {renderTextField()}
+      {renderTextArea()}
       {renderPatronGroupSelect()}
       {renderDatepicker()}
       {renderLocationSelect()}

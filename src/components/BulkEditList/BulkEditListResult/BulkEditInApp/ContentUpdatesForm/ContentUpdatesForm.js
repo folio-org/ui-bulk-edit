@@ -18,7 +18,6 @@ import { ActionsRow } from './ActionsRow';
 import {
   ACTION_VALUE_KEY,
   FIELD_VALUE_KEY,
-  FIELDS_TYPES,
   WITH_ITEMS_VALUE_KEY,
   getDefaultActions,
   isAddButtonShown,
@@ -38,7 +37,7 @@ export const ContentUpdatesForm = ({
   const fieldTemplate = {
     options,
     option: defaultOptionValue,
-    actionsDetails: getDefaultActions(defaultOptionValue, formatMessage),
+    actionsDetails: getDefaultActions(defaultOptionValue, options, formatMessage),
   };
 
   const [fields, setFields] = useState([fieldTemplate]);
@@ -59,12 +58,15 @@ export const ContentUpdatesForm = ({
   const handleOptionChange = (e, index) => {
     const mappedFields = fields.map((field, i) => {
       if (i === index) {
-        const value = e.target.value;
+        const option = e.target.value;
+        const sourceOption = options.find(o => o.value === option);
+        const parameters = sourceOption.parameters;
 
         return {
           ...field,
-          [FIELDS_TYPES.OPTION]: value,
-          actionsDetails: getDefaultActions(value, formatMessage),
+          parameters,
+          option,
+          actionsDetails: getDefaultActions(option, options, formatMessage),
         };
       }
 
@@ -130,7 +132,7 @@ export const ContentUpdatesForm = ({
         ? ({
           ...f,
           option: value,
-          actionsDetails: getDefaultActions(value, formatMessage),
+          actionsDetails: getDefaultActions(value, options, formatMessage),
         })
         : f;
     });
@@ -160,8 +162,11 @@ export const ContentUpdatesForm = ({
 
     const mappedContentUpdates = fields.map(
       // eslint-disable-next-line no-shadow
-      ({ option, actionsDetails: { actions } }) => {
+      ({ parameters, option, actionsDetails: { actions } }) => {
         const [initial, updated] = actions.map(action => action?.value ?? null);
+        const sourceOption = options.find(o => o.value === option);
+        const optionType = sourceOption.type;
+        const mappedOption = optionType || option; // if option has type, use it, otherwise use option value (required for ITEM_NOTE cases)
 
         // generate action type key with '_' delimiter
         const typeKey = actions
@@ -171,11 +176,12 @@ export const ContentUpdatesForm = ({
         const type = ACTIONS[typeKey];
 
         return {
-          option,
+          option: mappedOption,
           actions: [{
             type,
             initial,
             updated,
+            parameters,
           }],
         };
       },

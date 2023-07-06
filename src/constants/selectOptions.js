@@ -18,16 +18,17 @@ export const OPTIONS = {
   PERMANENT_LOAN_TYPE: 'PERMANENT_LOAN_TYPE',
   TEMPORARY_HOLDINGS_LOCATION: 'TEMPORARY_HOLDINGS_LOCATION',
   PERMANENT_HOLDINGS_LOCATION: 'PERMANENT_HOLDINGS_LOCATION',
-  ACTION_NOTE: 'ACTION_NOTE',
-  BINDING_NOTE: 'BINDING_NOTE',
-  CHECK_IN_NOTE: 'CHECK_IN_NOTE',
-  CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
-  COPY_NOTE: 'COPY_NOTE',
-  ELECTRONIC_BOOKPLATE: 'ELECTRONIC_BOOKPLATE',
-  NOTE: 'NOTE',
-  PROVENANCE: 'PROVENANCE',
-  REPRODUCTION: 'REPRODUCTION',
+  ITEM_NOTE: 'ITEM_NOTE',
+  ADMINISTRATIVE_NOTE: 'ADMINISTRATIVE_NOTE',
 };
+
+export const PARAMETERS_KEYS = {
+  ITEM_NOTE_TYPE_ID_KEY: 'ITEM_NOTE_TYPE_ID_KEY',
+};
+
+export const OPTIONS_WITH_ADDITIONAL_PARAMETERS = [
+  OPTIONS.ITEM_NOTE,
+];
 
 export const identifierOptions = {
   [CAPABILITIES.USER]: [
@@ -157,7 +158,7 @@ export const getUserOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.patronGroup' }),
     disabled: false,
   },
-];
+].sort((a, b) => a.label.localeCompare(b.label));
 
 export const getHoldingsOptions = (formatMessage) => [
   {
@@ -178,9 +179,9 @@ export const getHoldingsOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.suppress' }),
     disabled: false,
   },
-];
+].sort((a, b) => a.label.localeCompare(b.label));
 
-export const getItemsOptions = (formatMessage) => [
+export const getItemsOptions = (formatMessage, additionalItems = []) => [
   {
     value: '',
     label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
@@ -217,51 +218,12 @@ export const getItemsOptions = (formatMessage) => [
     disabled: false,
   },
   {
-    value: OPTIONS.ACTION_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.actionNote' }),
+    value: OPTIONS.ADMINISTRATIVE_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
     disabled: false,
   },
-  {
-    value: OPTIONS.BINDING_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.bindingNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.CHECK_IN_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkinNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.CHECK_OUT_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkoutNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.COPY_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.copyNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.ELECTRONIC_BOOKPLATE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.electronicBookplate' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.note' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.PROVENANCE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.provenance' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.REPRODUCTION,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.reproduction' }),
-    disabled: false,
-  },
-];
+  ...additionalItems,
+].sort((a, b) => a.label.localeCompare(b.label));
 
 export const getItemStatusOptions = (formatMessage) => [
   {

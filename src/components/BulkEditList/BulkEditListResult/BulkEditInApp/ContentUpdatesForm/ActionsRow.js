@@ -22,6 +22,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
           onChange={(e) => onChange({ actionIndex, value: e.target.value, fieldName: ACTION_VALUE_KEY })}
           disabled={action.actionsList.length === 1}
           data-testid={`select-actions-${actionIndex}`}
+          aria-label="Actions select"
         />
       </Col>
     );
