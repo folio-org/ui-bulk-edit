@@ -158,7 +158,7 @@ export const getUserOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.patronGroup' }),
     disabled: false,
   },
-].sort((a, b) => a.label.localeCompare(b.label));
+];
 
 export const getHoldingsOptions = (formatMessage) => [
   {
@@ -179,7 +179,7 @@ export const getHoldingsOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.suppress' }),
     disabled: false,
   },
-].sort((a, b) => a.label.localeCompare(b.label));
+];
 
 export const getItemsOptions = (formatMessage, additionalItems = []) => [
   {
@@ -223,7 +223,7 @@ export const getItemsOptions = (formatMessage, additionalItems = []) => [
     disabled: false,
   },
   ...additionalItems,
-].sort((a, b) => a.label.localeCompare(b.label));
+];
 
 export const getItemStatusOptions = (formatMessage) => [
   {

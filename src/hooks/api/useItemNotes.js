@@ -12,7 +12,7 @@ export const useItemNotes = () => {
     },
   );
 
-  const itemNotes = data?.itemNoteTypes?.map(type => ({
+  const mappedNotes = data?.itemNoteTypes?.map(type => ({
     label: type.name,
     value: type.id,
     type: OPTIONS.ITEM_NOTE,
@@ -22,6 +22,8 @@ export const useItemNotes = () => {
     }],
     disabled: false,
   })) || [];
+
+  const itemNotes = mappedNotes.sort((a, b) => a.label.localeCompare(b.label));
 
   return {
     itemNotes,
