@@ -339,6 +339,8 @@ describe('ContentUpdatesForm helpers', () => {
       const noteOptions = [
         OPTIONS.ITEM_NOTE,
         OPTIONS.ADMINISTRATIVE_NOTE,
+        OPTIONS.CHECK_IN_NOTE,
+        OPTIONS.CHECK_OUT_NOTE,
       ];
 
       noteOptions.forEach(option => {

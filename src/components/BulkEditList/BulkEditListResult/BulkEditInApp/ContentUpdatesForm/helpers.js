@@ -257,6 +257,8 @@ export const getDefaultActions = (option, options, formatMessage) => {
 
     case OPTIONS.ITEM_NOTE:
     case OPTIONS.ADMINISTRATIVE_NOTE:
+    case OPTIONS.CHECK_IN_NOTE:
+    case OPTIONS.CHECK_OUT_NOTE:
       return {
         type: '',
         actions: [

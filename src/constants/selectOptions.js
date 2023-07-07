@@ -20,6 +20,8 @@ export const OPTIONS = {
   PERMANENT_HOLDINGS_LOCATION: 'PERMANENT_HOLDINGS_LOCATION',
   ITEM_NOTE: 'ITEM_NOTE',
   ADMINISTRATIVE_NOTE: 'ADMINISTRATIVE_NOTE',
+  CHECK_IN_NOTE: 'CHECK_IN_NOTE',
+  CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
 };
 
 export const PARAMETERS_KEYS = {
@@ -220,6 +222,16 @@ export const getItemsOptions = (formatMessage, additionalItems = []) => [
   {
     value: OPTIONS.ADMINISTRATIVE_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.CHECK_IN_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkInNote' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.CHECK_OUT_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkOutNote' }),
     disabled: false,
   },
   ...additionalItems,
