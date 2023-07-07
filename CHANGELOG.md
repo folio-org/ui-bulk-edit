@@ -23,6 +23,7 @@
 * [UIBULKED-310](https://issues.folio.org/browse/UIBULKED-310) Apply to all items checkbox - default values
 * [UIBULKED-289](https://issues.folio.org/browse/UIBULKED-289) Landing page is not cleared switching to "Query" tab after completed Bulk edit
 * [UIBULKED-289](https://issues.folio.org/browse/UIBULKED-299) Bulk edit actions for notes - add and remove Mark as staff only
+* [UIBULKED-298](https://issues.folio.org/browse/UIBULKED-298) Group Item record properties using optgroup component.
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 

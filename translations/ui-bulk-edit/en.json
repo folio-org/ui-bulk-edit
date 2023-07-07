@@ -112,6 +112,9 @@
   "error.uploadedFile": "Fail to upload file",
   "error.sww": "Something went wrong",
 
+  "category.loanType": "Loan type",
+  "category.location": "Location",
+
   "columns.USER.User name": "Username",
   "columns.USER.User id": "User id",
   "columns.USER.External system id": "External System ID",
