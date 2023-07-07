@@ -22,6 +22,7 @@
 * [UIBULKED-287](https://issues.folio.org/browse/UIBULKED-287) "Something went wrong" error occurred clicking "Bulk edit" icon from the bulk edit In app form
 * [UIBULKED-310](https://issues.folio.org/browse/UIBULKED-310) Apply to all items checkbox - default values
 * [UIBULKED-289](https://issues.folio.org/browse/UIBULKED-289) Landing page is not cleared switching to "Query" tab after completed Bulk edit
+* [UIBULKED-296](https://issues.folio.org/browse/UIBULKED-296) White line on the top of Bulk Edit landing page.
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 
