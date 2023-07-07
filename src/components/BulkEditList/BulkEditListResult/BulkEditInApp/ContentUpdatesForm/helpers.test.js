@@ -20,6 +20,8 @@ jest.mock('../../../../../constants', () => ({
   getSetToFalseAction: jest.fn().mockReturnValue({ value: 'false' }),
   getMarkAsStuffOnlyAction: jest.fn().mockReturnValue({ value: 'mark' }),
   getRemoveMarkAsStuffOnlyAction: jest.fn().mockReturnValue({ value: 'remove' }),
+  getRemoveAllAction: jest.fn().mockReturnValue({ value: 'removeAll' }),
+  getAddNoteAction: jest.fn().mockReturnValue({ value: 'addNote' }),
 }));
 
 describe('ContentUpdatesForm helpers', () => {
@@ -165,7 +167,7 @@ describe('ContentUpdatesForm helpers', () => {
       const formatMessage = jest.fn();
 
       it('returns the correct object for the EMAIL_ADDRESS option', () => {
-        expect(getDefaultActions(OPTIONS.EMAIL_ADDRESS, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.EMAIL_ADDRESS, [], formatMessage)).toEqual({
           type: '',
           actions: [
             {
@@ -185,7 +187,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the PATRON_GROUP option', () => {
-        expect(getDefaultActions(OPTIONS.PATRON_GROUP, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.PATRON_GROUP, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -200,7 +202,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the EXPIRATION_DATE option', () => {
-        expect(getDefaultActions(OPTIONS.EXPIRATION_DATE, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.EXPIRATION_DATE, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -215,7 +217,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the TEMPORARY_HOLDINGS_LOCATION option', () => {
-        expect(getDefaultActions(OPTIONS.TEMPORARY_HOLDINGS_LOCATION, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.TEMPORARY_HOLDINGS_LOCATION, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -230,7 +232,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the PERMANENT_HOLDINGS_LOCATION option', () => {
-        expect(getDefaultActions(OPTIONS.PERMANENT_HOLDINGS_LOCATION, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.PERMANENT_HOLDINGS_LOCATION, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -245,7 +247,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the TEMPORARY_LOCATION option', () => {
-        expect(getDefaultActions(OPTIONS.TEMPORARY_LOCATION, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.TEMPORARY_LOCATION, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -260,7 +262,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the SUPPRESS_FROM_DISCOVERY option', () => {
-        expect(getDefaultActions(OPTIONS.SUPPRESS_FROM_DISCOVERY, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.SUPPRESS_FROM_DISCOVERY, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -275,7 +277,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the PERMANENT_LOCATION option', () => {
-        expect(getDefaultActions(OPTIONS.PERMANENT_LOCATION, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.PERMANENT_LOCATION, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -290,7 +292,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the STATUS option', () => {
-        expect(getDefaultActions(OPTIONS.STATUS, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.STATUS, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -305,7 +307,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the TEMPORARY_LOAN_TYPE option', () => {
-        expect(getDefaultActions(OPTIONS.TEMPORARY_LOAN_TYPE, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.TEMPORARY_LOAN_TYPE, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -320,7 +322,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the PERMANENT_LOAN_TYPE option', () => {
-        expect(getDefaultActions(OPTIONS.PERMANENT_LOAN_TYPE, formatMessage)).toEqual({
+        expect(getDefaultActions(OPTIONS.PERMANENT_LOAN_TYPE, [], formatMessage)).toEqual({
           type: '',
           actions: [
             null,
@@ -335,25 +337,27 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       const noteOptions = [
-        OPTIONS.ACTION_NOTE,
-        OPTIONS.BINDING_NOTE,
+        OPTIONS.ITEM_NOTE,
+        OPTIONS.ADMINISTRATIVE_NOTE,
         OPTIONS.CHECK_IN_NOTE,
         OPTIONS.CHECK_OUT_NOTE,
-        OPTIONS.COPY_NOTE,
-        OPTIONS.ELECTRONIC_BOOKPLATE,
-        OPTIONS.NOTE,
-        OPTIONS.PROVENANCE,
-        OPTIONS.REPRODUCTION,
       ];
 
       noteOptions.forEach(option => {
         it(`returns the correct object for the ${option} option`, () => {
-          expect(getDefaultActions(option, formatMessage)).toEqual({
+          expect(getDefaultActions(option, [], formatMessage)).toEqual({
             type: '',
             actions: [
+              null,
               {
-                actionsList: [{ value: 'placeholder' }, { value: 'mark' }, { value: 'remove' }],
-                type: CONTROL_TYPES.NOTE_SELECT,
+                actionsList: [
+                  { value: 'placeholder' },
+                  { value: 'mark' },
+                  { value: 'remove' },
+                  { value: 'addNote' },
+                  { value: 'removeAll' },
+                ],
+                type: CONTROL_TYPES.TEXTAREA,
                 [ACTION_VALUE_KEY]: 'placeholder',
                 [FIELD_VALUE_KEY]: '',
               },
@@ -363,7 +367,7 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the default case', () => {
-        expect(getDefaultActions('unknown', formatMessage)).toEqual({
+        expect(getDefaultActions('unknown', [], formatMessage)).toEqual({
           type: null,
           actions: [],
         });

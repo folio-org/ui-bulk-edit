@@ -285,16 +285,12 @@
   "layer.options.items.false": "Set false",
   "layer.options.items.markAsStaffOnly": "Mark as staff only",
   "layer.options.items.removeMarkAsStaffOnly": "Remove mark as staff only",
+  "layer.options.items.removeAll": "Remove all",
+  "layer.options.items.addNote": "Add note",
   "layer.options.suppressFromDiscovery": "Suppress from discovery",
-  "layer.options.actionNote": "Action note",
-  "layer.options.bindingNote": "Binding note",
-  "layer.options.checkinNote": "Check in note",
-  "layer.options.checkoutNote": "Check out note",
-  "layer.options.copyNote": "Copy note",
-  "layer.options.electronicBookplate": "Electronic bookplate",
-  "layer.options.note": "Note",
-  "layer.options.provenance": "Provenance",
-  "layer.options.reproduction": "Reproduction",
+  "layer.options.administrativeNote": "Administrative note",
+  "layer.options.checkInNote": "Check in note",
+  "layer.options.checkOutNote": "Check out note",
 
   "previewModal.message": "{count} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
   "previewModal.previewToBeChanged": "Preview of records to be changed",
@@ -349,5 +345,14 @@
   "permission.app-edit": "Bulk Edit: In app - Edit",
   "permission.app-edit.users": "Bulk edit: In app - Update user records",
   "permission.app-delete": "Bulk Edit: In app - Delete",
-  "permission.logs.view": "Bulk edit - Can view logs"
+  "permission.logs.view": "Bulk edit - Can view logs",
+
+  "ariaLabel.actionSelect": "Actions select",
+  "ariaLabel.textField": "Text field",
+  "ariaLabel.textArea": "Text area",
+  "ariaLabel.patronGroupSelect": "Patron group select",
+  "ariaLabel.date": "Date",
+  "ariaLabel.location": "Location",
+  "ariaLabel.statusSelect": "Status select",
+  "ariaLabel.loanTypeSelect": "Loan type select"
 }

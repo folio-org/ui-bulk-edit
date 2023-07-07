@@ -11,6 +11,7 @@ export const ACTIONS = {
   SET_TO_FALSE_INCLUDING_ITEMS: 'SET_TO_FALSE_INCLUDING_ITEMS',
   MARK_AS_STAFF_ONLY: 'MARK_AS_STAFF_ONLY',
   REMOVE_MARK_AS_STAFF_ONLY: 'REMOVE_MARK_AS_STAFF_ONLY',
+  REMOVE_ALL: 'REMOVE_ALL',
 };
 
 // FINAL_ACTIONS - final actions in scope of row. Not possible select anything after choosing it in row.
@@ -22,6 +23,7 @@ export const FINAL_ACTIONS = [
   ACTIONS.SET_TO_FALSE_INCLUDING_ITEMS,
   ACTIONS.MARK_AS_STAFF_ONLY,
   ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
+  ACTIONS.REMOVE_ALL,
 ];
 
 export const getPlaceholder = (formatMessage) => ({
@@ -69,6 +71,18 @@ export const getMarkAsStuffOnlyAction = (formatMessage) => ({
 export const getRemoveMarkAsStuffOnlyAction = (formatMessage) => ({
   value: ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
   label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.removeMarkAsStaffOnly' }),
+  disabled: false,
+});
+
+export const getRemoveAllAction = (formatMessage) => ({
+  value: ACTIONS.REMOVE_ALL,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.removeAll' }),
+  disabled: false,
+});
+
+export const getAddNoteAction = (formatMessage) => ({
+  value: ACTIONS.ADD_TO_EXISTING,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.addNote' }),
   disabled: false,
 });
 

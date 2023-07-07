@@ -5,12 +5,15 @@ import {
   Select,
 } from '@folio/stripes/components';
 
+import { useIntl } from 'react-intl';
 import { FINAL_ACTIONS } from '../../../../../constants';
 import { ACTION_VALUE_KEY } from './helpers';
 import { ValuesColumn } from './ValuesColumn';
 import { AdditionalActions } from './AdditionalActions';
 
 export const ActionsRow = ({ option, actions, onChange }) => {
+  const { formatMessage } = useIntl();
+
   return actions.map((action, actionIndex) => {
     if (!action) return null;
 
@@ -22,6 +25,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
           onChange={(e) => onChange({ actionIndex, value: e.target.value, fieldName: ACTION_VALUE_KEY })}
           disabled={action.actionsList.length === 1}
           data-testid={`select-actions-${actionIndex}`}
+          aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.actionsSelect' })}
         />
       </Col>
     );

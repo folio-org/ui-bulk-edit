@@ -12,6 +12,8 @@ import {
   FINAL_ACTIONS,
   getMarkAsStuffOnlyAction,
   getRemoveMarkAsStuffOnlyAction,
+  getRemoveAllAction,
+  getAddNoteAction,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -70,7 +72,7 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
   };
 };
 
-export const getDefaultActions = (option, formatMessage) => {
+export const getDefaultActions = (option, options, formatMessage) => {
   const emailActionsFind = [getFindAction(formatMessage)];
   const emailActionsReplace = [getReplaceAction(formatMessage)];
   const patronActions = [getReplaceAction(formatMessage)];
@@ -84,15 +86,21 @@ export const getDefaultActions = (option, formatMessage) => {
     getSetToTrueAction(formatMessage),
     getSetToFalseAction(formatMessage),
   ];
-  const noteMarkActions = [
+  const noteBaseActions = [
     getPlaceholder(formatMessage),
     getMarkAsStuffOnlyAction(formatMessage),
     getRemoveMarkAsStuffOnlyAction(formatMessage),
+    getAddNoteAction(formatMessage),
+    getRemoveAllAction(formatMessage),
   ];
 
   const allActionsInitialVal = allActions[0].value;
 
-  switch (option) {
+  const isStandardOption = Object.keys(OPTIONS).includes(option);
+
+  const opt = isStandardOption ? option : options.find(({ value }) => value === option)?.type;
+
+  switch (opt) {
     /* USER OPTIONS */
     case OPTIONS.EMAIL_ADDRESS:
       return {
@@ -247,22 +255,18 @@ export const getDefaultActions = (option, formatMessage) => {
         ],
       };
 
-    case OPTIONS.ACTION_NOTE:
-    case OPTIONS.BINDING_NOTE:
+    case OPTIONS.ITEM_NOTE:
+    case OPTIONS.ADMINISTRATIVE_NOTE:
     case OPTIONS.CHECK_IN_NOTE:
     case OPTIONS.CHECK_OUT_NOTE:
-    case OPTIONS.COPY_NOTE:
-    case OPTIONS.ELECTRONIC_BOOKPLATE:
-    case OPTIONS.NOTE:
-    case OPTIONS.PROVENANCE:
-    case OPTIONS.REPRODUCTION:
       return {
         type: '',
         actions: [
+          null,
           {
-            actionsList: noteMarkActions,
-            type: CONTROL_TYPES.NOTE_SELECT,
-            [ACTION_VALUE_KEY]: noteMarkActions[0].value,
+            actionsList: noteBaseActions,
+            type: CONTROL_TYPES.TEXTAREA,
+            [ACTION_VALUE_KEY]: noteBaseActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
