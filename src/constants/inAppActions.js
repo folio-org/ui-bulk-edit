@@ -127,6 +127,7 @@ export const noteActions = (formatMessage) => [
   getAddNoteAction(formatMessage),
   getRemoveAllAction(formatMessage),
   getChangeNoteTypeAction(formatMessage),
+  getFindAction(formatMessage),
 ];
 
 export const noteActionsWithMark = (formatMessage) => [
@@ -135,6 +136,7 @@ export const noteActionsWithMark = (formatMessage) => [
   getRemoveMarkAsStuffOnlyAction(formatMessage),
   getAddNoteAction(formatMessage),
   getRemoveAllAction(formatMessage),
+  getFindAction(formatMessage),
   getChangeNoteTypeAction(formatMessage),
 ];
 

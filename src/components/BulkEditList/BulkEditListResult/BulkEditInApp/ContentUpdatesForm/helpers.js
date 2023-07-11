@@ -7,6 +7,7 @@ import {
   ACTIONS,
   emailActionsFind,
   emailActionsReplace,
+  noteAdditionalActions,
   patronActions,
   expirationActions,
   replaceClearActions,
@@ -343,4 +344,22 @@ export const getActionType = (action, option, capability) => {
   }
 
   return actionName ?? null;
+};
+
+export const getExtraActions = (option, action, formattedMessage) => {
+  switch (`${option}-${action}`) {
+    case `${OPTIONS.ITEM_NOTE}-${ACTIONS.FIND}`:
+    case `${OPTIONS.ADMINISTRATIVE_NOTE}-${ACTIONS.FIND}`:
+    case `${OPTIONS.CHECK_IN_NOTE}-${ACTIONS.FIND}`:
+    case `${OPTIONS.CHECK_OUT_NOTE}-${ACTIONS.FIND}`:
+      return [{
+        actionsList: noteAdditionalActions(formattedMessage),
+        controlType: () => CONTROL_TYPES.TEXTAREA,
+        [ACTION_VALUE_KEY]: noteAdditionalActions(formattedMessage)[0].value,
+        [FIELD_VALUE_KEY]: '',
+      }];
+
+    default:
+      return [];
+  }
 };
