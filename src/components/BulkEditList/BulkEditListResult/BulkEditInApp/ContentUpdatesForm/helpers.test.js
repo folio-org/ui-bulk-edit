@@ -167,83 +167,113 @@ describe('ContentUpdatesForm helpers', () => {
       const formatMessage = jest.fn();
 
       it('returns the correct object for the EMAIL_ADDRESS option', () => {
-        expect(getDefaultActions(OPTIONS.EMAIL_ADDRESS, [], formatMessage)).toEqual({
+        const controlType = () => CONTROL_TYPES.INPUT;
+
+        expect(JSON.stringify(getDefaultActions(OPTIONS.EMAIL_ADDRESS, [], formatMessage))).toEqual(JSON.stringify({
           type: '',
           actions: [
             {
-              actionsList: [{ value: 'find' }],
-              type: CONTROL_TYPES.INPUT,
-              [ACTION_VALUE_KEY]: 'find',
+              actionsList: [{ value: 'FIND',
+                disabled: false,
+                label: undefined }],
+              controlType,
+              [ACTION_VALUE_KEY]: 'FIND',
               [FIELD_VALUE_KEY]: '',
             },
             {
-              actionsList: [{ value: 'replace' }],
-              type: CONTROL_TYPES.INPUT,
-              [ACTION_VALUE_KEY]: 'replace',
+              actionsList: [{ value: 'REPLACE_WITH',
+                disabled: false,
+                label: undefined }],
+              controlType,
+              [ACTION_VALUE_KEY]: 'REPLACE_WITH',
               [FIELD_VALUE_KEY]: '',
             },
           ],
-        });
+        }));
       });
 
       it('returns the correct object for the PATRON_GROUP option', () => {
-        expect(getDefaultActions(OPTIONS.PATRON_GROUP, [], formatMessage)).toEqual({
+        expect(JSON.stringify(getDefaultActions(OPTIONS.PATRON_GROUP, [], formatMessage))).toEqual(JSON.stringify({
           type: '',
           actions: [
             null,
             {
-              actionsList: [{ value: 'replace' }],
-              type: CONTROL_TYPES.PATRON_GROUP_SELECT,
-              [ACTION_VALUE_KEY]: 'replace',
+              actionsList: [{ value: 'REPLACE_WITH',
+                label: undefined,
+                disabled: false }],
+              controlType: () => CONTROL_TYPES.PATRON_GROUP_SELECT,
+              [ACTION_VALUE_KEY]: 'REPLACE_WITH',
               [FIELD_VALUE_KEY]: '',
             },
           ],
-        });
+        }));
       });
 
       it('returns the correct object for the EXPIRATION_DATE option', () => {
-        expect(getDefaultActions(OPTIONS.EXPIRATION_DATE, [], formatMessage)).toEqual({
-          type: '',
-          actions: [
-            null,
-            {
-              actionsList: [{ value: 'replace' }],
-              type: CONTROL_TYPES.DATE,
-              [ACTION_VALUE_KEY]: 'replace',
-              [FIELD_VALUE_KEY]: '',
-            },
-          ],
-        });
+        expect(JSON.stringify(getDefaultActions(OPTIONS.EXPIRATION_DATE, [], formatMessage))).toEqual(
+          JSON.stringify({
+            type: '',
+            actions: [
+              null,
+              {
+                actionsList: [{ value: 'REPLACE_WITH', disabled: false }],
+                [ACTION_VALUE_KEY]: 'REPLACE_WITH',
+                [FIELD_VALUE_KEY]: '',
+              },
+            ],
+          }),
+        );
       });
 
       it('returns the correct object for the TEMPORARY_HOLDINGS_LOCATION option', () => {
-        expect(getDefaultActions(OPTIONS.TEMPORARY_HOLDINGS_LOCATION, [], formatMessage)).toEqual({
-          type: '',
-          actions: [
-            null,
-            {
-              actionsList: [{ value: 'base' }],
-              type: CONTROL_TYPES.LOCATION,
-              [ACTION_VALUE_KEY]: 'base',
-              [FIELD_VALUE_KEY]: '',
-            },
-          ],
-        });
+        const controlType = () => CONTROL_TYPES.LOCATION;
+        expect(JSON.stringify(getDefaultActions(OPTIONS.TEMPORARY_HOLDINGS_LOCATION, [], formatMessage))).toEqual(
+          JSON.stringify({
+            type: '',
+            actions: [
+              null,
+              {
+                actionsList: [{ value: '',
+                  disabled: true,
+                  label: undefined },
+                {
+                  value: 'REPLACE_WITH',
+                  disabled: false,
+                  label: undefined,
+                },
+                {
+                  value: 'CLEAR_FIELD',
+                  disabled: false,
+                  label: undefined,
+                },
+                ],
+                controlType,
+                [ACTION_VALUE_KEY]: '',
+                [FIELD_VALUE_KEY]: '',
+              },
+            ],
+          }),
+        );
       });
 
       it('returns the correct object for the PERMANENT_HOLDINGS_LOCATION option', () => {
-        expect(getDefaultActions(OPTIONS.PERMANENT_HOLDINGS_LOCATION, [], formatMessage)).toEqual({
-          type: '',
-          actions: [
-            null,
-            {
-              actionsList: [{ value: 'replace' }],
-              type: CONTROL_TYPES.LOCATION,
-              [ACTION_VALUE_KEY]: 'replace',
-              [FIELD_VALUE_KEY]: '',
-            },
-          ],
-        });
+        const controlType = () => CONTROL_TYPES.LOCATION;
+        expect(JSON.stringify(getDefaultActions(OPTIONS.PERMANENT_HOLDINGS_LOCATION, [], formatMessage))).toEqual(
+          JSON.stringify({
+            type: '',
+            actions: [
+              null,
+              {
+                actionsList: [{ value: 'REPLACE_WITH',
+                  disabled: false,
+                  label: undefined }],
+                controlType,
+                [ACTION_VALUE_KEY]: 'REPLACE_WITH',
+                [FIELD_VALUE_KEY]: '',
+              },
+            ],
+          }),
+        );
       });
 
       it('returns the correct object for the TEMPORARY_LOCATION option', () => {
@@ -252,9 +282,22 @@ describe('ContentUpdatesForm helpers', () => {
           actions: [
             null,
             {
-              actionsList: [{ value: 'base' }],
-              type: CONTROL_TYPES.LOCATION,
-              [ACTION_VALUE_KEY]: 'base',
+              actionsList: [{ value: '',
+                disabled: true,
+                label: undefined },
+              {
+                value: 'REPLACE_WITH',
+                disabled: false,
+                label: undefined,
+              },
+              {
+                value: 'CLEAR_FIELD',
+                disabled: false,
+                label: undefined,
+              },
+              ],
+              type: 'LOCATION',
+              [ACTION_VALUE_KEY]: '',
               [FIELD_VALUE_KEY]: '',
             },
           ],
@@ -262,107 +305,176 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the SUPPRESS_FROM_DISCOVERY option', () => {
-        expect(getDefaultActions(OPTIONS.SUPPRESS_FROM_DISCOVERY, [], formatMessage)).toEqual({
-          type: '',
-          actions: [
-            null,
-            {
-              actionsList: [{ value: 'placeholder' }, { value: 'true' }, { value: 'false' }],
-              type: CONTROL_TYPES.SUPPRESS_CHECKBOX,
-              [ACTION_VALUE_KEY]: 'placeholder',
-              [FIELD_VALUE_KEY]: '',
-            },
-          ],
-        });
+        expect(JSON.stringify(getDefaultActions(OPTIONS.SUPPRESS_FROM_DISCOVERY, [], formatMessage))).toEqual(
+          JSON.stringify({
+            type: '',
+            actions: [
+              null,
+              {
+                actionsList: [{ value: '',
+                  disabled: true,
+                  label: undefined }, { value: 'SET_TO_TRUE',
+                  disabled: false,
+                  label: undefined }, { value: 'SET_TO_FALSE',
+                  disabled: false,
+                  label: undefined }],
+                [ACTION_VALUE_KEY]: '',
+                [FIELD_VALUE_KEY]: '',
+              },
+            ],
+          }),
+        );
       });
 
       it('returns the correct object for the PERMANENT_LOCATION option', () => {
-        expect(getDefaultActions(OPTIONS.PERMANENT_LOCATION, [], formatMessage)).toEqual({
-          type: '',
-          actions: [
-            null,
-            {
-              actionsList: [{ value: 'base' }],
-              type: CONTROL_TYPES.LOCATION,
-              [ACTION_VALUE_KEY]: 'base',
-              [FIELD_VALUE_KEY]: '',
-            },
-          ],
-        });
+        const controlType = () => CONTROL_TYPES.LOCATION;
+        expect(JSON.stringify(getDefaultActions(OPTIONS.PERMANENT_LOCATION, [], formatMessage))).toEqual(
+          JSON.stringify({
+            type: '',
+            actions: [
+              null,
+              {
+                actionsList: [{ value: '',
+                  disabled: true,
+                  label: undefined },
+                {
+                  value: 'REPLACE_WITH',
+                  disabled: false,
+                  label: undefined,
+                },
+                {
+                  value: 'CLEAR_FIELD',
+                  disabled: false,
+                  label: undefined,
+                },
+                ],
+                controlType,
+                [ACTION_VALUE_KEY]: '',
+                [FIELD_VALUE_KEY]: '',
+              },
+            ],
+          }),
+        );
       });
 
       it('returns the correct object for the STATUS option', () => {
-        expect(getDefaultActions(OPTIONS.STATUS, [], formatMessage)).toEqual({
-          type: '',
-          actions: [
-            null,
-            {
-              actionsList: [{ value: 'replace' }],
-              type: CONTROL_TYPES.STATUS_SELECT,
-              [ACTION_VALUE_KEY]: 'replace',
-              [FIELD_VALUE_KEY]: '',
-            },
-          ],
-        });
+        const controlType = () => CONTROL_TYPES.STATUS_SELECT;
+        expect(JSON.stringify(getDefaultActions(OPTIONS.STATUS, [], formatMessage))).toEqual(
+          JSON.stringify({
+            type: '',
+            actions: [
+              null,
+              {
+                actionsList: [{ value: 'REPLACE_WITH',
+                  disabled: false,
+                  label: undefined }],
+                controlType,
+                [ACTION_VALUE_KEY]: 'REPLACE_WITH',
+                [FIELD_VALUE_KEY]: '',
+              },
+            ],
+          }),
+        );
       });
 
       it('returns the correct object for the TEMPORARY_LOAN_TYPE option', () => {
-        expect(getDefaultActions(OPTIONS.TEMPORARY_LOAN_TYPE, [], formatMessage)).toEqual({
-          type: '',
-          actions: [
-            null,
-            {
-              actionsList: [{ value: 'base' }],
-              type: CONTROL_TYPES.LOAN_TYPE,
-              [ACTION_VALUE_KEY]: 'base',
-              [FIELD_VALUE_KEY]: '',
-            },
-          ],
-        });
+        const controlType = () => CONTROL_TYPES.LOAN_TYPE;
+        expect(JSON.stringify(getDefaultActions(OPTIONS.TEMPORARY_LOAN_TYPE, [], formatMessage))).toEqual(
+          JSON.stringify({
+            type: '',
+            actions: [
+              null,
+              {
+                actionsList: [{
+                  value: '',
+                  disabled: true,
+                  label: undefined,
+                },
+                {
+                  value: 'REPLACE_WITH',
+                  disabled: false,
+                  label: undefined,
+                },
+                {
+                  value: 'CLEAR_FIELD',
+                  disabled: false,
+                  label: undefined,
+                },
+                ],
+                controlType,
+                [ACTION_VALUE_KEY]: '',
+                [FIELD_VALUE_KEY]: '',
+              },
+            ],
+          }),
+        );
       });
 
       it('returns the correct object for the PERMANENT_LOAN_TYPE option', () => {
-        expect(getDefaultActions(OPTIONS.PERMANENT_LOAN_TYPE, [], formatMessage)).toEqual({
-          type: '',
-          actions: [
-            null,
-            {
-              actionsList: [{ value: 'replace' }],
-              type: CONTROL_TYPES.LOAN_TYPE,
-              [ACTION_VALUE_KEY]: 'replace',
-              [FIELD_VALUE_KEY]: '',
-            },
-          ],
-        });
+        const controlType = () => CONTROL_TYPES.LOAN_TYPE;
+        expect(JSON.stringify(getDefaultActions(OPTIONS.PERMANENT_LOAN_TYPE, [], formatMessage))).toEqual(
+          JSON.stringify({
+            type: '',
+            actions: [
+              null,
+              {
+                actionsList: [{ value: 'REPLACE_WITH',
+                  disabled: false,
+                  label: undefined }],
+                controlType,
+                [ACTION_VALUE_KEY]: 'REPLACE_WITH',
+                [FIELD_VALUE_KEY]: '',
+              },
+            ],
+          }),
+        );
       });
 
       const noteOptions = [
         OPTIONS.ITEM_NOTE,
-        OPTIONS.ADMINISTRATIVE_NOTE,
         OPTIONS.CHECK_IN_NOTE,
         OPTIONS.CHECK_OUT_NOTE,
       ];
 
       noteOptions.forEach(option => {
         it(`returns the correct object for the ${option} option`, () => {
-          expect(getDefaultActions(option, [], formatMessage)).toEqual({
-            type: '',
-            actions: [
-              null,
-              {
-                actionsList: [
-                  { value: 'placeholder' },
-                  { value: 'mark' },
-                  { value: 'remove' },
-                  { value: 'addNote' },
-                  { value: 'removeAll' },
-                ],
-                type: CONTROL_TYPES.TEXTAREA,
-                [ACTION_VALUE_KEY]: 'placeholder',
-                [FIELD_VALUE_KEY]: '',
-              },
-            ],
-          });
+          const controlType = () => {};
+          expect(JSON.stringify(getDefaultActions(option, [], formatMessage))).toEqual(
+            JSON.stringify({
+              type: '',
+              actions: [
+                null,
+                {
+                  actionsList: [
+                    { value: '',
+                      disabled: true,
+                      label: undefined },
+                    { value: 'MARK_AS_STAFF_ONLY',
+                      disabled: false,
+                      label: undefined },
+                    { value: 'REMOVE_MARK_AS_STAFF_ONLY',
+                      disabled: false,
+                      label: undefined },
+                    { value: 'ADD_TO_EXISTING',
+                      disabled: false,
+                      label: undefined },
+                    { value: 'REMOVE_ALL',
+                      disabled: false,
+                      label: undefined },
+                    {
+                      value: 'CHANGE_TYPE',
+                      disabled: false,
+                      label: undefined,
+                    },
+                  ],
+                  controlType,
+                  name: '',
+                  [ACTION_VALUE_KEY]: '',
+                  [FIELD_VALUE_KEY]: '',
+                },
+              ],
+            }),
+          );
         });
       });
 

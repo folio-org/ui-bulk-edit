@@ -8,6 +8,7 @@ import { createMemoryHistory } from 'history';
 import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 import { ValuesColumn } from './ValuesColumn';
 import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
+import { CONTROL_TYPES } from '../../../../../constants';
 
 jest.mock('../../../../../hooks/api/useLoanTypes');
 jest.mock('../../../../../hooks/api/usePatronGroup');
@@ -23,7 +24,7 @@ const mockAction = {
 };
 
 const renderComponent = (actionType) => {
-  const action = { ...mockAction, type: actionType };
+  const action = { ...mockAction, controlType: actionType };
   return render(
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
@@ -53,7 +54,7 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render TextField when action type is INPUT', async () => {
-    const { getByTestId } = renderComponent('INPUT');
+    const { getByTestId } = renderComponent(() => CONTROL_TYPES.INPUT);
     const element = getByTestId('input-email-0');
 
     expect(element).toBeInTheDocument();
@@ -65,7 +66,7 @@ describe('ValuesColumn Component', () => {
 
   /// continue from the above code
   it('should render Select with patron groups when action type is PATRON_GROUP_SELECT', async () => {
-    const { getByTestId } = renderComponent('PATRON_GROUP_SELECT');
+    const { getByTestId } = renderComponent(() => CONTROL_TYPES.PATRON_GROUP_SELECT);
     const element = getByTestId('select-patronGroup-0');
 
     expect(element).toBeInTheDocument();
@@ -76,7 +77,7 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render Datepicker when action type is DATE', async () => {
-    const { getByTestId } = renderComponent('DATE');
+    const { getByTestId } = renderComponent(() => CONTROL_TYPES.DATE);
     const element = getByTestId('dataPicker-experation-date-0');
 
     expect(element).toBeInTheDocument();
@@ -87,7 +88,7 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render Select with status options when action type is STATUS_SELECT', async () => {
-    const { getByTestId } = renderComponent('STATUS_SELECT');
+    const { getByTestId } = renderComponent(() => CONTROL_TYPES.STATUS_SELECT);
     const element = getByTestId('select-statuses-0');
 
     expect(element).toBeInTheDocument();
@@ -98,8 +99,19 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render Selection with loan types when action type is LOAN_TYPE', async () => {
-    const { container } = renderComponent('LOAN_TYPE');
+    const { container } = renderComponent(() => CONTROL_TYPES.LOAN_TYPE);
     const element = container.querySelector('#loanType');
+
+    expect(element).toBeInTheDocument();
+
+    fireEvent.change(element, { target: { value: 'newLoanType' } });
+
+    await waitFor(() => expect(onChange).toHaveBeenCalled());
+  });
+
+  it('should render select with item note types when action type is LOAN_TYPE', async () => {
+    const { container } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
+    const element = container.querySelector('#noteType');
 
     expect(element).toBeInTheDocument();
 
