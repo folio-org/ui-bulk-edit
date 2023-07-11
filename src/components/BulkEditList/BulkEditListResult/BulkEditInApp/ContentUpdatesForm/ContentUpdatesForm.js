@@ -22,6 +22,7 @@ import {
   isAddButtonShown,
   getActionType,
   getFilteredFields,
+  getExtraActions,
 } from './helpers';
 import { groupByCategory } from '../../../../../utils/filters';
 
@@ -68,26 +69,80 @@ export const ContentUpdatesForm = ({
     setFields(finalizedFields);
   };
 
+  const getMappedActions = ({
+    field,
+    value,
+    fieldName,
+    actionIndex,
+    hasActionChanged,
+  }) => {
+    return field.actionsDetails.actions.map((action, j) => {
+      if (!action) return action; // if null, return this value to stay with the same arr length
+
+      return j === actionIndex
+        ? ({
+          ...action,
+          [fieldName]: value,
+          ...(hasActionChanged && { [FIELD_VALUE_KEY]: '' }), // clear field values if action changed
+        })
+        : action;
+    });
+  };
+
+  const getWithExtraActions = ({
+    field,
+    value,
+    actions,
+    actionIndex,
+    hasActionChanged,
+  }) => {
+    let finalActions = [...actions];
+    const noNullActionIndex = finalActions[0] ? actionIndex : actionIndex - 1;
+
+    if (hasActionChanged && noNullActionIndex === 0) { // only based on first action additional actions are shown
+      const sourceOption = options.find(o => o.value === field.option);
+      const optionType = sourceOption.type;
+      const option = optionType || field.option;
+      const extraActions = getExtraActions(option, value, formatMessage);
+      const firstAvailableAction = finalActions.find(Boolean);
+
+      if (extraActions?.length) {
+        finalActions = [firstAvailableAction, ...extraActions];
+      } else {
+        finalActions = [null, firstAvailableAction];
+      }
+    }
+
+    return finalActions;
+  };
+
   const handleChange = ({ rowIndex, actionIndex, value, fieldName }) => {
     setFields(fieldsArr => fieldsArr.map((field, i) => {
       if (i === rowIndex) {
+        const hasActionChanged = fieldName === ACTION_VALUE_KEY;
+
+        const sharedArgs = {
+          field,
+          value,
+          actionIndex,
+          hasActionChanged,
+        };
+
+        const mappedActions = getMappedActions({
+          fieldName,
+          ...sharedArgs,
+        });
+
+        const actions = getWithExtraActions({
+          actions: mappedActions,
+          ...sharedArgs,
+        });
+
         return {
           ...field,
           actionsDetails: {
             ...field.actionsDetails,
-            actions: field.actionsDetails.actions.map((action, j) => {
-              if (!action) return action; // if null, return this value to stay with the same arr length
-
-              const hasActionChanged = fieldName === ACTION_VALUE_KEY;
-
-              return j === actionIndex
-                ? ({
-                  ...action,
-                  [fieldName]: value,
-                  ...(hasActionChanged && { [FIELD_VALUE_KEY]: '' }), // clear field values if action changed
-                })
-                : action;
-            }),
+            actions,
           },
         };
       }

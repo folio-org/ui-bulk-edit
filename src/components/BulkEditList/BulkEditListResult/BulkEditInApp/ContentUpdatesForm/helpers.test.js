@@ -1,11 +1,16 @@
 import {
-  ACTIONS, CONTROL_TYPES,
+  ACTIONS,
+  CONTROL_TYPES,
   OPTIONS,
+  noteAdditionalActions,
 } from '../../../../../constants';
 
 import {
-  ACTION_VALUE_KEY, FIELD_VALUE_KEY,
-  getContentUpdatesBody, getDefaultActions,
+  ACTION_VALUE_KEY,
+  FIELD_VALUE_KEY,
+  getContentUpdatesBody,
+  getDefaultActions,
+  getExtraActions,
   isContentUpdatesFormValid,
 } from './helpers';
 
@@ -22,6 +27,7 @@ jest.mock('../../../../../constants', () => ({
   getRemoveMarkAsStuffOnlyAction: jest.fn().mockReturnValue({ value: 'remove' }),
   getRemoveAllAction: jest.fn().mockReturnValue({ value: 'removeAll' }),
   getAddNoteAction: jest.fn().mockReturnValue({ value: 'addNote' }),
+  noteAdditionalActions: jest.fn().mockReturnValue([{ value: 'note' }]),
 }));
 
 describe('ContentUpdatesForm helpers', () => {
@@ -461,6 +467,9 @@ describe('ContentUpdatesForm helpers', () => {
                     { value: 'REMOVE_ALL',
                       disabled: false,
                       label: undefined },
+                    { value: 'FIND',
+                      disabled: false,
+                      label: undefined },
                     {
                       value: 'CHANGE_TYPE',
                       disabled: false,
@@ -483,6 +492,41 @@ describe('ContentUpdatesForm helpers', () => {
           type: null,
           actions: [],
         });
+      });
+    });
+
+    describe('getExtraActions', () => {
+      const mockFormattedMessage = 'label';
+
+      it('should return a certain structure for specific OPTIONS and ACTIONS', () => {
+        const optionActionCombinations = [
+          { option: OPTIONS.ITEM_NOTE, action: ACTIONS.FIND },
+          { option: OPTIONS.ADMINISTRATIVE_NOTE, action: ACTIONS.FIND },
+          { option: OPTIONS.CHECK_IN_NOTE, action: ACTIONS.FIND },
+          { option: OPTIONS.CHECK_OUT_NOTE, action: ACTIONS.FIND },
+        ];
+
+        optionActionCombinations.forEach(({ option, action }) => {
+          const result = getExtraActions(option, action, mockFormattedMessage);
+          const expectedFirstActionValue = noteAdditionalActions(mockFormattedMessage)[0].value;
+
+          const expectedStructure = [{
+            actionsList: noteAdditionalActions(mockFormattedMessage),
+            controlType: () => CONTROL_TYPES.TEXTAREA,
+            [ACTION_VALUE_KEY]: expectedFirstActionValue,
+            [FIELD_VALUE_KEY]: '',
+          }];
+
+          expect(JSON.stringify(result)).toEqual(JSON.stringify(expectedStructure));
+        });
+      });
+
+      it('should return an empty array for non-matching OPTIONS and ACTIONS', () => {
+        const nonMatchingOption = 'NON_MATCHING_OPTION';
+        const nonMatchingAction = 'NON_MATCHING_ACTION';
+
+        const result = getExtraActions(nonMatchingOption, nonMatchingAction, mockFormattedMessage);
+        expect(result).toEqual([]);
       });
     });
   });
