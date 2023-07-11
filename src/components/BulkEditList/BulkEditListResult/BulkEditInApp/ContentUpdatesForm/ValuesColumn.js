@@ -18,7 +18,9 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const { userGroups } = usePatronGroup();
   const { loanTypes, isLoanTypesLoading } = useLoanTypes();
   const { itemNotes, usItemNotesLoading } = useItemNotes();
-  const filteredNoteOptions = getNotesOptions(formatMessage, itemNotes).filter(obj => obj.value !== option);
+  const filteredAndMappedNotes = getNotesOptions(formatMessage, itemNotes)
+    .filter(obj => obj.value !== option)
+    .map(({ label, value }) => ({ label, value }));
   const statuses = getItemStatusOptions(formatMessage);
   const actionValue = action.value;
   const controlType = action.controlType(action.name);
@@ -128,15 +130,15 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   );
 
   const renderNoteTypeSelect = () => controlType === CONTROL_TYPES.NOTE_SELECT && (
-  <Select
-    id="noteType"
-    value={action.value}
-    loading={usItemNotesLoading}
-    onChange={value => onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY })}
-    placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectNoteType' })}
-    dataOptions={filteredNoteOptions}
-    aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-  />
+    <Select
+      id="noteType"
+      value={action.value}
+      loading={usItemNotesLoading}
+      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+      placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectNoteType' })}
+      dataOptions={filteredAndMappedNotes}
+      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+    />
   );
 
   return (
