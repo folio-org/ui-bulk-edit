@@ -135,7 +135,6 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       value={action.value}
       loading={usItemNotesLoading}
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
-      placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectNoteType' })}
       dataOptions={filteredAndMappedNotes}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
     />

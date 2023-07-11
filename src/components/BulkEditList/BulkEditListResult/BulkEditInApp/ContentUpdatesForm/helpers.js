@@ -14,7 +14,9 @@ import {
   permanentLoanTypeActions,
   suppressFromDiscActions,
   statusActions,
-  noteActions, CAPABILITIES, noteActionsWithMark,
+  noteActions,
+  CAPABILITIES,
+  noteActionsWithMark,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';

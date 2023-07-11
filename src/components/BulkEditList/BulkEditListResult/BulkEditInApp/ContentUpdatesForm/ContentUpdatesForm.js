@@ -163,24 +163,28 @@ export const ContentUpdatesForm = ({
   }, [fields]);
 
   const renderOptions = (optionsMap) => {
-    const result = [];
-
-    for (const [category, item] of Object.entries(optionsMap)) {
+    return Object.entries(optionsMap).map(([category, item]) => {
       if (Array.isArray(item)) {
-        result.push((
+        return (
           <optgroup
             key={category}
             label={category}
           >
             {renderOptions(item)}
           </optgroup>
-        ));
+        );
       } else {
-        result.push((<option key={item.value} value={item.value} disabled={item.disabled}>{item.label}</option>));
+        return (
+          <option
+            key={item.value}
+            value={item.value}
+            disabled={item.disabled}
+          >
+            {item.label}
+          </option>
+        );
       }
-    }
-
-    return result.map(item => item);
+    });
   };
 
   return (
