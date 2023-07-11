@@ -10,6 +10,7 @@ import { useLocation } from 'react-router';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import { CAPABILITIES, getHoldingsOptions, getItemsOptions, getUserOptions } from '../../../../constants';
+import { useItemNotes } from '../../../../hooks/api/useItemNotes';
 
 export const BulkEditInApp = ({
   onContentUpdatesChanged,
@@ -17,16 +18,19 @@ export const BulkEditInApp = ({
 }) => {
   const intl = useIntl();
   const location = useLocation();
+  const { itemNotes, usItemNotesLoading } = useItemNotes();
   const search = new URLSearchParams(location.search);
   const fileUploadedName = search.get('fileName');
 
   const optionsMap = {
-    [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage),
+    [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage, itemNotes),
     [CAPABILITIES.USER]: getUserOptions(intl.formatMessage),
     [CAPABILITIES.HOLDING]: getHoldingsOptions(intl.formatMessage),
   };
 
   const options = optionsMap[capabilities];
+
+  const showContentUpdatesForm = options && !usItemNotesLoading;
 
   return (
     <>
@@ -37,7 +41,7 @@ export const BulkEditInApp = ({
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
       >
         <BulkEditInAppTitle />
-        {options && (
+        {showContentUpdatesForm && (
           <ContentUpdatesForm
             options={options}
             onContentUpdatesChanged={onContentUpdatesChanged}

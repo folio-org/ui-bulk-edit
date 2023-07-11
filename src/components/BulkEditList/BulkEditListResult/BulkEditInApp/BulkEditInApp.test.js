@@ -213,7 +213,7 @@ describe('BulkEditInApp', () => {
     expect(optionReplace.selected).toBeTruthy();
   });
 
-  it('should display experation date', () => {
+  it('should display expiration date', () => {
     renderBulkEditInApp({ capability: CAPABILITIES.USER });
 
 

@@ -18,16 +18,19 @@ export const OPTIONS = {
   PERMANENT_LOAN_TYPE: 'PERMANENT_LOAN_TYPE',
   TEMPORARY_HOLDINGS_LOCATION: 'TEMPORARY_HOLDINGS_LOCATION',
   PERMANENT_HOLDINGS_LOCATION: 'PERMANENT_HOLDINGS_LOCATION',
-  ACTION_NOTE: 'ACTION_NOTE',
-  BINDING_NOTE: 'BINDING_NOTE',
+  ITEM_NOTE: 'ITEM_NOTE',
+  ADMINISTRATIVE_NOTE: 'ADMINISTRATIVE_NOTE',
   CHECK_IN_NOTE: 'CHECK_IN_NOTE',
   CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
-  COPY_NOTE: 'COPY_NOTE',
-  ELECTRONIC_BOOKPLATE: 'ELECTRONIC_BOOKPLATE',
-  NOTE: 'NOTE',
-  PROVENANCE: 'PROVENANCE',
-  REPRODUCTION: 'REPRODUCTION',
 };
+
+export const PARAMETERS_KEYS = {
+  ITEM_NOTE_TYPE_ID_KEY: 'ITEM_NOTE_TYPE_ID_KEY',
+};
+
+export const OPTIONS_WITH_ADDITIONAL_PARAMETERS = [
+  OPTIONS.ITEM_NOTE,
+];
 
 export const identifierOptions = {
   [CAPABILITIES.USER]: [
@@ -180,7 +183,7 @@ export const getHoldingsOptions = (formatMessage) => [
   },
 ];
 
-export const getItemsOptions = (formatMessage) => [
+export const getItemsOptions = (formatMessage, additionalItems = []) => [
   {
     value: '',
     label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
@@ -190,11 +193,15 @@ export const getItemsOptions = (formatMessage) => [
     value: OPTIONS.TEMPORARY_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLocation' }),
     disabled: false,
+    category: 'Location',
+    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.location' }),
   },
   {
     value: OPTIONS.PERMANENT_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLocation' }),
     disabled: false,
+    category: 'Location',
+    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.location' }),
   },
   {
     value: OPTIONS.STATUS,
@@ -205,11 +212,15 @@ export const getItemsOptions = (formatMessage) => [
     value: OPTIONS.TEMPORARY_LOAN_TYPE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLoanTypeLabel' }),
     disabled: false,
+    category: 'Loan type',
+    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
   },
   {
     value: OPTIONS.PERMANENT_LOAN_TYPE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLoanType' }),
     disabled: false,
+    category: 'Loan type',
+    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
   },
   {
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
@@ -217,50 +228,21 @@ export const getItemsOptions = (formatMessage) => [
     disabled: false,
   },
   {
-    value: OPTIONS.ACTION_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.actionNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.BINDING_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.bindingNote' }),
+    value: OPTIONS.ADMINISTRATIVE_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
     disabled: false,
   },
   {
     value: OPTIONS.CHECK_IN_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkinNote' }),
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkInNote' }),
     disabled: false,
   },
   {
     value: OPTIONS.CHECK_OUT_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkoutNote' }),
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkOutNote' }),
     disabled: false,
   },
-  {
-    value: OPTIONS.COPY_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.copyNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.ELECTRONIC_BOOKPLATE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.electronicBookplate' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.note' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.PROVENANCE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.provenance' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.REPRODUCTION,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.reproduction' }),
-    disabled: false,
-  },
+  ...additionalItems,
 ];
 
 export const getItemStatusOptions = (formatMessage) => [
