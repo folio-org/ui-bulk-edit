@@ -80,8 +80,4 @@ export const getMappedTableData = ({ data, capabilities, intl }) => {
   };
 };
 
-export const getParametersIfAny = (label, options) => {
-  const opt = options?.find(option => option.label === label);
 
-  return opt?.parameters ? { parameters: opt.parameters } : {};
-};

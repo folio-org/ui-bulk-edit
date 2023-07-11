@@ -1,9 +1,11 @@
 import { useOkapiKy } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
+import { useIntl } from 'react-intl';
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 
 export const useItemNotes = () => {
   const ky = useOkapiKy();
+  const { formatMessage } = useIntl();
 
   const { data, isLoading: usItemNotesLoading } = useQuery(
     {
@@ -21,6 +23,7 @@ export const useItemNotes = () => {
       value: type.id,
     }],
     disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.itemNotes' }),
   })) || [];
 
   const itemNotes = mappedNotes.sort((a, b) => a.label.localeCompare(b.label));

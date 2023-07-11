@@ -3,8 +3,13 @@ import { Col, Datepicker, Select, Selection, TextField, TextArea } from '@folio/
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import { BASE_DATE_FORMAT, CONTROL_TYPES, getItemStatusOptions, getNotesOptions } from '../../../../../constants';
-import { FIELD_VALUE_KEY, removeObjectFromArray, TEMPORARY_LOCATIONS } from './helpers';
+import {
+  BASE_DATE_FORMAT,
+  CONTROL_TYPES,
+  getItemStatusOptions,
+  getNotesOptions,
+} from '../../../../../constants';
+import { FIELD_VALUE_KEY, TEMPORARY_LOCATIONS } from './helpers';
 import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
 import { useItemNotes } from '../../../../../hooks/api/useItemNotes';
 
@@ -13,23 +18,23 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const { userGroups } = usePatronGroup();
   const { loanTypes, isLoanTypesLoading } = useLoanTypes();
   const { itemNotes, usItemNotesLoading } = useItemNotes();
-  const notesOptions = () => {
-    return removeObjectFromArray(getNotesOptions(formatMessage, itemNotes), option);
-  };
+  const filteredNoteOptions = getNotesOptions(formatMessage, itemNotes).filter(obj => obj.value !== option);
   const statuses = getItemStatusOptions(formatMessage);
+  const actionValue = action.value;
+  const controlType = action.controlType(action.name);
 
-  const renderTextField = () => action.type === CONTROL_TYPES.INPUT && (
+  const renderTextField = () => controlType === CONTROL_TYPES.INPUT && (
     <TextField
-      value={action.value}
+      value={actionValue}
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       data-testid={`input-email-${actionIndex}`}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textField' })}
     />
   );
 
-  const renderTextArea = () => action.type === CONTROL_TYPES.TEXTAREA && (
+  const renderTextArea = () => controlType === CONTROL_TYPES.TEXTAREA && (
     <TextArea
-      value={action.value}
+      value={actionValue}
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       data-testid={`input-textarea-${actionIndex}`}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textArea' })}
@@ -57,10 +62,10 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       ],
     );
 
-    return action.type === CONTROL_TYPES.PATRON_GROUP_SELECT && (
+    return controlType === CONTROL_TYPES.PATRON_GROUP_SELECT && (
       <Select
         dataOptions={patronGroups}
-        value={action.value}
+        value={actionValue}
         onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
         data-testid={`select-patronGroup-${actionIndex}`}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.patronGroupSelect' })}
@@ -68,9 +73,9 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
     );
   };
 
-  const renderDatepicker = () => action.type === CONTROL_TYPES.DATE && (
+  const renderDatepicker = () => controlType === CONTROL_TYPES.DATE && (
     <Datepicker
-      value={action.value}
+      value={actionValue}
       onChange={(e, value, formattedValue) => {
         onChange({ actionIndex, value: formattedValue, fieldName: FIELD_VALUE_KEY });
       }}
@@ -80,10 +85,10 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
     />
   );
 
-  const renderLocationSelect = () => action.type === CONTROL_TYPES.LOCATION && (
+  const renderLocationSelect = () => controlType === CONTROL_TYPES.LOCATION && (
     <>
       <LocationSelection
-        value={action.value}
+        value={actionValue}
         onSelect={location => onChange({ actionIndex, value: location.id, fieldName: FIELD_VALUE_KEY })}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
         data-test-id={`textField-${actionIndex}`}
@@ -100,20 +105,20 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
     </>
   );
 
-  const renderStatusSelect = () => action.type === CONTROL_TYPES.STATUS_SELECT && (
+  const renderStatusSelect = () => controlType === CONTROL_TYPES.STATUS_SELECT && (
     <Select
       dataOptions={statuses}
-      value={action.value}
+      value={actionValue}
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       data-testid={`select-statuses-${actionIndex}`}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statusSelect' })}
     />
   );
 
-  const renderLoanTypeSelect = () => action.type === CONTROL_TYPES.LOAN_TYPE && (
+  const renderLoanTypeSelect = () => controlType === CONTROL_TYPES.LOAN_TYPE && (
     <Selection
       id="loanType"
-      value={action.value}
+      value={actionValue}
       loading={isLoanTypesLoading}
       onChange={value => onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY })}
       placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
@@ -122,14 +127,14 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
     />
   );
 
-  const renderNoteTypeSelect = () => action.type === CONTROL_TYPES.NOTE_SELECT && (
+  const renderNoteTypeSelect = () => controlType === CONTROL_TYPES.NOTE_SELECT && (
   <Select
     id="noteType"
     value={action.value}
     loading={usItemNotesLoading}
     onChange={value => onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY })}
     placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectNoteType' })}
-    dataOptions={notesOptions()}
+    dataOptions={filteredNoteOptions}
     aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
   />
   );
@@ -151,7 +156,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
 ValuesColumn.propTypes = {
   option: PropTypes.string,
   action: PropTypes.shape({
-    type: PropTypes.string,
+    controlType: PropTypes.func,
     name: PropTypes.string,
     value: PropTypes.string,
   }),

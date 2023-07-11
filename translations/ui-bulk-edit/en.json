@@ -114,6 +114,7 @@
 
   "category.loanType": "Loan type",
   "category.location": "Location",
+  "category.itemNotes": "Item notes",
 
   "columns.USER.User name": "Username",
   "columns.USER.User id": "User id",
@@ -349,7 +350,7 @@
   "permission.app-delete": "Bulk Edit: In app - Delete",
   "permission.logs.view": "Bulk edit - Can view logs",
 
-  "ariaLabel.actionSelect": "Actions select",
+  "ariaLabel.actionsSelect": "Actions select",
   "ariaLabel.textField": "Text field",
   "ariaLabel.textArea": "Text area",
   "ariaLabel.patronGroupSelect": "Patron group select",
