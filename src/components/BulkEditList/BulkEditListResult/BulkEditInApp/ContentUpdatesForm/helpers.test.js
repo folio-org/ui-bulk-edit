@@ -461,6 +461,9 @@ describe('ContentUpdatesForm helpers', () => {
                     { value: 'REMOVE_ALL',
                       disabled: false,
                       label: undefined },
+                    { value: 'FIND',
+                      disabled: false,
+                      label: undefined },
                     {
                       value: 'CHANGE_TYPE',
                       disabled: false,
