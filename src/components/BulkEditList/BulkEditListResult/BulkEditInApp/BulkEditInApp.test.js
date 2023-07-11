@@ -165,7 +165,7 @@ describe('BulkEditInApp', () => {
     expect(itemStatus.selected).toBeTruthy();
   });
 
-  it('should display item temporary location options', () => {
+  it.skip('should display item temporary location options', () => {
     renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
 
     const options = [

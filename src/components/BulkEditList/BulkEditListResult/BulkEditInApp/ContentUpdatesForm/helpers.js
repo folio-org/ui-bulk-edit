@@ -3,17 +3,20 @@ import {
   CONTROL_TYPES,
   OPTIONS,
   BASE_DATE_FORMAT,
-  getReplaceAction,
-  getFindAction,
-  getBaseActions,
-  getSetToTrueAction,
-  getSetToFalseAction,
-  getPlaceholder,
   FINAL_ACTIONS,
-  getMarkAsStuffOnlyAction,
-  getRemoveMarkAsStuffOnlyAction,
-  getRemoveAllAction,
-  getAddNoteAction,
+  ACTIONS,
+  emailActionsFind,
+  emailActionsReplace,
+  patronActions,
+  expirationActions,
+  replaceClearActions,
+  permanentHoldingsLocation,
+  permanentLoanTypeActions,
+  suppressFromDiscActions,
+  statusActions,
+  noteActions,
+  CAPABILITIES,
+  noteActionsWithMark,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -73,28 +76,19 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
 };
 
 export const getDefaultActions = (option, options, formatMessage) => {
-  const emailActionsFind = [getFindAction(formatMessage)];
-  const emailActionsReplace = [getReplaceAction(formatMessage)];
-  const patronActions = [getReplaceAction(formatMessage)];
-  const expirationActions = [getReplaceAction(formatMessage)];
-  const statusActions = [getReplaceAction(formatMessage)];
-  const permanentLoanTypeActions = [getReplaceAction(formatMessage)];
-  const permanentHoldingsLocation = [getReplaceAction(formatMessage)];
-  const allActions = getBaseActions(formatMessage);
-  const suppressFromDiscActions = [
-    getPlaceholder(formatMessage),
-    getSetToTrueAction(formatMessage),
-    getSetToFalseAction(formatMessage),
-  ];
-  const noteBaseActions = [
-    getPlaceholder(formatMessage),
-    getMarkAsStuffOnlyAction(formatMessage),
-    getRemoveMarkAsStuffOnlyAction(formatMessage),
-    getAddNoteAction(formatMessage),
-    getRemoveAllAction(formatMessage),
-  ];
+  const replaceClearDefaultActions = replaceClearActions(formatMessage);
+  const emailDefaultFindActions = emailActionsFind(formatMessage);
+  const emailDefaultReplaceActions = emailActionsReplace(formatMessage);
+  const patronDefaultActions = patronActions(formatMessage);
+  const expirationDefaultActions = expirationActions(formatMessage);
+  const holdingsLocationDefaultActions = permanentHoldingsLocation(formatMessage);
+  const suppressDefaultActions = suppressFromDiscActions(formatMessage);
+  const statusDefaultActions = statusActions(formatMessage);
+  const loanDefaultActions = permanentLoanTypeActions(formatMessage);
+  const noteDefaultActions = noteActions(formatMessage);
+  const noteWithMarkDefaultActions = noteActionsWithMark(formatMessage);
 
-  const allActionsInitialVal = allActions[0].value;
+  const replaceClearInitialVal = replaceClearDefaultActions[0].value;
 
   const isStandardOption = Object.keys(OPTIONS).includes(option);
 
@@ -107,15 +101,15 @@ export const getDefaultActions = (option, options, formatMessage) => {
         type: '',
         actions: [
           {
-            actionsList: emailActionsFind,
-            type: CONTROL_TYPES.INPUT,
-            [ACTION_VALUE_KEY]: emailActionsFind[0].value,
+            actionsList: emailDefaultFindActions,
+            controlType: () => CONTROL_TYPES.INPUT,
+            [ACTION_VALUE_KEY]: emailDefaultFindActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
           {
-            actionsList: emailActionsReplace,
-            type: CONTROL_TYPES.INPUT,
-            [ACTION_VALUE_KEY]: emailActionsReplace[0].value,
+            actionsList: emailDefaultReplaceActions,
+            controlType: () => CONTROL_TYPES.INPUT,
+            [ACTION_VALUE_KEY]: emailDefaultReplaceActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -126,9 +120,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: patronActions,
-            type: CONTROL_TYPES.PATRON_GROUP_SELECT,
-            [ACTION_VALUE_KEY]: patronActions[0].value,
+            actionsList: patronDefaultActions,
+            controlType: () => CONTROL_TYPES.PATRON_GROUP_SELECT,
+            [ACTION_VALUE_KEY]: patronDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -139,9 +133,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: expirationActions,
-            type: CONTROL_TYPES.DATE,
-            [ACTION_VALUE_KEY]: expirationActions[0].value,
+            actionsList: expirationDefaultActions,
+            controlType: () => CONTROL_TYPES.DATE,
+            [ACTION_VALUE_KEY]: expirationDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -154,9 +148,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: allActions,
-            type: CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: allActionsInitialVal,
+            actionsList: replaceClearDefaultActions,
+            controlType: () => CONTROL_TYPES.LOCATION,
+            [ACTION_VALUE_KEY]: replaceClearInitialVal,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -167,9 +161,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: permanentHoldingsLocation,
-            type: CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: permanentHoldingsLocation[0].value,
+            actionsList: holdingsLocationDefaultActions,
+            controlType: () => CONTROL_TYPES.LOCATION,
+            [ACTION_VALUE_KEY]: holdingsLocationDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -182,9 +176,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: allActions,
+            actionsList: replaceClearDefaultActions,
             type: CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: allActionsInitialVal,
+            [ACTION_VALUE_KEY]: replaceClearInitialVal,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -195,9 +189,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: suppressFromDiscActions,
-            type: CONTROL_TYPES.SUPPRESS_CHECKBOX,
-            [ACTION_VALUE_KEY]: suppressFromDiscActions[0].value,
+            actionsList: suppressDefaultActions,
+            controlType: () => CONTROL_TYPES.SUPPRESS_CHECKBOX,
+            [ACTION_VALUE_KEY]: suppressDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -208,9 +202,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: allActions,
-            type: CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: allActionsInitialVal,
+            actionsList: replaceClearDefaultActions,
+            controlType: () => CONTROL_TYPES.LOCATION,
+            [ACTION_VALUE_KEY]: replaceClearInitialVal,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -221,9 +215,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: statusActions,
-            type: CONTROL_TYPES.STATUS_SELECT,
-            [ACTION_VALUE_KEY]: statusActions[0].value,
+            actionsList: statusDefaultActions,
+            controlType: () => CONTROL_TYPES.STATUS_SELECT,
+            [ACTION_VALUE_KEY]: statusDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -234,9 +228,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: allActions,
-            type: CONTROL_TYPES.LOAN_TYPE,
-            [ACTION_VALUE_KEY]: allActionsInitialVal,
+            actionsList: replaceClearDefaultActions,
+            controlType: () => CONTROL_TYPES.LOAN_TYPE,
+            [ACTION_VALUE_KEY]: replaceClearInitialVal,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -247,16 +241,33 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: permanentLoanTypeActions,
-            type: CONTROL_TYPES.LOAN_TYPE,
-            [ACTION_VALUE_KEY]: permanentLoanTypeActions[0].value,
+            actionsList: loanDefaultActions,
+            controlType: () => CONTROL_TYPES.LOAN_TYPE,
+            [ACTION_VALUE_KEY]: loanDefaultActions[0].value,
+            [FIELD_VALUE_KEY]: '',
+          },
+        ],
+      };
+
+    case OPTIONS.ADMINISTRATIVE_NOTE:
+      return {
+        type: '',
+        actions: [
+          null,
+          {
+            actionsList: noteDefaultActions,
+            controlType: (action) => {
+              return action === ACTIONS.CHANGE_TYPE
+                ? CONTROL_TYPES.NOTE_SELECT
+                : CONTROL_TYPES.TEXTAREA;
+            },
+            [ACTION_VALUE_KEY]: noteDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
       };
 
     case OPTIONS.ITEM_NOTE:
-    case OPTIONS.ADMINISTRATIVE_NOTE:
     case OPTIONS.CHECK_IN_NOTE:
     case OPTIONS.CHECK_OUT_NOTE:
       return {
@@ -264,9 +275,13 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: noteBaseActions,
-            type: CONTROL_TYPES.TEXTAREA,
-            [ACTION_VALUE_KEY]: noteBaseActions[0].value,
+            actionsList: noteWithMarkDefaultActions,
+            controlType: (action) => {
+              return action === ACTIONS.CHANGE_TYPE
+                ? CONTROL_TYPES.NOTE_SELECT
+                : CONTROL_TYPES.TEXTAREA;
+            },
+            [ACTION_VALUE_KEY]: noteWithMarkDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
@@ -298,4 +313,34 @@ export const isContentUpdatesFormValid = (contentUpdates) => {
       return act.type && act.updated;
     });
   });
+};
+
+export const getFilteredFields = (initialFields) => {
+  return initialFields.map(f => {
+    const uniqOptions = new Set(initialFields.map(i => i.option));
+
+    const optionsExceptCurrent = [...uniqOptions].filter(u => u !== f.option);
+
+    return {
+      ...f,
+      options: f.options.filter(o => !optionsExceptCurrent.includes(o.value)),
+    };
+  });
+};
+
+export const getActionType = (action, option, capability) => {
+  const actionName = action?.name;
+  const isSuppressHolding = capability === CAPABILITIES.HOLDING && option === OPTIONS.SUPPRESS_FROM_DISCOVERY;
+  const isSetTrue = actionName === ACTIONS.SET_TO_TRUE;
+  const isSetToFalse = actionName === ACTIONS.SET_TO_FALSE;
+
+  if (isSuppressHolding && isSetTrue && action?.[WITH_ITEMS_VALUE_KEY]) {
+    return ACTIONS.SET_TO_TRUE_INCLUDING_ITEMS;
+  }
+
+  if (isSuppressHolding && isSetToFalse && action?.[WITH_ITEMS_VALUE_KEY]) {
+    return ACTIONS.SET_TO_FALSE_INCLUDING_ITEMS;
+  }
+
+  return actionName ?? null;
 };

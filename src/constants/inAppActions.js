@@ -1,10 +1,10 @@
 export const ACTIONS = {
+  // actions
   ADD_TO_EXISTING: 'ADD_TO_EXISTING',
   CLEAR_FIELD: 'CLEAR_FIELD',
-  FIND: 'FIND',
-  FIND_AND_REMOVE_THESE: 'FIND_AND_REMOVE_THESE',
   REPLACE_WITH: 'REPLACE_WITH',
   FIND_REPLACE_WITH: 'FIND_AND_REPLACE',
+  FIND_REMOVE_THESE: 'FIND_AND_REMOVE_THESE',
   SET_TO_TRUE: 'SET_TO_TRUE',
   SET_TO_FALSE: 'SET_TO_FALSE',
   SET_TO_TRUE_INCLUDING_ITEMS: 'SET_TO_TRUE_INCLUDING_ITEMS',
@@ -12,6 +12,11 @@ export const ACTIONS = {
   MARK_AS_STAFF_ONLY: 'MARK_AS_STAFF_ONLY',
   REMOVE_MARK_AS_STAFF_ONLY: 'REMOVE_MARK_AS_STAFF_ONLY',
   REMOVE_ALL: 'REMOVE_ALL',
+  CHANGE_TYPE: 'CHANGE_TYPE',
+
+  // helper actions using for concatenation to final action
+  FIND: 'FIND',
+  REMOVE_THESE: 'REMOVE_THESE',
 };
 
 // FINAL_ACTIONS - final actions in scope of row. Not possible select anything after choosing it in row.
@@ -24,6 +29,8 @@ export const FINAL_ACTIONS = [
   ACTIONS.MARK_AS_STAFF_ONLY,
   ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
   ACTIONS.REMOVE_ALL,
+  ACTIONS.REMOVE_THESE,
+  ACTIONS.FIND_REMOVE_THESE,
 ];
 
 export const getPlaceholder = (formatMessage) => ({
@@ -62,6 +69,12 @@ export const getSetToFalseAction = (formatMessage) => ({
   disabled: false,
 });
 
+export const getChangeNoteTypeAction = (formatMessage) => ({
+  value: ACTIONS.CHANGE_TYPE,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.changeNote' }),
+  disabled: false,
+});
+
 export const getMarkAsStuffOnlyAction = (formatMessage) => ({
   value: ACTIONS.MARK_AS_STAFF_ONLY,
   label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.markAsStaffOnly' }),
@@ -86,8 +99,47 @@ export const getAddNoteAction = (formatMessage) => ({
   disabled: false,
 });
 
-export const getBaseActions = (formatMessage) => [
+export const getRemoveNoteAction = (formatMessage) => ({
+  value: ACTIONS.REMOVE_THESE,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.removeNote' }),
+  disabled: false,
+});
+
+export const emailActionsFind = (formatMessage) => [getFindAction(formatMessage)];
+export const emailActionsReplace = (formatMessage) => [getReplaceAction(formatMessage)];
+export const patronActions = (formatMessage) => [getReplaceAction(formatMessage)];
+export const expirationActions = (formatMessage) => [getReplaceAction(formatMessage)];
+export const statusActions = (formatMessage) => [getReplaceAction(formatMessage)];
+export const permanentLoanTypeActions = (formatMessage) => [getReplaceAction(formatMessage)];
+export const permanentHoldingsLocation = (formatMessage) => [getReplaceAction(formatMessage)];
+export const replaceClearActions = (formatMessage) => [
   getPlaceholder(formatMessage),
   getReplaceAction(formatMessage),
   getClearAction(formatMessage),
+];
+export const suppressFromDiscActions = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getSetToTrueAction(formatMessage),
+  getSetToFalseAction(formatMessage),
+];
+export const noteActions = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getAddNoteAction(formatMessage),
+  getRemoveAllAction(formatMessage),
+  getChangeNoteTypeAction(formatMessage),
+];
+
+export const noteActionsWithMark = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getMarkAsStuffOnlyAction(formatMessage),
+  getRemoveMarkAsStuffOnlyAction(formatMessage),
+  getAddNoteAction(formatMessage),
+  getRemoveAllAction(formatMessage),
+  getChangeNoteTypeAction(formatMessage),
+];
+
+export const noteAdditionalActions = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getReplaceAction(formatMessage),
+  getRemoveNoteAction(formatMessage),
 ];

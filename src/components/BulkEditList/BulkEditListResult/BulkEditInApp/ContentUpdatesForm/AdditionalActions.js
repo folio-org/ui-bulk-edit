@@ -16,7 +16,7 @@ export const AdditionalActions = ({ action, actionIndex, onChange }) => {
   useDerivativeModification({ onChange, actionIndex, action: action.name, deps: [action.name] });
 
   const renderSuppressCheckbox = () => {
-    return capability === CAPABILITIES.HOLDING && action.type === CONTROL_TYPES.SUPPRESS_CHECKBOX && (
+    return capability === CAPABILITIES.HOLDING && action.controlType() === CONTROL_TYPES.SUPPRESS_CHECKBOX && (
       <Col xs={2} sm={2}>
         <Checkbox
           label={formatMessage({ id: 'ui-bulk-edit.layer.action.applyItems' })}
@@ -34,10 +34,10 @@ export const AdditionalActions = ({ action, actionIndex, onChange }) => {
 
 AdditionalActions.propTypes = {
   action: PropTypes.shape({
-    type: PropTypes.string,
+    controlType: PropTypes.func,
     name: PropTypes.string,
     value: PropTypes.string,
-    withItems: Promise.bool,
+    withItems: PropTypes.bool,
   }),
   actionIndex: PropTypes.number,
   onChange: PropTypes.func,

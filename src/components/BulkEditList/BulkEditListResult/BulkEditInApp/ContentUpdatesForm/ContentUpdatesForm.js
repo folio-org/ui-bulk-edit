@@ -12,17 +12,18 @@ import {
 } from '@folio/stripes/components';
 
 import { useLocation } from 'react-router-dom';
-import { ACTIONS, CAPABILITIES, OPTIONS } from '../../../../../constants';
+import { ACTIONS } from '../../../../../constants';
 import css from '../BulkEditInApp.css';
 import { ActionsRow } from './ActionsRow';
 import {
   ACTION_VALUE_KEY,
   FIELD_VALUE_KEY,
-  WITH_ITEMS_VALUE_KEY,
   getDefaultActions,
   isAddButtonShown,
+  getActionType,
+  getFilteredFields,
 } from './helpers';
-import { convertArray } from '../../../../../utils/filters';
+import { groupByCategory } from '../../../../../utils/filters';
 
 export const ContentUpdatesForm = ({
   onContentUpdatesChanged,
@@ -42,19 +43,6 @@ export const ContentUpdatesForm = ({
   };
 
   const [fields, setFields] = useState([fieldTemplate]);
-
-  const getFilteredFields = (initialFields) => {
-    return initialFields.map(f => {
-      const uniqOptions = new Set(initialFields.map(i => i.option));
-
-      const optionsExceptCurrent = [...uniqOptions].filter(u => u !== f.option);
-
-      return {
-        ...f,
-        options: f.options.filter(o => !optionsExceptCurrent.includes(o.value)),
-      };
-    });
-  };
 
   const handleOptionChange = (e, index) => {
     const mappedFields = fields.map((field, i) => {
@@ -127,13 +115,13 @@ export const ContentUpdatesForm = ({
     }]);
 
     const initializedFields = filteredFields.map((f, i) => {
-      const value = f.options[0].value;
+      const option = f.options[0].value;
 
       return i === filteredFields.length - 1
         ? ({
           ...f,
-          option: value,
-          actionsDetails: getDefaultActions(value, options, formatMessage),
+          option,
+          actionsDetails: getDefaultActions(option, options, formatMessage),
         })
         : f;
     });
@@ -144,23 +132,6 @@ export const ContentUpdatesForm = ({
   };
 
   useEffect(() => {
-    const getActionType = (action, option) => {
-      const actionName = action?.name;
-      const isSuppressHolding = capability === CAPABILITIES.HOLDING && option === OPTIONS.SUPPRESS_FROM_DISCOVERY;
-      const isSetTrue = actionName === ACTIONS.SET_TO_TRUE;
-      const isSetToFalse = actionName === ACTIONS.SET_TO_FALSE;
-
-      if (isSuppressHolding && isSetTrue && action?.[WITH_ITEMS_VALUE_KEY]) {
-        return ACTIONS.SET_TO_TRUE_INCLUDING_ITEMS;
-      }
-
-      if (isSuppressHolding && isSetToFalse && action?.[WITH_ITEMS_VALUE_KEY]) {
-        return ACTIONS.SET_TO_FALSE_INCLUDING_ITEMS;
-      }
-
-      return actionName ?? null;
-    };
-
     const mappedContentUpdates = fields.map(
       // eslint-disable-next-line no-shadow
       ({ parameters, option, actionsDetails: { actions } }) => {
@@ -172,7 +143,7 @@ export const ContentUpdatesForm = ({
         // generate action type key with '_' delimiter
         const typeKey = actions
           .filter(Boolean)
-          .map(action => getActionType(action, option) ?? null).join('_');
+          .map(action => getActionType(action, option, capability) ?? null).join('_');
 
         const type = ACTIONS[typeKey];
 
@@ -191,28 +162,27 @@ export const ContentUpdatesForm = ({
     onContentUpdatesChanged(mappedContentUpdates);
   }, [fields]);
 
-  const renderOptions = (array) => {
-    return array.map(item => {
-      if (typeof item === 'object' && Object.keys(item).length === 1) {
-        const category = Object.keys(item)[0];
-        let categoryLabel = '';
-        const categoryOptions = item[category].map(option => {
-          categoryLabel = option.categoryLabel;
-
-          return (
-            <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>
-          );
-        });
-
+  const renderOptions = (optionsMap) => {
+    return Object.entries(optionsMap).map(([category, item]) => {
+      if (Array.isArray(item)) {
         return (
           <optgroup
             key={category}
-            label={categoryLabel}
+            label={category}
           >
-            {categoryOptions}
-          </optgroup>);
+            {renderOptions(item)}
+          </optgroup>
+        );
       } else {
-        return <option key={item.value} value={item.value} disabled={item.disabled}>{item.label}</option>;
+        return (
+          <option
+            key={item.value}
+            value={item.value}
+            disabled={item.disabled}
+          >
+            {item.label}
+          </option>
+        );
       }
     });
   };
@@ -232,7 +202,7 @@ export const ContentUpdatesForm = ({
                 data-testid={`select-option-${index}`}
                 aria-label={`select-option-${index}`}
               >
-                {renderOptions(convertArray(field.options))}
+                {renderOptions(groupByCategory(field.options))}
               </Select>
             </Col>
             <ActionsRow

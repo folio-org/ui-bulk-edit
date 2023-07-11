@@ -183,49 +183,11 @@ export const getHoldingsOptions = (formatMessage) => [
   },
 ];
 
-export const getItemsOptions = (formatMessage, additionalItems = []) => [
+export const getNotesOptions = (formatMessage, itemNotes) => [
   {
     value: '',
     label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
     disabled: true,
-  },
-  {
-    value: OPTIONS.TEMPORARY_LOCATION,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLocation' }),
-    disabled: false,
-    category: 'Location',
-    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.location' }),
-  },
-  {
-    value: OPTIONS.PERMANENT_LOCATION,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLocation' }),
-    disabled: false,
-    category: 'Location',
-    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.location' }),
-  },
-  {
-    value: OPTIONS.STATUS,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.statusLabel' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.TEMPORARY_LOAN_TYPE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLoanTypeLabel' }),
-    disabled: false,
-    category: 'Loan type',
-    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
-  },
-  {
-    value: OPTIONS.PERMANENT_LOAN_TYPE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLoanType' }),
-    disabled: false,
-    category: 'Loan type',
-    categoryLabel: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
-  },
-  {
-    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.suppressFromDiscovery' }),
-    disabled: false,
   },
   {
     value: OPTIONS.ADMINISTRATIVE_NOTE,
@@ -242,7 +204,45 @@ export const getItemsOptions = (formatMessage, additionalItems = []) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkOutNote' }),
     disabled: false,
   },
-  ...additionalItems,
+  ...itemNotes,
+];
+
+export const getItemsOptions = (formatMessage, itemNotes = []) => [
+  ...getNotesOptions(formatMessage, itemNotes),
+  {
+    value: OPTIONS.STATUS,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.statusLabel' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.TEMPORARY_LOAN_TYPE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLoanTypeLabel' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
+  },
+  {
+    value: OPTIONS.PERMANENT_LOAN_TYPE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLoanType' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
+  },
+  {
+    value: OPTIONS.TEMPORARY_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.temporaryLocation' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.location' }),
+  },
+  {
+    value: OPTIONS.PERMANENT_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.permanentLocation' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.location' }),
+  },
+  {
+    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.suppressFromDiscovery' }),
+    disabled: false,
+  },
 ];
 
 export const getItemStatusOptions = (formatMessage) => [
