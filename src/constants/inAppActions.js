@@ -12,7 +12,7 @@ export const ACTIONS = {
   MARK_AS_STAFF_ONLY: 'MARK_AS_STAFF_ONLY',
   REMOVE_MARK_AS_STAFF_ONLY: 'REMOVE_MARK_AS_STAFF_ONLY',
   REMOVE_ALL: 'REMOVE_ALL',
-  CHANGE_NOTE_TYPE: 'CHANGE_NOTE_TYPE',
+  CHANGE_TYPE: 'CHANGE_TYPE',
 
   // helper actions using for concatenation to final action
   FIND: 'FIND',
@@ -70,7 +70,7 @@ export const getSetToFalseAction = (formatMessage) => ({
 });
 
 export const getChangeNoteTypeAction = (formatMessage) => ({
-  value: ACTIONS.CHANGE_NOTE_TYPE,
+  value: ACTIONS.CHANGE_TYPE,
   label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.changeNote' }),
   disabled: false,
 });
