@@ -12,6 +12,7 @@ export const ACTIONS = {
   MARK_AS_STAFF_ONLY: 'MARK_AS_STAFF_ONLY',
   REMOVE_MARK_AS_STAFF_ONLY: 'REMOVE_MARK_AS_STAFF_ONLY',
   REMOVE_ALL: 'REMOVE_ALL',
+  CHANGE_NOTE_TYPE: 'CHANGE_NOTE_TYPE',
 };
 
 // FINAL_ACTIONS - final actions in scope of row. Not possible select anything after choosing it in row.
@@ -59,6 +60,12 @@ export const getSetToTrueAction = (formatMessage) => ({
 export const getSetToFalseAction = (formatMessage) => ({
   value: ACTIONS.SET_TO_FALSE,
   label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.false' }),
+  disabled: false,
+});
+
+export const getChangeNoteTypeAction = (formatMessage) => ({
+  value: ACTIONS.CHANGE_NOTE_TYPE,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.changeNote' }),
   disabled: false,
 });
 

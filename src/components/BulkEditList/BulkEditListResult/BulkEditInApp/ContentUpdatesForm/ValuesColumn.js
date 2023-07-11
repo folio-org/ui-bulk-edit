@@ -3,14 +3,19 @@ import { Col, Datepicker, Select, Selection, TextField, TextArea } from '@folio/
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import { BASE_DATE_FORMAT, CONTROL_TYPES, getItemStatusOptions } from '../../../../../constants';
-import { FIELD_VALUE_KEY, TEMPORARY_LOCATIONS } from './helpers';
+import { BASE_DATE_FORMAT, CONTROL_TYPES, getItemStatusOptions, getNotesOptions } from '../../../../../constants';
+import { FIELD_VALUE_KEY, removeObjectFromArray, TEMPORARY_LOCATIONS } from './helpers';
 import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
+import { useItemNotes } from '../../../../../hooks/api/useItemNotes';
 
 export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
   const { userGroups } = usePatronGroup();
   const { loanTypes, isLoanTypesLoading } = useLoanTypes();
+  const { itemNotes, usItemNotesLoading } = useItemNotes();
+  const notesOptions = () => {
+    return removeObjectFromArray(getNotesOptions(formatMessage, itemNotes), option);
+  };
   const statuses = getItemStatusOptions(formatMessage);
 
   const renderTextField = () => action.type === CONTROL_TYPES.INPUT && (
@@ -117,6 +122,18 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
     />
   );
 
+  const renderNoteTypeSelect = () => action.type === CONTROL_TYPES.NOTE_SELECT && (
+  <Select
+    id="noteType"
+    value={action.value}
+    loading={usItemNotesLoading}
+    onChange={value => onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY })}
+    placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectNoteType' })}
+    dataOptions={notesOptions()}
+    aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+  />
+  );
+
   return (
     <Col xs={2} sm={2}>
       {renderTextField()}
@@ -126,6 +143,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       {renderLocationSelect()}
       {renderStatusSelect()}
       {renderLoanTypeSelect()}
+      {renderNoteTypeSelect()}
     </Col>
   );
 };

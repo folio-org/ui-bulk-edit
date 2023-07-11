@@ -183,6 +183,25 @@ export const getHoldingsOptions = (formatMessage) => [
   },
 ];
 
+export const getNotesOptions = (formatMessage, itemNotes = []) => [
+  {
+    value: OPTIONS.ADMINISTRATIVE_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.CHECK_IN_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkInNote' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.CHECK_OUT_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkOutNote' }),
+    disabled: false,
+  },
+  ...itemNotes,
+];
+
 export const getItemsOptions = (formatMessage, additionalItems = []) => [
   {
     value: '',
@@ -227,22 +246,7 @@ export const getItemsOptions = (formatMessage, additionalItems = []) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.suppressFromDiscovery' }),
     disabled: false,
   },
-  {
-    value: OPTIONS.ADMINISTRATIVE_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.CHECK_IN_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkInNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.CHECK_OUT_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkOutNote' }),
-    disabled: false,
-  },
-  ...additionalItems,
+  ...getNotesOptions(formatMessage, additionalItems),
 ];
 
 export const getItemStatusOptions = (formatMessage) => [

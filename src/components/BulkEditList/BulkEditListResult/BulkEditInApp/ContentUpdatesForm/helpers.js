@@ -13,7 +13,7 @@ import {
   getMarkAsStuffOnlyAction,
   getRemoveMarkAsStuffOnlyAction,
   getRemoveAllAction,
-  getAddNoteAction,
+  getAddNoteAction, getChangeNoteTypeAction,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -92,6 +92,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
     getRemoveMarkAsStuffOnlyAction(formatMessage),
     getAddNoteAction(formatMessage),
     getRemoveAllAction(formatMessage),
+    getChangeNoteTypeAction(formatMessage),
   ];
 
   const allActionsInitialVal = allActions[0].value;
@@ -265,13 +266,12 @@ export const getDefaultActions = (option, options, formatMessage) => {
           null,
           {
             actionsList: noteBaseActions,
-            type: CONTROL_TYPES.TEXTAREA,
+            type: CONTROL_TYPES.NOTE_SELECT,
             [ACTION_VALUE_KEY]: noteBaseActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
       };
-
     default:
       return {
         type: null,
@@ -298,4 +298,8 @@ export const isContentUpdatesFormValid = (contentUpdates) => {
       return act.type && act.updated;
     });
   });
+};
+
+export const removeObjectFromArray = (noteTypes, selectedNote) => {
+  return noteTypes.filter(obj => obj.value !== selectedNote);
 };
