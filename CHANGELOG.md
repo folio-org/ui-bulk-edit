@@ -25,6 +25,7 @@
 * [UIBULKED-289](https://issues.folio.org/browse/UIBULKED-299) Bulk edit actions for notes - add and remove Mark as staff only
 * [UIBULKED-298](https://issues.folio.org/browse/UIBULKED-298) Group Item record properties using optgroup component.
 * [UIBULKED-296](https://issues.folio.org/browse/UIBULKED-296) White line on the top of Bulk Edit landing page.
+* [UIBULKED-302](https://issues.folio.org/browse/UIBULKED-302) Bulk edit actions for notes - change note type.
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 
