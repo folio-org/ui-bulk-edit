@@ -102,7 +102,6 @@ export const ContentUpdatesForm = ({
           }
         }
 
-
         return {
           ...field,
           actionsDetails: {
