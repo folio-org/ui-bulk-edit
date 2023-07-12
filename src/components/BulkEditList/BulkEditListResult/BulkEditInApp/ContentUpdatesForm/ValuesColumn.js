@@ -5,7 +5,8 @@ import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import {
-  BASE_DATE_FORMAT, CAPABILITIES,
+  BASE_DATE_FORMAT,
+  CAPABILITIES,
   CONTROL_TYPES,
   getItemStatusOptions,
   getNotesOptions,
