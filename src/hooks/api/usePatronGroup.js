@@ -4,7 +4,7 @@ import {
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-export const usePatronGroup = () => {
+export const usePatronGroup = (options = {}) => {
   const ky = useOkapiKy();
 
   const { data, isLoading } = useQuery(
@@ -27,6 +27,7 @@ export const usePatronGroup = () => {
           return acc;
         }, []);
       },
+      ...options,
     },
   );
 
