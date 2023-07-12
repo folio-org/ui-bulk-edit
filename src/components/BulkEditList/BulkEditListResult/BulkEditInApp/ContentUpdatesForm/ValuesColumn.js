@@ -20,12 +20,12 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
 
-  const isUserInApp = capability === CAPABILITIES.USER;
-  const isItemInApp = capability === CAPABILITIES.ITEM;
+  const isUserCapability = capability === CAPABILITIES.USER;
+  const isItemCapability = capability === CAPABILITIES.ITEM;
 
-  const { userGroups } = usePatronGroup({ enabled: isUserInApp });
-  const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemInApp });
-  const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemInApp });
+  const { userGroups } = usePatronGroup({ enabled: isUserCapability });
+  const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });
+  const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
 
   const filteredAndMappedNotes = getNotesOptions(formatMessage, itemNotes)
     .filter(obj => obj.value !== option)
