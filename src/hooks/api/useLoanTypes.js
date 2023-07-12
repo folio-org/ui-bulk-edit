@@ -1,7 +1,7 @@
 import { useOkapiKy } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
 
-export const useLoanTypes = () => {
+export const useLoanTypes = (options = {}) => {
   const ky = useOkapiKy();
 
   const { data, isLoading } = useQuery(
@@ -10,6 +10,7 @@ export const useLoanTypes = () => {
       cacheTime: Infinity,
       staleTime: Infinity,
       queryFn: () => ky.get('loan-types?query=cql.allRecords%3D1%20sortby%20name&limit=1000').json(),
+      ...options,
     },
   );
 

@@ -18,9 +18,12 @@ export const BulkEditInApp = ({
 }) => {
   const intl = useIntl();
   const location = useLocation();
-  const { itemNotes, usItemNotesLoading } = useItemNotes();
   const search = new URLSearchParams(location.search);
+
   const fileUploadedName = search.get('fileName');
+  const isItemCapability = capabilities === CAPABILITIES.ITEM;
+
+  const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
 
   const optionsMap = {
     [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage, itemNotes),
@@ -29,7 +32,6 @@ export const BulkEditInApp = ({
   };
 
   const options = optionsMap[capabilities];
-
   const showContentUpdatesForm = options && !usItemNotesLoading;
 
   return (

@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 
-export const useItemNotes = () => {
+export const useItemNotes = (options = {}) => {
   const ky = useOkapiKy();
   const { formatMessage } = useIntl();
 
@@ -11,6 +11,7 @@ export const useItemNotes = () => {
     {
       queryKey: 'itemNotes',
       queryFn: () => ky.get('item-note-types').json(),
+      ...options,
     },
   );
 
