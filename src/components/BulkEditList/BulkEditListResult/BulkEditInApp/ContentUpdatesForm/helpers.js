@@ -95,7 +95,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
 
   const opt = isStandardOption ? option : options.find(({ value }) => value === option)?.type;
 
-  const replaceClearActionDetails = {
+  const locationRelatedDefaultActions = {
     type: '',
     actions: [
       null,
@@ -157,7 +157,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
 
     /* HOLDINGS OPTIONS */
     case OPTIONS.TEMPORARY_HOLDINGS_LOCATION:
-      return replaceClearActionDetails;
+      return locationRelatedDefaultActions;
     case OPTIONS.PERMANENT_HOLDINGS_LOCATION:
       return {
         type: '',
@@ -174,7 +174,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
 
     /* ITEMS OPTIONS */
     case OPTIONS.TEMPORARY_LOCATION:
-      return replaceClearActionDetails;
+      return locationRelatedDefaultActions;
     case OPTIONS.SUPPRESS_FROM_DISCOVERY:
       return {
         type: '',
@@ -189,7 +189,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
         ],
       };
     case OPTIONS.PERMANENT_LOCATION:
-      return replaceClearActionDetails;
+      return locationRelatedDefaultActions;
     case OPTIONS.STATUS:
       return {
         type: '',
