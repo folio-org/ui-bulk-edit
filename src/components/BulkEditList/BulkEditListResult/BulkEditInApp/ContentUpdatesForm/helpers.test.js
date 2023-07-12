@@ -283,31 +283,32 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the TEMPORARY_LOCATION option', () => {
-        expect(getDefaultActions(OPTIONS.TEMPORARY_LOCATION, [], formatMessage)).toEqual({
-          type: '',
-          actions: [
-            null,
-            {
-              actionsList: [{ value: '',
-                disabled: true,
-                label: undefined },
+        expect(JSON.stringify(getDefaultActions(OPTIONS.TEMPORARY_LOCATION, [], formatMessage)))
+          .toEqual(JSON.stringify({
+            type: '',
+            actions: [
+              null,
               {
-                value: 'REPLACE_WITH',
-                disabled: false,
-                label: undefined,
+                actionsList: [{ value: '',
+                  disabled: true,
+                  label: undefined },
+                {
+                  value: 'REPLACE_WITH',
+                  disabled: false,
+                  label: undefined,
+                },
+                {
+                  value: 'CLEAR_FIELD',
+                  disabled: false,
+                  label: undefined,
+                },
+                ],
+                controlType: () => 'LOCATION',
+                [ACTION_VALUE_KEY]: '',
+                [FIELD_VALUE_KEY]: '',
               },
-              {
-                value: 'CLEAR_FIELD',
-                disabled: false,
-                label: undefined,
-              },
-              ],
-              type: 'LOCATION',
-              [ACTION_VALUE_KEY]: '',
-              [FIELD_VALUE_KEY]: '',
-            },
-          ],
-        });
+            ],
+          }));
       });
 
       it('returns the correct object for the SUPPRESS_FROM_DISCOVERY option', () => {
