@@ -177,7 +177,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
           null,
           {
             actionsList: replaceClearDefaultActions,
-            type: CONTROL_TYPES.LOCATION,
+            controlType: () => CONTROL_TYPES.LOCATION,
             [ACTION_VALUE_KEY]: replaceClearInitialVal,
             [FIELD_VALUE_KEY]: '',
           },
