@@ -95,6 +95,19 @@ export const getDefaultActions = (option, options, formatMessage) => {
 
   const opt = isStandardOption ? option : options.find(({ value }) => value === option)?.type;
 
+  const locationRelatedDefaultActions = {
+    type: '',
+    actions: [
+      null,
+      {
+        actionsList: replaceClearDefaultActions,
+        controlType: () => CONTROL_TYPES.LOCATION,
+        [ACTION_VALUE_KEY]: replaceClearInitialVal,
+        [FIELD_VALUE_KEY]: '',
+      },
+    ],
+  };
+
   switch (opt) {
     /* USER OPTIONS */
     case OPTIONS.EMAIL_ADDRESS:
@@ -144,18 +157,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
 
     /* HOLDINGS OPTIONS */
     case OPTIONS.TEMPORARY_HOLDINGS_LOCATION:
-      return {
-        type: '',
-        actions: [
-          null,
-          {
-            actionsList: replaceClearDefaultActions,
-            controlType: () => CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: replaceClearInitialVal,
-            [FIELD_VALUE_KEY]: '',
-          },
-        ],
-      };
+      return locationRelatedDefaultActions;
     case OPTIONS.PERMANENT_HOLDINGS_LOCATION:
       return {
         type: '',
@@ -172,18 +174,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
 
     /* ITEMS OPTIONS */
     case OPTIONS.TEMPORARY_LOCATION:
-      return {
-        type: '',
-        actions: [
-          null,
-          {
-            actionsList: replaceClearDefaultActions,
-            type: CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: replaceClearInitialVal,
-            [FIELD_VALUE_KEY]: '',
-          },
-        ],
-      };
+      return locationRelatedDefaultActions;
     case OPTIONS.SUPPRESS_FROM_DISCOVERY:
       return {
         type: '',
@@ -198,18 +189,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
         ],
       };
     case OPTIONS.PERMANENT_LOCATION:
-      return {
-        type: '',
-        actions: [
-          null,
-          {
-            actionsList: replaceClearDefaultActions,
-            controlType: () => CONTROL_TYPES.LOCATION,
-            [ACTION_VALUE_KEY]: replaceClearInitialVal,
-            [FIELD_VALUE_KEY]: '',
-          },
-        ],
-      };
+      return locationRelatedDefaultActions;
     case OPTIONS.STATUS:
       return {
         type: '',

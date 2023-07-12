@@ -3,8 +3,10 @@ import { Col, Datepicker, Select, Selection, TextField, TextArea } from '@folio/
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import {
   BASE_DATE_FORMAT,
+  CAPABILITIES,
   CONTROL_TYPES,
   getItemStatusOptions,
   getNotesOptions,
@@ -15,9 +17,17 @@ import { useItemNotes } from '../../../../../hooks/api/useItemNotes';
 
 export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
-  const { userGroups } = usePatronGroup();
-  const { loanTypes, isLoanTypesLoading } = useLoanTypes();
-  const { itemNotes, usItemNotesLoading } = useItemNotes();
+  const location = useLocation();
+  const search = new URLSearchParams(location.search);
+  const capability = search.get('capabilities');
+
+  const isUserCapability = capability === CAPABILITIES.USER;
+  const isItemCapability = capability === CAPABILITIES.ITEM;
+
+  const { userGroups } = usePatronGroup({ enabled: isUserCapability });
+  const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });
+  const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
+
   const filteredAndMappedNotes = getNotesOptions(formatMessage, itemNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value }) => ({ label, value }));
