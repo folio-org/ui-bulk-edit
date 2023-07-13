@@ -30,7 +30,14 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
 
   const filteredAndMappedNotes = getNotesOptions(formatMessage, itemNotes)
     .filter(obj => obj.value !== option)
-    .map(({ label, value }) => ({ label, value }));
+    .map(({ label, value }) => ({ label, value }))
+    .sort((a, b) => {
+      if (a.label === 'Select option') return -1;
+      if (b.label === 'Select option') return 1;
+
+      return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
+    });
+
   const statuses = getItemStatusOptions(formatMessage);
   const actionValue = action.value;
   const controlType = action.controlType(action.name);
