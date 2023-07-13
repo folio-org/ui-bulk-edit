@@ -4,6 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import {
   Headline,
   Accordion,
+  Loading,
+  Layout,
 } from '@folio/stripes/components';
 
 import { useLocation } from 'react-router';
@@ -23,7 +25,7 @@ export const BulkEditInApp = ({
   const fileUploadedName = search.get('fileName');
   const isItemCapability = capabilities === CAPABILITIES.ITEM;
 
-  const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
+  const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
 
   const optionsMap = {
     [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage, itemNotes),
@@ -32,7 +34,7 @@ export const BulkEditInApp = ({
   };
 
   const options = optionsMap[capabilities];
-  const showContentUpdatesForm = options && !usItemNotesLoading;
+  const showContentUpdatesForm = options && !isItemNotesLoading;
 
   return (
     <>
@@ -43,11 +45,15 @@ export const BulkEditInApp = ({
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
       >
         <BulkEditInAppTitle />
-        {showContentUpdatesForm && (
+        {showContentUpdatesForm ? (
           <ContentUpdatesForm
             options={options}
             onContentUpdatesChanged={onContentUpdatesChanged}
           />
+        ) : (
+          <Layout className="display-flex centerContent">
+            <Loading size="large" />
+          </Layout>
         )}
       </Accordion>
     </>

@@ -31,6 +31,14 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const filteredAndMappedNotes = getNotesOptions(formatMessage, itemNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value }) => ({ label, value }));
+  const sortWithoutPlaceholder = (array) => {
+    const [placeholder, ...rest] = array;
+
+    return [placeholder, ...rest.sort((a, b) => a.label.localeCompare(b.label))];
+  };
+
+  const sortedNotes = sortWithoutPlaceholder(filteredAndMappedNotes);
+
   const statuses = getItemStatusOptions(formatMessage);
   const actionValue = action.value;
   const controlType = action.controlType(action.name);
@@ -145,7 +153,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       value={action.value}
       loading={usItemNotesLoading}
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
-      dataOptions={filteredAndMappedNotes}
+      dataOptions={sortedNotes}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
     />
   );

@@ -5,6 +5,8 @@ import {
   BASE_DATE_FORMAT,
   FINAL_ACTIONS,
   ACTIONS,
+  REQUIRES_INITIAL_ACTIONS,
+  CAPABILITIES,
   emailActionsFind,
   emailActionsReplace,
   noteAdditionalActions,
@@ -16,7 +18,6 @@ import {
   suppressFromDiscActions,
   statusActions,
   noteActions,
-  CAPABILITIES,
   noteActionsWithMark,
 } from '../../../../../constants';
 
@@ -279,19 +280,24 @@ export const getDefaultActions = (option, options, formatMessage) => {
 export const isContentUpdatesFormValid = (contentUpdates) => {
   return contentUpdates?.every(({ actions, option }) => {
     return option && actions.every(act => {
-      const initial = act.initial ?? null;
+      const { type, updated, initial = null } = act;
 
       // for FINAL_ACTIONS 'updated' is not required
-      if (FINAL_ACTIONS.includes(act.type)) {
-        return act.type;
+      if (FINAL_ACTIONS.includes(type)) {
+        return type;
+      }
+
+      // for some cases only initial value is required (e.g. for 'FIND_AND_REMOVE_THESE' action)
+      if (REQUIRES_INITIAL_ACTIONS.includes(type)) {
+        return type && initial;
       }
 
       // if initial value isn't null, it should be a part of validation
       if (initial !== null) {
-        return act.type && act.updated && act.initial;
+        return type && updated && initial;
       }
 
-      return act.type && act.updated;
+      return type && updated;
     });
   });
 };
