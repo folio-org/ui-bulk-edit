@@ -32,10 +32,9 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
     .filter(obj => obj.value !== option)
     .map(({ label, value }) => ({ label, value }));
   const sortWithoutPlaceholder = (array) => {
-    const first = array.slice(0, 1);
-    const rest = array.slice(1).sort((a, b) => a.label.localeCompare(b.label));
+    const [placeholder, ...rest] = array;
 
-    return [...first, ...rest];
+    return [placeholder, ...rest.sort((a, b) => a.label.localeCompare(b.label))];
   };
 
   const sortedNotes = sortWithoutPlaceholder(filteredAndMappedNotes);
