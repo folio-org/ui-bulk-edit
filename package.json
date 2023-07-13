@@ -108,7 +108,8 @@
         "displayName": "Bulk Edit: In app - Edit",
         "subPermissions": [
           "ui-bulk-edit.app-view",
-          "ui-bulk-edit.edit.base"
+          "ui-bulk-edit.edit.base",
+          "inventory-storage.item-note-types.collection.get"
         ],
         "visible": true
       },
