@@ -2,13 +2,12 @@ import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { useLocation, useParams } from 'react-router';
 
-import { Loading } from '@folio/stripes/components';
+import { Layout, Loading } from '@folio/stripes/components';
 
 import { useBulkOperationDetails } from '../../../../hooks/api';
 import { CRITERIA, EDITING_STEPS } from '../../../../constants';
 import { Preview } from '../Preview/Preview';
 
-import css from '../../../BulkEdit.css';
 import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
 
 const PreviewContainer = () => {
@@ -37,9 +36,9 @@ const PreviewContainer = () => {
     return <NoResultsMessage />;
   } else if (isLoading) {
     return (
-      <div className={css.LoaderContainer}>
-        <Loading />
-      </div>
+      <Layout className="display-flex centerContent">
+        <Loading size="large" />
+      </Layout>
     );
   } else {
     return (

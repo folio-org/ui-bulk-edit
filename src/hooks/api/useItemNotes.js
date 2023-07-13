@@ -7,9 +7,11 @@ export const useItemNotes = (options = {}) => {
   const ky = useOkapiKy();
   const { formatMessage } = useIntl();
 
-  const { data, isLoading: usItemNotesLoading } = useQuery(
+  const { data, isLoading: isItemNotesLoading } = useQuery(
     {
       queryKey: 'itemNotes',
+      cacheTime: Infinity,
+      staleTime: Infinity,
       queryFn: () => ky.get('item-note-types').json(),
       ...options,
     },
@@ -31,6 +33,6 @@ export const useItemNotes = (options = {}) => {
 
   return {
     itemNotes,
-    usItemNotesLoading,
+    isItemNotesLoading,
   };
 };
