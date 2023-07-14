@@ -32,7 +32,7 @@ const renderBulkEditInApp = ({ capability }) => {
   return render(
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={[`/bulk-edit?${params}`]}>
-        <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn() }}>
+        <RootContext.Provider value={{}}>
           <BulkEditInApp
             onContentUpdatesChanged={() => {}}
             capabilities={capability}

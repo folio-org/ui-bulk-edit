@@ -31,7 +31,7 @@ const renderPreview = (props = defaultProps) => {
   render(
     <MemoryRouter initialEntries={['/bulk-edit/1?queryText=patronGroup%3D%3D"1"']}>
       <QueryClientProvider client={queryClient}>
-        <RootContext.Provider value={{ setNewBulkFooterShown: jest.fn(), setCountOfRecords: setCountOfRecordsMock }}>
+        <RootContext.Provider value={{ setCountOfRecords: setCountOfRecordsMock }}>
           <Preview {...props} />
         </RootContext.Provider>
       </QueryClientProvider>

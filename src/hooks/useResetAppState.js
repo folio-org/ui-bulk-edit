@@ -9,7 +9,6 @@ export const useResetAppState = ({
   initialFiltersState,
   setVisibleColumns,
   setCountOfRecords,
-  setNewBulkFooterShown,
   filtersTab,
   setIsBulkEditLayerOpen,
   setInAppCommitted,
@@ -52,7 +51,6 @@ export const useResetAppState = ({
         }),
       });
 
-      setNewBulkFooterShown(false);
       setIsBulkEditLayerOpen(false);
       setInAppCommitted(false);
     }

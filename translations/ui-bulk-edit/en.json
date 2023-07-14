@@ -100,7 +100,6 @@
   "start.edit": "Start bulk edit",
   "start.edit.csv": "Start bulk edit (CSV)",
   "start.delete": "Start bulk delete",
-  "start.newBulkEdit": "New bulk edit",
 
   "textArea.search": "Search",
   "textArea.resetAll": "Reset all",

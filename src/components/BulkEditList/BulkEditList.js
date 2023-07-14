@@ -8,8 +8,6 @@ import { FormattedMessage } from 'react-intl';
 import {
   Pane,
   Paneset,
-  PaneFooter,
-  Button,
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
@@ -45,7 +43,6 @@ export const BulkEditList = () => {
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
   const [contentUpdates, setContentUpdates] = useState(null);
-  const [newBulkFooterShown, setNewBulkFooterShown] = useState(false);
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
   const [inAppCommitted, setInAppCommitted] = useState(false);
@@ -84,7 +81,6 @@ export const BulkEditList = () => {
     setFilters,
     setConfirmedFileName,
     setCountOfRecords,
-    setNewBulkFooterShown,
     setVisibleColumns,
     filtersTab,
     setIsBulkEditLayerOpen,
@@ -173,30 +169,8 @@ export const BulkEditList = () => {
     appIcon: <AppIcon app="bulk-edit" iconKey="app" />,
   };
 
-  const renderNewBulkFooter = () => {
-    const handleStartNewBulkEdit = () => {
-      setVisibleColumns(null);
-      setInAppCommitted(false);
-      // redirect to initial state with saved capabilities in search
-      history.replace({
-        pathname: '/bulk-edit',
-      });
-    };
-
-    return newBulkFooterShown ? (
-      <PaneFooter
-        renderEnd={(
-          <Button onClick={handleStartNewBulkEdit} buttonStyle="primary mega">
-            <FormattedMessage id="ui-bulk-edit.start.newBulkEdit" />
-          </Button>
-        )}
-      />
-    ) : null;
-  };
-
   return (
     <RootContext.Provider value={{
-      setNewBulkFooterShown,
       countOfRecords,
       setCountOfRecords,
       visibleColumns,
@@ -229,7 +203,6 @@ export const BulkEditList = () => {
             <Pane
               {...defaultPaneProps}
               actionMenu={actionMenu}
-              footer={renderNewBulkFooter()}
             >
               <BulkEditListResult />
             </Pane>
