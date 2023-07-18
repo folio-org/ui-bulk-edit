@@ -67,7 +67,6 @@ const renderPreviewAccordion = ({
 
   render(
     <RootContext.Provider value={{
-      setNewBulkFooterShown: jest.fn(),
       setCountOfRecords: jest.fn(),
       setVisibleColumns: jest.fn(),
       visibleColumns,

@@ -18,7 +18,7 @@ import { EDITING_STEPS } from '../../../../constants';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const location = useLocation();
-  const { setNewBulkFooterShown, countOfRecords, setCountOfRecords, visibleColumns } = useContext(RootContext);
+  const { countOfRecords, setCountOfRecords, visibleColumns } = useContext(RootContext);
   const [countOfErrors, setCountOfErrors] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
 
@@ -45,12 +45,6 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     setCountOfRecords(countRecords);
     setTotalCount(isInitialPreview ? bulkDetails.totalNumOfRecords : bulkDetails.matchedNumOfRecords);
   }, [bulkDetails, step]);
-
-  useEffect(() => {
-    if (contentData || errors?.length) {
-      setNewBulkFooterShown(true);
-    }
-  }, [contentData, errors]);
 
 
   return (
