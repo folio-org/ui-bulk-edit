@@ -3,7 +3,10 @@ import { render, screen } from '@testing-library/react';
 import { QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import '../../../../test/jest/__mock__';
-import { bulkEditLogsData } from '../../../../test/jest/__mock__/fakeData';
+import {
+  bulkEditLogsData,
+  bulkEditLogsDataWithExpiredFlag,
+} from '../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 import {
   JOB_STATUSES,
@@ -23,6 +26,16 @@ const bulkOperation = {
   [FILE_KEYS.TRIGGERING_FILE]: FILE_KEYS.TRIGGERING_FILE,
 };
 
+const bulkOperationWithExpired = {
+  ...bulkEditLogsDataWithExpiredFlag[0],
+  status: JOB_STATUSES.DATA_MODIFICATION,
+  [FILE_KEYS.MATCHING_RECORDS_LINK]: FILE_KEYS.MATCHING_RECORDS_LINK,
+  [FILE_KEYS.UPDATED_RECORDS_LINK]: FILE_KEYS.UPDATED_RECORDS_LINK,
+  [FILE_KEYS.MATCHING_ERRORS_LINK]: FILE_KEYS.MATCHING_ERRORS_LINK,
+  [FILE_KEYS.UPDATED_ERRORS_LINK]: FILE_KEYS.UPDATED_ERRORS_LINK,
+  [FILE_KEYS.PROPOSED_CHANGES_LINK]: FILE_KEYS.PROPOSED_CHANGES_LINK,
+  [FILE_KEYS.TRIGGERING_FILE]: FILE_KEYS.TRIGGERING_FILE,
+};
 jest.mock('../../../hooks', () => ({
   ...jest.requireActual('../../../hooks'),
   useBulkPermissions: jest.fn(),
@@ -55,6 +68,14 @@ describe('BulkEditLogsActions', () => {
     renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.USER } });
 
     expect(screen.queryByText('ui-bulk-edit.list.actions.download')).toBeNull();
+  });
+
+  it('should display infoPopover instead of action menu since expired flag is true', async () => {
+    useBulkPermissions.mockReturnValue({ hasUsersViewPerms: true });
+
+    renderBulkEditLogsActions({ item: { ...bulkOperationWithExpired } });
+
+    expect(screen.getByRole('button', { name: 'info' })).toBeVisible();
   });
 
   Object.values(FILE_KEYS).forEach((fileKey) => {
