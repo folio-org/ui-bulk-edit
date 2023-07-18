@@ -29,7 +29,7 @@ export const bulkEditLogsData = Array(50).fill(null).map((_, index) => [
 
 export const bulkEditLogsDataWithExpiredFlag = Array(50).fill(null).map((_, index) => [
   {
-    id: index.toString(),
+    id: `A${index}`,
     operationType: 'Edit',
     entityType: 'Item',
     status: 'New',
@@ -43,7 +43,7 @@ export const bulkEditLogsDataWithExpiredFlag = Array(50).fill(null).map((_, inde
     expired: true,
   },
   {
-    id: (index + 1).toString(),
+    id: `B${index}`,
     operationType: 'Delete',
     entityType: 'Holdings',
     status: 'Completed',
