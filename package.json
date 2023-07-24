@@ -72,7 +72,7 @@
       },
       {
         "permissionName": "ui-bulk-edit.view",
-        "displayName": "Bulk Edit: (CSV) View",
+        "displayName": "Bulk Edit: Local - View user records",
         "visible": true,
         "subPermissions": [
           "ui-bulk-edit.view.base"
@@ -80,7 +80,7 @@
       },
       {
         "permissionName": "ui-bulk-edit.edit",
-        "displayName": "Bulk Edit: (CSV) Edit",
+        "displayName": "Bulk Edit: Local - Edit user records",
         "subPermissions": [
           "ui-bulk-edit.view",
           "ui-bulk-edit.edit.base"
@@ -88,16 +88,8 @@
         "visible": true
       },
       {
-        "permissionName": "ui-bulk-edit.delete",
-        "displayName": "Bulk Edit: (CSV) Delete",
-        "subPermissions": [
-          "ui-bulk-edit.edit"
-        ],
-        "visible": true
-      },
-      {
         "permissionName": "ui-bulk-edit.app-view",
-        "displayName": "Bulk Edit: In app - View",
+        "displayName": "Bulk Edit: In app - View inventory records",
         "subPermissions": [
           "ui-bulk-edit.view.base"
         ],
@@ -105,7 +97,7 @@
       },
       {
         "permissionName": "ui-bulk-edit.app-edit",
-        "displayName": "Bulk Edit: In app - Edit",
+        "displayName": "Bulk Edit: In app - Edit inventory records",
         "subPermissions": [
           "ui-bulk-edit.app-view",
           "ui-bulk-edit.edit.base",
@@ -115,21 +107,15 @@
       },
       {
         "permissionName": "ui-bulk-edit.app-edit.users",
-        "displayName": "Bulk edit: In app - Update user records",
+        "displayName": "Bulk edit: In app - Edit user records",
         "subPermissions": [
           "ui-bulk-edit.edit.base"
         ],
         "visible": true
       },
       {
-        "permissionName": "ui-bulk-edit.app-delete",
-        "displayName": "Bulk Edit: In app - Delete",
-        "subPermissions": [],
-        "visible": true
-      },
-      {
         "permissionName": "ui-bulk-edit.logs.view",
-        "displayName": "Bulk edit - Can view logs",
+        "displayName": "Bulk edit: Can view logs",
         "subPermissions": [
           "bulk-operations.download.item.get",
           "bulk-operations.collection.get",
@@ -139,8 +125,9 @@
       },
       {
         "permissionName": "ui-bulk-edit.query",
-        "displayName": "Bulk edit: Query",
+        "displayName": "Bulk edit: Can build query",
         "subPermissions": [
+          "module.bulk-edit.enabled",
           "usergroups.item.get",
           "addresstypes.item.get",
           "inventory-storage.statistical-codes.item.get",
