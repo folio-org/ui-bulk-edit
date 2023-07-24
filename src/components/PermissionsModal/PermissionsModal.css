@@ -1,0 +1,12 @@
+.PermissionsModal {
+  position: relative;
+  padding: 0;
+  min-height: 70vh;
+}
+
+.PermissionsModalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
