@@ -29,6 +29,8 @@
 * [UIBULKED-301](https://issues.folio.org/browse/UIBULKED-301) Bulk edit actions for notes - find and replace or remove.
 * [UIBULKED-281](https://issues.folio.org/browse/UIBULKED-281) Rename filters by start and end date
 * [UIBULKED-314](https://issues.folio.org/browse/UIBULKED-314) Remove "New bulk edit" button
+* [UIBULKED-328](https://issues.folio.org/browse/UIBULKED-328) Rename Actions menu option for Bulk edit (CSV) approach
+* [UIBULKED-319](https://issues.folio.org/browse/UIBULKED-319) Bulk edit permission names cleanup.
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 
