@@ -75,9 +75,7 @@ describe('PermissionsModal', () => {
   });
 
   it('should render the modal with correct title', () => {
-    const { debug } = renderComponent();
-
-    debug(undefined, 300000);
+    renderComponent();
 
     const modalTitle = screen.getByText('ui-bulk-edit.permissionsModal.title');
     expect(modalTitle).toBeInTheDocument();
@@ -169,6 +167,104 @@ describe('PermissionsModal', () => {
 
     await waitFor(() => {
       checkRowsLength(1);
+    });
+  });
+
+  it('should sort by name', async () => {
+    renderComponent();
+
+    const nameHeader = screen.getByText('ui-bulk-edit.permissionsModal.list.columns.name');
+
+    const row = screen.getAllByRole('row');
+
+    expect(row[1]).toHaveTextContent(/role-acq-admin/);
+
+    userEvent.click(nameHeader);
+
+    await waitFor(() => {
+      expect(row[1]).toHaveTextContent(/ui-inventory.permission.call-number-browse.view/);
+    });
+  });
+
+  it('should select all ', async () => {
+    renderComponent();
+
+    const nameHeader = screen.getByText('ui-bulk-edit.permissionsModal.list.columns.name');
+
+    const row = screen.getAllByRole('row');
+
+    expect(row[1]).toHaveTextContent(/role-acq-admin/);
+
+    userEvent.click(nameHeader);
+
+    await waitFor(() => {
+      expect(row[1]).toHaveTextContent(/ui-inventory.permission.call-number-browse.view/);
+    });
+  });
+
+  it('should reset filters when "reset button" clicked', async () => {
+    renderComponent();
+
+    const searchInput = screen.getByTestId('search-permissions');
+    const typeCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.permissions' });
+    const statusCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.assigned' });
+
+    const resetButton = document.getElementById('reset-permissions-filters');
+
+    userEvent.type(searchInput, 'Bulk Edit');
+
+    await waitFor(() => {
+      expect(searchInput).toHaveValue('Bulk Edit');
+    });
+
+    act(() => {
+      userEvent.click(typeCheckbox);
+    });
+
+    await waitFor(() => {
+      expect(typeCheckbox.checked).toBeTruthy();
+    });
+
+
+    act(() => {
+      userEvent.click(statusCheckbox);
+    });
+
+    await waitFor(() => {
+      expect(statusCheckbox.checked).toBeTruthy();
+    });
+
+    act(() => {
+      userEvent.click(resetButton);
+    });
+
+    await waitFor(() => {
+      expect(typeCheckbox.checked).toBeFalsy();
+      expect(statusCheckbox.checked).toBeFalsy();
+      expect(searchInput).toHaveValue('');
+    });
+  });
+
+  it('should reset individual filters when clear button clicked', async () => {
+    renderComponent();
+
+    const typeCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.permissions' });
+    const resetButton = document.querySelectorAll('[data-test-clear-button]')[0];
+
+    act(() => {
+      userEvent.click(typeCheckbox);
+    });
+
+    await waitFor(() => {
+      expect(typeCheckbox.checked).toBeTruthy();
+    });
+
+    act(() => {
+      userEvent.click(resetButton);
+    });
+
+    await waitFor(() => {
+      expect(typeCheckbox.checked).toBeFalsy();
     });
   });
 });

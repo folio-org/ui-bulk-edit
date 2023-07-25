@@ -1,6 +1,13 @@
-export const permsVisibleColumns = ['selected', 'permissionName', 'type', 'status'];
+export const COLUMNS_KEYS = {
+  SELECTED: 'selected',
+  NAME: 'permissionName',
+  TYPE: 'type',
+  STATUS: 'status',
+};
 
-export const permsColumnWidths = {
+export const VISIBLE_COLUMNS = Object.values(COLUMNS_KEYS);
+
+export const COLUMN_WIDTHS = {
   selected: '5',
   permissionName: '55',
   type: '20',

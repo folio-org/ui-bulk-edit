@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MultiColumnList } from '@folio/stripes/components';
 import { useIntl } from 'react-intl';
@@ -7,16 +7,16 @@ import { getPermissionLabelString } from '@folio/stripes/util';
 import { SORT_DIRECTIONS } from '../constants/core';
 import { permsFormatter } from '../utills/formatters';
 import { permsColumnMapping } from '../utills/mappings';
-import { permsColumnWidths, permsVisibleColumns } from '../constants/lists';
+import { COLUMN_WIDTHS, COLUMNS_KEYS, VISIBLE_COLUMNS } from '../constants/lists';
 
-export const PermissionsList = memo(({
+export const PermissionsList = ({
   selectedPermissions,
   filteredPermissions,
   onRowClicked,
   onSelectAllClicked,
 }) => {
   const { formatMessage } = useIntl();
-  const [sortedColumn, setSortedColumn] = useState('permissionName');
+  const [sortedColumn, setSortedColumn] = useState(COLUMNS_KEYS.NAME);
   const [sortOrder, setSortOrder] = useState(SORT_DIRECTIONS.asc.name);
 
   const sorters = {
@@ -27,8 +27,8 @@ export const PermissionsList = memo(({
 
   const sortedPermissions = orderBy(filteredPermissions, sorters[sortedColumn], sortOrder);
 
-  const onHeaderClick = (e, { name: columnName }) => {
-    if (columnName === 'selected') return;
+  const handleHeaderClick = (e, { name: columnName }) => {
+    if (columnName === COLUMNS_KEYS.SELECTED) return; // ignore sorting on checkbox column
 
     if (sortedColumn !== columnName) {
       setSortedColumn(columnName);
@@ -42,12 +42,18 @@ export const PermissionsList = memo(({
     }
   };
 
+  const handleRowClick = (_, { id }) => onRowClicked(id);
+
   return (
     <MultiColumnList
-      id="list-permissions"
-      columnWidths={permsColumnWidths}
-      visibleColumns={permsVisibleColumns}
+      id="modal-list-permissions"
+      columnWidths={COLUMN_WIDTHS}
+      visibleColumns={VISIBLE_COLUMNS}
       contentData={sortedPermissions}
+      onRowClick={handleRowClick}
+      onHeaderClick={handleHeaderClick}
+      sortedColumn={sortedColumn}
+      sortDirection={SORT_DIRECTIONS[sortOrder].fullName}
       columnMapping={permsColumnMapping({
         selectedPermissions,
         filteredPermissions,
@@ -58,13 +64,9 @@ export const PermissionsList = memo(({
         formatMessage,
         onRowClicked,
       })}
-      onRowClick={(_, { id }) => onRowClicked(id)}
-      onHeaderClick={onHeaderClick}
-      sortDirection={SORT_DIRECTIONS[sortOrder].fullName}
-      sortedColumn={sortedColumn}
     />
   );
-});
+};
 
 PermissionsList.propTypes = {
   filteredPermissions: PropTypes.arrayOf(PropTypes.object).isRequired,

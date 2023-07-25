@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Pane, Modal, Paneset, PaneHeader, Loading, Layout } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
@@ -45,13 +45,13 @@ export const PermissionsModal = ({
     return isQueryMatched && isPermissionTypeMatched && isStatusesMatched;
   }), [permissions, selectedPermissions, filter]);
 
-  const handleRowClicked = useCallback((permissionId) => {
+  const handleRowClicked = (permissionId) => {
     if (selectedPermissions.includes(permissionId)) {
       setSelectedPermissions(selectedPermissions.filter((id) => id !== permissionId));
     } else {
       setSelectedPermissions([...selectedPermissions, permissionId]);
     }
-  }, [selectedPermissions]);
+  };
 
   const handleSelectAll = () => {
     if (selectedPermissions.length === filteredPermissions.length) {

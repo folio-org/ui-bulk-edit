@@ -10,26 +10,31 @@ import { FILTER_KEYS } from '../constants/core';
 export const PermissionsFilter = ({ filter, onFilter, onClearFilter }) => {
   const [query, setQuery] = useState('');
 
-  const onFormSubmit = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
+  const handleFilterChange = ({ name, values }) => onFilter(name, values);
 
-    onFilter(FILTER_KEYS.QUERY, query);
-  };
   const handleResetAll = () => {
     setQuery('');
 
     onClearFilter(FILTER_KEYS.ALL);
   };
 
+  const handleSubmit = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    onFilter(FILTER_KEYS.QUERY, query);
+  };
+
+  const handleQueryChange = (e) => setQuery(e.target.value);
+
   return (
-    <form onSubmit={onFormSubmit}>
+    <form onSubmit={handleSubmit}>
       <SearchField
         data-testid="search-permissions"
         aria-label=""
         name="query"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={handleQueryChange}
         autoFocus
       />
       <Button
@@ -42,7 +47,7 @@ export const PermissionsFilter = ({ filter, onFilter, onClearFilter }) => {
       </Button>
 
       <ResetButton
-        id="reset-export-filters"
+        id="reset-permissions-filters"
         disabled={false}
         reset={handleResetAll}
         label={<FormattedMessage id="ui-bulk-edit.permissionsModal.filter.resetAll" />}
@@ -60,7 +65,7 @@ export const PermissionsFilter = ({ filter, onFilter, onClearFilter }) => {
 
           <CheckboxFilter
             dataOptions={PERMS_FILTER_OPTIONS}
-            onChange={({ name, values }) => onFilter(name, values)}
+            onChange={handleFilterChange}
             selectedValues={filter[FILTER_KEYS.PERMISSIONS]}
             name={FILTER_KEYS.PERMISSIONS}
           />
@@ -78,7 +83,7 @@ export const PermissionsFilter = ({ filter, onFilter, onClearFilter }) => {
 
           <CheckboxFilter
             dataOptions={STATUS_FILTER_OPTIONS}
-            onChange={({ name, values }) => onFilter(name, values)}
+            onChange={handleFilterChange}
             selectedValues={filter[FILTER_KEYS.STATUSES]}
             name={FILTER_KEYS.STATUSES}
           />
