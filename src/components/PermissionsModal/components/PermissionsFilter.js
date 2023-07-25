@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { SearchField, FilterAccordionHeader, Accordion, AccordionSet, Button } from '@folio/stripes/components';
+import {
+  SearchField,
+  FilterAccordionHeader,
+  Accordion,
+  AccordionSet,
+  Button,
+} from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 import { ResetButton } from '@folio/stripes-acq-components';

@@ -1,6 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Pane, Modal, Paneset, PaneHeader, Loading, Layout } from '@folio/stripes/components';
+import {
+  Pane,
+  Modal,
+  Paneset,
+  PaneHeader,
+  Loading,
+  Layout,
+} from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import css from './PermissionsModal.css';
 import { PermissionsFilter } from './components/PermissionsFilter';
