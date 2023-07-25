@@ -27,6 +27,37 @@ export const bulkEditLogsData = Array(50).fill(null).map((_, index) => [
   },
 ]).flat();
 
+export const bulkEditLogsDataWithExpiredFlag = Array(50).fill(null).map((_, index) => [
+  {
+    id: `A${index}`,
+    operationType: 'Edit',
+    entityType: 'Item',
+    status: 'New',
+    userId: 'Smith, Josh S',
+    startTime: '11/12/2023 2:35AM',
+    endTime: '10/12/2022 7:34AM',
+    totalNumOfRecords: 100,
+    processedNumOfRecords: 55,
+    committedNumOfRecords: 20,
+    editing: 'In app',
+    expired: true,
+  },
+  {
+    id: `B${index}`,
+    operationType: 'Delete',
+    entityType: 'Holdings',
+    status: 'Completed',
+    userId: 'Brown, Marry',
+    startTime: '12/12/2022 7:34AM',
+    endTime: '12/12/2022 7:34AM',
+    totalNumOfRecords: 65,
+    processedNumOfRecords: 12,
+    committedNumOfRecords: 20,
+    editing: 'In app',
+    expired: true,
+  },
+]).flat();
+
 export const listUsers = {
   'header': [
     {
