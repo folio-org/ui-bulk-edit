@@ -79,10 +79,7 @@ export const PermissionsModal = ({
     if (key === FILTER_KEYS.ALL) {
       setFilter(filterInitialValue);
     } else {
-      setFilter({
-        ...filter,
-        [key]: [],
-      });
+      handleFilterChange(key, []);
     }
   };
 
