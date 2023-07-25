@@ -12,6 +12,7 @@ import {
   MenuSection,
   Button,
   Icon,
+  InfoPopover,
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import { useFileDownload } from '../../../hooks/api';
@@ -78,14 +79,24 @@ const BulkEditLogsActions = ({ item }) => {
     </DropdownMenu>
   ), [availableFiles]);
 
-
   if (item.entityType === CAPABILITIES.USER && !hasUsersViewPerms) return null;
 
   return (
-    <Dropdown
-      renderTrigger={renderTrigger}
-      renderMenu={renderMenu}
-    />
+    item?.expired ?
+      <InfoPopover
+        key={item.id}
+        iconSize="medium"
+        content={
+          <FormattedMessage
+            id="ui-bulk-edit.logs.infoPopover"
+          />
+            }
+      />
+      :
+      <Dropdown
+        renderTrigger={renderTrigger}
+        renderMenu={renderMenu}
+      />
   );
 };
 

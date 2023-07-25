@@ -307,6 +307,7 @@
   "progressBar.committing": "Committing changes",
   "progresssBar.processing": "Processing",
 
+  "logs.infoPopover": "Files are unavailable for download because 30 days have elapsed since the date the job was run.",
   "logs.actions.linkToTriggeringCsvFile": "File that was used to trigger the bulk edit",
   "logs.actions.linkToMatchedRecordsCsvFile": "File with the matching records",
   "logs.actions.linkToMatchedRecordsErrorsCsvFile": "File with errors encountered during the record matching",
