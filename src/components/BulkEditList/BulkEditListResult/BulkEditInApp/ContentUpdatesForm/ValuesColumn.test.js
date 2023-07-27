@@ -119,4 +119,15 @@ describe('ValuesColumn Component', () => {
 
     await waitFor(() => expect(onChange).toHaveBeenCalled());
   });
+
+  it('should render select with item note types when action type is DUPLICATE', async () => {
+    const { container } = renderComponent(() => CONTROL_TYPES.NOTE_DUPLICATE_SELECT);
+    const element = container.querySelector('#noteTypeDuplicate');
+
+    expect(element).toBeInTheDocument();
+
+    fireEvent.change(element, { target: { value: 'CHECK OUT' } });
+
+    await waitFor(() => expect(onChange).toHaveBeenCalled());
+  });
 });

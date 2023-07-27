@@ -1,5 +1,12 @@
-import React from 'react';
-import { Col, Datepicker, Select, Selection, TextField, TextArea } from '@folio/stripes/components';
+import React, { useEffect } from 'react';
+import {
+  Col,
+  Datepicker,
+  Select,
+  Selection,
+  TextField,
+  TextArea,
+} from '@folio/stripes/components';
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
@@ -8,6 +15,7 @@ import {
   BASE_DATE_FORMAT,
   CAPABILITIES,
   CONTROL_TYPES,
+  getDuplicateNoteOptions,
   getItemStatusOptions,
   getNotesOptions,
 } from '../../../../../constants';
@@ -27,6 +35,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const { userGroups } = usePatronGroup({ enabled: isUserCapability });
   const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
+  const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
 
   const filteredAndMappedNotes = getNotesOptions(formatMessage, itemNotes)
     .filter(obj => obj.value !== option)
@@ -42,6 +51,12 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const statuses = getItemStatusOptions(formatMessage);
   const actionValue = action.value;
   const controlType = action.controlType(action.name);
+
+  useEffect(() => {
+    if (controlType === CONTROL_TYPES.NOTE_DUPLICATE_SELECT) {
+      onChange({ actionIndex, value: duplicateNoteOptions[0].value, fieldName: FIELD_VALUE_KEY });
+    }
+  }, []);
 
   const renderTextField = () => controlType === CONTROL_TYPES.INPUT && (
     <TextField
@@ -158,6 +173,17 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
     />
   );
 
+  const renderNoteDuplicateTypeSelect = () => controlType === CONTROL_TYPES.NOTE_DUPLICATE_SELECT && (
+  <Select
+    id="noteTypeDuplicate"
+    value={action.value}
+    disabled
+    onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+    dataOptions={duplicateNoteOptions}
+    aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+  />
+  );
+
   return (
     <Col xs={2} sm={2}>
       {renderTextField()}
@@ -168,6 +194,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       {renderStatusSelect()}
       {renderLoanTypeSelect()}
       {renderNoteTypeSelect()}
+      {renderNoteDuplicateTypeSelect()}
     </Col>
   );
 };

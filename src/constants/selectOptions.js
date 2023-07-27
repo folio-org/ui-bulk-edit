@@ -207,6 +207,19 @@ export const getNotesOptions = (formatMessage, itemNotes) => [
   ...itemNotes,
 ];
 
+export const getDuplicateNoteOptions = (formatMessage) => [
+  {
+    value: OPTIONS.CHECK_IN_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkInNote' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.CHECK_OUT_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkOutNote' }),
+    disabled: false,
+  },
+];
+
 export const getItemsOptions = (formatMessage, itemNotes = []) => [
   ...getNotesOptions(formatMessage, itemNotes),
   {

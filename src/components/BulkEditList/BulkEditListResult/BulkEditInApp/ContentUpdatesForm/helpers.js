@@ -19,6 +19,7 @@ import {
   statusActions,
   noteActions,
   noteActionsWithMark,
+  noteActionsWithDuplicate,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -89,6 +90,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
   const loanDefaultActions = permanentLoanTypeActions(formatMessage);
   const noteDefaultActions = noteActions(formatMessage);
   const noteWithMarkDefaultActions = noteActionsWithMark(formatMessage);
+  const noteDuplicateDefaultActions = noteActionsWithDuplicate(formatMessage);
 
   const replaceClearInitialVal = replaceClearDefaultActions[0].value;
 
@@ -249,9 +251,28 @@ export const getDefaultActions = (option, options, formatMessage) => {
         ],
       };
 
-    case OPTIONS.ITEM_NOTE:
     case OPTIONS.CHECK_IN_NOTE:
     case OPTIONS.CHECK_OUT_NOTE:
+      return {
+        type: '',
+        actions: [
+          null,
+          {
+            actionsList: noteDuplicateDefaultActions,
+            controlType: (action) => {
+              if (action === ACTIONS.CHANGE_TYPE) {
+                return CONTROL_TYPES.NOTE_SELECT;
+              }
+              if (action === ACTIONS.DUPLICATE) {
+                return CONTROL_TYPES.NOTE_DUPLICATE_SELECT;
+              } else return CONTROL_TYPES.TEXTAREA;
+            },
+            [ACTION_VALUE_KEY]: noteDuplicateDefaultActions[0].value,
+            [FIELD_VALUE_KEY]: '',
+          },
+        ],
+      };
+    case OPTIONS.ITEM_NOTE:
       return {
         type: '',
         actions: [
