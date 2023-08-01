@@ -35,6 +35,15 @@ export const useBulkPermissions = () => {
   const isInventoryRadioDisabled = !hasInAppViewPerms;
   const isUserRadioDisabled = !hasCsvViewPerms && !hasInAppUsersEditPerms;
   const hasOnlyInAppViewPerms = hasInAppViewPerms && !hasCsvEditPerms && !hasInAppEditPerms && !hasInAppUsersEditPerms;
+  const hasItemInventoryView = hasInAppViewPerms && hasItemsPerms;
+  const hasHoldingsInventoryView = hasInAppViewPerms && hasHoldingsPerms;
+  const hasItemsAndHoldingsInventoryView = hasInAppViewPerms && hasInventoryInstanceViewPerms;
+  const hasItemInventoryEdit = hasInAppEditPerms && hasItemsPerms;
+  const hasHoldingsInventoryEdit = hasInAppEditPerms && hasHoldingsPerms;
+  const hasItemsAndHoldingsInventoryEdit = hasInAppEditPerms && hasInventoryInstanceViewPerms;
+  const hasAnyInventoryWithInAppView = (hasItemInventoryView && hasInAppViewPerms)
+      || (hasHoldingsInventoryView && hasInAppViewPerms)
+      || (hasItemsAndHoldingsInventoryView && hasInAppViewPerms);
 
   // Logs perms
   const hasLogViewPerms = stripes.hasPerm('ui-bulk-edit.logs.view');
@@ -65,5 +74,12 @@ export const useBulkPermissions = () => {
     hasUsersViewPerms,
     hasOnlyViewCsvPerms,
     hasViewInAppPerms,
+    hasItemInventoryEdit,
+    hasHoldingsInventoryEdit,
+    hasItemsAndHoldingsInventoryEdit,
+    hasItemInventoryView,
+    hasHoldingsInventoryView,
+    hasItemsAndHoldingsInventoryView,
+    hasAnyInventoryWithInAppView,
   };
 };

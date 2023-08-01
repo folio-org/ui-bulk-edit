@@ -55,6 +55,7 @@ export const BulkEditListFilters = ({
     hasInAppViewPerms,
     hasViewInAppPerms,
     hasOnlyViewCsvPerms,
+    hasAnyInventoryWithInAppView,
   } = permissions;
   const showCallout = useShowCallout();
   const history = useHistory();
@@ -235,7 +236,10 @@ export const BulkEditListFilters = ({
   const renderListSelect = () => (
     <ListSelect
       value={recordIdentifier}
-      disabled={getIsDisabledByPerm(capabilities, isSelectIdentifiersDisabled, hasOnlyViewCsvPerms, hasViewInAppPerms)}
+      disabled={getIsDisabledByPerm(capabilities,
+        isSelectIdentifiersDisabled,
+        hasOnlyViewCsvPerms,
+        hasAnyInventoryWithInAppView)}
       onChange={handleRecordIdentifierChange}
       capabilities={capabilities}
     />
@@ -249,7 +253,7 @@ export const BulkEditListFilters = ({
       handleDrop={handleDrop}
       isDropZoneDisabled={isDropZoneDisabled
           ||
-          getIsDisabledByPerm(capabilities, isDropZoneDisabledPerm, hasOnlyViewCsvPerms, hasViewInAppPerms)}
+          getIsDisabledByPerm(capabilities, isDropZoneDisabledPerm, hasOnlyViewCsvPerms, hasAnyInventoryWithInAppView)}
       recordIdentifier={recordIdentifier}
       handleDragLeave={handleDragLeave}
       handleDragEnter={handleDragEnter}

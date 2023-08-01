@@ -19,15 +19,17 @@ const Capabilities = ({
     >
       <RadioButtonGroup>
         {capabilitiesFilterOptions?.map(option => (
-          <RadioButton
-            key={option.value}
-            label={option.label}
-            name="capabilities"
-            value={option.value}
-            disabled={option.disabled}
-            onChange={onCapabilityChange}
-            checked={option.value === capabilities}
-          />
+          !option.hidden && (
+            <RadioButton
+              key={option.value}
+              label={option.label}
+              name="capabilities"
+              value={option.value}
+              disabled={option.disabled}
+              onChange={onCapabilityChange}
+              checked={option.value === capabilities}
+            />
+          )
         ))}
       </RadioButtonGroup>
     </Accordion>
