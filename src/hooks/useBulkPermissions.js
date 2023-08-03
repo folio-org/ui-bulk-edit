@@ -75,7 +75,6 @@ export const useBulkPermissions = () => {
     hasViewInAppPerms,
     hasItemInventoryEdit,
     hasHoldingsInventoryEdit,
-    hasItemsAndHoldingsInventoryEdit,
     hasItemInventoryView,
     hasHoldingsInventoryView,
     hasItemsAndHoldingsInventoryView,
