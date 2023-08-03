@@ -5,4 +5,5 @@ export const linkNamesMap = {
   linkToModifiedRecordsCsvFile: 'PROPOSED_CHANGES_FILE',
   linkToCommittedRecordsCsvFile: 'COMMITTED_RECORDS_FILE',
   linkToCommittedRecordsErrorsCsvFile: 'COMMITTING_CHANGES_ERROR_FILE',
+  expired: 'expired',
 };

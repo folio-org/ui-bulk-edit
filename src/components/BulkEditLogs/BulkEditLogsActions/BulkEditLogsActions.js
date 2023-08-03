@@ -82,7 +82,7 @@ const BulkEditLogsActions = ({ item }) => {
   if (item.entityType === CAPABILITIES.USER && !hasUsersViewPerms) return null;
 
   return (
-    item?.expired ?
+    item.expired ?
       <InfoPopover
         key={item.id}
         iconSize="medium"
