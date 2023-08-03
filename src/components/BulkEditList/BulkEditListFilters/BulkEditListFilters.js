@@ -53,7 +53,6 @@ export const BulkEditListFilters = ({
     hasCsvViewPerms,
     hasInAppUsersEditPerms,
     hasInAppViewPerms,
-    hasViewInAppPerms,
     hasOnlyViewCsvPerms,
     hasAnyInventoryWithInAppView,
   } = permissions;

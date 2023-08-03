@@ -39,7 +39,6 @@ export const useBulkPermissions = () => {
   const hasItemsAndHoldingsInventoryView = hasInAppViewPerms && hasInventoryInstanceViewPerms;
   const hasItemInventoryEdit = hasInAppEditPerms && hasItemsPerms;
   const hasHoldingsInventoryEdit = hasInAppEditPerms && hasHoldingsPerms;
-  const hasItemsAndHoldingsInventoryEdit = hasInAppEditPerms && hasInventoryInstanceViewPerms;
   const hasAnyInventoryWithInAppView = (hasItemInventoryView && hasInAppViewPerms)
       || (hasHoldingsInventoryView && hasInAppViewPerms)
       || (hasItemsAndHoldingsInventoryView && hasInAppViewPerms);
