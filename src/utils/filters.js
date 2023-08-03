@@ -17,8 +17,11 @@ export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
 
   const capabilitiesMap = {
     [CAPABILITIES.USER]: isQuery ? !hasUsersPerms : isUserRadioDisabled,
-    [CAPABILITIES.ITEM]: (!hasItemInventoryView || !hasItemsAndHoldingsInventoryView),
-    [CAPABILITIES.HOLDING]: (!hasHoldingsInventoryView || !hasItemsAndHoldingsInventoryView),
+    [CAPABILITIES.ITEM]: hasItemInventoryView ?
+      !hasItemInventoryView : !hasItemsAndHoldingsInventoryView,
+    [CAPABILITIES.HOLDING]: hasHoldingsInventoryView ?
+      !hasHoldingsInventoryView :
+      !hasItemsAndHoldingsInventoryView,
   };
 
   return capabilitiesMap[capabilityValue];
@@ -31,8 +34,6 @@ export const getCapabilityOptions = (view, perms) => EDIT_CAPABILITIES_OPTIONS.m
 
 export const getDefaultCapabilities = (view, perms) => {
   const capabilityOptions = getCapabilityOptions(view, perms);
-
-  console.log(capabilityOptions);
 
   return capabilityOptions.find(option => !option.hidden)?.value;
 };
