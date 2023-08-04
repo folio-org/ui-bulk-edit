@@ -38,13 +38,16 @@ const BulkEditActionMenu = ({
 
   const {
     hasCsvEditPerms,
-    hasAnyInAppEditPermissions,
+    hasHoldingsInventoryEdit,
+    hasItemInventoryEdit,
   } = perms;
 
   const { id } = usePathParams('/bulk-edit/:id');
   const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
 
   const [fileInfo, setFileInfo] = useState(null);
+
+  const hasEditPerm = hasHoldingsInventoryEdit || hasItemInventoryEdit;
 
   useFileDownload({
     id,
@@ -62,7 +65,7 @@ const BulkEditActionMenu = ({
   const isStartBulkCsvActive = hasCsvEditPerms && capability === CAPABILITIES.USER;
   const isInitialStep = step === EDITING_STEPS.UPLOAD;
   const isStartBulkInAppActive =
-    hasAnyInAppEditPermissions
+       hasEditPerm
     && isInitialStep
     && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
 

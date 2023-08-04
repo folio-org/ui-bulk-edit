@@ -34,7 +34,7 @@
 * [UIBULKED-282](https://issues.folio.org/browse/UIBULKED-282) Files generated more than 30 days ago can be downloaded from the "Logs".
 * [UIBULKED-274](https://issues.folio.org/browse/UIBULKED-274) Create reusable permission-select component
 * [UIBULKED-311](https://issues.folio.org/browse/UIBULKED-311) Bulk edit actions for notes - duplicate note.
-
+* [UIBULKED-321](https://issues.folio.org/browse/UIBULKED-321) Permissions for editing Inventory records.
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 

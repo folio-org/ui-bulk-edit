@@ -9,7 +9,7 @@ export const getIsDisabledByPerm = (capabilities, defaultPerm, csvPerm, inAppVie
     case CAPABILITIES.ITEM:
     case CAPABILITIES.HOLDING:
       if (inAppView) {
-        return true;
+        return false;
       } else return defaultPerm;
 
     default: return defaultPerm;

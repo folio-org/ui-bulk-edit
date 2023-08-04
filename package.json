@@ -91,7 +91,8 @@
         "permissionName": "ui-bulk-edit.app-view",
         "displayName": "Bulk Edit: In app - View inventory records",
         "subPermissions": [
-          "ui-bulk-edit.view.base"
+          "ui-bulk-edit.view.base",
+          "ui-bulk-edit.edit.base"
         ],
         "visible": true
       },

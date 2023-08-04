@@ -15,7 +15,7 @@ describe('getIsDisabledByPerm', () => {
     csvPerm = false;
     inAppPerm = true;
 
-    expect(getIsDisabledByPerm(CAPABILITIES.ITEM, false, csvPerm, inAppPerm)).toBe(true);
+    expect(getIsDisabledByPerm(CAPABILITIES.ITEM, false, csvPerm, inAppPerm)).toBe(false);
   });
 
   it('should return correct boolean with default Perm', () => {

@@ -20,7 +20,12 @@ import { CAPABILITIES, linkNamesMap } from '../../../constants';
 import { useBulkPermissions } from '../../../hooks';
 
 const BulkEditLogsActions = ({ item }) => {
-  const { hasUsersViewPerms } = useBulkPermissions();
+  const {
+    hasUsersViewPerms,
+    hasLogItemViewPerms,
+    hasLogHoldingsViewPerms,
+    hasInventoryInstanceViewPerms,
+  } = useBulkPermissions();
   const [triggeredFile, setTriggeredFile] = useState(null);
   const { refetch } = useFileDownload({
     enabled: false,
@@ -80,6 +85,10 @@ const BulkEditLogsActions = ({ item }) => {
   ), [availableFiles]);
 
   if (item.entityType === CAPABILITIES.USER && !hasUsersViewPerms) return null;
+  if (item.entityType === CAPABILITIES.HOLDING &&
+      (!hasLogHoldingsViewPerms || !hasInventoryInstanceViewPerms)) return null;
+  if (item.entityType === CAPABILITIES.ITEM &&
+      (!hasLogItemViewPerms && !hasInventoryInstanceViewPerms)) return null;
 
   return (
     item.expired ?

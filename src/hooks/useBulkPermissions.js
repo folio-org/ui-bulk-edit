@@ -32,12 +32,20 @@ export const useBulkPermissions = () => {
   const isActionMenuShown = hasCsvEditPerms || hasAnyInAppEditPermissions;
   const isSelectIdentifiersDisabled = !hasAnyEditPermissions;
   const isDropZoneDisabled = !hasAnyEditPermissions;
-  const isInventoryRadioDisabled = !hasInAppViewPerms;
   const isUserRadioDisabled = !hasCsvViewPerms && !hasInAppUsersEditPerms;
   const hasOnlyInAppViewPerms = hasInAppViewPerms && !hasCsvEditPerms && !hasInAppEditPerms && !hasInAppUsersEditPerms;
+  const hasItemInventoryView = hasInAppViewPerms && hasItemsPerms;
+  const hasHoldingsInventoryView = hasInAppViewPerms && hasHoldingsPerms;
+  const hasItemsAndHoldingsInventoryView = hasInAppViewPerms && hasInventoryInstanceViewPerms;
+  const hasItemInventoryEdit = hasInAppEditPerms && hasItemsPerms;
+  const hasHoldingsInventoryEdit = hasInAppEditPerms && hasHoldingsPerms;
+  const hasAnyInventoryWithInAppView = (hasItemInventoryView || hasHoldingsInventoryView
+      || hasItemsAndHoldingsInventoryView) && hasInAppViewPerms;
 
   // Logs perms
   const hasLogViewPerms = stripes.hasPerm('ui-bulk-edit.logs.view');
+  const hasLogItemViewPerms = hasLogViewPerms && hasItemsPerms;
+  const hasLogHoldingsViewPerms = hasLogViewPerms && hasHoldingsPerms;
 
   return {
     // base
@@ -54,7 +62,6 @@ export const useBulkPermissions = () => {
     isActionMenuShown,
     isSelectIdentifiersDisabled,
     isDropZoneDisabled,
-    isInventoryRadioDisabled,
     isUserRadioDisabled,
     hasOnlyInAppViewPerms,
     hasAnyEditPermissions,
@@ -65,5 +72,13 @@ export const useBulkPermissions = () => {
     hasUsersViewPerms,
     hasOnlyViewCsvPerms,
     hasViewInAppPerms,
+    hasItemInventoryEdit,
+    hasHoldingsInventoryEdit,
+    hasItemInventoryView,
+    hasHoldingsInventoryView,
+    hasItemsAndHoldingsInventoryView,
+    hasAnyInventoryWithInAppView,
+    hasLogItemViewPerms,
+    hasLogHoldingsViewPerms,
   };
 };

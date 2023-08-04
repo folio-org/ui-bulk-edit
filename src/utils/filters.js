@@ -9,16 +9,19 @@ export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
 
   const {
     isUserRadioDisabled,
-    isInventoryRadioDisabled,
-    hasItemsPerms,
-    hasHoldingsPerms,
+    hasItemInventoryView,
+    hasHoldingsInventoryView,
+    hasItemsAndHoldingsInventoryView,
     hasUsersPerms,
   } = perms;
 
   const capabilitiesMap = {
     [CAPABILITIES.USER]: isQuery ? !hasUsersPerms : isUserRadioDisabled,
-    [CAPABILITIES.ITEM]: isQuery ? !hasItemsPerms : isInventoryRadioDisabled,
-    [CAPABILITIES.HOLDING]: isQuery ? !hasHoldingsPerms : isInventoryRadioDisabled,
+    [CAPABILITIES.ITEM]: hasItemInventoryView ?
+      !hasItemInventoryView : !hasItemsAndHoldingsInventoryView,
+    [CAPABILITIES.HOLDING]: hasHoldingsInventoryView ?
+      !hasHoldingsInventoryView :
+      !hasItemsAndHoldingsInventoryView,
   };
 
   return capabilitiesMap[capabilityValue];
@@ -26,13 +29,13 @@ export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
 
 export const getCapabilityOptions = (view, perms) => EDIT_CAPABILITIES_OPTIONS.map(capability => ({
   ...capability,
-  disabled: isCapabilityDisabled(capability.value, view, perms),
+  hidden: isCapabilityDisabled(capability.value, view, perms),
 }));
 
 export const getDefaultCapabilities = (view, perms) => {
   const capabilityOptions = getCapabilityOptions(view, perms);
 
-  return capabilityOptions.find(option => !option.disabled)?.value;
+  return capabilityOptions.find(option => !option.hidden)?.value;
 };
 
 export const groupByCategory = (array) => {
