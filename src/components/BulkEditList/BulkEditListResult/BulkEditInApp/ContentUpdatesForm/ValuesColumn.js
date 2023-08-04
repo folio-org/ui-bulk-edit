@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Col,
   Datepicker,
@@ -22,6 +22,7 @@ import {
 import { FIELD_VALUE_KEY, TEMPORARY_LOCATIONS } from './helpers';
 import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
 import { useItemNotes } from '../../../../../hooks/api/useItemNotes';
+import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
 
 export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
@@ -52,11 +53,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const actionValue = action.value;
   const controlType = action.controlType(action.name);
 
-  useEffect(() => {
-    if (controlType === CONTROL_TYPES.NOTE_DUPLICATE_SELECT) {
-      onChange({ actionIndex, value: duplicateNoteOptions[0].value, fieldName: FIELD_VALUE_KEY });
-    }
-  }, []);
+  usePreselectedValue(controlType, duplicateNoteOptions, onChange, actionIndex);
 
   const renderTextField = () => controlType === CONTROL_TYPES.INPUT && (
     <TextField
