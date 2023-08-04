@@ -13,6 +13,7 @@ export const ACTIONS = {
   REMOVE_MARK_AS_STAFF_ONLY: 'REMOVE_MARK_AS_STAFF_ONLY',
   REMOVE_ALL: 'REMOVE_ALL',
   CHANGE_TYPE: 'CHANGE_TYPE',
+  DUPLICATE: 'DUPLICATE',
 
   // helper actions using for concatenation to final action
   FIND: 'FIND',
@@ -108,6 +109,12 @@ export const getRemoveNoteAction = (formatMessage) => ({
   disabled: false,
 });
 
+export const getDuplicateToNoteAction = (formatMessage) => ({
+  value: ACTIONS.DUPLICATE,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.duplicateTo' }),
+  disabled: false,
+});
+
 export const emailActionsFind = (formatMessage) => [getFindAction(formatMessage)];
 export const emailActionsReplace = (formatMessage) => [getReplaceAction(formatMessage)];
 export const patronActions = (formatMessage) => [getReplaceAction(formatMessage)];
@@ -143,6 +150,16 @@ export const noteActionsWithMark = (formatMessage) => [
   getChangeNoteTypeAction(formatMessage),
 ];
 
+export const noteActionsWithDuplicate = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getMarkAsStuffOnlyAction(formatMessage),
+  getRemoveMarkAsStuffOnlyAction(formatMessage),
+  getAddNoteAction(formatMessage),
+  getRemoveAllAction(formatMessage),
+  getFindAction(formatMessage),
+  getChangeNoteTypeAction(formatMessage),
+  getDuplicateToNoteAction(formatMessage),
+];
 export const noteAdditionalActions = (formatMessage) => [
   getPlaceholder(formatMessage),
   getReplaceAction(formatMessage),

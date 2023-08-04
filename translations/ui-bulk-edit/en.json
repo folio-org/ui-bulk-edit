@@ -290,6 +290,7 @@
   "layer.options.items.removeAll": "Remove all",
   "layer.options.items.removeNote": "Remove",
   "layer.options.items.addNote": "Add note",
+  "layer.options.items.duplicateTo": "Duplicate to",
   "layer.options.suppressFromDiscovery": "Suppress from discovery",
   "layer.options.administrativeNote": "Administrative note",
   "layer.options.checkInNote": "Check in note",

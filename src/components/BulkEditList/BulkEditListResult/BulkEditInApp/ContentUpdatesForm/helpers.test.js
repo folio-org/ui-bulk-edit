@@ -438,14 +438,12 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       const noteOptions = [
-        OPTIONS.ITEM_NOTE,
         OPTIONS.CHECK_IN_NOTE,
         OPTIONS.CHECK_OUT_NOTE,
       ];
 
       noteOptions.forEach(option => {
         it(`returns the correct object for the ${option} option`, () => {
-          const controlType = () => {};
           expect(JSON.stringify(getDefaultActions(option, [], formatMessage))).toEqual(
             JSON.stringify({
               type: '',
@@ -476,8 +474,13 @@ describe('ContentUpdatesForm helpers', () => {
                       disabled: false,
                       label: undefined,
                     },
+                    {
+                      value: 'DUPLICATE',
+                      disabled: false,
+                      label: undefined,
+                    },
                   ],
-                  controlType,
+                  controlType: () => CONTROL_TYPES.TEXTAREA,
                   name: '',
                   [ACTION_VALUE_KEY]: '',
                   [FIELD_VALUE_KEY]: '',
