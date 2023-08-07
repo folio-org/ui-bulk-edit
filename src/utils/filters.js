@@ -1,22 +1,18 @@
 import {
   CAPABILITIES,
-  CRITERIA,
   EDIT_CAPABILITIES_OPTIONS,
 } from '../constants';
 
 export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
-  const isQuery = view === CRITERIA.QUERY;
-
   const {
-    isUserRadioDisabled,
     hasItemInventoryView,
     hasHoldingsInventoryView,
     hasItemsAndHoldingsInventoryView,
-    hasUsersPerms,
+    hasAnyUserWithBulkPerm,
   } = perms;
 
   const capabilitiesMap = {
-    [CAPABILITIES.USER]: isQuery ? !hasUsersPerms : isUserRadioDisabled,
+    [CAPABILITIES.USER]: !hasAnyUserWithBulkPerm,
     [CAPABILITIES.ITEM]: hasItemInventoryView ?
       !hasItemInventoryView : !hasItemsAndHoldingsInventoryView,
     [CAPABILITIES.HOLDING]: hasHoldingsInventoryView ?

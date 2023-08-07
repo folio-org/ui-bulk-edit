@@ -75,7 +75,8 @@
         "displayName": "Bulk Edit: Local - View user records",
         "visible": true,
         "subPermissions": [
-          "ui-bulk-edit.view.base"
+          "ui-bulk-edit.view.base",
+          "ui-bulk-edit.edit.base"
         ]
       },
       {

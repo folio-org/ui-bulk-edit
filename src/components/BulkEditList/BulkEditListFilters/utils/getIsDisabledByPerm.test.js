@@ -8,7 +8,7 @@ describe('getIsDisabledByPerm', () => {
     csvPerm = true;
     inAppPerm = false;
 
-    expect(getIsDisabledByPerm(CAPABILITIES.USER, false, csvPerm, inAppPerm)).toBe(true);
+    expect(getIsDisabledByPerm(CAPABILITIES.USER, false, csvPerm, inAppPerm)).toBe(false);
   });
 
   it('should return correct boolean with inApp perm', () => {
