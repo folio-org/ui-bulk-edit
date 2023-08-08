@@ -20,7 +20,10 @@ import {
   BULK_VISIBLE_COLUMNS,
   getFormattedFilePrefixDate,
 } from '../../constants';
-import { useBulkPermissions, usePathParams } from '../../hooks';
+import {
+  useBulkPermissions,
+  usePathParams,
+} from '../../hooks';
 import { RootContext } from '../../context/RootContext';
 import { useBulkOperationDetails, useFileDownload } from '../../hooks/api';
 
@@ -37,9 +40,10 @@ const BulkEditActionMenu = ({
   const fileName = search.get('fileName') || `${capability}-${search.get('criteria')}.csv`;
 
   const {
-    hasCsvEditPerms,
+    hasUserEditLocalPerm,
     hasHoldingsInventoryEdit,
     hasItemInventoryEdit,
+    hasUserEditInAppPerm,
   } = perms;
 
   const { id } = usePathParams('/bulk-edit/:id');
@@ -47,7 +51,7 @@ const BulkEditActionMenu = ({
 
   const [fileInfo, setFileInfo] = useState(null);
 
-  const hasEditPerm = hasHoldingsInventoryEdit || hasItemInventoryEdit;
+  const hasEditPerm = hasHoldingsInventoryEdit || hasItemInventoryEdit || hasUserEditInAppPerm;
 
   useFileDownload({
     id,
@@ -62,7 +66,7 @@ const BulkEditActionMenu = ({
   const columns = visibleColumns || [];
   const selectedValues = columns.filter(item => !item.selected).map(item => item.value);
 
-  const isStartBulkCsvActive = hasCsvEditPerms && capability === CAPABILITIES.USER;
+  const isStartBulkCsvActive = hasUserEditLocalPerm && capability === CAPABILITIES.USER;
   const isInitialStep = step === EDITING_STEPS.UPLOAD;
   const isStartBulkInAppActive =
        hasEditPerm

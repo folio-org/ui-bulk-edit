@@ -41,11 +41,16 @@ export const useBulkPermissions = () => {
   const hasHoldingsInventoryEdit = hasInAppEditPerms && hasHoldingsPerms;
   const hasAnyInventoryWithInAppView = (hasItemInventoryView || hasHoldingsInventoryView
       || hasItemsAndHoldingsInventoryView) && hasInAppViewPerms;
+  const hasAnyUserWithBulkPerm = (hasUsersViewPerms || hasUsersPerms) &&
+      (hasCsvViewPerms || hasCsvEditPerms || hasInAppUsersEditPerms);
+  const hasUserEditLocalPerm = hasCsvEditPerms && hasUsersPerms;
+  const hasUserEditInAppPerm = hasInAppUsersEditPerms && hasUsersPerms;
 
   // Logs perms
   const hasLogViewPerms = stripes.hasPerm('ui-bulk-edit.logs.view');
   const hasLogItemViewPerms = hasLogViewPerms && hasItemsPerms;
   const hasLogHoldingsViewPerms = hasLogViewPerms && hasHoldingsPerms;
+  const hasLogUsersPerms = (hasUsersPerms || hasUsersViewPerms) && hasLogViewPerms;
 
   return {
     // base
@@ -80,5 +85,9 @@ export const useBulkPermissions = () => {
     hasAnyInventoryWithInAppView,
     hasLogItemViewPerms,
     hasLogHoldingsViewPerms,
+    hasLogUsersPerms,
+    hasAnyUserWithBulkPerm,
+    hasUserEditLocalPerm,
+    hasUserEditInAppPerm,
   };
 };

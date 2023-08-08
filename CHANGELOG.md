@@ -35,6 +35,7 @@
 * [UIBULKED-274](https://issues.folio.org/browse/UIBULKED-274) Create reusable permission-select component
 * [UIBULKED-311](https://issues.folio.org/browse/UIBULKED-311) Bulk edit actions for notes - duplicate note.
 * [UIBULKED-321](https://issues.folio.org/browse/UIBULKED-321) Permissions for editing Inventory records.
+* [UIBULKED-322](https://issues.folio.org/browse/UIBULKED-322) Permissions for editing User records.
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 
