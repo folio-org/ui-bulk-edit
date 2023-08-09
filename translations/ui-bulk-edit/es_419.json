@@ -352,5 +352,6 @@
     "permissionsModal.list.subTitle": "{contar} permisos encontrados",
     "permissionsModal.cancel": "Cancelar",
     "permissionsModal.save": "Guardar y cerrar",
-    "permissionsModal.totalSelected": "Total seleccionado: {count}"
+    "permissionsModal.totalSelected": "Total seleccionado: {count}",
+    "layer.options.items.duplicateTo": "Duplicate to"
 }
