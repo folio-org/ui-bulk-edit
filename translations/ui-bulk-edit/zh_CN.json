@@ -352,5 +352,6 @@
     "permissionsModal.list.subTitle": "找到{count}个权限",
     "permissionsModal.cancel": "取消",
     "permissionsModal.save": "保存并关闭",
-    "permissionsModal.totalSelected": "已选总数： {count}"
+    "permissionsModal.totalSelected": "已选总数： {count}",
+    "layer.options.items.duplicateTo": "Duplicate to"
 }
