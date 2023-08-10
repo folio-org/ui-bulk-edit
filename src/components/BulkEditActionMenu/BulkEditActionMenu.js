@@ -55,6 +55,7 @@ const BulkEditActionMenu = ({
       || (hasItemInventoryEdit && capability === CAPABILITIES.ITEM)
       || (hasUserEditInAppPerm && capability === CAPABILITIES.USER);
 
+
   useFileDownload({
     id,
     fileInfo,

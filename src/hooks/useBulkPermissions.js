@@ -46,6 +46,7 @@ export const useBulkPermissions = () => {
   const hasUserEditInAppPerm = hasInAppUsersEditPerms && hasUsersPerms;
   const hasAnyEditPermissions = hasAnyUserWithBulkPerm || hasAnyInventoryWithInAppView;
 
+
   // Logs perms
   const hasLogViewPerms = stripes.hasPerm('ui-bulk-edit.logs.view');
   const hasLogItemViewPerms = hasLogViewPerms && hasItemsPerms;
