@@ -26,10 +26,8 @@ export const useBulkPermissions = () => {
 
   // derived pages
   const hasAnyInAppEditPermissions = hasInAppEditPerms || hasInAppUsersEditPerms;
-  const hasAnyEditPermissions = hasCsvEditPerms || hasAnyInAppEditPermissions;
   const hasOnlyViewCsvPerms = hasCsvViewPerms && !hasCsvEditPerms && !hasInAppUsersEditPerms;
   const hasViewInAppPerms = hasInAppViewPerms && !hasInAppEditPerms && !hasInAppUsersEditPerms;
-  const isActionMenuShown = hasCsvEditPerms || hasAnyInAppEditPermissions;
   const isSelectIdentifiersDisabled = !hasAnyEditPermissions;
   const isDropZoneDisabled = !hasAnyEditPermissions;
   const isUserRadioDisabled = !hasCsvViewPerms && !hasInAppUsersEditPerms;
@@ -43,8 +41,10 @@ export const useBulkPermissions = () => {
       || hasItemsAndHoldingsInventoryView) && hasInAppViewPerms;
   const hasAnyUserWithBulkPerm = (hasUsersViewPerms || hasUsersPerms) &&
       (hasCsvViewPerms || hasCsvEditPerms || hasInAppUsersEditPerms);
+  const isActionMenuShown = hasAnyInventoryWithInAppView || hasAnyUserWithBulkPerm;
   const hasUserEditLocalPerm = hasCsvEditPerms && hasUsersPerms;
   const hasUserEditInAppPerm = hasInAppUsersEditPerms && hasUsersPerms;
+  const hasAnyEditPermissions = hasAnyUserWithBulkPerm || hasAnyInventoryWithInAppView;
 
   // Logs perms
   const hasLogViewPerms = stripes.hasPerm('ui-bulk-edit.logs.view');

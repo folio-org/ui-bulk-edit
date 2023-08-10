@@ -51,7 +51,9 @@ const BulkEditActionMenu = ({
 
   const [fileInfo, setFileInfo] = useState(null);
 
-  const hasEditPerm = hasHoldingsInventoryEdit || hasItemInventoryEdit || hasUserEditInAppPerm;
+  const hasEditPerm = (hasHoldingsInventoryEdit && capability === CAPABILITIES.HOLDING)
+      || (hasItemInventoryEdit && capability === CAPABILITIES.ITEM)
+      || (hasUserEditInAppPerm && capability === CAPABILITIES.USER);
 
   useFileDownload({
     id,
