@@ -53,7 +53,6 @@ export const BulkEditListFilters = ({
     hasCsvViewPerms,
     hasInAppUsersEditPerms,
     hasInAppViewPerms,
-    hasOnlyViewCsvPerms,
     hasAnyInventoryWithInAppView,
     hasAnyUserWithBulkPerm,
   } = permissions;
@@ -238,7 +237,7 @@ export const BulkEditListFilters = ({
       value={recordIdentifier}
       disabled={getIsDisabledByPerm(capabilities,
         isSelectIdentifiersDisabled,
-        hasOnlyViewCsvPerms,
+        hasAnyUserWithBulkPerm,
         hasAnyInventoryWithInAppView)}
       onChange={handleRecordIdentifierChange}
       capabilities={capabilities}
