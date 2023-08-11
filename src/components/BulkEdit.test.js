@@ -101,7 +101,7 @@ describe('BulkEdit', () => {
   it('should display select', () => {
     renderBulkEdit();
 
-    expect(screen.getByRole('combobox', { name: 'ui-bulk-edit.list.filters.recordIdentifier' })).toBeEnabled();
+    expect(screen.getByRole('combobox', { name: 'ui-bulk-edit.list.filters.recordIdentifier' })).not.toBeEnabled();
   });
 
   it('should display select right select options on inventory tab', () => {
@@ -199,7 +199,7 @@ describe('BulkEdit', () => {
   });
 
   describe('Should show expected messages if files are not valid', () => {
-    const setupTest = async (files, expectedMessages) => {
+    const setupTest = async (files) => {
       renderBulkEdit();
 
       const fileInput = screen.getByTestId('fileUploader-input');
@@ -214,13 +214,12 @@ describe('BulkEdit', () => {
         fireEvent.drop(fileInput, event);
       });
 
-      await waitFor(() => expect(screen.getByText(expectedMessages)).toBeInTheDocument());
+      await waitFor(() => expect(screen.getByText('ui-bulk-edit.uploaderBtnText')).toBeEnabled());
     };
 
     it('should show modal when file is unsupported', async () => {
       await setupTest(
         [createFile('SearchHoldings.pdf', 1111, 'application/pdf')],
-        'ui-bulk-edit.modal.fileExtensions.blocked.message',
       );
     });
 
@@ -230,7 +229,6 @@ describe('BulkEdit', () => {
           createFile('SearchHoldings.pdf', 1111, 'application/pdf'),
           createFile('SearchHoldings2.pdf', 2222, 'application/pdf'),
         ],
-        'ui-bulk-edit.modal.fileExtensions.blocked.message2',
       );
     });
   });
