@@ -98,7 +98,7 @@ export const BulkEditListFilters = ({
     [applyFilters],
   );
 
-  const { setVisibleColumns } = useContext(RootContext);
+  const { setVisibleColumns, setInAppCommitted } = useContext(RootContext);
   const [isDropZoneActive, setDropZoneActive] = useState(false);
   const [isDropZoneDisabled, setIsDropZoneDisabled] = useState(true);
 
@@ -123,11 +123,14 @@ export const BulkEditListFilters = ({
       search: buildSearch({
         capabilities: value,
         identifier: null,
+        step: null,
+        fileName: null,
       }, location.search),
     });
 
     setVisibleColumns(null);
     setIsFileUploaded(false);
+    setInAppCommitted(false);
   };
 
   const handleCriteriaChange = (value) => {
@@ -151,17 +154,21 @@ export const BulkEditListFilters = ({
 
     history.replace({
       pathname: '/bulk-edit',
-      search: buildSearch({ identifier: e.target.value,
+      search: buildSearch({
+        identifier: e.target.value,
         capabilities,
         criteria,
         status,
         entityType,
         endTime,
         startTime,
-        operationType }),
+        operationType,
+        step: null,
+      }),
     });
 
     setIsFileUploaded(false);
+    setInAppCommitted(false);
   }, [location.search]);
 
   const uploadFileFlow = async (fileToUpload) => {
