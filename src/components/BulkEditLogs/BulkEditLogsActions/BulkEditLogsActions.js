@@ -22,8 +22,6 @@ import { useBulkPermissions } from '../../../hooks';
 const BulkEditLogsActions = ({ item }) => {
   const {
     hasUsersViewPerms,
-    hasLogItemViewPerms,
-    hasLogHoldingsViewPerms,
     hasInventoryInstanceViewPerms,
   } = useBulkPermissions();
   const [triggeredFile, setTriggeredFile] = useState(null);
@@ -86,9 +84,9 @@ const BulkEditLogsActions = ({ item }) => {
 
   if (item.entityType === CAPABILITIES.USER && !hasUsersViewPerms) return null;
   if (item.entityType === CAPABILITIES.HOLDING &&
-      (!hasLogHoldingsViewPerms || !hasInventoryInstanceViewPerms)) return null;
+      !hasInventoryInstanceViewPerms) return null;
   if (item.entityType === CAPABILITIES.ITEM &&
-      (!hasLogItemViewPerms || !hasInventoryInstanceViewPerms)) return null;
+      !hasInventoryInstanceViewPerms) return null;
 
   return (
     item.expired ?
