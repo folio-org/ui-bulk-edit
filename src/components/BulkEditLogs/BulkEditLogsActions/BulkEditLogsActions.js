@@ -88,7 +88,7 @@ const BulkEditLogsActions = ({ item }) => {
   if (item.entityType === CAPABILITIES.HOLDING &&
       (!hasLogHoldingsViewPerms || !hasInventoryInstanceViewPerms)) return null;
   if (item.entityType === CAPABILITIES.ITEM &&
-      (!hasLogItemViewPerms && !hasInventoryInstanceViewPerms)) return null;
+      (!hasLogItemViewPerms || !hasInventoryInstanceViewPerms)) return null;
 
   return (
     item.expired ?
