@@ -353,5 +353,5 @@
     "permissionsModal.cancel": "Cancelar",
     "permissionsModal.save": "Guardar y cerrar",
     "permissionsModal.totalSelected": "Total seleccionado: {count}",
-    "layer.options.items.duplicateTo": "Duplicate to"
+    "layer.options.items.duplicateTo": "duplicar a"
 }
