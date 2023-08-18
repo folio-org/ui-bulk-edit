@@ -81,6 +81,8 @@ export const TRANSLATION_SUFFIX = {
   [CAPABILITIES.USER]: '',
   [CAPABILITIES.ITEM]: '.item',
   [CAPABILITIES.HOLDING]: '.holdings',
+  null: '',
+  '': '',
 };
 
 export const FILTERS = {

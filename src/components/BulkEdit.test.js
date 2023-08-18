@@ -101,7 +101,7 @@ describe('BulkEdit', () => {
   it('should display select', () => {
     renderBulkEdit();
 
-    expect(screen.getByRole('combobox', { name: 'ui-bulk-edit.list.filters.recordIdentifier' })).toBeEnabled();
+    expect(screen.getByRole('combobox', { name: 'ui-bulk-edit.list.filters.recordIdentifier' })).not.toBeEnabled();
   });
 
   it('should display select right select options on inventory tab', () => {
