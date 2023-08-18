@@ -8,9 +8,13 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
+
+import { QueryClientProvider } from 'react-query';
+import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
 import { LogsFilters } from './LogsFilters';
 
@@ -28,17 +32,29 @@ const resetFiltersMock = jest.fn();
 
 const renderLogsFilters = () => {
   render(
-    <MemoryRouter initialEntries={['/bulk-edit?criteria=logs']}>
-      <LogsFilters
-        activeFilters={activeFiltersMock}
-        onChange={onChangeMock}
-        resetFilter={resetFiltersMock}
-      />
-    </MemoryRouter>,
+    <QueryClientProvider client={queryClient}>
+      <MemoryRouter initialEntries={['/bulk-edit?criteria=logs']}>
+        <LogsFilters
+          activeFilters={activeFiltersMock}
+          onChange={onChangeMock}
+          resetFilter={resetFiltersMock}
+        />
+      </MemoryRouter>,
+    </QueryClientProvider>,
   );
 };
 
 describe('LogsFilters', () => {
+  beforeEach(() => {
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue({
+        get: () => ({
+          json: () => ({ users: [{ value: '1', label: 'test' }] }),
+        }),
+      });
+  });
+
   it('should contain Search and filter section', () => {
     renderLogsFilters();
 
