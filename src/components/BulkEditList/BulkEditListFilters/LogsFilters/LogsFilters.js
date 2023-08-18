@@ -7,6 +7,7 @@ import {
   AccordionSet,
   Accordion,
   FilterAccordionHeader,
+  Selection,
 } from '@folio/stripes/components';
 import {
   createClearFilterHandler,
@@ -24,6 +25,8 @@ import {
   FILTERS,
   FILTER_OPTIONS,
 } from '../../../../constants';
+import { useBulkOperationUsers } from '../../../../hooks/api/useBulkOperationUsers';
+import { getFullName } from '../../../../utils/getFullName';
 
 export const LogsFilters = ({
   onChange,
@@ -31,6 +34,14 @@ export const LogsFilters = ({
   resetFilter,
 }) => {
   const location = useLocation();
+
+  const { data } = useBulkOperationUsers();
+
+  const userOptions = data?.users.map(({ id, firstName, lastName }) => ({
+    label: getFullName({ firstName, lastName }),
+    value: id,
+  })) || [];
+
   const getDateRange = filterValue => {
     let dateRange = {
       startDate: '',
@@ -132,6 +143,21 @@ export const LogsFilters = ({
             makeFilterString={getDateFilter}
             dateFormat={DATE_FORMAT}
             onChange={onChange}
+          />
+        </Accordion>
+        <Accordion
+          closedByDefault={false}
+          displayClearButton
+          header={FilterAccordionHeader}
+          id={FILTERS.USER}
+          label={<FormattedMessage id="ui-bulk-edit.logs.filter.title.user" />}
+          onClearFilter={createClearFilterHandler(onChange, FILTERS.USER)}
+        >
+          <Selection
+            placeholder="Choose user"
+            dataOptions={userOptions}
+            value={activeFilters[FILTERS.USER]?.toString()}
+            onChange={values => onChange({ name: FILTERS.USER, values })}
           />
         </Accordion>
       </AccordionSet>
