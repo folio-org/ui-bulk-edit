@@ -319,6 +319,7 @@
   "logs.filter.title.capability": "Record types",
   "logs.filter.title.types": "Bulk operation type",
   "logs.filter.title.user": "User",
+  "logs.filter.user.placeholder": "Choose user",
   "logs.status.NEW": "New",
   "logs.status.RETRIEVING_RECORDS": "Retrieving records",
   "logs.status.SAVING_RECORDS_LOCALLY": "Saving records",

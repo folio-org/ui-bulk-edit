@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import {
-  FormattedMessage,
+  FormattedMessage, useIntl,
 } from 'react-intl';
 
 import {
@@ -33,6 +33,7 @@ export const LogsFilters = ({
   activeFilters,
   resetFilter,
 }) => {
+  const intl = useIntl();
   const location = useLocation();
 
   const { data } = useBulkOperationUsers();
@@ -154,7 +155,7 @@ export const LogsFilters = ({
           onClearFilter={createClearFilterHandler(onChange, FILTERS.USER)}
         >
           <Selection
-            placeholder="Choose user"
+            placeholder={intl.formatMessage({ id: 'ui-bulk-edit.logs.filter.user.placeholder' })}
             dataOptions={userOptions}
             value={activeFilters[FILTERS.USER]?.toString()}
             onChange={values => onChange({ name: FILTERS.USER, values })}
