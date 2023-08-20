@@ -177,6 +177,7 @@ export const BulkEditList = () => {
       setVisibleColumns,
       confirmedFileName,
       inAppCommitted,
+      setInAppCommitted,
     }}
     >
       <Paneset>
