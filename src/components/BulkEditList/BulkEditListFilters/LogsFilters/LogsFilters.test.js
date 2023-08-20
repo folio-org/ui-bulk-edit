@@ -1,5 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
+import { QueryClientProvider } from 'react-query';
 import {
   act,
   fireEvent,
@@ -13,7 +14,6 @@ import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
 
-import { QueryClientProvider } from 'react-query';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
 import { LogsFilters } from './LogsFilters';

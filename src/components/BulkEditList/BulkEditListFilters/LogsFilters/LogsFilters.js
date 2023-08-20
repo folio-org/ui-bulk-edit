@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import {
-  FormattedMessage, useIntl,
+  FormattedMessage,
+  useIntl,
 } from 'react-intl';
 
 import {
