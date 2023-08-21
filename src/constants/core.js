@@ -91,6 +91,7 @@ export const FILTERS = {
   OPERATION_TYPE: 'operationType',
   START_DATE: 'startTime',
   END_DATE: 'endTime',
+  USER: 'userId',
 };
 
 export const MANUAL_UPLOAD_STEPS = {
