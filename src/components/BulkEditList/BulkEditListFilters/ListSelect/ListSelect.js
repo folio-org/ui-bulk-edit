@@ -19,6 +19,8 @@ export const ListSelect = memo(({ value, disabled, onChange, capabilities }) => 
 
   const identifier = new URLSearchParams(location.search).get('identifier') || value;
 
+  const isDisabled = capabilities === '' ? true : disabled;
+
   return (
     <Select
       dataOptions={options}
@@ -26,7 +28,7 @@ export const ListSelect = memo(({ value, disabled, onChange, capabilities }) => 
       label={<FormattedMessage id="ui-bulk-edit.list.filters.recordIdentifier" />}
       value={identifier}
       onChange={onChange}
-      disabled={disabled}
+      disabled={isDisabled}
     />
   );
 });
