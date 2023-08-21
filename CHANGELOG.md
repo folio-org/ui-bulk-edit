@@ -36,6 +36,7 @@
 * [UIBULKED-311](https://issues.folio.org/browse/UIBULKED-311) Bulk edit actions for notes - duplicate note.
 * [UIBULKED-321](https://issues.folio.org/browse/UIBULKED-321) Permissions for editing Inventory records.
 * [UIBULKED-322](https://issues.folio.org/browse/UIBULKED-322) Permissions for editing User records.
+* [UIBULKED-335](https://issues.folio.org/browse/UIBULKED-335) Reset state to default when changing "Record identifier"
 * [UIBULKED-330](https://issues.folio.org/browse/UIBULKED-330) Order alphabetically record types on the landing page.
 * [UIBULKED-340](https://issues.folio.org/browse/UIBULKED-340) Wrong message on Bulk edit main page without View Inventory/Users permissions.
 
