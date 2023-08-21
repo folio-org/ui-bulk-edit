@@ -29,7 +29,6 @@ import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreview
 
 import { RootContext } from '../../context/RootContext';
 import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
-import { getDefaultCapabilities } from '../../utils/filters';
 import { useResetAppState } from '../../hooks/useResetAppState';
 import BulkEditInAppLayer from './BulkEditListResult/BulkEditInAppLayer/BulkEditInAppLayer';
 
@@ -50,13 +49,12 @@ export const BulkEditList = () => {
     logsTab: [],
   });
 
-  const { isActionMenuShown, ...restPerms } = useBulkPermissions();
+  const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
   const step = search.get('step');
   const capabilities = search.get('capabilities');
   const criteria = search.get('criteria');
   const logsFilters = Object.values(FILTERS).map((el) => search.getAll(el));
-  const defaultCapability = capabilities || getDefaultCapabilities(criteria, restPerms);
 
   useEffect(() => {
     if (history.location.search) {
@@ -69,7 +67,7 @@ export const BulkEditList = () => {
 
   const initialFiltersState = {
     criteria: CRITERIA.IDENTIFIER,
-    capabilities: defaultCapability,
+    capabilities: '',
     queryText: '',
     recordIdentifier: '',
   };
@@ -177,6 +175,7 @@ export const BulkEditList = () => {
       setVisibleColumns,
       confirmedFileName,
       inAppCommitted,
+      setInAppCommitted,
     }}
     >
       <Paneset>

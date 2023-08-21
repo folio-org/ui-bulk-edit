@@ -31,6 +31,7 @@
   "list.filters.recordIdentifier.holdings.itemBarcodes": "Item barcodes",
 
   "list.result.emptyMessage": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+  "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
   "list.result.emptyMessage.item": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
   "list.result.emptyMessage.holdings": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
   "list.result.emptyMessage.ID": "Drag and drop or choose file with User UUIDs",
@@ -67,6 +68,7 @@
 
   "uploaderBtnText": "or choose file",
   "uploaderSubTitle": "Select a file with record identifiers",
+  "uploaderSubTitle.empty": "Select a file with record identifiers",
   "uploaderSubTitle.item": "Select a file with record identifiers",
   "uploaderSubTitle.holdings": "Select a file with record identifiers",
   "uploaderSubTitle.ID": "Select a file with User UUIDs",
@@ -318,6 +320,8 @@
   "logs.filter.title.status": "Statuses",
   "logs.filter.title.capability": "Record types",
   "logs.filter.title.types": "Bulk operation type",
+  "logs.filter.title.user": "User",
+  "logs.filter.user.placeholder": "Choose user",
   "logs.status.NEW": "New",
   "logs.status.RETRIEVING_RECORDS": "Retrieving records",
   "logs.status.SAVING_RECORDS_LOCALLY": "Saving records",
