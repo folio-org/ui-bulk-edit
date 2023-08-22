@@ -118,6 +118,7 @@
         "subPermissions": [
           "bulk-operations.download.item.get",
           "bulk-operations.collection.get",
+          "bulk-operations.list-users.collection.get",
           "users.collection.get"
         ],
         "visible": true
