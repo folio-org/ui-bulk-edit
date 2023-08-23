@@ -39,7 +39,7 @@ export const LogsFilters = ({
 
   const { data } = useBulkOperationUsers();
 
-  const userOptions = data?.users?.map(({ id, firstName, lastName }) => ({
+  const userOptions = data?.users.map(({ id, firstName, lastName }) => ({
     label: getFullName({ firstName, lastName }),
     value: id,
   })) || [];
