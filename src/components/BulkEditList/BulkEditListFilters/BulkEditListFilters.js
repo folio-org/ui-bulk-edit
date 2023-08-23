@@ -167,6 +167,7 @@ export const BulkEditListFilters = ({
       }),
     });
 
+    setVisibleColumns(null);
     setIsFileUploaded(false);
     setInAppCommitted(false);
   }, [location.search]);
