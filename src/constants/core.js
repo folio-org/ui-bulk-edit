@@ -14,9 +14,9 @@ export const APPROACHES = {
 };
 
 export const CAPABILITIES = {
-  USER: 'USER',
-  ITEM: 'ITEM',
   HOLDING: 'HOLDINGS_RECORD',
+  ITEM: 'ITEM',
+  USER: 'USER',
 };
 
 export const IDENTIFIERS = {
@@ -81,6 +81,8 @@ export const TRANSLATION_SUFFIX = {
   [CAPABILITIES.USER]: '',
   [CAPABILITIES.ITEM]: '.item',
   [CAPABILITIES.HOLDING]: '.holdings',
+  null: '',
+  '': '',
 };
 
 export const FILTERS = {
@@ -89,6 +91,7 @@ export const FILTERS = {
   OPERATION_TYPE: 'operationType',
   START_DATE: 'startTime',
   END_DATE: 'endTime',
+  USER: 'userId',
 };
 
 export const MANUAL_UPLOAD_STEPS = {

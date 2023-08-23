@@ -107,6 +107,12 @@ export const identifierOptions = {
       label: 'ui-bulk-edit.list.filters.recordIdentifier.holdings.itemBarcodes',
     },
   ],
+  '': [
+    {
+      value: '',
+      label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
+    },
+  ],
 };
 
 export const FILTER_OPTIONS = {
@@ -313,8 +319,8 @@ export const getItemStatusOptions = (formatMessage) => [
 
 export const EDIT_CAPABILITIES_OPTIONS = [
   {
-    value: CAPABILITIES.USER,
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.users" />,
+    value: CAPABILITIES.HOLDING,
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.holdings" />,
     disabled: false,
   },
   {
@@ -323,8 +329,8 @@ export const EDIT_CAPABILITIES_OPTIONS = [
     disabled: false,
   },
   {
-    value: CAPABILITIES.HOLDING,
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.holdings" />,
+    value: CAPABILITIES.USER,
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.users" />,
     disabled: false,
   },
 ];
