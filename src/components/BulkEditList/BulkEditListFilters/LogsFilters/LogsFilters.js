@@ -148,7 +148,7 @@ export const LogsFilters = ({
           />
         </Accordion>
         <Accordion
-          closedByDefault={false}
+          closedByDefault={true}
           displayClearButton={!!activeFilters[FILTERS.USER]}
           header={FilterAccordionHeader}
           id={FILTERS.USER}

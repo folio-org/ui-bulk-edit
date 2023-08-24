@@ -216,7 +216,7 @@ export const BulkEditListFilters = ({
   }, [recordIdentifier]);
 
   useEffect(() => {
-    if (isFileUploaded || !recordIdentifier) {
+    if (isFileUploaded || !recordIdentifier || initialFileName) {
       setIsDropZoneDisabled(true);
     } else {
       setIsDropZoneDisabled(false);
@@ -228,6 +228,10 @@ export const BulkEditListFilters = ({
 
     if (identifier) {
       handleChange(identifier, 'recordIdentifier');
+    }
+
+    if (initialCapabilities) {
+      handleChange(initialCapabilities, 'capabilities');
     }
   }, [location.search]);
 
