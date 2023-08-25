@@ -220,7 +220,7 @@
     "columns.ITEM.Item HRID": "HRID jednotky",
     "columns.ITEM.Holdings Record Id": "ID záznamu holdingu",
     "columns.ITEM.Former Ids": "Dřívější identifikátory",
-    "columns.ITEM.Discovery Suppress": "Potlačeno z vyhledávání",
+    "columns.ITEM.Discovery Suppress": "Potlačit z vyhledávání",
     "columns.ITEM.Title": "Název",
     "columns.ITEM.Contributor Names": "Jména autorů",
     "columns.ITEM.Call Number": "Signatura",
@@ -290,7 +290,7 @@
     "columns.HOLDINGS_RECORD.Copy number": "Číslo kopie",
     "columns.HOLDINGS_RECORD.Number of items": "Počet jednotek",
     "columns.HOLDINGS_RECORD.Receiving history": "Historie příjmu",
-    "columns.HOLDINGS_RECORD.Discovery suppress": "Potlačeno z vyhledávání",
+    "columns.HOLDINGS_RECORD.Discovery suppress": "Potlačit z vyhledávání",
     "columns.HOLDINGS_RECORD.Statistical codes": "Statistické kódy",
     "columns.HOLDINGS_RECORD.Tags": "Štítky",
     "columns.HOLDINGS_RECORD.Source": "Zdroj",
@@ -353,5 +353,9 @@
     "permissionsModal.cancel": "Zrušit",
     "permissionsModal.save": "Uložit a zavřít",
     "permissionsModal.totalSelected": "Celkem vybráno: {count}",
-    "layer.options.items.duplicateTo": "Duplikovat do"
+    "layer.options.items.duplicateTo": "Duplikovat do",
+    "list.result.emptyMessage.empty": "Na kartě Identifikátor vyberte „identifikátor záznamu“. Na kartě Dotaz zadejte „vyhledávací dotaz“.",
+    "uploaderSubTitle.empty": "Vybrat soubor s identifikátory záznamu",
+    "logs.filter.title.user": "Uživatel",
+    "logs.filter.user.placeholder": "Vybrat uživatele"
 }

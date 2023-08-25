@@ -220,7 +220,7 @@
     "columns.ITEM.Item HRID": "Item HRID",
     "columns.ITEM.Holdings Record Id": "所蔵レコードID",
     "columns.ITEM.Former Ids": "Former identifiers",
-    "columns.ITEM.Discovery Suppress": "Suppressed from discovery",
+    "columns.ITEM.Discovery Suppress": "Suppress from discovery",
     "columns.ITEM.Title": "タイトル",
     "columns.ITEM.Contributor Names": "Contributor names",
     "columns.ITEM.Call Number": "コールナンバー",
@@ -290,7 +290,7 @@
     "columns.HOLDINGS_RECORD.Copy number": "コピー番号",
     "columns.HOLDINGS_RECORD.Number of items": "アイテム数",
     "columns.HOLDINGS_RECORD.Receiving history": "Receiving history",
-    "columns.HOLDINGS_RECORD.Discovery suppress": "Suppressed from discovery",
+    "columns.HOLDINGS_RECORD.Discovery suppress": "Suppress from discovery",
     "columns.HOLDINGS_RECORD.Statistical codes": "Statistical codes",
     "columns.HOLDINGS_RECORD.Tags": "タグ",
     "columns.HOLDINGS_RECORD.Source": "ソース",
@@ -353,5 +353,9 @@
     "permissionsModal.cancel": "Cancel",
     "permissionsModal.save": "Save & close",
     "permissionsModal.totalSelected": "Total selected: {count}",
-    "layer.options.items.duplicateTo": "Duplicate to"
+    "layer.options.items.duplicateTo": "Duplicate to",
+    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "uploaderSubTitle.empty": "Select a file with record identifiers",
+    "logs.filter.title.user": "User",
+    "logs.filter.user.placeholder": "Choose user"
 }

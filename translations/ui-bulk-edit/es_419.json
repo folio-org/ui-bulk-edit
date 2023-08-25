@@ -353,5 +353,9 @@
     "permissionsModal.cancel": "Cancelar",
     "permissionsModal.save": "Guardar y cerrar",
     "permissionsModal.totalSelected": "Total seleccionado: {count}",
-    "layer.options.items.duplicateTo": "duplicar a"
+    "layer.options.items.duplicateTo": "duplicar a",
+    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "uploaderSubTitle.empty": "Select a file with record identifiers",
+    "logs.filter.title.user": "User",
+    "logs.filter.user.placeholder": "Choose user"
 }

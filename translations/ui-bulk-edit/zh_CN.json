@@ -353,5 +353,9 @@
     "permissionsModal.cancel": "取消",
     "permissionsModal.save": "保存并关闭",
     "permissionsModal.totalSelected": "已选总数： {count}",
-    "layer.options.items.duplicateTo": "Duplicate to"
+    "layer.options.items.duplicateTo": "Duplicate to",
+    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "uploaderSubTitle.empty": "Select a file with record identifiers",
+    "logs.filter.title.user": "User",
+    "logs.filter.user.placeholder": "Choose user"
 }
