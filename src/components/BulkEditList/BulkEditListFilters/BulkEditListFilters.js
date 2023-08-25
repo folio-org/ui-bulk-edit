@@ -156,7 +156,7 @@ export const BulkEditListFilters = ({
       pathname: '/bulk-edit',
       search: buildSearch({
         identifier: e.target.value,
-        capabilities,
+        capabilities: initialCapabilities,
         criteria,
         status,
         entityType,
