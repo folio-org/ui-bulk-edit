@@ -356,6 +356,6 @@
     "layer.options.items.duplicateTo": "Duplicar para",
     "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
     "uploaderSubTitle.empty": "Select a file with record identifiers",
-    "logs.filter.title.user": "User",
-    "logs.filter.user.placeholder": "Choose user"
+    "logs.filter.title.user": "Usuário",
+    "logs.filter.user.placeholder": "Escolha o usuário"
 }
