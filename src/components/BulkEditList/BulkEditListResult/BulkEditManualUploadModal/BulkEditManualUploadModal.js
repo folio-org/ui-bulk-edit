@@ -87,7 +87,7 @@ const BulkEditManualUploadModal = ({
 
   const handleCancel = () => {
     if (controller.current) controller.current.abort();
-    if (fileName) bulkOperationDelete({ id: operationId, name:fileName });
+    if (fileName) bulkOperationDelete({ operationId });
 
     setCurrentStep(MANUAL_UPLOAD_STEPS.UPLOAD);
     setFileName('');

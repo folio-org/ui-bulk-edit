@@ -96,7 +96,7 @@
   "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded.",
   "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded.",
   "modal.fileExtensions.actionButton": "Choose other file to upload",
-  "modal.successfullMessage": "{fileName} succesfully uploaded.",
+  "modal.successfullMessage": "{fileName} successfully uploaded.",
   "modal.next": "Next",
 
   "start.edit": "Start bulk edit",
