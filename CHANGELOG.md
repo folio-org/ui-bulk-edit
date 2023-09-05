@@ -42,6 +42,7 @@
 * [UIBULKED-318](https://issues.folio.org/browse/UIBULKED-318) Add User filter to Logs tab
 * [UIBULKED-325](https://issues.folio.org/browse/UIBULKED-325) Rename "Suppressed from discovery" option to "Suppress from discovery" for Items and Holdings
 * [UIBULKED-337](https://issues.folio.org/browse/UIBULKED-337) *BREAKING* Update `react` to `v18`.
+* [UIBULKED-312](https://issues.folio.org/browse/UIBULKED-312) CSV: On cancel button click uploaded file should be deleted.
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 
