@@ -220,7 +220,7 @@
     "columns.ITEM.Item HRID": "HRID do item",
     "columns.ITEM.Holdings Record Id": "ID dos registros de coleções",
     "columns.ITEM.Former Ids": "Identificadores anteriores",
-    "columns.ITEM.Discovery Suppress": "Suprimido da descoberta",
+    "columns.ITEM.Discovery Suppress": "Suprimir da descoberta",
     "columns.ITEM.Title": "Título",
     "columns.ITEM.Contributor Names": "Nomes de colaborador",
     "columns.ITEM.Call Number": "Número de chamada",
@@ -290,7 +290,7 @@
     "columns.HOLDINGS_RECORD.Copy number": "Número de cópia",
     "columns.HOLDINGS_RECORD.Number of items": "Número de itens",
     "columns.HOLDINGS_RECORD.Receiving history": "Histórico de recebimento",
-    "columns.HOLDINGS_RECORD.Discovery suppress": "Suprimido da descoberta",
+    "columns.HOLDINGS_RECORD.Discovery suppress": "Suprimir da descoberta",
     "columns.HOLDINGS_RECORD.Statistical codes": "Códigos estatísticos",
     "columns.HOLDINGS_RECORD.Tags": "Etiquetas",
     "columns.HOLDINGS_RECORD.Source": "Fonte",
@@ -354,8 +354,8 @@
     "permissionsModal.save": "Salvar e fechar",
     "permissionsModal.totalSelected": "Total selecionado: {count}",
     "layer.options.items.duplicateTo": "Duplicar para",
-    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
-    "uploaderSubTitle.empty": "Select a file with record identifiers",
+    "list.result.emptyMessage.empty": "Selecione um \"identificador de registro\" na guia Identificador. Insira uma \"consulta de pesquisa\" quando estiver na guia Consulta",
+    "uploaderSubTitle.empty": "Selecione um arquivo com identificadores de registro",
     "logs.filter.title.user": "Usuário",
     "logs.filter.user.placeholder": "Escolha o usuário"
 }

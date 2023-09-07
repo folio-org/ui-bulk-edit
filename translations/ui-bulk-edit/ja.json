@@ -52,7 +52,7 @@
     "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
     "list.errors.table.code": "Record identifier",
     "list.errors.table.message": "エラーの理由",
-    "modal.successfullMessage": "{fileName} succesfully uploaded.",
+    "modal.successfullMessage": "{fileName} successfully uploaded.",
     "modal.next": "次",
     "conformationModal.commitChanges": "Commit changes",
     "list.filters.recordIdentifier.item.barcode": "資料バーコード",

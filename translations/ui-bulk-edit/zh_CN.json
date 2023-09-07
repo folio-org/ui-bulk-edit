@@ -353,9 +353,9 @@
     "permissionsModal.cancel": "取消",
     "permissionsModal.save": "保存并关闭",
     "permissionsModal.totalSelected": "已选总数： {count}",
-    "layer.options.items.duplicateTo": "Duplicate to",
-    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
-    "uploaderSubTitle.empty": "Select a file with record identifiers",
-    "logs.filter.title.user": "User",
-    "logs.filter.user.placeholder": "Choose user"
+    "layer.options.items.duplicateTo": "复制到",
+    "list.result.emptyMessage.empty": "在标识符选项卡上选择“记录标识符”。在“查询”选项卡上输入“搜索查询”",
+    "uploaderSubTitle.empty": "选择带有记录标识符的文件",
+    "logs.filter.title.user": "用户",
+    "logs.filter.user.placeholder": "选择用户"
 }
