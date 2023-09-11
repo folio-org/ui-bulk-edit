@@ -56,6 +56,7 @@
         "subPermissions": [
           "ui-bulk-edit.view.base",
           "bulk-operations.item.upload.post",
+          "bulk-operations.item.cancel.post",
           "bulk-operations.item.content-update.post",
           "bulk-operations.item.start.post",
           "inventory-storage.loan-types.collection.get",
