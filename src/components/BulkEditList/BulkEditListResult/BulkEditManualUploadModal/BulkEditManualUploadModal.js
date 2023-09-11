@@ -112,7 +112,9 @@ const BulkEditManualUploadModal = ({
     } catch {
       swwCallout(swwErrorMessage);
     } finally {
-      handleCancel();
+      setCurrentStep(MANUAL_UPLOAD_STEPS.UPLOAD);
+      setFileName('');
+      onCancel();
     }
   };
 
