@@ -85,9 +85,9 @@ const BulkEditManualUploadModal = ({
     setCurrentStep(MANUAL_UPLOAD_STEPS.CONFIRM);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (isCancel = true) => {
     if (controller.current) controller.current.abort();
-    if (fileName) bulkOperationDelete({ operationId });
+    if (fileName && isCancel) bulkOperationDelete({ operationId });
 
     setCurrentStep(MANUAL_UPLOAD_STEPS.UPLOAD);
     setFileName('');
@@ -112,9 +112,7 @@ const BulkEditManualUploadModal = ({
     } catch {
       swwCallout(swwErrorMessage);
     } finally {
-      setCurrentStep(MANUAL_UPLOAD_STEPS.UPLOAD);
-      setFileName('');
-      onCancel();
+      handleCancel(false);
     }
   };
 
