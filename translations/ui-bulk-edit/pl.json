@@ -52,7 +52,7 @@
     "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
     "list.errors.table.code": "Record identifier",
     "list.errors.table.message": "Reason for error",
-    "modal.successfullMessage": "{fileName} successfully uploaded.",
+    "modal.successfullMessage": "{fileName} załadowany pomyślnie",
     "modal.next": "Next",
     "conformationModal.commitChanges": "Commit changes",
     "list.filters.recordIdentifier.item.barcode": "Item barcode",
