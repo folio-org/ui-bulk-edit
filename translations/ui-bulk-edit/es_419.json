@@ -349,7 +349,7 @@
     "permissionsModal.list.cell.permissionSets": "Conjunto de permisos",
     "permissionsModal.list.cell.permissions": "Permiso",
     "permissionsModal.list.title": "Permisos",
-    "permissionsModal.list.subTitle": "{contar} permisos encontrados",
+    "permissionsModal.list.subTitle": "{count} permisos encontrados",
     "permissionsModal.cancel": "Cancelar",
     "permissionsModal.save": "Guardar y cerrar",
     "permissionsModal.totalSelected": "Total seleccionado: {count}",
