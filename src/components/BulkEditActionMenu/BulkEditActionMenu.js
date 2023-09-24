@@ -18,7 +18,8 @@ import {
   EDITING_STEPS,
   JOB_STATUSES,
   BULK_VISIBLE_COLUMNS,
-  getFormattedFilePrefixDate,
+  FILE_SEARCH_PARAMS,
+  FILE_TO_LINK,
 } from '../../constants';
 import {
   useBulkPermissions,
@@ -37,7 +38,6 @@ const BulkEditActionMenu = ({
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
   const step = search.get('step');
-  const fileName = search.get('fileName') || `${capability}-${search.get('criteria')}.csv`;
 
   const {
     hasUserEditLocalPerm,
@@ -57,10 +57,13 @@ const BulkEditActionMenu = ({
 
 
   useFileDownload({
+    enabled: !!fileInfo,
     id,
-    fileInfo,
+    fileInfo: {
+      fileContentType: FILE_SEARCH_PARAMS[fileInfo?.param],
+    },
     onSuccess: data => {
-      saveAs(new Blob([data]), fileInfo?.fileName);
+      saveAs(new Blob([data]), fileInfo?.bulkDetails[FILE_TO_LINK[fileInfo?.param]].split('/')[1]);
       setFileInfo(null);
     },
   });
@@ -110,16 +113,14 @@ const BulkEditActionMenu = ({
   const renderLinkButtons = () => {
     if (isLoading) return <Preloader />;
 
-    const date = getFormattedFilePrefixDate();
-
-    const downloadLinks = getDownloadLinks({ perms, step, fileName, date });
+    const downloadLinks = getDownloadLinks({ perms, step });
 
     return downloadLinks.map(l => bulkDetails && Object.hasOwn(bulkDetails, l.KEY) && l.IS_VISIBLE && (
       <Button
         key={l.SEARCH_PARAM}
         buttonStyle="dropdownItem"
         data-testid={l.SEARCH_PARAM}
-        onClick={() => handleFileSave({ fileContentType: l.SEARCH_PARAM, fileName: l.SAVE_FILE_NAME })}
+        onClick={() => handleFileSave({ bulkDetails, param: l.SEARCH_PARAM })}
       >
         <Icon icon="download">
           {l.LINK_NAME}

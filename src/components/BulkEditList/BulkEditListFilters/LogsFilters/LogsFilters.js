@@ -148,8 +148,8 @@ export const LogsFilters = ({
           />
         </Accordion>
         <Accordion
-          closedByDefault={false}
-          displayClearButton
+          closedByDefault={true}
+          displayClearButton={!!activeFilters[FILTERS.USER]}
           header={FilterAccordionHeader}
           id={FILTERS.USER}
           label={<FormattedMessage id="ui-bulk-edit.logs.filter.title.user" />}

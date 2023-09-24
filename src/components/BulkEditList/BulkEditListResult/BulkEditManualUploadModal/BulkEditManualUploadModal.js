@@ -23,6 +23,7 @@ import {
   useUpload,
   useBulkOperationStart,
 } from '../../../../hooks/api';
+import { useBulkOperationDelete } from '../../../../hooks/api/useBulkOperationDelete';
 
 const BulkEditManualUploadModal = ({
   operationId,
@@ -63,6 +64,8 @@ const BulkEditManualUploadModal = ({
 
   const confirmationModalMessage = intl.formatMessage({ id: 'ui-bulk-edit.conformationModal.message' }, { count: countOfRecords });
 
+  const { bulkOperationDelete } = useBulkOperationDelete();
+
   const swwCallout = (message) => (
     callout({
       type: 'error',
@@ -82,8 +85,9 @@ const BulkEditManualUploadModal = ({
     setCurrentStep(MANUAL_UPLOAD_STEPS.CONFIRM);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (isCancel = true) => {
     if (controller.current) controller.current.abort();
+    if (fileName && isCancel) bulkOperationDelete({ operationId });
 
     setCurrentStep(MANUAL_UPLOAD_STEPS.UPLOAD);
     setFileName('');
@@ -108,7 +112,7 @@ const BulkEditManualUploadModal = ({
     } catch {
       swwCallout(swwErrorMessage);
     } finally {
-      handleCancel();
+      handleCancel(false);
     }
   };
 

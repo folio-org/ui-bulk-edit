@@ -1,43 +1,17 @@
 {
+  "extends": ["@folio/eslint-config-stripes"],
   "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "requireConfigFile": false,
-    "babelOptions": {
-      "presets": ["@babel/preset-react"]
-    }
-  },
-  "extends": ["@folio/eslint-config-stripes/acquisitions"],
   "rules": {
-    "no-multiple-empty-lines": 0,
-    "react/react-in-jsx-scope": 0,
-    "template-curly-spacing" : 0,
-    "indent" : 2,
-    "react-hooks/exhaustive-deps": 0,
-    "import/no-unresolved": 0,
-    "no-unused-vars": 0,
-    "filenames/match-exported": 0,
-    "import/no-extraneous-dependencies": 0,
-    "no-undef": 0,
-    "no-use-before-define": ["error"],
-    "no-shadow": 0
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    },
-    "import/resolver": {
-      "node": {
-        "paths": ["src"],
-        "extensions": [".js", ".jsx"]
-      }
-    }
+    "import/prefer-default-export": "off"
   },
   "overrides": [
     {
-      "files": ["*test.*", "test/**"],
-      "rules": {
-        "react/prop-types": "off",
-        "padding-line-between-statements": "off"
+      "files": [
+        "**/*.test.js",
+        "**/*.test.jsx"
+      ],
+      "env": {
+        "jest": true
       }
     }
   ]

@@ -156,7 +156,7 @@ export const BulkEditListFilters = ({
       pathname: '/bulk-edit',
       search: buildSearch({
         identifier: e.target.value,
-        capabilities,
+        capabilities: initialCapabilities,
         criteria,
         status,
         entityType,
@@ -167,6 +167,7 @@ export const BulkEditListFilters = ({
       }),
     });
 
+    setVisibleColumns(null);
     setIsFileUploaded(false);
     setInAppCommitted(false);
   }, [location.search]);
@@ -215,7 +216,7 @@ export const BulkEditListFilters = ({
   }, [recordIdentifier]);
 
   useEffect(() => {
-    if (isFileUploaded || !recordIdentifier) {
+    if (isFileUploaded || !recordIdentifier || initialFileName) {
       setIsDropZoneDisabled(true);
     } else {
       setIsDropZoneDisabled(false);
@@ -227,6 +228,10 @@ export const BulkEditListFilters = ({
 
     if (identifier) {
       handleChange(identifier, 'recordIdentifier');
+    }
+
+    if (initialCapabilities) {
+      handleChange(initialCapabilities, 'capabilities');
     }
   }, [location.search]);
 

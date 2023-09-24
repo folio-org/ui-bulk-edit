@@ -52,7 +52,7 @@
     "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
     "list.errors.table.code": "Record identifier",
     "list.errors.table.message": "Reason for error",
-    "modal.successfullMessage": "{fileName} succesfully uploaded.",
+    "modal.successfullMessage": "{fileName} successfully uploaded.",
     "modal.next": "Next",
     "conformationModal.commitChanges": "Commit changes",
     "list.filters.recordIdentifier.item.barcode": "Item barcode",
@@ -220,7 +220,7 @@
     "columns.ITEM.Item HRID": "Item HRID",
     "columns.ITEM.Holdings Record Id": "Holdings record ID",
     "columns.ITEM.Former Ids": "Former identifiers",
-    "columns.ITEM.Discovery Suppress": "Suppressed from discovery",
+    "columns.ITEM.Discovery Suppress": "Suppress from discovery",
     "columns.ITEM.Title": "Title",
     "columns.ITEM.Contributor Names": "Contributor names",
     "columns.ITEM.Call Number": "Call number",
@@ -290,7 +290,7 @@
     "columns.HOLDINGS_RECORD.Copy number": "Copy number",
     "columns.HOLDINGS_RECORD.Number of items": "Number of items",
     "columns.HOLDINGS_RECORD.Receiving history": "Receiving history",
-    "columns.HOLDINGS_RECORD.Discovery suppress": "Suppressed from discovery",
+    "columns.HOLDINGS_RECORD.Discovery suppress": "Suppress from discovery",
     "columns.HOLDINGS_RECORD.Statistical codes": "Statistical codes",
     "columns.HOLDINGS_RECORD.Tags": "Tags",
     "columns.HOLDINGS_RECORD.Source": "Source",
@@ -353,5 +353,9 @@
     "permissionsModal.cancel": "Cancel",
     "permissionsModal.save": "Save & close",
     "permissionsModal.totalSelected": "Total selected: {count}",
-    "layer.options.items.duplicateTo": "Duplicate to"
+    "layer.options.items.duplicateTo": "Duplicate to",
+    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "uploaderSubTitle.empty": "Select a file with record identifiers",
+    "logs.filter.title.user": "User",
+    "logs.filter.user.placeholder": "Choose user"
 }
