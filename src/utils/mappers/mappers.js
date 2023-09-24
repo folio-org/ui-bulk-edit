@@ -11,6 +11,7 @@ import {
   CAPABILITIES,
   CUSTOM_ENTITY_COLUMNS,
 } from '../../constants';
+import { FormattedNotes } from '../../components/BulkEditList/BulkEditListResult/Preview/FormattedNotes/FormattedNotes';
 
 export const DATA_TYPES = {
   NUMERIC: 'NUMERIC',
@@ -32,6 +33,8 @@ const formatData = ({ capability, column, data }) => {
       return <FormattedUTCDate value={data} />;
     case dataType === DATA_TYPES.DATE_TIME:
       return <FolioFormattedTime dateString={data} />;
+    case field === CUSTOM_ENTITY_COLUMNS.NOTES:
+      return <FormattedNotes notes={data} />;
     default:
       return data;
   }
