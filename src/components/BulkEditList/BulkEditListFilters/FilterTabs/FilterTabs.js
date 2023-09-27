@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { CRITERIA } from '../../../../constants';
 
-const FilterTabs = ({ criteria, hasLogViewPerms, hasQueryViewPerms, onCriteriaChange }) => {
+const FilterTabs = ({ criteria, hasQueryViewPerms, onCriteriaChange }) => {
   const buttonStyleActive = (criteriaToCompare) => (criteria === criteriaToCompare ? 'primary' : 'default');
 
   return (
@@ -23,14 +23,15 @@ const FilterTabs = ({ criteria, hasLogViewPerms, hasQueryViewPerms, onCriteriaCh
           <FormattedMessage id="ui-bulk-edit.list.filters.query" />
         </Button>
       )}
-      {hasLogViewPerms && (
+      {/* temporarily commented out because of https://issues.folio.org/browse/UIBULKED-351 */}
+      {/* {hasLogViewPerms && (
         <Button
           buttonStyle={buttonStyleActive(CRITERIA.LOGS)}
           onClick={() => onCriteriaChange(CRITERIA.LOGS)}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.logs" />
         </Button>
-      )}
+      )} */}
     </>
   );
 };
