@@ -51,10 +51,11 @@ export const getMappedTableData = ({ data, capabilities, intl }) => {
     value: cell.value,
     disabled: false,
     selected: !cell.visible,
+    ignoreTranslation: cell.ignoreTranslation,
   }));
 
-  const columnMapping = columns.reduce((acc, { value, label }) => {
-    acc[value] = intl.formatMessage({ id: `ui-bulk-edit.columns.${capabilities}.${label}` });
+  const columnMapping = columns.reduce((acc, { value, label, ignoreTranslation }) => {
+    acc[value] = ignoreTranslation ? value : intl.formatMessage({ id: `ui-bulk-edit.columns.${capabilities}.${label}` });
 
     return acc;
   }, {});

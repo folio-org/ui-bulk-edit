@@ -45,6 +45,7 @@
 * [UIBULKED-312](https://issues.folio.org/browse/UIBULKED-312) CSV: On cancel button click uploaded file should be deleted.
 * [UIBULKED-346](https://issues.folio.org/browse/UIBULKED-346) *BREAKING* bump `react-intl` to `v6.4.4`.
 * [UIBULKED-343](https://issues.folio.org/browse/UIBULKED-343) Refactor logic for downloading file from actions menu.
+* [UIBULKED-341](https://issues.folio.org/browse/UIBULKED-341) Separate Item notes in different columns based on the note type
 * [UIBULKED-351](https://issues.folio.org/browse/UIBULKED-351) Hide Query tab
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
