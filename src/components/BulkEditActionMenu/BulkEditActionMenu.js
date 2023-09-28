@@ -85,7 +85,7 @@ const BulkEditActionMenu = ({
 
   const columnsOptions = columns.map(item => ({
     ...item,
-    label: intl.formatMessage({ id: `ui-bulk-edit.columns.${capability}.${item.label}` }),
+    label: item.ignoreTranslation ? item.label : intl.formatMessage({ id: `ui-bulk-edit.columns.${capability}.${item.label}` }),
     disabled: isLastUnselectedColumn(item.value) || !countOfRecords,
   }));
 
