@@ -39,7 +39,6 @@ const FilterTabs = ({ criteria, hasLogViewPerms, onCriteriaChange }) => {
 FilterTabs.propTypes = {
   criteria: PropTypes.string,
   hasLogViewPerms: PropTypes.bool,
-  hasQueryViewPerms: PropTypes.bool,
   onCriteriaChange: PropTypes.func,
 };
 
