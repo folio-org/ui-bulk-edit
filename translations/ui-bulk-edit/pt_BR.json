@@ -266,7 +266,7 @@
     "columns.HOLDINGS_RECORD.Version": "Versão",
     "columns.HOLDINGS_RECORD.Holdings type": "Tipo de coleções",
     "columns.HOLDINGS_RECORD.Former ids": "Ids anteriores",
-    "columns.HOLDINGS_RECORD.Instance": "Instância",
+    "columns.HOLDINGS_RECORD.Instance": "Instância (Título, Editora, Data de publicação)",
     "columns.HOLDINGS_RECORD.Permanent location": "Localização permanente",
     "columns.HOLDINGS_RECORD.Temporary location": "Localização temporária",
     "columns.HOLDINGS_RECORD.Effective location": "Localização efetiva",
