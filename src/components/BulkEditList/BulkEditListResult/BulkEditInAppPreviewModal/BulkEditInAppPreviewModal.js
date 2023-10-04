@@ -163,7 +163,7 @@ const BulkEditInAppPreviewModal = ({
       {contentData && !isPreviewLoading ? (
         <>
           <MessageBanner type="warning">
-            <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: bulkDetails?.matchedNumOfRecords }} />
+            <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: intl.formatNumber(bulkDetails?.matchedNumOfRecords) }} />
           </MessageBanner>
 
           <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>

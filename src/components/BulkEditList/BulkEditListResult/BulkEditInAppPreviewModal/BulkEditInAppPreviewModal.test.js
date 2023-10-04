@@ -6,6 +6,7 @@ import { act, render, screen, fireEvent } from '@testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../../../../test/jest/__mock__';
+import { IntlProvider } from 'react-intl';
 import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 import { RootContext } from '../../../../context/RootContext';
@@ -39,19 +40,26 @@ const defaultProps = {
   contentUpdates: undefined,
 };
 
+jest.mock('react-intl', () => ({
+  ...jest.requireActual('react-intl'),
+  formatNumber: jest.fn()
+}));
+
 const renderPreviewModal = (props = defaultProps) => {
   return render(
-    <MemoryRouter initialEntries={['/bulk-edit/1/initial?capabilities=ITEMS&fileName=barcodes.csv&identifier=BARCODE']}>
-      <QueryClientProvider client={queryClient}>
-        <RootContext.Provider value={{
-          visibleColumns,
-          setVisibleColumns,
-        }}
-        >
-          <BulkEditInAppPreviewModal {...props} />
-        </RootContext.Provider>
-      </QueryClientProvider>
-    </MemoryRouter>,
+    <IntlProvider locale="en">
+      <MemoryRouter initialEntries={['/bulk-edit/1/initial?capabilities=ITEMS&fileName=barcodes.csv&identifier=BARCODE']}>
+        <QueryClientProvider client={queryClient}>
+          <RootContext.Provider value={{
+            visibleColumns,
+            setVisibleColumns,
+          }}
+          >
+            <BulkEditInAppPreviewModal {...props} />
+          </RootContext.Provider>
+        </QueryClientProvider>
+      </MemoryRouter>,
+    </IntlProvider>
   );
 };
 

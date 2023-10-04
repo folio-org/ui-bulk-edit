@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
   Headline,
   AccordionSet,
@@ -18,6 +18,7 @@ import { EDITING_STEPS } from '../../../../constants';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const location = useLocation();
+  const intl = useIntl();
   const { countOfRecords, setCountOfRecords, visibleColumns } = useContext(RootContext);
   const [countOfErrors, setCountOfErrors] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
@@ -54,7 +55,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
           <MessageBanner type="success" contentClassName="SuccessBanner">
             <FormattedMessage
               id="ui-bulk-edit.recordsSuccessfullyChanged"
-              values={{ value: countOfRecords }}
+              values={{ value: intl.formatNumber(countOfRecords) }}
             />
           </MessageBanner>
         </Headline>
@@ -81,6 +82,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
             matched={countOfRecords}
             countOfErrors={countOfErrors}
             isInitial={isInitial}
+            intl={intl}
           />
         )}
       </AccordionSet>

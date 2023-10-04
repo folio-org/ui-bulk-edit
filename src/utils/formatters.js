@@ -9,7 +9,7 @@ import { linkNamesMap } from '../constants';
 
 const isActionsRendered = (item) => Object.keys(item).some(key => Object.keys(linkNamesMap).includes(key));
 
-export const getLogsResultsFormatter = () => ({
+export const getLogsResultsFormatter = (intl) => ({
   id: item => item.id,
   operationType: item => item.operationType,
   entityType: item => <FormattedMessage id={`ui-bulk-edit.logs.entityType.${item.entityType}`} />,
@@ -17,8 +17,8 @@ export const getLogsResultsFormatter = () => ({
   userId: item => item.runBy,
   startTime: item => <FolioFormattedTime dateString={item.startTime} />,
   endTime: item => <FolioFormattedTime dateString={item.endTime} />,
-  totalNumOfRecords: item => item.totalNumOfRecords,
-  processedNumOfRecords: item => item.processedNumOfRecords,
+  totalNumOfRecords: item => intl.formatNumber(item.totalNumOfRecords),
+  processedNumOfRecords: item => intl.formatNumber(item.processedNumOfRecords),
   editing: item => (
     item.approach
       ? <FormattedMessage id={`ui-bulk-edit.logs.approach.${item.approach}`} />

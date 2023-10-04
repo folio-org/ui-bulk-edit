@@ -10,6 +10,7 @@ import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../test/jest/__mock__';
 
+import { IntlProvider } from 'react-intl';
 import BulkEdit from './BulkEdit';
 import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../test/jest/utils/fileUpload';
 import { queryClient } from '../../test/jest/utils/queryClient';
@@ -18,15 +19,22 @@ jest.mock('./BulkEditList/BulkEditListResult', () => ({
   BulkEditListResult: () => 'BulkEditListResult',
 }));
 
+jest.mock('react-intl', () => ({
+  ...jest.requireActual('react-intl'),
+  formatNumber: jest.fn()
+}));
+
 const history = createMemoryHistory();
 
 const renderBulkEdit = (type = 'USERS') => {
   render(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}&identifier=BARCODE&criteria=identifier`]}>
-        <BulkEdit />
-      </MemoryRouter>,
-    </QueryClientProvider>,
+    <IntlProvider locale="en">
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}&identifier=BARCODE&criteria=identifier`]}>
+          <BulkEdit />
+        </MemoryRouter>,
+      </QueryClientProvider>,
+    </IntlProvider>
   );
 };
 

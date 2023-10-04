@@ -27,6 +27,7 @@ const ErrorsAccordion = ({
   countOfErrors,
   matched,
   isInitial,
+  intl
 }) => {
   const location = useLocation();
   const fileName = new URLSearchParams(location.search).get('fileName');
@@ -40,8 +41,8 @@ const ErrorsAccordion = ({
       values={{
         fileName,
         entries,
-        matched,
-        errors: countOfErrors,
+        matched: intl.formatNumber(matched),
+        errors: intl.formatNumber(countOfErrors),
       }}
     />
   );
@@ -84,6 +85,7 @@ ErrorsAccordion.propTypes = {
   countOfErrors: PropTypes.number,
   matched: PropTypes.number,
   isInitial: PropTypes.bool,
+  intl:PropTypes.object,
 };
 
 export default ErrorsAccordion;
