@@ -266,7 +266,7 @@
     "columns.HOLDINGS_RECORD.Version": "Version",
     "columns.HOLDINGS_RECORD.Holdings type": "Holdings type",
     "columns.HOLDINGS_RECORD.Former ids": "Former ids",
-    "columns.HOLDINGS_RECORD.Instance": "Instance",
+    "columns.HOLDINGS_RECORD.Instance": "Instance (Title, Publisher, Publication date)",
     "columns.HOLDINGS_RECORD.Permanent location": "Permanent location",
     "columns.HOLDINGS_RECORD.Temporary location": "Temporary location",
     "columns.HOLDINGS_RECORD.Effective location": "Effective location",
