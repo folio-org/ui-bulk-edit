@@ -266,7 +266,6 @@
     "columns.HOLDINGS_RECORD.Version": "Versión",
     "columns.HOLDINGS_RECORD.Holdings type": "tipo de holding",
     "columns.HOLDINGS_RECORD.Former ids": "Id anteriores",
-    "columns.HOLDINGS_RECORD.Instance": "Instancia",
     "columns.HOLDINGS_RECORD.Permanent location": "Cambiar ubicación permanente",
     "columns.HOLDINGS_RECORD.Temporary location": "Ubicación temporal",
     "columns.HOLDINGS_RECORD.Effective location": "Ubicación efectiva",
@@ -357,5 +356,6 @@
     "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
     "uploaderSubTitle.empty": "Select a file with record identifiers",
     "logs.filter.title.user": "Usuario",
-    "logs.filter.user.placeholder": "Elegir usuario"
+    "logs.filter.user.placeholder": "Elegir usuario",
+    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)"
 }

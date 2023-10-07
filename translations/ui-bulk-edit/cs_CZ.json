@@ -266,7 +266,6 @@
     "columns.HOLDINGS_RECORD.Version": "Verze",
     "columns.HOLDINGS_RECORD.Holdings type": "Typ holdingu",
     "columns.HOLDINGS_RECORD.Former ids": "Bývalé ID",
-    "columns.HOLDINGS_RECORD.Instance": "Titul",
     "columns.HOLDINGS_RECORD.Permanent location": "Trvalá lokace",
     "columns.HOLDINGS_RECORD.Temporary location": "Dočasná lokace",
     "columns.HOLDINGS_RECORD.Effective location": "Efektivní lokace",
@@ -357,5 +356,6 @@
     "list.result.emptyMessage.empty": "Na kartě Identifikátor vyberte „identifikátor záznamu“. Na kartě Dotaz zadejte „vyhledávací dotaz“.",
     "uploaderSubTitle.empty": "Vybrat soubor s identifikátory záznamu",
     "logs.filter.title.user": "Uživatel",
-    "logs.filter.user.placeholder": "Vybrat uživatele"
+    "logs.filter.user.placeholder": "Vybrat uživatele",
+    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)"
 }
