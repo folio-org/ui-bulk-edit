@@ -4,13 +4,13 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
+import { IntlProvider } from 'react-intl';
 
 import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../test/jest/__mock__';
 
-import { IntlProvider } from 'react-intl';
 import BulkEdit from './BulkEdit';
 import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../test/jest/utils/fileUpload';
 import { queryClient } from '../../test/jest/utils/queryClient';
