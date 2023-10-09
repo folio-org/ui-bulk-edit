@@ -266,7 +266,6 @@
     "columns.HOLDINGS_RECORD.Version": "Versão",
     "columns.HOLDINGS_RECORD.Holdings type": "Tipo de coleções",
     "columns.HOLDINGS_RECORD.Former ids": "Ids anteriores",
-    "columns.HOLDINGS_RECORD.Instance": "Instância (Título, Editora, Data de publicação)",
     "columns.HOLDINGS_RECORD.Permanent location": "Localização permanente",
     "columns.HOLDINGS_RECORD.Temporary location": "Localização temporária",
     "columns.HOLDINGS_RECORD.Effective location": "Localização efetiva",
@@ -357,5 +356,6 @@
     "list.result.emptyMessage.empty": "Selecione um \"identificador de registro\" na guia Identificador. Insira uma \"consulta de pesquisa\" quando estiver na guia Consulta",
     "uploaderSubTitle.empty": "Selecione um arquivo com identificadores de registro",
     "logs.filter.title.user": "Usuário",
-    "logs.filter.user.placeholder": "Escolha o usuário"
+    "logs.filter.user.placeholder": "Escolha o usuário",
+    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instância (Título, Editora, Data de publicação)"
 }
