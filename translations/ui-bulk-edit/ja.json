@@ -266,7 +266,6 @@
     "columns.HOLDINGS_RECORD.Version": "Version",
     "columns.HOLDINGS_RECORD.Holdings type": "Holdings type",
     "columns.HOLDINGS_RECORD.Former ids": "Former ids",
-    "columns.HOLDINGS_RECORD.Instance": "インスタンス",
     "columns.HOLDINGS_RECORD.Permanent location": "Permanent location",
     "columns.HOLDINGS_RECORD.Temporary location": "Temporary location",
     "columns.HOLDINGS_RECORD.Effective location": "Effective location",
@@ -357,5 +356,6 @@
     "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
     "uploaderSubTitle.empty": "Select a file with record identifiers",
     "logs.filter.title.user": "User",
-    "logs.filter.user.placeholder": "Choose user"
+    "logs.filter.user.placeholder": "Choose user",
+    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)"
 }
