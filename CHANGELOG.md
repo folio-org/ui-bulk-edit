@@ -48,6 +48,7 @@
 * [UIBULKED-341](https://issues.folio.org/browse/UIBULKED-341) Separate Item notes in different columns based on the note type
 * [UIBULKED-351](https://issues.folio.org/browse/UIBULKED-351) Hide Query tab
 * [UIBULKED-276](https://issues.folio.org/browse/UIBULKED-276) Rename "Instance" column for holdings records preview
+* [UIBULKED-355](https://issues.folio.org/browse/UIBULKED-355) Remove reference to Query tab on the landing page.
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 
