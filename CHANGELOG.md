@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
+
 * [UIBULKED-255](https://issues.folio.org/browse/UIBULKED-255) Incorrect message on the logs landing page.
 * [UIBULKED-252](https://issues.folio.org/browse/UIBULKED-252) Selected filters are not reset on "Logs" tab
 * [UIBULKED-267](https://issues.folio.org/browse/UIBULKED-267) User's names in "Run by" column of Bulk edit logs.
