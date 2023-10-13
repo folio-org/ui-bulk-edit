@@ -7,7 +7,6 @@ import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
-import { IntlProvider } from 'react-intl';
 import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
@@ -28,22 +27,15 @@ const defaultProps = {
   id: bulkOperation.id,
 };
 
-jest.mock('react-intl', () => ({
-  ...jest.requireActual('react-intl'),
-  formatNumber: jest.fn()
-}));
-
 const renderPreview = (props = defaultProps) => {
   render(
-    <IntlProvider locale="en">
-      <MemoryRouter initialEntries={['/bulk-edit/1?queryText=patronGroup%3D%3D"1"']}>
-        <QueryClientProvider client={queryClient}>
-          <RootContext.Provider value={{ setCountOfRecords: setCountOfRecordsMock }}>
-            <Preview {...props} />
-          </RootContext.Provider>
-        </QueryClientProvider>
-      </MemoryRouter>,
-    </IntlProvider>
+    <MemoryRouter initialEntries={['/bulk-edit/1?queryText=patronGroup%3D%3D"1"']}>
+      <QueryClientProvider client={queryClient}>
+        <RootContext.Provider value={{ setCountOfRecords: setCountOfRecordsMock }}>
+          <Preview {...props} />
+        </RootContext.Provider>
+      </QueryClientProvider>
+    </MemoryRouter>,
   );
 };
 

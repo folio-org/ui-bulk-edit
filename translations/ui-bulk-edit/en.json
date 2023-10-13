@@ -8,8 +8,8 @@
 
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
-  "list.logSubTitle.matched": "{count} records match",
-  "list.logSubTitle.changed": "{count} records changed",
+  "list.logSubTitle.matched": "{count, number} records match",
+  "list.logSubTitle.changed": "{count, number} records changed",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
   "list.filters.logs": "Logs",
@@ -61,8 +61,8 @@
   "list.preview.table.status.false": "Inactive",
 
   "list.errors.title": "Errors",
-  "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
-  "list.errors.infoProcessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
+  "list.errors.info": "<b>{fileName}: {entries} entries * {matched, number} records matched * {errors, number} errors</b>",
+  "list.errors.infoProcessed": "<b>{fileName}: {entries} entries * {matched, number} records changed * {errors, number} errors</b>",
   "list.errors.table.code": "Record identifier",
   "list.errors.table.message": "Reason for error",
 
@@ -90,7 +90,7 @@
   "uploaderActiveTitle": "Drop to continue",
   "uploading": "Uploading",
   "cancel": "Cancel",
-  "recordsSuccessfullyChanged": "{value} records have been successfully changed",
+  "recordsSuccessfullyChanged": "{value, number} records have been successfully changed",
 
   "modal.fileExtensions.blocked.header": "Invalid file",
   "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded.",
@@ -298,7 +298,7 @@
   "layer.options.checkInNote": "Check in note",
   "layer.options.checkOutNote": "Check out note",
 
-  "previewModal.message": "{count} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
+  "previewModal.message": "{count, number} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
   "previewModal.previewToBeChanged": "Preview of records to be changed",
   "previewModal.keepEditing": "Keep editing",
   "previewModal.downloadPreview": "Download preview",

@@ -6,16 +6,11 @@ import { errorsPreview } from '../../../../../../test/jest/__mock__/fakeData';
 
 import ErrorsAccordion from './ErrorsAccordion';
 
-const mockIntl = {
-  formatNumber: jest.fn()
-};
-
 const defaultProps = {
   errors: errorsPreview.errors,
   entries: 5,
   countOfErrors: errorsPreview.errors.length,
   matched: 4,
-  intl: mockIntl
 };
 
 const renderPreviewAccordion = (history, props = defaultProps) => {

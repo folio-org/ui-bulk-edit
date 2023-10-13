@@ -3,7 +3,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import {
   Pane,
@@ -35,7 +35,6 @@ import BulkEditInAppLayer from './BulkEditListResult/BulkEditInAppLayer/BulkEdit
 export const BulkEditList = () => {
   const history = useHistory();
   const search = new URLSearchParams(history.location.search);
-  const intl = useIntl();
 
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
@@ -148,8 +147,8 @@ export const BulkEditList = () => {
 
   const changedPaneSubTitle = useMemo(() => (
     step === EDITING_STEPS.UPLOAD ?
-      <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: intl.formatNumber(countOfRecords) }} />
-      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: intl.formatNumber(countOfRecords) }} />
+      <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
+      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
   ), [countOfRecords, step]);
 
   const paneSubtitle = useMemo(() => {
