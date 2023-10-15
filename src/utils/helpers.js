@@ -50,4 +50,25 @@ export const groupByCategory = (array) => {
   }, {});
 };
 
+export const getMappedAndSortedNotes = ({
+  notes,
+  categoryName,
+  key,
+  type
+}) => {
+  const mappedNotes = notes?.map(note => ({
+    label: note.name,
+    value: note.id,
+    type,
+    parameters: [{
+      key,
+      value: note.id,
+    }],
+    disabled: false,
+    categoryName,
+  })) || [];
+
+  return mappedNotes.sort((a, b) => a.label.localeCompare(b.label));
+};
+
 
