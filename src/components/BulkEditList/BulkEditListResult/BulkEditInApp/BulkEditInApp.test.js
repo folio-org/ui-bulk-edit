@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
-import { act, render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { useOkapiKy } from '@folio/stripes/core';
@@ -256,11 +256,16 @@ describe('BulkEditInApp', () => {
     expect(optionPatronGroup.selected).toBeTruthy();
   });
 
-  it('should display holdings permanent location', () => {
+  it('should display holdings permanent location', async () => {
     renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
 
-    const selectOption = screen.getByTestId('select-option-0');
-    const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.permanentLocation/ });
+    let selectOption;
+    let optionStatus;
+
+    await waitFor(() => {
+      selectOption = screen.getByTestId('select-option-0');
+      optionStatus = screen.getByRole('option', { name: /layer.options.holdings.permanentLocation/ });
+    });
 
     act(() => userEvent.selectOptions(selectOption, optionStatus));
 
