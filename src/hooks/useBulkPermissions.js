@@ -9,7 +9,7 @@ export const useBulkPermissions = () => {
 
   // In-app perms
   const hasInAppViewPerms = stripes.hasPerm('ui-bulk-edit.app-view');
-  const hasInAppEditPerms = stripes.hasPerm('ui-bulk-edit.in-app-edit');
+  const hasInAppEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit');
   const hasInAppUsersEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit.users');
 
   // Query perms
