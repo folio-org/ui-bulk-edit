@@ -61,8 +61,8 @@
   "list.preview.table.status.false": "Inactive",
 
   "list.errors.title": "Errors",
-  "list.errors.info": "<b>{fileName}: {entries} entries * {matched, number} records matched * {errors, number} errors</b>",
-  "list.errors.infoProcessed": "<b>{fileName}: {entries} entries * {matched, number} records changed * {errors, number} errors</b>",
+  "list.errors.info": "<b>{fileName}: {entries, number} entries * {matched, number} records matched * {errors, number} errors</b>",
+  "list.errors.infoProcessed": "<b>{fileName}: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
   "list.errors.table.code": "Record identifier",
   "list.errors.table.message": "Reason for error",
 
@@ -243,7 +243,7 @@
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
 
-  "conformationModal.message": "{count} records will be updated if the <b>Commit changes</b> button is clicked.",
+  "conformationModal.message": "{count, number} records will be updated if the <b>Commit changes</b> button is clicked.",
   "conformationModal.commitChanges": "Commit changes",
 
   "preview.file.title": "Filename: {fileUploadedName}",
@@ -344,7 +344,7 @@
   "list.result.emptyMessage.logs": "Choose a filter to show results.",
   "list.actions.download": "Download",
 
-  "retrievedDataList.title": "{matched} matching {capability} records found.",
+  "retrievedDataList.title": "{matched, number} matching {capability} records found.",
 
   "permission.module.bulk-edit.enabled": "UI: Bulk edit module is enabled",
   "permission.view": "Bulk Edit: Local - View user records",
@@ -383,9 +383,9 @@
   "permissionsModal.list.cell.permissions": "Permission",
 
   "permissionsModal.list.title": "Permissions",
-  "permissionsModal.list.subTitle": "{count} permissions found",
+  "permissionsModal.list.subTitle": "{count, number} permissions found",
   "permissionsModal.cancel": "Cancel",
   "permissionsModal.save": "Save & close",
-  "permissionsModal.totalSelected": "Total selected: {count}"
+  "permissionsModal.totalSelected": "Total selected: {count, number}"
 
 }
