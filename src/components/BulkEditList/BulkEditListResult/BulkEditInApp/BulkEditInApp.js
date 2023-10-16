@@ -28,12 +28,12 @@ export const BulkEditInApp = ({
   const isHoldingsCapability = capabilities === CAPABILITIES.HOLDING;
 
   const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
-  const { holdingNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
+  const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
 
   const optionsMap = {
     [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage, itemNotes),
     [CAPABILITIES.USER]: getUserOptions(intl.formatMessage),
-    [CAPABILITIES.HOLDING]: getHoldingsOptions(intl.formatMessage, holdingNotes),
+    [CAPABILITIES.HOLDING]: getHoldingsOptions(intl.formatMessage, holdingsNotes),
   };
 
   const options = optionsMap[capabilities];

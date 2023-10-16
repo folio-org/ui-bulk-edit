@@ -117,6 +117,7 @@
   "category.location": "Location",
   "category.itemNotes": "Item notes",
   "category.holdingNotes": "Holdings notes",
+  "category.holdingLocation": "Holdings location",
 
   "columns.USER.User name": "Username",
   "columns.USER.User id": "User id",
