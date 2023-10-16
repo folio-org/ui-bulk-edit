@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import noop from 'lodash/noop';
 
 import { AppIcon } from '@folio/stripes/core';
@@ -34,7 +34,6 @@ const sortableFields = LOGS_COLUMNS
   .map(({ value }) => value);
 
 const BulkEditLogs = () => {
-  const intl = useIntl();
   const location = useLocation();
   const history = useHistory();
   const DEFAULT_SORTING = { [SORTING_PARAMETER]: 'endTime', [SORTING_DIRECTION_PARAMETER]: DESC_DIRECTION };
@@ -88,7 +87,7 @@ const BulkEditLogs = () => {
             totalCount={logsCount}
             columnMapping={columnMapping}
             visibleColumns={visibleColumns}
-            formatter={getLogsResultsFormatter(intl)}
+            formatter={getLogsResultsFormatter()}
             isEmptyMessage={resultsStatusMessage}
             sortOrder={sortingField}
             sortDirection={sortingDirection}
