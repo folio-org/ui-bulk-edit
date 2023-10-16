@@ -30,7 +30,7 @@ import {
 } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 import { LogsFilters } from './LogsFilters/LogsFilters';
-import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/filters';
+import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/helpers';
 import FilterTabs from './FilterTabs/FilterTabs';
 import Capabilities from './Capabilities/Capabilities';
 import { getIsDisabledByPerm } from './utils/getIsDisabledByPerm';

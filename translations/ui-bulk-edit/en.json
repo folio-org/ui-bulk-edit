@@ -116,6 +116,7 @@
   "category.loanType": "Loan type",
   "category.location": "Location",
   "category.itemNotes": "Item notes",
+  "category.holdingNotes": "Holdings notes",
 
   "columns.USER.User name": "Username",
   "columns.USER.User id": "User id",
