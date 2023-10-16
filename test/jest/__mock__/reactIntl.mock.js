@@ -9,6 +9,16 @@ jest.mock('react-intl', () => {
     formatNumber: value => value,
   };
 
+  const sharedMockFn = jest.fn(({
+    value, children,
+  }) => {
+    if (children) {
+      return children([value]);
+    }
+
+    return value;
+  });
+
   return {
     ...jest.requireActual('react-intl'),
     FormattedMessage: jest.fn(({
@@ -20,15 +30,8 @@ jest.mock('react-intl', () => {
 
       return id;
     }),
-    FormattedTime: jest.fn(({
-      value, children,
-    }) => {
-      if (children) {
-        return children([value]);
-      }
-
-      return value;
-    }),
+    FormattedTime: sharedMockFn,
+    FormattedNumber: sharedMockFn,
     useIntl: () => intl,
     injectIntl: Component => props => (
       <Component
