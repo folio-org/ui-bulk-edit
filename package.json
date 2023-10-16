@@ -96,7 +96,10 @@
         "visible": true
       },
       {
-        "permissionName": "ui-bulk-edit.app-edit",
+        "permissionName": "ui-bulk-edit.in-app-edit",
+        "replaces": [
+          "ui-bulk-edit.app-edit"
+        ],
         "displayName": "Bulk Edit: In app - Edit inventory records",
         "subPermissions": [
           "ui-bulk-edit.app-view",
