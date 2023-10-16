@@ -19,11 +19,6 @@ jest.mock('./BulkEditList/BulkEditListResult', () => ({
   BulkEditListResult: () => 'BulkEditListResult',
 }));
 
-jest.mock('react-intl', () => ({
-  ...jest.requireActual('react-intl'),
-  formatNumber: jest.fn()
-}));
-
 const history = createMemoryHistory();
 
 const renderBulkEdit = (type = 'USERS') => {
