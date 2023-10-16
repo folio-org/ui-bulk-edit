@@ -24,7 +24,7 @@ import {
   getFilteredFields,
   getExtraActions,
 } from './helpers';
-import { groupByCategory } from '../../../../../utils/filters';
+import { groupByCategory } from '../../../../../utils/helpers';
 
 export const ContentUpdatesForm = ({
   onContentUpdatesChanged,

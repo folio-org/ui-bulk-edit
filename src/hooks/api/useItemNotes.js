@@ -2,6 +2,7 @@ import { useOkapiKy } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
+import { getMappedAndSortedNotes } from '../../utils/helpers';
 
 export const useItemNotes = (options = {}) => {
   const ky = useOkapiKy();
@@ -17,19 +18,12 @@ export const useItemNotes = (options = {}) => {
     },
   );
 
-  const mappedNotes = data?.itemNoteTypes?.map(type => ({
-    label: type.name,
-    value: type.id,
-    type: OPTIONS.ITEM_NOTE,
-    parameters: [{
-      key: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY,
-      value: type.id,
-    }],
-    disabled: false,
+  const itemNotes = getMappedAndSortedNotes({
+    notes: data?.itemNoteTypes,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.itemNotes' }),
-  })) || [];
-
-  const itemNotes = mappedNotes.sort((a, b) => a.label.localeCompare(b.label));
+    type: OPTIONS.ITEM_NOTE,
+    key: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY,
+  });
 
   return {
     itemNotes,
