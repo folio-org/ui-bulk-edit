@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedNumber } from 'react-intl';
 
 import { NoValue } from '@folio/stripes/components';
 import { FolioFormattedTime } from '@folio/stripes-acq-components';
@@ -17,8 +17,8 @@ export const getLogsResultsFormatter = () => ({
   userId: item => item.runBy,
   startTime: item => <FolioFormattedTime dateString={item.startTime} />,
   endTime: item => <FolioFormattedTime dateString={item.endTime} />,
-  totalNumOfRecords: item => item.totalNumOfRecords,
-  processedNumOfRecords: item => item.processedNumOfRecords,
+  totalNumOfRecords: item => <FormattedNumber value={item.totalNumOfRecords} />,
+  processedNumOfRecords: item => <FormattedNumber value={item.processedNumOfRecords} />,
   editing: item => (
     item.approach
       ? <FormattedMessage id={`ui-bulk-edit.logs.approach.${item.approach}`} />
