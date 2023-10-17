@@ -10,7 +10,7 @@ export const useHoldingsNotes = (options = {}) => {
 
   const { data, isLoading: isHoldingsNotesLoading } = useQuery(
     {
-      queryKey: 'holdingNotes',
+      queryKey: 'holdingsNotes',
       cacheTime: Infinity,
       staleTime: Infinity,
       queryFn: () => ky.get('holdings-note-types').json(),
@@ -18,15 +18,15 @@ export const useHoldingsNotes = (options = {}) => {
     },
   );
 
-  const holdingNotes = getMappedAndSortedNotes({
+  const holdingsNotes = getMappedAndSortedNotes({
     notes: data?.holdingsNoteTypes,
-    categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingNotes' }),
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingsNotes' }),
     type: OPTIONS.HOLDINGS_NOTE,
     key: PARAMETERS_KEYS.HOLDINGS_NOTE_TYPE_ID_KEY,
   });
 
   return {
-    holdingNotes,
+    holdingsNotes,
     isHoldingsNotesLoading,
   };
 };
