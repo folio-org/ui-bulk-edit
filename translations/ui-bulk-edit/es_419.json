@@ -353,9 +353,11 @@
     "permissionsModal.save": "Guardar y cerrar",
     "permissionsModal.totalSelected": "Total seleccionado: {count}",
     "layer.options.items.duplicateTo": "duplicar a",
-    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab",
     "uploaderSubTitle.empty": "Select a file with record identifiers",
     "logs.filter.title.user": "Usuario",
     "logs.filter.user.placeholder": "Elegir usuario",
-    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)"
+    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)",
+    "category.holdingsNotes": "Holdings notes",
+    "category.holdingsLocation": "Holdings location"
 }
