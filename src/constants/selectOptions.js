@@ -182,14 +182,14 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     disabled: false,
   },
   {
-    value: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.temporaryLocation' }),
+    value: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.permanentLocation' }),
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingsLocation' }),
   },
   {
-    value: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.permanentLocation' }),
+    value: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.temporaryLocation' }),
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingsLocation' }),
   },
