@@ -357,5 +357,7 @@
     "uploaderSubTitle.empty": "选择带有记录标识符的文件",
     "logs.filter.title.user": "用户",
     "logs.filter.user.placeholder": "选择用户",
-    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)"
+    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)",
+    "category.holdingsNotes": "Holdings notes",
+    "category.holdingsLocation": "Holdings location"
 }
