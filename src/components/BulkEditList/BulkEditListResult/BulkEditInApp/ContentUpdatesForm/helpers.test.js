@@ -509,6 +509,20 @@ describe('ContentUpdatesForm helpers', () => {
                 { value: 'REMOVE_MARK_AS_STAFF_ONLY',
                   disabled: false,
                   label: undefined },
+                { value: 'ADD_TO_EXISTING',
+                  disabled: false,
+                  label: undefined },
+                { value: 'REMOVE_ALL',
+                  disabled: false,
+                  label: undefined },
+                { value: 'FIND',
+                  disabled: false,
+                  label: undefined },
+                {
+                  value: 'CHANGE_TYPE',
+                  disabled: false,
+                  label: undefined,
+                },
                 ],
                 controlType: (action) => {
                   return action === ACTIONS.CHANGE_TYPE
