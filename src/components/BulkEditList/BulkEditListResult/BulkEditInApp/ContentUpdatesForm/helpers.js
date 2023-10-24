@@ -20,6 +20,7 @@ import {
   noteActions,
   noteActionsWithMark,
   noteActionsWithDuplicate,
+  noteActionHoldings,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -91,6 +92,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
   const noteDefaultActions = noteActions(formatMessage);
   const noteWithMarkDefaultActions = noteActionsWithMark(formatMessage);
   const noteDuplicateDefaultActions = noteActionsWithDuplicate(formatMessage);
+  const noteHoldingsDefaultActions = noteActionHoldings(formatMessage);
 
   const replaceClearInitialVal = replaceClearDefaultActions[0].value;
 
@@ -285,6 +287,24 @@ export const getDefaultActions = (option, options, formatMessage) => {
                 : CONTROL_TYPES.TEXTAREA;
             },
             [ACTION_VALUE_KEY]: noteWithMarkDefaultActions[0].value,
+            [FIELD_VALUE_KEY]: '',
+          },
+        ],
+      };
+
+    case OPTIONS.HOLDINGS_NOTE:
+      return {
+        type: '',
+        actions: [
+          null,
+          {
+            actionsList: noteHoldingsDefaultActions,
+            controlType: (action) => {
+              return action === ACTIONS.CHANGE_TYPE
+                ? CONTROL_TYPES.NOTE_SELECT
+                : CONTROL_TYPES.TEXTAREA;
+            },
+            [ACTION_VALUE_KEY]: noteHoldingsDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],

@@ -4,6 +4,7 @@
 
 * [UIBULKED-355](https://issues.folio.org/browse/UIBULKED-355) Remove reference to Query tab on the landing page.
 * [UIBULKED-315](https://issues.folio.org/browse/UIBULKED-315) Group holdings record properties using optgroup component
+* [UIBULKED-316](https://issues.folio.org/browse/UIBULKED-316) Bulk edit actions for holdings notes - add and remove Mark as staff only.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
