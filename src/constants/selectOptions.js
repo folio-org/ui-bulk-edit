@@ -19,6 +19,7 @@ export const OPTIONS = {
   TEMPORARY_HOLDINGS_LOCATION: 'TEMPORARY_HOLDINGS_LOCATION',
   PERMANENT_HOLDINGS_LOCATION: 'PERMANENT_HOLDINGS_LOCATION',
   ITEM_NOTE: 'ITEM_NOTE',
+  HOLDINGS_NOTE: 'HOLDINGS_NOTE',
   ADMINISTRATIVE_NOTE: 'ADMINISTRATIVE_NOTE',
   CHECK_IN_NOTE: 'CHECK_IN_NOTE',
   CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
@@ -26,6 +27,7 @@ export const OPTIONS = {
 
 export const PARAMETERS_KEYS = {
   ITEM_NOTE_TYPE_ID_KEY: 'ITEM_NOTE_TYPE_ID_KEY',
+  HOLDINGS_NOTE_TYPE_ID_KEY: 'HOLDINGS_NOTE_TYPE_ID_KEY',
 };
 
 export const OPTIONS_WITH_ADDITIONAL_PARAMETERS = [
@@ -168,20 +170,30 @@ export const getUserOptions = (formatMessage) => [
   },
 ];
 
-export const getHoldingsOptions = (formatMessage) => [
+export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
   {
     value: '',
     label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
     disabled: true,
   },
-  { value: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.temporaryLocation' }),
-    disabled: false },
+  {
+    value: OPTIONS.ADMINISTRATIVE_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
+    disabled: false,
+  },
   {
     value: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.permanentLocation' }),
     disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingsLocation' }),
   },
+  {
+    value: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.temporaryLocation' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingsLocation' }),
+  },
+  ...holdingsNotes,
   {
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.suppress' }),

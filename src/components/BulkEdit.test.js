@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
+import { IntlProvider } from 'react-intl';
 
 import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
@@ -22,11 +23,13 @@ const history = createMemoryHistory();
 
 const renderBulkEdit = (type = 'USERS') => {
   render(
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}&identifier=BARCODE&criteria=identifier`]}>
-        <BulkEdit />
-      </MemoryRouter>,
-    </QueryClientProvider>,
+    <IntlProvider locale="en">
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}&identifier=BARCODE&criteria=identifier`]}>
+          <BulkEdit />
+        </MemoryRouter>,
+      </QueryClientProvider>,
+    </IntlProvider>
   );
 };
 

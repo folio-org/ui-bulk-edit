@@ -348,14 +348,16 @@
     "permissionsModal.list.cell.permissionSets": "Conjunto de permisos",
     "permissionsModal.list.cell.permissions": "Permiso",
     "permissionsModal.list.title": "Permisos",
-    "permissionsModal.list.subTitle": "{count} permisos encontrados",
+    "permissionsModal.list.subTitle": "{count, number} permisos encontrados",
     "permissionsModal.cancel": "Cancelar",
     "permissionsModal.save": "Guardar y cerrar",
-    "permissionsModal.totalSelected": "Total seleccionado: {count}",
+    "permissionsModal.totalSelected": "Total seleccionado: {count, number}",
     "layer.options.items.duplicateTo": "duplicar a",
-    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+    "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab",
     "uploaderSubTitle.empty": "Select a file with record identifiers",
     "logs.filter.title.user": "Usuario",
     "logs.filter.user.placeholder": "Elegir usuario",
-    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)"
+    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)",
+    "category.holdingsNotes": "Holdings notes",
+    "category.holdingsLocation": "Holdings location"
 }

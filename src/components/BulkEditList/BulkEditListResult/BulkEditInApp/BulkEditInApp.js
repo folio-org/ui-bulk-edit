@@ -13,6 +13,7 @@ import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import { CAPABILITIES, getHoldingsOptions, getItemsOptions, getUserOptions } from '../../../../constants';
 import { useItemNotes } from '../../../../hooks/api/useItemNotes';
+import { useHoldingsNotes } from '../../../../hooks/api/useHoldingsNotes';
 
 export const BulkEditInApp = ({
   onContentUpdatesChanged,
@@ -24,17 +25,19 @@ export const BulkEditInApp = ({
 
   const fileUploadedName = search.get('fileName');
   const isItemCapability = capabilities === CAPABILITIES.ITEM;
+  const isHoldingsCapability = capabilities === CAPABILITIES.HOLDING;
 
   const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
+  const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
 
   const optionsMap = {
     [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage, itemNotes),
     [CAPABILITIES.USER]: getUserOptions(intl.formatMessage),
-    [CAPABILITIES.HOLDING]: getHoldingsOptions(intl.formatMessage),
+    [CAPABILITIES.HOLDING]: getHoldingsOptions(intl.formatMessage, holdingsNotes),
   };
 
   const options = optionsMap[capabilities];
-  const showContentUpdatesForm = options && !isItemNotesLoading;
+  const showContentUpdatesForm = options && !isItemNotesLoading && !isHoldingsNotesLoading;
 
   return (
     <>

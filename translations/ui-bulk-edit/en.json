@@ -8,8 +8,8 @@
 
   "list.criteriaTitle": "Set criteria",
   "list.logSubTitle": "Set criteria to start bulk edit",
-  "list.logSubTitle.matched": "{count} records match",
-  "list.logSubTitle.changed": "{count} records changed",
+  "list.logSubTitle.matched": "{count, number} records match",
+  "list.logSubTitle.changed": "{count, number} records changed",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
   "list.filters.logs": "Logs",
@@ -30,10 +30,10 @@
   "list.filters.recordIdentifier.holdings.instanceHRID": "Instance HRIDs",
   "list.filters.recordIdentifier.holdings.itemBarcodes": "Item barcodes",
 
-  "list.result.emptyMessage": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
-  "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
-  "list.result.emptyMessage.item": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
-  "list.result.emptyMessage.holdings": "Select a \"record identifier\" when on the Identifier tab. Enter a \"search query\" when on the Query tab",
+  "list.result.emptyMessage": "Select a \"record identifier\" when on the Identifier tab",
+  "list.result.emptyMessage.empty": "Select a \"record identifier\" when on the Identifier tab",
+  "list.result.emptyMessage.item": "Select a \"record identifier\" when on the Identifier tab",
+  "list.result.emptyMessage.holdings": "Select a \"record identifier\" when on the Identifier tab",
   "list.result.emptyMessage.ID": "Drag and drop or choose file with User UUIDs",
   "list.result.emptyMessage.BARCODE": "Drag and drop or choose file with User Barcodes",
   "list.result.emptyMessage.EXTERNAL_SYSTEM_ID": "Drag and drop or choose file with External IDs",
@@ -61,8 +61,8 @@
   "list.preview.table.status.false": "Inactive",
 
   "list.errors.title": "Errors",
-  "list.errors.info": "<b>{fileName}: {entries} entries * {matched} records matched * {errors} errors</b>",
-  "list.errors.infoProcessed": "<b>{fileName}: {entries} entries * {matched} records changed * {errors} errors</b>",
+  "list.errors.info": "<b>{fileName}: {entries, number} entries * {matched, number} records matched * {errors, number} errors</b>",
+  "list.errors.infoProcessed": "<b>{fileName}: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
   "list.errors.table.code": "Record identifier",
   "list.errors.table.message": "Reason for error",
 
@@ -90,7 +90,7 @@
   "uploaderActiveTitle": "Drop to continue",
   "uploading": "Uploading",
   "cancel": "Cancel",
-  "recordsSuccessfullyChanged": "{value} records have been successfully changed",
+  "recordsSuccessfullyChanged": "{value, number} records have been successfully changed",
 
   "modal.fileExtensions.blocked.header": "Invalid file",
   "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded.",
@@ -116,6 +116,8 @@
   "category.loanType": "Loan type",
   "category.location": "Location",
   "category.itemNotes": "Item notes",
+  "category.holdingsNotes": "Holdings notes",
+  "category.holdingsLocation": "Holdings location",
 
   "columns.USER.User name": "Username",
   "columns.USER.User id": "User id",
@@ -243,7 +245,7 @@
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
 
-  "conformationModal.message": "{count} records will be updated if the <b>Commit changes</b> button is clicked.",
+  "conformationModal.message": "{count, number} records will be updated if the <b>Commit changes</b> button is clicked.",
   "conformationModal.commitChanges": "Commit changes",
 
   "preview.file.title": "Filename: {fileUploadedName}",
@@ -298,7 +300,7 @@
   "layer.options.checkInNote": "Check in note",
   "layer.options.checkOutNote": "Check out note",
 
-  "previewModal.message": "{count} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
+  "previewModal.message": "{count, number} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
   "previewModal.previewToBeChanged": "Preview of records to be changed",
   "previewModal.keepEditing": "Keep editing",
   "previewModal.downloadPreview": "Download preview",
@@ -344,7 +346,7 @@
   "list.result.emptyMessage.logs": "Choose a filter to show results.",
   "list.actions.download": "Download",
 
-  "retrievedDataList.title": "{matched} matching {capability} records found.",
+  "retrievedDataList.title": "{matched, number} matching {capability} records found.",
 
   "permission.module.bulk-edit.enabled": "UI: Bulk edit module is enabled",
   "permission.view": "Bulk Edit: Local - View user records",
@@ -383,9 +385,9 @@
   "permissionsModal.list.cell.permissions": "Permission",
 
   "permissionsModal.list.title": "Permissions",
-  "permissionsModal.list.subTitle": "{count} permissions found",
+  "permissionsModal.list.subTitle": "{count, number} permissions found",
   "permissionsModal.cancel": "Cancel",
   "permissionsModal.save": "Save & close",
-  "permissionsModal.totalSelected": "Total selected: {count}"
+  "permissionsModal.totalSelected": "Total selected: {count, number}"
 
 }

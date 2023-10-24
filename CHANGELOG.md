@@ -2,6 +2,11 @@
 
 ## In progress
 
+* [UIBULKED-355](https://issues.folio.org/browse/UIBULKED-355) Remove reference to Query tab on the landing page.
+* [UIBULKED-315](https://issues.folio.org/browse/UIBULKED-315) Group holdings record properties using optgroup component
+
+## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
+
 * [UIBULKED-255](https://issues.folio.org/browse/UIBULKED-255) Incorrect message on the logs landing page.
 * [UIBULKED-252](https://issues.folio.org/browse/UIBULKED-252) Selected filters are not reset on "Logs" tab
 * [UIBULKED-267](https://issues.folio.org/browse/UIBULKED-267) User's names in "Run by" column of Bulk edit logs.
@@ -48,6 +53,8 @@
 * [UIBULKED-341](https://issues.folio.org/browse/UIBULKED-341) Separate Item notes in different columns based on the note type
 * [UIBULKED-351](https://issues.folio.org/browse/UIBULKED-351) Hide Query tab
 * [UIBULKED-276](https://issues.folio.org/browse/UIBULKED-276) Rename "Instance" column for holdings records preview
+* [UIBULKED-352](https://issues.folio.org/browse/UIBULKED-352) Localize numbers displayed in bulk edit
+
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 

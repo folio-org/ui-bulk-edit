@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import '../../../test/jest/__mock__';
+import { IntlProvider } from 'react-intl';
 import { bulkEditLogsData } from '../../../test/jest/__mock__/fakeData';
 
 import { LOGS_COLUMNS } from '../../constants';
@@ -20,9 +21,11 @@ jest.mock('../../hooks/api', () => ({
 
 const renderBulkEditLogs = () => {
   render(
-    <MemoryRouter initialEntries={['/bulk-edit?criteria=logs']}>
-      <BulkEditLogs />
-    </MemoryRouter>,
+    <IntlProvider locale="en">
+      <MemoryRouter initialEntries={['/bulk-edit?criteria=logs']}>
+        <BulkEditLogs />
+      </MemoryRouter>,
+    </IntlProvider>
   );
 };
 
