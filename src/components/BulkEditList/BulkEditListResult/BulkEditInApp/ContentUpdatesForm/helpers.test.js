@@ -510,7 +510,11 @@ describe('ContentUpdatesForm helpers', () => {
                   disabled: false,
                   label: undefined },
                 ],
-                controlType: () => CONTROL_TYPES.TEXTAREA,
+                controlType: (action) => {
+                  return action === ACTIONS.CHANGE_TYPE
+                    ? CONTROL_TYPES.NOTE_SELECT
+                    : CONTROL_TYPES.TEXTAREA;
+                },
                 [ACTION_VALUE_KEY]: '',
                 [FIELD_VALUE_KEY]: '',
               },
