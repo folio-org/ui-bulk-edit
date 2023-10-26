@@ -22,7 +22,7 @@ import {
   useBulkOperationStart,
   useBulkOperationDetails,
   useContentUpdate,
-  useFileDownload,
+  useFileDownload, QUERY_KEY_DOWNLOAD_IN_APP,
 } from '../../../../hooks/api';
 
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
@@ -75,6 +75,7 @@ const BulkEditInAppPreviewModal = ({
   });
 
   const { refetch } = useFileDownload({
+    queryKey: QUERY_KEY_DOWNLOAD_IN_APP,
     enabled: false, // to prevent automatic file fetch in preview modal
     id: bulkOperationId,
     fileInfo: {
