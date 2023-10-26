@@ -22,7 +22,8 @@ import {
   useBulkOperationStart,
   useBulkOperationDetails,
   useContentUpdate,
-  useFileDownload, QUERY_KEY_DOWNLOAD_IN_APP,
+  useFileDownload,
+  QUERY_KEY_DOWNLOAD_IN_APP,
 } from '../../../../hooks/api';
 
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
