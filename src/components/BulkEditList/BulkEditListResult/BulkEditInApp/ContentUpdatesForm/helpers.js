@@ -282,7 +282,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
             actionsList: noteWithMarkDefaultActions,
             controlType: (action) => {
               return action === ACTIONS.CHANGE_TYPE
-                ? CONTROL_TYPES.NOTE_SELECT
+                ? CONTROL_TYPES.HOLDINGS_NOTE
                 : CONTROL_TYPES.TEXTAREA;
             },
             [ACTION_VALUE_KEY]: noteWithMarkDefaultActions[0].value,

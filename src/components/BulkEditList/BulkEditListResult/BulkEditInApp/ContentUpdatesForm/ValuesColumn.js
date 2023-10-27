@@ -15,7 +15,7 @@ import {
   BASE_DATE_FORMAT,
   CAPABILITIES,
   CONTROL_TYPES,
-  getDuplicateNoteOptions,
+  getDuplicateNoteOptions, getHoldingsNotes,
   getItemStatusOptions,
   getNotesOptions,
 } from '../../../../../constants';
@@ -23,6 +23,7 @@ import { FIELD_VALUE_KEY, TEMPORARY_LOCATIONS } from './helpers';
 import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
 import { useItemNotes } from '../../../../../hooks/api/useItemNotes';
 import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
+import { useHoldingsNotes } from '../../../../../hooks/api/useHoldingsNotes';
 
 export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
@@ -32,15 +33,22 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
 
   const isUserCapability = capability === CAPABILITIES.USER;
   const isItemCapability = capability === CAPABILITIES.ITEM;
+  const isHoldingsCapability = capability === CAPABILITIES.HOLDING;
 
   const { userGroups } = usePatronGroup({ enabled: isUserCapability });
   const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
+  const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
   const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
 
   const filteredAndMappedNotes = getNotesOptions(formatMessage, itemNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value }) => ({ label, value }));
+
+  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, holdingsNotes)
+    .filter(obj => obj.value !== option)
+    .map(({ label, value, disabled }) => ({ label, value, disabled }));
+
   const sortWithoutPlaceholder = (array) => {
     const [placeholder, ...rest] = array;
 
@@ -48,6 +56,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   };
 
   const sortedNotes = sortWithoutPlaceholder(filteredAndMappedNotes);
+  const sortedHoldingsNotes = sortWithoutPlaceholder(filteredAndMappedHoldingsNotes);
 
   const statuses = getItemStatusOptions(formatMessage);
   const actionValue = action.value;
@@ -181,6 +190,17 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   />
   );
 
+  const renderNoteHoldingsTypeSelect = () => controlType === CONTROL_TYPES.HOLDINGS_NOTE && (
+    <Select
+      id="noteHoldingsType"
+      value={action.value}
+      loading={isHoldingsNotesLoading}
+      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+      dataOptions={sortedHoldingsNotes}
+      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+    />
+  );
+
   return (
     <Col xs={2} sm={2}>
       {renderTextField()}
@@ -192,6 +212,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       {renderLoanTypeSelect()}
       {renderNoteTypeSelect()}
       {renderNoteDuplicateTypeSelect()}
+      {renderNoteHoldingsTypeSelect()}
     </Col>
   );
 };
