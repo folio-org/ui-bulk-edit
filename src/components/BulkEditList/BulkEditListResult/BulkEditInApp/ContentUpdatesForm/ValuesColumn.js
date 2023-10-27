@@ -169,14 +169,28 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   );
 
   const renderNoteTypeSelect = () => controlType === CONTROL_TYPES.NOTE_SELECT && (
-    <Select
-      id="noteType"
-      value={action.value}
-      loading={usItemNotesLoading}
-      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
-      dataOptions={sortedNotes}
-      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-    />
+    isHoldingsCapability ? (
+      <Select
+        id="noteHoldingsType"
+        value={action.value}
+        loading={isHoldingsNotesLoading}
+        onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+        dataOptions={sortedHoldingsNotes}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+      />)
+      :
+      (<Select
+        id="noteType"
+        value={action.value}
+        loading={usItemNotesLoading}
+        onChange={e => onChange({
+          actionIndex,
+          value: e.target.value,
+          fieldName: FIELD_VALUE_KEY
+        })}
+        dataOptions={sortedNotes}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+      />)
   );
 
   const renderNoteDuplicateTypeSelect = () => controlType === CONTROL_TYPES.NOTE_DUPLICATE_SELECT && (
