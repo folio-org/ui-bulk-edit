@@ -15,7 +15,7 @@ import {
   InfoPopover,
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
-import { useFileDownload } from '../../../hooks/api';
+import { QUERY_KEY_DOWNLOAD_LOGS, useFileDownload } from '../../../hooks/api';
 import { CAPABILITIES, linkNamesMap } from '../../../constants';
 import { useBulkPermissions } from '../../../hooks';
 
@@ -26,6 +26,7 @@ const BulkEditLogsActions = ({ item }) => {
   } = useBulkPermissions();
   const [triggeredFile, setTriggeredFile] = useState(null);
   const { refetch } = useFileDownload({
+    queryKey: QUERY_KEY_DOWNLOAD_LOGS,
     enabled: false,
     id: item.id,
     fileInfo: {

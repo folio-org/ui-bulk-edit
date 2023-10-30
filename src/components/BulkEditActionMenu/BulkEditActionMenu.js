@@ -26,7 +26,11 @@ import {
   usePathParams,
 } from '../../hooks';
 import { RootContext } from '../../context/RootContext';
-import { useBulkOperationDetails, useFileDownload } from '../../hooks/api';
+import {
+  QUERY_KEY_DOWNLOAD_ACTION_MENU,
+  useBulkOperationDetails,
+  useFileDownload
+} from '../../hooks/api';
 
 const BulkEditActionMenu = ({
   onEdit,
@@ -57,6 +61,7 @@ const BulkEditActionMenu = ({
 
 
   useFileDownload({
+    queryKey: QUERY_KEY_DOWNLOAD_ACTION_MENU,
     enabled: !!fileInfo,
     id,
     fileInfo: {
