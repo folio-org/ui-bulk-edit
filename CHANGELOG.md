@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [UIBULKED-373](https://issues.folio.org/browse/UIBULKED-373) "User" dropdown doesn't include Users recently run bulk edit jobs
+
 ## [4.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.1) (2023-10-24)
 
 * [UIBULKED-355](https://issues.folio.org/browse/UIBULKED-355) Remove reference to Query tab on the landing page.
