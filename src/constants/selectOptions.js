@@ -201,6 +201,20 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
   },
 ];
 
+export const getHoldingsNotes = (formatMessage, holdingsNotes) => [
+  {
+    value: '',
+    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
+    disabled: true,
+  },
+  {
+    value: OPTIONS.ADMINISTRATIVE_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
+    disabled: false,
+  },
+  ...holdingsNotes,
+];
+
 export const getNotesOptions = (formatMessage, itemNotes) => [
   {
     value: '',

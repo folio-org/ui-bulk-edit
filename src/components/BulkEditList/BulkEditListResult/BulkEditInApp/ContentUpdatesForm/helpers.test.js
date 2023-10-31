@@ -491,6 +491,52 @@ describe('ContentUpdatesForm helpers', () => {
         });
       });
 
+      it('returns the correct object for the HOLDINGS_NOTE option', () => {
+        expect(JSON.stringify(getDefaultActions(OPTIONS.HOLDINGS_NOTE, [], formatMessage))).toEqual(
+          JSON.stringify({
+            type: '',
+            actions: [
+              null,
+              {
+                actionsList: [{
+                  value: '',
+                  disabled: true,
+                  label: undefined,
+                },
+                { value: 'MARK_AS_STAFF_ONLY',
+                  disabled: false,
+                  label: undefined },
+                { value: 'REMOVE_MARK_AS_STAFF_ONLY',
+                  disabled: false,
+                  label: undefined },
+                { value: 'ADD_TO_EXISTING',
+                  disabled: false,
+                  label: undefined },
+                { value: 'REMOVE_ALL',
+                  disabled: false,
+                  label: undefined },
+                { value: 'FIND',
+                  disabled: false,
+                  label: undefined },
+                {
+                  value: 'CHANGE_TYPE',
+                  disabled: false,
+                  label: undefined,
+                },
+                ],
+                controlType: (action) => {
+                  return action === ACTIONS.CHANGE_TYPE
+                    ? CONTROL_TYPES.NOTE_SELECT
+                    : CONTROL_TYPES.TEXTAREA;
+                },
+                [ACTION_VALUE_KEY]: '',
+                [FIELD_VALUE_KEY]: '',
+              },
+            ],
+          }),
+        );
+      });
+
       it('returns the correct object for the default case', () => {
         expect(getDefaultActions('unknown', [], formatMessage)).toEqual({
           type: null,

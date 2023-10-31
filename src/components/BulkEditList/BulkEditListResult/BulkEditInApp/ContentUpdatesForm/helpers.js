@@ -272,6 +272,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
           },
         ],
       };
+    case OPTIONS.HOLDINGS_NOTE:
     case OPTIONS.ITEM_NOTE:
       return {
         type: '',
@@ -281,7 +282,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
             actionsList: noteWithMarkDefaultActions,
             controlType: (action) => {
               return action === ACTIONS.CHANGE_TYPE
-                ? CONTROL_TYPES.NOTE_SELECT
+                ? CONTROL_TYPES.HOLDINGS_NOTE
                 : CONTROL_TYPES.TEXTAREA;
             },
             [ACTION_VALUE_KEY]: noteWithMarkDefaultActions[0].value,
@@ -359,6 +360,7 @@ export const getExtraActions = (option, action, formattedMessage) => {
     case `${OPTIONS.ADMINISTRATIVE_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_IN_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_OUT_NOTE}-${ACTIONS.FIND}`:
+    case `${OPTIONS.HOLDINGS_NOTE}-${ACTIONS.FIND}`:
       return [{
         actionsList: noteAdditionalActions(formattedMessage),
         controlType: () => CONTROL_TYPES.TEXTAREA,

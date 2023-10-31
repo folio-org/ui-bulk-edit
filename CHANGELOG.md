@@ -6,6 +6,10 @@
 * [UIBULKED-315](https://issues.folio.org/browse/UIBULKED-315) Group holdings record properties using optgroup component
 * [UIBULKED-354](https://issues.folio.org/browse/UIBULKED-354) Two identical files with the preview of proposed changes are downloaded from Logs
 * [UIBULKED-373](https://issues.folio.org/browse/UIBULKED-373) "User" dropdown doesn't include Users recently run bulk edit jobs
+* [UIBULKED-316](https://issues.folio.org/browse/UIBULKED-316) Bulk edit actions for holdings notes - add and remove Mark as staff only.
+* [UIBULKED-331](https://issues.folio.org/browse/UIBULKED-331) Bulk edit actions for holdings notes - add and remove notes.
+* [UIBULKED-332](https://issues.folio.org/browse/UIBULKED-332) Bulk edit actions for holdings notes - find and replace or remove.
+* [UIBULKED-333](https://issues.folio.org/browse/UIBULKED-333) Bulk edit actions for holdings notes - change note type.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
