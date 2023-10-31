@@ -360,6 +360,7 @@ export const getExtraActions = (option, action, formattedMessage) => {
     case `${OPTIONS.ADMINISTRATIVE_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_IN_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_OUT_NOTE}-${ACTIONS.FIND}`:
+    case `${OPTIONS.HOLDINGS_NOTE}-${ACTIONS.FIND}`:
       return [{
         actionsList: noteAdditionalActions(formattedMessage),
         controlType: () => CONTROL_TYPES.TEXTAREA,
