@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [4.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.2) (2023-11-06)
+
 * [UIBULKED-373](https://issues.folio.org/browse/UIBULKED-373) "User" dropdown doesn't include Users recently run bulk edit jobs
 
 ## [4.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.1) (2023-10-24)
