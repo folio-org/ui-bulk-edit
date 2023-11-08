@@ -19,7 +19,7 @@ import {
   statusActions,
   noteActions,
   noteActionsWithMark,
-  noteActionsWithDuplicate,
+  noteActionsWithDuplicate, electronicAccess,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -91,6 +91,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
   const noteDefaultActions = noteActions(formatMessage);
   const noteWithMarkDefaultActions = noteActionsWithMark(formatMessage);
   const noteDuplicateDefaultActions = noteActionsWithDuplicate(formatMessage);
+  const electronicAccessActions = electronicAccess(formatMessage);
 
   const replaceClearInitialVal = replaceClearDefaultActions[0].value;
 
@@ -291,6 +292,20 @@ export const getDefaultActions = (option, options, formatMessage) => {
         ],
       };
 
+    case OPTIONS.URI:
+      return {
+        type: '',
+        actions: [
+          null,
+          {
+            actionsList: electronicAccessActions,
+            controlType: () => CONTROL_TYPES.TEXTAREA,
+            [ACTION_VALUE_KEY]: electronicAccessActions[0].value,
+            [FIELD_VALUE_KEY]: '',
+          },
+        ],
+      };
+
     default:
       return {
         type: null,
@@ -358,6 +373,7 @@ export const getExtraActions = (option, action, formattedMessage) => {
   switch (`${option}-${action}`) {
     case `${OPTIONS.ITEM_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.ADMINISTRATIVE_NOTE}-${ACTIONS.FIND}`:
+    case `${OPTIONS.URI}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_IN_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_OUT_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.HOLDINGS_NOTE}-${ACTIONS.FIND}`:
