@@ -10,6 +10,7 @@
 * [UIBULKED-331](https://issues.folio.org/browse/UIBULKED-331) Bulk edit actions for holdings notes - add and remove notes.
 * [UIBULKED-332](https://issues.folio.org/browse/UIBULKED-332) Bulk edit actions for holdings notes - find and replace or remove.
 * [UIBULKED-333](https://issues.folio.org/browse/UIBULKED-333) Bulk edit actions for holdings notes - change note type.
+* [UIBULKED-353](https://issues.folio.org/browse/UIBULKED-353) Update Electronic access - URI.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
