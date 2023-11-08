@@ -19,7 +19,8 @@ import {
   statusActions,
   noteActions,
   noteActionsWithMark,
-  noteActionsWithDuplicate, electronicAccess,
+  noteActionsWithDuplicate,
+  electronicAccess,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
