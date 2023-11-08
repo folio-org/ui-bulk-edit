@@ -72,6 +72,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
             contentData={contentData}
             columnMapping={columnMapping}
             visibleColumns={visibleColumns}
+            step={step}
           />
         )}
         {Boolean(errors?.length) && (
