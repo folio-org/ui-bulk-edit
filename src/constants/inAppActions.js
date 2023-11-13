@@ -165,3 +165,16 @@ export const noteAdditionalActions = (formatMessage) => [
   getReplaceAction(formatMessage),
   getRemoveNoteAction(formatMessage),
 ];
+
+export const urlReletionshipActions = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getClearAction(formatMessage),
+  getFindAction(formatMessage),
+  getReplaceAction(formatMessage),
+];
+
+export const urlReletionshipAdditionalActions = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getReplaceAction(formatMessage),
+  getRemoveNoteAction(formatMessage),
+];

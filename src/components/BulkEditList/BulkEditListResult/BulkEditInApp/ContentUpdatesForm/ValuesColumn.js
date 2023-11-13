@@ -16,7 +16,7 @@ import {
   CAPABILITIES,
   CONTROL_TYPES,
   getDuplicateNoteOptions, getHoldingsNotes,
-  getItemStatusOptions,
+  getItemStatusOptions, getItemsWithPlaceholder,
   getNotesOptions,
 } from '../../../../../constants';
 import { FIELD_VALUE_KEY, TEMPORARY_LOCATIONS } from './helpers';
@@ -24,8 +24,9 @@ import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
 import { useItemNotes } from '../../../../../hooks/api/useItemNotes';
 import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
 import { useHoldingsNotes } from '../../../../../hooks/api/useHoldingsNotes';
+import { useElectronicAccessRelationships } from '../../../../../hooks/api/useElectronicAccess';
 
-export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
+export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
   const location = useLocation();
   const search = new URLSearchParams(location.search);
@@ -38,6 +39,12 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   const { userGroups } = usePatronGroup({ enabled: isUserCapability });
   const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
+
+  const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
+  const filteredElectronicAccessRelationships = getItemsWithPlaceholder(
+    electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value),
+  );
+
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
   const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
 
@@ -130,7 +137,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
     <>
       <LocationSelection
         value={actionValue}
-        onSelect={location => onChange({ actionIndex, value: location.id, fieldName: FIELD_VALUE_KEY })}
+        onSelect={loc => onChange({ actionIndex, value: loc.id, fieldName: FIELD_VALUE_KEY })}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
         data-test-id={`textField-${actionIndex}`}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}
@@ -138,8 +145,8 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       <LocationLookup
         marginBottom0
         isTemporaryLocation={TEMPORARY_LOCATIONS.includes(option)}
-        onLocationSelected={(location) => onChange({
-          actionIndex, value: location.id, fieldName: FIELD_VALUE_KEY,
+        onLocationSelected={(loc) => onChange({
+          actionIndex, value: loc.id, fieldName: FIELD_VALUE_KEY,
         })}
         data-testid={`locationLookup-${actionIndex}`}
       />
@@ -204,6 +211,17 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   />
   );
 
+  const renderElectronicAccessRelationshipSelect = () => controlType === CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT && (
+    <Select
+      id="urlRelationship"
+      value={action.value}
+      loading={isElectronicAccessLoading}
+      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+      dataOptions={filteredElectronicAccessRelationships}
+      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+    />
+  );
+
   return (
     <Col xs={2} sm={2}>
       {renderTextField()}
@@ -215,6 +233,7 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       {renderLoanTypeSelect()}
       {renderNoteTypeSelect()}
       {renderNoteDuplicateTypeSelect()}
+      {renderElectronicAccessRelationshipSelect()}
     </Col>
   );
 };
@@ -227,5 +246,10 @@ ValuesColumn.propTypes = {
     value: PropTypes.string,
   }),
   actionIndex: PropTypes.number,
+  allActions: PropTypes.arrayOf(PropTypes.shape({
+    controlType: PropTypes.func,
+    name: PropTypes.string,
+    value: PropTypes.string,
+  })),
   onChange: PropTypes.func,
 };

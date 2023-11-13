@@ -19,7 +19,7 @@ import {
   statusActions,
   noteActions,
   noteActionsWithMark,
-  noteActionsWithDuplicate,
+  noteActionsWithDuplicate, urlReletionshipActions, urlReletionshipAdditionalActions,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -291,6 +291,20 @@ export const getDefaultActions = (option, options, formatMessage) => {
         ],
       };
 
+    case OPTIONS.URL_RELATIONSHIP:
+      return {
+        type: '',
+        actions: [
+          null,
+          {
+            actionsList: urlReletionshipActions(formatMessage),
+            controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
+            [ACTION_VALUE_KEY]: noteDefaultActions[0].value,
+            [FIELD_VALUE_KEY]: '',
+          },
+        ],
+      };
+
     default:
       return {
         type: null,
@@ -365,6 +379,14 @@ export const getExtraActions = (option, action, formattedMessage) => {
         actionsList: noteAdditionalActions(formattedMessage),
         controlType: () => CONTROL_TYPES.TEXTAREA,
         [ACTION_VALUE_KEY]: noteAdditionalActions(formattedMessage)[0].value,
+        [FIELD_VALUE_KEY]: '',
+      }];
+
+    case `${OPTIONS.URL_RELATIONSHIP}-${ACTIONS.FIND}`:
+      return [{
+        actionsList: urlReletionshipAdditionalActions(formattedMessage),
+        controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
+        [ACTION_VALUE_KEY]: urlReletionshipAdditionalActions(formattedMessage)[0].value,
         [FIELD_VALUE_KEY]: '',
       }];
 
