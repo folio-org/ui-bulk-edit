@@ -8,7 +8,7 @@ import { createMemoryHistory } from 'history';
 import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 import { ValuesColumn } from './ValuesColumn';
 import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
-import { CONTROL_TYPES } from '../../../../../constants';
+import { CAPABILITIES, CONTROL_TYPES } from '../../../../../constants';
 
 jest.mock('../../../../../hooks/api/useLoanTypes');
 jest.mock('../../../../../hooks/api/usePatronGroup');
@@ -64,6 +64,17 @@ describe('ValuesColumn Component', () => {
     await waitFor(() => expect(onChange).toHaveBeenCalled());
   });
 
+  it('should render TextArea when action type is TEXTAREA', async () => {
+    const { getByTestId } = renderComponent(() => CONTROL_TYPES.TEXTAREA);
+    const element = getByTestId('input-textarea-0');
+
+    expect(element).toBeInTheDocument();
+
+    fireEvent.change(element, { target: { value: 'textarea value' } });
+
+    await waitFor(() => expect(onChange).toHaveBeenCalled());
+  });
+
   /// continue from the above code
   it('should render Select with patron groups when action type is PATRON_GROUP_SELECT', async () => {
     const { getByTestId } = renderComponent(() => CONTROL_TYPES.PATRON_GROUP_SELECT);
@@ -109,13 +120,27 @@ describe('ValuesColumn Component', () => {
     await waitFor(() => expect(onChange).toHaveBeenCalled());
   });
 
-  it('should render select with item note types when action type is LOAN_TYPE', async () => {
+  it('should render select with item note types when action type is NOTE_SELECT', async () => {
     const { container } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
     const element = container.querySelector('#noteType');
 
     expect(element).toBeInTheDocument();
 
-    fireEvent.change(element, { target: { value: 'newLoanType' } });
+    fireEvent.change(element, { target: { value: 'new note select value' } });
+
+    await waitFor(() => expect(onChange).toHaveBeenCalled());
+  });
+
+  it('should render select with item note types when action type is NOTE_SELECT + HOLDINS CAPABILITY', async () => {
+    const spy = jest.spyOn(URLSearchParams.prototype, 'get');
+    spy.mockReturnValueOnce(CAPABILITIES.HOLDING);
+
+    const { container } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
+    const element = container.querySelector('#noteHoldingsType');
+
+    expect(element).toBeInTheDocument();
+
+    fireEvent.change(element, { target: { value: 'new note holding value' } });
 
     await waitFor(() => expect(onChange).toHaveBeenCalled());
   });
