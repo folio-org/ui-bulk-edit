@@ -2,7 +2,7 @@ import {
   ACTIONS,
   CONTROL_TYPES,
   OPTIONS,
-  noteAdditionalActions,
+  commonAdditionalActions,
 } from '../../../../../constants';
 
 import {
@@ -546,9 +546,9 @@ describe('ContentUpdatesForm helpers', () => {
     });
 
     describe('getExtraActions', () => {
-      const mockFormattedMessage = 'label';
+      const mockFormattedMessage = jest.fn();
 
-      it('should return a certain structure for specific OPTIONS and ACTIONS', () => {
+      it('should return a certain structure for specific OPTIONS and ACTIONS - Notes', () => {
         const optionActionCombinations = [
           { option: OPTIONS.ITEM_NOTE, action: ACTIONS.FIND },
           { option: OPTIONS.ADMINISTRATIVE_NOTE, action: ACTIONS.FIND },
@@ -558,11 +558,31 @@ describe('ContentUpdatesForm helpers', () => {
 
         optionActionCombinations.forEach(({ option, action }) => {
           const result = getExtraActions(option, action, mockFormattedMessage);
-          const expectedFirstActionValue = noteAdditionalActions(mockFormattedMessage)[0].value;
+          const expectedFirstActionValue = commonAdditionalActions(mockFormattedMessage)[0].value;
 
           const expectedStructure = [{
-            actionsList: noteAdditionalActions(mockFormattedMessage),
+            actionsList: commonAdditionalActions(mockFormattedMessage),
             controlType: () => CONTROL_TYPES.TEXTAREA,
+            [ACTION_VALUE_KEY]: expectedFirstActionValue,
+            [FIELD_VALUE_KEY]: '',
+          }];
+
+          expect(JSON.stringify(result)).toEqual(JSON.stringify(expectedStructure));
+        });
+      });
+
+      it('should return a certain structure for specific OPTIONS and ACTIONS - URL Relationship', () => {
+        const optionActionCombinations = [
+          { option: OPTIONS.URL_RELATIONSHIP, action: ACTIONS.FIND },
+        ];
+
+        optionActionCombinations.forEach(({ option, action }) => {
+          const result = getExtraActions(option, action, mockFormattedMessage);
+          const expectedFirstActionValue = commonAdditionalActions(mockFormattedMessage)[0].value;
+
+          const expectedStructure = [{
+            actionsList: commonAdditionalActions(mockFormattedMessage),
+            controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
             [ACTION_VALUE_KEY]: expectedFirstActionValue,
             [FIELD_VALUE_KEY]: '',
           }];

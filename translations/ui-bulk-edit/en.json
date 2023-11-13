@@ -367,6 +367,7 @@
   "ariaLabel.location": "Location",
   "ariaLabel.statusSelect": "Status select",
   "ariaLabel.loanTypeSelect": "Loan type select",
+  "ariaLabel.urlRelationshipSelect": "Url relationship select",
 
   "permissionsModal.title": "Select Permissions",
   "permissionsModal.filter.title": "Search & filter",

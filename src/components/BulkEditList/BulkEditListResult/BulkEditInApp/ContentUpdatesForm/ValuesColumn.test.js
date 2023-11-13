@@ -130,4 +130,15 @@ describe('ValuesColumn Component', () => {
 
     await waitFor(() => expect(onChange).toHaveBeenCalled());
   });
+
+  it('should render select with url relationship types when action type is FIND', async () => {
+    const { container } = renderComponent(() => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT);
+    const element = container.querySelector('#urlRelationship');
+
+    expect(element).toBeInTheDocument();
+
+    fireEvent.change(element, { target: { value: 'RESOURCE' } });
+
+    await waitFor(() => expect(onChange).toHaveBeenCalled());
+  });
 });

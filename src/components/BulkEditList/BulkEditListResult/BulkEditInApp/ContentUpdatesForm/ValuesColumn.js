@@ -218,7 +218,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       loading={isElectronicAccessLoading}
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       dataOptions={filteredElectronicAccessRelationships}
-      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
     />
   );
 

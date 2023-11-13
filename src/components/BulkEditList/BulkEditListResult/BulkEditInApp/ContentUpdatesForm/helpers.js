@@ -9,7 +9,7 @@ import {
   CAPABILITIES,
   emailActionsFind,
   emailActionsReplace,
-  noteAdditionalActions,
+  commonAdditionalActions,
   patronActions,
   expirationActions,
   replaceClearActions,
@@ -19,7 +19,8 @@ import {
   statusActions,
   noteActions,
   noteActionsWithMark,
-  noteActionsWithDuplicate, urlReletionshipActions, urlReletionshipAdditionalActions,
+  noteActionsWithDuplicate,
+  urlRelationshipActions,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -297,7 +298,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: urlReletionshipActions(formatMessage),
+            actionsList: urlRelationshipActions(formatMessage),
             controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
             [ACTION_VALUE_KEY]: noteDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
@@ -376,17 +377,17 @@ export const getExtraActions = (option, action, formattedMessage) => {
     case `${OPTIONS.CHECK_OUT_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.HOLDINGS_NOTE}-${ACTIONS.FIND}`:
       return [{
-        actionsList: noteAdditionalActions(formattedMessage),
+        actionsList: commonAdditionalActions(formattedMessage),
         controlType: () => CONTROL_TYPES.TEXTAREA,
-        [ACTION_VALUE_KEY]: noteAdditionalActions(formattedMessage)[0].value,
+        [ACTION_VALUE_KEY]: commonAdditionalActions(formattedMessage)[0].value,
         [FIELD_VALUE_KEY]: '',
       }];
 
     case `${OPTIONS.URL_RELATIONSHIP}-${ACTIONS.FIND}`:
       return [{
-        actionsList: urlReletionshipAdditionalActions(formattedMessage),
+        actionsList: commonAdditionalActions(formattedMessage),
         controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
-        [ACTION_VALUE_KEY]: urlReletionshipAdditionalActions(formattedMessage)[0].value,
+        [ACTION_VALUE_KEY]: commonAdditionalActions(formattedMessage)[0].value,
         [FIELD_VALUE_KEY]: '',
       }];
 

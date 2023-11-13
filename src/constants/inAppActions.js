@@ -97,13 +97,13 @@ export const getRemoveAllAction = (formatMessage) => ({
   disabled: false,
 });
 
-export const getAddNoteAction = (formatMessage) => ({
+export const getAddToExistingAction = (formatMessage) => ({
   value: ACTIONS.ADD_TO_EXISTING,
   label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.addNote' }),
   disabled: false,
 });
 
-export const getRemoveNoteAction = (formatMessage) => ({
+export const getRemoveTheseAction = (formatMessage) => ({
   value: ACTIONS.REMOVE_THESE,
   label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.removeNote' }),
   disabled: false,
@@ -134,7 +134,7 @@ export const suppressFromDiscActions = (formatMessage) => [
 ];
 export const noteActions = (formatMessage) => [
   getPlaceholder(formatMessage),
-  getAddNoteAction(formatMessage),
+  getAddToExistingAction(formatMessage),
   getRemoveAllAction(formatMessage),
   getFindAction(formatMessage),
   getChangeNoteTypeAction(formatMessage),
@@ -144,7 +144,7 @@ export const noteActionsWithMark = (formatMessage) => [
   getPlaceholder(formatMessage),
   getMarkAsStuffOnlyAction(formatMessage),
   getRemoveMarkAsStuffOnlyAction(formatMessage),
-  getAddNoteAction(formatMessage),
+  getAddToExistingAction(formatMessage),
   getRemoveAllAction(formatMessage),
   getFindAction(formatMessage),
   getChangeNoteTypeAction(formatMessage),
@@ -154,27 +154,21 @@ export const noteActionsWithDuplicate = (formatMessage) => [
   getPlaceholder(formatMessage),
   getMarkAsStuffOnlyAction(formatMessage),
   getRemoveMarkAsStuffOnlyAction(formatMessage),
-  getAddNoteAction(formatMessage),
+  getAddToExistingAction(formatMessage),
   getRemoveAllAction(formatMessage),
   getFindAction(formatMessage),
   getChangeNoteTypeAction(formatMessage),
   getDuplicateToNoteAction(formatMessage),
 ];
-export const noteAdditionalActions = (formatMessage) => [
+export const commonAdditionalActions = (formatMessage) => [
   getPlaceholder(formatMessage),
   getReplaceAction(formatMessage),
-  getRemoveNoteAction(formatMessage),
+  getRemoveTheseAction(formatMessage),
 ];
 
-export const urlReletionshipActions = (formatMessage) => [
+export const urlRelationshipActions = (formatMessage) => [
   getPlaceholder(formatMessage),
   getClearAction(formatMessage),
   getFindAction(formatMessage),
   getReplaceAction(formatMessage),
-];
-
-export const urlReletionshipAdditionalActions = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getReplaceAction(formatMessage),
-  getRemoveNoteAction(formatMessage),
 ];
