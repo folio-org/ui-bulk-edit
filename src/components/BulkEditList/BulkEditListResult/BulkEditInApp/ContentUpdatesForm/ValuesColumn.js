@@ -15,8 +15,10 @@ import {
   BASE_DATE_FORMAT,
   CAPABILITIES,
   CONTROL_TYPES,
-  getDuplicateNoteOptions, getHoldingsNotes,
-  getItemStatusOptions, getItemsWithPlaceholder,
+  getDuplicateNoteOptions,
+  getHoldingsNotes,
+  getItemStatusOptions,
+  getItemsWithPlaceholder,
   getNotesOptions,
 } from '../../../../../constants';
 import { FIELD_VALUE_KEY, TEMPORARY_LOCATIONS } from './helpers';
