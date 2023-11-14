@@ -153,8 +153,8 @@ export const noteActionsWithMark = (formatMessage) => [
 export const electronicAccess = (formatMessage) => [
   getPlaceholder(formatMessage),
   getClearAction(formatMessage),
-  getReplaceAction(formatMessage),
   getFindAction(formatMessage),
+  getReplaceAction(formatMessage),
 ];
 export const noteActionsWithDuplicate = (formatMessage) => [
   getPlaceholder(formatMessage),
@@ -170,11 +170,4 @@ export const commonAdditionalActions = (formatMessage) => [
   getPlaceholder(formatMessage),
   getReplaceAction(formatMessage),
   getRemoveTheseAction(formatMessage),
-];
-
-export const urlRelationshipActions = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getClearAction(formatMessage),
-  getFindAction(formatMessage),
-  getReplaceAction(formatMessage),
 ];

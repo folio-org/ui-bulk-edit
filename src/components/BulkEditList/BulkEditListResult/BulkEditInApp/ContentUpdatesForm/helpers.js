@@ -21,7 +21,6 @@ import {
   noteActionsWithMark,
   noteActionsWithDuplicate,
   electronicAccess,
-  urlRelationshipActions,
 } from '../../../../../constants';
 
 export const ACTION_VALUE_KEY = 'name';
@@ -300,9 +299,9 @@ export const getDefaultActions = (option, options, formatMessage) => {
         actions: [
           null,
           {
-            actionsList: urlRelationshipActions(formatMessage),
+            actionsList: electronicAccessActions,
             controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
-            [ACTION_VALUE_KEY]: noteDefaultActions[0].value,
+            [ACTION_VALUE_KEY]: electronicAccessActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
