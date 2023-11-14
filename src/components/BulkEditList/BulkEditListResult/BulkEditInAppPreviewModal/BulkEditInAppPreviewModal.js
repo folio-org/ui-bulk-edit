@@ -44,6 +44,7 @@ const BulkEditInAppPreviewModal = ({
   const history = useHistory();
   const search = new URLSearchParams(history.location.search);
   const capabilities = search.get('capabilities');
+  const step = search.get('step');
   const { visibleColumns } = useContext(RootContext);
 
   const swwCallout = () => (
@@ -176,6 +177,7 @@ const BulkEditInAppPreviewModal = ({
             columnMapping={columnMapping}
             visibleColumns={visibleColumnKeys}
             maxHeight={300}
+            columnIdPrefix={step}
           />
         </>
       ) : <Preloader />}
