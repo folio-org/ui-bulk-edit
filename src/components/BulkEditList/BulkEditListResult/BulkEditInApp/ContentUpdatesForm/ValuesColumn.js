@@ -204,17 +204,6 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
   />
   );
 
-  const renderNoteHoldingsTypeSelect = () => controlType === CONTROL_TYPES.HOLDINGS_NOTE && (
-    <Select
-      id="noteHoldingsType"
-      value={action.value}
-      loading={isHoldingsNotesLoading}
-      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
-      dataOptions={sortedHoldingsNotes}
-      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-    />
-  );
-
   return (
     <Col xs={2} sm={2}>
       {renderTextField()}
@@ -226,7 +215,6 @@ export const ValuesColumn = ({ action, actionIndex, onChange, option }) => {
       {renderLoanTypeSelect()}
       {renderNoteTypeSelect()}
       {renderNoteDuplicateTypeSelect()}
-      {renderNoteHoldingsTypeSelect()}
     </Col>
   );
 };
