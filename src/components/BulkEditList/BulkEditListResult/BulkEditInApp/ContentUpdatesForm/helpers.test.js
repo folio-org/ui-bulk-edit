@@ -615,8 +615,8 @@ describe('ContentUpdatesForm helpers', () => {
           );
       });
 
-      it('returns the correct object for the URL_RELATIONSHIP option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.URL_RELATIONSHIP, [], formatMessage)))
+      it('returns the correct object for the ELECTRONIC_ACCESS_URL_RELATIONSHIP option', () => {
+        expect(JSON.stringify(getDefaultActions(OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP, [], formatMessage)))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -654,8 +654,8 @@ describe('ContentUpdatesForm helpers', () => {
           );
       });
 
-      it('returns the correct object for the URI option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.URI, [], formatMessage)))
+      it('returns the correct object for the ELECTRONIC_ACCESS_URI option', () => {
+        expect(JSON.stringify(getDefaultActions(OPTIONS.ELECTRONIC_ACCESS_URI, [], formatMessage)))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -746,7 +746,7 @@ describe('ContentUpdatesForm helpers', () => {
       it('should return a certain structure for specific OPTIONS and ACTIONS - URL Relationship', () => {
         const optionActionCombinations = [
           {
-            option: OPTIONS.URL_RELATIONSHIP,
+            option: OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP,
             action: ACTIONS.FIND
           },
         ];

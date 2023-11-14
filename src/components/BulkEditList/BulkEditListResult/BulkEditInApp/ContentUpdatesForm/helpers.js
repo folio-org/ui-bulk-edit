@@ -293,7 +293,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
         ],
       };
 
-    case OPTIONS.URL_RELATIONSHIP:
+    case OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP:
       return {
         type: '',
         actions: [
@@ -307,7 +307,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
         ],
       };
 
-    case OPTIONS.URI:
+    case OPTIONS.ELECTRONIC_ACCESS_URI:
       return {
         type: '',
         actions: [
@@ -388,7 +388,7 @@ export const getExtraActions = (option, action, formattedMessage) => {
   switch (`${option}-${action}`) {
     case `${OPTIONS.ITEM_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.ADMINISTRATIVE_NOTE}-${ACTIONS.FIND}`:
-    case `${OPTIONS.URI}-${ACTIONS.FIND}`:
+    case `${OPTIONS.ELECTRONIC_ACCESS_URI}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_IN_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_OUT_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.HOLDINGS_NOTE}-${ACTIONS.FIND}`:
@@ -399,7 +399,7 @@ export const getExtraActions = (option, action, formattedMessage) => {
         [FIELD_VALUE_KEY]: '',
       }];
 
-    case `${OPTIONS.URL_RELATIONSHIP}-${ACTIONS.FIND}`:
+    case `${OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP}-${ACTIONS.FIND}`:
       return [{
         actionsList: commonAdditionalActions(formattedMessage),
         controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
