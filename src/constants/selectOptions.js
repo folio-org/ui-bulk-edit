@@ -23,6 +23,7 @@ export const OPTIONS = {
   ADMINISTRATIVE_NOTE: 'ADMINISTRATIVE_NOTE',
   CHECK_IN_NOTE: 'CHECK_IN_NOTE',
   CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
+  URI: 'URI'
 };
 
 export const PARAMETERS_KEYS = {
@@ -195,10 +196,16 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
   },
   ...holdingsNotes,
   {
+    value: OPTIONS.URI,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.uri' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
+  },
+  {
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.suppress' }),
     disabled: false,
-  },
+  }
 ];
 
 export const getHoldingsNotes = (formatMessage, holdingsNotes) => [
