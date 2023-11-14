@@ -359,5 +359,16 @@
     "logs.filter.user.placeholder": "Elegir usuario",
     "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)",
     "category.holdingsNotes": "Holdings notes",
-    "category.holdingsLocation": "Holdings location"
+    "category.holdingsLocation": "Holdings location",
+    "category.electronicAccess": "Electronic access",
+    "layer.options.holdings.uri": "URI",
+    "columns.HOLDINGS_RECORD.Action note": "Action note",
+    "columns.HOLDINGS_RECORD.Binding": "Binding",
+    "columns.HOLDINGS_RECORD.Copy note": "Copy note",
+    "columns.HOLDINGS_RECORD.Electronic bookplate": "Electronic bookplate",
+    "columns.HOLDINGS_RECORD.Provenance": "Provenance",
+    "columns.HOLDINGS_RECORD.Reproduction": "Reproduction",
+    "layer.options.holdings.urlRelationship": "URL Relationship",
+    "layer.selectType": "Select note type",
+    "ariaLabel.urlRelationshipSelect": "Url relationship select"
 }
