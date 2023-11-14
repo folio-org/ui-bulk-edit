@@ -36,7 +36,13 @@ export const ActionsRow = ({ option, actions, onChange }) => {
 
         {/* Render value fields only in case if actions selected AND action is not from FINAL_ACTIONS */}
         {action.name && !FINAL_ACTIONS.includes(action.name) && (
-          <ValuesColumn option={option} action={action} actionIndex={actionIndex} onChange={onChange} />
+          <ValuesColumn
+            option={option}
+            action={action}
+            allActions={actions}
+            actionIndex={actionIndex}
+            onChange={onChange}
+          />
         )}
 
         {/* Render additional actions  */}

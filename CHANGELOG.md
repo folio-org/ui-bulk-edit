@@ -15,6 +15,7 @@
 * [UIBULKED-371](https://issues.folio.org/browse/UIBULKED-371) Bulk edit - Grouped form controls missing accessible name.
 * [UIBULKED-353](https://issues.folio.org/browse/UIBULKED-353) Update Electronic access - URI.
 * [UIBULKED-356](https://issues.folio.org/browse/UIBULKED-356) Separate holdings notes by note type
+* [UIBULKED-349](https://issues.folio.org/browse/UIBULKED-349) Update Electronic access - URL relationship
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 

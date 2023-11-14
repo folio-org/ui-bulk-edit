@@ -23,7 +23,8 @@ export const OPTIONS = {
   ADMINISTRATIVE_NOTE: 'ADMINISTRATIVE_NOTE',
   CHECK_IN_NOTE: 'CHECK_IN_NOTE',
   CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
-  URI: 'URI'
+  ELECTRONIC_ACCESS_URI: 'ELECTRONIC_ACCESS_URI',
+  ELECTRONIC_ACCESS_URL_RELATIONSHIP: 'ELECTRONIC_ACCESS_URL_RELATIONSHIP',
 };
 
 export const PARAMETERS_KEYS = {
@@ -33,6 +34,15 @@ export const PARAMETERS_KEYS = {
 
 export const OPTIONS_WITH_ADDITIONAL_PARAMETERS = [
   OPTIONS.ITEM_NOTE,
+];
+
+export const getItemsWithPlaceholder = (items) => [
+  {
+    value: '',
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.recordIdentifier.placeholder" />,
+    disabled: true,
+  },
+  ...items,
 ];
 
 export const identifierOptions = {
@@ -196,8 +206,14 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
   },
   ...holdingsNotes,
   {
-    value: OPTIONS.URI,
+    value: OPTIONS.ELECTRONIC_ACCESS_URI,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.uri' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
+  },
+  {
+    value: OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.urlRelationship' }),
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
   },
@@ -205,7 +221,7 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.suppress' }),
     disabled: false,
-  }
+  },
 ];
 
 export const getHoldingsNotes = (formatMessage, holdingsNotes) => [

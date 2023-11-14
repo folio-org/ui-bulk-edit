@@ -273,6 +273,7 @@
   "layer.options.holdings.temporaryLocation": "Temporary holdings location",
   "layer.options.holdings.permanentLocation": "Permanent holdings location",
   "layer.options.holdings.suppress": "Suppress from discovery",
+  "layer.options.holdings.urlRelationship": "URL Relationship",
   "layer.options.expirationDate": "Expiration date",
   "layer.options.email": "Email",
   "layer.options.patronGroup": "Patron group",
@@ -293,6 +294,7 @@
   "layer.selectPatronGroup": "Select patron group",
   "layer.selectLoanType": "Select loan type",
   "layer.selectNoteType": "Select note type",
+  "layer.selectType": "Select note type",
   "layer.options.items.true": "Set true",
   "layer.options.items.false": "Set false",
   "layer.options.items.changeNote": "Change note type",
@@ -372,6 +374,7 @@
   "ariaLabel.location": "Location",
   "ariaLabel.statusSelect": "Status select",
   "ariaLabel.loanTypeSelect": "Loan type select",
+  "ariaLabel.urlRelationshipSelect": "Url relationship select",
 
   "permissionsModal.title": "Select Permissions",
   "permissionsModal.filter.title": "Search & filter",

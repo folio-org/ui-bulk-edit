@@ -9,7 +9,7 @@ import {
   CAPABILITIES,
   emailActionsFind,
   emailActionsReplace,
-  noteAdditionalActions,
+  commonAdditionalActions,
   patronActions,
   expirationActions,
   replaceClearActions,
@@ -293,7 +293,21 @@ export const getDefaultActions = (option, options, formatMessage) => {
         ],
       };
 
-    case OPTIONS.URI:
+    case OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP:
+      return {
+        type: '',
+        actions: [
+          null,
+          {
+            actionsList: electronicAccessActions,
+            controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
+            [ACTION_VALUE_KEY]: electronicAccessActions[0].value,
+            [FIELD_VALUE_KEY]: '',
+          },
+        ],
+      };
+
+    case OPTIONS.ELECTRONIC_ACCESS_URI:
       return {
         type: '',
         actions: [
@@ -374,14 +388,22 @@ export const getExtraActions = (option, action, formattedMessage) => {
   switch (`${option}-${action}`) {
     case `${OPTIONS.ITEM_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.ADMINISTRATIVE_NOTE}-${ACTIONS.FIND}`:
-    case `${OPTIONS.URI}-${ACTIONS.FIND}`:
+    case `${OPTIONS.ELECTRONIC_ACCESS_URI}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_IN_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_OUT_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.HOLDINGS_NOTE}-${ACTIONS.FIND}`:
       return [{
-        actionsList: noteAdditionalActions(formattedMessage),
+        actionsList: commonAdditionalActions(formattedMessage),
         controlType: () => CONTROL_TYPES.TEXTAREA,
-        [ACTION_VALUE_KEY]: noteAdditionalActions(formattedMessage)[0].value,
+        [ACTION_VALUE_KEY]: commonAdditionalActions(formattedMessage)[0].value,
+        [FIELD_VALUE_KEY]: '',
+      }];
+
+    case `${OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP}-${ACTIONS.FIND}`:
+      return [{
+        actionsList: commonAdditionalActions(formattedMessage),
+        controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
+        [ACTION_VALUE_KEY]: commonAdditionalActions(formattedMessage)[0].value,
         [FIELD_VALUE_KEY]: '',
       }];
 
