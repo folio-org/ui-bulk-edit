@@ -17,7 +17,9 @@ const Capabilities = ({
       header={FilterAccordionHeader}
       label={<FormattedMessage id="ui-bulk-edit.list.filters.capabilities.title" />}
     >
-      <RadioButtonGroup>
+      <RadioButtonGroup
+        aria-labelledby="record-types"
+      >
         {capabilitiesFilterOptions?.map(option => (
           !option.hidden && (
             <RadioButton
