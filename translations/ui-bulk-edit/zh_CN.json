@@ -359,5 +359,16 @@
     "logs.filter.user.placeholder": "选择用户",
     "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "实例（题名、出版者、出版日期）",
     "category.holdingsNotes": "馆藏附注",
-    "category.holdingsLocation": "馆藏位置"
+    "category.holdingsLocation": "馆藏位置",
+    "category.electronicAccess": "Electronic access",
+    "layer.options.holdings.uri": "URI",
+    "columns.HOLDINGS_RECORD.Action note": "Action note",
+    "columns.HOLDINGS_RECORD.Binding": "Binding",
+    "columns.HOLDINGS_RECORD.Copy note": "Copy note",
+    "columns.HOLDINGS_RECORD.Electronic bookplate": "Electronic bookplate",
+    "columns.HOLDINGS_RECORD.Provenance": "Provenance",
+    "columns.HOLDINGS_RECORD.Reproduction": "Reproduction",
+    "layer.options.holdings.urlRelationship": "URL Relationship",
+    "layer.selectType": "Select note type",
+    "ariaLabel.urlRelationshipSelect": "Url relationship select"
 }
