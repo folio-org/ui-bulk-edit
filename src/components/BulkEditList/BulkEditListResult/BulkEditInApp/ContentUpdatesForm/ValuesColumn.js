@@ -33,7 +33,6 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const location = useLocation();
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
-  const [firstAction] = allActions;
 
   const isUserCapability = capability === CAPABILITIES.USER;
   const isItemCapability = capability === CAPABILITIES.ITEM;
@@ -45,7 +44,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
   // exclude from second action the first action value
-  const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== firstAction?.value);
+  const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
   const accessRelationshipsWithPlaceholder = getItemsWithPlaceholder(filteredElectronicAccessRelationships);
 
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
