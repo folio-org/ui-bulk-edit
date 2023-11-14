@@ -23,6 +23,7 @@ export const OPTIONS = {
   ADMINISTRATIVE_NOTE: 'ADMINISTRATIVE_NOTE',
   CHECK_IN_NOTE: 'CHECK_IN_NOTE',
   CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
+  URI: 'URI',
   URL_RELATIONSHIP: 'URL_RELATIONSHIP',
 };
 
@@ -204,6 +205,12 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingsLocation' }),
   },
   ...holdingsNotes,
+  {
+    value: OPTIONS.URI,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.uri' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
+  },
   {
     value: OPTIONS.URL_RELATIONSHIP,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.urlRelationship' }),

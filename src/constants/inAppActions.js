@@ -150,6 +150,12 @@ export const noteActionsWithMark = (formatMessage) => [
   getChangeNoteTypeAction(formatMessage),
 ];
 
+export const electronicAccess = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getClearAction(formatMessage),
+  getReplaceAction(formatMessage),
+  getFindAction(formatMessage),
+];
 export const noteActionsWithDuplicate = (formatMessage) => [
   getPlaceholder(formatMessage),
   getMarkAsStuffOnlyAction(formatMessage),

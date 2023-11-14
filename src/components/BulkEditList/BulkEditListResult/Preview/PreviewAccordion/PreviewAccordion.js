@@ -9,7 +9,7 @@ import {
 } from '@folio/stripes/components';
 
 
-const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitial }) => {
+const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitial, step }) => {
   const translationKey = isInitial ? 'title' : 'titleChanged';
   const maxHeight = window.innerHeight * 0.4;
 
@@ -31,6 +31,7 @@ const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitia
             columnMapping={columnMapping}
             visibleColumns={visibleColumnKeys}
             maxHeight={maxHeight}
+            columnIdPrefix={step}
           />
         </Col>
       </Row>
@@ -43,6 +44,7 @@ PreviewAccordion.propTypes = {
   columnMapping: PropTypes.object,
   visibleColumns: PropTypes.arrayOf(PropTypes.object),
   isInitial: PropTypes.bool,
+  step: PropTypes.string,
 };
 
 export default memo(PreviewAccordion);

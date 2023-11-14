@@ -77,6 +77,7 @@ const renderPreviewAccordion = ({
         visibleColumns={visibleColumns}
         columnMapping={columnMapping}
         initial={initial}
+        step="UPLOAD"
       />
     </RootContext.Provider>,
   );
