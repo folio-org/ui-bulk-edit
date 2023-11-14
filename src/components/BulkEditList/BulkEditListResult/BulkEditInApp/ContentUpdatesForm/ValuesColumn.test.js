@@ -54,8 +54,8 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render TextField when action type is INPUT', async () => {
-    const { getByTestId } = renderComponent(() => CONTROL_TYPES.INPUT);
-    const element = getByTestId('input-email-0');
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.INPUT);
+    const element = getByRole('textbox');
 
     expect(element).toBeInTheDocument();
 
@@ -65,8 +65,8 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render TextArea when action type is TEXTAREA', async () => {
-    const { getByTestId } = renderComponent(() => CONTROL_TYPES.TEXTAREA);
-    const element = getByTestId('input-textarea-0');
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.TEXTAREA);
+    const element = getByRole('textbox');
 
     expect(element).toBeInTheDocument();
 
@@ -77,8 +77,8 @@ describe('ValuesColumn Component', () => {
 
   /// continue from the above code
   it('should render Select with patron groups when action type is PATRON_GROUP_SELECT', async () => {
-    const { getByTestId } = renderComponent(() => CONTROL_TYPES.PATRON_GROUP_SELECT);
-    const element = getByTestId('select-patronGroup-0');
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.PATRON_GROUP_SELECT);
+    const element = getByRole('combobox');
 
     expect(element).toBeInTheDocument();
 
@@ -88,8 +88,8 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render Datepicker when action type is DATE', async () => {
-    const { getByTestId } = renderComponent(() => CONTROL_TYPES.DATE);
-    const element = getByTestId('dataPicker-experation-date-0');
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.DATE);
+    const element = getByRole('textbox');
 
     expect(element).toBeInTheDocument();
 
@@ -99,8 +99,8 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render Select with status options when action type is STATUS_SELECT', async () => {
-    const { getByTestId } = renderComponent(() => CONTROL_TYPES.STATUS_SELECT);
-    const element = getByTestId('select-statuses-0');
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.STATUS_SELECT);
+    const element = getByRole('combobox');
 
     expect(element).toBeInTheDocument();
 
@@ -121,8 +121,8 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render select with item note types when action type is NOTE_SELECT', async () => {
-    const { container } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
-    const element = container.querySelector('#noteType');
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
+    const element = getByRole('combobox');
 
     expect(element).toBeInTheDocument();
 
@@ -135,8 +135,8 @@ describe('ValuesColumn Component', () => {
     const spy = jest.spyOn(URLSearchParams.prototype, 'get');
     spy.mockReturnValueOnce(CAPABILITIES.HOLDING);
 
-    const { container } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
-    const element = container.querySelector('#noteHoldingsType');
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
+    const element = getByRole('combobox');
 
     expect(element).toBeInTheDocument();
 
@@ -146,8 +146,8 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render select with item note types when action type is DUPLICATE', async () => {
-    const { container } = renderComponent(() => CONTROL_TYPES.NOTE_DUPLICATE_SELECT);
-    const element = container.querySelector('#noteTypeDuplicate');
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.NOTE_DUPLICATE_SELECT);
+    const element = getByRole('combobox');
 
     expect(element).toBeInTheDocument();
 
@@ -157,8 +157,8 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render select with url relationship types when action type is FIND', async () => {
-    const { container } = renderComponent(() => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT);
-    const element = container.querySelector('#urlRelationship');
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT);
+    const element = getByRole('combobox');
 
     expect(element).toBeInTheDocument();
 
