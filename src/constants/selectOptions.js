@@ -39,7 +39,7 @@ export const OPTIONS_WITH_ADDITIONAL_PARAMETERS = [
 export const getItemsWithPlaceholder = (items) => [
   {
     value: '',
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.recordIdentifier.placeholder" />,
+    label: <FormattedMessage id="ui-bulk-edit.type.placeholder" />,
     disabled: true,
   },
   ...items,

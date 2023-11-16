@@ -9,7 +9,7 @@ export const useElectronicAccessRelationships = (options = {}) => {
       queryKey: 'electronicAccess',
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get('electronic-access-relationships').json(),
+      queryFn: () => ky.get('electronic-access-relationships?limit=1000&query=cql.allRecords=1 sortby name').json(),
       ...options,
     },
   );
