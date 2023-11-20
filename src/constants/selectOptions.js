@@ -39,7 +39,7 @@ export const OPTIONS_WITH_ADDITIONAL_PARAMETERS = [
 export const getItemsWithPlaceholder = (items) => [
   {
     value: '',
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.recordIdentifier.placeholder" />,
+    label: <FormattedMessage id="ui-bulk-edit.type.placeholder" />,
     disabled: true,
   },
   ...items,
@@ -193,6 +193,18 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     disabled: false,
   },
   {
+    value: OPTIONS.ELECTRONIC_ACCESS_URI,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.uri' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
+  },
+  {
+    value: OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.urlRelationship' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
+  },
+  {
     value: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.permanentLocation' }),
     disabled: false,
@@ -205,18 +217,6 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingsLocation' }),
   },
   ...holdingsNotes,
-  {
-    value: OPTIONS.ELECTRONIC_ACCESS_URI,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.uri' }),
-    disabled: false,
-    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
-  },
-  {
-    value: OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.urlRelationship' }),
-    disabled: false,
-    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
-  },
   {
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.suppress' }),
