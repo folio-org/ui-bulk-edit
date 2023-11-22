@@ -275,6 +275,7 @@
   "layer.options.holdings.permanentLocation": "Permanent holdings location",
   "layer.options.holdings.suppress": "Suppress from discovery",
   "layer.options.holdings.urlRelationship": "URL Relationship",
+  "layer.options.holdings.urlPublic": "URL public note",
   "layer.options.expirationDate": "Expiration date",
   "layer.options.email": "Email",
   "layer.options.patronGroup": "Patron group",
