@@ -363,7 +363,7 @@
     "category.electronicAccess": "Elektronický přístup",
     "layer.options.holdings.uri": "URI",
     "columns.HOLDINGS_RECORD.Action note": "Poznámka k akci",
-    "columns.HOLDINGS_RECORD.Binding": "Svázat",
+    "columns.HOLDINGS_RECORD.Binding": "Vazba",
     "columns.HOLDINGS_RECORD.Copy note": "Kopírovat poznámku",
     "columns.HOLDINGS_RECORD.Electronic bookplate": "Elektronická knižní deska",
     "columns.HOLDINGS_RECORD.Provenance": "Původ",
@@ -371,5 +371,7 @@
     "layer.options.holdings.urlRelationship": "Vztah URL",
     "layer.selectType": "Vybrat typ poznámky",
     "ariaLabel.urlRelationshipSelect": "Vybrat vztah URL",
-    "type.placeholder": "Vybrat typ"
+    "type.placeholder": "Vybrat typ",
+    "layer.options.holdings.materialsSpecified": "Materials specified",
+    "layer.options.holdings.linkText": "Link text"
 }
