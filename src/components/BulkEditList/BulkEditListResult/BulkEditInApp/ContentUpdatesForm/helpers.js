@@ -306,7 +306,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
           },
         ],
       };
-
+    case OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT:
     case OPTIONS.ELECTRONIC_ACCESS_URI:
       return {
         type: '',

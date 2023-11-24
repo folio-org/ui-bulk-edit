@@ -654,8 +654,10 @@ describe('ContentUpdatesForm helpers', () => {
           );
       });
 
-      it('returns the correct object for the ELECTRONIC_ACCESS_URI option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.ELECTRONIC_ACCESS_URI, [], formatMessage)))
+      const electronicAccessOptions = [OPTIONS.ELECTRONIC_ACCESS_URI, OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT];
+
+      it('returns the correct object for the ELECTRONIC_ACCESS options', () => {
+        electronicAccessOptions.forEach(option => expect(JSON.stringify(getDefaultActions(option, [], formatMessage)))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -689,7 +691,7 @@ describe('ContentUpdatesForm helpers', () => {
                 },
               ],
             }),
-          );
+          ));
       });
 
       it('returns the correct object for the default case', () => {
