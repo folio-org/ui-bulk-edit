@@ -371,5 +371,7 @@
     "layer.options.holdings.urlRelationship": "URL Relationship",
     "layer.selectType": "Select note type",
     "ariaLabel.urlRelationshipSelect": "Url relationship select",
-    "type.placeholder": "Select type"
+    "type.placeholder": "Select type",
+    "layer.options.holdings.materialsSpecified": "Materials specified",
+    "layer.options.holdings.linkText": "Link text"
 }
