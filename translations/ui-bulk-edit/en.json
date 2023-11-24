@@ -276,6 +276,7 @@
   "layer.options.holdings.suppress": "Suppress from discovery",
   "layer.options.holdings.urlRelationship": "URL Relationship",
   "layer.options.holdings.linkText": "Link text",
+  "layer.options.holdings.materialsSpecified": "Materials specified",
   "layer.options.expirationDate": "Expiration date",
   "layer.options.email": "Email",
   "layer.options.patronGroup": "Patron group",

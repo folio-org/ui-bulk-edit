@@ -26,6 +26,7 @@ export const OPTIONS = {
   ELECTRONIC_ACCESS_URI: 'ELECTRONIC_ACCESS_URI',
   ELECTRONIC_ACCESS_URL_RELATIONSHIP: 'ELECTRONIC_ACCESS_URL_RELATIONSHIP',
   ELECTRONIC_ACCESS_LINK_TEXT: 'ELECTRONIC_ACCESS_LINK_TEXT',
+  ELECTRONIC_ACCESS_MATERIALS_SPECIFIED: 'ELECTRONIC_ACCESS_MATERIALS_SPECIFIED'
 };
 
 export const PARAMETERS_KEYS = {
@@ -208,6 +209,12 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
   {
     value: OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.linkText' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
+  },
+  {
+    value: OPTIONS.ELECTRONIC_ACCESS_MATERIALS_SPECIFIED,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.materialsSpecified' }),
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
   },
