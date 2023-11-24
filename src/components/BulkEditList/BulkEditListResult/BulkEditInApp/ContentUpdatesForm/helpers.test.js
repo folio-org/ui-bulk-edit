@@ -654,7 +654,7 @@ describe('ContentUpdatesForm helpers', () => {
           );
       });
 
-      const electronicAccessOptions = [OPTIONS.ELECTRONIC_ACCESS_URI, OPTIONS.ELECTRONIC_ACCESS_MATERIALS_SPECIFIED, OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT]];
+      const electronicAccessOptions = [OPTIONS.ELECTRONIC_ACCESS_URI, OPTIONS.ELECTRONIC_ACCESS_MATERIALS_SPECIFIED, OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT];
 
       it('returns the correct object for the ELECTRONIC_ACCESS_URI option', () => {
         electronicAccessOptions.forEach(options => expect(JSON.stringify(getDefaultActions(options, [], formatMessage)))
@@ -729,7 +729,7 @@ describe('ContentUpdatesForm helpers', () => {
                 },
               ],
             }),
-          ));
+          );
       });
 
       it('returns the correct object for the default case', () => {
