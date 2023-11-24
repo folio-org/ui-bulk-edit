@@ -370,5 +370,6 @@
     "columns.HOLDINGS_RECORD.Reproduction": "Reproduction",
     "layer.options.holdings.urlRelationship": "URL Relationship",
     "layer.selectType": "Select note type",
-    "ariaLabel.urlRelationshipSelect": "Url relationship select"
+    "ariaLabel.urlRelationshipSelect": "Url relationship select",
+    "type.placeholder": "Select type"
 }
