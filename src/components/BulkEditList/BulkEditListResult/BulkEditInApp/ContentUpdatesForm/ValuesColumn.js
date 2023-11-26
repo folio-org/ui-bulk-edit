@@ -139,7 +139,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     <>
       <LocationSelection
         value={actionValue}
-        onSelect={loc => onChange({ actionIndex, value: loc.id, fieldName: FIELD_VALUE_KEY })}
+        onSelect={loc => onChange({ actionIndex, value: loc?.id, fieldName: FIELD_VALUE_KEY })}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
         data-test-id={`textField-${actionIndex}`}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}

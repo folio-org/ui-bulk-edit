@@ -17,6 +17,9 @@
 * [UIBULKED-356](https://issues.folio.org/browse/UIBULKED-356) Separate holdings notes by note type
 * [UIBULKED-349](https://issues.folio.org/browse/UIBULKED-349) Update Electronic access - URL relationship
 * [UIBULKED-347](https://issues.folio.org/browse/UIBULKED-347) Group holdings record properties using optgroup component.
+* [UIBULKED-359](https://issues.folio.org/browse/UIBULKED-359) Update Electronic access - Materials specified.
+* [UIBULKED-378](https://issues.folio.org/browse/UIBULKED-378) "Select location" can be selected for item's location, and the "Confirm changes" button will remain active.
+* [UIBULKED-358](https://issues.folio.org/browse/UIBULKED-358) Update Electronic access - Link text.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 

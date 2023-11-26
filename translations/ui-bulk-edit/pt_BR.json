@@ -371,5 +371,7 @@
     "layer.options.holdings.urlRelationship": "Relacionamento da URL",
     "layer.selectType": "Selecione o tipo de nota",
     "ariaLabel.urlRelationshipSelect": "Seleção de relacionamento da URL",
-    "type.placeholder": "Selecione o tipo"
+    "type.placeholder": "Selecione o tipo",
+    "layer.options.holdings.materialsSpecified": "Materiais especificados",
+    "layer.options.holdings.linkText": "Texto do link"
 }

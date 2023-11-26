@@ -654,44 +654,87 @@ describe('ContentUpdatesForm helpers', () => {
           );
       });
 
-      it('returns the correct object for the ELECTRONIC_ACCESS_URI and ELECTRONIC_ACCESS_URL_PUBLIC_NOTE options', () => {
-        [OPTIONS.ELECTRONIC_ACCESS_URI, OPTIONS.ELECTRONIC_ACCESS_URL_PUBLIC_NOTE].forEach(option => {
-          expect(JSON.stringify(getDefaultActions(option, [], formatMessage)))
-            .toEqual(
-              JSON.stringify({
-                type: '',
-                actions: [
-                  null,
-                  {
-                    actionsList: [{
-                      value: '',
-                      disabled: true,
-                      label: undefined,
-                    },
-                    {
-                      value: ACTIONS.CLEAR_FIELD,
-                      disabled: false,
-                      label: undefined
-                    },
-                    {
-                      value: ACTIONS.FIND,
-                      disabled: false,
-                      label: undefined
-                    },
-                    {
-                      value: ACTIONS.REPLACE_WITH,
-                      disabled: false,
-                      label: undefined
-                    },
-                    ],
-                    controlType: () => CONTROL_TYPES.TEXTAREA,
-                    [ACTION_VALUE_KEY]: '',
-                    [FIELD_VALUE_KEY]: '',
+      const electronicAccessOptions = [
+        OPTIONS.ELECTRONIC_ACCESS_URI,
+        OPTIONS.ELECTRONIC_ACCESS_MATERIALS_SPECIFIED,
+        OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT,
+        OPTIONS.ELECTRONIC_ACCESS_URL_PUBLIC_NOTE
+      ];
+
+      it('returns the correct object for the ELECTRONIC_ACCESS_URI option', () => {
+        electronicAccessOptions.forEach(options => expect(JSON.stringify(getDefaultActions(options, [], formatMessage)))
+          .toEqual(
+            JSON.stringify({
+              type: '',
+              actions: [
+                null,
+                {
+                  actionsList: [{
+                    value: '',
+                    disabled: true,
+                    label: undefined,
                   },
-                ],
-              }),
-            );
-        });
+                  {
+                    value: ACTIONS.CLEAR_FIELD,
+                    disabled: false,
+                    label: undefined
+                  },
+                  {
+                    value: ACTIONS.FIND,
+                    disabled: false,
+                    label: undefined
+                  },
+                  {
+                    value: ACTIONS.REPLACE_WITH,
+                    disabled: false,
+                    label: undefined
+                  },
+                  ],
+                  controlType: () => CONTROL_TYPES.TEXTAREA,
+                  [ACTION_VALUE_KEY]: '',
+                  [FIELD_VALUE_KEY]: '',
+                },
+              ],
+            }),
+          ));
+      });
+
+      it('returns the correct object for the ELECTRONIC_ACCESS_MATERIALS_SPECIFIED option', () => {
+        expect(JSON.stringify(getDefaultActions(OPTIONS.ELECTRONIC_ACCESS_MATERIALS_SPECIFIED, [], formatMessage)))
+          .toEqual(
+            JSON.stringify({
+              type: '',
+              actions: [
+                null,
+                {
+                  actionsList: [{
+                    value: '',
+                    disabled: true,
+                    label: undefined,
+                  },
+                  {
+                    value: ACTIONS.CLEAR_FIELD,
+                    disabled: false,
+                    label: undefined
+                  },
+                  {
+                    value: ACTIONS.FIND,
+                    disabled: false,
+                    label: undefined
+                  },
+                  {
+                    value: ACTIONS.REPLACE_WITH,
+                    disabled: false,
+                    label: undefined
+                  },
+                  ],
+                  controlType: () => CONTROL_TYPES.TEXTAREA,
+                  [ACTION_VALUE_KEY]: '',
+                  [FIELD_VALUE_KEY]: '',
+                },
+              ],
+            }),
+          );
       });
 
       it('returns the correct object for the default case', () => {
