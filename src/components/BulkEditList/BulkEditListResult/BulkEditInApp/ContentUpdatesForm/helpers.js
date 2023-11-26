@@ -309,6 +309,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
     case OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT:
     case OPTIONS.ELECTRONIC_ACCESS_MATERIALS_SPECIFIED:
     case OPTIONS.ELECTRONIC_ACCESS_URI:
+    case OPTIONS.ELECTRONIC_ACCESS_URL_PUBLIC_NOTE:
       return {
         type: '',
         actions: [
@@ -395,6 +396,7 @@ export const getExtraActions = (option, action, formattedMessage) => {
     case `${OPTIONS.CHECK_IN_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.CHECK_OUT_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.HOLDINGS_NOTE}-${ACTIONS.FIND}`:
+    case `${OPTIONS.ELECTRONIC_ACCESS_URL_PUBLIC_NOTE}-${ACTIONS.FIND}`:
       return [{
         actionsList: commonAdditionalActions(formattedMessage),
         controlType: () => CONTROL_TYPES.TEXTAREA,

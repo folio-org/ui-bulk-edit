@@ -277,6 +277,7 @@
   "layer.options.holdings.urlRelationship": "URL Relationship",
   "layer.options.holdings.linkText": "Link text",
   "layer.options.holdings.materialsSpecified": "Materials specified",
+  "layer.options.holdings.urlPublic": "URL public note",
   "layer.options.expirationDate": "Expiration date",
   "layer.options.email": "Email",
   "layer.options.patronGroup": "Patron group",
