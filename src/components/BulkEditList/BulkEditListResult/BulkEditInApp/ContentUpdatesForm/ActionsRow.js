@@ -17,10 +17,21 @@ export const ActionsRow = ({ option, actions, onChange }) => {
   return actions.map((action, actionIndex) => {
     if (!action) return null;
 
+    const collator = new Intl.Collator();
+
+    const sortedActions = action.actionsList.sort((a, b) => {
+      if (a.label === formatMessage({ id: 'ui-bulk-edit.actions.placeholder' })) {
+        return -1;
+      } else if (b.label === formatMessage({ id: 'ui-bulk-edit.actions.placeholder' })) {
+        return 1;
+      } else {
+        return collator.compare(a.label, b.label);
+      }
+    });
     const renderOptionColumn = () => (
       <Col xs={2} sm={2}>
         <Select
-          dataOptions={action.actionsList}
+          dataOptions={sortedActions}
           value={action.name}
           onChange={(e) => onChange({ actionIndex, value: e.target.value, fieldName: ACTION_VALUE_KEY })}
           disabled={action.actionsList.length === 1}
