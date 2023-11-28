@@ -14,6 +14,7 @@ import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import { CAPABILITIES, getHoldingsOptions, getItemsOptions, getUserOptions } from '../../../../constants';
 import { useItemNotes } from '../../../../hooks/api/useItemNotes';
 import { useHoldingsNotes } from '../../../../hooks/api/useHoldingsNotes';
+import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
 
 export const BulkEditInApp = ({
   onContentUpdatesChanged,
@@ -38,6 +39,7 @@ export const BulkEditInApp = ({
 
   const options = optionsMap[capabilities];
   const showContentUpdatesForm = options && !isItemNotesLoading && !isHoldingsNotesLoading;
+  const sortedOptions = sortAlphabetically(options, intl.formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
 
   return (
     <>
@@ -50,7 +52,7 @@ export const BulkEditInApp = ({
         <BulkEditInAppTitle />
         {showContentUpdatesForm ? (
           <ContentUpdatesForm
-            options={options}
+            options={sortedOptions}
             onContentUpdatesChanged={onContentUpdatesChanged}
           />
         ) : (

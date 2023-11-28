@@ -10,6 +10,7 @@ import { FINAL_ACTIONS } from '../../../../../constants';
 import { ACTION_VALUE_KEY } from './helpers';
 import { ValuesColumn } from './ValuesColumn';
 import { AdditionalActions } from './AdditionalActions';
+import { sortAlphabeticallyActions } from '../../../../../utils/sortAlphabetically';
 
 export const ActionsRow = ({ option, actions, onChange }) => {
   const { formatMessage } = useIntl();
@@ -17,10 +18,11 @@ export const ActionsRow = ({ option, actions, onChange }) => {
   return actions.map((action, actionIndex) => {
     if (!action) return null;
 
+    const sortedActions = sortAlphabeticallyActions(action.actionsList, formatMessage({ id: 'ui-bulk-edit.actions.placeholder' }));
     const renderOptionColumn = () => (
       <Col xs={2} sm={2}>
         <Select
-          dataOptions={action.actionsList}
+          dataOptions={sortedActions}
           value={action.name}
           onChange={(e) => onChange({ actionIndex, value: e.target.value, fieldName: ACTION_VALUE_KEY })}
           disabled={action.actionsList.length === 1}
