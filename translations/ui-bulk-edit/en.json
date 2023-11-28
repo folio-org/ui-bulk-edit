@@ -194,6 +194,8 @@
   "columns.ITEM.Tags": "Tags",
   "columns.ITEM.Last CheckIn": "Last check in",
   "columns.ITEM.Electronic Access": "Electronic access",
+  "columns.ITEM.Check In Notes": "Check in notes",
+  "columns.ITEM.Check Out Notes": "Check out notes",
 
   "columns.HOLDINGS_RECORD.Holdings record id": "Holdings ID",
   "columns.HOLDINGS_RECORD.Version": "Version",
