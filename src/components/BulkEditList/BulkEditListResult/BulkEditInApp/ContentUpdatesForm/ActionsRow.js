@@ -10,6 +10,7 @@ import { FINAL_ACTIONS } from '../../../../../constants';
 import { ACTION_VALUE_KEY } from './helpers';
 import { ValuesColumn } from './ValuesColumn';
 import { AdditionalActions } from './AdditionalActions';
+import { sortAlphabeticallyActions } from '../../../../../utils/sortAlphabetically';
 
 export const ActionsRow = ({ option, actions, onChange }) => {
   const { formatMessage } = useIntl();
@@ -17,17 +18,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
   return actions.map((action, actionIndex) => {
     if (!action) return null;
 
-    const collator = new Intl.Collator();
-
-    const sortedActions = action.actionsList.sort((a, b) => {
-      if (a.label === formatMessage({ id: 'ui-bulk-edit.actions.placeholder' })) {
-        return -1;
-      } else if (b.label === formatMessage({ id: 'ui-bulk-edit.actions.placeholder' })) {
-        return 1;
-      } else {
-        return collator.compare(a.label, b.label);
-      }
-    });
+    const sortedActions = sortAlphabeticallyActions(action.actionsList, formatMessage({ id: 'ui-bulk-edit.actions.placeholder' }));
     const renderOptionColumn = () => (
       <Col xs={2} sm={2}>
         <Select

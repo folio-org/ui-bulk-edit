@@ -1,4 +1,4 @@
-import { sortAlphabetically } from './sortAlphabetically';
+import { sortAlphabetically, sortAlphabeticallyActions } from './sortAlphabetically';
 
 describe('sortAlphabetically', () => {
   it('should sort the array alphabetically', () => {
@@ -37,5 +37,28 @@ describe('sortAlphabetically', () => {
     const result = sortAlphabetically(inputArray, 'Placeholder');
 
     expect(result).toEqual(expectedOutput);
+  });
+});
+
+describe('sortAlphabeticallyActions', () => {
+  it('should sort the array alphabetically with placeholder priority', () => {
+    const array = [
+      { label: 'Replace with' },
+      { label: 'Clear field' },
+      { label: 'Change note type' },
+      { label: 'Placeholder' },
+    ];
+
+    const sortedArray = sortAlphabeticallyActions(array, 'Placeholder');
+
+    // Your expected sorted array based on the logic in the function
+    const expectedSortedArray = [
+      { label: 'Placeholder' },
+      { label: 'Change note type' },
+      { label: 'Clear field' },
+      { label: 'Replace with' },
+    ];
+
+    expect(sortedArray).toEqual(expectedSortedArray);
   });
 });
