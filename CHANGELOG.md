@@ -22,6 +22,7 @@
 * [UIBULKED-358](https://issues.folio.org/browse/UIBULKED-358) Update Electronic access - Link text.
 * [UIBULKED-375](https://issues.folio.org/browse/UIBULKED-375) Localize alphabetical order of Bulk edit elements.
 * [UIBULKED-376](https://issues.folio.org/browse/UIBULKED-376) Separate Item circulation notes in different columns.
+* [UIBULKED-388](https://issues.folio.org/browse/UIBULKED-388) Bulk edit - Scrollable element not keyboard accessible.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
