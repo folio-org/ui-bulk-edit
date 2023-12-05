@@ -57,6 +57,12 @@
   "list.preview.title": "Preview of record matched",
   "list.preview.titleChanged": "Preview of record changed",
 
+  "list.preview.electronicAccess.relationship": "Relationship",
+  "list.preview.electronicAccess.uri": "URI",
+  "list.preview.electronicAccess.linkText": "Link text",
+  "list.preview.electronicAccess.materialsSpecified": "Materials specified",
+  "list.preview.electronicAccess.publicNote": "Public note",
+
   "list.preview.table.status.true": "Active",
   "list.preview.table.status.false": "Inactive",
 

@@ -7,7 +7,7 @@ import { getPermissionLabelString } from '@folio/stripes/util';
 import { SORT_DIRECTIONS } from '../constants/core';
 import { permsFormatter } from '../utills/formatters';
 import { permsColumnMapping } from '../utills/mappings';
-import { COLUMN_WIDTHS, COLUMNS_KEYS, VISIBLE_COLUMNS } from '../constants/lists';
+import { COLUMNS_KEYS, PERMISSIONS_COLUMN_WIDTHS, VISIBLE_COLUMNS } from '../constants/lists';
 
 export const PermissionsList = ({
   selectedPermissions,
@@ -47,7 +47,7 @@ export const PermissionsList = ({
   return (
     <MultiColumnList
       id="modal-list-permissions"
-      columnWidths={COLUMN_WIDTHS}
+      columnWidths={PERMISSIONS_COLUMN_WIDTHS}
       visibleColumns={VISIBLE_COLUMNS}
       contentData={sortedPermissions}
       onRowClick={handleRowClick}
