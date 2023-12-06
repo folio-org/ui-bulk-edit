@@ -17,7 +17,7 @@ export const PERMISSIONS_COLUMN_WIDTHS = {
   status: '20',
 };
 
-export const ELECTRONIC_ACCESS_HEAD = [
+export const ELECTRONIC_ACCESS_HEAD_TITLES = [
   <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.relationship" />,
   <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.uri" />,
   <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.linkText" />,
