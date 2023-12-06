@@ -18,11 +18,11 @@ export const PERMISSIONS_COLUMN_WIDTHS = {
 };
 
 export const ELECTRONIC_ACCESS_HEAD_TITLES = [
-  <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.relationship" />,
-  <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.uri" />,
-  <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.linkText" />,
-  <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.materialsSpecified" />,
-  <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.publicNote" />,
+  { key: 'relationship', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.relationship" /> },
+  { key: 'uri', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.uri" /> },
+  { key: 'linkText', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.linkText" /> },
+  { key: 'materialsSpecified', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.materialsSpecified" /> },
+  { key: 'publicNote', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.publicNote" /> },
 ];
 
 export const PREVIEW_COLUMN_WIDTHS = {
