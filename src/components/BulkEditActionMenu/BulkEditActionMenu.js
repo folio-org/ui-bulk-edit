@@ -5,12 +5,13 @@ import { saveAs } from 'file-saver';
 import {
   Button,
   Icon,
+  MultiSelection,
 } from '@folio/stripes/components';
-import { CheckboxFilter } from '@folio/stripes/smart-components';
 import React, { useContext, useState } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useLocation } from 'react-router-dom';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
+import css from './ActionMenuGroup/ActionMenuGroup.css';
 import {
   APPROACHES,
   CAPABILITIES,
@@ -74,8 +75,13 @@ const BulkEditActionMenu = ({
   });
 
   const { countOfRecords, visibleColumns, setVisibleColumns } = useContext(RootContext);
-  const columns = visibleColumns || [];
-  const selectedValues = columns.filter(item => !item.selected).map(item => item.value);
+
+  const columnsOptions = visibleColumns.map(item => ({
+    ...item,
+    label: item.ignoreTranslation ? item.label : intl.formatMessage({ id: `ui-bulk-edit.columns.${capability}.${item.label}` }),
+  }));
+
+  const selectedValues = columnsOptions.filter(item => item.selected);
 
   const isStartBulkCsvActive = hasUserEditLocalPerm && capability === CAPABILITIES.USER;
   const isInitialStep = step === EDITING_STEPS.UPLOAD;
@@ -84,21 +90,13 @@ const BulkEditActionMenu = ({
     && isInitialStep
     && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
 
-  const isLastUnselectedColumn = (value) => {
-    return selectedValues?.length === 1 && selectedValues?.[0] === value;
-  };
+  const handleColumnChange = (values) => {
+    if (!values?.length) return;
 
-  const columnsOptions = columns.map(item => ({
-    ...item,
-    label: item.ignoreTranslation ? item.label : intl.formatMessage({ id: `ui-bulk-edit.columns.${capability}.${item.label}` }),
-    disabled: isLastUnselectedColumn(item.value) || !countOfRecords,
-  }));
-
-  const handleColumnChange = ({ values }) => {
-    const changedColumns = columns.map(col => {
+    const changedColumns = visibleColumns.map(col => {
       return ({
         ...col,
-        selected: !values.includes(col.value),
+        selected: values.map(({ value }) => value).includes(col.value),
       });
     });
 
@@ -165,17 +163,18 @@ const BulkEditActionMenu = ({
 
   const renderColumnsFilter = () => {
     return (
-      <CheckboxFilter
+      <MultiSelection
+        placeholder="Select columns"
         dataOptions={columnsOptions}
-        name="filter"
+        value={selectedValues}
         onChange={handleColumnChange}
-        selectedValues={selectedValues}
+        backspaceDeletes={false}
       />
     );
   };
 
   return (
-    <>
+    <div className={css.ActionMenu}>
       <ActionMenuGroup
         title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}
       >
@@ -185,8 +184,7 @@ const BulkEditActionMenu = ({
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
         {Boolean(columnsOptions.length) && renderColumnsFilter()}
       </ActionMenuGroup>
-
-    </>
+    </div>
   );
 };
 

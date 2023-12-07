@@ -50,7 +50,7 @@ export const getMappedTableData = ({ data, capabilities, intl }) => {
     label: cell.value,
     value: cell.value,
     disabled: false,
-    selected: !cell.visible,
+    selected: cell.visible,
     ignoreTranslation: cell.ignoreTranslation,
   }));
 

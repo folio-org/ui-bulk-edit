@@ -1,3 +1,7 @@
+.ActionMenu {
+    max-width: 300px;
+}
+
 .ActionMenuGroup {
     margin-bottom: 20px;
 }

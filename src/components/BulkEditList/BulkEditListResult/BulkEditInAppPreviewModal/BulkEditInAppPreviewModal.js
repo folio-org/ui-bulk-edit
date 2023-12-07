@@ -94,7 +94,7 @@ const BulkEditInAppPreviewModal = ({
     },
   });
 
-  const visibleColumnKeys = visibleColumns?.filter(item => !item.selected).map(item => item.value);
+  const visibleColumnKeys = visibleColumns?.filter(item => item.selected).map(item => item.value);
 
   const isChangedPreviewReady = bulkDetails && Object.hasOwn(bulkDetails, FILE_KEYS.PROPOSED_CHANGES_LINK);
 

@@ -16,7 +16,7 @@ const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitia
   const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
 
   const visibleColumnKeys = useMemo(() => {
-    return visibleColumns?.filter(item => !item.selected).map(item => item.value);
+    return visibleColumns?.filter(item => item.selected).map(item => item.value);
   }, [visibleColumns]);
 
   return (

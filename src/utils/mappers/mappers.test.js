@@ -48,7 +48,7 @@ describe('mappers', () => {
           label: uuidColumn.label,
           value: uuidColumn.value,
           disabled: false,
-          selected: false,
+          selected: true,
         }],
         contentData: [{
           [uuidColumn.value]: row[0],
