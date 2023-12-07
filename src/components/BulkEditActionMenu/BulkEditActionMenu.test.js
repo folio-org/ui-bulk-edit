@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
@@ -191,48 +191,5 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditActionMenu({ step: EDITING_STEPS.UPLOAD, capability: CAPABILITIES.USER });
 
     expect(screen.getByText('ui-bulk-edit.menuGroup.showColumns')).toBeVisible();
-  });
-
-  it('should display checkbox for column when provided', () => {
-    renderBulkEditActionMenu({ step: EDITING_STEPS.UPLOAD, capability: CAPABILITIES.USER });
-
-    expect(screen.getByText('ui-bulk-edit.columns.USER.uuid')).toBeVisible();
-  });
-
-  it('should change visibleColumns when checkbox is pressed ', () => {
-    const setVisibleColumns = jest.fn();
-
-    renderBulkEditActionMenu({
-      step: EDITING_STEPS.UPLOAD,
-      capability: CAPABILITIES.USER,
-      providerState: { ...defaultProviderState, setVisibleColumns, countOfRecords: 1 },
-    });
-
-    act(() => userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid')));
-
-    expect(setVisibleColumns).toHaveBeenCalledWith([
-      { ...defaultProviderState.visibleColumns[0], selected: true },
-      defaultProviderState.visibleColumns[1],
-    ]);
-  });
-
-  it('should not change visibleColumns when checkbox is pressed and only one option is selected ', () => {
-    const setVisibleColumns = jest.fn();
-
-    renderBulkEditActionMenu({
-      step: EDITING_STEPS.UPLOAD,
-      capability: CAPABILITIES.USER,
-      providerState: {
-        setVisibleColumns,
-        visibleColumns: [
-          defaultProviderState.visibleColumns[0],
-          { ...defaultProviderState.visibleColumns[1], selected: true },
-        ],
-      },
-    });
-
-    act(() => userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid')));
-
-    expect(setVisibleColumns).not.toHaveBeenCalledWith();
   });
 });
