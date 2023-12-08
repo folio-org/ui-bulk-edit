@@ -11,6 +11,9 @@ import {
   CAPABILITIES,
   CUSTOM_ENTITY_COLUMNS,
 } from '../../constants';
+import {
+  ElectronicAccessTable
+} from '../../components/BulkEditList/BulkEditListResult/Preview/ElectronicAccessTable/ElectronicAccessTable';
 
 export const DATA_TYPES = {
   NUMERIC: 'NUMERIC',
@@ -32,6 +35,8 @@ const formatData = ({ capability, column, data }) => {
       return <FormattedUTCDate value={data} />;
     case dataType === DATA_TYPES.DATE_TIME:
       return <FolioFormattedTime dateString={data} />;
+    case capability === CAPABILITIES.HOLDING && field === CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS:
+      return <ElectronicAccessTable value={data} />;
     default:
       return data;
   }
