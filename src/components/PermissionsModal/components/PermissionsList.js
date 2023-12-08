@@ -7,7 +7,11 @@ import { getPermissionLabelString } from '@folio/stripes/util';
 import { SORT_DIRECTIONS } from '../constants/core';
 import { permsFormatter } from '../utills/formatters';
 import { permsColumnMapping } from '../utills/mappings';
-import { COLUMNS_KEYS, PERMISSIONS_COLUMN_WIDTHS, VISIBLE_COLUMNS } from '../constants/lists';
+import {
+  COLUMNS_KEYS,
+  PERMISSIONS_COLUMN_WIDTHS,
+  VISIBLE_COLUMNS,
+} from '../constants/lists';
 
 export const PermissionsList = ({
   selectedPermissions,
