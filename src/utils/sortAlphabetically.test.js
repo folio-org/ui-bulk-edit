@@ -29,9 +29,10 @@ describe('sortAlphabetically', () => {
 
     const expectedOutput = [
       { label: 'Placeholder' },
-      { label: 'URL public note' },
-      { label: 'Link text' },
       { label: 'Available' },
+      { label: 'Link text' },
+      { label: 'URL public note' },
+
     ];
 
     const result = sortAlphabetically(inputArray, 'Placeholder');
