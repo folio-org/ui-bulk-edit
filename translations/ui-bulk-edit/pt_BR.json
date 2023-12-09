@@ -373,5 +373,13 @@
     "ariaLabel.urlRelationshipSelect": "Seleção de relacionamento da URL",
     "type.placeholder": "Selecione o tipo",
     "layer.options.holdings.materialsSpecified": "Materiais especificados",
-    "layer.options.holdings.linkText": "Texto do link"
+    "layer.options.holdings.linkText": "Texto do link",
+    "layer.options.holdings.urlPublic": "URL da nota pública",
+    "columns.ITEM.Check In Notes": "Notas de devolução",
+    "columns.ITEM.Check Out Notes": "Notas de empréstimo",
+    "list.preview.electronicAccess.relationship": "Relacionamento",
+    "list.preview.electronicAccess.uri": "URI",
+    "list.preview.electronicAccess.linkText": "Texto do link",
+    "list.preview.electronicAccess.materialsSpecified": "Materiais especificados",
+    "list.preview.electronicAccess.publicNote": "Nota pública"
 }

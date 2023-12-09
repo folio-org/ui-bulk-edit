@@ -373,5 +373,13 @@
     "ariaLabel.urlRelationshipSelect": "Url relationship select",
     "type.placeholder": "Select type",
     "layer.options.holdings.materialsSpecified": "Materials specified",
-    "layer.options.holdings.linkText": "Link text"
+    "layer.options.holdings.linkText": "Link text",
+    "layer.options.holdings.urlPublic": "URL public note",
+    "columns.ITEM.Check In Notes": "Check in notes",
+    "columns.ITEM.Check Out Notes": "Check out notes",
+    "list.preview.electronicAccess.relationship": "Relationship",
+    "list.preview.electronicAccess.uri": "URI",
+    "list.preview.electronicAccess.linkText": "Link text",
+    "list.preview.electronicAccess.materialsSpecified": "Materials specified",
+    "list.preview.electronicAccess.publicNote": "Public note"
 }
