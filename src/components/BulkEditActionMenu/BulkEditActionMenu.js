@@ -4,7 +4,7 @@ import { saveAs } from 'file-saver';
 
 import {
   Button,
-  Icon,
+  Icon, TextField,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 import React, { useContext, useState } from 'react';
@@ -39,6 +39,7 @@ const BulkEditActionMenu = ({
   const intl = useIntl();
   const location = useLocation();
   const perms = useBulkPermissions();
+  const [columnSearch, setColumnSearch] = useState('');
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
   const step = search.get('step');
@@ -164,13 +165,24 @@ const BulkEditActionMenu = ({
   };
 
   const renderColumnsFilter = () => {
+    const filteredColumns = columnsOptions
+      .filter(item => item.label.toLowerCase().includes(columnSearch.toLowerCase()));
+
     return (
-      <CheckboxFilter
-        dataOptions={columnsOptions}
-        name="filter"
-        onChange={handleColumnChange}
-        selectedValues={selectedValues}
-      />
+      <>
+        <div style={{ position: 'sticky', top: '10px', backgroundColor: 'white', zIndex: 100 }}>
+          <TextField
+            value={columnSearch}
+            onChange={e => setColumnSearch(e.target.value)}
+          />
+        </div>
+        <CheckboxFilter
+          dataOptions={filteredColumns}
+          name="filter"
+          onChange={handleColumnChange}
+          selectedValues={selectedValues}
+        />
+      </>
     );
   };
 
