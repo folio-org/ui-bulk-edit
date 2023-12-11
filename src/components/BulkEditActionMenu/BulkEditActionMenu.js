@@ -4,7 +4,8 @@ import { saveAs } from 'file-saver';
 
 import {
   Button,
-  Icon, TextField,
+  Icon,
+  TextField,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 import React, { useContext, useState } from 'react';
@@ -39,10 +40,11 @@ const BulkEditActionMenu = ({
   const intl = useIntl();
   const location = useLocation();
   const perms = useBulkPermissions();
-  const [columnSearch, setColumnSearch] = useState('');
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
   const step = search.get('step');
+
+  const [columnSearch, setColumnSearch] = useState('');
 
   const {
     hasUserEditLocalPerm,
