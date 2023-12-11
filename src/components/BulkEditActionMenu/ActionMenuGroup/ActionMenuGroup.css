@@ -1,14 +1,11 @@
+.ActionMenu {
+    max-width: 250px;
+}
+
 .ActionMenuGroup {
     margin-bottom: 20px;
 }
 
 .ActionMenuGroupBody {
     margin-top: -8px;
-}
-
-.ActionMenuColumnSearch {
-    position: sticky;
-    top: 10px;
-    background: var(--bg);
-    z-index: 100
 }

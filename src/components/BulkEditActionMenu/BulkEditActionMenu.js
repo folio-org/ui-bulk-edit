@@ -170,22 +170,23 @@ const BulkEditActionMenu = ({
     const filteredColumns = columnsOptions
       .filter(item => item.label.toLowerCase().includes(columnSearch.toLowerCase()));
 
+    const allDisabled = columnsOptions.every(item => item.disabled);
+
     return (
-      <>
-        <div className={css.ActionMenuColumnSearch}>
-          <TextField
-            value={columnSearch}
-            onChange={e => setColumnSearch(e.target.value)}
-            aria-label={intl.formatMessage({ id: 'ui-bulk-edit.ariaLabel.columnFilter' })}
-          />
-        </div>
+      <div className={css.ActionMenu}>
+        <TextField
+          value={columnSearch}
+          onChange={e => setColumnSearch(e.target.value)}
+          aria-label={intl.formatMessage({ id: 'ui-bulk-edit.ariaLabel.columnFilter' })}
+          disabled={allDisabled}
+        />
         <CheckboxFilter
           dataOptions={filteredColumns}
           name="filter"
           onChange={handleColumnChange}
           selectedValues={selectedValues}
         />
-      </>
+      </div>
     );
   };
 
