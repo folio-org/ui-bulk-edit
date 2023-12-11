@@ -5,3 +5,10 @@
 .ActionMenuGroupBody {
     margin-top: -8px;
 }
+
+.ActionMenuColumnSearch {
+    position: sticky;
+    top: 10px;
+    background: var(--bg);
+    z-index: 100
+}

@@ -1,7 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { saveAs } from 'file-saver';
-
 import {
   Button,
   Icon,
@@ -11,6 +10,7 @@ import { CheckboxFilter } from '@folio/stripes/smart-components';
 import React, { useContext, useState } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useLocation } from 'react-router-dom';
+import css from './ActionMenuGroup/ActionMenuGroup.css';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import {
   APPROACHES,
@@ -172,10 +172,11 @@ const BulkEditActionMenu = ({
 
     return (
       <>
-        <div style={{ position: 'sticky', top: '10px', backgroundColor: 'white', zIndex: 100 }}>
+        <div className={css.ActionMenuColumnSearch}>
           <TextField
             value={columnSearch}
             onChange={e => setColumnSearch(e.target.value)}
+            aria-label={intl.formatMessage({ id: 'ui-bulk-edit.ariaLabel.columnFilter' })}
           />
         </div>
         <CheckboxFilter
