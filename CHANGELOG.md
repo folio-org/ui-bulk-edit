@@ -21,6 +21,7 @@
 * [UIBULKED-378](https://issues.folio.org/browse/UIBULKED-378) "Select location" can be selected for item's location, and the "Confirm changes" button will remain active.
 * [UIBULKED-358](https://issues.folio.org/browse/UIBULKED-358) Update Electronic access - Link text.
 * [UIBULKED-375](https://issues.folio.org/browse/UIBULKED-375) Localize alphabetical order of Bulk edit elements.
+* [UIBULKED-382](https://issues.folio.org/browse/UIBULKED-382) Update Item record column names.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
