@@ -73,4 +73,5 @@ export const CUSTOM_ENTITY_COLUMNS = {
   USER_STATUS: 'Active',
   EXPIRATION_DATE: 'Expiration date',
   DATE_OF_BIRTH: 'Date Of Birth',
+  ELECTRONIC_ACCESS: 'Electronic access',
 };

@@ -7,6 +7,7 @@ import {
   Row,
   MultiColumnList,
 } from '@folio/stripes/components';
+import { PREVIEW_COLUMN_WIDTHS } from '../../../../PermissionsModal/constants/lists';
 
 
 const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitial, step }) => {
@@ -32,6 +33,7 @@ const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitia
             visibleColumns={visibleColumnKeys}
             maxHeight={maxHeight}
             columnIdPrefix={step}
+            columnWidths={PREVIEW_COLUMN_WIDTHS}
           />
         </Col>
       </Row>

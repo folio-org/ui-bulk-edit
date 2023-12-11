@@ -11,6 +11,9 @@ import {
 } from '../../constants';
 
 import { getMappedTableData, DATA_TYPES } from './mappers';
+import {
+  ElectronicAccessTable
+} from '../../components/BulkEditList/BulkEditListResult/Preview/ElectronicAccessTable/ElectronicAccessTable';
 
 const intl = {
   formatMessage: jest.fn(),
@@ -126,6 +129,23 @@ describe('mappers', () => {
       const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.USER });
 
       expect(contentData[0][statusColumn.value].props.id).toBe('ui-bulk-edit.list.preview.table.status.true');
+    });
+
+    it('should render Electronic access as a table', () => {
+      const electronicAccessColumn = {
+        value: CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS,
+        label: CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS,
+        visible: true,
+      };
+      const row = ['true'];
+      const data = {
+        header: [electronicAccessColumn],
+        rows: [{ row }],
+      };
+
+      const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.HOLDING });
+
+      expect(contentData[0][electronicAccessColumn.value].type).toEqual(ElectronicAccessTable);
     });
   });
 });

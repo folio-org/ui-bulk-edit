@@ -25,7 +25,8 @@ export const NoResultsMessage = () => {
   return (
     <>
       <Layout className="display-flex centerContent">
-        <div className={css.noResultsMessage} data-testid="empty-message">
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+        <div className={css.noResultsMessage} data-testid="empty-message" tabIndex={0}>
           <div className={css.noResultsMessageLabelWrap}>
             <Icon iconRootClass={css.noResultsMessageIcon} icon="arrow-left" />
             <span className={css.noResultsMessageLabel}>
