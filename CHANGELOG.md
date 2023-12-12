@@ -24,6 +24,7 @@
 * [UIBULKED-376](https://issues.folio.org/browse/UIBULKED-376) Separate Item circulation notes in different columns.
 * [UIBULKED-388](https://issues.folio.org/browse/UIBULKED-388) Bulk edit - Scrollable element not keyboard accessible.
 * [UIBULKED-384](https://issues.folio.org/browse/UIBULKED-384) Rendering holdings electronic access properties.
+* [UIBULKED-313](https://issues.folio.org/browse/UIBULKED-313) Filter column names.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
