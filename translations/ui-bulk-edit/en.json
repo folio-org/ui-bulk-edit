@@ -387,6 +387,7 @@
   "ariaLabel.statusSelect": "Status select",
   "ariaLabel.loanTypeSelect": "Loan type select",
   "ariaLabel.urlRelationshipSelect": "Url relationship select",
+  "ariaLabel.columnFilter": "Column filter input",
 
   "permissionsModal.title": "Select Permissions",
   "permissionsModal.filter.title": "Search & filter",

@@ -1,15 +1,16 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { saveAs } from 'file-saver';
-
 import {
   Button,
   Icon,
+  TextField,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 import React, { useContext, useState } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { useLocation } from 'react-router-dom';
+import css from './ActionMenuGroup/ActionMenuGroup.css';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import {
   APPROACHES,
@@ -42,6 +43,8 @@ const BulkEditActionMenu = ({
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
   const step = search.get('step');
+
+  const [columnSearch, setColumnSearch] = useState('');
 
   const {
     hasUserEditLocalPerm,
@@ -164,13 +167,26 @@ const BulkEditActionMenu = ({
   };
 
   const renderColumnsFilter = () => {
+    const filteredColumns = columnsOptions
+      .filter(item => item.label.toLowerCase().includes(columnSearch.toLowerCase()));
+
+    const allDisabled = columnsOptions.every(item => item.disabled);
+
     return (
-      <CheckboxFilter
-        dataOptions={columnsOptions}
-        name="filter"
-        onChange={handleColumnChange}
-        selectedValues={selectedValues}
-      />
+      <div className={css.ActionMenu}>
+        <TextField
+          value={columnSearch}
+          onChange={e => setColumnSearch(e.target.value)}
+          aria-label={intl.formatMessage({ id: 'ui-bulk-edit.ariaLabel.columnFilter' })}
+          disabled={allDisabled}
+        />
+        <CheckboxFilter
+          dataOptions={filteredColumns}
+          name="filter"
+          onChange={handleColumnChange}
+          selectedValues={selectedValues}
+        />
+      </div>
     );
   };
 

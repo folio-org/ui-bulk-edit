@@ -216,6 +216,21 @@ describe('BulkEditActionMenu', () => {
     ]);
   });
 
+  it('should filter columns based on value in input', () => {
+    const setVisibleColumns = jest.fn();
+
+    const { getByRole, queryByText } = renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, setVisibleColumns, countOfRecords: 1 },
+    });
+
+    act(() => userEvent.type(getByRole('textbox'), 'name'));
+
+    expect(queryByText('ui-bulk-edit.columns.USER.name')).toBeVisible();
+    expect(queryByText('ui-bulk-edit.columns.USER.uuid')).not.toBeInTheDocument();
+  });
+
   it('should not change visibleColumns when checkbox is pressed and only one option is selected ', () => {
     const setVisibleColumns = jest.fn();
 
