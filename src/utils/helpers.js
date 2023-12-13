@@ -71,4 +71,7 @@ export const getMappedAndSortedNotes = ({
   return mappedNotes.sort((a, b) => a.label.localeCompare(b.label));
 };
 
+export const getVisibleColumnsKeys = (columns) => {
+  return columns?.filter(item => item.selected).map(item => item.value);
+};
 

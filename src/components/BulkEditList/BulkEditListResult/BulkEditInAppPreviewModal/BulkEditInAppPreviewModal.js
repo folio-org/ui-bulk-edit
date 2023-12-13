@@ -30,6 +30,7 @@ import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpe
 import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFooter';
 
 import css from './BulkEditInAppPreviewModal.css';
+import { getVisibleColumnsKeys } from '../../../../utils/helpers';
 
 const BulkEditInAppPreviewModal = ({
   open,
@@ -94,7 +95,7 @@ const BulkEditInAppPreviewModal = ({
     },
   });
 
-  const visibleColumnKeys = visibleColumns?.filter(item => !item.selected).map(item => item.value);
+  const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
   const isChangedPreviewReady = bulkDetails && Object.hasOwn(bulkDetails, FILE_KEYS.PROPOSED_CHANGES_LINK);
 
