@@ -31,6 +31,7 @@ import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFoot
 
 import css from './BulkEditInAppPreviewModal.css';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
+import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
 
 const BulkEditInAppPreviewModal = ({
   open,
@@ -178,6 +179,7 @@ const BulkEditInAppPreviewModal = ({
             visibleColumns={visibleColumnKeys}
             maxHeight={300}
             columnIdPrefix="in-app"
+            columnWidths={PREVIEW_COLUMN_WIDTHS}
           />
         </>
       ) : <Preloader />}
