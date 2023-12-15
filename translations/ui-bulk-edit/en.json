@@ -182,7 +182,7 @@
   "columns.ITEM.Missing Pieces Date": "Missing pieces date",
   "columns.ITEM.Item Damaged Status": "Item damaged status",
   "columns.ITEM.Item Damaged Status Date": "Item damaged status date",
-  "columns.ITEM.Administrative Notes": "Administrative notes",
+  "columns.ITEM.Administrative Note": "Administrative notes",
   "columns.ITEM.Notes": "Notes",
   "columns.ITEM.Circulation Notes": "Circulation Notes",
   "columns.ITEM.Status": "Status",
