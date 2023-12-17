@@ -15,6 +15,7 @@ export const APPROACHES = {
 
 export const CAPABILITIES = {
   HOLDING: 'HOLDINGS_RECORD',
+  INSTANCE: 'INSTANCE',
   ITEM: 'ITEM',
   USER: 'USER',
 };

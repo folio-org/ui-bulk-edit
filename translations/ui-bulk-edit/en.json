@@ -52,6 +52,7 @@
   "list.filters.capabilities.users": "Users",
   "list.filters.capabilities.inventory": "Inventory - items",
   "list.filters.capabilities.holdings": "Inventory - holdings",
+  "list.filters.capabilities.instances": "Inventory - instances",
   "list.filters.capabilities.circulation": "Circulation",
   "list.filters.capabilities.acquisition": "Acquisition",
   "list.preview.title": "Preview of record matched",
