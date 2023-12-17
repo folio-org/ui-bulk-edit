@@ -82,6 +82,7 @@ export const CONTROL_TYPES = {
 export const TRANSLATION_SUFFIX = {
   [CAPABILITIES.USER]: '',
   [CAPABILITIES.ITEM]: '.item',
+  [CAPABILITIES.INSTANCE]: '.instance',
   [CAPABILITIES.HOLDING]: '.holdings',
   null: '',
   '': '',
