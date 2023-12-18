@@ -244,7 +244,6 @@
     "columns.ITEM.Missing Pieces Date": "遗失件日期",
     "columns.ITEM.Item Damaged Status": "单件损坏状态",
     "columns.ITEM.Item Damaged Status Date": "单件损坏状态日期",
-    "columns.ITEM.Administrative Notes": "管理说明",
     "columns.ITEM.Notes": "附注",
     "columns.ITEM.Circulation Notes": "流通附注",
     "columns.ITEM.Status": "状态",
@@ -279,7 +278,6 @@
     "columns.HOLDINGS_RECORD.Acquisition method": "采购方式",
     "columns.HOLDINGS_RECORD.Receipt status": "接收状态",
     "columns.HOLDINGS_RECORD.Notes": "附注",
-    "columns.HOLDINGS_RECORD.Administrative notes": "管理说明",
     "columns.HOLDINGS_RECORD.Ill policy": "馆际互借政策",
     "columns.HOLDINGS_RECORD.Retention policy": "保留政策",
     "columns.HOLDINGS_RECORD.Digitization policy": "数字化政策",
@@ -381,5 +379,9 @@
     "list.preview.electronicAccess.uri": "URI",
     "list.preview.electronicAccess.linkText": "Link text",
     "list.preview.electronicAccess.materialsSpecified": "Materials specified",
-    "list.preview.electronicAccess.publicNote": "Public note"
+    "list.preview.electronicAccess.publicNote": "Public note",
+    "columns.HOLDINGS_RECORD.Administrative Note": "Administrative note",
+    "ariaLabel.columnFilter": "Column filter input",
+    "columns.ITEM.Administrative Note": "Administrative note",
+    "actionMenu.placeholder": "Search column name"
 }
