@@ -182,7 +182,7 @@
   "columns.ITEM.Missing Pieces Date": "Missing pieces date",
   "columns.ITEM.Item Damaged Status": "Item damaged status",
   "columns.ITEM.Item Damaged Status Date": "Item damaged status date",
-  "columns.ITEM.Administrative Note": "Administrative notes",
+  "columns.ITEM.Administrative Note": "Administrative note",
   "columns.ITEM.Notes": "Notes",
   "columns.ITEM.Circulation Notes": "Circulation Notes",
   "columns.ITEM.Status": "Status",
@@ -321,6 +321,8 @@
   "layer.options.checkInNote": "Check in note",
   "layer.options.checkOutNote": "Check out note",
   "layer.options.holdings.uri": "URI",
+
+  "actionMenu.placeholder": "Search column name",
 
   "previewModal.message": "{count, number} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
   "previewModal.previewToBeChanged": "Preview of records to be changed",
