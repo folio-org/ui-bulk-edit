@@ -123,6 +123,28 @@ export const identifierOptions = {
       label: 'ui-bulk-edit.list.filters.recordIdentifier.holdings.itemBarcodes',
     },
   ],
+  [CAPABILITIES.INSTANCE]: [
+    {
+      value: '',
+      label: 'ui-bulk-edit.list.filters.recordIdentifier.placeholder',
+    },
+    {
+      value: IDENTIFIERS.ID,
+      label: 'ui-bulk-edit.list.filters.recordIdentifier.instance.instanceUUID',
+    },
+    {
+      value: IDENTIFIERS.HRID,
+      label: 'ui-bulk-edit.list.filters.recordIdentifier.instance.instanceHRID',
+    },
+    {
+      value: IDENTIFIERS.ISBN,
+      label: 'ui-bulk-edit.list.filters.recordIdentifier.instance.instanceISBN',
+    },
+    {
+      value: IDENTIFIERS.ISSN,
+      label: 'ui-bulk-edit.list.filters.recordIdentifier.instance.instanceISSN',
+    },
+  ],
   '': [
     {
       value: '',
