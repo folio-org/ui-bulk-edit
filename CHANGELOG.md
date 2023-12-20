@@ -26,6 +26,7 @@
 * [UIBULKED-384](https://issues.folio.org/browse/UIBULKED-384) Rendering holdings electronic access properties.
 * [UIBULKED-382](https://issues.folio.org/browse/UIBULKED-382) Update Item record column names.
 * [UIBULKED-313](https://issues.folio.org/browse/UIBULKED-313) Filter column names.
+* [UIBULKED-391](https://issues.folio.org/browse/UIBULKED-391) Changing value in dropdown, influences to change value in the other dropdown.
 
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)

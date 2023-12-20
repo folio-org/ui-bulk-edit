@@ -12,7 +12,10 @@ import {
 } from '@folio/stripes/components';
 
 import { useLocation } from 'react-router-dom';
-import { ACTIONS } from '../../../../../constants';
+import {
+  ACTIONS,
+  OPTIONS
+} from '../../../../../constants';
 import css from '../BulkEditInApp.css';
 import { ActionsRow } from './ActionsRow';
 import {
@@ -83,7 +86,7 @@ export const ContentUpdatesForm = ({
         ? ({
           ...action,
           [fieldName]: value,
-          ...(hasActionChanged && { [FIELD_VALUE_KEY]: '' }), // clear field values if action changed
+          ...((hasActionChanged) && { [FIELD_VALUE_KEY]: '' }), // clear field values if action changed
         })
         : action;
     });
@@ -120,12 +123,14 @@ export const ContentUpdatesForm = ({
     setFields(fieldsArr => fieldsArr.map((field, i) => {
       if (i === rowIndex) {
         const hasActionChanged = fieldName === ACTION_VALUE_KEY;
+        const hasValueChanged = fieldName === FIELD_VALUE_KEY && actionIndex === 0 && field.option === OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP;
 
         const sharedArgs = {
           field,
           value,
           actionIndex,
           hasActionChanged,
+          hasValueChanged
         };
 
         const mappedActions = getMappedActions({
@@ -137,6 +142,11 @@ export const ContentUpdatesForm = ({
           actions: mappedActions,
           ...sharedArgs,
         });
+
+        if (hasValueChanged) {
+          // Set name and value to empty line at index 1 in the actions array
+          actions[1] = { ...actions[1], name: '', value: '' };
+        }
 
         return {
           ...field,
