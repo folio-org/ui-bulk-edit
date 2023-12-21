@@ -180,6 +180,7 @@ const BulkEditActionMenu = ({
           onChange={e => setColumnSearch(e.target.value)}
           aria-label={intl.formatMessage({ id: 'ui-bulk-edit.ariaLabel.columnFilter' })}
           disabled={allDisabled}
+          placeholder={intl.formatMessage({ id: 'ui-bulk-edit.actionMenu.placeholder' })}
         />
         <CheckboxFilter
           dataOptions={filteredColumns}
