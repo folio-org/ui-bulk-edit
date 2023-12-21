@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { PropTypes } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -8,6 +8,7 @@ import {
   MultiColumnList,
 } from '@folio/stripes/components';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../../PermissionsModal/constants/lists';
+import { getVisibleColumnsKeys } from '../../../../../utils/helpers';
 
 
 const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitial, step }) => {
@@ -16,9 +17,7 @@ const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitia
 
   const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
 
-  const visibleColumnKeys = useMemo(() => {
-    return visibleColumns?.filter(item => !item.selected).map(item => item.value);
-  }, [visibleColumns]);
+  const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
   return (
     <Accordion
