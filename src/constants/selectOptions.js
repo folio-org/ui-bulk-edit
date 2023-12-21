@@ -394,6 +394,11 @@ export const EDIT_CAPABILITIES_OPTIONS = [
     disabled: false,
   },
   {
+    value: CAPABILITIES.INSTANCE,
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.instances" />,
+    disabled: false,
+  },
+  {
     value: CAPABILITIES.ITEM,
     label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.inventory" />,
     disabled: false,
