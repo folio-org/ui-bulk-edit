@@ -32,6 +32,7 @@ import {
   useBulkOperationDetails,
   useFileDownload
 } from '../../hooks/api';
+import { getVisibleColumnsKeys } from '../../utils/helpers';
 
 const BulkEditActionMenu = ({
   onEdit,
@@ -78,7 +79,7 @@ const BulkEditActionMenu = ({
 
   const { countOfRecords, visibleColumns, setVisibleColumns } = useContext(RootContext);
   const columns = visibleColumns || [];
-  const selectedValues = columns.filter(item => !item.selected).map(item => item.value);
+  const visibleColumnKeys = getVisibleColumnsKeys(columns);
 
   const isStartBulkCsvActive = hasUserEditLocalPerm && capability === CAPABILITIES.USER;
   const isInitialStep = step === EDITING_STEPS.UPLOAD;
@@ -88,7 +89,7 @@ const BulkEditActionMenu = ({
     && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
 
   const isLastUnselectedColumn = (value) => {
-    return selectedValues?.length === 1 && selectedValues?.[0] === value;
+    return visibleColumnKeys?.length === 1 && visibleColumnKeys?.[0] === value;
   };
 
   const columnsOptions = columns.map(item => ({
@@ -101,7 +102,7 @@ const BulkEditActionMenu = ({
     const changedColumns = columns.map(col => {
       return ({
         ...col,
-        selected: !values.includes(col.value),
+        selected: values.includes(col.value),
       });
     });
 
@@ -185,7 +186,7 @@ const BulkEditActionMenu = ({
           dataOptions={filteredColumns}
           name="filter"
           onChange={handleColumnChange}
-          selectedValues={selectedValues}
+          selectedValues={visibleColumnKeys}
         />
       </div>
     );
