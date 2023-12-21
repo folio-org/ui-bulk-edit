@@ -32,7 +32,7 @@ export const IDENTIFIERS = {
   INSTANCE_HRID: 'INSTANCE_HRID',
   ITEM_BARCODE: 'ITEM_BARCODE',
   ISBN: 'ISBN',
-  ISSN: 'ISSN'
+  ISSN: 'ISSN',
 };
 
 export const JOB_STATUSES = {
