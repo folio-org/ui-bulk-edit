@@ -106,7 +106,7 @@ describe('PreviewAccordion', () => {
 
   it('should render preview accordion with users on initial step', () => {
     const user = users[0];
-    const visibleColumns = Object.keys(user).map(column => ({ value: column }));
+    const visibleColumns = Object.keys(user).map(column => ({ value: column, selected: true }));
 
     renderPreviewAccordion({
       items: users,
@@ -120,7 +120,7 @@ describe('PreviewAccordion', () => {
 
   it('should render preview accordion with inventory items', () => {
     const item = inventoryItems[0];
-    const visibleColumns = Object.keys(item).map(column => ({ value: column }));
+    const visibleColumns = Object.keys(item).map(column => ({ value: column, selected: true }));
 
     renderPreviewAccordion({
       items: inventoryItems,
@@ -134,7 +134,7 @@ describe('PreviewAccordion', () => {
 
   it('should render preview accordion with holding items', () => {
     const holding = holdingsItems[0];
-    const visibleColumns = Object.keys(holding).map(column => ({ value: column }));
+    const visibleColumns = Object.keys(holding).map(column => ({ value: column, selected: true }));
 
     renderPreviewAccordion({
       items: holdingsItems,

@@ -15,6 +15,7 @@ export const APPROACHES = {
 
 export const CAPABILITIES = {
   HOLDING: 'HOLDINGS_RECORD',
+  INSTANCE: 'INSTANCE',
   ITEM: 'ITEM',
   USER: 'USER',
 };
@@ -30,6 +31,8 @@ export const IDENTIFIERS = {
   EXTERNAL_SYSTEM_ID: 'EXTERNAL_SYSTEM_ID',
   INSTANCE_HRID: 'INSTANCE_HRID',
   ITEM_BARCODE: 'ITEM_BARCODE',
+  ISBN: 'ISBN',
+  ISSN: 'ISSN',
 };
 
 export const JOB_STATUSES = {
@@ -81,6 +84,7 @@ export const CONTROL_TYPES = {
 export const TRANSLATION_SUFFIX = {
   [CAPABILITIES.USER]: '',
   [CAPABILITIES.ITEM]: '.item',
+  [CAPABILITIES.INSTANCE]: '.instance',
   [CAPABILITIES.HOLDING]: '.holdings',
   null: '',
   '': '',
