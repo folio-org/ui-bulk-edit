@@ -49,7 +49,13 @@ export const useRecordsPreview = ({
         localStorage.setItem(storageKey, JSON.stringify(storedVisibleColumns));
       }
 
-      setVisibleColumns(storedVisibleColumns);
+      // force selected columns to be visible
+      const mappedVisibleColumns = storedVisibleColumns.map(column => ({
+        ...column,
+        selected: column.forceSelected || column.selected,
+      }));
+
+      setVisibleColumns(mappedVisibleColumns);
     }
   }, [columns]);
 

@@ -25,7 +25,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
           dataOptions={sortedActions}
           value={action.name}
           onChange={(e) => onChange({ actionIndex, value: e.target.value, fieldName: ACTION_VALUE_KEY })}
-          disabled={action.actionsList.length === 1}
+          disabled={action.actionsList?.length === 1}
           data-testid={`select-actions-${actionIndex}`}
           aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.actionsSelect' })}
         />
