@@ -87,6 +87,7 @@
   "uploaderSubTitle.empty": "Select a file with record identifiers",
   "uploaderSubTitle.item": "Select a file with record identifiers",
   "uploaderSubTitle.holdings": "Select a file with record identifiers",
+  "uploaderSubTitle.instance": "Select a file with record identifiers",
   "uploaderSubTitle.ID": "Select a file with User UUIDs",
   "uploaderSubTitle.BARCODE": "Select a file with User Barcodes",
   "uploaderSubTitle.EXTERNAL_SYSTEM_ID": "Select a file with External IDs",
