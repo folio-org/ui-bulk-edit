@@ -23,7 +23,9 @@ const BulkEditLogsActions = ({ item }) => {
   const {
     hasUsersViewPerms,
     hasInventoryInstanceViewPerms,
+    hasInstancePerms
   } = useBulkPermissions();
+
   const [triggeredFile, setTriggeredFile] = useState(null);
   const { refetch } = useFileDownload({
     queryKey: QUERY_KEY_DOWNLOAD_LOGS,
@@ -88,6 +90,8 @@ const BulkEditLogsActions = ({ item }) => {
       !hasInventoryInstanceViewPerms) return null;
   if (item.entityType === CAPABILITIES.ITEM &&
       !hasInventoryInstanceViewPerms) return null;
+  if (item.entityType === CAPABILITIES.INSTANCE &&
+     !hasInstancePerms) return null;
 
   return (
     item.expired ?

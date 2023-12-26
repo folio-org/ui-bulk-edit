@@ -18,6 +18,7 @@ export const useBulkPermissions = () => {
   // Inventory
   const hasItemsPerms = stripes.hasPerm('ui-inventory.item.edit');
   const hasHoldingsPerms = stripes.hasPerm('ui-inventory.holdings.edit');
+  const hasInstancePerms = stripes.hasPerm('ui-inventory.instance.edit');
   const hasInventoryInstanceViewPerms = stripes.hasPerm('ui-inventory.instance.view');
 
   // Users
@@ -32,11 +33,13 @@ export const useBulkPermissions = () => {
   const hasOnlyInAppViewPerms = hasInAppViewPerms && !hasCsvEditPerms && !hasInAppEditPerms && !hasInAppUsersEditPerms;
   const hasItemInventoryView = hasInAppViewPerms && hasItemsPerms;
   const hasHoldingsInventoryView = hasInAppViewPerms && hasHoldingsPerms;
+  const hasInstanceInventoryView = hasInAppViewPerms && hasInstancePerms;
   const hasItemsAndHoldingsInventoryView = hasInAppViewPerms && hasInventoryInstanceViewPerms;
   const hasItemInventoryEdit = hasInAppEditPerms && hasItemsPerms;
   const hasHoldingsInventoryEdit = hasInAppEditPerms && hasHoldingsPerms;
+  const hasInstanceInventoryEdit = hasInAppEditPerms && hasInstancePerms;
   const hasAnyInventoryWithInAppView = (hasItemInventoryView || hasHoldingsInventoryView
-      || hasItemsAndHoldingsInventoryView) && hasInAppViewPerms;
+      || hasItemsAndHoldingsInventoryView || hasInstanceInventoryView) && hasInAppViewPerms;
   const hasAnyUserWithBulkPerm = (hasUsersViewPerms || hasUsersPerms) &&
       (hasCsvViewPerms || hasCsvEditPerms || hasInAppUsersEditPerms);
   const isActionMenuShown = hasAnyInventoryWithInAppView || hasAnyUserWithBulkPerm;
@@ -50,6 +53,7 @@ export const useBulkPermissions = () => {
   const hasLogViewPerms = stripes.hasPerm('ui-bulk-edit.logs.view');
   const hasLogItemViewPerms = hasLogViewPerms && hasItemsPerms;
   const hasLogHoldingsViewPerms = hasLogViewPerms && hasHoldingsPerms;
+  const hasLogInstanceViewPerms = hasLogViewPerms && hasInstancePerms;
   const hasLogUsersPerms = (hasUsersPerms || hasUsersViewPerms) && hasLogViewPerms;
 
   return {
@@ -62,6 +66,7 @@ export const useBulkPermissions = () => {
     hasLogViewPerms,
     hasQueryPerms,
     hasInventoryInstanceViewPerms,
+    hasInstancePerms,
 
     // derived
     isActionMenuShown,
@@ -89,5 +94,8 @@ export const useBulkPermissions = () => {
     hasAnyUserWithBulkPerm,
     hasUserEditLocalPerm,
     hasUserEditInAppPerm,
+    hasLogInstanceViewPerms,
+    hasInstanceInventoryEdit,
+    hasInstanceInventoryView,
   };
 };

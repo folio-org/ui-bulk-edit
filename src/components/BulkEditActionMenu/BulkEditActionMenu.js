@@ -52,6 +52,7 @@ const BulkEditActionMenu = ({
     hasHoldingsInventoryEdit,
     hasItemInventoryEdit,
     hasUserEditInAppPerm,
+    hasInstanceInventoryEdit,
   } = perms;
 
   const { id } = usePathParams('/bulk-edit/:id');
@@ -61,7 +62,8 @@ const BulkEditActionMenu = ({
 
   const hasEditPerm = (hasHoldingsInventoryEdit && capability === CAPABILITIES.HOLDING)
       || (hasItemInventoryEdit && capability === CAPABILITIES.ITEM)
-      || (hasUserEditInAppPerm && capability === CAPABILITIES.USER);
+      || (hasUserEditInAppPerm && capability === CAPABILITIES.USER)
+      || (hasInstanceInventoryEdit && capability === CAPABILITIES.INSTANCE);
 
 
   useFileDownload({
