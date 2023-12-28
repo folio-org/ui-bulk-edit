@@ -374,7 +374,7 @@
   "logs.entityType.HOLDINGS_RECORD": "Inventory - holdings",
   "logs.entityType.ITEM": "Inventory - items",
   "logs.entityType.USER": "Users",
-  "logs.entityType.INSTANCE": "Inventory - instance",
+  "logs.entityType.INSTANCE": "Inventory - instances",
   "logs.approach.IN_APP": "In app",
   "logs.approach.MANUAL": "Local",
   "logs.approach.QUERY": "Query",
