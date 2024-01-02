@@ -383,5 +383,21 @@
     "columns.HOLDINGS_RECORD.Administrative Note": "Nota administrativa",
     "ariaLabel.columnFilter": "Entrada de filtro de coluna",
     "columns.ITEM.Administrative Note": "Nota administrativa",
-    "actionMenu.placeholder": "Nome da coluna de busca"
+    "actionMenu.placeholder": "Nome da coluna de busca",
+    "list.result.emptyMessage.instance": "Selecione um \"identificador de registro\" quando estiver na guia Identificador",
+    "list.filters.capabilities.instances": "Inventário - instâncias",
+    "list.filters.recordIdentifier.instance.instanceUUID": "UUIDs de instância",
+    "list.filters.recordIdentifier.instance.instanceHRID": "HRIDs de instância",
+    "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
+    "list.filters.recordIdentifier.instance.instanceISSN": "ISSN",
+    "list.result.emptyMessage.instance.ID": "Arraste e solte ou escolha um arquivo com UUIDs de instância",
+    "list.result.emptyMessage.instance.HRID": "Arraste e solte ou escolha o arquivo com HRIDs de instância",
+    "list.result.emptyMessage.instance.ISBN": "Arraste e solte ou escolha um arquivo com ISBN",
+    "list.result.emptyMessage.instance.ISSN": "Arraste e solte ou escolha um arquivo com ISSN",
+    "uploaderSubTitle.instance.ID": "Selecione um arquivo com UUIDs de instância",
+    "uploaderSubTitle.instance.HRID": "Selecione um arquivo com HRIDs de instância",
+    "uploaderSubTitle.instance.ISBN": "Selecione um arquivo com ISBN",
+    "uploaderSubTitle.instance.ISSN": "Selecione um arquivo com ISSN",
+    "uploaderSubTitle.instance": "Selecione um arquivo com identificadores de registro",
+    "logs.entityType.INSTANCE": "Inventário - instância"
 }
