@@ -30,6 +30,7 @@
 * [UIBULKED-363](https://issues.folio.org/browse/UIBULKED-363) Populate instance records identifiers drop-down
 * [UIBULKED-391](https://issues.folio.org/browse/UIBULKED-391) Changing value in dropdown, influences to change value in the other dropdown.
 * [UIBULKED-392](https://issues.folio.org/browse/UIBULKED-392) Unhide Query tab
+* [UIBULKED-393](https://issues.folio.org/browse/UIBULKED-393) Add Inventory - instances filter to the Logs tab.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
