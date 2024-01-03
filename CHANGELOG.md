@@ -29,6 +29,7 @@
 * [UIBULKED-362](https://issues.folio.org/browse/UIBULKED-362) Add inventory - instance option
 * [UIBULKED-363](https://issues.folio.org/browse/UIBULKED-363) Populate instance records identifiers drop-down
 * [UIBULKED-391](https://issues.folio.org/browse/UIBULKED-391) Changing value in dropdown, influences to change value in the other dropdown.
+* [UIBULKED-392](https://issues.folio.org/browse/UIBULKED-392) Unhide Query tab
 * [UIBULKED-393](https://issues.folio.org/browse/UIBULKED-393) Add Inventory - instances filter to the Logs tab.
 * [UIBULKED-387](https://issues.folio.org/browse/UIBULKED-387) Permissions for bulk editing instances.
 

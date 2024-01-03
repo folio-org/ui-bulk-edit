@@ -3,9 +3,11 @@ import { Button } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { CRITERIA } from '../../../../constants';
+import { useBulkPermissions } from '../../../../hooks';
 
 const FilterTabs = ({ criteria, hasLogViewPerms, onCriteriaChange }) => {
   const buttonStyleActive = (criteriaToCompare) => (criteria === criteriaToCompare ? 'primary' : 'default');
+  const { hasQueryPerms } = useBulkPermissions();
 
   return (
     <>
@@ -16,14 +18,14 @@ const FilterTabs = ({ criteria, hasLogViewPerms, onCriteriaChange }) => {
         <FormattedMessage id="ui-bulk-edit.list.filters.identifier" />
       </Button>
       {/* temporarily commented out because of https://issues.folio.org/browse/UIBULKED-351 */}
-      {/* {hasQueryViewPerms && (
+      {hasQueryPerms && (
         <Button
           buttonStyle={buttonStyleActive(CRITERIA.QUERY)}
           onClick={() => onCriteriaChange(CRITERIA.QUERY)}
         >
           <FormattedMessage id="ui-bulk-edit.list.filters.query" />
         </Button>
-      )} */}
+      )}
       {hasLogViewPerms && (
         <Button
           buttonStyle={buttonStyleActive(CRITERIA.LOGS)}
