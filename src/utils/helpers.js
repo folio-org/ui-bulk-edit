@@ -8,6 +8,7 @@ export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
     hasItemInventoryView,
     hasHoldingsInventoryView,
     hasItemsAndHoldingsInventoryView,
+    hasInstanceInventoryView,
     hasAnyUserWithBulkPerm,
   } = perms;
 
@@ -17,6 +18,9 @@ export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
       !hasItemInventoryView : !hasItemsAndHoldingsInventoryView,
     [CAPABILITIES.HOLDING]: hasHoldingsInventoryView ?
       !hasHoldingsInventoryView :
+      !hasItemsAndHoldingsInventoryView,
+    [CAPABILITIES.INSTANCE]: hasInstanceInventoryView ?
+      !hasInstanceInventoryView :
       !hasItemsAndHoldingsInventoryView,
   };
 
