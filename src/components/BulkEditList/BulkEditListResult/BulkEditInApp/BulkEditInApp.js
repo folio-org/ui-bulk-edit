@@ -11,7 +11,13 @@ import {
 import { useLocation } from 'react-router';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
-import { CAPABILITIES, getHoldingsOptions, getItemsOptions, getUserOptions } from '../../../../constants';
+import {
+  CAPABILITIES,
+  getHoldingsOptions,
+  getInstanceOptions,
+  getItemsOptions,
+  getUserOptions
+} from '../../../../constants';
 import { useItemNotes } from '../../../../hooks/api/useItemNotes';
 import { useHoldingsNotes } from '../../../../hooks/api/useHoldingsNotes';
 import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
@@ -35,6 +41,7 @@ export const BulkEditInApp = ({
     [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage, itemNotes),
     [CAPABILITIES.USER]: getUserOptions(intl.formatMessage),
     [CAPABILITIES.HOLDING]: getHoldingsOptions(intl.formatMessage, holdingsNotes),
+    [CAPABILITIES.INSTANCE]: getInstanceOptions(intl.formatMessage),
   };
 
   const options = optionsMap[capabilities];
