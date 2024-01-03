@@ -21,7 +21,7 @@ export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
       !hasItemsAndHoldingsInventoryView,
     [CAPABILITIES.INSTANCE]: hasInstanceInventoryView ?
       !hasInstanceInventoryView :
-      !hasItemsAndHoldingsInventoryView
+      !hasItemsAndHoldingsInventoryView,
   };
 
   return capabilitiesMap[capabilityValue];

@@ -23,7 +23,7 @@ const BulkEditLogsActions = ({ item }) => {
   const {
     hasUsersViewPerms,
     hasInventoryInstanceViewPerms,
-    hasInstancePerms
+    hasInstancePerms,
   } = useBulkPermissions();
 
   const [triggeredFile, setTriggeredFile] = useState(null);
