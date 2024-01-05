@@ -23,7 +23,6 @@ const BulkEditLogsActions = ({ item }) => {
   const {
     hasUsersViewPerms,
     hasInventoryInstanceViewPerms,
-    hasInstancePerms,
   } = useBulkPermissions();
 
   const [triggeredFile, setTriggeredFile] = useState(null);
@@ -91,7 +90,7 @@ const BulkEditLogsActions = ({ item }) => {
   if (item.entityType === CAPABILITIES.ITEM &&
       !hasInventoryInstanceViewPerms) return null;
   if (item.entityType === CAPABILITIES.INSTANCE &&
-     !hasInstancePerms) return null;
+     !hasInventoryInstanceViewPerms) return null;
 
   return (
     item.expired ?
