@@ -193,6 +193,19 @@ export const getDefaultActions = (option, options, formatMessage) => {
           },
         ],
       };
+    case OPTIONS.STAFF_SUPPRESS_FROM_DISCOVERY:
+      return {
+        type: '',
+        actions: [
+          null,
+          {
+            actionsList: suppressDefaultActions,
+            controlType: () => CONTROL_TYPES.SUPPRESS_CHECKBOX,
+            [ACTION_VALUE_KEY]: suppressDefaultActions[0].value,
+            [FIELD_VALUE_KEY]: '',
+          },
+        ],
+      };
     case OPTIONS.PERMANENT_LOCATION:
       return locationRelatedDefaultActions;
     case OPTIONS.STATUS:

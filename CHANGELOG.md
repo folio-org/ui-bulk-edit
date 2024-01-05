@@ -32,6 +32,7 @@
 * [UIBULKED-392](https://issues.folio.org/browse/UIBULKED-392) Unhide Query tab
 * [UIBULKED-393](https://issues.folio.org/browse/UIBULKED-393) Add Inventory - instances filter to the Logs tab.
 * [UIBULKED-387](https://issues.folio.org/browse/UIBULKED-387) Permissions for bulk editing instances.
+* [UIBULKED-390](https://issues.folio.org/browse/UIBULKED-390) Add Staff suppress option to Instance records edits.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 

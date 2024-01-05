@@ -10,6 +10,7 @@ export const OPTIONS = {
   TEMPORARY_LOCATION: 'TEMPORARY_LOCATION',
   PERMANENT_LOCATION: 'PERMANENT_LOCATION',
   SUPPRESS_FROM_DISCOVERY: 'SUPPRESS_FROM_DISCOVERY',
+  STAFF_SUPPRESS_FROM_DISCOVERY: 'STAFF_SUPPRESS_FROM_DISCOVERY',
   STATUS: 'STATUS',
   EXPIRATION_DATE: 'EXPIRATION_DATE',
   EMAIL_ADDRESS: 'EMAIL_ADDRESS',
@@ -263,6 +264,14 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
   {
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.suppress' }),
+    disabled: false,
+  },
+];
+
+export const getInstanceOptions = (formatMessage) => [
+  {
+    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.staffSuppress' }),
     disabled: false,
   },
 ];
