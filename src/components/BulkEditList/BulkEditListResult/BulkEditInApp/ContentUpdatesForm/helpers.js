@@ -193,7 +193,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
           },
         ],
       };
-    case OPTIONS.STAFF_SUPPRESS_FROM_DISCOVERY:
+    case OPTIONS.STAFF_SUPPRESS:
       return {
         type: '',
         actions: [
