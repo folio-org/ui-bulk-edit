@@ -270,6 +270,11 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
 
 export const getInstanceOptions = (formatMessage) => [
   {
+    value: '',
+    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
+    disabled: true,
+  },
+  {
     value: OPTIONS.STAFF_SUPPRESS,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.staffSuppress' }),
     disabled: false,
