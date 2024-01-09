@@ -399,5 +399,5 @@
     "uploaderSubTitle.instance.ISBN": "Select a file with ISBN",
     "uploaderSubTitle.instance.ISSN": "Select a file with ISSN",
     "uploaderSubTitle.instance": "Select a file with record identifiers",
-    "logs.entityType.INSTANCE": "Inventory - instance"
+    "logs.entityType.INSTANCE": "Inventory - instances"
 }
