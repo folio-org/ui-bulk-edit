@@ -74,4 +74,5 @@ export const CUSTOM_ENTITY_COLUMNS = {
   EXPIRATION_DATE: 'Expiration date',
   DATE_OF_BIRTH: 'Date Of Birth',
   ELECTRONIC_ACCESS: 'Electronic access',
+  CATALOGED_DATE: 'Cataloged date'
 };

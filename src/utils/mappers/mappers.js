@@ -33,6 +33,8 @@ const formatData = ({ capability, column, data }) => {
       return <FormattedMessage id={`ui-bulk-edit.list.preview.table.status.${data}`} />;
     case capability === CAPABILITIES.USER && field === CUSTOM_ENTITY_COLUMNS.DATE_OF_BIRTH:
       return <FormattedUTCDate value={data} />;
+    case capability === CAPABILITIES.INSTANCE && field === CUSTOM_ENTITY_COLUMNS.CATALOGED_DATE:
+      return <FormattedUTCDate value={data} />;
     case dataType === DATA_TYPES.DATE_TIME:
       return <FolioFormattedTime dateString={data} />;
     case capability === CAPABILITIES.HOLDING && field === CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS:
