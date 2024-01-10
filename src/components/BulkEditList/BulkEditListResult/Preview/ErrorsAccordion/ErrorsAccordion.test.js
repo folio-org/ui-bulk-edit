@@ -1,4 +1,4 @@
-import { act, logDOM, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
 import '../../../../../../test/jest/__mock__';

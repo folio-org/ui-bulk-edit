@@ -35,6 +35,7 @@ const ErrorsAccordion = ({
   const [opened, setOpened] = useState(!!errorLength);
 
   const headLineTranslateKey = isInitial ? 'info' : 'infoProcessed';
+
   const headLine = (
     <FormattedMessage
       id={`ui-bulk-edit.list.errors.${headLineTranslateKey}`}
@@ -57,11 +58,9 @@ const ErrorsAccordion = ({
         label={<FormattedMessage id="ui-bulk-edit.list.errors.title" />}
       >
         <div className={css.errorAccordionInner}>
-          {!!errorLength && (
           <Headline size="medium" margin="small">
             {headLine}
           </Headline>
-          )}
           <MultiColumnList
             contentData={errors}
             columnMapping={columnMapping}
