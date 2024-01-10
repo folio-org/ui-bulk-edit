@@ -1,0 +1,30 @@
+.previewContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.previewAccordion {
+    flex-grow: 1;
+}
+
+.previewAccordion:first-child:has([aria-expanded="false"]) {
+    flex-grow: 0;
+}
+
+.previewAccordion > * {
+    height: 100%;
+}
+
+.previewAccordionInner {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.errorAccordionInner {
+    display: grid;
+    height: calc(100% - 35px); /* 35px - height of the accordion header */
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content auto;
+}
