@@ -2,10 +2,11 @@ import {
   ACTIONS,
   CONTROL_TYPES,
   OPTIONS,
-  commonAdditionalActions,
+  commonAdditionalActions, CAPABILITIES, PARAMETERS_KEYS,
 } from '../../../../../constants';
 
 import {
+  ACTION_PARAMETERS_KEY,
   ACTION_VALUE_KEY,
   FIELD_VALUE_KEY,
   getContentUpdatesBody,
@@ -192,7 +193,12 @@ describe('ContentUpdatesForm helpers', () => {
       it('returns the correct object for the EMAIL_ADDRESS option', () => {
         const controlType = () => CONTROL_TYPES.INPUT;
 
-        expect(JSON.stringify(getDefaultActions(OPTIONS.EMAIL_ADDRESS, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.EMAIL_ADDRESS,
+          options: [],
+          capability: CAPABILITIES.USER,
+          formatMessage,
+        })))
           .toEqual(JSON.stringify({
             type: '',
             actions: [
@@ -221,7 +227,12 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the PATRON_GROUP option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.PATRON_GROUP, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.PATRON_GROUP,
+          options: [],
+          capability: CAPABILITIES.USER,
+          formatMessage,
+        })))
           .toEqual(JSON.stringify({
             type: '',
             actions: [
@@ -241,7 +252,12 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the EXPIRATION_DATE option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.EXPIRATION_DATE, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.EXPIRATION_DATE,
+          options: [],
+          capability: CAPABILITIES.USER,
+          formatMessage,
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -262,7 +278,12 @@ describe('ContentUpdatesForm helpers', () => {
 
       it('returns the correct object for the TEMPORARY_HOLDINGS_LOCATION option', () => {
         const controlType = () => CONTROL_TYPES.LOCATION;
-        expect(JSON.stringify(getDefaultActions(OPTIONS.TEMPORARY_HOLDINGS_LOCATION, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.HOLDING
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -296,7 +317,12 @@ describe('ContentUpdatesForm helpers', () => {
 
       it('returns the correct object for the PERMANENT_HOLDINGS_LOCATION option', () => {
         const controlType = () => CONTROL_TYPES.LOCATION;
-        expect(JSON.stringify(getDefaultActions(OPTIONS.PERMANENT_HOLDINGS_LOCATION, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.HOLDING
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -318,7 +344,12 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the TEMPORARY_LOCATION option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.TEMPORARY_LOCATION, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.TEMPORARY_LOCATION,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.ITEM
+        })))
           .toEqual(JSON.stringify({
             type: '',
             actions: [
@@ -349,7 +380,12 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the SUPPRESS_FROM_DISCOVERY option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.SUPPRESS_FROM_DISCOVERY, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.HOLDING
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -371,6 +407,9 @@ describe('ContentUpdatesForm helpers', () => {
                   }],
                   [ACTION_VALUE_KEY]: '',
                   [FIELD_VALUE_KEY]: '',
+                  [ACTION_PARAMETERS_KEY]: [
+                    { key: PARAMETERS_KEYS.APPLY_TO_ITEMS, value: false }
+                  ]
                 },
               ],
             }),
@@ -379,7 +418,12 @@ describe('ContentUpdatesForm helpers', () => {
 
       it('returns the correct object for the PERMANENT_LOCATION option', () => {
         const controlType = () => CONTROL_TYPES.LOCATION;
-        expect(JSON.stringify(getDefaultActions(OPTIONS.PERMANENT_LOCATION, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.PERMANENT_LOCATION,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.ITEM
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -413,7 +457,12 @@ describe('ContentUpdatesForm helpers', () => {
 
       it('returns the correct object for the STATUS option', () => {
         const controlType = () => CONTROL_TYPES.STATUS_SELECT;
-        expect(JSON.stringify(getDefaultActions(OPTIONS.STATUS, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.STATUS,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.ITEM
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -436,7 +485,12 @@ describe('ContentUpdatesForm helpers', () => {
 
       it('returns the correct object for the TEMPORARY_LOAN_TYPE option', () => {
         const controlType = () => CONTROL_TYPES.LOAN_TYPE;
-        expect(JSON.stringify(getDefaultActions(OPTIONS.TEMPORARY_LOAN_TYPE, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.TEMPORARY_LOAN_TYPE,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.ITEM
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -470,7 +524,12 @@ describe('ContentUpdatesForm helpers', () => {
 
       it('returns the correct object for the PERMANENT_LOAN_TYPE option', () => {
         const controlType = () => CONTROL_TYPES.LOAN_TYPE;
-        expect(JSON.stringify(getDefaultActions(OPTIONS.PERMANENT_LOAN_TYPE, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.PERMANENT_LOAN_TYPE,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.ITEM
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -498,7 +557,12 @@ describe('ContentUpdatesForm helpers', () => {
 
       noteOptions.forEach(option => {
         it(`returns the correct object for the ${option} option`, () => {
-          expect(JSON.stringify(getDefaultActions(option, [], formatMessage)))
+          expect(JSON.stringify(getDefaultActions({
+            option,
+            options: [],
+            formatMessage,
+            capability: CAPABILITIES.ITEM
+          })))
             .toEqual(
               JSON.stringify({
                 type: '',
@@ -559,7 +623,12 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the HOLDINGS_NOTE option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.HOLDINGS_NOTE, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.HOLDINGS_NOTE,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.HOLDING
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -616,7 +685,12 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the ELECTRONIC_ACCESS_URL_RELATIONSHIP option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.INSTANCE
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -662,7 +736,12 @@ describe('ContentUpdatesForm helpers', () => {
       ];
 
       it('returns the correct object for the ELECTRONIC_ACCESS_URI option', () => {
-        electronicAccessOptions.forEach(options => expect(JSON.stringify(getDefaultActions(options, [], formatMessage)))
+        electronicAccessOptions.forEach(option => expect(JSON.stringify(getDefaultActions({
+          option,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.INSTANCE
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -700,7 +779,12 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the ELECTRONIC_ACCESS_MATERIALS_SPECIFIED option', () => {
-        expect(JSON.stringify(getDefaultActions(OPTIONS.ELECTRONIC_ACCESS_MATERIALS_SPECIFIED, [], formatMessage)))
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.ELECTRONIC_ACCESS_MATERIALS_SPECIFIED,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.INSTANCE
+        })))
           .toEqual(
             JSON.stringify({
               type: '',
@@ -738,7 +822,12 @@ describe('ContentUpdatesForm helpers', () => {
       });
 
       it('returns the correct object for the default case', () => {
-        expect(getDefaultActions('unknown', [], formatMessage))
+        expect(getDefaultActions({
+          option: 'unknown',
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.USER
+        }))
           .toEqual({
             type: null,
             actions: [],
