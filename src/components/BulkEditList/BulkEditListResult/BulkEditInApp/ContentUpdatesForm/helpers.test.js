@@ -379,7 +379,7 @@ describe('ContentUpdatesForm helpers', () => {
           }));
       });
 
-      it('returns the correct object for the SUPPRESS_FROM_DISCOVERY option', () => {
+      it('returns the correct object for the SUPPRESS_FROM_DISCOVERY for HOLDINGS option', () => {
         expect(JSON.stringify(getDefaultActions({
           option: OPTIONS.SUPPRESS_FROM_DISCOVERY,
           options: [],
@@ -415,6 +415,45 @@ describe('ContentUpdatesForm helpers', () => {
             }),
           );
       });
+
+      it('returns the correct object for the SUPPRESS_FROM_DISCOVERY for INSTANCE option', () => {
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.INSTANCE
+        })))
+          .toEqual(
+            JSON.stringify({
+              type: '',
+              actions: [
+                null,
+                {
+                  actionsList: [{
+                    value: '',
+                    disabled: true,
+                    label: undefined
+                  }, {
+                    value: ACTIONS.SET_TO_TRUE,
+                    disabled: false,
+                    label: undefined
+                  }, {
+                    value: ACTIONS.SET_TO_FALSE,
+                    disabled: false,
+                    label: undefined
+                  }],
+                  [ACTION_VALUE_KEY]: '',
+                  [FIELD_VALUE_KEY]: '',
+                  [ACTION_PARAMETERS_KEY]: [
+                    { key: PARAMETERS_KEYS.APPLY_TO_HOLDINGS, value: false },
+                    { key: PARAMETERS_KEYS.APPLY_TO_ITEMS, value: false }
+                  ]
+                },
+              ],
+            }),
+          );
+      });
+
 
       it('returns the correct object for the PERMANENT_LOCATION option', () => {
         const controlType = () => CONTROL_TYPES.LOCATION;
