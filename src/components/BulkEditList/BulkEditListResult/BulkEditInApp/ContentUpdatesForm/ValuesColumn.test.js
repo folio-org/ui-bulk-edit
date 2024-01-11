@@ -10,6 +10,8 @@ import { ValuesColumn } from './ValuesColumn';
 import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
 import { CAPABILITIES, CONTROL_TYPES } from '../../../../../constants';
 
+import '../../../../../../test/jest/__mock__';
+
 jest.mock('../../../../../hooks/api/useLoanTypes');
 jest.mock('../../../../../hooks/api/usePatronGroup');
 

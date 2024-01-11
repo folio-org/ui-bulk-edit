@@ -3,40 +3,36 @@ import { PropTypes } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
   Accordion,
-  Col,
-  Row,
   MultiColumnList,
 } from '@folio/stripes/components';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../../PermissionsModal/constants/lists';
 import { getVisibleColumnsKeys } from '../../../../../utils/helpers';
+import css from '../Preview.css';
 
 
 const PreviewAccordion = ({ contentData, columnMapping, visibleColumns, isInitial, step }) => {
   const translationKey = isInitial ? 'title' : 'titleChanged';
-  const maxHeight = window.innerHeight * 0.4;
 
   const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
   return (
-    <Accordion
-      label={accordionLabel}
-    >
-      <Row>
-        <Col xs={12}>
-          <MultiColumnList
-            striped
-            contentData={contentData}
-            columnMapping={columnMapping}
-            visibleColumns={visibleColumnKeys}
-            maxHeight={maxHeight}
-            columnIdPrefix={step}
-            columnWidths={PREVIEW_COLUMN_WIDTHS}
-          />
-        </Col>
-      </Row>
-    </Accordion>
+    <div className={css.previewAccordion}>
+      <Accordion
+        label={accordionLabel}
+      >
+        <MultiColumnList
+          striped
+          contentData={contentData}
+          columnMapping={columnMapping}
+          visibleColumns={visibleColumnKeys}
+          columnIdPrefix={step}
+          columnWidths={PREVIEW_COLUMN_WIDTHS}
+          autosize
+        />
+      </Accordion>
+    </div>
   );
 };
 

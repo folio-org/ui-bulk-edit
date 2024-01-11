@@ -3,11 +3,11 @@ import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import {
   Accordion,
-  Col,
-  Row,
   MultiColumnList,
   Headline,
 } from '@folio/stripes/components';
+import { useState } from 'react';
+import css from '../Preview.css';
 
 const visibleColumns = ['key', 'message'];
 
@@ -31,9 +31,11 @@ const ErrorsAccordion = ({
   const location = useLocation();
   const fileName = new URLSearchParams(location.search).get('fileName');
   const errorLength = errors.length;
-  const maxHeight = window.innerHeight * 0.4;
+
+  const [opened, setOpened] = useState(!!errorLength);
 
   const headLineTranslateKey = isInitial ? 'info' : 'infoProcessed';
+
   const headLine = (
     <FormattedMessage
       id={`ui-bulk-edit.list.errors.${headLineTranslateKey}`}
@@ -47,34 +49,28 @@ const ErrorsAccordion = ({
   );
 
   return (
-    <>
+    <div className={css.previewAccordion}>
       <Accordion
-        open={!!errorLength}
+        open={opened}
+        onToggle={() => {
+          setOpened(!opened);
+        }}
         label={<FormattedMessage id="ui-bulk-edit.list.errors.title" />}
       >
-
-        {!!errorLength && (
-          <Row>
-            <Col xs={12}>
-              <Headline size="medium" margin="small">
-                {headLine}
-              </Headline>
-            </Col>
-          </Row>
-        )}
-        <Row>
-          <Col xs={12}>
-            <MultiColumnList
-              contentData={errors}
-              columnMapping={columnMapping}
-              formatter={resultsFormatter}
-              visibleColumns={visibleColumns}
-              maxHeight={maxHeight}
-            />
-          </Col>
-        </Row>
+        <div className={css.errorAccordionInner}>
+          <Headline size="medium" margin="small">
+            {headLine}
+          </Headline>
+          <MultiColumnList
+            contentData={errors}
+            columnMapping={columnMapping}
+            formatter={resultsFormatter}
+            visibleColumns={visibleColumns}
+            autosize
+          />
+        </div>
       </Accordion>
-    </>
+    </div>
   );
 };
 

@@ -1,13 +1,13 @@
 import { FormattedMessage } from 'react-intl';
 import {
   Headline,
-  AccordionSet,
   AccordionStatus,
   MessageBanner,
 } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import css from './Preview.css';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
 import { useErrorsPreview,
@@ -49,7 +49,8 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
   return (
     <AccordionStatus>
-      {!isInitial && (
+      <div className={css.previewContainer}>
+        {!isInitial && (
         <Headline size="large" margin="small">
           <MessageBanner type="success" contentClassName="SuccessBanner">
             <FormattedMessage
@@ -58,33 +59,36 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
             />
           </MessageBanner>
         </Headline>
-      )}
-      {title && (
+        )}
+        {title && (
         <Headline size="large" margin="medium">
           {title}
         </Headline>
-      )}
-      <AccordionSet>
-        {Boolean(contentData?.length) && (
-          <PreviewAccordion
-            isInitial={isInitial}
-            columns={columns}
-            contentData={contentData}
-            columnMapping={columnMapping}
-            visibleColumns={visibleColumns}
-            step={step}
-          />
         )}
-        {Boolean(errors?.length) && (
-          <ErrorsAccordion
-            errors={errors}
-            entries={totalCount}
-            matched={countOfRecords}
-            countOfErrors={countOfErrors}
-            isInitial={isInitial}
-          />
-        )}
-      </AccordionSet>
+        <div className={css.previewAccordionInner}>
+          {Boolean(contentData?.length) && (
+            <PreviewAccordion
+              isInitial={isInitial}
+              columns={columns}
+              contentData={contentData}
+              columnMapping={columnMapping}
+              visibleColumns={visibleColumns}
+              step={step}
+            />
+          )}
+
+          {Boolean(errors?.length) && (
+            <ErrorsAccordion
+              errors={errors}
+              entries={totalCount}
+              matched={countOfRecords}
+              countOfErrors={countOfErrors}
+              isInitial={isInitial}
+            />
+          )}
+        </div>
+
+      </div>
     </AccordionStatus>
   );
 };

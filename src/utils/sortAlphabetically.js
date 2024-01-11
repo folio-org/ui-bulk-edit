@@ -1,4 +1,4 @@
-export const sortAlphabetically = (array, placeholder) => array.sort((a, b) => {
+export const sortAlphabetically = (array, placeholder) => array?.sort((a, b) => {
   const collator = new Intl.Collator();
 
   if (a.label === placeholder) {
