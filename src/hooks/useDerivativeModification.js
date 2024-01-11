@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { ACTIONS } from '../constants';
 import {
-  WITH_ITEMS_VALUE_KEY,
+  ACTION_PARAMETERS_KEY,
 } from '../components/BulkEditList/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 
-export const useDerivativeModification = ({ onChange, action, actionIndex, deps }) => {
+export const useDerivativeModification = ({ onChange, action, actionIndex, deps = [] }) => {
   useEffect(() => {
-    if (action === ACTIONS.SET_TO_TRUE) {
-      onChange({ actionIndex, value: true, fieldName: WITH_ITEMS_VALUE_KEY });
+    if ([ACTIONS.SET_TO_TRUE, ACTIONS.SET_TO_FALSE].includes(action.name)) {
+      onChange({
+        actionIndex,
+        value: action.parameters?.map((param) => ({ ...param, value: action.name === ACTIONS.SET_TO_TRUE })),
+        fieldName: ACTION_PARAMETERS_KEY
+      });
     }
-
-    if (action === ACTIONS.SET_TO_FALSE) {
-      onChange({ actionIndex, value: false, fieldName: WITH_ITEMS_VALUE_KEY });
-    }
-  }, [...deps]);
+  }, deps);
 };

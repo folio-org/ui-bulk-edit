@@ -23,7 +23,6 @@ import {
   FIELD_VALUE_KEY,
   getDefaultActions,
   isAddButtonShown,
-  getActionType,
   getFilteredFields,
   getExtraActions,
 } from './helpers';
@@ -43,7 +42,12 @@ export const ContentUpdatesForm = ({
   const fieldTemplate = {
     options,
     option: defaultOptionValue,
-    actionsDetails: getDefaultActions(defaultOptionValue, options, formatMessage),
+    actionsDetails: getDefaultActions({
+      option: defaultOptionValue,
+      options,
+      capability,
+      formatMessage
+    }),
   };
 
   const [fields, setFields] = useState([fieldTemplate]);
@@ -59,7 +63,12 @@ export const ContentUpdatesForm = ({
           ...field,
           parameters,
           option,
-          actionsDetails: getDefaultActions(option, options, formatMessage),
+          actionsDetails: getDefaultActions({
+            option,
+            options,
+            capability,
+            formatMessage
+          }),
         };
       }
 
@@ -186,7 +195,12 @@ export const ContentUpdatesForm = ({
         ? ({
           ...f,
           option,
-          actionsDetails: getDefaultActions(option, options, formatMessage),
+          actionsDetails: getDefaultActions({
+            option,
+            options,
+            capability,
+            formatMessage
+          }),
         })
         : f;
     });
@@ -208,7 +222,9 @@ export const ContentUpdatesForm = ({
         // generate action type key with '_' delimiter
         const typeKey = actions
           .filter(Boolean)
-          .map(action => getActionType(action, option, capability) ?? null).join('_');
+          .map(action => action?.name ?? null).join('_');
+
+        const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
 
         const type = ACTIONS[typeKey];
 
@@ -218,7 +234,10 @@ export const ContentUpdatesForm = ({
             type,
             initial,
             updated,
-            parameters,
+            parameters: [
+              ...(parameters || []),
+              ...(actionParameters || []),
+            ],
           }],
         };
       },

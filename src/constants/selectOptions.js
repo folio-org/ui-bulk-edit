@@ -34,11 +34,9 @@ export const OPTIONS = {
 export const PARAMETERS_KEYS = {
   ITEM_NOTE_TYPE_ID_KEY: 'ITEM_NOTE_TYPE_ID_KEY',
   HOLDINGS_NOTE_TYPE_ID_KEY: 'HOLDINGS_NOTE_TYPE_ID_KEY',
+  APPLY_TO_HOLDINGS: 'APPLY_TO_HOLDINGS',
+  APPLY_TO_ITEMS: 'APPLY_TO_ITEMS',
 };
-
-export const OPTIONS_WITH_ADDITIONAL_PARAMETERS = [
-  OPTIONS.ITEM_NOTE,
-];
 
 export const getItemsWithPlaceholder = (items) => [
   {
@@ -277,6 +275,11 @@ export const getInstanceOptions = (formatMessage) => [
   {
     value: OPTIONS.STAFF_SUPPRESS,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.staffSuppress' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.suppress' }),
     disabled: false,
   },
 ];

@@ -9,7 +9,7 @@ import { useIntl } from 'react-intl';
 import { FINAL_ACTIONS } from '../../../../../constants';
 import { ACTION_VALUE_KEY } from './helpers';
 import { ValuesColumn } from './ValuesColumn';
-import { AdditionalActions } from './AdditionalActions';
+import { AdditionalActionParameters } from './AdditionalActionParameters';
 import { sortAlphabeticallyActions } from '../../../../../utils/sortAlphabetically';
 
 export const ActionsRow = ({ option, actions, onChange }) => {
@@ -48,10 +48,9 @@ export const ActionsRow = ({ option, actions, onChange }) => {
         )}
 
         {/* Render additional actions  */}
-        {action.name && (
-          <AdditionalActions action={action} actionIndex={actionIndex} onChange={onChange} />
+        {action.name && !actions.parameters?.length && (
+          <AdditionalActionParameters action={action} actionIndex={actionIndex} onChange={onChange} />
         )}
-
       </Fragment>
     );
   });

@@ -13,3 +13,9 @@
     margin-left: auto;
     padding-right: 10px;
 }
+
+.additionalParameters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
