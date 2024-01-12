@@ -2,7 +2,9 @@ import {
   ACTIONS,
   CONTROL_TYPES,
   OPTIONS,
-  commonAdditionalActions, CAPABILITIES, PARAMETERS_KEYS,
+  commonAdditionalActions,
+  CAPABILITIES,
+  PARAMETERS_KEYS,
 } from '../../../../../constants';
 
 import {
