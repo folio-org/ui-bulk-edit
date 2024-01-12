@@ -1,7 +1,9 @@
 import React from 'react';
-import { Checkbox, Col } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
+
+import { Checkbox, Col } from '@folio/stripes/components';
+
 import { useDerivativeModification } from '../../../../../hooks';
 import { ACTION_PARAMETERS_KEY } from './helpers';
 import css from '../BulkEditInApp.css';
@@ -49,7 +51,7 @@ AdditionalActionParameters.propTypes = {
       key: PropTypes.string,
       value: PropTypes.bool,
     })),
-  }),
-  actionIndex: PropTypes.number,
-  onChange: PropTypes.func,
+  }).isRequired,
+  actionIndex: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
