@@ -32,7 +32,7 @@ export const AdditionalActionParameters = ({ action, actionIndex, onChange }) =>
             name={parameter.key}
             label={formatMessage({ id: `ui-bulk-edit.layer.action.apply.${parameter.key}` })}
             checked={parameter.value}
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
           />
         ))}
       </div>
