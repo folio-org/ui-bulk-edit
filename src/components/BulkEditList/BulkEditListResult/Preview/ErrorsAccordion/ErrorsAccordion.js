@@ -61,13 +61,15 @@ const ErrorsAccordion = ({
           <Headline size="medium" margin="small">
             {headLine}
           </Headline>
-          <MultiColumnList
-            contentData={errors}
-            columnMapping={columnMapping}
-            formatter={resultsFormatter}
-            visibleColumns={visibleColumns}
-            autosize
-          />
+          <div className={css.errorAccordionList}>
+            <MultiColumnList
+              contentData={errors}
+              columnMapping={columnMapping}
+              formatter={resultsFormatter}
+              visibleColumns={visibleColumns}
+              autosize
+            />
+          </div>
         </div>
       </Accordion>
     </div>
