@@ -4,7 +4,8 @@
     height: 100%;
 }
 
-.previewAccordion {
+.previewAccordion,
+.errorAccordionList {
     flex-grow: 1;
 }
 
@@ -16,15 +17,13 @@
     height: 100%;
 }
 
-.previewAccordionInner {
+.previewAccordionInner,
+.errorAccordionInner {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
 .errorAccordionInner {
-    display: grid;
-    height: calc(100% - 35px); /* 35px - height of the accordion header */
-    grid-template-columns: 1fr;
-    grid-template-rows: max-content auto;
+    height: 100%;
 }

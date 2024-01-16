@@ -6,7 +6,6 @@ import {
   FINAL_ACTIONS,
   ACTIONS,
   REQUIRES_INITIAL_ACTIONS,
-  CAPABILITIES,
   emailActionsFind,
   emailActionsReplace,
   commonAdditionalActions,
@@ -22,15 +21,11 @@ import {
   noteActionsWithDuplicate,
   electronicAccess,
 } from '../../../../../constants';
+import { getActionParameters } from '../../../../../constants/actionParameters';
 
 export const ACTION_VALUE_KEY = 'name';
 export const FIELD_VALUE_KEY = 'value';
-export const WITH_ITEMS_VALUE_KEY = 'withItems';
-
-export const FIELDS_TYPES = {
-  ACTION: 'actions',
-  OPTION: 'option',
-};
+export const ACTION_PARAMETERS_KEY = 'parameters';
 
 export const TEMPORARY_LOCATIONS = [OPTIONS.TEMPORARY_LOCATION, OPTIONS.TEMPORARY_HOLDINGS_LOCATION];
 
@@ -79,7 +74,12 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
   };
 };
 
-export const getDefaultActions = (option, options, formatMessage) => {
+export const getDefaultActions = ({
+  option,
+  options,
+  capability,
+  formatMessage
+}) => {
   const replaceClearDefaultActions = replaceClearActions(formatMessage);
   const emailDefaultFindActions = emailActionsFind(formatMessage);
   const emailDefaultReplaceActions = emailActionsReplace(formatMessage);
@@ -190,6 +190,7 @@ export const getDefaultActions = (option, options, formatMessage) => {
             controlType: () => CONTROL_TYPES.SUPPRESS_CHECKBOX,
             [ACTION_VALUE_KEY]: suppressDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
+            [ACTION_PARAMETERS_KEY]: getActionParameters(option, capability),
           },
         ],
       };
@@ -380,23 +381,6 @@ export const getFilteredFields = (initialFields) => {
       options: f.options.filter(o => !optionsExceptCurrent.includes(o.value)),
     };
   });
-};
-
-export const getActionType = (action, option, capability) => {
-  const actionName = action?.name;
-  const isSuppressHolding = capability === CAPABILITIES.HOLDING && option === OPTIONS.SUPPRESS_FROM_DISCOVERY;
-  const isSetTrue = actionName === ACTIONS.SET_TO_TRUE;
-  const isSetToFalse = actionName === ACTIONS.SET_TO_FALSE;
-
-  if (isSuppressHolding && isSetTrue && action?.[WITH_ITEMS_VALUE_KEY]) {
-    return ACTIONS.SET_TO_TRUE_INCLUDING_ITEMS;
-  }
-
-  if (isSuppressHolding && isSetToFalse && action?.[WITH_ITEMS_VALUE_KEY]) {
-    return ACTIONS.SET_TO_FALSE_INCLUDING_ITEMS;
-  }
-
-  return actionName ?? null;
 };
 
 export const getExtraActions = (option, action, formattedMessage) => {

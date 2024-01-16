@@ -24,6 +24,7 @@ import {
   useContentUpdate,
   useFileDownload,
   QUERY_KEY_DOWNLOAD_IN_APP,
+  IN_APP_PREVIEW_KEY,
 } from '../../../../hooks/api';
 
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
@@ -65,6 +66,7 @@ const BulkEditInAppPreviewModal = ({
     columnMapping,
     refetch: fetchPreview,
   } = useRecordsPreview({
+    key: IN_APP_PREVIEW_KEY,
     id: bulkOperationId,
     step: EDITING_STEPS.EDIT,
     capabilities,
