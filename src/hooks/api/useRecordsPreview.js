@@ -11,7 +11,11 @@ import {
 import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
 
+export const RECORDS_PREVIEW_KEY = 'records';
+export const IN_APP_PREVIEW_KEY = 'in-app-records';
+
 export const useRecordsPreview = ({
+  key,
   id,
   step,
   queryOptions,
@@ -23,7 +27,7 @@ export const useRecordsPreview = ({
 
   const { data, refetch, isLoading } = useQuery(
     {
-      queryKey: ['records', id, step],
+      queryKey: [key, id, step],
       cacheTime: 0,
       queryFn: () => {
         return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json();
@@ -52,7 +56,7 @@ export const useRecordsPreview = ({
       // force selected columns to be visible
       const mappedVisibleColumns = storedVisibleColumns.map(column => ({
         ...column,
-        selected: column.forceSelected || column.selected,
+        selected: column.selected || columns.find(({ value }) => value === column.value)?.forceSelected,
       }));
 
       setVisibleColumns(mappedVisibleColumns);
