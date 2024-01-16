@@ -315,7 +315,7 @@
   "layer.action.replace": "Replace with",
   "layer.action.clear": "Clear field",
   "layer.action.apply.ITEMS": "Apply to items records",
-  "layer.action.apply.APPLY_TO_ITEMS": "Apply to all item records",
+  "layer.action.apply.APPLY_TO_ITEMS": "Apply to all items records",
   "layer.action.apply.APPLY_TO_HOLDINGS": "Apply to all holdings records",
   "layer.options.permanentLocation": "Permanent item location",
   "layer.options.temporaryLocation": "Temporary item location",
