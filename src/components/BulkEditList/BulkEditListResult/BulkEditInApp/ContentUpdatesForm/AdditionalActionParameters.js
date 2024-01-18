@@ -25,6 +25,8 @@ export const AdditionalActionParameters = ({ action, actionIndex, onChange }) =>
     onChange({ actionIndex, value: parameters, fieldName: ACTION_PARAMETERS_KEY });
   };
 
+  if (!action.parameters?.length) return null;
+
   return (
     <Col xs={dynamicWidth} sm={dynamicWidth}>
       <div className={css.additionalParameters}>
