@@ -423,7 +423,7 @@
     "columns.INSTANCE.Publication range": "Intervalo de publicação",
     "layer.options.instances.staffSuppress": "Ocultar para a equipe",
     "layer.options.instances.suppress": "Ocultar na ferramenta de descoberta",
-    "layer.action.apply.ITEMS": "Apply to items records",
-    "layer.action.apply.APPLY_TO_ITEMS": "Apply to all items records",
-    "layer.action.apply.APPLY_TO_HOLDINGS": "Apply to all holdings records"
+    "layer.action.apply.ITEMS": "Aplicar aos registros de itens",
+    "layer.action.apply.APPLY_TO_ITEMS": "Aplicar a todos os registros de itens",
+    "layer.action.apply.APPLY_TO_HOLDINGS": "Aplicar a todos os registros de coleções"
 }
