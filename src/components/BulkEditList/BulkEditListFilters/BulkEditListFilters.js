@@ -11,7 +11,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import {
   ButtonGroup,
 } from '@folio/stripes/components';
-import { Pluggable } from '@folio/stripes/core';
+import { Pluggable, useOkapiKy } from '@folio/stripes/core';
 import { useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
@@ -34,6 +34,8 @@ import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/helpe
 import FilterTabs from './FilterTabs/FilterTabs';
 import Capabilities from './Capabilities/Capabilities';
 import { getIsDisabledByPerm } from './utils/getIsDisabledByPerm';
+import { useRecordTypes } from '../../../hooks/api/useRecordTypes';
+import { getRecordType } from '../../../utils/getRecordType';
 
 export const BulkEditListFilters = ({
   filters,
@@ -58,6 +60,7 @@ export const BulkEditListFilters = ({
   } = permissions;
   const showCallout = useShowCallout();
   const history = useHistory();
+  const ky = useOkapiKy();
   const location = useLocation();
 
   const search = new URLSearchParams(location.search);
@@ -65,6 +68,7 @@ export const BulkEditListFilters = ({
   const initialCapabilities = search.get('capabilities');
   const initialFileName = search.get('fileName');
   const initialStep = search.get('step');
+  const initialRecordType = search.get('recordTypes');
   const logFilters = Object.values(FILTERS).map((el) => search.getAll(el));
 
   const isQuery = criteria === CRITERIA.QUERY;
@@ -83,6 +87,7 @@ export const BulkEditListFilters = ({
     criteria: CRITERIA.LOGS,
     fileName: initialFileName,
     step: initialStep,
+    recordTypes: initialRecordType,
   };
 
   const [
@@ -105,6 +110,40 @@ export const BulkEditListFilters = ({
   const { fileUpload, isLoading } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
 
+  const { recordTypes } = useRecordTypes();
+
+  const entityTypeDataSource = async () => {
+    if (initialRecordType) {
+      return ky.get(`entity-types/${initialRecordType}`).json();
+    }
+    return null;
+  };
+
+  const queryDetailsDataSource = async ({ queryId, includeContent, offset, limit }) => {
+    const searchParams = {
+      includeResults: includeContent,
+      offset,
+      limit
+    };
+
+    return ky.get(`query/${queryId}`, { searchParams }).json();
+  };
+
+  const testQueryDataSource = async ({ fqlQuery }) => {
+    return ky.post('query', { json: {
+      entityTypeId: initialRecordType,
+      fqlQuery: JSON.stringify(fqlQuery)
+    } }).json();
+  };
+
+  const getParamsSource = async ({ entityTypeId, columnName, searchValue }) => {
+    return ky.get(`entity-types/${entityTypeId}/columns/${columnName}/values?search=${searchValue}`).json();
+  };
+
+  const cancelQueryDataSource = async ({ queryId }) => {
+    return ky.delete(`query/${queryId}`);
+  };
+
   const handleChange = (value, field) => setFilters(prev => ({
     ...prev, [field]: value,
   }));
@@ -118,6 +157,8 @@ export const BulkEditListFilters = ({
       recordIdentifier: '',
     }));
 
+    const selected = recordTypes?.find(type => type.label === getRecordType(value))?.id;
+
     history.replace({
       pathname: '/bulk-edit',
       search: buildSearch({
@@ -125,6 +166,7 @@ export const BulkEditListFilters = ({
         identifier: null,
         step: null,
         fileName: null,
+        recordTypes: selected
       }, location.search),
     });
 
@@ -312,6 +354,13 @@ export const BulkEditListFilters = ({
             componentType="builder"
             type="query-builder"
             disabled={isQueryBuilderDisabled}
+            key={capabilities}
+            entityTypeDataSource={entityTypeDataSource}
+            testQueryDataSource={testQueryDataSource}
+            getParamsSource={getParamsSource}
+            queryDetailsDataSource={queryDetailsDataSource}
+            onQueryRunFail={() => {}}
+            cancelQueryDataSource={cancelQueryDataSource}
           />
         </>
       )}

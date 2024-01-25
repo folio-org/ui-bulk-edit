@@ -60,6 +60,7 @@ export const useLocationFilters = ({
           criteria: initialFilter.criteria,
           step: initialFilter.step,
           fileName: initialFilter.fileName,
+          recordTypes: initialFilter.recordTypes
         }),
       });
     },

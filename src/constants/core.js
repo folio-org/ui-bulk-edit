@@ -20,6 +20,11 @@ export const CAPABILITIES = {
   USER: 'USER',
 };
 
+export const RECORD_TYPES = {
+  ITEM: 'Items',
+  USER: 'Users'
+};
+
 export const IDENTIFIERS = {
   ID: 'ID',
   BARCODE: 'BARCODE',
