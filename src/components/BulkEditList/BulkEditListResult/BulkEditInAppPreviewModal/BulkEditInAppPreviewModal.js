@@ -7,7 +7,7 @@ import { saveAs } from 'file-saver';
 
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { useShowCallout } from '@folio/stripes-acq-components';
+import { PrevNextPagination, usePagination, useShowCallout } from '@folio/stripes-acq-components';
 
 import { RootContext } from '../../../../context/RootContext';
 import {
@@ -15,7 +15,7 @@ import {
   EDITING_STEPS,
   FILE_KEYS,
   FILE_SEARCH_PARAMS,
-  getFormattedFilePrefixDate,
+  getFormattedFilePrefixDate, LOGS_PAGINATION_CONFIG,
 } from '../../../../constants';
 import {
   useRecordsPreview,
@@ -60,7 +60,13 @@ const BulkEditInAppPreviewModal = ({
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
   const { bulkOperationStart } = useBulkOperationStart();
 
+  const {
+    pagination,
+    changePage,
+  } = usePagination(LOGS_PAGINATION_CONFIG);
+
   const [isPreviewLoading, setIsLoadingPreview] = useState(false);
+
   const {
     contentData,
     columnMapping,
@@ -183,6 +189,15 @@ const BulkEditInAppPreviewModal = ({
             columnIdPrefix="in-app"
             columnWidths={PREVIEW_COLUMN_WIDTHS}
           />
+
+          {contentData.length > 0 && (
+            <PrevNextPagination
+              {...pagination}
+              totalCount={bulkDetails?.matchedNumOfRecords}
+              disabled={false}
+              onChange={changePage}
+            />
+          )}
         </>
       ) : <Preloader />}
     </Modal>

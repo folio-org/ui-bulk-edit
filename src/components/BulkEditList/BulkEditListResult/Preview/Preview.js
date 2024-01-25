@@ -76,6 +76,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
         <div className={css.previewAccordionInner}>
           {Boolean(contentData?.length) && (
             <PreviewAccordion
+              totalRecords={bulkDetails?.matchedNumOfRecords}
               isInitial={isInitial}
               columns={columns}
               contentData={contentData}

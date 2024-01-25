@@ -82,7 +82,7 @@ export const CONTROL_TYPES = {
 };
 
 export const TRANSLATION_SUFFIX = {
-  [CAPABILITIES.USER]: '',
+  [CAPABILITIES.USER]: '.users',
   [CAPABILITIES.ITEM]: '.item',
   [CAPABILITIES.INSTANCE]: '.instance',
   [CAPABILITIES.HOLDING]: '.holdings',
