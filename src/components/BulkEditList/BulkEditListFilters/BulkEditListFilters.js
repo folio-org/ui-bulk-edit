@@ -80,7 +80,7 @@ export const BulkEditListFilters = ({
 
   const isQueryBuilderEnabledForUsers = hasUsersViewPerms && (hasCsvViewPerms || hasInAppUsersEditPerms);
   const isQueryBuilderEnabledForItems = hasInventoryInstanceViewPerms && hasInAppViewPerms;
-  const isQueryBuilderDisabled = !isQueryBuilderEnabledForUsers && !isQueryBuilderEnabledForItems;
+  const isQueryBuilderDisabled = (!isQueryBuilderEnabledForUsers && !isQueryBuilderEnabledForItems) || !capabilities;
 
   const initialFilter = {
     capabilities: initialCapabilities,
