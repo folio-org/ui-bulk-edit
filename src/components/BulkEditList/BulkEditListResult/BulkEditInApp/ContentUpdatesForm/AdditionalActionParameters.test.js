@@ -56,4 +56,17 @@ describe('AdditionalActionParameters', () => {
       fieldName: ACTION_PARAMETERS_KEY,
     });
   });
+
+  it('shouldn`t render component if there are not params', () => {
+    const overrideMockAction = {
+      ...mockAction,
+      parameters: [],
+    };
+
+    const { queryByText } = render(
+      <AdditionalActionParameters action={overrideMockAction} actionIndex={0} onChange={() => {}} />
+    );
+
+    expect(queryByText(`ui-bulk-edit.layer.action.apply.${PARAMETERS_KEYS.APPLY_TO_ITEMS}`)).toBeNull();
+  });
 });
