@@ -11,11 +11,6 @@ import { CAPABILITIES, IDENTIFIERS, CRITERIA } from '../../constants';
 
 import { BulkEditList } from './BulkEditList';
 
-jest.mock('./BulkEditListFilters/BulkEditListFilters', () => {
-  return {
-    BulkEditListFilters: jest.fn().mockReturnValue('BulkEditListFilters'),
-  };
-});
 jest.mock('../BulkEditLogs/BulkEditLogs', () => {
   return jest.fn().mockReturnValue('BulkEditLogs');
 });
@@ -53,7 +48,7 @@ describe('BulkEditList', () => {
   it('should display Filters pane', async () => {
     renderBulkEditList({ criteria: CRITERIA.LOGS });
 
-    expect(screen.getByText('BulkEditListFilters')).toBeVisible();
+    expect(screen.getByText(/holdings/i)).toBeVisible();
   });
 
   it('should display Logs pane when criteria is logs', async () => {
@@ -66,5 +61,11 @@ describe('BulkEditList', () => {
     renderBulkEditList({ criteria: CRITERIA.IDENTIFIER });
 
     expect(screen.getByText(/BulkEditListResult/)).toBeVisible();
+  });
+
+  it('should display Bulk edit query', async () => {
+    renderBulkEditList({ criteria: CRITERIA.QUERY });
+
+    expect(screen.getByText(/holdings/i)).toBeVisible();
   });
 });
