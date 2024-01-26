@@ -26,7 +26,7 @@ import {
 import { RootContext } from '../../../context/RootContext';
 import {
   useUpload,
-  useBulkOperationStart,
+  useBulkOperationStart, useQueryPlugin,
 } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 import { LogsFilters } from './LogsFilters/LogsFilters';
@@ -34,6 +34,8 @@ import { getCapabilityOptions, isCapabilityDisabled } from '../../../utils/helpe
 import FilterTabs from './FilterTabs/FilterTabs';
 import Capabilities from './Capabilities/Capabilities';
 import { getIsDisabledByPerm } from './utils/getIsDisabledByPerm';
+import { useRecordTypes } from '../../../hooks/api/useRecordTypes';
+import { getRecordType } from '../../../utils/getRecordType';
 
 export const BulkEditListFilters = ({
   filters,
@@ -65,6 +67,7 @@ export const BulkEditListFilters = ({
   const initialCapabilities = search.get('capabilities');
   const initialFileName = search.get('fileName');
   const initialStep = search.get('step');
+  const initialRecordType = search.get('recordTypes');
   const logFilters = Object.values(FILTERS).map((el) => search.getAll(el));
 
   const isQuery = criteria === CRITERIA.QUERY;
@@ -83,6 +86,7 @@ export const BulkEditListFilters = ({
     criteria: CRITERIA.LOGS,
     fileName: initialFileName,
     step: initialStep,
+    recordTypes: initialRecordType,
   };
 
   const [
@@ -105,6 +109,16 @@ export const BulkEditListFilters = ({
   const { fileUpload, isLoading } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
 
+  const { recordTypes } = useRecordTypes();
+
+  const {
+    entityTypeDataSource,
+    queryDetailsDataSource,
+    testQueryDataSource,
+    getParamsSource,
+    cancelQueryDataSource,
+  } = useQueryPlugin(initialRecordType);
+
   const handleChange = (value, field) => setFilters(prev => ({
     ...prev, [field]: value,
   }));
@@ -118,6 +132,8 @@ export const BulkEditListFilters = ({
       recordIdentifier: '',
     }));
 
+    const selected = recordTypes?.find(type => type.label === getRecordType(value))?.id;
+
     history.replace({
       pathname: '/bulk-edit',
       search: buildSearch({
@@ -125,6 +141,7 @@ export const BulkEditListFilters = ({
         identifier: null,
         step: null,
         fileName: null,
+        recordTypes: selected
       }, location.search),
     });
 
@@ -312,6 +329,13 @@ export const BulkEditListFilters = ({
             componentType="builder"
             type="query-builder"
             disabled={isQueryBuilderDisabled}
+            key={capabilities}
+            entityTypeDataSource={entityTypeDataSource}
+            testQueryDataSource={testQueryDataSource}
+            getParamsSource={getParamsSource}
+            queryDetailsDataSource={queryDetailsDataSource}
+            onQueryRunFail={() => {}}
+            cancelQueryDataSource={cancelQueryDataSource}
           />
         </>
       )}
