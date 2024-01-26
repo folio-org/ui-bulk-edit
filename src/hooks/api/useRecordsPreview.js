@@ -25,7 +25,7 @@ export const useRecordsPreview = ({
   const { setVisibleColumns } = useContext(RootContext);
   const ky = useOkapiKy();
 
-  const { data, refetch, isLoading } = useQuery(
+  const { data, refetch, isLoading, dataUpdatedAt } = useQuery(
     {
       queryKey: [key, id, step],
       cacheTime: 0,
@@ -61,7 +61,7 @@ export const useRecordsPreview = ({
 
       setVisibleColumns(mappedVisibleColumns);
     }
-  }, [columns]);
+  }, [columns, dataUpdatedAt]);
 
   return {
     isLoading,

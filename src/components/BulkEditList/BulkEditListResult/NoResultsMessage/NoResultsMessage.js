@@ -15,11 +15,19 @@ export const NoResultsMessage = () => {
 
   const message = useMemo(() => {
     const identifier = new URLSearchParams(location.search).get('identifier');
-    const messagePrefix = criteria === CRITERIA.IDENTIFIER && identifier
-      ? `.${identifier}`
-      : '';
+    const getPostfix = () => {
+      if (criteria === CRITERIA.IDENTIFIER && identifier) {
+        return `.${identifier}`;
+      }
 
-    return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${TRANSLATION_SUFFIX[capabilities]}${messagePrefix}`} />;
+      if (criteria === CRITERIA.QUERY) {
+        return `.${criteria}`;
+      }
+
+      return '';
+    };
+
+    return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${TRANSLATION_SUFFIX[capabilities]}${getPostfix()}`} />;
   }, [location.search]);
 
   return (

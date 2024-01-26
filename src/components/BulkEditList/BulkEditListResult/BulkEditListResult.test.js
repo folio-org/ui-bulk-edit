@@ -71,6 +71,16 @@ describe('BulkEditListResult', () => {
     expect(screen.getByText(/list.result.emptyMessage/)).toBeVisible();
   });
 
+  it('displays query-specific empty message with query tab and no capability', () => {
+    const history = createMemoryHistory();
+
+    history.push('/bulk-edit?criteria=query');
+
+    renderBulkEditResult(history);
+
+    expect(screen.getByText(/list.result.emptyMessage.query/)).toBeVisible();
+  });
+
   it('displays fileName field for initial preview', () => {
     const history = createMemoryHistory();
 
