@@ -5,6 +5,8 @@ import { QueryClientProvider } from 'react-query';
 
 import '../../../test/jest/__mock__';
 
+import userEvent from '@testing-library/user-event';
+import { useOkapiKy } from '@folio/stripes/core';
 import { queryClient } from '../../../test/jest/utils/queryClient';
 
 import { CAPABILITIES, IDENTIFIERS, CRITERIA } from '../../constants';
@@ -19,6 +21,10 @@ jest.mock('./BulkEditListResult', () => {
     BulkEditListResult: jest.fn().mockReturnValue('BulkEditListResult'),
   };
 });
+
+jest.mock('@folio/stripes/core', () => ({
+  useOkapiKy: jest.fn(),
+}));
 jest.mock('./BulkEditListResult/BulkEditManualUploadModal', () => {
   return {
     BulkEditManualUploadModal: jest.fn().mockReturnValue('BulkEditManualUploadModal'),
@@ -64,7 +70,15 @@ describe('BulkEditList', () => {
   });
 
   it('should display Bulk edit query', async () => {
+    useOkapiKy.mockReturnValue({
+      get: jest.fn().mockResolvedValue({ json: jest.fn().mockResolvedValue({}) }),
+      post: jest.fn().mockResolvedValue({ json: jest.fn().mockResolvedValue({}) }),
+      delete: jest.fn().mockResolvedValue({ json: jest.fn().mockResolvedValue({}) }),
+    });
     renderBulkEditList({ criteria: CRITERIA.QUERY });
+
+    userEvent.click(screen.getByText(/Get query/));
+    userEvent.click(screen.getByText(/Cancel query/));
 
     expect(screen.getByText(/holdings/i)).toBeVisible();
   });

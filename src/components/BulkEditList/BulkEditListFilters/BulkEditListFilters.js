@@ -11,7 +11,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import {
   ButtonGroup,
 } from '@folio/stripes/components';
-import { Pluggable, useOkapiKy } from '@folio/stripes/core';
+import { Pluggable } from '@folio/stripes/core';
 import { useShowCallout, buildSearch } from '@folio/stripes-acq-components';
 
 import { ListSelect } from './ListSelect/ListSelect';
@@ -26,7 +26,7 @@ import {
 import { RootContext } from '../../../context/RootContext';
 import {
   useUpload,
-  useBulkOperationStart,
+  useBulkOperationStart, useQueryPlugin,
 } from '../../../hooks/api';
 import { useBulkPermissions, useLocationFilters } from '../../../hooks';
 import { LogsFilters } from './LogsFilters/LogsFilters';
@@ -60,7 +60,6 @@ export const BulkEditListFilters = ({
   } = permissions;
   const showCallout = useShowCallout();
   const history = useHistory();
-  const ky = useOkapiKy();
   const location = useLocation();
 
   const search = new URLSearchParams(location.search);
@@ -112,37 +111,13 @@ export const BulkEditListFilters = ({
 
   const { recordTypes } = useRecordTypes();
 
-  const entityTypeDataSource = async () => {
-    if (initialRecordType) {
-      return ky.get(`entity-types/${initialRecordType}`).json();
-    }
-    return null;
-  };
-
-  const queryDetailsDataSource = async ({ queryId, includeContent, offset, limit }) => {
-    const searchParams = {
-      includeResults: includeContent,
-      offset,
-      limit
-    };
-
-    return ky.get(`query/${queryId}`, { searchParams }).json();
-  };
-
-  const testQueryDataSource = async ({ fqlQuery }) => {
-    return ky.post('query', { json: {
-      entityTypeId: initialRecordType,
-      fqlQuery: JSON.stringify(fqlQuery)
-    } }).json();
-  };
-
-  const getParamsSource = async ({ entityTypeId, columnName, searchValue }) => {
-    return ky.get(`entity-types/${entityTypeId}/columns/${columnName}/values?search=${searchValue}`).json();
-  };
-
-  const cancelQueryDataSource = async ({ queryId }) => {
-    return ky.delete(`query/${queryId}`);
-  };
+  const {
+    entityTypeDataSource,
+    queryDetailsDataSource,
+    testQueryDataSource,
+    getParamsSource,
+    cancelQueryDataSource,
+  } = useQueryPlugin(initialRecordType);
 
   const handleChange = (value, field) => setFilters(prev => ({
     ...prev, [field]: value,

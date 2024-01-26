@@ -86,7 +86,9 @@ const mockStripesCore = {
   },
 
   // eslint-disable-next-line react/prop-types
-  Pluggable: props => <>{props.children}</>,
+  Pluggable: props => <><button onClick={props.entityTypeDataSource}>Get query</button>
+    <button onClick={props.cancelQueryDataSource}>Cancel query</button>
+  </>,
 
   // eslint-disable-next-line react/prop-types
   IfPermission: jest.fn(props => <>{props.children}</>),

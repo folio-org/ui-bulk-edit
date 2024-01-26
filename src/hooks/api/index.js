@@ -9,3 +9,4 @@ export * from './useUserGroupsMap';
 export * from './usePatronGroup';
 export * from './useLoanTypes';
 export * from './useBulkOperationDetails';
+export * from './useQueryPlugin';
