@@ -5,7 +5,6 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import css from './Preview.css';
 import { PreviewAccordion } from './PreviewAccordion';
@@ -15,45 +14,40 @@ import {
   useErrorsPreview,
   useRecordsPreview
 } from '../../../../hooks/api';
-import { RootContext } from '../../../../context/RootContext';
 
-import { EDITING_STEPS } from '../../../../constants';
+import { PAGINATION_CONFIG } from '../../../../constants';
+import { usePagination } from '../../../../hooks/usePagination';
+import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const location = useLocation();
-  const { countOfRecords, setCountOfRecords, visibleColumns } = useContext(RootContext);
-  const [countOfErrors, setCountOfErrors] = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
-
   const search = new URLSearchParams(location.search);
   const step = search.get('step');
   const capabilities = search.get('capabilities');
 
-  const { contentData, columns, columnMapping } = useRecordsPreview({
+  const {
+    countOfRecords,
+    countOfErrors,
+    totalCount,
+    visibleColumns,
+  } = useBulkOperationStats({ bulkDetails, step });
+
+  const {
+    pagination,
+    changePage,
+  } = usePagination(PAGINATION_CONFIG);
+
+  const { contentData, columns, columnMapping, isFetching } = useRecordsPreview({
     key: RECORDS_PREVIEW_KEY,
     id,
     step,
-    capabilities
+    capabilities,
+    ...pagination,
   });
+
   const { data } = useErrorsPreview({ id });
+
   const errors = data?.errors || [];
-
-  useEffect(() => {
-    const isInitialPreview = step === EDITING_STEPS.UPLOAD;
-
-    const countRecords = isInitialPreview
-      ? bulkDetails.matchedNumOfRecords
-      : bulkDetails.committedNumOfRecords;
-
-    const countErrors = isInitialPreview
-      ? bulkDetails.matchedNumOfErrors
-      : bulkDetails.committedNumOfErrors;
-
-    setCountOfErrors(countErrors);
-    setCountOfRecords(countRecords);
-    setTotalCount(isInitialPreview ? bulkDetails.totalNumOfRecords : bulkDetails.matchedNumOfRecords);
-  }, [bulkDetails, step]);
-
 
   return (
     <AccordionStatus>
@@ -73,7 +67,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
           {title}
         </Headline>
         )}
-        <div className={css.previewAccordionInner}>
+        <div className={css.previewAccordionOuter}>
           {Boolean(contentData?.length) && (
             <PreviewAccordion
               totalRecords={bulkDetails?.matchedNumOfRecords}
@@ -83,6 +77,9 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
               columnMapping={columnMapping}
               visibleColumns={visibleColumns}
               step={step}
+              onChangePage={changePage}
+              pagination={pagination}
+              isFetching={isFetching}
             />
           )}
 

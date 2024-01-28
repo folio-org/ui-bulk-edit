@@ -7,7 +7,7 @@ import { saveAs } from 'file-saver';
 
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { PrevNextPagination, usePagination, useShowCallout } from '@folio/stripes-acq-components';
+import { PrevNextPagination, useShowCallout } from '@folio/stripes-acq-components';
 
 import { RootContext } from '../../../../context/RootContext';
 import {
@@ -15,7 +15,7 @@ import {
   EDITING_STEPS,
   FILE_KEYS,
   FILE_SEARCH_PARAMS,
-  getFormattedFilePrefixDate, LOGS_PAGINATION_CONFIG,
+  getFormattedFilePrefixDate, PAGINATION_CONFIG,
 } from '../../../../constants';
 import {
   useRecordsPreview,
@@ -33,6 +33,7 @@ import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFoot
 import css from './BulkEditInAppPreviewModal.css';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
+import { usePagination } from '../../../../hooks/usePagination';
 
 const BulkEditInAppPreviewModal = ({
   open,
@@ -63,7 +64,7 @@ const BulkEditInAppPreviewModal = ({
   const {
     pagination,
     changePage,
-  } = usePagination(LOGS_PAGINATION_CONFIG);
+  } = usePagination(PAGINATION_CONFIG);
 
   const [isPreviewLoading, setIsLoadingPreview] = useState(false);
 
@@ -83,6 +84,7 @@ const BulkEditInAppPreviewModal = ({
         onKeepEditing();
       },
     },
+    ...pagination,
   });
 
   const { refetch } = useFileDownload({

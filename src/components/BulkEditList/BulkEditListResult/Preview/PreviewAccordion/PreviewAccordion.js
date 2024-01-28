@@ -5,11 +5,10 @@ import {
   Accordion,
   MultiColumnList,
 } from '@folio/stripes/components';
-import { PrevNextPagination, usePagination } from '@folio/stripes-acq-components';
+import { PrevNextPagination } from '@folio/stripes-acq-components';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../../PermissionsModal/constants/lists';
 import { getVisibleColumnsKeys } from '../../../../../utils/helpers';
 import css from '../Preview.css';
-import { LOGS_PAGINATION_CONFIG } from '../../../../../constants';
 
 
 const PreviewAccordion = ({
@@ -19,6 +18,9 @@ const PreviewAccordion = ({
   isInitial,
   step,
   totalRecords,
+  pagination,
+  onChangePage,
+  isFetching,
 }) => {
   const translationKey = isInitial ? 'title' : 'titleChanged';
 
@@ -26,37 +28,35 @@ const PreviewAccordion = ({
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
-  const {
-    pagination,
-    changePage,
-  } = usePagination(LOGS_PAGINATION_CONFIG);
-
   return (
-    <>
-      <div className={css.previewAccordion}>
-        <Accordion
-          label={accordionLabel}
-        >
-          <MultiColumnList
-            striped
-            contentData={contentData}
-            columnMapping={columnMapping}
-            visibleColumns={visibleColumnKeys}
-            columnIdPrefix={step}
-            columnWidths={PREVIEW_COLUMN_WIDTHS}
-            autosize
-          />
-        </Accordion>
-      </div>
-      {contentData.length > 0 && (
-        <PrevNextPagination
-          {...pagination}
-          totalCount={totalRecords}
-          disabled={false}
-          onChange={changePage}
-        />
-      )}
-    </>
+    <div className={css.previewAccordion}>
+      <Accordion
+        label={accordionLabel}
+      >
+        <div className={css.previewAccordionInner}>
+          <div className={css.previewAccordionList}>
+            <MultiColumnList
+              striped
+              contentData={contentData}
+              columnMapping={columnMapping}
+              visibleColumns={visibleColumnKeys}
+              columnIdPrefix={step}
+              columnWidths={PREVIEW_COLUMN_WIDTHS}
+              autosize
+              loading={isFetching}
+            />
+          </div>
+          {contentData.length > 0 && (
+            <PrevNextPagination
+              {...pagination}
+              totalCount={totalRecords}
+              disabled={false}
+              onChange={onChangePage}
+            />
+          )}
+        </div>
+      </Accordion>
+    </div>
   );
 };
 
@@ -67,6 +67,12 @@ PreviewAccordion.propTypes = {
   visibleColumns: PropTypes.arrayOf(PropTypes.object),
   isInitial: PropTypes.bool,
   step: PropTypes.string,
+  pagination: PropTypes.shape({
+    offset: PropTypes.number,
+    limit: PropTypes.number,
+  }),
+  onChangePage: PropTypes.func,
+  isFetching: PropTypes.bool,
 };
 
 export default memo(PreviewAccordion);

@@ -57,7 +57,7 @@ const ErrorsAccordion = ({
         }}
         label={<FormattedMessage id="ui-bulk-edit.list.errors.title" />}
       >
-        <div className={css.errorAccordionInner}>
+        <div className={css.errorAccordionOuter}>
           <Headline size="medium" margin="small">
             {headLine}
           </Headline>

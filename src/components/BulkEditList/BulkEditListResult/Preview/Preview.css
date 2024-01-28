@@ -5,11 +5,12 @@
 }
 
 .previewAccordion,
+.previewAccordionList,
 .errorAccordionList {
     flex-grow: 1;
 }
 
-.previewAccordion:first-child:has([aria-expanded="false"]) {
+.previewAccordion:has([aria-expanded="false"]) {
     flex-grow: 0;
 }
 
@@ -17,13 +18,19 @@
     height: 100%;
 }
 
-.previewAccordionInner,
-.errorAccordionInner {
+.previewAccordionInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.previewAccordionOuter,
+.errorAccordionOuter {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-.errorAccordionInner {
+.errorAccordionOuter {
     height: 100%;
 }
