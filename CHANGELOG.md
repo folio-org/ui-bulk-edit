@@ -36,6 +36,9 @@
 * [UIBULKED-364](https://issues.folio.org/browse/UIBULKED-364) Instance records - preview of matching records.
 * [UIBULKED-389](https://issues.folio.org/browse/UIBULKED-389) Add Suppress from discovery option to Instance records edits.
 * [UIBULKED-400](https://issues.folio.org/browse/UIBULKED-400) Enabling Build query button on Query tab.
+* [UIBULKED-399](https://issues.folio.org/browse/UIBULKED-399) Update label verbiage on the Identifier tab.
+* [UIBULKED-407](https://issues.folio.org/browse/UIBULKED-407) When selecting action "Find" in Bulk Edit, the last dropdown on the row moves to the right.
+* [UIBULKED-403](https://issues.folio.org/browse/UIBULKED-403) Integrate query-plugin with bulk-edit API.
 * [UIBULKED-246](https://issues.folio.org/browse/UIBULKED-246) Enabling Build query button on Query tab.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)

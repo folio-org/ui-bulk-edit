@@ -20,6 +20,11 @@ export const CAPABILITIES = {
   USER: 'USER',
 };
 
+export const RECORD_TYPES = {
+  ITEM: 'Items',
+  USER: 'Users'
+};
+
 export const IDENTIFIERS = {
   ID: 'ID',
   BARCODE: 'BARCODE',
@@ -82,7 +87,7 @@ export const CONTROL_TYPES = {
 };
 
 export const TRANSLATION_SUFFIX = {
-  [CAPABILITIES.USER]: '.users',
+  [CAPABILITIES.USER]: '.user',
   [CAPABILITIES.ITEM]: '.item',
   [CAPABILITIES.INSTANCE]: '.instance',
   [CAPABILITIES.HOLDING]: '.holdings',
