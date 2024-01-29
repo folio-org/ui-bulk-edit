@@ -110,6 +110,6 @@ export const MANUAL_UPLOAD_STEPS = {
 };
 
 export const PAGINATION_CONFIG = {
-  limit: 100,
+  limit: PREVIEW_LIMITS.RECORDS,
   offset: 0,
 };

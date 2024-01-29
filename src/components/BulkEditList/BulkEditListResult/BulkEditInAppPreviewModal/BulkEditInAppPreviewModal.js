@@ -15,7 +15,8 @@ import {
   EDITING_STEPS,
   FILE_KEYS,
   FILE_SEARCH_PARAMS,
-  getFormattedFilePrefixDate, PAGINATION_CONFIG,
+  PAGINATION_CONFIG,
+  getFormattedFilePrefixDate,
 } from '../../../../constants';
 import {
   useRecordsPreview,
