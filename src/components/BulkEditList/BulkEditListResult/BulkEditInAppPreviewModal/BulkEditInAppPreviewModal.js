@@ -26,6 +26,7 @@ import {
   useFileDownload,
   QUERY_KEY_DOWNLOAD_IN_APP,
   IN_APP_PREVIEW_KEY,
+  BULK_OPERATION_DETAILS_KEY,
 } from '../../../../hooks/api';
 
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
@@ -72,14 +73,13 @@ const BulkEditInAppPreviewModal = ({
   const {
     contentData,
     columnMapping,
-    refetch: fetchPreview,
+    isFetching
   } = useRecordsPreview({
     key: IN_APP_PREVIEW_KEY,
     id: bulkOperationId,
     step: EDITING_STEPS.EDIT,
     capabilities,
     queryOptions: {
-      enabled: false,
       onError: () => {
         swwCallout();
         onKeepEditing();
@@ -146,8 +146,10 @@ const BulkEditInAppPreviewModal = ({
           approach: APPROACHES.IN_APP,
           step: EDITING_STEPS.EDIT,
         }))
-        .then(() => fetchPreview())
-        .then(() => queryClient.invalidateQueries('bulkOperationDetails'))
+        .then(() => {
+          queryClient.invalidateQueries(BULK_OPERATION_DETAILS_KEY);
+          queryClient.invalidateQueries(IN_APP_PREVIEW_KEY);
+        })
         .catch(() => {
           swwCallout();
           onKeepEditing();
@@ -191,6 +193,7 @@ const BulkEditInAppPreviewModal = ({
             maxHeight={300}
             columnIdPrefix="in-app"
             columnWidths={PREVIEW_COLUMN_WIDTHS}
+            loading={isFetching}
           />
 
           {contentData.length > 0 && (
