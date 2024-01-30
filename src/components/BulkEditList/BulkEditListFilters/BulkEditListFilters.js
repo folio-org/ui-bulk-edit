@@ -151,9 +151,12 @@ export const BulkEditListFilters = ({
   };
 
   const handleCriteriaChange = (value) => {
-    setFilters(prev => ({ ...prev, criteria: value }));
+    const newFilterValue = { capabilities: null, recordTypes: null, criteria: value };
+
+    setFilters(prev => ({ ...prev, ...newFilterValue }));
+
     history.replace({
-      search: buildSearch({ criteria: value }, location.search),
+      search: buildSearch(newFilterValue, location.search),
     });
   };
 
