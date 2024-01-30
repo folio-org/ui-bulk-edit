@@ -222,13 +222,15 @@ export const BulkEditList = () => {
           />
         </BulkEditInAppLayer>
 
-        <BulkEditInAppPreviewModal
-          bulkOperationId={bulkOperationId}
-          open={isPreviewModalOpened}
-          contentUpdates={contentUpdates}
-          onKeepEditing={handlePreviewModalClose}
-          onChangesCommited={handleChangesCommited}
-        />
+        {isPreviewModalOpened && (
+          <BulkEditInAppPreviewModal
+            bulkOperationId={bulkOperationId}
+            open={isPreviewModalOpened}
+            contentUpdates={contentUpdates}
+            onKeepEditing={handlePreviewModalClose}
+            onChangesCommited={handleChangesCommited}
+          />
+        )}
       </Paneset>
 
       <BulkEditManualUploadModal

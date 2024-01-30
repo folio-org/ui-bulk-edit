@@ -61,7 +61,9 @@ const BulkEditInAppPreviewModal = ({
 
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
-  const { bulkOperationStart } = useBulkOperationStart();
+  const { bulkOperationStart, startData } = useBulkOperationStart();
+
+  const totalRecords = bulkDetails?.totalNumOfRecords;
 
   const {
     pagination,
@@ -80,6 +82,7 @@ const BulkEditInAppPreviewModal = ({
     step: EDITING_STEPS.EDIT,
     capabilities,
     queryOptions: {
+      enabled: !!startData,
       onError: () => {
         swwCallout();
         onKeepEditing();
@@ -95,7 +98,7 @@ const BulkEditInAppPreviewModal = ({
     fileInfo: {
       fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
     },
-    onSuccess: data => {
+    onSuccess: fileData => {
       const searchParams = new URLSearchParams(history.location.search);
       let fileName = searchParams.get('fileName');
 
@@ -103,7 +106,7 @@ const BulkEditInAppPreviewModal = ({
         fileName = `${capabilities}-${searchParams.get('criteria')}.csv`;
       }
 
-      saveAs(new Blob([data]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
+      saveAs(new Blob([fileData]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
     },
   });
 
@@ -131,11 +134,11 @@ const BulkEditInAppPreviewModal = ({
   };
 
   useEffect(() => {
-    if (contentUpdates && open) {
+    if (contentUpdates && open && totalRecords) {
       const contentUpdatesBody = getContentUpdatesBody({
         bulkOperationId,
         contentUpdates,
-        totalRecords: bulkDetails.totalNumOfRecords,
+        totalRecords,
       });
 
       setIsLoadingPreview(true);
@@ -158,7 +161,7 @@ const BulkEditInAppPreviewModal = ({
           setIsLoadingPreview(false);
         });
     }
-  }, [contentUpdates, open]);
+  }, [contentUpdates, open, totalRecords]);
 
   return (
     <Modal
