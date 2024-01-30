@@ -89,6 +89,7 @@
   "list.errors.table.message": "Reason for error",
 
   "uploaderBtnText": "or choose file",
+  "uploaderSubTitle": "Select a file with record identifiers",
   "uploaderSubTitle.empty": "Select a file with record identifiers",
   "uploaderSubTitle.item": "Select a file with record identifiers",
   "uploaderSubTitle.user": "Select a file with record identifiers",
