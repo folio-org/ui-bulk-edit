@@ -7,7 +7,7 @@ import { saveAs } from 'file-saver';
 
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { useShowCallout } from '@folio/stripes-acq-components';
+import { PrevNextPagination, useShowCallout } from '@folio/stripes-acq-components';
 
 import { RootContext } from '../../../../context/RootContext';
 import {
@@ -15,6 +15,7 @@ import {
   EDITING_STEPS,
   FILE_KEYS,
   FILE_SEARCH_PARAMS,
+  PAGINATION_CONFIG,
   getFormattedFilePrefixDate,
 } from '../../../../constants';
 import {
@@ -25,6 +26,7 @@ import {
   useFileDownload,
   QUERY_KEY_DOWNLOAD_IN_APP,
   IN_APP_PREVIEW_KEY,
+  BULK_OPERATION_DETAILS_KEY,
 } from '../../../../hooks/api';
 
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
@@ -33,6 +35,7 @@ import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFoot
 import css from './BulkEditInAppPreviewModal.css';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
+import { usePagination } from '../../../../hooks/usePagination';
 
 const BulkEditInAppPreviewModal = ({
   open,
@@ -58,25 +61,34 @@ const BulkEditInAppPreviewModal = ({
 
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
-  const { bulkOperationStart } = useBulkOperationStart();
+  const { bulkOperationStart, startData } = useBulkOperationStart();
+
+  const totalRecords = bulkDetails?.totalNumOfRecords;
+
+  const {
+    pagination,
+    changePage,
+  } = usePagination(PAGINATION_CONFIG);
 
   const [isPreviewLoading, setIsLoadingPreview] = useState(false);
+
   const {
     contentData,
     columnMapping,
-    refetch: fetchPreview,
+    isFetching
   } = useRecordsPreview({
     key: IN_APP_PREVIEW_KEY,
     id: bulkOperationId,
     step: EDITING_STEPS.EDIT,
     capabilities,
     queryOptions: {
-      enabled: false,
+      enabled: !!startData,
       onError: () => {
         swwCallout();
         onKeepEditing();
       },
     },
+    ...pagination,
   });
 
   const { refetch } = useFileDownload({
@@ -86,7 +98,7 @@ const BulkEditInAppPreviewModal = ({
     fileInfo: {
       fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
     },
-    onSuccess: data => {
+    onSuccess: fileData => {
       const searchParams = new URLSearchParams(history.location.search);
       let fileName = searchParams.get('fileName');
 
@@ -94,7 +106,7 @@ const BulkEditInAppPreviewModal = ({
         fileName = `${capabilities}-${searchParams.get('criteria')}.csv`;
       }
 
-      saveAs(new Blob([data]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
+      saveAs(new Blob([fileData]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
     },
   });
 
@@ -122,11 +134,11 @@ const BulkEditInAppPreviewModal = ({
   };
 
   useEffect(() => {
-    if (contentUpdates && open) {
+    if (contentUpdates && open && totalRecords) {
       const contentUpdatesBody = getContentUpdatesBody({
         bulkOperationId,
         contentUpdates,
-        totalRecords: bulkDetails.totalNumOfRecords,
+        totalRecords,
       });
 
       setIsLoadingPreview(true);
@@ -137,8 +149,10 @@ const BulkEditInAppPreviewModal = ({
           approach: APPROACHES.IN_APP,
           step: EDITING_STEPS.EDIT,
         }))
-        .then(() => fetchPreview())
-        .then(() => queryClient.invalidateQueries('bulkOperationDetails'))
+        .then(() => {
+          queryClient.invalidateQueries(BULK_OPERATION_DETAILS_KEY);
+          queryClient.invalidateQueries(IN_APP_PREVIEW_KEY);
+        })
         .catch(() => {
           swwCallout();
           onKeepEditing();
@@ -147,7 +161,7 @@ const BulkEditInAppPreviewModal = ({
           setIsLoadingPreview(false);
         });
     }
-  }, [contentUpdates, open]);
+  }, [contentUpdates, open, totalRecords]);
 
   return (
     <Modal
@@ -182,7 +196,17 @@ const BulkEditInAppPreviewModal = ({
             maxHeight={300}
             columnIdPrefix="in-app"
             columnWidths={PREVIEW_COLUMN_WIDTHS}
+            loading={isFetching}
           />
+
+          {contentData.length > 0 && (
+            <PrevNextPagination
+              {...pagination}
+              totalCount={bulkDetails?.matchedNumOfRecords}
+              disabled={false}
+              onChange={changePage}
+            />
+          )}
         </>
       ) : <Preloader />}
     </Modal>

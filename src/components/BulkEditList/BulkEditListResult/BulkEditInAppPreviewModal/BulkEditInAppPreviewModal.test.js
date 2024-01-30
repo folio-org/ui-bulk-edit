@@ -17,12 +17,14 @@ import {
 } from '../../../../constants';
 import {
   useBulkOperationDetails,
+  useRecordsPreview,
 } from '../../../../hooks/api';
 import BulkEditInAppPreviewModal from './BulkEditInAppPreviewModal';
 
 jest.mock('../../../../hooks/api', () => ({
   ...jest.requireActual('../../../../hooks/api'),
   useBulkOperationDetails: jest.fn(),
+  useRecordsPreview: jest.fn(),
 }));
 
 const bulkOperation = bulkEditLogsData[0];
@@ -61,6 +63,15 @@ describe('BulkEditInAppPreviewModal', () => {
   beforeEach(() => {
     useBulkOperationDetails.mockClear().mockReturnValue({
       bulkDetails: bulkOperation,
+    });
+
+    useRecordsPreview.mockClear().mockReturnValue({
+      isLoading: false,
+      refetch: jest.fn(),
+      isFetching: false,
+      contentData: [],
+      columnMapping: {},
+      columns: [],
     });
 
     useOkapiKy

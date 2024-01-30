@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { buildSearch } from '@folio/stripes-acq-components';
 import { useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
+import { BULK_OPERATION_DETAILS_KEY } from './api';
 
 export const useResetAppState = ({
   setFilters,
@@ -27,7 +28,7 @@ export const useResetAppState = ({
       setFilters(initialFiltersState);
 
       // clear bulkOperation information
-      queryClient.setQueryData('bulkOperationDetails', () => ({ data: undefined }));
+      queryClient.setQueryData(BULK_OPERATION_DETAILS_KEY, () => ({ data: undefined }));
 
       // reset confirmed file name
       setConfirmedFileName(null);

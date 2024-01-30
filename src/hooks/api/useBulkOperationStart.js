@@ -34,7 +34,7 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
     enabled: false,
   });
 
-  const { mutateAsync: bulkOperationStart, isLoading } = useMutation({
+  const { mutateAsync: bulkOperationStart, isLoading, data: startData } = useMutation({
     mutationFn: async ({
       id,
       approach,
@@ -74,5 +74,6 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
   return {
     bulkOperationStart,
     isLoading,
+    startData
   };
 };

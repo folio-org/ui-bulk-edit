@@ -4,6 +4,8 @@ import { useOkapiKy } from '@folio/stripes/core';
 import { useHistory } from 'react-router-dom';
 import { buildSearch } from '@folio/stripes-acq-components';
 
+export const BULK_OPERATION_DETAILS_KEY = 'bulkOperationDetails';
+
 export const useBulkOperationDetails = ({
   id,
   interval = 0,
@@ -16,7 +18,7 @@ export const useBulkOperationDetails = ({
   const [refetchInterval, setRefetchInterval] = useState(interval);
 
   const { data, isLoading } = useQuery({
-    queryKey: ['bulkOperationDetails', id, refetchInterval, ...additionalQueryKeys],
+    queryKey: [BULK_OPERATION_DETAILS_KEY, id, refetchInterval, ...additionalQueryKeys],
     enabled: !!id,
     refetchInterval,
     queryFn: () => ky.get(`bulk-operations/${id}`).json(),

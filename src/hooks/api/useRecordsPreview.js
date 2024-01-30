@@ -4,10 +4,7 @@ import { useIntl } from 'react-intl';
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-import {
-  BULK_VISIBLE_COLUMNS,
-  PREVIEW_LIMITS,
-} from '../../constants';
+import { BULK_VISIBLE_COLUMNS } from '../../constants';
 import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
 
@@ -20,17 +17,20 @@ export const useRecordsPreview = ({
   step,
   queryOptions,
   capabilities,
+  limit,
+  offset,
 }) => {
   const intl = useIntl();
   const { setVisibleColumns } = useContext(RootContext);
   const ky = useOkapiKy();
 
-  const { data, refetch, isLoading, dataUpdatedAt } = useQuery(
+  const { data, refetch, isLoading, dataUpdatedAt, isFetching } = useQuery(
     {
-      queryKey: [key, id, step],
+      queryKey: [key, id, step, limit, offset],
       cacheTime: 0,
+      keepPreviousData: true,
       queryFn: () => {
-        return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit: PREVIEW_LIMITS.RECORDS, step } }).json();
+        return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit, offset, step } }).json();
       },
       ...queryOptions,
     },
@@ -66,7 +66,7 @@ export const useRecordsPreview = ({
   return {
     isLoading,
     refetch,
-
+    isFetching,
     contentData,
     columnMapping,
     columns,

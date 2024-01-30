@@ -16,7 +16,7 @@ import {
   SORTING_PARAMETER,
 } from '@folio/stripes-acq-components';
 
-import { LOGS_COLUMNS, LOGS_PAGINATION_CONFIG } from '../../constants';
+import { LOGS_COLUMNS, PAGINATION_CONFIG } from '../../constants';
 import { getLogsResultsFormatter } from '../../utils/formatters';
 import { useLogsQueryParams } from '../../hooks';
 import { useBulkEditLogs } from '../../hooks/api';
@@ -49,7 +49,7 @@ const BulkEditLogs = () => {
   const {
     pagination,
     changePage,
-  } = usePagination(LOGS_PAGINATION_CONFIG);
+  } = usePagination(PAGINATION_CONFIG);
 
   const {
     logs,

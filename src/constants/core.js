@@ -4,7 +4,7 @@ export const BULK_VISIBLE_COLUMNS = 'bulk-edit-visible-columns';
 
 export const PREVIEW_LIMITS = {
   ERRORS: 10,
-  RECORDS: 10,
+  RECORDS: 100,
 };
 
 export const APPROACHES = {
@@ -109,7 +109,7 @@ export const MANUAL_UPLOAD_STEPS = {
   CONFIRM: 'CONFIRM',
 };
 
-export const LOGS_PAGINATION_CONFIG = {
-  limit: 100,
+export const PAGINATION_CONFIG = {
+  limit: PREVIEW_LIMITS.RECORDS,
   offset: 0,
 };
