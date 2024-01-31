@@ -265,18 +265,15 @@ export const BulkEditListFilters = ({
   );
 
   const renderListSelect = () => (
-    <>
-      {JSON.stringify(capabilities)}
-      <ListSelect
-        value={recordIdentifier}
-        disabled={getIsDisabledByPerm(capabilities,
-          isSelectIdentifiersDisabled,
-          hasAnyUserWithBulkPerm,
-          hasAnyInventoryWithInAppView)}
-        onChange={handleRecordIdentifierChange}
-        capabilities={capabilities}
-      />
-    </>
+    <ListSelect
+      value={recordIdentifier}
+      disabled={getIsDisabledByPerm(capabilities,
+        isSelectIdentifiersDisabled,
+        hasAnyUserWithBulkPerm,
+        hasAnyInventoryWithInAppView)}
+      onChange={handleRecordIdentifierChange}
+      capabilities={capabilities}
+    />
   );
 
   const renderListFileUploader = () => (
