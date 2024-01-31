@@ -151,7 +151,7 @@ export const BulkEditListFilters = ({
   };
 
   const handleCriteriaChange = (value) => {
-    const newFilterValue = { capabilities: null, recordTypes: null, criteria: value };
+    const newFilterValue = { capabilities: '', recordTypes: '', criteria: value };
 
     setFilters(prev => ({ ...prev, ...newFilterValue }));
 
@@ -265,15 +265,18 @@ export const BulkEditListFilters = ({
   );
 
   const renderListSelect = () => (
-    <ListSelect
-      value={recordIdentifier}
-      disabled={getIsDisabledByPerm(capabilities,
-        isSelectIdentifiersDisabled,
-        hasAnyUserWithBulkPerm,
-        hasAnyInventoryWithInAppView)}
-      onChange={handleRecordIdentifierChange}
-      capabilities={capabilities}
-    />
+    <>
+      {JSON.stringify(capabilities)}
+      <ListSelect
+        value={recordIdentifier}
+        disabled={getIsDisabledByPerm(capabilities,
+          isSelectIdentifiersDisabled,
+          hasAnyUserWithBulkPerm,
+          hasAnyInventoryWithInAppView)}
+        onChange={handleRecordIdentifierChange}
+        capabilities={capabilities}
+      />
+    </>
   );
 
   const renderListFileUploader = () => (

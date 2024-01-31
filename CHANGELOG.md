@@ -40,6 +40,7 @@
 * [UIBULKED-407](https://issues.folio.org/browse/UIBULKED-407) When selecting action "Find" in Bulk Edit, the last dropdown on the row moves to the right.
 * [UIBULKED-403](https://issues.folio.org/browse/UIBULKED-403) Integrate query-plugin with bulk-edit API.
 * [UIBULKED-246](https://issues.folio.org/browse/UIBULKED-246) Enabling Build query button on Query tab.
+* [UIBULKED-367](https://issues.folio.org/browse/UIBULKED-367) Logs - Provide a link to file with identifiers of the records affected by query.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
