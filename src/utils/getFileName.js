@@ -1,7 +1,7 @@
-import { APPROACHES, getFormattedFilePrefixDate } from '../constants';
+import { getFormattedFilePrefixDate } from '../constants';
 
 export const getFileName = (item, triggeredFile) => {
-  if (item.approach === APPROACHES.QUERY) {
+  if (item.fqlQueryId) {
     return {
       linkToTriggeringCsvFile: `Query-${item.id}.csv`,
       linkToMatchedRecordsCsvFile: `${getFormattedFilePrefixDate()}-Matched-Records-Query-${item.id}.csv`,
