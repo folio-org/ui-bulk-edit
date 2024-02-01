@@ -15,7 +15,7 @@ import {
   useRecordsPreview
 } from '../../../../hooks/api';
 
-import { PAGINATION_CONFIG } from '../../../../constants';
+import { EDITING_STEPS, PAGINATION_CONFIG } from '../../../../constants';
 import { usePagination } from '../../../../hooks/usePagination';
 import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
 
@@ -24,6 +24,8 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const search = new URLSearchParams(location.search);
   const step = search.get('step');
   const capabilities = search.get('capabilities');
+
+  const totalRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
 
   const {
     countOfRecords,
@@ -70,7 +72,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
         <div className={css.previewAccordionOuter}>
           {Boolean(contentData?.length) && (
             <PreviewAccordion
-              totalRecords={bulkDetails?.matchedNumOfRecords}
+              totalRecords={totalRecords}
               isInitial={isInitial}
               columns={columns}
               contentData={contentData}

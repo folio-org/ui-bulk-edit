@@ -16,10 +16,13 @@ import {
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import { QUERY_KEY_DOWNLOAD_LOGS, useFileDownload } from '../../../hooks/api';
-import { CAPABILITIES, linkNamesMap } from '../../../constants';
+import { APPROACHES, CAPABILITIES, linkNamesMap } from '../../../constants';
 import { useBulkPermissions } from '../../../hooks';
+import { getFileName } from '../../../utils/getFileName';
 
 const BulkEditLogsActions = ({ item }) => {
+  const fileNamePostfix = item.approach === APPROACHES.QUERY ? `.${item.approach}` : '';
+
   const {
     hasUsersViewPerms,
     hasInventoryInstanceViewPerms,
@@ -34,7 +37,7 @@ const BulkEditLogsActions = ({ item }) => {
       fileContentType: linkNamesMap[triggeredFile],
     },
     onSuccess: data => {
-      saveAs(new Blob([data]), item[triggeredFile].split('/')[1]);
+      saveAs(new Blob([data]), getFileName(item, triggeredFile));
       setTriggeredFile(null);
     },
   });
@@ -76,7 +79,7 @@ const BulkEditLogsActions = ({ item }) => {
             onClick={() => onLoadFile(file)}
           >
             <Icon icon="download">
-              <FormattedMessage id={`ui-bulk-edit.logs.actions.${file}`} />
+              <FormattedMessage id={`ui-bulk-edit.logs.actions.${file}${fileNamePostfix}`} />
             </Icon>
           </Button>
         ))}
