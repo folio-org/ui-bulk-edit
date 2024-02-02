@@ -67,7 +67,6 @@ export const BulkEditListFilters = ({
   const initialCapabilities = search.get('capabilities');
   const initialFileName = search.get('fileName');
   const initialStep = search.get('step');
-  const initialRecordType = search.get('recordTypes');
   const logFilters = Object.values(FILTERS).map((el) => search.getAll(el));
 
   const isQuery = criteria === CRITERIA.QUERY;
@@ -86,7 +85,6 @@ export const BulkEditListFilters = ({
     criteria: CRITERIA.LOGS,
     fileName: initialFileName,
     step: initialStep,
-    recordTypes: initialRecordType,
   };
 
   const [
@@ -109,7 +107,9 @@ export const BulkEditListFilters = ({
   const { fileUpload, isLoading } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
 
-  const { recordTypes } = useRecordTypes();
+  const { recordTypes } = useRecordTypes({ enabled: isQuery });
+
+  const recordTypeId = recordTypes?.find(type => type.label === getRecordType(initialCapabilities))?.id;
 
   const {
     entityTypeDataSource,
@@ -117,7 +117,7 @@ export const BulkEditListFilters = ({
     testQueryDataSource,
     getParamsSource,
     cancelQueryDataSource,
-  } = useQueryPlugin(initialRecordType);
+  } = useQueryPlugin(recordTypeId);
 
   const handleChange = (value, field) => setFilters(prev => ({
     ...prev, [field]: value,
@@ -132,8 +132,6 @@ export const BulkEditListFilters = ({
       recordIdentifier: '',
     }));
 
-    const selected = recordTypes?.find(type => type.label === getRecordType(value))?.id;
-
     history.replace({
       pathname: '/bulk-edit',
       search: buildSearch({
@@ -141,7 +139,6 @@ export const BulkEditListFilters = ({
         identifier: null,
         step: null,
         fileName: null,
-        recordTypes: selected
       }, location.search),
     });
 
@@ -151,12 +148,10 @@ export const BulkEditListFilters = ({
   };
 
   const handleCriteriaChange = (value) => {
-    const newFilterValue = { capabilities: '', recordTypes: '', criteria: value };
-
-    setFilters(prev => ({ ...prev, ...newFilterValue }));
+    setFilters(prev => ({ ...prev, recordIdentifier: '', criteria: value }));
 
     history.replace({
-      search: buildSearch(newFilterValue, location.search),
+      search: buildSearch({ identifier: '', criteria: value }, location.search),
     });
   };
 
@@ -332,7 +327,7 @@ export const BulkEditListFilters = ({
             componentType="builder"
             type="query-builder"
             disabled={isQueryBuilderDisabled}
-            key={capabilities}
+            key={recordTypeId}
             entityTypeDataSource={entityTypeDataSource}
             testQueryDataSource={testQueryDataSource}
             getParamsSource={getParamsSource}
