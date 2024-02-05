@@ -21,7 +21,7 @@ import { useBulkPermissions } from '../../../hooks';
 import { getFileName } from '../../../utils/getFileName';
 
 const BulkEditLogsActions = ({ item }) => {
-  const fileNamePostfix = item.approach === APPROACHES.QUERY ? `.${item.approach}` : '';
+  const fileNamePostfix = item.fqlQueryId ? `.${APPROACHES.QUERY}` : '';
 
   const {
     hasUsersViewPerms,
