@@ -4,6 +4,8 @@ export const useQueryPlugin = (recordType) => {
   const ky = useOkapiKy();
 
   const entityTypeDataSource = async () => {
+    if (!recordType) return null;
+
     return ky.get(`entity-types/${recordType}`).json();
   };
 
