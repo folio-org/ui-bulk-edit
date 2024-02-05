@@ -40,7 +40,7 @@ describe('useRecordTypes', () => {
 
     let result;
     await act(async () => {
-      result = renderHook(() => useRecordTypes()).result;
+      result = renderHook(() => useRecordTypes({ enabled: true })).result;
     });
 
     expect(result.current.recordTypes).toEqual([

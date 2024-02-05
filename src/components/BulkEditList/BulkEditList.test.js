@@ -13,6 +13,7 @@ import { CAPABILITIES, IDENTIFIERS, CRITERIA } from '../../constants';
 
 import { BulkEditList } from './BulkEditList';
 
+
 jest.mock('../BulkEditLogs/BulkEditLogs', () => {
   return jest.fn().mockReturnValue('BulkEditLogs');
 });
@@ -33,6 +34,17 @@ jest.mock('./BulkEditListResult/BulkEditManualUploadModal', () => {
 jest.mock('./BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal', () => {
   return jest.fn().mockReturnValue('BulkEditInAppPreviewModal');
 });
+
+jest.mock('../../hooks/api', () => ({
+  ...jest.requireActual('../../hooks/api'),
+  useQueryPlugin: jest.fn().mockReturnValue({
+    entityTypeDataSource: jest.fn(),
+    queryDetailsDataSource: jest.fn(),
+    testQueryDataSource: jest.fn(),
+    getParamsSource: jest.fn(),
+    cancelQueryDataSource: jest.fn(),
+  }),
+}));
 
 const renderBulkEditList = ({ criteria }) => {
   const params = new URLSearchParams({
