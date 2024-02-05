@@ -370,9 +370,7 @@
     "list.preview.electronicAccess.linkText": "Link text",
     "list.preview.electronicAccess.materialsSpecified": "Materials specified",
     "list.preview.electronicAccess.publicNote": "Public note",
-    "columns.HOLDINGS_RECORD.Administrative Note": "Administrative note",
     "ariaLabel.columnFilter": "Column filter input",
-    "columns.ITEM.Administrative Note": "Administrative note",
     "actionMenu.placeholder": "Search column name",
     "list.result.emptyMessage.instance": "Select a record identifier.",
     "list.filters.capabilities.instances": "Inventory - instances",
@@ -431,5 +429,9 @@
     "uploaderSubTitle.user.ID": "Select a file with User UUIDs",
     "uploaderSubTitle.user.BARCODE": "Select a file with User Barcodes",
     "uploaderSubTitle.user.EXTERNAL_SYSTEM_ID": "Select a file with External IDs",
-    "uploaderSubTitle.user.USER_NAME": "Select a file with Usernames"
+    "uploaderSubTitle.user.USER_NAME": "Select a file with Usernames",
+    "uploaderSubTitle": "Select a file with record identifiers",
+    "logs.actions.linkToTriggeringCsvFile.QUERY": "File with identifiers of the records affected by bulk update",
+    "columns.ITEM.Administrative note": "Administrative note",
+    "columns.HOLDINGS_RECORD.Administrative note": "Administrative note"
 }
