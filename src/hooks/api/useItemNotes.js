@@ -13,7 +13,7 @@ export const useItemNotes = (options = {}) => {
       queryKey: 'itemNotes',
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get('item-note-types').json(),
+      queryFn: () => ky.get('item-note-types', { searchParams: { limit: 1000 } }).json(),
       ...options,
     },
   );
