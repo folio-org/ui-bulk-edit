@@ -13,7 +13,7 @@ export const useHoldingsNotes = (options = {}) => {
       queryKey: 'holdingsNotes',
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get('holdings-note-types').json(),
+      queryFn: () => ky.get('holdings-note-types', { searchParams: { limit: 1000 } }).json(),
       ...options,
     },
   );
