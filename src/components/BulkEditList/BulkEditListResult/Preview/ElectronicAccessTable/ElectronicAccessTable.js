@@ -4,13 +4,8 @@ import { ELECTRONIC_ACCESS_HEAD_TITLES } from '../../../../PermissionsModal/cons
 import css from './ElectronicAcess.css';
 
 export const ElectronicAccessTable = ({ value }) => {
-  const tableBodyRows = value?.split('|')
-    .map(row => {
-      const cells = row.split(';');
-      const [uri, linkText, materialsSpecified, publicNote, relationship] = cells;
-
-      return [relationship, uri, linkText, materialsSpecified, publicNote];
-    });
+  const tableBodyRows = value?.split('\u001f|')
+    .map(row => row.split('\u001f;'));
 
   return (
     <table className={css.ElectronicAccess}>
