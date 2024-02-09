@@ -433,5 +433,10 @@
     "uploaderSubTitle": "Wybierz plik z identyfikatorami rekordów",
     "logs.actions.linkToTriggeringCsvFile.QUERY": "File with identifiers of the records affected by bulk update",
     "columns.ITEM.Administrative note": "Administrative note",
-    "columns.HOLDINGS_RECORD.Administrative note": "Administrative note"
+    "columns.HOLDINGS_RECORD.Administrative note": "Administrative note",
+    "logs.actions.linkToMatchedRecordsCsvFile.QUERY": "File with the matching records",
+    "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": "File with errors encountered during the record matching",
+    "logs.actions.linkToModifiedRecordsCsvFile.QUERY": "File with the preview of proposed changes",
+    "logs.actions.linkToCommittedRecordsCsvFile.QUERY": "File with updated records",
+    "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": "File with errors encountered when committing the changes"
 }

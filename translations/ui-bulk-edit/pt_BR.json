@@ -433,5 +433,10 @@
     "uploaderSubTitle": "Selecione um arquivo com identificadores de registro",
     "logs.actions.linkToTriggeringCsvFile.QUERY": "Arquivo com identificadores dos registros afetados pela atualização em massa",
     "columns.ITEM.Administrative note": "Nota administrativa",
-    "columns.HOLDINGS_RECORD.Administrative note": "Nota administrativa"
+    "columns.HOLDINGS_RECORD.Administrative note": "Nota administrativa",
+    "logs.actions.linkToMatchedRecordsCsvFile.QUERY": "Arquivo com os registros correspondentes",
+    "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": "Arquivo com erros encontrados durante a correspondência de registros",
+    "logs.actions.linkToModifiedRecordsCsvFile.QUERY": "Arquivo com a pré-visualização das alterações propostas",
+    "logs.actions.linkToCommittedRecordsCsvFile.QUERY": "Arquivo com registros atualizados",
+    "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": "Arquivo com erros encontrados ao confirmar as alterações"
 }
