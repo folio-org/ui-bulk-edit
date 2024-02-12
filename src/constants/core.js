@@ -67,6 +67,10 @@ export const CRITERIA = {
   LOGS: 'logs',
 };
 
+export const ERRORS = {
+  TOKEN: 'Incorrect number of tokens found in record'
+};
+
 export const TYPE_OF_PROGRESS = {
   INITIAL: 'initial',
   PROCESSED: 'processed',

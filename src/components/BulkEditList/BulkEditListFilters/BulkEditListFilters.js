@@ -21,7 +21,7 @@ import {
   JOB_STATUSES,
   TRANSLATION_SUFFIX,
   EDITING_STEPS,
-  FILTERS,
+  FILTERS, ERRORS,
 } from '../../../constants';
 import { RootContext } from '../../../context/RootContext';
 import {
@@ -195,11 +195,12 @@ export const BulkEditListFilters = ({
         identifierType: recordIdentifier,
       });
 
-      const { status } = await bulkOperationStart({
+      const { status, errorMessage } = await bulkOperationStart({
         id,
         step: EDITING_STEPS.UPLOAD,
       });
 
+      if (errorMessage.includes(ERRORS.TOKEN)) throw Error(ERRORS.TOKEN);
       if (status === JOB_STATUSES.FAILED) throw Error();
 
       history.replace({
@@ -209,10 +210,17 @@ export const BulkEditListFilters = ({
 
       setIsFileUploaded(true);
     } catch ({ message }) {
-      showCallout({
-        message: <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:fileToUpload.name }} />,
-        type: 'error',
-      });
+      if (message === ERRORS.TOKEN) {
+        showCallout({
+          message: <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:fileToUpload.name }} />,
+          type: 'error',
+        });
+      } else {
+        showCallout({
+          message: <FormattedMessage id="ui-bulk-edit.error.uploadedFile" />,
+          type: 'error',
+        });
+      }
     }
   };
 
