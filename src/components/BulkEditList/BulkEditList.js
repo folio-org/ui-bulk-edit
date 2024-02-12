@@ -56,7 +56,12 @@ export const BulkEditList = () => {
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const { step, capabilities, criteria, initialFileName } = useSearchParams();
+  const {
+    step,
+    capabilities,
+    criteria,
+    initialFileName
+  } = useSearchParams();
   const identifierFilters = Object.values(IDENTIFIER_FILTERS).map((el) => search.getAll(el));
   const queryFilters = Object.values(QUERY_FILTERS).map((el) => search.getAll(el));
   const logsFilters = Object.values(LOGS_FILTERS).map((el) => search.getAll(el));

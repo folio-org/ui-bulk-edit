@@ -15,7 +15,12 @@ import { RootContext } from '../../../../context/RootContext';
 
 export const QueryTab = () => {
   const history = useHistory();
-  const { queryRecordType, criteria, step, initialFileName } = useSearchParams();
+  const {
+    queryRecordType,
+    criteria,
+    step,
+    initialFileName
+  } = useSearchParams();
   const { setVisibleColumns } = useContext(RootContext);
   const { recordTypes } = useRecordTypes();
   const permissions = useBulkPermissions();

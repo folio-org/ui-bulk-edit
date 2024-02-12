@@ -1,4 +1,9 @@
-import React, { useCallback, useContext, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useMemo,
+  useState
+} from 'react';
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -23,7 +28,9 @@ import { RootContext } from '../../../../context/RootContext';
 export const IdentifierTab = () => {
   const history = useHistory();
   const location = useLocation();
+  const showCallout = useShowCallout();
   const permissions = useBulkPermissions();
+
   const {
     isFileUploaded,
     setIsFileUploaded,
@@ -37,10 +44,8 @@ export const IdentifierTab = () => {
     capabilities,
     identifier
   } = useSearchParams();
-  const showCallout = useShowCallout();
 
   const [isDropZoneActive, setDropZoneActive] = useState(false);
-
   const { fileUpload, isLoading } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
 
@@ -56,8 +61,8 @@ export const IdentifierTab = () => {
 
   const [recordType] = activeFilters[IDENTIFIER_FILTERS.CAPABILITIES] || [];
   const [recordIdentifier] = activeFilters[IDENTIFIER_FILTERS.IDENTIFIER] || [];
-
   const isDropZoneDisabled = isFileUploaded || !recordIdentifier || initialFileName;
+  const capabilitiesFilterOptions = getCapabilityOptions(criteria, permissions);
 
   const {
     isSelectIdentifiersDisabled,
@@ -66,9 +71,6 @@ export const IdentifierTab = () => {
     isDropZoneDisabledPerm,
     hasInAppEditPerms,
   } = permissions;
-
-  const capabilitiesFilterOptions = getCapabilityOptions(criteria, permissions);
-
 
   const isRecordIdentifierSelectDisabled = getIsDisabledByPerm(
     recordType,
