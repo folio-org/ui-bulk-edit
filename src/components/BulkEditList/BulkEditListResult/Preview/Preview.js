@@ -6,6 +6,7 @@ import {
 } from '@folio/stripes/components';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import React from 'react';
 import css from './Preview.css';
 import { PreviewAccordion } from './PreviewAccordion';
 import { ErrorsAccordion } from './ErrorsAccordion';
@@ -15,15 +16,21 @@ import {
   useRecordsPreview
 } from '../../../../hooks/api';
 
-import { EDITING_STEPS, PAGINATION_CONFIG } from '../../../../constants';
+import {
+  CRITERIA,
+  EDITING_STEPS,
+  PAGINATION_CONFIG
+} from '../../../../constants';
 import { usePagination } from '../../../../hooks/usePagination';
 import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
+import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const location = useLocation();
   const search = new URLSearchParams(location.search);
   const step = search.get('step');
   const capabilities = search.get('capabilities');
+  const criteria = search.get('criteria');
 
   const totalRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
 
@@ -51,6 +58,9 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
   const errors = data?.errors || [];
 
+  if (!((bulkDetails.fqlQuery && criteria === CRITERIA.QUERY) || (criteria !== CRITERIA.QUERY && !bulkDetails.fqlQuery))) {
+    return <NoResultsMessage />;
+  }
   return (
     <AccordionStatus>
       <div className={css.previewContainer}>
@@ -95,7 +105,6 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
             />
           )}
         </div>
-
       </div>
     </AccordionStatus>
   );
@@ -112,5 +121,6 @@ Preview.propTypes = {
     processedNumOfRecords: PropTypes.number,
     matchedNumOfErrors: PropTypes.number,
     committedNumOfErrors: PropTypes.number,
+    fqlQuery: PropTypes.string
   }),
 };

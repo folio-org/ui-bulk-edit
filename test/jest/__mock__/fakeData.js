@@ -11,6 +11,7 @@ export const bulkEditLogsData = Array(50).fill(null).map((_, index) => [
     processedNumOfRecords: 55,
     committedNumOfRecords: 20,
     editing: 'In app',
+    fqlQuery: 'test'
   },
   {
     id: (index + 1).toString(),

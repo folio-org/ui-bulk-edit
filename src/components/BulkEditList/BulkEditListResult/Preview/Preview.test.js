@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router';
 import { QueryClientProvider } from 'react-query';
 
-import { render, screen } from '@testing-library/react';
+import { logDOM, render, screen } from '@testing-library/react';
 
 import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
@@ -12,6 +12,7 @@ import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
 import { RootContext } from '../../../../context/RootContext';
 import { Preview } from './Preview';
+import { CRITERIA } from '../../../../constants';
 
 jest.mock('./PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
@@ -27,9 +28,9 @@ const defaultProps = {
   id: bulkOperation.id,
 };
 
-const renderPreview = (props = defaultProps) => {
+const renderPreview = (props = defaultProps, criteria = 'query') => {
   render(
-    <MemoryRouter initialEntries={['/bulk-edit/1?queryText=patronGroup%3D%3D"1"']}>
+    <MemoryRouter initialEntries={[`/bulk-edit/1?queryText=patronGroup%3D%3D"1"&criteria=${criteria}`]}>
       <QueryClientProvider client={queryClient}>
         <RootContext.Provider value={{ setCountOfRecords: setCountOfRecordsMock }}>
           <Preview {...props} />
@@ -86,5 +87,18 @@ describe('Preview Query', () => {
     await runAxeTest({
       rootNode: document.body,
     });
+  });
+  it('should render with no axe errors', async () => {
+    renderPreview();
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
+  });
+
+  it('should render no message', async () => {
+    renderPreview(defaultProps, CRITERIA.IDENTIFIER);
+
+    logDOM();
   });
 });

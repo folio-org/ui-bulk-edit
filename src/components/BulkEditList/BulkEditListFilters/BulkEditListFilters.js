@@ -117,6 +117,7 @@ export const BulkEditListFilters = ({
     testQueryDataSource,
     getParamsSource,
     cancelQueryDataSource,
+    runQueryDataSource
   } = useQueryPlugin(recordTypeId);
 
   const handleChange = (value, field) => setFilters(prev => ({
@@ -250,6 +251,13 @@ export const BulkEditListFilters = ({
     }
   }, [location.search]);
 
+  const onQueryRunSuccess = ({ id }) => {
+    history.replace({
+      pathname: `/bulk-edit/${id}/progress`,
+      search: buildSearch({}, location.search),
+    });
+  };
+
   const renderCapabilities = () => (
     <Capabilities
       capabilities={capabilities}
@@ -333,6 +341,8 @@ export const BulkEditListFilters = ({
             getParamsSource={getParamsSource}
             queryDetailsDataSource={queryDetailsDataSource}
             onQueryRunFail={() => {}}
+            onQueryRunSuccess={onQueryRunSuccess}
+            runQueryDataSource={runQueryDataSource}
             cancelQueryDataSource={cancelQueryDataSource}
           />
         </>
