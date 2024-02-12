@@ -210,7 +210,7 @@ export const BulkEditListFilters = ({
       setIsFileUploaded(true);
     } catch ({ message }) {
       showCallout({
-        message: <FormattedMessage id="ui-bulk-edit.error.uploadedFile" />,
+        message: <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:fileToUpload.name }} />,
         type: 'error',
       });
     }
