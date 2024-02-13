@@ -1,23 +1,25 @@
 import { memo } from 'react';
-import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Select } from '@folio/stripes/components';
 
-import { identifierOptions } from '../../../../constants';
+import { identifierOptions } from '../../../constants';
 
-export const ListSelect = memo(({ value, disabled, onChange, capabilities }) => {
+
+export const ListSelect = memo(({
+  value = '',
+  capabilities = '',
+  disabled,
+  onChange
+}) => {
   const intl = useIntl();
-  const location = useLocation();
 
   const options = identifierOptions[capabilities]?.map((el) => ({
     value: el.value,
     label: intl.formatMessage({ id: el.label }),
     disabled: el.disabled,
   }));
-
-  const identifier = new URLSearchParams(location.search).get('identifier') || value;
 
   const isDisabled = capabilities === '' ? true : disabled;
 
@@ -26,7 +28,7 @@ export const ListSelect = memo(({ value, disabled, onChange, capabilities }) => 
       dataOptions={options}
       arial-label={intl.formatMessage({ id: 'ui-bulk-edit.list.filters.recordIdentifier' })}
       label={<FormattedMessage id="ui-bulk-edit.list.filters.recordIdentifier" />}
-      value={identifier}
+      value={value}
       onChange={onChange}
       disabled={isDisabled}
     />
@@ -34,8 +36,8 @@ export const ListSelect = memo(({ value, disabled, onChange, capabilities }) => 
 });
 
 ListSelect.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  defaultIdentifier: PropTypes.func,
+  value: PropTypes.string,
   disabled: PropTypes.bool,
   capabilities: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
 };

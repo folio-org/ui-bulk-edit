@@ -6,9 +6,9 @@ import {
   SORTING_DIRECTION_PARAMETER,
 } from '@folio/stripes-acq-components';
 
-import { FILTERS } from '../constants';
+import { LOGS_FILTERS } from '../constants';
 
-const queryFields = [SORTING_PARAMETER, SORTING_DIRECTION_PARAMETER, ...Object.values(FILTERS)];
+const queryFields = [SORTING_PARAMETER, SORTING_DIRECTION_PARAMETER, ...Object.values(LOGS_FILTERS)];
 
 export const useLogsQueryParams = ({ search }) => {
   const logsQueryParams = useMemo(() => {

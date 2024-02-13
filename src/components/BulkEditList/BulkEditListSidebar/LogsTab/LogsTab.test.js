@@ -16,7 +16,7 @@ import '../../../../../test/jest/__mock__';
 
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
-import { LogsFilters } from './LogsFilters';
+import { LogsTab } from './LogsTab';
 
 const activeFiltersMock = {
   STATUS: ['New'],
@@ -34,7 +34,7 @@ const renderLogsFilters = () => {
   render(
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={['/bulk-edit?criteria=logs']}>
-        <LogsFilters
+        <LogsTab
           activeFilters={activeFiltersMock}
           onChange={onChangeMock}
           resetFilter={resetFiltersMock}

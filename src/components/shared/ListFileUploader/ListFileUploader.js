@@ -12,21 +12,19 @@ import {
 } from '@folio/stripes-data-transfer-components';
 
 import css from './ListFileUploader.css';
-import { getFileInfo } from '../BulkEditList/BulkEditListFilters/utils/getFileInfo';
+import { getFileInfo } from '../../BulkEditList/BulkEditListSidebar/utils/getFileInfo';
 
-const ListFileUploader = (
-  {
-    isDropZoneActive,
-    isLoading,
-    handleDrop,
-    isDropZoneDisabled,
-    handleDragEnter,
-    disableUploader,
-    handleDragLeave,
-    uploaderSubTitle,
-    className,
-  },
-) => {
+const ListFileUploader = ({
+  uploaderSubTitle,
+  isDropZoneActive,
+  isLoading,
+  handleDrop,
+  isDropZoneDisabled,
+  handleDragEnter,
+  disableUploader,
+  handleDragLeave,
+  className,
+}) => {
   const [fileExtensionModalOpen, setFileExtensionModalOpen] = useState(false);
   const [fileExtensionModalMessage, setFileExtensionModalMessage] = useState('');
 

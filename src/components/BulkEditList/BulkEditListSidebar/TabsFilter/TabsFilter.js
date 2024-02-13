@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 import { CRITERIA } from '../../../../constants';
 import { useBulkPermissions } from '../../../../hooks';
 
-const FilterTabs = ({ criteria, hasLogViewPerms, onCriteriaChange }) => {
+export const TabsFilter = ({
+  criteria,
+  hasLogViewPerms,
+  onCriteriaChange
+}) => {
   const buttonStyleActive = (criteriaToCompare) => (criteria === criteriaToCompare ? 'primary' : 'default');
   const { hasQueryPerms } = useBulkPermissions();
 
@@ -38,10 +42,8 @@ const FilterTabs = ({ criteria, hasLogViewPerms, onCriteriaChange }) => {
   );
 };
 
-FilterTabs.propTypes = {
+TabsFilter.propTypes = {
   criteria: PropTypes.string,
   hasLogViewPerms: PropTypes.bool,
   onCriteriaChange: PropTypes.func,
 };
-
-export default FilterTabs;

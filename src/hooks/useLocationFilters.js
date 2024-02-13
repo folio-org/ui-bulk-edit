@@ -3,13 +3,15 @@ import { useCallback, useEffect } from 'react';
 import { buildFiltersObj } from '@folio/stripes-acq-components/lib/AcqList/utils';
 import { buildSearch } from '@folio/stripes-acq-components';
 import { SEARCH_INDEX_PARAMETER } from '@folio/stripes-acq-components/lib/AcqList/constants';
+import { useHistory } from 'react-router-dom';
 
 export const useLocationFilters = ({
   resetData = () => {},
-  location,
-  history,
   initialFilter,
 }) => {
+  const history = useHistory();
+  const { search } = history.location;
+
   const {
     filters,
     applyFilters,
@@ -21,32 +23,32 @@ export const useLocationFilters = ({
 
   useEffect(
     () => {
-      const initialFilters = buildFiltersObj(location.search);
+      const initialFilters = buildFiltersObj(search);
 
       setFilters(initialFilters);
       setSearchIndex(initialFilters[SEARCH_INDEX_PARAMETER] || '');
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [search],
   );
 
   const applyLocationFilters = useCallback(
     (type, value) => {
       const newFilters = applyFilters(type, value);
-      const search = new URLSearchParams(location.search);
-      const criteria = search.get('criteria');
-      const capabilities = search.get('capabilities');
-      const fileName = search.get('fileName');
-      const step = search.get('step');
+      const searchParams = new URLSearchParams(search);
+      const criteria = searchParams.get('criteria');
+      const capabilities = searchParams.get('capabilities');
+      const fileName = searchParams.get('fileName');
+      const step = searchParams.get('step');
 
       history.replace({
         pathname: '',
-        search: `${buildSearch({ ...newFilters, capabilities, criteria, fileName, step }, location.search)}`,
+        search: `${buildSearch({ ...newFilters, capabilities, criteria, fileName, step }, search)}`,
       });
 
       return newFilters;
     },
-    [applyFilters, history, location.search],
+    [applyFilters, history, search],
   );
 
   const resetLocationFilters = useCallback(
