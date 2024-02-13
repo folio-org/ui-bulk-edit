@@ -430,13 +430,13 @@
     "uploaderSubTitle.user.BARCODE": "Vybrat soubor s uživatelskými čárovými kódy",
     "uploaderSubTitle.user.EXTERNAL_SYSTEM_ID": "Vyberte soubor s externími ID",
     "uploaderSubTitle.user.USER_NAME": "Vyberte soubor s uživatelskými jmény",
-    "uploaderSubTitle": "Select a file with record identifiers",
+    "uploaderSubTitle": "Vybrat soubor s identifikátory záznamu",
     "logs.actions.linkToTriggeringCsvFile.QUERY": "File with identifiers of the records affected by bulk update",
-    "columns.ITEM.Administrative note": "Administrative note",
-    "columns.HOLDINGS_RECORD.Administrative note": "Administrative note",
-    "logs.actions.linkToMatchedRecordsCsvFile.QUERY": "File with the matching records",
-    "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": "File with errors encountered during the record matching",
-    "logs.actions.linkToModifiedRecordsCsvFile.QUERY": "File with the preview of proposed changes",
-    "logs.actions.linkToCommittedRecordsCsvFile.QUERY": "File with updated records",
-    "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": "File with errors encountered when committing the changes"
+    "columns.ITEM.Administrative note": "Administrativní poznámka",
+    "columns.HOLDINGS_RECORD.Administrative note": "Administrativní poznámka",
+    "logs.actions.linkToMatchedRecordsCsvFile.QUERY": "Soubor s odpovídajícími záznamy",
+    "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": "Soubor s chybami zjištěnými během porovnávání záznamů",
+    "logs.actions.linkToModifiedRecordsCsvFile.QUERY": "Soubor s náhledem navrhovaných změn",
+    "logs.actions.linkToCommittedRecordsCsvFile.QUERY": "Soubor s aktualizovanými záznamy",
+    "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": "Soubor s chybami, ke kterým došlo při provádění změn"
 }
