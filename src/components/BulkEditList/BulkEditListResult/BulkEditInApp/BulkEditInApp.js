@@ -13,6 +13,7 @@ import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import {
   CAPABILITIES,
+  CRITERIA,
   getHoldingsOptions,
   getInstanceOptions,
   getItemsOptions,
@@ -29,6 +30,9 @@ export const BulkEditInApp = ({
   const intl = useIntl();
   const location = useLocation();
   const search = new URLSearchParams(location.search);
+  const criteria = search.get('criteria');
+  const queryRecordType = search.get('queryRecordType');
+  const key = criteria === CRITERIA.QUERY ? queryRecordType : capabilities;
 
   const fileUploadedName = search.get('fileName');
   const isItemCapability = capabilities === CAPABILITIES.ITEM;
@@ -44,7 +48,7 @@ export const BulkEditInApp = ({
     [CAPABILITIES.INSTANCE]: getInstanceOptions(intl.formatMessage),
   };
 
-  const options = optionsMap[capabilities];
+  const options = optionsMap[key];
   const showContentUpdatesForm = options && !isItemNotesLoading && !isHoldingsNotesLoading;
   const sortedOptions = sortAlphabetically(options, intl.formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
 
