@@ -5,7 +5,7 @@ import { useOkapiKy } from '@folio/stripes/core';
 
 import { bulkEditLogsData } from '../../../../test/jest/__mock__/fakeData';
 
-import { FILTERS, JOB_STATUSES } from '../../../constants';
+import { LOGS_FILTERS, JOB_STATUSES } from '../../../constants';
 import { useBulkEditLogs } from './useBulkEditLogs';
 import { getFullName } from '../../../utils/getFullName';
 
@@ -68,7 +68,7 @@ describe('useBulkEditLogs', () => {
   it('should return fetched hydreated logs list', async () => {
     const { result, waitFor } = renderHook(() => useBulkEditLogs({
       pagination: { limit: 5, offset: 0, timestamp: 42 },
-      filters: { [FILTERS.STATUS]: JOB_STATUSES.COMPLETED },
+      filters: { [LOGS_FILTERS.STATUS]: JOB_STATUSES.COMPLETED },
     }), { wrapper });
 
     await waitFor(() => !result.current.isLoading);

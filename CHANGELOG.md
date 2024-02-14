@@ -42,6 +42,7 @@
 * [UIBULKED-246](https://issues.folio.org/browse/UIBULKED-246) Enabling Build query button on Query tab.
 * [UIBULKED-367](https://issues.folio.org/browse/UIBULKED-367) Logs - Provide a link to file with identifiers of the records affected by query.
 * [UIBULKED-412](https://issues.folio.org/browse/UIBULKED-412) Not all but up to 10 note types are displayed in Bulk edit.
+* [UIBULKED-411](https://issues.folio.org/browse/UIBULKED-411) Refactoring of ListFilters component
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 

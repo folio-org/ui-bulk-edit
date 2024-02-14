@@ -6,10 +6,16 @@ import {
   fireEvent,
 } from '@testing-library/react';
 
-import '../../../test/jest/__mock__';
+import '../../../../test/jest/__mock__';
 
 import ListFileUploader from './ListFileUploader';
-import { createDtWithFiles, createFile, dispatchEvt, flushPromises, mockData } from '../../../test/jest/utils/fileUpload';
+import {
+  createDtWithFiles,
+  createFile,
+  dispatchEvt,
+  flushPromises,
+  mockData
+} from '../../../../test/jest/utils/fileUpload';
 
 const onDragEnterMock = jest.fn();
 const onDragLeaveMock = jest.fn();
