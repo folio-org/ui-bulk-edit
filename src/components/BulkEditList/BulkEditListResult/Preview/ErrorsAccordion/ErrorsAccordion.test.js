@@ -3,6 +3,7 @@ import { MemoryRouter } from 'react-router';
 
 import '../../../../../../test/jest/__mock__';
 import userEvent from '@testing-library/user-event';
+import { runAxeTest } from '@folio/stripes-testing';
 import { errorsPreview } from '../../../../../../test/jest/__mock__/fakeData';
 
 import ErrorsAccordion from './ErrorsAccordion';
@@ -31,6 +32,16 @@ describe('ErrorsAccordion', () => {
     expect(screen.getByText(/errors.info/)).toBeVisible();
     expect(screen.getByText(/errors.table.code/)).toBeVisible();
     expect(screen.getByText(errorsPreview.errors[0].message)).toBeVisible();
+  });
+
+  it('should render with no axe errors', async () => {
+    const mockHistory = ['/bulk-edit/1/preview'];
+
+    renderPreviewAccordion(mockHistory, { ...defaultProps, initial: true });
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 
   it('should render preview accordion', () => {

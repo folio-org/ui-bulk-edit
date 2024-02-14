@@ -6,6 +6,7 @@ import { act, render, screen, fireEvent } from '@testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../../../../test/jest/__mock__';
+import { runAxeTest } from '@folio/stripes-testing';
 import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 import { RootContext } from '../../../../context/RootContext';
@@ -125,5 +126,9 @@ describe('BulkEditInAppPreviewModal', () => {
     });
 
     expect(screen.getByText('ui-bulk-edit.previewModal.previewToBeChanged')).toBeVisible();
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 });

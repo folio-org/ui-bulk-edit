@@ -7,6 +7,7 @@ import { QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 
 import '../../../test/jest/__mock__';
+import { runAxeTest } from '@folio/stripes-testing';
 import { bulkEditLogsData } from '../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../test/jest/utils/queryClient';
 
@@ -249,5 +250,13 @@ describe('BulkEditActionMenu', () => {
     act(() => userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid')));
 
     expect(setVisibleColumns).not.toHaveBeenCalledWith();
+  });
+
+  it('should render with no axe errors', async () => {
+    renderBulkEditActionMenu({ step: EDITING_STEPS.UPLOAD, capability: CAPABILITIES.USER });
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 });

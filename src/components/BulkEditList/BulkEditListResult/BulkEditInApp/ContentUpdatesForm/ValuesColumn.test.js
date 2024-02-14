@@ -5,6 +5,7 @@ import { IntlProvider } from 'react-intl';
 import { QueryClientProvider } from 'react-query';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { runAxeTest } from '@folio/stripes-testing';
 import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 import { ValuesColumn } from './ValuesColumn';
 import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
@@ -167,5 +168,13 @@ describe('ValuesColumn Component', () => {
     fireEvent.change(element, { target: { value: 'RESOURCE' } });
 
     await waitFor(() => expect(onChange).toHaveBeenCalled());
+  });
+
+  it('should render with no axe errors', async () => {
+    renderComponent(() => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT);
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 });

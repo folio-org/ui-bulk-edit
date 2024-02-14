@@ -6,6 +6,7 @@ import { QueryClientProvider } from 'react-query';
 import '../../../../../test/jest/__mock__';
 
 import { BrowserRouter } from 'react-router-dom';
+import { runAxeTest } from '@folio/stripes-testing';
 import { BulkEditManualUploadModal } from './index';
 import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../../../../test/jest/utils/fileUpload';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
@@ -55,6 +56,14 @@ describe('BulkEditActionMenu', () => {
     renderWithRouter(startModal, { route: currentRoute });
 
     expect(screen.getByText(/meta.title/)).toBeVisible();
+  });
+
+  it('should render with no axe errors', async () => {
+    renderWithRouter(startModal, { route: currentRoute });
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 
   it('should update title with uploaded name', async () => {

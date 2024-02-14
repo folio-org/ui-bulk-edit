@@ -1,8 +1,9 @@
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { runAxeTest } from '@folio/stripes-testing'; // for expect assertions
 import { AdditionalActionParameters } from './AdditionalActionParameters';
 import { ACTIONS, PARAMETERS_KEYS } from '../../../../../constants';
-import { ACTION_PARAMETERS_KEY } from './helpers'; // for expect assertions
+import { ACTION_PARAMETERS_KEY } from './helpers';
 
 describe('AdditionalActionParameters', () => {
   const mockAction = {
@@ -39,6 +40,16 @@ describe('AdditionalActionParameters', () => {
     );
 
     expect(getByLabelText(`ui-bulk-edit.layer.action.apply.${PARAMETERS_KEYS.APPLY_TO_ITEMS}`)).toBeInTheDocument();
+  });
+
+  it('should render with no axe errors', async () => {
+    render(
+      <AdditionalActionParameters action={mockAction} actionIndex={0} onChange={() => {}} />
+    );
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 
   it('calls onChange with updated parameters when a checkbox is clicked', () => {
