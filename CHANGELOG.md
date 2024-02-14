@@ -2,6 +2,10 @@
 
 ## In progress
 
+## [4.0.3](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.3) (2024-02-14)
+
+* [UIBULKED-412](https://issues.folio.org/browse/UIBULKED-412) Not all but up to 10 note types are displayed in Bulk edit.
+
 ## [4.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.2) (2023-11-06)
 
 * [UIBULKED-373](https://issues.folio.org/browse/UIBULKED-373) "User" dropdown doesn't include Users recently run bulk edit jobs
