@@ -15,6 +15,7 @@ import { ListSelect } from '../../../shared/ListSelect/ListSelect';
 import {
   CRITERIA,
   EDITING_STEPS,
+  ERRORS,
   IDENTIFIER_FILTERS,
   JOB_STATUSES,
   TRANSLATION_SUFFIX
@@ -133,11 +134,12 @@ export const IdentifierTab = () => {
         identifierType: recordIdentifier,
       });
 
-      const { status } = await bulkOperationStart({
+      const { status, errorMessage } = await bulkOperationStart({
         id,
         step: EDITING_STEPS.UPLOAD,
       });
 
+      if (errorMessage.includes(ERRORS.TOKEN)) throw Error(ERRORS.TOKEN);
       if (status === JOB_STATUSES.FAILED) throw Error();
 
       history.replace({
@@ -147,10 +149,17 @@ export const IdentifierTab = () => {
 
       setIsFileUploaded(true);
     } catch ({ message }) {
-      showCallout({
-        message: <FormattedMessage id="ui-bulk-edit.error.uploadedFile" />,
-        type: 'error',
-      });
+      if (message === ERRORS.TOKEN) {
+        showCallout({
+          message: <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:fileToUpload.name }} />,
+          type: 'error',
+        });
+      } else {
+        showCallout({
+          message: <FormattedMessage id="ui-bulk-edit.error.uploadedFile" />,
+          type: 'error',
+        });
+      }
     }
   };
 
