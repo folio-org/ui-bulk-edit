@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { runAxeTest } from '@folio/stripes-testing';
 import { ElectronicAccessTable } from './ElectronicAccessTable';
 
 
@@ -27,6 +28,14 @@ describe('ElectronicAccessTable', () => {
       row.forEach(cell => {
         expect(getByText(cell)).toBeInTheDocument();
       });
+    });
+  });
+
+  it('should render with no axe errors', async () => {
+    render(<ElectronicAccessTable value={testValue} />);
+
+    await runAxeTest({
+      rootNode: document.body,
     });
   });
 });

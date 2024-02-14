@@ -10,6 +10,7 @@ import {
 import '@testing-library/jest-dom/extend-expect';
 import { QueryClientProvider } from 'react-query';
 import userEvent from '@testing-library/user-event';
+
 import { PermissionsModal } from './PermissionsModal';
 import { queryClient } from '../../../test/jest/utils/queryClient';
 import { useAllPermissions } from './hooks/useAllPermissions';

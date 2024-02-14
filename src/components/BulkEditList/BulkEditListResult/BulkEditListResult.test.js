@@ -61,6 +61,18 @@ describe('BulkEditListResult', () => {
     expect(screen.getByText(/list.result.emptyMessage/)).toBeVisible();
   });
 
+  it('should render with no axe errors', async () => {
+    const history = createMemoryHistory();
+
+    history.push('/bulk-edit?capabilities=USERS&criteria=identifier');
+
+    renderBulkEditResult(history);
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
+  });
+
   it('displays empty message with query tab', () => {
     const history = createMemoryHistory();
 

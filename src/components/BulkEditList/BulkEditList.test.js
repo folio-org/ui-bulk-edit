@@ -7,12 +7,12 @@ import '../../../test/jest/__mock__';
 
 import userEvent from '@testing-library/user-event';
 import { useOkapiKy } from '@folio/stripes/core';
+import { runAxeTest } from '@folio/stripes-testing';
 import { queryClient } from '../../../test/jest/utils/queryClient';
 
 import { CAPABILITIES, IDENTIFIERS, CRITERIA } from '../../constants';
 
 import { BulkEditList } from './BulkEditList';
-
 
 jest.mock('../BulkEditLogs/BulkEditLogs', () => {
   return jest.fn().mockReturnValue('BulkEditLogs');
@@ -67,6 +67,14 @@ describe('BulkEditList', () => {
     renderBulkEditList({ criteria: CRITERIA.LOGS });
 
     expect(screen.getByText(/holdings/i)).toBeVisible();
+  });
+
+  it('should render with no axe errors', async () => {
+    renderBulkEditList({ criteria: CRITERIA.LOGS });
+
+    await runAxeTest({
+      rootNode: document.body,
+    });
   });
 
   it('should display Logs pane when criteria is logs', async () => {
