@@ -14,7 +14,8 @@ import { Capabilities } from '../../../shared/Capabilities/Capabilities';
 import { ListSelect } from '../../../shared/ListSelect/ListSelect';
 import {
   CRITERIA,
-  EDITING_STEPS, ERRORS,
+  EDITING_STEPS,
+  ERRORS,
   IDENTIFIER_FILTERS,
   JOB_STATUSES,
   TRANSLATION_SUFFIX
