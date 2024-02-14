@@ -21,6 +21,7 @@ import {
   BULK_VISIBLE_COLUMNS,
   FILE_SEARCH_PARAMS,
   FILE_TO_LINK,
+  CRITERIA,
 } from '../../constants';
 import {
   useBulkPermissions,
@@ -43,7 +44,11 @@ const BulkEditActionMenu = ({
   const perms = useBulkPermissions();
   const search = new URLSearchParams(location.search);
   const capability = search.get('capabilities');
+  const criteria = search.get('criteria');
+  const queryRecordType = search.get('queryRecordType');
   const step = search.get('step');
+
+  const key = criteria === CRITERIA.QUERY ? queryRecordType : capability;
 
   const [columnSearch, setColumnSearch] = useState('');
 
@@ -60,10 +65,10 @@ const BulkEditActionMenu = ({
 
   const [fileInfo, setFileInfo] = useState(null);
 
-  const hasEditPerm = (hasHoldingsInventoryEdit && capability === CAPABILITIES.HOLDING)
-      || (hasItemInventoryEdit && capability === CAPABILITIES.ITEM)
-      || (hasUserEditInAppPerm && capability === CAPABILITIES.USER)
-      || (hasInstanceInventoryEdit && capability === CAPABILITIES.INSTANCE);
+  const hasEditPerm = (hasHoldingsInventoryEdit && key === CAPABILITIES.HOLDING)
+      || (hasItemInventoryEdit && key === CAPABILITIES.ITEM)
+      || (hasUserEditInAppPerm && key === CAPABILITIES.USER)
+      || (hasInstanceInventoryEdit && key === CAPABILITIES.INSTANCE);
 
 
   useFileDownload({
@@ -96,7 +101,7 @@ const BulkEditActionMenu = ({
 
   const columnsOptions = columns.map(item => ({
     ...item,
-    label: item.ignoreTranslation ? item.label : intl.formatMessage({ id: `ui-bulk-edit.columns.${capability}.${item.label}` }),
+    label: item.ignoreTranslation ? item.label : intl.formatMessage({ id: `ui-bulk-edit.columns.${key}.${item.label}` }),
     disabled: isLastUnselectedColumn(item.value) || !countOfRecords,
   }));
 

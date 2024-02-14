@@ -1,5 +1,8 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import {
+  useHistory,
+  useLocation
+} from 'react-router-dom';
 
 import { Pluggable } from '@folio/stripes/core';
 import { buildSearch } from '@folio/stripes-acq-components';
@@ -8,13 +11,17 @@ import { useRecordTypes } from '../../../../hooks/api/useRecordTypes';
 import { getRecordType } from '../../../../utils/getRecordType';
 import { useQueryPlugin } from '../../../../hooks/api';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
-import { useBulkPermissions, useLocationFilters } from '../../../../hooks';
+import {
+  useBulkPermissions,
+  useLocationFilters
+} from '../../../../hooks';
 import { getCapabilityOptions } from '../../../../utils/helpers';
 import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
 import { RootContext } from '../../../../context/RootContext';
 
 export const QueryTab = () => {
   const history = useHistory();
+  const location = useLocation();
   const {
     queryRecordType,
     criteria,
@@ -56,6 +63,7 @@ export const QueryTab = () => {
     testQueryDataSource,
     getParamsSource,
     cancelQueryDataSource,
+    runQueryDataSource
   } = useQueryPlugin(recordTypeId);
 
   const handleCapabilityChange = (e) => {
@@ -69,6 +77,13 @@ export const QueryTab = () => {
     });
 
     setVisibleColumns(null);
+  };
+
+  const onQueryRunSuccess = ({ id }) => {
+    history.replace({
+      pathname: `/bulk-edit/${id}/progress`,
+      search: buildSearch({}, location.search),
+    });
   };
 
 
@@ -91,6 +106,8 @@ export const QueryTab = () => {
         queryDetailsDataSource={queryDetailsDataSource}
         onQueryRunFail={() => {}}
         cancelQueryDataSource={cancelQueryDataSource}
+        onQueryRunSuccess={onQueryRunSuccess}
+        runQueryDataSource={runQueryDataSource}
       />
     </>
   );
