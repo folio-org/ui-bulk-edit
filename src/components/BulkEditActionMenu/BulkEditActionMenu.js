@@ -46,6 +46,7 @@ const BulkEditActionMenu = ({
     capabilities,
     queryRecordType,
   } = useSearchParams();
+  const availableRecordType = capabilities || queryRecordType;
 
   const [columnSearch, setColumnSearch] = useState('');
 
@@ -98,7 +99,7 @@ const BulkEditActionMenu = ({
 
   const columnsOptions = columns.map(item => ({
     ...item,
-    label: item.ignoreTranslation ? item.label : intl.formatMessage({ id: `ui-bulk-edit.columns.${capabilities || queryRecordType}.${item.label}` }),
+    label: item.ignoreTranslation ? item.label : intl.formatMessage({ id: `ui-bulk-edit.columns.${availableRecordType}.${item.label}` }),
     disabled: isLastUnselectedColumn(item.value) || !countOfRecords,
   }));
 
@@ -111,7 +112,7 @@ const BulkEditActionMenu = ({
     });
 
     setVisibleColumns(changedColumns);
-    localStorage.setItem(`${BULK_VISIBLE_COLUMNS}_${capabilities || queryRecordType}`, JSON.stringify(changedColumns));
+    localStorage.setItem(`${BULK_VISIBLE_COLUMNS}_${availableRecordType}`, JSON.stringify(changedColumns));
   };
 
   const handleOnStartEdit = (approach) => {
