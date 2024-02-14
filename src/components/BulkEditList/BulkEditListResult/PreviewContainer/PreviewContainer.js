@@ -1,9 +1,6 @@
 import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import {
-  useLocation,
-  useParams
-} from 'react-router';
+import { useParams } from 'react-router';
 
 import {
   Layout,
@@ -18,25 +15,26 @@ import {
 import { Preview } from '../Preview/Preview';
 
 import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
+import { useSearchParams } from '../../../../hooks/useSearchParams';
 
 const PreviewContainer = () => {
   const intl = useIntl();
-
-  const location = useLocation();
-  const search = new URLSearchParams(location.search);
-  const step = search.get('step');
-  const fileUploadedName = search.get('fileName');
-  const capabilities = search.get('capabilities')?.toLocaleLowerCase();
-  const criteria = search.get('criteria');
-
   const { id } = useParams();
+  const {
+    step,
+    criteria,
+    initialFileName,
+    currentRecordType,
+  } = useSearchParams();
+  const lowerCaseRecordType = currentRecordType?.toLowerCase();
+
   const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
 
   const title = useMemo(() => {
     if (bulkDetails?.fqlQuery) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText: bulkDetails.fqlQuery });
 
-    return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName });
-  }, [bulkDetails?.fqlQuery, fileUploadedName]);
+    return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName: initialFileName });
+  }, [bulkDetails?.fqlQuery, initialFileName]);
 
   const isInitial = step === EDITING_STEPS.UPLOAD;
 
@@ -53,7 +51,7 @@ const PreviewContainer = () => {
       <Preview
         title={title}
         id={id}
-        capabilities={capabilities}
+        capabilities={lowerCaseRecordType}
         bulkDetails={bulkDetails}
         isInitial={isInitial}
       />

@@ -1,9 +1,12 @@
-import useFilters from '@folio/stripes-acq-components/lib/AcqList/hooks/useFilters';
 import { useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import useFilters from '@folio/stripes-acq-components/lib/AcqList/hooks/useFilters';
 import { buildFiltersObj } from '@folio/stripes-acq-components/lib/AcqList/utils';
 import { buildSearch } from '@folio/stripes-acq-components';
 import { SEARCH_INDEX_PARAMETER } from '@folio/stripes-acq-components/lib/AcqList/constants';
-import { useHistory } from 'react-router-dom';
+
+import { useSearchParams } from './useSearchParams';
 
 export const useLocationFilters = ({
   resetData = () => {},
@@ -11,6 +14,12 @@ export const useLocationFilters = ({
 }) => {
   const history = useHistory();
   const { search } = history.location;
+  const {
+    step,
+    criteria,
+    initialFileName,
+    currentRecordType,
+  } = useSearchParams();
 
   const {
     filters,
@@ -35,15 +44,16 @@ export const useLocationFilters = ({
   const applyLocationFilters = useCallback(
     (type, value) => {
       const newFilters = applyFilters(type, value);
-      const searchParams = new URLSearchParams(search);
-      const criteria = searchParams.get('criteria');
-      const capabilities = searchParams.get('capabilities');
-      const fileName = searchParams.get('fileName');
-      const step = searchParams.get('step');
 
       history.replace({
         pathname: '',
-        search: `${buildSearch({ ...newFilters, capabilities, criteria, fileName, step }, search)}`,
+        search: `${buildSearch({
+          ...newFilters,
+          capabilities: currentRecordType,
+          fileName: initialFileName,
+          criteria,
+          step
+        }, search)}`,
       });
 
       return newFilters;

@@ -11,7 +11,6 @@ import {
   RepeatableField,
 } from '@folio/stripes/components';
 
-import { useLocation } from 'react-router-dom';
 import {
   ACTIONS,
   OPTIONS
@@ -27,15 +26,16 @@ import {
   getExtraActions,
 } from './helpers';
 import { groupByCategory } from '../../../../../utils/helpers';
+import { useSearchParams } from '../../../../../hooks/useSearchParams';
 
 export const ContentUpdatesForm = ({
   onContentUpdatesChanged,
   options,
 }) => {
   const { formatMessage } = useIntl();
-  const location = useLocation();
-  const search = new URLSearchParams(location.search);
-  const capability = search.get('capabilities');
+  const {
+    currentRecordType,
+  } = useSearchParams();
 
   const defaultOptionValue = options[0].value;
 
@@ -44,8 +44,8 @@ export const ContentUpdatesForm = ({
     option: defaultOptionValue,
     actionsDetails: getDefaultActions({
       option: defaultOptionValue,
+      capability: currentRecordType,
       options,
-      capability,
       formatMessage
     }),
   };
@@ -64,9 +64,9 @@ export const ContentUpdatesForm = ({
           parameters,
           option,
           actionsDetails: getDefaultActions({
+            capability: currentRecordType,
             option,
             options,
-            capability,
             formatMessage
           }),
         };
@@ -196,9 +196,9 @@ export const ContentUpdatesForm = ({
           ...f,
           option,
           actionsDetails: getDefaultActions({
+            capability: currentRecordType,
             option,
             options,
-            capability,
             formatMessage
           }),
         })

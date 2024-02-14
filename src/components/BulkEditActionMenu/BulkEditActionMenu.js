@@ -9,7 +9,6 @@ import {
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 import React, { useContext, useState } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { useLocation } from 'react-router-dom';
 import css from './ActionMenuGroup/ActionMenuGroup.css';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import {
@@ -21,7 +20,6 @@ import {
   BULK_VISIBLE_COLUMNS,
   FILE_SEARCH_PARAMS,
   FILE_TO_LINK,
-  CRITERIA,
 } from '../../constants';
 import {
   useBulkPermissions,
@@ -34,21 +32,20 @@ import {
   useFileDownload
 } from '../../hooks/api';
 import { getVisibleColumnsKeys } from '../../utils/helpers';
+import { useSearchParams } from '../../hooks/useSearchParams';
 
 const BulkEditActionMenu = ({
   onEdit,
   onToggle,
 }) => {
   const intl = useIntl();
-  const location = useLocation();
   const perms = useBulkPermissions();
-  const search = new URLSearchParams(location.search);
-  const capability = search.get('capabilities');
-  const criteria = search.get('criteria');
-  const queryRecordType = search.get('queryRecordType');
-  const step = search.get('step');
-
-  const key = criteria === CRITERIA.QUERY ? queryRecordType : capability;
+  const {
+    step,
+    currentRecordType,
+    capabilities,
+    queryRecordType,
+  } = useSearchParams();
 
   const [columnSearch, setColumnSearch] = useState('');
 
@@ -65,10 +62,10 @@ const BulkEditActionMenu = ({
 
   const [fileInfo, setFileInfo] = useState(null);
 
-  const hasEditPerm = (hasHoldingsInventoryEdit && key === CAPABILITIES.HOLDING)
-      || (hasItemInventoryEdit && key === CAPABILITIES.ITEM)
-      || (hasUserEditInAppPerm && key === CAPABILITIES.USER)
-      || (hasInstanceInventoryEdit && key === CAPABILITIES.INSTANCE);
+  const hasEditPerm = (hasHoldingsInventoryEdit && currentRecordType === CAPABILITIES.HOLDING)
+      || (hasItemInventoryEdit && currentRecordType === CAPABILITIES.ITEM)
+      || (hasUserEditInAppPerm && currentRecordType === CAPABILITIES.USER)
+      || (hasInstanceInventoryEdit && currentRecordType === CAPABILITIES.INSTANCE);
 
 
   useFileDownload({
@@ -88,7 +85,7 @@ const BulkEditActionMenu = ({
   const columns = visibleColumns || [];
   const visibleColumnKeys = getVisibleColumnsKeys(columns);
 
-  const isStartBulkCsvActive = hasUserEditLocalPerm && capability === CAPABILITIES.USER;
+  const isStartBulkCsvActive = hasUserEditLocalPerm && currentRecordType === CAPABILITIES.USER;
   const isInitialStep = step === EDITING_STEPS.UPLOAD;
   const isStartBulkInAppActive =
        hasEditPerm
@@ -101,7 +98,7 @@ const BulkEditActionMenu = ({
 
   const columnsOptions = columns.map(item => ({
     ...item,
-    label: item.ignoreTranslation ? item.label : intl.formatMessage({ id: `ui-bulk-edit.columns.${key}.${item.label}` }),
+    label: item.ignoreTranslation ? item.label : intl.formatMessage({ id: `ui-bulk-edit.columns.${capabilities || queryRecordType}.${item.label}` }),
     disabled: isLastUnselectedColumn(item.value) || !countOfRecords,
   }));
 
@@ -114,7 +111,7 @@ const BulkEditActionMenu = ({
     });
 
     setVisibleColumns(changedColumns);
-    localStorage.setItem(`${BULK_VISIBLE_COLUMNS}_${capability}`, JSON.stringify(changedColumns));
+    localStorage.setItem(`${BULK_VISIBLE_COLUMNS}_${capabilities || queryRecordType}`, JSON.stringify(changedColumns));
   };
 
   const handleOnStartEdit = (approach) => {
