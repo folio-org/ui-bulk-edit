@@ -1,11 +1,20 @@
 import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import { useLocation, useParams } from 'react-router';
+import {
+  useLocation,
+  useParams
+} from 'react-router';
 
-import { Layout, Loading } from '@folio/stripes/components';
+import {
+  Layout,
+  Loading
+} from '@folio/stripes/components';
 
 import { useBulkOperationDetails } from '../../../../hooks/api';
-import { CRITERIA, EDITING_STEPS } from '../../../../constants';
+import {
+  CRITERIA,
+  EDITING_STEPS
+} from '../../../../constants';
 import { Preview } from '../Preview/Preview';
 
 import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
@@ -18,21 +27,20 @@ const PreviewContainer = () => {
   const step = search.get('step');
   const fileUploadedName = search.get('fileName');
   const capabilities = search.get('capabilities')?.toLocaleLowerCase();
-  const queryText = search.get('queryText');
   const criteria = search.get('criteria');
 
   const { id } = useParams();
   const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
 
   const title = useMemo(() => {
-    if (queryText) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText });
+    if (bulkDetails?.fqlQuery) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText: bulkDetails.fqlQuery });
 
     return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName });
-  }, [queryText, fileUploadedName]);
+  }, [bulkDetails?.fqlQuery, fileUploadedName]);
 
   const isInitial = step === EDITING_STEPS.UPLOAD;
 
-  if (criteria !== CRITERIA.IDENTIFIER) {
+  if (criteria === CRITERIA.LOGS) {
     return <NoResultsMessage />;
   } else if (isLoading) {
     return (

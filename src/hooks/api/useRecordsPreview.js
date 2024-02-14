@@ -19,6 +19,8 @@ export const useRecordsPreview = ({
   capabilities,
   limit,
   offset,
+  criteria,
+  queryRecordType
 }) => {
   const intl = useIntl();
   const { setVisibleColumns } = useContext(RootContext);
@@ -40,6 +42,8 @@ export const useRecordsPreview = ({
     data,
     intl,
     capabilities,
+    criteria,
+    queryRecordType
   }), [data]);
 
   // set initial and visible columns

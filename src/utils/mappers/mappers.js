@@ -9,6 +9,7 @@ import {
 
 import {
   CAPABILITIES,
+  CRITERIA,
   CUSTOM_ENTITY_COLUMNS,
 } from '../../constants';
 import {
@@ -44,7 +45,7 @@ const formatData = ({ capability, column, data }) => {
   }
 };
 
-export const getMappedTableData = ({ data, capabilities, intl }) => {
+export const getMappedTableData = ({ data, capabilities, criteria, queryRecordType, intl }) => {
   if (!data) {
     return {
       contentData: null,
@@ -52,6 +53,8 @@ export const getMappedTableData = ({ data, capabilities, intl }) => {
       columns: [],
     };
   }
+
+  const key = criteria === CRITERIA.QUERY ? queryRecordType : capabilities;
 
   const columns = data.header.map((cell) => ({
     label: cell.value,
@@ -63,7 +66,7 @@ export const getMappedTableData = ({ data, capabilities, intl }) => {
   }));
 
   const columnMapping = columns.reduce((acc, { value, label, ignoreTranslation }) => {
-    acc[value] = ignoreTranslation ? value : intl.formatMessage({ id: `ui-bulk-edit.columns.${capabilities}.${label}` });
+    acc[value] = ignoreTranslation ? value : intl.formatMessage({ id: `ui-bulk-edit.columns.${key}.${label}` });
 
     return acc;
   }, {});
@@ -74,7 +77,7 @@ export const getMappedTableData = ({ data, capabilities, intl }) => {
 
       acc[column.value] = formatData({
         column,
-        capability: capabilities,
+        capability: key,
         data: item,
       });
 
