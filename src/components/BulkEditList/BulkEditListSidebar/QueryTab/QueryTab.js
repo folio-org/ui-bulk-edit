@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   useHistory,
   useLocation
@@ -17,7 +17,6 @@ import {
 } from '../../../../hooks';
 import { getCapabilityOptions } from '../../../../utils/helpers';
 import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
-import { RootContext } from '../../../../context/RootContext';
 
 export const QueryTab = () => {
   const history = useHistory();
@@ -28,7 +27,6 @@ export const QueryTab = () => {
     step,
     initialFileName
   } = useSearchParams();
-  const { setVisibleColumns } = useContext(RootContext);
   const { recordTypes } = useRecordTypes();
   const permissions = useBulkPermissions();
   const {
@@ -71,12 +69,8 @@ export const QueryTab = () => {
       pathname: '/bulk-edit',
       search: buildSearch({
         queryRecordType: e.target.value,
-        step: null,
-        fileName: null,
       }, history.location.search),
     });
-
-    setVisibleColumns(null);
   };
 
   const onQueryRunSuccess = ({ id }) => {

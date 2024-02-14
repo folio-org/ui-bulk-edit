@@ -11,8 +11,7 @@ export const NoResultsMessage = () => {
   const {
     criteria,
     identifier,
-    capabilities,
-    queryRecordType,
+    currentRecordType,
   } = useSearchParams();
 
   const message = useMemo(() => {
@@ -28,16 +27,8 @@ export const NoResultsMessage = () => {
       return '';
     };
 
-    const getKey = () => {
-      if (criteria === CRITERIA.QUERY) {
-        return queryRecordType;
-      }
-
-      return capabilities;
-    };
-
-    return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${TRANSLATION_SUFFIX[getKey()]}${getPostfix()}`} />;
-  }, [identifier, criteria, capabilities, queryRecordType]);
+    return <FormattedMessage id={`ui-bulk-edit.list.result.emptyMessage${TRANSLATION_SUFFIX[currentRecordType]}${getPostfix()}`} />;
+  }, [identifier, criteria, currentRecordType]);
 
   return (
     <>
