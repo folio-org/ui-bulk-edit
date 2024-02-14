@@ -43,6 +43,7 @@
 * [UIBULKED-367](https://issues.folio.org/browse/UIBULKED-367) Logs - Provide a link to file with identifiers of the records affected by query.
 * [UIBULKED-412](https://issues.folio.org/browse/UIBULKED-412) Not all but up to 10 note types are displayed in Bulk edit.
 * [UIBULKED-411](https://issues.folio.org/browse/UIBULKED-411) Refactoring of ListFilters component
+* [UIBULKED-404](https://issues.folio.org/browse/UIBULKED-404) Render preview after query executed.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
@@ -93,8 +94,6 @@
 * [UIBULKED-351](https://issues.folio.org/browse/UIBULKED-351) Hide Query tab
 * [UIBULKED-276](https://issues.folio.org/browse/UIBULKED-276) Rename "Instance" column for holdings records preview
 * [UIBULKED-352](https://issues.folio.org/browse/UIBULKED-352) Localize numbers displayed in bulk edit
-* [UIBULKED-404](https://issues.folio.org/browse/UIBULKED-404)Render preview after query executed.
-
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 
