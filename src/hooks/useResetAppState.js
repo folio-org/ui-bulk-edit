@@ -3,16 +3,15 @@ import { buildSearch } from '@folio/stripes-acq-components';
 import { useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import { BULK_OPERATION_DETAILS_KEY } from './api';
+import { CRITERIA } from '../constants';
 
 export const useResetAppState = ({
-  setFilters,
   setConfirmedFileName,
-  initialFiltersState,
   setVisibleColumns,
   setCountOfRecords,
   filtersTab,
   setIsBulkEditLayerOpen,
-  setInAppCommitted,
+  setInAppCommitted
 }) => {
   const history = useHistory();
   const queryClient = useQueryClient();
@@ -23,9 +22,6 @@ export const useResetAppState = ({
     if (history.location.pathname === initialRoute && !history.location.search) {
       // reset count of records
       setCountOfRecords(0);
-
-      // reset filters
-      setFilters(initialFiltersState);
 
       // clear bulkOperation information
       queryClient.setQueryData(BULK_OPERATION_DETAILS_KEY, () => ({ data: undefined }));
@@ -41,9 +37,9 @@ export const useResetAppState = ({
       // set user capability by default
       history.replace({
         search: buildSearch({
-          criteria: initialFiltersState.criteria,
-          identifier: initialFiltersState.identifier,
-          capabilities: initialFiltersState.capabilities,
+          criteria: CRITERIA.IDENTIFIER,
+          identifier: '',
+          capabilities: '',
           status,
           entityType,
           operationType,

@@ -3,7 +3,7 @@ import { Accordion, FilterAccordionHeader, RadioButton, RadioButtonGroup } from 
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 
-const Capabilities = ({
+export const Capabilities = ({
   capabilitiesFilterOptions,
   onCapabilityChange,
   capabilities,
@@ -44,4 +44,3 @@ Capabilities.propTypes = {
   capabilities: PropTypes.string,
   hasInAppEditPerms: PropTypes.bool,
 };
-export default Capabilities;

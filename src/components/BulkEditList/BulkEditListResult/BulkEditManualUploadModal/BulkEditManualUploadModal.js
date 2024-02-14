@@ -11,7 +11,6 @@ import {
 } from '@folio/stripes/components';
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 
-import { ListFileUploader } from '../../../ListFileUploader';
 import {
   APPROACHES,
   CAPABILITIES,
@@ -24,10 +23,11 @@ import {
   useBulkOperationStart,
 } from '../../../../hooks/api';
 import { useBulkOperationDelete } from '../../../../hooks/api/useBulkOperationDelete';
+import { ListFileUploader } from '../../../shared/ListFileUploader';
+import { useSearchParams } from '../../../../hooks/useSearchParams';
 
 const BulkEditManualUploadModal = ({
   operationId,
-  identifier,
   open,
   onCancel,
   setCountOfRecords,
@@ -37,6 +37,7 @@ const BulkEditManualUploadModal = ({
   const intl = useIntl();
   const callout = useShowCallout();
   const controller = useRef(null);
+  const { identifier } = useSearchParams();
 
   const { fileUpload } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
@@ -216,7 +217,6 @@ const BulkEditManualUploadModal = ({
 
 BulkEditManualUploadModal.propTypes = {
   operationId: PropTypes.string,
-  identifier: PropTypes.string,
   open: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
   setCountOfRecords: PropTypes.func,

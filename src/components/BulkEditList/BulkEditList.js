@@ -13,7 +13,6 @@ import { AppIcon } from '@folio/stripes/core';
 import { noop } from 'lodash/util';
 
 import { useHistory } from 'react-router';
-import { BulkEditListFilters } from './BulkEditListFilters/BulkEditListFilters';
 import { BulkEditListResult } from './BulkEditListResult';
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
@@ -22,7 +21,9 @@ import {
   CRITERIA,
   APPROACHES,
   EDITING_STEPS,
-  FILTERS,
+  LOGS_FILTERS,
+  IDENTIFIER_FILTERS,
+  QUERY_FILTERS,
 } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
@@ -31,6 +32,8 @@ import { RootContext } from '../../context/RootContext';
 import BulkEditLogs from '../BulkEditLogs/BulkEditLogs';
 import { useResetAppState } from '../../hooks/useResetAppState';
 import BulkEditInAppLayer from './BulkEditListResult/BulkEditInAppLayer/BulkEditInAppLayer';
+import { BulkEditListSidebar } from './BulkEditListSidebar/BulkEditListSidebar';
+import { useSearchParams } from '../../hooks/useSearchParams';
 
 export const BulkEditList = () => {
   const history = useHistory();
@@ -46,37 +49,35 @@ export const BulkEditList = () => {
   const [confirmedFileName, setConfirmedFileName] = useState(null);
   const [inAppCommitted, setInAppCommitted] = useState(false);
   const [filtersTab, setFiltersTab] = useState({
+    identifierTab: [],
+    queryTab: [],
     logsTab: [],
   });
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const step = search.get('step');
-  const capabilities = search.get('capabilities');
-  const criteria = search.get('criteria');
-  const logsFilters = Object.values(FILTERS).map((el) => search.getAll(el));
+  const {
+    step,
+    capabilities,
+    criteria,
+    initialFileName
+  } = useSearchParams();
+  const identifierFilters = Object.values(IDENTIFIER_FILTERS).map((el) => search.getAll(el));
+  const queryFilters = Object.values(QUERY_FILTERS).map((el) => search.getAll(el));
+  const logsFilters = Object.values(LOGS_FILTERS).map((el) => search.getAll(el));
 
   useEffect(() => {
     if (history.location.search) {
       setFiltersTab(prevState => ({
         ...prevState,
+        queryTab: queryFilters,
+        identifierTab: identifierFilters,
         logsTab: logsFilters,
       }));
     }
   }, [history.location]);
 
-  const initialFiltersState = {
-    criteria: CRITERIA.IDENTIFIER,
-    capabilities: '',
-    queryText: '',
-    recordIdentifier: '',
-  };
-
-  const [filters, setFilters] = useState(initialFiltersState);
-
   useResetAppState({
-    initialFiltersState,
-    setFilters,
     setConfirmedFileName,
     setCountOfRecords,
     setVisibleColumns,
@@ -133,17 +134,15 @@ export const BulkEditList = () => {
   };
 
   const paneTitle = useMemo(() => {
-    const fileUploadedName = search.get('fileName');
-
-    if (confirmedFileName || fileUploadedName) {
+    if (confirmedFileName || initialFileName) {
       return (
         <FormattedMessage
           id="ui-bulk-edit.meta.title.uploadedFile"
-          values={{ fileName: confirmedFileName || fileUploadedName }}
+          values={{ fileName: confirmedFileName || initialFileName }}
         />
       );
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [confirmedFileName, history.location.search]);
+  }, [confirmedFileName, initialFileName, history.location.search]);
 
   const changedPaneSubTitle = useMemo(() => (
     step === EDITING_STEPS.UPLOAD ?
@@ -176,37 +175,30 @@ export const BulkEditList = () => {
       confirmedFileName,
       inAppCommitted,
       setInAppCommitted,
+      isFileUploaded,
+      setIsFileUploaded,
     }}
     >
       <Paneset>
-        {/* FILTERS PANE */}
+        {/* LOGS_FILTERS PANE */}
         <Pane
           defaultWidth="300px"
           paneTitle={<FormattedMessage id="ui-bulk-edit.list.criteriaTitle" />}
         >
-          <BulkEditListFilters
-            filters={filters}
-            setFilters={setFilters}
-            setIsFileUploaded={setIsFileUploaded}
-            isFileUploaded={isFileUploaded}
-            setVisibleColumns={setVisibleColumns}
-          />
+          <BulkEditListSidebar />
         </Pane>
 
         {/* RESULT PANES */}
-        {
-          isLogsTab && <BulkEditLogs />
-        }
-        {
-          !isLogsTab && (
-            <Pane
-              {...defaultPaneProps}
-              actionMenu={actionMenu}
-            >
-              <BulkEditListResult />
-            </Pane>
-          )
-        }
+        { isLogsTab && <BulkEditLogs /> }
+
+        { !isLogsTab && (
+          <Pane
+            {...defaultPaneProps}
+            actionMenu={actionMenu}
+          >
+            <BulkEditListResult />
+          </Pane>
+        )}
 
         {/* IN_APP APPROACH */}
         <BulkEditInAppLayer
@@ -235,7 +227,6 @@ export const BulkEditList = () => {
 
       <BulkEditManualUploadModal
         operationId={bulkOperationId}
-        identifier={filters.recordIdentifier}
         open={isBulkEditModalOpen}
         onCancel={cancelBulkEditStart}
         countOfRecords={countOfRecords}

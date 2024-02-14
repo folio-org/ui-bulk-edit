@@ -95,7 +95,16 @@ export const TRANSLATION_SUFFIX = {
   '': '',
 };
 
-export const FILTERS = {
+export const IDENTIFIER_FILTERS = {
+  CAPABILITIES: 'capabilities',
+  IDENTIFIER: 'identifier',
+};
+
+export const QUERY_FILTERS = {
+  RECORD_TYPE: 'queryRecordType',
+};
+
+export const LOGS_FILTERS = {
   STATUS: 'status',
   CAPABILITY: 'entityType',
   OPERATION_TYPE: 'operationType',

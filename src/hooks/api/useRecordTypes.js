@@ -12,7 +12,8 @@ export const useRecordTypes = ({ enabled } = {}) => {
 
       return response.json();
     },
-    refetchOnWindowFocus: false,
+    cacheTime: Infinity,
+    staleTime: Infinity,
     enabled
   });
 
