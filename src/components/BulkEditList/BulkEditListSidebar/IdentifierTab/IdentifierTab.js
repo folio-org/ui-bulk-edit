@@ -139,7 +139,7 @@ export const IdentifierTab = () => {
         step: EDITING_STEPS.UPLOAD,
       });
 
-      if (errorMessage.includes(ERRORS.TOKEN)) throw Error(ERRORS.TOKEN);
+      if (errorMessage?.includes(ERRORS.TOKEN)) throw Error(ERRORS.TOKEN);
       if (status === JOB_STATUSES.FAILED) throw Error();
 
       history.replace({
