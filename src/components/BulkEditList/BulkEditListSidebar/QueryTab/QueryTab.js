@@ -75,7 +75,9 @@ export const QueryTab = () => {
   const onQueryRunSuccess = ({ id }) => {
     history.replace({
       pathname: `/bulk-edit/${id}/progress`,
-      search: buildSearch({}, location.search),
+      search:  buildSearch({
+        fileName: null,
+      }, location.search),
     });
   };
 
