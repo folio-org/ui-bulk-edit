@@ -143,7 +143,7 @@ export const BulkEditList = () => {
   };
 
   const paneTitle = useMemo(() => {
-    if (confirmedFileName || initialFileName) {
+    if ((confirmedFileName || initialFileName) && isIdentifierTabWithPreview) {
       return (
         <FormattedMessage
           id="ui-bulk-edit.meta.title.uploadedFile"
@@ -151,21 +151,23 @@ export const BulkEditList = () => {
         />
       );
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [confirmedFileName, initialFileName, history.location.search]);
+  }, [confirmedFileName, initialFileName, isIdentifierTabWithPreview, history.location.search]);
 
-  const changedPaneSubTitle = useMemo(() => (
-    step === EDITING_STEPS.UPLOAD ?
+  const changedPaneSubTitle = useMemo(() => {
+    if (!isIdentifierTabWithPreview && !isQueryTabWithPreview) return null;
+
+    return step === EDITING_STEPS.UPLOAD ?
       <FormattedMessage id="ui-bulk-edit.list.logSubTitle.matched" values={{ count: countOfRecords }} />
-      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />
-  ), [countOfRecords, step]);
+      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle.changed" values={{ count: countOfRecords }} />;
+  }, [countOfRecords, step, isIdentifierTabWithPreview, isQueryTabWithPreview]);
 
   const paneSubtitle = useMemo(() => {
     return (
-      step === EDITING_STEPS.UPLOAD || step === EDITING_STEPS.COMMIT
+      (step === EDITING_STEPS.UPLOAD || step === EDITING_STEPS.COMMIT) && (isIdentifierTabWithPreview || isQueryTabWithPreview)
         ? changedPaneSubTitle
         : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
     );
-  }, [step, changedPaneSubTitle]);
+  }, [step, changedPaneSubTitle, isIdentifierTabWithPreview, isQueryTabWithPreview]);
 
 
   const defaultPaneProps = {
