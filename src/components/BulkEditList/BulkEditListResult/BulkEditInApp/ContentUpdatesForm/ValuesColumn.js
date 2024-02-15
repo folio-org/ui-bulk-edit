@@ -1,4 +1,7 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
+import PropTypes from 'prop-types';
+
 import {
   Col,
   Datepicker,
@@ -8,9 +11,7 @@ import {
   TextArea,
 } from '@folio/stripes/components';
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
-import { useIntl } from 'react-intl';
-import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+
 import {
   BASE_DATE_FORMAT,
   CAPABILITIES,
@@ -27,16 +28,17 @@ import { useItemNotes } from '../../../../../hooks/api/useItemNotes';
 import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
 import { useHoldingsNotes } from '../../../../../hooks/api/useHoldingsNotes';
 import { useElectronicAccessRelationships } from '../../../../../hooks/api/useElectronicAccess';
+import { useSearchParams } from '../../../../../hooks/useSearchParams';
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
-  const location = useLocation();
-  const search = new URLSearchParams(location.search);
-  const capability = search.get('capabilities');
+  const {
+    currentRecordType,
+  } = useSearchParams();
 
-  const isUserCapability = capability === CAPABILITIES.USER;
-  const isItemCapability = capability === CAPABILITIES.ITEM;
-  const isHoldingsCapability = capability === CAPABILITIES.HOLDING;
+  const isUserCapability = currentRecordType === CAPABILITIES.USER;
+  const isItemCapability = currentRecordType === CAPABILITIES.ITEM;
+  const isHoldingsCapability = currentRecordType === CAPABILITIES.HOLDING;
 
   const { userGroups } = usePatronGroup({ enabled: isUserCapability });
   const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });

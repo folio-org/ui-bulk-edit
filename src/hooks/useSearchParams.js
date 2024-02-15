@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useMemo } from 'react';
+import { CRITERIA } from '../constants';
 
 export const useSearchParams = () => {
   const history = useHistory();
@@ -14,6 +15,8 @@ export const useSearchParams = () => {
   const initialFileName = searchParams.get('fileName');
   const processedFileName = searchParams.get('processedFileName');
 
+  const currentRecordType = criteria === CRITERIA.QUERY ? queryRecordType : capabilities;
+
   return {
     step,
     criteria,
@@ -22,5 +25,6 @@ export const useSearchParams = () => {
     initialFileName,
     queryRecordType,
     processedFileName,
+    currentRecordType,
   };
 };

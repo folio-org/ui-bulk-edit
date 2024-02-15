@@ -36,6 +36,7 @@ import css from './BulkEditInAppPreviewModal.css';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
 import { usePagination } from '../../../../hooks/usePagination';
+import { useSearchParams } from '../../../../hooks/useSearchParams';
 
 const BulkEditInAppPreviewModal = ({
   open,
@@ -48,9 +49,8 @@ const BulkEditInAppPreviewModal = ({
   const callout = useShowCallout();
   const intl = useIntl();
   const history = useHistory();
-  const search = new URLSearchParams(history.location.search);
-  const capabilities = search.get('capabilities');
   const { visibleColumns } = useContext(RootContext);
+  const { currentRecordType } = useSearchParams();
 
   const swwCallout = () => (
     callout({
@@ -80,7 +80,7 @@ const BulkEditInAppPreviewModal = ({
     key: IN_APP_PREVIEW_KEY,
     id: bulkOperationId,
     step: EDITING_STEPS.EDIT,
-    capabilities,
+    capabilities: currentRecordType,
     queryOptions: {
       enabled: !!startData,
       onError: () => {
@@ -103,7 +103,7 @@ const BulkEditInAppPreviewModal = ({
       let fileName = searchParams.get('fileName');
 
       if (!fileName) {
-        fileName = `${capabilities}-${searchParams.get('criteria')}.csv`;
+        fileName = `${currentRecordType}-${searchParams.get('criteria')}.csv`;
       }
 
       saveAs(new Blob([fileData]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
