@@ -94,6 +94,7 @@ export const IdentifierTab = () => {
       search: buildSearch({
         identifier: e.target.value,
         step: null,
+        fileName: null,
       }, location.search),
     });
 

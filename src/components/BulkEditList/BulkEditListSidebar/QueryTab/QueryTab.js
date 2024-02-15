@@ -66,7 +66,6 @@ export const QueryTab = () => {
 
   const handleCapabilityChange = (e) => {
     history.replace({
-      pathname: '/bulk-edit',
       search: buildSearch({
         queryRecordType: e.target.value,
       }, history.location.search),

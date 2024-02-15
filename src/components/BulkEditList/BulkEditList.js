@@ -34,6 +34,7 @@ import { useResetAppState } from '../../hooks/useResetAppState';
 import BulkEditInAppLayer from './BulkEditListResult/BulkEditInAppLayer/BulkEditInAppLayer';
 import { BulkEditListSidebar } from './BulkEditListSidebar/BulkEditListSidebar';
 import { useSearchParams } from '../../hooks/useSearchParams';
+import { useBulkOperationDetails } from '../../hooks/api';
 
 export const BulkEditList = () => {
   const history = useHistory();
@@ -62,6 +63,9 @@ export const BulkEditList = () => {
     criteria,
     initialFileName
   } = useSearchParams();
+
+  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, additionalQueryKeys: [step] });
+
   const identifierFilters = Object.values(IDENTIFIER_FILTERS).map((el) => search.getAll(el));
   const queryFilters = Object.values(QUERY_FILTERS).map((el) => search.getAll(el));
   const logsFilters = Object.values(LOGS_FILTERS).map((el) => search.getAll(el));
@@ -118,7 +122,12 @@ export const BulkEditList = () => {
   };
 
   const isLogsTab = criteria === CRITERIA.LOGS;
-  const isActionMenuVisible = visibleColumns?.length && isActionMenuShown && !isLogsTab;
+  const isQueryTab = criteria === CRITERIA.QUERY;
+  const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
+  const isQueryTabWithPreview = isQueryTab && visibleColumns?.length && bulkDetails?.fqlQuery;
+  const isIdentifierTabWithPreview = isIdentifierTab && visibleColumns?.length && !bulkDetails?.fqlQuery;
+
+  const isActionMenuVisible = (isQueryTabWithPreview || isIdentifierTabWithPreview) && isActionMenuShown && !isLogsTab;
 
   const actionMenu = () => (
     isActionMenuVisible && (
