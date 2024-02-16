@@ -41,7 +41,7 @@ export const ProgressBar = () => {
   const swwCallout = () => {
     callout({
       type: 'error',
-      message:errorMessage?.includes(ERRORS.TOKEN) ? <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:title }} />
+      message: errorMessage?.includes(ERRORS.TOKEN) ? <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:title }} />
         :
         intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
     });
