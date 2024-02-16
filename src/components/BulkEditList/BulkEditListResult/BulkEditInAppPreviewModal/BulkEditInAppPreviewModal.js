@@ -101,9 +101,10 @@ const BulkEditInAppPreviewModal = ({
     onSuccess: fileData => {
       const searchParams = new URLSearchParams(history.location.search);
       let fileName = searchParams.get('fileName');
+      const criteria = searchParams.get('criteria');
 
       if (!fileName) {
-        fileName = `${currentRecordType}-${searchParams.get('criteria')}.csv`;
+        fileName = `${criteria.charAt(0).toUpperCase().toUpperCase() + criteria.slice(1)}-${bulkOperationId}.csv`;
       }
 
       saveAs(new Blob([fileData]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
