@@ -85,6 +85,8 @@
   "list.errors.title": "Errors",
   "list.errors.info": "<b>{fileName}: {entries, number} entries * {matched, number} records matched * {errors, number} errors</b>",
   "list.errors.infoProcessed": "<b>{fileName}: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
+  "list.errors.query.info": "<b>Bulk edit query: {entries, number} entries * {matched, number} records matched * {errors, number} errors</b>",
+  "list.errors.query.infoProcessed": "<b>Bulk edit query: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
   "list.errors.table.code": "Record identifier",
   "list.errors.table.message": "Reason for error",
 
