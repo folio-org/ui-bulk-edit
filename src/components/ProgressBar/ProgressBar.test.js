@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 
 import { runAxeTest } from '@folio/stripes-testing';
 
-import { JOB_STATUSES } from '../../constants';
+import { ERRORS, JOB_STATUSES } from '../../constants';
 import { useBulkOperationDetails } from '../../hooks/api';
 
 import { ProgressBar } from './ProgressBar';
@@ -33,6 +33,7 @@ describe('ProgressBar', () => {
     totalNumOfRecords: 100,
     status: JOB_STATUSES.APPLY_CHANGES,
   };
+
   const clearIntervalAndRedirect = jest.fn();
 
   beforeEach(() => {
@@ -106,5 +107,21 @@ describe('ProgressBar', () => {
 
       expect(clearIntervalAndRedirect).toHaveBeenCalled();
     });
+  });
+});
+
+describe('test', () => {
+  const bulkOperationWithError = {
+    processedNumOfRecords: 50,
+    totalNumOfRecords: 100,
+    status: JOB_STATUSES.FAILED,
+    errorMessage: ERRORS.TOKEN
+  };
+
+  it('should render with error', async () => {
+    useBulkOperationDetails.mockClear().mockReturnValue({ bulkDetails: bulkOperationWithError,
+      clearIntervalAndRedirect: jest.fn() });
+
+    renderProgressBar();
   });
 });

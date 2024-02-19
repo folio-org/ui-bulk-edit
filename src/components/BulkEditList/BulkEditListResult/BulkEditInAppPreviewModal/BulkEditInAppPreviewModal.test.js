@@ -1,7 +1,12 @@
 import { QueryClientProvider } from 'react-query';
 import { MemoryRouter } from 'react-router';
 
-import { act, render, screen, fireEvent } from '@testing-library/react';
+import {
+  act,
+  render,
+  screen,
+  fireEvent
+} from '@testing-library/react';
 
 import { useOkapiKy } from '@folio/stripes/core';
 
@@ -42,9 +47,9 @@ const defaultProps = {
   contentUpdates: undefined,
 };
 
-const renderPreviewModal = (props = defaultProps) => {
+const renderPreviewModal = (props = defaultProps, fileName = 'barcodes.csv') => {
   return render(
-    <MemoryRouter initialEntries={['/bulk-edit/1/initial?capabilities=ITEMS&fileName=barcodes.csv&identifier=BARCODE']}>
+    <MemoryRouter initialEntries={[`/bulk-edit/1/initial?capabilities=ITEMS&fileName=${fileName}&identifier=BARCODE`]}>
       <QueryClientProvider client={queryClient}>
         <RootContext.Provider value={{
           visibleColumns,
@@ -92,6 +97,12 @@ describe('BulkEditInAppPreviewModal', () => {
 
     fireEvent.click(screen.getByText('ui-bulk-edit.previewModal.keepEditing'));
     expect(onKeepEditing).toHaveBeenCalled();
+  });
+
+  it('should call all footer handlers without fileName', () => {
+    renderPreviewModal(defaultProps, '');
+
+    fireEvent.click(screen.getByText('ui-bulk-edit.previewModal.downloadPreview'));
   });
 
   it('should display preview records when available', async () => {
