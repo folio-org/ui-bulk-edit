@@ -8,12 +8,10 @@ import {
   Layout,
 } from '@folio/stripes/components';
 
-import { useLocation } from 'react-router';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import {
   CAPABILITIES,
-  CRITERIA,
   getHoldingsOptions,
   getInstanceOptions,
   getItemsOptions,
@@ -22,24 +20,22 @@ import {
 import { useItemNotes } from '../../../../hooks/api/useItemNotes';
 import { useHoldingsNotes } from '../../../../hooks/api/useHoldingsNotes';
 import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
+import { useSearchParams } from '../../../../hooks/useSearchParams';
 
 export const BulkEditInApp = ({
   onContentUpdatesChanged,
-  capabilities,
 }) => {
   const intl = useIntl();
-  const location = useLocation();
-  const search = new URLSearchParams(location.search);
-  const criteria = search.get('criteria');
-  const queryRecordType = search.get('queryRecordType');
-  const key = criteria === CRITERIA.QUERY ? queryRecordType : capabilities;
+  const {
+    currentRecordType,
+    initialFileName
+  } = useSearchParams();
 
-  const fileUploadedName = search.get('fileName');
-  const isItemCapability = capabilities === CAPABILITIES.ITEM;
-  const isHoldingsCapability = capabilities === CAPABILITIES.HOLDING;
+  const isItemRecordType = currentRecordType === CAPABILITIES.ITEM;
+  const isHoldingsRecordType = currentRecordType === CAPABILITIES.HOLDING;
 
-  const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
-  const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
+  const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemRecordType });
+  const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
 
   const optionsMap = {
     [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage, itemNotes),
@@ -48,14 +44,14 @@ export const BulkEditInApp = ({
     [CAPABILITIES.INSTANCE]: getInstanceOptions(intl.formatMessage),
   };
 
-  const options = optionsMap[key];
+  const options = optionsMap[currentRecordType];
   const showContentUpdatesForm = options && !isItemNotesLoading && !isHoldingsNotesLoading;
   const sortedOptions = sortAlphabetically(options, intl.formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
 
   return (
     <>
       <Headline size="large" margin="medium">
-        <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName }} />
+        <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: initialFileName }} />
       </Headline>
       <Accordion
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
@@ -77,6 +73,5 @@ export const BulkEditInApp = ({
 };
 
 BulkEditInApp.propTypes = {
-  capabilities: PropTypes.string,
   onContentUpdatesChanged: PropTypes.func,
 };
