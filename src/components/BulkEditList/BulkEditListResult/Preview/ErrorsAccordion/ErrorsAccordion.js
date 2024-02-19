@@ -8,6 +8,8 @@ import {
 } from '@folio/stripes/components';
 import { useState } from 'react';
 import css from '../Preview.css';
+import { useSearchParams } from '../../../../../hooks/useSearchParams';
+import { CRITERIA } from '../../../../../constants';
 
 const visibleColumns = ['key', 'message'];
 
@@ -29,6 +31,7 @@ const ErrorsAccordion = ({
   isInitial,
 }) => {
   const location = useLocation();
+  const { criteria } = useSearchParams();
   const fileName = new URLSearchParams(location.search).get('fileName');
   const errorLength = errors.length;
 
@@ -36,17 +39,29 @@ const ErrorsAccordion = ({
 
   const headLineTranslateKey = isInitial ? 'info' : 'infoProcessed';
 
-  const headLine = (
-    <FormattedMessage
-      id={`ui-bulk-edit.list.errors.${headLineTranslateKey}`}
-      values={{
-        fileName,
-        entries,
-        matched,
-        errors: countOfErrors,
-      }}
-    />
-  );
+  const headLine = criteria === CRITERIA.QUERY ?
+    (
+      <FormattedMessage
+        id={`ui-bulk-edit.list.errors.query.${headLineTranslateKey}`}
+        values={{
+          entries,
+          matched,
+          errors: countOfErrors,
+        }}
+      />
+    )
+    :
+    (
+      <FormattedMessage
+        id={`ui-bulk-edit.list.errors.${headLineTranslateKey}`}
+        values={{
+          fileName,
+          entries,
+          matched,
+          errors: countOfErrors,
+        }}
+      />
+    );
 
   return (
     <div className={css.previewAccordion}>

@@ -34,6 +34,16 @@ describe('ErrorsAccordion', () => {
     expect(screen.getByText(errorsPreview.errors[0].message)).toBeVisible();
   });
 
+  it('should render preview accordion for bulk edit query', () => {
+    const mockHistory = ['/bulk-edit/1/preview?criteria=query'];
+
+    renderPreviewAccordion(mockHistory, { ...defaultProps, initial: true });
+
+    expect(screen.getByText(/errors.query.info/)).toBeVisible();
+    expect(screen.getByText(/errors.table.code/)).toBeVisible();
+    expect(screen.getByText(errorsPreview.errors[0].message)).toBeVisible();
+  });
+
   it('should render with no axe errors', async () => {
     const mockHistory = ['/bulk-edit/1/preview'];
 

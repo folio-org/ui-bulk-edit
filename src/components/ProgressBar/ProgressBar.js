@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -8,7 +8,7 @@ import { Icon, Loading } from '@folio/stripes/components';
 import { useShowCallout } from '@folio/stripes-acq-components';
 
 import { useBulkOperationDetails } from '../../hooks/api';
-import { JOB_STATUSES } from '../../constants';
+import { ERRORS, JOB_STATUSES } from '../../constants';
 import { getBulkOperationStep } from './utils';
 
 import css from './ProgressBar.css';
@@ -33,6 +33,7 @@ export const ProgressBar = () => {
   });
 
   const status = bulkDetails?.status;
+  const errorMessage = bulkDetails?.errorMessage;
   const progressPercentage = bulkDetails
     ? (bulkDetails.processedNumOfRecords / bulkDetails.totalNumOfRecords) * 100
     : 0;
@@ -40,7 +41,9 @@ export const ProgressBar = () => {
   const swwCallout = () => {
     callout({
       type: 'error',
-      message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
+      message: errorMessage?.includes(ERRORS.TOKEN) ? <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:title }} />
+        :
+        intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
     });
   };
 
