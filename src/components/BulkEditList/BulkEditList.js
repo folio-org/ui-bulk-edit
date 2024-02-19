@@ -59,7 +59,6 @@ export const BulkEditList = () => {
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
   const {
     step,
-    capabilities,
     criteria,
     initialFileName
   } = useSearchParams();
@@ -221,7 +220,6 @@ export const BulkEditList = () => {
         >
           <BulkEditInApp
             onContentUpdatesChanged={setContentUpdates}
-            capabilities={capabilities}
           />
         </BulkEditInAppLayer>
 
