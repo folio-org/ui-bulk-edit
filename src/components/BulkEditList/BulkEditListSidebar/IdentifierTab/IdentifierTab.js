@@ -93,9 +93,11 @@ export const IdentifierTab = () => {
       pathname: '/bulk-edit',
       search: buildSearch({
         identifier: e.target.value,
-        step: null,
-        fileName: null,
-      }, location.search),
+        criteria: CRITERIA.IDENTIFIER,
+        queryRecordType: '',
+        step: '',
+        fileName: '',
+      }, history.location.search),
     });
 
     setIsFileUploaded(false);
@@ -108,10 +110,12 @@ export const IdentifierTab = () => {
       pathname: '/bulk-edit',
       search: buildSearch({
         capabilities: e.target.value,
+        criteria: CRITERIA.IDENTIFIER,
         identifier: '',
-        step: null,
-        fileName: null,
-      }, location.search),
+        queryRecordType: '',
+        step: '',
+        fileName: '',
+      }, history.location.search),
     });
 
     setVisibleColumns(null);
