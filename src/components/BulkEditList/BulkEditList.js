@@ -125,6 +125,7 @@ export const BulkEditList = () => {
   const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
   const isQueryTabWithPreview = isQueryTab && visibleColumns?.length && bulkDetails?.fqlQuery;
   const isIdentifierTabWithPreview = isIdentifierTab && visibleColumns?.length && !bulkDetails?.fqlQuery;
+  const isBuildQueryButtonDisabled = bulkDetails?.fqlQuery;
 
   const isActionMenuVisible = (isQueryTabWithPreview || isIdentifierTabWithPreview) && isActionMenuShown && !isLogsTab;
 
@@ -149,8 +150,10 @@ export const BulkEditList = () => {
           values={{ fileName: confirmedFileName || initialFileName }}
         />
       );
+    } else if (isQueryTabWithPreview) {
+      return <FormattedMessage id="ui-bulk-edit.meta.query.title" />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [confirmedFileName, initialFileName, isIdentifierTabWithPreview, history.location.search]);
+  }, [confirmedFileName, initialFileName, isIdentifierTabWithPreview, isQueryTabWithPreview, history.location.search]);
 
   const changedPaneSubTitle = useMemo(() => {
     if (!isIdentifierTabWithPreview && !isQueryTabWithPreview) return null;
@@ -195,7 +198,7 @@ export const BulkEditList = () => {
           defaultWidth="300px"
           paneTitle={<FormattedMessage id="ui-bulk-edit.list.criteriaTitle" />}
         >
-          <BulkEditListSidebar />
+          <BulkEditListSidebar isBuildQueryButtonDisabled={isBuildQueryButtonDisabled} />
         </Pane>
 
         {/* RESULT PANES */}

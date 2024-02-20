@@ -6,6 +6,7 @@ import {
 
 import { Pluggable } from '@folio/stripes/core';
 import { buildSearch } from '@folio/stripes-acq-components';
+import PropTypes from 'prop-types';
 import { Capabilities } from '../../../shared/Capabilities/Capabilities';
 import { useRecordTypes } from '../../../../hooks/api/useRecordTypes';
 import { getRecordType } from '../../../../utils/getRecordType';
@@ -18,7 +19,7 @@ import {
 import { getCapabilityOptions } from '../../../../utils/helpers';
 import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
 
-export const QueryTab = () => {
+export const QueryTab = ({ isBuildQueryButtonDisabled }) => {
   const history = useHistory();
   const location = useLocation();
   const {
@@ -53,8 +54,10 @@ export const QueryTab = () => {
   const recordTypeId = recordTypes?.find(type => type.label === getRecordType(recordType))?.id;
   const isQueryBuilderEnabledForUsers = hasUsersViewPerms && (hasCsvViewPerms || hasInAppUsersEditPerms);
   const isQueryBuilderEnabledForItems = hasInventoryInstanceViewPerms && hasInAppViewPerms;
-  const isQueryBuilderDisabled = (!isQueryBuilderEnabledForUsers && !isQueryBuilderEnabledForItems) || !recordTypeId;
-
+  const isQueryBuilderDisabled =
+    (!isQueryBuilderEnabledForUsers && !isQueryBuilderEnabledForItems)
+    || !recordTypeId
+    || isBuildQueryButtonDisabled;
   const {
     entityTypeDataSource,
     queryDetailsDataSource,
@@ -106,4 +109,8 @@ export const QueryTab = () => {
       />
     </>
   );
+};
+
+QueryTab.propTypes = {
+  isBuildQueryButtonDisabled: PropTypes.bool
 };

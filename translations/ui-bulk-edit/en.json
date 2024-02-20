@@ -3,6 +3,7 @@
   "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
   "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
   "meta.logs.title": "Bulk edit logs",
+  "meta.query.title": "Bulk edit query",
 
   "resetFilters": "Reset all",
 
