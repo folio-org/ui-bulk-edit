@@ -1,8 +1,5 @@
-import React from 'react';
-import {
-  useHistory,
-  useLocation
-} from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Pluggable } from '@folio/stripes/core';
 import { buildSearch } from '@folio/stripes-acq-components';
@@ -18,16 +15,24 @@ import {
 } from '../../../../hooks';
 import { getCapabilityOptions } from '../../../../utils/helpers';
 import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
+import { RootContext } from '../../../../context/RootContext';
 
 export const QueryTab = ({ isBuildQueryButtonDisabled }) => {
   const history = useHistory();
-  const location = useLocation();
+
   const {
     queryRecordType,
     criteria,
     step,
     initialFileName
   } = useSearchParams();
+
+  const {
+    setIsFileUploaded,
+    setVisibleColumns,
+    setInAppCommitted,
+  } = useContext(RootContext);
+
   const { recordTypes } = useRecordTypes();
   const permissions = useBulkPermissions();
   const {
@@ -67,12 +72,22 @@ export const QueryTab = ({ isBuildQueryButtonDisabled }) => {
     runQueryDataSource
   } = useQueryPlugin(recordTypeId);
 
-  const handleCapabilityChange = (e) => {
+  const handleQueryRecordTypeChange = (e) => {
     history.replace({
+      pathname: '/bulk-edit',
       search: buildSearch({
         queryRecordType: e.target.value,
+        criteria: CRITERIA.QUERY,
+        step: '',
+        capabilities: '',
+        identifier: '',
+        fileName: '',
       }, history.location.search),
     });
+
+    setIsFileUploaded(false);
+    setVisibleColumns(null);
+    setInAppCommitted(false);
   };
 
   const onQueryRunSuccess = ({ id }) => {
@@ -80,7 +95,7 @@ export const QueryTab = ({ isBuildQueryButtonDisabled }) => {
       pathname: `/bulk-edit/${id}/progress`,
       search:  buildSearch({
         fileName: null,
-      }, location.search),
+      }, history.location.search),
     });
   };
 
@@ -90,7 +105,7 @@ export const QueryTab = ({ isBuildQueryButtonDisabled }) => {
       <Capabilities
         capabilities={queryRecordType}
         capabilitiesFilterOptions={capabilitiesFilterOptions}
-        onCapabilityChange={handleCapabilityChange}
+        onCapabilityChange={handleQueryRecordTypeChange}
         hasInAppEditPerms={hasInAppEditPerms}
       />
       <Pluggable

@@ -67,13 +67,7 @@ export const useLocationFilters = ({
 
       history.push({
         pathname: '',
-        search: buildSearch({
-          capabilities: initialFilter.capabilities,
-          criteria: initialFilter.criteria,
-          step: initialFilter.step,
-          fileName: initialFilter.fileName,
-          recordTypes: initialFilter.recordTypes
-        }),
+        search: buildSearch(initialFilter),
       });
     },
     [history, resetFilters],
