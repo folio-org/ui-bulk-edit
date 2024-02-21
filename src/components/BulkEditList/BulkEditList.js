@@ -125,7 +125,6 @@ export const BulkEditList = () => {
   const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
   const isQueryTabWithPreview = isQueryTab && visibleColumns?.length && bulkDetails?.fqlQuery;
   const isIdentifierTabWithPreview = isIdentifierTab && visibleColumns?.length && !bulkDetails?.fqlQuery;
-  const isBuildQueryButtonDisabled = bulkDetails?.fqlQuery;
 
   const isActionMenuVisible = (isQueryTabWithPreview || isIdentifierTabWithPreview) && isActionMenuShown && !isLogsTab;
 
@@ -198,7 +197,7 @@ export const BulkEditList = () => {
           defaultWidth="300px"
           paneTitle={<FormattedMessage id="ui-bulk-edit.list.criteriaTitle" />}
         >
-          <BulkEditListSidebar isBuildQueryButtonDisabled={isBuildQueryButtonDisabled} />
+          <BulkEditListSidebar />
         </Pane>
 
         {/* RESULT PANES */}

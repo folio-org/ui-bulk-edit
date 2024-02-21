@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { ButtonGroup } from '@folio/stripes/components';
@@ -13,7 +12,7 @@ import { QueryTab } from './QueryTab/QueryTab';
 import { LogsTab } from './LogsTab/LogsTab';
 import { useSearchParams } from '../../../hooks/useSearchParams';
 
-export const BulkEditListSidebar = ({ isBuildQueryButtonDisabled }) => {
+export const BulkEditListSidebar = () => {
   const history = useHistory();
   const location = useLocation();
   const { hasLogViewPerms, hasQueryPerms } = useBulkPermissions();
@@ -46,14 +45,10 @@ export const BulkEditListSidebar = ({ isBuildQueryButtonDisabled }) => {
       )}
 
       {/* QUERY TAB */}
-      {isQuery && hasQueryPerms && <QueryTab isBuildQueryButtonDisabled={isBuildQueryButtonDisabled} />}
+      {isQuery && hasQueryPerms && <QueryTab />}
 
       {/* LOGS TAB */}
       {isLogs && <LogsTab />}
     </>
   );
-};
-
-BulkEditListSidebar.propTypes = {
-  isBuildQueryButtonDisabled: PropTypes.bool,
 };

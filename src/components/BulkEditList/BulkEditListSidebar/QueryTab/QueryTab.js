@@ -3,21 +3,20 @@ import { useHistory } from 'react-router-dom';
 
 import { Pluggable } from '@folio/stripes/core';
 import { buildSearch } from '@folio/stripes-acq-components';
-import PropTypes from 'prop-types';
 import { Capabilities } from '../../../shared/Capabilities/Capabilities';
 import { useRecordTypes } from '../../../../hooks/api/useRecordTypes';
 import { getRecordType } from '../../../../utils/getRecordType';
-import { useQueryPlugin } from '../../../../hooks/api';
+import { useBulkOperationDetails, useQueryPlugin } from '../../../../hooks/api';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
 import {
   useBulkPermissions,
-  useLocationFilters
+  useLocationFilters, usePathParams
 } from '../../../../hooks';
 import { getCapabilityOptions } from '../../../../utils/helpers';
 import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
 import { RootContext } from '../../../../context/RootContext';
 
-export const QueryTab = ({ isBuildQueryButtonDisabled }) => {
+export const QueryTab = () => {
   const history = useHistory();
 
   const {
@@ -26,6 +25,8 @@ export const QueryTab = ({ isBuildQueryButtonDisabled }) => {
     step,
     initialFileName
   } = useSearchParams();
+  const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
+  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, additionalQueryKeys: [step] });
 
   const {
     setIsFileUploaded,
@@ -62,7 +63,7 @@ export const QueryTab = ({ isBuildQueryButtonDisabled }) => {
   const isQueryBuilderDisabled =
     (!isQueryBuilderEnabledForUsers && !isQueryBuilderEnabledForItems)
     || !recordTypeId
-    || isBuildQueryButtonDisabled;
+    || bulkDetails?.fqlQuery;
   const {
     entityTypeDataSource,
     queryDetailsDataSource,
@@ -124,8 +125,4 @@ export const QueryTab = ({ isBuildQueryButtonDisabled }) => {
       />
     </>
   );
-};
-
-QueryTab.propTypes = {
-  isBuildQueryButtonDisabled: PropTypes.bool
 };
