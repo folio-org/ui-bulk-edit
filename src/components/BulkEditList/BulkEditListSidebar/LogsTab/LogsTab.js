@@ -38,6 +38,7 @@ export const LogsTab = () => {
   const {
     step,
     initialFileName,
+    identifier,
     capabilities,
     queryRecordType
   } = useSearchParams();
@@ -49,6 +50,7 @@ export const LogsTab = () => {
   ] = useLocationFilters({
     initialFilter: {
       step,
+      identifier,
       capabilities,
       queryRecordType,
       criteria: CRITERIA.LOGS,
