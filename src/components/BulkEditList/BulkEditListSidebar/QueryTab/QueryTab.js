@@ -10,7 +10,8 @@ import { useBulkOperationDetails, useQueryPlugin } from '../../../../hooks/api';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
 import {
   useBulkPermissions,
-  useLocationFilters, usePathParams
+  useLocationFilters,
+  usePathParams
 } from '../../../../hooks';
 import { getCapabilityOptions } from '../../../../utils/helpers';
 import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
