@@ -228,6 +228,7 @@
   "columns.ITEM.Electronic Access": "Electronic access",
   "columns.ITEM.Check In Notes": "Check in notes",
   "columns.ITEM.Check Out Notes": "Check out notes",
+  "columns.ITEM.Holdings (Location, Call number)": "Holdings (Location, Call number)",
 
   "columns.HOLDINGS_RECORD.Holdings record id": "Holdings ID",
   "columns.HOLDINGS_RECORD.Version": "Version",
