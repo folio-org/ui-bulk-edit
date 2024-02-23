@@ -97,6 +97,7 @@
 * [UIBULKED-408](https://issues.folio.org/browse/UIBULKED-408) Bulk edit - Add accessibility testing to automated tests.
 * [UIBULKED-210](https://issues.folio.org/browse/UIBULKED-210) Improve user errors for invalid data - IncorrectTokenCountException error.
 * [UIBULKED-398](https://issues.folio.org/browse/UIBULKED-398) Add Holdings column to Item record columns .
+* [UIBULKED-414](https://issues.folio.org/browse/UIBULKED-414) Query search results display.
 
 ## [3.0.5](https://github.com/folio-org/ui-bulk-edit/tree/v3.0.5) (2023-03-22)
 

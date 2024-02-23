@@ -6,11 +6,12 @@ import { buildSearch } from '@folio/stripes-acq-components';
 import { Capabilities } from '../../../shared/Capabilities/Capabilities';
 import { useRecordTypes } from '../../../../hooks/api/useRecordTypes';
 import { getRecordType } from '../../../../utils/getRecordType';
-import { useQueryPlugin } from '../../../../hooks/api';
+import { useBulkOperationDetails, useQueryPlugin } from '../../../../hooks/api';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
 import {
   useBulkPermissions,
-  useLocationFilters
+  useLocationFilters,
+  usePathParams
 } from '../../../../hooks';
 import { getCapabilityOptions } from '../../../../utils/helpers';
 import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
@@ -25,6 +26,8 @@ export const QueryTab = () => {
     step,
     initialFileName
   } = useSearchParams();
+  const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
+  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, additionalQueryKeys: [step] });
 
   const {
     setIsFileUploaded,
@@ -58,8 +61,10 @@ export const QueryTab = () => {
   const recordTypeId = recordTypes?.find(type => type.label === getRecordType(recordType))?.id;
   const isQueryBuilderEnabledForUsers = hasUsersViewPerms && (hasCsvViewPerms || hasInAppUsersEditPerms);
   const isQueryBuilderEnabledForItems = hasInventoryInstanceViewPerms && hasInAppViewPerms;
-  const isQueryBuilderDisabled = (!isQueryBuilderEnabledForUsers && !isQueryBuilderEnabledForItems) || !recordTypeId;
-
+  const isQueryBuilderDisabled =
+    (!isQueryBuilderEnabledForUsers && !isQueryBuilderEnabledForItems)
+    || !recordTypeId
+    || bulkDetails?.fqlQuery;
   const {
     entityTypeDataSource,
     queryDetailsDataSource,
