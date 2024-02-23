@@ -152,7 +152,7 @@ export const BulkEditList = () => {
     } else if (isQueryTabWithPreview) {
       return <FormattedMessage id="ui-bulk-edit.meta.query.title" />;
     } else return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [confirmedFileName, initialFileName, isIdentifierTabWithPreview, isQueryTabWithPreview, history.location.search]);
+  }, [confirmedFileName, initialFileName, isIdentifierTabWithPreview, isQueryTabWithPreview]);
 
   const changedPaneSubTitle = useMemo(() => {
     if (!isIdentifierTabWithPreview && !isQueryTabWithPreview) return null;
