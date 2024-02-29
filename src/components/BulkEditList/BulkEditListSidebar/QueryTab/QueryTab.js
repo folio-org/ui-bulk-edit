@@ -6,7 +6,7 @@ import { buildSearch } from '@folio/stripes-acq-components';
 import { Capabilities } from '../../../shared/Capabilities/Capabilities';
 import { useRecordTypes } from '../../../../hooks/api/useRecordTypes';
 import { getRecordType } from '../../../../utils/getRecordType';
-import { useBulkOperationDetails, useQueryPlugin } from '../../../../hooks/api';
+import { useQueryPlugin } from '../../../../hooks/api';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
 import {
   useBulkPermissions,
@@ -27,7 +27,6 @@ export const QueryTab = () => {
     initialFileName
   } = useSearchParams();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, additionalQueryKeys: [step] });
 
   const {
     setIsFileUploaded,
@@ -64,7 +63,8 @@ export const QueryTab = () => {
   const isQueryBuilderDisabled =
     (!isQueryBuilderEnabledForUsers && !isQueryBuilderEnabledForItems)
     || !recordTypeId
-    || bulkDetails?.fqlQuery;
+    || bulkOperationId;
+
   const {
     entityTypeDataSource,
     queryDetailsDataSource,
