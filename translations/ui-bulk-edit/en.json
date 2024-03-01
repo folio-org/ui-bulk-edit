@@ -143,7 +143,7 @@
 
   "error.uploadedFile": "Fail to upload file",
   "error.sww": "Something went wrong",
-  "error.incorrectFormatted": "{fileName}: is formatted incorrectly. Please correct the formatting and upload the file again.",
+  "error.incorrectFormatted": "{fileName} is formatted incorrectly. Please correct the formatting and upload the file again.",
 
   "category.loanType": "Loan type",
   "category.location": "Location",
