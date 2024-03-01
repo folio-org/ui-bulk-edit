@@ -438,5 +438,10 @@
     "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": "File with errors encountered during the record matching",
     "logs.actions.linkToModifiedRecordsCsvFile.QUERY": "File with the preview of proposed changes",
     "logs.actions.linkToCommittedRecordsCsvFile.QUERY": "File with updated records",
-    "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": "File with errors encountered when committing the changes"
+    "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": "File with errors encountered when committing the changes",
+    "error.incorrectFormatted": "{fileName} is formatted incorrectly. Please correct the formatting and upload the file again.",
+    "list.errors.query.info": "<b>Bulk edit query: {entries, number} entries * {matched, number} records matched * {errors, number} errors</b>",
+    "list.errors.query.infoProcessed": "<b>Bulk edit query: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
+    "columns.ITEM.Holdings (Location, Call number)": "Coleções (localização, número de chamada)",
+    "meta.query.title": "Bulk edit query"
 }
