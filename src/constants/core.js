@@ -21,8 +21,10 @@ export const CAPABILITIES = {
 };
 
 export const RECORD_TYPES = {
-  ITEM: 'Items',
-  USER: 'Users'
+  [CAPABILITIES.HOLDING]: 'Holdings',
+  [CAPABILITIES.INSTANCE]: 'Instances',
+  [CAPABILITIES.ITEM]: 'Items',
+  [CAPABILITIES.USER]: 'Users',
 };
 
 export const IDENTIFIERS = {

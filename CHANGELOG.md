@@ -44,6 +44,7 @@
 * [UIBULKED-412](https://issues.folio.org/browse/UIBULKED-412) Not all but up to 10 note types are displayed in Bulk edit.
 * [UIBULKED-411](https://issues.folio.org/browse/UIBULKED-411) Refactoring of ListFilters component
 * [UIBULKED-404](https://issues.folio.org/browse/UIBULKED-404) Render preview after query executed.
+* [UIBULKED-404](https://issues.folio.org/browse/UIBULKED-404) Render preview after query executed.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
