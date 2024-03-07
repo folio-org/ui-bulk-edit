@@ -7,12 +7,12 @@ import { Icon, Loading } from '@folio/stripes/components';
 
 import { useShowCallout } from '@folio/stripes-acq-components';
 
-import { useBulkOperationDetails } from '../../hooks/api';
-import { ERRORS, JOB_STATUSES } from '../../constants';
+import { useBulkOperationDetails } from '../../../hooks/api';
+import { ERRORS, JOB_STATUSES } from '../../../constants';
 import { getBulkOperationStep } from './utils';
 
 import css from './ProgressBar.css';
-import { RootContext } from '../../context/RootContext';
+import { RootContext } from '../../../context/RootContext';
 
 export const ProgressBar = () => {
   const callout = useShowCallout();

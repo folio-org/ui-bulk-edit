@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 
 import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
-import { ProgressBar } from '../../ProgressBar/ProgressBar';
+import { ProgressBar } from '../../shared/ProgressBar/ProgressBar';
 import PreviewContainer from './PreviewContainer/PreviewContainer';
 
 const BulkEditListResult = () => {

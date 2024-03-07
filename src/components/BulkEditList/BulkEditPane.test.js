@@ -12,7 +12,7 @@ import { queryClient } from '../../../test/jest/utils/queryClient';
 
 import { CAPABILITIES, IDENTIFIERS, CRITERIA } from '../../constants';
 
-import { BulkEditList } from './BulkEditList';
+import { BulkEditPane } from './BulkEditPane';
 
 jest.mock('../BulkEditLogs/BulkEditLogs', () => {
   return jest.fn().mockReturnValue('BulkEditLogs');
@@ -56,7 +56,7 @@ const renderBulkEditList = ({ criteria }) => {
   return render(
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={[`/bulk-edit/1/preview?${params}`]}>2
-        <BulkEditList />
+        <BulkEditPane />
       </MemoryRouter>,
     </QueryClientProvider>,
   );

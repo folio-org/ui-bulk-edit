@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { isContentUpdatesFormValid } from '../BulkEditInApp/ContentUpdatesForm/helpers';
 
-const BulkEditInAppLayer = ({
+export const BulkEditInAppLayer = ({
   isLayerOpen,
   onLayerClose,
   onConfirm,
@@ -65,6 +65,4 @@ BulkEditInAppLayer.propTypes = {
     PropTypes.node,
   ]).isRequired,
 };
-
-export default BulkEditInAppLayer;
 

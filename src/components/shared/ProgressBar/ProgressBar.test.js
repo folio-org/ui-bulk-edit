@@ -5,13 +5,13 @@ import { render, screen } from '@testing-library/react';
 
 import { runAxeTest } from '@folio/stripes-testing';
 
-import { ERRORS, JOB_STATUSES } from '../../constants';
-import { useBulkOperationDetails } from '../../hooks/api';
+import { ERRORS, JOB_STATUSES } from '../../../constants';
+import { useBulkOperationDetails } from '../../../hooks/api';
 
 import { ProgressBar } from './ProgressBar';
-import { RootContext } from '../../context/RootContext';
+import { RootContext } from '../../../context/RootContext';
 
-jest.mock('../../hooks/api', () => ({
+jest.mock('../../../hooks/api', () => ({
   useBulkOperationDetails: jest.fn(),
 }));
 

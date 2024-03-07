@@ -1,7 +1,7 @@
 import {
   EDITING_STEPS,
   JOB_STATUSES,
-} from '../../constants';
+} from '../../../constants';
 
 import { getBulkOperationStep } from './utils';
 
