@@ -94,9 +94,10 @@ export const QueryTab = () => {
 
   const onQueryRunSuccess = ({ id }) => {
     history.replace({
-      pathname: `/bulk-edit/${id}/progress`,
+      pathname: `/bulk-edit/${id}/preview`,
       search:  buildSearch({
         fileName: null,
+        progress: CRITERIA.QUERY,
       }, history.location.search),
     });
   };

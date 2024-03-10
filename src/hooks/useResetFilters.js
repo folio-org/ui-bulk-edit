@@ -13,13 +13,11 @@ export const useResetFilters = ({
   const logsFilters = Object.values(LOGS_FILTERS).map((el) => search.getAll(el));
 
   useEffect(() => {
-    if (search) {
-      setFiltersTab(prevState => ({
-        ...prevState,
-        queryTab: queryFilters,
-        identifierTab: identifierFilters,
-        logsTab: logsFilters,
-      }));
-    }
-  }, [search]);
+    setFiltersTab(prevState => ({
+      ...prevState,
+      queryTab: queryFilters,
+      identifierTab: identifierFilters,
+      logsTab: logsFilters,
+    }));
+  }, [history.location]);
 };

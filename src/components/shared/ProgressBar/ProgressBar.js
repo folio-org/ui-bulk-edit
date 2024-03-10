@@ -13,19 +13,19 @@ import { getBulkOperationStep } from './utils';
 
 import css from './ProgressBar.css';
 import { RootContext } from '../../../context/RootContext';
+import { useSearchParams } from '../../../hooks/useSearchParams';
 
 export const ProgressBar = () => {
   const callout = useShowCallout();
   const { inAppCommitted } = useContext(RootContext);
   const intl = useIntl();
-
-  const location = useLocation();
-  const search = new URLSearchParams(location.search);
-  const processedTitle = search.get('processedFileName');
-  const title = search.get('fileName');
-  const step = search.get('step');
-
+  const {
+    processedFileName,
+    initialFileName,
+    step
+  } = useSearchParams();
   const { id } = useParams();
+
   const { bulkDetails, clearIntervalAndRedirect } = useBulkOperationDetails({
     id,
     interval: 1000 * 3,
@@ -41,7 +41,7 @@ export const ProgressBar = () => {
   const swwCallout = () => {
     callout({
       type: 'error',
-      message: errorMessage?.includes(ERRORS.TOKEN) ? <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:title }} />
+      message: errorMessage?.includes(ERRORS.TOKEN) ? <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName: initialFileName }} />
         :
         intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
     });
@@ -51,7 +51,7 @@ export const ProgressBar = () => {
     const nextStep = getBulkOperationStep(bulkDetails);
 
     if (nextStep) {
-      clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, { step: nextStep });
+      clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, { step: nextStep, progress: null });
     }
 
     if (status === JOB_STATUSES.FAILED) {
@@ -75,7 +75,7 @@ export const ProgressBar = () => {
             :
             <FormattedMessage
               id="ui-bulk-edit.progressBar.title"
-              values={{ title: title || processedTitle }}
+              values={{ title: initialFileName || processedFileName }}
             />}
         </div>
       </div>

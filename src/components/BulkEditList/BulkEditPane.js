@@ -140,6 +140,16 @@ export const BulkEditPane = () => {
     );
   };
 
+  const renderManualUploadModal = () => (
+    <BulkEditManualUploadModal
+      operationId={bulkOperationId}
+      open={isBulkEditModalOpen}
+      onCancel={handleCancelBulkEdit}
+      countOfRecords={countOfRecords}
+      setCountOfRecords={setCountOfRecords}
+    />
+  );
+
   return (
     <RootContext.Provider value={{
       countOfRecords,
@@ -167,7 +177,8 @@ export const BulkEditPane = () => {
         { isIdentifierTab && (
           <BulkEditIdentifiers
             bulkDetails={bulkDetails}
-            renderApproach={renderAppLayer}
+            renderInAppApproach={renderAppLayer}
+            renderManualApproach={renderManualUploadModal}
             actionMenu={renderActionMenu}
           />
         )}
@@ -175,21 +186,14 @@ export const BulkEditPane = () => {
         { isQueryTab && (
           <BulkEditQuery
             bulkDetails={bulkDetails}
-            renderApproach={renderAppLayer}
+            renderInAppApproach={renderAppLayer}
+            renderManualApproach={renderManualUploadModal}
             actionMenu={renderActionMenu}
           />
         )}
 
         { isLogsTab && <BulkEditLogs /> }
       </Paneset>
-
-      <BulkEditManualUploadModal
-        operationId={bulkOperationId}
-        open={isBulkEditModalOpen}
-        onCancel={handleCancelBulkEdit}
-        countOfRecords={countOfRecords}
-        setCountOfRecords={setCountOfRecords}
-      />
 
     </RootContext.Provider>
   );

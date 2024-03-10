@@ -1,19 +1,21 @@
 import React, { useContext, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
+
 import { Pane } from '@folio/stripes/components';
-import { noop } from 'lodash/util';
 import { AppIcon } from '@folio/stripes/core';
-import { APPROACHES, EDITING_STEPS } from '../../../constants';
-import { useBulkPermissions } from '../../../hooks';
+
+import { EDITING_STEPS } from '../../../constants';
 import { useSearchParams } from '../../../hooks/useSearchParams';
 import { RootContext } from '../../../context/RootContext';
 import { BulkEditListResult } from '../BulkEditListResult';
-import { BulkEditActionMenu } from '../../BulkEditActionMenu';
 
-export const BulkEditIdentifiers = ({ bulkDetails, renderApproach }) => {
-  const { isActionMenuShown } = useBulkPermissions();
-
+export const BulkEditIdentifiers = ({
+  bulkDetails,
+  actionMenu,
+  renderInAppApproach,
+  renderManualApproach
+}) => {
   const {
     step,
     processedFileName,
@@ -23,21 +25,9 @@ export const BulkEditIdentifiers = ({ bulkDetails, renderApproach }) => {
   const {
     visibleColumns,
     countOfRecords,
-    setIsBulkEditLayerOpen,
-    setIsBulkEditModalOpen,
   } = useContext(RootContext);
 
   const isIdentifierTabWithPreview = visibleColumns?.length && !bulkDetails?.fqlQuery;
-
-  const handleStartBulkEdit = (approach) => {
-    if (approach === APPROACHES.IN_APP) {
-      setIsBulkEditLayerOpen(true);
-    }
-
-    if (approach === APPROACHES.MANUAL) {
-      setIsBulkEditModalOpen(true);
-    }
-  };
 
   const paneTitle = useMemo(() => {
     if ((processedFileName || initialFileName) && isIdentifierTabWithPreview) {
@@ -69,13 +59,6 @@ export const BulkEditIdentifiers = ({ bulkDetails, renderApproach }) => {
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />;
   }, [step, paneSubUpdated, isIdentifierTabWithPreview]);
 
-  const actionMenu = () => isActionMenuShown && (
-    <BulkEditActionMenu
-      onEdit={handleStartBulkEdit}
-      onToggle={noop}
-    />
-  );
-
   const paneProps = {
     defaultWidth: 'fill',
     paneTitle,
@@ -90,12 +73,15 @@ export const BulkEditIdentifiers = ({ bulkDetails, renderApproach }) => {
     >
       <BulkEditListResult />
 
-      {renderApproach(paneProps)}
+      {renderInAppApproach(paneProps)}
+      {renderManualApproach()}
     </Pane>
   );
 };
 
 BulkEditIdentifiers.propTypes = {
   bulkDetails: PropTypes.object,
-  renderApproach: PropTypes.func,
+  actionMenu: PropTypes.object,
+  renderInAppApproach: PropTypes.func,
+  renderManualApproach: PropTypes.func,
 };

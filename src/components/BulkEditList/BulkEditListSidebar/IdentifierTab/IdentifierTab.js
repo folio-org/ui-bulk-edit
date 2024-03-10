@@ -63,7 +63,7 @@ export const IdentifierTab = () => {
 
   const [recordType] = activeFilters[IDENTIFIER_FILTERS.CAPABILITIES] || [];
   const [recordIdentifier] = activeFilters[IDENTIFIER_FILTERS.IDENTIFIER] || [];
-  const isDropZoneDisabled = isFileUploaded || !recordIdentifier || initialFileName;
+  const isDropZoneDisabled = isFileUploaded || !recordIdentifier || !!initialFileName;
   const capabilitiesFilterOptions = getCapabilityOptions(criteria, permissions);
 
   const {
@@ -148,8 +148,8 @@ export const IdentifierTab = () => {
       if (status === JOB_STATUSES.FAILED) throw Error();
 
       history.replace({
-        pathname: `/bulk-edit/${id}/progress`,
-        search: buildSearch({ fileName: fileToUpload.name }, location.search),
+        pathname: `/bulk-edit/${id}/preview`,
+        search: buildSearch({ fileName: fileToUpload.name, progress: CRITERIA.IDENTIFIER }, location.search),
       });
 
       setIsFileUploaded(true);

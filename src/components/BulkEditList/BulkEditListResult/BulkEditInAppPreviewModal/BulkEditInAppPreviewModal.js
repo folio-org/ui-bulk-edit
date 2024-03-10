@@ -7,7 +7,7 @@ import { saveAs } from 'file-saver';
 
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { PrevNextPagination, useShowCallout } from '@folio/stripes-acq-components';
+import { buildSearch, PrevNextPagination, useShowCallout } from '@folio/stripes-acq-components';
 
 import { RootContext } from '../../../../context/RootContext';
 import {
@@ -28,10 +28,8 @@ import {
   IN_APP_PREVIEW_KEY,
   BULK_OPERATION_DETAILS_KEY,
 } from '../../../../hooks/api';
-
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
 import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFooter';
-
 import css from './BulkEditInAppPreviewModal.css';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
@@ -50,7 +48,11 @@ const BulkEditInAppPreviewModal = ({
   const intl = useIntl();
   const history = useHistory();
   const { visibleColumns } = useContext(RootContext);
-  const { currentRecordType } = useSearchParams();
+  const {
+    currentRecordType,
+    criteria,
+    initialFileName
+  } = useSearchParams();
 
   const swwCallout = () => (
     callout({
@@ -99,11 +101,9 @@ const BulkEditInAppPreviewModal = ({
       fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
     },
     onSuccess: fileData => {
-      const searchParams = new URLSearchParams(history.location.search);
-      let fileName = searchParams.get('fileName');
-      const criteria = searchParams.get('criteria');
+      let fileName = initialFileName;
 
-      if (!fileName) {
+      if (!initialFileName) {
         fileName = `${criteria.charAt(0).toUpperCase().toUpperCase() + criteria.slice(1)}-${bulkOperationId}.csv`;
       }
 
@@ -126,8 +126,10 @@ const BulkEditInAppPreviewModal = ({
       onChangesCommited();
 
       history.replace({
-        pathname: `/bulk-edit/${bulkOperationId}/progress`,
-        search: history.location.search,
+        pathname: `/bulk-edit/${bulkOperationId}/preview`,
+        search: buildSearch({
+          progress: criteria,
+        }, history.location.search),
       });
     } catch {
       swwCallout();

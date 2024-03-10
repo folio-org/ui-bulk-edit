@@ -37,7 +37,7 @@ const BulkEditManualUploadModal = ({
   const intl = useIntl();
   const callout = useShowCallout();
   const controller = useRef(null);
-  const { identifier } = useSearchParams();
+  const { identifier, criteria } = useSearchParams();
 
   const { fileUpload } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
@@ -107,8 +107,8 @@ const BulkEditManualUploadModal = ({
       setCountOfRecords(committedNumOfRecords);
 
       history.replace({
-        pathname: `/bulk-edit/${operationId}/progress`,
-        search: buildSearch({ fileName, step: EDITING_STEPS.COMMIT }, history.location.search),
+        pathname: `/bulk-edit/${operationId}/preview`,
+        search: buildSearch({ fileName, step: EDITING_STEPS.COMMIT, progress: criteria }, history.location.search),
       });
     } catch {
       swwCallout(swwErrorMessage);

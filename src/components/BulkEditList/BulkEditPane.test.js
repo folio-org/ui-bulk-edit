@@ -11,7 +11,6 @@ import { runAxeTest } from '@folio/stripes-testing';
 import { queryClient } from '../../../test/jest/utils/queryClient';
 
 import { CAPABILITIES, IDENTIFIERS, CRITERIA } from '../../constants';
-
 import { BulkEditPane } from './BulkEditPane';
 
 jest.mock('../BulkEditLogs/BulkEditLogs', () => {

@@ -19,7 +19,7 @@ const history = createMemoryHistory();
 
 const renderProgressBar = (inAppCommitted = false) => {
   render(
-    <MemoryRouter initialEntries={['/bulk-edit/1/progress?processedFileName=some.scv']}>
+    <MemoryRouter initialEntries={['/bulk-edit/1/preview?processedFileName=some.scv&criteria=identifier&progress=identifier']}>
       <RootContext.Provider value={{ inAppCommitted }}>
         <ProgressBar />
       </RootContext.Provider>

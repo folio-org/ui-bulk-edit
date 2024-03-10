@@ -4,17 +4,13 @@ import { FormattedMessage } from 'react-intl';
 
 import { AppIcon } from '@folio/stripes/core';
 import { Pane } from '@folio/stripes/components';
-import { noop } from 'lodash/util';
 
 import { BulkEditListResult } from '../BulkEditListResult';
 import { EDITING_STEPS } from '../../../constants';
-import { useBulkPermissions } from '../../../hooks';
 import { useSearchParams } from '../../../hooks/useSearchParams';
-import { BulkEditActionMenu } from '../../BulkEditActionMenu';
 import { RootContext } from '../../../context/RootContext';
 
-export const BulkEditQuery = ({ bulkDetails, renderApproach }) => {
-  const { isActionMenuShown } = useBulkPermissions();
+export const BulkEditQuery = ({ bulkDetails, actionMenu, renderInAppApproach, renderManualApproach }) => {
   const {
     step,
   } = useSearchParams();
@@ -22,7 +18,6 @@ export const BulkEditQuery = ({ bulkDetails, renderApproach }) => {
   const {
     visibleColumns,
     countOfRecords,
-    setIsBulkEditLayerOpen,
   } = useContext(RootContext);
 
   const isQueryTabWithPreview = visibleColumns?.length && bulkDetails?.fqlQuery;
@@ -54,13 +49,6 @@ export const BulkEditQuery = ({ bulkDetails, renderApproach }) => {
     );
   }, [isQueryTabWithPreview, step, paneSubtitleUpdated]);
 
-  const actionMenu = () => isQueryTabWithPreview && isActionMenuShown && (
-    <BulkEditActionMenu
-      onEdit={() => setIsBulkEditLayerOpen(true)}
-      onToggle={noop}
-    />
-  );
-
   const paneProps = {
     defaultWidth: 'fill',
     paneTitle,
@@ -75,12 +63,15 @@ export const BulkEditQuery = ({ bulkDetails, renderApproach }) => {
     >
       <BulkEditListResult />
 
-      {renderApproach(paneProps)}
+      {renderInAppApproach(paneProps)}
+      {renderManualApproach()}
     </Pane>
   );
 };
 
 BulkEditQuery.propTypes = {
   bulkDetails: PropTypes.object,
-  renderApproach: PropTypes.func,
+  actionMenu: PropTypes.object,
+  renderInAppApproach: PropTypes.func,
+  renderManualApproach: PropTypes.func,
 };

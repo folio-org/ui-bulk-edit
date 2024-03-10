@@ -16,6 +16,7 @@ import { Preview } from '../Preview/Preview';
 
 import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
+import { ProgressBar } from '../../../shared/ProgressBar/ProgressBar';
 
 const PreviewContainer = () => {
   const intl = useIntl();
@@ -25,6 +26,7 @@ const PreviewContainer = () => {
     criteria,
     initialFileName,
     currentRecordType,
+    progress
   } = useSearchParams();
   const lowerCaseRecordType = currentRecordType?.toLowerCase();
 
@@ -37,6 +39,8 @@ const PreviewContainer = () => {
   }, [bulkDetails?.fqlQuery, initialFileName]);
 
   const isInitial = step === EDITING_STEPS.UPLOAD;
+
+  if (progress === criteria) return <ProgressBar />;
 
   if (criteria === CRITERIA.LOGS) {
     return <NoResultsMessage />;
