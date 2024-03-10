@@ -9,7 +9,7 @@ import { bulkEditLogsData } from '../../../test/jest/__mock__/fakeData';
 import { LOGS_COLUMNS } from '../../constants';
 import { useBulkEditLogs } from '../../hooks/api';
 
-import BulkEditLogs from './BulkEditLogs';
+import { BulkEditLogs } from './BulkEditLogs';
 
 jest.mock('react-virtualized-auto-sizer', () => jest.fn(
   (props) => <div>{props.children({ width: 100 })}</div>,
