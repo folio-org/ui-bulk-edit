@@ -15,7 +15,7 @@ import {
   APPROACHES,
 } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
-import BulkEditInAppPreviewModal from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
+import { BulkEditInAppPreviewModal } from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
 
 import { RootContext } from '../../context/RootContext';
 import { BulkEditLogs } from '../BulkEditLogs/BulkEditLogs';
@@ -38,11 +38,6 @@ export const BulkEditPane = () => {
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
   const [inAppCommitted, setInAppCommitted] = useState(false);
-  const [filtersTab, setFiltersTab] = useState({
-    identifierTab: [],
-    queryTab: [],
-    logsTab: [],
-  });
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
@@ -52,6 +47,7 @@ export const BulkEditPane = () => {
   } = useSearchParams();
 
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, additionalQueryKeys: [step] });
+  const { filtersTab } = useResetFilters();
 
   const isLogsTab = criteria === CRITERIA.LOGS;
   const isQueryTab = criteria === CRITERIA.QUERY;
@@ -59,8 +55,6 @@ export const BulkEditPane = () => {
   const isQueryTabWithPreview = isQueryTab && visibleColumns?.length && bulkDetails?.fqlQuery;
   const isIdentifierTabWithPreview = isIdentifierTab && visibleColumns?.length && !bulkDetails?.fqlQuery;
   const isActionMenuVisible = (isQueryTabWithPreview || isIdentifierTabWithPreview) && isActionMenuShown && !isLogsTab;
-
-  useResetFilters(({ setFiltersTab }));
 
   useResetAppState({
     setConfirmedFileName,

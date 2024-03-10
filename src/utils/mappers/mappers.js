@@ -14,7 +14,7 @@ import {
 } from '../../constants';
 import {
   ElectronicAccessTable
-} from '../../components/BulkEditList/BulkEditListResult/Preview/ElectronicAccessTable/ElectronicAccessTable';
+} from '../../components/BulkEditPane/BulkEditListResult/Preview/ElectronicAccessTable/ElectronicAccessTable';
 
 export const DATA_TYPES = {
   NUMERIC: 'NUMERIC',

@@ -3,7 +3,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { BulkEditPane } from './BulkEditList/BulkEditPane';
+import { BulkEditPane } from './BulkEditPane/BulkEditPane';
 
 const queryClient = new QueryClient({
   defaultOptions: {

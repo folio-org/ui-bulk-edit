@@ -1,16 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { useLocation } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Icon, Loading } from '@folio/stripes/components';
-
 import { useShowCallout } from '@folio/stripes-acq-components';
 
 import { useBulkOperationDetails } from '../../../hooks/api';
 import { ERRORS, JOB_STATUSES } from '../../../constants';
 import { getBulkOperationStep } from './utils';
-
 import css from './ProgressBar.css';
 import { RootContext } from '../../../context/RootContext';
 import { useSearchParams } from '../../../hooks/useSearchParams';

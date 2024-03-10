@@ -13,7 +13,7 @@ import {
 import { getMappedTableData, DATA_TYPES } from './mappers';
 import {
   ElectronicAccessTable
-} from '../../components/BulkEditList/BulkEditListResult/Preview/ElectronicAccessTable/ElectronicAccessTable';
+} from '../../components/BulkEditPane/BulkEditListResult/Preview/ElectronicAccessTable/ElectronicAccessTable';
 
 const intl = {
   formatMessage: jest.fn(),

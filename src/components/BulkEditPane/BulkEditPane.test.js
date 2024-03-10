@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 
@@ -14,7 +14,9 @@ import { CAPABILITIES, IDENTIFIERS, CRITERIA } from '../../constants';
 import { BulkEditPane } from './BulkEditPane';
 
 jest.mock('../BulkEditLogs/BulkEditLogs', () => {
-  return jest.fn().mockReturnValue('BulkEditLogs');
+  return {
+    BulkEditLogs: jest.fn().mockReturnValue(() => <div>BulkEditLogs</div>),
+  };
 });
 jest.mock('./BulkEditListResult', () => {
   return {
@@ -31,7 +33,9 @@ jest.mock('./BulkEditListResult/BulkEditManualUploadModal', () => {
   };
 });
 jest.mock('./BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal', () => {
-  return jest.fn().mockReturnValue('BulkEditInAppPreviewModal');
+  return {
+    BulkEditInAppPreviewModal: jest.fn().mockReturnValue('BulkEditInAppPreviewModal'),
+  };
 });
 
 jest.mock('../../hooks/api', () => ({
@@ -42,6 +46,10 @@ jest.mock('../../hooks/api', () => ({
     testQueryDataSource: jest.fn(),
     getParamsSource: jest.fn(),
     cancelQueryDataSource: jest.fn(),
+  }),
+  useBulkOperationUsers: jest.fn().mockReturnValue({
+    data: { users: [] },
+    isLoading: false,
   }),
 }));
 
@@ -54,7 +62,7 @@ const renderBulkEditList = ({ criteria }) => {
   }).toString();
   return render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={[`/bulk-edit/1/preview?${params}`]}>2
+      <MemoryRouter initialEntries={[`/bulk-edit/1/preview?${params}`]}>
         <BulkEditPane />
       </MemoryRouter>,
     </QueryClientProvider>,
@@ -79,7 +87,7 @@ describe('BulkEditList', () => {
   it('should display Logs pane when criteria is logs', async () => {
     renderBulkEditList({ criteria: CRITERIA.LOGS });
 
-    expect(screen.getByText(/BulkEditLogs/)).toBeVisible();
+    waitFor(() => expect(screen.getByText(/BulkEditLogs/)).toBeVisible());
   });
 
   it('should display Bulk edit preview container when criteria is not logs', async () => {

@@ -36,7 +36,7 @@ import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists
 import { usePagination } from '../../../../hooks/usePagination';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
 
-const BulkEditInAppPreviewModal = ({
+export const BulkEditInAppPreviewModal = ({
   open,
   bulkOperationId,
   contentUpdates,
@@ -223,5 +223,3 @@ BulkEditInAppPreviewModal.propTypes = {
   onChangesCommited: PropTypes.func,
   contentUpdates: PropTypes.arrayOf(PropTypes.object),
 };
-
-export default BulkEditInAppPreviewModal;

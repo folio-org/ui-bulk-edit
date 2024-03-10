@@ -15,7 +15,7 @@ import BulkEdit from './BulkEdit';
 import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../test/jest/utils/fileUpload';
 import { queryClient } from '../../test/jest/utils/queryClient';
 
-jest.mock('./BulkEditList/BulkEditListResult', () => ({
+jest.mock('./BulkEditPane/BulkEditListResult', () => ({
   BulkEditListResult: () => 'BulkEditListResult',
 }));
 
