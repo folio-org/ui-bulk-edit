@@ -5,7 +5,6 @@ import { Pluggable } from '@folio/stripes/core';
 import { buildSearch } from '@folio/stripes-acq-components';
 import { Capabilities } from '../../../shared/Capabilities/Capabilities';
 import { useRecordTypes } from '../../../../hooks/api/useRecordTypes';
-import { getRecordType } from '../../../../utils/getRecordType';
 import { useQueryPlugin } from '../../../../hooks/api';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
 import {
@@ -14,7 +13,7 @@ import {
   usePathParams
 } from '../../../../hooks';
 import { getCapabilityOptions } from '../../../../utils/helpers';
-import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
+import { CRITERIA, QUERY_FILTERS, RECORD_TYPES } from '../../../../constants';
 import { RootContext } from '../../../../context/RootContext';
 
 export const QueryTab = () => {
@@ -55,9 +54,8 @@ export const QueryTab = () => {
   });
 
   const [recordType] = activeFilters[QUERY_FILTERS.RECORD_TYPE] || [];
-
   const capabilitiesFilterOptions = getCapabilityOptions(criteria, permissions);
-  const recordTypeId = recordTypes?.find(type => type.label === getRecordType(recordType))?.id;
+  const recordTypeId = recordTypes?.find(type => type.label === RECORD_TYPES[recordType])?.id;
   const isQueryBuilderEnabledForUsers = hasUsersViewPerms && (hasCsvViewPerms || hasInAppUsersEditPerms);
   const isQueryBuilderEnabledForItems = hasInventoryInstanceViewPerms && hasInAppViewPerms;
   const isQueryBuilderDisabled =
