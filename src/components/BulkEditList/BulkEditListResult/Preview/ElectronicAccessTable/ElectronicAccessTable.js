@@ -10,10 +10,10 @@ export const ElectronicAccessTable = ({ value }) => {
   return (
     <table className={css.ElectronicAccess}>
       <thead>
-        <tr>{ELECTRONIC_ACCESS_HEAD_TITLES.map((cell) => <th key={cell.key}>{cell.value}</th>)}</tr>
+        <tr>{ELECTRONIC_ACCESS_HEAD_TITLES.map((cell, index) => <th key={cell.key + index}>{cell.value}</th>)}</tr>
       </thead>
       <tbody>
-        {tableBodyRows.map((row, index) => <tr key={index}>{row.map(cell => <td key={cell}>{cell}</td>)}</tr>)}
+        {tableBodyRows.map((row, index) => <tr key={`${row}-${index}`}>{row.map((cell, cellIndex) => <td key={`cell-${index}-${cellIndex}`}>{cell}</td>)}</tr>)}
       </tbody>
     </table>
   );
