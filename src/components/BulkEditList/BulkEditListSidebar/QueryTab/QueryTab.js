@@ -121,6 +121,7 @@ export const QueryTab = () => {
         cancelQueryDataSource={cancelQueryDataSource}
         onQueryRunSuccess={onQueryRunSuccess}
         runQueryDataSource={runQueryDataSource}
+        recordsLimit={100000}
       />
     </>
   );
