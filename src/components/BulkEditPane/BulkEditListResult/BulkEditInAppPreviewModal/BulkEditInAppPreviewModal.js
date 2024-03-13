@@ -7,7 +7,7 @@ import { saveAs } from 'file-saver';
 
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { PrevNextPagination, useShowCallout } from '@folio/stripes-acq-components';
+import { buildSearch, PrevNextPagination, useShowCallout } from '@folio/stripes-acq-components';
 
 import { RootContext } from '../../../../context/RootContext';
 import {
@@ -28,17 +28,15 @@ import {
   IN_APP_PREVIEW_KEY,
   BULK_OPERATION_DETAILS_KEY,
 } from '../../../../hooks/api';
-
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
 import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFooter';
-
 import css from './BulkEditInAppPreviewModal.css';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
 import { usePagination } from '../../../../hooks/usePagination';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
 
-const BulkEditInAppPreviewModal = ({
+export const BulkEditInAppPreviewModal = ({
   open,
   bulkOperationId,
   contentUpdates,
@@ -50,7 +48,11 @@ const BulkEditInAppPreviewModal = ({
   const intl = useIntl();
   const history = useHistory();
   const { visibleColumns } = useContext(RootContext);
-  const { currentRecordType } = useSearchParams();
+  const {
+    currentRecordType,
+    criteria,
+    initialFileName
+  } = useSearchParams();
 
   const swwCallout = () => (
     callout({
@@ -70,7 +72,7 @@ const BulkEditInAppPreviewModal = ({
     changePage,
   } = usePagination(PAGINATION_CONFIG);
 
-  const [isPreviewLoading, setIsLoadingPreview] = useState(false);
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
 
   const {
     contentData,
@@ -99,11 +101,9 @@ const BulkEditInAppPreviewModal = ({
       fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
     },
     onSuccess: fileData => {
-      const searchParams = new URLSearchParams(history.location.search);
-      let fileName = searchParams.get('fileName');
-      const criteria = searchParams.get('criteria');
+      let fileName = initialFileName;
 
-      if (!fileName) {
+      if (!initialFileName) {
         fileName = `${criteria.charAt(0).toUpperCase().toUpperCase() + criteria.slice(1)}-${bulkOperationId}.csv`;
       }
 
@@ -126,8 +126,10 @@ const BulkEditInAppPreviewModal = ({
       onChangesCommited();
 
       history.replace({
-        pathname: `/bulk-edit/${bulkOperationId}/progress`,
-        search: history.location.search,
+        pathname: `/bulk-edit/${bulkOperationId}/preview`,
+        search: buildSearch({
+          progress: criteria,
+        }, history.location.search),
       });
     } catch {
       swwCallout();
@@ -142,7 +144,7 @@ const BulkEditInAppPreviewModal = ({
         totalRecords,
       });
 
-      setIsLoadingPreview(true);
+      setIsPreviewLoading(true);
 
       contentUpdate({ contentUpdates: contentUpdatesBody })
         .then(() => bulkOperationStart({
@@ -159,7 +161,7 @@ const BulkEditInAppPreviewModal = ({
           onKeepEditing();
         })
         .finally(() => {
-          setIsLoadingPreview(false);
+          setIsPreviewLoading(false);
         });
     }
   }, [contentUpdates, open, totalRecords]);
@@ -221,5 +223,3 @@ BulkEditInAppPreviewModal.propTypes = {
   onChangesCommited: PropTypes.func,
   contentUpdates: PropTypes.arrayOf(PropTypes.object),
 };
-
-export default BulkEditInAppPreviewModal;

@@ -12,7 +12,7 @@ import {
 } from '@folio/stripes-data-transfer-components';
 
 import css from './ListFileUploader.css';
-import { getFileInfo } from '../../BulkEditList/BulkEditListSidebar/utils/getFileInfo';
+import { getFileInfo } from '../../BulkEditPane/BulkEditListSidebar/utils/getFileInfo';
 
 const ListFileUploader = ({
   uploaderSubTitle,

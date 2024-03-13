@@ -37,12 +37,12 @@ const BulkEditManualUploadModal = ({
   const intl = useIntl();
   const callout = useShowCallout();
   const controller = useRef(null);
-  const { identifier } = useSearchParams();
+  const { identifier, criteria } = useSearchParams();
 
   const { fileUpload } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
 
-  const [isDropZoneActive, setDropZoneActive] = useState(false);
+  const [isDropZoneActive, setIsDropZoneActive] = useState(false);
 
   const [fileName, setFileName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -75,11 +75,11 @@ const BulkEditManualUploadModal = ({
   );
 
   const handleDragEnter = () => {
-    setDropZoneActive(true);
+    setIsDropZoneActive(true);
   };
 
   const handleDragLeave = () => {
-    setDropZoneActive(false);
+    setIsDropZoneActive(false);
   };
 
   const handleNextClick = () => {
@@ -107,8 +107,8 @@ const BulkEditManualUploadModal = ({
       setCountOfRecords(committedNumOfRecords);
 
       history.replace({
-        pathname: `/bulk-edit/${operationId}/progress`,
-        search: buildSearch({ fileName, step: EDITING_STEPS.COMMIT }, history.location.search),
+        pathname: `/bulk-edit/${operationId}/preview`,
+        search: buildSearch({ fileName, step: EDITING_STEPS.COMMIT, progress: criteria }, history.location.search),
       });
     } catch {
       swwCallout(swwErrorMessage);
@@ -149,7 +149,7 @@ const BulkEditManualUploadModal = ({
   };
 
   const handleDrop = async (fileToUpload) => {
-    setDropZoneActive(false);
+    setIsDropZoneActive(false);
 
     if (fileToUpload) {
       await uploadFileFlow(fileToUpload);

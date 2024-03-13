@@ -14,11 +14,13 @@ export const useSearchParams = () => {
   const queryRecordType = searchParams.get('queryRecordType');
   const initialFileName = searchParams.get('fileName');
   const processedFileName = searchParams.get('processedFileName');
+  const progress = searchParams.get('progress');
 
   const currentRecordType = criteria === CRITERIA.QUERY ? queryRecordType : capabilities;
 
   return {
     step,
+    progress,
     criteria,
     identifier,
     capabilities,

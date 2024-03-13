@@ -25,7 +25,7 @@ import {
   useBulkOperationDetails,
   useRecordsPreview,
 } from '../../../../hooks/api';
-import BulkEditInAppPreviewModal from './BulkEditInAppPreviewModal';
+import { BulkEditInAppPreviewModal } from './BulkEditInAppPreviewModal';
 
 jest.mock('../../../../hooks/api', () => ({
   ...jest.requireActual('../../../../hooks/api'),

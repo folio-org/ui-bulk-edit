@@ -33,7 +33,7 @@ const sortableFields = LOGS_COLUMNS
   .filter(({ sortable }) => sortable)
   .map(({ value }) => value);
 
-const BulkEditLogs = () => {
+export const BulkEditLogs = () => {
   const location = useLocation();
   const history = useHistory();
   const DEFAULT_SORTING = { [SORTING_PARAMETER]: 'endTime', [SORTING_DIRECTION_PARAMETER]: DESC_DIRECTION };
@@ -112,5 +112,3 @@ const BulkEditLogs = () => {
     </ResultsPane>
   );
 };
-
-export default BulkEditLogs;

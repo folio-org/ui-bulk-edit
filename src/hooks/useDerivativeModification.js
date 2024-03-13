@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { ACTIONS } from '../constants';
 import {
   ACTION_PARAMETERS_KEY,
-} from '../components/BulkEditList/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
+} from '../components/BulkEditPane/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 
 export const useDerivativeModification = ({ onChange, action, actionIndex, deps = [] }) => {
   useEffect(() => {

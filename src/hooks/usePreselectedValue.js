@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { CONTROL_TYPES } from '../constants';
-import { FIELD_VALUE_KEY } from '../components/BulkEditList/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
+import { FIELD_VALUE_KEY } from '../components/BulkEditPane/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 
 export const usePreselectedValue = (controlType, duplicateNoteOptions, onChange, actionIndex) => {
   useEffect(() => {
