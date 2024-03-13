@@ -47,7 +47,7 @@ export const IdentifierTab = () => {
     identifier
   } = useSearchParams();
 
-  const [isDropZoneActive, setDropZoneActive] = useState(false);
+  const [isDropZoneActive, setIsDropZoneActive] = useState(false);
   const { fileUpload, isLoading } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
 
@@ -124,11 +124,11 @@ export const IdentifierTab = () => {
   };
 
   const handleDragEnter = () => {
-    setDropZoneActive(true);
+    setIsDropZoneActive(true);
   };
 
   const handleDragLeave = () => {
-    setDropZoneActive(false);
+    setIsDropZoneActive(false);
   };
 
   const uploadFileFlow = async (fileToUpload) => {
@@ -173,7 +173,7 @@ export const IdentifierTab = () => {
 
     await uploadFileFlow(fileToUpload);
 
-    setDropZoneActive(false);
+    setIsDropZoneActive(false);
   };
 
   const uploaderSubTitle = useMemo(() => {

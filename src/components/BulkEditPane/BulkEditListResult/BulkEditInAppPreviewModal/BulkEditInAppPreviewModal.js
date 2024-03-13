@@ -72,7 +72,7 @@ export const BulkEditInAppPreviewModal = ({
     changePage,
   } = usePagination(PAGINATION_CONFIG);
 
-  const [isPreviewLoading, setIsLoadingPreview] = useState(false);
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
 
   const {
     contentData,
@@ -144,7 +144,7 @@ export const BulkEditInAppPreviewModal = ({
         totalRecords,
       });
 
-      setIsLoadingPreview(true);
+      setIsPreviewLoading(true);
 
       contentUpdate({ contentUpdates: contentUpdatesBody })
         .then(() => bulkOperationStart({
@@ -161,7 +161,7 @@ export const BulkEditInAppPreviewModal = ({
           onKeepEditing();
         })
         .finally(() => {
-          setIsLoadingPreview(false);
+          setIsPreviewLoading(false);
         });
     }
   }, [contentUpdates, open, totalRecords]);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -33,7 +33,7 @@ export const BulkEditPane = () => {
   const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
   const [isBulkEditLayerOpen, setIsBulkEditLayerOpen] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
-  const [isPreviewModalOpened, setPreviewModalOpened] = useState(false);
+  const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
   const [contentUpdates, setContentUpdates] = useState(null);
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
@@ -56,6 +56,25 @@ export const BulkEditPane = () => {
   const isIdentifierTabWithPreview = isIdentifierTab && visibleColumns?.length && !bulkDetails?.fqlQuery;
   const isActionMenuVisible = (isQueryTabWithPreview || isIdentifierTabWithPreview) && isActionMenuShown && !isLogsTab;
 
+  const providerValue = useMemo(() => ({
+    countOfRecords,
+    setCountOfRecords,
+    visibleColumns,
+    setVisibleColumns,
+    confirmedFileName,
+    inAppCommitted,
+    setInAppCommitted,
+    isFileUploaded,
+    setIsFileUploaded,
+    setIsBulkEditLayerOpen,
+  }), [
+    countOfRecords,
+    visibleColumns,
+    confirmedFileName,
+    inAppCommitted,
+    isFileUploaded
+  ]);
+
   useResetAppState({
     setConfirmedFileName,
     setCountOfRecords,
@@ -73,11 +92,11 @@ export const BulkEditPane = () => {
   };
 
   const handlePreviewModalOpen = () => {
-    setPreviewModalOpened(true);
+    setIsPreviewModalOpened(true);
   };
 
   const handlePreviewModalClose = () => {
-    setPreviewModalOpened(false);
+    setIsPreviewModalOpened(false);
   };
 
   const handleChangesCommitted = () => {
@@ -145,19 +164,7 @@ export const BulkEditPane = () => {
   );
 
   return (
-    <RootContext.Provider value={{
-      countOfRecords,
-      setCountOfRecords,
-      visibleColumns,
-      setVisibleColumns,
-      confirmedFileName,
-      inAppCommitted,
-      setInAppCommitted,
-      isFileUploaded,
-      setIsFileUploaded,
-      setIsBulkEditLayerOpen,
-    }}
-    >
+    <RootContext.Provider value={providerValue}>
       <Paneset>
         {/* LOGS_FILTERS PANE */}
         <Pane

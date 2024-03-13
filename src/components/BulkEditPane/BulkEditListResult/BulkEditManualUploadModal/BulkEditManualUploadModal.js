@@ -42,7 +42,7 @@ const BulkEditManualUploadModal = ({
   const { fileUpload } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
 
-  const [isDropZoneActive, setDropZoneActive] = useState(false);
+  const [isDropZoneActive, setIsDropZoneActive] = useState(false);
 
   const [fileName, setFileName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -75,11 +75,11 @@ const BulkEditManualUploadModal = ({
   );
 
   const handleDragEnter = () => {
-    setDropZoneActive(true);
+    setIsDropZoneActive(true);
   };
 
   const handleDragLeave = () => {
-    setDropZoneActive(false);
+    setIsDropZoneActive(false);
   };
 
   const handleNextClick = () => {
@@ -149,7 +149,7 @@ const BulkEditManualUploadModal = ({
   };
 
   const handleDrop = async (fileToUpload) => {
-    setDropZoneActive(false);
+    setIsDropZoneActive(false);
 
     if (fileToUpload) {
       await uploadFileFlow(fileToUpload);
