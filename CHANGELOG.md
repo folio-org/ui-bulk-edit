@@ -44,6 +44,9 @@
 * [UIBULKED-412](https://issues.folio.org/browse/UIBULKED-412) Not all but up to 10 note types are displayed in Bulk edit.
 * [UIBULKED-411](https://issues.folio.org/browse/UIBULKED-411) Refactoring of ListFilters component
 * [UIBULKED-404](https://issues.folio.org/browse/UIBULKED-404) Render preview after query executed.
+* [UIBULKED-415](https://issues.folio.org/browse/UIBULKED-415) Query Tab - Support for Instance and Holdings Record Types.
+* [UIBULKED-434](https://folio-org.atlassian.net/browse/UIBULKED-434) Electronic access table is resized incorrectly when to go through pagination and back.
+* [UIBULKED-451](https://issues.folio.org/browse/UIBULKED-451) Set Maximum Limit for Bulk Edit.
 * [UIBULKED-416](https://issues.folio.org/browse/UIBULKED-416) Refactoring of bulk-edit preview components.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
