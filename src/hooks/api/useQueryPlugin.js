@@ -38,10 +38,11 @@ export const useQueryPlugin = (recordType) => {
     return ky.delete(`query/${queryId}`);
   };
 
-  const runQueryDataSource = async ({ fqlQuery }) => {
+  const runQueryDataSource = async ({ fqlQuery, userFriendlyQuery }) => {
     const response = ky.post('bulk-operations/query', { json: {
       entityTypeId:recordType,
-      fqlQuery: JSON.stringify(fqlQuery)
+      fqlQuery: JSON.stringify(fqlQuery),
+      userFriendlyQuery
     } });
     return response.json();
   };

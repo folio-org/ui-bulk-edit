@@ -33,7 +33,7 @@ const PreviewContainer = () => {
   const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
 
   const title = useMemo(() => {
-    if (bulkDetails?.fqlQuery) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText: bulkDetails.fqlQuery });
+    if (bulkDetails?.fqlQuery) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText: bulkDetails.userFriendlyQuery });
 
     return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName: initialFileName });
   }, [bulkDetails?.fqlQuery, initialFileName]);
