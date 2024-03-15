@@ -123,6 +123,7 @@ export const QueryTab = () => {
         onQueryRunSuccess={onQueryRunSuccess}
         runQueryDataSource={runQueryDataSource}
         recordsLimit={100000}
+        canRunEmptyQuery={false}
       />
     </>
   );
