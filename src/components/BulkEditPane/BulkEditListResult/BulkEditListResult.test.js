@@ -12,6 +12,7 @@ import { TYPE_OF_PROGRESS } from '../../../constants';
 
 import { RootContext } from '../../../context/RootContext';
 import BulkEditListResult from './BulkEditListResult';
+import { useBulkOperationDetails } from '../../../hooks/api';
 
 jest.mock('./Preview/PreviewAccordion', () => ({
   PreviewAccordion: () => 'PreviewAccordion',
@@ -111,6 +112,30 @@ describe('BulkEditListResult', () => {
     renderBulkEditResult(history, TYPE_OF_PROGRESS.INITIAL);
 
     expect(screen.getByText(/progressBar.title/)).toBeVisible();
+  });
+
+  it('displays query tab title', () => {
+    const history = createMemoryHistory();
+
+    useBulkOperationDetails.mockReturnValue({ bulkDetails: { userFriendlyQuery: 'query', fqlQuery: 'fqlQuery' } });
+
+    history.push('/bulk-edit/1/preview?fileName=Mock.csv&capabilities=USERS&criteria=query');
+
+    renderBulkEditResult(history, TYPE_OF_PROGRESS.INITIAL);
+
+    expect(screen.getByText(/preview.query.title/)).toBeVisible();
+  });
+
+  it('displays identifier tab title', () => {
+    const history = createMemoryHistory();
+
+    useBulkOperationDetails.mockReturnValue({ bulkDetails: { userFriendlyQuery: null, fqlQuery: null } });
+
+    history.push('/bulk-edit/1/preview?fileName=Mock.csv&capabilities=USERS&criteria=identifier');
+
+    renderBulkEditResult(history, TYPE_OF_PROGRESS.INITIAL);
+
+    expect(screen.getByText(/preview.file.title/)).toBeVisible();
   });
 
   it('displays processed title', () => {

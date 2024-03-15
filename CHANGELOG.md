@@ -50,6 +50,7 @@
 * [UIBULKED-416](https://issues.folio.org/browse/UIBULKED-416) Refactoring of bulk-edit preview components.
 * [UIBULKED-437](https://issues.folio.org/browse/UIBULKED-437) Remove ISBN and ISSN from the list of instance records identifiers drop-down
 * [UIBULKED-453](https://folio-org.atlassian.net/browse/UIBULKED-453) Disable "run query" button if test query has not results.
+* [UIBULKED-426](https://issues.folio.org/browse/UIBULKED-426) Query String Display  After Query Builder Closes.
 
 ## [4.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.0.0) (2023-10-12)
 
