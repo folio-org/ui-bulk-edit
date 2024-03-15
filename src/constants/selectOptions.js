@@ -135,14 +135,15 @@ export const identifierOptions = {
       value: IDENTIFIERS.HRID,
       label: 'ui-bulk-edit.list.filters.recordIdentifier.instance.instanceHRID',
     },
-    {
-      value: IDENTIFIERS.ISBN,
-      label: 'ui-bulk-edit.list.filters.recordIdentifier.instance.instanceISBN',
-    },
-    {
-      value: IDENTIFIERS.ISSN,
-      label: 'ui-bulk-edit.list.filters.recordIdentifier.instance.instanceISSN',
-    },
+    // It's commented in scope of story UIBULKED-437
+    // {
+    //   value: IDENTIFIERS.ISBN,
+    //   label: 'ui-bulk-edit.list.filters.recordIdentifier.instance.instanceISBN',
+    // },
+    // {
+    //   value: IDENTIFIERS.ISSN,
+    //   label: 'ui-bulk-edit.list.filters.recordIdentifier.instance.instanceISSN',
+    // },
   ],
   '': [
     {
