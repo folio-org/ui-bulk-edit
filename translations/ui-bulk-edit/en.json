@@ -417,6 +417,7 @@
   "logs.status.COMPLETED_WITH_ERRORS": "Completed with errors",
   "logs.status.FAILED": "Failed",
   "logs.status.APPLY_CHANGES": "Apply changes",
+  "logs.status.EXECUTING_QUERY": "Executing query",
   "logs.entityType.HOLDINGS_RECORD": "Inventory - holdings",
   "logs.entityType.ITEM": "Inventory - items",
   "logs.entityType.USER": "Users",
