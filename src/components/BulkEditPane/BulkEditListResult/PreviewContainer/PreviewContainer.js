@@ -36,7 +36,7 @@ const PreviewContainer = () => {
     if (bulkDetails?.userFriendlyQuery) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText: bulkDetails.userFriendlyQuery });
 
     return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName: initialFileName });
-  }, [bulkDetails?.userFriendlyQuery, initialFileName]);
+  }, [bulkDetails?.userFriendlyQuery, initialFileName, intl]);
 
   const isInitial = step === EDITING_STEPS.UPLOAD;
 
