@@ -248,7 +248,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   );
 
   return (
-    <Col xs={2} sm={2} className={`${css.column}`}>
+    <Col xs={2} sm={2} className={css.column}>
       {renderTextField()}
       {renderTextArea()}
       {renderPatronGroupSelect()}
