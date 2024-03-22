@@ -11,6 +11,7 @@ import { ACTION_VALUE_KEY } from './helpers';
 import { ValuesColumn } from './ValuesColumn';
 import { AdditionalActionParameters } from './AdditionalActionParameters';
 import { sortAlphabeticallyActions } from '../../../../../utils/sortAlphabetically';
+import css from '../BulkEditInApp.css';
 
 export const ActionsRow = ({ option, actions, onChange }) => {
   const { formatMessage } = useIntl();
@@ -20,7 +21,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
 
     const sortedActions = sortAlphabeticallyActions(action.actionsList, formatMessage({ id: 'ui-bulk-edit.actions.placeholder' }));
     const renderOptionColumn = () => (
-      <Col xs={2} sm={2}>
+      <Col xs={2} sm={2} className={css.column}>
         <Select
           dataOptions={sortedActions}
           value={action.name}
@@ -28,6 +29,8 @@ export const ActionsRow = ({ option, actions, onChange }) => {
           disabled={action.actionsList?.length === 1}
           data-testid={`select-actions-${actionIndex}`}
           aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.actionsSelect' })}
+          marginBottom0
+          dirty={action.name}
         />
       </Col>
     );

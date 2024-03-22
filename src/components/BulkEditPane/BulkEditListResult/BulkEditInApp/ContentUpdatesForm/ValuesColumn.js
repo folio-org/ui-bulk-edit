@@ -29,6 +29,7 @@ import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
 import { useHoldingsNotes } from '../../../../../hooks/api/useHoldingsNotes';
 import { useElectronicAccessRelationships } from '../../../../../hooks/api/useElectronicAccess';
 import { useSearchParams } from '../../../../../hooks/useSearchParams';
+import css from '../BulkEditInApp.css';
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
@@ -81,6 +82,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       data-testid={`input-email-${actionIndex}`}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textField' })}
+      marginBottom0
+      dirty={actionValue}
     />
   );
 
@@ -90,6 +93,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       data-testid={`input-textarea-${actionIndex}`}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textArea' })}
+      marginBottom0
+      dirty={actionValue}
     />
   );
 
@@ -121,6 +126,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
         data-testid={`select-patronGroup-${actionIndex}`}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.patronGroupSelect' })}
+        marginBottom0
+        dirty={actionValue}
       />
     );
   };
@@ -134,6 +141,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       data-testid={`dataPicker-experation-date-${actionIndex}`}
       backendDateStandard={BASE_DATE_FORMAT}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.date' })}
+      marginBottom0
+      dirty={actionValue}
     />
   );
 
@@ -145,6 +154,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
         data-test-id={`textField-${actionIndex}`}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}
+        dirty={actionValue}
       />
       <LocationLookup
         marginBottom0
@@ -164,6 +174,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       data-testid={`select-statuses-${actionIndex}`}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statusSelect' })}
+      marginBottom0
+      dirty={actionValue}
     />
   );
 
@@ -176,6 +188,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
       dataOptions={loanTypes}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+      dirty={actionValue}
     />
   );
 
@@ -188,6 +201,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
         dataOptions={sortedHoldingsNotes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+        marginBottom0
+        dirty={action.value}
       />)
       :
       (<Select
@@ -201,6 +216,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         })}
         dataOptions={sortedNotes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+        marginBottom0
+        dirty={actionValue}
       />)
   );
 
@@ -212,6 +229,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
     dataOptions={duplicateNoteOptions}
     aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+    marginBottom0
+    dirty={actionValue}
   />
   );
 
@@ -223,11 +242,13 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
       dataOptions={accessRelationshipsWithPlaceholder}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
+      marginBottom0
+      dirty={actionValue}
     />
   );
 
   return (
-    <Col xs={2} sm={2}>
+    <Col xs={2} sm={2} className={`${css.column}`}>
       {renderTextField()}
       {renderTextArea()}
       {renderPatronGroupSelect()}
