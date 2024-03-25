@@ -279,12 +279,14 @@ export const ContentUpdatesForm = ({
       renderField={(field, index) => {
         return (
           <Row data-testid={`row-${index}`}>
-            <Col xs={3} sm={3}>
+            <Col xs={3} sm={3} className={`${css.column} ${css.borderRight}`}>
               <Select
                 value={field.option}
                 onChange={(e) => handleOptionChange(e, index)}
                 data-testid={`select-option-${index}`}
                 aria-label={`select-option-${index}`}
+                dirty={field.option}
+                marginBottom0
               >
                 {renderOptions(groupByCategory(field.options))}
               </Select>
