@@ -1,14 +1,17 @@
 {
   "extends": ["@folio/eslint-config-stripes"],
   "parser": "@babel/eslint-parser",
+  "ignorePatterns": ["**/*.mock.js"],
   "rules": {
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "react-hooks/exhaustive-deps": "off"
   },
   "overrides": [
     {
       "files": [
         "**/*.test.js",
-        "**/*.test.jsx"
+        "**/*.test.jsx",
+        "**/*.mock.js"
       ],
       "env": {
         "jest": true

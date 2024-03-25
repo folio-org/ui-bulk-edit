@@ -68,6 +68,7 @@ export type BulkOperationDto = {
   operationType: 'UPDATE' | 'DELETE',
   entityType: EntityType,
   entityCustomIdentifierType: EntityCustomIdentifierType,
+  // eslint-disable-next-line no-restricted-globals
   status: Status,
   approach: Approach,
   dataExportJobId: string,
@@ -112,6 +113,7 @@ export type GroupsDto = {
 export type LoanTypesDto = {
   loantypes: {
     id: string,
+    // eslint-disable-next-line no-restricted-globals
     name: string
   }[]
 };
