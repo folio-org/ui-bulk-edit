@@ -21,7 +21,7 @@
     "modal.fileExtensions.actionButton": "Elija otro archivo para cargar",
     "list.filters.capabilities.title": "Tipos de registro",
     "list.filters.capabilities.users": "Usuarios",
-    "list.filters.capabilities.inventory": "Inventario - artículos",
+    "list.filters.capabilities.inventory": "Inventario - ítems",
     "list.filters.capabilities.circulation": "Circulación",
     "list.filters.capabilities.acquisition": "Adquisición",
     "start.edit": "Iniciar Cambio global",
@@ -51,7 +51,7 @@
     "modal.next": "Próximo",
     "conformationModal.commitChanges": "Confirmar cambios",
     "list.filters.recordIdentifier.item.barcode": "Código de barras del artículo",
-    "list.filters.recordIdentifier.item.UUID": "UUID de artículos",
+    "list.filters.recordIdentifier.item.UUID": "UUID de ítems",
     "list.filters.recordIdentifier.item.ItemHRIDs": "Item HRIDs",
     "list.filters.recordIdentifier.item.former": "Identificador anterior del artículo",
     "list.filters.recordIdentifier.item.accession": "Número de acceso al artículo",
@@ -177,7 +177,7 @@
     "logs.status.FAILED": "Fallido",
     "logs.status.APPLY_CHANGES": "Aplicar cambios",
     "logs.entityType.HOLDINGS_RECORD": "Inventario - Holdings",
-    "logs.entityType.ITEM": "Inventario - artículos",
+    "logs.entityType.ITEM": "Inventario - ítems",
     "logs.entityType.USER": "Usuarios",
     "logs.approach.IN_APP": "En aplicación",
     "logs.approach.MANUAL": "CSV",
@@ -443,5 +443,6 @@
     "list.errors.query.info": "<b>Bulk edit query: {entries, number} entries * {matched, number} records matched * {errors, number} errors</b>",
     "list.errors.query.infoProcessed": "<b>Bulk edit query: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
     "columns.ITEM.Holdings (Location, Call number)": "Holdings (Location, Call number)",
-    "meta.query.title": "Bulk edit query"
+    "meta.query.title": "Bulk edit query",
+    "logs.status.EXECUTING_QUERY": "Executing query"
 }
