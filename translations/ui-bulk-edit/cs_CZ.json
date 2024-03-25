@@ -443,5 +443,6 @@
     "list.errors.query.info": "<b>Hromadné úpravy dotazu: {entries, number} záznamy * {matched, number} odpovídající záznamy * {errors, number} chyby</b>",
     "list.errors.query.infoProcessed": "<b>Hromadné úpravy dotazu: {entries, number} záznamy * {matched, number} záznamy změněny * {errors, number} chyby</b>",
     "columns.ITEM.Holdings (Location, Call number)": "Holdings (Location, Call number)",
-    "meta.query.title": "Dotaz pro hromadnou úpravu"
+    "meta.query.title": "Dotaz pro hromadnou úpravu",
+    "logs.status.EXECUTING_QUERY": "Spouštění dotazu"
 }
