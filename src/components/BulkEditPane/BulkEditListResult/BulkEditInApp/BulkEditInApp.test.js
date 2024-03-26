@@ -292,10 +292,13 @@ describe('BulkEditInApp', () => {
 
     act(() => userEvent.selectOptions(selectAction, actionSetToTrue));
 
-    const checkbox = screen.getByRole('checkbox');
 
-    expect(optionStatus.selected).toBeTruthy();
-    expect(checkbox).toBeChecked();
+    waitFor(() => {
+      const checkbox = screen.getByRole('checkbox');
+
+      expect(optionStatus.selected).toBeTruthy();
+      expect(checkbox).toBeChecked();
+    });
   });
 
   it('should display holdings set to false is unchecked by default', () => {
@@ -311,10 +314,12 @@ describe('BulkEditInApp', () => {
 
     act(() => userEvent.selectOptions(selectAction, actionSetToFalse));
 
-    const checkbox = screen.getByRole('checkbox');
+    waitFor(() => {
+      const checkbox = screen.getByRole('checkbox');
 
-    expect(optionStatus.selected).toBeTruthy();
-    expect(checkbox).not.toBeChecked();
+      expect(optionStatus.selected).toBeTruthy();
+      expect(checkbox).not.toBeChecked();
+    });
   });
 
   it('should display holding temporart location options', () => {

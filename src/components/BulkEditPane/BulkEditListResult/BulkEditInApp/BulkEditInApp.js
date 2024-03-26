@@ -8,6 +8,7 @@ import {
   Layout,
 } from '@folio/stripes/components';
 
+import { useState } from 'react';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import {
@@ -21,11 +22,12 @@ import { useItemNotes } from '../../../../hooks/api/useItemNotes';
 import { useHoldingsNotes } from '../../../../hooks/api/useHoldingsNotes';
 import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
+import { getDefaultActions } from './ContentUpdatesForm/helpers';
 
 export const BulkEditInApp = ({
   onContentUpdatesChanged,
 }) => {
-  const intl = useIntl();
+  const { formatMessage } = useIntl();
   const {
     currentRecordType,
     initialFileName
@@ -38,15 +40,30 @@ export const BulkEditInApp = ({
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
 
   const optionsMap = {
-    [CAPABILITIES.ITEM]: getItemsOptions(intl.formatMessage, itemNotes),
-    [CAPABILITIES.USER]: getUserOptions(intl.formatMessage),
-    [CAPABILITIES.HOLDING]: getHoldingsOptions(intl.formatMessage, holdingsNotes),
-    [CAPABILITIES.INSTANCE]: getInstanceOptions(intl.formatMessage),
+    [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, itemNotes),
+    [CAPABILITIES.USER]: getUserOptions(formatMessage),
+    [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, holdingsNotes),
+    [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage),
   };
 
   const options = optionsMap[currentRecordType];
   const showContentUpdatesForm = options && !isItemNotesLoading && !isHoldingsNotesLoading;
-  const sortedOptions = sortAlphabetically(options, intl.formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
+  const sortedOptions = sortAlphabetically(options, formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
+
+  const defaultOptionValue = options[0].value;
+
+  const fieldTemplate = {
+    options,
+    option: defaultOptionValue,
+    actionsDetails: getDefaultActions({
+      option: defaultOptionValue,
+      capability: currentRecordType,
+      options,
+      formatMessage
+    }),
+  };
+
+  const [fields, setFields] = useState([fieldTemplate]);
 
   return (
     <>
@@ -56,9 +73,12 @@ export const BulkEditInApp = ({
       <Accordion
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
       >
-        <BulkEditInAppTitle />
+        <BulkEditInAppTitle fields={fields} />
         {showContentUpdatesForm ? (
           <ContentUpdatesForm
+            fieldTemplate={fieldTemplate}
+            fields={fields}
+            setFields={setFields}
             options={sortedOptions}
             onContentUpdatesChanged={onContentUpdatesChanged}
           />

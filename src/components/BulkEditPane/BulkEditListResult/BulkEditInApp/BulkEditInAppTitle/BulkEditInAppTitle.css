@@ -1,14 +1,15 @@
 @import "@folio/stripes-components/lib/variables";
 
 .headerCell {
-  padding: 10px 10px 5px;
-  font-weight: var(--text-weight-bold);
   border-bottom: 5px solid var(--primary);
+  padding-top: 5px;
 }
 
 .emptyHeaderCell {
-  width: 100%;
+  flex-grow: 1;
   padding: 10px 10px 5px;
-  font-weight: var(--text-weight-bold);
   border-bottom: 5px solid var(--primary);
+  font-weight: var(--text-weight-bold);
+  margin-left: auto;
+  text-align: right;
 }

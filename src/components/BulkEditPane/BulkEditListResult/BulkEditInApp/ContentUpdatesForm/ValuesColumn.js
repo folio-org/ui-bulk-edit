@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
 import {
-  Col,
   Datepicker,
   Select,
   Selection,
@@ -29,7 +28,6 @@ import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
 import { useHoldingsNotes } from '../../../../../hooks/api/useHoldingsNotes';
 import { useElectronicAccessRelationships } from '../../../../../hooks/api/useElectronicAccess';
 import { useSearchParams } from '../../../../../hooks/useSearchParams';
-import css from '../BulkEditInApp.css';
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
@@ -248,7 +246,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   );
 
   return (
-    <Col xs={2} sm={2} className={css.column}>
+    <>
       {renderTextField()}
       {renderTextArea()}
       {renderPatronGroupSelect()}
@@ -259,7 +257,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       {renderNoteTypeSelect()}
       {renderNoteDuplicateTypeSelect()}
       {renderElectronicAccessRelationshipSelect()}
-    </Col>
+    </>
   );
 };
 
