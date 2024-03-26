@@ -58,6 +58,7 @@ export const useLocationFilters = ({
 
       return newFilters;
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [applyFilters, history, search],
   );
 
@@ -70,6 +71,7 @@ export const useLocationFilters = ({
         search: buildSearch(initialFilter),
       });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [history, resetFilters],
   );
 

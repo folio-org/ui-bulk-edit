@@ -164,6 +164,8 @@ export const BulkEditInAppPreviewModal = ({
           setIsPreviewLoading(false);
         });
     }
+    // We don't need to put here query-client, setPreviewIsLoading in deps to escape update problems.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contentUpdates, open, totalRecords]);
 
   return (

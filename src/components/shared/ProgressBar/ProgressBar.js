@@ -55,6 +55,8 @@ export const ProgressBar = () => {
       swwCallout();
       clearIntervalAndRedirect('/bulk-edit', '');
     }
+    // We want our useEffect fire only on status change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   return (

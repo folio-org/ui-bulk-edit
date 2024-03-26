@@ -51,5 +51,6 @@ export const useResetAppState = ({
       setIsBulkEditLayerOpen(false);
       setInAppCommitted(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history.location]);
 };
