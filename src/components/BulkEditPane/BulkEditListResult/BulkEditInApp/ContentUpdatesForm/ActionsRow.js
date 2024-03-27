@@ -51,7 +51,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
         )}
 
         {/* Render additional actions  */}
-        {action.name && actions.parameters?.length > 0 && (
+        {action.name && action.parameters?.length > 0 && (
           <Col xs={2} className={css.column}>
             <AdditionalActionParameters action={action} actionIndex={actionIndex} onChange={onChange} />
           </Col>
