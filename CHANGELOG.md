@@ -2,6 +2,7 @@
 
 ## In progress
 * [UIBULKED-441](https://issues.folio.org/browse/UIBULKED-441) Bulk edit form enhancements - part 1.
+* [UIBULKED-442](https://issues.folio.org/browse/UIBULKED-442) Bulk edit form enhancements - part 2.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
