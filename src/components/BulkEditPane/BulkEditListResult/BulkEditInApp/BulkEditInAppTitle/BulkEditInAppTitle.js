@@ -28,48 +28,48 @@ export const BulkEditInAppTitle = ({ fields }) => {
   const nonEmptyActions = getNonEmptyActions(field);
 
   return (
-    <>
-      <Row>
-        <Col
-          className={css.headerCell}
-          sm={2}
-        >
-          <Label required>
-            <FormattedMessage id="ui-bulk-edit.layer.column.options" />
-          </Label>
-        </Col>
+    <Row>
+      <Col
+        className={css.headerCell}
+        sm={2}
+      >
+        <Label required>
+          <FormattedMessage id="ui-bulk-edit.layer.column.options" />
+        </Label>
+      </Col>
 
-        {nonEmptyActions.map((action) => (
-          <>
+      {nonEmptyActions.map((action) => (
+        <>
+          <Col
+            className={css.headerCell}
+            sm={2}
+          >
+            <Label required>
+              <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
+            </Label>
+            <div className={css.splitter} />
+          </Col>
+          {shouldRenderAction(action) && (
             <Col
               className={css.headerCell}
               sm={2}
             >
               <Label required>
-                <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
+                <FormattedMessage id="ui-bulk-edit.layer.column.data" />
               </Label>
               <div className={css.splitter} />
             </Col>
-            {shouldRenderAction(action) && (
-              <Col
-                className={css.headerCell}
-                sm={2}
-              >
-                <Label required>
-                  <FormattedMessage id="ui-bulk-edit.layer.column.data" />
-                </Label>
-                <div className={css.splitter} />
-              </Col>
-            )}
-          </>
-        ))}
-        <Col
-          className={css.emptyHeaderCell}
-        >
+          )}
+        </>
+      ))}
+      <Col
+        className={css.emptyHeaderCell}
+      >
+        <Label>
           <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
-        </Col>
-      </Row>
-    </>
+        </Label>
+      </Col>
+    </Row>
   );
 };
 
