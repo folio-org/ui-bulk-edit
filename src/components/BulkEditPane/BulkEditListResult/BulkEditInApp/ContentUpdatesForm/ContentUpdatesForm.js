@@ -267,7 +267,7 @@ export const ContentUpdatesForm = ({
       renderField={(field, index) => {
         return (
           <Row data-testid={`row-${index}`}>
-            <Col xs={2} sm={2} className={`${css.column} ${css.borderRight}`}>
+            <Col xs={2} sm={2} className={css.column}>
               <Select
                 value={field.option}
                 onChange={(e) => handleOptionChange(e, index)}

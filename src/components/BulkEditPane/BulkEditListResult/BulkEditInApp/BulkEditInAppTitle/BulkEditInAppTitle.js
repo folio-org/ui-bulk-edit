@@ -1,5 +1,4 @@
 import { FormattedMessage } from 'react-intl';
-import { maxBy } from 'lodash/math';
 import PropTypes from 'prop-types';
 
 import {
@@ -12,8 +11,21 @@ import css from './BulkEditInAppTitle.css';
 import { FINAL_ACTIONS } from '../../../../../constants';
 
 export const BulkEditInAppTitle = ({ fields }) => {
-  const field = maxBy(fields, (item) => item.actionsDetails.actions.filter(i => !!i).length);
-  const nonEmptyActions = field.actionsDetails.actions.filter(Boolean);
+  const shouldRenderAction = (action) => action?.name && (!FINAL_ACTIONS.includes(action?.name) || action?.parameters?.length > 0);
+  const getNonEmptyActions = (field) => field.actionsDetails.actions.filter(Boolean);
+  const getFilledNonFinalActions = (field) => field.actionsDetails.actions.filter(shouldRenderAction);
+
+  // Find the field with the most non-empty + non-final actions and based on this field render the header for all rows
+  const field = fields.reduce((acc, item) => {
+    if (getNonEmptyActions(item).length > getNonEmptyActions(acc).length
+      || getFilledNonFinalActions(item).length > getFilledNonFinalActions(acc).length) {
+      return item;
+    }
+
+    return acc;
+  }, fields[0]);
+
+  const nonEmptyActions = getNonEmptyActions(field);
 
   return (
     <>
@@ -36,8 +48,9 @@ export const BulkEditInAppTitle = ({ fields }) => {
               <Label required>
                 <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
               </Label>
+              <div className={css.splitter} />
             </Col>
-            {action.name && (!FINAL_ACTIONS.includes(action.name) || action.parameters?.length > 0) && (
+            {shouldRenderAction(action) && (
               <Col
                 className={css.headerCell}
                 sm={2}
@@ -45,6 +58,7 @@ export const BulkEditInAppTitle = ({ fields }) => {
                 <Label required>
                   <FormattedMessage id="ui-bulk-edit.layer.column.data" />
                 </Label>
+                <div className={css.splitter} />
               </Col>
             )}
           </>

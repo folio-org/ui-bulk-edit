@@ -25,7 +25,7 @@ export const AdditionalActionParameters = ({ action, actionIndex, onChange }) =>
   };
 
   return (
-    <div className={`${css.additionalParameters}`}>
+    <div className={css.additionalParameters}>
       {action.parameters?.map((parameter) => (
         <Checkbox
           key={parameter.key}
