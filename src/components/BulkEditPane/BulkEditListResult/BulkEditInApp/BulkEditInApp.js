@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useState } from 'react';
 
 import {
   Headline,
@@ -8,7 +9,6 @@ import {
   Layout,
 } from '@folio/stripes/components';
 
-import { useState } from 'react';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import {

@@ -7,8 +7,8 @@ import {
   Label,
 } from '@folio/stripes/components';
 
-import css from './BulkEditInAppTitle.css';
 import { FINAL_ACTIONS } from '../../../../../constants';
+import css from './BulkEditInAppTitle.css';
 
 export const BulkEditInAppTitle = ({ fields }) => {
   const shouldRenderAction = (action) => action?.name && (!FINAL_ACTIONS.includes(action?.name) || action?.parameters?.length > 0);
