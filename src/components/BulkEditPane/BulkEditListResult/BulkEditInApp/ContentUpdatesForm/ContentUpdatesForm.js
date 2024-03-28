@@ -244,6 +244,8 @@ export const ContentUpdatesForm = ({
     );
 
     onContentUpdatesChanged(mappedContentUpdates);
+    // We want call useEffect only on fields changes, avoid other deps to prevent unexpected re-renders
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fields]);
 
   const renderOptions = (optionsMap) => {

@@ -23,6 +23,7 @@ export const useResetFilters = () => {
       identifierTab: identifierFilters,
       logsTab: logsFilters,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history.location]);
 
   return { filtersTab };

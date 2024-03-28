@@ -60,6 +60,7 @@ export const LogsTab = () => {
 
   const applyFiltersAdapter = (callBack) => ({ name, values }) => callBack(name, values);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const adaptedApplyFilters = useCallback(applyFiltersAdapter(applyFilters), [applyFilters]);
 
   const { data } = useBulkOperationUsers();

@@ -44,6 +44,7 @@ export const useRecordsPreview = ({
     capabilities,
     criteria,
     queryRecordType
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [data]);
 
   // set initial and visible columns
@@ -65,6 +66,7 @@ export const useRecordsPreview = ({
 
       setVisibleColumns(mappedVisibleColumns);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columns, dataUpdatedAt]);
 
   return {

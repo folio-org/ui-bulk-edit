@@ -13,5 +13,6 @@ export const useDerivativeModification = ({ onChange, action, actionIndex, deps 
         fieldName: ACTION_PARAMETERS_KEY
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 };

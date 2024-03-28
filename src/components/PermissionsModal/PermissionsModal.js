@@ -33,13 +33,13 @@ export const PermissionsModal = ({
   const { permissions, isPermissionsLoading } = useAllPermissions();
 
   const filteredPermissions = useMemo(() => permissions?.filter((permission) => {
-    const { query, permissions, statuses } = filter;
+    const { query, permissions: permissionsList, statuses } = filter;
 
     const isQueryMatched = query?.length
       ? permission.displayName?.toLowerCase().includes(query.toLowerCase())
       : true;
-    const isPermissionTypeMatched = permissions.length
-      ? permissions.includes(permission.type)
+    const isPermissionTypeMatched = permissionsList.length
+      ? permissionsList.includes(permission.type)
       : true;
 
     const status = selectedPermissions.includes(permission.id)

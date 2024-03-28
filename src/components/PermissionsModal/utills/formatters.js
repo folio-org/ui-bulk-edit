@@ -6,7 +6,7 @@ import { FILTER_KEYS } from '../constants/core';
 
 export const permsFormatter = ({ selectedPermissions, formatMessage, onRowClicked }) => ({
   selected: permission => (
-    <div onClick={e => e.stopPropagation()}>
+    <div onClick={e => e.stopPropagation()} role="presentation">
       <Checkbox
         id={permission.id}
         checked={selectedPermissions.includes(permission.id)}

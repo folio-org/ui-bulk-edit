@@ -46,6 +46,7 @@ const BulkEditLogsActions = ({ item }) => {
     if (triggeredFile) {
       refetch();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggeredFile]);
 
   const onLoadFile = (file) => {
@@ -85,6 +86,7 @@ const BulkEditLogsActions = ({ item }) => {
         ))}
       </MenuSection>
     </DropdownMenu>
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   ), [availableFiles]);
 
   if (item.entityType === CAPABILITIES.USER && !hasUsersViewPerms) return null;

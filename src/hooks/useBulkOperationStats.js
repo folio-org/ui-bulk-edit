@@ -21,6 +21,8 @@ export const useBulkOperationStats = ({ bulkDetails, step }) => {
     setCountOfErrors(countErrors);
     setCountOfRecords(countRecords);
     setTotalCount(isInitialPreview ? bulkDetails.totalNumOfRecords : bulkDetails.matchedNumOfRecords);
+    // We want to fire that useEffect only on update of bulkDetails and step, avoiding unexpected calls
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bulkDetails, step]);
 
   return {
