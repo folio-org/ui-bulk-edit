@@ -1,14 +1,28 @@
 @import "@folio/stripes-components/lib/variables";
 
+:root {
+  --cellHeight: 36px;
+}
+
 .headerCell {
-  padding: 10px 10px 5px;
-  font-weight: var(--text-weight-bold);
+  height: var(--cellHeight);
   border-bottom: 5px solid var(--primary);
+  padding-top: 5px;
+}
+
+.splitter {
+  position: absolute;
+  bottom: 0;
+  width: 1px;
+  height: calc(100% - var(--cellHeight));
+  background-color: var(--color-border-p2);
+  transform: translateX(-8px);
 }
 
 .emptyHeaderCell {
-  width: 100%;
-  padding: 10px 10px 5px;
-  font-weight: var(--text-weight-bold);
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
   border-bottom: 5px solid var(--primary);
+  margin-left: auto;
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import noop from 'lodash/noop';
@@ -31,26 +31,14 @@ import { useSearchParams } from '../../../../../hooks/useSearchParams';
 export const ContentUpdatesForm = ({
   onContentUpdatesChanged,
   options,
+  fields,
+  setFields,
+  fieldTemplate,
 }) => {
   const { formatMessage } = useIntl();
   const {
     currentRecordType,
   } = useSearchParams();
-
-  const defaultOptionValue = options[0].value;
-
-  const fieldTemplate = {
-    options,
-    option: defaultOptionValue,
-    actionsDetails: getDefaultActions({
-      option: defaultOptionValue,
-      capability: currentRecordType,
-      options,
-      formatMessage
-    }),
-  };
-
-  const [fields, setFields] = useState([fieldTemplate]);
 
   const handleOptionChange = (e, index) => {
     const mappedFields = fields.map((field, i) => {
@@ -279,7 +267,7 @@ export const ContentUpdatesForm = ({
       renderField={(field, index) => {
         return (
           <Row data-testid={`row-${index}`}>
-            <Col xs={3} sm={3} className={`${css.column} ${css.borderRight}`}>
+            <Col xs={2} sm={2} className={css.column}>
               <Select
                 value={field.option}
                 onChange={(e) => handleOptionChange(e, index)}
@@ -322,4 +310,7 @@ export const ContentUpdatesForm = ({
 ContentUpdatesForm.propTypes = {
   onContentUpdatesChanged: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.object),
+  fields: PropTypes.arrayOf(PropTypes.object),
+  fieldTemplate: PropTypes.object,
+  setFields: PropTypes.func,
 };

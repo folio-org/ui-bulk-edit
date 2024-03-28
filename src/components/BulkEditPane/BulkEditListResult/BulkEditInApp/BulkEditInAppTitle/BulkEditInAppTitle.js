@@ -1,31 +1,78 @@
 import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
 
 import {
   Col,
   Row,
+  Label,
 } from '@folio/stripes/components';
 
+import { FINAL_ACTIONS } from '../../../../../constants';
 import css from './BulkEditInAppTitle.css';
 
-export const BulkEditInAppTitle = () => {
+export const BulkEditInAppTitle = ({ fields }) => {
+  const shouldRenderAction = (action) => action?.name && (!FINAL_ACTIONS.includes(action?.name) || action?.parameters?.length > 0);
+  const getNonEmptyActions = (field) => field.actionsDetails.actions.filter(Boolean);
+  const getFilledNonFinalActions = (field) => field.actionsDetails.actions.filter(shouldRenderAction);
+
+  // Find the field with the most non-empty + non-final actions and based on this field render the header for all rows
+  const field = fields.reduce((acc, item) => {
+    if (getNonEmptyActions(item).length > getNonEmptyActions(acc).length
+      || getFilledNonFinalActions(item).length > getFilledNonFinalActions(acc).length) {
+      return item;
+    }
+
+    return acc;
+  }, fields[0]);
+
+  const nonEmptyActions = getNonEmptyActions(field);
+
   return (
-    <Row className={css.header}>
+    <Row>
       <Col
         className={css.headerCell}
-        sm={3}
+        sm={2}
       >
-        <FormattedMessage id="ui-bulk-edit.layer.column.options" />
+        <Label required>
+          <FormattedMessage id="ui-bulk-edit.layer.column.options" />
+        </Label>
       </Col>
-      <Col
-        className={css.headerCell}
-        sm={3}
-      >
-        <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
-      </Col>
+
+      {nonEmptyActions.map((action) => (
+        <>
+          <Col
+            className={css.headerCell}
+            sm={2}
+          >
+            <Label required>
+              <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
+            </Label>
+            <div className={css.splitter} />
+          </Col>
+          {shouldRenderAction(action) && (
+            <Col
+              className={css.headerCell}
+              sm={2}
+            >
+              <Label required>
+                <FormattedMessage id="ui-bulk-edit.layer.column.data" />
+              </Label>
+              <div className={css.splitter} />
+            </Col>
+          )}
+        </>
+      ))}
       <Col
         className={css.emptyHeaderCell}
-        sm={6}
-      />
+      >
+        <Label>
+          <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
+        </Label>
+      </Col>
     </Row>
   );
+};
+
+BulkEditInAppTitle.propTypes = {
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
