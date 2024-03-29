@@ -30,7 +30,7 @@ const PreviewContainer = () => {
   } = useSearchParams();
   const lowerCaseRecordType = currentRecordType?.toLowerCase();
 
-  const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
+  const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step, progress] });
 
   const title = useMemo(() => {
     if (bulkDetails?.userFriendlyQuery) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText: bulkDetails.userFriendlyQuery });
