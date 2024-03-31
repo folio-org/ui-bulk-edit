@@ -1,6 +1,7 @@
 # Change history for ui-bulk-edit
 
 ## In progress
+* [UIBULKED-465](https://issues.folio.org/browse/UIBULKED-465) Local approach - Incorrect numbers of changed records and errors are displayed on Confirmation screen
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
