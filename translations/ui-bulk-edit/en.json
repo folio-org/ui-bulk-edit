@@ -324,6 +324,7 @@
   "actions.find": "Find",
   "layer.column.options": "Options",
   "layer.column.actions": "Actions",
+  "layer.column.data": "Data",
   "layer.action.replace": "Replace with",
   "layer.action.clear": "Clear field",
   "layer.action.apply.ITEMS": "Apply to items records",
