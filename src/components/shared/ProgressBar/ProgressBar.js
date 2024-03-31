@@ -42,7 +42,12 @@ export const ProgressBar = () => {
         :
         intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
     });
-  }, [callout, errorMessage, initialFileName, intl]);
+  }, [
+    callout,
+    errorMessage,
+    initialFileName,
+    intl
+  ]);
 
   useEffect(() => {
     const nextStep = getBulkOperationStep(bulkDetails);
@@ -55,7 +60,13 @@ export const ProgressBar = () => {
       swwCallout();
       clearIntervalAndRedirect('/bulk-edit', '');
     }
-  }, [status, bulkDetails, id, clearIntervalAndRedirect, swwCallout]);
+  }, [
+    status,
+    bulkDetails,
+    id,
+    clearIntervalAndRedirect,
+    swwCallout
+  ]);
 
   return (
     <div className={css.progressBar}>

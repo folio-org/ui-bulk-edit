@@ -103,7 +103,12 @@ export const IdentifierTab = () => {
     setIsFileUploaded(false);
     setVisibleColumns(null);
     setInAppCommitted(false);
-  }, [history, setIsFileUploaded, setVisibleColumns, setInAppCommitted]);
+  }, [
+    history,
+    setIsFileUploaded,
+    setVisibleColumns,
+    setInAppCommitted
+  ]);
 
   const handleCapabilityChange = (e) => {
     history.replace({

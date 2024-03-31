@@ -13,5 +13,9 @@ export const useDerivativeModification = ({ onChange, action, actionIndex }) => 
         fieldName: ACTION_PARAMETERS_KEY
       });
     }
-  }, [action, actionIndex, onChange]);
+  }, [
+    action,
+    actionIndex,
+    onChange
+  ]);
 };

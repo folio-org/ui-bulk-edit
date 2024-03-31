@@ -7,5 +7,10 @@ export const usePreselectedValue = (controlType, duplicateNoteOptions, onChange,
     if (controlType === CONTROL_TYPES.NOTE_DUPLICATE_SELECT) {
       onChange({ actionIndex, value: duplicateNoteOptions[0].value, fieldName: FIELD_VALUE_KEY });
     }
-  }, [controlType, duplicateNoteOptions, onChange, actionIndex]);
+  }, [
+    controlType,
+    duplicateNoteOptions,
+    onChange,
+    actionIndex
+  ]);
 };

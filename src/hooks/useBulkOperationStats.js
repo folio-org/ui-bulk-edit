@@ -21,7 +21,13 @@ export const useBulkOperationStats = ({ bulkDetails, step }) => {
     setCountOfErrors(countErrors);
     setCountOfRecords(countRecords);
     setTotalCount(isInitialPreview ? bulkDetails.totalNumOfRecords : bulkDetails.matchedNumOfRecords);
-  }, [bulkDetails, step, setCountOfErrors, setCountOfRecords, setTotalCount]);
+  }, [
+    bulkDetails,
+    step,
+    setCountOfErrors,
+    setCountOfRecords,
+    setTotalCount
+  ]);
 
   return {
     countOfRecords,
