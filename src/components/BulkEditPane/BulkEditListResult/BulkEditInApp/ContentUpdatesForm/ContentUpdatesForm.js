@@ -232,7 +232,7 @@ export const ContentUpdatesForm = ({
     );
 
     onContentUpdatesChanged(mappedContentUpdates);
-  }, [fields]);
+  }, [fields, options, onContentUpdatesChanged, currentRecordType]);
 
   const renderOptions = (optionsMap) => {
     return Object.entries(optionsMap).map(([category, item]) => {
