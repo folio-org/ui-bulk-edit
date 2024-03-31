@@ -81,7 +81,7 @@ export const BulkEditIdentifiers = ({
 
 BulkEditIdentifiers.propTypes = {
   bulkDetails: PropTypes.object,
-  actionMenu: PropTypes.object,
+  actionMenu: PropTypes.func,
   renderInAppApproach: PropTypes.func,
   renderManualApproach: PropTypes.func,
 };
