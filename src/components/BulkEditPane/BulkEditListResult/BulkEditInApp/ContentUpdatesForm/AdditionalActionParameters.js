@@ -11,7 +11,7 @@ import css from '../BulkEditInApp.css';
 export const AdditionalActionParameters = ({ action, actionIndex, onChange }) => {
   const { formatMessage } = useIntl();
 
-  useDerivativeModification({ onChange, actionIndex, action, deps: [action.name] });
+  useDerivativeModification({ onChange, actionIndex, action });
 
   const handleChange = (e) => {
     const { checked, name } = e.target;

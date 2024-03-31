@@ -44,8 +44,7 @@ export const useRecordsPreview = ({
     capabilities,
     criteria,
     queryRecordType
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [data]);
+  }), [data, intl, capabilities, criteria, queryRecordType]);
 
   // set initial and visible columns
   useEffect(() => {
@@ -66,8 +65,7 @@ export const useRecordsPreview = ({
 
       setVisibleColumns(mappedVisibleColumns);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [columns, dataUpdatedAt]);
+  }, [columns, dataUpdatedAt, setVisibleColumns, capabilities]);
 
   return {
     isLoading,

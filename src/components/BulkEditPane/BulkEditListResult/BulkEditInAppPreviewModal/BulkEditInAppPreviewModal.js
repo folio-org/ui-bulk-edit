@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
@@ -54,12 +54,12 @@ export const BulkEditInAppPreviewModal = ({
     initialFileName
   } = useSearchParams();
 
-  const swwCallout = () => (
+  const swwCallout = useCallback(() => (
     callout({
       type: 'error',
       message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
     })
-  );
+  ), [callout, intl]);
 
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
@@ -164,9 +164,17 @@ export const BulkEditInAppPreviewModal = ({
           setIsPreviewLoading(false);
         });
     }
-    // We don't need to put here query-client, setPreviewIsLoading in deps to escape update problems.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [contentUpdates, open, totalRecords]);
+  }, [
+    contentUpdates,
+    open,
+    totalRecords,
+    bulkOperationId,
+    contentUpdate,
+    bulkOperationStart,
+    queryClient,
+    onKeepEditing,
+    swwCallout
+  ]);
 
   return (
     <Modal

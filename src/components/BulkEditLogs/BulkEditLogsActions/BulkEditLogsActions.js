@@ -46,8 +46,7 @@ const BulkEditLogsActions = ({ item }) => {
     if (triggeredFile) {
       refetch();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [triggeredFile]);
+  }, [triggeredFile, refetch]);
 
   const onLoadFile = (file) => {
     setTriggeredFile(file);
@@ -86,8 +85,7 @@ const BulkEditLogsActions = ({ item }) => {
         ))}
       </MenuSection>
     </DropdownMenu>
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  ), [availableFiles]);
+  ), [availableFiles, fileNamePostfix]);
 
   if (item.entityType === CAPABILITIES.USER && !hasUsersViewPerms) return null;
   if (item.entityType === CAPABILITIES.HOLDING &&

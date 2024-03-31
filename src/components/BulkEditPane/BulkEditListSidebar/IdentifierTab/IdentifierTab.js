@@ -103,8 +103,7 @@ export const IdentifierTab = () => {
     setIsFileUploaded(false);
     setVisibleColumns(null);
     setInAppCommitted(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.search]);
+  }, [history, setIsFileUploaded, setVisibleColumns, setInAppCommitted]);
 
   const handleCapabilityChange = (e) => {
     history.replace({

@@ -7,6 +7,5 @@ export const usePreselectedValue = (controlType, duplicateNoteOptions, onChange,
     if (controlType === CONTROL_TYPES.NOTE_DUPLICATE_SELECT) {
       onChange({ actionIndex, value: duplicateNoteOptions[0].value, fieldName: FIELD_VALUE_KEY });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [controlType, duplicateNoteOptions, onChange, actionIndex]);
 };

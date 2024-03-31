@@ -37,8 +37,11 @@ export const useLocationFilters = ({
       setFilters(initialFilters);
       setSearchIndex(initialFilters[SEARCH_INDEX_PARAMETER] || '');
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [search],
+    [
+      search,
+      setFilters,
+      setSearchIndex,
+    ],
   );
 
   const applyLocationFilters = useCallback(
@@ -58,8 +61,15 @@ export const useLocationFilters = ({
 
       return newFilters;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [applyFilters, history, search],
+    [
+      applyFilters,
+      history,
+      search,
+      currentRecordType,
+      initialFileName,
+      criteria,
+      step
+    ],
   );
 
   const resetLocationFilters = useCallback(
@@ -71,8 +81,7 @@ export const useLocationFilters = ({
         search: buildSearch(initialFilter),
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [history, resetFilters],
+    [history, resetFilters, initialFilter],
   );
 
   return [
