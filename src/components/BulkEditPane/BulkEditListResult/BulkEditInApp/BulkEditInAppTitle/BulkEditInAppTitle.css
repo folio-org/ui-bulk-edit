@@ -25,4 +25,5 @@
   flex-grow: 1;
   border-bottom: 5px solid var(--primary);
   margin-left: auto;
+  padding-right: 10px;
 }

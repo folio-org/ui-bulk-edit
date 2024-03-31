@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -11,6 +12,8 @@ import { FINAL_ACTIONS } from '../../../../../constants';
 import css from './BulkEditInAppTitle.css';
 
 export const BulkEditInAppTitle = ({ fields }) => {
+  if (!fields.length) return null;
+
   const shouldRenderAction = (action) => action?.name && (!FINAL_ACTIONS.includes(action?.name) || action?.parameters?.length > 0);
   const getNonEmptyActions = (field) => field.actionsDetails.actions.filter(Boolean);
   const getFilledNonFinalActions = (field) => field.actionsDetails.actions.filter(shouldRenderAction);
@@ -38,8 +41,8 @@ export const BulkEditInAppTitle = ({ fields }) => {
         </Label>
       </Col>
 
-      {nonEmptyActions.map((action) => (
-        <>
+      {nonEmptyActions.map((action, index) => (
+        <Fragment key={index}>
           <Col
             className={css.headerCell}
             sm={2}
@@ -60,7 +63,7 @@ export const BulkEditInAppTitle = ({ fields }) => {
               <div className={css.splitter} />
             </Col>
           )}
-        </>
+        </Fragment>
       ))}
       <Col
         className={css.emptyHeaderCell}
