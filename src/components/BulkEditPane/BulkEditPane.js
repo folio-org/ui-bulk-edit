@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { saveAs } from 'file-saver';
 
 import {
   Pane,
@@ -9,21 +10,29 @@ import { noop } from 'lodash/util';
 
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
-import { usePathParams, useBulkPermissions } from '../../hooks';
+import {
+  usePathParams,
+  useBulkPermissions,
+  useSearchParams
+} from '../../hooks';
 import {
   CRITERIA,
   APPROACHES,
+  FILE_SEARCH_PARAMS,
+  FILE_TO_LINK,
 } from '../../constants';
 import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import { BulkEditInAppPreviewModal } from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
-
 import { RootContext } from '../../context/RootContext';
 import { BulkEditLogs } from '../BulkEditLogs/BulkEditLogs';
 import { useResetAppState } from '../../hooks/useResetAppState';
 import { BulkEditInAppLayer } from './BulkEditListResult/BulkEditInAppLayer/BulkEditInAppLayer';
 import { BulkEditListSidebar } from './BulkEditListSidebar/BulkEditListSidebar';
-import { useSearchParams } from '../../hooks/useSearchParams';
-import { useBulkOperationDetails } from '../../hooks/api';
+import {
+  QUERY_KEY_DOWNLOAD_ACTION_MENU,
+  useBulkOperationDetails,
+  useFileDownload
+} from '../../hooks/api';
 import { BulkEditQuery } from './BulkEditQuery/BulkEditQuery';
 import { BulkEditIdentifiers } from './BulkEditIdentifiers/BulkEditIdentifiers';
 import { useResetFilters } from '../../hooks/useResetFilters';
@@ -38,6 +47,7 @@ export const BulkEditPane = () => {
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
   const [inAppCommitted, setInAppCommitted] = useState(false);
+  const [fileInfo, setFileInfo] = useState(null);
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
@@ -74,6 +84,23 @@ export const BulkEditPane = () => {
     inAppCommitted,
     isFileUploaded
   ]);
+
+  useFileDownload({
+    queryKey: QUERY_KEY_DOWNLOAD_ACTION_MENU,
+    enabled: !!fileInfo,
+    id: bulkOperationId,
+    fileInfo: {
+      fileContentType: FILE_SEARCH_PARAMS[fileInfo?.param],
+    },
+    onSuccess: data => {
+      /* istanbul ignore next */
+      saveAs(new Blob([data]), fileInfo?.bulkDetails[FILE_TO_LINK[fileInfo?.param]].split('/')[1]);
+    },
+    onSettled: () => {
+      /* istanbul ignore next */
+      setFileInfo(null);
+    },
+  });
 
   useResetAppState({
     setConfirmedFileName,
@@ -122,6 +149,7 @@ export const BulkEditPane = () => {
     <BulkEditActionMenu
       onEdit={handleStartBulkEdit}
       onToggle={noop}
+      setFileInfo={setFileInfo}
     />
   );
 
