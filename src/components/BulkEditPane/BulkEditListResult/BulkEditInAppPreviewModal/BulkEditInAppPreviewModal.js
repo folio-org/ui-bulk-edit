@@ -164,6 +164,8 @@ export const BulkEditInAppPreviewModal = ({
           setIsPreviewLoading(false);
         });
     }
+    // We disable rule here, because proposed onKeepEditing dep is failing our flow
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     contentUpdates,
     open,
@@ -172,7 +174,6 @@ export const BulkEditInAppPreviewModal = ({
     contentUpdate,
     bulkOperationStart,
     queryClient,
-    onKeepEditing,
     swwCallout
   ]);
 
