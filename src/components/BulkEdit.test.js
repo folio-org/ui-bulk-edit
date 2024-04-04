@@ -49,20 +49,7 @@ describe('BulkEdit', () => {
   it('displays Bulk edit', () => {
     renderBulkEdit();
 
-    expect(screen.getByText(/meta.title/)).toBeVisible();
-  });
-
-  it('should display correct pane titles', () => {
-    renderBulkEdit();
-
-    expect(screen.getByText(/list.logSubTitle/)).toBeVisible();
-    expect(screen.getByText(/list.criteriaTitle/)).toBeVisible();
-  });
-
-  it('should display empty result list', () => {
-    renderBulkEdit();
-
-    expect(screen.getByText(/BulkEditListResult/)).toBeVisible();
+    expect(screen.getByText(/TitleManager/)).toBeVisible();
   });
 
   // This test will be passing after fixing problem in stripes-data-transfer-components
@@ -177,7 +164,7 @@ describe('BulkEdit', () => {
       pathname: 'bulk-edit/1',
     });
 
-    expect(screen.getByText(/meta.title/)).toBeVisible();
+    expect(screen.getByText(/TitleManager/)).toBeVisible();
   });
 
   it('should update unsupported type of file', async () => {

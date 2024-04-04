@@ -107,8 +107,3 @@ jest.mock('@folio/stripes/core', () => ({
   ...jest.requireActual('@folio/stripes/core'),
   ...mockStripesCore
 }), { virtual: true });
-
-jest.mock('@folio/stripes-core', () => ({
-  ...jest.requireActual('@folio/stripes-core'),
-  ...mockStripesCore
-}), { virtual: true });
