@@ -100,10 +100,6 @@ const mockStripesCore = {
 
   useNamespace: () => ['@folio/inventory'],
 
-  TitleManager: jest.fn(({ children, ...rest }) => (
-    <span {...rest}>{children}</span>
-  )),
-
   checkIfUserInMemberTenant: () => true,
 };
 
