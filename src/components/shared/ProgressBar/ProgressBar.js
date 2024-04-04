@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -35,14 +35,19 @@ export const ProgressBar = () => {
     ? (bulkDetails.processedNumOfRecords / bulkDetails.totalNumOfRecords) * 100
     : 0;
 
-  const swwCallout = () => {
+  const swwCallout = useCallback(() => {
     callout({
       type: 'error',
       message: errorMessage?.includes(ERRORS.TOKEN) ? <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName: initialFileName }} />
         :
         intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
     });
-  };
+  }, [
+    callout,
+    errorMessage,
+    initialFileName,
+    intl
+  ]);
 
   useEffect(() => {
     const nextStep = getBulkOperationStep(bulkDetails);
@@ -55,7 +60,13 @@ export const ProgressBar = () => {
       swwCallout();
       clearIntervalAndRedirect('/bulk-edit', '');
     }
-  }, [status]);
+  }, [
+    status,
+    bulkDetails,
+    id,
+    clearIntervalAndRedirect,
+    swwCallout
+  ]);
 
   return (
     <div className={css.progressBar}>

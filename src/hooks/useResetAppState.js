@@ -51,5 +51,14 @@ export const useResetAppState = ({
       setIsBulkEditLayerOpen(false);
       setInAppCommitted(false);
     }
-  }, [history.location]);
+  }, [
+    history,
+    setConfirmedFileName,
+    setVisibleColumns,
+    setCountOfRecords,
+    filtersTab.logsTab,
+    setIsBulkEditLayerOpen,
+    setInAppCommitted,
+    queryClient,
+  ]);
 };

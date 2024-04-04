@@ -58,9 +58,7 @@ export const LogsTab = () => {
     }
   });
 
-  const applyFiltersAdapter = (callBack) => ({ name, values }) => callBack(name, values);
-
-  const adaptedApplyFilters = useCallback(applyFiltersAdapter(applyFilters), [applyFilters]);
+  const adaptedApplyFilters = useCallback(({ name, values }) => applyFilters(name, values), [applyFilters]);
 
   const { data } = useBulkOperationUsers();
 

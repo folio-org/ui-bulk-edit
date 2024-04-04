@@ -46,7 +46,7 @@ const BulkEditLogsActions = ({ item }) => {
     if (triggeredFile) {
       refetch();
     }
-  }, [triggeredFile]);
+  }, [triggeredFile, refetch]);
 
   const onLoadFile = (file) => {
     setTriggeredFile(file);
@@ -85,7 +85,7 @@ const BulkEditLogsActions = ({ item }) => {
         ))}
       </MenuSection>
     </DropdownMenu>
-  ), [availableFiles]);
+  ), [availableFiles, fileNamePostfix]);
 
   if (item.entityType === CAPABILITIES.USER && !hasUsersViewPerms) return null;
   if (item.entityType === CAPABILITIES.HOLDING &&

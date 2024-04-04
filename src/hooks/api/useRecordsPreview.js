@@ -44,7 +44,13 @@ export const useRecordsPreview = ({
     capabilities,
     criteria,
     queryRecordType
-  }), [data]);
+  }), [
+    data,
+    intl,
+    capabilities,
+    criteria,
+    queryRecordType
+  ]);
 
   // set initial and visible columns
   useEffect(() => {
@@ -65,7 +71,12 @@ export const useRecordsPreview = ({
 
       setVisibleColumns(mappedVisibleColumns);
     }
-  }, [columns, dataUpdatedAt]);
+  }, [
+    columns,
+    dataUpdatedAt,
+    setVisibleColumns,
+    capabilities
+  ]);
 
   return {
     isLoading,

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { saveAs } from 'file-saver';
 
@@ -111,26 +111,26 @@ export const BulkEditPane = () => {
     setInAppCommitted,
   });
 
-  const handleBulkEditLayerOpen = () => {
+  const handleBulkEditLayerOpen = useCallback(() => {
     setIsBulkEditLayerOpen(true);
-  };
-  const handleBulkEditLayerClose = () => {
+  }, []);
+  const handleBulkEditLayerClose = useCallback(() => {
     setIsBulkEditLayerOpen(false);
-  };
+  }, []);
 
-  const handlePreviewModalOpen = () => {
+  const handlePreviewModalOpen = useCallback(() => {
     setIsPreviewModalOpened(true);
-  };
+  }, []);
 
-  const handlePreviewModalClose = () => {
+  const handlePreviewModalClose = useCallback(() => {
     setIsPreviewModalOpened(false);
-  };
+  }, []);
 
-  const handleChangesCommitted = () => {
+  const handleChangesCommitted = useCallback(() => {
     handlePreviewModalClose();
     handleBulkEditLayerClose();
     setInAppCommitted(true);
-  };
+  }, [handleBulkEditLayerClose, handlePreviewModalClose]);
 
   const handleStartBulkEdit = (approach) => {
     if (approach === APPROACHES.IN_APP) {
