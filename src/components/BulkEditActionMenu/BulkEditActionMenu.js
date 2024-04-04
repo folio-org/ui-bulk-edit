@@ -1,15 +1,15 @@
+import React, { useContext, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import { saveAs } from 'file-saver';
+
 import {
   Button,
   Icon,
   TextField,
 } from '@folio/stripes/components';
 import { CheckboxFilter } from '@folio/stripes/smart-components';
-import React, { useContext, useState } from 'react';
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import css from './ActionMenuGroup/ActionMenuGroup.css';
+
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import {
   APPROACHES,
@@ -18,25 +18,23 @@ import {
   EDITING_STEPS,
   JOB_STATUSES,
   BULK_VISIBLE_COLUMNS,
-  FILE_SEARCH_PARAMS,
-  FILE_TO_LINK,
 } from '../../constants';
 import {
   useBulkPermissions,
   usePathParams,
+  useSearchParams
 } from '../../hooks';
 import { RootContext } from '../../context/RootContext';
-import {
-  QUERY_KEY_DOWNLOAD_ACTION_MENU,
-  useBulkOperationDetails,
-  useFileDownload
-} from '../../hooks/api';
+import { useBulkOperationDetails } from '../../hooks/api';
 import { getVisibleColumnsKeys } from '../../utils/helpers';
-import { useSearchParams } from '../../hooks/useSearchParams';
+
+import css from './ActionMenuGroup/ActionMenuGroup.css';
+
 
 const BulkEditActionMenu = ({
   onEdit,
   onToggle,
+  setFileInfo,
 }) => {
   const intl = useIntl();
   const perms = useBulkPermissions();
@@ -58,26 +56,10 @@ const BulkEditActionMenu = ({
   const { id } = usePathParams('/bulk-edit/:id');
   const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
 
-  const [fileInfo, setFileInfo] = useState(null);
-
   const hasEditPerm = (hasHoldingsInventoryEdit && currentRecordType === CAPABILITIES.HOLDING)
       || (hasItemInventoryEdit && currentRecordType === CAPABILITIES.ITEM)
       || (hasUserEditInAppPerm && currentRecordType === CAPABILITIES.USER)
       || (hasInstanceInventoryEdit && currentRecordType === CAPABILITIES.INSTANCE);
-
-
-  useFileDownload({
-    queryKey: QUERY_KEY_DOWNLOAD_ACTION_MENU,
-    enabled: !!fileInfo,
-    id,
-    fileInfo: {
-      fileContentType: FILE_SEARCH_PARAMS[fileInfo?.param],
-    },
-    onSuccess: data => {
-      saveAs(new Blob([data]), fileInfo?.bulkDetails[FILE_TO_LINK[fileInfo?.param]].split('/')[1]);
-      setFileInfo(null);
-    },
-  });
 
   const { countOfRecords, visibleColumns, setVisibleColumns } = useContext(RootContext);
   const columns = visibleColumns || [];
@@ -212,6 +194,7 @@ const BulkEditActionMenu = ({
 BulkEditActionMenu.propTypes = {
   onToggle: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
+  setFileInfo: PropTypes.func.isRequired,
 };
 
 export default BulkEditActionMenu;

@@ -9,6 +9,7 @@ export const useFileDownload = ({
   id,
   fileInfo,
   onSuccess,
+  onSettled,
   queryKey,
   ...queryProps
 }) => {
@@ -22,6 +23,7 @@ export const useFileDownload = ({
       }).blob(),
       enabled: !!fileInfo,
       onSuccess,
+      onSettled,
       ...queryProps,
     },
   );
