@@ -26,9 +26,6 @@ jest.mock('./BulkEditListResult', () => {
 
 jest.mock('@folio/stripes/core', () => ({
   useOkapiKy: jest.fn(),
-  TitleManager: jest.fn(({ children, ...rest }) => (
-    <span {...rest}>{children}</span>
-  )),
 }));
 jest.mock('./BulkEditListResult/BulkEditManualUploadModal', () => {
   return {

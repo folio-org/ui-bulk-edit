@@ -99,7 +99,7 @@ const mockStripesCore = {
   IfInterface: jest.fn(props => <>{props.children}</>),
 
   useNamespace: () => ['@folio/inventory'],
-
+  TitleManager: ({ children }) => <>{children}</>,
   checkIfUserInMemberTenant: () => true,
 };
 
