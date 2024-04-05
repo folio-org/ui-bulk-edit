@@ -7,6 +7,7 @@
 * [UIBULKED-467](https://issues.folio.org/browse/UIBULKED-467) File is not downloaded to local machine when "Actions" menu is closed
 * [UIBULKED-454](https://folio-org.atlassian.net/browse/UIBULKED-454) Fix eslint problems in bulk-edit.
 * [UIBULKED-472](https://folio-org.atlassian.net/browse/UIBULKED-472) Fix 100% progress bar when progress is not available.
+* [UIBULKED-463](https://folio-org.atlassian.net/browse/UIBULKED-463) Update translation with new key fo columns
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 

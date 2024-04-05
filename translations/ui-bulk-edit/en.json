@@ -177,6 +177,7 @@
   "columns.USER.Updated date": "Record updated",
   "columns.USER.Tags": "Tags",
   "columns.USER.Custom fields": "Custom fields",
+  "columns.USER.Link to the profile picture": "Link to the profile picture",
 
   "columns.ITEM.Item id": "Item ID",
   "columns.ITEM.Version": "Version",
