@@ -89,7 +89,7 @@ export const ProgressBar = () => {
       </div>
       <div className={css.progressBarBody}>
         <div className={css.progressBarLine}>
-          <div data-testid="progress-line" style={{ width: `${progressPercentage}%` }} />
+          <div data-testid="progress-line" style={{ width: `${progressPercentage || 0}%` }} />
         </div>
         <div className={css.progressBarLineStatus}>
           <span>
