@@ -11,7 +11,6 @@ export const useResetAppState = ({
   setCountOfRecords,
   filtersTab,
   setIsBulkEditLayerOpen,
-  setInAppCommitted
 }) => {
   const history = useHistory();
   const queryClient = useQueryClient();
@@ -49,7 +48,6 @@ export const useResetAppState = ({
       });
 
       setIsBulkEditLayerOpen(false);
-      setInAppCommitted(false);
     }
   }, [
     history,
@@ -58,7 +56,6 @@ export const useResetAppState = ({
     setCountOfRecords,
     filtersTab.logsTab,
     setIsBulkEditLayerOpen,
-    setInAppCommitted,
     queryClient,
   ]);
 };

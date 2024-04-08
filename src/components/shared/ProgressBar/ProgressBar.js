@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -6,15 +6,13 @@ import { Icon, Loading } from '@folio/stripes/components';
 import { useShowCallout } from '@folio/stripes-acq-components';
 
 import { useBulkOperationDetails } from '../../../hooks/api';
-import { ERRORS, JOB_STATUSES } from '../../../constants';
+import { EDITING_STEPS, ERRORS, JOB_STATUSES } from '../../../constants';
 import { getBulkOperationStep } from './utils';
 import css from './ProgressBar.css';
-import { RootContext } from '../../../context/RootContext';
 import { useSearchParams } from '../../../hooks/useSearchParams';
 
 export const ProgressBar = () => {
   const callout = useShowCallout();
-  const { inAppCommitted } = useContext(RootContext);
   const intl = useIntl();
   const {
     processedFileName,
@@ -76,7 +74,7 @@ export const ProgressBar = () => {
           size="small"
         />
         <div className={css.progressBarTitleText}>
-          {inAppCommitted ?
+          {step === EDITING_STEPS.UPLOAD ?
             <FormattedMessage
               id="ui-bulk-edit.progressBar.committing"
             />
@@ -93,7 +91,7 @@ export const ProgressBar = () => {
         </div>
         <div className={css.progressBarLineStatus}>
           <span>
-            {inAppCommitted ?
+            {step === EDITING_STEPS.UPLOAD ?
               <FormattedMessage id="ui-bulk-edit.progresssBar.processing" />
               :
               <FormattedMessage id="ui-bulk-edit.progresssBar.retrieving" />
