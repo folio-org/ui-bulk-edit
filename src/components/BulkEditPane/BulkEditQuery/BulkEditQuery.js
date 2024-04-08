@@ -4,7 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
   AppIcon,
-  TitleManager, useStripes
+  TitleManager,
+  useStripes,
 } from '@folio/stripes/core';
 import { Pane } from '@folio/stripes/components';
 

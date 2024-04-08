@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { Pane } from '@folio/stripes/components';
 import {
   AppIcon,
-  TitleManager, useStripes
+  TitleManager,
+  useStripes,
 } from '@folio/stripes/core';
 
 import { EDITING_STEPS } from '../../../constants';
