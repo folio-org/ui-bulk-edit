@@ -10,5 +10,5 @@ export const usePreselectedValue = (controlType, duplicateNoteOptions, onChange,
     // we need to do that only on the first render, we are sure that all data are ready to be used.
     // This behavior will be changed after refactoring of this functionality.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [controlType]);
 };
