@@ -1,24 +1,30 @@
 import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { AppIcon } from '@folio/stripes/core';
+import {
+  AppIcon,
+  TitleManager,
+  useStripes,
+} from '@folio/stripes/core';
 import { Pane } from '@folio/stripes/components';
 
 import { BulkEditListResult } from '../BulkEditListResult';
 import { EDITING_STEPS } from '../../../constants';
-import { useSearchParams } from '../../../hooks/useSearchParams';
+import { useSearchParams } from '../../../hooks';
 import { RootContext } from '../../../context/RootContext';
 
 export const BulkEditQuery = ({ bulkDetails, actionMenu, renderInAppApproach, renderManualApproach }) => {
   const {
     step,
   } = useSearchParams();
+  const intl = useIntl();
 
   const {
     visibleColumns,
     countOfRecords,
   } = useContext(RootContext);
+  const stripes = useStripes();
 
   const isQueryTabWithPreview = visibleColumns?.length && bulkDetails?.fqlQuery;
 
@@ -57,15 +63,17 @@ export const BulkEditQuery = ({ bulkDetails, actionMenu, renderInAppApproach, re
   };
 
   return (
-    <Pane
-      actionMenu={actionMenu}
-      {...paneProps}
-    >
-      <BulkEditListResult />
+    <TitleManager stripes={stripes} record={intl.formatMessage({ id: 'ui-bulk-edit.title.query' })}>
+      <Pane
+        actionMenu={actionMenu}
+        {...paneProps}
+      >
+        <BulkEditListResult />
 
-      {renderInAppApproach(paneProps)}
-      {renderManualApproach()}
-    </Pane>
+        {renderInAppApproach(paneProps)}
+        {renderManualApproach()}
+      </Pane>
+    </TitleManager>
   );
 };
 

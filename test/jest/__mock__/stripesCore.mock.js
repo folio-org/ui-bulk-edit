@@ -2,7 +2,9 @@ export const buildStripes = (otherProperties = {}) => ({
   actionNames: [],
   clone: buildStripes,
   connect: Comp => Comp,
-  config: {},
+  config: {
+    platformName: 'bulk-edit'
+  },
   currency: 'USD',
   hasInterface: jest.fn().mockReturnValue(true),
   hasPerm: jest.fn().mockReturnValue(true),
@@ -97,18 +99,11 @@ const mockStripesCore = {
   IfInterface: jest.fn(props => <>{props.children}</>),
 
   useNamespace: () => ['@folio/inventory'],
-
   TitleManager: ({ children }) => <>{children}</>,
-
   checkIfUserInMemberTenant: () => true,
 };
 
 jest.mock('@folio/stripes/core', () => ({
   ...jest.requireActual('@folio/stripes/core'),
-  ...mockStripesCore
-}), { virtual: true });
-
-jest.mock('@folio/stripes-core', () => ({
-  ...jest.requireActual('@folio/stripes-core'),
   ...mockStripesCore
 }), { virtual: true });
