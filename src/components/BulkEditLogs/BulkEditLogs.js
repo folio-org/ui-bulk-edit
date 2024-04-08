@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import noop from 'lodash/noop';
 
-import { AppIcon } from '@folio/stripes/core';
+import { AppIcon, TitleManager, useStripes } from '@folio/stripes/core';
 import { MultiColumnList } from '@folio/stripes/components';
 import {
   ResultsPane,
@@ -36,6 +36,8 @@ const sortableFields = LOGS_COLUMNS
 export const BulkEditLogs = () => {
   const location = useLocation();
   const history = useHistory();
+  const intl = useIntl();
+  const stripes = useStripes();
   const DEFAULT_SORTING = { [SORTING_PARAMETER]: 'endTime', [SORTING_DIRECTION_PARAMETER]: DESC_DIRECTION };
 
   const { logsQueryParams } = useLogsQueryParams({ search: location.search });
@@ -68,47 +70,49 @@ export const BulkEditLogs = () => {
   );
 
   return (
-    <ResultsPane
-      id="bulk-edit-logs-pane"
-      autosize
-      title={<FormattedMessage id="ui-bulk-edit.meta.logs.title" />}
-      count={logsCount}
-      toggleFiltersPane={noop}
-      filters={logsQueryParams}
-      isFiltersOpened
-      isLoading={isLoading}
-      appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
-    >
-      {({ height, width }) => (
-        <>
-          <MultiColumnList
-            loading={isLoading}
-            contentData={logs}
-            totalCount={logsCount}
-            columnMapping={columnMapping}
-            visibleColumns={visibleColumns}
-            formatter={getLogsResultsFormatter()}
-            isEmptyMessage={resultsStatusMessage}
-            sortOrder={sortingField}
-            sortDirection={sortingDirection}
-            onHeaderClick={changeSorting}
-            onNeedMoreData={changePage}
-            pagingType="none"
-            hasMargin
-            height={height - PrevNextPagination.HEIGHT}
-            width={width}
-          />
+    <TitleManager stripes={stripes} record={intl.formatMessage({ id: 'ui-bulk-edit.title.logs' })}>
+      <ResultsPane
+        id="bulk-edit-logs-pane"
+        autosize
+        title={<FormattedMessage id="ui-bulk-edit.meta.logs.title" />}
+        count={logsCount}
+        toggleFiltersPane={noop}
+        filters={logsQueryParams}
+        isFiltersOpened
+        isLoading={isLoading}
+        appIcon={<AppIcon app="bulk-edit" iconKey="app" />}
+      >
+        {({ height, width }) => (
+          <>
+            <MultiColumnList
+              loading={isLoading}
+              contentData={logs}
+              totalCount={logsCount}
+              columnMapping={columnMapping}
+              visibleColumns={visibleColumns}
+              formatter={getLogsResultsFormatter()}
+              isEmptyMessage={resultsStatusMessage}
+              sortOrder={sortingField}
+              sortDirection={sortingDirection}
+              onHeaderClick={changeSorting}
+              onNeedMoreData={changePage}
+              pagingType="none"
+              hasMargin
+              height={height - PrevNextPagination.HEIGHT}
+              width={width}
+            />
 
-          {logs.length > 0 && (
+            {logs.length > 0 && (
             <PrevNextPagination
               {...pagination}
               totalCount={logsCount}
               disabled={isLoading}
               onChange={changePage}
             />
-          )}
-        </>
-      )}
-    </ResultsPane>
+            )}
+          </>
+        )}
+      </ResultsPane>
+    </TitleManager>
   );
 };

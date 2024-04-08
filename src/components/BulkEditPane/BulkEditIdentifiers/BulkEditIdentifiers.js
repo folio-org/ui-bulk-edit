@@ -1,9 +1,13 @@
 import React, { useContext, useMemo } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
 import { Pane } from '@folio/stripes/components';
-import { AppIcon } from '@folio/stripes/core';
+import {
+  AppIcon,
+  TitleManager,
+  useStripes,
+} from '@folio/stripes/core';
 
 import { EDITING_STEPS } from '../../../constants';
 import { useSearchParams } from '../../../hooks/useSearchParams';
@@ -16,6 +20,8 @@ export const BulkEditIdentifiers = ({
   renderInAppApproach,
   renderManualApproach
 }) => {
+  const intl = useIntl();
+  const stripes = useStripes();
   const {
     step,
     processedFileName,
@@ -67,15 +73,17 @@ export const BulkEditIdentifiers = ({
   };
 
   return (
-    <Pane
-      actionMenu={actionMenu}
-      {...paneProps}
-    >
-      <BulkEditListResult />
+    <TitleManager stripes={stripes} record={intl.formatMessage({ id: 'ui-bulk-edit.title.identifier' })}>
+      <Pane
+        actionMenu={actionMenu}
+        {...paneProps}
+      >
+        <BulkEditListResult />
 
-      {renderInAppApproach(paneProps)}
-      {renderManualApproach()}
-    </Pane>
+        {renderInAppApproach(paneProps)}
+        {renderManualApproach()}
+      </Pane>
+    </TitleManager>
   );
 };
 
