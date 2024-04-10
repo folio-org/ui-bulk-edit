@@ -41,7 +41,7 @@ export const getPlaceholder = (formatMessage) => ({
 
 export const getFindAction = (formatMessage) => ({
   value: ACTIONS.FIND,
-  label: formatMessage({ id: 'ui-bulk-edit.actions.find' }),
+  label: formatMessage({ id: 'ui-bulk-edit.actions.findFullField' }),
   disabled: false,
 });
 
