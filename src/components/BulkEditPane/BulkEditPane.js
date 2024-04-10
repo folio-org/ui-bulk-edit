@@ -46,7 +46,6 @@ export const BulkEditPane = () => {
   const [contentUpdates, setContentUpdates] = useState(null);
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
-  const [inAppCommitted, setInAppCommitted] = useState(false);
   const [fileInfo, setFileInfo] = useState(null);
 
   const { isActionMenuShown } = useBulkPermissions();
@@ -72,8 +71,6 @@ export const BulkEditPane = () => {
     visibleColumns,
     setVisibleColumns,
     confirmedFileName,
-    inAppCommitted,
-    setInAppCommitted,
     isFileUploaded,
     setIsFileUploaded,
     setIsBulkEditLayerOpen,
@@ -81,7 +78,6 @@ export const BulkEditPane = () => {
     countOfRecords,
     visibleColumns,
     confirmedFileName,
-    inAppCommitted,
     isFileUploaded
   ]);
 
@@ -108,7 +104,6 @@ export const BulkEditPane = () => {
     setVisibleColumns,
     filtersTab,
     setIsBulkEditLayerOpen,
-    setInAppCommitted,
   });
 
   const handleBulkEditLayerOpen = () => {
@@ -129,7 +124,6 @@ export const BulkEditPane = () => {
   const handleChangesCommitted = () => {
     handlePreviewModalClose();
     handleBulkEditLayerClose();
-    setInAppCommitted(true);
   };
 
   const handleStartBulkEdit = (approach) => {

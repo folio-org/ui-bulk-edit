@@ -36,7 +36,6 @@ export const IdentifierTab = () => {
     isFileUploaded,
     setIsFileUploaded,
     setVisibleColumns,
-    setInAppCommitted,
   } = useContext(RootContext);
 
   const {
@@ -102,7 +101,6 @@ export const IdentifierTab = () => {
 
     setIsFileUploaded(false);
     setVisibleColumns(null);
-    setInAppCommitted(false);
   }, [location.search]);
 
   const handleCapabilityChange = (e) => {
@@ -120,7 +118,6 @@ export const IdentifierTab = () => {
 
     setVisibleColumns(null);
     setIsFileUploaded(false);
-    setInAppCommitted(false);
   };
 
   const handleDragEnter = () => {

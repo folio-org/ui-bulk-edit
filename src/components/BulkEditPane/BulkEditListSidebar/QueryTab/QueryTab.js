@@ -30,7 +30,6 @@ export const QueryTab = () => {
   const {
     setIsFileUploaded,
     setVisibleColumns,
-    setInAppCommitted,
   } = useContext(RootContext);
 
   const { recordTypes } = useRecordTypes();
@@ -87,7 +86,6 @@ export const QueryTab = () => {
 
     setIsFileUploaded(false);
     setVisibleColumns(null);
-    setInAppCommitted(false);
   };
 
   const onQueryRunSuccess = ({ id }) => {
