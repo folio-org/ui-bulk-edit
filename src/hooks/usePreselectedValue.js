@@ -7,10 +7,8 @@ export const usePreselectedValue = (controlType, duplicateNoteOptions, onChange,
     if (controlType === CONTROL_TYPES.NOTE_DUPLICATE_SELECT) {
       onChange({ actionIndex, value: duplicateNoteOptions[0].value, fieldName: FIELD_VALUE_KEY });
     }
-  }, [
-    controlType,
-    duplicateNoteOptions,
-    onChange,
-    actionIndex
-  ]);
+    // we need to do that only on the first render, we are sure that all data are ready to be used.
+    // This behavior will be changed after refactoring of this functionality.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [controlType]);
 };
