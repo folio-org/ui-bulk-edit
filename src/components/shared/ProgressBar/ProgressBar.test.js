@@ -5,11 +5,10 @@ import { render, screen } from '@testing-library/react';
 
 import { runAxeTest } from '@folio/stripes-testing';
 
-import { ERRORS, JOB_STATUSES } from '../../../constants';
+import { EDITING_STEPS, ERRORS, JOB_STATUSES } from '../../../constants';
 import { useBulkOperationDetails } from '../../../hooks/api';
 
 import { ProgressBar } from './ProgressBar';
-import { RootContext } from '../../../context/RootContext';
 
 jest.mock('../../../hooks/api', () => ({
   useBulkOperationDetails: jest.fn(),
@@ -17,12 +16,10 @@ jest.mock('../../../hooks/api', () => ({
 
 const history = createMemoryHistory();
 
-const renderProgressBar = (inAppCommitted = false) => {
+const renderProgressBar = (step = '') => {
   render(
-    <MemoryRouter initialEntries={['/bulk-edit/1/preview?processedFileName=some.scv&criteria=identifier&progress=identifier']}>
-      <RootContext.Provider value={{ inAppCommitted }}>
-        <ProgressBar />
-      </RootContext.Provider>
+    <MemoryRouter initialEntries={[`/bulk-edit/1/preview?processedFileName=some.scv&criteria=identifier&progress=identifier&step=${step}`]}>
+      <ProgressBar />
     </MemoryRouter>,
   );
 };
@@ -69,7 +66,7 @@ describe('ProgressBar', () => {
   it('should render with text after in app committing', async () => {
     useBulkOperationDetails.mockReturnValue({ bulkDetails: bulkOperation });
 
-    renderProgressBar(true);
+    renderProgressBar(EDITING_STEPS.UPLOAD);
 
     expect(screen.getByText(/progresssBar.processing/)).toBeVisible();
   });
