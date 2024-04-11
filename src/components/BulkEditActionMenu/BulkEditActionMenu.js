@@ -95,8 +95,8 @@ const BulkEditActionMenu = ({
   };
 
   const handleOnStartEdit = (approach) => {
-    onEdit(approach);
     onToggle();
+    onEdit(approach);
   };
 
   const handleFileSave = (info) => {
