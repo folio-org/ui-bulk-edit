@@ -6,7 +6,6 @@ import {
   Pane,
   Paneset,
 } from '@folio/stripes/components';
-import { noop } from 'lodash/util';
 
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
