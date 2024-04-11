@@ -6,7 +6,6 @@ import {
   Pane,
   Paneset,
 } from '@folio/stripes/components';
-import { noop } from 'lodash/util';
 
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
@@ -139,10 +138,10 @@ export const BulkEditPane = () => {
     setIsBulkEditModalOpen(false);
   };
 
-  const renderActionMenu = () => isActionMenuVisible && (
+  const renderActionMenu = ({ onToggle }) => isActionMenuVisible && (
     <BulkEditActionMenu
       onEdit={handleStartBulkEdit}
-      onToggle={noop}
+      onToggle={onToggle}
       setFileInfo={setFileInfo}
     />
   );
