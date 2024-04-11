@@ -98,7 +98,7 @@ const mockStripesCore = {
   // eslint-disable-next-line react/prop-types
   IfInterface: jest.fn(props => <>{props.children}</>),
 
-  useNamespace: () => ['@folio/inventory'],
+  useNamespace: ({ key }) => [`@folio/bulk-edit:${key}`],
   TitleManager: ({ children }) => <>{children}</>,
   checkIfUserInMemberTenant: () => true,
 };

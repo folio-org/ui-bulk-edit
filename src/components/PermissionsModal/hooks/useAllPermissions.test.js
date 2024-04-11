@@ -3,12 +3,10 @@ import { useQuery } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import { useAllPermissions } from './useAllPermissions'; // Adjust the import path as per your project structure
 
+import '../../../../test/jest/__mock__/stripesCore.mock';
+
 jest.mock('react-query', () => ({
   useQuery: jest.fn(),
-}));
-
-jest.mock('@folio/stripes/core', () => ({
-  useOkapiKy: jest.fn(),
 }));
 
 describe('useAllPermissions', () => {
