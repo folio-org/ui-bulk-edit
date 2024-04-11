@@ -2,14 +2,17 @@ import {
   useQuery,
 } from 'react-query';
 
-import { useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+
+export const PATRON_GROUP_KEY = 'PATRON_GROUP_KEY';
 
 export const usePatronGroup = (options = {}) => {
   const ky = useOkapiKy();
+  const [namespaceKey] = useNamespace({ key: PATRON_GROUP_KEY });
 
   const { data, isLoading } = useQuery(
     {
-      queryKey: ['userPatronGroup'],
+      queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
       queryFn: async () => {

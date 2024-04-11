@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { saveAs } from 'file-saver';
 
+import { useNamespace } from '@folio/stripes/core';
 import { MessageBanner, Modal, MultiColumnList } from '@folio/stripes/components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { buildSearch, PrevNextPagination, useShowCallout } from '@folio/stripes-acq-components';
@@ -44,6 +45,8 @@ export const BulkEditInAppPreviewModal = ({
   onChangesCommited,
 }) => {
   const queryClient = useQueryClient();
+  const [bulkOperationKey] = useNamespace({ key: BULK_OPERATION_DETAILS_KEY });
+  const [inAppPreviewKey] = useNamespace({ key: IN_APP_PREVIEW_KEY });
   const callout = useShowCallout();
   const intl = useIntl();
   const history = useHistory();
@@ -153,8 +156,8 @@ export const BulkEditInAppPreviewModal = ({
           step: EDITING_STEPS.EDIT,
         }))
         .then(() => {
-          queryClient.invalidateQueries(BULK_OPERATION_DETAILS_KEY);
-          queryClient.invalidateQueries(IN_APP_PREVIEW_KEY);
+          queryClient.invalidateQueries(bulkOperationKey);
+          queryClient.invalidateQueries(inAppPreviewKey);
         })
         .catch(() => {
           swwCallout();

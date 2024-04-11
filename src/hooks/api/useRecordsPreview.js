@@ -2,14 +2,14 @@ import { useContext, useEffect, useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
 
-import { useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 
 import { BULK_VISIBLE_COLUMNS } from '../../constants';
 import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
 
-export const RECORDS_PREVIEW_KEY = 'records';
-export const IN_APP_PREVIEW_KEY = 'in-app-records';
+export const RECORDS_PREVIEW_KEY = 'RECORDS_PREVIEW_KEY';
+export const IN_APP_PREVIEW_KEY = 'IN_APP_PREVIEW_KEY';
 
 export const useRecordsPreview = ({
   key,
@@ -25,10 +25,11 @@ export const useRecordsPreview = ({
   const intl = useIntl();
   const { setVisibleColumns } = useContext(RootContext);
   const ky = useOkapiKy();
+  const [namespaceKey] = useNamespace({ key });
 
   const { data, refetch, isLoading, dataUpdatedAt, isFetching } = useQuery(
     {
-      queryKey: [key, id, step, limit, offset],
+      queryKey: [namespaceKey, id, step, limit, offset],
       cacheTime: 0,
       keepPreviousData: true,
       queryFn: () => {

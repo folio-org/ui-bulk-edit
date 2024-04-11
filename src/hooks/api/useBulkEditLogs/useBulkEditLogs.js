@@ -21,10 +21,12 @@ const buildLogsQuery = makeQueryBuilder(
   'sortby endTime/sort.descending',
 );
 
+export const BULK_EDIT_LOGS_KEY = 'BULK_EDIT_LOGS_KEY';
+
 export const useBulkEditLogs = ({ filters = {}, pagination }) => {
   const usersMap = useRef({});
   const ky = useOkapiKy();
-  const [namespace] = useNamespace({ key: 'bulk-edit-logs' });
+  const [namespaceKey] = useNamespace({ key: BULK_EDIT_LOGS_KEY });
 
   const logsQuery = buildLogsQuery(filters);
   const filtersCount = getFiltersCount(filters);
@@ -35,7 +37,8 @@ export const useBulkEditLogs = ({ filters = {}, pagination }) => {
     offset: pagination.offset,
   };
 
-  const queryKey = [namespace, pagination.timestamp, pagination.limit, pagination.offset];
+  const queryKey = [namespaceKey, pagination.timestamp, pagination.limit, pagination.offset];
+
   const queryFn = async () => {
     if (!filtersCount) {
       return { bulkOperations: [], totalRecords: 0 };
@@ -75,14 +78,12 @@ export const useBulkEditLogs = ({ filters = {}, pagination }) => {
     };
   };
 
-  const { data, isFetching } = useQuery(
+  const { data, isFetching } = useQuery({
     queryKey,
     queryFn,
-    {
-      enabled: Boolean(pagination.timestamp),
-      keepPreviousData: true,
-    },
-  );
+    enabled: Boolean(pagination.timestamp),
+    keepPreviousData: true,
+  });
 
   return {
     logs: data?.bulkOperations || [],
