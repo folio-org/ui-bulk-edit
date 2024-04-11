@@ -139,10 +139,10 @@ export const BulkEditPane = () => {
     setIsBulkEditModalOpen(false);
   };
 
-  const renderActionMenu = () => isActionMenuVisible && (
+  const renderActionMenu = ({ onToggle }) => isActionMenuVisible && (
     <BulkEditActionMenu
       onEdit={handleStartBulkEdit}
-      onToggle={noop}
+      onToggle={onToggle}
       setFileInfo={setFileInfo}
     />
   );
