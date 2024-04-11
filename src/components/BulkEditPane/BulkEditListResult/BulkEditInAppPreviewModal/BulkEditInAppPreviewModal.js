@@ -35,7 +35,7 @@ import css from './BulkEditInAppPreviewModal.css';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
 import { usePagination } from '../../../../hooks/usePagination';
-import { useSearchParams } from '../../../../hooks/useSearchParams';
+import { useSearchParams } from '../../../../hooks';
 
 export const BulkEditInAppPreviewModal = ({
   open,
@@ -176,7 +176,10 @@ export const BulkEditInAppPreviewModal = ({
     bulkOperationStart,
     queryClient,
     swwCallout,
-    onKeepEditing]);
+    onKeepEditing,
+    bulkOperationKey,
+    inAppPreviewKey,
+  ]);
 
   return (
     <Modal
