@@ -1,17 +1,20 @@
-import { useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
 import { useMemo } from 'react';
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 import { getMappedAndSortedNotes } from '../../utils/helpers';
 
+export const ITEM_NOTES_KEY = 'ITEM_NOTES_KEY';
+
 export const useItemNotes = (options = {}) => {
   const ky = useOkapiKy();
+  const [namespaceKey] = useNamespace({ key: ITEM_NOTES_KEY });
   const { formatMessage } = useIntl();
 
   const { data, isLoading: isItemNotesLoading } = useQuery(
     {
-      queryKey: 'itemNotes',
+      queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
       queryFn: () => ky.get('item-note-types', { searchParams: { limit: 1000 } }).json(),

@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 
 export const QUERY_KEY_DOWNLOAD_LOGS = 'downloadLogs';
 export const QUERY_KEY_DOWNLOAD_ACTION_MENU = 'downloadActionMenu';
@@ -14,10 +14,11 @@ export const useFileDownload = ({
   ...queryProps
 }) => {
   const ky = useOkapiKy();
+  const [namespaceKey] = useNamespace({ key: queryKey });
 
   const { refetch } = useQuery(
     {
-      queryKey: [queryKey, id, fileInfo],
+      queryKey: [namespaceKey, id, fileInfo],
       queryFn: () => ky.get(`bulk-operations/${id}/download`, {
         searchParams: { fileContentType: fileInfo?.fileContentType },
       }).blob(),
