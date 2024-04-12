@@ -110,7 +110,6 @@
     "layer.selectLoanType": "Wybierz sposób wypożyczania",
     "layer.options.patronGroup": "Patron group",
     "layer.selectPatronGroup": "Wybierz grupę czytelników",
-    "actions.find": "Znajdź",
     "layer.options.email": "Email",
     "list.filters.recordIdentifier.holdings.holdingsUUID": "Holdings UUIDs",
     "list.filters.recordIdentifier.holdings.holdingsHRID": "Holdings HRIDs",
@@ -444,5 +443,11 @@
     "list.errors.query.infoProcessed": "<b>Bulk edit query: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
     "columns.ITEM.Holdings (Location, Call number)": "Holdings (Location, Call number)",
     "meta.query.title": "Bulk edit query",
-    "logs.status.EXECUTING_QUERY": "Executing query"
+    "logs.status.EXECUTING_QUERY": "Executing query",
+    "layer.column.data": "Data",
+    "columns.USER.Link to the profile picture": "Link to the profile picture",
+    "title.identifier": "Identifier",
+    "title.query": "Query",
+    "title.logs": "Logs",
+    "actions.findFullField": "Find (full field search)"
 }
