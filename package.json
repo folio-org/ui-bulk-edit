@@ -46,7 +46,8 @@
           "bulk-operations.download.item.get",
           "bulk-operations.collection.get",
           "bulk-operations.item.get",
-          "usergroups.collection.get"
+          "usergroups.collection.get",
+          "data-export.job.item.download"
         ]
       },
       {

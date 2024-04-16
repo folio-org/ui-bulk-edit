@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [UIBULKED-478](https://folio-org.atlassian.net/browse/UIBULKED-478) Update permissions related to export manager module.
+
 ## [4.1.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.2) (2024-04-12)
 
 * [UIBULKED-467](https://issues.folio.org/browse/UIBULKED-467) File is not downloaded to local machine when "Actions" menu is closed
