@@ -2,13 +2,17 @@ import {
   useQuery,
 } from 'react-query';
 
-import { useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+
+export const GROUP_MAP_KEYS = 'GROUP_MAP_KEYS';
 
 export const useUserGroupsMap = () => {
   const ky = useOkapiKy();
+  const [namespaceKey] = useNamespace({ key: GROUP_MAP_KEYS });
+
   const { data } = useQuery(
     {
-      queryKey: ['userGroupsMap'],
+      queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
       queryFn: async () => {

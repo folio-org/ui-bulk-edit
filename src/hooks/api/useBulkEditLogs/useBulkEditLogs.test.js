@@ -9,12 +9,7 @@ import { LOGS_FILTERS, JOB_STATUSES } from '../../../constants';
 import { useBulkEditLogs } from './useBulkEditLogs';
 import { getFullName } from '../../../utils/getFullName';
 
-jest.mock('@folio/stripes/core', () => ({
-  ...jest.requireActual('@folio/stripes/core'),
-  useNamespace: () => ['namespace'],
-  useOkapiKy: jest.fn(),
-  useStripes: () => ({ timezone: 'UTC' }),
-}));
+import '../../../../test/jest/__mock__/stripesCore.mock';
 
 const users = [
   {

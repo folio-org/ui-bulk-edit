@@ -4,9 +4,7 @@ import { useQuery } from 'react-query';
 import { act } from '@testing-library/react';
 import { useRecordTypes } from './useRecordTypes';
 
-jest.mock('@folio/stripes/core', () => ({
-  useOkapiKy: jest.fn(),
-}));
+import '../../../test/jest/__mock__/stripesCore.mock';
 
 jest.mock('react-query', () => ({
   ...jest.requireActual('react-query'),
