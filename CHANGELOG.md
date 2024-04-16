@@ -11,6 +11,7 @@
 * [UIBULKED-455](https://folio-org.atlassian.net/browse/UIBULKED-455) Update HTML Page Title on Bulk Edit Tabs Page.
 * [UIBULKED-471](https://folio-org.atlassian.net/browse/UIBULKED-471) Rename "Find" to "Find (full field search)".
 * [UIBULKED-476](https://folio-org.atlassian.net/browse/UIBULKED-476) Remove local QueryClientProvider from bulk edit.
+* [UIBULKED-478](https://folio-org.atlassian.net/browse/UIBULKED-478) Update permissions related to export manager module.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
