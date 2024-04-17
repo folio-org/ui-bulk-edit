@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import noop from 'lodash/noop';
+import uniqueId from 'lodash/uniqueId';
 
 import {
   IconButton,
@@ -26,7 +27,7 @@ import {
   getExtraActions,
 } from './helpers';
 import { groupByCategory } from '../../../../../utils/helpers';
-import { useSearchParams } from '../../../../../hooks/useSearchParams';
+import { useSearchParams } from '../../../../../hooks';
 
 export const ContentUpdatesForm = ({
   onContentUpdatesChanged,
@@ -169,6 +170,7 @@ export const ContentUpdatesForm = ({
   const handleAdd = () => {
     const filteredFields = getFilteredFields([...fields, {
       ...fieldTemplate,
+      id: uniqueId(),
       actionsDetails: {
         type: null,
         actions: [],
@@ -261,6 +263,7 @@ export const ContentUpdatesForm = ({
 
   return (
     <RepeatableField
+      getFieldUniqueKey={(field) => field.id}
       fields={fields}
       className={css.row}
       onAdd={noop}

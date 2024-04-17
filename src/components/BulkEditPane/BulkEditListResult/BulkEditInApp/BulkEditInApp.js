@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useEffect, useMemo, useState } from 'react';
+import uniqueId from 'lodash/uniqueId';
 
 import {
   Headline,
@@ -21,7 +22,7 @@ import {
 import { useItemNotes } from '../../../../hooks/api/useItemNotes';
 import { useHoldingsNotes } from '../../../../hooks/api/useHoldingsNotes';
 import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
-import { useSearchParams } from '../../../../hooks/useSearchParams';
+import { useSearchParams } from '../../../../hooks';
 import { getDefaultActions } from './ContentUpdatesForm/helpers';
 
 export const BulkEditInApp = ({
@@ -52,6 +53,7 @@ export const BulkEditInApp = ({
 
   const fieldTemplate = useMemo(() => {
     return ({
+      id: uniqueId(),
       options,
       option: options[0].value,
       actionsDetails: getDefaultActions({
