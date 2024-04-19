@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [4.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.3) (2024-04-19)
+
 * [UIBULKED-478](https://folio-org.atlassian.net/browse/UIBULKED-478) Update permissions related to export manager module.
 
 ## [4.1.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.2) (2024-04-12)
