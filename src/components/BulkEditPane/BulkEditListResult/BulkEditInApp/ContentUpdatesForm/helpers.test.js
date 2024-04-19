@@ -668,7 +668,7 @@ describe('ContentUpdatesForm helpers', () => {
           option: OPTIONS.HOLDINGS_NOTE,
           options: [],
           formatMessage,
-          capability: CAPABILITIES.HOLDING
+          capability: CAPABILITIES.HOLDING,
         })))
           .toEqual(
             JSON.stringify({
@@ -719,6 +719,7 @@ describe('ContentUpdatesForm helpers', () => {
                   },
                   [ACTION_VALUE_KEY]: '',
                   [FIELD_VALUE_KEY]: '',
+                  [ACTION_PARAMETERS_KEY]: []
                 },
               ],
             }),
