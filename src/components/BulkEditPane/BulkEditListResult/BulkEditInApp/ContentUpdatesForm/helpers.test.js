@@ -946,6 +946,66 @@ describe('ContentUpdatesForm helpers', () => {
         });
       });
 
+      it('returns the correct object for the ITEM_NOTE for ITEM option', () => {
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.ITEM_NOTE,
+          formatMessage: mockFormattedMessage,
+          options: [],
+          capability: CAPABILITIES.ITEM
+        })))
+          .toEqual(
+            JSON.stringify({
+              type: '',
+              actions: [
+                null,
+                {
+                  actionsList: [{
+                    value: '',
+                    disabled: true,
+                    label: undefined
+                  }, {
+                    value: ACTIONS.MARK_AS_STAFF_ONLY,
+                    disabled: false,
+                    label: undefined
+                  }, {
+                    value: ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
+                    disabled: false,
+                    label: undefined
+                  }, {
+                    value: ACTIONS.ADD_TO_EXISTING,
+                    disabled: false,
+                    label: undefined
+                  },
+                  {
+                    value: ACTIONS.REMOVE_ALL,
+                    disabled: false,
+                    label: undefined
+                  },
+                  {
+                    value: ACTIONS.FIND,
+                    disabled: false,
+                    label: undefined
+                  },
+                  {
+                    value: ACTIONS.CHANGE_TYPE,
+                    disabled: false,
+                    label: undefined,
+                  }],
+                  [ACTION_VALUE_KEY]: '',
+                  [FIELD_VALUE_KEY]: '',
+                  [ACTION_PARAMETERS_KEY]: [
+                    {
+                      key: PARAMETERS_KEYS.STAFF_ONLY,
+                      value: false,
+                      onlyForActions: [ACTIONS.ADD_TO_EXISTING]
+                    },
+                  ]
+                },
+              ],
+            }),
+          );
+      });
+
       it('should return an empty array for non-matching OPTIONS and ACTIONS', () => {
         const nonMatchingOption = 'NON_MATCHING_OPTION';
         const nonMatchingAction = 'NON_MATCHING_ACTION';
