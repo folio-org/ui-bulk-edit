@@ -10,13 +10,14 @@ import css from '../BulkEditInApp.css';
 
 export const AdditionalActionParameters = ({ action, actionIndex, onChange }) => {
   const { formatMessage } = useIntl();
+  const actionParameters = action.parameters || [];
 
   useDerivativeModification({ onChange, actionIndex, action });
 
   const handleChange = (e) => {
     const { checked, name } = e.target;
 
-    const parameters = action.parameters.map((parameter) => ({
+    const parameters = actionParameters.map((parameter) => ({
       ...parameter,
       value: parameter.key === name ? checked : parameter.value,
     }));
@@ -26,15 +27,19 @@ export const AdditionalActionParameters = ({ action, actionIndex, onChange }) =>
 
   return (
     <div className={css.additionalParameters}>
-      {action.parameters?.map((parameter) => (
-        <Checkbox
-          key={parameter.key}
-          name={parameter.key}
-          label={formatMessage({ id: `ui-bulk-edit.layer.action.apply.${parameter.key}` })}
-          checked={parameter.value}
-          onChange={handleChange}
-        />
-      ))}
+      {actionParameters?.map((parameter) => {
+        if (parameter.onlyForActions && !parameter.onlyForActions.includes(action.name)) return null;
+
+        return (
+          <Checkbox
+            key={parameter.key}
+            name={parameter.key}
+            label={formatMessage({ id: `ui-bulk-edit.layer.action.apply.${parameter.key}` })}
+            checked={parameter.value}
+            onChange={handleChange}
+          />
+        );
+      })}
     </div>
   );
 };
