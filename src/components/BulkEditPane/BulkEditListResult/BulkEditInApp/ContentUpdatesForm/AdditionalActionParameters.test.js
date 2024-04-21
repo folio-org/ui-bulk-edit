@@ -87,7 +87,27 @@ describe('AdditionalActionParameters', () => {
       name: ACTIONS.ADD_TO_EXISTING,
       parameters: [
         {
-          key: PARAMETERS_KEYS.APPLY_TO_ITEMS,
+          key: PARAMETERS_KEYS.STAFF_ONLY,
+          value: false,
+          onlyForActions: [ACTIONS.ADD_TO_EXISTING]
+        }
+      ]
+    };
+
+    const { queryByText } = render(
+      <AdditionalActionParameters action={overrideMockAction} actionIndex={0} onChange={() => {}} />
+    );
+
+    expect(queryByText(`ui-bulk-edit.layer.action.apply.${PARAMETERS_KEYS.STAFF_ONLY}`)).not.toBeNull();
+  });
+
+  it('should NOT render component if there are parameters for not selected action', () => {
+    const overrideMockAction = {
+      ...mockAction,
+      name: ACTIONS.DUPLICATE,
+      parameters: [
+        {
+          key: PARAMETERS_KEYS.STAFF_ONLY,
           value: false,
           onlyForActions: [ACTIONS.ADD_TO_EXISTING]
         }
