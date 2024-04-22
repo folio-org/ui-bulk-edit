@@ -25,8 +25,8 @@ export const getActionParameters = (option, capability) => {
     }
   }
 
-  if (option === OPTIONS.ITEM_NOTE) {
-    if (capability === CAPABILITIES.ITEM) {
+  if ([OPTIONS.ITEM_NOTE, OPTIONS.HOLDINGS_NOTE].includes(option)) {
+    if ([CAPABILITIES.ITEM, CAPABILITIES.HOLDING].includes(capability)) {
       return [
         {
           key: PARAMETERS_KEYS.STAFF_ONLY,

@@ -946,64 +946,76 @@ describe('ContentUpdatesForm helpers', () => {
         });
       });
 
-      it('returns the correct object for the ITEM_NOTE for ITEM option', () => {
-        expect(JSON.stringify(getDefaultActions({
-          option: OPTIONS.ITEM_NOTE,
-          formatMessage: mockFormattedMessage,
-          options: [],
-          capability: CAPABILITIES.ITEM
-        })))
-          .toEqual(
-            JSON.stringify({
-              type: '',
-              actions: [
-                null,
+      describe('should return a certain structure for specific OPTIONS and ACTIONS - Notes (ITEM, HOLDING)', () => {
+        const structure = JSON.stringify({
+          type: '',
+          actions: [
+            null,
+            {
+              actionsList: [{
+                value: '',
+                disabled: true,
+                label: undefined
+              }, {
+                value: ACTIONS.MARK_AS_STAFF_ONLY,
+                disabled: false,
+                label: undefined
+              }, {
+                value: ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
+                disabled: false,
+                label: undefined
+              }, {
+                value: ACTIONS.ADD_TO_EXISTING,
+                disabled: false,
+                label: undefined
+              },
+              {
+                value: ACTIONS.REMOVE_ALL,
+                disabled: false,
+                label: undefined
+              },
+              {
+                value: ACTIONS.FIND,
+                disabled: false,
+                label: undefined
+              },
+              {
+                value: ACTIONS.CHANGE_TYPE,
+                disabled: false,
+                label: undefined,
+              }],
+              [ACTION_VALUE_KEY]: '',
+              [FIELD_VALUE_KEY]: '',
+              [ACTION_PARAMETERS_KEY]: [
                 {
-                  actionsList: [{
-                    value: '',
-                    disabled: true,
-                    label: undefined
-                  }, {
-                    value: ACTIONS.MARK_AS_STAFF_ONLY,
-                    disabled: false,
-                    label: undefined
-                  }, {
-                    value: ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
-                    disabled: false,
-                    label: undefined
-                  }, {
-                    value: ACTIONS.ADD_TO_EXISTING,
-                    disabled: false,
-                    label: undefined
-                  },
-                  {
-                    value: ACTIONS.REMOVE_ALL,
-                    disabled: false,
-                    label: undefined
-                  },
-                  {
-                    value: ACTIONS.FIND,
-                    disabled: false,
-                    label: undefined
-                  },
-                  {
-                    value: ACTIONS.CHANGE_TYPE,
-                    disabled: false,
-                    label: undefined,
-                  }],
-                  [ACTION_VALUE_KEY]: '',
-                  [FIELD_VALUE_KEY]: '',
-                  [ACTION_PARAMETERS_KEY]: [
-                    {
-                      key: PARAMETERS_KEYS.STAFF_ONLY,
-                      value: false,
-                      onlyForActions: [ACTIONS.ADD_TO_EXISTING]
-                    },
-                  ]
+                  key: PARAMETERS_KEYS.STAFF_ONLY,
+                  value: false,
+                  onlyForActions: [ACTIONS.ADD_TO_EXISTING]
                 },
-              ],
-            }),
-          );
+              ]
+            },
+          ],
+        });
+
+        it('returns the correct object for the ITEM_NOTE for ITEM option', () => {
+          expect(JSON.stringify(getDefaultActions({
+            option: OPTIONS.ITEM_NOTE,
+            formatMessage: mockFormattedMessage,
+            options: [],
+            capability: CAPABILITIES.ITEM
+          })))
+            .toEqual(structure);
+        });
+
+        it('returns the correct object for the HOLDING_NOTE for HOLDING note option', () => {
+          expect(JSON.stringify(getDefaultActions({
+            option: OPTIONS.HOLDINGS_NOTE,
+            formatMessage: mockFormattedMessage,
+            options: [],
+            capability: CAPABILITIES.HOLDING
+          })))
+            .toEqual(structure);
+        });
       });
 
       it('should return an empty array for non-matching OPTIONS and ACTIONS', () => {
