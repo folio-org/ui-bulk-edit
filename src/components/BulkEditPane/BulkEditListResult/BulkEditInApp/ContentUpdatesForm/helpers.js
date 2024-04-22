@@ -190,7 +190,7 @@ export const getDefaultActions = ({
             controlType: () => CONTROL_TYPES.SUPPRESS_CHECKBOX,
             [ACTION_VALUE_KEY]: suppressDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
-            [ACTION_PARAMETERS_KEY]: getActionParameters(option, capability),
+            [ACTION_PARAMETERS_KEY]: getActionParameters(opt, capability),
           },
         ],
       };
@@ -303,6 +303,7 @@ export const getDefaultActions = ({
             },
             [ACTION_VALUE_KEY]: noteWithMarkDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
+            [ACTION_PARAMETERS_KEY]: getActionParameters(opt, capability),
           },
         ],
       };

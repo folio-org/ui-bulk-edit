@@ -36,6 +36,7 @@ export const PARAMETERS_KEYS = {
   HOLDINGS_NOTE_TYPE_ID_KEY: 'HOLDINGS_NOTE_TYPE_ID_KEY',
   APPLY_TO_HOLDINGS: 'APPLY_TO_HOLDINGS',
   APPLY_TO_ITEMS: 'APPLY_TO_ITEMS',
+  STAFF_ONLY: 'STAFF_ONLY',
 };
 
 export const getItemsWithPlaceholder = (items) => [
