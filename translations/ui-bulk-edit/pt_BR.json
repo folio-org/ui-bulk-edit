@@ -414,7 +414,7 @@
     "layer.action.apply.ITEMS": "Aplicar aos registros de itens",
     "layer.action.apply.APPLY_TO_ITEMS": "Aplicar a todos os registros de itens",
     "layer.action.apply.APPLY_TO_HOLDINGS": "Aplicar a todos os registros de coleção",
-    "list.result.emptyMessage.query": "Selecione um tipo de registro e clique no botão Construir consulta.",
+    "list.result.emptyMessage.query": "Selecione um tipo de registro e clique no botão Criar consulta.",
     "list.result.emptyMessage.item.query": "Clique no botão Criar consulta para criar a consulta.",
     "list.result.emptyMessage.instance.query": "Clique no botão Criar consulta para criar a consulta.",
     "list.result.emptyMessage.holdings.query": "Clique no botão Criar consulta para criar a consulta.",

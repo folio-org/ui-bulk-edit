@@ -310,7 +310,7 @@
     "ariaLabel.date": "Date",
     "ariaLabel.location": "Lokalizacja",
     "ariaLabel.statusSelect": "Wybierz status",
-    "ariaLabel.loanTypeSelect": "Loan type select",
+    "ariaLabel.loanTypeSelect": "Wybierz rodzaj wypożyczenia",
     "category.itemNotes": "Uwagi egzemplarza",
     "layer.selectNoteType": "Wybierz typ uwagi",
     "layer.options.items.changeNote": "Change note type",
