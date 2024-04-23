@@ -719,7 +719,13 @@ describe('ContentUpdatesForm helpers', () => {
                   },
                   [ACTION_VALUE_KEY]: '',
                   [FIELD_VALUE_KEY]: '',
-                  [ACTION_PARAMETERS_KEY]: []
+                  [ACTION_PARAMETERS_KEY]: [
+                    {
+                      key: PARAMETERS_KEYS.STAFF_ONLY,
+                      value: false,
+                      onlyForActions: [ACTIONS.ADD_TO_EXISTING]
+                    },
+                  ]
                 },
               ],
             }),

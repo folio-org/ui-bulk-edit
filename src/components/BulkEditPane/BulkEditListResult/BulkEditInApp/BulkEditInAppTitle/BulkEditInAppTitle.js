@@ -14,13 +14,24 @@ import css from './BulkEditInAppTitle.css';
 export const BulkEditInAppTitle = ({ fields }) => {
   if (!fields.length) return null;
 
-  const shouldRenderAction = (action) => action?.name && (!FINAL_ACTIONS.includes(action?.name) || action?.parameters?.length > 0);
-  const getNonEmptyActions = (field) => field.actionsDetails.actions.filter(Boolean);
-  const getFilledNonFinalActions = (field) => field.actionsDetails.actions.filter(shouldRenderAction);
+  // Check if the action is final, it means that it should not be rendered in the data column
+  const isNotFinalAction = (actionName) => !FINAL_ACTIONS.includes(actionName);
+  // Check if the action has parameters that should be rendered only for specific actions
+  const hasActionParams = (actionName, actionParams) => {
+    const areSomeItemsSpecific = actionParams?.some(param => param.onlyForActions && !param.onlyForActions.includes(actionName));
+
+    return actionParams?.length > 0 && !areSomeItemsSpecific;
+  };
+
+  // Check if the additional data column should be rendered
+  const shouldRenderDataColumn = (action) => action?.name && (isNotFinalAction(action?.name) || hasActionParams(action?.name, action?.parameters));
+
+  const getNonEmptyActionsOrParams = (field) => field.actionsDetails.actions.filter(Boolean);
+  const getFilledNonFinalActions = (field) => field.actionsDetails.actions.filter(shouldRenderDataColumn);
 
   // Find the field with the most non-empty + non-final actions and based on this field render the header for all rows
   const field = fields.reduce((acc, item) => {
-    if (getNonEmptyActions(item).length > getNonEmptyActions(acc).length
+    if (getNonEmptyActionsOrParams(item).length > getNonEmptyActionsOrParams(acc).length
       || getFilledNonFinalActions(item).length > getFilledNonFinalActions(acc).length) {
       return item;
     }
@@ -28,7 +39,7 @@ export const BulkEditInAppTitle = ({ fields }) => {
     return acc;
   }, fields[0]);
 
-  const nonEmptyActions = getNonEmptyActions(field);
+  const nonEmptyActions = getNonEmptyActionsOrParams(field);
 
   return (
     <Row>
@@ -52,7 +63,7 @@ export const BulkEditInAppTitle = ({ fields }) => {
             </Label>
             <div className={css.splitter} />
           </Col>
-          {shouldRenderAction(action) && (
+          {shouldRenderDataColumn(action) && (
             <Col
               className={css.headerCell}
               sm={2}
