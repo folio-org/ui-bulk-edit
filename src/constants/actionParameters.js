@@ -25,16 +25,14 @@ export const getActionParameters = (option, capability) => {
     }
   }
 
-  if (option === OPTIONS.ITEM_NOTE) {
-    if (capability === CAPABILITIES.ITEM) {
-      return [
-        {
-          key: PARAMETERS_KEYS.STAFF_ONLY,
-          value: false,
-          onlyForActions: [ACTIONS.ADD_TO_EXISTING]
-        },
-      ];
-    }
+  if (option === OPTIONS.ITEM_NOTE && capability === CAPABILITIES.ITEM) {
+    return [
+      {
+        key: PARAMETERS_KEYS.STAFF_ONLY,
+        value: false,
+        onlyForActions: [ACTIONS.ADD_TO_EXISTING]
+      },
+    ];
   }
 
 
