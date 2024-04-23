@@ -1,4 +1,4 @@
-import { CAPABILITIES, OPTIONS, PARAMETERS_KEYS } from './index';
+import { ACTIONS, CAPABILITIES, OPTIONS, PARAMETERS_KEYS } from './index';
 
 export const getActionParameters = (option, capability) => {
   if (option === OPTIONS.SUPPRESS_FROM_DISCOVERY) {
@@ -24,6 +24,17 @@ export const getActionParameters = (option, capability) => {
       ];
     }
   }
+
+  if (option === OPTIONS.ITEM_NOTE && capability === CAPABILITIES.ITEM) {
+    return [
+      {
+        key: PARAMETERS_KEYS.STAFF_ONLY,
+        value: false,
+        onlyForActions: [ACTIONS.ADD_TO_EXISTING]
+      },
+    ];
+  }
+
 
   return [];
 };

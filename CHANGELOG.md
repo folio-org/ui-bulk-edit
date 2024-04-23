@@ -13,6 +13,7 @@
 * [UIBULKED-476](https://folio-org.atlassian.net/browse/UIBULKED-476) Remove local QueryClientProvider from bulk edit.
 * [UIBULKED-478](https://folio-org.atlassian.net/browse/UIBULKED-478) Update permissions related to export manager module.
 * [UIBULKED-470](https://folio-org.atlassian.net/browse/UIBULKED-470) "Apply to all holdings records", "Apply to all items records" checkboxes set to default value when delete other row.
+* [UIBULKED-458](https://folio-org.atlassian.net/browse/UIBULKED-458) Bulk Edit Actions for Item Notes - Staff Only for Added Notes.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 

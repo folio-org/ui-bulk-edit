@@ -334,6 +334,7 @@
   "layer.action.apply.ITEMS": "Apply to items records",
   "layer.action.apply.APPLY_TO_ITEMS": "Apply to all items records",
   "layer.action.apply.APPLY_TO_HOLDINGS": "Apply to all holdings records",
+  "layer.action.apply.STAFF_ONLY": "Staff only",
   "layer.options.permanentLocation": "Permanent item location",
   "layer.options.temporaryLocation": "Temporary item location",
   "layer.options.holdings.temporaryLocation": "Temporary holdings location",
