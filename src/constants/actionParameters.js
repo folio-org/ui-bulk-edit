@@ -25,16 +25,16 @@ export const getActionParameters = (option, capability) => {
     }
   }
 
-  if (option === OPTIONS.ITEM_NOTE && capability === CAPABILITIES.ITEM) {
+  if ((option === OPTIONS.ITEM_NOTE && capability === CAPABILITIES.ITEM) ||
+    (option === OPTIONS.HOLDINGS_NOTE && capability === CAPABILITIES.HOLDING)) {
     return [
       {
         key: PARAMETERS_KEYS.STAFF_ONLY,
         value: false,
         onlyForActions: [ACTIONS.ADD_TO_EXISTING]
-      },
+      }
     ];
   }
-
 
   return [];
 };
