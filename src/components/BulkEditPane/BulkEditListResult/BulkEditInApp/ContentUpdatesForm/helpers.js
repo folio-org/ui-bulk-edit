@@ -285,6 +285,7 @@ export const getDefaultActions = ({
             },
             [ACTION_VALUE_KEY]: noteDuplicateDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
+            [ACTION_PARAMETERS_KEY]: getActionParameters(opt, capability),
           },
         ],
       };
