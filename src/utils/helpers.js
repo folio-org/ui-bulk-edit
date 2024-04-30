@@ -79,3 +79,7 @@ export const getVisibleColumnsKeys = (columns) => {
   return columns?.filter(item => item.selected).map(item => item.value);
 };
 
+export const customFilter = (value, dataOptions) => {
+  return dataOptions.filter(option => new RegExp(value, 'i').test(option.label));
+};
+
