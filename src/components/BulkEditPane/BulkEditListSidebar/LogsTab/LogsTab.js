@@ -29,8 +29,8 @@ import {
 } from '../../../../constants';
 import { useBulkOperationUsers } from '../../../../hooks/api/useBulkOperationUsers';
 import { getFullName } from '../../../../utils/getFullName';
-import { useLocationFilters } from '../../../../hooks';
-import { useSearchParams } from '../../../../hooks/useSearchParams';
+import { useLocationFilters, useSearchParams } from '../../../../hooks';
+import { customFilter } from '../../../../utils/helpers';
 
 export const LogsTab = () => {
   const intl = useIntl();
@@ -183,6 +183,7 @@ export const LogsTab = () => {
             dataOptions={userOptions}
             value={activeFilters[LOGS_FILTERS.USER]?.toString()}
             onChange={values => adaptedApplyFilters({ name: LOGS_FILTERS.USER, values })}
+            onFilter={customFilter}
           />
         </Accordion>
       </AccordionSet>

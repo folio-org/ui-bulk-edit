@@ -15,6 +15,7 @@
 * [UIBULKED-470](https://folio-org.atlassian.net/browse/UIBULKED-470) "Apply to all holdings records", "Apply to all items records" checkboxes set to default value when delete other row.
 * [UIBULKED-458](https://folio-org.atlassian.net/browse/UIBULKED-458) Bulk Edit Actions for Item Notes - Staff Only for Added Notes.
 * [UIBULKED-459](https://folio-org.atlassian.net/browse/UIBULKED-459) Bulk Edit Actions for Holdings Notes - Staff Only for Added Notes.
+* [UIBULKED-479](https://folio-org.atlassian.net/browse/UIBULKED-479) Extend User search in User lookup.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
