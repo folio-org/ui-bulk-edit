@@ -449,5 +449,6 @@
     "title.identifier": "Identificador",
     "title.query": "Consulta",
     "title.logs": "Logs",
-    "actions.findFullField": "Encontrar (pesquisa de campo completo)"
+    "actions.findFullField": "Encontrar (pesquisa de campo completo)",
+    "layer.action.apply.STAFF_ONLY": "Somente pessoal autorizado"
 }
