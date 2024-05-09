@@ -449,5 +449,6 @@
     "title.identifier": "Identifier",
     "title.query": "Query",
     "title.logs": "Logs",
-    "actions.findFullField": "Find (full field search)"
+    "actions.findFullField": "Find (full field search)",
+    "layer.action.apply.STAFF_ONLY": "Staff only"
 }

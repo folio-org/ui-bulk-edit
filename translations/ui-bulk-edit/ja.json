@@ -449,5 +449,6 @@
     "title.identifier": "識別子",
     "title.query": "Query",
     "title.logs": "ログ",
-    "actions.findFullField": "Find (full field search)"
+    "actions.findFullField": "Find (full field search)",
+    "layer.action.apply.STAFF_ONLY": "スタッフのみ"
 }

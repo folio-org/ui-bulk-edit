@@ -449,5 +449,6 @@
     "title.identifier": "Identifikátor",
     "title.query": "Dotaz",
     "title.logs": "Logy",
-    "actions.findFullField": "Find (full field search)"
+    "actions.findFullField": "Najít (hledání v celém poli)",
+    "layer.action.apply.STAFF_ONLY": "Pouze pro zaměstnance"
 }

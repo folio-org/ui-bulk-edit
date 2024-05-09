@@ -445,9 +445,10 @@
     "meta.query.title": "Bulk edit query",
     "logs.status.EXECUTING_QUERY": "Executing query",
     "layer.column.data": "Data",
-    "columns.USER.Link to the profile picture": "Link to the profile picture",
-    "title.identifier": "Identifier",
-    "title.query": "Query",
+    "columns.USER.Link to the profile picture": "Enlace a la foto de perfil.",
+    "title.identifier": "Identificador",
+    "title.query": "Consulta",
     "title.logs": "Logs",
-    "actions.findFullField": "Find (full field search)"
+    "actions.findFullField": "Find (full field search)",
+    "layer.action.apply.STAFF_ONLY": "Sólo Personal"
 }

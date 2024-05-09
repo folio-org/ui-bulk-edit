@@ -449,5 +449,6 @@
     "title.identifier": "識別號",
     "title.query": "查詢",
     "title.logs": "日誌紀錄",
-    "actions.findFullField": "查找（全域檢索）"
+    "actions.findFullField": "查找（全域檢索）",
+    "layer.action.apply.STAFF_ONLY": "Staff only"
 }
