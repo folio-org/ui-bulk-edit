@@ -154,6 +154,7 @@
   "category.holdingsNotes": "Holdings notes",
   "category.holdingsLocation": "Holdings location",
   "category.electronicAccess": "Electronic access",
+  "category.instanceNotes": "Instance notes",
 
   "columns.USER.User name": "Username",
   "columns.USER.User id": "User id",

@@ -21,6 +21,7 @@ export const OPTIONS = {
   PERMANENT_HOLDINGS_LOCATION: 'PERMANENT_HOLDINGS_LOCATION',
   ITEM_NOTE: 'ITEM_NOTE',
   HOLDINGS_NOTE: 'HOLDINGS_NOTE',
+  INSTANCE_NOTE: 'INSTANCE_NOTE',
   ADMINISTRATIVE_NOTE: 'ADMINISTRATIVE_NOTE',
   CHECK_IN_NOTE: 'CHECK_IN_NOTE',
   CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
@@ -34,6 +35,7 @@ export const OPTIONS = {
 export const PARAMETERS_KEYS = {
   ITEM_NOTE_TYPE_ID_KEY: 'ITEM_NOTE_TYPE_ID_KEY',
   HOLDINGS_NOTE_TYPE_ID_KEY: 'HOLDINGS_NOTE_TYPE_ID_KEY',
+  INSTANCE_NOTE_TYPE_ID_KEY: 'INSTANCE_NOTE_TYPE_ID_KEY',
   APPLY_TO_HOLDINGS: 'APPLY_TO_HOLDINGS',
   APPLY_TO_ITEMS: 'APPLY_TO_ITEMS',
   STAFF_ONLY: 'STAFF_ONLY',
@@ -268,11 +270,16 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
   },
 ];
 
-export const getInstanceOptions = (formatMessage) => [
+export const getInstanceOptions = (formatMessage, instanceNotes) => [
   {
     value: '',
     label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
     disabled: true,
+  },
+  {
+    value: OPTIONS.ADMINISTRATIVE_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
+    disabled: false,
   },
   {
     value: OPTIONS.STAFF_SUPPRESS,
@@ -284,6 +291,7 @@ export const getInstanceOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.suppress' }),
     disabled: false,
   },
+  ...instanceNotes
 ];
 
 export const getHoldingsNotes = (formatMessage, holdingsNotes) => [
@@ -298,6 +306,20 @@ export const getHoldingsNotes = (formatMessage, holdingsNotes) => [
     disabled: false,
   },
   ...holdingsNotes,
+];
+
+export const getInstanceNotes = (formatMessage, instanceNotes) => [
+  {
+    value: '',
+    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
+    disabled: true,
+  },
+  {
+    value: OPTIONS.ADMINISTRATIVE_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
+    disabled: false,
+  },
+  ...instanceNotes,
 ];
 
 export const getNotesOptions = (formatMessage, itemNotes) => [

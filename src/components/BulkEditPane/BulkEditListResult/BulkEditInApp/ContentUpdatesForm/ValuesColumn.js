@@ -16,7 +16,7 @@ import {
   CAPABILITIES,
   CONTROL_TYPES,
   getDuplicateNoteOptions,
-  getHoldingsNotes,
+  getHoldingsNotes, getInstanceNotes,
   getItemStatusOptions,
   getItemsWithPlaceholder,
   getNotesOptions,
@@ -28,6 +28,7 @@ import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
 import { useHoldingsNotes } from '../../../../../hooks/api/useHoldingsNotes';
 import { useElectronicAccessRelationships } from '../../../../../hooks/api/useElectronicAccess';
 import { useSearchParams } from '../../../../../hooks/useSearchParams';
+import { useInstanceNotes } from '../../../../../hooks/api/useInstanceNotes';
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
@@ -38,10 +39,12 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const isUserCapability = currentRecordType === CAPABILITIES.USER;
   const isItemCapability = currentRecordType === CAPABILITIES.ITEM;
   const isHoldingsCapability = currentRecordType === CAPABILITIES.HOLDING;
+  const isInstanceCapability = currentRecordType === CAPABILITIES.INSTANCE;
 
   const { userGroups } = usePatronGroup({ enabled: isUserCapability });
   const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
+  const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceCapability });
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
   // exclude from second action the first action value
@@ -59,6 +62,10 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     .filter(obj => obj.value !== option)
     .map(({ label, value, disabled }) => ({ label, value, disabled }));
 
+  const filteredAndMappedInstanceNotes = getInstanceNotes(formatMessage, instanceNotes)
+    .filter(obj => obj.value !== option)
+    .map(({ label, value, disabled }) => ({ label, value, disabled }));
+
   const sortWithoutPlaceholder = (array) => {
     const [placeholder, ...rest] = array;
 
@@ -67,6 +74,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
 
   const sortedNotes = sortWithoutPlaceholder(filteredAndMappedNotes);
   const sortedHoldingsNotes = sortWithoutPlaceholder(filteredAndMappedHoldingsNotes);
+  const sortedInstanceNotes = sortWithoutPlaceholder(filteredAndMappedInstanceNotes);
 
   const statuses = getItemStatusOptions(formatMessage);
   const actionValue = action.value;
@@ -191,7 +199,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   );
 
   const renderNoteTypeSelect = () => controlType === CONTROL_TYPES.NOTE_SELECT && (
-    isHoldingsCapability ? (
+    <>
+      {isHoldingsCapability && (
       <Select
         id="noteHoldingsType"
         value={action.value}
@@ -201,9 +210,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
         marginBottom0
         dirty={action.value}
-      />)
-      :
-      (<Select
+      />)}
+      {isItemCapability && (<Select
         id="noteType"
         value={action.value}
         loading={usItemNotesLoading}
@@ -216,7 +224,20 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
         marginBottom0
         dirty={actionValue}
-      />)
+      />)}
+      {isInstanceCapability && (
+        <Select
+          id="noteInstanceType"
+          value={action.value}
+          loading={isInstanceNotesLoading}
+          onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+          dataOptions={sortedInstanceNotes}
+          aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+          marginBottom0
+          dirty={action.value}
+        />
+      )}
+    </>
   );
 
   const renderNoteDuplicateTypeSelect = () => controlType === CONTROL_TYPES.NOTE_DUPLICATE_SELECT && (

@@ -124,6 +124,8 @@ describe('ValuesColumn Component', () => {
   });
 
   it('should render select with item note types when action type is NOTE_SELECT', async () => {
+    const spy = jest.spyOn(URLSearchParams.prototype, 'get');
+    spy.mockReturnValue(CAPABILITIES.ITEM);
     const { getByRole } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
     const element = getByRole('combobox');
 
@@ -134,9 +136,23 @@ describe('ValuesColumn Component', () => {
     await waitFor(() => expect(onChange).toHaveBeenCalled());
   });
 
+
+  it('should render select with item note types when action type is NOTE_SELECT + INSTANCE CAPABILITY', async () => {
+    const spy = jest.spyOn(URLSearchParams.prototype, 'get');
+    spy.mockReturnValue(CAPABILITIES.INSTANCE);
+    const { getByRole } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
+    const element = getByRole('combobox');
+
+    expect(element).toBeInTheDocument();
+
+    fireEvent.change(element, { target: { value: 'new note instance value' } });
+
+    await waitFor(() => expect(onChange).toHaveBeenCalled());
+  });
+
   it('should render select with item note types when action type is NOTE_SELECT + HOLDINS CAPABILITY', async () => {
     const spy = jest.spyOn(URLSearchParams.prototype, 'get');
-    spy.mockReturnValueOnce(CAPABILITIES.HOLDING);
+    spy.mockReturnValue(CAPABILITIES.HOLDING);
 
     const { getByRole } = renderComponent(() => CONTROL_TYPES.NOTE_SELECT);
     const element = getByRole('combobox');

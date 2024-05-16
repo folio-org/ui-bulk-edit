@@ -289,6 +289,7 @@ export const getDefaultActions = ({
           },
         ],
       };
+    case OPTIONS.INSTANCE_NOTE:
     case OPTIONS.HOLDINGS_NOTE:
     case OPTIONS.ITEM_NOTE:
       return {
