@@ -24,6 +24,7 @@ import { useHoldingsNotes } from '../../../../hooks/api/useHoldingsNotes';
 import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
 import { useSearchParams } from '../../../../hooks';
 import { getDefaultActions } from './ContentUpdatesForm/helpers';
+import { useInstanceNotes } from '../../../../hooks/api/useInstanceNotes';
 
 export const BulkEditInApp = ({
   onContentUpdatesChanged,
@@ -37,18 +38,20 @@ export const BulkEditInApp = ({
 
   const isItemRecordType = currentRecordType === CAPABILITIES.ITEM;
   const isHoldingsRecordType = currentRecordType === CAPABILITIES.HOLDING;
+  const isInstanceRecordType = currentRecordType === CAPABILITIES.INSTANCE;
 
   const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemRecordType });
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
+  const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
 
   const options = useMemo(() => ({
     [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, itemNotes),
     [CAPABILITIES.USER]: getUserOptions(formatMessage),
     [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, holdingsNotes),
-    [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage),
-  })[currentRecordType], [formatMessage, itemNotes, holdingsNotes, currentRecordType]);
+    [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage, instanceNotes),
+  })[currentRecordType], [formatMessage, itemNotes, holdingsNotes, currentRecordType, instanceNotes]);
 
-  const showContentUpdatesForm = options && !isItemNotesLoading && !isHoldingsNotesLoading;
+  const showContentUpdatesForm = options && !isItemNotesLoading && !isHoldingsNotesLoading && !isInstanceNotesLoading;
   const sortedOptions = sortAlphabetically(options, formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
 
   const fieldTemplate = useMemo(() => {
