@@ -28,8 +28,9 @@ export const getActionParameters = (option, capability) => {
   const showForSpecificItemNotes = [OPTIONS.ITEM_NOTE, OPTIONS.CHECK_IN_NOTE, OPTIONS.CHECK_OUT_NOTE].includes(option)
     && capability === CAPABILITIES.ITEM;
   const showForSpecificHoldingNotes = option === OPTIONS.HOLDINGS_NOTE && capability === CAPABILITIES.HOLDING;
+  const showForSpecificInstanceNotes = option === OPTIONS.INSTANCE_NOTE && capability === CAPABILITIES.INSTANCE;
 
-  if (showForSpecificItemNotes || showForSpecificHoldingNotes) {
+  if (showForSpecificItemNotes || showForSpecificHoldingNotes || showForSpecificInstanceNotes) {
     return [
       {
         key: PARAMETERS_KEYS.STAFF_ONLY,
