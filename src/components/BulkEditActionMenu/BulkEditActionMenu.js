@@ -41,6 +41,8 @@ const BulkEditActionMenu = ({
   const {
     step,
     currentRecordType,
+    capabilities,
+    queryRecordType,
   } = useSearchParams();
 
   const [columnSearch, setColumnSearch] = useState('');
@@ -132,7 +134,9 @@ const BulkEditActionMenu = ({
             onClick={() => handleOnStartEdit(APPROACHES.IN_APP)}
           >
             <Icon icon="edit">
-              <FormattedMessage id="ui-bulk-edit.start.edit" />
+              {[capabilities, queryRecordType].includes(CAPABILITIES.INSTANCE)
+                ? <FormattedMessage id="ui-bulk-edit.start.edit.instance" />
+                : <FormattedMessage id="ui-bulk-edit.start.edit" />}
             </Icon>
           </Button>
         )}

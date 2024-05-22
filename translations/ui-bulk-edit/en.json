@@ -134,6 +134,7 @@
   "modal.next": "Next",
 
   "start.edit": "Start bulk edit",
+  "start.edit.instance": "Start bulk edit - Instance fields",
   "start.edit.csv": "Start bulk edit (Local)",
   "start.delete": "Start bulk delete",
 
@@ -299,6 +300,7 @@
   "columns.INSTANCE.Languages": "Languages",
   "columns.INSTANCE.Publication frequency": "Publication frequency",
   "columns.INSTANCE.Publication range": "Publication range",
+  "columns.INSTANCE.Notes": "Notes",
 
   "columns.logs.hrId": "ID",
   "columns.logs.operationType": "Bulk operation type",
