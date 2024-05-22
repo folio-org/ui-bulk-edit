@@ -19,6 +19,7 @@
 * [UIBULKED-445](https://folio-org.atlassian.net/browse/UIBULKED-445) Populate Bulk Edit Form with Instance Note Types.
 * [UIBULKED-446](https://folio-org.atlassian.net/browse/UIBULKED-446) Bulk Edit Actions for All Instance Notes - Add and Remove Notes.
 * [UIBULKED-447](https://folio-org.atlassian.net/browse/UIBULKED-447) Bulk Edit Actions for Instance Notes - Find and Replace or Remove.
+* [UIBULKED-449](https://folio-org.atlassian.net/browse/UIBULKED-449) Navigate to FOLIO Instances Bulk Edit Screen.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 

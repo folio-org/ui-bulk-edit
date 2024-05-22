@@ -134,6 +134,7 @@
   "modal.next": "Next",
 
   "start.edit": "Start bulk edit",
+  "start.edit.instance": "Start bulk edit - Instance fields",
   "start.edit.csv": "Start bulk edit (Local)",
   "start.delete": "Start bulk delete",
 
