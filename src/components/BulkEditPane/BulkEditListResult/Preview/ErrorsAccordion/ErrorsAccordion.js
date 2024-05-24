@@ -26,7 +26,7 @@ const resultsFormatter = {
       <div>
         {error.message}
         {' '}
-        {link && (
+        {!!link && (
           <span className={css.errorLink}>
             <TextLink to={link} target="_blank">
               <Icon icon="external-link" size="small" iconPosition="end">
