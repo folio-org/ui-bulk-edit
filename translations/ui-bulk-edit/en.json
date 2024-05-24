@@ -93,6 +93,7 @@
   "list.errors.query.infoProcessed": "<b>Bulk edit query: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
   "list.errors.table.code": "Record identifier",
   "list.errors.table.message": "Reason for error",
+  "list.errors.table.link": "View latest version",
 
   "uploaderBtnText": "or choose file",
   "uploaderSubTitle": "Select a file with record identifiers",
