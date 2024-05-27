@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -8,7 +9,6 @@ import {
   Icon,
   TextLink,
 } from '@folio/stripes/components';
-import React, { useState } from 'react';
 import css from '../Preview.css';
 import { useSearchParams } from '../../../../../hooks';
 import { CRITERIA, ERROR_PARAMETERS_KEYS } from '../../../../../constants';
