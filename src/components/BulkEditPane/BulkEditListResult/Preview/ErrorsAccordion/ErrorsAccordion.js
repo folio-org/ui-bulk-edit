@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -5,17 +6,38 @@ import {
   Accordion,
   MultiColumnList,
   Headline,
+  Icon,
+  TextLink,
 } from '@folio/stripes/components';
-import { useState } from 'react';
 import css from '../Preview.css';
-import { useSearchParams } from '../../../../../hooks/useSearchParams';
-import { CRITERIA } from '../../../../../constants';
+import { useSearchParams } from '../../../../../hooks';
+import { CRITERIA, ERROR_PARAMETERS_KEYS } from '../../../../../constants';
 
 const visibleColumns = ['key', 'message'];
 
+const getParam = (error, key) => error.parameters.find(param => param.key === key)?.value;
+
 const resultsFormatter = {
-  key: error => error.parameters[0].value,
-  message: error => error.message,
+  key: error => getParam(error, ERROR_PARAMETERS_KEYS.IDENTIFIER),
+  message: error => {
+    const link = getParam(error, ERROR_PARAMETERS_KEYS.LINK);
+
+    return (
+      <div>
+        {error.message}
+        {' '}
+        {!!link && (
+          <span className={css.errorLink}>
+            <TextLink to={link} target="_blank">
+              <Icon icon="external-link" size="small" iconPosition="end">
+                <FormattedMessage id="ui-bulk-edit.list.errors.table.link" />
+              </Icon>
+            </TextLink>
+          </span>
+        )}
+      </div>
+    );
+  },
 };
 
 const columnMapping = {

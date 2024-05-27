@@ -34,3 +34,9 @@
 .errorAccordionOuter {
     height: 100%;
 }
+
+.errorLink {
+    position: relative;
+    bottom: 2px;
+    cursor: pointer;
+}
