@@ -39,9 +39,15 @@ export const getPlaceholder = (formatMessage) => ({
   disabled: true,
 });
 
-export const getFindAction = (formatMessage) => ({
+export const getFindFullFieldAction = (formatMessage) => ({
   value: ACTIONS.FIND,
   label: formatMessage({ id: 'ui-bulk-edit.actions.findFullField' }),
+  disabled: false,
+});
+
+export const getFindAction = (formatMessage) => ({
+  value: ACTIONS.FIND,
+  label: formatMessage({ id: 'ui-bulk-edit.actions.find' }),
   disabled: false,
 });
 
@@ -132,7 +138,7 @@ export const noteActions = (formatMessage) => [
   getPlaceholder(formatMessage),
   getAddToExistingAction(formatMessage),
   getRemoveAllAction(formatMessage),
-  getFindAction(formatMessage),
+  getFindFullFieldAction(formatMessage),
   getChangeNoteTypeAction(formatMessage),
 ];
 
@@ -142,14 +148,14 @@ export const noteActionsWithMark = (formatMessage) => [
   getRemoveMarkAsStuffOnlyAction(formatMessage),
   getAddToExistingAction(formatMessage),
   getRemoveAllAction(formatMessage),
-  getFindAction(formatMessage),
+  getFindFullFieldAction(formatMessage),
   getChangeNoteTypeAction(formatMessage),
 ];
 
 export const electronicAccess = (formatMessage) => [
   getPlaceholder(formatMessage),
   getClearAction(formatMessage),
-  getFindAction(formatMessage),
+  getFindFullFieldAction(formatMessage),
   getReplaceAction(formatMessage),
 ];
 export const noteActionsWithDuplicate = (formatMessage) => [
@@ -158,7 +164,7 @@ export const noteActionsWithDuplicate = (formatMessage) => [
   getRemoveMarkAsStuffOnlyAction(formatMessage),
   getAddToExistingAction(formatMessage),
   getRemoveAllAction(formatMessage),
-  getFindAction(formatMessage),
+  getFindFullFieldAction(formatMessage),
   getChangeNoteTypeAction(formatMessage),
   getDuplicateToNoteAction(formatMessage),
 ];

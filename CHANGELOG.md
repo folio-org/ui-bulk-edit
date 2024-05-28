@@ -21,6 +21,7 @@
 * [UIBULKED-447](https://folio-org.atlassian.net/browse/UIBULKED-447) Bulk Edit Actions for Instance Notes - Find and Replace or Remove.
 * [UIBULKED-449](https://folio-org.atlassian.net/browse/UIBULKED-449) Navigate to FOLIO Instances Bulk Edit Screen.
 * [UIBULKED-456](https://folio-org.atlassian.net/browse/UIBULKED-456) Provide User-friendly Error Message for Optimistic Locking.
+* [UIBULKED-493](https://folio-org.atlassian.net/browse/UIBULKED-493) Rename "Find (full field search)" to "Find" for bulk edit Email in Users record type.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
