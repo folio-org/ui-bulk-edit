@@ -329,6 +329,7 @@
   "options.placeholder": "Select option",
   "type.placeholder": "Select type",
   "actions.findFullField": "Find (full field search)",
+  "actions.find": "Find",
   "layer.column.options": "Options",
   "layer.column.actions": "Actions",
   "layer.column.data": "Data",
