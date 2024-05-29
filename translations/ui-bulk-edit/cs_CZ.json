@@ -450,5 +450,9 @@
     "title.query": "Dotaz",
     "title.logs": "Logy",
     "actions.findFullField": "Najít (hledání v celém poli)",
-    "layer.action.apply.STAFF_ONLY": "Pouze pro zaměstnance"
+    "layer.action.apply.STAFF_ONLY": "Pouze pro zaměstnance",
+    "category.instanceNotes": "Poznámky k titulu",
+    "start.edit.instance": "Start bulk edit - Instance fields",
+    "list.errors.table.link": "View latest version",
+    "actions.find": "Find"
 }

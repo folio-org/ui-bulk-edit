@@ -450,5 +450,9 @@
     "title.query": "Consulta",
     "title.logs": "Logs",
     "actions.findFullField": "Find (full field search)",
-    "layer.action.apply.STAFF_ONLY": "Sólo Personal"
+    "layer.action.apply.STAFF_ONLY": "Sólo Personal",
+    "category.instanceNotes": "Notas de instancia",
+    "start.edit.instance": "Iniciar edición masiva - Campos de instancia",
+    "list.errors.table.link": "Ver la última versión",
+    "actions.find": "Find"
 }
