@@ -110,7 +110,6 @@
     "layer.selectLoanType": "حدد نوع الإعارة",
     "layer.options.patronGroup": "مجموعة المستفيدين",
     "layer.selectPatronGroup": "حدد مجموعة المستفيد",
-    "actions.find": "بحث",
     "layer.options.email": "البريد الإلكتروني",
     "list.filters.recordIdentifier.holdings.holdingsUUID": "المعرفات الفريدة العمومية للمقتنيات",
     "list.filters.recordIdentifier.holdings.holdingsHRID": "Holdings HRIDs",
@@ -443,5 +442,17 @@
     "list.errors.query.info": "<b>Bulk edit query: {entries, number} entries * {matched, number} records matched * {errors, number} errors</b>",
     "list.errors.query.infoProcessed": "<b>Bulk edit query: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
     "columns.ITEM.Holdings (Location, Call number)": "Holdings (Location, Call number)",
-    "meta.query.title": "Bulk edit query"
+    "meta.query.title": "Bulk edit query",
+    "logs.status.EXECUTING_QUERY": "Executing query",
+    "layer.column.data": "Data",
+    "columns.USER.Link to the profile picture": "Link to the profile picture",
+    "title.identifier": "Identifier",
+    "title.query": "Query",
+    "title.logs": "Logs",
+    "actions.findFullField": "Find (full field search)",
+    "layer.action.apply.STAFF_ONLY": "Staff only",
+    "category.instanceNotes": "Instance notes",
+    "start.edit.instance": "Start bulk edit - Instance fields",
+    "list.errors.table.link": "View latest version",
+    "actions.find": "Find"
 }
