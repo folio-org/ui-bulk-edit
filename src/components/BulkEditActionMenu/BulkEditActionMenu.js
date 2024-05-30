@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
+import noop from 'lodash/noop';
 
 import {
   Button,
@@ -73,6 +74,7 @@ const BulkEditActionMenu = ({
        hasEditPerm
     && isInitialStep
     && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
+  const isStartMarkActive = isStartBulkInAppActive && currentRecordType === CAPABILITIES.INSTANCE;
 
   const isLastUnselectedColumn = (value) => {
     return visibleColumnKeys?.length === 1 && visibleColumnKeys?.[0] === value;
@@ -137,6 +139,17 @@ const BulkEditActionMenu = ({
               {[capabilities, queryRecordType].includes(CAPABILITIES.INSTANCE)
                 ? <FormattedMessage id="ui-bulk-edit.start.edit.instance" />
                 : <FormattedMessage id="ui-bulk-edit.start.edit" />}
+            </Icon>
+          </Button>
+        )}
+        {isStartMarkActive && (
+          <Button
+            data-testid="startMarkAction"
+            buttonStyle="dropdownItem"
+            onClick={noop}
+          >
+            <Icon icon="edit">
+              <FormattedMessage id="ui-bulk-edit.start.edit.mark" />
             </Icon>
           </Button>
         )}
