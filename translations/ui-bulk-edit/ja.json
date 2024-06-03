@@ -450,5 +450,9 @@
     "title.query": "Query",
     "title.logs": "ログ",
     "actions.findFullField": "Find (full field search)",
-    "layer.action.apply.STAFF_ONLY": "スタッフのみ"
+    "layer.action.apply.STAFF_ONLY": "スタッフのみ",
+    "category.instanceNotes": "Instance notes",
+    "start.edit.instance": "Start bulk edit - Instance fields",
+    "list.errors.table.link": "View latest version",
+    "actions.find": "Find"
 }

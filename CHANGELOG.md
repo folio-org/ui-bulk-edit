@@ -18,6 +18,11 @@
 * [UIBULKED-479](https://folio-org.atlassian.net/browse/UIBULKED-479) Extend User search in User lookup.
 * [UIBULKED-445](https://folio-org.atlassian.net/browse/UIBULKED-445) Populate Bulk Edit Form with Instance Note Types.
 * [UIBULKED-446](https://folio-org.atlassian.net/browse/UIBULKED-446) Bulk Edit Actions for All Instance Notes - Add and Remove Notes.
+* [UIBULKED-447](https://folio-org.atlassian.net/browse/UIBULKED-447) Bulk Edit Actions for Instance Notes - Find and Replace or Remove.
+* [UIBULKED-449](https://folio-org.atlassian.net/browse/UIBULKED-449) Navigate to FOLIO Instances Bulk Edit Screen.
+* [UIBULKED-456](https://folio-org.atlassian.net/browse/UIBULKED-456) Provide User-friendly Error Message for Optimistic Locking.
+* [UIBULKED-493](https://folio-org.atlassian.net/browse/UIBULKED-493) Rename "Find (full field search)" to "Find" for bulk edit Email in Users record type.
+* [UIBULKED-450](https://folio-org.atlassian.net/browse/UIBULKED-450) Add button to navigate to MARC Instances Bulk Edit Screen.
 * [UIBULKED-490](https://folio-org.atlassian.net/browse/UIBULKED-490) Adding missing translations.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)

@@ -128,3 +128,8 @@ export const PAGINATION_CONFIG = {
   limit: PREVIEW_LIMITS.RECORDS,
   offset: 0,
 };
+
+export const ERROR_PARAMETERS_KEYS = {
+  IDENTIFIER: 'IDENTIFIER',
+  LINK: 'LINK',
+};

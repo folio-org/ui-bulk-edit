@@ -93,6 +93,7 @@
   "list.errors.query.infoProcessed": "<b>Bulk edit query: {entries, number} entries * {matched, number} records changed * {errors, number} errors</b>",
   "list.errors.table.code": "Record identifier",
   "list.errors.table.message": "Reason for error",
+  "list.errors.table.link": "View latest version",
 
   "uploaderBtnText": "or choose file",
   "uploaderSubTitle": "Select a file with record identifiers",
@@ -134,6 +135,8 @@
   "modal.next": "Next",
 
   "start.edit": "Start bulk edit",
+  "start.edit.instance": "Start bulk edit - Instance fields",
+  "start.edit.mark": "Start bulk edit - MARC fields",
   "start.edit.csv": "Start bulk edit (Local)",
   "start.delete": "Start bulk delete",
 
@@ -327,6 +330,7 @@
   "options.placeholder": "Select option",
   "type.placeholder": "Select type",
   "actions.findFullField": "Find (full field search)",
+  "actions.find": "Find",
   "layer.column.options": "Options",
   "layer.column.actions": "Actions",
   "layer.column.data": "Data",
