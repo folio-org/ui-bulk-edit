@@ -18,6 +18,7 @@
 * [UIBULKED-479](https://folio-org.atlassian.net/browse/UIBULKED-479) Extend User search in User lookup.
 * [UIBULKED-445](https://folio-org.atlassian.net/browse/UIBULKED-445) Populate Bulk Edit Form with Instance Note Types.
 * [UIBULKED-446](https://folio-org.atlassian.net/browse/UIBULKED-446) Bulk Edit Actions for All Instance Notes - Add and Remove Notes.
+* [UIBULKED-490](https://folio-org.atlassian.net/browse/UIBULKED-490) Adding missing translations.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 

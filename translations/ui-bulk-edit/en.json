@@ -425,6 +425,8 @@
   "logs.status.FAILED": "Failed",
   "logs.status.APPLY_CHANGES": "Apply changes",
   "logs.status.EXECUTING_QUERY": "Executing query",
+  "logs.status.RETRIEVING_IDENTIFIERS": "Retrieving identifiers",
+  "logs.status.SAVED_IDENTIFIERS": "Saving identifiers",
   "logs.entityType.HOLDINGS_RECORD": "Inventory - holdings",
   "logs.entityType.ITEM": "Inventory - items",
   "logs.entityType.USER": "Users",
