@@ -10,7 +10,8 @@ export const useResetAppState = ({
   setVisibleColumns,
   setCountOfRecords,
   filtersTab,
-  setIsBulkEditLayerOpen,
+  closeInAppLayer,
+  closeMarkLayer,
 }) => {
   const history = useHistory();
   const queryClient = useQueryClient();
@@ -47,7 +48,8 @@ export const useResetAppState = ({
         }),
       });
 
-      setIsBulkEditLayerOpen(false);
+      closeInAppLayer();
+      closeMarkLayer();
     }
   }, [
     history,
@@ -55,7 +57,8 @@ export const useResetAppState = ({
     setVisibleColumns,
     setCountOfRecords,
     filtersTab.logsTab,
-    setIsBulkEditLayerOpen,
+    closeInAppLayer,
+    closeMarkLayer,
     queryClient,
   ]);
 };

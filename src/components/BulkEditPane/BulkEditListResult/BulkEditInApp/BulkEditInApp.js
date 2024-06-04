@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import uniqueId from 'lodash/uniqueId';
 
 import {
@@ -25,15 +25,14 @@ import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
 import { useSearchParams } from '../../../../hooks';
 import { getDefaultActions } from './ContentUpdatesForm/helpers';
 import { useInstanceNotes } from '../../../../hooks/api/useInstanceNotes';
+import { RootContext } from '../../../../context/RootContext';
 
 export const BulkEditInApp = ({
   onContentUpdatesChanged,
 }) => {
+  const { title } = useContext(RootContext);
   const { formatMessage } = useIntl();
-  const {
-    currentRecordType,
-    initialFileName
-  } = useSearchParams();
+  const { currentRecordType } = useSearchParams();
   const [fields, setFields] = useState([]);
 
   const isItemRecordType = currentRecordType === CAPABILITIES.ITEM;
@@ -75,7 +74,7 @@ export const BulkEditInApp = ({
   return (
     <>
       <Headline size="large" margin="medium">
-        <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: initialFileName }} />
+        {title}
       </Headline>
       <Accordion
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}

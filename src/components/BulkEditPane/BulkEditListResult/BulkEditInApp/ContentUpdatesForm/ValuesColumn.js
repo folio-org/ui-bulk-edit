@@ -89,7 +89,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       data-testid={`input-email-${actionIndex}`}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textField' })}
       marginBottom0
-      dirty={actionValue}
+      dirty={!!actionValue}
     />
   );
 
@@ -100,7 +100,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       data-testid={`input-textarea-${actionIndex}`}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textArea' })}
       marginBottom0
-      dirty={actionValue}
+      dirty={!!actionValue}
     />
   );
 
@@ -133,7 +133,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         data-testid={`select-patronGroup-${actionIndex}`}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.patronGroupSelect' })}
         marginBottom0
-        dirty={actionValue}
+        dirty={!!actionValue}
       />
     );
   };
@@ -148,7 +148,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       backendDateStandard={BASE_DATE_FORMAT}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.date' })}
       marginBottom0
-      dirty={actionValue}
+      dirty={!!actionValue}
     />
   );
 
@@ -160,7 +160,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
         data-test-id={`textField-${actionIndex}`}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}
-        dirty={actionValue}
+        dirty={!!actionValue}
       />
       <LocationLookup
         marginBottom0
@@ -181,7 +181,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       data-testid={`select-statuses-${actionIndex}`}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statusSelect' })}
       marginBottom0
-      dirty={actionValue}
+      dirty={!!actionValue}
     />
   );
 
@@ -194,7 +194,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
       dataOptions={loanTypes}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-      dirty={actionValue}
+      dirty={!!actionValue}
     />
   );
 
@@ -209,7 +209,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         dataOptions={sortedHoldingsNotes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
         marginBottom0
-        dirty={action.value}
+        dirty={!!action.value}
       />)}
       {isItemCapability && (<Select
         id="noteType"
@@ -223,7 +223,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         dataOptions={sortedNotes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
         marginBottom0
-        dirty={actionValue}
+        dirty={!!actionValue}
       />)}
       {isInstanceCapability && (
         <Select
@@ -234,7 +234,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
           dataOptions={sortedInstanceNotes}
           aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
           marginBottom0
-          dirty={action.value}
+          dirty={!!action.value}
         />
       )}
     </>
@@ -249,7 +249,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     dataOptions={duplicateNoteOptions}
     aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
     marginBottom0
-    dirty={actionValue}
+    dirty={!!actionValue}
   />
   );
 
@@ -262,7 +262,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       dataOptions={accessRelationshipsWithPlaceholder}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
       marginBottom0
-      dirty={actionValue}
+      dirty={!!actionValue}
     />
   );
 

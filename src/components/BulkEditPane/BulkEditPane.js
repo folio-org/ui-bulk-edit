@@ -12,7 +12,11 @@ import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUp
 import {
   usePathParams,
   useBulkPermissions,
-  useSearchParams
+  useSearchParams,
+  useResetAppState,
+  useInAppApproach,
+  useMarkApproach,
+  useManualApproach
 } from '../../hooks';
 import {
   CRITERIA,
@@ -20,12 +24,8 @@ import {
   FILE_SEARCH_PARAMS,
   FILE_TO_LINK,
 } from '../../constants';
-import { BulkEditInApp } from './BulkEditListResult/BulkEditInApp/BulkEditInApp';
-import { BulkEditInAppPreviewModal } from './BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
 import { RootContext } from '../../context/RootContext';
 import { BulkEditLogs } from '../BulkEditLogs/BulkEditLogs';
-import { useResetAppState } from '../../hooks/useResetAppState';
-import { BulkEditInAppLayer } from './BulkEditListResult/BulkEditInAppLayer/BulkEditInAppLayer';
 import { BulkEditListSidebar } from './BulkEditListSidebar/BulkEditListSidebar';
 import {
   QUERY_KEY_DOWNLOAD_ACTION_MENU,
@@ -36,13 +36,12 @@ import { BulkEditQuery } from './BulkEditQuery/BulkEditQuery';
 import { BulkEditIdentifiers } from './BulkEditIdentifiers/BulkEditIdentifiers';
 import { useResetFilters } from '../../hooks/useResetFilters';
 
+import BulkEditInAppLayer from './BulkEditInAppLayer/BulkEditInAppLayer';
+import BulkEditMarkLayer from './BulkEditMarkLayer/BulkEditMarkLayer';
+
 export const BulkEditPane = () => {
   const [isFileUploaded, setIsFileUploaded] = useState(false);
-  const [isBulkEditModalOpen, setIsBulkEditModalOpen] = useState(false);
-  const [isBulkEditLayerOpen, setIsBulkEditLayerOpen] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
-  const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
-  const [contentUpdates, setContentUpdates] = useState(null);
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
   const [fileInfo, setFileInfo] = useState(null);
@@ -52,10 +51,31 @@ export const BulkEditPane = () => {
   const {
     step,
     criteria,
+    initialFileName,
   } = useSearchParams();
 
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, additionalQueryKeys: [step] });
   const { filtersTab } = useResetFilters();
+
+  const inAppApproach = useInAppApproach();
+  const {
+    openInAppLayer,
+    closeInAppLayer
+  } = inAppApproach;
+
+  const markApproach = useMarkApproach();
+  const {
+    fields,
+    setFields,
+    openMarkLayer,
+    closeMarkLayer
+  } = markApproach;
+
+  const {
+    isBulkEditModalOpen,
+    openManualModal,
+    closeManualModal,
+  } = useManualApproach();
 
   const isLogsTab = criteria === CRITERIA.LOGS;
   const isQueryTab = criteria === CRITERIA.QUERY;
@@ -63,6 +83,12 @@ export const BulkEditPane = () => {
   const isQueryTabWithPreview = isQueryTab && visibleColumns?.length && bulkDetails?.fqlQuery;
   const isIdentifierTabWithPreview = isIdentifierTab && visibleColumns?.length && !bulkDetails?.fqlQuery;
   const isActionMenuVisible = (isQueryTabWithPreview || isIdentifierTabWithPreview) && isActionMenuShown && !isLogsTab;
+
+  const title = useMemo(() => {
+    if (bulkDetails?.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;
+
+    return <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: initialFileName }} />;
+  }, [bulkDetails?.userFriendlyQuery, initialFileName]);
 
   const providerValue = useMemo(() => ({
     countOfRecords,
@@ -72,12 +98,17 @@ export const BulkEditPane = () => {
     confirmedFileName,
     isFileUploaded,
     setIsFileUploaded,
-    setIsBulkEditLayerOpen,
+    setFields,
+    fields,
+    title,
   }), [
     countOfRecords,
     visibleColumns,
     confirmedFileName,
-    isFileUploaded
+    isFileUploaded,
+    setFields,
+    fields,
+    title
   ]);
 
   useFileDownload({
@@ -102,41 +133,23 @@ export const BulkEditPane = () => {
     setCountOfRecords,
     setVisibleColumns,
     filtersTab,
-    setIsBulkEditLayerOpen,
+    closeInAppLayer,
+    closeMarkLayer,
   });
 
-  const handleBulkEditLayerOpen = useCallback(() => {
-    setIsBulkEditLayerOpen(true);
-  }, []);
-  const handleBulkEditLayerClose = useCallback(() => {
-    setIsBulkEditLayerOpen(false);
-  }, []);
-
-  const handlePreviewModalOpen = useCallback(() => {
-    setIsPreviewModalOpened(true);
-  }, []);
-
-  const handlePreviewModalClose = useCallback(() => {
-    setIsPreviewModalOpened(false);
-  }, []);
-
-  const handleChangesCommitted = useCallback(() => {
-    handlePreviewModalClose();
-    handleBulkEditLayerClose();
-  }, [handleBulkEditLayerClose, handlePreviewModalClose]);
-
-  const handleStartBulkEdit = (approach) => {
+  const handleStartBulkEdit = useCallback((approach) => {
     if (approach === APPROACHES.IN_APP) {
-      handleBulkEditLayerOpen();
+      openInAppLayer();
     }
 
     if (approach === APPROACHES.MANUAL) {
-      setIsBulkEditModalOpen(true);
+      openManualModal();
     }
-  };
-  const handleCancelBulkEdit = () => {
-    setIsBulkEditModalOpen(false);
-  };
+
+    if (approach === APPROACHES.MARK) {
+      openMarkLayer();
+    }
+  }, [openInAppLayer, openManualModal, openMarkLayer]);
 
   const renderActionMenu = ({ onToggle }) => isActionMenuVisible && (
     <BulkEditActionMenu
@@ -146,42 +159,29 @@ export const BulkEditPane = () => {
     />
   );
 
-  const renderAppLayer = (paneProps) => {
-    return (
-      <>
-        <BulkEditInAppLayer
-          isLayerOpen={isBulkEditLayerOpen}
-          onLayerClose={handleBulkEditLayerClose}
-          onConfirm={handlePreviewModalOpen}
-          contentUpdates={contentUpdates}
-          {...paneProps}
-        >
-          <BulkEditInApp
-            onContentUpdatesChanged={setContentUpdates}
-          />
-        </BulkEditInAppLayer>
-
-        {isPreviewModalOpened && (
-          <BulkEditInAppPreviewModal
-            bulkOperationId={bulkOperationId}
-            open={isPreviewModalOpened}
-            contentUpdates={contentUpdates}
-            onKeepEditing={handlePreviewModalClose}
-            onChangesCommited={handleChangesCommitted}
-          />
-        )}
-      </>
-    );
-  };
-
   const renderManualUploadModal = () => (
     <BulkEditManualUploadModal
       operationId={bulkOperationId}
       open={isBulkEditModalOpen}
-      onCancel={handleCancelBulkEdit}
+      onCancel={closeManualModal}
       countOfRecords={countOfRecords}
       setCountOfRecords={setCountOfRecords}
     />
+  );
+
+  const renderLayers = (paneProps) => (
+    <>
+      <BulkEditInAppLayer
+        bulkOperationId={bulkOperationId}
+        paneProps={paneProps}
+        {...inAppApproach}
+      />
+      <BulkEditMarkLayer
+        paneProps={paneProps}
+        {...markApproach}
+      />
+      {renderManualUploadModal()}
+    </>
   );
 
   return (
@@ -199,19 +199,19 @@ export const BulkEditPane = () => {
         { isIdentifierTab && (
           <BulkEditIdentifiers
             bulkDetails={bulkDetails}
-            renderInAppApproach={renderAppLayer}
-            renderManualApproach={renderManualUploadModal}
             actionMenu={renderActionMenu}
-          />
+          >
+            {renderLayers}
+          </BulkEditIdentifiers>
         )}
 
         { isQueryTab && (
           <BulkEditQuery
             bulkDetails={bulkDetails}
-            renderInAppApproach={renderAppLayer}
-            renderManualApproach={renderManualUploadModal}
             actionMenu={renderActionMenu}
-          />
+          >
+            {renderLayers}
+          </BulkEditQuery>
         )}
 
         { isLogsTab && <BulkEditLogs /> }

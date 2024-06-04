@@ -10,13 +10,14 @@ import {
 import { Pane } from '@folio/stripes/components';
 
 import { BulkEditListResult } from '../BulkEditListResult';
-import { EDITING_STEPS } from '../../../constants';
+import { APPROACHES, EDITING_STEPS } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
 import { RootContext } from '../../../context/RootContext';
 
-export const BulkEditQuery = ({ bulkDetails, actionMenu, renderInAppApproach, renderManualApproach }) => {
+export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   const {
     step,
+    approach,
   } = useSearchParams();
   const intl = useIntl();
 
@@ -30,11 +31,15 @@ export const BulkEditQuery = ({ bulkDetails, actionMenu, renderInAppApproach, re
 
   const paneTitle = useMemo(() => {
     if (isQueryTabWithPreview) {
-      return <FormattedMessage id="ui-bulk-edit.meta.query.title" />;
+      const id = approach === APPROACHES.MARK
+        ? 'ui-bulk-edit.meta.query.title.mark'
+        : 'ui-bulk-edit.meta.query.title';
+
+      return <FormattedMessage id={id} />;
     }
 
     return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [isQueryTabWithPreview]);
+  }, [isQueryTabWithPreview, approach]);
 
   const paneSubtitleUpdated = useMemo(() => {
     if (!isQueryTabWithPreview) return null;
@@ -70,16 +75,14 @@ export const BulkEditQuery = ({ bulkDetails, actionMenu, renderInAppApproach, re
       >
         <BulkEditListResult />
 
-        {renderInAppApproach(paneProps)}
-        {renderManualApproach()}
+        {children(paneProps)}
       </Pane>
     </TitleManager>
   );
 };
 
 BulkEditQuery.propTypes = {
+  children: PropTypes.func.isRequired,
   bulkDetails: PropTypes.object,
   actionMenu: PropTypes.object,
-  renderInAppApproach: PropTypes.func,
-  renderManualApproach: PropTypes.func,
 };

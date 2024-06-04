@@ -105,6 +105,12 @@ export const getAddToExistingAction = (formatMessage) => ({
   disabled: false,
 });
 
+export const getAddAction = (formatMessage) => ({
+  value: ACTIONS.ADD_TO_EXISTING,
+  label: formatMessage({ id: 'ui-bulk-edit.layer.options.add' }),
+  disabled: false,
+});
+
 export const getRemoveTheseAction = (formatMessage) => ({
   value: ACTIONS.REMOVE_THESE,
   label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.removeNote' }),
@@ -172,4 +178,11 @@ export const commonAdditionalActions = (formatMessage) => [
   getPlaceholder(formatMessage),
   getReplaceAction(formatMessage),
   getRemoveTheseAction(formatMessage),
+];
+
+export const markActions = (formatMessage) => [
+  getPlaceholder(formatMessage),
+  getAddAction(formatMessage),
+  getFindAction(formatMessage),
+  getRemoveAllAction(formatMessage),
 ];
