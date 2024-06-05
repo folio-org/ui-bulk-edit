@@ -11,6 +11,7 @@ export const APPROACHES = {
   IN_APP: 'IN_APP',
   MANUAL: 'MANUAL',
   QUERY: 'QUERY',
+  MARK: 'MARK',
 };
 
 export const CAPABILITIES = {

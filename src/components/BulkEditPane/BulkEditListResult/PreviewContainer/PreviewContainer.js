@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react';
-import { useIntl } from 'react-intl';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router';
 
 import {
@@ -15,28 +14,22 @@ import {
 import { Preview } from '../Preview/Preview';
 
 import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
-import { useSearchParams } from '../../../../hooks/useSearchParams';
+import { useSearchParams } from '../../../../hooks';
 import { ProgressBar } from '../../../shared/ProgressBar/ProgressBar';
+import { RootContext } from '../../../../context/RootContext';
 
 const PreviewContainer = () => {
-  const intl = useIntl();
+  const { title } = useContext(RootContext);
   const { id } = useParams();
   const {
     step,
     criteria,
-    initialFileName,
     currentRecordType,
     progress
   } = useSearchParams();
   const lowerCaseRecordType = currentRecordType?.toLowerCase();
 
   const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step, progress] });
-
-  const title = useMemo(() => {
-    if (bulkDetails?.userFriendlyQuery) return intl.formatMessage({ id: 'ui-bulk-edit.preview.query.title' }, { queryText: bulkDetails.userFriendlyQuery });
-
-    return intl.formatMessage({ id: 'ui-bulk-edit.preview.file.title' }, { fileUploadedName: initialFileName });
-  }, [bulkDetails?.userFriendlyQuery, initialFileName, intl]);
 
   const isInitial = step === EDITING_STEPS.UPLOAD;
 

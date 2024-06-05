@@ -33,7 +33,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
             data-testid={`select-actions-${actionIndex}`}
             aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.actionsSelect' })}
             marginBottom0
-            dirty={action.name}
+            dirty={!!action.name}
           />
         </Col>
 

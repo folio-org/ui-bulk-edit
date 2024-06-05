@@ -9,21 +9,21 @@ import {
   useStripes,
 } from '@folio/stripes/core';
 
-import { EDITING_STEPS } from '../../../constants';
-import { useSearchParams } from '../../../hooks/useSearchParams';
+import { APPROACHES, EDITING_STEPS } from '../../../constants';
+import { useSearchParams } from '../../../hooks';
 import { RootContext } from '../../../context/RootContext';
 import { BulkEditListResult } from '../BulkEditListResult';
 
 export const BulkEditIdentifiers = ({
+  children,
   bulkDetails,
   actionMenu,
-  renderInAppApproach,
-  renderManualApproach
 }) => {
   const intl = useIntl();
   const stripes = useStripes();
   const {
     step,
+    approach,
     processedFileName,
     initialFileName,
   } = useSearchParams();
@@ -37,16 +37,19 @@ export const BulkEditIdentifiers = ({
 
   const paneTitle = useMemo(() => {
     if ((processedFileName || initialFileName) && isIdentifierTabWithPreview) {
+      const id = approach === APPROACHES.MARK
+        ? 'ui-bulk-edit.meta.title.uploadedFile.mark'
+        : 'ui-bulk-edit.meta.title.uploadedFile';
       return (
         <FormattedMessage
-          id="ui-bulk-edit.meta.title.uploadedFile"
+          id={id}
           values={{ fileName: processedFileName || initialFileName }}
         />
       );
     }
 
     return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [processedFileName, initialFileName, isIdentifierTabWithPreview]);
+  }, [processedFileName, initialFileName, isIdentifierTabWithPreview, approach]);
 
   const paneSubUpdated = useMemo(() => {
     if (!isIdentifierTabWithPreview) return null;
@@ -79,17 +82,14 @@ export const BulkEditIdentifiers = ({
         {...paneProps}
       >
         <BulkEditListResult />
-
-        {renderInAppApproach(paneProps)}
-        {renderManualApproach()}
+        {children(paneProps)}
       </Pane>
     </TitleManager>
   );
 };
 
 BulkEditIdentifiers.propTypes = {
+  children: PropTypes.func,
   bulkDetails: PropTypes.object,
   actionMenu: PropTypes.func,
-  renderInAppApproach: PropTypes.func,
-  renderManualApproach: PropTypes.func,
 };

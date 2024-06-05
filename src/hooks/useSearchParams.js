@@ -1,5 +1,8 @@
 import { useHistory } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+
+import { buildSearch } from '@folio/stripes-acq-components';
+
 import { CRITERIA } from '../constants';
 
 export const useSearchParams = () => {
@@ -15,12 +18,22 @@ export const useSearchParams = () => {
   const initialFileName = searchParams.get('fileName');
   const processedFileName = searchParams.get('processedFileName');
   const progress = searchParams.get('progress');
+  const approach = searchParams.get('approach');
 
   const currentRecordType = criteria === CRITERIA.QUERY ? queryRecordType : capabilities;
+
+  const setParam = useCallback((param, value) => {
+    history.replace({
+      search: buildSearch({
+        [param]: value,
+      }, history.location.search),
+    });
+  }, [history]);
 
   return {
     step,
     progress,
+    approach,
     criteria,
     identifier,
     capabilities,
@@ -28,5 +41,6 @@ export const useSearchParams = () => {
     queryRecordType,
     processedFileName,
     currentRecordType,
+    setParam,
   };
 };

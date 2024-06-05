@@ -7,6 +7,8 @@ import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
+import { FormattedMessage } from 'react-intl';
+import React from 'react';
 import { flushPromises } from '../../../../../test/jest/utils/fileUpload';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 
@@ -32,7 +34,10 @@ const renderBulkEditInApp = ({ capability }) => {
   return render(
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={[`/bulk-edit?${params}`]}>
-        <RootContext.Provider value={{}}>
+        <RootContext.Provider value={{
+          title: <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: 'fileName' }} />,
+        }}
+        >
           <BulkEditInApp
             onContentUpdatesChanged={() => {}}
             capabilities={capability}

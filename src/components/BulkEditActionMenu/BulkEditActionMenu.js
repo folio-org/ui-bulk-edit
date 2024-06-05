@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import noop from 'lodash/noop';
 
 import {
   Button,
@@ -146,7 +145,7 @@ const BulkEditActionMenu = ({
           <Button
             data-testid="startMarkAction"
             buttonStyle="dropdownItem"
-            onClick={noop}
+            onClick={() => handleOnStartEdit(APPROACHES.MARK)}
           >
             <Icon icon="edit">
               <FormattedMessage id="ui-bulk-edit.start.edit.mark" />

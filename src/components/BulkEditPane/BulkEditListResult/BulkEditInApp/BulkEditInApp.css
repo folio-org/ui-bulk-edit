@@ -27,6 +27,21 @@
 }
 
 .column {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 8px;
+}
+
+.column.field {
+    width: 100px;
+}
+
+.column.in {
+    width: 50px;
+}
+
+.column.subfield {
+    width: 100px;
+}
+
+.column.actions {
+    width: 150px;
 }

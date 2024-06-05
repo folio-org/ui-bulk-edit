@@ -24,6 +24,7 @@
 * [UIBULKED-493](https://folio-org.atlassian.net/browse/UIBULKED-493) Rename "Find (full field search)" to "Find" for bulk edit Email in Users record type.
 * [UIBULKED-450](https://folio-org.atlassian.net/browse/UIBULKED-450) Add button to navigate to MARC Instances Bulk Edit Screen.
 * [UIBULKED-490](https://folio-org.atlassian.net/browse/UIBULKED-490) Adding missing translations.
+* [UIBULKED-460](https://folio-org.atlassian.net/browse/UIBULKED-460) Add MARC Instances Bulk Edit Form.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 

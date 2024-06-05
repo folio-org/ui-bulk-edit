@@ -276,7 +276,7 @@ export const ContentUpdatesForm = ({
                 onChange={(e) => handleOptionChange(e, index)}
                 data-testid={`select-option-${index}`}
                 aria-label={`select-option-${index}`}
-                dirty={field.option}
+                dirty={!!field.option}
                 marginBottom0
               >
                 {renderOptions(groupByCategory(field.options))}

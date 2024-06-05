@@ -7,6 +7,8 @@ import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../test/jest/__mock__';
 
+import { FormattedMessage } from 'react-intl';
+import React from 'react';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 import { TYPE_OF_PROGRESS } from '../../../constants';
 
@@ -32,13 +34,18 @@ jest.mock('../../../hooks/api', () => ({
 
 const setCountOfRecordsMock = jest.fn();
 
-const renderBulkEditResult = (history, typeOfProgress = TYPE_OF_PROGRESS.INITIAL) => {
+const renderBulkEditResult = (
+  history,
+  typeOfProgress = TYPE_OF_PROGRESS.INITIAL,
+  title = <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: 'fileName' }} />
+) => {
   render(
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
         <RootContext.Provider value={{
           setCountOfRecords: setCountOfRecordsMock,
           fileName: 'TestMock.cvs',
+          title,
         }}
         >
           <BulkEditListResult
@@ -121,7 +128,11 @@ describe('BulkEditListResult', () => {
 
     history.push('/bulk-edit/1/preview?fileName=Mock.csv&capabilities=USERS&criteria=query');
 
-    renderBulkEditResult(history, TYPE_OF_PROGRESS.INITIAL);
+    renderBulkEditResult(
+      history,
+      TYPE_OF_PROGRESS.INITIAL,
+      <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: 'query' }} />
+    );
 
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
   });
