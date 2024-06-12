@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import { Col, Select, TextArea } from '@folio/stripes/components';
@@ -51,6 +52,14 @@ const BulkEditMarkActionRow = ({
       </Col>
     </Fragment>
   ));
+};
+
+BulkEditMarkActionRow.propTypes = {
+  actions: PropTypes.arrayOf(PropTypes.object),
+  rowIndex: PropTypes.number.isRequired,
+  subfieldIndex: PropTypes.number,
+  onActionChange: PropTypes.func.isRequired,
+  onDataChange: PropTypes.func.isRequired,
 };
 
 export default BulkEditMarkActionRow;
