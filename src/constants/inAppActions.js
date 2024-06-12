@@ -179,10 +179,3 @@ export const commonAdditionalActions = (formatMessage) => [
   getReplaceAction(formatMessage),
   getRemoveTheseAction(formatMessage),
 ];
-
-export const markActions = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getAddAction(formatMessage),
-  getFindAction(formatMessage),
-  getRemoveAllAction(formatMessage),
-];
