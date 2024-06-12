@@ -5,16 +5,7 @@ import { Col, Icon, Label, Row, Tooltip } from '@folio/stripes/components';
 
 import css from '../../BulkEditInApp/BulkEditInAppTitle/BulkEditInAppTitle.css';
 import { RootContext } from '../../../../../context/RootContext';
-
-const getFielMaxColumnsCount = (field) => {
-  let sum = field.actions.length;
-
-  field.actions.forEach(action => {
-    sum += action?.data.length || 0;
-  });
-
-  return sum;
-};
+import { getFielMaxColumnsCount } from '../helpers';
 
 
 const BulkEditMarkTitle = () => {

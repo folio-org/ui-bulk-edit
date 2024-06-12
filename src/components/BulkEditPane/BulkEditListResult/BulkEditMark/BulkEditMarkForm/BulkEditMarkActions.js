@@ -6,7 +6,14 @@ import { IconButton } from '@folio/stripes/components';
 import css from '../../BulkEditInApp/BulkEditInApp.css';
 
 
-const BulkEditMarkActions = ({ addingDisabled, removingDisabled, rowIndex, subfieldIndex, onAdd, onRemove }) => {
+const BulkEditMarkActions = ({
+  addingDisabled,
+  removingDisabled,
+  rowIndex,
+  subfieldIndex,
+  onAdd,
+  onRemove
+}) => {
   return (
     <div className={css.iconButtonWrapper}>
       {!addingDisabled && (

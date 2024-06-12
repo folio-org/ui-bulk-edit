@@ -1,22 +1,26 @@
 import React, { Fragment, useContext } from 'react';
-import noop from 'lodash/noop';
 import { useIntl } from 'react-intl';
+import noop from 'lodash/noop';
 import uniqueId from 'lodash/uniqueId';
+import { set } from 'lodash';
 
 import { Col, RepeatableField, Row, TextField } from '@folio/stripes/components';
 
-import { set } from 'lodash';
-import css from '../../BulkEditInApp/BulkEditInApp.css';
 import {
+  getNextAction,
+  getSubfieldTemplate,
+  getNextDataControls,
   getDefaultMarkTemplate,
   TAG_FIELD_MAX_LENGTH,
   INDICATOR_FIELD_MAX_LENGTH,
-  SUBFIELD_MAX_LENGTH, getSubfieldTemplate, getNextAction, getNextDataControls,
+  SUBFIELD_MAX_LENGTH,
 } from '../helpers';
 import { RootContext } from '../../../../../context/RootContext';
 import { ACTIONS } from '../../../../../constants/markActions';
 import BulkEditMarkActionRow from './BulkEditMarkActionRow';
 import BulkEditMarkActions from './BulkEditMarkActions';
+
+import css from '../../BulkEditInApp/BulkEditInApp.css';
 
 
 const BulkEditMarkForm = () => {

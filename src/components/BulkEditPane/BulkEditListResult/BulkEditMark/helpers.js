@@ -116,3 +116,13 @@ export const getNextDataControls = (action) => {
 export const isMarkFormValid = (fields) => {
   return fields.every(field => Object.values(field).every(Boolean));
 };
+
+export const getFielMaxColumnsCount = (field) => {
+  let sum = field.actions.length;
+
+  field.actions.forEach(action => {
+    sum += action?.data.length || 0;
+  });
+
+  return sum;
+};
