@@ -91,7 +91,7 @@ describe('BulkEditMarkLayer', () => {
     expect(getByText('ui-bulk-edit.layer.column.in1')).toBeVisible();
     expect(getByText('ui-bulk-edit.layer.column.in2')).toBeVisible();
     expect(getByText('ui-bulk-edit.layer.column.subfield')).toBeVisible();
-    expect(getAllByText('ui-bulk-edit.layer.column.actions').length).toBe(2);
+    expect(getAllByText('ui-bulk-edit.layer.column.actions').length).toBe(3);
 
     // tooltips
     expect(getByText('Limited to 5xx and 9xx.')).toBeVisible();
