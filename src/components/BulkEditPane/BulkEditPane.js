@@ -159,16 +159,6 @@ export const BulkEditPane = () => {
     />
   );
 
-  const renderManualUploadModal = () => (
-    <BulkEditManualUploadModal
-      operationId={bulkOperationId}
-      open={isBulkEditModalOpen}
-      onCancel={closeManualModal}
-      countOfRecords={countOfRecords}
-      setCountOfRecords={setCountOfRecords}
-    />
-  );
-
   const renderLayers = (paneProps) => (
     <>
       <BulkEditInAppLayer
@@ -180,7 +170,13 @@ export const BulkEditPane = () => {
         paneProps={paneProps}
         {...markApproach}
       />
-      {renderManualUploadModal()}
+      <BulkEditManualUploadModal
+        operationId={bulkOperationId}
+        open={isBulkEditModalOpen}
+        onCancel={closeManualModal}
+        countOfRecords={countOfRecords}
+        setCountOfRecords={setCountOfRecords}
+      />
     </>
   );
 

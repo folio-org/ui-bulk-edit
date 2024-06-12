@@ -6,7 +6,7 @@ import { Checkbox } from '@folio/stripes/components';
 
 import { useDerivativeModification } from '../../../../../hooks';
 import { ACTION_PARAMETERS_KEY } from './helpers';
-import css from '../BulkEditInApp.css';
+import css from '../../../BulkEditPane.css';
 
 export const AdditionalActionParameters = ({ action, actionIndex, onChange }) => {
   const { formatMessage } = useIntl();

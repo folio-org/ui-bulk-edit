@@ -9,7 +9,7 @@ import {
 } from '@folio/stripes/components';
 
 import { FINAL_ACTIONS } from '../../../../../constants';
-import css from './BulkEditInAppTitle.css';
+import css from '../../../BulkEditPane.css';
 
 export const BulkEditInAppTitle = ({ fields }) => {
   if (!fields.length) return null;

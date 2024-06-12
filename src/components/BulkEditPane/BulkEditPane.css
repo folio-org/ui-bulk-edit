@@ -1,0 +1,107 @@
+@import "@folio/stripes-components/lib/variables";
+
+:root {
+    --cellHeight: 36px;
+}
+
+.headerCell, .headerStickyCell {
+    display: flex;
+    align-items: center;
+    height: var(--cellHeight);
+    border-bottom: 5px solid var(--primary);
+    padding: 5px 8px 0;
+    flex: auto;
+}
+
+.headerStickyCell {
+    margin-left: auto;
+    flex: 0;
+}
+
+.column {
+    flex-grow: 1;
+    padding: 5px 8px;
+}
+
+.column.fallback {
+    max-width: 200px;
+}
+
+.headerCell.field,
+.column.field {
+    max-width: 100px;
+    padding-left: 5px;
+}
+
+.headerCell.in,
+.column.in {
+    max-width: 50px;
+}
+
+.headerCell.subfield,
+.column.subfield {
+    max-width: 100px;
+}
+
+.headerCell.actions,
+.column.actions {
+    max-width: 10%;
+}
+
+.headerCell.data,
+.column.data {
+    max-width: 15%;
+}
+
+.headerCell:has(+ :not(.headerCell)) {
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.splitter {
+    position: absolute;
+    bottom: 0;
+    width: 1px;
+    height: calc(100% - var(--cellHeight));
+    background-color: var(--color-border-p2);
+    transform: translateX(-8px);
+}
+
+.emptyHeaderCell {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+    border-bottom: 5px solid var(--primary);
+    margin-left: auto;
+    padding-right: 10px;
+}
+
+.row {
+    background-color: var(--color-fill);
+    line-height: var(--line-height);
+    margin: 0;
+    box-sizing: border-box;
+    justify-content: flex-end;
+}
+
+.row [class^="repeatableFieldList"] {
+    margin: 0;
+}
+
+.actionButtonsWrapper {
+    margin-left: auto;
+    padding: 5px 10px;
+    min-width: 70px;
+    border-left: 1px solid var(--color-border-p2);
+    text-align: right;
+}
+
+.iconButton:has([disabled]) {
+    opacity: 0.5;
+}
+
+.additionalParameters {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

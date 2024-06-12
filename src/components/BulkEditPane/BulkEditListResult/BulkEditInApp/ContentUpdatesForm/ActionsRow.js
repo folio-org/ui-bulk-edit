@@ -11,7 +11,7 @@ import { ACTION_VALUE_KEY } from './helpers';
 import { ValuesColumn } from './ValuesColumn';
 import { AdditionalActionParameters } from './AdditionalActionParameters';
 import { sortAlphabeticallyActions } from '../../../../../utils/sortAlphabetically';
-import css from '../BulkEditInApp.css';
+import css from '../../../BulkEditPane.css';
 
 export const ActionsRow = ({ option, actions, onChange }) => {
   const { formatMessage } = useIntl();
