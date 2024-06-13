@@ -12,11 +12,6 @@ export const ACTIONS = {
   REPLACE_WITH: 'REPLACE_WITH',
 };
 
-// FINAL_ACTIONS - final actions in scope of row. Not possible select anything after choosing it in row.
-export const FINAL_ACTIONS = [
-  ACTIONS.REMOVE_ALL,
-];
-
 export const getPlaceholder = () => ({
   value: '',
   label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,

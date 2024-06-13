@@ -141,7 +141,7 @@ describe('BulkEditMarkLayer', () => {
   });
 
 
-  it('should add subfifield when user selected APPEND action', async () => {
+  it('should be able to add and remove sub-fields', async () => {
     const { debug, queryByTestId, getByTestId, getByRole, getAllByRole } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });

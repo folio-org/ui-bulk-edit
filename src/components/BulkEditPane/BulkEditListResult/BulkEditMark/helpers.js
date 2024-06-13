@@ -2,7 +2,6 @@ import { FormattedMessage } from 'react-intl';
 import React from 'react';
 import {
   ACTIONS,
-  FINAL_ACTIONS,
   getAdditionalSubfieldAction,
   getPlaceholder,
   markActions, markSubfieldActions
@@ -12,7 +11,6 @@ export const TAG_FIELD_MAX_LENGTH = 3;
 export const INDICATOR_FIELD_MAX_LENGTH = 1;
 export const SUBFIELD_MAX_LENGTH = 1;
 
-export const isFinalAction = (action) => action && FINAL_ACTIONS.includes(action);
 
 export const getDataTemplate = ({
   required = true,
@@ -123,7 +121,7 @@ export const isMarkFormValid = (fields) => {
   return fields.every(field => Object.values(field).every(Boolean));
 };
 
-export const getFielMaxColumnsCount = (field) => {
+export const getMaxFieldColumnsCount = (field) => {
   let sum = field.actions.length;
 
   field.actions.forEach(action => {

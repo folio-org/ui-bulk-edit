@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Col, Icon, Label, Row, Tooltip } from '@folio/stripes/components';
 
 import { RootContext } from '../../../../../context/RootContext';
-import { getFielMaxColumnsCount } from '../helpers';
+import { getMaxFieldColumnsCount } from '../helpers';
 
 import css from '../../../BulkEditPane.css';
 
@@ -12,7 +12,7 @@ import css from '../../../BulkEditPane.css';
 const BulkEditMarkTitle = () => {
   const { fields } = useContext(RootContext);
   const field = fields.reduce((acc, item) => {
-    if (getFielMaxColumnsCount(item) > getFielMaxColumnsCount(acc)) {
+    if (getMaxFieldColumnsCount(item) > getMaxFieldColumnsCount(acc)) {
       return item;
     }
 
