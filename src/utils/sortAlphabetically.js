@@ -27,7 +27,7 @@ export const sortAlphabetically = (array, placeholder) => array?.sort((a, b) => 
   return categoryComparison;
 });
 
-export const sortAlphabeticallyActions = (array, placeholder) => {
+export const sortAlphabeticallyWithoutGroups = (array, placeholder) => {
   const collator = new Intl.Collator();
 
   return array?.sort((a, b) => {

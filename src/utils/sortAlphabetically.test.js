@@ -1,4 +1,4 @@
-import { sortAlphabetically, sortAlphabeticallyActions } from './sortAlphabetically';
+import { sortAlphabetically, sortAlphabeticallyWithoutGroups } from './sortAlphabetically';
 
 describe('sortAlphabetically', () => {
   it('should sort the array alphabetically', () => {
@@ -50,7 +50,7 @@ describe('sortAlphabeticallyActions', () => {
       { label: 'Placeholder' },
     ];
 
-    const sortedArray = sortAlphabeticallyActions(array, 'Placeholder');
+    const sortedArray = sortAlphabeticallyWithoutGroups(array, 'Placeholder');
 
     // Your expected sorted array based on the logic in the function
     const expectedSortedArray = [
