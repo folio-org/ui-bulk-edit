@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
-import { render, waitFor } from '@testing-library/react';
+import { render, waitFor, within } from '@testing-library/react';
 import uniqueId from 'lodash/uniqueId';
 
 import '../../../../test/jest/__mock__';
@@ -12,6 +12,7 @@ import { APPROACHES, CAPABILITIES, CRITERIA, IDENTIFIERS } from '../../../consta
 import BulkEditMarkLayer from './BulkEditMarkLayer';
 import { RootContext } from '../../../context/RootContext';
 import { getDefaultMarkTemplate } from '../BulkEditListResult/BulkEditMark/helpers';
+import { ACTIONS } from '../../../constants/markActions';
 
 
 const closeMarkLayerFn = jest.fn();
@@ -91,7 +92,7 @@ describe('BulkEditMarkLayer', () => {
     expect(getByText('ui-bulk-edit.layer.column.in1')).toBeVisible();
     expect(getByText('ui-bulk-edit.layer.column.in2')).toBeVisible();
     expect(getByText('ui-bulk-edit.layer.column.subfield')).toBeVisible();
-    expect(getAllByText('ui-bulk-edit.layer.column.actions').length).toBe(2);
+    expect(getAllByText('ui-bulk-edit.layer.column.actions').length).toBe(3);
 
     // tooltips
     expect(getByText('Limited to 5xx and 9xx.')).toBeVisible();
@@ -136,6 +137,52 @@ describe('BulkEditMarkLayer', () => {
 
     await waitFor(() => {
       expect(getAllByRole('button', { name: /plus-sign/i }).length).toBe(1);
+    });
+  });
+
+
+  it('should be able to add and remove sub-fields', async () => {
+    const { debug, queryByTestId, getByTestId, getByRole, getAllByRole } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
+
+    // select first action
+    userEvent.selectOptions(actionSelect, ACTIONS.ADD_TO_EXISTING);
+
+    await waitFor(() => {
+      debug(undefined, Infinity);
+
+      expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.data/i })).toBeVisible();
+      expect(getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })).toHaveLength(2);
+    });
+
+    // select second action
+    const secondAction = getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })[1];
+
+    userEvent.selectOptions(secondAction, ACTIONS.ADDITIONAL_SUBFIELD);
+
+    // when second action selected - should render subfield row
+    await waitFor(() => {
+      expect(getByTestId('subfield-row-0')).toBeVisible();
+    });
+
+    const secondSubfieldAction = within(getByTestId('subfield-row-0'))
+      .getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })[1];
+
+    userEvent.selectOptions(secondSubfieldAction, ACTIONS.ADDITIONAL_SUBFIELD);
+
+    // when second action of subfield selected - should render new subfield row
+    await waitFor(() => {
+      expect(getByTestId('subfield-row-1')).toBeVisible();
+    });
+
+    // remove subfield
+    const trashBtn = within(getByTestId('subfield-row-0')).getByRole('button', { name: /trash/i });
+
+    userEvent.click(trashBtn);
+
+    await waitFor(() => {
+      expect(queryByTestId('subfield-row-1')).toBeNull();
     });
   });
 });

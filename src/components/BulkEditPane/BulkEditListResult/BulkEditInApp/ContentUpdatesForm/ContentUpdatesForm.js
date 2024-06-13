@@ -16,7 +16,7 @@ import {
   ACTIONS,
   OPTIONS
 } from '../../../../../constants';
-import css from '../BulkEditInApp.css';
+import css from '../../../BulkEditPane.css';
 import { ActionsRow } from './ActionsRow';
 import {
   ACTION_VALUE_KEY,
@@ -287,7 +287,7 @@ export const ContentUpdatesForm = ({
               actions={field.actionsDetails.actions}
               onChange={(values) => handleChange({ ...values, rowIndex: index })}
             />
-            <div className={css.iconButtonWrapper}>
+            <div className={css.actionButtonsWrapper}>
               {isAddButtonShown(index, fields, options) && (
                 <IconButton
                   icon="plus-sign"

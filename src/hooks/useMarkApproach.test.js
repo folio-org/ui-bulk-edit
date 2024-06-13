@@ -8,6 +8,7 @@ import {
 import { useSearchParams } from './useSearchParams';
 import { APPROACHES } from '../constants';
 import { useMarkApproach } from './useMarkApproach';
+import { markActions } from '../constants/markActions';
 
 
 jest.mock('lodash/uniqueId', () => jest.fn());
@@ -31,7 +32,17 @@ describe('getDefaultMarkTemplate', () => {
       in1: '\\',
       in2: '\\',
       subfield: '',
-      action: '',
+      actions: [
+        {
+          meta: {
+            options: markActions(),
+            required: true,
+          },
+          name: '',
+          data: []
+        },
+      ],
+      parameters: [],
       subfields: [],
     };
 
@@ -84,3 +95,4 @@ describe('useMarkApproach', () => {
     expect(setParamMock).toHaveBeenCalledWith('approach', null);
   });
 });
+
