@@ -46,7 +46,7 @@ BulkEditMarkActions.propTypes = {
   removingDisabled: PropTypes.bool,
   rowIndex: PropTypes.number.isRequired,
   subfieldIndex: PropTypes.number,
-  onAdd: PropTypes.func.isRequired,
+  onAdd: PropTypes.func,
   onRemove: PropTypes.func.isRequired,
 };
 

@@ -18,6 +18,10 @@
     flex: 0;
 }
 
+.fieldRow {
+    background: var(--color-fill);
+}
+
 .column {
     flex-grow: 1;
     padding: 5px 8px;

@@ -4,7 +4,8 @@ import {
   ACTIONS,
   getAdditionalSubfieldAction,
   getPlaceholder,
-  markActions, markSubfieldActions
+  markActions,
+  markSubfieldActions
 } from '../../../../constants/markActions';
 
 export const TAG_FIELD_MAX_LENGTH = 3;

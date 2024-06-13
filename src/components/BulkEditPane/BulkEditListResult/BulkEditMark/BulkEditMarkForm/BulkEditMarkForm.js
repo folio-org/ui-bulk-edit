@@ -154,7 +154,7 @@ const BulkEditMarkForm = () => {
   };
 
   const renderFields = (field, index) => (
-    <Row data-testid={`row-${index}`}>
+    <Row data-testid={`row-${index}`} className={css.fieldRow}>
       <Col className={`${css.column} ${css.field}`}>
         <TextField
           onChange={handleChange}
