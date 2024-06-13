@@ -80,40 +80,60 @@ const BulkEditMarkForm = () => {
     handleUpdateField(rowIndex, newField);
   };
 
+  const updateSubfields = (value, rowIndex, subfieldIndex, updatedField) => {
+    const subfieldsPath = 'subfields';
+
+    if (value !== ACTIONS.ADDITIONAL_SUBFIELD) {
+      return set(updatedField, subfieldsPath, []);
+    }
+
+    const newSubfield = getSubfieldTemplate(uniqueId());
+    let subfields = fields[rowIndex].subfields || [];
+
+    if (subfieldIndex) {
+      const index = Number(subfieldIndex) + 1;
+      subfields = [
+        ...subfields.slice(0, index),
+        newSubfield,
+        ...subfields.slice(index)
+      ];
+    } else {
+      subfields = [newSubfield];
+    }
+
+    return set(updatedField, subfieldsPath, subfields);
+  };
+
   const handleActionChange = (e) => {
     const { value } = e.target;
     const { rowIndex, actionIndex, subfieldIndex } = e.target.dataset;
     const nextAction = getNextAction(value);
 
-    const path = subfieldIndex
-      ? `subfields[${subfieldIndex}].actions[${actionIndex}]`
-      : `actions[${actionIndex}]`;
+    const basePath = subfieldIndex
+      ? `subfields[${subfieldIndex}].actions`
+      : 'actions';
+    const actionPath = `${basePath}[${actionIndex}]`;
 
-    let updatedFields = set(fields[rowIndex], path, {
+    const fieldWithUpdatedData = set(fields[rowIndex], actionPath, {
       ...fields[rowIndex].actions[actionIndex],
       name: value,
       data: getNextDataControls(value),
     });
 
-    if (value === ACTIONS.ADDITIONAL_SUBFIELD) {
-      if (subfieldIndex) {
-        updatedFields = set(fields[rowIndex], 'subfields', [
-          ...fields[rowIndex].subfields.slice(0, Number(subfieldIndex) + 1),
-          getSubfieldTemplate(uniqueId()),
-          ...fields[rowIndex].subfields.slice(Number(subfieldIndex) + 1)
-        ]);
-      } else {
-        updatedFields = set(fields[rowIndex], 'subfields', [
-          getSubfieldTemplate(uniqueId()),
-        ]);
-      }
-    } else {
-      updatedFields = set(fields[rowIndex], 'subfields', []);
-    }
+    const updatedFieldsWithSubfields = updateSubfields(
+      value,
+      rowIndex,
+      subfieldIndex,
+      fieldWithUpdatedData
+    );
 
-    updatedFields = set(updatedFields, `actions[${Number(actionIndex) + 1}]`, nextAction);
+    const fieldWithNextActions = set(
+      updatedFieldsWithSubfields,
+      `${basePath}[${Number(actionIndex) + 1}]`,
+      nextAction
+    );
 
-    handleUpdateField(rowIndex, updatedFields);
+    handleUpdateField(rowIndex, fieldWithNextActions);
   };
 
   const handleDataChange = (e) => {
