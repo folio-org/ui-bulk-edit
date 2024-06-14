@@ -29,6 +29,7 @@ import { useHoldingsNotes } from '../../../../../hooks/api/useHoldingsNotes';
 import { useElectronicAccessRelationships } from '../../../../../hooks/api/useElectronicAccess';
 import { useSearchParams } from '../../../../../hooks/useSearchParams';
 import { useInstanceNotes } from '../../../../../hooks/api/useInstanceNotes';
+import { sortAlphabeticallyWithoutGroups } from '../../../../../utils/sortAlphabetically';
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { formatMessage } = useIntl();
@@ -105,7 +106,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   );
 
   const renderPatronGroupSelect = () => {
-    const patronGroups = Object.values(userGroups).reduce(
+    const patronGroups = sortAlphabeticallyWithoutGroups(Object.values(userGroups).reduce(
       (acc, { id, group, desc }) => {
         const description = desc ? `(${desc})` : '';
         const groupObject = {
@@ -123,7 +124,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
           label: formatMessage({ id: 'ui-bulk-edit.layer.selectPatronGroup' }),
         },
       ],
-    );
+    ), formatMessage({ id: 'ui-bulk-edit.layer.selectPatronGroup' }));
 
     return controlType === CONTROL_TYPES.PATRON_GROUP_SELECT && (
       <Select
