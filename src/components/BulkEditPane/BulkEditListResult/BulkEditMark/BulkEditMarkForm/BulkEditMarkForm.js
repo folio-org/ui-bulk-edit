@@ -255,7 +255,6 @@ const BulkEditMarkForm = () => {
         onActionChange={handleActionChange}
         onDataChange={handleDataChange}
       />
-
       <BulkEditMarkActions
         fields={field.subfields}
         rowIndex={index}
