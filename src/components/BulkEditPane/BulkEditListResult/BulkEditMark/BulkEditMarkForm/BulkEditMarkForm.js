@@ -12,7 +12,7 @@ import {
   getDefaultMarkTemplate,
   TAG_FIELD_MAX_LENGTH,
   INDICATOR_FIELD_MAX_LENGTH,
-  SUBFIELD_MAX_LENGTH,
+  SUBFIELD_MAX_LENGTH, isMarcValueValid,
 } from '../helpers';
 import { RootContext } from '../../../../../context/RootContext';
 import { ACTIONS } from '../../../../../constants/markActions';
@@ -29,14 +29,15 @@ const BulkEditMarkForm = () => {
 
   const isIndicatorDirty = (value) => value?.length && value !== '\\';
 
-  const isValid = (value) => {
-    const userInput = value.trim();
+  const isValueFieldValid = (value) => {
+    if (Number(value.trim()).toString().length === 3) {
+      return isMarcValueValid(value);
+    } else return true;
+  };
 
-    const num = Number(userInput);
-    if (num.toString().length === 3) {
-      return (num >= 500 && num <= 599) || (num >= 900 && num <= 999);
-    }
-    return true;
+  const valueFieldError = (value) => {
+    if (!isValueFieldValid(value)) return formatMessage({ id:'ui-bulk-edit.layer.marc.error' });
+    return '';
   };
 
 
@@ -182,7 +183,7 @@ const BulkEditMarkForm = () => {
           onChange={handleChange}
           data-row-index={index}
           name="value"
-          error={isValid(field.value) ? '' : formatMessage({ id:'ui-bulk-edit.layer.marc.error' })}
+          error={valueFieldError(field.value)}
           value={field.value}
           dirty={!!field.value}
           maxLength={TAG_FIELD_MAX_LENGTH}

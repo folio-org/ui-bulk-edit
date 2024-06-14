@@ -117,7 +117,7 @@ export const getNextDataControls = (action) => {
   }
 };
 
-export const isValid = (value) => {
+export const isMarcValueValid = (value) => {
   const userInput = value.trim();
 
   const num = Number(userInput);
@@ -128,7 +128,7 @@ export const isValid = (value) => {
 export const isMarkFormValid = (fields) => {
   return fields.every(field => {
     const allFieldsValid = Object.values(field).every(Boolean);
-    const valueValid = isValid(field.value);
+    const valueValid = isMarcValueValid(field.value);
 
     return allFieldsValid && valueValid;
   });
