@@ -27,7 +27,6 @@ const BulkEditMarkActions = ({
           data-testid={`add-button-${rowIndex}`}
         />
       )}
-
       <IconButton
         className={css.iconButton}
         data-row-index={rowIndex}
