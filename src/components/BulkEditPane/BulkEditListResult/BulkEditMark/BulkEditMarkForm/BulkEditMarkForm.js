@@ -165,7 +165,6 @@ const BulkEditMarkForm = () => {
   };
 
   const handleOnBlur = (e) => {
-    // const newField = set(fields[rowIndex], name, '\\');
     const { value, name } = e.target;
     const { rowIndex, subfieldIndex } = e.target.dataset;
 
