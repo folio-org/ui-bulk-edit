@@ -71,13 +71,11 @@ const renderBulkEditMarkLayer = ({ criteria }) => {
 
 describe('BulkEditMarkLayer', () => {
   it('should render correct layer titles', () => {
-    const { debug, getByText } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    const { getByText } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
 
     expect(getByText(title)).toBeVisible();
     expect(getByText(paneTitle)).toBeVisible();
     expect(getByText(paneSub)).toBeVisible();
-
-    debug(undefined, Infinity);
   });
 
   it('should render correct Mark Repeatable fields', () => {
@@ -142,7 +140,7 @@ describe('BulkEditMarkLayer', () => {
 
 
   it('should be able to add and remove sub-fields', async () => {
-    const { debug, queryByTestId, getByTestId, getByRole, getAllByRole } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    const { queryByTestId, getByTestId, getByRole, getAllByRole } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
 
@@ -150,8 +148,6 @@ describe('BulkEditMarkLayer', () => {
     userEvent.selectOptions(actionSelect, ACTIONS.ADD_TO_EXISTING);
 
     await waitFor(() => {
-      debug(undefined, Infinity);
-
       expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.data/i })).toBeVisible();
       expect(getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })).toHaveLength(2);
     });

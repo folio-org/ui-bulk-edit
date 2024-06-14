@@ -1,18 +1,18 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { IconButton } from '@folio/stripes/components';
 
+import noop from 'lodash/noop';
 import css from '../../../BulkEditPane.css';
 
 
 const BulkEditMarkActions = ({
-  addingDisabled,
-  removingDisabled,
+  addingDisabled = false,
+  removingDisabled = false,
+  onAdd = noop,
+  onRemove,
   rowIndex,
-  subfieldIndex,
-  onAdd,
-  onRemove
+  subfieldIndex
 }) => {
   return (
     <div className={css.actionButtonsWrapper}>
@@ -44,7 +44,7 @@ BulkEditMarkActions.propTypes = {
   addingDisabled: PropTypes.bool,
   removingDisabled: PropTypes.bool,
   rowIndex: PropTypes.number.isRequired,
-  subfieldIndex: PropTypes.number,
+  subfieldIndex: PropTypes.number.isRequired,
   onAdd: PropTypes.func,
   onRemove: PropTypes.func.isRequired,
 };
