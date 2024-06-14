@@ -49,6 +49,19 @@ const BulkEditMarkForm = () => {
     setFields(newFields);
   };
 
+  const isValid = (value) => {
+    // Remove any whitespace from the input
+    const userInput = value.trim();
+
+    // Check if the input is a number
+    const num = Number(userInput);
+    if (num.toString().length === 3) {
+      return (num >= 500 && num <= 599) || (num >= 900 && num <= 999);
+    }
+    // Check if the number is in the desired range
+    return true;
+  };
+
   const handleUpdateField = (index, updated) => {
     setFields(fields.map((field, idx) => {
       if (idx === Number(index)) {
@@ -129,6 +142,19 @@ const BulkEditMarkForm = () => {
     handleUpdateField(rowIndex, newField);
   };
 
+
+  const handleOnBlur = (e) => {
+    // const newField = set(fields[rowIndex], name, '\\');
+    const { value, name } = e.target;
+    const { rowIndex, subfieldIndex } = e.target.dataset;
+
+    const path = subfieldIndex ? `subfields[${subfieldIndex}].${name}` : name;
+
+    const newField = set(fields[rowIndex], path, !value ? '\\' : value);
+
+    handleUpdateField(rowIndex, newField);
+  };
+
   const handleIndicatorFocus = (e) => {
     e.target.select();
   };
@@ -141,6 +167,8 @@ const BulkEditMarkForm = () => {
           data-row-index={index}
           name="value"
           value={field.value}
+          error={isValid(field.value) ? '' : formatMessage({ id:'ui-bulk-edit.layer.marc.error' })}
+          valid
           dirty={!!field.value}
           maxLength={TAG_FIELD_MAX_LENGTH}
           placeholder=""
@@ -159,6 +187,7 @@ const BulkEditMarkForm = () => {
           placeholder=""
           onFocus={handleIndicatorFocus}
           onChange={handleChange}
+          onBlur={handleOnBlur}
           hasClearIcon={false}
           marginBottom0
           aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.in1' })}
@@ -173,6 +202,7 @@ const BulkEditMarkForm = () => {
           name="in2"
           placeholder=""
           onFocus={handleIndicatorFocus}
+          onBlur={handleOnBlur}
           onChange={handleChange}
           hasClearIcon={false}
           marginBottom0
