@@ -7,7 +7,7 @@ import { Col, Select, TextArea } from '@folio/stripes/components';
 import css from '../../../BulkEditPane.css';
 
 const BulkEditMarkActionRow = ({
-  subfieldIndex,
+  subfieldIndex = null,
   actions,
   rowIndex,
   onActionChange,

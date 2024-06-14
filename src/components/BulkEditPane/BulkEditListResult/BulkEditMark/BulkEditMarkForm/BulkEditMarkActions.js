@@ -10,9 +10,9 @@ const BulkEditMarkActions = ({
   addingDisabled = false,
   removingDisabled = false,
   onAdd = noop,
+  subfieldIndex = null,
   onRemove,
   rowIndex,
-  subfieldIndex
 }) => {
   return (
     <div className={css.actionButtonsWrapper}>
@@ -44,7 +44,7 @@ BulkEditMarkActions.propTypes = {
   addingDisabled: PropTypes.bool,
   removingDisabled: PropTypes.bool,
   rowIndex: PropTypes.number.isRequired,
-  subfieldIndex: PropTypes.number.isRequired,
+  subfieldIndex: PropTypes.number,
   onAdd: PropTypes.func,
   onRemove: PropTypes.func.isRequired,
 };
