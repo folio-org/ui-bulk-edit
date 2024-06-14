@@ -2,7 +2,6 @@ import React, { Fragment, useContext } from 'react';
 import { useIntl } from 'react-intl';
 import noop from 'lodash/noop';
 import uniqueId from 'lodash/uniqueId';
-import { set } from 'lodash';
 
 import { Col, RepeatableField, Row, TextField } from '@folio/stripes/components';
 
@@ -21,6 +20,7 @@ import BulkEditMarkActionRow from './BulkEditMarkActionRow';
 import BulkEditMarkActions from './BulkEditMarkActions';
 
 import css from '../../../BulkEditPane.css';
+import { setIn } from '../../../../../utils/helpers';
 
 
 const BulkEditMarkForm = () => {
@@ -62,7 +62,7 @@ const BulkEditMarkForm = () => {
   const handleRemoveSubfield = (e) => {
     const { rowIndex, subfieldIndex } = e.target.dataset;
 
-    const newField = set(fields[rowIndex], 'subfields', [
+    const newField = setIn(fields[rowIndex], 'subfields', [
       ...fields[rowIndex].subfields.filter((_, idx) => idx !== Number(subfieldIndex))
     ]);
 
@@ -75,7 +75,7 @@ const BulkEditMarkForm = () => {
 
     const path = subfieldIndex ? `subfields[${subfieldIndex}].${name}` : name;
 
-    const newField = set(fields[rowIndex], path, value);
+    const newField = setIn(fields[rowIndex], path, value);
 
     handleUpdateField(rowIndex, newField);
   };
@@ -84,7 +84,7 @@ const BulkEditMarkForm = () => {
     const subfieldsPath = 'subfields';
 
     if (value !== ACTIONS.ADDITIONAL_SUBFIELD) {
-      return set(updatedField, subfieldsPath, []);
+      return setIn(updatedField, subfieldsPath, []);
     }
 
     const newSubfield = getSubfieldTemplate(uniqueId());
@@ -101,7 +101,7 @@ const BulkEditMarkForm = () => {
       subfields = [newSubfield];
     }
 
-    return set(updatedField, subfieldsPath, subfields);
+    return setIn(updatedField, subfieldsPath, subfields);
   };
 
   const handleActionChange = (e) => {
@@ -114,7 +114,7 @@ const BulkEditMarkForm = () => {
       : 'actions';
     const actionPath = `${basePath}[${actionIndex}]`;
 
-    const fieldWithUpdatedData = set(fields[rowIndex], actionPath, {
+    const fieldWithUpdatedData = setIn(fields[rowIndex], actionPath, {
       ...fields[rowIndex].actions[actionIndex],
       name: value,
       data: getNextDataControls(value),
@@ -127,7 +127,7 @@ const BulkEditMarkForm = () => {
       fieldWithUpdatedData
     );
 
-    const fieldWithNextActions = set(
+    const fieldWithNextActions = setIn(
       updatedFieldsWithSubfields,
       `${basePath}[${Number(actionIndex) + 1}]`,
       nextAction
@@ -144,7 +144,7 @@ const BulkEditMarkForm = () => {
       ? `subfields[${subfieldIndex}].actions[${actionIndex}].data[${dataIndex}].value`
       : `actions[${actionIndex}].data[${dataIndex}].value`;
 
-    const newField = set(fields[rowIndex], path, value);
+    const newField = setIn(fields[rowIndex], path, value);
 
     handleUpdateField(rowIndex, newField);
   };
