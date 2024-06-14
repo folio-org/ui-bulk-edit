@@ -376,6 +376,7 @@
   "layer.options.unknown": "Unknown",
   "layer.options.placeholder": "Select item status",
   "layer.options.add": "Add",
+  "layer.options.additionalSubfield": "Additional subfield",
   "layer.selectLocation": "Select location",
   "layer.selectPatronGroup": "Select patron group",
   "layer.selectLoanType": "Select loan type",

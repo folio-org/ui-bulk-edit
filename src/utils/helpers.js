@@ -1,3 +1,4 @@
+import { clone, setWith } from 'lodash';
 import {
   CAPABILITIES,
   EDIT_CAPABILITIES_OPTIONS,
@@ -81,5 +82,9 @@ export const getVisibleColumnsKeys = (columns) => {
 
 export const customFilter = (value, dataOptions) => {
   return dataOptions.filter(option => new RegExp(value, 'i').test(option.label));
+};
+
+export const setIn = (obj, path, value) => {
+  return setWith(clone(obj), path, value, clone);
 };
 

@@ -27,6 +27,7 @@
 * [UIBULKED-460](https://folio-org.atlassian.net/browse/UIBULKED-460) Add MARC Instances Bulk Edit Form.
 * [UIBULKED-443](https://folio-org.atlassian.net/browse/UIBULKED-443) Separate Instance Notes by Note Type.
 * [UIBULKED-496](https://folio-org.atlassian.net/browse/UIBULKED-496) Sorting patron groups list on bulk edit form.
+* [UIBULKED-462](https://folio-org.atlassian.net/browse/UIBULKED-462) Adding New MARC field.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
