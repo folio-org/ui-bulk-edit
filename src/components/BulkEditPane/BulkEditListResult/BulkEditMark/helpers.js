@@ -117,9 +117,21 @@ export const getNextDataControls = (action) => {
   }
 };
 
+export const isValid = (value) => {
+  const userInput = value.trim();
+
+  const num = Number(userInput);
+  return (num >= 500 && num <= 599) || (num >= 900 && num <= 999);
+};
+
 
 export const isMarkFormValid = (fields) => {
-  return fields.every(field => Object.values(field).every(Boolean));
+  return fields.every(field => {
+    const allFieldsValid = Object.values(field).every(Boolean);
+    const valueValid = isValid(field.value);
+
+    return allFieldsValid && valueValid;
+  });
 };
 
 export const getMaxFieldColumnsCount = (field) => {

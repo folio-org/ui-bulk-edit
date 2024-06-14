@@ -29,6 +29,17 @@ const BulkEditMarkForm = () => {
 
   const isIndicatorDirty = (value) => value?.length && value !== '\\';
 
+  const isValid = (value) => {
+    const userInput = value.trim();
+
+    const num = Number(userInput);
+    if (num.toString().length === 3) {
+      return (num >= 500 && num <= 599) || (num >= 900 && num <= 999);
+    }
+    return true;
+  };
+
+
   const handleAddField = (e) => {
     const { rowIndex } = e.target.dataset;
 
@@ -153,6 +164,18 @@ const BulkEditMarkForm = () => {
     e.target.select();
   };
 
+  const handleOnBlur = (e) => {
+    // const newField = set(fields[rowIndex], name, '\\');
+    const { value, name } = e.target;
+    const { rowIndex, subfieldIndex } = e.target.dataset;
+
+    const path = subfieldIndex ? `subfields[${subfieldIndex}].${name}` : name;
+
+    const newField = setIn(fields[rowIndex], path, !value ? '\\' : value);
+
+    handleUpdateField(rowIndex, newField);
+  };
+
   const renderFields = (field, index) => (
     <Row data-testid={`row-${index}`} className={css.fieldRow}>
       <Col className={`${css.column} ${css.field}`}>
@@ -160,6 +183,7 @@ const BulkEditMarkForm = () => {
           onChange={handleChange}
           data-row-index={index}
           name="value"
+          error={isValid(field.value) ? '' : formatMessage({ id:'ui-bulk-edit.layer.marc.error' })}
           value={field.value}
           dirty={!!field.value}
           maxLength={TAG_FIELD_MAX_LENGTH}
@@ -179,6 +203,7 @@ const BulkEditMarkForm = () => {
           placeholder=""
           onFocus={handleIndicatorFocus}
           onChange={handleChange}
+          onBlur={handleOnBlur}
           hasClearIcon={false}
           marginBottom0
           aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.in1' })}
@@ -193,6 +218,7 @@ const BulkEditMarkForm = () => {
           name="in2"
           placeholder=""
           onFocus={handleIndicatorFocus}
+          onBlur={handleOnBlur}
           onChange={handleChange}
           hasClearIcon={false}
           marginBottom0

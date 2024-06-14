@@ -396,6 +396,7 @@
   "layer.options.checkInNote": "Check in note",
   "layer.options.checkOutNote": "Check out note",
   "layer.options.holdings.uri": "URI",
+  "layer.marc.error": "Only 5xx and 9xx edits are currently supported",
 
   "actionMenu.placeholder": "Search column name",
 
