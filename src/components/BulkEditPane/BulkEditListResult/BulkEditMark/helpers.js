@@ -2,10 +2,14 @@ import { FormattedMessage } from 'react-intl';
 import React from 'react';
 import {
   ACTIONS,
+  getAddAction,
   getAdditionalSubfieldAction,
+  getAppendAction,
   getPlaceholder,
+  getRemoveFieldAction,
+  getRemoveSubfieldAction,
+  getReplaceWithAction,
   markActions,
-  markSubfieldActions
 } from '../../../../constants/markActions';
 
 export const TAG_FIELD_MAX_LENGTH = 3;
@@ -51,7 +55,10 @@ export const getSubfieldTemplate = (id) => ({
   actions: [
     {
       meta: {
-        options: markSubfieldActions(),
+        options: [
+          getPlaceholder(),
+          getAddAction(),
+        ],
         disabled: true,
         required: true,
       },
@@ -96,6 +103,20 @@ export const getNextAction = (action) => {
         data: [],
       };
     case ACTIONS.FIND:
+      return {
+        meta: {
+          required: true,
+          options: [
+            getPlaceholder(),
+            getAppendAction(),
+            getRemoveFieldAction(),
+            getRemoveSubfieldAction(),
+            getReplaceWithAction(),
+          ],
+        },
+        name: '',
+        data: [],
+      };
     case ACTIONS.REMOVE_ALL:
       return null;
     default:
@@ -106,10 +127,11 @@ export const getNextAction = (action) => {
 export const getNextDataControls = (action) => {
   switch (action) {
     case ACTIONS.ADD_TO_EXISTING:
+    case ACTIONS.FIND:
+    case ACTIONS.REPLACE_WITH:
       return [
         getDataTemplate(),
       ];
-    case ACTIONS.FIND:
     case ACTIONS.REMOVE_ALL:
       return [];
     default:

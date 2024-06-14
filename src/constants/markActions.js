@@ -48,14 +48,33 @@ export const getAdditionalSubfieldAction = () => ({
   disabled: false,
 });
 
+export const getAppendAction = () => ({
+  value: ACTIONS.APPEND,
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.append" />,
+  disabled: false,
+});
+
+export const getRemoveFieldAction = () => ({
+  value: ACTIONS.REMOVE_FIELD,
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.removeField" />,
+  disabled: false,
+});
+
+export const getRemoveSubfieldAction = () => ({
+  value: ACTIONS.REMOVE_SUBFIELD,
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.removeSubfield" />,
+  disabled: false,
+});
+
+export const getReplaceWithAction = () => ({
+  value: ACTIONS.REPLACE_WITH,
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.replaceWith" />,
+  disabled: false,
+});
+
 export const markActions = () => [
   getPlaceholder(),
   getFindAction(),
   getAddAction(),
   getRemoveAllAction(),
-];
-
-export const markSubfieldActions = () => [
-  getPlaceholder(),
-  getAddAction(),
 ];

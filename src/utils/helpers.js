@@ -1,3 +1,4 @@
+import { clone, setWith } from 'lodash';
 import {
   CAPABILITIES,
   EDIT_CAPABILITIES_OPTIONS,
