@@ -28,6 +28,10 @@
 * [UIBULKED-443](https://folio-org.atlassian.net/browse/UIBULKED-443) Separate Instance Notes by Note Type.
 * [UIBULKED-496](https://folio-org.atlassian.net/browse/UIBULKED-496) Sorting patron groups list on bulk edit form.
 * [UIBULKED-462](https://folio-org.atlassian.net/browse/UIBULKED-462) Adding New MARC field.
+* [UIBULKED-481](https://folio-org.atlassian.net/browse/UIBULKED-481) Find (full subfield search) for MARC field
+* [UIBULKED-483](https://folio-org.atlassian.net/browse/UIBULKED-483) Find (full subfield search) and Remove field in MARC Instance
+* [UIBULKED-485](https://folio-org.atlassian.net/browse/UIBULKED-485) Find (full subfield search) and Replace with in MARC Instance
+* [UIBULKED-498](https://folio-org.atlassian.net/browse/UIBULKED-498) Find (full subfield search) and Remove subfield in MARC Instance
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 

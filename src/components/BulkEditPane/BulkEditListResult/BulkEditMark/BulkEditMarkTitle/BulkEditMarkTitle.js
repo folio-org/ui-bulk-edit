@@ -72,7 +72,7 @@ const BulkEditMarkTitle = () => {
             key={index}
             className={`${css.headerCell} ${css.actions}`}
           >
-            <Label required={action.meta.required}>
+            <Label required={action.meta.required && index < 1}>
               <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
             </Label>
             <div className={css.splitter} />
@@ -90,6 +90,9 @@ const BulkEditMarkTitle = () => {
           ))}
         </Fragment>
       ))}
+      <Col className={`${css.headerCell} ${css.fill}`}>
+        <div className={css.splitter} />
+      </Col>
       <Col
         className={css.headerStickyCell}
       >

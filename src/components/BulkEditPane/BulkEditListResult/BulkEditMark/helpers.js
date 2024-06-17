@@ -1,21 +1,28 @@
 import { FormattedMessage } from 'react-intl';
-import React from 'react';
 import {
   ACTIONS,
+  getAddAction,
   getAdditionalSubfieldAction,
+  getAppendAction,
   getPlaceholder,
+  getRemoveFieldAction,
+  getRemoveSubfieldAction,
+  getReplaceWithAction,
   markActions,
-  markSubfieldActions
 } from '../../../../constants/markActions';
 
 export const TAG_FIELD_MAX_LENGTH = 3;
 export const INDICATOR_FIELD_MAX_LENGTH = 1;
 export const SUBFIELD_MAX_LENGTH = 1;
 
+export const DATA_KEYS = {
+  VALUE: 'VALUE',
+  SUBFIELD: 'SUBFIELD',
+};
 
 export const getDataTemplate = ({
   required = true,
-  key = 'VALUE',
+  key = DATA_KEYS.VALUE,
 } = {}) => ({
   meta: {
     title: <FormattedMessage id="ui-bulk-edit.layer.column.data" />,
@@ -51,7 +58,10 @@ export const getSubfieldTemplate = (id) => ({
   actions: [
     {
       meta: {
-        options: markSubfieldActions(),
+        options: [
+          getPlaceholder(),
+          getAddAction(),
+        ],
         disabled: true,
         required: true,
       },
@@ -62,7 +72,7 @@ export const getSubfieldTemplate = (id) => ({
             title: <FormattedMessage id="ui-bulk-edit.layer.column.data" />,
             required: true,
           },
-          key: 'VALUE',
+          key: DATA_KEYS.VALUE,
           value: '',
         }
       ]
@@ -96,6 +106,20 @@ export const getNextAction = (action) => {
         data: [],
       };
     case ACTIONS.FIND:
+      return {
+        meta: {
+          required: true,
+          options: [
+            getPlaceholder(),
+            getAppendAction(),
+            getRemoveFieldAction(),
+            getRemoveSubfieldAction(),
+            getReplaceWithAction(),
+          ],
+        },
+        name: '',
+        data: [],
+      };
     case ACTIONS.REMOVE_ALL:
       return null;
     default:
@@ -106,10 +130,11 @@ export const getNextAction = (action) => {
 export const getNextDataControls = (action) => {
   switch (action) {
     case ACTIONS.ADD_TO_EXISTING:
+    case ACTIONS.FIND:
+    case ACTIONS.REPLACE_WITH:
       return [
         getDataTemplate(),
       ];
-    case ACTIONS.FIND:
     case ACTIONS.REMOVE_ALL:
       return [];
     default:
