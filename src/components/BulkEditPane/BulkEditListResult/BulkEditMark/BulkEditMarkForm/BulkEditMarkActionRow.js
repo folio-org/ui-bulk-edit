@@ -14,6 +14,10 @@ const BulkEditMarkActionRow = ({
   onDataChange
 }) => {
   const { formatMessage } = useIntl();
+  const hasError = (action, actionIndex) => !action.name
+    && action.meta.required
+    && actionIndex > 0
+    && formatMessage({ id: 'ui-bulk-edit.error.required' });
 
   return actions.map((action, actionIndex) => !!action && (
     <Fragment key={actionIndex}>
@@ -24,6 +28,7 @@ const BulkEditMarkActionRow = ({
           data-subfield-index={subfieldIndex}
           value={action.name}
           dirty={!!action.name}
+          error={hasError(action, actionIndex)}
           name="action"
           dataOptions={action.meta.options}
           disabled={action.meta.disabled}
