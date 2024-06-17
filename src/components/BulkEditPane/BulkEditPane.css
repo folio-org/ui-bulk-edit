@@ -57,7 +57,7 @@
     max-width: 15%;
 }
 
-.headerCell:has(+ :not(.headerCell)) {
+.headerCell.fill {
     flex-grow: 1;
     max-width: 100%;
 }

@@ -13,6 +13,7 @@ import {
   TAG_FIELD_MAX_LENGTH,
   INDICATOR_FIELD_MAX_LENGTH,
   SUBFIELD_MAX_LENGTH, isMarcValueValid,
+  SUBFIELD_MAX_LENGTH,
 } from '../helpers';
 import { RootContext } from '../../../../../context/RootContext';
 import { ACTIONS } from '../../../../../constants/markActions';
@@ -21,6 +22,8 @@ import BulkEditMarkActions from './BulkEditMarkActions';
 
 import css from '../../../BulkEditPane.css';
 import { setIn } from '../../../../../utils/helpers';
+import BulkEditMarkFormField from './BulkEditMarkFormField';
+import BulkEditMarkFormSubfields from './BulkEditMarkFormSubfields';
 
 
 const BulkEditMarkForm = () => {
@@ -100,7 +103,7 @@ const BulkEditMarkForm = () => {
     }
 
     const newSubfield = getSubfieldTemplate(uniqueId());
-    let subfields = fields[rowIndex].subfields || [];
+    let subfields = updatedField.subfields || [];
 
     if (subfieldIndex) {
       const index = Number(subfieldIndex) + 1;
@@ -161,10 +164,18 @@ const BulkEditMarkForm = () => {
     handleUpdateField(rowIndex, newField);
   };
 
-  const handleIndicatorFocus = (e) => {
-    e.target.select();
+  const handleResetSecondAction = (id) => {
+    const rowIndex = fields.findIndex((field) => field.id === id);
+
+    if (fields[rowIndex].actions.length > 1) {
+      const newField = setIn(fields[rowIndex], 'actions[1].name', '');
+
+      handleUpdateField(rowIndex, newField);
+    }
   };
 
+  const renderSubfields = (field, index) => field.subfields.map((subfield, subfieldIndex) => {
+    const isAddingDisabled = subfieldIndex !== field.subfields.length - 1;
   const handleOnBlur = (e) => {
     const { value, name } = e.target;
     const { rowIndex, subfieldIndex } = e.target.dataset;
@@ -246,51 +257,42 @@ const BulkEditMarkForm = () => {
         onDataChange={handleDataChange}
       />
 
-      <BulkEditMarkActions
-        fields={fields}
-        rowIndex={index}
-        onAdd={handleAddField}
-        onRemove={handleRemoveField}
-        removingDisabled={fields.length === 1}
-      />
-    </Row>
-  );
-
-  const renderSubfields = (field, index) => field.subfields.map((subfield, subfieldIndex) => (
-    <Row key={subfieldIndex} data-testid={`subfield-row-${subfieldIndex}`}>
-      <Col className={`${css.column} ${css.fallback}`} />
-      <Col className={`${css.column} ${css.subfield}`}>
-        <TextField
-          data-row-index={index}
-          data-subfield-index={subfieldIndex}
-          value={subfield.subfield}
-          dirty={!!subfield.subfield}
-          maxLength={SUBFIELD_MAX_LENGTH}
-          name="subfield"
-          placeholder=""
-          onChange={handleChange}
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.subfield' })}
+    return (
+      <Row key={subfieldIndex} data-testid={`subfield-row-${subfieldIndex}`}>
+        <Col className={`${css.column} ${css.fallback}`} />
+        <Col className={`${css.column} ${css.subfield}`}>
+          <TextField
+            data-row-index={index}
+            data-subfield-index={subfieldIndex}
+            value={subfield.subfield}
+            dirty={!!subfield.subfield}
+            maxLength={SUBFIELD_MAX_LENGTH}
+            name="subfield"
+            placeholder=""
+            onChange={handleChange}
+            hasClearIcon={false}
+            marginBottom0
+            aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.subfield' })}
+          />
+        </Col>
+        <BulkEditMarkActionRow
+          actions={subfield.actions}
+          rowIndex={index}
+          subfieldIndex={subfieldIndex}
+          onActionChange={handleActionChange}
+          onDataChange={handleDataChange}
         />
-      </Col>
-      <BulkEditMarkActionRow
-        actions={subfield.actions}
-        rowIndex={index}
-        subfieldIndex={subfieldIndex}
-        onActionChange={handleActionChange}
-        onDataChange={handleDataChange}
-      />
-      <BulkEditMarkActions
-        fields={field.subfields}
-        rowIndex={index}
-        subfieldIndex={subfieldIndex}
-        onRemove={handleRemoveSubfield}
-        addingDisabled
-        removingDisabled={subfieldIndex === field.subfields.length - 1}
-      />
-    </Row>
-  ));
+        <BulkEditMarkActions
+          fields={field.subfields}
+          rowIndex={index}
+          subfieldIndex={subfieldIndex}
+          onRemove={handleRemoveSubfield}
+          onAdd={handleAddField}
+          addingDisabled={isAddingDisabled}
+        />
+      </Row>
+    );
+  });
 
   return (
     <RepeatableField
@@ -300,9 +302,28 @@ const BulkEditMarkForm = () => {
       onAdd={noop}
       renderField={(field, index) => {
         return (
-          <Fragment key={index}>
-            {renderFields(field, index)}
-            {renderSubfields(field, index)}
+          <Fragment key={field.id}>
+            <BulkEditMarkFormField
+              field={field}
+              index={index}
+              onChange={handleChange}
+              onActionChange={handleActionChange}
+              onDataChange={handleDataChange}
+              onAddField={handleAddField}
+              onRemoveField={handleRemoveField}
+              onSubfieldsRemoved={handleResetSecondAction}
+              removingDisabled={fields.length === 1}
+              addingDisabled={field.subfields.length > 0}
+            />
+            <BulkEditMarkFormSubfields
+              field={field}
+              index={index}
+              onChange={handleChange}
+              onDataChange={handleDataChange}
+              onActionChange={handleActionChange}
+              onAddField={handleAddField}
+              onRemoveField={handleRemoveSubfield}
+            />
           </Fragment>
         );
       }}
