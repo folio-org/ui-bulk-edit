@@ -35,6 +35,9 @@ const BulkEditMarkFormField = ({
   // reset last subfield action if subfields length is changed
   useEffect(() => {
     onResetSubfield(field.id, subfieldsCount);
+    // disabled because we need to run it only when subfieldsCount amd fieldId is changed
+    // memoization wil cost a lot for onResetSubfield function
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id, subfieldsCount]);
 
   return (
