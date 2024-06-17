@@ -151,6 +151,7 @@
   "start.downloadChangedRecords": "Download changed records (CSV)",
 
   "error.uploadedFile": "Fail to upload file",
+  "error.required": "Required",
   "error.sww": "Something went wrong",
   "error.incorrectFormatted": "{fileName} is formatted incorrectly. Please correct the formatting and upload the file again.",
 

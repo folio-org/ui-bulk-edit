@@ -1,33 +1,25 @@
 import React, { Fragment, useContext } from 'react';
-import { useIntl } from 'react-intl';
 import noop from 'lodash/noop';
 import uniqueId from 'lodash/uniqueId';
 
-import { Col, RepeatableField, Row, TextField } from '@folio/stripes/components';
+import { RepeatableField } from '@folio/stripes/components';
 
 import {
   getNextAction,
   getSubfieldTemplate,
   getNextDataControls,
   getDefaultMarkTemplate,
-  TAG_FIELD_MAX_LENGTH,
-  INDICATOR_FIELD_MAX_LENGTH,
-  SUBFIELD_MAX_LENGTH,
 } from '../helpers';
 import { RootContext } from '../../../../../context/RootContext';
 import { ACTIONS } from '../../../../../constants/markActions';
-import BulkEditMarkActionRow from './BulkEditMarkActionRow';
-import BulkEditMarkActions from './BulkEditMarkActions';
-
-import css from '../../../BulkEditPane.css';
 import { setIn } from '../../../../../utils/helpers';
+import BulkEditMarkFormField from './BulkEditMarkFormField';
+import BulkEditMarkFormSubfield from './BulkEditMarkFormSubfield';
+import css from '../../../BulkEditPane.css';
 
 
 const BulkEditMarkForm = () => {
   const { fields, setFields } = useContext(RootContext);
-  const { formatMessage } = useIntl();
-
-  const isIndicatorDirty = (value) => value?.length && value !== '\\';
 
   const handleAddField = (e) => {
     const { rowIndex } = e.target.dataset;
@@ -88,7 +80,7 @@ const BulkEditMarkForm = () => {
     }
 
     const newSubfield = getSubfieldTemplate(uniqueId());
-    let subfields = fields[rowIndex].subfields || [];
+    let subfields = updatedField.subfields || [];
 
     if (subfieldIndex) {
       const index = Number(subfieldIndex) + 1;
@@ -149,134 +141,59 @@ const BulkEditMarkForm = () => {
     handleUpdateField(rowIndex, newField);
   };
 
-  const handleIndicatorFocus = (e) => {
-    e.target.select();
+  const handleResetSecondAction = (fieldId, subfieldsCount) => {
+    const rowIndex = fields.findIndex(field => field.id === fieldId);
+    const subfieldActionNamePath = `subfields[${subfieldsCount - 1}].actions[1].name`;
+    const fieldActionNamePath = 'actions[1].name';
+    let newField;
+
+    if (fields[rowIndex].actions.length > 1) {
+      if (subfieldsCount > 0) {
+        newField = setIn(fields[rowIndex], subfieldActionNamePath, '');
+      } else if (subfieldsCount === 0) {
+        newField = setIn(fields[rowIndex], fieldActionNamePath, '');
+      }
+
+      handleUpdateField(rowIndex, newField);
+    }
   };
-
-  const renderFields = (field, index) => (
-    <Row data-testid={`row-${index}`} className={css.fieldRow}>
-      <Col className={`${css.column} ${css.field}`}>
-        <TextField
-          onChange={handleChange}
-          data-row-index={index}
-          name="value"
-          value={field.value}
-          dirty={!!field.value}
-          maxLength={TAG_FIELD_MAX_LENGTH}
-          placeholder=""
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.field' })}
-        />
-      </Col>
-      <Col className={`${css.column} ${css.in}`}>
-        <TextField
-          data-row-index={index}
-          value={field.in1}
-          dirty={isIndicatorDirty(field.in1)}
-          maxLength={INDICATOR_FIELD_MAX_LENGTH}
-          name="in1"
-          placeholder=""
-          onFocus={handleIndicatorFocus}
-          onChange={handleChange}
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.in1' })}
-        />
-      </Col>
-      <Col className={`${css.column} ${css.in}`}>
-        <TextField
-          data-row-index={index}
-          value={field.in2}
-          dirty={isIndicatorDirty(field.in2)}
-          maxLength={INDICATOR_FIELD_MAX_LENGTH}
-          name="in2"
-          placeholder=""
-          onFocus={handleIndicatorFocus}
-          onChange={handleChange}
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.in2' })}
-        />
-      </Col>
-      <Col className={`${css.column} ${css.subfield}`}>
-        <TextField
-          data-row-index={index}
-          value={field.subfield}
-          dirty={!!field.subfield}
-          maxLength={SUBFIELD_MAX_LENGTH}
-          name="subfield"
-          placeholder=""
-          onChange={handleChange}
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.subfield' })}
-        />
-      </Col>
-      <BulkEditMarkActionRow
-        actions={field.actions}
-        rowIndex={index}
-        onActionChange={handleActionChange}
-        onDataChange={handleDataChange}
-      />
-
-      <BulkEditMarkActions
-        fields={fields}
-        rowIndex={index}
-        onAdd={handleAddField}
-        onRemove={handleRemoveField}
-        removingDisabled={fields.length === 1}
-      />
-    </Row>
-  );
-
-  const renderSubfields = (field, index) => field.subfields.map((subfield, subfieldIndex) => (
-    <Row key={subfieldIndex} data-testid={`subfield-row-${subfieldIndex}`}>
-      <Col className={`${css.column} ${css.fallback}`} />
-      <Col className={`${css.column} ${css.subfield}`}>
-        <TextField
-          data-row-index={index}
-          data-subfield-index={subfieldIndex}
-          value={subfield.subfield}
-          dirty={!!subfield.subfield}
-          maxLength={SUBFIELD_MAX_LENGTH}
-          name="subfield"
-          placeholder=""
-          onChange={handleChange}
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.subfield' })}
-        />
-      </Col>
-      <BulkEditMarkActionRow
-        actions={subfield.actions}
-        rowIndex={index}
-        subfieldIndex={subfieldIndex}
-        onActionChange={handleActionChange}
-        onDataChange={handleDataChange}
-      />
-      <BulkEditMarkActions
-        fields={field.subfields}
-        rowIndex={index}
-        subfieldIndex={subfieldIndex}
-        onRemove={handleRemoveSubfield}
-        addingDisabled
-        removingDisabled={subfieldIndex === field.subfields.length - 1}
-      />
-    </Row>
-  ));
 
   return (
     <RepeatableField
       getFieldUniqueKey={(field) => field.id}
       fields={fields}
-      className={css.row}
+      className={css.markRow}
       onAdd={noop}
       renderField={(field, index) => {
         return (
-          <Fragment key={index}>
-            {renderFields(field, index)}
-            {renderSubfields(field, index)}
+          <Fragment key={field.id}>
+            <BulkEditMarkFormField
+              field={field}
+              index={index}
+              onChange={handleChange}
+              onActionChange={handleActionChange}
+              onDataChange={handleDataChange}
+              onAddField={handleAddField}
+              onRemoveField={handleRemoveField}
+              onResetSubfield={handleResetSecondAction}
+              removingDisabled={fields.length === 1}
+              addingDisabled={field.subfields.length > 0}
+            />
+            {field.subfields.map((subfield, subfieldIndex) => (
+              <BulkEditMarkFormSubfield
+                key={subfield.id}
+                field={field}
+                subfield={subfield}
+                index={index}
+                subfieldIndex={subfieldIndex}
+                onChange={handleChange}
+                onDataChange={handleDataChange}
+                onActionChange={handleActionChange}
+                onAddField={handleAddField}
+                onRemoveField={handleRemoveSubfield}
+              />
+            ))}
+
           </Fragment>
         );
       }}
