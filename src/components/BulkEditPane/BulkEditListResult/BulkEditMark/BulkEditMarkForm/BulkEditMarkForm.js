@@ -1,6 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import noop from 'lodash/noop';
 import uniqueId from 'lodash/uniqueId';
+import { useIntl } from 'react-intl';
 
 import { RepeatableField } from '@folio/stripes/components';
 
@@ -153,17 +154,6 @@ const BulkEditMarkForm = () => {
 
     handleUpdateField(rowIndex, newField);
   };
-
-  const handleResetSecondAction = (id) => {
-    const rowIndex = fields.findIndex((field) => field.id === id);
-
-    if (fields[rowIndex].actions.length > 1) {
-      const newField = setIn(fields[rowIndex], 'actions[1].name', '');
-
-      handleUpdateField(rowIndex, newField);
-    }
-  };
-
 
   const handleOnBlur = (e) => {
     const { value, name } = e.target;
