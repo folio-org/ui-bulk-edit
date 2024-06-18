@@ -151,7 +151,6 @@
   "start.downloadChangedRecords": "Download changed records (CSV)",
 
   "error.uploadedFile": "Fail to upload file",
-  "error.required": "Required",
   "error.sww": "Something went wrong",
   "error.incorrectFormatted": "{fileName} is formatted incorrectly. Please correct the formatting and upload the file again.",
 
@@ -335,6 +334,7 @@
   "options.placeholder": "Select option",
   "type.placeholder": "Select type",
   "actions.findFullField": "Find (full field search)",
+  "actions.findEntireField": "Find (entire subfield search)",
   "actions.find": "Find",
   "layer.column.options": "Options",
   "layer.column.actions": "Actions",

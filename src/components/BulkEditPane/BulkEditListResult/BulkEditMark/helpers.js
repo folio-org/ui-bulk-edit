@@ -159,10 +159,10 @@ export const isMarkFormValid = (fields) => {
 };
 
 export const getMaxFieldColumnsCount = (field) => {
-  let sum = field.actions.length;
+  let sum = field.actions.filter(Boolean).length;
 
   field.actions.forEach(action => {
-    sum += action?.data.length || 0;
+    sum += action?.data.filter(Boolean).length || 0;
   });
 
   return sum;
