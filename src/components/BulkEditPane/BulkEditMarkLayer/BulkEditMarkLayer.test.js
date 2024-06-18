@@ -1,7 +1,12 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
-import { render, waitFor, within, screen, getByTestId, logDOM } from '@testing-library/react';
+import {
+  render,
+  waitFor,
+  within,
+  screen
+} from '@testing-library/react';
 import uniqueId from 'lodash/uniqueId';
 
 import '../../../../test/jest/__mock__';
