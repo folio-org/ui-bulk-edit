@@ -1,6 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import noop from 'lodash/noop';
 import uniqueId from 'lodash/uniqueId';
+import { useIntl } from 'react-intl';
 
 import { RepeatableField } from '@folio/stripes/components';
 
@@ -9,6 +10,7 @@ import {
   getSubfieldTemplate,
   getNextDataControls,
   getDefaultMarkTemplate,
+  isMarkValueValid,
 } from '../helpers';
 import { RootContext } from '../../../../../context/RootContext';
 import { ACTIONS } from '../../../../../constants/markActions';
@@ -20,6 +22,19 @@ import css from '../../../BulkEditPane.css';
 
 const BulkEditMarkForm = () => {
   const { fields, setFields } = useContext(RootContext);
+  const { formatMessage } = useIntl();
+
+  const isValueFieldValid = (value) => {
+    if (Number(value.trim()).toString().length === 3) {
+      return isMarkValueValid(value);
+    }
+    return true;
+  };
+
+  const valueFieldError = (value) => {
+    if (!isValueFieldValid(value)) return formatMessage({ id:'ui-bulk-edit.layer.marc.error' });
+    return '';
+  };
 
   const handleAddField = (e) => {
     const { rowIndex } = e.target.dataset;
@@ -141,6 +156,17 @@ const BulkEditMarkForm = () => {
     handleUpdateField(rowIndex, newField);
   };
 
+  const handleOnBlur = (e) => {
+    const { value, name } = e.target;
+    const { rowIndex, subfieldIndex } = e.target.dataset;
+
+    const path = subfieldIndex ? `subfields[${subfieldIndex}].${name}` : name;
+
+    const newField = setIn(fields[rowIndex], path, !value ? '\\' : value);
+
+    handleUpdateField(rowIndex, newField);
+  };
+
   const handleResetSecondAction = (fieldId, subfieldsCount) => {
     const rowIndex = fields.findIndex(field => field.id === fieldId);
     const subfieldActionNamePath = `subfields[${subfieldsCount - 1}].actions[1].name`;
@@ -178,6 +204,8 @@ const BulkEditMarkForm = () => {
               onResetSubfield={handleResetSecondAction}
               removingDisabled={fields.length === 1}
               addingDisabled={field.subfields.length > 0}
+              errorValidation={valueFieldError}
+              onBlur={handleOnBlur}
             />
             {field.subfields.map((subfield, subfieldIndex) => (
               <BulkEditMarkFormSubfield
@@ -193,7 +221,6 @@ const BulkEditMarkForm = () => {
                 onRemoveField={handleRemoveSubfield}
               />
             ))}
-
           </Fragment>
         );
       }}

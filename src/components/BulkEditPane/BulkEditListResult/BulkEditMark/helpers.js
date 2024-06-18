@@ -142,16 +142,27 @@ export const getNextDataControls = (action) => {
   }
 };
 
+export const isMarkValueValid = (value) => {
+  const userInput = value.trim();
+
+  const num = Number(userInput);
+  return (num >= 500 && num <= 599) || (num >= 900 && num <= 999);
+};
 
 export const isMarkFormValid = (fields) => {
-  return fields.every(field => Object.values(field).every(Boolean));
+  return fields.every(field => {
+    const allFieldsValid = Object.values(field).every(Boolean);
+    const valueValid = isMarkValueValid(field.value);
+
+    return allFieldsValid && valueValid;
+  });
 };
 
 export const getMaxFieldColumnsCount = (field) => {
-  let sum = field.actions.length;
+  let sum = field.actions.filter(Boolean).length;
 
   field.actions.forEach(action => {
-    sum += action?.data.length || 0;
+    sum += action?.data.filter(Boolean).length || 0;
   });
 
   return sum;

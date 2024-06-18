@@ -16,8 +16,7 @@ const BulkEditMarkActionRow = ({
   const { formatMessage } = useIntl();
   const hasError = (action, actionIndex) => !action.name
     && action.meta.required
-    && actionIndex > 0
-    && formatMessage({ id: 'ui-bulk-edit.error.required' });
+    && actionIndex > 0;
 
   return actions.map((action, actionIndex) => !!action && (
     <Fragment key={actionIndex}>

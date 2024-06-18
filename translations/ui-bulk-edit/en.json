@@ -151,7 +151,6 @@
   "start.downloadChangedRecords": "Download changed records (CSV)",
 
   "error.uploadedFile": "Fail to upload file",
-  "error.required": "Required",
   "error.sww": "Something went wrong",
   "error.incorrectFormatted": "{fileName} is formatted incorrectly. Please correct the formatting and upload the file again.",
 
@@ -335,6 +334,7 @@
   "options.placeholder": "Select option",
   "type.placeholder": "Select type",
   "actions.findFullField": "Find (full field search)",
+  "actions.findEntireField": "Find (entire subfield search)",
   "actions.find": "Find",
   "layer.column.options": "Options",
   "layer.column.actions": "Actions",
@@ -401,6 +401,7 @@
   "layer.options.checkInNote": "Check in note",
   "layer.options.checkOutNote": "Check out note",
   "layer.options.holdings.uri": "URI",
+  "layer.marc.error": "Only 5xx and 9xx edits are currently supported",
 
   "actionMenu.placeholder": "Search column name",
 

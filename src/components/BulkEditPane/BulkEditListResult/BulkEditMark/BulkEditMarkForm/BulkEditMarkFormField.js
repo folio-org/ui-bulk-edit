@@ -24,6 +24,8 @@ const BulkEditMarkFormField = ({
   onRemoveField,
   removingDisabled,
   addingDisabled,
+  onBlur,
+  errorValidation
 }) => {
   const { formatMessage } = useIntl();
   const subfieldsCount = field.subfields.length;
@@ -47,6 +49,7 @@ const BulkEditMarkFormField = ({
           onChange={onChange}
           data-row-index={index}
           name="value"
+          error={errorValidation(field.value)}
           value={field.value}
           dirty={!!field.value}
           maxLength={TAG_FIELD_MAX_LENGTH}
@@ -61,10 +64,12 @@ const BulkEditMarkFormField = ({
           data-row-index={index}
           value={field.in1}
           dirty={isIndicatorDirty(field.in1)}
+          onBlur={onBlur}
           maxLength={INDICATOR_FIELD_MAX_LENGTH}
           name="in1"
           placeholder=""
           onFocus={handleIndicatorFocus}
+          data-testid={`in1-${index}`}
           onChange={onChange}
           hasClearIcon={false}
           marginBottom0
@@ -78,8 +83,10 @@ const BulkEditMarkFormField = ({
           dirty={isIndicatorDirty(field.in2)}
           maxLength={INDICATOR_FIELD_MAX_LENGTH}
           name="in2"
+          onBlur={onBlur}
           placeholder=""
           onFocus={handleIndicatorFocus}
+          data-testid={`in2-${index}`}
           onChange={onChange}
           hasClearIcon={false}
           marginBottom0
@@ -129,6 +136,8 @@ BulkEditMarkFormField.propTypes = {
   onResetSubfield: PropTypes.func.isRequired,
   removingDisabled: PropTypes.bool,
   addingDisabled: PropTypes.bool,
+  onBlur: PropTypes.func,
+  errorValidation: PropTypes.func,
 };
 
 export default BulkEditMarkFormField;
