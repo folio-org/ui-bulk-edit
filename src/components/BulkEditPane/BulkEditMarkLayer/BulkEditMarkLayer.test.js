@@ -153,7 +153,7 @@ describe('BulkEditMarkLayer', () => {
   });
 
 
-  it('should be able to add and remove sub-fields', async () => {
+  it('should work correctly with "Add" + "Add subfield" actions', async () => {
     const { queryByTestId, getByTestId, getByRole, getAllByRole } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
@@ -193,6 +193,40 @@ describe('BulkEditMarkLayer', () => {
 
     await waitFor(() => {
       expect(queryByTestId('subfield-row-1')).toBeNull();
+    });
+
+    const lastTrashButton = within(getByTestId('subfield-row-0')).getByRole('button', { name: /trash/i });
+
+    userEvent.click(lastTrashButton);
+
+    await waitFor(() => {
+      expect(getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })[1]).toHaveValue('');
+    });
+  });
+
+  it('should work correctly with "Find" + "Replace with" actions', async () => {
+    const {
+      getByRole,
+      getAllByRole
+    } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
+
+    // select first action
+    userEvent.selectOptions(actionSelect, ACTIONS.FIND);
+
+    await waitFor(() => {
+      expect(getAllByRole('textbox', { name: /ui-bulk-edit.layer.column.data/i })).toHaveLength(1);
+      expect(getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })).toHaveLength(2);
+    });
+
+    // select second action
+    const secondAction = getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })[1];
+
+    userEvent.selectOptions(secondAction, ACTIONS.REPLACE_WITH);
+
+    await waitFor(() => {
+      expect(getAllByRole('textbox', { name: /ui-bulk-edit.layer.column.data/i })).toHaveLength(2);
     });
   });
 });

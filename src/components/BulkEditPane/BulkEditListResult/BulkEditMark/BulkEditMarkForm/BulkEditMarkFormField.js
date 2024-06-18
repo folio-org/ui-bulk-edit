@@ -19,7 +19,7 @@ const BulkEditMarkFormField = ({
   onChange,
   onDataChange,
   onActionChange,
-  onSubfieldsRemoved,
+  onResetSubfield,
   onAddField,
   onRemoveField,
   removingDisabled,
@@ -28,21 +28,22 @@ const BulkEditMarkFormField = ({
   errorValidation
 }) => {
   const { formatMessage } = useIntl();
-  const subfieldsCount = field?.subfields.length;
+  const subfieldsCount = field.subfields.length;
 
   const handleIndicatorFocus = (e) => {
     e.target.select();
   };
 
-  // Reset second action if subfields count is 0
+  // reset last subfield action if subfields length is changed
   useEffect(() => {
-    if (subfieldsCount === 0) {
-      onSubfieldsRemoved(field.id);
-    }
-  }, [subfieldsCount, field.id]);
+    onResetSubfield(field.id, subfieldsCount);
+    // disabled because we need to run it only when subfieldsCount amd fieldId is changed
+    // memoization wil cost a lot for onResetSubfield function
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field.id, subfieldsCount]);
 
   return (
-    <Row data-testid={`row-${index}`} className={css.fieldRow}>
+    <Row data-testid={`row-${index}`} className={css.markFieldRow}>
       <Col className={`${css.column} ${css.field}`}>
         <TextField
           onChange={onChange}
