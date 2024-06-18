@@ -27,7 +27,8 @@ const BulkEditMarkForm = () => {
   const isValueFieldValid = (value) => {
     if (Number(value.trim()).toString().length === 3) {
       return isMarkValueValid(value);
-    } else return true;
+    }
+    return true;
   };
 
   const valueFieldError = (value) => {
