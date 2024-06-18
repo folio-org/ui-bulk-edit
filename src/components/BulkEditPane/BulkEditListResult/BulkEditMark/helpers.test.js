@@ -1,25 +1,25 @@
-import { isMarcValueValid, isMarkFormValid } from './helpers';
+import { isMarkValueValid, isMarkFormValid } from './helpers';
 
 describe('isMarcValueValid', () => {
   test('should return true for values between 500 and 599', () => {
-    expect(isMarcValueValid('500')).toBe(true);
-    expect(isMarcValueValid('599')).toBe(true);
+    expect(isMarkValueValid('500')).toBe(true);
+    expect(isMarkValueValid('599')).toBe(true);
   });
 
   test('should return true for values between 900 and 999', () => {
-    expect(isMarcValueValid('900')).toBe(true);
-    expect(isMarcValueValid('950')).toBe(true);
+    expect(isMarkValueValid('900')).toBe(true);
+    expect(isMarkValueValid('950')).toBe(true);
   });
 
   test('should return false for values outside the ranges', () => {
-    expect(isMarcValueValid('499')).toBe(false);
-    expect(isMarcValueValid('600')).toBe(false);
+    expect(isMarkValueValid('499')).toBe(false);
+    expect(isMarkValueValid('600')).toBe(false);
   });
 
   test('should return false for non-numeric values', () => {
-    expect(isMarcValueValid('abc')).toBe(false);
-    expect(isMarcValueValid('12a')).toBe(false);
-    expect(isMarcValueValid('')).toBe(false);
+    expect(isMarkValueValid('abc')).toBe(false);
+    expect(isMarkValueValid('12a')).toBe(false);
+    expect(isMarkValueValid('')).toBe(false);
   });
 });
 

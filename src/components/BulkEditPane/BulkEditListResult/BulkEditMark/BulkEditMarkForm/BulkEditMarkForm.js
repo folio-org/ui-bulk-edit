@@ -10,10 +10,7 @@ import {
   getSubfieldTemplate,
   getNextDataControls,
   getDefaultMarkTemplate,
-  TAG_FIELD_MAX_LENGTH,
-  INDICATOR_FIELD_MAX_LENGTH,
-  SUBFIELD_MAX_LENGTH, isMarcValueValid,
-  SUBFIELD_MAX_LENGTH,
+  SUBFIELD_MAX_LENGTH, isMarkValueValid,
 } from '../helpers';
 import { RootContext } from '../../../../../context/RootContext';
 import { ACTIONS } from '../../../../../constants/markActions';
@@ -30,11 +27,9 @@ const BulkEditMarkForm = () => {
   const { fields, setFields } = useContext(RootContext);
   const { formatMessage } = useIntl();
 
-  const isIndicatorDirty = (value) => value?.length && value !== '\\';
-
   const isValueFieldValid = (value) => {
     if (Number(value.trim()).toString().length === 3) {
-      return isMarcValueValid(value);
+      return isMarkValueValid(value);
     } else return true;
   };
 
@@ -42,7 +37,6 @@ const BulkEditMarkForm = () => {
     if (!isValueFieldValid(value)) return formatMessage({ id:'ui-bulk-edit.layer.marc.error' });
     return '';
   };
-
 
   const handleAddField = (e) => {
     const { rowIndex } = e.target.dataset;
@@ -174,8 +168,7 @@ const BulkEditMarkForm = () => {
     }
   };
 
-  const renderSubfields = (field, index) => field.subfields.map((subfield, subfieldIndex) => {
-    const isAddingDisabled = subfieldIndex !== field.subfields.length - 1;
+
   const handleOnBlur = (e) => {
     const { value, name } = e.target;
     const { rowIndex, subfieldIndex } = e.target.dataset;
@@ -187,75 +180,8 @@ const BulkEditMarkForm = () => {
     handleUpdateField(rowIndex, newField);
   };
 
-  const renderFields = (field, index) => (
-    <Row data-testid={`row-${index}`} className={css.fieldRow}>
-      <Col className={`${css.column} ${css.field}`}>
-        <TextField
-          onChange={handleChange}
-          data-row-index={index}
-          name="value"
-          error={valueFieldError(field.value)}
-          value={field.value}
-          dirty={!!field.value}
-          maxLength={TAG_FIELD_MAX_LENGTH}
-          placeholder=""
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.field' })}
-        />
-      </Col>
-      <Col className={`${css.column} ${css.in}`}>
-        <TextField
-          data-row-index={index}
-          value={field.in1}
-          dirty={isIndicatorDirty(field.in1)}
-          maxLength={INDICATOR_FIELD_MAX_LENGTH}
-          name="in1"
-          placeholder=""
-          onFocus={handleIndicatorFocus}
-          onChange={handleChange}
-          onBlur={handleOnBlur}
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.in1' })}
-        />
-      </Col>
-      <Col className={`${css.column} ${css.in}`}>
-        <TextField
-          data-row-index={index}
-          value={field.in2}
-          dirty={isIndicatorDirty(field.in2)}
-          maxLength={INDICATOR_FIELD_MAX_LENGTH}
-          name="in2"
-          placeholder=""
-          onFocus={handleIndicatorFocus}
-          onBlur={handleOnBlur}
-          onChange={handleChange}
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.in2' })}
-        />
-      </Col>
-      <Col className={`${css.column} ${css.subfield}`}>
-        <TextField
-          data-row-index={index}
-          value={field.subfield}
-          dirty={!!field.subfield}
-          maxLength={SUBFIELD_MAX_LENGTH}
-          name="subfield"
-          placeholder=""
-          onChange={handleChange}
-          hasClearIcon={false}
-          marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.subfield' })}
-        />
-      </Col>
-      <BulkEditMarkActionRow
-        actions={field.actions}
-        rowIndex={index}
-        onActionChange={handleActionChange}
-        onDataChange={handleDataChange}
-      />
+  const renderSubfields = (field, index) => field.subfields.map((subfield, subfieldIndex) => {
+    const isAddingDisabled = subfieldIndex !== field.subfields.length - 1;
 
     return (
       <Row key={subfieldIndex} data-testid={`subfield-row-${subfieldIndex}`}>
@@ -314,6 +240,8 @@ const BulkEditMarkForm = () => {
               onSubfieldsRemoved={handleResetSecondAction}
               removingDisabled={fields.length === 1}
               addingDisabled={field.subfields.length > 0}
+              errorValidation={valueFieldError}
+              onBlur={handleOnBlur}
             />
             <BulkEditMarkFormSubfields
               field={field}

@@ -142,18 +142,17 @@ export const getNextDataControls = (action) => {
   }
 };
 
-export const isMarcValueValid = (value) => {
+export const isMarkValueValid = (value) => {
   const userInput = value.trim();
 
   const num = Number(userInput);
   return (num >= 500 && num <= 599) || (num >= 900 && num <= 999);
 };
 
-
 export const isMarkFormValid = (fields) => {
   return fields.every(field => {
     const allFieldsValid = Object.values(field).every(Boolean);
-    const valueValid = isMarcValueValid(field.value);
+    const valueValid = isMarkValueValid(field.value);
 
     return allFieldsValid && valueValid;
   });
