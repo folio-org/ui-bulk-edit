@@ -69,6 +69,7 @@ const BulkEditMarkFormField = ({
           name="in1"
           placeholder=""
           onFocus={handleIndicatorFocus}
+          data-testid={`in1-${index}`}
           onChange={onChange}
           hasClearIcon={false}
           marginBottom0
@@ -85,6 +86,7 @@ const BulkEditMarkFormField = ({
           onBlur={onBlur}
           placeholder=""
           onFocus={handleIndicatorFocus}
+          data-testid={`in2-${index}`}
           onChange={onChange}
           hasClearIcon={false}
           marginBottom0

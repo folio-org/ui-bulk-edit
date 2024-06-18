@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
-import { render, waitFor, within, screen } from '@testing-library/react';
+import { render, waitFor, within, screen, getByTestId, logDOM } from '@testing-library/react';
 import uniqueId from 'lodash/uniqueId';
 
 import '../../../../test/jest/__mock__';
@@ -128,6 +128,36 @@ describe('BulkEditMarkLayer', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/layer.marc.error/)).toBeVisible();
+    });
+  });
+
+  it('should show error message if value is not between 5xx and 9xx ', async () => {
+    const { getByRole } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
+
+    expect(inputField).toHaveValue('');
+
+    userEvent.type(inputField, '123');
+
+    await waitFor(() => {
+      expect(screen.getByText(/layer.marc.error/)).toBeVisible();
+    });
+  });
+
+  it('should put backslash in in1 field if its empty', async () => {
+    renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    const inputField = screen.getByTestId('in1-0');
+
+    expect(inputField).toHaveValue('\\');
+
+    userEvent.clear(inputField);
+
+    userEvent.tab();
+
+    await waitFor(() => {
+      expect(inputField).toHaveValue('\\');
     });
   });
 
