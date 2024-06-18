@@ -133,7 +133,7 @@ BulkEditMarkFormField.propTypes = {
   onActionChange: PropTypes.func.isRequired,
   onAddField: PropTypes.func.isRequired,
   onRemoveField: PropTypes.func.isRequired,
-  onSubfieldsRemoved: PropTypes.func.isRequired,
+  onResetSubfield: PropTypes.func.isRequired,
   removingDisabled: PropTypes.bool,
   addingDisabled: PropTypes.bool,
   onBlur: PropTypes.func,
