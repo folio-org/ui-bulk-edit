@@ -8,6 +8,7 @@ import { useSearchParams } from './useSearchParams';
 import { APPROACHES } from '../constants';
 import { useMarkApproach } from './useMarkApproach';
 import { markActions } from '../constants/markActions';
+import { getMarkFormErrors } from '../components/BulkEditPane/BulkEditListResult/BulkEditMark/validation';
 
 
 jest.mock('lodash/uniqueId', () => jest.fn());
@@ -16,9 +17,8 @@ jest.mock('./useSearchParams', () => ({
   useSearchParams: jest.fn(),
 }));
 
-jest.mock('../components/BulkEditPane/BulkEditListResult/BulkEditMark/helpers', () => ({
-  ...jest.requireActual('../components/BulkEditPane/BulkEditListResult/BulkEditMark/helpers'),
-  isMarkFormValid: jest.fn(),
+jest.mock('../components/BulkEditPane/BulkEditListResult/BulkEditMark/validation', () => ({
+  getMarkFormErrors: jest.fn(),
 }));
 
 
@@ -27,7 +27,7 @@ describe('getDefaultMarkTemplate', () => {
     const id = 'test-id';
     const expectedTemplate = {
       id,
-      value: '',
+      tag: '',
       ind1: '\\',
       ind2: '\\',
       subfield: '',
