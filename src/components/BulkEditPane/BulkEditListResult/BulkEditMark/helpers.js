@@ -1,9 +1,7 @@
 import { FormattedMessage } from 'react-intl';
-import { array, object, string } from 'yup';
 
 import {
   ACTIONS,
-  FINAL_MARK_ACTIONS,
   getAddAction,
   getAdditionalSubfieldAction,
   getAppendAction,

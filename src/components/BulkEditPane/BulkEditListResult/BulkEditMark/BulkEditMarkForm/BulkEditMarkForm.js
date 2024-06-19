@@ -8,8 +8,7 @@ import {
   getNextAction,
   getSubfieldTemplate,
   getNextDataControls,
-  getDefaultMarkTemplate,
-  getTransformedField,
+  getDefaultMarkTemplate, getTransformedField,
 } from '../helpers';
 import { getMarkFormErrors } from '../validation';
 import { RootContext } from '../../../../../context/RootContext';
@@ -209,6 +208,9 @@ const BulkEditMarkForm = () => {
                 onRemoveField={handleRemoveSubfield}
               />
             ))}
+            <pre>{JSON.stringify(errors, null, 2)}</pre>
+            <hr />
+            <pre>{JSON.stringify(fields.map(getTransformedField), null, 2)}</pre>
           </Fragment>
         );
       }}
