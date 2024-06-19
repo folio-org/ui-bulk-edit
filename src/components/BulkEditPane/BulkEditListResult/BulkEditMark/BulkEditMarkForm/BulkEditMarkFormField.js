@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
+import get from 'lodash/get';
 
 import { Col, Row, TextField } from '@folio/stripes/components';
 
@@ -25,10 +26,12 @@ const BulkEditMarkFormField = ({
   removingDisabled,
   addingDisabled,
   onBlur,
-  errorValidation
+  errors,
 }) => {
   const { formatMessage } = useIntl();
   const subfieldsCount = field.subfields.length;
+  const tagErrorId = get(errors, `[${index}].tag`);
+  const tagErrorMessage = tagErrorId ? field.tag && formatMessage({ id: tagErrorId }) : '';
 
   const handleIndicatorFocus = (e) => {
     e.target.select();
@@ -48,10 +51,10 @@ const BulkEditMarkFormField = ({
         <TextField
           onChange={onChange}
           data-row-index={index}
-          name="value"
-          error={errorValidation(field.value)}
-          value={field.value}
-          dirty={!!field.value}
+          name="tag"
+          error={tagErrorMessage}
+          value={field.tag}
+          dirty={!!field.tag}
           maxLength={TAG_FIELD_MAX_LENGTH}
           placeholder=""
           hasClearIcon={false}
@@ -62,35 +65,35 @@ const BulkEditMarkFormField = ({
       <Col className={`${css.column} ${css.in}`}>
         <TextField
           data-row-index={index}
-          value={field.in1}
-          dirty={isIndicatorDirty(field.in1)}
+          value={field.ind1}
+          dirty={isIndicatorDirty(field.ind1)}
           onBlur={onBlur}
           maxLength={INDICATOR_FIELD_MAX_LENGTH}
-          name="in1"
+          name="ind1"
           placeholder=""
           onFocus={handleIndicatorFocus}
-          data-testid={`in1-${index}`}
+          data-testid={`ind1-${index}`}
           onChange={onChange}
           hasClearIcon={false}
           marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.in1' })}
+          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.ind1' })}
         />
       </Col>
       <Col className={`${css.column} ${css.in}`}>
         <TextField
           data-row-index={index}
-          value={field.in2}
-          dirty={isIndicatorDirty(field.in2)}
+          value={field.ind2}
+          dirty={isIndicatorDirty(field.ind2)}
           maxLength={INDICATOR_FIELD_MAX_LENGTH}
-          name="in2"
+          name="ind2"
           onBlur={onBlur}
           placeholder=""
           onFocus={handleIndicatorFocus}
-          data-testid={`in2-${index}`}
+          data-testid={`ind2-${index}`}
           onChange={onChange}
           hasClearIcon={false}
           marginBottom0
-          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.in2' })}
+          aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.ind2' })}
         />
       </Col>
       <Col className={`${css.column} ${css.subfield}`}>
@@ -137,7 +140,7 @@ BulkEditMarkFormField.propTypes = {
   removingDisabled: PropTypes.bool,
   addingDisabled: PropTypes.bool,
   onBlur: PropTypes.func,
-  errorValidation: PropTypes.func,
+  errors: PropTypes.object,
 };
 
 export default BulkEditMarkFormField;

@@ -12,6 +12,13 @@ export const ACTIONS = {
   REPLACE_WITH: 'REPLACE_WITH',
 };
 
+export const FINAL_MARK_ACTIONS = [
+  ACTIONS.REMOVE_ALL,
+  ACTIONS.REMOVE_FIELD,
+  ACTIONS.REMOVE_SUBFIELD,
+  ACTIONS.ADDITIONAL_SUBFIELD,
+];
+
 export const getPlaceholder = () => ({
   value: '',
   label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
@@ -68,7 +75,7 @@ export const getReplaceWithAction = () => ({
 
 export const markActions = () => [
   getPlaceholder(),
-  getFindEntireFieldAction(),
   getAddAction(),
+  getFindEntireFieldAction(),
   getRemoveAllAction(),
 ];

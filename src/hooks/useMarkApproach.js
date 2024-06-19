@@ -2,8 +2,8 @@ import { useCallback, useState } from 'react';
 import uniqueId from 'lodash/uniqueId';
 import {
   getDefaultMarkTemplate,
-  isMarkFormValid
 } from '../components/BulkEditPane/BulkEditListResult/BulkEditMark/helpers';
+import { getMarkFormErrors } from '../components/BulkEditPane/BulkEditListResult/BulkEditMark/validation';
 import { useSearchParams } from './useSearchParams';
 import { APPROACHES } from '../constants';
 
@@ -14,7 +14,8 @@ export const useMarkApproach = () => {
   const [fields, setFields] = useState(initialFields);
   const [isMarkLayerOpen, setIsMarkLayerOpen] = useState(false);
 
-  const isMarkFieldsValid = isMarkFormValid(fields);
+  const errors = getMarkFormErrors(fields);
+  const isMarkFieldsValid = Object.keys(errors).length === 0;
 
   const closeMarkLayer = useCallback(() => {
     setIsMarkLayerOpen(false);

@@ -3,7 +3,6 @@ import uniqueId from 'lodash/uniqueId';
 
 import {
   getDefaultMarkTemplate,
-  isMarkFormValid
 } from '../components/BulkEditPane/BulkEditListResult/BulkEditMark/helpers';
 import { useSearchParams } from './useSearchParams';
 import { APPROACHES } from '../constants';
@@ -29,8 +28,8 @@ describe('getDefaultMarkTemplate', () => {
     const expectedTemplate = {
       id,
       value: '',
-      in1: '\\',
-      in2: '\\',
+      ind1: '\\',
+      ind2: '\\',
       subfield: '',
       actions: [
         {
@@ -58,7 +57,7 @@ describe('useMarkApproach', () => {
   beforeEach(() => {
     setParamMock = jest.fn();
     useSearchParams.mockReturnValue({ setParam: setParamMock });
-    isMarkFormValid.mockReturnValue(true);
+    getMarkFormErrors.mockReturnValue(true);
     uniqueId.mockReturnValue(mockUniqueId);
   });
 

@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
-import { Accordion, Headline } from '@folio/stripes/components';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { Accordion, Headline } from '@folio/stripes/components';
 import { TitleManager, useStripes } from '@folio/stripes/core';
+
 import BulkEditMarkForm from './BulkEditMarkForm/BulkEditMarkForm';
 import BulkEditMarkTitle from './BulkEditMarkTitle/BulkEditMarkTitle';
 import { RootContext } from '../../../../context/RootContext';
+
 
 const BulkEditMark = () => {
   const stripes = useStripes();

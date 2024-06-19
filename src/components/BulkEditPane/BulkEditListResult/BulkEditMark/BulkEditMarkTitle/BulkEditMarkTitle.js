@@ -4,20 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import { Col, Icon, Label, Row, Tooltip } from '@folio/stripes/components';
 
 import { RootContext } from '../../../../../context/RootContext';
-import { getMaxFieldColumnsCount } from '../helpers';
+import { DATA_KEYS, getFieldWithMaxColumns } from '../helpers';
 
 import css from '../../../BulkEditPane.css';
 
 
 const BulkEditMarkTitle = () => {
   const { fields } = useContext(RootContext);
-  const field = fields.reduce((acc, item) => {
-    if (getMaxFieldColumnsCount(item) > getMaxFieldColumnsCount(acc)) {
-      return item;
-    }
-
-    return acc;
-  }, fields[0]);
+  const longestField = getFieldWithMaxColumns(fields);
 
   return (
     <Row>
@@ -46,7 +40,7 @@ const BulkEditMarkTitle = () => {
         className={`${css.headerCell} ${css.in}`}
       >
         <Label required>
-          <FormattedMessage id="ui-bulk-edit.layer.column.in1" />
+          <FormattedMessage id="ui-bulk-edit.layer.column.ind1" />
         </Label>
         <div className={css.splitter} />
       </Col>
@@ -54,7 +48,7 @@ const BulkEditMarkTitle = () => {
         className={`${css.headerCell} ${css.in}`}
       >
         <Label required>
-          <FormattedMessage id="ui-bulk-edit.layer.column.in2" />
+          <FormattedMessage id="ui-bulk-edit.layer.column.ind2" />
         </Label>
         <div className={css.splitter} />
       </Col>
@@ -66,7 +60,7 @@ const BulkEditMarkTitle = () => {
         </Label>
         <div className={css.splitter} />
       </Col>
-      {field.actions.map((action, index) => !!action && (
+      {longestField.actions.map((action, index) => !!action && (
         <Fragment key={index}>
           <Col
             key={index}
@@ -80,7 +74,7 @@ const BulkEditMarkTitle = () => {
           {action.data.map((data, dataIndex) => (
             <Col
               key={dataIndex}
-              className={`${css.headerCell} ${css.data}`}
+              className={`${css.headerCell} ${data.key === DATA_KEYS.VALUE ? css.data : css.subfield}`}
             >
               <Label required={data.meta.required}>
                 {data.meta.title}

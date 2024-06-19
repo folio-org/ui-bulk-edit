@@ -1,6 +1,9 @@
 import { FormattedMessage } from 'react-intl';
+import { array, object, string } from 'yup';
+
 import {
   ACTIONS,
+  FINAL_MARK_ACTIONS,
   getAddAction,
   getAdditionalSubfieldAction,
   getAppendAction,
@@ -10,6 +13,7 @@ import {
   getReplaceWithAction,
   markActions,
 } from '../../../../constants/markActions';
+
 
 export const TAG_FIELD_MAX_LENGTH = 3;
 export const INDICATOR_FIELD_MAX_LENGTH = 1;
@@ -23,9 +27,10 @@ export const DATA_KEYS = {
 export const getDataTemplate = ({
   required = true,
   key = DATA_KEYS.VALUE,
+  title = <FormattedMessage id="ui-bulk-edit.layer.column.data" />,
 } = {}) => ({
   meta: {
-    title: <FormattedMessage id="ui-bulk-edit.layer.column.data" />,
+    title,
     required,
   },
   key,
@@ -34,9 +39,9 @@ export const getDataTemplate = ({
 
 export const getDefaultMarkTemplate = (id) => ({
   id,
-  value: '',
-  in1: '\\',
-  in2: '\\',
+  tag: '',
+  ind1: '\\',
+  ind2: '\\',
   subfield: '',
   actions: [
     {
@@ -101,6 +106,8 @@ export const getNextAction = (action) => {
             getPlaceholder(),
             getAdditionalSubfieldAction(),
           ],
+          disabled: false,
+          required: false,
         },
         name: '',
         data: [],
@@ -135,6 +142,14 @@ export const getNextDataControls = (action) => {
       return [
         getDataTemplate(),
       ];
+    case ACTIONS.APPEND:
+      return [
+        getDataTemplate({
+          key: DATA_KEYS.SUBFIELD,
+          title: <FormattedMessage id="ui-bulk-edit.layer.column.subfield" />,
+        }),
+        getDataTemplate(),
+      ];
     case ACTIONS.REMOVE_ALL:
       return [];
     default:
@@ -142,23 +157,7 @@ export const getNextDataControls = (action) => {
   }
 };
 
-export const isMarkValueValid = (value) => {
-  const userInput = value.trim();
-
-  const num = Number(userInput);
-  return (num >= 500 && num <= 599) || (num >= 900 && num <= 999);
-};
-
-export const isMarkFormValid = (fields) => {
-  return fields.every(field => {
-    const allFieldsValid = Object.values(field).every(Boolean);
-    const valueValid = isMarkValueValid(field.value);
-
-    return allFieldsValid && valueValid;
-  });
-};
-
-export const getMaxFieldColumnsCount = (field) => {
+const getMaxFieldColumnsCount = (field) => {
   let sum = field.actions.filter(Boolean).length;
 
   field.actions.forEach(action => {
@@ -167,3 +166,28 @@ export const getMaxFieldColumnsCount = (field) => {
 
   return sum;
 };
+
+export const getFieldWithMaxColumns = (fields) => {
+  return fields.reduce((acc, item) => {
+    if (getMaxFieldColumnsCount(item) > getMaxFieldColumnsCount(acc)) {
+      return item;
+    }
+
+    return acc;
+  }, fields[0]);
+};
+
+export const getTransformedField = (field) => ({
+  ...field,
+  // if subfields exist, recursively transform them
+  ...(field.subfields && { subfields: field?.subfields.filter(Boolean).map(getTransformedField) }),
+  // transform actions and data
+  actions: field.actions.filter(Boolean).map(action => {
+    const { name, data } = action;
+
+    return {
+      name,
+      data: data.filter(Boolean).map(({ key, value }) => ({ key, value })),
+    };
+  }),
+});
