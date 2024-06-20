@@ -8,7 +8,7 @@ import {
   getNextAction,
   getSubfieldTemplate,
   getNextDataControls,
-  getDefaultMarkTemplate, getTransformedField,
+  getDefaultMarkTemplate,
 } from '../helpers';
 import { getMarkFormErrors } from '../validation';
 import { RootContext } from '../../../../../context/RootContext';
