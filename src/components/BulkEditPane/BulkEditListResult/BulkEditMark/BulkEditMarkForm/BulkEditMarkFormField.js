@@ -31,7 +31,9 @@ const BulkEditMarkFormField = ({
   const { formatMessage } = useIntl();
   const subfieldsCount = field.subfields.length;
   const tagErrorId = get(errors, `[${index}].tag`);
-  const tagErrorMessage = tagErrorId ? field.tag && formatMessage({ id: tagErrorId }) : '';
+  const tagErrorMessage = tagErrorId && field.tag.length === TAG_FIELD_MAX_LENGTH
+    ? formatMessage({ id: tagErrorId })
+    : '';
 
   const handleIndicatorFocus = (e) => {
     e.target.select();
