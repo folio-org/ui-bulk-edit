@@ -1,7 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import noop from 'lodash/noop';
 import uniqueId from 'lodash/uniqueId';
-import { useIntl } from 'react-intl';
 
 import { RepeatableField } from '@folio/stripes/components';
 
@@ -10,8 +9,8 @@ import {
   getSubfieldTemplate,
   getNextDataControls,
   getDefaultMarkTemplate,
-  isMarkValueValid,
 } from '../helpers';
+import { getMarkFormErrors } from '../validation';
 import { RootContext } from '../../../../../context/RootContext';
 import { ACTIONS } from '../../../../../constants/markActions';
 import { setIn } from '../../../../../utils/helpers';
@@ -22,19 +21,7 @@ import css from '../../../BulkEditPane.css';
 
 const BulkEditMarkForm = () => {
   const { fields, setFields } = useContext(RootContext);
-  const { formatMessage } = useIntl();
-
-  const isValueFieldValid = (value) => {
-    if (Number(value.trim()).toString().length === 3) {
-      return isMarkValueValid(value);
-    }
-    return true;
-  };
-
-  const valueFieldError = (value) => {
-    if (!isValueFieldValid(value)) return formatMessage({ id:'ui-bulk-edit.layer.marc.error' });
-    return '';
-  };
+  const errors = getMarkFormErrors(fields);
 
   const handleAddField = (e) => {
     const { rowIndex } = e.target.dataset;
@@ -204,7 +191,7 @@ const BulkEditMarkForm = () => {
               onResetSubfield={handleResetSecondAction}
               removingDisabled={fields.length === 1}
               addingDisabled={field.subfields.length > 0}
-              errorValidation={valueFieldError}
+              errors={errors}
               onBlur={handleOnBlur}
             />
             {field.subfields.map((subfield, subfieldIndex) => (

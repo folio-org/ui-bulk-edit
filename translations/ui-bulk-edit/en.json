@@ -340,8 +340,8 @@
   "layer.column.actions": "Actions",
   "layer.column.data": "Data",
   "layer.column.field": "Field",
-  "layer.column.in1": "In.1",
-  "layer.column.in2": "In.2",
+  "layer.column.ind1": "In.1",
+  "layer.column.ind2": "In.2",
   "layer.column.subfield": "Subfield",
   "layer.action.replace": "Replace with",
   "layer.action.clear": "Clear field",
@@ -401,7 +401,7 @@
   "layer.options.checkInNote": "Check in note",
   "layer.options.checkOutNote": "Check out note",
   "layer.options.holdings.uri": "URI",
-  "layer.marc.error": "Only 5xx and 9xx edits are currently supported",
+  "layer.marc.error": "Only 5xx and 9xx edits are currently supported.",
 
   "actionMenu.placeholder": "Search column name",
 
