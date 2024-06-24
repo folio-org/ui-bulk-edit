@@ -33,7 +33,8 @@
 * [UIBULKED-485](https://folio-org.atlassian.net/browse/UIBULKED-485) Find (full subfield search) and Replace with in MARC Instance
 * [UIBULKED-498](https://folio-org.atlassian.net/browse/UIBULKED-498) Find (full subfield search) and Remove subfield in MARC Instance
 * [UIBULKED-461](https://folio-org.atlassian.net/browse/UIBULKED-461) Basic  UI only data entry validation on the MARC instance bulk edit form.
-* [UIBULKED-482](https://folio-org.atlassian.net/browse/UIBULKED-482) Find (full subfield search) and Append a new subfield for MARC Instance
+* [UIBULKED-482](https://folio-org.atlassian.net/browse/UIBULKED-482) Find (full subfield search) and Append a new subfield for MARC Instance.
+* [UIBULKED-425](https://folio-org.atlassian.net/browse/UIBULKED-425) Holdings record's column names cleanup.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
