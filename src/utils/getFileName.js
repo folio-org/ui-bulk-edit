@@ -7,7 +7,8 @@ export const getFileName = (item, triggeredFile) => {
       linkToMatchedRecordsCsvFile: `${getFormattedFilePrefixDate()}-Matched-Records-Query-${item.id}.csv`,
       linkToModifiedRecordsCsvFile: `${getFormattedFilePrefixDate()}-Updates-Preview-Query-${item.id}.csv`,
       linkToCommittedRecordsCsvFile: `${getFormattedFilePrefixDate()}-Changed-Records-Query-${item.id}.csv`,
-      linkToCommittedRecordsErrorsCsvFile: `${getFormattedFilePrefixDate()}-Committing-changes-Errors-Query-${item.id}.csv`
+      linkToCommittedRecordsErrorsCsvFile: `${getFormattedFilePrefixDate()}-Committing-changes-Errors-Query-${item.id}.csv`,
+      linkToMatchedRecordsErrorsCsvFile:`${getFormattedFilePrefixDate()}-Matching-Records-Errors-Query-${item.id}.csv`
     }[triggeredFile];
   }
 
