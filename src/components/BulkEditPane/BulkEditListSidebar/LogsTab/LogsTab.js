@@ -62,8 +62,8 @@ export const LogsTab = () => {
 
   const { data } = useBulkOperationUsers();
 
-  const userOptions = data?.users.map(({ id, firstName, lastName }) => ({
-    label: getFullName({ firstName, lastName }),
+  const userOptions = data?.users.map(({ id, firstName, lastName, middleName, preferredFirstName }) => ({
+    label: getFullName({ firstName, lastName, middleName, preferredFirstName }),
     value: id,
   })) || [];
 

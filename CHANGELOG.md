@@ -35,6 +35,7 @@
 * [UIBULKED-461](https://folio-org.atlassian.net/browse/UIBULKED-461) Basic  UI only data entry validation on the MARC instance bulk edit form.
 * [UIBULKED-482](https://folio-org.atlassian.net/browse/UIBULKED-482) Find (full subfield search) and Append a new subfield for MARC Instance
 * [UIBULKED-468](https://folio-org.atlassian.net/browse/UIBULKED-468) Query - File with errors encountered during the record matching is downloaded in .txt format with wrong name from Logs tab
+* [UIBULKED-504](https://folio-org.atlassian.net/browse/UIBULKED-504) Names under "User" dropdown are consistent with the names in "Run by" column on "Bulk edit logs" page.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
