@@ -92,8 +92,8 @@ describe('BulkEditMarkLayer', () => {
 
     // columns
     expect(getByText('ui-bulk-edit.layer.column.field')).toBeVisible();
-    expect(getByText('ui-bulk-edit.layer.column.in1')).toBeVisible();
-    expect(getByText('ui-bulk-edit.layer.column.in2')).toBeVisible();
+    expect(getByText('ui-bulk-edit.layer.column.ind1')).toBeVisible();
+    expect(getByText('ui-bulk-edit.layer.column.ind2')).toBeVisible();
     expect(getByText('ui-bulk-edit.layer.column.subfield')).toBeVisible();
     expect(getAllByText('ui-bulk-edit.layer.column.actions').length).toBe(3);
 
@@ -102,8 +102,8 @@ describe('BulkEditMarkLayer', () => {
 
     // controls
     expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i })).toBeVisible();
-    expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.in1/i })).toBeVisible();
-    expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.in2/i })).toBeVisible();
+    expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.ind1/i })).toBeVisible();
+    expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.ind2/i })).toBeVisible();
     expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.subfield/i })).toBeVisible();
     expect(getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })).toBeVisible();
   });
@@ -150,10 +150,10 @@ describe('BulkEditMarkLayer', () => {
     });
   });
 
-  it('should put backslash in in1 field if its empty', async () => {
+  it('should put backslash in ind1 field if its empty', async () => {
     renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const inputField = screen.getByTestId('in1-0');
+    const inputField = screen.getByTestId('ind1-0');
 
     expect(inputField).toHaveValue('\\');
 

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Layer, Pane, PaneFooter } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
+
+import { Button, Layer, Pane, PaneFooter } from '@folio/stripes/components';
+
 import { useSearchParams } from '../../../../hooks';
 
 

@@ -212,7 +212,8 @@
     "query-string": "^6.1.0",
     "react-final-form": "^6.5.2",
     "react-router-prop-types": "^1.0.4",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "yup": "^1.4.0"
   },
   "peerDependencies": {
     "@folio/stripes": "^9.0.0",
