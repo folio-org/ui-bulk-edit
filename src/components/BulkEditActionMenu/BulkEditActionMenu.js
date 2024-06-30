@@ -18,6 +18,7 @@ import {
   EDITING_STEPS,
   JOB_STATUSES,
   BULK_VISIBLE_COLUMNS,
+  CRITERIA,
 } from '../../constants';
 import {
   useBulkPermissions,
@@ -43,6 +44,7 @@ const BulkEditActionMenu = ({
     currentRecordType,
     capabilities,
     queryRecordType,
+    criteria,
   } = useSearchParams();
 
   const [columnSearch, setColumnSearch] = useState('');
@@ -74,6 +76,7 @@ const BulkEditActionMenu = ({
     && isInitialStep
     && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
   const isStartMarkActive = isStartBulkInAppActive && currentRecordType === CAPABILITIES.INSTANCE;
+  const isStartManualButtonVisible = isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && criteria !== CRITERIA.QUERY;
 
   const isLastUnselectedColumn = (value) => {
     return visibleColumnKeys?.length === 1 && visibleColumnKeys?.[0] === value;
@@ -152,7 +155,7 @@ const BulkEditActionMenu = ({
             </Icon>
           </Button>
         )}
-        {isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && (
+        {isStartManualButtonVisible && (
           <Button
             data-testid="startCsvAction"
             buttonStyle="dropdownItem"
