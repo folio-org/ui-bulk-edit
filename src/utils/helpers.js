@@ -33,14 +33,8 @@ export const getCapabilityOptions = (view, perms) => EDIT_CAPABILITIES_OPTIONS.m
   hidden: isCapabilityDisabled(capability.value, view, perms),
 }));
 
-export const getDefaultCapabilities = (view, perms) => {
-  const capabilityOptions = getCapabilityOptions(view, perms);
-
-  return capabilityOptions.find(option => !option.hidden)?.value;
-};
-
 export const groupByCategory = (array) => {
-  return array.reduce((acc, item) => {
+  const grouped = array.reduce((acc, item) => {
     if (item.categoryName) {
       if (!acc[item.categoryName]) {
         acc[item.categoryName] = [];
@@ -53,6 +47,17 @@ export const groupByCategory = (array) => {
 
     return acc;
   }, {});
+
+  return Object.entries(grouped).map(([key, value]) => {
+    if (Array.isArray(value)) {
+      return {
+        label: key,
+        options: value,
+      };
+    }
+
+    return value;
+  });
 };
 
 export const getMappedAndSortedNotes = ({

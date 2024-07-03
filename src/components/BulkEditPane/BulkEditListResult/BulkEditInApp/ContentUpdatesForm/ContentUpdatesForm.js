@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import noop from 'lodash/noop';
@@ -8,8 +8,8 @@ import {
   IconButton,
   Col,
   Row,
-  Select,
   RepeatableField,
+  Selection,
 } from '@folio/stripes/components';
 
 import {
@@ -26,7 +26,7 @@ import {
   getFilteredFields,
   getExtraActions,
 } from './helpers';
-import { groupByCategory } from '../../../../../utils/helpers';
+import { customFilter, groupByCategory } from '../../../../../utils/helpers';
 import { useSearchParams } from '../../../../../hooks';
 
 export const ContentUpdatesForm = ({
@@ -41,12 +41,11 @@ export const ContentUpdatesForm = ({
     currentRecordType,
   } = useSearchParams();
 
-  const handleOptionChange = (e, index) => {
+  const handleOptionChange = (option, index) => {
     const mappedFields = fields.map((field, i) => {
       if (i === index) {
-        const option = e.target.value;
         const sourceOption = options.find(o => o.value === option);
-        const parameters = sourceOption.parameters;
+        const parameters = sourceOption?.parameters;
 
         return {
           ...field,
@@ -102,7 +101,7 @@ export const ContentUpdatesForm = ({
 
     if (hasActionChanged && noNullActionIndex === 0) { // only based on first action additional actions are shown
       const sourceOption = options.find(o => o.value === field.option);
-      const optionType = sourceOption.type;
+      const optionType = sourceOption?.type;
       const option = optionType || field.option;
       const extraActions = getExtraActions(option, value, formatMessage);
       const firstAvailableAction = finalActions.find(Boolean);
@@ -179,7 +178,7 @@ export const ContentUpdatesForm = ({
     }]);
 
     const initializedFields = filteredFields.map((f, i) => {
-      const option = f.options[0].value;
+      const option = '';
 
       return i === filteredFields.length - 1
         ? ({
@@ -206,7 +205,7 @@ export const ContentUpdatesForm = ({
       ({ parameters, option, actionsDetails: { actions } }) => {
         const [initial, updated] = actions.map(action => action?.value ?? null);
         const sourceOption = options.find(o => o.value === option);
-        const optionType = sourceOption.type;
+        const optionType = sourceOption?.type;
         const mappedOption = optionType || option; // if option has type, use it, otherwise use option value (required for ITEM_NOTE cases)
 
         // generate action type key with '_' delimiter
@@ -236,31 +235,6 @@ export const ContentUpdatesForm = ({
     onContentUpdatesChanged(mappedContentUpdates);
   }, [fields, options, onContentUpdatesChanged, currentRecordType]);
 
-  const renderOptions = (optionsMap) => {
-    return Object.entries(optionsMap).map(([category, item]) => {
-      if (Array.isArray(item)) {
-        return (
-          <optgroup
-            key={category}
-            label={category}
-          >
-            {renderOptions(item)}
-          </optgroup>
-        );
-      } else {
-        return (
-          <option
-            key={item.value}
-            value={item.value}
-            disabled={item.disabled}
-          >
-            {item.label}
-          </option>
-        );
-      }
-    });
-  };
-
   return (
     <RepeatableField
       getFieldUniqueKey={(field) => field.id}
@@ -271,16 +245,16 @@ export const ContentUpdatesForm = ({
         return (
           <Row data-testid={`row-${index}`}>
             <Col xs={2} sm={2} className={css.column}>
-              <Select
+              <Selection
+                dataOptions={groupByCategory(field.options)}
                 value={field.option}
-                onChange={(e) => handleOptionChange(e, index)}
-                data-testid={`select-option-${index}`}
-                aria-label={`select-option-${index}`}
+                onChange={(value) => handleOptionChange(value, index)}
+                placeholder={formatMessage({ id:'ui-bulk-edit.options.placeholder' })}
                 dirty={!!field.option}
+                ariaLabel={`select-option-${index}`}
                 marginBottom0
-              >
-                {renderOptions(groupByCategory(field.options))}
-              </Select>
+                onFilter={customFilter}
+              />
             </Col>
             <ActionsRow
               option={field.option}

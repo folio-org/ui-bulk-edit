@@ -188,11 +188,6 @@ export const FILTER_OPTIONS = {
 
 export const getUserOptions = (formatMessage) => [
   {
-    value: '',
-    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
-    disabled: true,
-  },
-  {
     value: OPTIONS.EMAIL_ADDRESS,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.email' }),
     disabled: false,
@@ -210,11 +205,6 @@ export const getUserOptions = (formatMessage) => [
 ];
 
 export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
-  {
-    value: '',
-    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
-    disabled: true,
-  },
   {
     value: OPTIONS.ADMINISTRATIVE_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
@@ -272,11 +262,6 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
 
 export const getInstanceOptions = (formatMessage, instanceNotes) => [
   {
-    value: '',
-    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
-    disabled: true,
-  },
-  {
     value: OPTIONS.ADMINISTRATIVE_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
     disabled: false,
@@ -323,11 +308,6 @@ export const getInstanceNotes = (formatMessage, instanceNotes) => [
 ];
 
 export const getNotesOptions = (formatMessage, itemNotes) => [
-  {
-    value: '',
-    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
-    disabled: true,
-  },
   {
     value: OPTIONS.ADMINISTRATIVE_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
