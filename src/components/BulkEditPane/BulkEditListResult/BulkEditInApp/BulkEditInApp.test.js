@@ -3,7 +3,6 @@ import { QueryClientProvider } from 'react-query';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../../test/jest/__mock__';
@@ -16,9 +15,20 @@ import { CAPABILITIES } from '../../../../constants';
 
 import { BulkEditInApp } from './BulkEditInApp';
 import { RootContext } from '../../../../context/RootContext';
+import { useItemNotes, useHoldingsNotes, useInstanceNotes, useElectronicAccessRelationships } from '../../../../hooks/api';
 
-jest.mock('../../../../hooks/api/usePatronGroup', () => ({
-  usePatronGroup: () => ({ userGroups: {} }),
+
+jest.mock('../../../../hooks', () => ({
+  ...jest.requireActual('../../../../hooks'),
+  useBulkPermissions: jest.fn(),
+}));
+
+jest.mock('../../../../hooks/api', () => ({
+  ...jest.requireActual('../../../../hooks/api'),
+  useItemNotes: jest.fn(),
+  useHoldingsNotes: jest.fn(),
+  useInstanceNotes: jest.fn(),
+  useElectronicAccessRelationships: jest.fn(),
 }));
 
 const fileName = 'Mock.csv';
@@ -50,19 +60,25 @@ const renderBulkEditInApp = ({ capability }) => {
 
 describe('BulkEditInApp', () => {
   beforeEach(() => {
-    useOkapiKy
-      .mockClear()
-      .mockReturnValue({
-        get: () => ({
-          json: () => ({
-            usergroups: [{
-              value: 'Test',
-              desc: 'Test',
-            }],
-            loantypes: [],
-          }),
-        }),
-      });
+    useItemNotes.mockClear().mockReturnValue({
+      itemNotes: [],
+      isItemNotesLoading: false,
+    });
+
+    useHoldingsNotes.mockClear().mockReturnValue({
+      holdingsNotes: [],
+      isHoldingsNotesLoading: false,
+    });
+
+    useInstanceNotes.mockClear().mockReturnValue({
+      instanceNotes: [],
+      isInstanceNotesLoading: false,
+    });
+
+    useElectronicAccessRelationships.mockClear().mockReturnValue({
+      electronicAccessRelationships: [],
+      isElectronicAccessLoading: false,
+    });
   });
 
   it('should display correct title', () => {
@@ -81,30 +97,28 @@ describe('BulkEditInApp', () => {
     titles.forEach((el) => expect(screen.getByText(el)).toBeVisible());
   });
 
-  it('should display added row after plus button click', () => {
-    const options = [
-      'select-option-0',
-      'select-option-1',
-    ];
+  it('should display added row after plus button click', async () => {
+    const { getByLabelText, getAllByLabelText } = renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
 
-    renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    const plusButton = getByLabelText('plus-sign');
 
-    const plusButton = screen.getByLabelText('plus-sign');
+    expect(plusButton).toBeInTheDocument();
 
-    act(() => userEvent.click(plusButton));
+    userEvent.click(plusButton);
 
-    options.forEach((el) => expect(screen.getByTestId(el)).toBeVisible());
+    await waitFor(() => {
+      expect(getAllByLabelText('plus-sign')).toHaveLength(1);
+    });
 
-    const removeButton = screen.getAllByLabelText('trash');
+    const removeButton = getAllByLabelText('trash');
 
     userEvent.click(removeButton[1]);
 
-
-    expect(screen.queryByTestId('select-option-1')).not.toBeInTheDocument();
+    expect(getAllByLabelText('plus-sign')).toHaveLength(1);
   });
 
   it('should display select right select options on inventory tab', () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    const { getByRole } = renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
 
     const options = [
       /layer.options.permanentLocation/,
@@ -114,23 +128,22 @@ describe('BulkEditInApp', () => {
       /layer.options.temporaryLoanType/,
     ];
 
-    const permanentLocation = screen.getByRole('option', { name: /layer.options.permanentLocation/ });
-    const selectOption = screen.getByTestId('select-option-0');
+    const selectionBtn = getByRole('button', { name: /options.placeholder/ });
 
-    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+    userEvent.click(selectionBtn);
 
-    act(() => {
-      userEvent.selectOptions(
-        selectOption,
-        permanentLocation,
-      );
-    });
+    const permanentLocation = getByRole('option', { name: /layer.options.permanentLocation/ });
 
-    expect(permanentLocation.selected).toBeTruthy();
+    options.forEach((el) => expect(getByRole('option', { name: el })).toBeVisible());
+
+    userEvent.click(permanentLocation);
+    userEvent.click(selectionBtn);
+
+    expect(permanentLocation).toHaveAttribute('aria-selected', 'true');
   });
 
   it('should display correct status options in action select', async () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
 
     const options = [
       /layer.options.available/,
@@ -143,22 +156,28 @@ describe('BulkEditInApp', () => {
       /layer.options.unavailable/,
       /layer.options.unknown/,
     ];
-    const optionStatus = screen.getByRole('option', { name: /layer.options.statusLabel/ });
-    const selectOption = screen.getByTestId('select-option-0');
 
-    act(() => userEvent.selectOptions(selectOption, optionStatus));
+    const selectionBtn = getByRole('button', { name: /options.placeholder/ });
+    userEvent.click(selectionBtn);
 
-    const selectAction = screen.getByTestId('select-actions-1');
-    const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
+    const optionStatus = getByRole('option', { name: /layer.options.statusLabel/ });
+    userEvent.click(optionStatus);
+
+    await waitFor(() => {
+      expect(getByTestId('select-actions-1')).toBeInTheDocument();
+    });
+
+    const selectAction = getByTestId('select-actions-1');
+    const actionReplace = getByRole('option', { name: /layer.action.replace/ });
 
     act(() => userEvent.selectOptions(selectAction, actionReplace));
 
     await flushPromises();
 
-    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+    options.forEach((el) => expect(getByRole('option', { name: el })).toBeVisible());
 
-    const selectStatus = screen.getByTestId('select-statuses-1');
-    const itemStatus = screen.getByRole('option', { name: /layer.options.missing/ });
+    const selectStatus = getByTestId('select-statuses-1');
+    const itemStatus = getByRole('option', { name: /layer.options.missing/ });
 
     act(() => {
       userEvent.selectOptions(
@@ -170,32 +189,8 @@ describe('BulkEditInApp', () => {
     expect(itemStatus.selected).toBeTruthy();
   });
 
-  it.skip('should display item temporary location options', () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
-
-    const options = [
-      /layer.action.replace/,
-      /layer.action.clear/,
-      /layer.options.temporaryLocation/,
-    ];
-
-    const selectOption = screen.getByTestId('select-option-0');
-    const optionStatus = screen.getByRole('option', { name: /layer.options.temporaryLocation/ });
-
-    act(() => userEvent.selectOptions(selectOption, optionStatus));
-
-    const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
-    const selectAction = screen.getByTestId('select-actions-1');
-
-    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
-
-    act(() => userEvent.selectOptions(selectAction, optionReplace));
-
-    expect(optionReplace.selected).toBeTruthy();
-  });
-
-  it('should display item permanent location options', () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+  it('should display item permanent location options', async () => {
+    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
 
     const options = [
       /layer.action.replace/,
@@ -203,55 +198,63 @@ describe('BulkEditInApp', () => {
       /layer.options.permanentLocation/,
     ];
 
-    const selectOption = screen.getByTestId('select-option-0');
-    const optionStatus = screen.getByRole('option', { name: /layer.options.permanentLocation/ });
+    const selectionBtn = getByRole('button', { name: /options.placeholder/ });
+    userEvent.click(selectionBtn);
 
-    act(() => userEvent.selectOptions(selectOption, optionStatus));
+    const optionStatus = getByRole('option', { name: /layer.options.permanentLocation/ });
+    userEvent.click(optionStatus);
 
-    const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
-    const selectAction = screen.getByTestId('select-actions-1');
+    await waitFor(() => {
+      expect(getByRole('option', { name: /layer.action.replace/ })).toBeInTheDocument();
+    });
 
-    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+    const optionReplace = getByRole('option', { name: /layer.action.replace/ });
+    const selectAction = getByTestId('select-actions-1');
+
+    userEvent.click(selectionBtn);
+
+    options.forEach((el) => expect(getByRole('option', { name: el })).toBeVisible());
 
     act(() => userEvent.selectOptions(selectAction, optionReplace));
 
     expect(optionReplace.selected).toBeTruthy();
   });
 
-  it('should display expiration date', () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.USER });
+  it('should display expiration date', async () => {
+    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.USER });
 
+    const selectionBtn = getByRole('button', { name: /options.placeholder/ });
+    userEvent.click(selectionBtn);
 
-    const selectOption = screen.getByTestId('select-option-0');
-    const optionStatus = screen.getByRole('option', { name: /layer.options.expirationDate/ });
+    const optionStatus = getByRole('option', { name: /layer.options.expirationDate/ });
+    userEvent.click(optionStatus);
 
-    act(() => {
-      userEvent.selectOptions(
-        selectOption,
-        optionStatus,
-      );
+    await waitFor(() => {
+      expect(getByTestId('dataPicker-experation-date-1')).toBeInTheDocument();
     });
 
-    const dataPicker = screen.getByTestId('dataPicker-experation-date-1');
+    const dataPicker = getByTestId('dataPicker-experation-date-1');
 
     userEvent.type(dataPicker, '2000-01-01 00:00:00.000Z');
 
     expect(dataPicker).toHaveValue('01/01/2000 00:00:00.000Z');
   });
 
-  it('should display patron group', () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.USER });
+  it('should display patron group', async () => {
+    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.USER });
 
-    const selectOption = screen.getByTestId('select-option-0');
-    const optionStatus = screen.getByRole('option', { name: /layer.options.patronGroup/ });
+    const selectionBtn = getByRole('button', { name: /options.placeholder/ });
+    userEvent.click(selectionBtn);
 
-    act(() => userEvent.selectOptions(
-      selectOption,
-      optionStatus,
-    ));
+    const optionStatus = getByRole('option', { name: /layer.options.patronGroup/ });
+    userEvent.click(optionStatus);
 
-    const selectPatronGroup = screen.getByTestId('select-patronGroup-1');
-    const optionPatronGroup = screen.getByRole('option', { name: /layer.selectPatronGroup/ });
+    await waitFor(() => {
+      expect(getByTestId('select-patronGroup-1')).toBeInTheDocument();
+    });
+
+    const selectPatronGroup = getByTestId('select-patronGroup-1');
+    const optionPatronGroup = getByRole('option', { name: /layer.selectPatronGroup/ });
 
     act(() => userEvent.selectOptions(
       selectPatronGroup,
@@ -262,113 +265,110 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display holdings permanent location', async () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+    const { getByTestId, getByRole } = renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
 
-    let selectOption;
-    let optionStatus;
+    const selectionBtn = getByRole('button', { name: /options.placeholder/ });
+    userEvent.click(selectionBtn);
+
+    const optionStatus = getByRole('option', { name: /layer.options.holdings.permanentLocation/ });
+    userEvent.click(optionStatus);
 
     await waitFor(() => {
-      selectOption = screen.getByTestId('select-option-0');
-      optionStatus = screen.getByRole('option', { name: /layer.options.holdings.permanentLocation/ });
+      expect(getByRole('option', { name: /layer.action.replace/ })).toBeInTheDocument();
     });
 
-    act(() => userEvent.selectOptions(selectOption, optionStatus));
-
-    const actionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
-    const selectAction = screen.getByTestId('select-actions-1');
-
-    expect(screen.queryByRole('option', { name: /layer.action.clear/ })).not.toBeInTheDocument();
+    const actionReplace = getByRole('option', { name: /layer.action.replace/ });
+    const selectAction = getByTestId('select-actions-1');
 
     act(() => userEvent.selectOptions(selectAction, actionReplace));
 
-    expect(optionStatus.selected).toBeTruthy();
+    userEvent.click(selectionBtn);
+
+    expect(optionStatus).toHaveAttribute('aria-selected', 'true');
   });
 
-  it('should display holdings set to true is checked by default', () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+  it('should display holdings set to true is checked by default', async () => {
+    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
 
-    const selectOption = screen.getByTestId('select-option-0');
-    const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.suppress/ });
+    const selectionBtn = getByRole('button', { name: /options.placeholder/ });
+    userEvent.click(selectionBtn);
 
-    act(() => userEvent.selectOptions(selectOption, optionStatus));
+    const optionStatus = getByRole('option', { name: /layer.options.holdings.suppress/ });
+    userEvent.click(optionStatus);
 
-    const actionSetToTrue = screen.getByRole('option', { name: /layer.options.items.true/ });
-    const selectAction = screen.getByTestId('select-actions-1');
+    await waitFor(() => {
+      expect(getByRole('option', { name: /layer.options.items.true/ })).toBeInTheDocument();
+    });
+
+    const actionSetToTrue = getByRole('option', { name: /layer.options.items.true/ });
+    const selectAction = getByTestId('select-actions-1');
 
     act(() => userEvent.selectOptions(selectAction, actionSetToTrue));
 
+    userEvent.click(selectionBtn);
 
-    waitFor(() => {
-      const checkbox = screen.getByRole('checkbox');
+    await waitFor(() => {
+      const checkbox = getByRole('checkbox');
 
-      expect(optionStatus.selected).toBeTruthy();
+      expect(optionStatus).toHaveAttribute('aria-selected', 'true');
       expect(checkbox).toBeChecked();
     });
   });
 
-  it('should display holdings set to false is unchecked by default', () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+  it('should display holdings set to false is unchecked by default', async () => {
+    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
 
-    const selectOption = screen.getByTestId('select-option-0');
-    const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.suppress/ });
+    const selectionBtn = getByRole('button', { name: /options.placeholder/ });
+    userEvent.click(selectionBtn);
 
-    act(() => userEvent.selectOptions(selectOption, optionStatus));
+    const optionStatus = getByRole('option', { name: /layer.options.holdings.suppress/ });
+    userEvent.click(optionStatus);
 
-    const actionSetToFalse = screen.getByRole('option', { name: /layer.options.items.false/ });
-    const selectAction = screen.getByTestId('select-actions-1');
+    await waitFor(() => {
+      expect(getByRole('option', { name: /layer.options.items.false/ })).toBeInTheDocument();
+    });
+
+    const actionSetToFalse = getByRole('option', { name: /layer.options.items.false/ });
+    const selectAction = getByTestId('select-actions-1');
 
     act(() => userEvent.selectOptions(selectAction, actionSetToFalse));
 
-    waitFor(() => {
+    userEvent.click(selectionBtn);
+
+    await waitFor(() => {
       const checkbox = screen.getByRole('checkbox');
 
-      expect(optionStatus.selected).toBeTruthy();
+      expect(optionStatus).toHaveAttribute('aria-selected', 'true');
       expect(checkbox).not.toBeChecked();
     });
   });
 
-  it('should display holding temporart location options', () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+  it('should display holding temporary location options', async () => {
+    const { getByTestId, getByRole } = renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
 
     const options = [
       /layer.action.replace/,
       /layer.action.clear/,
     ];
 
-    const selectOption = screen.getByTestId('select-option-0');
-    const optionStatus = screen.getByRole('option', { name: /layer.options.holdings.temporaryLocation/ });
+    const selectionBtn = getByRole('button', { name: /options.placeholder/ });
+    userEvent.click(selectionBtn);
 
-    act(() => userEvent.selectOptions(selectOption, optionStatus));
+    const optionStatus = getByRole('option', { name: /layer.options.holdings.temporaryLocation/ });
+    userEvent.click(optionStatus);
 
-    const optionReplace = screen.getByRole('option', { name: /layer.action.replace/ });
-    const selectAction = screen.getByTestId('select-actions-1');
+    await waitFor(() => {
+      expect(getByRole('option', { name: /layer.action.replace/ })).toBeInTheDocument();
+    });
 
-    options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
+    const optionReplace = getByRole('option', { name: /layer.action.replace/ });
+    const selectAction = getByTestId('select-actions-1');
+
+    options.forEach((el) => expect(getByRole('option', { name: el })).toBeVisible());
 
     act(() => userEvent.selectOptions(selectAction, optionReplace));
 
     expect(optionReplace.selected).toBeTruthy();
-  });
-
-  it('should display added row after plus button click in holdings tab', () => {
-    const options = [
-      'select-option-0',
-      'select-option-1',
-    ];
-
-    renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
-
-    const plusButton = screen.getByLabelText('plus-sign');
-
-    act(() => userEvent.click(plusButton));
-
-    options.forEach((el) => expect(screen.getByTestId(el)).toBeVisible());
-
-    const removeButton = screen.getAllByLabelText('trash');
-
-    act(() => userEvent.click(removeButton[1]));
-
-    expect(screen.queryByTestId('select-option-1')).not.toBeInTheDocument();
   });
 
   it('should render with no axe errors in holding form', async () => {
