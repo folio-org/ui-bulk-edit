@@ -19,12 +19,11 @@ import {
   getItemsOptions,
   getUserOptions
 } from '../../../../constants';
-import { useItemNotes } from '../../../../hooks/api/useItemNotes';
-import { useHoldingsNotes } from '../../../../hooks/api/useHoldingsNotes';
+import { useItemNotes, useHoldingsNotes, useInstanceNotes } from '../../../../hooks/api';
 import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
 import { useSearchParams } from '../../../../hooks';
 import { getDefaultActions } from './ContentUpdatesForm/helpers';
-import { useInstanceNotes } from '../../../../hooks/api/useInstanceNotes';
+
 import { RootContext } from '../../../../context/RootContext';
 
 export const BulkEditInApp = ({
@@ -57,9 +56,9 @@ export const BulkEditInApp = ({
     return ({
       id: uniqueId(),
       options,
-      option: options[0].value,
+      option: '',
       actionsDetails: getDefaultActions({
-        option: options[0].value,
+        option: '',
         capability: currentRecordType,
         options,
         formatMessage

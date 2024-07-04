@@ -10,3 +10,7 @@ export * from './usePatronGroup';
 export * from './useLoanTypes';
 export * from './useBulkOperationDetails';
 export * from './useQueryPlugin';
+export * from './useItemNotes';
+export * from './useHoldingsNotes';
+export * from './useInstanceNotes';
+export * from './useElectronicAccess';
