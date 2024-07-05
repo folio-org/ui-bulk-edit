@@ -42,7 +42,7 @@ export const getFormattedDate = (value) => {
 };
 
 export const isAddButtonShown = (index, fields, options) => {
-  return index === fields.length - 1 && fields.length !== options.length - 1;
+  return index === fields.length - 1 && fields.length !== options.length;
 };
 
 export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRecords }) => {
