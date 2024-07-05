@@ -86,7 +86,26 @@ export const getVisibleColumnsKeys = (columns) => {
 };
 
 export const customFilter = (value, dataOptions) => {
-  return dataOptions.filter(option => new RegExp(value, 'i').test(option.label));
+  return dataOptions.reduce((acc, option) => {
+    const optionLabelMatched = option.label.toLowerCase().includes(value.toLowerCase());
+
+    if (option.options?.length > 0) {
+      const filteredOptions = option.options.filter(opt => opt.label.toLowerCase().includes(value.toLowerCase()));
+
+      if (filteredOptions.length > 0) {
+        acc.push({
+          ...option,
+          options: filteredOptions,
+        });
+      } else if (optionLabelMatched) {
+        acc.push(option);
+      }
+    } else if (optionLabelMatched) {
+      acc.push(option);
+    }
+
+    return acc;
+  }, []);
 };
 
 export const setIn = (obj, path, value) => {
