@@ -253,6 +253,7 @@ export const ContentUpdatesForm = ({
                 dirty={!!field.option}
                 ariaLabel={`select-option-${index}`}
                 marginBottom0
+                listMaxHeight="50vh"
                 onFilter={customFilter}
               />
             </Col>

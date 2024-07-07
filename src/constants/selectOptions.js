@@ -50,6 +50,8 @@ export const getItemsWithPlaceholder = (items) => [
   ...items,
 ];
 
+export const getItemsWithoutPlaceholder = (items) => items.filter(item => item.value);
+
 export const identifierOptions = {
   [CAPABILITIES.USER]: [
     {
@@ -309,6 +311,11 @@ export const getInstanceNotes = (formatMessage, instanceNotes) => [
 
 export const getNotesOptions = (formatMessage, itemNotes) => [
   {
+    value: '',
+    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
+    disabled: true,
+  },
+  {
     value: OPTIONS.ADMINISTRATIVE_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
     disabled: false,
@@ -340,7 +347,7 @@ export const getDuplicateNoteOptions = (formatMessage) => [
 ];
 
 export const getItemsOptions = (formatMessage, itemNotes = []) => [
-  ...getNotesOptions(formatMessage, itemNotes),
+  ...getItemsWithoutPlaceholder(getNotesOptions(formatMessage, itemNotes)),
   {
     value: OPTIONS.STATUS,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.statusLabel' }),
