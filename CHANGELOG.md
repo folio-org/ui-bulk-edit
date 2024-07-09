@@ -39,6 +39,7 @@
 * [UIBULKED-425](https://folio-org.atlassian.net/browse/UIBULKED-425) Holdings record's column names cleanup.
 * [UIBULKED-487](https://folio-org.atlassian.net/browse/UIBULKED-487) Bulk edit of user records in local mode is not supported.
 * [UIBULKED-440](https://folio-org.atlassian.net/browse/UIBULKED-440) Add Search box to Group Component.
+* [UIBULKED-381](https://folio-org.atlassian.net/browse/UIBULKED-381) Localize Item record's column names
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
