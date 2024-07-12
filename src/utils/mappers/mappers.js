@@ -34,7 +34,7 @@ const formatData = ({ capability, column, data }) => {
       return <FormattedMessage id={`ui-bulk-edit.list.preview.table.status.${data}`} />;
     case capability === CAPABILITIES.USER && field === CUSTOM_ENTITY_COLUMNS.DATE_OF_BIRTH:
       return <FormattedUTCDate value={data} />;
-    case capability === CAPABILITIES.INSTANCE && [
+    case [CAPABILITIES.INSTANCE, CAPABILITIES.ITEM].includes(dataType) && [
       CUSTOM_ENTITY_COLUMNS.CATALOGED_DATE,
       CUSTOM_ENTITY_COLUMNS.MISSING_PIECES_DATE,
       CUSTOM_ENTITY_COLUMNS.ITEM_DAMAGE_STATUS_DATE,
