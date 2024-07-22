@@ -238,7 +238,7 @@
   "columns.ITEM.Last CheckIn": "Last check in",
   "columns.ITEM.Electronic access": "Electronic access",
   "columns.ITEM.Check in note": "Check in notes",
-  "columns.ITEM.Check out note": "Check out notes",
+  "columns.ITEM.Check out note": "Check out note",
   "columns.ITEM.Holdings (Location, Call number)": "Holdings (Location, Call number)",
   "columns.ITEM.Item UUID": "Item UUID",
   "columns.ITEM.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)",
