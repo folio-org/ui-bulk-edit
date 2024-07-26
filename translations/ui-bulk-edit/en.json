@@ -188,6 +188,7 @@
   "columns.USER.Tags": "Tags",
   "columns.USER.Custom fields": "Custom fields",
   "columns.USER.Link to the profile picture": "Link to the profile picture",
+  "columns.USER.Preferred email communications": "Preferred email communications",
 
   "columns.ITEM.Item id": "Item ID",
   "columns.ITEM.Version": "Version",
