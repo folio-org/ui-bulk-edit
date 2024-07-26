@@ -60,7 +60,7 @@ export const LogsTab = () => {
 
   const adaptedApplyFilters = useCallback(({ name, values }) => applyFilters(name, values), [applyFilters]);
 
-  const { data } = useBulkOperationUsers();
+  const { data } = useBulkOperationUsers(activeFilters?.entityType);
 
   const userOptions = data?.users.map(({ id, firstName, lastName, middleName, preferredFirstName }) => ({
     label: getFullName({ firstName, lastName, middleName, preferredFirstName }),
