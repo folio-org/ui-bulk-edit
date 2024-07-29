@@ -459,6 +459,7 @@
     "columns.HOLDINGS_RECORD.Holdings statement for indexes": "Holdings statement for indexes",
     "columns.HOLDINGS_RECORD.ILL policy": "ILL policy",
     "columns.HOLDINGS_RECORD.Order format": "Order format",
+    "columns.ITEM.Former identifier": "Former identifier",
     "columns.ITEM.Suppress from discovery": "Suppress from discovery",
     "columns.ITEM.Shelving order": "Shelving order",
     "columns.ITEM.Accession number": "Accession number",
@@ -489,7 +490,6 @@
     "columns.ITEM.Electronic access": "Electronic access",
     "columns.ITEM.Check in note": "Check in note",
     "columns.ITEM.Check out note": "Check out note",
-    "columns.ITEM.Former identifier": "Former identifier",
     "columns.ITEM.Item UUID": "Item UUID",
     "columns.ITEM.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)",
     "columns.ITEM.Holdings UUID": "Holdings UUID"
