@@ -29,7 +29,7 @@ import {
 } from '../../../../constants';
 import { useBulkOperationUsers } from '../../../../hooks/api/useBulkOperationUsers';
 import { getFullName } from '../../../../utils/getFullName';
-import { useLocationFilters, useSearchParams } from '../../../../hooks';
+import { useLocationFilters, useLogsQueryParams, useSearchParams } from '../../../../hooks';
 import { customFilter } from '../../../../utils/helpers';
 
 export const LogsTab = () => {
@@ -60,7 +60,9 @@ export const LogsTab = () => {
 
   const adaptedApplyFilters = useCallback(({ name, values }) => applyFilters(name, values), [applyFilters]);
 
-  const { data } = useBulkOperationUsers(activeFilters?.entityType);
+  const { logsQueryParams } = useLogsQueryParams({ search: location.search });
+
+  const { data } = useBulkOperationUsers(logsQueryParams);
 
   const userOptions = data?.users.map(({ id, firstName, lastName, middleName, preferredFirstName }) => ({
     label: getFullName({ firstName, lastName, middleName, preferredFirstName }),
@@ -181,6 +183,7 @@ export const LogsTab = () => {
           <Selection
             placeholder={intl.formatMessage({ id: 'ui-bulk-edit.logs.filter.user.placeholder' })}
             dataOptions={userOptions}
+            emptyMessage={intl.formatMessage({ id: 'ui-bulk-edit.logs.filter.user.placeholder.empty' })}
             value={activeFilters[LOGS_FILTERS.USER]?.toString()}
             onChange={values => adaptedApplyFilters({ name: LOGS_FILTERS.USER, values })}
             onFilter={customFilter}

@@ -8,7 +8,6 @@ import { renderHook } from '@testing-library/react-hooks';
 import { waitFor, act } from '@testing-library/react';
 
 import { useBulkOperationUsers } from './useBulkOperationUsers';
-import { QUERY_CAPABILITIES } from '../../constants';
 
 jest.mock('@folio/stripes/core', () => ({
   ...jest.requireActual('@folio/stripes/core'),
@@ -50,7 +49,7 @@ describe('useBulkOperationUsers', () => {
   });
 
   it('should fetch related users', async () => {
-    const { result } = renderHook(() => useBulkOperationUsers([QUERY_CAPABILITIES.ITEM]), { wrapper });
+    const { result } = renderHook(() => useBulkOperationUsers({}), { wrapper });
     await act(() => !result.current.isLoading);
 
     await waitFor(() => expect(result.current.isLoading).toBeFalsy());
