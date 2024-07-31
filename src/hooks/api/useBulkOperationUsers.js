@@ -1,8 +1,10 @@
 import { useQuery } from 'react-query';
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+import { omit } from 'lodash';
+
 import { makeQueryBuilder } from '@folio/stripes-acq-components';
 import noop from 'lodash/noop';
-import { PAGINATION_CONFIG as pagination } from '../../constants';
+import { LOGS_FILTERS, PAGINATION_CONFIG as pagination } from '../../constants';
 
 export const BULK_OPERATION_USERS_KEY = 'BULK_OPERATION_USERS_KEY';
 
@@ -16,7 +18,7 @@ export const useBulkOperationUsers = (filters, options) => {
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: BULK_OPERATION_USERS_KEY });
 
-  const logsQuery = buildLogsQuery(filters);
+  const logsQuery = buildLogsQuery(omit(filters, [LOGS_FILTERS.USER]));
 
   const searchParams = {
     query: logsQuery,
