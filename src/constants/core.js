@@ -21,13 +21,6 @@ export const CAPABILITIES = {
   USER: 'USER',
 };
 
-export const QUERY_CAPABILITIES = {
-  HOLDINGS_RECORD: 'HOLDINGS_RECORD',
-  INSTANCE: 'INSTANCE',
-  ITEM: 'ITEM',
-  USER: 'USER',
-};
-
 export const RECORD_TYPES = {
   [CAPABILITIES.HOLDING]: 'Holdings',
   [CAPABILITIES.INSTANCE]: 'Instances',

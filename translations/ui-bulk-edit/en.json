@@ -525,6 +525,8 @@
   "permissionsModal.list.subTitle": "{count, number} permissions found",
   "permissionsModal.cancel": "Cancel",
   "permissionsModal.save": "Save & close",
-  "permissionsModal.totalSelected": "Total selected: {count, number}"
+  "permissionsModal.totalSelected": "Total selected: {count, number}",
+
+  "logs.filter.user.placeholder.empty": "List is empty"
 
 }
