@@ -24,6 +24,8 @@ const BulkEditMarkActionRow = ({
     && action.meta.required
     && actionIndex > 0;
 
+  const getRequiredClassname = (isRequired, value) => ((isRequired && !value) ? `${css.required}` : `${css.fullWidth}`);
+
   const renderDataControl = (data, actionIndex, dataIndex) => {
     // render empty subfield column to have the same structure in columns
     const emptySubfieldColumn = longestField?.actions[actionIndex].data[dataIndex].key !== data.key
@@ -34,7 +36,7 @@ const BulkEditMarkActionRow = ({
         return (
           <>
             {emptySubfieldColumn}
-            <Col className={`${css.column} ${css.data}`}>
+            <Col className={`${css.column} ${css.data} ${css.flexRow}`}>
               <TextArea
                 data-row-index={rowIndex}
                 data-action-index={actionIndex}
@@ -42,35 +44,53 @@ const BulkEditMarkActionRow = ({
                 data-subfield-index={subfieldIndex}
                 value={data.value}
                 dirty={!!data.value}
+                required={data.meta.required}
+                validStylesEnabled
                 name="value"
+                noBorder
                 placeholder=""
                 onChange={onDataChange}
+                rootClass={getRequiredClassname(data.meta.required, data.value)}
                 hasClearIcon={false}
                 marginBottom0
                 aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.data' })}
               />
+              {data.meta.required && (
+                <span className={css.asterisk} aria-hidden>
+                  *
+                </span>)
+              }
             </Col>
           </>
         );
 
       case DATA_KEYS.SUBFIELD:
         return (
-          <Col className={`${css.column} ${css.subfield}`}>
+          <Col className={`${css.column} ${css.subfield} ${css.flexRow}`}>
             <TextField
               data-row-index={rowIndex}
               data-action-index={actionIndex}
               data-data-index={dataIndex}
               data-subfield-index={subfieldIndex}
               value={data.value}
+              required={data.meta.required}
               dirty={!!data.value}
+              noBorder={!data.value}
+              inputClass={getRequiredClassname(data.meta.required, data.value)}
               name="value"
               placeholder=""
+              validStylesEnabled
               onChange={onDataChange}
               hasClearIcon={false}
               marginBottom0
               aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.data' })}
               maxLength={SUBFIELD_MAX_LENGTH}
             />
+            {data.meta.required && (
+              <span className={css.asterisk} aria-hidden>
+                *
+              </span>)
+            }
           </Col>
         );
 
@@ -81,7 +101,7 @@ const BulkEditMarkActionRow = ({
 
   return actions.map((action, actionIndex) => !!action && (
     <Fragment key={actionIndex}>
-      <Col className={`${css.column} ${css.actions}`}>
+      <Col className={`${css.column} ${css.actions} ${css.flexRow}`}>
         <Select
           data-row-index={rowIndex}
           data-action-index={actionIndex}
@@ -93,9 +113,15 @@ const BulkEditMarkActionRow = ({
           dataOptions={action.meta.options}
           disabled={action.meta.disabled}
           onChange={onActionChange}
+          required={action.meta.required}
           marginBottom0
           aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.actions' })}
         />
+        {(action.meta.required && actionIndex > 0) && (
+          <span className={css.asterisk} aria-hidden>
+            *
+          </span>)
+        }
       </Col>
       {action.data.map((data, dataIndex) => renderDataControl(data, actionIndex, dataIndex))}
     </Fragment>

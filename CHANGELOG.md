@@ -43,6 +43,7 @@
 * [UIBULKED-489](https://folio-org.atlassian.net/browse/UIBULKED-489)"User" dropdown doesn't include Users that did bulk edit of ONLY Instance record type
 * [UIBULKED-488](https://folio-org.atlassian.net/browse/UIBULKED-488) Bulk edit of user records in local mode (CSV approach) is not supported in Query search.
 * [UIBULKED-512](https://folio-org.atlassian.net/browse/UIBULKED-512) Add missing translation for preferredEmailCommunications.
+* [UIBULKED-507](https://folio-org.atlassian.net/browse/UIBULKED-507) MARC Instance - Update required field notification.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
