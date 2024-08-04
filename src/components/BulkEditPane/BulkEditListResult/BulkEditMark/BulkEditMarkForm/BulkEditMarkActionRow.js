@@ -47,7 +47,7 @@ const BulkEditMarkActionRow = ({
                 required={data.meta.required}
                 validStylesEnabled
                 name="value"
-                noBorder
+                noBorder={!data.value}
                 placeholder=""
                 onChange={onDataChange}
                 rootClass={getRequiredClassname(data.meta.required, data.value)}
