@@ -101,7 +101,7 @@ const BulkEditMarkActionRow = ({
 
   return actions.map((action, actionIndex) => !!action && (
     <Fragment key={actionIndex}>
-      <Col className={`${css.column} ${css.actions} ${css.flexRow}`}>
+      <Col className={`${css.column} ${css.actions} ${(action.meta.required && actionIndex > 0) ? css.flexRow : null}`}>
         <Select
           data-row-index={rowIndex}
           data-action-index={actionIndex}
