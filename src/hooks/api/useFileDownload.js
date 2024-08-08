@@ -4,6 +4,7 @@ import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 export const QUERY_KEY_DOWNLOAD_LOGS = 'downloadLogs';
 export const QUERY_KEY_DOWNLOAD_ACTION_MENU = 'downloadActionMenu';
 export const QUERY_KEY_DOWNLOAD_PREVIEW_MODAL = 'downloadPreviewModal';
+export const QUERY_KEY_DOWNLOAD_MARK_PREVIEW_MODAL = 'downloadMarkPreviewModal';
 
 export const useFileDownload = ({
   id,

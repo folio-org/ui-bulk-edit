@@ -24,6 +24,7 @@ export const BulkEditPreviewModal = ({
   bulkDetails,
   isPreviewLoading,
   onKeepEditing,
+  onDownload,
   onChangesCommited,
 }) => {
   const callout = useShowCallout();
@@ -70,6 +71,7 @@ export const BulkEditPreviewModal = ({
           bulkOperationId={bulkDetails?.id}
           isActionButtonsDisabled={!isChangedPreviewReady || isPreviewLoading}
           onSave={handleBulkOperationStart}
+          onDownload={onDownload}
           onKeepEditing={onKeepEditing}
         />
       }
@@ -91,4 +93,5 @@ BulkEditPreviewModal.propTypes = {
   bulkDetails: PropTypes.object,
   onKeepEditing: PropTypes.func,
   onChangesCommited: PropTypes.func,
+  onDownload: PropTypes.func,
 };

@@ -1,23 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useIntl } from 'react-intl';
 
-import { useShowCallout } from '@folio/stripes-acq-components';
-
-import { useQueryClient } from 'react-query';
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditMark } from '../BulkEditListResult/BulkEditMark/BulkEditMark';
 import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
-import {
-  BULK_OPERATION_DETAILS_KEY,
-  PREVIEW_MODAL_KEY,
-  useBulkOperationDetails,
-  useBulkOperationStart
-} from '../../../hooks/api';
 import { getTransformedField } from '../BulkEditListResult/BulkEditMark/helpers';
 import { RootContext } from '../../../context/RootContext';
 import { useMarkContentUpdate } from '../../../hooks/api/useMarkContentUpdate';
-import { APPROACHES, EDITING_STEPS } from '../../../constants';
+import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
+import { QUERY_KEY_DOWNLOAD_MARK_PREVIEW_MODAL } from '../../../hooks/api';
 
 
 export const BulkEditMarkLayer = ({
@@ -27,27 +18,25 @@ export const BulkEditMarkLayer = ({
   closeMarkLayer,
   paneProps,
 }) => {
-  const callout = useShowCallout();
-  const intl = useIntl();
-  const queryClient = useQueryClient();
-
   const { fields } = useContext(RootContext);
-
-  const [openMarkPreviewModal, setOpenMarkPreviewModal] = useState(false);
-  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
-
-  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
-  const { bulkOperationStart } = useBulkOperationStart();
   const { markContentUpdate } = useMarkContentUpdate({ id: bulkOperationId });
 
-  const totalRecords = bulkDetails?.totalNumOfRecords;
-
-  const handleCloseMarkPreviewModal = () => {
-    setOpenMarkPreviewModal(false);
-  };
+  const {
+    isPreviewModalOpened,
+    isPreviewLoading,
+    bulkDetails,
+    totalRecords,
+    downloadFile,
+    confirmChanges,
+    closePreviewModal,
+  } = useConfirmChanges({
+    updateFn: markContentUpdate,
+    queryDownloadKey: QUERY_KEY_DOWNLOAD_MARK_PREVIEW_MODAL,
+    bulkOperationId,
+  });
 
   const handleChangesCommited = () => {
-    handleCloseMarkPreviewModal();
+    closePreviewModal();
     closeMarkLayer();
   };
 
@@ -58,28 +47,10 @@ export const BulkEditMarkLayer = ({
         ...getTransformedField(field),
       }));
 
-    markContentUpdate({
+    confirmChanges({
       bulkOperationMarcRules,
       totalRecords,
-    }).then(() => bulkOperationStart({
-      id: bulkOperationId,
-      approach: APPROACHES.IN_APP,
-      step: EDITING_STEPS.EDIT,
-    }))
-      .then(() => {
-        queryClient.invalidateQueries(BULK_OPERATION_DETAILS_KEY);
-        queryClient.invalidateQueries(PREVIEW_MODAL_KEY);
-      })
-      .catch(() => {
-        callout({
-          type: 'error',
-          message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
-        });
-        handleCloseMarkPreviewModal();
-      })
-      .finally(() => {
-        setIsPreviewLoading(false);
-      });
+    });
   };
 
   return (
@@ -97,8 +68,9 @@ export const BulkEditMarkLayer = ({
       <BulkEditPreviewModal
         isPreviewLoading={isPreviewLoading}
         bulkDetails={bulkDetails}
-        open={openMarkPreviewModal}
-        onKeepEditing={handleCloseMarkPreviewModal}
+        open={isPreviewModalOpened}
+        onDownload={downloadFile}
+        onKeepEditing={closePreviewModal}
         onChangesCommited={handleChangesCommited}
       />
     </>
