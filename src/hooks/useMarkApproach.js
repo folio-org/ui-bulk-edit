@@ -13,6 +13,7 @@ export const useMarkApproach = () => {
   const { setParam } = useSearchParams();
   const [fields, setFields] = useState(initialFields);
   const [isMarkLayerOpen, setIsMarkLayerOpen] = useState(false);
+  const [isMarkPreviewModalOpened, setIsMarkPreviewModalOpened] = useState(false);
 
   const errors = getMarkFormErrors(fields);
   const isMarkFieldsValid = Object.keys(errors).length === 0;
@@ -35,6 +36,8 @@ export const useMarkApproach = () => {
     setIsMarkLayerOpen,
     closeMarkLayer,
     openMarkLayer,
-    isMarkFieldsValid
+    isMarkFieldsValid,
+    isMarkPreviewModalOpened,
+    setIsMarkPreviewModalOpened,
   };
 };

@@ -14,7 +14,7 @@ import '../../../../test/jest/__mock__';
 import userEvent from '@testing-library/user-event';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 import { APPROACHES, CAPABILITIES, CRITERIA, IDENTIFIERS } from '../../../constants';
-import BulkEditMarkLayer from './BulkEditMarkLayer';
+import { BulkEditMarkLayer } from './BulkEditMarkLayer';
 import { RootContext } from '../../../context/RootContext';
 import { getDefaultMarkTemplate } from '../BulkEditListResult/BulkEditMark/helpers';
 import { ACTIONS } from '../../../constants/markActions';

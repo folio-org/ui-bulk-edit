@@ -25,19 +25,19 @@ import {
   useBulkOperationDetails,
   useContentUpdate,
   useFileDownload,
-  QUERY_KEY_DOWNLOAD_IN_APP,
-  IN_APP_PREVIEW_KEY,
+  QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
+  PREVIEW_MODAL_KEY,
   BULK_OPERATION_DETAILS_KEY,
 } from '../../../../hooks/api';
 import { getContentUpdatesBody } from '../BulkEditInApp/ContentUpdatesForm/helpers';
-import { BulkEditInAppPreviewModalFooter } from './BulkEditInAppPreviewModalFooter';
+import { BulkEditPreviewModalFooter } from './BulkEditPreviewModalFooter';
 import css from './BulkEditInAppPreviewModal.css';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
 import { usePagination } from '../../../../hooks/usePagination';
 import { useSearchParams } from '../../../../hooks';
 
-export const BulkEditInAppPreviewModal = ({
+export const BulkEditMarkPreviewModal = ({
   open,
   bulkOperationId,
   contentUpdates,
@@ -46,7 +46,7 @@ export const BulkEditInAppPreviewModal = ({
 }) => {
   const queryClient = useQueryClient();
   const [bulkOperationKey] = useNamespace({ key: BULK_OPERATION_DETAILS_KEY });
-  const [inAppPreviewKey] = useNamespace({ key: IN_APP_PREVIEW_KEY });
+  const [inAppPreviewKey] = useNamespace({ key: PREVIEW_MODAL_KEY });
   const callout = useShowCallout();
   const intl = useIntl();
   const history = useHistory();
@@ -82,7 +82,7 @@ export const BulkEditInAppPreviewModal = ({
     columnMapping,
     isFetching
   } = useRecordsPreview({
-    key: IN_APP_PREVIEW_KEY,
+    key: PREVIEW_MODAL_KEY,
     id: bulkOperationId,
     step: EDITING_STEPS.EDIT,
     capabilities: currentRecordType,
@@ -97,7 +97,7 @@ export const BulkEditInAppPreviewModal = ({
   });
 
   const { refetch } = useFileDownload({
-    queryKey: QUERY_KEY_DOWNLOAD_IN_APP,
+    queryKey: QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
     enabled: false, // to prevent automatic file fetch in preview modal
     id: bulkOperationId,
     fileInfo: {
@@ -188,7 +188,7 @@ export const BulkEditInAppPreviewModal = ({
       label={<FormattedMessage id="ui-bulk-edit.previewModal.areYouSure" />}
       aria-label="PreviewModal"
       footer={
-        <BulkEditInAppPreviewModalFooter
+        <BulkEditPreviewModalFooter
           isChangedPreviewReady={isChangedPreviewReady && !isPreviewLoading}
           onDownloadPreview={refetch}
           onSave={handleBulkOperationStart}
@@ -231,7 +231,7 @@ export const BulkEditInAppPreviewModal = ({
   );
 };
 
-BulkEditInAppPreviewModal.propTypes = {
+BulkEditMarkPreviewModal.propTypes = {
   open: PropTypes.bool,
   bulkOperationId: PropTypes.string,
   onKeepEditing: PropTypes.func,
