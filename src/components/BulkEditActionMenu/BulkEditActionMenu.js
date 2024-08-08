@@ -10,6 +10,7 @@ import {
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 
+import { useStripes } from '@folio/stripes/core';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
 import {
   APPROACHES,
@@ -37,6 +38,7 @@ const BulkEditActionMenu = ({
   onToggle,
   setFileInfo,
 }) => {
+  const stripes = useStripes();
   const intl = useIntl();
   const perms = useBulkPermissions();
   const {
@@ -69,6 +71,7 @@ const BulkEditActionMenu = ({
   const columns = visibleColumns || [];
   const visibleColumnKeys = getVisibleColumnsKeys(columns);
 
+  const isESC = stripes.user?.user?.consortium;
   const isStartBulkCsvActive = hasUserEditLocalPerm && currentRecordType === CAPABILITIES.USER;
   const isInitialStep = step === EDITING_STEPS.UPLOAD;
   const isStartBulkInAppActive =
@@ -76,7 +79,7 @@ const BulkEditActionMenu = ({
     && isInitialStep
     && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
   const isStartMarkActive = isStartBulkInAppActive && currentRecordType === CAPABILITIES.INSTANCE;
-  const isStartManualButtonVisible = isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && criteria !== CRITERIA.QUERY;
+  const isStartManualButtonVisible = isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && criteria !== CRITERIA.QUERY && !isESC;
 
   const isLastUnselectedColumn = (value) => {
     return visibleColumnKeys?.length === 1 && visibleColumnKeys?.[0] === value;

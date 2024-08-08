@@ -76,7 +76,7 @@ const BulkEditMarkTitle = () => {
               key={dataIndex}
               className={`${css.headerCell} ${data.key === DATA_KEYS.VALUE ? css.data : css.subfield}`}
             >
-              <Label required={data.meta.required}>
+              <Label>
                 {data.meta.title}
               </Label>
               <div className={css.splitter} />
