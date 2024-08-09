@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { saveAs } from 'file-saver';
 
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditInApp } from '../BulkEditListResult/BulkEditInApp/BulkEditInApp';
@@ -8,7 +7,6 @@ import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreview
 import { getContentUpdatesBody } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 import { QUERY_KEY_DOWNLOAD_PREVIEW_MODAL, useContentUpdate } from '../../../hooks/api';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
-import { getFormattedFilePrefixDate } from '../../../utils/date';
 import { savePreviewFile } from '../../../utils/files';
 
 
