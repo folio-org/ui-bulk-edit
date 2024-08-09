@@ -3,28 +3,70 @@ import PropTypes from 'prop-types';
 
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditInApp } from '../BulkEditListResult/BulkEditInApp/BulkEditInApp';
-import { BulkEditInAppPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal';
+import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
+import { getContentUpdatesBody } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
+import { QUERY_KEY_DOWNLOAD_PREVIEW_MODAL, useContentUpdate } from '../../../hooks/api';
+import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
+import { savePreviewFile } from '../../../utils/files';
 
-const BulkEditInAppLayer = ({
+
+export const BulkEditInAppLayer = ({
   bulkOperationId,
   contentUpdates,
   setContentUpdates,
   isInAppLayerOpen,
-  isPreviewModalOpened,
   paneProps,
   isInAppFormValid,
   closeInAppLayer,
-  openInAppPreviewModal,
-  closeInAppPreviewModal,
-  closePreviewAndLayer,
 }) => {
+  const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
+
+  const {
+    isPreviewModalOpened,
+    isPreviewLoading,
+    bulkDetails,
+    totalRecords,
+    downloadFile,
+    confirmChanges,
+    closePreviewModal,
+  } = useConfirmChanges({
+    queryDownloadKey: QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
+    updateFn: contentUpdate,
+    bulkOperationId,
+    onDownloadSuccess: (fileData, searchParams) => {
+      const { approach, initialFileName } = searchParams;
+
+      savePreviewFile({
+        bulkOperationId,
+        fileData,
+        approach,
+        initialFileName,
+      });
+    },
+  });
+
+  const handleChangesCommited = () => {
+    closePreviewModal();
+    closeInAppLayer();
+  };
+
+  const handleConfirm = () => {
+    const contentUpdatesBody = getContentUpdatesBody({
+      bulkOperationId,
+      contentUpdates,
+      totalRecords,
+    });
+
+    confirmChanges({ contentUpdates: contentUpdatesBody });
+  };
+
   return (
     <>
       <BulkEditLayer
         isLayerOpen={isInAppLayerOpen}
         isConfirmDisabled={!isInAppFormValid}
         onLayerClose={closeInAppLayer}
-        onConfirm={openInAppPreviewModal}
+        onConfirm={handleConfirm}
         {...paneProps}
       >
         <BulkEditInApp
@@ -32,15 +74,14 @@ const BulkEditInAppLayer = ({
         />
       </BulkEditLayer>
 
-      {isPreviewModalOpened && (
-        <BulkEditInAppPreviewModal
-          bulkOperationId={bulkOperationId}
-          open={isPreviewModalOpened}
-          contentUpdates={contentUpdates}
-          onKeepEditing={closeInAppPreviewModal}
-          onChangesCommited={closePreviewAndLayer}
-        />
-      )}
+      <BulkEditPreviewModal
+        isPreviewLoading={isPreviewLoading}
+        bulkDetails={bulkDetails}
+        open={isPreviewModalOpened}
+        onDownload={downloadFile}
+        onKeepEditing={closePreviewModal}
+        onChangesCommited={handleChangesCommited}
+      />
     </>
   );
 };
@@ -58,5 +99,3 @@ BulkEditInAppLayer.propTypes = {
   closeInAppPreviewModal: PropTypes.func,
   closePreviewAndLayer: PropTypes.func,
 };
-
-export default BulkEditInAppLayer;

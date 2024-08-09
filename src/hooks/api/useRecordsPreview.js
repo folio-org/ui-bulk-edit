@@ -9,7 +9,7 @@ import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
 
 export const RECORDS_PREVIEW_KEY = 'RECORDS_PREVIEW_KEY';
-export const IN_APP_PREVIEW_KEY = 'IN_APP_PREVIEW_KEY';
+export const PREVIEW_MODAL_KEY = 'PREVIEW_MODAL_KEY';
 
 export const useRecordsPreview = ({
   key,
@@ -29,7 +29,7 @@ export const useRecordsPreview = ({
 
   const { data, refetch, isLoading, dataUpdatedAt, isFetching } = useQuery(
     {
-      queryKey: [namespaceKey, id, step, limit, offset],
+      queryKey: [key, namespaceKey, id, step, limit, offset],
       cacheTime: 0,
       keepPreviousData: true,
       queryFn: () => {

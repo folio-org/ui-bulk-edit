@@ -9,7 +9,7 @@ import BulkEditMarkTitle from './BulkEditMarkTitle/BulkEditMarkTitle';
 import { RootContext } from '../../../../context/RootContext';
 
 
-const BulkEditMark = () => {
+export const BulkEditMark = () => {
   const stripes = useStripes();
   const intl = useIntl();
   const { title } = useContext(RootContext);
@@ -28,5 +28,3 @@ const BulkEditMark = () => {
     </TitleManager>
   );
 };
-
-export default BulkEditMark;

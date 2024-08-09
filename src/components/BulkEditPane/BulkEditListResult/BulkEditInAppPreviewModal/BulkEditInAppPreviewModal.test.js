@@ -25,7 +25,7 @@ import {
   useBulkOperationDetails,
   useRecordsPreview,
 } from '../../../../hooks/api';
-import { BulkEditInAppPreviewModal } from './BulkEditInAppPreviewModal';
+import { BulkEditPreviewModal } from './BulkEditPreviewModal';
 
 jest.mock('../../../../hooks/api', () => ({
   ...jest.requireActual('../../../../hooks/api'),
@@ -56,7 +56,7 @@ const renderPreviewModal = (props = defaultProps, fileName = 'barcodes.csv') => 
           setVisibleColumns,
         }}
         >
-          <BulkEditInAppPreviewModal {...props} />
+          <BulkEditPreviewModal {...props} />
         </RootContext.Provider>
       </QueryClientProvider>
     </MemoryRouter>,

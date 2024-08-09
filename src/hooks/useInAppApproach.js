@@ -32,11 +32,6 @@ export const useInAppApproach = () => {
     setIsPreviewModalOpened(false);
   }, []);
 
-  const closePreviewAndLayer = useCallback(() => {
-    closeInAppPreviewModal();
-    setIsInAppLayerOpen(false);
-  }, [closeInAppPreviewModal]);
-
   return {
     contentUpdates,
     setContentUpdates,
@@ -48,7 +43,6 @@ export const useInAppApproach = () => {
     openInAppLayer,
     openInAppPreviewModal,
     closeInAppPreviewModal,
-    closePreviewAndLayer,
     isInAppFormValid
   };
 };

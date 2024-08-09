@@ -3,7 +3,8 @@ import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 
 export const QUERY_KEY_DOWNLOAD_LOGS = 'downloadLogs';
 export const QUERY_KEY_DOWNLOAD_ACTION_MENU = 'downloadActionMenu';
-export const QUERY_KEY_DOWNLOAD_IN_APP = 'downloadInApp';
+export const QUERY_KEY_DOWNLOAD_PREVIEW_MODAL = 'downloadPreviewModal';
+export const QUERY_KEY_DOWNLOAD_MARK_PREVIEW_MODAL = 'downloadMarkPreviewModal';
 
 export const useFileDownload = ({
   id,
@@ -16,7 +17,7 @@ export const useFileDownload = ({
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: queryKey });
 
-  const { refetch } = useQuery(
+  const { refetch, isFetching } = useQuery(
     {
       queryKey: [namespaceKey, id, fileInfo],
       queryFn: () => ky.get(`bulk-operations/${id}/download`, {
@@ -29,5 +30,5 @@ export const useFileDownload = ({
     },
   );
 
-  return { refetch };
+  return { refetch, isFetching };
 };

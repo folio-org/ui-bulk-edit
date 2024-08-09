@@ -32,9 +32,9 @@ jest.mock('./BulkEditListResult/BulkEditManualUploadModal', () => {
     BulkEditManualUploadModal: jest.fn().mockReturnValue('BulkEditManualUploadModal'),
   };
 });
-jest.mock('./BulkEditListResult/BulkEditInAppPreviewModal/BulkEditInAppPreviewModal', () => {
+jest.mock('./BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal', () => {
   return {
-    BulkEditInAppPreviewModal: jest.fn().mockReturnValue('BulkEditInAppPreviewModal'),
+    BulkEditPreviewModal: jest.fn().mockReturnValue('BulkEditInAppPreviewModal'),
   };
 });
 

@@ -19,7 +19,7 @@ export const useBulkOperationDetails = ({
   const [refetchInterval, setRefetchInterval] = useState(interval);
 
   const { data, isLoading } = useQuery({
-    queryKey: [namespaceKey, id, refetchInterval, ...additionalQueryKeys],
+    queryKey: [BULK_OPERATION_DETAILS_KEY, namespaceKey, id, refetchInterval, ...additionalQueryKeys],
     enabled: !!id,
     refetchInterval,
     queryFn: () => ky.get(`bulk-operations/${id}`).json(),

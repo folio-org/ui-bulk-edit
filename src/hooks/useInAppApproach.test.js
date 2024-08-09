@@ -80,15 +80,4 @@ describe('useInAppApproach', () => {
 
     expect(result.current.isPreviewModalOpened).toBe(false);
   });
-
-  it('should close both preview modal and layer', () => {
-    const { result } = renderHook(() => useInAppApproach());
-
-    act(() => {
-      result.current.closePreviewAndLayer();
-    });
-
-    expect(result.current.isPreviewModalOpened).toBe(false);
-    expect(result.current.isInAppLayerOpen).toBe(false);
-  });
 });
