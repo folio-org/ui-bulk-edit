@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
-import { saveAs } from 'file-saver';
 
 import { useShowCallout } from '@folio/stripes-acq-components';
 
@@ -16,7 +15,6 @@ import {
   APPROACHES,
   EDITING_STEPS,
   FILE_SEARCH_PARAMS,
-  getFormattedFilePrefixDate
 } from '../constants';
 import { useSearchParams } from './useSearchParams';
 
@@ -25,14 +23,12 @@ export const useConfirmChanges = ({
   updateFn,
   queryDownloadKey,
   bulkOperationId,
+  onDownloadSuccess,
 }) => {
   const callout = useShowCallout();
   const intl = useIntl();
   const queryClient = useQueryClient();
-  const {
-    criteria,
-    initialFileName,
-  } = useSearchParams();
+  const searchParams = useSearchParams();
 
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
@@ -84,15 +80,7 @@ export const useConfirmChanges = ({
     fileInfo: {
       fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
     },
-    onSuccess: fileData => {
-      let fileName = initialFileName;
-
-      if (!initialFileName) {
-        fileName = `${criteria.charAt(0).toUpperCase().toUpperCase() + criteria.slice(1)}-${bulkOperationId}.csv`;
-      }
-
-      saveAs(new Blob([fileData]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
-    },
+    onSuccess: (data) => onDownloadSuccess(data, searchParams),
   });
 
   return {

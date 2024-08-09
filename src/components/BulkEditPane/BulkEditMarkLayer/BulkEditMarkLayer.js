@@ -9,6 +9,7 @@ import { RootContext } from '../../../context/RootContext';
 import { useMarkContentUpdate } from '../../../hooks/api/useMarkContentUpdate';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
 import { QUERY_KEY_DOWNLOAD_MARK_PREVIEW_MODAL } from '../../../hooks/api';
+import { savePreviewFile } from '../../../utils/files';
 
 
 export const BulkEditMarkLayer = ({
@@ -33,6 +34,16 @@ export const BulkEditMarkLayer = ({
     updateFn: markContentUpdate,
     queryDownloadKey: QUERY_KEY_DOWNLOAD_MARK_PREVIEW_MODAL,
     bulkOperationId,
+    onDownloadSuccess: (fileData, searchParams) => {
+      const { approach, initialFileName } = searchParams;
+
+      savePreviewFile({
+        bulkOperationId,
+        fileData,
+        approach,
+        initialFileName,
+      });
+    },
   });
 
   const handleChangesCommited = () => {

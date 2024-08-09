@@ -18,7 +18,7 @@ import { FormattedMessage } from 'react-intl';
 import { QUERY_KEY_DOWNLOAD_LOGS, useFileDownload } from '../../../hooks/api';
 import { APPROACHES, CAPABILITIES, linkNamesMap } from '../../../constants';
 import { useBulkPermissions } from '../../../hooks';
-import { getFileName } from '../../../utils/getFileName';
+import { getFileName } from '../../../utils/files';
 
 const BulkEditLogsActions = ({ item }) => {
   const fileNamePostfix = item.fqlQueryId ? `.${APPROACHES.QUERY}` : '';

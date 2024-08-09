@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 import React from 'react';
 import { EDITING_STEPS } from './core';
 
-// use as marks that files are ready
+// use as marks that getFileName are ready
 export const FILE_KEYS = {
   MATCHING_RECORDS_LINK: 'linkToMatchedRecordsCsvFile',
   MATCHING_ERRORS_LINK: 'linkToMatchedRecordsErrorsCsvFile',
