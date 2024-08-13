@@ -34,7 +34,7 @@ export const BulkEditPreviewModal = ({
 
   const { bulkOperationStart } = useBulkOperationStart();
 
-  const isChangedPreviewReady = bulkDetails && Object.hasOwn(bulkDetails, FILE_KEYS.PROPOSED_CHANGES_LINK);
+  const isChangedPreviewReady = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC] || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
 
   const handleBulkOperationStart = async () => {
     try {

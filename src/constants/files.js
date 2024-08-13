@@ -7,6 +7,7 @@ export const FILE_KEYS = {
   MATCHING_RECORDS_LINK: 'linkToMatchedRecordsCsvFile',
   MATCHING_ERRORS_LINK: 'linkToMatchedRecordsErrorsCsvFile',
   PROPOSED_CHANGES_LINK: 'linkToModifiedRecordsCsvFile',
+  PROPOSED_CHANGES_LINK_MARC: 'linkToModifiedRecordsMarcFile',
   UPDATED_RECORDS_LINK: 'linkToCommittedRecordsCsvFile',
   UPDATED_ERRORS_LINK: 'linkToCommittedRecordsErrorsCsvFile',
   TRIGGERING_FILE: 'linkToTriggeringCsvFile',
@@ -27,6 +28,7 @@ export const FILE_TO_LINK = {
   COMMITTED_RECORDS_FILE: 'linkToCommittedRecordsCsvFile',
   COMMITTING_CHANGES_ERROR_FILE: 'linkToCommittedRecordsErrorsCsvFile',
   PROPOSED_CHANGES_FILE: 'linkToModifiedRecordsCsvFile',
+  PROPOSED_CHANGES_FILE_MARK: 'linkToModifiedRecordsMarcFile',
 };
 
 export const getDownloadLinks = ({ perms, step }) => [
