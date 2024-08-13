@@ -28,7 +28,6 @@ export const FILE_TO_LINK = {
   COMMITTED_RECORDS_FILE: 'linkToCommittedRecordsCsvFile',
   COMMITTING_CHANGES_ERROR_FILE: 'linkToCommittedRecordsErrorsCsvFile',
   PROPOSED_CHANGES_FILE: 'linkToModifiedRecordsCsvFile',
-  PROPOSED_CHANGES_FILE_MARK: 'linkToModifiedRecordsMarcFile',
 };
 
 export const getDownloadLinks = ({ perms, step }) => [
