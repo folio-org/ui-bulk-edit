@@ -473,6 +473,7 @@
   "logs.entityType.ITEM": "Inventory - items",
   "logs.entityType.USER": "Users",
   "logs.entityType.INSTANCE": "Inventory - instances",
+  "logs.entityType.INSTANCE_MARC": "Inventory - instances (MARC)",
   "logs.approach.IN_APP": "In app",
   "logs.approach.MANUAL": "Local",
   "logs.approach.QUERY": "Query",
