@@ -2,11 +2,12 @@ import { FormattedMessage } from 'react-intl';
 import React from 'react';
 import { EDITING_STEPS } from './core';
 
-// use as marks that files are ready
+// use as marks that getFileName are ready
 export const FILE_KEYS = {
   MATCHING_RECORDS_LINK: 'linkToMatchedRecordsCsvFile',
   MATCHING_ERRORS_LINK: 'linkToMatchedRecordsErrorsCsvFile',
   PROPOSED_CHANGES_LINK: 'linkToModifiedRecordsCsvFile',
+  PROPOSED_CHANGES_LINK_MARC: 'linkToModifiedRecordsMarcFile',
   UPDATED_RECORDS_LINK: 'linkToCommittedRecordsCsvFile',
   UPDATED_ERRORS_LINK: 'linkToCommittedRecordsErrorsCsvFile',
   TRIGGERING_FILE: 'linkToTriggeringCsvFile',

@@ -188,7 +188,7 @@ describe('BulkEdit', () => {
     });
   });
 
-  describe('Should show expected messages if files are not valid', () => {
+  describe('Should show expected messages if getFileName are not valid', () => {
     const setupTest = async (files) => {
       renderBulkEdit();
 
@@ -213,7 +213,7 @@ describe('BulkEdit', () => {
       );
     });
 
-    it('should show modal when files count > 1', async () => {
+    it('should show modal when getFileName count > 1', async () => {
       await setupTest(
         [
           createFile('SearchHoldings.pdf', 1111, 'application/pdf'),

@@ -36,8 +36,8 @@ import { BulkEditQuery } from './BulkEditQuery/BulkEditQuery';
 import { BulkEditIdentifiers } from './BulkEditIdentifiers/BulkEditIdentifiers';
 import { useResetFilters } from '../../hooks/useResetFilters';
 
-import BulkEditInAppLayer from './BulkEditInAppLayer/BulkEditInAppLayer';
-import BulkEditMarkLayer from './BulkEditMarkLayer/BulkEditMarkLayer';
+import { BulkEditInAppLayer } from './BulkEditInAppLayer/BulkEditInAppLayer';
+import { BulkEditMarkLayer } from './BulkEditMarkLayer/BulkEditMarkLayer';
 
 export const BulkEditPane = () => {
   const [isFileUploaded, setIsFileUploaded] = useState(false);
@@ -167,6 +167,7 @@ export const BulkEditPane = () => {
         {...inAppApproach}
       />
       <BulkEditMarkLayer
+        bulkOperationId={bulkOperationId}
         paneProps={paneProps}
         {...markApproach}
       />
