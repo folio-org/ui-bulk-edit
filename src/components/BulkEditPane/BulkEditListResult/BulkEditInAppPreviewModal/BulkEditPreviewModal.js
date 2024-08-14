@@ -35,6 +35,9 @@ export const BulkEditPreviewModal = ({
   const { bulkOperationStart } = useBulkOperationStart();
 
   const isChangedPreviewReady = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC] || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
+  const downloadLabel = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC]
+    ? <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview.marc" />
+    : <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />;
 
   const handleBulkOperationStart = async () => {
     try {
@@ -68,6 +71,7 @@ export const BulkEditPreviewModal = ({
       aria-label="PreviewModal"
       footer={
         <BulkEditPreviewModalFooter
+          downloadLabel={downloadLabel}
           bulkOperationId={bulkDetails?.id}
           isActionButtonsDisabled={!isChangedPreviewReady || isPreviewLoading}
           onSave={handleBulkOperationStart}
