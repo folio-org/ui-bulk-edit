@@ -492,5 +492,11 @@
     "columns.ITEM.Check out note": "Check out note",
     "columns.ITEM.Item UUID": "Item UUID",
     "columns.ITEM.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)",
-    "columns.ITEM.Holdings UUID": "Holdings UUID"
+    "columns.ITEM.Holdings UUID": "Holdings UUID",
+    "logs.filter.user.placeholder.empty": "List is empty",
+    "columns.USER.Preferred email communications": "Preferred email communications",
+    "logs.actions.linkToModifiedRecordsMarcFile": "File with the preview of proposed changes",
+    "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "File with the preview of proposed changes",
+    "logs.entityType.INSTANCE_MARC": "Inventory - instances (MARC)",
+    "previewModal.downloadPreview.marc": "Download preview in MARC format"
 }

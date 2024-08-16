@@ -492,5 +492,11 @@
     "columns.ITEM.Check out note": "Notas de empréstimo",
     "columns.ITEM.Item UUID": "UUID do item",
     "columns.ITEM.Instance (Title, Publisher, Publication date)": "Instância (Título, Editora, Data de publicação)",
-    "columns.ITEM.Holdings UUID": "UUID da coleção"
+    "columns.ITEM.Holdings UUID": "UUID da coleção",
+    "logs.filter.user.placeholder.empty": "A lista está vazia",
+    "columns.USER.Preferred email communications": "Comunicações preferenciais por e-mail",
+    "logs.actions.linkToModifiedRecordsMarcFile": "Arquivo com a pré-visualização das alterações propostas",
+    "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "Arquivo com a pré-visualização das alterações propostas",
+    "logs.entityType.INSTANCE_MARC": "Inventário - instâncias (MARC)",
+    "previewModal.downloadPreview.marc": "Baixar a pré-visualização no formato MARC"
 }
