@@ -59,6 +59,7 @@
           "bulk-operations.item.upload.post",
           "bulk-operations.item.cancel.post",
           "bulk-operations.item.content-update.post",
+          "bulk-operations.item.marc-content-update.post",
           "bulk-operations.item.start.post",
           "inventory-storage.loan-types.collection.get",
           "inventory-storage.locations.collection.get",

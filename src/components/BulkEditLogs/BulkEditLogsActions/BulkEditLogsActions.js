@@ -92,7 +92,7 @@ const BulkEditLogsActions = ({ item }) => {
       !hasInventoryInstanceViewPerms) return null;
   if (item.entityType === CAPABILITIES.ITEM &&
       !hasInventoryInstanceViewPerms) return null;
-  if (item.entityType === CAPABILITIES.INSTANCE &&
+  if ([CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC].includes(item.entityType) &&
      !hasInventoryInstanceViewPerms) return null;
 
   return (
