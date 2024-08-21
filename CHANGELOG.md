@@ -47,6 +47,7 @@
 * [UIBULKED-517](https://folio-org.atlassian.net/browse/UIBULKED-517) Show "Are you sure?" form for MARK fields
 * [UIBULKED-499](https://folio-org.atlassian.net/browse/UIBULKED-499) Downloading .mrc file from Are you sure? form
 * [UIBULKED-527](https://folio-org.atlassian.net/browse/UIBULKED-527) include queryId to bulk-edit query request
+* [UIBULKED-518](https://folio-org.atlassian.net/browse/UIBULKED-518) The size of the dropdowns in the 'Actions' column is not consistent.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 

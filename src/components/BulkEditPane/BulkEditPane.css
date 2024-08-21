@@ -18,7 +18,9 @@
 }
 
 .column {
-    padding: 5px 8px;
+    position: relative;
+    align-self: flex-start;
+    padding: 5px 10px;
 }
 
 .column.fallback {
@@ -119,20 +121,16 @@
     gap: 10px;
 }
 
-
 .asterisk {
+    position: absolute;
+    right: 1px;
+    top: 0;
     color: var(--error);
     font-weight: bold;
-    padding: 0 0.1rem;
-}
-
-.flexRow {
-    display: flex;
 }
 
 .required {
     border: 1px solid var(--error) !important;
-    width: 100%;
 }
 
 .fullWidth {

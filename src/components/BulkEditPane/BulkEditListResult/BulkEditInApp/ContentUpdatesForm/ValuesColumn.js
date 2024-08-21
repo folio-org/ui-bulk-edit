@@ -102,6 +102,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textArea' })}
       marginBottom0
       dirty={!!actionValue}
+      fullWidth
+      lockWidth
     />
   );
 
