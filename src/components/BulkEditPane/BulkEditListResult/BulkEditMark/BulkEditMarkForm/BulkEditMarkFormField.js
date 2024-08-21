@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import get from 'lodash/get';
 
-import { Col, Row, TextField } from '@folio/stripes/components';
+import { Col, InfoPopover, Row, TextField } from '@folio/stripes/components';
 
 import { INDICATOR_FIELD_MAX_LENGTH, SUBFIELD_MAX_LENGTH, TAG_FIELD_MAX_LENGTH } from '../helpers';
 import BulkEditMarkActionRow from './BulkEditMarkActionRow';
@@ -46,6 +46,17 @@ const BulkEditMarkFormField = ({
     // memoization wil cost a lot for onResetSubfield function
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id, subfieldsCount]);
+
+  const renderInfoPopover = () => {
+    const errorId = errors[`[${index}]`];
+
+    return !!errorId && (
+      <InfoPopover
+        iconSize="medium"
+        content={formatMessage({ id: errorId })}
+      />
+    );
+  };
 
   return (
     <Row data-testid={`row-${index}`} className={css.markFieldRow}>
@@ -111,6 +122,7 @@ const BulkEditMarkFormField = ({
           marginBottom0
           aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.subfield' })}
         />
+        {renderInfoPopover()}
       </Col>
       <BulkEditMarkActionRow
         actions={field.actions}

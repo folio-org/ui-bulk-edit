@@ -33,6 +33,8 @@ const schema = array(object({
   ind2: string().required().length(INDICATOR_FIELD_MAX_LENGTH),
   subfields: array(object(subfieldSchema)).nullable(),
   ...subfieldSchema,
+}).test('tag-999', 'ui-bulk-edit.layer.marc.error.protected', (value) => {
+  return !(value.tag === '999' && value.ind1 === 'f' && value.ind2 === 'f');
 }));
 
 export const getMarkFormErrors = (fields) => {

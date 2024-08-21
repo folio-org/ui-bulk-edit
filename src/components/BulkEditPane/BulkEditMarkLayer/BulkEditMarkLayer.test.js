@@ -114,7 +114,7 @@ describe('BulkEditMarkLayer', () => {
       .toBe(3);
 
     // tooltips
-    expect(getByText('Limited to 5xx and 9xx.'))
+    expect(getByText('ui-bulk-edit.layer.marc.error.limited'))
       .toBeVisible();
 
     // controls
@@ -157,7 +157,7 @@ describe('BulkEditMarkLayer', () => {
     userEvent.type(inputField, '123');
 
     await waitFor(() => {
-      expect(screen.getByText(/layer.marc.error/))
+      expect(screen.getByText('ui-bulk-edit.layer.marc.error'))
         .toBeVisible();
     });
   });
@@ -173,7 +173,7 @@ describe('BulkEditMarkLayer', () => {
     userEvent.type(inputField, '123');
 
     await waitFor(() => {
-      expect(screen.getByText(/layer.marc.error/))
+      expect(screen.getByText('ui-bulk-edit.layer.marc.error'))
         .toBeVisible();
     });
   });
@@ -350,6 +350,25 @@ describe('BulkEditMarkLayer', () => {
         ],
         totalRecords: 1,
       });
+    });
+  });
+
+  it('should show info popover if field 999 and indicators are "f"', async () => {
+    const {
+      getByRole,
+    } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
+    const ind1Field = getByRole('textbox', { name: /ui-bulk-edit.layer.column.ind1/i });
+    const ind2Field = getByRole('textbox', { name: /ui-bulk-edit.layer.column.ind2/i });
+
+    userEvent.type(inputField, '999');
+    userEvent.type(ind1Field, 'f');
+    userEvent.type(ind2Field, 'f');
+
+    await waitFor(() => {
+      expect(getByRole('button', { name: /info/i }))
+        .toBeVisible();
     });
   });
 });

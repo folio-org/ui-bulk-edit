@@ -35,7 +35,7 @@ export const BulkEditPreviewModal = ({
   const { bulkOperationStart } = useBulkOperationStart();
 
   const hasLinkForDownload = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC] || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
-  const canCommitChanges = approach === APPROACHES.MARK || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
+
   const downloadLabel = approach === APPROACHES.MARK
     ? <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview.marc" />
     : <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />;
@@ -74,7 +74,7 @@ export const BulkEditPreviewModal = ({
         <BulkEditPreviewModalFooter
           downloadLabel={downloadLabel}
           bulkOperationId={bulkDetails?.id}
-          isCommitBtnDisabled={!canCommitChanges}
+          isCommitBtnDisabled={!hasLinkForDownload}
           isDownloadBtnDisabled={!hasLinkForDownload}
           onSave={handleBulkOperationStart}
           onDownload={onDownload}

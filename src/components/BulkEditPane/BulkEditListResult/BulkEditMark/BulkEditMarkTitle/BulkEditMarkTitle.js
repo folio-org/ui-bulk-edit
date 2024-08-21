@@ -23,7 +23,7 @@ const BulkEditMarkTitle = () => {
         </Label>
         <Tooltip
           id="field-tooltip"
-          text="Limited to 5xx and 9xx."
+          text={<FormattedMessage id="ui-bulk-edit.layer.marc.error.limited" />}
         >
           {({ ref, ariaIds }) => (
             <Icon

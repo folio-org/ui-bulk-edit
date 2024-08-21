@@ -41,6 +41,8 @@
 
 .headerCell.subfield,
 .column.subfield {
+    display: flex;
+    align-items: flex-start;
     width: 5%;
     min-width: 80px;
 }
