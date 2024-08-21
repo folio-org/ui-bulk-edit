@@ -59,7 +59,7 @@ export const BulkEditPreviewModalList = ({
   return (
     <>
       <MessageBanner type="warning">
-        <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: bulkDetails?.matchedNumOfRecords }} />
+        <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: bulkDetails?.processedNumOfRecords }} />
       </MessageBanner>
 
       <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
@@ -78,7 +78,7 @@ export const BulkEditPreviewModalList = ({
       {contentData.length > 0 && (
         <PrevNextPagination
           {...pagination}
-          totalCount={bulkDetails?.matchedNumOfRecords}
+          totalCount={bulkDetails?.processedNumOfRecords}
           disabled={false}
           onChange={changePage}
         />
