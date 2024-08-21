@@ -30,12 +30,13 @@ export const BulkEditPreviewModal = ({
   const callout = useShowCallout();
   const intl = useIntl();
   const history = useHistory();
-  const { criteria } = useSearchParams();
+  const { criteria, approach } = useSearchParams();
 
   const { bulkOperationStart } = useBulkOperationStart();
 
-  const isChangedPreviewReady = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC] || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
-  const downloadLabel = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC]
+  const hasLinkForDownload = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC] || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
+  const canCommitChanges = approach === APPROACHES.MARK || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
+  const downloadLabel = approach === APPROACHES.MARK
     ? <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview.marc" />
     : <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />;
 
@@ -73,7 +74,8 @@ export const BulkEditPreviewModal = ({
         <BulkEditPreviewModalFooter
           downloadLabel={downloadLabel}
           bulkOperationId={bulkDetails?.id}
-          isActionButtonsDisabled={!isChangedPreviewReady || isPreviewLoading}
+          isCommitBtnDisabled={!canCommitChanges}
+          isDownloadBtnDisabled={!hasLinkForDownload}
           onSave={handleBulkOperationStart}
           onDownload={onDownload}
           onKeepEditing={onKeepEditing}

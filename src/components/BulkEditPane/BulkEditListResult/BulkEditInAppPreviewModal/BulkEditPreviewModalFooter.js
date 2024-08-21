@@ -10,7 +10,8 @@ import css from './BulkEditInAppPreviewModal.css';
 export const BulkEditPreviewModalFooter = ({
   onDownload,
   downloadLabel,
-  isActionButtonsDisabled,
+  isCommitBtnDisabled,
+  isDownloadBtnDisabled,
   onKeepEditing,
   onSave,
 }) => {
@@ -19,10 +20,10 @@ export const BulkEditPreviewModalFooter = ({
       <Button onClick={onKeepEditing}>
         <FormattedMessage id="ui-bulk-edit.previewModal.keepEditing" />
       </Button>
-      <Button onClick={onDownload} disabled={isActionButtonsDisabled}>
+      <Button onClick={onDownload} disabled={isDownloadBtnDisabled}>
         {downloadLabel}
       </Button>
-      <Button onClick={onSave} buttonStyle="primary" disabled={isActionButtonsDisabled}>
+      <Button onClick={onSave} buttonStyle="primary" disabled={isCommitBtnDisabled}>
         <FormattedMessage id="ui-bulk-edit.previewModal.saveAndClose" />
       </Button>
     </div>
@@ -30,7 +31,8 @@ export const BulkEditPreviewModalFooter = ({
 };
 
 BulkEditPreviewModalFooter.propTypes = {
-  isActionButtonsDisabled: PropTypes.bool,
+  isDownloadBtnDisabled: PropTypes.bool,
+  isCommitBtnDisabled: PropTypes.bool,
   downloadLabel: PropTypes.node,
   onKeepEditing: PropTypes.func,
   onDownload: PropTypes.func,
