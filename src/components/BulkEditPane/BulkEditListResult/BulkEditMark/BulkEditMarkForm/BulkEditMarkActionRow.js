@@ -36,7 +36,7 @@ const BulkEditMarkActionRow = ({
         return (
           <>
             {emptySubfieldColumn}
-            <Col className={`${css.column} ${css.data} ${css.flexRow}`}>
+            <Col className={`${css.column} ${css.data}`}>
               <TextArea
                 data-row-index={rowIndex}
                 data-action-index={actionIndex}
@@ -54,19 +54,17 @@ const BulkEditMarkActionRow = ({
                 hasClearIcon={false}
                 marginBottom0
                 aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.data' })}
+                fullWidth
+                lockWidth
               />
-              {data.meta.required && (
-                <span className={css.asterisk} aria-hidden>
-                  *
-                </span>)
-              }
+              {data.meta.required && <span className={css.asterisk} aria-hidden>*</span>}
             </Col>
           </>
         );
 
       case DATA_KEYS.SUBFIELD:
         return (
-          <Col className={`${css.column} ${css.subfield} ${css.flexRow}`}>
+          <Col className={`${css.column} ${css.subfield}`}>
             <TextField
               data-row-index={rowIndex}
               data-action-index={actionIndex}
@@ -87,10 +85,10 @@ const BulkEditMarkActionRow = ({
               maxLength={SUBFIELD_MAX_LENGTH}
             />
             {data.meta.required && (
-              <span className={css.asterisk} aria-hidden>
-                *
-              </span>)
-            }
+            <span className={css.asterisk} aria-hidden>
+              *
+            </span>)
+              }
           </Col>
         );
 
@@ -101,7 +99,7 @@ const BulkEditMarkActionRow = ({
 
   return actions.map((action, actionIndex) => !!action && (
     <Fragment key={actionIndex}>
-      <Col className={`${css.column} ${css.actions} ${(action.meta.required && actionIndex > 0) ? css.flexRow : null}`}>
+      <Col className={`${css.column} ${css.actions}`}>
         <Select
           data-row-index={rowIndex}
           data-action-index={actionIndex}
@@ -116,12 +114,13 @@ const BulkEditMarkActionRow = ({
           required={action.meta.required}
           marginBottom0
           aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.actions' })}
+          fullWidth
         />
         {(action.meta.required && actionIndex > 0) && (
-          <span className={css.asterisk} aria-hidden>
-            *
-          </span>)
-        }
+        <span className={css.asterisk} aria-hidden>
+          *
+        </span>)
+          }
       </Col>
       {action.data.map((data, dataIndex) => renderDataControl(data, actionIndex, dataIndex))}
     </Fragment>
