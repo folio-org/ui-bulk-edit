@@ -74,8 +74,8 @@ export const BulkEditPreviewModal = ({
         <BulkEditPreviewModalFooter
           downloadLabel={downloadLabel}
           bulkOperationId={bulkDetails?.id}
-          isCommitBtnDisabled={!hasLinkForDownload}
-          isDownloadBtnDisabled={!hasLinkForDownload}
+          isCommitBtnDisabled={!hasLinkForDownload || isPreviewLoading}
+          isDownloadBtnDisabled={!hasLinkForDownload || isPreviewLoading}
           onSave={handleBulkOperationStart}
           onDownload={onDownload}
           onKeepEditing={onKeepEditing}
