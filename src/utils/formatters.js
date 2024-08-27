@@ -19,7 +19,7 @@ export const getLogsResultsFormatter = () => ({
   endTime: item => <FolioFormattedTime dateString={item.endTime} />,
   totalNumOfRecords: item => <FormattedNumber value={item.totalNumOfRecords} />,
   processedNumOfRecords: item => <FormattedNumber value={item.processedNumOfRecords} />,
-  editing: item => (
+  approach: item => (
     item.approach
       ? <FormattedMessage id={`ui-bulk-edit.logs.approach.${item.approach}`} />
       : <NoValue />

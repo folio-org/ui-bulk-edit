@@ -7,18 +7,21 @@ export const LOGS_COLUMNS = [
     value: 'entityType',
     disabled: false,
     selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.status" />,
     value: 'status',
     disabled: false,
     selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.editing" />,
-    value: 'editing',
+    value: 'approach',
     disabled: false,
     selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.totalNumOfRecords" />,
@@ -53,6 +56,7 @@ export const LOGS_COLUMNS = [
     value: 'userId',
     disabled: false,
     selected: false,
+    sortable: true,
   },
   {
     label: <FormattedMessage id="ui-bulk-edit.columns.logs.hrId" />,

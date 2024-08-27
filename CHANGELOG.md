@@ -49,6 +49,7 @@
 * [UIBULKED-527](https://folio-org.atlassian.net/browse/UIBULKED-527) include queryId to bulk-edit query request
 * [UIBULKED-518](https://folio-org.atlassian.net/browse/UIBULKED-518) The size of the dropdowns in the 'Actions' column is not consistent.
 * [UIBULKED-522](https://folio-org.atlassian.net/browse/UIBULKED-522) The progress bar disappears after clicking the 'Reset all' button on the 'Logs' tab.
+* [UIBULKED-528](https://folio-org.atlassian.net/browse/UIBULKED-528) Add more sortings options to bulk edit logs.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
