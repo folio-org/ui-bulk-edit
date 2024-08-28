@@ -336,7 +336,7 @@
   "columns.logs.endTime": "Ended",
   "columns.logs.totalNumOfRecords": "# of records",
   "columns.logs.processedNumOfRecords": "Processed",
-  "columns.logs.editing": "Editing",
+  "columns.logs.approach": "Editing",
   "columns.logs.actions": "Actions",
 
   "menuGroup.actions": "Actions",

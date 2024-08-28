@@ -17,7 +17,7 @@ export const LOGS_COLUMNS = [
     sortable: true,
   },
   {
-    label: <FormattedMessage id="ui-bulk-edit.columns.logs.editing" />,
+    label: <FormattedMessage id="ui-bulk-edit.columns.logs.approach" />,
     value: 'approach',
     disabled: false,
     selected: false,
