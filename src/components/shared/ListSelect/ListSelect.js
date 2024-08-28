@@ -19,7 +19,7 @@ export const ListSelect = memo(({
   const isCentral = stripes.user?.user?.consortium?.centralTenantId;
 
   const options = identifierOptions[capabilities]?.filter((el) => {
-    return !(isCentral && el.isCentralTenant);
+    return !(isCentral && el.isIgnoredInCentralTenant);
   }).map((el) => ({
     value: el.value,
     label: intl.formatMessage({ id: el.label }),

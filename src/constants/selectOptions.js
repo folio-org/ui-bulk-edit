@@ -95,17 +95,17 @@ export const identifierOptions = {
     {
       value: IDENTIFIERS.FORMER_IDS,
       label: 'ui-bulk-edit.list.filters.recordIdentifier.item.former',
-      isCentralTenant: true,
+      isIgnoredInCentralTenant: true,
     },
     {
       value: IDENTIFIERS.ACCESSION_NUMBER,
       label: 'ui-bulk-edit.list.filters.recordIdentifier.item.accession',
-      isCentralTenant: true,
+      isIgnoredInCentralTenant: true,
     },
     {
       value: IDENTIFIERS.HOLDINGS_RECORD_ID,
       label: 'ui-bulk-edit.list.filters.recordIdentifier.item.holdingsUUID',
-      isCentralTenant: true,
+      isIgnoredInCentralTenant: true,
     },
   ],
   [CAPABILITIES.HOLDING]: [
@@ -128,7 +128,7 @@ export const identifierOptions = {
     {
       value: IDENTIFIERS.ITEM_BARCODE,
       label: 'ui-bulk-edit.list.filters.recordIdentifier.holdings.itemBarcodes',
-      isCentralTenant: true,
+      isIgnoredInCentralTenant: true,
     },
   ],
   [CAPABILITIES.INSTANCE]: [
