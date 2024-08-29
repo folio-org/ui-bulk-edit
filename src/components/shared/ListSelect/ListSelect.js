@@ -7,7 +7,6 @@ import { Select } from '@folio/stripes/components';
 import { useStripes } from '@folio/stripes/core';
 import { identifierOptions } from '../../../constants';
 
-
 export const ListSelect = memo(({
   value = '',
   capabilities = '',
@@ -16,10 +15,11 @@ export const ListSelect = memo(({
 }) => {
   const intl = useIntl();
   const stripes = useStripes();
-  const isCentral = stripes.user?.user?.consortium?.centralTenantId;
+  const isCentralTenant = stripes.user?.user?.consortium?.centralTenantId;
+  const tenantId = stripes.okapi.tenant;
 
   const options = identifierOptions[capabilities]?.filter((el) => {
-    return !(isCentral && el.isIgnoredInCentralTenant);
+    return !(isCentralTenant === tenantId && el.isIgnoredInCentralTenant);
   }).map((el) => ({
     value: el.value,
     label: intl.formatMessage({ id: el.label }),
