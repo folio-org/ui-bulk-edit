@@ -100,6 +100,7 @@ export const BulkEditLogs = () => {
               hasMargin
               height={height - PrevNextPagination.HEIGHT}
               width={width}
+              showSortIndicator
             />
 
             {logs.length > 0 && (
