@@ -48,6 +48,7 @@
 * [UIBULKED-499](https://folio-org.atlassian.net/browse/UIBULKED-499) Downloading .mrc file from Are you sure? form
 * [UIBULKED-527](https://folio-org.atlassian.net/browse/UIBULKED-527) include queryId to bulk-edit query request
 * [UIBULKED-518](https://folio-org.atlassian.net/browse/UIBULKED-518) The size of the dropdowns in the 'Actions' column is not consistent.
+* [UIBULKED-522](https://folio-org.atlassian.net/browse/UIBULKED-522) The progress bar disappears after clicking the 'Reset all' button on the 'Logs' tab.
 * [UIBULKED-515](https://folio-org.atlassian.net/browse/UIBULKED-515) Limit identifiers options for holdings and items in ECS environment on Central tenant.
 
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)

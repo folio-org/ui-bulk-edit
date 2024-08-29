@@ -40,7 +40,8 @@ export const LogsTab = () => {
     initialFileName,
     identifier,
     capabilities,
-    queryRecordType
+    queryRecordType,
+    progress,
   } = useSearchParams();
 
   const [
@@ -55,6 +56,7 @@ export const LogsTab = () => {
       queryRecordType,
       criteria: CRITERIA.LOGS,
       fileName: initialFileName,
+      progress,
     }
   });
 
