@@ -148,7 +148,6 @@
     "permission.app-edit.users": " 批次編輯：在應用程式內 - 編輯使用者記錄",
     "permission.logs.view": "批次編輯：可以查看日誌紀錄",
     "columns.logs.status": "狀態",
-    "columns.logs.editing": "編輯",
     "columns.logs.actions": "操作",
     "list.actions.download": "下載",
     "retrievedDataList.title": "找到{matched, number}匹配的{capability}記錄。",
@@ -498,5 +497,8 @@
     "logs.actions.linkToModifiedRecordsMarcFile": "File with the preview of proposed changes",
     "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "File with the preview of proposed changes",
     "logs.entityType.INSTANCE_MARC": "Inventory - instances (MARC)",
-    "previewModal.downloadPreview.marc": "Download preview in MARC format"
+    "previewModal.downloadPreview.marc": "Download preview in MARC format",
+    "layer.marc.error.protected": "This field is protected.",
+    "layer.marc.error.limited": "Limited to 5xx and 9xx.",
+    "columns.logs.approach": "Editing"
 }

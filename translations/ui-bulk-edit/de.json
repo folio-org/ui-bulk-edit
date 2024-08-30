@@ -148,7 +148,6 @@
     "permission.app-edit.users": " Bulk edit: In app - Edit user records",
     "permission.logs.view": "Massenbearbeitung: Kann Protokolle anzeigen",
     "columns.logs.status": "Status",
-    "columns.logs.editing": "Editing",
     "columns.logs.actions": "Aktionen",
     "list.actions.download": "Herunterladen",
     "retrievedDataList.title": "{matched, number} matching {capability} records found.",
@@ -498,5 +497,8 @@
     "logs.actions.linkToModifiedRecordsMarcFile": "File with the preview of proposed changes",
     "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "File with the preview of proposed changes",
     "logs.entityType.INSTANCE_MARC": "Inventory - instances (MARC)",
-    "previewModal.downloadPreview.marc": "Download preview in MARC format"
+    "previewModal.downloadPreview.marc": "Download preview in MARC format",
+    "layer.marc.error.protected": "This field is protected.",
+    "layer.marc.error.limited": "Limited to 5xx and 9xx.",
+    "columns.logs.approach": "Editing"
 }
