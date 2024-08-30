@@ -148,7 +148,6 @@
     "permission.app-edit.users": " Bulk edit: In app - Edit user records",
     "permission.logs.view": "Bulk edit: Can view logs",
     "columns.logs.status": "Statut",
-    "columns.logs.editing": "Editing",
     "columns.logs.actions": "Actions",
     "list.actions.download": "Télécharger",
     "retrievedDataList.title": "{matched, number} matching {capability} records found.",
@@ -222,7 +221,7 @@
     "columns.ITEM.In Transit Destination Service Point": "In transit destination service point",
     "columns.ITEM.Purchase Order Line Identifier": "Purchase order line identifier",
     "columns.ITEM.Tags": "Mots-clés",
-    "columns.ITEM.Last CheckIn": "Last check in",
+    "columns.ITEM.Last CheckIn": "Dernier retour",
     "columns.HOLDINGS_RECORD.Holdings record id": "Holdings ID",
     "columns.HOLDINGS_RECORD.Version": "Version",
     "columns.HOLDINGS_RECORD.Holdings type": "Holdings type",
@@ -273,8 +272,8 @@
     "layer.options.items.removeAll": "Remove all",
     "layer.options.items.addNote": "Add note",
     "layer.options.administrativeNote": "Administrative note",
-    "layer.options.checkInNote": "Check in note",
-    "layer.options.checkOutNote": "Check out note",
+    "layer.options.checkInNote": "Note de retour",
+    "layer.options.checkOutNote": "Note d'emprunt",
     "ariaLabel.textField": "Text field",
     "ariaLabel.textArea": "Text area",
     "ariaLabel.patronGroupSelect": "Sélection du groupe d'usagers",
@@ -498,5 +497,8 @@
     "logs.actions.linkToModifiedRecordsMarcFile": "File with the preview of proposed changes",
     "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "File with the preview of proposed changes",
     "logs.entityType.INSTANCE_MARC": "Inventory - instances (MARC)",
-    "previewModal.downloadPreview.marc": "Download preview in MARC format"
+    "previewModal.downloadPreview.marc": "Download preview in MARC format",
+    "layer.marc.error.protected": "This field is protected.",
+    "layer.marc.error.limited": "Limited to 5xx and 9xx.",
+    "columns.logs.approach": "Editing"
 }

@@ -148,7 +148,6 @@
     "permission.app-edit.users": "Cambios globales: In app - Actualizar los registros de los usuarios",
     "permission.logs.view": "Cambios globales- Puede ver los registros",
     "columns.logs.status": "Estado",
-    "columns.logs.editing": "Edición de",
     "columns.logs.actions": "Comportamiento",
     "list.actions.download": "Descargar",
     "retrievedDataList.title": "{matched, number} registros {capability} coincidentes encontrados.",
@@ -498,5 +497,8 @@
     "logs.actions.linkToModifiedRecordsMarcFile": "File with the preview of proposed changes",
     "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "File with the preview of proposed changes",
     "logs.entityType.INSTANCE_MARC": "Inventory - instances (MARC)",
-    "previewModal.downloadPreview.marc": "Download preview in MARC format"
+    "previewModal.downloadPreview.marc": "Download preview in MARC format",
+    "layer.marc.error.protected": "This field is protected.",
+    "layer.marc.error.limited": "Limited to 5xx and 9xx.",
+    "columns.logs.approach": "Editing"
 }
