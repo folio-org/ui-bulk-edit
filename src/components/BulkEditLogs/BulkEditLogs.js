@@ -23,6 +23,7 @@ import { useBulkEditLogs } from '../../hooks/api';
 
 const resetData = () => {};
 
+const nonInteractiveHeaders = ['actions'];
 const visibleColumns = LOGS_COLUMNS.map(i => i.value);
 const columnMapping = LOGS_COLUMNS.reduce((acc, el) => {
   acc[el.value] = el.label;
@@ -101,6 +102,7 @@ export const BulkEditLogs = () => {
               height={height - PrevNextPagination.HEIGHT}
               width={width}
               showSortIndicator
+              nonInteractiveHeaders={nonInteractiveHeaders}
             />
 
             {logs.length > 0 && (
