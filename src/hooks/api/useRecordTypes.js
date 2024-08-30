@@ -12,7 +12,7 @@ export const useRecordTypes = ({ enabled } = {}) => {
     queryFn: async () => {
       const response = await ky.get('entity-types');
 
-      return response.json();
+      return (await response.json()).entityTypes;
     },
     cacheTime: Infinity,
     staleTime: Infinity,

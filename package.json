@@ -14,6 +14,7 @@
     "home": "/bulk-edit",
     "okapiInterfaces": {
       "bulk-operations": "1.0",
+      "entity-types": "2.0",
       "users": "15.4 16.0"
     },
     "optionalOkapiInterfaces": {},
