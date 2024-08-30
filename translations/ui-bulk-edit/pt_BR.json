@@ -148,7 +148,6 @@
     "permission.app-edit.users": " Edição em massa: no aplicativo - Editar registros de usuários",
     "permission.logs.view": "Edição em massa: pode visualizar logs",
     "columns.logs.status": "Status",
-    "columns.logs.editing": "Editando",
     "columns.logs.actions": "Ações",
     "list.actions.download": "Baixar",
     "retrievedDataList.title": "{matched, number} registros correspondentes a {capability} encontrados.",
@@ -498,5 +497,8 @@
     "logs.actions.linkToModifiedRecordsMarcFile": "Arquivo com a pré-visualização das alterações propostas",
     "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "Arquivo com a pré-visualização das alterações propostas",
     "logs.entityType.INSTANCE_MARC": "Inventário - instâncias (MARC)",
-    "previewModal.downloadPreview.marc": "Baixar a pré-visualização no formato MARC"
+    "previewModal.downloadPreview.marc": "Baixar a pré-visualização no formato MARC",
+    "layer.marc.error.protected": "Este campo está protegido.",
+    "layer.marc.error.limited": "Limitado a 5xx e 9xx.",
+    "columns.logs.approach": "Editando"
 }

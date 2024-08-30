@@ -148,7 +148,6 @@
     "permission.app-edit.users": "Hromadná úprava: V aplikaci - Úprava uživatelských záznamů",
     "permission.logs.view": "Hromadná úprava - Může prohlížet logy",
     "columns.logs.status": "Stav",
-    "columns.logs.editing": "Úpravy",
     "columns.logs.actions": "Akce",
     "list.actions.download": "Stáhnout",
     "retrievedDataList.title": "Nalezeno {matched, number} odpovídajících {capability} záznamů.",
@@ -498,5 +497,8 @@
     "logs.actions.linkToModifiedRecordsMarcFile": "Soubor s náhledem navrhovaných změn",
     "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "Soubor s náhledem navrhovaných změn",
     "logs.entityType.INSTANCE_MARC": "Katalog: tituly (MARC)",
-    "previewModal.downloadPreview.marc": "Stáhnout náhled ve formátu MARC"
+    "previewModal.downloadPreview.marc": "Stáhnout náhled ve formátu MARC",
+    "layer.marc.error.protected": "Toto pole je chráněno.",
+    "layer.marc.error.limited": "Omezeno na 5xx a 9xx.",
+    "columns.logs.approach": "Úpravy"
 }
