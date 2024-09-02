@@ -53,6 +53,25 @@
 * [UIBULKED-528](https://folio-org.atlassian.net/browse/UIBULKED-528) Add more sortings options to bulk edit logs.
 * [UIBULKED-536](https://folio-org.atlassian.net/browse/UIBULKED-536) Declare dependency on FQM `entity-types` interface; support new response format.
 
+## [4.1.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.4) (2024-05-29)
+
+* [UIBULKED-493](https://folio-org.atlassian.net/browse/UIBULKED-493) Rename "Find (full field search)" to "Find" for bulk edit Email in Users record type.
+
+## [4.1.3](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.3) (2024-04-19)
+
+* [UIBULKED-478](https://folio-org.atlassian.net/browse/UIBULKED-478) Update permissions related to export manager module.
+
+## [4.1.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.2) (2024-04-12)
+
+* [UIBULKED-467](https://issues.folio.org/browse/UIBULKED-467) File is not downloaded to local machine when "Actions" menu is closed
+* [UIBULKED-463](https://folio-org.atlassian.net/browse/UIBULKED-463) Update translation with new key fo columns
+* [UIBULKED-472](https://folio-org.atlassian.net/browse/UIBULKED-472) Fix 100% progress bar when progress is not available.
+* [UIBULKED-471](https://folio-org.atlassian.net/browse/UIBULKED-471) Rename "Find" to "Find (full field search)".
+
+## [4.1.1](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.1) (2024-04-03)
+
+* [UIBULKED-465](https://issues.folio.org/browse/UIBULKED-465) Local approach - Incorrect numbers of changed records and errors are displayed on Confirmation screen
+
 ## [4.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.0) (2024-03-19)
 
 * [UIBULKED-355](https://issues.folio.org/browse/UIBULKED-355) Remove reference to Query tab on the landing page.
