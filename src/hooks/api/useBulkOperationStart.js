@@ -3,19 +3,17 @@ import { useMutation, useQuery } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
 
-import { useIntl } from 'react-intl';
-import { useShowCallout } from '@folio/stripes-acq-components';
 import {
   IDENTIFIERS,
   JOB_STATUSES,
   EDITING_STEPS,
 } from '../../constants';
+import { useErrorMessages } from '../useErrorMessages';
 
 export const useBulkOperationStart = (mutationOptions = {}) => {
   const params = useRef({});
   const ky = useOkapiKy();
-  const intl = useIntl();
-  const callout = useShowCallout();
+  const { showErrorMessage } = useErrorMessages();
 
   const { refetch: fetchBulkOperation } = useQuery({
     queryFn: async () => {
@@ -66,12 +64,7 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
           json: body,
         });
 
-        if (startResult?.errorMessage) {
-          callout({
-            type: 'error',
-            message: intl.formatMessage({ id: `ui-bulk-edit.${startResult.errorMessage}` }),
-          });
-        }
+        showErrorMessage(startResult);
 
       // eslint-disable-next-line no-empty
       } catch (e) {}
