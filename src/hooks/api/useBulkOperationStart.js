@@ -3,6 +3,8 @@ import { useMutation, useQuery } from 'react-query';
 
 import { useOkapiKy } from '@folio/stripes/core';
 
+import { useIntl } from 'react-intl';
+import { useShowCallout } from '@folio/stripes-acq-components';
 import {
   IDENTIFIERS,
   JOB_STATUSES,
@@ -12,6 +14,8 @@ import {
 export const useBulkOperationStart = (mutationOptions = {}) => {
   const params = useRef({});
   const ky = useOkapiKy();
+  const intl = useIntl();
+  const callout = useShowCallout();
 
   const { refetch: fetchBulkOperation } = useQuery({
     queryFn: async () => {
@@ -58,9 +62,17 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
       params.current = { id, step };
 
       try {
-        await ky.post(`bulk-operations/${id}/start`, {
+        const startResult = await ky.post(`bulk-operations/${id}/start`, {
           json: body,
         });
+
+        if (startResult?.errorMessage) {
+          callout({
+            type: 'error',
+            message: intl.formatMessage({ id: `ui-bulk-edit.${startResult.errorMessage}` }),
+          });
+        }
+
       // eslint-disable-next-line no-empty
       } catch (e) {}
 

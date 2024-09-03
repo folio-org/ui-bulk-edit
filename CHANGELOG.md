@@ -52,6 +52,7 @@
 * [UIBULKED-515](https://folio-org.atlassian.net/browse/UIBULKED-515) Limit identifiers options for holdings and items in ECS environment on Central tenant.
 * [UIBULKED-528](https://folio-org.atlassian.net/browse/UIBULKED-528) Add more sortings options to bulk edit logs.
 * [UIBULKED-536](https://folio-org.atlassian.net/browse/UIBULKED-536) Declare dependency on FQM `entity-types` interface; support new response format.
+* [UIBULKED-526](https://folio-org.atlassian.net/browse/UIBULKED-526) Localize S3 error messages.
 
 ## [4.1.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.4) (2024-05-29)
 
