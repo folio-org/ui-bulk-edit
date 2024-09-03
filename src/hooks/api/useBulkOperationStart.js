@@ -62,7 +62,7 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
       try {
         const startResult = await ky.post(`bulk-operations/${id}/start`, {
           json: body,
-        });
+        }).json();
 
         showErrorMessage(startResult);
 
