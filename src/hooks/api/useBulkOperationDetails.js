@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useHistory } from 'react-router-dom';
 import { buildSearch } from '@folio/stripes-acq-components';
+import { useErrorMessages } from '../useErrorMessages';
 
 export const BULK_OPERATION_DETAILS_KEY = 'BULK_OPERATION_DETAILS_KEY';
 
@@ -15,13 +16,14 @@ export const useBulkOperationDetails = ({
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: BULK_OPERATION_DETAILS_KEY });
   const history = useHistory();
-
+  const { checkErrorMessage } = useErrorMessages();
   const [refetchInterval, setRefetchInterval] = useState(interval);
 
   const { data, isLoading } = useQuery({
     queryKey: [BULK_OPERATION_DETAILS_KEY, namespaceKey, id, refetchInterval, ...additionalQueryKeys],
     enabled: !!id,
     refetchInterval,
+    onSuccess: checkErrorMessage,
     queryFn: () => ky.get(`bulk-operations/${id}`).json(),
     ...options,
   });

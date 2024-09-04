@@ -31,7 +31,7 @@ describe('useErrorMessages', () => {
 
     const { result } = renderHook(() => useErrorMessages());
 
-    result.current.showErrorMessage(data);
+    result.current.checkErrorMessage(data);
 
     expect(mockFormatMessage).toHaveBeenCalledWith({ id: 'ui-bulk-edit.some-error' });
   });
@@ -41,7 +41,7 @@ describe('useErrorMessages', () => {
 
     const { result } = renderHook(() => useErrorMessages());
 
-    result.current.showErrorMessage(data);
+    result.current.checkErrorMessage(data);
 
     expect(mockCallout).not.toHaveBeenCalled();
     expect(mockFormatMessage).not.toHaveBeenCalled();
@@ -50,8 +50,8 @@ describe('useErrorMessages', () => {
   it('should not call the callout when data is null or undefined', () => {
     const { result } = renderHook(() => useErrorMessages());
 
-    result.current.showErrorMessage(null);
-    result.current.showErrorMessage(undefined);
+    result.current.checkErrorMessage(null);
+    result.current.checkErrorMessage(undefined);
 
     expect(mockCallout).not.toHaveBeenCalled();
     expect(mockFormatMessage).not.toHaveBeenCalled();

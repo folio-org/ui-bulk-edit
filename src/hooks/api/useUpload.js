@@ -7,7 +7,7 @@ import { useErrorMessages } from '../useErrorMessages';
 
 export const useUpload = () => {
   const ky = useOkapiKy();
-  const { showErrorMessage } = useErrorMessages();
+  const { checkErrorMessage } = useErrorMessages();
 
   const { mutateAsync: fileUpload, isLoading } = useMutation({ mutationFn: ({
     manual = false,
@@ -34,7 +34,7 @@ export const useUpload = () => {
       ...(signal ? { signal } : {}),
     }).json();
   },
-  onSuccess: showErrorMessage,
+  onSuccess: checkErrorMessage,
   retry: (_, error) => {
     if (error.name === 'AbortError') return 0;
 

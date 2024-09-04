@@ -13,7 +13,7 @@ import { useErrorMessages } from '../useErrorMessages';
 export const useBulkOperationStart = (mutationOptions = {}) => {
   const params = useRef({});
   const ky = useOkapiKy();
-  const { showErrorMessage } = useErrorMessages();
+  const { checkErrorMessage } = useErrorMessages();
 
   const { refetch: fetchBulkOperation } = useQuery({
     queryFn: async () => {
@@ -64,7 +64,7 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
           json: body,
         }).json();
 
-        showErrorMessage(startResult);
+        checkErrorMessage(startResult);
 
       // eslint-disable-next-line no-empty
       } catch (e) {}

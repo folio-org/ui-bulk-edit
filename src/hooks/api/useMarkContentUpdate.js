@@ -1,10 +1,8 @@
 import { useMutation } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
-import { useErrorMessages } from '../useErrorMessages';
 
 export const useMarkContentUpdate = ({ id }) => {
   const ky = useOkapiKy();
-  const { showErrorMessage } = useErrorMessages();
 
   const { data, mutateAsync: markContentUpdate, isLoading } = useMutation({
     mutationFn: (json) => {
@@ -12,7 +10,6 @@ export const useMarkContentUpdate = ({ id }) => {
         json,
       });
     },
-    onSuccess: showErrorMessage,
   });
 
   return { markContentUpdate, isLoading, data };

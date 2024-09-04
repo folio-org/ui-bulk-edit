@@ -5,7 +5,7 @@ export const useErrorMessages = () => {
   const intl = useIntl();
   const callout = useShowCallout();
 
-  const showErrorMessage = (data) => {
+  const checkErrorMessage = (data) => {
     const message = data?.errorMessage;
 
     if (message) {
@@ -17,6 +17,6 @@ export const useErrorMessages = () => {
   };
 
   return {
-    showErrorMessage,
+    checkErrorMessage,
   };
 };
