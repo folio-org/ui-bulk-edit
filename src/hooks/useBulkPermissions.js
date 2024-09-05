@@ -21,6 +21,11 @@ export const useBulkPermissions = () => {
   const hasInstancePerms = stripes.hasPerm('ui-inventory.instance.edit');
   const hasInventoryInstanceViewPerms = stripes.hasPerm('ui-inventory.instance.view');
 
+  // Quick marc
+
+  const hasQuickMarcEditPerms = stripes.hasPerm('ui-quick-marc.quick-marc-editor.all');
+  const hasQuickMarcViewPerms = stripes.hasPerm('ui-quick-marc.quick-marc-editor.view');
+
   // Users
   const hasUsersPerms = stripes.hasPerm('ui-users.edit');
   const hasUsersViewPerms = stripes.hasPerm('ui-users.view');
@@ -37,12 +42,15 @@ export const useBulkPermissions = () => {
   const hasItemsAndHoldingsInventoryView = hasInAppViewPerms && hasInventoryInstanceViewPerms;
   const hasItemInventoryEdit = hasInAppEditPerms && hasItemsPerms;
   const hasHoldingsInventoryEdit = hasInAppEditPerms && hasHoldingsPerms;
-  const hasInstanceInventoryEdit = hasInAppEditPerms && hasInstancePerms;
   const hasAnyInventoryWithInAppView = (hasItemInventoryView || hasHoldingsInventoryView
       || hasItemsAndHoldingsInventoryView || hasInstanceInventoryView) && hasInAppViewPerms;
   const hasAnyUserWithBulkPerm = (hasUsersViewPerms || hasUsersPerms) &&
       (hasCsvViewPerms || hasCsvEditPerms || hasInAppUsersEditPerms);
   const isActionMenuShown = hasAnyInventoryWithInAppView || hasAnyUserWithBulkPerm;
+  const hasInstanceAndMarcEditPerm = hasInstancePerms && hasQuickMarcEditPerms;
+  const hasInventoryAndMarcEditPerm = hasInventoryInstanceViewPerms && hasQuickMarcEditPerms;
+  const hasInstanceInventoryEdit = (hasInAppEditPerms || hasInstanceAndMarcEditPerm) && hasInstancePerms;
+  const hasOnlyViewInventoryAndMarcPerms = hasInventoryInstanceViewPerms && hasQuickMarcViewPerms;
   const hasUserEditLocalPerm = hasCsvEditPerms && hasUsersPerms;
   const hasUserEditInAppPerm = hasInAppUsersEditPerms && hasUsersPerms;
   const hasAnyEditPermissions = hasAnyUserWithBulkPerm || hasAnyInventoryWithInAppView;
@@ -97,5 +105,8 @@ export const useBulkPermissions = () => {
     hasLogInstanceViewPerms,
     hasInstanceInventoryEdit,
     hasInstanceInventoryView,
+    hasInstanceAndMarcEditPerm,
+    hasInventoryAndMarcEditPerm,
+    hasOnlyViewInventoryAndMarcPerms
   };
 };
