@@ -134,24 +134,26 @@ export const IdentifierTab = () => {
 
   const uploadFileFlow = async (fileToUpload) => {
     try {
-      const { id } = await fileUpload({
+      const { id, errorMessage: uploadErrorMessage } = await fileUpload({
         fileToUpload,
         entityType: recordType,
         identifierType: recordIdentifier,
       });
 
-      const { status, errorMessage } = await bulkOperationStart({
-        id,
-        step: EDITING_STEPS.UPLOAD,
-      });
+      if (!uploadErrorMessage) {
+        const { status, errorMessage } = await bulkOperationStart({
+          id,
+          step: EDITING_STEPS.UPLOAD,
+        });
 
-      if (errorMessage?.includes(ERRORS.TOKEN)) throw Error(ERRORS.TOKEN);
-      if (status === JOB_STATUSES.FAILED) throw Error();
+        if (errorMessage?.includes(ERRORS.TOKEN)) throw Error(ERRORS.TOKEN);
+        if (status === JOB_STATUSES.FAILED) throw Error();
 
-      history.replace({
-        pathname: `/bulk-edit/${id}/preview`,
-        search: buildSearch({ fileName: fileToUpload.name, progress: CRITERIA.IDENTIFIER }, location.search),
-      });
+        history.replace({
+          pathname: `/bulk-edit/${id}/preview`,
+          search: buildSearch({ fileName: fileToUpload.name, progress: CRITERIA.IDENTIFIER }, location.search),
+        });
+      }
 
       setIsFileUploaded(true);
     } catch ({ message }) {
