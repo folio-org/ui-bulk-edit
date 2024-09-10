@@ -138,8 +138,8 @@
   "modal.next": "Next",
 
   "start.edit": "Start bulk edit",
-  "start.edit.instance": "Start bulk edit - Instance fields",
-  "start.edit.mark": "Start bulk edit - MARC fields",
+  "start.edit.instance": "Instances and Administrative data",
+  "start.edit.mark": "Instances with source MARC(POC)",
   "start.edit.csv": "Start bulk edit (Local)",
   "start.delete": "Start bulk delete",
 
@@ -341,6 +341,7 @@
 
   "menuGroup.actions": "Actions",
   "menuGroup.showColumns": "Show columns",
+  "menuGroup.startEdit": "Start bulk edit",
 
   "conformationModal.message": "{count, number} records will be updated if the <b>Commit changes</b> button is clicked.",
   "conformationModal.commitChanges": "Commit changes",
