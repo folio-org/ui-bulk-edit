@@ -500,5 +500,8 @@
     "previewModal.downloadPreview.marc": "Stáhnout náhled ve formátu MARC",
     "layer.marc.error.protected": "Toto pole je chráněno.",
     "layer.marc.error.limited": "Omezeno na 5xx a 9xx.",
-    "columns.logs.approach": "Úpravy"
+    "columns.logs.approach": "Úpravy",
+    "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": "Vyskytl se problém s konfigurací S3, který brání modulu hromadné úpravy ukládat soubory. Obraťte se na svého poskytovatele hostingu a zjistěte, zda byla aplikace pro hromadné úpravy správně nakonfigurována.",
+    "error.mod-bulk-operations.not.download.file.from.s3": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker).",
+    "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker)."
 }

@@ -8,10 +8,12 @@ import {
   JOB_STATUSES,
   EDITING_STEPS,
 } from '../../constants';
+import { useErrorMessages } from '../useErrorMessages';
 
 export const useBulkOperationStart = (mutationOptions = {}) => {
   const params = useRef({});
   const ky = useOkapiKy();
+  const { checkErrorMessage } = useErrorMessages();
 
   const { refetch: fetchBulkOperation } = useQuery({
     queryFn: async () => {
@@ -58,9 +60,12 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
       params.current = { id, step };
 
       try {
-        await ky.post(`bulk-operations/${id}/start`, {
+        const startResult = await ky.post(`bulk-operations/${id}/start`, {
           json: body,
-        });
+        }).json();
+
+        checkErrorMessage(startResult);
+
       // eslint-disable-next-line no-empty
       } catch (e) {}
 

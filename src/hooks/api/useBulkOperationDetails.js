@@ -15,7 +15,6 @@ export const useBulkOperationDetails = ({
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: BULK_OPERATION_DETAILS_KEY });
   const history = useHistory();
-
   const [refetchInterval, setRefetchInterval] = useState(interval);
 
   const { data, isLoading } = useQuery({

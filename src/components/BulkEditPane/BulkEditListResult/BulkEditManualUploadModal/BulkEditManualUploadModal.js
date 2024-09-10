@@ -122,7 +122,7 @@ const BulkEditManualUploadModal = ({
     setIsLoading(true);
 
     try {
-      await fileUpload({
+      const uploadResponse = await fileUpload({
         operationId,
         fileToUpload,
         entityType: CAPABILITIES.USER,
@@ -131,15 +131,18 @@ const BulkEditManualUploadModal = ({
         signal: controller.current.signal,
       });
 
-      const { matchedNumOfRecords } = await bulkOperationStart({
-        id: operationId,
-        step: EDITING_STEPS.EDIT,
-        approach: APPROACHES.MANUAL,
-      });
+      if (!uploadResponse?.errorMessage) {
+        const { matchedNumOfRecords } = await bulkOperationStart({
+          id: operationId,
+          step: EDITING_STEPS.EDIT,
+          approach: APPROACHES.MANUAL,
+        });
 
-      setFileName(fileToUpload.name);
+        setFileName(fileToUpload.name);
+        setCountOfRecords(matchedNumOfRecords);
+      }
+
       setIsLoading(false);
-      setCountOfRecords(matchedNumOfRecords);
     } catch (error) {
       setIsLoading(false);
       if (error.name !== 'AbortError') {
