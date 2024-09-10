@@ -20,8 +20,7 @@ import {
   JOB_STATUSES,
   TRANSLATION_SUFFIX
 } from '../../../../constants';
-import { useBulkPermissions, useLocationFilters } from '../../../../hooks';
-import { useSearchParams } from '../../../../hooks/useSearchParams';
+import { useBulkPermissions, useLocationFilters, useSearchParams } from '../../../../hooks';
 import { useBulkOperationStart, useUpload } from '../../../../hooks/api';
 import { getIsDisabledByPerm } from '../utils/getIsDisabledByPerm';
 import { RootContext } from '../../../../context/RootContext';
@@ -160,11 +159,6 @@ export const IdentifierTab = () => {
       if (message === ERRORS.TOKEN) {
         showCallout({
           message: <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:fileToUpload.name }} />,
-          type: 'error',
-        });
-      } else {
-        showCallout({
-          message: <FormattedMessage id="ui-bulk-edit.error.uploadedFile" />,
           type: 'error',
         });
       }
