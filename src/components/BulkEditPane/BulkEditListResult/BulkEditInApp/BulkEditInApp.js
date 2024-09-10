@@ -10,6 +10,7 @@ import {
   Layout,
 } from '@folio/stripes/components';
 
+import { useParams } from 'react-router';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import {
@@ -19,12 +20,13 @@ import {
   getItemsOptions,
   getUserOptions
 } from '../../../../constants';
-import { useItemNotes, useHoldingsNotes, useInstanceNotes } from '../../../../hooks/api';
+import { useItemNotes, useHoldingsNotes, useInstanceNotes, useBulkOperationTenants } from '../../../../hooks/api';
 import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
-import { useSearchParams } from '../../../../hooks';
+import { usePathParams, useSearchParams } from '../../../../hooks';
 import { getDefaultActions } from './ContentUpdatesForm/helpers';
 
 import { RootContext } from '../../../../context/RootContext';
+import { useInstanceNotesEsc } from '../../../../hooks/api/useInstanceNotesEsc';
 
 export const BulkEditInApp = ({
   onContentUpdatesChanged,
@@ -32,6 +34,7 @@ export const BulkEditInApp = ({
   const { title } = useContext(RootContext);
   const { formatMessage } = useIntl();
   const { currentRecordType } = useSearchParams();
+  const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
   const [fields, setFields] = useState([]);
 
   const isItemRecordType = currentRecordType === CAPABILITIES.ITEM;
@@ -41,6 +44,8 @@ export const BulkEditInApp = ({
   const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemRecordType });
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
+  const { data: tenants } = useBulkOperationTenants(bulkOperationId);
+  const { data } = useInstanceNotesEsc(tenants);
 
   const options = useMemo(() => ({
     [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, itemNotes),
