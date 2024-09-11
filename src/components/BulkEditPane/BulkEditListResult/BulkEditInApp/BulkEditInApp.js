@@ -10,7 +10,6 @@ import {
   Layout,
 } from '@folio/stripes/components';
 
-import { useParams } from 'react-router';
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
 import {
@@ -20,18 +19,31 @@ import {
   getItemsOptions,
   getUserOptions
 } from '../../../../constants';
-import { useItemNotes, useHoldingsNotes, useInstanceNotes, useBulkOperationTenants } from '../../../../hooks/api';
+import {
+  useItemNotes,
+  useHoldingsNotes,
+  useInstanceNotes,
+  useBulkOperationTenants,
+  useHoldingsNotesEsc
+} from '../../../../hooks/api';
 import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
 import { usePathParams, useSearchParams } from '../../../../hooks';
 import { getDefaultActions } from './ContentUpdatesForm/helpers';
 
 import { RootContext } from '../../../../context/RootContext';
-import { useInstanceNotesEsc } from '../../../../hooks/api/useInstanceNotesEsc';
+import { useItemNotesEsc } from '../../../../hooks/api';
+import {removeDuplicatesByValue} from "../../../../utils/helpers";
+import {useStripes} from "@folio/stripes/core";
 
 export const BulkEditInApp = ({
   onContentUpdatesChanged,
 }) => {
   const { title } = useContext(RootContext);
+  const {user, okapi} = useStripes();
+  const centralTenant = user?.user?.consortium?.centralTenantId;
+  const tenantId = okapi.tenant;
+  const isCentralTenant = tenantId === centralTenant;
+
   const { formatMessage } = useIntl();
   const { currentRecordType } = useSearchParams();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
@@ -45,16 +57,20 @@ export const BulkEditInApp = ({
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { data } = useInstanceNotesEsc(tenants);
+  const { itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants,'option', { enabled: isItemRecordType});
+  const { holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading} = useHoldingsNotesEsc(tenants,'option', {enabled: isHoldingsRecordType})
+
+  console.log('real', itemsNotes)
+  console.log('dup', removeDuplicatesByValue(itemsNotes))
 
   const options = useMemo(() => ({
-    [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, itemNotes),
+    [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemsNotes : itemNotes)),
     [CAPABILITIES.USER]: getUserOptions(formatMessage),
-    [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, holdingsNotes),
+    [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, isCentralTenant ? holdingsNotesEsc : holdingsNotes),
     [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage, instanceNotes),
-  })[currentRecordType], [formatMessage, itemNotes, holdingsNotes, currentRecordType, instanceNotes]);
+  })[currentRecordType], [formatMessage, itemNotes, holdingsNotes, currentRecordType, instanceNotes, itemsNotes, holdingsNotesEsc]);
 
-  const showContentUpdatesForm = options && !isItemNotesLoading && !isHoldingsNotesLoading && !isInstanceNotesLoading;
+  const showContentUpdatesForm = options && !isInstanceNotesLoading && !isItemsNotesEscLoading && !isHoldingsNotesLoading && !isHoldingsNotesEscLoading;
   const sortedOptions = sortAlphabetically(options, formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
 
   const fieldTemplate = useMemo(() => {

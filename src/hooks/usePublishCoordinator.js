@@ -1,5 +1,8 @@
 import partititon from 'lodash/partition';
-import { useCallback, useEffect, useRef } from 'react';
+import {
+  useCallback,
+  useRef
+} from 'react';
 
 import {
   useOkapiKy,
@@ -33,19 +36,13 @@ const formatPublicationResult = ({ publicationResults, totalRecords }) => {
   };
 };
 
-export const usePublishCoordinator = (options = {}) => {
+export const usePublishCoordinator = (namespace, options = {}) => {
   const ky = useOkapiKy();
   const stripes = useStripes();
   const abortController = useRef(new AbortController());
 
   const consortium = stripes.user?.user?.consortium;
   const baseApi = `${CONSORTIA_API}/${consortium?.id}/${PUBLICATIONS_API}`;
-
-  useEffect(() => {
-    return () => {
-      abortController.current.abort();
-    };
-  }, []);
 
   const getPublicationResults = useCallback((id, { signal }) => {
     return ky.get(`${baseApi}/${id}/results`, { signal })
@@ -83,7 +80,7 @@ export const usePublishCoordinator = (options = {}) => {
     return ky.post(baseApi, { json, signal })
       .json()
       .then(res => getPublicationResponse(res, { signal }));
-  }, [baseApi, getPublicationResponse, ky, options.signal]);
+  }, [baseApi, getPublicationResponse, ky, options.signal, namespace]);
 
   return {
     initPublicationRequest,

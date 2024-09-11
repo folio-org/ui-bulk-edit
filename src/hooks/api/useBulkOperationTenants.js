@@ -5,11 +5,12 @@ export const BULK_TENANTS_KEY = 'BULK_TENANTS_KEY';
 
 export const useBulkOperationTenants = (id, options = {}) => {
   const ky = useOkapiKy();
-  const [namespaceKey] = useNamespace({ key: BULK_TENANTS_KEY });
+  const [namespace] = useNamespace({ key: BULK_TENANTS_KEY });
 
   const { data, isLoading } = useQuery({
-    queryKey: [namespaceKey],
+    queryKey: [namespace],
     queryFn: () => ky.get(`bulk-operations/used-tenants/${id}`).json(),
+    keepPreviousData: true,
     ...options,
   });
 

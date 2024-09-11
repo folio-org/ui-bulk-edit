@@ -22,20 +22,34 @@ import {
   getNotesOptions,
 } from '../../../../../constants';
 import { FIELD_VALUE_KEY, TEMPORARY_LOCATIONS } from './helpers';
-import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
-import { useItemNotes } from '../../../../../hooks/api/useItemNotes';
+import {
+  useBulkOperationTenants,
+  useHoldingsNotesEsc,
+  useItemNotesEsc,
+  useLoanTypes,
+  usePatronGroup
+} from '../../../../../hooks/api';
+import { useItemNotes } from '../../../../../hooks/api';
 import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
-import { useHoldingsNotes } from '../../../../../hooks/api/useHoldingsNotes';
-import { useElectronicAccessRelationships } from '../../../../../hooks/api/useElectronicAccess';
-import { useSearchParams } from '../../../../../hooks/useSearchParams';
-import { useInstanceNotes } from '../../../../../hooks/api/useInstanceNotes';
+import { useHoldingsNotes } from '../../../../../hooks/api';
+import { useElectronicAccessRelationships } from '../../../../../hooks/api';
+import { useSearchParams } from '../../../../../hooks';
+import { useInstanceNotes } from '../../../../../hooks/api';
 import { sortAlphabeticallyWithoutGroups } from '../../../../../utils/sortAlphabetically';
+import {usePathParams} from "../../../../../hooks";
+import {removeDuplicatesByValue} from "../../../../../utils/helpers";
+import {useStripes} from "@folio/stripes/core";
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
+  const {user, okapi} = useStripes();
   const { formatMessage } = useIntl();
   const {
     currentRecordType,
   } = useSearchParams();
+  const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
+  const centralTenant = user?.user?.consortium?.centralTenantId;
+  const tenantId = okapi.tenant;
+  const isCentralTenant = tenantId === centralTenant;
 
   const isUserCapability = currentRecordType === CAPABILITIES.USER;
   const isItemCapability = currentRecordType === CAPABILITIES.ITEM;
@@ -46,6 +60,9 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceCapability });
+  const { data: tenants } = useBulkOperationTenants(bulkOperationId);
+  const { itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length)});
+  const { holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading} = useHoldingsNotesEsc(tenants, 'action', {enabled: isHoldingsCapability && Boolean(tenants?.length)})
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
   // exclude from second action the first action value
@@ -55,11 +72,11 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
   const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
 
-  const filteredAndMappedNotes = getNotesOptions(formatMessage, itemNotes)
+  const filteredAndMappedNotes = getNotesOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(itemsNotes) : itemNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value }) => ({ label, value }));
 
-  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, holdingsNotes)
+  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc) : holdingsNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value, disabled }) => ({ label, value, disabled }));
 
@@ -208,6 +225,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         id="noteHoldingsType"
         value={action.value}
         loading={isHoldingsNotesLoading}
+        disabled={isHoldingsNotesEscLoading}
         onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
         dataOptions={sortedHoldingsNotes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
@@ -217,7 +235,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       {isItemCapability && (<Select
         id="noteType"
         value={action.value}
-        loading={usItemNotesLoading}
+        disabled={usItemNotesLoading || isItemsNotesEscLoading}
         onChange={e => onChange({
           actionIndex,
           value: e.target.value,
