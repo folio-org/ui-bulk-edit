@@ -1,17 +1,17 @@
 import { useQuery } from 'react-query';
+import { useIntl } from 'react-intl';
+import { useMemo } from 'react';
 
-import {useNamespace} from '@folio/stripes/core';
+import { useNamespace } from '@folio/stripes/core';
 
 import { usePublishCoordinator } from '../usePublishCoordinator';
-import {getMappedAndSortedNotes} from "../../utils/helpers";
-import {OPTIONS, PARAMETERS_KEYS} from "../../constants";
-import {useIntl} from "react-intl";
-import {useMemo} from "react";
+import { getMappedAndSortedNotes } from '../../utils/helpers';
+import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 
 const DEFAULT_DATA = {};
 
 export const useItemNotesEsc = (tenants, type, options = {}) => {
-  const [namespace] = useNamespace({key:'item-note-types-esc'});
+  const [namespace] = useNamespace({ key:'item-note-types-esc' });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
   const { formatMessage } = useIntl();
 

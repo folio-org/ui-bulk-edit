@@ -112,10 +112,10 @@ export const setIn = (obj, path, value) => {
   return setWith(clone(obj), path, value, clone);
 };
 
-export const removeDuplicatesByValue = (arr) => {
+export const removeDuplicatesByValue = (arr = []) => {
   const valueMap = new Map();
 
-  arr.forEach(item => {
+  arr?.forEach(item => {
     if (!valueMap.has(item.value)) {
       valueMap.set(item.value, item);
     } else {
@@ -125,5 +125,5 @@ export const removeDuplicatesByValue = (arr) => {
   });
 
   return Array.from(valueMap.values());
-}
+};
 

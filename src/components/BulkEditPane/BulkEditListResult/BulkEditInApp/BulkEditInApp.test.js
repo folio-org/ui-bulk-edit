@@ -15,7 +15,14 @@ import { CAPABILITIES } from '../../../../constants';
 
 import { BulkEditInApp } from './BulkEditInApp';
 import { RootContext } from '../../../../context/RootContext';
-import { useItemNotes, useHoldingsNotes, useInstanceNotes, useElectronicAccessRelationships } from '../../../../hooks/api';
+import {
+  useItemNotes,
+  useHoldingsNotes,
+  useInstanceNotes,
+  useElectronicAccessRelationships,
+  useHoldingsNotesEsc,
+  useItemNotesEsc,
+} from '../../../../hooks/api';
 
 
 jest.mock('../../../../hooks', () => ({
@@ -29,6 +36,8 @@ jest.mock('../../../../hooks/api', () => ({
   useHoldingsNotes: jest.fn(),
   useInstanceNotes: jest.fn(),
   useElectronicAccessRelationships: jest.fn(),
+  useHoldingsNotesEsc: jest.fn(),
+  useItemNotesEsc: jest.fn(),
 }));
 
 const fileName = 'Mock.csv';
@@ -78,6 +87,14 @@ describe('BulkEditInApp', () => {
     useElectronicAccessRelationships.mockClear().mockReturnValue({
       electronicAccessRelationships: [],
       isElectronicAccessLoading: false,
+    });
+    useHoldingsNotesEsc.mockClear().mockReturnValue({
+      instanceNotes: [],
+      isFetching: false,
+    });
+    useItemNotesEsc.mockClear().mockReturnValue({
+      itemNotes: [],
+      isFetching: false,
     });
   });
 

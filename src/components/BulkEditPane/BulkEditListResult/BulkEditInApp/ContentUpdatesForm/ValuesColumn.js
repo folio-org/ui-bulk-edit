@@ -2,6 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
+import { useStripes } from '@folio/stripes/core';
 import {
   Datepicker,
   Select,
@@ -27,21 +28,19 @@ import {
   useHoldingsNotesEsc,
   useItemNotesEsc,
   useLoanTypes,
-  usePatronGroup
+  usePatronGroup,
+  useItemNotes,
+  useHoldingsNotes,
+  useElectronicAccessRelationships,
+  useInstanceNotes
 } from '../../../../../hooks/api';
-import { useItemNotes } from '../../../../../hooks/api';
 import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
-import { useHoldingsNotes } from '../../../../../hooks/api';
-import { useElectronicAccessRelationships } from '../../../../../hooks/api';
-import { useSearchParams } from '../../../../../hooks';
-import { useInstanceNotes } from '../../../../../hooks/api';
+import { useSearchParams, usePathParams } from '../../../../../hooks';
 import { sortAlphabeticallyWithoutGroups } from '../../../../../utils/sortAlphabetically';
-import {usePathParams} from "../../../../../hooks";
-import {removeDuplicatesByValue} from "../../../../../utils/helpers";
-import {useStripes} from "@folio/stripes/core";
+import { removeDuplicatesByValue } from '../../../../../utils/helpers';
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
-  const {user, okapi} = useStripes();
+  const { user, okapi } = useStripes();
   const { formatMessage } = useIntl();
   const {
     currentRecordType,
@@ -61,8 +60,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceCapability });
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length)});
-  const { holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading} = useHoldingsNotesEsc(tenants, 'action', {enabled: isHoldingsCapability && Boolean(tenants?.length)})
+  const { itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length) });
+  const { holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && Boolean(tenants?.length) });
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
   // exclude from second action the first action value
