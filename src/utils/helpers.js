@@ -120,7 +120,7 @@ export const removeDuplicatesByValue = (arr = []) => {
       valueMap.set(item.value, item);
     } else {
       const existingItem = valueMap.get(item.value);
-      existingItem.label = existingItem.label.replace(/\s*\([^()]*\)/, '');
+      existingItem.label = existingItem.label.replace(/\s*\([^)]*\)/, '');
     }
   });
 
