@@ -60,15 +60,15 @@ export const BulkEditInApp = ({
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'option', { enabled: isItemRecordType });
-  const { holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'option', { enabled: isHoldingsRecordType });
+  const { notesEsc: itemNotesEsc, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'option', { enabled: isItemRecordType });
+  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'option', { enabled: isHoldingsRecordType });
 
   const options = useMemo(() => ({
-    [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemsNotes : itemNotes)),
+    [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemNotesEsc : itemNotes)),
     [CAPABILITIES.USER]: getUserOptions(formatMessage),
     [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, isCentralTenant ? holdingsNotesEsc : holdingsNotes),
     [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage, instanceNotes),
-  })[currentRecordType], [formatMessage, itemNotes, holdingsNotes, currentRecordType, instanceNotes, itemsNotes, holdingsNotesEsc]);
+  })[currentRecordType], [formatMessage, itemNotes, holdingsNotes, currentRecordType, instanceNotes, itemNotesEsc, holdingsNotesEsc]);
 
   const showContentUpdatesForm = options && !isItemNotesLoading && !isInstanceNotesLoading && !isItemsNotesEscLoading && !isHoldingsNotesLoading && !isHoldingsNotesEscLoading;
   const sortedOptions = sortAlphabetically(options, formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
