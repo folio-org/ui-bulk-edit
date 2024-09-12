@@ -49,7 +49,7 @@ export const useBulkPermissions = () => {
   const isActionMenuShown = hasAnyInventoryWithInAppView || hasAnyUserWithBulkPerm;
   const hasInstanceAndMarcEditPerm = hasInstancePerms && hasQuickMarcEditPerms;
   const hasInventoryAndMarcEditPerm = hasInventoryInstanceViewPerms && hasQuickMarcEditPerms;
-  const hasInstanceInventoryEdit = (hasInAppEditPerms || hasInstanceAndMarcEditPerm) && hasInstancePerms;
+  const hasInstanceInventoryEdit = hasInAppEditPerms && hasInstancePerms;
   const hasOnlyViewInventoryAndMarcPerms = hasInventoryInstanceViewPerms && hasQuickMarcViewPerms;
   const hasUserEditLocalPerm = hasCsvEditPerms && hasUsersPerms;
   const hasUserEditInAppPerm = hasInAppUsersEditPerms && hasUsersPerms;
