@@ -120,10 +120,17 @@ export const removeDuplicatesByValue = (arr = []) => {
       valueMap.set(item.value, item);
     } else {
       const existingItem = valueMap.get(item.value);
-      existingItem.label = existingItem.label.replace(/\s*\([^)]*\)/, '');
+
+      const startIndex = existingItem.label.indexOf('(');
+      const endIndex = existingItem.label.indexOf(')', startIndex);
+
+      if (startIndex !== -1 && endIndex !== -1) {
+        existingItem.label = existingItem.label.slice(0, startIndex).trim() + existingItem.label.slice(endIndex + 1).trim();
+      }
     }
   });
 
   return Array.from(valueMap.values());
 };
+
 
