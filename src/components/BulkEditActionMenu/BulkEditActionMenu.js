@@ -219,8 +219,8 @@ const BulkEditActionMenu = ({
         title={<FormattedMessage id="ui-bulk-edit.menuGroup.actions" />}
       >
         {renderLinkButtons()}
-        {renderStartBulkEditButtons()}
       </ActionMenuGroup>
+      {renderStartBulkEditButtons()}
       <ActionMenuGroup title={<FormattedMessage id="ui-bulk-edit.menuGroup.showColumns" />}>
         {Boolean(columnsOptions.length) && renderColumnsFilter()}
       </ActionMenuGroup>
