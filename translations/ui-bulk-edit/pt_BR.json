@@ -420,10 +420,10 @@
     "actions.findFullField": "Encontrar (pesquisa de campo completo)",
     "layer.action.apply.STAFF_ONLY": "Somente para a equipe",
     "category.instanceNotes": "Notas da instância",
-    "start.edit.instance": "Iniciar edição em massa - Campos da instância",
+    "start.edit.instance": "Instâncias e dados administrativos",
     "list.errors.table.link": "Ver versão mais recente",
     "actions.find": "Buscar",
-    "start.edit.mark": "Iniciar edição em massa – campos MARC",
+    "start.edit.mark": "Instâncias com fonte MARC(POC)",
     "logs.status.RETRIEVING_IDENTIFIERS": "Recuperando identificadores",
     "logs.status.SAVED_IDENTIFIERS": "Salvando identificadores",
     "meta.title.uploadedFile.mark": "Edição em massa de campos MARC - <b>{fileName}</b>",
@@ -501,7 +501,9 @@
     "layer.marc.error.protected": "Este campo está protegido.",
     "layer.marc.error.limited": "Limitado a 5xx e 9xx.",
     "columns.logs.approach": "Editando",
-    "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": "There is a problem with S3 configuration that prevents Bulk edit module to save files.  Please contact your hosting provider to check if the Bulk edit app has been configured correctly.",
-    "error.mod-bulk-operations.not.download.file.from.s3": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
-    "error.mod-bulk-operations.not.confirm.changes.s3.issue": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules)."
+    "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": "Há um problema com a configuração do S3 que impede que o módulo Edição em massa salve arquivos.  Entre em contato com seu provedor de hospedagem para verificar se o aplicativo Edição em massa foi configurado corretamente.",
+    "error.mod-bulk-operations.not.download.file.from.s3": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker).",
+    "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker).",
+    "menuGroup.startEdit": "Iniciar edição em lote",
+    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "O arquivo enviado está vazio."
 }

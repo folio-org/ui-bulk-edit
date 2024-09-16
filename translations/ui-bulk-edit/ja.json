@@ -501,7 +501,9 @@
     "layer.marc.error.protected": "このフィールドは保護されています",
     "layer.marc.error.limited": "5xx および 9xx に限定されます",
     "columns.logs.approach": "Editing",
-    "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": "There is a problem with S3 configuration that prevents Bulk edit module to save files.  Please contact your hosting provider to check if the Bulk edit app has been configured correctly.",
-    "error.mod-bulk-operations.not.download.file.from.s3": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
-    "error.mod-bulk-operations.not.confirm.changes.s3.issue": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules)."
+    "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": "S3 構成に問題があり、一括編集モジュールがファイルを保存できません。ホスティング プロバイダーに問い合わせて、一括編集アプリが正しく構成されているかどうかを確認してください。",
+    "error.mod-bulk-operations.not.download.file.from.s3": "S3 からデータを取得できません。ホスティング プロバイダーに問い合わせて、S3 の設定を確認してください。詳細については、一括編集アプリ ログ (mod-bulk-operations および mod-data-export-worker モジュール) を参照してください。",
+    "error.mod-bulk-operations.not.confirm.changes.s3.issue": "S3 からデータを取得できません。ホスティング プロバイダーに問い合わせて、S3 の設定を確認してください。詳細については、一括編集アプリ ログ (mod-bulk-operations および mod-data-export-worker モジュール) を参照してください。",
+    "menuGroup.startEdit": "Start bulk edit",
+    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty."
 }
