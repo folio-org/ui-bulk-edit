@@ -15,6 +15,10 @@ export const PUBLISH_COORDINATOR_STATUSES = {
   IN_PROGRESS: 'IN_PROGRESS',
 };
 
+export const PUBLISH_COORDINATOR_STATUSES_METHODS = {
+  GET: 'GET'
+};
+
 export const PUBLICATIONS_API = 'publications';
 export const CONSORTIA_API = 'consortia';
 
