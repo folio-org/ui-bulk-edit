@@ -1,5 +1,6 @@
-import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
+
+import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 
 export const BULK_TENANTS_KEY = 'BULK_TENANTS_KEY';
 

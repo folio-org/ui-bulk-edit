@@ -15,5 +15,5 @@ export * from './useHoldingsNotes';
 export * from './useInstanceNotes';
 export * from './useElectronicAccess';
 export * from './useBulkOperationTenants';
-export * from './useItemNotesEsc'
-export * from './useHoldingsNotesEsc'
+export * from './useItemNotesEsc';
+export * from './useHoldingsNotesEsc';

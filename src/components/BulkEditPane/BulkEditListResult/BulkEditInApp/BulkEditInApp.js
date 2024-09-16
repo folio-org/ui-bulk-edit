@@ -68,7 +68,7 @@ export const BulkEditInApp = ({
     [CAPABILITIES.USER]: getUserOptions(formatMessage),
     [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, isCentralTenant ? holdingsNotesEsc : holdingsNotes),
     [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage, instanceNotes),
-  })[currentRecordType], [formatMessage, itemNotes, holdingsNotes, currentRecordType, instanceNotes, itemNotesEsc, holdingsNotesEsc]);
+  })[currentRecordType], [formatMessage, isCentralTenant, itemNotesEsc, itemNotes, holdingsNotesEsc, holdingsNotes, instanceNotes, currentRecordType]);
 
   const showContentUpdatesForm = options && !isItemNotesLoading && !isInstanceNotesLoading && !isItemsNotesEscLoading && !isHoldingsNotesLoading && !isHoldingsNotesEscLoading;
   const sortedOptions = sortAlphabetically(options, formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
