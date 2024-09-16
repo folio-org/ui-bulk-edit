@@ -8,7 +8,7 @@ import {
   Select,
   Selection,
   TextField,
-  TextArea,
+  TextArea, Loading,
 } from '@folio/stripes/components';
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
 
@@ -38,6 +38,7 @@ import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
 import { useSearchParams, usePathParams } from '../../../../../hooks';
 import { sortAlphabeticallyWithoutGroups } from '../../../../../utils/sortAlphabetically';
 import { removeDuplicatesByValue } from '../../../../../utils/helpers';
+import {useLocationEsc} from "../../../../../hooks/api/useLocationEsc";
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { user, okapi } = useStripes();
@@ -62,6 +63,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
   const { itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length) });
   const { holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && Boolean(tenants?.length) });
+  const {locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(tenants, {enabled: Boolean(tenants?.length) });
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
   // exclude from second action the first action value
@@ -173,6 +175,17 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
 
   const renderLocationSelect = () => controlType === CONTROL_TYPES.LOCATION && (
     <>
+      {isCentralTenant ?
+          <Selection
+          id = 'locations-esc'
+          loading={isLocationEscLoading}
+          placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
+          dataOptions={removeDuplicatesByValue(locationsEsc)}
+          aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+          dirty={!!actionValue}
+          onChange={value => onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY })}
+          />
+          :
       <LocationSelection
         value={actionValue}
         onSelect={loc => onChange({ actionIndex, value: loc?.id, fieldName: FIELD_VALUE_KEY })}
@@ -181,6 +194,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}
         dirty={!!actionValue}
       />
+      }
       <LocationLookup
         marginBottom0
         isTemporaryLocation={TEMPORARY_LOCATIONS.includes(option)}
@@ -220,11 +234,13 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const renderNoteTypeSelect = () => controlType === CONTROL_TYPES.NOTE_SELECT && (
     <>
       {isHoldingsCapability && (
+          isHoldingsNotesEscLoading ?
+              <Loading size="large" />
+              :
       <Select
         id="noteHoldingsType"
         value={action.value}
         loading={isHoldingsNotesLoading}
-        disabled={isHoldingsNotesEscLoading}
         onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
         dataOptions={sortedHoldingsNotes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}

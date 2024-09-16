@@ -66,7 +66,7 @@ export const BulkEditInApp = ({
   const options = useMemo(() => ({
     [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemNotesEsc : itemNotes)),
     [CAPABILITIES.USER]: getUserOptions(formatMessage),
-    [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, isCentralTenant ? holdingsNotesEsc : holdingsNotes),
+    [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc) : holdingsNotes),
     [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage, instanceNotes),
   })[currentRecordType], [formatMessage, isCentralTenant, itemNotesEsc, itemNotes, holdingsNotesEsc, holdingsNotes, instanceNotes, currentRecordType]);
 
