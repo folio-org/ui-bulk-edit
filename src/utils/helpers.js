@@ -67,18 +67,18 @@ export const getMappedAndSortedNotes = ({
   type
 }) => {
   const mappedNotes = notes?.map(note => ({
-    label: note.name,
-    value: note.id,
+    label: note?.name,
+    value: note?.id,
     type,
     parameters: [{
       key,
-      value: note.id,
+      value: note?.id,
     }],
     disabled: false,
     categoryName,
   })) || [];
 
-  return mappedNotes.sort((a, b) => a.label.localeCompare(b.label));
+  return mappedNotes.sort((a, b) => a.label?.localeCompare(b?.label));
 };
 
 export const getVisibleColumnsKeys = (columns) => {
@@ -111,4 +111,26 @@ export const customFilter = (value, dataOptions) => {
 export const setIn = (obj, path, value) => {
   return setWith(clone(obj), path, value, clone);
 };
+
+export const removeDuplicatesByValue = (arr = []) => {
+  const valueMap = new Map();
+
+  arr?.forEach(item => {
+    if (!valueMap.has(item.value)) {
+      valueMap.set(item.value, item);
+    } else {
+      const existingItem = valueMap.get(item.value);
+
+      const startIndex = existingItem.label.indexOf('(');
+      const endIndex = existingItem.label.indexOf(')', startIndex);
+
+      if (startIndex !== -1 && endIndex !== -1) {
+        existingItem.label = existingItem.label.slice(0, startIndex).trim() + existingItem.label.slice(endIndex + 1).trim();
+      }
+    }
+  });
+
+  return Array.from(valueMap.values());
+};
+
 

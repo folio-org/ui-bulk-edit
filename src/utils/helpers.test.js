@@ -1,4 +1,7 @@
-import { customFilter } from './helpers';
+import {
+  customFilter,
+  removeDuplicatesByValue
+} from './helpers';
 
 describe('customFilter', () => {
   const dataOptions = [
@@ -108,5 +111,63 @@ describe('customFilter', () => {
     ];
     const result = customFilter(value, dataOptions);
     expect(result).toEqual(expected);
+  });
+});
+
+describe('removeDuplicatesByValue', () => {
+  it('should remove duplicates by value', () => {
+    const input = [
+      { value: 1, label: 'Item 1' },
+      { value: 2, label: 'Item 2' },
+      { value: 1, label: 'Item 1 (duplicate)' },
+    ];
+    const expectedOutput = [
+      { value: 1, label: 'Item 1' },
+      { value: 2, label: 'Item 2' },
+    ];
+    expect(removeDuplicatesByValue(input)).toEqual(expectedOutput);
+  });
+
+  it('should remove parentheses from label if duplicate is found', () => {
+    const input = [
+      { value: 1, label: 'Item 1 (original)' },
+      { value: 1, label: 'Item 1 (duplicate)' },
+    ];
+    const expectedOutput = [
+      { value: 1, label: 'Item 1' },
+    ];
+    expect(removeDuplicatesByValue(input)).toEqual(expectedOutput);
+  });
+
+  it('should handle empty array', () => {
+    const input = [];
+    const expectedOutput = [];
+    expect(removeDuplicatesByValue(input)).toEqual(expectedOutput);
+  });
+
+  it('should handle array with unique values', () => {
+    const input = [
+      { value: 1, label: 'Item 1' },
+      { value: 2, label: 'Item 2' },
+      { value: 3, label: 'Item 3' },
+    ];
+    const expectedOutput = [
+      { value: 1, label: 'Item 1' },
+      { value: 2, label: 'Item 2' },
+      { value: 3, label: 'Item 3' },
+    ];
+    expect(removeDuplicatesByValue(input)).toEqual(expectedOutput);
+  });
+
+  it('should handle array with all duplicates', () => {
+    const input = [
+      { value: 1, label: 'Item 1 (original)' },
+      { value: 1, label: 'Item 1 (duplicate)' },
+      { value: 1, label: 'Item 1 (another duplicate)' },
+    ];
+    const expectedOutput = [
+      { value: 1, label: 'Item 1' },
+    ];
+    expect(removeDuplicatesByValue(input)).toEqual(expectedOutput);
   });
 });
