@@ -61,8 +61,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceCapability });
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { notesEsc: itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length) });
-  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && Boolean(tenants?.length) });
+  const { itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length) });
+  const { holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && Boolean(tenants?.length) });
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
   // exclude from second action the first action value
@@ -72,11 +72,11 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
   const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
 
-  const filteredAndMappedNotes = getNotesOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemsNotes : itemNotes))
+  const filteredAndMappedNotes = getNotesOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(itemsNotes) : itemNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value }) => ({ label, value }));
 
-  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, removeDuplicatesByValue(isCentralTenant ? holdingsNotesEsc : holdingsNotes))
+  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc) : holdingsNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value, disabled }) => ({ label, value, disabled }));
 
@@ -221,31 +221,36 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const renderNoteTypeSelect = () => controlType === CONTROL_TYPES.NOTE_SELECT && (
     <>
       {isHoldingsCapability && (
-          !isHoldingsNotesEscLoading ? <Select
-              id="noteHoldingsType"
-              value={action.value}
-              loading={isHoldingsNotesLoading}
-              disabled={isHoldingsNotesEscLoading}
-              onChange={e => onChange({actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY})}
-              dataOptions={sortedHoldingsNotes}
-              aria-label={formatMessage({id: 'ui-bulk-edit.ariaLabel.loanTypeSelect'})}
-              marginBottom0
-              dirty={!!action.value}
-          /> : <Loading size='large'/>)}
-      {isItemCapability && (<Select
-        id="noteType"
-        value={action.value}
-        disabled={usItemNotesLoading || isItemsNotesEscLoading}
-        onChange={e => onChange({
-          actionIndex,
-          value: e.target.value,
-          fieldName: FIELD_VALUE_KEY
-        })}
-        dataOptions={sortedNotes}
-        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-        marginBottom0
-        dirty={!!actionValue}
-      />)}
+        !isHoldingsNotesEscLoading ? <Select
+          id="noteHoldingsType"
+          value={action.value}
+          loading={isHoldingsNotesLoading}
+          disabled={isHoldingsNotesEscLoading}
+          onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+          dataOptions={sortedHoldingsNotes}
+          aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+          marginBottom0
+          dirty={!!action.value}
+        /> : <Loading size="large" />
+      )}
+      {isItemCapability && (
+        !isItemsNotesEscLoading ?
+          <Select
+            id="noteType"
+            value={action.value}
+            disabled={usItemNotesLoading || isItemsNotesEscLoading}
+            onChange={e => onChange({
+              actionIndex,
+              value: e.target.value,
+              fieldName: FIELD_VALUE_KEY
+            })}
+            dataOptions={sortedNotes}
+            aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+            marginBottom0
+            dirty={!!actionValue}
+          />
+          : <Loading size="large" />
+      )}
       {isInstanceCapability && (
         <Select
           id="noteInstanceType"
