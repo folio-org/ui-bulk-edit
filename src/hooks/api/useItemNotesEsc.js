@@ -9,15 +9,15 @@ const NOTE_ESC = {
 };
 
 export const useItemNotesEsc = (tenants, type, options = {}) => {
-  return useNotesEsc(
-    NOTE_ESC.NAMESPACE,
+  return useNotesEsc({
+    namespaceKey: NOTE_ESC.NAMESPACE,
     tenants,
     type,
-    NOTE_ESC.CATEGORY,
+    categoryId: NOTE_ESC.CATEGORY,
     options,
-    NOTE_ESC.URL,
-    NOTE_ESC.NOTE_KEY,
-    OPTIONS.ITEM_NOTE,
-    PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY
-  );
+    url: NOTE_ESC.URL,
+    noteKey: NOTE_ESC.NOTE_KEY,
+    optionType: OPTIONS.ITEM_NOTE,
+    parameterKey: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY
+  });
 };

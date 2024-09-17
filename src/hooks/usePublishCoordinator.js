@@ -84,7 +84,7 @@ export const usePublishCoordinator = (namespace, options = {}) => {
     return ky.post(baseApi, { json, signal })
       .json()
       .then(res => getPublicationResponse(res, { signal }));
-  }, [baseApi, getPublicationResponse, ky, options.signal, namespace]);
+  }, [baseApi, getPublicationResponse, ky, options.signal]);
 
   return {
     initPublicationRequest,
