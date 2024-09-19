@@ -56,11 +56,11 @@ const renderComponent = (selectedPermissionsIds = []) => render(
 );
 
 const checkRowsLength = (length) => {
-  const tableBody = screen.getByRole('rowgroup');
+  const tableBody = screen.getByRole('rowgroup', { hidden: true });
 
   expect(tableBody).toBeInTheDocument();
 
-  const rows = within(tableBody).getAllByRole('row');
+  const rows = within(tableBody).getAllByRole('row', { hidden: true });
 
   expect(rows).toHaveLength(length);
 };
@@ -151,7 +151,7 @@ describe('PermissionsModal', () => {
   it('should filter permissions by type "permissions"', async () => {
     renderComponent();
 
-    const typeCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.permissions' });
+    const typeCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.permissions', hidden: true });
 
     act(() => {
       userEvent.click(typeCheckbox);
@@ -165,7 +165,7 @@ describe('PermissionsModal', () => {
   it('should filter permissions by status "assigned"', async () => {
     renderComponent();
     const row0Checkbox = document.getElementById(permissions[0].id);
-    const statusCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.assigned' });
+    const statusCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.assigned', hidden: true });
 
     userEvent.click(row0Checkbox);
 
@@ -183,7 +183,7 @@ describe('PermissionsModal', () => {
 
     const nameHeader = screen.getByText('ui-bulk-edit.permissionsModal.list.columns.name');
 
-    const row = screen.getAllByRole('row');
+    const row = screen.getAllByRole('row', { hidden: true });
 
     expect(row[1]).toHaveTextContent(/role-acq-admin/);
 
@@ -197,9 +197,9 @@ describe('PermissionsModal', () => {
   it('should select all ', async () => {
     renderComponent();
 
-    const nameHeader = screen.getByText('ui-bulk-edit.permissionsModal.list.columns.name');
+    const nameHeader = screen.getByText('ui-bulk-edit.permissionsModal.list.columns.name', { hidden: true });
 
-    const row = screen.getAllByRole('row');
+    const row = screen.getAllByRole('row', { hidden: true });
 
     expect(row[1]).toHaveTextContent(/role-acq-admin/);
 
@@ -213,9 +213,9 @@ describe('PermissionsModal', () => {
   it('should reset filters when "reset button" clicked', async () => {
     renderComponent();
 
-    const searchInput = screen.getByTestId('search-permissions');
-    const typeCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.permissions' });
-    const statusCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.assigned' });
+    const searchInput = screen.getByTestId('search-permissions', { hidden: true });
+    const typeCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.permissions', hidden: true });
+    const statusCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.assigned', hidden: true });
 
     const resetButton = document.getElementById('reset-permissions-filters');
 
@@ -256,7 +256,7 @@ describe('PermissionsModal', () => {
   it('should reset individual filters when clear button clicked', async () => {
     renderComponent();
 
-    const typeCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.permissions' });
+    const typeCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.permissions', hidden: true });
     const resetButton = document.querySelectorAll('[data-test-clear-button]')[0];
 
     act(() => {
