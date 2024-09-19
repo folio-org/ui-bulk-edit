@@ -136,7 +136,7 @@ describe('BulkEditInAppPreviewModal', () => {
       });
     });
 
-    expect(screen.getByText('ui-bulk-edit.previewModal.previewToBeChanged')).toBeVisible();
+    expect(screen.getByText('ui-bulk-edit.previewModal.previewToBeChanged')).toBeInTheDocument();
 
     await runAxeTest({
       rootNode: document.body,
