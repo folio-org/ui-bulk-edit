@@ -4,7 +4,7 @@ import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 const NOTE_ESC = {
   NAMESPACE: 'holdings-note-types-esc',
   CATEGORY: 'ui-bulk-edit.category.holdingsNotes',
-  URL: 'holdings-note-types',
+  URL: 'holdings-note-types?limit=2000',
   NOTE_KEY: 'holdingsNoteTypes'
 };
 
