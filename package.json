@@ -68,7 +68,11 @@
           "inventory-storage.location-units.campuses.collection.get",
           "inventory-storage.location-units.libraries.collection.get",
           "remote-storage.mappings.collection.get",
-          "usergroups.collection.get"
+          "usergroups.collection.get",
+          "bulk-operations.used.tenants.get",
+          "consortia.publications.item.get",
+          "consortia.publications.item.post",
+          "consortia.publications-results.item.get"
         ]
       },
       {
