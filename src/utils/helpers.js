@@ -117,7 +117,7 @@ export const removeDuplicatesByValue = (arr = []) => {
 
   arr?.forEach(item => {
     if (!valueMap.has(item.value)) {
-      valueMap.set(item.value, item);
+      valueMap.set(item.value, { ...item, tenant: [item.tenant] });
     } else {
       const existingItem = valueMap.get(item.value);
 
@@ -127,10 +127,19 @@ export const removeDuplicatesByValue = (arr = []) => {
       if (startIndex !== -1 && endIndex !== -1) {
         existingItem.label = existingItem.label.slice(0, startIndex).trim() + existingItem.label.slice(endIndex + 1).trim();
       }
+
+      if (!existingItem.tenant.includes(item.tenant)) {
+        existingItem.tenant.push(item.tenant);
+      }
     }
   });
 
   return Array.from(valueMap.values());
+};
+
+export const getTenantsById = (arr, id) => {
+  const item = arr.find(obj => obj.value === id);
+  return item ? item.tenant : null;
 };
 
 

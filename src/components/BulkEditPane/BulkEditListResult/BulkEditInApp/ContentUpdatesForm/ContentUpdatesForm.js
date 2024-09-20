@@ -75,6 +75,7 @@ export const ContentUpdatesForm = ({
     fieldName,
     actionIndex,
     hasActionChanged,
+      tenants
   }) => {
     return field.actionsDetails.actions.map((action, j) => {
       if (!action) return action; // if null, return this value to stay with the same arr length
@@ -83,7 +84,8 @@ export const ContentUpdatesForm = ({
         ? ({
           ...action,
           [fieldName]: value,
-          ...((hasActionChanged) && { [FIELD_VALUE_KEY]: '' }), // clear field values if action changed
+          ...((hasActionChanged) && { [FIELD_VALUE_KEY]: '' }),
+            ...(tenants ? { tenants } : null) // clear field values if action changed
         })
         : action;
     });
@@ -116,7 +118,7 @@ export const ContentUpdatesForm = ({
     return finalActions;
   };
 
-  const handleChange = ({ rowIndex, actionIndex, value, fieldName }) => {
+  const handleChange = ({ rowIndex, actionIndex, value, fieldName, tenants = [] }) => {
     setFields(fieldsArr => fieldsArr.map((field, i) => {
       if (i === rowIndex) {
         const hasActionChanged = fieldName === ACTION_VALUE_KEY;
@@ -127,7 +129,8 @@ export const ContentUpdatesForm = ({
           value,
           actionIndex,
           hasActionChanged,
-          hasValueChanged
+          hasValueChanged,
+          tenants
         };
 
         const mappedActions = getMappedActions({
@@ -204,6 +207,7 @@ export const ContentUpdatesForm = ({
       // eslint-disable-next-line no-shadow
       ({ parameters, option, actionsDetails: { actions } }) => {
         const [initial, updated] = actions.map(action => action?.value ?? null);
+        const tenants = actions.map(action => action?.tenants);
         const sourceOption = options.find(o => o.value === option);
         const optionType = sourceOption?.type;
         const mappedOption = optionType || option; // if option has type, use it, otherwise use option value (required for ITEM_NOTE cases)
@@ -214,6 +218,7 @@ export const ContentUpdatesForm = ({
           .map(action => action?.name ?? null).join('_');
 
         const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
+        const activeTenants = tenants?.find(tenant => Boolean(tenant?.length))
 
         const type = ACTIONS[typeKey];
 
@@ -223,6 +228,7 @@ export const ContentUpdatesForm = ({
             type,
             initial,
             updated,
+            tenants: activeTenants,
             parameters: [
               ...(parameters || []),
               ...(actionParameters || []),

@@ -37,15 +37,15 @@ import {
   useItemNotes,
   useHoldingsNotes,
   useElectronicAccessRelationships,
-  useInstanceNotes
+  useInstanceNotes,
+  useLocationEsc,
+  useLoanTypesEsc,
+  useElectronicAccessEsc
 } from '../../../../../hooks/api';
 import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
 import { useSearchParams, usePathParams } from '../../../../../hooks';
 import { sortAlphabeticallyWithoutGroups } from '../../../../../utils/sortAlphabetically';
-import { removeDuplicatesByValue } from '../../../../../utils/helpers';
-import { useLocationEsc } from '../../../../../hooks/api/useLocationEsc';
-import { useLoanTypesEsc } from '../../../../../hooks/api/useLoanTypesEsc';
-import { useElectronicAccessEsc } from '../../../../../hooks/api/useElectronicAccessEsc';
+import {getTenantsById, removeDuplicatesByValue} from '../../../../../utils/helpers';
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { user, okapi } = useStripes();
@@ -112,7 +112,6 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const controlType = action.controlType(action.name);
 
   usePreselectedValue(controlType, duplicateNoteOptions, onChange, actionIndex);
-  console.log(actionValue);
 
   const renderTextField = () => controlType === CONTROL_TYPES.INPUT && (
     <TextField
@@ -255,7 +254,9 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       id="loanType"
       value={actionValue}
       loading={isLoanTypesLoading}
-      onChange={value => onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY })}
+      onChange={value => {
+        onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY, tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc), value) })
+      }}
       placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
       dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc) : loanTypes}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
@@ -273,7 +274,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
             id="noteHoldingsType"
             value={action.value}
             loading={isHoldingsNotesLoading}
-            onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+            onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY, tenants: getTenantsById(sortedHoldingsNotes, e.target.value), })}
             dataOptions={sortedHoldingsNotes}
             aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
             marginBottom0
@@ -286,7 +287,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         onChange={e => onChange({
           actionIndex,
           value: e.target.value,
-          fieldName: FIELD_VALUE_KEY
+          fieldName: FIELD_VALUE_KEY,
+          tenants: getTenantsById(sortedNotes, e.target.value),
         })}
         dataOptions={sortedNotes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
@@ -326,7 +328,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       id="urlRelationship"
       value={action.value}
       loading={isElectronicAccessLoading}
-      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY, tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value) })}
       dataOptions={accessRelationshipsWithPlaceholder}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
       marginBottom0

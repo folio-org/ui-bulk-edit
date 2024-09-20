@@ -35,6 +35,7 @@ export const useNotesEsc = (namespaceKey, tenants, type, categoryId, options = {
       return tenantData.response?.[noteKey]?.map(note => ({
         ...note,
         name: `${note.name} (${tenantName})`,
+        tenantName
       }));
     });
 

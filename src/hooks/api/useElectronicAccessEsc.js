@@ -13,6 +13,7 @@ export const useElectronicAccessEsc = (tenants, options = {}) => {
     (tenantData, tenantName) => tenantData.response?.electronicAccessRelationships?.map(type => ({
       ...type,
       name: `${type.name} (${tenantName})`,
+        tenantName,
     })),
     options
   );
