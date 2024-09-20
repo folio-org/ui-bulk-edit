@@ -1,5 +1,5 @@
 import {
-  customFilter,
+  customFilter, getTenantsById,
   removeDuplicatesByValue
 } from './helpers';
 
@@ -117,24 +117,24 @@ describe('customFilter', () => {
 describe('removeDuplicatesByValue', () => {
   it('should remove duplicates by value', () => {
     const input = [
-      { value: 1, label: 'Item 1' },
-      { value: 2, label: 'Item 2' },
+      { value: 1, label: 'Item 1', tenantName: 'Item 1' },
+      { value: 2, label: 'Item 2', tenantName: 'Item 1' },
       { value: 1, label: 'Item 1 (duplicate)' },
     ];
     const expectedOutput = [
-      { value: 1, label: 'Item 1' },
-      { value: 2, label: 'Item 2' },
+      { value: 1, label: 'Item 1', tenants: ['Item 1'] },
+      { value: 2, label: 'Item 2', tenants: ['Item 1'] },
     ];
     expect(removeDuplicatesByValue(input)).toEqual(expectedOutput);
   });
 
   it('should remove parentheses from label if duplicate is found', () => {
     const input = [
-      { value: 1, label: 'Item 1 (original)' },
+      { value: 1, label: 'Item 1 (original)', tenantName: 'Item 1' },
       { value: 1, label: 'Item 1 (duplicate)' },
     ];
     const expectedOutput = [
-      { value: 1, label: 'Item 1' },
+      { value: 1, label: 'Item 1', tenants: ['Item 1'] },
     ];
     expect(removeDuplicatesByValue(input)).toEqual(expectedOutput);
   });
@@ -152,9 +152,9 @@ describe('removeDuplicatesByValue', () => {
       { value: 3, label: 'Item 3' },
     ];
     const expectedOutput = [
-      { value: 1, label: 'Item 1' },
-      { value: 2, label: 'Item 2' },
-      { value: 3, label: 'Item 3' },
+      { value: 1, label: 'Item 1', tenants: [] },
+      { value: 2, label: 'Item 2', tenants: [] },
+      { value: 3, label: 'Item 3', tenants: [] },
     ];
     expect(removeDuplicatesByValue(input)).toEqual(expectedOutput);
   });
@@ -166,8 +166,31 @@ describe('removeDuplicatesByValue', () => {
       { value: 1, label: 'Item 1 (another duplicate)' },
     ];
     const expectedOutput = [
-      { value: 1, label: 'Item 1' },
+      { value: 1, label: 'Item 1', tenants: [] },
     ];
     expect(removeDuplicatesByValue(input)).toEqual(expectedOutput);
+  });
+});
+
+describe('getTenantsById', () => {
+  const mockArray = [
+    { value: 1, tenant: 'Tenant 1' },
+    { value: 2, tenant: 'Tenant 2' },
+    { value: 3, tenant: 'Tenant 3' },
+  ];
+
+  it('should return tenant', () => {
+    const result = getTenantsById(mockArray, 2);
+    expect(result).toBe('Tenant 2');
+  });
+
+  it('should return null if not matched id', () => {
+    const result = getTenantsById(mockArray, 4);
+    expect(result).toBeNull();
+  });
+
+  it('should return null if array is empty', () => {
+    const result = getTenantsById([], 1);
+    expect(result).toBeNull();
   });
 });

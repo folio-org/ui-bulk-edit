@@ -11,7 +11,10 @@ import {
   TextArea,
   Loading,
 } from '@folio/stripes/components';
-import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
+import {
+  LocationLookup,
+  LocationSelection
+} from '@folio/stripes/smart-components';
 import {
   FindLocation,
   useCurrentUserTenants
@@ -27,7 +30,10 @@ import {
   getItemsWithPlaceholder,
   getNotesOptions,
 } from '../../../../../constants';
-import { FIELD_VALUE_KEY, TEMPORARY_LOCATIONS } from './helpers';
+import {
+  FIELD_VALUE_KEY,
+  TEMPORARY_LOCATIONS
+} from './helpers';
 import {
   useBulkOperationTenants,
   useHoldingsNotesEsc,
@@ -43,9 +49,15 @@ import {
   useElectronicAccessEsc
 } from '../../../../../hooks/api';
 import { usePreselectedValue } from '../../../../../hooks/usePreselectedValue';
-import { useSearchParams, usePathParams } from '../../../../../hooks';
+import {
+  useSearchParams,
+  usePathParams
+} from '../../../../../hooks';
 import { sortAlphabeticallyWithoutGroups } from '../../../../../utils/sortAlphabetically';
-import {getTenantsById, removeDuplicatesByValue} from '../../../../../utils/helpers';
+import {
+  getTenantsById,
+  removeDuplicatesByValue
+} from '../../../../../utils/helpers';
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { user, okapi } = useStripes();
@@ -70,16 +82,16 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceCapability });
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length) });
-  const { holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && Boolean(tenants?.length) });
+  const { notesEsc: itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length) });
+  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && Boolean(tenants?.length) });
   const { locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(userTenants, { enabled: Boolean(tenants?.length) });
   const { escData: loanTypesEsc, isFetching: isLoanTypesEscLoading } = useLoanTypesEsc(tenants, { enabled: Boolean(tenants?.length) });
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
-  const { escData: urlRelationshipsEsc, isFetching: isUrlLoading } = useElectronicAccessEsc(tenants, { enabled: Boolean(tenants?.length) });
+  const { escData: urlRelationshipsEsc, isFetching: isElectronicAccessEscLoading } = useElectronicAccessEsc(tenants, { enabled: Boolean(tenants?.length) });
   // exclude from second action the first action value
   const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
-  const filteredElectronicAccessRelationshipsEsc = urlRelationshipsEsc.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
+  const filteredElectronicAccessRelationshipsEsc = urlRelationshipsEsc?.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
   const accessRelationshipsWithPlaceholder = getItemsWithPlaceholder(isCentralTenant ? removeDuplicatesByValue(filteredElectronicAccessRelationshipsEsc) : filteredElectronicAccessRelationships);
 
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
@@ -253,9 +265,16 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     <Selection
       id="loanType"
       value={actionValue}
-      loading={isLoanTypesLoading}
+      loading={isLoanTypesLoading || isLoanTypesEscLoading}
       onChange={value => {
-        onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY, tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc), value) })
+        onChange(
+          {
+            actionIndex,
+            value,
+            fieldName: FIELD_VALUE_KEY,
+            tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc), value)
+          }
+        );
       }}
       placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
       dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc) : loanTypes}
@@ -274,7 +293,14 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
             id="noteHoldingsType"
             value={action.value}
             loading={isHoldingsNotesLoading}
-            onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY, tenants: getTenantsById(sortedHoldingsNotes, e.target.value), })}
+            onChange={e => onChange(
+              {
+                actionIndex,
+                value: e.target.value,
+                fieldName: FIELD_VALUE_KEY,
+                tenants: getTenantsById(sortedHoldingsNotes, e.target.value)
+              }
+            )}
             dataOptions={sortedHoldingsNotes}
             aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
             marginBottom0
@@ -327,8 +353,15 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     <Select
       id="urlRelationship"
       value={action.value}
-      loading={isElectronicAccessLoading}
-      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY, tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value) })}
+      loading={isElectronicAccessLoading || isElectronicAccessEscLoading}
+      onChange={e => onChange(
+        {
+          actionIndex,
+          value: e.target.value,
+          fieldName: FIELD_VALUE_KEY,
+          tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
+        }
+      )}
       dataOptions={accessRelationshipsWithPlaceholder}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
       marginBottom0
