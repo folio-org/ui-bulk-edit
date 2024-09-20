@@ -8,9 +8,14 @@ import {
   Select,
   Selection,
   TextField,
-  TextArea, Loading,
+  TextArea,
+  Loading,
 } from '@folio/stripes/components';
 import { LocationLookup, LocationSelection } from '@folio/stripes/smart-components';
+import {
+  FindLocation,
+  useCurrentUserTenants
+} from '@folio/stripes-acq-components'
 
 import {
   BASE_DATE_FORMAT,
@@ -39,6 +44,8 @@ import { useSearchParams, usePathParams } from '../../../../../hooks';
 import { sortAlphabeticallyWithoutGroups } from '../../../../../utils/sortAlphabetically';
 import { removeDuplicatesByValue } from '../../../../../utils/helpers';
 import {useLocationEsc} from "../../../../../hooks/api/useLocationEsc";
+import {useLoanTypesEsc} from "../../../../../hooks/api/useLoanTypesEsc";
+import {useElectronicAccessEsc} from "../../../../../hooks/api/useElectronicAccessEsc";
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
   const { user, okapi } = useStripes();
@@ -56,6 +63,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const isHoldingsCapability = currentRecordType === CAPABILITIES.HOLDING;
   const isInstanceCapability = currentRecordType === CAPABILITIES.INSTANCE;
 
+  const currentTenants = useCurrentUserTenants();
+  const userTenants = currentTenants.map(item => item.id)
   const { userGroups } = usePatronGroup({ enabled: isUserCapability });
   const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
@@ -63,12 +72,15 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
   const { itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length) });
   const { holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && Boolean(tenants?.length) });
-  const {locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(tenants, {enabled: Boolean(tenants?.length) });
+  const { locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(userTenants, {enabled: Boolean(tenants?.length) });
+  const { escData: loanTypesEsc, isFetching: isLoanTypesEscLoading} = useLoanTypesEsc(tenants, {enabled: Boolean(tenants?.length) })
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
+  const { escData: urlRelationshipsEsc, isFetching: isUrlLoading} = useElectronicAccessEsc(tenants, {enabled: Boolean(tenants?.length) })
   // exclude from second action the first action value
   const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
-  const accessRelationshipsWithPlaceholder = getItemsWithPlaceholder(filteredElectronicAccessRelationships);
+  const filteredElectronicAccessRelationshipsEsc = urlRelationshipsEsc.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value)
+  const accessRelationshipsWithPlaceholder = getItemsWithPlaceholder(isCentralTenant ? removeDuplicatesByValue(filteredElectronicAccessRelationshipsEsc) : filteredElectronicAccessRelationships);
 
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
   const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
@@ -100,6 +112,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const controlType = action.controlType(action.name);
 
   usePreselectedValue(controlType, duplicateNoteOptions, onChange, actionIndex);
+  console.log(actionValue)
 
   const renderTextField = () => controlType === CONTROL_TYPES.INPUT && (
     <TextField
@@ -173,37 +186,57 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     />
   );
 
-  const renderLocationSelect = () => controlType === CONTROL_TYPES.LOCATION && (
-    <>
-      {isCentralTenant ?
-          <Selection
-          id = 'locations-esc'
-          loading={isLocationEscLoading}
-          placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
-          dataOptions={removeDuplicatesByValue(locationsEsc)}
-          aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-          dirty={!!actionValue}
-          onChange={value => onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY })}
-          />
-          :
-      <LocationSelection
-        value={actionValue}
-        onSelect={loc => onChange({ actionIndex, value: loc?.id, fieldName: FIELD_VALUE_KEY })}
-        placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
-        data-test-id={`textField-${actionIndex}`}
-        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}
-        dirty={!!actionValue}
-      />
-      }
-      <LocationLookup
-        marginBottom0
-        isTemporaryLocation={TEMPORARY_LOCATIONS.includes(option)}
-        onLocationSelected={(loc) => onChange({
-          actionIndex, value: loc.id, fieldName: FIELD_VALUE_KEY,
-        })}
-        data-testid={`locationLookup-${actionIndex}`}
-      />
-    </>
+  const renderLocationSelect = () => (
+      controlType === CONTROL_TYPES.LOCATION && (
+          <>
+            {isCentralTenant ? (
+                <>
+                  <Selection
+                      id="locations-esc"
+                      loading={isLocationEscLoading}
+                      value={actionValue}
+                      dataOptions={locationsEsc}
+                      disabled
+                  />
+                  <FindLocation
+                      id="fund-locations"
+                      crossTenant={true}
+                      tenantId={tenants[0]}
+                      onRecordsSelect={(loc) => {
+                        onChange({
+                          actionIndex,
+                          value: loc[0].id,
+                          fieldName: FIELD_VALUE_KEY,
+                        });
+                      }}
+                  />
+                </>
+            ) : (
+                <>
+                  <LocationSelection
+                      value={actionValue}
+                      onSelect={(loc) => onChange({ actionIndex, value: loc?.id, fieldName: FIELD_VALUE_KEY })}
+                      placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
+                      data-test-id={`textField-${actionIndex}`}
+                      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}
+                      dirty={!!actionValue}
+                  />
+                  <LocationLookup
+                      marginBottom0
+                      isTemporaryLocation={TEMPORARY_LOCATIONS.includes(option)}
+                      onLocationSelected={(loc) =>
+                          onChange({
+                            actionIndex,
+                            value: loc.id,
+                            fieldName: FIELD_VALUE_KEY,
+                          })
+                      }
+                      data-testid={`locationLookup-${actionIndex}`}
+                  />
+                </>
+            )}
+          </>
+      )
   );
 
   const renderStatusSelect = () => controlType === CONTROL_TYPES.STATUS_SELECT && (
@@ -225,7 +258,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       loading={isLoanTypesLoading}
       onChange={value => onChange({ actionIndex, value, fieldName: FIELD_VALUE_KEY })}
       placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
-      dataOptions={loanTypes}
+      dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc) : loanTypes}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
       dirty={!!actionValue}
     />
