@@ -160,7 +160,7 @@ const BulkEditActionMenu = ({
               </Icon>
             </Button>
             )}
-            {(hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && (
+            {(hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && isInitialStep && (
               <Button
                 data-testid="startMarkAction"
                 buttonStyle="dropdownItem"

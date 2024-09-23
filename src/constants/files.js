@@ -8,6 +8,7 @@ export const FILE_KEYS = {
   MATCHING_ERRORS_LINK: 'linkToMatchedRecordsErrorsCsvFile',
   PROPOSED_CHANGES_LINK: 'linkToModifiedRecordsCsvFile',
   PROPOSED_CHANGES_LINK_MARC: 'linkToModifiedRecordsMarcFile',
+  UPDATE_CHANGES_LINK_MARC: 'linkToCommittedRecordsMarcFile',
   UPDATED_RECORDS_LINK: 'linkToCommittedRecordsCsvFile',
   UPDATED_ERRORS_LINK: 'linkToCommittedRecordsErrorsCsvFile',
   TRIGGERING_FILE: 'linkToTriggeringCsvFile',
@@ -41,6 +42,12 @@ export const getDownloadLinks = ({ perms, step }) => [
     KEY: FILE_KEYS.UPDATED_RECORDS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadChangedRecords" />,
+    IS_VISIBLE: perms.hasAnyEditPermissions,
+  },
+  {
+    KEY: FILE_KEYS.UPDATE_CHANGES_LINK_MARC,
+    SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE,
+    LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadChangedRecords.marc" />,
     IS_VISIBLE: perms.hasAnyEditPermissions,
   },
   {
