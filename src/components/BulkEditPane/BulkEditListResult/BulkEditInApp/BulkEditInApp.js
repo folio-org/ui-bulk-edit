@@ -78,6 +78,7 @@ export const BulkEditInApp = ({
       id: uniqueId(),
       options,
       option: '',
+      tenants: [],
       actionsDetails: getDefaultActions({
         option: '',
         capability: currentRecordType,

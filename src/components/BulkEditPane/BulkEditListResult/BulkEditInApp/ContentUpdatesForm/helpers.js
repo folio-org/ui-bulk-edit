@@ -52,6 +52,7 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
 
       return {
         option: OPTIONS_MAP[item.option] || item.option,
+        tenants: item?.tenants,
         actions: item.actions.map(action => ({
           ...action,
           updated: isExpirationDate ? getFormattedDate(action.updated) : action.updated,

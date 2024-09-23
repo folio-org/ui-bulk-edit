@@ -26,7 +26,7 @@ import {
   getFilteredFields,
   getExtraActions,
 } from './helpers';
-import { customFilter, groupByCategory } from '../../../../../utils/helpers';
+import {customFilter, getTenantsById, groupByCategory} from '../../../../../utils/helpers';
 import { useSearchParams } from '../../../../../hooks';
 
 export const ContentUpdatesForm = ({
@@ -41,7 +41,7 @@ export const ContentUpdatesForm = ({
     currentRecordType,
   } = useSearchParams();
 
-  const handleOptionChange = (option, index) => {
+  const handleOptionChange = (option, index, tenants = []) => {
     const mappedFields = fields.map((field, i) => {
       if (i === index) {
         const sourceOption = options.find(o => o.value === option);
@@ -51,6 +51,7 @@ export const ContentUpdatesForm = ({
           ...field,
           parameters,
           option,
+          tenants,
           actionsDetails: getDefaultActions({
             capability: currentRecordType,
             option,
@@ -205,25 +206,25 @@ export const ContentUpdatesForm = ({
   useEffect(() => {
     const mappedContentUpdates = fields.map(
       // eslint-disable-next-line no-shadow
-      ({ parameters, option, actionsDetails: { actions } }) => {
+      ({ parameters, tenants, option, actionsDetails: { actions } }) => {
         const [initial, updated] = actions.map(action => action?.value ?? null);
-        const tenants = actions.map(action => action?.tenants);
+        const actionTenants = actions.map(action => action?.tenants);
         const sourceOption = options.find(o => o.value === option);
         const optionType = sourceOption?.type;
         const mappedOption = optionType || option; // if option has type, use it, otherwise use option value (required for ITEM_NOTE cases)
-
         // generate action type key with '_' delimiter
         const typeKey = actions
           .filter(Boolean)
           .map(action => action?.name ?? null).join('_');
 
         const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
-        const activeTenants = tenants?.find(tenant => Boolean(tenant?.length))
+        const activeTenants = actionTenants?.find(tenant => Boolean(tenant?.length))
 
         const type = ACTIONS[typeKey];
 
         return {
           option: mappedOption,
+          tenants,
           actions: [{
             type,
             initial,
@@ -254,7 +255,7 @@ export const ContentUpdatesForm = ({
               <Selection
                 dataOptions={groupByCategory(field.options)}
                 value={field.option}
-                onChange={(value) => handleOptionChange(value, index)}
+                onChange={(value) => handleOptionChange(value, index, getTenantsById(field.options, value))}
                 placeholder={formatMessage({ id:'ui-bulk-edit.options.placeholder' })}
                 dirty={!!field.option}
                 ariaLabel={`select-option-${index}`}

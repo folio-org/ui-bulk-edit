@@ -55,6 +55,7 @@ import {
 } from '../../../../../hooks';
 import { sortAlphabeticallyWithoutGroups } from '../../../../../utils/sortAlphabetically';
 import {
+  filterByIds,
   getTenantsById,
   removeDuplicatesByValue
 } from '../../../../../utils/helpers';
@@ -76,7 +77,6 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const isInstanceCapability = currentRecordType === CAPABILITIES.INSTANCE;
 
   const currentTenants = useCurrentUserTenants();
-  const userTenants = currentTenants?.map(item => item.id);
   const { userGroups } = usePatronGroup({ enabled: isUserCapability });
   const { loanTypes, isLoanTypesLoading } = useLoanTypes({ enabled: isItemCapability });
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
@@ -84,7 +84,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
   const { notesEsc: itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length) });
   const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && Boolean(tenants?.length) });
-  const { locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(userTenants, { enabled: Boolean(tenants?.length) });
+  const { locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(tenants, { enabled: Boolean(tenants?.length) });
   const { escData: loanTypesEsc, isFetching: isLoanTypesEscLoading } = useLoanTypesEsc(tenants, { enabled: Boolean(tenants?.length) });
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
@@ -212,6 +212,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
             <FindLocation
               id="fund-locations"
               crossTenant
+              tenantsList={filterByIds(currentTenants, tenants)}
               tenantId={tenants[0]}
               onRecordsSelect={(loc) => {
                 onChange({

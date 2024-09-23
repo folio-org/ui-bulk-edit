@@ -70,6 +70,7 @@ export const getMappedAndSortedNotes = ({
     label: note?.name,
     value: note?.id,
     type,
+    tenant: note?.tenantName,
     parameters: [{
       key,
       value: note?.id,
@@ -140,6 +141,10 @@ export const removeDuplicatesByValue = (arr = []) => {
 export const getTenantsById = (arr, id) => {
   const item = arr.find(obj => obj.value === id);
   return item ? item.tenant : null;
+};
+
+export const filterByIds = (items, ids) => {
+  return items.filter(item => ids.includes(item.id));
 };
 
 
