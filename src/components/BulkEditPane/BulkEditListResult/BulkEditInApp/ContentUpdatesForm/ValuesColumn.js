@@ -219,6 +219,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
                   actionIndex,
                   value: loc[0].id,
                   fieldName: FIELD_VALUE_KEY,
+                  tenants: getTenantsById(removeDuplicatesByValue(locationsEsc), loc[0].id)
                 });
               }}
             />

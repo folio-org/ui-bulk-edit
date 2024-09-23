@@ -29,6 +29,7 @@ export const useLocationEsc = (tenants, options = {}) => {
             return tenantData.response?.locations?.map(note => ({
                 ...note,
                 name: `${note.name} (${tenantName})`,
+                tenantName,
             }));
         })
     }
@@ -36,6 +37,7 @@ export const useLocationEsc = (tenants, options = {}) => {
     const locationsEsc = locations().map((location) => ({
         value: location.id,
         label: location.name,
+        tenant: location.tenantName,
     }))
 
     return {
