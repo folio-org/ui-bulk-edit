@@ -5,11 +5,11 @@ import { useMemo } from 'react';
 import { useNamespace } from '@folio/stripes/core';
 
 import { getMappedAndSortedNotes } from '../../utils/helpers';
-import { usePublishCoordinator } from '../usePublishCoordinator';
+import { PUBLISH_COORDINATOR_STATUSES_METHODS, usePublishCoordinator } from '../usePublishCoordinator';
 
 const DEFAULT_DATA = {};
 
-export const useNotesEsc = (namespaceKey, tenants, type, categoryId, options = {}, url, noteKey, optionType, parameterKey) => {
+export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, noteKey, optionType, parameterKey, options = {} }) => {
   const [namespace] = useNamespace({ key: namespaceKey });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
   const { formatMessage } = useIntl();
@@ -19,7 +19,7 @@ export const useNotesEsc = (namespaceKey, tenants, type, categoryId, options = {
     queryFn: async () => {
       const { publicationResults } = await initPublicationRequest({
         url,
-        method: 'GET',
+        method: PUBLISH_COORDINATOR_STATUSES_METHODS.GET,
         tenants,
       });
       return publicationResults;

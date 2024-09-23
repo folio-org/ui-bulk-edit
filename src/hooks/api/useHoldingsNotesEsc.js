@@ -1,16 +1,23 @@
 import { useNotesEsc } from './useNoteEsc';
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 
+const NOTE_ESC = {
+  NAMESPACE: 'holdings-note-types-esc',
+  CATEGORY: 'ui-bulk-edit.category.holdingsNotes',
+  URL: 'holdings-note-types?limit=2000',
+  NOTE_KEY: 'holdingsNoteTypes'
+};
+
 export const useHoldingsNotesEsc = (tenants, type, options = {}) => {
-  return useNotesEsc(
-    'holdings-note-types-esc',
+  return useNotesEsc({
+    namespaceKey: NOTE_ESC.NAMESPACE,
     tenants,
     type,
-    'ui-bulk-edit.category.holdingsNotes',
+    categoryId: NOTE_ESC.CATEGORY,
     options,
-    'holdings-note-types',
-    'holdingsNoteTypes',
-    OPTIONS.HOLDINGS_NOTE,
-    PARAMETERS_KEYS.HOLDINGS_NOTE_TYPE_ID_KEY
-  );
+    url: NOTE_ESC.URL,
+    noteKey: NOTE_ESC.NOTE_KEY,
+    optionType: OPTIONS.ITEM_NOTE,
+    parameterKey: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY
+  });
 };

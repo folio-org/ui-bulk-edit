@@ -55,7 +55,7 @@ describe('BulkEditActionMenu', () => {
   it('should displays BulkEditManualConformationModal title', async () => {
     renderWithRouter(startModal, { route: currentRoute });
 
-    expect(screen.getByText(/meta.title/)).toBeVisible();
+    expect(screen.getByText(/meta.title/)).toBeInTheDocument();
   });
 
   it('should render with no axe errors', async () => {

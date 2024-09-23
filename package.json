@@ -68,7 +68,11 @@
           "inventory-storage.location-units.campuses.collection.get",
           "inventory-storage.location-units.libraries.collection.get",
           "remote-storage.mappings.collection.get",
-          "usergroups.collection.get"
+          "usergroups.collection.get",
+          "bulk-operations.used.tenants.get",
+          "consortia.publications.item.get",
+          "consortia.publications.item.post",
+          "consortia.publications-results.item.get"
         ]
       },
       {
@@ -77,7 +81,8 @@
         "visible": true,
         "subPermissions": [
           "ui-bulk-edit.view.base",
-          "ui-bulk-edit.edit.base"
+          "ui-bulk-edit.edit.base",
+          "bulk-operations.item.users.get"
         ]
       },
       {
@@ -85,7 +90,8 @@
         "displayName": "Bulk Edit: Local - Edit user records",
         "subPermissions": [
           "ui-bulk-edit.view",
-          "ui-bulk-edit.edit.base"
+          "ui-bulk-edit.edit.base",
+          "bulk-operations.item.users.put"
         ],
         "visible": true
       },
@@ -94,7 +100,8 @@
         "displayName": "Bulk Edit: In app - View inventory records",
         "subPermissions": [
           "ui-bulk-edit.view.base",
-          "ui-bulk-edit.edit.base"
+          "ui-bulk-edit.edit.base",
+          "bulk-operations.item.inventory.get"
         ],
         "visible": true
       },
@@ -106,7 +113,8 @@
           "ui-bulk-edit.edit.base",
           "inventory-storage.item-note-types.collection.get",
           "inventory-storage.holdings-note-types.collection.get",
-          "inventory-storage.electronic-access-relationships.collection.get"
+          "inventory-storage.electronic-access-relationships.collection.get",
+          "bulk-operations.item.inventory.put"
         ],
         "visible": true
       },
@@ -114,7 +122,9 @@
         "permissionName": "ui-bulk-edit.app-edit.users",
         "displayName": "Bulk edit: In app - Edit user records",
         "subPermissions": [
-          "ui-bulk-edit.edit.base"
+          "ui-bulk-edit.edit.base",
+          "bulk-operations.item.users.get",
+          "bulk-operations.item.users.put"
         ],
         "visible": true
       },

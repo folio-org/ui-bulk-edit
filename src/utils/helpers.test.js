@@ -1,5 +1,6 @@
 import {
-  customFilter, getTenantsById,
+  customFilter, 
+  getTenantsById,
   removeDuplicatesByValue
 } from './helpers';
 
@@ -177,12 +178,12 @@ describe('getTenantsById', () => {
     { value: 'consortium', tenant: 'Tenant 3' },
   ];
 
-  test('should return tenant 1', () => {
+  it('should return tenant 1', () => {
     const result = getTenantsById(mockData, 'college');
     expect(result).toBe('Tenant 1');
   });
 
-  test('should return null', () => {
+  it('should return null', () => {
     const result = getTenantsById(mockData, 'unknown');
     expect(result).toBeNull();
   });
