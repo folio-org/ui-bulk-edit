@@ -1,5 +1,5 @@
 import {
-  customFilter, 
+  customFilter,
   getTenantsById,
   removeDuplicatesByValue
 } from './helpers';

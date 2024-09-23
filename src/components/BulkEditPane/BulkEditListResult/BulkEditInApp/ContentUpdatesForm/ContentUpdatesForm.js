@@ -26,7 +26,11 @@ import {
   getFilteredFields,
   getExtraActions,
 } from './helpers';
-import {customFilter, getTenantsById, groupByCategory} from '../../../../../utils/helpers';
+import {
+  customFilter,
+  getTenantsById,
+  groupByCategory
+} from '../../../../../utils/helpers';
 import { useSearchParams } from '../../../../../hooks';
 
 export const ContentUpdatesForm = ({
@@ -76,7 +80,7 @@ export const ContentUpdatesForm = ({
     fieldName,
     actionIndex,
     hasActionChanged,
-      tenants
+    tenants
   }) => {
     return field.actionsDetails.actions.map((action, j) => {
       if (!action) return action; // if null, return this value to stay with the same arr length
@@ -86,7 +90,7 @@ export const ContentUpdatesForm = ({
           ...action,
           [fieldName]: value,
           ...((hasActionChanged) && { [FIELD_VALUE_KEY]: '' }),
-            ...(tenants ? { tenants } : null) // clear field values if action changed
+          ...(tenants ? { tenants } : null) // clear field values if action changed
         })
         : action;
     });
@@ -218,7 +222,7 @@ export const ContentUpdatesForm = ({
           .map(action => action?.name ?? null).join('_');
 
         const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
-        const activeTenants = actionTenants?.find(tenant => Boolean(tenant?.length))
+        const activeTenants = actionTenants?.find(tenant => Boolean(tenant?.length));
 
         const type = ACTIONS[typeKey];
 
