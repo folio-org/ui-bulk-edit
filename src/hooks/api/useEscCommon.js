@@ -19,6 +19,8 @@ export const useEscCommon = (key, url, tenants, mapResponse, options = {}) => {
       return publicationResults;
     },
     keepPreviousData: true,
+    cacheTime: Infinity,
+    staleTime: Infinity,
     ...options
   });
 
