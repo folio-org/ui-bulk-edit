@@ -8,14 +8,13 @@ const NOTE_ESC = {
   NOTE_KEY: 'holdingsNoteTypes'
 };
 
-export const useHoldingsNotesEsc = (tenants, type, index, options = {}) => {
+export const useHoldingsNotesEsc = (tenants, type, options = {}) => {
   return useNotesEsc({
     namespaceKey: NOTE_ESC.NAMESPACE,
     tenants,
     type,
     categoryId: NOTE_ESC.CATEGORY,
     options,
-    index,
     url: NOTE_ESC.URL,
     noteKey: NOTE_ESC.NOTE_KEY,
     optionType: OPTIONS.ITEM_NOTE,

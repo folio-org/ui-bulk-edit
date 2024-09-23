@@ -9,13 +9,13 @@ import { PUBLISH_COORDINATOR_STATUSES_METHODS, usePublishCoordinator } from '../
 
 const DEFAULT_DATA = {};
 
-export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, noteKey, optionType, parameterKey, index,  options = {} }) => {
+export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, noteKey, optionType, parameterKey,  options = {} }) => {
   const [namespace] = useNamespace({ key: namespaceKey });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
   const { formatMessage } = useIntl();
 
   const { data = DEFAULT_DATA, isFetching } = useQuery({
-    queryKey: [namespace, tenants, url, type, index],
+    queryKey: [namespace, tenants, url, type],
     queryFn: async () => {
       const { publicationResults } = await initPublicationRequest({
         url,
