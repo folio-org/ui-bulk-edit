@@ -92,16 +92,16 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   // exclude from second action the first action value
   const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
   const filteredElectronicAccessRelationshipsEsc = urlRelationshipsEsc?.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
-  const accessRelationshipsWithPlaceholder = getItemsWithPlaceholder(isCentralTenant ? removeDuplicatesByValue(filteredElectronicAccessRelationshipsEsc) : filteredElectronicAccessRelationships);
+  const accessRelationshipsWithPlaceholder = getItemsWithPlaceholder(isCentralTenant ? removeDuplicatesByValue(filteredElectronicAccessRelationshipsEsc, tenants) : filteredElectronicAccessRelationships);
 
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
   const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
 
-  const filteredAndMappedNotes = getNotesOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(itemsNotes) : itemNotes)
+  const filteredAndMappedNotes = getNotesOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(itemsNotes, tenants) : itemNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value }) => ({ label, value }));
 
-  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc) : holdingsNotes)
+  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc, tenants) : holdingsNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value, disabled }) => ({ label, value, disabled }));
 
@@ -219,7 +219,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
                   actionIndex,
                   value: loc[0].id,
                   fieldName: FIELD_VALUE_KEY,
-                  tenants: getTenantsById(removeDuplicatesByValue(locationsEsc), loc[0].id)
+                  tenants: getTenantsById(removeDuplicatesByValue(locationsEsc, tenants), loc[0].id)
                 });
               }}
             />
@@ -274,12 +274,12 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
             actionIndex,
             value,
             fieldName: FIELD_VALUE_KEY,
-            tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc), value)
+            tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc, tenants), value)
           }
         );
       }}
       placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
-      dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc) : loanTypes}
+      dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes}
       aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
       dirty={!!actionValue}
     />

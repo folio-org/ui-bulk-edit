@@ -113,7 +113,7 @@ export const setIn = (obj, path, value) => {
   return setWith(clone(obj), path, value, clone);
 };
 
-export const removeDuplicatesByValue = (arr = []) => {
+export const removeDuplicatesByValue = (arr = [], tenants) => {
   const valueMap = new Map();
 
   arr?.forEach(item => {
@@ -129,14 +129,24 @@ export const removeDuplicatesByValue = (arr = []) => {
         existingItem.label = existingItem.label.slice(0, startIndex).trim() + existingItem.label.slice(endIndex + 1).trim();
       }
 
+      if (tenants.length === 1) {
+        const tenantStartIndex = existingItem.label.indexOf('(');
+        const tenantEndIndex = existingItem.label.indexOf(')', tenantStartIndex);
+
+        if (tenantStartIndex !== -1 && tenantEndIndex !== -1) {
+          existingItem.label = existingItem.label.slice(0, tenantStartIndex).trim() + existingItem.label.slice(tenantEndIndex + 1).trim();
+        }
+      }
+
       if (!existingItem.tenant.includes(item.tenant)) {
         existingItem.tenant.push(item.tenant);
       }
     }
   });
 
-  return Array.from(valueMap.values());
+  return Array.from(valueMap.values()).sort((a, b) => a.label.localeCompare(b.label));
 };
+
 
 export const getTenantsById = (arr, id) => {
   const item = arr.find(obj => obj.value === id);

@@ -116,7 +116,7 @@ describe('customFilter', () => {
 });
 
 describe('removeDuplicatesByValue', () => {
-  test('should remove duplicates by the value field and merge tenant arrays', () => {
+  it('should remove duplicates by the value field, merge tenant arrays, and remove parentheses from labels', () => {
     const input = [
       { value: 'college', label: 'College (Main)', tenant: 'Tenant 1' },
       { value: 'college', label: 'College (Main)', tenant: 'Tenant 2' },
@@ -128,25 +128,56 @@ describe('removeDuplicatesByValue', () => {
       { value: 'university', label: 'University', tenant: ['Tenant 3'] },
     ];
 
-    const result = removeDuplicatesByValue(input);
+    const result = removeDuplicatesByValue(input, ['Tenant 1', 'Tenant 2', 'Tenant 3']);
     expect(result).toEqual(expectedOutput);
   });
 
-  test('should handle arrays with no duplicates correctly', () => {
+  it('should handle arrays with no duplicates and leave labels unchanged if there are no parentheses', () => {
     const input = [
-      { value: 'college', label: 'College (Main)', tenant: 'Tenant 1' },
+      { value: 'college', label: 'College', tenant: 'Tenant 1' },
       { value: 'university', label: 'University', tenant: 'Tenant 2' },
     ];
 
     const expectedOutput = [
-      { value: 'college', label: 'College (Main)', tenant: ['Tenant 1'] },
+      { value: 'college', label: 'College', tenant: ['Tenant 1'] },
       { value: 'university', label: 'University', tenant: ['Tenant 2'] },
     ];
 
-    const result = removeDuplicatesByValue(input);
+    const result = removeDuplicatesByValue(input, ['Tenant 1', 'Tenant 2']);
+    expect(result).toEqual(expectedOutput);
+  });
+
+  it('should remove parentheses from labels when tenants array has only one element', () => {
+    const input = [
+      { value: 'college', label: 'College (Main)', tenant: 'Tenant 1' },
+      { value: 'university', label: 'University (Main)', tenant: 'Tenant 2' },
+    ];
+
+    const expectedOutput = [
+      { value: 'college', label: 'College', tenant: ['Tenant 1'] },
+      { value: 'university', label: 'University', tenant: ['Tenant 2'] },
+    ];
+
+    const result = removeDuplicatesByValue(input, ['Tenant 1']);
+    expect(result).toEqual(expectedOutput);
+  });
+
+  it('should return results sorted by label in alphabetical order', () => {
+    const input = [
+      { value: 'university', label: 'University (Main)', tenant: 'Tenant 1' },
+      { value: 'college', label: 'College (Main)', tenant: 'Tenant 2' },
+    ];
+
+    const expectedOutput = [
+      { value: 'college', label: 'College', tenant: ['Tenant 2'] },
+      { value: 'university', label: 'University', tenant: ['Tenant 1'] },
+    ];
+
+    const result = removeDuplicatesByValue(input, ['Tenant 1', 'Tenant 2']);
     expect(result).toEqual(expectedOutput);
   });
 });
+
 
 describe('getTenantsById', () => {
   const mockArray = [

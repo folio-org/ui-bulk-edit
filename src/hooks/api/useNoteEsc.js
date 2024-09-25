@@ -33,7 +33,7 @@ export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, note
   const notesEsc = useMemo(() => {
     if (!data?.length || isFetching) return [];
     const notes = data.flatMap(tenantData => {
-      const tenantName = tenantData.tenantId;
+      const tenantName = tenants.length ? tenantData.tenantId : null;
       return tenantData.response?.[noteKey]?.map(note => ({
         ...note,
         name: `${note.name} (${tenantName})`,
