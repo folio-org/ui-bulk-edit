@@ -139,7 +139,7 @@
 
   "start.edit": "Start bulk edit",
   "start.edit.instance": "Instances and Administrative data",
-  "start.edit.mark": "Instances with source MARC(POC)",
+  "start.edit.mark": "Instances with source MARC (POC)",
   "start.edit.csv": "Start bulk edit (Local)",
   "start.delete": "Start bulk delete",
 

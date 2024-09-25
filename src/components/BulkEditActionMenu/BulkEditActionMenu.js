@@ -32,7 +32,6 @@ import { getVisibleColumnsKeys } from '../../utils/helpers';
 
 import css from './ActionMenuGroup/ActionMenuGroup.css';
 
-
 const BulkEditActionMenu = ({
   onEdit,
   onToggle,
