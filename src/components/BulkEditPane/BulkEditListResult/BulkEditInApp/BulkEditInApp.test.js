@@ -22,6 +22,9 @@ import {
   useElectronicAccessRelationships,
   useHoldingsNotesEsc,
   useItemNotesEsc,
+  useLocationEsc,
+  useLoanTypesEsc,
+  useElectronicAccessEsc
 } from '../../../../hooks/api';
 
 
@@ -38,6 +41,9 @@ jest.mock('../../../../hooks/api', () => ({
   useElectronicAccessRelationships: jest.fn(),
   useHoldingsNotesEsc: jest.fn(),
   useItemNotesEsc: jest.fn(),
+  useLocationEsc: jest.fn(),
+  useLoanTypesEsc: jest.fn(),
+  useElectronicAccessEsc: jest.fn(),
 }));
 
 const fileName = 'Mock.csv';
@@ -94,6 +100,18 @@ describe('BulkEditInApp', () => {
     });
     useItemNotesEsc.mockClear().mockReturnValue({
       itemNotes: [],
+      isFetching: false,
+    });
+    useLoanTypesEsc.mockClear().mockReturnValue({
+      loantypes: [],
+      isFetching: false,
+    });
+    useElectronicAccessEsc.mockClear().mockReturnValue({
+      electronicAccessRelationships: [],
+      isFetching: false,
+    });
+    useLocationEsc.mockClear().mockReturnValue({
+      locations: [],
       isFetching: false,
     });
   });

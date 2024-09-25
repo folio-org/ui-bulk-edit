@@ -70,6 +70,7 @@ export const getMappedAndSortedNotes = ({
     label: note?.name,
     value: note?.id,
     type,
+    tenant: note?.tenantName,
     parameters: [{
       key,
       value: note?.id,
@@ -112,12 +113,12 @@ export const setIn = (obj, path, value) => {
   return setWith(clone(obj), path, value, clone);
 };
 
-export const removeDuplicatesByValue = (arr = []) => {
+export const removeDuplicatesByValue = (arr = [], tenants) => {
   const valueMap = new Map();
 
   arr?.forEach(item => {
     if (!valueMap.has(item.value)) {
-      valueMap.set(item.value, item);
+      valueMap.set(item.value, { ...item, tenant: [item.tenant] });
     } else {
       const existingItem = valueMap.get(item.value);
 
@@ -127,10 +128,33 @@ export const removeDuplicatesByValue = (arr = []) => {
       if (startIndex !== -1 && endIndex !== -1) {
         existingItem.label = existingItem.label.slice(0, startIndex).trim() + existingItem.label.slice(endIndex + 1).trim();
       }
+
+      if (tenants.length === 1) {
+        const tenantStartIndex = existingItem.label.indexOf('(');
+        const tenantEndIndex = existingItem.label.indexOf(')', tenantStartIndex);
+
+        if (tenantStartIndex !== -1 && tenantEndIndex !== -1) {
+          existingItem.label = existingItem.label.slice(0, tenantStartIndex).trim() + existingItem.label.slice(tenantEndIndex + 1).trim();
+        }
+      }
+
+      if (!existingItem.tenant.includes(item.tenant)) {
+        existingItem.tenant.push(item.tenant);
+      }
     }
   });
 
-  return Array.from(valueMap.values());
+  return Array.from(valueMap.values()).sort((a, b) => a.label.localeCompare(b.label));
+};
+
+
+export const getTenantsById = (arr, id) => {
+  const item = arr.find(obj => obj.value === id);
+  return item ? item.tenant : null;
+};
+
+export const filterByIds = (items, ids) => {
+  return items.filter(item => ids.includes(item.id));
 };
 
 

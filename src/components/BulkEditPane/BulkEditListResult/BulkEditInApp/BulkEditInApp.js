@@ -60,13 +60,13 @@ export const BulkEditInApp = ({
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { notesEsc: itemNotesEsc, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'option', { enabled: isItemRecordType });
-  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'option', { enabled: isHoldingsRecordType });
+  const { notesEsc: itemNotesEsc, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'option', { enabled: isItemRecordType && Boolean(tenants?.length) });
+  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'option', { enabled: isHoldingsRecordType && (Boolean(tenants?.length)) });
 
   const options = useMemo(() => ({
-    [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemNotesEsc : itemNotes)),
+    [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemNotesEsc : itemNotes, tenants)),
     [CAPABILITIES.USER]: getUserOptions(formatMessage),
-    [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? holdingsNotesEsc : holdingsNotes)),
+    [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc, tenants) : holdingsNotes),
     [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage, instanceNotes),
   })[currentRecordType], [formatMessage, isCentralTenant, itemNotesEsc, itemNotes, holdingsNotesEsc, holdingsNotes, instanceNotes, currentRecordType]);
 
@@ -78,6 +78,7 @@ export const BulkEditInApp = ({
       id: uniqueId(),
       options,
       option: '',
+      tenants: [],
       actionsDetails: getDefaultActions({
         option: '',
         capability: currentRecordType,
