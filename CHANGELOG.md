@@ -57,6 +57,7 @@
 * [UIBULKED-524](https://folio-org.atlassian.net/browse/UIBULKED-524) Localize Item's and Holdings' Notes names in ECS.
 * [UIBULKED-538](https://folio-org.atlassian.net/browse/UIBULKED-538) “Are you sure" form notification banner wording for the case of bulk editing MARC fields for FOLIO Instances
 * [UIBULKED-525](https://folio-org.atlassian.net/browse/UIBULKED-525) Include tenantId in reference data values  in ECS.
+* [UIBULKED-542](https://folio-org.atlassian.net/browse/UIBULKED-542) Remove "Actions" Header from Actions menu.
 
 ## [4.1.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.4) (2024-05-29)
 
