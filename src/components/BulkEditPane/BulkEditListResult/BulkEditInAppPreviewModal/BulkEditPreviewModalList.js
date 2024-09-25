@@ -1,16 +1,32 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, useIntl } from 'react-intl';
+import {
+  FormattedMessage,
+  useIntl
+} from 'react-intl';
 
-import { MessageBanner, MultiColumnList } from '@folio/stripes/components';
-import { PrevNextPagination, useShowCallout } from '@folio/stripes-acq-components';
+import {
+  MessageBanner,
+  MultiColumnList
+} from '@folio/stripes/components';
+import {
+  PrevNextPagination,
+  useShowCallout
+} from '@folio/stripes-acq-components';
 
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
 import css from './BulkEditInAppPreviewModal.css';
 import { usePagination } from '../../../../hooks/usePagination';
-import { EDITING_STEPS, PAGINATION_CONFIG } from '../../../../constants';
-import { PREVIEW_MODAL_KEY, useRecordsPreview } from '../../../../hooks/api';
+import {
+  CAPABILITIES,
+  EDITING_STEPS,
+  PAGINATION_CONFIG
+} from '../../../../constants';
+import {
+  PREVIEW_MODAL_KEY,
+  useRecordsPreview
+} from '../../../../hooks/api';
 import { useSearchParams } from '../../../../hooks';
 import { RootContext } from '../../../../context/RootContext';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
@@ -56,11 +72,25 @@ export const BulkEditPreviewModalList = ({
 
   if (!contentData || !isPreviewEnabled) return <Preloader />;
 
-  return (
-    <>
+  const renderMessageBanner = () => {
+    if (!bulkDetails?.processedNumOfRecords && currentRecordType === CAPABILITIES.INSTANCE) {
+      return (
+        <MessageBanner type="warning">
+          <FormattedMessage id="ui-bulk-edit.previewModal.message.empty.marc" />
+        </MessageBanner>
+      );
+    }
+
+    return (
       <MessageBanner type="warning">
         <FormattedMessage id="ui-bulk-edit.previewModal.message" values={{ count: bulkDetails?.processedNumOfRecords }} />
       </MessageBanner>
+    );
+  };
+
+  return (
+    <>
+      {renderMessageBanner()}
 
       <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
 
