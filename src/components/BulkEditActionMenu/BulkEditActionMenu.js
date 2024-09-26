@@ -78,7 +78,7 @@ const BulkEditActionMenu = ({
        hasEditPerm
     && isInitialStep
     && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
-  const isStartMarkActive = (isStartBulkInAppActive || hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && currentRecordType === CAPABILITIES.INSTANCE;
+  const isStartMarkActive = (isStartBulkInAppActive || hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && currentRecordType === CAPABILITIES.INSTANCE && isInitialStep;
   const isStartManualButtonVisible = isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && criteria !== CRITERIA.QUERY && !isESC;
 
   const isLastUnselectedColumn = (value) => {
@@ -160,7 +160,7 @@ const BulkEditActionMenu = ({
               </Icon>
             </Button>
             )}
-            {(hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && isInitialStep && (
+            {(hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && (
               <Button
                 data-testid="startMarkAction"
                 buttonStyle="dropdownItem"
