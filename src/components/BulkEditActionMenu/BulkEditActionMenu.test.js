@@ -72,7 +72,7 @@ const renderBulkEditActionMenu = ({ step, capability, providerState = defaultPro
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={[`/bulk-edit/1/preview?${params}`]}>
         <RootContext.Provider value={providerState}>
-          <BulkEditActionMenu onEdit={onEdit} onToggle={onToggle} />
+          <BulkEditActionMenu onEdit={onEdit} onToggle={onToggle} setFileInfo={jest.fn()} />
         </RootContext.Provider>
       </MemoryRouter>,
     </QueryClientProvider>,
@@ -89,11 +89,11 @@ describe('BulkEditActionMenu', () => {
   it('should display actions group', async () => {
     renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
-      capability: CAPABILITIES.USER,
+      capability: CAPABILITIES.INSTANCE,
       providerState: { ...defaultProviderState, visibleColumns: [] },
     });
 
-    expect(screen.getByText('ui-bulk-edit.menuGroup.actions')).toBeVisible();
+    expect(screen.getByText(/menuGroup.startEdit/)).toBeVisible();
   });
 
   it('should display download matched records action when available', () => {
