@@ -116,7 +116,7 @@ export const BulkEditPane = () => {
     enabled: !!fileInfo,
     id: bulkOperationId,
     fileInfo: {
-      fileContentType: FILE_SEARCH_PARAMS[fileInfo?.param],
+      fileContentType: FILE_SEARCH_PARAMS[fileInfo?.param]?.replace('_MARC', ''),
     },
     onSuccess: data => {
       /* istanbul ignore next */

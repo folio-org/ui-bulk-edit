@@ -4,6 +4,7 @@ export const linkNamesMap = {
   linkToMatchedRecordsErrorsCsvFile: 'RECORD_MATCHING_ERROR_FILE',
   linkToModifiedRecordsCsvFile: 'PROPOSED_CHANGES_FILE',
   linkToModifiedRecordsMarcFile: 'PROPOSED_CHANGES_FILE',
+  linkToCommittedRecordsMarcFile: 'COMMITTED_RECORDS_FILE',
   linkToCommittedRecordsCsvFile: 'COMMITTED_RECORDS_FILE',
   linkToCommittedRecordsErrorsCsvFile: 'COMMITTING_CHANGES_ERROR_FILE',
   expired: 'expired',

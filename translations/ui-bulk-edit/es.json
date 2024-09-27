@@ -164,6 +164,7 @@
     "logs.actions.linkToMatchedRecordsErrorsCsvFile": "File with errors encountered during the record matching",
     "logs.actions.linkToModifiedRecordsCsvFile": "File with the preview of proposed changes",
     "logs.actions.linkToCommittedRecordsCsvFile": "File with updated records",
+    "logs.actions.linkToCommittedRecordsMarcFile": "File with updated records",
     "logs.actions.linkToCommittedRecordsErrorsCsvFile": "File with errors encountered when committing the changes",
     "logs.status.NEW": "New",
     "logs.status.RETRIEVING_RECORDS": "Retrieving records",
