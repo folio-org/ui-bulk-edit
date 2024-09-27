@@ -356,23 +356,26 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   );
 
   const renderElectronicAccessRelationshipSelect = () => controlType === CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT && (
-    <Select
-      id="urlRelationship"
-      value={action.value}
-      loading={isElectronicAccessLoading || isElectronicAccessEscLoading}
-      onChange={e => onChange(
-        {
-          actionIndex,
-          value: e.target.value,
-          fieldName: FIELD_VALUE_KEY,
-          tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
-        }
-      )}
-      dataOptions={accessRelationshipsWithPlaceholder}
-      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
-      marginBottom0
-      dirty={!!actionValue}
-    />
+      isElectronicAccessEscLoading ?
+          <Loading size="large" />
+          :
+          <Select
+            id="urlRelationship"
+            value={action.value}
+            loading={isElectronicAccessLoading || isElectronicAccessEscLoading}
+            onChange={e => onChange(
+              {
+                actionIndex,
+                value: e.target.value,
+                fieldName: FIELD_VALUE_KEY,
+                tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
+              }
+            )}
+            dataOptions={accessRelationshipsWithPlaceholder}
+            aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
+            marginBottom0
+            dirty={!!actionValue}
+          />
   );
 
   return (
