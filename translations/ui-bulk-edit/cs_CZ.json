@@ -288,7 +288,7 @@
     "layer.options.items.removeNote": "Odstranit",
     "logs.infoPopover": "Soubory nejsou k dispozici ke stažení, protože od data spuštění úlohy uplynulo 30 dní.",
     "permissionsModal.title": "Vyberte Oprávnění",
-    "permissionsModal.filter.title": "Hledat a filtrovat",
+    "permissionsModal.filter.title": "Vyhledat a filtrovat",
     "permissionsModal.filter.search": "Vyhledat",
     "permissionsModal.filter.resetAll": "Obnovit vše",
     "permissionsModal.filter.permissionTypes": "Typy oprávnění",
@@ -423,7 +423,7 @@
     "start.edit.instance": "Tituly a administrativní údaje",
     "list.errors.table.link": "Zobrazit nejnovější verzi",
     "actions.find": "Najít",
-    "start.edit.mark": "Tituly se zdrojem MARC(POC)",
+    "start.edit.mark": "Tituly se zdrojem MARC (POC)",
     "logs.status.RETRIEVING_IDENTIFIERS": "Získávání identifikátorů",
     "logs.status.SAVED_IDENTIFIERS": "Ukládání identifikátorů",
     "meta.title.uploadedFile.mark": "Hromadná úprava polí MARC - <b>{fileName}</b>",
@@ -505,5 +505,7 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker).",
     "menuGroup.startEdit": "Spustit hromadné úpravy",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "Nahraný soubor je prázdný."
+    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "Nahraný soubor je prázdný.",
+    "previewModal.message.empty.marc": "All instances have source FOLIO.  Use “Instances and  Administrative data” option for bulk edit.",
+    "start.downloadChangedRecords.marc": "Stáhnout změněné záznamy (MARC)"
 }

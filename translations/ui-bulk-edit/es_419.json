@@ -423,7 +423,7 @@
     "start.edit.instance": "Iniciar edición masiva - Campos de instancia",
     "list.errors.table.link": "Ver la última versión",
     "actions.find": "Find",
-    "start.edit.mark": "Instances with source MARC(POC)",
+    "start.edit.mark": "Instances with source MARC (POC)",
     "logs.status.RETRIEVING_IDENTIFIERS": "Retrieving identifiers",
     "logs.status.SAVED_IDENTIFIERS": "Saving identifiers",
     "meta.title.uploadedFile.mark": "Bulk edit MARC fields - <b>{fileName}</b>",
@@ -505,5 +505,7 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
     "menuGroup.startEdit": "Start bulk edit",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty."
+    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
+    "previewModal.message.empty.marc": "All instances have source FOLIO.  Use “Instances and  Administrative data” option for bulk edit.",
+    "start.downloadChangedRecords.marc": "Download changed records (MARC)"
 }

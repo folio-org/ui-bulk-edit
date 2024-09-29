@@ -500,10 +500,12 @@
     "previewModal.downloadPreview.marc": "MARC形式でプレビューをダウンロード",
     "layer.marc.error.protected": "このフィールドは保護されています",
     "layer.marc.error.limited": "5xx および 9xx に限定されます",
-    "columns.logs.approach": "Editing",
+    "columns.logs.approach": "編集",
     "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": "S3 構成に問題があり、一括編集モジュールがファイルを保存できません。ホスティング プロバイダーに問い合わせて、一括編集アプリが正しく構成されているかどうかを確認してください。",
     "error.mod-bulk-operations.not.download.file.from.s3": "S3 からデータを取得できません。ホスティング プロバイダーに問い合わせて、S3 の設定を確認してください。詳細については、一括編集アプリ ログ (mod-bulk-operations および mod-data-export-worker モジュール) を参照してください。",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "S3 からデータを取得できません。ホスティング プロバイダーに問い合わせて、S3 の設定を確認してください。詳細については、一括編集アプリ ログ (mod-bulk-operations および mod-data-export-worker モジュール) を参照してください。",
-    "menuGroup.startEdit": "Start bulk edit",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty."
+    "menuGroup.startEdit": "一括編集の開始",
+    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
+    "previewModal.message.empty.marc": "All instances have source FOLIO.  Use “Instances and  Administrative data” option for bulk edit.",
+    "start.downloadChangedRecords.marc": "変更されたレコードをダウンロードする (MARC)"
 }

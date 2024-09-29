@@ -423,7 +423,7 @@
     "start.edit.instance": "Instâncias e dados administrativos",
     "list.errors.table.link": "Ver versão mais recente",
     "actions.find": "Buscar",
-    "start.edit.mark": "Instâncias com fonte MARC(POC)",
+    "start.edit.mark": "Instâncias com fonte MARC (POC)",
     "logs.status.RETRIEVING_IDENTIFIERS": "Recuperando identificadores",
     "logs.status.SAVED_IDENTIFIERS": "Salvando identificadores",
     "meta.title.uploadedFile.mark": "Edição em massa de campos MARC - <b>{fileName}</b>",
@@ -505,5 +505,7 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker).",
     "menuGroup.startEdit": "Iniciar edição em lote",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "O arquivo enviado está vazio."
+    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "O arquivo enviado está vazio.",
+    "previewModal.message.empty.marc": "Todas as instâncias têm fonte FOLIO.  Use a opção \"Instâncias e dados administrativos\" para edição em massa.",
+    "start.downloadChangedRecords.marc": "Baixar registros alterados (MARC)"
 }
