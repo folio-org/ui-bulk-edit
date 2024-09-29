@@ -149,10 +149,15 @@ const BulkEditMarkForm = () => {
 
     const path = subfieldIndex ? `subfields[${subfieldIndex}].${name}` : name;
 
-    const newField = setIn(fields[rowIndex], path, !value ? '\\' : value);
+    const newField = setIn(
+      fields[rowIndex],
+      path,
+      !value || value.trim() === '' ? '\\' : value
+    );
 
     handleUpdateField(rowIndex, newField);
   };
+
 
   const handleResetSecondAction = (fieldId, subfieldsCount) => {
     const rowIndex = fields.findIndex(field => field.id === fieldId);
@@ -200,6 +205,7 @@ const BulkEditMarkForm = () => {
                 field={field}
                 subfield={subfield}
                 index={index}
+                errors={errors}
                 subfieldIndex={subfieldIndex}
                 onChange={handleChange}
                 onDataChange={handleDataChange}

@@ -31,10 +31,22 @@ const BulkEditMarkFormField = ({
   const { formatMessage } = useIntl();
   const subfieldsCount = field.subfields.length;
   const tagErrorId = get(errors, `[${index}].tag`);
+  const ind1ErrorsId = get(errors, `[${index}].ind1`);
+  const ind2ErrorsId = get(errors, `[${index}].ind2`);
+  const subFieldErrorId = get(errors, `[${index}].subfield`);
+  const ind1ErrorMessage = ind1ErrorsId && field.ind1.length === INDICATOR_FIELD_MAX_LENGTH ?
+    formatMessage({ id: ind1ErrorsId })
+    : '';
+  const ind2ErrorMessage = ind2ErrorsId && field.ind2.length === INDICATOR_FIELD_MAX_LENGTH ?
+    formatMessage({ id: ind2ErrorsId })
+    : '';
   const tagErrorMessage = tagErrorId && field.tag.length === TAG_FIELD_MAX_LENGTH
     ? formatMessage({ id: tagErrorId })
     : '';
-
+  const subfieldErrorMessage = subFieldErrorId && field.subfield.length === SUBFIELD_MAX_LENGTH ?
+    formatMessage({ id: subFieldErrorId })
+    :
+    '';
   const handleIndicatorFocus = (e) => {
     e.target.select();
   };
@@ -83,6 +95,7 @@ const BulkEditMarkFormField = ({
           onBlur={onBlur}
           maxLength={INDICATOR_FIELD_MAX_LENGTH}
           name="ind1"
+          error={ind1ErrorMessage}
           placeholder=""
           onFocus={handleIndicatorFocus}
           data-testid={`ind1-${index}`}
@@ -101,6 +114,7 @@ const BulkEditMarkFormField = ({
           name="ind2"
           onBlur={onBlur}
           placeholder=""
+          error={ind2ErrorMessage}
           onFocus={handleIndicatorFocus}
           data-testid={`ind2-${index}`}
           onChange={onChange}
@@ -117,6 +131,7 @@ const BulkEditMarkFormField = ({
           maxLength={SUBFIELD_MAX_LENGTH}
           name="subfield"
           placeholder=""
+          error={subfieldErrorMessage}
           onChange={onChange}
           hasClearIcon={false}
           marginBottom0
@@ -127,6 +142,7 @@ const BulkEditMarkFormField = ({
       <BulkEditMarkActionRow
         actions={field.actions}
         rowIndex={index}
+        errors={errors}
         onActionChange={onActionChange}
         onDataChange={onDataChange}
       />
