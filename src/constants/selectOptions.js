@@ -314,30 +314,30 @@ export const getInstanceNotes = (formatMessage, instanceNotes) => [
 ];
 
 export const getNotesOptions = (formatMessage, itemNotes) => {
-  console.log(itemNotes)
   return [
-  {
-    value: '',
-    label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
-    disabled: true,
-  },
-  {
-    value: OPTIONS.ADMINISTRATIVE_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.CHECK_IN_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkInNote' }),
-    disabled: false,
-  },
-  {
-    value: OPTIONS.CHECK_OUT_NOTE,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkOutNote' }),
-    disabled: false,
-  },
-  ...itemNotes,
-]};
+    {
+      value: '',
+      label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
+      disabled: true,
+    },
+    {
+      value: OPTIONS.ADMINISTRATIVE_NOTE,
+      label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
+      disabled: false,
+    },
+    {
+      value: OPTIONS.CHECK_IN_NOTE,
+      label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkInNote' }),
+      disabled: false,
+    },
+    {
+      value: OPTIONS.CHECK_OUT_NOTE,
+      label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkOutNote' }),
+      disabled: false,
+    },
+    ...itemNotes,
+  ];
+};
 
 export const getDuplicateNoteOptions = (formatMessage) => [
   {
