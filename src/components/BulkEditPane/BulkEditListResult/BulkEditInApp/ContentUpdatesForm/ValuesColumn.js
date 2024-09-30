@@ -99,11 +99,11 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
 
   const filteredAndMappedNotes = getNotesOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(itemsNotes, tenants) : itemNotes)
     .filter(obj => obj.value !== option)
-    .map(({ label, value }) => ({ label, value }));
+    .map(({ label, value, tenant }) => ({ label, value, tenant }));
 
   const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc, tenants) : holdingsNotes)
     .filter(obj => obj.value !== option)
-    .map(({ label, value, disabled }) => ({ label, value, disabled }));
+    .map(({ label, value, disabled, tenant }) => ({ label, value, disabled, tenant }));
 
   const filteredAndMappedInstanceNotes = getInstanceNotes(formatMessage, instanceNotes)
     .filter(obj => obj.value !== option)
@@ -264,25 +264,28 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   );
 
   const renderLoanTypeSelect = () => controlType === CONTROL_TYPES.LOAN_TYPE && (
-    <Selection
-      id="loanType"
-      value={actionValue}
-      loading={isLoanTypesLoading || isLoanTypesEscLoading}
-      onChange={value => {
-        onChange(
-          {
-            actionIndex,
-            value,
-            fieldName: FIELD_VALUE_KEY,
-            tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc, tenants), value)
-          }
-        );
-      }}
-      placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
-      dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes}
-      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-      dirty={!!actionValue}
-    />
+    isLoanTypesEscLoading ?
+      <Loading size="large" />
+      :
+      <Selection
+        id="loanType"
+        value={actionValue}
+        loading={isLoanTypesLoading}
+        onChange={value => {
+          onChange(
+            {
+              actionIndex,
+              value,
+              fieldName: FIELD_VALUE_KEY,
+              tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc, tenants), value)
+            }
+          );
+        }}
+        placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
+        dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+        dirty={!!actionValue}
+      />
   );
 
   const renderNoteTypeSelect = () => controlType === CONTROL_TYPES.NOTE_SELECT && (

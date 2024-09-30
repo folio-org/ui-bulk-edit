@@ -72,7 +72,10 @@
           "bulk-operations.used.tenants.get",
           "consortia.publications.item.get",
           "consortia.publications.item.post",
-          "consortia.publications-results.item.get"
+          "consortia.publications-results.item.get",
+          "consortium-search.institutions.collection.get",
+          "consortium-search.campuses.collection.get",
+          "consortium-search.libraries.collection.get"
         ]
       },
       {
