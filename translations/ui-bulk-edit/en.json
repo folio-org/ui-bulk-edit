@@ -452,6 +452,7 @@
   "logs.actions.linkToModifiedRecordsCsvFile": "File with the preview of proposed changes",
   "logs.actions.linkToModifiedRecordsMarcFile": "File with the preview of proposed changes",
   "logs.actions.linkToCommittedRecordsCsvFile": "File with updated records",
+  "logs.actions.linkToCommittedRecordsMarcFile": "File with updated records",
   "logs.actions.linkToCommittedRecordsErrorsCsvFile": "File with errors encountered when committing the changes",
   "logs.actions.linkToTriggeringCsvFile.QUERY": "File with identifiers of the records affected by bulk update",
   "logs.actions.linkToMatchedRecordsCsvFile.QUERY": "File with the matching records",
