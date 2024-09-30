@@ -101,7 +101,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     .filter(obj => obj.value !== option)
     .map(({ label, value, tenant }) => ({ label, value, tenant }));
 
-  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage,isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc, tenants) : holdingsNotes)
+  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc, tenants) : holdingsNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value, disabled, tenant }) => ({ label, value, disabled, tenant }));
 
@@ -115,7 +115,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     return [placeholder, ...rest.sort((a, b) => a.label.localeCompare(b.label))];
   };
 
-  const sortedNotes = sortWithoutPlaceholder( filteredAndMappedNotes);
+  const sortedNotes = sortWithoutPlaceholder(filteredAndMappedNotes);
   const sortedHoldingsNotes = sortWithoutPlaceholder(filteredAndMappedHoldingsNotes);
   const sortedInstanceNotes = sortWithoutPlaceholder(filteredAndMappedInstanceNotes);
 
@@ -124,8 +124,6 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const controlType = action.controlType(action.name);
 
   usePreselectedValue(controlType, duplicateNoteOptions, onChange, actionIndex);
-
-  console.log(sortedNotes)
 
   const renderTextField = () => controlType === CONTROL_TYPES.INPUT && (
     <TextField
@@ -266,28 +264,28 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   );
 
   const renderLoanTypeSelect = () => controlType === CONTROL_TYPES.LOAN_TYPE && (
-      isLoanTypesEscLoading ?
-          <Loading size="large" />
-           :
-          <Selection
-            id="loanType"
-            value={actionValue}
-            loading={isLoanTypesLoading}
-            onChange={value => {
-              onChange(
-                {
-                  actionIndex,
-                  value,
-                  fieldName: FIELD_VALUE_KEY,
-                  tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc, tenants), value)
-                }
-              );
-            }}
-            placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
-            dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes}
-            aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-            dirty={!!actionValue}
-          />
+    isLoanTypesEscLoading ?
+      <Loading size="large" />
+      :
+      <Selection
+        id="loanType"
+        value={actionValue}
+        loading={isLoanTypesLoading}
+        onChange={value => {
+          onChange(
+            {
+              actionIndex,
+              value,
+              fieldName: FIELD_VALUE_KEY,
+              tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc, tenants), value)
+            }
+          );
+        }}
+        placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
+        dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+        dirty={!!actionValue}
+      />
   );
 
   const renderNoteTypeSelect = () => controlType === CONTROL_TYPES.NOTE_SELECT && (
@@ -314,10 +312,10 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
             dirty={!!action.value}
           />)}
       {isItemCapability && (
-          isItemsNotesEscLoading ?
-              <Loading size="large" />
-              :
-              <Select
+        isItemsNotesEscLoading ?
+          <Loading size="large" />
+          :
+          <Select
             id="noteType"
             value={action.value}
             disabled={usItemNotesLoading || isItemsNotesEscLoading}
@@ -361,26 +359,26 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   );
 
   const renderElectronicAccessRelationshipSelect = () => controlType === CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT && (
-      isElectronicAccessEscLoading ?
-          <Loading size="large" />
-          :
-          <Select
-            id="urlRelationship"
-            value={action.value}
-            loading={isElectronicAccessLoading || isElectronicAccessEscLoading}
-            onChange={e => onChange(
-              {
-                actionIndex,
-                value: e.target.value,
-                fieldName: FIELD_VALUE_KEY,
-                tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
-              }
-            )}
-            dataOptions={accessRelationshipsWithPlaceholder}
-            aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
-            marginBottom0
-            dirty={!!actionValue}
-          />
+    isElectronicAccessEscLoading ?
+      <Loading size="large" />
+      :
+      <Select
+        id="urlRelationship"
+        value={action.value}
+        loading={isElectronicAccessLoading || isElectronicAccessEscLoading}
+        onChange={e => onChange(
+          {
+            actionIndex,
+            value: e.target.value,
+            fieldName: FIELD_VALUE_KEY,
+            tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
+          }
+        )}
+        dataOptions={accessRelationshipsWithPlaceholder}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
+        marginBottom0
+        dirty={!!actionValue}
+      />
   );
 
   return (

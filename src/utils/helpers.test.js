@@ -124,7 +124,7 @@ describe('removeDuplicatesByValue', () => {
     ];
 
     const expectedOutput = [
-      { value: 'college', label: 'College (Main)', tenant: ['Tenant 1', 'Tenant 2'] },
+      { value: 'college', label: 'College', tenant: ['Tenant 1', 'Tenant 2'] },
       { value: 'university', label: 'University', tenant: ['Tenant 3'] },
     ];
 
@@ -154,8 +154,8 @@ describe('removeDuplicatesByValue', () => {
     ];
 
     const expectedOutput = [
-      { value: 'college', label: 'College (Main)', tenant: ['Tenant 1'] },
-      { value: 'university', label: 'University (Main)', tenant: ['Tenant 2'] },
+      { value: 'college', label: 'College', tenant: ['Tenant 1'] },
+      { value: 'university', label: 'University', tenant: ['Tenant 2'] },
     ];
 
     const result = removeDuplicatesByValue(input, ['Tenant 1']);
