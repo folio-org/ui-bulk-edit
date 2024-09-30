@@ -58,7 +58,7 @@ const schema = array(object({
     .length(INDICATOR_FIELD_MAX_LENGTH)
     .test(
       'is-latin',
-      'ui-bulk-edit.layer.marc.ind',
+      'ui-bulk-edit.layer.marc.error.ind',
       (value) => /^[a-zA-Z0-9\s\\]+$/.test(value) // Латинские символы, цифры, пробелы и обратная косая черта
     ),
   subfields: array(object(subfieldSchema)).nullable(),

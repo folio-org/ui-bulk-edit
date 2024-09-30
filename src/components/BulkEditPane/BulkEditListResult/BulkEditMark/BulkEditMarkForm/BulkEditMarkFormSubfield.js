@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 
 import { Col, Row, TextField } from '@folio/stripes/components';
 
+import get from 'lodash/get';
 import { SUBFIELD_MAX_LENGTH } from '../helpers';
 import BulkEditMarkActionRow from './BulkEditMarkActionRow';
 import BulkEditMarkActions from './BulkEditMarkActions';
@@ -20,10 +21,17 @@ const BulkEditMarkFormSubfield = ({
   onActionChange,
   onAddField,
   onRemoveField,
+  errors
 }) => {
   const { formatMessage } = useIntl();
   const subfieldsCount = field.subfields.length;
   const isAddingDisabled = subfieldIndex !== subfieldsCount - 1;
+  const subFieldErrorId = get(errors, `[${index}].subfields[${subfieldIndex}].subfield`);
+
+  const subfieldErrorMessage = subFieldErrorId && subfield.subfield.length === SUBFIELD_MAX_LENGTH ?
+    formatMessage({ id: subFieldErrorId })
+    :
+    '';
 
   return (
     <Row key={subfieldIndex} data-testid={`subfield-row-${subfieldIndex}`} className={css.subRow}>
@@ -37,6 +45,7 @@ const BulkEditMarkFormSubfield = ({
           maxLength={SUBFIELD_MAX_LENGTH}
           name="subfield"
           placeholder=""
+          error={subfieldErrorMessage}
           onChange={onChange}
           hasClearIcon={false}
           marginBottom0
@@ -72,6 +81,7 @@ BulkEditMarkFormSubfield.propTypes = {
   onActionChange: PropTypes.func.isRequired,
   onAddField: PropTypes.func.isRequired,
   onRemoveField: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
 export default BulkEditMarkFormSubfield;

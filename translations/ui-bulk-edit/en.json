@@ -426,8 +426,8 @@
   "layer.marc.error": "Only 5xx and 9xx edits are currently supported.",
   "layer.marc.error.protected": "This field is protected.",
   "layer.marc.error.limited": "Limited to 5xx and 9xx.",
-  "layer.marc.error.ind": "only “\\” and alphanumeric values are supported for “In.1“, “In.2“ fields",
-  "layer.marc.error.subfield": "“Subfield“ field that supports only alphanumeric characters",
+  "layer.marc.error.ind": "Please check your input.",
+  "layer.marc.error.subfield": "Please check your input.",
 
   "actionMenu.placeholder": "Search column name",
 
