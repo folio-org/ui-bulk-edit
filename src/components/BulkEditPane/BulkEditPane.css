@@ -24,7 +24,7 @@
 }
 
 .column.fallback {
-    width: calc(max(5%, 80px) + 100px);
+    width: calc(max(5%, 120px) + 100px);
 }
 
 .headerCell.field,
@@ -36,7 +36,7 @@
 
 .headerCell.in,
 .column.in {
-    width: 50px;
+    width: 70px;
 }
 
 .headerCell.subfield,
