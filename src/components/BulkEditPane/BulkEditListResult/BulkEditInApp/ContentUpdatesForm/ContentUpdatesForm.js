@@ -138,6 +138,7 @@ export const ContentUpdatesForm = ({
           tenants
         };
 
+
         const mappedActions = getMappedActions({
           fieldName,
           ...sharedArgs,
@@ -223,6 +224,7 @@ export const ContentUpdatesForm = ({
 
         const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
         const activeTenants = actionTenants?.find(tenant => Boolean(tenant?.length));
+        console.log(activeTenants)
 
         const type = ACTIONS[typeKey];
 

@@ -313,7 +313,9 @@ export const getInstanceNotes = (formatMessage, instanceNotes) => [
   ...instanceNotes,
 ];
 
-export const getNotesOptions = (formatMessage, itemNotes) => [
+export const getNotesOptions = (formatMessage, itemNotes) => {
+  console.log(itemNotes)
+  return [
   {
     value: '',
     label: formatMessage({ id: 'ui-bulk-edit.options.placeholder' }),
@@ -335,7 +337,7 @@ export const getNotesOptions = (formatMessage, itemNotes) => [
     disabled: false,
   },
   ...itemNotes,
-];
+]};
 
 export const getDuplicateNoteOptions = (formatMessage) => [
   {
