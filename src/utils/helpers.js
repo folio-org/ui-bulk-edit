@@ -150,7 +150,6 @@ export const removeDuplicatesByValue = (arr = [], tenants = []) => {
   return Array.from(valueMap.values()).sort((a, b) => a.label.localeCompare(b.label));
 };
 
-
 export const getTenantsById = (arr, id) => {
   const item = arr.find(obj => obj.value === id);
   return item ? item.tenant : null;
