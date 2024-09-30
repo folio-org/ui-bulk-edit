@@ -461,6 +461,7 @@
   "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "File with the preview of proposed changes",
   "logs.actions.linkToCommittedRecordsCsvFile.QUERY": "File with updated records",
   "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": "File with errors encountered when committing the changes",
+  "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "File with updated records",
   "logs.filter.title.status": "Statuses",
   "logs.filter.title.capability": "Record types",
   "logs.filter.title.types": "Bulk operation type",
