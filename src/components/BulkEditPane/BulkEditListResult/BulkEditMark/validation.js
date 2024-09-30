@@ -28,7 +28,13 @@ const subfieldSchema = {
         .test(
           'is-valid-additional-subfield',
           'ui-bulk-edit.layer.marc.error.subfield',
-          (value) => /^[a-zA-Z0-9]+$/.test(value)
+          (value, context) => {
+            const { key } = context.parent;
+            if (key === 'SUBFIELD') {
+              return /^[a-zA-Z0-9]+$/.test(value);
+            }
+            return true;
+          }
         ),
     })),
   })

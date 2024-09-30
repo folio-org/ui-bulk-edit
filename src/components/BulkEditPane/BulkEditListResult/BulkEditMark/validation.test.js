@@ -71,7 +71,7 @@ describe('getMarkFormErrors', () => {
     expect(errors).toEqual({
       '[0].tag': 'ui-bulk-edit.layer.marc.error',
       '[0].subfield': 'ui-bulk-edit.layer.marc.error.subfield',
-      '[0].actions[0].data[0].value': 'ui-bulk-edit.layer.marc.error.subfield'
+      '[0].actions[0].data[0].value': '[0].actions[0].data[0].value is a required field'
     });
   });
 
