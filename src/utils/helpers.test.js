@@ -1,6 +1,7 @@
 import {
   customFilter,
-  getTenantsById, getTransformedLogsFilterValue,
+  getTenantsById,
+  getTransformedLogsFilterValue,
   removeDuplicatesByValue
 } from './helpers';
 import { CAPABILITIES } from '../constants';
@@ -254,7 +255,7 @@ describe('getTransformedLogsFilterValue', () => {
   it('should not modify the original input array', () => {
     const values = [CAPABILITIES.INSTANCE];
     const result = getTransformedLogsFilterValue(values);
-    expect(values).not.toContain(CAPABILITIES.INSTANCE_MARC); // Ensure input array is not modified
+    expect(values).not.toContain(CAPABILITIES.INSTANCE_MARC);
     expect(result).toContain(CAPABILITIES.INSTANCE_MARC);
   });
 });
