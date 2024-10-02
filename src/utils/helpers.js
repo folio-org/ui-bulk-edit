@@ -159,4 +159,8 @@ export const filterByIds = (items, ids) => {
   return items.filter(item => ids.includes(item.id));
 };
 
-
+export const getTransformedLogsFilterValue = (values) => {
+  return values.includes(CAPABILITIES.INSTANCE)
+    ? [...new Set([...values, CAPABILITIES.INSTANCE_MARC])]
+    : values.filter(value => value !== CAPABILITIES.INSTANCE_MARC);
+};
