@@ -222,7 +222,13 @@ export const ContentUpdatesForm = ({
           .map(action => action?.name ?? null).join('_');
 
         const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
-        const activeTenants = actionTenants?.find(tenant => Boolean(tenant?.length));
+        const filteredTenants = actionTenants.filter(Boolean);
+
+        const activeTenants = filteredTenants.length === 1
+            ? filteredTenants.flat()
+            : filteredTenants
+                .flat()
+                .filter((tenant, index, array) => array.indexOf(tenant) !== index);
 
         const type = ACTIONS[typeKey];
 
