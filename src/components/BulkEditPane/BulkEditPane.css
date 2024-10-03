@@ -24,13 +24,7 @@
 }
 
 .column.fallback {
-    width: calc(max(7%, 120px) + 100px);
-}
-
-@media (min-width: 1600px) {
-    .column.fallback {
-        width: calc(max(7%, 124px) + 100px);
-    }
+    width: calc(max(5%, 80px) + 140px);
 }
 
 .headerCell.field,

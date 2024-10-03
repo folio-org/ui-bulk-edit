@@ -60,6 +60,7 @@
 * [UIBULKED-542](https://folio-org.atlassian.net/browse/UIBULKED-542) Remove "Actions" Header from Actions menu.
 * [UIBULKED-501](https://folio-org.atlassian.net/browse/UIBULKED-501) Downloading .mrc file from Confirmation form
 * [UIBULKED-539](https://folio-org.atlassian.net/browse/UIBULKED-539) Handle validation cases for “In.1“, “In.2“, "Subfield" fields on Bulk edit MARC fields form.
+* [UIBULKED-549](https://folio-org.atlassian.net/browse/UIBULKED-549) Add additional item status.
 
 ## [4.1.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.4) (2024-05-29)
 
