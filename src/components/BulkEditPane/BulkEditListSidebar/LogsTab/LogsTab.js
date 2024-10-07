@@ -30,7 +30,7 @@ import {
 import { useBulkOperationUsers } from '../../../../hooks/api/useBulkOperationUsers';
 import { getFullName } from '../../../../utils/getFullName';
 import { useLocationFilters, useLogsQueryParams, useSearchParams } from '../../../../hooks';
-import { customFilter } from '../../../../utils/helpers';
+import { customFilter, getTransformedLogsFilterValue } from '../../../../utils/helpers';
 
 export const LogsTab = () => {
   const intl = useIntl();
@@ -60,7 +60,9 @@ export const LogsTab = () => {
     }
   });
 
-  const adaptedApplyFilters = useCallback(({ name, values }) => applyFilters(name, values), [applyFilters]);
+  const adaptedApplyFilters = useCallback(({ name, values }) => {
+    return applyFilters(name, getTransformedLogsFilterValue(values));
+  }, [applyFilters]);
 
   const { logsQueryParams } = useLogsQueryParams({ search: location.search });
 
