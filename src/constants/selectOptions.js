@@ -443,6 +443,11 @@ export const getItemStatusOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.unknown' }),
     disabled: false,
   },
+  {
+    value: 'IN_PROCESS',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.inProcess' }),
+    disabled: false,
+  }
 ];
 
 export const EDIT_CAPABILITIES_OPTIONS = [
