@@ -2,6 +2,7 @@ import { clone, setWith } from 'lodash';
 import {
   CAPABILITIES,
   EDIT_CAPABILITIES_OPTIONS,
+  LOGS_FILTERS,
 } from '../constants';
 
 export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
@@ -159,8 +160,12 @@ export const filterByIds = (items, ids) => {
   return items.filter(item => ids.includes(item.id));
 };
 
-export const getTransformedLogsFilterValue = (values) => {
-  return values.includes(CAPABILITIES.INSTANCE)
-    ? [...new Set([...values, CAPABILITIES.INSTANCE_MARC])]
-    : values.filter(value => value !== CAPABILITIES.INSTANCE_MARC);
+export const getTransformedLogsFilterValue = (name, values) => {
+  if (name === LOGS_FILTERS.CAPABILITY) {
+    return values.includes(CAPABILITIES.INSTANCE)
+      ? [...new Set([...values, CAPABILITIES.INSTANCE_MARC])]
+      : values.filter(value => value !== CAPABILITIES.INSTANCE_MARC);
+  }
+
+  return values;
 };
