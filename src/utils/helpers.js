@@ -1,7 +1,8 @@
 import { clone, setWith } from 'lodash';
 import {
   CAPABILITIES,
-  EDIT_CAPABILITIES_OPTIONS, LOGS_FILTERS,
+  EDIT_CAPABILITIES_OPTIONS,
+  LOGS_FILTERS,
 } from '../constants';
 
 export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
