@@ -4,7 +4,7 @@ import {
   getTransformedLogsFilterValue,
   removeDuplicatesByValue
 } from './helpers';
-import { CAPABILITIES } from '../constants';
+import { CAPABILITIES, LOGS_FILTERS } from '../constants';
 
 describe('customFilter', () => {
   const dataOptions = [
@@ -226,14 +226,14 @@ describe('getTenantsById', () => {
 describe('getTransformedLogsFilterValue', () => {
   it('should add INSTANCE_MARC to the array if INSTANCE is present', () => {
     const values = [CAPABILITIES.INSTANCE];
-    const result = getTransformedLogsFilterValue(values);
+    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
     expect(result).toContain(CAPABILITIES.INSTANCE);
     expect(result).toContain(CAPABILITIES.INSTANCE_MARC);
   });
 
   it('should not add INSTANCE_MARC if it is already present', () => {
     const values = [CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC];
-    const result = getTransformedLogsFilterValue(values);
+    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
     expect(result).toContain(CAPABILITIES.INSTANCE);
     expect(result).toContain(CAPABILITIES.INSTANCE_MARC);
     expect(result.length).toBe(2);
@@ -241,21 +241,28 @@ describe('getTransformedLogsFilterValue', () => {
 
   it('should remove INSTANCE_MARC from the array if INSTANCE is not present', () => {
     const values = [CAPABILITIES.INSTANCE_MARC, 'other_value'];
-    const result = getTransformedLogsFilterValue(values);
+    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
     expect(result).not.toContain(CAPABILITIES.INSTANCE_MARC);
     expect(result).toContain('other_value');
   });
 
   it('should return the same array if INSTANCE and INSTANCE_MARC are not present', () => {
     const values = ['other_value'];
-    const result = getTransformedLogsFilterValue(values);
+    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
     expect(result).toEqual(values);
   });
 
   it('should not modify the original input array', () => {
     const values = [CAPABILITIES.INSTANCE];
-    const result = getTransformedLogsFilterValue(values);
+    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
     expect(values).not.toContain(CAPABILITIES.INSTANCE_MARC);
     expect(result).toContain(CAPABILITIES.INSTANCE_MARC);
+  });
+
+  it('should not modify the original userID', () => {
+    const values = 'userID';
+    const result = getTransformedLogsFilterValue(LOGS_FILTERS.USER, values);
+    expect(values).not.toContain(CAPABILITIES.INSTANCE_MARC);
+    expect(result).toContain('userID');
   });
 });

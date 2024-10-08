@@ -61,7 +61,7 @@ export const LogsTab = () => {
   });
 
   const adaptedApplyFilters = useCallback(({ name, values }) => {
-    return applyFilters(name, getTransformedLogsFilterValue(values));
+    return applyFilters(name, getTransformedLogsFilterValue(name, values));
   }, [applyFilters]);
 
   const { logsQueryParams } = useLogsQueryParams({ search: location.search });
