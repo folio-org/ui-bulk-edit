@@ -209,7 +209,7 @@
     "columns.ITEM.Item HRID": "資料 HRID",
     "columns.ITEM.Holdings Record Id": "所蔵レコード ID",
     "columns.ITEM.Title": "タイトル",
-    "columns.ITEM.Contributor Names": "Contributor names",
+    "columns.ITEM.Contributor Names": "寄与者名称",
     "columns.ITEM.Call Number": "請求記号",
     "columns.ITEM.Barcode": "バーコード",
     "columns.ITEM.Volume": "巻",
@@ -290,7 +290,7 @@
     "permissionsModal.title": "Select Permissions",
     "permissionsModal.filter.title": "Search & filter",
     "permissionsModal.filter.search": "Search",
-    "permissionsModal.filter.resetAll": "Reset all",
+    "permissionsModal.filter.resetAll": "全てリセット",
     "permissionsModal.filter.permissionTypes": "Permission types",
     "permissionsModal.filter.permissionSets": "Permission sets",
     "permissionsModal.filter.permissions": "Permissions",
@@ -359,7 +359,7 @@
     "columns.INSTANCE.Instance HRID": "インスタンスHRID",
     "columns.INSTANCE.Instance status term": "インスタンスステータス用語",
     "columns.INSTANCE.Resource title": "リソースのタイトル",
-    "columns.INSTANCE.Contributors": "Contributors",
+    "columns.INSTANCE.Contributors": "寄与者",
     "columns.INSTANCE.Resource type": "リソースタイプ",
     "columns.INSTANCE.Instance UUID": "インスタンス UUID",
     "columns.INSTANCE.Staff suppress": "Staff suppress",
@@ -507,5 +507,10 @@
     "menuGroup.startEdit": "一括編集の開始",
     "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
     "previewModal.message.empty.marc": "All instances have source FOLIO.  Use “Instances and  Administrative data” option for bulk edit.",
-    "start.downloadChangedRecords.marc": "変更されたレコードをダウンロードする (MARC)"
+    "start.downloadChangedRecords.marc": "変更されたレコードをダウンロードする (MARC)",
+    "layer.marc.error.ind": "入力内容を確認してください",
+    "layer.marc.error.subfield": "入力内容を確認してください",
+    "logs.actions.linkToCommittedRecordsMarcFile": "更新済レコードを含むファイル",
+    "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "更新済レコードを含むファイル",
+    "layer.options.inProcess": "In process"
 }
