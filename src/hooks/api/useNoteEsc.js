@@ -9,7 +9,7 @@ import { PUBLISH_COORDINATOR_STATUSES_METHODS, usePublishCoordinator } from '../
 
 const DEFAULT_DATA = {};
 
-export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, noteKey, optionType, parameterKey,  options = {} }) => {
+export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, noteKey, optionType, parameterKey, options = {} }) => {
   const [namespace] = useNamespace({ key: namespaceKey });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
   const { formatMessage } = useIntl();
@@ -47,7 +47,7 @@ export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, note
       type: optionType,
       key: parameterKey,
     });
-  }, [categoryId, data, formatMessage, isFetching, noteKey, optionType, parameterKey]);
+  }, [categoryId, data, formatMessage, isFetching, noteKey, optionType, parameterKey, tenants.length]);
 
   return {
     notesEsc,
