@@ -18,6 +18,6 @@ export const useHoldingsNotesEsc = (tenants, type, options = {}) => {
     url: NOTE_ESC.URL,
     noteKey: NOTE_ESC.NOTE_KEY,
     optionType: OPTIONS.HOLDINGS_NOTE,
-    parameterKey: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY
+    parameterKey: PARAMETERS_KEYS.HOLDINGS_NOTE_TYPE_ID_KEY
   });
 };

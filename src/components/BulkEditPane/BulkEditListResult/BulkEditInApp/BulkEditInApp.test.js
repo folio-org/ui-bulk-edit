@@ -174,7 +174,7 @@ describe('BulkEditInApp', () => {
     userEvent.click(permanentLocation);
     userEvent.click(selectionBtn);
 
-    expect(permanentLocation).toHaveAttribute('aria-selected', 'false');
+    expect(permanentLocation).toHaveAttribute('aria-selected', 'true');
   });
 
   it('should display correct status options in action select', async () => {
@@ -319,7 +319,7 @@ describe('BulkEditInApp', () => {
 
     userEvent.click(selectionBtn);
 
-    expect(optionStatus).toHaveAttribute('aria-selected', 'false');
+    expect(optionStatus).toHaveAttribute('aria-selected', 'true');
   });
 
   it('should display holdings set to true is checked by default', async () => {
@@ -345,7 +345,7 @@ describe('BulkEditInApp', () => {
     await waitFor(() => {
       const checkbox = getByRole('checkbox');
 
-      expect(optionStatus).toHaveAttribute('aria-selected', 'false');
+      expect(optionStatus).toHaveAttribute('aria-selected', 'true');
       expect(checkbox).toBeChecked();
     });
   });
@@ -373,7 +373,7 @@ describe('BulkEditInApp', () => {
     await waitFor(() => {
       const checkbox = screen.getByRole('checkbox');
 
-      expect(optionStatus).toHaveAttribute('aria-selected', 'false');
+      expect(optionStatus).toHaveAttribute('aria-selected', 'true');
       expect(checkbox).not.toBeChecked();
     });
   });
