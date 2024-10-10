@@ -47,7 +47,7 @@ export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, note
       type: optionType,
       key: parameterKey,
     });
-  }, [categoryId, data, formatMessage, isFetching, noteKey, optionType, parameterKey, tenants.length]);
+  }, [categoryId, data, formatMessage, isFetching, noteKey, optionType, parameterKey]);
 
   return {
     notesEsc,
