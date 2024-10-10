@@ -507,5 +507,10 @@
     "menuGroup.startEdit": "Iniciar edição em lote",
     "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "O arquivo enviado está vazio.",
     "previewModal.message.empty.marc": "Todas as instâncias têm fonte FOLIO.  Use a opção \"Instâncias e dados administrativos\" para edição em massa.",
-    "start.downloadChangedRecords.marc": "Baixar registros alterados (MARC)"
+    "start.downloadChangedRecords.marc": "Baixar registros alterados (MARC)",
+    "layer.marc.error.ind": "Por favor, verifique sua entrada.",
+    "layer.marc.error.subfield": "Por favor, verifique sua entrada.",
+    "logs.actions.linkToCommittedRecordsMarcFile": "Arquivo com registros atualizados",
+    "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "Arquivo com registros atualizados",
+    "layer.options.inProcess": "Em processo"
 }

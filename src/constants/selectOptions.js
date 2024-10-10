@@ -176,10 +176,12 @@ export const FILTER_OPTIONS = {
     value: status,
     label: <FormattedMessage id={`ui-bulk-edit.logs.status.${status}`} />,
   })),
-  CAPABILITY: Object.values(CAPABILITIES).map(entityType => ({
-    value: entityType,
-    label: <FormattedMessage id={`ui-bulk-edit.logs.entityType.${entityType}`} />,
-  })),
+  CAPABILITY: Object.values(CAPABILITIES)
+    .filter(capability => capability !== CAPABILITIES.INSTANCE_MARC)
+    .map(entityType => ({
+      value: entityType,
+      label: <FormattedMessage id={`ui-bulk-edit.logs.entityType.${entityType}`} />,
+    })),
   OPERATION_TYPE: [
     {
       value: 'UPDATE',
@@ -441,6 +443,11 @@ export const getItemStatusOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.unknown' }),
     disabled: false,
   },
+  {
+    value: 'IN_PROCESS',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.inProcess' }),
+    disabled: false,
+  }
 ];
 
 export const EDIT_CAPABILITIES_OPTIONS = [

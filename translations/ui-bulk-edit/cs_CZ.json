@@ -507,5 +507,10 @@
     "menuGroup.startEdit": "Spustit hromadné úpravy",
     "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "Nahraný soubor je prázdný.",
     "previewModal.message.empty.marc": "All instances have source FOLIO.  Use “Instances and  Administrative data” option for bulk edit.",
-    "start.downloadChangedRecords.marc": "Stáhnout změněné záznamy (MARC)"
+    "start.downloadChangedRecords.marc": "Stáhnout změněné záznamy (MARC)",
+    "layer.marc.error.ind": "Please check your input.",
+    "layer.marc.error.subfield": "Please check your input.",
+    "logs.actions.linkToCommittedRecordsMarcFile": "File with updated records",
+    "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "File with updated records",
+    "layer.options.inProcess": "In process"
 }
