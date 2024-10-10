@@ -426,6 +426,8 @@
   "layer.marc.error": "Only 5xx and 9xx edits are currently supported.",
   "layer.marc.error.protected": "This field is protected.",
   "layer.marc.error.limited": "Limited to 5xx and 9xx.",
+  "layer.marc.error.ind": "Please check your input.",
+  "layer.marc.error.subfield": "Please check your input.",
 
   "actionMenu.placeholder": "Search column name",
 
@@ -450,6 +452,7 @@
   "logs.actions.linkToModifiedRecordsCsvFile": "File with the preview of proposed changes",
   "logs.actions.linkToModifiedRecordsMarcFile": "File with the preview of proposed changes",
   "logs.actions.linkToCommittedRecordsCsvFile": "File with updated records",
+  "logs.actions.linkToCommittedRecordsMarcFile": "File with updated records",
   "logs.actions.linkToCommittedRecordsErrorsCsvFile": "File with errors encountered when committing the changes",
   "logs.actions.linkToTriggeringCsvFile.QUERY": "File with identifiers of the records affected by bulk update",
   "logs.actions.linkToMatchedRecordsCsvFile.QUERY": "File with the matching records",
@@ -458,6 +461,7 @@
   "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "File with the preview of proposed changes",
   "logs.actions.linkToCommittedRecordsCsvFile.QUERY": "File with updated records",
   "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": "File with errors encountered when committing the changes",
+  "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "File with updated records",
   "logs.filter.title.status": "Statuses",
   "logs.filter.title.capability": "Record types",
   "logs.filter.title.types": "Bulk operation type",

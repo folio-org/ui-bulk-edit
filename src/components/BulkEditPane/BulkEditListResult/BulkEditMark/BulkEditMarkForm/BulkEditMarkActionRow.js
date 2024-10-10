@@ -4,9 +4,11 @@ import { useIntl } from 'react-intl';
 
 import { Col, Select, TextArea, TextField } from '@folio/stripes/components';
 
+import get from 'lodash/get';
 import css from '../../../BulkEditPane.css';
 import { DATA_KEYS, getFieldWithMaxColumns, SUBFIELD_MAX_LENGTH } from '../helpers';
 import { RootContext } from '../../../../../context/RootContext';
+import { getMarkFormErrors } from '../validation';
 
 
 const BulkEditMarkActionRow = ({
@@ -14,7 +16,7 @@ const BulkEditMarkActionRow = ({
   actions,
   rowIndex,
   onActionChange,
-  onDataChange
+  onDataChange,
 }) => {
   const { fields } = useContext(RootContext);
   const { formatMessage } = useIntl();
@@ -30,6 +32,13 @@ const BulkEditMarkActionRow = ({
     // render empty subfield column to have the same structure in columns
     const emptySubfieldColumn = longestField?.actions[actionIndex].data[dataIndex].key !== data.key
       && <Col className={`${css.column} ${css.subfield}`} />;
+
+    const errors = getMarkFormErrors(fields);
+    const subFieldErrorId = get(errors, `[${rowIndex}].actions[${actionIndex}].data[${dataIndex}].value`);
+    const subfieldErrorMessage = subFieldErrorId && data.value.length === SUBFIELD_MAX_LENGTH ?
+      formatMessage({ id: subFieldErrorId })
+      :
+      '';
 
     switch (data.key) {
       case DATA_KEYS.VALUE:
@@ -76,6 +85,7 @@ const BulkEditMarkActionRow = ({
               noBorder={!data.value}
               inputClass={getRequiredClassname(data.meta.required, data.value)}
               name="value"
+              error={subfieldErrorMessage}
               placeholder=""
               validStylesEnabled
               onChange={onDataChange}
