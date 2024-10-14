@@ -10,6 +10,7 @@ import {
   Row,
   RepeatableField,
   Selection,
+  StripesOverlayWrapper
 } from '@folio/stripes/components';
 
 import {
@@ -225,10 +226,10 @@ export const ContentUpdatesForm = ({
         const filteredTenants = actionTenants.filter(Boolean);
 
         const activeTenants = filteredTenants.length === 1
-            ? filteredTenants.flat()
-            : filteredTenants
-                .flat()
-                .filter((tenant, index, array) => array.indexOf(tenant) !== index);
+          ? filteredTenants.flat()
+          : filteredTenants
+            .flat()
+            .filter((tenant, index, array) => array.indexOf(tenant) !== index);
 
         const type = ACTIONS[typeKey];
 
@@ -253,52 +254,54 @@ export const ContentUpdatesForm = ({
   }, [fields, options, onContentUpdatesChanged, currentRecordType]);
 
   return (
-    <RepeatableField
-      getFieldUniqueKey={(field) => field.id}
-      fields={fields}
-      className={css.row}
-      onAdd={noop}
-      renderField={(field, index) => {
-        return (
-          <Row data-testid={`row-${index}`}>
-            <Col xs={2} sm={2} className={css.column}>
-              <Selection
-                dataOptions={groupByCategory(field.options)}
-                value={field.option}
-                onChange={(value) => handleOptionChange(value, index, getTenantsById(field.options, value))}
-                placeholder={formatMessage({ id:'ui-bulk-edit.options.placeholder' })}
-                dirty={!!field.option}
-                ariaLabel={`select-option-${index}`}
-                marginBottom0
-                listMaxHeight="50vh"
-                onFilter={customFilter}
+    <StripesOverlayWrapper>
+      <RepeatableField
+        getFieldUniqueKey={(field) => field.id}
+        fields={fields}
+        className={css.row}
+        onAdd={noop}
+        renderField={(field, index) => {
+          return (
+            <Row data-testid={`row-${index}`}>
+              <Col xs={2} sm={2} className={css.column}>
+                <Selection
+                  dataOptions={groupByCategory(field.options)}
+                  value={field.option}
+                  onChange={(value) => handleOptionChange(value, index, getTenantsById(field.options, value))}
+                  placeholder={formatMessage({ id:'ui-bulk-edit.options.placeholder' })}
+                  dirty={!!field.option}
+                  ariaLabel={`select-option-${index}`}
+                  marginBottom0
+                  listMaxHeight="calc(45vh - 65px)" // 65px - for fixed header
+                  onFilter={customFilter}
+                />
+              </Col>
+              <ActionsRow
+                option={field.option}
+                actions={field.actionsDetails.actions}
+                onChange={(values) => handleChange({ ...values, rowIndex: index })}
               />
-            </Col>
-            <ActionsRow
-              option={field.option}
-              actions={field.actionsDetails.actions}
-              onChange={(values) => handleChange({ ...values, rowIndex: index })}
-            />
-            <div className={css.actionButtonsWrapper}>
-              {isAddButtonShown(index, fields, options) && (
+              <div className={css.actionButtonsWrapper}>
+                {isAddButtonShown(index, fields, options) && (
                 <IconButton
                   icon="plus-sign"
                   size="medium"
                   onClick={handleAdd}
                   data-testid={`add-button-${index}`}
                 />
-              )}
-              <IconButton
-                icon="trash"
-                onClick={() => handleRemove(index)}
-                disabled={fields.length === 1}
-                data-testid={`remove-button-${index}`}
-              />
-            </div>
-          </Row>
-        );
-      }}
-    />
+                )}
+                <IconButton
+                  icon="trash"
+                  onClick={() => handleRemove(index)}
+                  disabled={fields.length === 1}
+                  data-testid={`remove-button-${index}`}
+                />
+              </div>
+            </Row>
+          );
+        }}
+      />
+    </StripesOverlayWrapper>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from 'react';
 import noop from 'lodash/noop';
 import uniqueId from 'lodash/uniqueId';
 
-import { RepeatableField } from '@folio/stripes/components';
+import { RepeatableField, StripesOverlayWrapper } from '@folio/stripes/components';
 
 import {
   getNextAction,
@@ -177,47 +177,49 @@ const BulkEditMarkForm = () => {
   };
 
   return (
-    <RepeatableField
-      getFieldUniqueKey={(field) => field.id}
-      fields={fields}
-      className={css.markRow}
-      onAdd={noop}
-      renderField={(field, index) => {
-        return (
-          <Fragment key={field.id}>
-            <BulkEditMarkFormField
-              field={field}
-              index={index}
-              onChange={handleChange}
-              onActionChange={handleActionChange}
-              onDataChange={handleDataChange}
-              onAddField={handleAddField}
-              onRemoveField={handleRemoveField}
-              onResetSubfield={handleResetSecondAction}
-              removingDisabled={fields.length === 1}
-              addingDisabled={field.subfields.length > 0}
-              errors={errors}
-              onBlur={handleOnBlur}
-            />
-            {field.subfields.map((subfield, subfieldIndex) => (
-              <BulkEditMarkFormSubfield
-                key={subfield.id}
+    <StripesOverlayWrapper>
+      <RepeatableField
+        getFieldUniqueKey={(field) => field.id}
+        fields={fields}
+        className={css.markRow}
+        onAdd={noop}
+        renderField={(field, index) => {
+          return (
+            <Fragment key={field.id}>
+              <BulkEditMarkFormField
                 field={field}
-                subfield={subfield}
                 index={index}
-                errors={errors}
-                subfieldIndex={subfieldIndex}
                 onChange={handleChange}
-                onDataChange={handleDataChange}
                 onActionChange={handleActionChange}
+                onDataChange={handleDataChange}
                 onAddField={handleAddField}
-                onRemoveField={handleRemoveSubfield}
+                onRemoveField={handleRemoveField}
+                onResetSubfield={handleResetSecondAction}
+                removingDisabled={fields.length === 1}
+                addingDisabled={field.subfields.length > 0}
+                errors={errors}
+                onBlur={handleOnBlur}
               />
-            ))}
-          </Fragment>
-        );
-      }}
-    />
+              {field.subfields.map((subfield, subfieldIndex) => (
+                <BulkEditMarkFormSubfield
+                  key={subfield.id}
+                  field={field}
+                  subfield={subfield}
+                  index={index}
+                  errors={errors}
+                  subfieldIndex={subfieldIndex}
+                  onChange={handleChange}
+                  onDataChange={handleDataChange}
+                  onActionChange={handleActionChange}
+                  onAddField={handleAddField}
+                  onRemoveField={handleRemoveSubfield}
+                />
+              ))}
+            </Fragment>
+          );
+        }}
+      />
+    </StripesOverlayWrapper>
   );
 };
 
