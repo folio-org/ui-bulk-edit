@@ -1,8 +1,6 @@
-import { useIntl } from 'react-intl';
 import { renderHook } from '@testing-library/react-hooks';
-
+import { useIntl } from 'react-intl';
 import { useShowCallout } from '@folio/stripes-acq-components';
-
 import { useErrorMessages } from './useErrorMessages';
 
 jest.mock('react-intl', () => ({
@@ -14,46 +12,83 @@ jest.mock('@folio/stripes-acq-components', () => ({
 }));
 
 describe('useErrorMessages', () => {
-  const mockCallout = jest.fn();
-  const mockFormatMessage = jest.fn();
+  const showCalloutMock = jest.fn();
+  const formatMessageMock = jest.fn();
 
   beforeEach(() => {
-    useIntl.mockReturnValue({ formatMessage: mockFormatMessage });
-    useShowCallout.mockReturnValue(mockCallout);
+    showCalloutMock.mockClear();
+    formatMessageMock.mockClear();
+
+    useIntl.mockReturnValue({
+      formatMessage: formatMessageMock,
+      messages: {
+        'ui-bulk-edit.error.testError': 'Translated Test Error',
+      },
+    });
+
+    useShowCallout.mockReturnValue(showCalloutMock);
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it('should call the callout with the correct error message when errorMessage exists', () => {
-    const data = { errorMessage: 'some-error' };
-
+  it('should show a translated error message if one exists', () => {
     const { result } = renderHook(() => useErrorMessages());
+    const { showErrorMessage } = result.current;
 
-    result.current.checkErrorMessage(data);
+    formatMessageMock.mockReturnValue('Translated Test Error');
 
-    expect(mockFormatMessage).toHaveBeenCalledWith({ id: 'ui-bulk-edit.some-error' });
+    showErrorMessage({ errorMessage: 'testError' });
+
+    expect(showCalloutMock).toHaveBeenCalledWith({
+      type: 'error',
+      message: 'testError',
+    });
   });
 
-  it('should not call the callout when errorMessage does not exist', () => {
-    const data = {};
-
+  it('should show the error message from the body if no translation is found', () => {
     const { result } = renderHook(() => useErrorMessages());
+    const { showErrorMessage } = result.current;
 
-    result.current.checkErrorMessage(data);
+    showErrorMessage({ errorMessage: 'nonTranslatableError' });
 
-    expect(mockCallout).not.toHaveBeenCalled();
-    expect(mockFormatMessage).not.toHaveBeenCalled();
+    expect(showCalloutMock).toHaveBeenCalledWith({
+      type: 'error',
+      message: 'nonTranslatableError',
+    });
+    expect(formatMessageMock).not.toHaveBeenCalled();
   });
 
-  it('should not call the callout when data is null or undefined', () => {
+  it('should show the message from the response when no error message in body is available', () => {
     const { result } = renderHook(() => useErrorMessages());
+    const { showErrorMessage } = result.current;
 
-    result.current.checkErrorMessage(null);
-    result.current.checkErrorMessage(undefined);
+    showErrorMessage({ message: 'Another error occurred' });
 
-    expect(mockCallout).not.toHaveBeenCalled();
-    expect(mockFormatMessage).not.toHaveBeenCalled();
+    expect(showCalloutMock).toHaveBeenCalledWith({
+      type: 'error',
+      message: 'Another error occurred',
+    });
+  });
+
+  it('should show the default error message when the response is an error object without a message', () => {
+    const { result } = renderHook(() => useErrorMessages());
+    const { showErrorMessage } = result.current;
+
+    formatMessageMock.mockReturnValue('Something went wrong');
+
+    showErrorMessage(new Error());
+
+    expect(formatMessageMock).toHaveBeenCalledWith({ id: 'ui-bulk-edit.error.sww' });
+    expect(showCalloutMock).toHaveBeenCalledWith({
+      type: 'error',
+      message: 'Something went wrong',
+    });
+  });
+
+  it('should not show any message if no error message is provided', () => {
+    const { result } = renderHook(() => useErrorMessages());
+    const { showErrorMessage } = result.current;
+
+    showErrorMessage({});
+
+    expect(showCalloutMock).not.toHaveBeenCalled();
   });
 });

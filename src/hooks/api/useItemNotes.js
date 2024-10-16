@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { useMemo } from 'react';
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 import { getMappedAndSortedNotes } from '../../utils/helpers';
+import { useErrorMessages } from '../useErrorMessages';
 
 export const ITEM_NOTES_KEY = 'ITEM_NOTES_KEY';
 
@@ -11,6 +12,7 @@ export const useItemNotes = (options = {}) => {
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: ITEM_NOTES_KEY });
   const { formatMessage } = useIntl();
+  const { showErrorMessage } = useErrorMessages();
 
   const { data, isLoading: isItemNotesLoading } = useQuery(
     {
@@ -18,6 +20,8 @@ export const useItemNotes = (options = {}) => {
       cacheTime: Infinity,
       staleTime: Infinity,
       queryFn: () => ky.get('item-note-types', { searchParams: { limit: 1000 } }).json(),
+      onError: showErrorMessage,
+      onSuccess: showErrorMessage,
       ...options,
     },
   );
