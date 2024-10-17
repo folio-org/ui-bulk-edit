@@ -245,6 +245,7 @@
   "columns.ITEM.Item UUID": "Item UUID",
   "columns.ITEM.Instance (Title, Publisher, Publication date)": "Instance (Title, Publisher, Publication date)",
   "columns.ITEM.Holdings UUID": "Holdings UUID",
+  "columns.ITEM.Member": "Member",
 
   "columns.HOLDINGS_RECORD.Holdings record id": "Holdings ID",
   "columns.HOLDINGS_RECORD.Version": "Version",
@@ -303,6 +304,7 @@
   "columns.HOLDINGS_RECORD.Electronic bookplate": "Electronic bookplate note",
   "columns.HOLDINGS_RECORD.Provenance": "Provenance note",
   "columns.HOLDINGS_RECORD.Reproduction": "Reproduction note",
+  "columns.HOLDINGS_RECORD.Member": "Member",
 
   "columns.INSTANCE.Suppress from discovery": "Suppress from discovery",
   "columns.INSTANCE.Instance HRID": "Instance HRID",
