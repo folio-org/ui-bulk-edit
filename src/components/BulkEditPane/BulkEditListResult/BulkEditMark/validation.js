@@ -10,7 +10,7 @@ const subfieldSchema = {
     .test(
       'is-valid-subfield',
       'ui-bulk-edit.layer.marc.error.subfield',
-      (value) => /^[a-zA-Z0-9]+$/.test(value) // Латинские буквы и цифры
+      (value) => /^[a-z-0-9]+$/.test(value),
     ),
   actions: array(object({
     name: string()
@@ -31,7 +31,7 @@ const subfieldSchema = {
           (value, context) => {
             const { key } = context.parent;
             if (key === 'SUBFIELD') {
-              return /^[a-zA-Z0-9]+$/.test(value);
+              return /^[a-z-0-9]+$/.test(value);
             }
             return true;
           }
