@@ -10,7 +10,7 @@ export const useContentUpdate = ({ id }) => {
     mutationFn: ({ contentUpdates }) => {
       return ky.post(`bulk-operations/${id}/content-update`, {
         json: contentUpdates,
-      });
+      }).json();
     },
     onError: showErrorMessage,
     onSuccess: showErrorMessage,

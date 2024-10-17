@@ -19,7 +19,8 @@ export const useErrorMessages = () => {
     const message = messageInBody || messageWhenError;
 
     // check if error message should be translated (if it's exist in translations)
-    const translatedMessage = intl.messages[message] ? intl.formatMessage({ id: `ui-bulk-edit.${message}` }) : '';
+    const prefixedMessageId = `ui-bulk-edit.${message}`;
+    const translatedMessage = intl.messages[prefixedMessageId] ? intl.formatMessage({ id: prefixedMessageId }) : '';
 
     // show translated message if it exists
     if (translatedMessage) {

@@ -10,7 +10,7 @@ export const useMarkContentUpdate = ({ id }) => {
     mutationFn: (json) => {
       return ky.post(`bulk-operations/${id}/marc-content-update`, {
         json,
-      });
+      }).json();
     },
     onError: showErrorMessage,
     onSuccess: showErrorMessage,
