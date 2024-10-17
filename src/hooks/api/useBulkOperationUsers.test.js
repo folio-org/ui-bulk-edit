@@ -3,6 +3,8 @@ import {
   QueryClientProvider,
 } from 'react-query';
 
+import '../../../test/jest/__mock__/reactIntl.mock';
+
 import { useOkapiKy } from '@folio/stripes/core';
 import { renderHook } from '@testing-library/react-hooks';
 import { waitFor, act } from '@testing-library/react';

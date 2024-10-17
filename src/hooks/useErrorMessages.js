@@ -15,7 +15,7 @@ export const useErrorMessages = () => {
 
   const showErrorMessage = (res) => {
     const messageInBody = res?.errorMessage;
-    const messageWhenError = res.message;
+    const messageWhenError = res?.message;
     const anyErrorMessage = messageInBody || messageWhenError;
 
     // check if error message should be translated (if it's code from backend + exist in translations)
