@@ -16,18 +16,18 @@ export const useErrorMessages = () => {
   const showErrorMessage = (res) => {
     const messageInBody = res?.errorMessage;
     const messageWhenError = res?.message;
-    const anyErrorMessage = messageInBody || messageWhenError;
+    const message = messageInBody || messageWhenError;
 
-    // check if error message should be translated (if it's code from backend + exist in translations)
-    const translatedMessage = intl.messages[anyErrorMessage] ? intl.formatMessage({ id: `ui-bulk-edit.error.${anyErrorMessage}` }) : '';
+    // check if error message should be translated (if it's exist in translations)
+    const translatedMessage = intl.messages[message] ? intl.formatMessage({ id: `ui-bulk-edit.${message}` }) : '';
 
     // show translated message if it exists
     if (translatedMessage) {
       showError(translatedMessage);
       // otherwise show an error message we have
-    } else if (anyErrorMessage) {
-      showError(anyErrorMessage);
-      // if there is no error message at all, show default error message
+    } else if (message) {
+      showError(message);
+      // if there is no error message but it's error instance, show sww error message
     } else if (res instanceof Error) {
       showError(intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }));
     }
