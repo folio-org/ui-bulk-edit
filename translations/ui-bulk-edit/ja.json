@@ -512,5 +512,7 @@
     "layer.marc.error.subfield": "入力内容を確認してください",
     "logs.actions.linkToCommittedRecordsMarcFile": "更新済レコードを含むファイル",
     "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "更新済レコードを含むファイル",
-    "layer.options.inProcess": "In process"
+    "layer.options.inProcess": "In process",
+    "columns.ITEM.Member": "Member",
+    "columns.HOLDINGS_RECORD.Member": "Member"
 }
