@@ -23,6 +23,26 @@ const columnMapping = {
   message: <FormattedMessage id="ui-bulk-edit.list.errors.table.message" />,
 };
 
+const renderErrorMessage = (error, isLinkAvailable) => {
+  const link = getParam(error, ERROR_PARAMETERS_KEYS.LINK);
+
+  return (
+    <div>
+      {error.message}
+      {' '}
+      {!!link && isLinkAvailable && (
+      <span className={css.errorLink}>
+        <TextLink to={link} target="_blank">
+          <Icon icon="external-link" size="small" iconPosition="end">
+            <FormattedMessage id="ui-bulk-edit.list.errors.table.link" />
+          </Icon>
+        </TextLink>
+      </span>
+      )}
+    </div>
+  );
+};
+
 const ErrorsAccordion = ({
   errors = [],
   entries,
@@ -39,25 +59,7 @@ const ErrorsAccordion = ({
 
   const resultsFormatter = {
     key: error => getParam(error, ERROR_PARAMETERS_KEYS.IDENTIFIER),
-    message: error => {
-      const link = getParam(error, ERROR_PARAMETERS_KEYS.LINK);
-
-      return (
-        <div>
-          {error.message}
-          {' '}
-          {!!link && isLinkAvailable && (
-            <span className={css.errorLink}>
-              <TextLink to={link} target="_blank">
-                <Icon icon="external-link" size="small" iconPosition="end">
-                  <FormattedMessage id="ui-bulk-edit.list.errors.table.link" />
-                </Icon>
-              </TextLink>
-            </span>
-          )}
-        </div>
-      );
-    },
+    message: error => renderErrorMessage(error, isLinkAvailable),
   };
 
   const location = useLocation();
