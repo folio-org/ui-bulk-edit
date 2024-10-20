@@ -14,6 +14,7 @@ import {
 } from '@folio/stripes-acq-components';
 
 import { getFullName } from '../../../utils/getFullName';
+import { useErrorMessages } from '../../useErrorMessages';
 
 const buildLogsQuery = makeQueryBuilder(
   'cql.allRecords=1',
@@ -27,6 +28,7 @@ export const useBulkEditLogs = ({ filters = {}, pagination }) => {
   const usersMap = useRef({});
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: BULK_EDIT_LOGS_KEY });
+  const { showErrorMessage } = useErrorMessages();
 
   const logsQuery = buildLogsQuery(filters);
   const filtersCount = getFiltersCount(filters);
@@ -83,6 +85,8 @@ export const useBulkEditLogs = ({ filters = {}, pagination }) => {
     queryFn,
     enabled: Boolean(pagination.timestamp),
     keepPreviousData: true,
+    onError: showErrorMessage,
+    onSuccess: showErrorMessage,
   });
 
   return {

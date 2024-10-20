@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+import { useErrorMessages } from '../useErrorMessages';
 
 export const QUERY_KEY_DOWNLOAD_LOGS = 'downloadLogs';
 export const QUERY_KEY_DOWNLOAD_ACTION_MENU = 'downloadActionMenu';
@@ -16,6 +17,7 @@ export const useFileDownload = ({
 }) => {
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: queryKey });
+  const { showErrorMessage } = useErrorMessages();
 
   const { refetch, isFetching } = useQuery(
     {
@@ -24,7 +26,11 @@ export const useFileDownload = ({
         searchParams: { fileContentType: fileInfo?.fileContentType },
       }).blob(),
       enabled: !!fileInfo,
-      onSuccess,
+      onSuccess: response => {
+        showErrorMessage(response);
+        onSuccess?.(response);
+      },
+      onError: showErrorMessage,
       onSettled,
       ...queryProps,
     },
