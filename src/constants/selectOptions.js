@@ -404,13 +404,18 @@ export const getItemStatusOptions = (formatMessage) => [
     disabled: false,
   },
   {
+    value: 'Missing',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.missing' }),
+    disabled: false,
+  },
+  {
     value: 'Withdrawn',
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.withdrawn' }),
     disabled: false,
   },
   {
-    value: 'Missing',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.missing' }),
+    value: 'IN_PROCESS',
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.inProcess' }),
     disabled: false,
   },
   {
@@ -443,11 +448,6 @@ export const getItemStatusOptions = (formatMessage) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.unknown' }),
     disabled: false,
   },
-  {
-    value: 'IN_PROCESS',
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.inProcess' }),
-    disabled: false,
-  }
 ];
 
 export const EDIT_CAPABILITIES_OPTIONS = [
