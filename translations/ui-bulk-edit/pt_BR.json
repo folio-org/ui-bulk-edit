@@ -512,5 +512,7 @@
     "layer.marc.error.subfield": "Por favor, verifique sua entrada.",
     "logs.actions.linkToCommittedRecordsMarcFile": "Arquivo com registros atualizados",
     "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "Arquivo com registros atualizados",
-    "layer.options.inProcess": "Em processo"
+    "layer.options.inProcess": "Em processo",
+    "columns.ITEM.Member": "Membro",
+    "columns.HOLDINGS_RECORD.Member": "Membro"
 }
