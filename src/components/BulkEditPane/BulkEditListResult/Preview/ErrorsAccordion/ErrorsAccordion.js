@@ -9,40 +9,38 @@ import {
   Icon,
   TextLink,
 } from '@folio/stripes/components';
+import { useStripes } from '@folio/stripes/core';
 import css from '../Preview.css';
 import { useSearchParams } from '../../../../../hooks';
-import { CRITERIA, ERROR_PARAMETERS_KEYS } from '../../../../../constants';
+import { CAPABILITIES, CRITERIA, ERROR_PARAMETERS_KEYS } from '../../../../../constants';
 
 const visibleColumns = ['key', 'message'];
 
 const getParam = (error, key) => error.parameters.find(param => param.key === key)?.value;
 
-const resultsFormatter = {
-  key: error => getParam(error, ERROR_PARAMETERS_KEYS.IDENTIFIER),
-  message: error => {
-    const link = getParam(error, ERROR_PARAMETERS_KEYS.LINK);
-
-    return (
-      <div>
-        {error.message}
-        {' '}
-        {!!link && (
-          <span className={css.errorLink}>
-            <TextLink to={link} target="_blank">
-              <Icon icon="external-link" size="small" iconPosition="end">
-                <FormattedMessage id="ui-bulk-edit.list.errors.table.link" />
-              </Icon>
-            </TextLink>
-          </span>
-        )}
-      </div>
-    );
-  },
-};
-
 const columnMapping = {
   key: <FormattedMessage id="ui-bulk-edit.list.errors.table.code" />,
   message: <FormattedMessage id="ui-bulk-edit.list.errors.table.message" />,
+};
+
+const renderErrorMessage = (error, isLinkAvailable) => {
+  const link = getParam(error, ERROR_PARAMETERS_KEYS.LINK);
+
+  return (
+    <div>
+      {error.message}
+      {' '}
+      {!!link && isLinkAvailable && (
+      <span className={css.errorLink}>
+        <TextLink to={link} target="_blank">
+          <Icon icon="external-link" size="small" iconPosition="end">
+            <FormattedMessage id="ui-bulk-edit.list.errors.table.link" />
+          </Icon>
+        </TextLink>
+      </span>
+      )}
+    </div>
+  );
 };
 
 const ErrorsAccordion = ({
@@ -52,6 +50,18 @@ const ErrorsAccordion = ({
   matched,
   isInitial,
 }) => {
+  const { user, okapi } = useStripes();
+  const centralTenant = user?.user?.consortium?.centralTenantId;
+  const tenantId = okapi.tenant;
+  const isCentralTenant = tenantId === centralTenant;
+  const { capabilities } = useSearchParams();
+  const isLinkAvailable = (isCentralTenant && capabilities === CAPABILITIES.INSTANCE) || !isCentralTenant;
+
+  const resultsFormatter = {
+    key: error => getParam(error, ERROR_PARAMETERS_KEYS.IDENTIFIER),
+    message: error => renderErrorMessage(error, isLinkAvailable),
+  };
+
   const location = useLocation();
   const { criteria } = useSearchParams();
   const fileName = new URLSearchParams(location.search).get('fileName');
