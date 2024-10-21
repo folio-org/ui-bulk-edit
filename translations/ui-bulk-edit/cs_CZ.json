@@ -508,9 +508,11 @@
     "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "Nahraný soubor je prázdný.",
     "previewModal.message.empty.marc": "All instances have source FOLIO.  Use “Instances and  Administrative data” option for bulk edit.",
     "start.downloadChangedRecords.marc": "Stáhnout změněné záznamy (MARC)",
-    "layer.marc.error.ind": "Please check your input.",
-    "layer.marc.error.subfield": "Please check your input.",
-    "logs.actions.linkToCommittedRecordsMarcFile": "File with updated records",
-    "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "File with updated records",
-    "layer.options.inProcess": "In process"
+    "layer.marc.error.ind": "Zkontrolujte prosím svůj vstup.",
+    "layer.marc.error.subfield": "Zkontrolujte prosím svůj vstup.",
+    "logs.actions.linkToCommittedRecordsMarcFile": "Soubor s aktualizovanými záznamy",
+    "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "Soubor s aktualizovanými záznamy",
+    "layer.options.inProcess": "Ve zpracování",
+    "columns.ITEM.Member": "Member",
+    "columns.HOLDINGS_RECORD.Member": "Member"
 }
