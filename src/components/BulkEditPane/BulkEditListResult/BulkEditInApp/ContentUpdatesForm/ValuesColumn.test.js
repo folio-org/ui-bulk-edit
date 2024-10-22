@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import '../../../../../../test/jest/__mock__/reactIntl.mock';
 import { IntlProvider } from 'react-intl';
 import { QueryClientProvider } from 'react-query';
 import { Router } from 'react-router-dom';
@@ -10,8 +11,6 @@ import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 import { ValuesColumn } from './ValuesColumn';
 import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
 import { CAPABILITIES, CONTROL_TYPES } from '../../../../../constants';
-
-import '../../../../../../test/jest/__mock__';
 
 jest.mock('../../../../../hooks/api/useLoanTypes');
 jest.mock('../../../../../hooks/api/usePatronGroup');

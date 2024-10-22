@@ -13,7 +13,7 @@ import { useErrorMessages } from '../useErrorMessages';
 export const useBulkOperationStart = (mutationOptions = {}) => {
   const params = useRef({});
   const ky = useOkapiKy();
-  const { checkErrorMessage } = useErrorMessages();
+  const { showErrorMessage } = useErrorMessages();
 
   const { refetch: fetchBulkOperation } = useQuery({
     queryFn: async () => {
@@ -60,11 +60,9 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
       params.current = { id, step };
 
       try {
-        const startResult = await ky.post(`bulk-operations/${id}/start`, {
+        return await ky.post(`bulk-operations/${id}/start`, {
           json: body,
         }).json();
-
-        checkErrorMessage(startResult);
 
       // eslint-disable-next-line no-empty
       } catch (e) {}
@@ -73,6 +71,8 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
 
       return data;
     },
+    onSuccess: showErrorMessage,
+    onError: showErrorMessage,
     ...mutationOptions,
   });
 

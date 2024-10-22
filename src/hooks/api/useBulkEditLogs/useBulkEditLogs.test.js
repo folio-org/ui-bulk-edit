@@ -1,15 +1,14 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import '../../../../test/jest/__mock__/reactIntl.mock';
 import { useOkapiKy } from '@folio/stripes/core';
-
 import { bulkEditLogsData } from '../../../../test/jest/__mock__/fakeData';
 
 import { LOGS_FILTERS, JOB_STATUSES } from '../../../constants';
 import { useBulkEditLogs } from './useBulkEditLogs';
 import { getFullName } from '../../../utils/getFullName';
 
-import '../../../../test/jest/__mock__/stripesCore.mock';
 
 const users = [
   {

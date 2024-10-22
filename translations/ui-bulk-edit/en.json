@@ -151,10 +151,6 @@
   "start.downloadChangedRecords": "Download changed records (CSV)",
   "start.downloadChangedRecords.marc": "Download changed records (MARC)",
 
-  "error.uploadedFile": "Fail to upload file",
-  "error.sww": "Something went wrong",
-  "error.incorrectFormatted": "{fileName} is formatted incorrectly. Please correct the formatting and upload the file again.",
-
   "category.loanType": "Loan type",
   "category.location": "Location",
   "category.itemNotes": "Item notes",
@@ -548,5 +544,8 @@
   "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": "There is a problem with S3 configuration that prevents Bulk edit module to save files.  Please contact your hosting provider to check if the Bulk edit app has been configured correctly.",
   "error.mod-bulk-operations.not.download.file.from.s3": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
   "error.mod-bulk-operations.not.confirm.changes.s3.issue": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
+  "error.uploadedFile": "Fail to upload file",
+  "error.sww": "Something went wrong",
+  "error.incorrectFormatted": "{fileName} is formatted incorrectly. Please correct the formatting and upload the file again.",
   "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty."
 }

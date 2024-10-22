@@ -3,10 +3,11 @@ import { QueryClientProvider } from 'react-query';
 
 import { logDOM, render, screen } from '@testing-library/react';
 
+import '../../../../../test/jest/__mock__';
+
 import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
-import '../../../../../test/jest/__mock__';
 import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 

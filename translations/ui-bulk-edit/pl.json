@@ -477,7 +477,7 @@
     "columns.ITEM.Missing pieces date": "Missing pieces date",
     "columns.ITEM.Item damaged status": "Item damaged status",
     "columns.ITEM.Item damaged status date": "Item damaged status date",
-    "columns.ITEM.Material type": "Material type",
+    "columns.ITEM.Material type": "Rodzaj materiału",
     "columns.ITEM.Is bound with": "Is bound with",
     "columns.ITEM.Bound with titles": "Bound with titles",
     "columns.ITEM.Permanent loan type": "Permanent loan type",
@@ -512,5 +512,7 @@
     "layer.marc.error.subfield": "Please check your input.",
     "logs.actions.linkToCommittedRecordsMarcFile": "File with updated records",
     "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "File with updated records",
-    "layer.options.inProcess": "In process"
+    "layer.options.inProcess": "In process",
+    "columns.ITEM.Member": "Member",
+    "columns.HOLDINGS_RECORD.Member": "Member"
 }

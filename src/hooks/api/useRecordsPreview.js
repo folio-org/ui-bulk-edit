@@ -7,6 +7,7 @@ import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { BULK_VISIBLE_COLUMNS } from '../../constants';
 import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
+import { useErrorMessages } from '../useErrorMessages';
 
 export const RECORDS_PREVIEW_KEY = 'RECORDS_PREVIEW_KEY';
 export const PREVIEW_MODAL_KEY = 'PREVIEW_MODAL_KEY';
@@ -26,6 +27,7 @@ export const useRecordsPreview = ({
   const { setVisibleColumns } = useContext(RootContext);
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key });
+  const { showErrorMessage } = useErrorMessages();
 
   const { data, refetch, isLoading, dataUpdatedAt, isFetching } = useQuery(
     {
@@ -35,6 +37,8 @@ export const useRecordsPreview = ({
       queryFn: () => {
         return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit, offset, step } }).json();
       },
+      onError: showErrorMessage,
+      onSuccess: showErrorMessage,
       ...queryOptions,
     },
   );

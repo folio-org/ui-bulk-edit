@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { useMemo } from 'react';
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 import { getMappedAndSortedNotes } from '../../utils/helpers';
+import { useErrorMessages } from '../useErrorMessages';
 
 export const HOLDINGS_NOTES_KEY = 'HOLDINGS_NOTES_KEY';
 
@@ -11,6 +12,7 @@ export const useHoldingsNotes = (options = {}) => {
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: HOLDINGS_NOTES_KEY });
   const { formatMessage } = useIntl();
+  const { showErrorMessage } = useErrorMessages();
 
   const { data, isLoading: isHoldingsNotesLoading } = useQuery(
     {
@@ -18,6 +20,8 @@ export const useHoldingsNotes = (options = {}) => {
       cacheTime: Infinity,
       staleTime: Infinity,
       queryFn: () => ky.get('holdings-note-types', { searchParams: { limit: 1000 } }).json(),
+      onError: showErrorMessage,
+      onSuccess: showErrorMessage,
       ...options,
     },
   );

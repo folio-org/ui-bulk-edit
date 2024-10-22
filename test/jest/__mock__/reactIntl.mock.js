@@ -7,6 +7,7 @@ jest.mock('react-intl', () => {
     formatDisplayName: value => value,
     formatMessage: ({ id }) => id,
     formatNumber: value => value,
+    messages: [],
   };
 
   const sharedMockFn = jest.fn(({

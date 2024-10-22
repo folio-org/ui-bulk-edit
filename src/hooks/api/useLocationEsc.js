@@ -1,12 +1,14 @@
 import { useNamespace } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
 import { usePublishCoordinator } from '../usePublishCoordinator';
+import { useErrorMessages } from '../useErrorMessages';
 
 const DEFAULT_DATA = {};
 
 export const useLocationEsc = (tenants, options = {}) => {
   const [namespace] = useNamespace({ key: 'locationsEsc' });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
+  const { showErrorMessage } = useErrorMessages();
 
   const { data = DEFAULT_DATA, isFetching } = useQuery({
     queryKey: [namespace, tenants],
@@ -19,6 +21,8 @@ export const useLocationEsc = (tenants, options = {}) => {
       return publicationResults;
     },
     keepPreviousData: true,
+    onError: showErrorMessage,
+    onSuccess: showErrorMessage,
     ...options
   });
 
