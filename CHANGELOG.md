@@ -64,6 +64,7 @@
 * [UIBULKED-555](https://folio-org.atlassian.net/browse/UIBULKED-555)Rearrange item statuses order.
 * [UIBULKED-559](https://folio-org.atlassian.net/browse/UIBULKED-559) Update subfield validation in MARC form.
 * [UIBULKED-558](https://folio-org.atlassian.net/browse/UIBULKED-558) Add translation for new "Member" column.
+* [UIBULKED-556](https://folio-org.atlassian.net/browse/UIBULKED-556) ECS - remove link to affected record in Optimistic error for holdings and items.
 
 ## [4.1.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.4) (2024-05-29)
 
