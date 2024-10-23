@@ -2,6 +2,12 @@
     max-width: 1024px;
 }
 
+.previewLoading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .previewModalFooter {
     width: 100%;
     display: flex;

@@ -65,6 +65,7 @@
 * [UIBULKED-559](https://folio-org.atlassian.net/browse/UIBULKED-559) Update subfield validation in MARC form.
 * [UIBULKED-558](https://folio-org.atlassian.net/browse/UIBULKED-558) Add translation for new "Member" column.
 * [UIBULKED-556](https://folio-org.atlassian.net/browse/UIBULKED-556) ECS - remove link to affected record in Optimistic error for holdings and items.
+* [UIBULKED-497](https://folio-org.atlassian.net/browse/UIBULKED-497) "Are you sure" preview displays outdated values after User changed selection on bulk edit form and clicked "Confirm changes".
 
 ## [4.1.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.4) (2024-05-29)
 

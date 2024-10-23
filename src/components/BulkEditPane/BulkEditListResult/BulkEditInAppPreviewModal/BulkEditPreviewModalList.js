@@ -6,6 +6,7 @@ import {
 } from 'react-intl';
 
 import {
+  Loading,
   MessageBanner,
   MultiColumnList
 } from '@folio/stripes/components';
@@ -21,6 +22,7 @@ import { usePagination } from '../../../../hooks/usePagination';
 import {
   CAPABILITIES,
   EDITING_STEPS,
+  JOB_STATUSES,
   PAGINATION_CONFIG
 } from '../../../../constants';
 import {
@@ -58,7 +60,7 @@ export const BulkEditPreviewModalList = ({
     step: EDITING_STEPS.EDIT,
     capabilities: currentRecordType,
     queryOptions: {
-      enabled: isPreviewEnabled,
+      enabled: isPreviewEnabled && bulkDetails?.status !== JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS,
       onError: () => {
         callout({
           type: 'error',
@@ -89,31 +91,41 @@ export const BulkEditPreviewModalList = ({
   };
 
   return (
-    <>
-      {renderMessageBanner()}
+    bulkDetails?.status !== JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS ?
+      (
+        <>
+          {renderMessageBanner()}
 
-      <strong className={css.previewModalSubtitle}><FormattedMessage id="ui-bulk-edit.previewModal.previewToBeChanged" /></strong>
+          <strong className={css.previewModalSubtitle}><FormattedMessage
+            id="ui-bulk-edit.previewModal.previewToBeChanged"
+          />
+          </strong>
 
-      <MultiColumnList
-        striped
-        contentData={contentData}
-        columnMapping={columnMapping}
-        visibleColumns={visibleColumnKeys}
-        maxHeight={300}
-        columnIdPrefix="in-app"
-        columnWidths={PREVIEW_COLUMN_WIDTHS}
-        loading={isFetching}
-      />
+          <MultiColumnList
+            striped
+            contentData={contentData}
+            columnMapping={columnMapping}
+            visibleColumns={visibleColumnKeys}
+            maxHeight={300}
+            columnIdPrefix="in-app"
+            columnWidths={PREVIEW_COLUMN_WIDTHS}
+            loading={isFetching}
+          />
 
-      {contentData.length > 0 && (
-        <PrevNextPagination
-          {...pagination}
-          totalCount={bulkDetails?.processedNumOfRecords}
-          disabled={false}
-          onChange={changePage}
-        />
-      )}
-    </>
+          {contentData.length > 0 && (
+          <PrevNextPagination
+            {...pagination}
+            totalCount={bulkDetails?.processedNumOfRecords}
+            disabled={false}
+            onChange={changePage}
+          />
+          )}
+        </>
+      )
+      :
+        <div className={css.previewLoading}>
+          <Loading size="large" />
+        </div>
   );
 };
 
