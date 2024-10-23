@@ -502,6 +502,7 @@
   "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
   "permission.users.edit": "Bulk edit: In app - Edit user records",
   "permission.logs.view": "Bulk edit: Can view logs",
+  "permission.query.execute": "Bulk edit: Can build query",
 
   "ariaLabel.actionsSelect": "Actions select",
   "ariaLabel.textField": "Text field",
