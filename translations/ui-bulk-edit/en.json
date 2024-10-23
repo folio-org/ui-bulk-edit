@@ -496,11 +496,11 @@
   "retrievedDataList.title": "{matched, number} matching {capability} records found.",
 
   "permission.module.bulk-edit.enabled": "UI: Bulk edit module is enabled",
-  "permission.view": "Bulk Edit: Local - View user records",
-  "permission.edit": "Bulk Edit: Local - Edit user records",
-  "permission.app-view": "Bulk Edit: In app - View inventory records",
-  "permission.app-edit": "Bulk Edit: In app - Edit inventory records",
-  "permission.app-edit.users": " Bulk edit: In app - Edit user records",
+  "permission.users.csv.view": "Bulk Edit: Local - View user records",
+  "permission.users.csv.edit": "Bulk Edit: Local - Edit user records",
+  "permission.inventory.view": "Bulk Edit: In app - View inventory records",
+  "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
+  "permission.users.edit": " Bulk edit: In app - Edit user records",
   "permission.logs.view": "Bulk edit: Can view logs",
 
   "ariaLabel.actionsSelect": "Actions select",
