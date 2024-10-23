@@ -21,8 +21,6 @@ export const useBulkPermissions = () => {
   const hasInstancePerms = stripes.hasPerm('ui-inventory.instance.edit');
   const hasInventoryInstanceViewPerms = stripes.hasPerm('ui-inventory.instance.view');
 
-  console.log(hasInAppViewPerms, hasInAppEditPerms, hasItemsPerms)
-
   // Quick marc
 
   const hasQuickMarcEditPerms = stripes.hasPerm('ui-quick-marc.quick-marc-editor.all');
