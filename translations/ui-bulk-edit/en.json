@@ -500,7 +500,7 @@
   "permission.users.csv.edit": "Bulk Edit: Local - Edit user records",
   "permission.inventory.view": "Bulk Edit: In app - View inventory records",
   "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
-  "permission.users.edit": " Bulk edit: In app - Edit user records",
+  "permission.users.edit": "Bulk edit: In app - Edit user records",
   "permission.logs.view": "Bulk edit: Can view logs",
 
   "ariaLabel.actionsSelect": "Actions select",
