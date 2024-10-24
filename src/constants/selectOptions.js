@@ -414,7 +414,7 @@ export const getItemStatusOptions = (formatMessage) => [
     disabled: false,
   },
   {
-    value: 'IN_PROCESS',
+    value: 'In process',
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.inProcess' }),
     disabled: false,
   },

@@ -65,6 +65,8 @@ export const BulkEditPreviewModal = ({
     }
   };
 
+  const isModalButtonDisabled = !hasLinkForDownload || isPreviewLoading || bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS;
+
   return (
     <Modal
       size="large"
@@ -75,8 +77,8 @@ export const BulkEditPreviewModal = ({
         <BulkEditPreviewModalFooter
           downloadLabel={downloadLabel}
           bulkOperationId={bulkDetails?.id}
-          isCommitBtnDisabled={!hasLinkForDownload || isPreviewLoading || bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS}
-          isDownloadBtnDisabled={!hasLinkForDownload || isPreviewLoading || bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS}
+          isCommitBtnDisabled={isModalButtonDisabled}
+          isDownloadBtnDisabled={isModalButtonDisabled}
           onSave={handleBulkOperationStart}
           onDownload={onDownload}
           onKeepEditing={onKeepEditing}

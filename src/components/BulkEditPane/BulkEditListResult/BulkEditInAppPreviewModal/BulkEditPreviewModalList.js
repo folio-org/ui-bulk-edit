@@ -6,6 +6,7 @@ import {
 } from 'react-intl';
 
 import {
+  Layout,
   Loading,
   MessageBanner,
   MultiColumnList
@@ -123,9 +124,9 @@ export const BulkEditPreviewModalList = ({
         </>
       )
       :
-        <div className={css.previewLoading}>
+        <Layout className="flex centerContent">
           <Loading size="large" />
-        </div>
+        </Layout>
   );
 };
 
