@@ -10,6 +10,7 @@ import {
   APPROACHES,
   EDITING_STEPS,
   FILE_KEYS,
+  JOB_STATUSES,
 } from '../../../../constants';
 import {
   useBulkOperationStart,
@@ -64,6 +65,8 @@ export const BulkEditPreviewModal = ({
     }
   };
 
+  const isModalButtonDisabled = !hasLinkForDownload || isPreviewLoading || bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS;
+
   return (
     <Modal
       size="large"
@@ -74,8 +77,8 @@ export const BulkEditPreviewModal = ({
         <BulkEditPreviewModalFooter
           downloadLabel={downloadLabel}
           bulkOperationId={bulkDetails?.id}
-          isCommitBtnDisabled={!hasLinkForDownload || isPreviewLoading}
-          isDownloadBtnDisabled={!hasLinkForDownload || isPreviewLoading}
+          isCommitBtnDisabled={isModalButtonDisabled}
+          isDownloadBtnDisabled={isModalButtonDisabled}
           onSave={handleBulkOperationStart}
           onDownload={onDownload}
           onKeepEditing={onKeepEditing}
