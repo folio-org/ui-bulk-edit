@@ -19,7 +19,7 @@ jest.mock('./hooks/useAllPermissions');
 
 const permissions = [
   {
-    'permissionName': 'ui-bulk-edit.app-edit',
+    'permissionName': 'ui-bulk-edit.inventory.edit',
     'displayName': 'Bulk Edit: In app - Edit',
     'id': 'baa169b5-e36c-47fd-bbd7-10ad10fb9ce8',
     'mutable': false,

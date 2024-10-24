@@ -4,16 +4,16 @@ export const useBulkPermissions = () => {
   const stripes = useStripes();
 
   // CSV perms
-  const hasCsvViewPerms = stripes.hasPerm('ui-bulk-edit.view');
-  const hasCsvEditPerms = stripes.hasPerm('ui-bulk-edit.edit');
+  const hasCsvViewPerms = stripes.hasPerm('ui-bulk-edit.users.csv.view');
+  const hasCsvEditPerms = stripes.hasPerm('ui-bulk-edit.users.csv.edit');
 
   // In-app perms
-  const hasInAppViewPerms = stripes.hasPerm('ui-bulk-edit.app-view');
-  const hasInAppEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit');
-  const hasInAppUsersEditPerms = stripes.hasPerm('ui-bulk-edit.app-edit.users');
+  const hasInAppViewPerms = stripes.hasPerm('ui-bulk-edit.inventory.view');
+  const hasInAppEditPerms = stripes.hasPerm('ui-bulk-edit.inventory.edit');
+  const hasInAppUsersEditPerms = stripes.hasPerm('ui-bulk-edit.users.edit');
 
   // Query perms
-  const hasQueryPerms = stripes.hasPerm('ui-bulk-edit.query');
+  const hasQueryPerms = stripes.hasPerm('ui-bulk-edit.query.execute');
 
   // Inventory
   const hasItemsPerms = stripes.hasPerm('ui-inventory.item.edit');
