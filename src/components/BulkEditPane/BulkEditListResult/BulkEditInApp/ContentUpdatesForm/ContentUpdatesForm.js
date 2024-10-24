@@ -224,7 +224,6 @@ export const ContentUpdatesForm = ({
 
         const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
         const filteredTenants = actionTenants.filter(Boolean);
-        console.log(filteredTenants)
 
         const activeTenants = filteredTenants.length === 1
           ? filteredTenants.flat()
@@ -233,7 +232,7 @@ export const ContentUpdatesForm = ({
             .filter((tenant, index, array) => array.indexOf(tenant) !== index);
 
         // That tenants array need when we use find and replace action with two different action values
-        const updated_tenants = filteredTenants[1] || []
+        const updatedTenants = filteredTenants[1] || [];
         const type = ACTIONS[typeKey];
 
         return {
@@ -244,7 +243,7 @@ export const ContentUpdatesForm = ({
             initial,
             updated,
             tenants: activeTenants,
-            updated_tenants,
+            updated_tenants: updatedTenants,
             parameters: [
               ...(parameters || []),
               ...(actionParameters || []),
