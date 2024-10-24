@@ -66,6 +66,7 @@
 * [UIBULKED-558](https://folio-org.atlassian.net/browse/UIBULKED-558) Add translation for new "Member" column.
 * [UIBULKED-556](https://folio-org.atlassian.net/browse/UIBULKED-556) ECS - remove link to affected record in Optimistic error for holdings and items.
 * [UIBULKED-545](https://folio-org.atlassian.net/browse/UIBULKED-545) Clean up permissions.
+* [UIBULKED-572](https://folio-org.atlassian.net/browse/UIBULKED-572) Include additional field to 'actions'.
 
 ## [4.1.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.4) (2024-05-29)
 
