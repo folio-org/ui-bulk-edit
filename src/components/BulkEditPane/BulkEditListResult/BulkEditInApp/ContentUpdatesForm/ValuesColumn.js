@@ -116,7 +116,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   };
 
   function getLabelByValue(items, targetValue) {
-    const item = items.find((labeledValue) => labeledValue.value === targetValue);
+    const item = items?.find((labeledValue) => labeledValue.value === targetValue);
     return item ? item.label : undefined;
   }
   const sortedNotes = sortWithoutPlaceholder(filteredAndMappedNotes);
