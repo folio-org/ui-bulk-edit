@@ -15,6 +15,7 @@ import {
   APPROACHES,
   EDITING_STEPS,
   FILE_SEARCH_PARAMS,
+  JOB_STATUSES,
 } from '../constants';
 import { useSearchParams } from './useSearchParams';
 
@@ -31,9 +32,13 @@ export const useConfirmChanges = ({
   const searchParams = useSearchParams();
 
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
+  const [isBulkOperationStarting, setIsBulkOperationStarting] = useState(false);
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
 
-  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, interval: 1000 * 3 });
+  const { bulkDetails } = useBulkOperationDetails({
+    id: bulkOperationId,
+    interval: isPreviewLoading ? 3000 : 0
+  });
   const { bulkOperationStart } = useBulkOperationStart();
 
   const totalRecords = bulkDetails?.totalNumOfRecords;
@@ -44,9 +49,11 @@ export const useConfirmChanges = ({
 
   const closePreviewModal = () => {
     setIsPreviewModalOpened(false);
+    setIsPreviewLoading(false);
   };
 
   const confirmChanges = (payload) => {
+    setIsBulkOperationStarting(true);
     setIsPreviewLoading(true);
     setIsPreviewModalOpened(true);
 
@@ -69,7 +76,7 @@ export const useConfirmChanges = ({
         closePreviewModal();
       })
       .finally(() => {
-        setIsPreviewLoading(false);
+        setIsBulkOperationStarting(false);
       });
   };
 
@@ -83,10 +90,16 @@ export const useConfirmChanges = ({
     onSuccess: (data) => onDownloadSuccess(data, searchParams),
   });
 
+  const isReadyToShowPreview = !isBulkOperationStarting &&
+    ![JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS].includes(bulkDetails?.status);
+
   return {
     totalRecords,
     bulkDetails,
     isPreviewModalOpened,
+    isBulkOperationStarting,
+    setIsBulkOperationStarting,
+    isReadyToShowPreview,
     isPreviewLoading,
     setIsPreviewLoading,
     isFileDownloading,

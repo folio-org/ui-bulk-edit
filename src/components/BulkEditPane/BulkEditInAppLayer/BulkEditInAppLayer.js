@@ -23,12 +23,14 @@ export const BulkEditInAppLayer = ({
 
   const {
     isPreviewModalOpened,
-    isPreviewLoading,
     bulkDetails,
     totalRecords,
     downloadFile,
     confirmChanges,
     closePreviewModal,
+    isPreviewLoading,
+    setIsPreviewLoading,
+    isReadyToShowPreview,
   } = useConfirmChanges({
     queryDownloadKey: QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
     updateFn: contentUpdate,
@@ -60,6 +62,10 @@ export const BulkEditInAppLayer = ({
     confirmChanges({ contentUpdates: contentUpdatesBody });
   };
 
+  const handlePreviewLoaded = () => {
+    setIsPreviewLoading(false);
+  };
+
   return (
     <>
       <BulkEditLayer
@@ -76,11 +82,13 @@ export const BulkEditInAppLayer = ({
 
       <BulkEditPreviewModal
         isPreviewLoading={isPreviewLoading}
+        isReadyToShowPreview={isReadyToShowPreview}
         bulkDetails={bulkDetails}
         open={isPreviewModalOpened}
         onDownload={downloadFile}
         onKeepEditing={closePreviewModal}
         onChangesCommited={handleChangesCommited}
+        onPreviewLoaded={handlePreviewLoaded}
       />
     </>
   );

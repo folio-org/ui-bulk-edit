@@ -30,6 +30,8 @@ export const BulkEditMarkLayer = ({
     downloadFile,
     confirmChanges,
     closePreviewModal,
+    setIsPreviewLoading,
+    isReadyToShowPreview,
   } = useConfirmChanges({
     updateFn: markContentUpdate,
     queryDownloadKey: QUERY_KEY_DOWNLOAD_MARK_PREVIEW_MODAL,
@@ -64,6 +66,10 @@ export const BulkEditMarkLayer = ({
     });
   };
 
+  const handlePreviewLoaded = () => {
+    setIsPreviewLoading(false);
+  };
+
   return (
     <>
       <BulkEditLayer
@@ -78,11 +84,13 @@ export const BulkEditMarkLayer = ({
 
       <BulkEditPreviewModal
         isPreviewLoading={isPreviewLoading}
+        isReadyToShowPreview={isReadyToShowPreview}
         bulkDetails={bulkDetails}
         open={isPreviewModalOpened}
         onDownload={downloadFile}
         onKeepEditing={closePreviewModal}
         onChangesCommited={handleChangesCommited}
+        onPreviewLoaded={handlePreviewLoaded}
       />
     </>
   );

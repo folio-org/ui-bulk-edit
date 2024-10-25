@@ -71,7 +71,6 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
 
       return data;
     },
-    onSuccess: showErrorMessage,
     onError: showErrorMessage,
     ...mutationOptions,
   });

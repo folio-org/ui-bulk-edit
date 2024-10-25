@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useHistory } from 'react-router-dom';
@@ -10,14 +10,14 @@ export const BULK_OPERATION_DETAILS_KEY = 'BULK_OPERATION_DETAILS_KEY';
 
 export const useBulkOperationDetails = ({
   id,
-  interval = 0,
+  interval,
   additionalQueryKeys = [],
   ...options
 }) => {
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: BULK_OPERATION_DETAILS_KEY });
   const history = useHistory();
-  const [refetchInterval, setRefetchInterval] = useState(interval);
+  const [refetchInterval, setRefetchInterval] = useState(0);
   const { showErrorMessage } = useErrorMessages();
 
   const clearInterval = () => {
@@ -57,6 +57,10 @@ export const useBulkOperationDetails = ({
     },
     ...options,
   });
+
+  useEffect(() => {
+    setRefetchInterval(interval);
+  }, [interval]);
 
   return {
     bulkDetails: data,

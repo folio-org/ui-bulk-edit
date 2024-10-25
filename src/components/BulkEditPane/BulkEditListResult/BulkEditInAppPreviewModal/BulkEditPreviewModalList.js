@@ -6,8 +6,6 @@ import {
 } from 'react-intl';
 
 import {
-  Layout,
-  Loading,
   MessageBanner,
   MultiColumnList
 } from '@folio/stripes/components';
@@ -23,7 +21,6 @@ import { usePagination } from '../../../../hooks/usePagination';
 import {
   CAPABILITIES,
   EDITING_STEPS,
-  JOB_STATUSES,
   PAGINATION_CONFIG
 } from '../../../../constants';
 import {
@@ -38,8 +35,9 @@ import { useErrorMessages } from '../../../../hooks/useErrorMessages';
 
 export const BulkEditPreviewModalList = ({
   bulkDetails,
-  isPreviewEnabled,
+  isReadyToShowPreview,
   onPreviewError,
+  onPreviewLoaded,
 }) => {
   const callout = useShowCallout();
   const intl = useIntl();
@@ -63,8 +61,11 @@ export const BulkEditPreviewModalList = ({
     step: EDITING_STEPS.EDIT,
     capabilities: currentRecordType,
     queryOptions: {
-      enabled: isPreviewEnabled && bulkDetails?.status !== JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS,
-      onSuccess: showErrorMessage,
+      enabled: !!bulkDetails?.id && isReadyToShowPreview,
+      onSuccess: (response) => {
+        showErrorMessage(response);
+        onPreviewLoaded(response);
+      },
       onError: () => {
         callout({
           type: 'error',
@@ -76,7 +77,7 @@ export const BulkEditPreviewModalList = ({
     ...pagination,
   });
 
-  if (!contentData || !isPreviewEnabled) return <Preloader />;
+  if (!contentData?.length) return <Preloader />;
 
   const renderMessageBanner = () => {
     if (!bulkDetails?.processedNumOfRecords && currentRecordType === CAPABILITIES.INSTANCE) {
@@ -95,46 +96,41 @@ export const BulkEditPreviewModalList = ({
   };
 
   return (
-    bulkDetails?.status !== JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS ?
-      (
-        <>
-          {renderMessageBanner()}
+    <>
+      {renderMessageBanner()}
 
-          <strong className={css.previewModalSubtitle}><FormattedMessage
-            id="ui-bulk-edit.previewModal.previewToBeChanged"
-          />
-          </strong>
+      <strong className={css.previewModalSubtitle}><FormattedMessage
+        id="ui-bulk-edit.previewModal.previewToBeChanged"
+      />
+      </strong>
 
-          <MultiColumnList
-            striped
-            contentData={contentData}
-            columnMapping={columnMapping}
-            visibleColumns={visibleColumnKeys}
-            maxHeight={300}
-            columnIdPrefix="in-app"
-            columnWidths={PREVIEW_COLUMN_WIDTHS}
-            loading={isFetching}
-          />
+      <MultiColumnList
+        striped
+        contentData={contentData}
+        columnMapping={columnMapping}
+        visibleColumns={visibleColumnKeys}
+        maxHeight={300}
+        columnIdPrefix="in-app"
+        columnWidths={PREVIEW_COLUMN_WIDTHS}
+        loading={isFetching}
+      />
 
-          {contentData.length > 0 && (
-          <PrevNextPagination
-            {...pagination}
-            totalCount={bulkDetails?.processedNumOfRecords}
-            disabled={false}
-            onChange={changePage}
-          />
-          )}
-        </>
-      )
-      :
-        <Layout className="flex centerContent">
-          <Loading size="large" />
-        </Layout>
+      {contentData.length > 0 && (
+      <PrevNextPagination
+        {...pagination}
+        totalCount={bulkDetails?.processedNumOfRecords}
+        disabled={false}
+        onChange={changePage}
+      />
+      )}
+    </>
   );
 };
 
 BulkEditPreviewModalList.propTypes = {
   bulkDetails: PropTypes.object,
   isPreviewEnabled: PropTypes.bool,
+  isReadyToShowPreview: PropTypes.bool,
   onPreviewError: PropTypes.func,
+  onPreviewLoaded: PropTypes.func,
 };

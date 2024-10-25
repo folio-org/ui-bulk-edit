@@ -24,7 +24,9 @@ export const BulkEditPreviewModal = ({
   open,
   bulkDetails,
   isPreviewLoading,
+  isReadyToShowPreview,
   onKeepEditing,
+  onPreviewLoaded,
   onDownload,
   onChangesCommited,
 }) => {
@@ -89,8 +91,9 @@ export const BulkEditPreviewModal = ({
     >
       <BulkEditPreviewModalList
         bulkDetails={bulkDetails}
-        isPreviewEnabled={!isPreviewLoading}
         onPreviewError={onKeepEditing}
+        onPreviewLoaded={onPreviewLoaded}
+        isReadyToShowPreview={isReadyToShowPreview}
       />
     </Modal>
   );
@@ -98,9 +101,11 @@ export const BulkEditPreviewModal = ({
 
 BulkEditPreviewModal.propTypes = {
   open: PropTypes.bool,
+  isReadyToShowPreview: PropTypes.bool,
   isPreviewLoading: PropTypes.bool,
   bulkDetails: PropTypes.object,
   onKeepEditing: PropTypes.func,
+  onPreviewLoaded: PropTypes.func,
   onChangesCommited: PropTypes.func,
   onDownload: PropTypes.func,
 };
