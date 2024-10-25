@@ -36,19 +36,25 @@ export const useBulkOperationDetails = ({
   const { data, isLoading } = useQuery({
     queryKey: [BULK_OPERATION_DETAILS_KEY, namespaceKey, id, refetchInterval, ...additionalQueryKeys],
     enabled: !!id,
-    onError: (error) => {
-      showErrorMessage(error);
-      clearIntervalAndRedirect('/bulk-edit', '');
-    },
-    onSuccess: (response) => {
-      showErrorMessage(response);
+    refetchInterval,
+    queryFn: async () => {
+      try {
+        const response = await ky.get(`bulk-operations/${id}`).json();
 
-      if (response.status === JOB_STATUSES.FAILED || response?.errorMessage) {
+        showErrorMessage(response);
+
+        if (response.status === JOB_STATUSES.FAILED || response?.errorMessage) {
+          clearIntervalAndRedirect('/bulk-edit', '');
+        }
+
+        return response;
+      } catch (e) {
+        showErrorMessage(e);
         clearIntervalAndRedirect('/bulk-edit', '');
+
+        return e;
       }
     },
-    refetchInterval,
-    queryFn: () => ky.get(`bulk-operations/${id}`).json(),
     ...options,
   });
 
