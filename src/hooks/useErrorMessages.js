@@ -14,9 +14,7 @@ export const useErrorMessages = () => {
   };
 
   const showErrorMessage = (res) => {
-    const messageInBody = res?.errorMessage;
-    const messageWhenError = res?.message;
-    const message = messageInBody || messageWhenError;
+    const message = res?.errorMessage;
 
     // check if error message should be translated (if it's exist in translations)
     const prefixedMessageId = `ui-bulk-edit.${message}`;
