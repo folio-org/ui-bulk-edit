@@ -33,7 +33,7 @@ export const useConfirmChanges = ({
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
 
-  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, interval: 1000 * 3 });
+  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, interval: 0 });
   const { bulkOperationStart } = useBulkOperationStart();
 
   const totalRecords = bulkDetails?.totalNumOfRecords;
