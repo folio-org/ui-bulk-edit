@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 
+import noop from 'lodash/noop';
 import { BULK_VISIBLE_COLUMNS } from '../../constants';
 import { getMappedTableData } from '../../utils/mappers';
 import { RootContext } from '../../context/RootContext';
@@ -21,7 +22,8 @@ export const useRecordsPreview = ({
   limit,
   offset,
   criteria,
-  queryRecordType
+  queryRecordType,
+  onSuccess = noop,
 }) => {
   const intl = useIntl();
   const { setVisibleColumns } = useContext(RootContext);
@@ -82,6 +84,13 @@ export const useRecordsPreview = ({
     setVisibleColumns,
     capabilities
   ]);
+
+  console.log(contentData);
+  useEffect(() => {
+    if (contentData?.length > 0) {
+      onSuccess();
+    }
+  }, [contentData, onSuccess]);
 
   return {
     isLoading,

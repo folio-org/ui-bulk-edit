@@ -24,6 +24,7 @@ export const ProgressBar = () => {
   const { bulkDetails, clearIntervalAndRedirect } = useBulkOperationDetails({
     id,
     interval: 1000 * 3,
+    shouldRefetch: true,
     additionalQueryKeys: [step],
   });
 

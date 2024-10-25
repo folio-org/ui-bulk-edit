@@ -27,6 +27,7 @@ export const BulkEditPreviewModal = ({
   onKeepEditing,
   onDownload,
   onChangesCommited,
+  setShouldRefetchStatus
 }) => {
   const callout = useShowCallout();
   const intl = useIntl();
@@ -91,6 +92,7 @@ export const BulkEditPreviewModal = ({
         bulkDetails={bulkDetails}
         isPreviewEnabled={!isPreviewLoading}
         onPreviewError={onKeepEditing}
+        setShouldRefetchStatus={setShouldRefetchStatus}
       />
     </Modal>
   );
@@ -103,4 +105,5 @@ BulkEditPreviewModal.propTypes = {
   onKeepEditing: PropTypes.func,
   onChangesCommited: PropTypes.func,
   onDownload: PropTypes.func,
+  setShouldRefetchStatus: PropTypes.func
 };

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage,
@@ -39,6 +39,7 @@ export const BulkEditPreviewModalList = ({
   bulkDetails,
   isPreviewEnabled,
   onPreviewError,
+  setShouldRefetchStatus,
 }) => {
   const callout = useShowCallout();
   const intl = useIntl();
@@ -50,6 +51,17 @@ export const BulkEditPreviewModalList = ({
   } = usePagination(PAGINATION_CONFIG);
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
+  console.log('isPreviewEnabled:', isPreviewEnabled);
+  console.log('bulkDetails status:', bulkDetails?.status);
+  const [shouldFetch, setShouldFetch] = useState(false);
+
+  useEffect(() => {
+    if (isPreviewEnabled && ![JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS, JOB_STATUSES.DATA_MODIFICATION].includes(bulkDetails?.status)) {
+      setShouldFetch(true);
+    } else {
+      setShouldFetch(false);
+    }
+  }, [bulkDetails?.status, isPreviewEnabled]);
 
   const {
     contentData,
@@ -60,8 +72,9 @@ export const BulkEditPreviewModalList = ({
     id: bulkDetails?.id,
     step: EDITING_STEPS.EDIT,
     capabilities: currentRecordType,
+    onSuccess: () => setShouldRefetchStatus(false),
     queryOptions: {
-      enabled: isPreviewEnabled && bulkDetails?.status !== JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS,
+      enabled: shouldFetch,
       onError: () => {
         callout({
           type: 'error',

@@ -29,6 +29,7 @@ export const BulkEditInAppLayer = ({
     downloadFile,
     confirmChanges,
     closePreviewModal,
+    setShouldRefetchStatus
   } = useConfirmChanges({
     queryDownloadKey: QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
     updateFn: contentUpdate,
@@ -81,6 +82,7 @@ export const BulkEditInAppLayer = ({
         onDownload={downloadFile}
         onKeepEditing={closePreviewModal}
         onChangesCommited={handleChangesCommited}
+        setShouldRefetchStatus={setShouldRefetchStatus}
       />
     </>
   );

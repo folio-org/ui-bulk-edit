@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
@@ -32,8 +32,13 @@ export const useConfirmChanges = ({
 
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
+  const [shouldRefetchStatus, setShouldRefetchStatus] = useState(false);
 
-  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, interval: 1000 * 3 });
+  const { bulkDetails } = useBulkOperationDetails({
+    id: bulkOperationId,
+    interval: 1000 * 3,
+    shouldRefetch: shouldRefetchStatus,
+  });
   const { bulkOperationStart } = useBulkOperationStart();
 
   const totalRecords = bulkDetails?.totalNumOfRecords;
@@ -44,11 +49,13 @@ export const useConfirmChanges = ({
 
   const closePreviewModal = () => {
     setIsPreviewModalOpened(false);
+    setShouldRefetchStatus(false);
   };
 
   const confirmChanges = (payload) => {
     setIsPreviewLoading(true);
     setIsPreviewModalOpened(true);
+    setShouldRefetchStatus(true);
 
     updateFn(payload)
       .then(() => bulkOperationStart({
@@ -58,7 +65,6 @@ export const useConfirmChanges = ({
       }))
       .then(() => {
         queryClient.invalidateQueries(BULK_OPERATION_DETAILS_KEY);
-        queryClient.invalidateQueries(PREVIEW_MODAL_KEY);
       })
       .catch(() => {
         callout({
@@ -94,5 +100,6 @@ export const useConfirmChanges = ({
     openPreviewModal,
     closePreviewModal,
     confirmChanges,
+    setShouldRefetchStatus
   };
 };
