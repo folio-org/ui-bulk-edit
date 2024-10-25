@@ -115,6 +115,9 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     return [placeholder, ...rest.sort((a, b) => a.label.localeCompare(b.label))];
   };
 
+  function getLabelByValue(items, targetValue) {
+    return items?.find((labeledValue) => labeledValue.value === targetValue)?.label;
+  }
   const sortedNotes = sortWithoutPlaceholder(filteredAndMappedNotes);
   const sortedHoldingsNotes = sortWithoutPlaceholder(filteredAndMappedHoldingsNotes);
   const sortedInstanceNotes = sortWithoutPlaceholder(filteredAndMappedInstanceNotes);
@@ -171,15 +174,17 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     ), formatMessage({ id: 'ui-bulk-edit.layer.selectPatronGroup' }));
 
     return controlType === CONTROL_TYPES.PATRON_GROUP_SELECT && (
-      <Select
-        dataOptions={patronGroups}
-        value={actionValue}
-        onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
-        data-testid={`select-patronGroup-${actionIndex}`}
-        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.patronGroupSelect' })}
-        marginBottom0
-        dirty={!!actionValue}
-      />
+      <div title={getLabelByValue(patronGroups, actionValue)}>
+        <Select
+          dataOptions={patronGroups}
+          value={actionValue}
+          onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+          data-testid={`select-patronGroup-${actionIndex}`}
+          aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.patronGroupSelect' })}
+          marginBottom0
+          dirty={!!actionValue}
+        />
+      </div>
     );
   };
 
@@ -201,7 +206,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     controlType === CONTROL_TYPES.LOCATION && (
       <>
         {isCentralTenant ? (
-          <>
+          <div title={getLabelByValue(locationsEsc, actionValue)}>
             <Selection
               id="locations-esc"
               loading={isLocationEscLoading}
@@ -223,9 +228,9 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
                 });
               }}
             />
-          </>
+          </div>
         ) : (
-          <>
+          <div title={getLabelByValue(locationsEsc, actionValue)}>
             <LocationSelection
               value={actionValue}
               onSelect={(loc) => onChange({ actionIndex, value: loc?.id, fieldName: FIELD_VALUE_KEY })}
@@ -245,47 +250,51 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
                       }
               data-testid={`locationLookup-${actionIndex}`}
             />
-          </>
+          </div>
         )}
       </>
     )
   );
 
   const renderStatusSelect = () => controlType === CONTROL_TYPES.STATUS_SELECT && (
-    <Select
-      dataOptions={statuses}
-      value={actionValue}
-      onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
-      data-testid={`select-statuses-${actionIndex}`}
-      aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statusSelect' })}
-      marginBottom0
-      dirty={!!actionValue}
-    />
+    <div title={getLabelByValue(statuses, actionValue)}>
+      <Select
+        dataOptions={statuses}
+        value={actionValue}
+        onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+        data-testid={`select-statuses-${actionIndex}`}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statusSelect' })}
+        marginBottom0
+        dirty={!!actionValue}
+      />
+    </div>
   );
 
   const renderLoanTypeSelect = () => controlType === CONTROL_TYPES.LOAN_TYPE && (
     isLoanTypesEscLoading ?
       <Loading size="large" />
       :
-      <Selection
-        id="loanType"
-        value={actionValue}
-        loading={isLoanTypesLoading}
-        onChange={value => {
-          onChange(
-            {
-              actionIndex,
-              value,
-              fieldName: FIELD_VALUE_KEY,
-              tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc, tenants), value)
-            }
-          );
-        }}
-        placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
-        dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes}
-        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-        dirty={!!actionValue}
-      />
+      <div title={getLabelByValue(isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes, actionValue)}>
+        <Selection
+          id="loanType"
+          value={actionValue}
+          loading={isLoanTypesLoading}
+          onChange={value => {
+            onChange(
+              {
+                actionIndex,
+                value,
+                fieldName: FIELD_VALUE_KEY,
+                tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc, tenants), value)
+              }
+            );
+          }}
+          placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
+          dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes}
+          aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+          dirty={!!actionValue}
+        />
+      </div>
   );
 
   const renderNoteTypeSelect = () => controlType === CONTROL_TYPES.NOTE_SELECT && (
@@ -294,91 +303,103 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
         isHoldingsNotesEscLoading ?
           <Loading size="large" />
           :
-          <Select
-            id="noteHoldingsType"
-            value={action.value}
-            loading={isHoldingsNotesLoading}
-            onChange={e => onChange(
-              {
-                actionIndex,
-                value: e.target.value,
-                fieldName: FIELD_VALUE_KEY,
-                tenants: getTenantsById(sortedHoldingsNotes, e.target.value)
-              }
-            )}
-            dataOptions={sortedHoldingsNotes}
-            aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-            marginBottom0
-            dirty={!!action.value}
-          />)}
+          <div title={getLabelByValue(sortedHoldingsNotes, action.value)}>
+            <Select
+              id="noteHoldingsType"
+              value={action.value}
+              loading={isHoldingsNotesLoading}
+              onChange={e => onChange(
+                {
+                  actionIndex,
+                  value: e.target.value,
+                  fieldName: FIELD_VALUE_KEY,
+                  tenants: getTenantsById(sortedHoldingsNotes, e.target.value)
+                }
+              )}
+              dataOptions={sortedHoldingsNotes}
+              aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+              marginBottom0
+              dirty={!!action.value}
+            />
+          </div>
+      )}
       {isItemCapability && (
         isItemsNotesEscLoading ?
           <Loading size="large" />
           :
+          <div title={getLabelByValue(sortedNotes, action.value)}>
+            <Select
+              id="noteType"
+              value={action.value}
+              disabled={usItemNotesLoading || isItemsNotesEscLoading}
+              onChange={e => onChange({
+                actionIndex,
+                value: e.target.value,
+                fieldName: FIELD_VALUE_KEY,
+                tenants: getTenantsById(sortedNotes, e.target.value),
+              })}
+              dataOptions={sortedNotes}
+              aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+              marginBottom0
+              dirty={!!actionValue}
+            />
+          </div>
+      )}
+      {isInstanceCapability && (
+        <div title={getLabelByValue(sortedInstanceNotes, actionValue)}>
           <Select
-            id="noteType"
+            id="noteInstanceType"
             value={action.value}
-            disabled={usItemNotesLoading || isItemsNotesEscLoading}
-            onChange={e => onChange({
-              actionIndex,
-              value: e.target.value,
-              fieldName: FIELD_VALUE_KEY,
-              tenants: getTenantsById(sortedNotes, e.target.value),
-            })}
-            dataOptions={sortedNotes}
+            loading={isInstanceNotesLoading}
+            onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+            dataOptions={sortedInstanceNotes}
             aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
             marginBottom0
-            dirty={!!actionValue}
-          />)}
-      {isInstanceCapability && (
-        <Select
-          id="noteInstanceType"
-          value={action.value}
-          loading={isInstanceNotesLoading}
-          onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
-          dataOptions={sortedInstanceNotes}
-          aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-          marginBottom0
-          dirty={!!action.value}
-        />
+            dirty={!!action.value}
+          />
+        </div>
       )}
     </>
   );
 
   const renderNoteDuplicateTypeSelect = () => controlType === CONTROL_TYPES.NOTE_DUPLICATE_SELECT && (
-  <Select
-    id="noteTypeDuplicate"
-    value={action.value}
-    disabled
-    onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
-    dataOptions={duplicateNoteOptions}
-    aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
-    marginBottom0
-    dirty={!!actionValue}
-  />
+    <div title={getLabelByValue(duplicateNoteOptions, action.value)}>
+      <Select
+        id="noteTypeDuplicate"
+        value={action.value}
+        disabled
+        onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
+        dataOptions={duplicateNoteOptions}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+        marginBottom0
+        dirty={!!actionValue}
+      />
+    </div>
   );
 
   const renderElectronicAccessRelationshipSelect = () => controlType === CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT && (
     isElectronicAccessEscLoading ?
       <Loading size="large" />
       :
-      <Select
-        id="urlRelationship"
-        value={action.value}
-        loading={isElectronicAccessLoading || isElectronicAccessEscLoading}
-        onChange={e => onChange(
-          {
-            actionIndex,
-            value: e.target.value,
-            fieldName: FIELD_VALUE_KEY,
-            tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
-          }
-        )}
-        dataOptions={accessRelationshipsWithPlaceholder}
-        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
-        marginBottom0
-        dirty={!!actionValue}
-      />
+      <div title={getLabelByValue(accessRelationshipsWithPlaceholder, action.value)}>
+        <Select
+          id="urlRelationship"
+          value={action.value}
+          loading={isElectronicAccessLoading || isElectronicAccessEscLoading}
+          onChange={e => onChange(
+            {
+              actionIndex,
+              value: e.target.value,
+              fieldName: FIELD_VALUE_KEY,
+              tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
+            }
+          )}
+          dataOptions={accessRelationshipsWithPlaceholder}
+          aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
+          marginBottom0
+          dirty={!!actionValue}
+        />
+      </div>
   );
 
   return (
