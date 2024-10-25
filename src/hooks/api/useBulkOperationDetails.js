@@ -44,13 +44,13 @@ export const useBulkOperationDetails = ({
         showErrorMessage(response);
 
         if (response.status === JOB_STATUSES.FAILED || response?.errorMessage) {
-          clearIntervalAndRedirect('/bulk-edit', '');
+          clearInterval();
         }
 
         return response;
       } catch (e) {
         showErrorMessage(e);
-        clearIntervalAndRedirect('/bulk-edit', '');
+        clearInterval();
 
         return e;
       }
