@@ -33,6 +33,7 @@ import {
 import { useSearchParams } from '../../../../hooks';
 import { RootContext } from '../../../../context/RootContext';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
+import { useErrorMessages } from '../../../../hooks/useErrorMessages';
 
 
 export const BulkEditPreviewModalList = ({
@@ -45,6 +46,7 @@ export const BulkEditPreviewModalList = ({
   const intl = useIntl();
   const { visibleColumns } = useContext(RootContext);
   const { currentRecordType } = useSearchParams();
+  const { showErrorMessage } = useErrorMessages();
   const {
     pagination,
     changePage,
@@ -75,6 +77,8 @@ export const BulkEditPreviewModalList = ({
     onSuccess: () => setShouldRefetchStatus(false),
     queryOptions: {
       enabled: shouldFetch,
+      enabled: isPreviewEnabled && bulkDetails?.status !== JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS,
+      onSuccess: showErrorMessage,
       onError: () => {
         callout({
           type: 'error',

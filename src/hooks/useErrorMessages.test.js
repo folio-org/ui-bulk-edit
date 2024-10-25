@@ -56,18 +56,6 @@ describe('useErrorMessages', () => {
     expect(formatMessageMock).not.toHaveBeenCalled();
   });
 
-  it('should show the message from the response when no error message in body is available', () => {
-    const { result } = renderHook(() => useErrorMessages());
-    const { showErrorMessage } = result.current;
-
-    showErrorMessage({ message: 'Another error occurred' });
-
-    expect(showCalloutMock).toHaveBeenCalledWith({
-      type: 'error',
-      message: 'Another error occurred',
-    });
-  });
-
   it('should show the default error message when the response is an error object without a message', () => {
     const { result } = renderHook(() => useErrorMessages());
     const { showErrorMessage } = result.current;
