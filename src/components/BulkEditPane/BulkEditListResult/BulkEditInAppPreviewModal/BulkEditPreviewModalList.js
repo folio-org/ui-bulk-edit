@@ -22,7 +22,8 @@ import css from './BulkEditInAppPreviewModal.css';
 import { usePagination } from '../../../../hooks/usePagination';
 import {
   CAPABILITIES,
-  EDITING_STEPS, JOB_STATUSES,
+  EDITING_STEPS,
+  JOB_STATUSES,
   PAGINATION_CONFIG
 } from '../../../../constants';
 import {
