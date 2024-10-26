@@ -32,6 +32,10 @@ export const useBulkOperationDetails = ({
 
   useEffect(() => {
     setRefetchInterval(interval);
+
+    return () => {
+      clearInterval();
+    };
   }, [interval]);
 
   const { data, isLoading } = useQuery({

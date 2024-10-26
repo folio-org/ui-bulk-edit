@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   FormattedMessage,
 } from 'react-intl';
+import { useQueryClient } from 'react-query';
 
 import {
   MessageBanner,
@@ -23,6 +24,7 @@ import {
   PAGINATION_CONFIG
 } from '../../../../constants';
 import {
+  BULK_OPERATION_DETAILS_KEY,
   PREVIEW_MODAL_KEY,
   useBulkOperationDetails,
   useRecordsPreview
@@ -37,6 +39,7 @@ export const BulkEditPreviewModalList = ({
   isPreviewEnabled,
   onPreviewError,
 }) => {
+  const queryClient = useQueryClient();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
   const { visibleColumns } = useContext(RootContext);
   const { currentRecordType } = useSearchParams();
@@ -47,10 +50,14 @@ export const BulkEditPreviewModalList = ({
   } = usePagination(PAGINATION_CONFIG);
 
   const [previewLoaded, setPreviewLoaded] = useState(false);
-  const interval = previewLoaded ? 0 : 3000;
-  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, interval, refetchOnMount: true });
+  const interval = previewLoaded ? 0 : 1000;
+  const { bulkDetails } = useBulkOperationDetails({
+    id: bulkOperationId,
+    interval,
+  });
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
+  const enabled = isPreviewEnabled && bulkDetails?.status === JOB_STATUSES.REVIEW_CHANGES;
 
   const {
     contentData,
@@ -62,7 +69,7 @@ export const BulkEditPreviewModalList = ({
     step: EDITING_STEPS.EDIT,
     capabilities: currentRecordType,
     queryOptions: {
-      enabled: bulkDetails?.status === JOB_STATUSES.REVIEW_CHANGES,
+      enabled,
       onSuccess: showErrorMessage,
       onError: (error) => {
         showErrorMessage(error);
@@ -70,6 +77,7 @@ export const BulkEditPreviewModalList = ({
       },
       onSettled: () => {
         setPreviewLoaded(true);
+        queryClient.invalidateQueries(BULK_OPERATION_DETAILS_KEY);
       }
     },
     ...pagination,

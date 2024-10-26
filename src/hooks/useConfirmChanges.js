@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 
-import { useNamespace } from '@folio/stripes/core';
-
 import {
   PREVIEW_MODAL_KEY,
   BULK_OPERATION_DETAILS_KEY,
@@ -29,7 +27,6 @@ export const useConfirmChanges = ({
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const { showErrorMessage } = useErrorMessages();
-  const [namespaceKey] = useNamespace({ key: BULK_OPERATION_DETAILS_KEY });
 
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
@@ -48,15 +45,13 @@ export const useConfirmChanges = ({
   };
 
   const confirmChanges = (payload) => {
-    // as backend reset a status to 'DATA_MODIFICATION' only after the job started
-    // we need to set it manually to show the preview modal without a delay
-    queryClient.setQueryData(
-      [BULK_OPERATION_DETAILS_KEY, namespaceKey, bulkOperationId],
-      (preBulkOperation) => ({ ...preBulkOperation, status: JOB_STATUSES.DATA_MODIFICATION })
-    );
-
-    setIsPreviewModalOpened(true);
     setIsPreviewLoading(true);
+
+    queryClient.removeQueries(PREVIEW_MODAL_KEY);
+    queryClient.setQueriesData(
+      BULK_OPERATION_DETAILS_KEY,
+      (preBulkOperation) => ({ ...preBulkOperation, status: JOB_STATUSES.DATA_MODIFICATION }),
+    );
 
     updateFn(payload)
       .then(() => bulkOperationStart({
@@ -66,12 +61,10 @@ export const useConfirmChanges = ({
       }))
       .then((response) => {
         showErrorMessage(response);
-
-        queryClient.invalidateQueries(PREVIEW_MODAL_KEY);
+        openPreviewModal();
       })
       .catch((error) => {
         showErrorMessage(error);
-
         closePreviewModal();
       })
       .finally(() => {

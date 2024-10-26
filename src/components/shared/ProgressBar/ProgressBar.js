@@ -49,7 +49,6 @@ export const ProgressBar = () => {
     bulkDetails,
     id,
     clearIntervalAndRedirect,
-    showErrorMessage,
   ]);
 
   return (

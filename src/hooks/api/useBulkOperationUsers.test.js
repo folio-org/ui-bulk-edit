@@ -18,7 +18,7 @@ jest.mock('@folio/stripes/core', () => ({
 }));
 
 jest.mock('../../hooks/useSearchParams', () => ({
-  useSearchParams: jest.fn(),
+  useSearchParams: jest.fn().mockReturnValue({ initialFileName: 'initialFileName' }),
 }));
 
 const queryClient = new QueryClient();
