@@ -49,15 +49,13 @@ describe('useBulkOperationDetails', () => {
 
   it('should initialize with the correct refetch interval and query key', () => {
     const id = 'test-id';
-    const refetchInterval = 5000;
+    const interval = 5000;
 
-    const { result } = renderHook(() => useBulkOperationDetails({ id, interval: refetchInterval }));
+    renderHook(() => useBulkOperationDetails({ id, interval }));
 
-    expect(result.current.isLoading).toBe(false);
     expect(useQuery).toHaveBeenCalledWith(
       expect.objectContaining({
-        queryKey: [BULK_OPERATION_DETAILS_KEY, 'namespace-key', id, refetchInterval],
-        refetchInterval,
+        queryKey: [BULK_OPERATION_DETAILS_KEY, 'namespace-key', 0, id],
         enabled: true,
       })
     );

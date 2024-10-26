@@ -1,4 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState
+} from 'react';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage,
@@ -148,4 +152,5 @@ BulkEditPreviewModalList.propTypes = {
   bulkDetails: PropTypes.object,
   isPreviewEnabled: PropTypes.bool,
   onPreviewError: PropTypes.func,
+  setShouldRefetchStatus: PropTypes.func,
 };
