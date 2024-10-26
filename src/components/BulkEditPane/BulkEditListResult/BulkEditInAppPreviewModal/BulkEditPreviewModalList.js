@@ -23,7 +23,8 @@ import {
   PAGINATION_CONFIG
 } from '../../../../constants';
 import {
-  PREVIEW_MODAL_KEY, useBulkOperationDetails,
+  PREVIEW_MODAL_KEY,
+  useBulkOperationDetails,
   useRecordsPreview
 } from '../../../../hooks/api';
 import { usePathParams, useSearchParams } from '../../../../hooks';
@@ -48,10 +49,6 @@ export const BulkEditPreviewModalList = ({
   const [previewLoaded, setPreviewLoaded] = useState(false);
   const interval = previewLoaded ? 0 : 3000;
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, interval, refetchOnMount: true });
-
-  console.log('previewLoaded', previewLoaded);
-  console.log('interval', interval);
-  console.log('status', bulkDetails?.status);
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
