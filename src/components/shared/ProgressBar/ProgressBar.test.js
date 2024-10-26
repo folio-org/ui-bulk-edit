@@ -6,12 +6,18 @@ import { render, screen } from '@testing-library/react';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import { EDITING_STEPS, ERRORS, JOB_STATUSES } from '../../../constants';
-import { useBulkOperationDetails } from '../../../hooks/api';
 
+import '../../../../test/jest/__mock__/reactIntl.mock';
+
+import { useBulkOperationDetails } from '../../../hooks/api';
 import { ProgressBar } from './ProgressBar';
 
 jest.mock('../../../hooks/api', () => ({
   useBulkOperationDetails: jest.fn(),
+}));
+
+jest.mock('../../../hooks/useErrorMessages', () => ({
+  useErrorMessages: jest.fn().mockReturnValue({ showErrorMessage: jest.fn() }),
 }));
 
 const history = createMemoryHistory();

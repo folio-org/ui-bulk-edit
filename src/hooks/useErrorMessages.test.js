@@ -2,6 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { useIntl } from 'react-intl';
 import { useShowCallout } from '@folio/stripes-acq-components';
 import { useErrorMessages } from './useErrorMessages';
+import { ERRORS } from '../constants';
 
 jest.mock('react-intl', () => ({
   useIntl: jest.fn(),
@@ -9,6 +10,10 @@ jest.mock('react-intl', () => ({
 
 jest.mock('@folio/stripes-acq-components', () => ({
   useShowCallout: jest.fn(),
+}));
+
+jest.mock('../hooks/useSearchParams', () => ({
+  useSearchParams: jest.fn().mockReturnValue({ initialFileName: 'initialFileName' }),
 }));
 
 describe('useErrorMessages', () => {
@@ -40,6 +45,20 @@ describe('useErrorMessages', () => {
     expect(showCalloutMock).toHaveBeenCalledWith({
       type: 'error',
       message: 'testError',
+    });
+  });
+
+  it('should show specific error message if error includes ERRORS.TOKEN', () => {
+    const { result } = renderHook(() => useErrorMessages());
+    const { showErrorMessage } = result.current;
+
+    formatMessageMock.mockReturnValue(ERRORS.TOKEN);
+
+    showErrorMessage({ errorMessage: 'Some message prefix + Incorrect number of tokens found in record' });
+
+    expect(showCalloutMock).toHaveBeenCalledWith({
+      type: 'error',
+      message: 'Incorrect number of tokens found in record',
     });
   });
 

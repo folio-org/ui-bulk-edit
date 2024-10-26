@@ -9,6 +9,9 @@ import { LOGS_FILTERS, JOB_STATUSES } from '../../../constants';
 import { useBulkEditLogs } from './useBulkEditLogs';
 import { getFullName } from '../../../utils/getFullName';
 
+jest.mock('../../useSearchParams', () => ({
+  useSearchParams: jest.fn().mockReturnValue({ initialFileName: 'initialFileName' }),
+}));
 
 const users = [
   {

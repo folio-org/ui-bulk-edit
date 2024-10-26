@@ -44,6 +44,10 @@ jest.mock('../../../hooks', () => ({
   useBulkPermissions: jest.fn(),
 }));
 
+jest.mock('../../../hooks/useSearchParams', () => ({
+  useSearchParams: jest.fn().mockReturnValue({ criteria: 'testCriteria', initialFileName: 'initialFileName' }),
+}));
+
 const renderBulkEditLogsActions = ({ item = bulkOperation } = {}) => {
   return render(
     <QueryClientProvider client={queryClient}>

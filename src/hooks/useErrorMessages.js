@@ -32,8 +32,9 @@ export const useErrorMessages = () => {
       // if error message contains token error, show a special message
       if (message?.includes(ERRORS.TOKEN)) {
         showError(intl.formatMessage({ id: 'ui-bulk-edit.error.incorrectFormatted' }, { fileName: initialFileName }));
+      } else {
+        showError(message);
       }
-      showError(message);
       // if there is no error message but it's error instance, show sww error message
     } else if (res instanceof Error) {
       showError(intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }));
