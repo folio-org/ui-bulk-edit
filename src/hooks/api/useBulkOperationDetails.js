@@ -18,63 +18,56 @@ export const useBulkOperationDetails = ({
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: BULK_OPERATION_DETAILS_KEY });
   const history = useHistory();
+  const [refetchInterval, setRefetchInterval] = useState(0);
+  const { showErrorMessage } = useErrorMessages();
+
+  const stopRefetching = () => setRefetchInterval(0);
+
+  const fetchBulkOperationDetails = async () => {
+    try {
+      const response = await ky.get(`bulk-operations/${id}`).json();
+      showErrorMessage(response);
+
+      if (response.status === JOB_STATUSES.FAILED || response?.errorMessage) {
+        stopRefetching();
+      }
+
+      return response;
+    } catch (error) {
+      showErrorMessage(error);
+      stopRefetching();
+
+      return error;
+    }
+  };
+
   const { data, isLoading, refetch } = useQuery({
-    queryKey: [BULK_OPERATION_DETAILS_KEY, namespaceKey, id],
+    queryKey: [BULK_OPERATION_DETAILS_KEY, namespaceKey, refetchInterval, id, ...additionalQueryKeys],
     enabled: !!id,
-    queryFn: () => ky.get(`bulk-operations/${id}`).json(),
+    queryFn: fetchBulkOperationDetails,
     ...options,
   });
 
   useEffect(() => {
-    let intervalId;
+    if (!shouldRefetch || interval <= 0) return;
 
-    if (shouldRefetch) {
-      intervalId = setInterval(() => {
-        refetch();
-      }, interval);
-    }
+    const intervalId = setInterval(refetch, interval);
 
-    return () => {
-      clearInterval(intervalId);
-    };
+    return () => clearInterval(intervalId);
   }, [shouldRefetch, interval, refetch]);
 
-  const clearIntervalAndRedirect = (pathname, searchParams) => {
+  const redirectAndStopRefetching = (pathname, searchParams) => {
+    stopRefetching();
     history.replace({
       pathname,
       search: searchParams ? buildSearch(searchParams, history.location.search) : '',
     });
   };
 
-  const { data, isLoading } = useQuery({
-    queryKey: [BULK_OPERATION_DETAILS_KEY, namespaceKey, id, refetchInterval, ...additionalQueryKeys],
-    enabled: !!id,
-    refetchInterval,
-    queryFn: async () => {
-      try {
-        const response = await ky.get(`bulk-operations/${id}`).json();
-
-        showErrorMessage(response);
-
-        if (response.status === JOB_STATUSES.FAILED || response?.errorMessage) {
-          clearInterval();
-        }
-
-        return response;
-      } catch (e) {
-        showErrorMessage(e);
-        clearInterval();
-
-        return e;
-      }
-    },
-    ...options,
-  });
-
   return {
     bulkDetails: data,
     isLoading,
     refetch,
-    clearIntervalAndRedirect,
+    clearIntervalAndRedirect: redirectAndStopRefetching,
   };
 };

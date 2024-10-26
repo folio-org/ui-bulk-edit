@@ -1,11 +1,10 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
 import { useShowCallout } from '@folio/stripes-acq-components';
 
 import {
-  PREVIEW_MODAL_KEY,
   BULK_OPERATION_DETAILS_KEY,
   useBulkOperationDetails,
   useBulkOperationStart,

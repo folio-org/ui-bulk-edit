@@ -85,7 +85,6 @@ export const useRecordsPreview = ({
     capabilities
   ]);
 
-  console.log(contentData);
   useEffect(() => {
     if (contentData?.length > 0) {
       onSuccess();

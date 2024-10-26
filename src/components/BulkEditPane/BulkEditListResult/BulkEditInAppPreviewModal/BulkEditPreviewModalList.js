@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage,
@@ -53,8 +53,6 @@ export const BulkEditPreviewModalList = ({
   } = usePagination(PAGINATION_CONFIG);
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
-  console.log('isPreviewEnabled:', isPreviewEnabled);
-  console.log('bulkDetails status:', bulkDetails?.status);
   const [shouldFetch, setShouldFetch] = useState(false);
 
   useEffect(() => {
@@ -77,7 +75,6 @@ export const BulkEditPreviewModalList = ({
     onSuccess: () => setShouldRefetchStatus(false),
     queryOptions: {
       enabled: shouldFetch,
-      enabled: isPreviewEnabled && bulkDetails?.status !== JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS,
       onSuccess: showErrorMessage,
       onError: () => {
         callout({
