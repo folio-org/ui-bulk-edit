@@ -12,9 +12,7 @@ import {
   FILE_KEYS,
   JOB_STATUSES,
 } from '../../../../constants';
-import {
-  useBulkOperationStart,
-} from '../../../../hooks/api';
+import { useBulkOperationStart } from '../../../../hooks/api';
 import { BulkEditPreviewModalFooter } from './BulkEditPreviewModalFooter';
 import { useSearchParams } from '../../../../hooks';
 import { BulkEditPreviewModalList } from './BulkEditPreviewModalList';
@@ -65,7 +63,7 @@ export const BulkEditPreviewModal = ({
     }
   };
 
-  const isModalButtonDisabled = !hasLinkForDownload || isPreviewLoading || bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS;
+  const isModalButtonDisabled = !hasLinkForDownload || isPreviewLoading || bulkDetails?.status !== JOB_STATUSES.REVIEW_CHANGES;
 
   return (
     <Modal
@@ -88,7 +86,6 @@ export const BulkEditPreviewModal = ({
       onClose={onKeepEditing}
     >
       <BulkEditPreviewModalList
-        bulkDetails={bulkDetails}
         isPreviewEnabled={!isPreviewLoading}
         onPreviewError={onKeepEditing}
       />

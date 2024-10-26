@@ -88,7 +88,7 @@ export const BulkEditInAppLayer = ({
 
 BulkEditInAppLayer.propTypes = {
   bulkOperationId: PropTypes.string,
-  contentUpdates: PropTypes.object,
+  contentUpdates: PropTypes.arrayOf(PropTypes.object),
   setContentUpdates: PropTypes.func,
   isInAppLayerOpen: PropTypes.bool,
   isPreviewModalOpened: PropTypes.bool,

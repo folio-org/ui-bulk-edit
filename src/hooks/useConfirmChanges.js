@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
-import { useShowCallout } from '@folio/stripes-acq-components';
+import { useNamespace } from '@folio/stripes/core';
 
 import {
   PREVIEW_MODAL_KEY,
@@ -14,9 +13,10 @@ import {
 import {
   APPROACHES,
   EDITING_STEPS,
-  FILE_SEARCH_PARAMS,
+  FILE_SEARCH_PARAMS, JOB_STATUSES,
 } from '../constants';
 import { useSearchParams } from './useSearchParams';
+import { useErrorMessages } from './useErrorMessages';
 
 
 export const useConfirmChanges = ({
@@ -25,15 +25,15 @@ export const useConfirmChanges = ({
   bulkOperationId,
   onDownloadSuccess,
 }) => {
-  const callout = useShowCallout();
-  const intl = useIntl();
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
+  const { showErrorMessage } = useErrorMessages();
+  const [namespaceKey] = useNamespace({ key: BULK_OPERATION_DETAILS_KEY });
 
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
 
-  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, interval: 1000 * 3 });
+  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
   const { bulkOperationStart } = useBulkOperationStart();
 
   const totalRecords = bulkDetails?.totalNumOfRecords;
@@ -47,8 +47,15 @@ export const useConfirmChanges = ({
   };
 
   const confirmChanges = (payload) => {
-    setIsPreviewLoading(true);
+    // as backend reset a status to 'DATA_MODIFICATION' only after the job started
+    // we need to set it manually to show the preview modal without a delay
+    queryClient.setQueryData(
+      [BULK_OPERATION_DETAILS_KEY, namespaceKey, bulkOperationId],
+      (preBulkOperation) => ({ ...preBulkOperation, status: JOB_STATUSES.DATA_MODIFICATION })
+    );
+
     setIsPreviewModalOpened(true);
+    setIsPreviewLoading(true);
 
     updateFn(payload)
       .then(() => bulkOperationStart({
@@ -56,15 +63,13 @@ export const useConfirmChanges = ({
         approach: APPROACHES.IN_APP,
         step: EDITING_STEPS.EDIT,
       }))
-      .then(() => {
-        queryClient.invalidateQueries(BULK_OPERATION_DETAILS_KEY);
+      .then((response) => {
+        showErrorMessage(response);
+
         queryClient.invalidateQueries(PREVIEW_MODAL_KEY);
       })
-      .catch(() => {
-        callout({
-          type: 'error',
-          message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
-        });
+      .catch((error) => {
+        showErrorMessage(error);
 
         closePreviewModal();
       })

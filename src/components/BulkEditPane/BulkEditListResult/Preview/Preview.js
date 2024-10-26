@@ -116,7 +116,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
 Preview.propTypes = {
   id: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   isInitial: PropTypes.bool,
   bulkDetails: PropTypes.shape({
     totalNumOfRecords: PropTypes.number,

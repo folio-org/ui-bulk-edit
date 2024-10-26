@@ -1,10 +1,14 @@
 import { useIntl } from 'react-intl';
 import { useShowCallout } from '@folio/stripes-acq-components';
 
+import { ERRORS } from '../constants';
+import { useSearchParams } from './useSearchParams';
+
 
 export const useErrorMessages = () => {
   const intl = useIntl();
   const callout = useShowCallout();
+  const { initialFileName } = useSearchParams();
 
   const showError = (message) => {
     callout({
@@ -25,6 +29,10 @@ export const useErrorMessages = () => {
       showError(translatedMessage);
       // otherwise show an error message we have
     } else if (message) {
+      // if error message contains token error, show a special message
+      if (message?.includes(ERRORS.TOKEN)) {
+        showError(intl.formatMessage({ id: 'ui-bulk-edit.error.incorrectFormatted' }, { fileName: initialFileName }));
+      }
       showError(message);
       // if there is no error message but it's error instance, show sww error message
     } else if (res instanceof Error) {

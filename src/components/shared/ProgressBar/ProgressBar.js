@@ -1,25 +1,24 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Icon, Loading } from '@folio/stripes/components';
-import { useShowCallout } from '@folio/stripes-acq-components';
 
 import { useBulkOperationDetails } from '../../../hooks/api';
-import { EDITING_STEPS, ERRORS, JOB_STATUSES } from '../../../constants';
+import { EDITING_STEPS, JOB_STATUSES } from '../../../constants';
 import { getBulkOperationStep } from './utils';
 import css from './ProgressBar.css';
-import { useSearchParams } from '../../../hooks/useSearchParams';
+import { useSearchParams } from '../../../hooks';
+import { useErrorMessages } from '../../../hooks/useErrorMessages';
 
 export const ProgressBar = () => {
-  const callout = useShowCallout();
-  const intl = useIntl();
   const {
     processedFileName,
     initialFileName,
     step
   } = useSearchParams();
   const { id } = useParams();
+  const { showErrorMessage } = useErrorMessages();
 
   const { bulkDetails, clearIntervalAndRedirect } = useBulkOperationDetails({
     id,
@@ -28,34 +27,21 @@ export const ProgressBar = () => {
   });
 
   const status = bulkDetails?.status;
-  const errorMessage = bulkDetails?.errorMessage;
   const progressPercentage = bulkDetails
     ? (bulkDetails.processedNumOfRecords / bulkDetails.totalNumOfRecords) * 100
     : 0;
 
-  const swwCallout = useCallback(() => {
-    callout({
-      type: 'error',
-      message: errorMessage?.includes(ERRORS.TOKEN) ? <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName: initialFileName }} />
-        :
-        intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
-    });
-  }, [
-    callout,
-    errorMessage,
-    initialFileName,
-    intl
-  ]);
-
   useEffect(() => {
     const nextStep = getBulkOperationStep(bulkDetails);
+
+    // Show error message if any
+    showErrorMessage(bulkDetails);
 
     if (nextStep) {
       clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, { step: nextStep, progress: null });
     }
 
     if (status === JOB_STATUSES.FAILED) {
-      swwCallout();
       clearIntervalAndRedirect('/bulk-edit', '');
     }
   }, [
@@ -63,7 +49,7 @@ export const ProgressBar = () => {
     bulkDetails,
     id,
     clearIntervalAndRedirect,
-    swwCallout
+    showErrorMessage,
   ]);
 
   return (
