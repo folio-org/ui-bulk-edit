@@ -141,11 +141,6 @@
     "logs.filter.endDate": "終了",
     "list.result.emptyMessage.logs": "Choose a filter to show results.",
     "permission.module.bulk-edit.enabled": "UI: Bulk edit module is enabled",
-    "permission.view": "一括編集: ローカル - ユーザーレコードの表示",
-    "permission.edit": "一括編集: ローカル - ユーザーレコードの編集",
-    "permission.app-view": "一括編集: アプリ内 - インベントリレコードの表示",
-    "permission.app-edit": "一括編集: アプリ内 - インベントリレコードの編集",
-    "permission.app-edit.users": "一括編集: アプリ内 - ユーザーレコードの編集",
     "permission.logs.view": "一括編集: ログを表示できます",
     "columns.logs.status": "ステータス",
     "columns.logs.actions": "Actions",
@@ -514,5 +509,11 @@
     "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "更新済レコードを含むファイル",
     "layer.options.inProcess": "In process",
     "columns.ITEM.Member": "Member",
-    "columns.HOLDINGS_RECORD.Member": "Member"
+    "columns.HOLDINGS_RECORD.Member": "Member",
+    "permission.users.csv.view": "Bulk Edit: Local - View user records",
+    "permission.users.csv.edit": "Bulk Edit: Local - Edit user records",
+    "permission.inventory.view": "Bulk Edit: In app - View inventory records",
+    "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
+    "permission.users.edit": "Bulk edit: In app - Edit user records",
+    "permission.query.execute": "Bulk edit: Can build query"
 }
