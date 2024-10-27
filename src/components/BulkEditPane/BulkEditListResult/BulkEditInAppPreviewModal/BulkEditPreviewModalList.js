@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   FormattedMessage,
 } from 'react-intl';
-import { useQueryClient } from 'react-query';
 
 import {
   MessageBanner,
@@ -24,7 +23,6 @@ import {
   PAGINATION_CONFIG
 } from '../../../../constants';
 import {
-  BULK_OPERATION_DETAILS_KEY,
   PREVIEW_MODAL_KEY,
   useBulkOperationDetails,
   useRecordsPreview
@@ -39,7 +37,6 @@ export const BulkEditPreviewModalList = ({
   isPreviewEnabled,
   onPreviewError,
 }) => {
-  const queryClient = useQueryClient();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
   const { visibleColumns } = useContext(RootContext);
   const { currentRecordType } = useSearchParams();
@@ -77,7 +74,6 @@ export const BulkEditPreviewModalList = ({
       },
       onSettled: () => {
         setPreviewLoaded(true);
-        queryClient.invalidateQueries(BULK_OPERATION_DETAILS_KEY);
       }
     },
     ...pagination,
