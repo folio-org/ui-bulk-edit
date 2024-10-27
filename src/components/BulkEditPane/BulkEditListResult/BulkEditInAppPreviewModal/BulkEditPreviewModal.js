@@ -1,10 +1,10 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Modal } from '@folio/stripes/components';
-import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
+import { buildSearch } from '@folio/stripes-acq-components';
 
 import {
   APPROACHES,
@@ -12,12 +12,11 @@ import {
   FILE_KEYS,
   JOB_STATUSES,
 } from '../../../../constants';
-import {
-  useBulkOperationStart,
-} from '../../../../hooks/api';
+import { useBulkOperationStart } from '../../../../hooks/api';
 import { BulkEditPreviewModalFooter } from './BulkEditPreviewModalFooter';
 import { useSearchParams } from '../../../../hooks';
 import { BulkEditPreviewModalList } from './BulkEditPreviewModalList';
+import { useErrorMessages } from '../../../../hooks/useErrorMessages';
 
 
 export const BulkEditPreviewModal = ({
@@ -28,11 +27,9 @@ export const BulkEditPreviewModal = ({
   onDownload,
   onChangesCommited,
 }) => {
-  const callout = useShowCallout();
-  const intl = useIntl();
   const history = useHistory();
   const { criteria, approach } = useSearchParams();
-
+  const { showErrorMessage } = useErrorMessages();
   const { bulkOperationStart } = useBulkOperationStart();
 
   const hasLinkForDownload = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC] || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
@@ -57,15 +54,12 @@ export const BulkEditPreviewModal = ({
           progress: criteria,
         }, history.location.search),
       });
-    } catch {
-      callout({
-        type: 'error',
-        message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
-      });
+    } catch (e) {
+      showErrorMessage(e);
     }
   };
 
-  const isModalButtonDisabled = !hasLinkForDownload || isPreviewLoading || bulkDetails?.status === JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS;
+  const isModalButtonDisabled = !hasLinkForDownload || isPreviewLoading || bulkDetails?.status !== JOB_STATUSES.REVIEW_CHANGES;
 
   return (
     <Modal
@@ -87,11 +81,12 @@ export const BulkEditPreviewModal = ({
       dismissible
       onClose={onKeepEditing}
     >
-      <BulkEditPreviewModalList
-        bulkDetails={bulkDetails}
-        isPreviewEnabled={!isPreviewLoading}
-        onPreviewError={onKeepEditing}
-      />
+      {open && (
+        <BulkEditPreviewModalList
+          isPreviewEnabled={!isPreviewLoading}
+          onPreviewError={onKeepEditing}
+        />
+      )}
     </Modal>
   );
 };

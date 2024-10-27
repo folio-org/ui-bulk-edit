@@ -56,7 +56,7 @@ describe('useBulkOperationDetails', () => {
     expect(result.current.isLoading).toBe(false);
     expect(useQuery).toHaveBeenCalledWith(
       expect.objectContaining({
-        queryKey: [BULK_OPERATION_DETAILS_KEY, 'namespace-key', id, refetchInterval],
+        queryKey: [BULK_OPERATION_DETAILS_KEY, 'namespace-key', id],
         refetchInterval,
         enabled: true,
       })

@@ -11,6 +11,10 @@ jest.mock('react-query', () => ({
   useQuery: jest.fn(),
 }));
 
+jest.mock('../../hooks/useSearchParams', () => ({
+  useSearchParams: jest.fn().mockReturnValue({ initialFileName: 'initialFileName' }),
+}));
+
 describe('useRecordTypes', () => {
   it('should return recordTypes, loading state, and error state', async () => {
     useOkapiKy.mockReturnValue({

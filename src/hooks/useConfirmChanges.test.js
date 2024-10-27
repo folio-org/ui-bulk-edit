@@ -1,17 +1,13 @@
-import { useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 import { renderHook, act } from '@testing-library/react-hooks';
 
 import { useShowCallout } from '@folio/stripes-acq-components';
 
+import '../../test/jest/__mock__/reactIntl.mock';
+
 import { useBulkOperationDetails, useBulkOperationStart, useFileDownload } from './api';
 import { useSearchParams } from './useSearchParams';
 import { useConfirmChanges } from './useConfirmChanges';
-
-
-jest.mock('react-intl', () => ({
-  useIntl: jest.fn(),
-}));
 
 jest.mock('react-query', () => ({
   useQueryClient: jest.fn(),
@@ -34,8 +30,12 @@ jest.mock('./useSearchParams', () => ({
 
 describe('useConfirmChanges', () => {
   const mockCallout = jest.fn();
-  const mockIntl = { formatMessage: jest.fn() };
-  const mockQueryClient = { invalidateQueries: jest.fn() };
+  const mockQueryClient = {
+    invalidateQueries: jest.fn(),
+    setQueriesData: jest.fn(),
+    removeQueries: jest.fn(),
+    resetQueries: jest.fn(),
+  };
   const mockBulkOperationDetails = { bulkDetails: { totalNumOfRecords: 100 } };
   const mockBulkOperationStart = jest.fn();
   const mockUpdateFn = jest.fn(() => Promise.resolve());
@@ -43,7 +43,6 @@ describe('useConfirmChanges', () => {
 
   beforeEach(() => {
     useShowCallout.mockReturnValue(mockCallout);
-    useIntl.mockReturnValue(mockIntl);
     useQueryClient.mockReturnValue(mockQueryClient);
     useBulkOperationDetails.mockReturnValue(mockBulkOperationDetails);
     useBulkOperationStart.mockReturnValue({ bulkOperationStart: mockBulkOperationStart });
@@ -95,7 +94,7 @@ describe('useConfirmChanges', () => {
     });
 
     expect(result.current.isPreviewLoading).toBe(true);
-    expect(result.current.isPreviewModalOpened).toBe(true);
+
 
     await waitForNextUpdate();
 
@@ -122,7 +121,6 @@ describe('useConfirmChanges', () => {
     });
 
     expect(result.current.isPreviewLoading).toBe(true);
-    expect(result.current.isPreviewModalOpened).toBe(true);
 
     await waitForNextUpdate();
 

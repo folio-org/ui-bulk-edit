@@ -5,6 +5,11 @@ import { useAllPermissions } from './useAllPermissions'; // Adjust the import pa
 
 import '../../../../test/jest/__mock__/stripesCore.mock';
 
+jest.mock('../../../hooks/useSearchParams', () => ({
+  useSearchParams: jest.fn().mockReturnValue({ initialFileName: 'initialFileName' }),
+}));
+
+
 jest.mock('react-query', () => ({
   useQuery: jest.fn(),
 }));

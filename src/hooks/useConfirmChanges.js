@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import { useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
-
-import { useShowCallout } from '@folio/stripes-acq-components';
 
 import {
   PREVIEW_MODAL_KEY,
@@ -15,8 +12,10 @@ import {
   APPROACHES,
   EDITING_STEPS,
   FILE_SEARCH_PARAMS,
+  JOB_STATUSES,
 } from '../constants';
 import { useSearchParams } from './useSearchParams';
+import { useErrorMessages } from './useErrorMessages';
 
 
 export const useConfirmChanges = ({
@@ -25,15 +24,14 @@ export const useConfirmChanges = ({
   bulkOperationId,
   onDownloadSuccess,
 }) => {
-  const callout = useShowCallout();
-  const intl = useIntl();
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
+  const { showErrorMessage } = useErrorMessages();
 
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
   const [isPreviewLoading, setIsPreviewLoading] = useState(false);
 
-  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, interval: 1000 * 3 });
+  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
   const { bulkOperationStart } = useBulkOperationStart();
 
   const totalRecords = bulkDetails?.totalNumOfRecords;
@@ -44,11 +42,17 @@ export const useConfirmChanges = ({
 
   const closePreviewModal = () => {
     setIsPreviewModalOpened(false);
+    queryClient.resetQueries(BULK_OPERATION_DETAILS_KEY);
   };
 
   const confirmChanges = (payload) => {
     setIsPreviewLoading(true);
-    setIsPreviewModalOpened(true);
+
+    queryClient.removeQueries(PREVIEW_MODAL_KEY);
+    queryClient.setQueriesData(
+      BULK_OPERATION_DETAILS_KEY,
+      (preBulkOperation) => ({ ...preBulkOperation, status: JOB_STATUSES.DATA_MODIFICATION }),
+    );
 
     updateFn(payload)
       .then(() => bulkOperationStart({
@@ -56,16 +60,12 @@ export const useConfirmChanges = ({
         approach: APPROACHES.IN_APP,
         step: EDITING_STEPS.EDIT,
       }))
-      .then(() => {
-        queryClient.invalidateQueries(BULK_OPERATION_DETAILS_KEY);
-        queryClient.invalidateQueries(PREVIEW_MODAL_KEY);
+      .then((response) => {
+        showErrorMessage(response);
+        openPreviewModal();
       })
-      .catch(() => {
-        callout({
-          type: 'error',
-          message: intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }),
-        });
-
+      .catch((error) => {
+        showErrorMessage(error);
         closePreviewModal();
       })
       .finally(() => {

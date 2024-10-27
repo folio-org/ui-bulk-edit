@@ -17,6 +17,10 @@ jest.mock('@folio/stripes/core', () => ({
   useNamespace: jest.fn().mockReturnValue(['1', '2', '3']),
 }));
 
+jest.mock('../../hooks/useSearchParams', () => ({
+  useSearchParams: jest.fn().mockReturnValue({ initialFileName: 'initialFileName' }),
+}));
+
 const queryClient = new QueryClient();
 
 // eslint-disable-next-line react/prop-types
