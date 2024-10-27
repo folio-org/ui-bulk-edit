@@ -141,11 +141,6 @@
     "logs.filter.endDate": "Geëindigd",
     "list.result.emptyMessage.logs": "Kies een filter om resultaten weer te geven.",
     "permission.module.bulk-edit.enabled": "UI: Bulkbewerkingsmodule is ingeschakeld",
-    "permission.view": "Bulkbewerking: Lokaal - Gebruikersrecords bekijken",
-    "permission.edit": "Bulkbewerking: Lokaal - Gebruikersrecords bewerken",
-    "permission.app-view": "Bulkbewerking: In app - Collectiebezitrecords bekijken",
-    "permission.app-edit": "Bulkbewerking: In app - Collectiebezitrecords bewerken",
-    "permission.app-edit.users": " Bulkbewerking: In app - Gebruikersrecords bewerken",
     "permission.logs.view": "Bulkbewerking: Kan logs bekijken",
     "columns.logs.status": "Status",
     "columns.logs.actions": "Acties",
@@ -514,5 +509,11 @@
     "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "File with updated records",
     "layer.options.inProcess": "In process",
     "columns.ITEM.Member": "Member",
-    "columns.HOLDINGS_RECORD.Member": "Member"
+    "columns.HOLDINGS_RECORD.Member": "Member",
+    "permission.users.csv.view": "Bulk Edit: Local - View user records",
+    "permission.users.csv.edit": "Bulk Edit: Local - Edit user records",
+    "permission.inventory.view": "Bulk Edit: In app - View inventory records",
+    "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
+    "permission.users.edit": "Bulk edit: In app - Edit user records",
+    "permission.query.execute": "Bulk edit: Can build query"
 }
