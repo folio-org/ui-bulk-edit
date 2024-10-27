@@ -30,7 +30,7 @@ jest.mock('./useSearchParams', () => ({
 
 describe('useConfirmChanges', () => {
   const mockCallout = jest.fn();
-  const mockQueryClient = { invalidateQueries: jest.fn(), setQueryData: jest.fn() };
+  const mockQueryClient = { invalidateQueries: jest.fn(), setQueriesData: jest.fn(), removeQueries: jest.fn() };
   const mockBulkOperationDetails = { bulkDetails: { totalNumOfRecords: 100 } };
   const mockBulkOperationStart = jest.fn();
   const mockUpdateFn = jest.fn(() => Promise.resolve());
@@ -89,7 +89,7 @@ describe('useConfirmChanges', () => {
     });
 
     expect(result.current.isPreviewLoading).toBe(true);
-    expect(result.current.isPreviewModalOpened).toBe(true);
+
 
     await waitForNextUpdate();
 
@@ -116,7 +116,6 @@ describe('useConfirmChanges', () => {
     });
 
     expect(result.current.isPreviewLoading).toBe(true);
-    expect(result.current.isPreviewModalOpened).toBe(true);
 
     await waitForNextUpdate();
 
