@@ -237,7 +237,7 @@ export const ContentUpdatesForm = ({
 
         return {
           option: mappedOption,
-          tenants,
+          tenants: tenants?.filter(item => item != null),
           actions: [{
             type,
             initial,
