@@ -16,7 +16,7 @@ describe('pollForStatus', () => {
   });
 
   afterEach(() => {
-    jest.clearAllMocks(); // Сбрасываем все моки после каждого теста
+    jest.clearAllMocks();
   });
 
   it('should resolve with the final status when status is not DATA_MODIFICATION_IN_PROGRESS', async () => {
@@ -31,7 +31,6 @@ describe('pollForStatus', () => {
 
     const promise = pollForStatus(useOkapiKy(), 'mockId');
 
-    // Эмулируем интервалы вручную
     jest.advanceTimersByTime(1000);
     await Promise.resolve();
     jest.advanceTimersByTime(1000);
