@@ -17,7 +17,7 @@ export const useErrorMessages = () => {
     });
   };
 
-  const showErrorMessage = (res) => {
+  const showErrorMessage = (res, meta) => {
     const message = res?.errorMessage;
 
     // check if error message should be translated (if it's exist in translations)
@@ -31,7 +31,7 @@ export const useErrorMessages = () => {
     } else if (message) {
       // if error message contains token error, show a special message
       if (message?.includes(ERRORS.TOKEN)) {
-        showError(intl.formatMessage({ id: 'ui-bulk-edit.error.incorrectFormatted' }, { fileName: initialFileName }));
+        showError(intl.formatMessage({ id: 'ui-bulk-edit.error.incorrectFormatted' }, { fileName: meta?.fileName || initialFileName }));
       } else {
         showError(message);
       }
