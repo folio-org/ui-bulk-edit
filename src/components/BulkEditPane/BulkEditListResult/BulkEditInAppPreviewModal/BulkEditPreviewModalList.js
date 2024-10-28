@@ -34,7 +34,6 @@ import { useErrorMessages } from '../../../../hooks/useErrorMessages';
 
 
 export const BulkEditPreviewModalList = ({
-  isPreviewEnabled,
   onPreviewError,
 }) => {
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
@@ -54,7 +53,7 @@ export const BulkEditPreviewModalList = ({
   });
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
-  const enabled = isPreviewEnabled && bulkDetails?.status === JOB_STATUSES.REVIEW_CHANGES;
+  const enabled = bulkDetails?.status === JOB_STATUSES.REVIEW_CHANGES;
 
   const {
     contentData,
@@ -79,7 +78,7 @@ export const BulkEditPreviewModalList = ({
     ...pagination,
   });
 
-  if (!contentData || !isPreviewEnabled) return <Preloader />;
+  if (!contentData) return <Preloader />;
 
   const renderMessageBanner = () => {
     if (!bulkDetails?.processedNumOfRecords && currentRecordType === CAPABILITIES.INSTANCE) {
@@ -130,6 +129,5 @@ export const BulkEditPreviewModalList = ({
 };
 
 BulkEditPreviewModalList.propTypes = {
-  isPreviewEnabled: PropTypes.bool,
   onPreviewError: PropTypes.func,
 };
