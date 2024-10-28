@@ -15,6 +15,10 @@ import BulkEdit from './BulkEdit';
 import { mockData, createDtWithFiles, createFile, flushPromises, dispatchEvt } from '../../test/jest/utils/fileUpload';
 import { queryClient } from '../../test/jest/utils/queryClient';
 
+jest.mock('../hooks/useErrorMessages', () => ({
+  useErrorMessages: jest.fn().mockReturnValue({ showErrorMessage: jest.fn() }),
+}));
+
 jest.mock('./BulkEditPane/BulkEditListResult', () => ({
   BulkEditListResult: () => 'BulkEditListResult',
 }));

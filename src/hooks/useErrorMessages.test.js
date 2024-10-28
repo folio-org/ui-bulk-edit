@@ -98,4 +98,21 @@ describe('useErrorMessages', () => {
 
     expect(showCalloutMock).not.toHaveBeenCalled();
   });
+
+  it('should use variables from meta object if provided', () => {
+    const { result } = renderHook(() => useErrorMessages());
+    const { showErrorMessage } = result.current;
+
+    formatMessageMock.mockImplementationOnce(({ id }, { fileName }) => {
+      return `${id}.${fileName}`;
+    });
+
+    showErrorMessage({ errorMessage: ERRORS.TOKEN }, { fileName: 'testFileName' });
+
+    expect(formatMessageMock).toHaveBeenCalledWith({ id: 'ui-bulk-edit.error.incorrectFormatted' }, { fileName: 'testFileName' });
+    expect(showCalloutMock).toHaveBeenCalledWith({
+      type: 'error',
+      message: 'ui-bulk-edit.error.incorrectFormatted.testFileName',
+    });
+  });
 });

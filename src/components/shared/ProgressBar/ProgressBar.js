@@ -34,14 +34,13 @@ export const ProgressBar = () => {
   useEffect(() => {
     const nextStep = getBulkOperationStep(bulkDetails);
 
-    // Show error message if any
-    showErrorMessage(bulkDetails);
-
     if (nextStep) {
       clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, { step: nextStep, progress: null });
     }
 
     if (status === JOB_STATUSES.FAILED) {
+      showErrorMessage(bulkDetails);
+
       clearIntervalAndRedirect('/bulk-edit', '');
     }
   }, [
@@ -49,6 +48,7 @@ export const ProgressBar = () => {
     bulkDetails,
     id,
     clearIntervalAndRedirect,
+    showErrorMessage,
   ]);
 
   return (
