@@ -4,7 +4,7 @@ import React, {
   useMemo,
   useState
 } from 'react';
-import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
+import { buildSearch } from '@folio/stripes-acq-components';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
 
@@ -24,12 +24,13 @@ import { useBulkPermissions, useLocationFilters, useSearchParams } from '../../.
 import { useBulkOperationStart, useUpload } from '../../../../hooks/api';
 import { getIsDisabledByPerm } from '../utils/getIsDisabledByPerm';
 import { RootContext } from '../../../../context/RootContext';
+import { useErrorMessages } from '../../../../hooks/useErrorMessages';
 
 export const IdentifierTab = () => {
   const history = useHistory();
   const location = useLocation();
-  const showCallout = useShowCallout();
   const permissions = useBulkPermissions();
+  const { showErrorMessage } = useErrorMessages();
 
   const {
     isFileUploaded,
@@ -146,7 +147,7 @@ export const IdentifierTab = () => {
         });
 
         if (errorMessage?.includes(ERRORS.TOKEN)) throw Error(ERRORS.TOKEN);
-        if (status === JOB_STATUSES.FAILED) throw Error();
+        if (status === JOB_STATUSES.FAILED) throw Error(errorMessage);
 
         history.replace({
           pathname: `/bulk-edit/${id}/preview`,
@@ -155,13 +156,8 @@ export const IdentifierTab = () => {
       }
 
       setIsFileUploaded(true);
-    } catch ({ message }) {
-      if (message === ERRORS.TOKEN) {
-        showCallout({
-          message: <FormattedMessage id="ui-bulk-edit.error.incorrectFormatted" values={{ fileName:fileToUpload.name }} />,
-          type: 'error',
-        });
-      }
+    } catch (error) {
+      showErrorMessage(error);
     }
   };
 
