@@ -25,6 +25,7 @@ import {
 import { useBulkOperationDelete } from '../../../../hooks/api/useBulkOperationDelete';
 import { ListFileUploader } from '../../../shared/ListFileUploader';
 import { useSearchParams } from '../../../../hooks/useSearchParams';
+import { useErrorMessages } from '../../../../hooks/useErrorMessages';
 
 const BulkEditManualUploadModal = ({
   operationId,
@@ -38,6 +39,7 @@ const BulkEditManualUploadModal = ({
   const callout = useShowCallout();
   const controller = useRef(null);
   const { identifier, criteria } = useSearchParams();
+  const { showErrorMessage } = useErrorMessages();
 
   const { fileUpload } = useUpload();
   const { bulkOperationStart } = useBulkOperationStart();
@@ -102,7 +104,7 @@ const BulkEditManualUploadModal = ({
         id: operationId,
         step: EDITING_STEPS.COMMIT,
         approach: APPROACHES.MANUAL,
-      });
+      }).then(showErrorMessage);
 
       setCountOfRecords(committedNumOfRecords);
 

@@ -157,7 +157,7 @@ export const IdentifierTab = () => {
 
       setIsFileUploaded(true);
     } catch (error) {
-      showErrorMessage(error, { fileName: fileToUpload.name });
+      showErrorMessage({ errorMessage: error.message }, { fileName: fileToUpload.name });
     }
   };
 
