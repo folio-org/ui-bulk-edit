@@ -69,6 +69,7 @@
 * [UIBULKED-572](https://folio-org.atlassian.net/browse/UIBULKED-572) Include additional field to 'actions'.
 * [UIBULKED-497](https://folio-org.atlassian.net/browse/UIBULKED-497) "Are you sure" preview displays outdated values after User changed selection on bulk edit form and clicked "Confirm changes".
 * [UIBULKED-557](https://folio-org.atlassian.net/browse/UIBULKED-557) Add hover effect to improve text visibility in dropdowns in Bulk Edit in-app form.
+* [UIBULKED-540](https://folio-org.atlassian.net/browse/UIBULKED-540) Update identifiers names for Item record.
 
 ## [4.1.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.4) (2024-05-29)
 
