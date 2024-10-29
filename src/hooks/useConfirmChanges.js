@@ -65,9 +65,7 @@ export const useConfirmChanges = ({
         approach: APPROACHES.IN_APP,
         step: EDITING_STEPS.EDIT,
       }))
-      .then((response) => {
-        showErrorMessage(response);
-      })
+      .then(showErrorMessage)
       .catch((error) => {
         showErrorMessage(error);
         closePreviewModal();

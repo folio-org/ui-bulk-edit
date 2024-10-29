@@ -8,12 +8,10 @@ import {
   JOB_STATUSES,
   EDITING_STEPS,
 } from '../../constants';
-import { useErrorMessages } from '../useErrorMessages';
 
 export const useBulkOperationStart = (mutationOptions = {}) => {
   const params = useRef({});
   const ky = useOkapiKy();
-  const { showErrorMessage } = useErrorMessages();
 
   const { refetch: fetchBulkOperation } = useQuery({
     queryFn: async () => {
@@ -71,8 +69,6 @@ export const useBulkOperationStart = (mutationOptions = {}) => {
 
       return data;
     },
-    onSuccess: showErrorMessage,
-    onError: showErrorMessage,
     ...mutationOptions,
   });
 
