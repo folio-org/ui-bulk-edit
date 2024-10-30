@@ -2,7 +2,10 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
-import { useStripes } from '@folio/stripes/core';
+import {
+  checkIfUserInCentralTenant,
+  useStripes,
+} from '@folio/stripes/core';
 import {
   Datepicker,
   Select,
@@ -61,15 +64,13 @@ import {
 } from '../../../../../utils/helpers';
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
-  const { user, okapi } = useStripes();
+  const stripes = useStripes();
   const { formatMessage } = useIntl();
   const {
     currentRecordType,
   } = useSearchParams();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const centralTenant = user?.user?.consortium?.centralTenantId;
-  const tenantId = okapi.tenant;
-  const isCentralTenant = tenantId === centralTenant;
+  const isCentralTenant = checkIfUserInCentralTenant(stripes);
 
   const isUserCapability = currentRecordType === CAPABILITIES.USER;
   const isItemCapability = currentRecordType === CAPABILITIES.ITEM;
@@ -82,13 +83,13 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { itemNotes, usItemNotesLoading } = useItemNotes({ enabled: isItemCapability });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceCapability });
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { notesEsc: itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && Boolean(tenants?.length) });
-  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && Boolean(tenants?.length) });
-  const { locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(tenants, { enabled: Boolean(tenants?.length) });
-  const { escData: loanTypesEsc, isFetching: isLoanTypesEscLoading } = useLoanTypesEsc(tenants, { enabled: Boolean(tenants?.length) });
+  const { notesEsc: itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && isCentralTenant });
+  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && isCentralTenant });
+  const { locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(tenants, { enabled: isCentralTenant });
+  const { escData: loanTypesEsc, isFetching: isLoanTypesEscLoading } = useLoanTypesEsc(tenants, { enabled: isCentralTenant });
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
-  const { escData: urlRelationshipsEsc, isFetching: isElectronicAccessEscLoading } = useElectronicAccessEsc(tenants, { enabled: Boolean(tenants?.length) });
+  const { escData: urlRelationshipsEsc, isFetching: isElectronicAccessEscLoading } = useElectronicAccessEsc(tenants, { enabled: isCentralTenant });
   // exclude from second action the first action value
   const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
   const filteredElectronicAccessRelationshipsEsc = urlRelationshipsEsc?.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
