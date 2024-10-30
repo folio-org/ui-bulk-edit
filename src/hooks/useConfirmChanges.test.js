@@ -8,10 +8,17 @@ import '../../test/jest/__mock__/reactIntl.mock';
 import { useBulkOperationDetails, useBulkOperationStart, useFileDownload } from './api';
 import { useSearchParams } from './useSearchParams';
 import { useConfirmChanges } from './useConfirmChanges';
+import { pollForStatus } from '../utils/pollForStatus';
 
 jest.mock('react-query', () => ({
   useQueryClient: jest.fn(),
 }));
+
+jest.mock('@folio/stripes/core', () => ({
+  ...jest.requireActual('@folio/stripes/core'),
+  useOkapiKy: jest.fn(),
+}));
+
 
 jest.mock('@folio/stripes-acq-components', () => ({
   useShowCallout: jest.fn(),
@@ -27,6 +34,7 @@ jest.mock('./useSearchParams', () => ({
   useSearchParams: jest.fn(),
 }));
 
+jest.mock('../utils/pollForStatus');
 
 describe('useConfirmChanges', () => {
   const mockCallout = jest.fn();
@@ -48,6 +56,7 @@ describe('useConfirmChanges', () => {
     useBulkOperationStart.mockReturnValue({ bulkOperationStart: mockBulkOperationStart });
     useSearchParams.mockReturnValue({ criteria: 'testCriteria', initialFileName: 'initialFileName' });
     useFileDownload.mockReturnValue({ refetch: mockDownloadFile, isFetching: false });
+    pollForStatus.mockImplementation(() => Promise.resolve());
 
     jest.clearAllMocks();
   });
@@ -89,26 +98,34 @@ describe('useConfirmChanges', () => {
       bulkOperationId: '123',
     }));
 
+    // Call confirmChanges with a mock payload
     act(() => {
       result.current.confirmChanges({});
     });
 
+    // Check if loading state is set
     expect(result.current.isPreviewLoading).toBe(true);
 
+    // Wait for the next update after the async calls
+    await waitForNextUpdate(); // Wait for the polling to start
 
-    await waitForNextUpdate();
-
+    // Verify that the update function is called
     expect(mockUpdateFn).toHaveBeenCalled();
+
+    // Verify that the bulkOperationStart function is called with the correct parameters
     expect(mockBulkOperationStart).toHaveBeenCalledWith({
       id: '123',
       approach: 'IN_APP',
       step: 'EDIT',
     });
+
+    // Finally, check if loading state is set back to false
     expect(result.current.isPreviewLoading).toBe(false);
   });
 
   it('should handle error in confirmChanges function', async () => {
-    mockUpdateFn.mockImplementationOnce(() => Promise.reject());
+    // Mock the update function to throw an error
+    mockUpdateFn.mockImplementationOnce(() => Promise.reject(new Error('Update failed')));
 
     const { result, waitForNextUpdate } = renderHook(() => useConfirmChanges({
       updateFn: mockUpdateFn,
@@ -120,12 +137,15 @@ describe('useConfirmChanges', () => {
       result.current.confirmChanges({});
     });
 
+    // Check if loading state is set
     expect(result.current.isPreviewLoading).toBe(true);
 
+    // Wait for the next update after the async calls
     await waitForNextUpdate();
 
+    // Check that loading state is set back to false after handling the error
     expect(result.current.isPreviewLoading).toBe(false);
-    expect(result.current.isPreviewModalOpened).toBe(false);
+    expect(result.current.isPreviewModalOpened).toBe(false); // Modal should close on error
   });
 
   it('should call downloadFile from useFileDownload', () => {

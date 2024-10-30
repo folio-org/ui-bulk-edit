@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 
+import { useOkapiKy } from '@folio/stripes/core';
 import {
   PREVIEW_MODAL_KEY,
   BULK_OPERATION_DETAILS_KEY,
@@ -15,8 +16,9 @@ import {
   JOB_STATUSES,
 } from '../constants';
 import { useSearchParams } from './useSearchParams';
-import { useErrorMessages } from './useErrorMessages';
 
+import { useErrorMessages } from './useErrorMessages';
+import { pollForStatus } from '../utils/pollForStatus';
 
 export const useConfirmChanges = ({
   updateFn,
@@ -25,6 +27,7 @@ export const useConfirmChanges = ({
   onDownloadSuccess,
 }) => {
   const queryClient = useQueryClient();
+  const ky = useOkapiKy();
   const searchParams = useSearchParams();
   const { showErrorMessage } = useErrorMessages();
 
@@ -54,16 +57,15 @@ export const useConfirmChanges = ({
       (preBulkOperation) => ({ ...preBulkOperation, status: JOB_STATUSES.DATA_MODIFICATION }),
     );
 
-    updateFn(payload)
+    openPreviewModal();
+    pollForStatus(ky, bulkOperationId)
+      .then(() => updateFn(payload))
       .then(() => bulkOperationStart({
         id: bulkOperationId,
         approach: APPROACHES.IN_APP,
         step: EDITING_STEPS.EDIT,
       }))
-      .then((response) => {
-        showErrorMessage(response);
-        openPreviewModal();
-      })
+      .then(showErrorMessage)
       .catch((error) => {
         showErrorMessage(error);
         closePreviewModal();

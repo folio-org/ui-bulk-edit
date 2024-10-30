@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Modal } from '@folio/stripes/components';
 import { buildSearch } from '@folio/stripes-acq-components';
 
+import { Preloader } from '@folio/stripes-data-transfer-components';
 import {
   APPROACHES,
   EDITING_STEPS,
@@ -44,7 +45,7 @@ export const BulkEditPreviewModal = ({
         id: bulkDetails?.id,
         approach: APPROACHES.IN_APP,
         step: EDITING_STEPS.COMMIT,
-      });
+      }).then(showErrorMessage);
 
       onChangesCommited();
 
@@ -81,12 +82,13 @@ export const BulkEditPreviewModal = ({
       dismissible
       onClose={onKeepEditing}
     >
-      {open && (
+      {isPreviewLoading ?
+        <Preloader />
+        :
         <BulkEditPreviewModalList
-          isPreviewEnabled={!isPreviewLoading}
           onPreviewError={onKeepEditing}
         />
-      )}
+      }
     </Modal>
   );
 };
