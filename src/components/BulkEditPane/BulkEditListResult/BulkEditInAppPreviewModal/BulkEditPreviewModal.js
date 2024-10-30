@@ -45,7 +45,7 @@ export const BulkEditPreviewModal = ({
         id: bulkDetails?.id,
         approach: APPROACHES.IN_APP,
         step: EDITING_STEPS.COMMIT,
-      }).then(showErrorMessage);
+      });
 
       onChangesCommited();
 
