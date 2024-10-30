@@ -57,12 +57,13 @@ export const BulkEditInApp = ({
   const isHoldingsRecordType = currentRecordType === CAPABILITIES.HOLDING;
   const isInstanceRecordType = currentRecordType === CAPABILITIES.INSTANCE;
 
+  const { data: tenants, isLoading } = useBulkOperationTenants(bulkOperationId);
+  console.log(tenants)
   const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemRecordType });
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
-  const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { notesEsc: itemNotesEsc, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'option', { enabled: isItemRecordType && isCentralTenant });
-  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'option', { enabled: isHoldingsRecordType && isCentralTenant });
+  const { notesEsc: itemNotesEsc, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'option', { enabled: isItemRecordType && isCentralTenant && !isLoading });
+  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'option', { enabled: isHoldingsRecordType && isCentralTenant && !isLoading });
 
   const options = useMemo(() => ({
     [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemNotesEsc : itemNotes, tenants)),

@@ -70,7 +70,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     currentRecordType,
   } = useSearchParams();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const isCentralTenant = checkIfUserInCentralTenant(stripes);
+  const isCentralTenant = checkIfUserInCentralTenant(stripes)
 
   const isUserCapability = currentRecordType === CAPABILITIES.USER;
   const isItemCapability = currentRecordType === CAPABILITIES.ITEM;
