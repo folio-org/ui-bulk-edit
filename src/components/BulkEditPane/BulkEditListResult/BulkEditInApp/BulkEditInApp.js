@@ -9,7 +9,10 @@ import {
   Loading,
   Layout,
 } from '@folio/stripes/components';
-import { useStripes } from '@folio/stripes/core';
+import {
+  checkIfUserInCentralTenant,
+  useStripes,
+} from '@folio/stripes/core';
 
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
@@ -42,10 +45,8 @@ export const BulkEditInApp = ({
   onContentUpdatesChanged,
 }) => {
   const { title } = useContext(RootContext);
-  const { user, okapi } = useStripes();
-  const centralTenant = user?.user?.consortium?.centralTenantId;
-  const tenantId = okapi.tenant;
-  const isCentralTenant = tenantId === centralTenant;
+  const stripes = useStripes();
+  const isCentralTenant = checkIfUserInCentralTenant(stripes);
 
   const { formatMessage } = useIntl();
   const { currentRecordType } = useSearchParams();
@@ -60,8 +61,8 @@ export const BulkEditInApp = ({
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { notesEsc: itemNotesEsc, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'option', { enabled: isItemRecordType && Boolean(tenants?.length) });
-  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'option', { enabled: isHoldingsRecordType && (Boolean(tenants?.length)) });
+  const { notesEsc: itemNotesEsc, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'option', { enabled: isItemRecordType && isCentralTenant });
+  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'option', { enabled: isHoldingsRecordType && isCentralTenant });
 
   const options = useMemo(() => ({
     [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemNotesEsc : itemNotes, tenants)),
