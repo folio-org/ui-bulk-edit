@@ -58,7 +58,6 @@ export const BulkEditInApp = ({
   const isInstanceRecordType = currentRecordType === CAPABILITIES.INSTANCE;
 
   const { data: tenants, isLoading } = useBulkOperationTenants(bulkOperationId);
-  console.log(tenants)
   const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemRecordType });
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
