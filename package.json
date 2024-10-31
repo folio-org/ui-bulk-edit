@@ -226,7 +226,7 @@
     "testing-library-selector": "^0.2.1"
   },
   "dependencies": {
-    "@folio/stripes-acq-components": "^5.0.0",
+    "@folio/stripes-acq-components": "^6.0.0",
     "file-saver": "^2.0.5",
     "history": "^5.1.0",
     "lodash": "^4.17.5",
