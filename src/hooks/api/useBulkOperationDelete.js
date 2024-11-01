@@ -8,10 +8,9 @@ export const useBulkOperationDelete = (mutationOptions = {}) => {
 
   const { mutateAsync: bulkOperationDelete, isLoading } = useMutation({
     mutationFn: async ({ operationId }) => {
-      return ky.post(`bulk-operations/${operationId}/cancel`).json();
+      return ky.post(`bulk-operations/${operationId}/cancel`);
     },
     onError: showErrorMessage,
-    onSuccess: showErrorMessage,
     ...mutationOptions,
   });
 
