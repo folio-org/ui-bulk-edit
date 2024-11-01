@@ -1,6 +1,7 @@
 # Change history for ui-bulk-edit
 
 ## In progress
+* [UIBULKED-540](https://folio-org.atlassian.net/browse/UIBULKED-540) Update identifiers names for Item record.
 
 ## [4.2.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.0) (2024-10-31)
 
