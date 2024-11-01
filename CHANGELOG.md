@@ -1,6 +1,10 @@
 # Change history for ui-bulk-edit
 
 ## In progress
+* [UIBULKED-540](https://folio-org.atlassian.net/browse/UIBULKED-540) Update identifiers names for Item record.
+
+## [4.2.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.0) (2024-10-31)
+
 * [UIBULKED-441](https://issues.folio.org/browse/UIBULKED-441) Bulk edit form enhancements - part 1.
 * [UIBULKED-442](https://issues.folio.org/browse/UIBULKED-442) Bulk edit form enhancements - part 2.
 * [UIBULKED-465](https://issues.folio.org/browse/UIBULKED-465) Local approach - Incorrect numbers of changed records and errors are displayed on Confirmation screen
@@ -69,7 +73,8 @@
 * [UIBULKED-572](https://folio-org.atlassian.net/browse/UIBULKED-572) Include additional field to 'actions'.
 * [UIBULKED-497](https://folio-org.atlassian.net/browse/UIBULKED-497) "Are you sure" preview displays outdated values after User changed selection on bulk edit form and clicked "Confirm changes".
 * [UIBULKED-557](https://folio-org.atlassian.net/browse/UIBULKED-557) Add hover effect to improve text visibility in dropdowns in Bulk Edit in-app form.
-* [UIBULKED-540](https://folio-org.atlassian.net/browse/UIBULKED-540) Update identifiers names for Item record.
+* [UIBULKED-575](https://folio-org.atlassian.net/browse/UIBULKED-575) Fix "Something went wrong" toast notifications when starting bulk edit.
+* Bump "@folio/stripes-acq-components" version to v6.0.0
 
 ## [4.1.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.1.4) (2024-05-29)
 

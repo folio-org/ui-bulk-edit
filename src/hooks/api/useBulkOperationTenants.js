@@ -12,6 +12,7 @@ export const useBulkOperationTenants = (id, options = {}) => {
     queryKey: [namespace],
     queryFn: () => ky.get(`bulk-operations/used-tenants/${id}`).json(),
     keepPreviousData: true,
+    enabled: !!id,
     ...options,
   });
 
