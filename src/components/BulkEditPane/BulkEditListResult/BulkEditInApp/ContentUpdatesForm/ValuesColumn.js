@@ -85,11 +85,11 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
   const { notesEsc: itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'action', { enabled: isItemCapability && isCentralTenant });
   const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'action', { enabled: isHoldingsCapability && isCentralTenant });
-  const { locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(tenants, { enabled: isCentralTenant });
-  const { escData: loanTypesEsc, isFetching: isLoanTypesEscLoading } = useLoanTypesEsc(tenants, { enabled: isCentralTenant });
+  const { locationsEsc, isFetching: isLocationEscLoading } = useLocationEsc(tenants, { enabled: isCentralTenant && (isItemCapability || isHoldingsCapability) });
+  const { escData: loanTypesEsc, isFetching: isLoanTypesEscLoading } = useLoanTypesEsc(tenants, { enabled: isCentralTenant && isItemCapability });
 
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships({ enabled: isHoldingsCapability });
-  const { escData: urlRelationshipsEsc, isFetching: isElectronicAccessEscLoading } = useElectronicAccessEsc(tenants, { enabled: isCentralTenant });
+  const { escData: urlRelationshipsEsc, isFetching: isElectronicAccessEscLoading } = useElectronicAccessEsc(tenants, { enabled: isCentralTenant && isHoldingsCapability });
   // exclude from second action the first action value
   const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
   const filteredElectronicAccessRelationshipsEsc = urlRelationshipsEsc?.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
