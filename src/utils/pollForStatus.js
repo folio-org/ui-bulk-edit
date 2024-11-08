@@ -7,11 +7,7 @@ export const pollForStatus = (ky, id) => {
       try {
         const data = await ky.get(`bulk-operations/${id}`).json();
         if (data.status !== JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS) {
-          clearInterval(intervalId);
-          resolve(data.status);
-        } else if (data.status === JOB_STATUSES.FAILED) {
-          clearInterval(intervalId);
-          reject(data.errorMessage);
+          clearInterval(intervalId); resolve(data.status);
         }
       } catch (error) { clearInterval(intervalId); reject(error); }
     }, interval);
