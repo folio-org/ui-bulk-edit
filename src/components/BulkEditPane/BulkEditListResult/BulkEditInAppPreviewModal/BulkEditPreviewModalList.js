@@ -17,7 +17,6 @@ import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists
 import css from './BulkEditInAppPreviewModal.css';
 import { usePagination } from '../../../../hooks/usePagination';
 import {
-  CAPABILITIES,
   EDITING_STEPS,
   JOB_STATUSES,
   PAGINATION_CONFIG
@@ -53,7 +52,7 @@ export const BulkEditPreviewModalList = ({
   });
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
-  const enabled = bulkDetails?.status === JOB_STATUSES.REVIEW_CHANGES;
+  const enabled = [JOB_STATUSES.REVIEWED_NO_MARC_RECORDS, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
 
   const {
     contentData,
@@ -81,7 +80,7 @@ export const BulkEditPreviewModalList = ({
   if (!contentData) return <Preloader />;
 
   const renderMessageBanner = () => {
-    if (!bulkDetails?.processedNumOfRecords && currentRecordType === CAPABILITIES.INSTANCE) {
+    if (bulkDetails?.status === JOB_STATUSES.REVIEWED_NO_MARC_RECORDS) {
       return (
         <MessageBanner type="warning">
           <FormattedMessage id="ui-bulk-edit.previewModal.message.empty.marc" />
