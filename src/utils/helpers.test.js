@@ -4,7 +4,7 @@ import {
   getTransformedLogsFilterValue,
   removeDuplicatesByValue
 } from './helpers';
-import { CAPABILITIES, LOGS_FILTERS } from '../constants';
+import { CAPABILITIES, JOB_STATUSES, LOGS_FILTERS } from '../constants';
 
 describe('customFilter', () => {
   const dataOptions = [
@@ -264,5 +264,19 @@ describe('getTransformedLogsFilterValue', () => {
     const result = getTransformedLogsFilterValue(LOGS_FILTERS.USER, values);
     expect(values).not.toContain(CAPABILITIES.INSTANCE_MARC);
     expect(result).toContain('userID');
+  });
+
+  it('should add REVIEWED_NO_MARC_RECORDS to the array if REVIEW_CHANGES is present', () => {
+    const values = [JOB_STATUSES.REVIEW_CHANGES];
+    const result = getTransformedLogsFilterValue(LOGS_FILTERS.STATUS, values);
+    expect(result).toContain(JOB_STATUSES.REVIEW_CHANGES);
+    expect(result).toContain(JOB_STATUSES.REVIEWED_NO_MARC_RECORDS);
+  });
+
+  it('should remove REVIEWED_NO_MARC_RECORDS to the array if REVIEW_CHANGES is not present', () => {
+    const values = ['other_value'];
+    const result = getTransformedLogsFilterValue(LOGS_FILTERS.STATUS, values);
+    expect(result).not.toContain(JOB_STATUSES.REVIEWED_NO_MARC_RECORDS);
+    expect(result).toContain('other_value');
   });
 });

@@ -1,7 +1,7 @@
 import { clone, setWith } from 'lodash';
 import {
   CAPABILITIES,
-  EDIT_CAPABILITIES_OPTIONS,
+  EDIT_CAPABILITIES_OPTIONS, JOB_STATUSES,
   LOGS_FILTERS,
 } from '../constants';
 
@@ -161,10 +161,18 @@ export const filterByIds = (items, ids) => {
 };
 
 export const getTransformedLogsFilterValue = (name, values) => {
+  const getWithDependentValue = (triggerValue, dependentValue) => {
+    return values.includes(triggerValue)
+      ? [...new Set([...values, dependentValue])]
+      : values.filter(value => value !== dependentValue);
+  };
+
   if (name === LOGS_FILTERS.CAPABILITY) {
-    return values.includes(CAPABILITIES.INSTANCE)
-      ? [...new Set([...values, CAPABILITIES.INSTANCE_MARC])]
-      : values.filter(value => value !== CAPABILITIES.INSTANCE_MARC);
+    return getWithDependentValue(CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC);
+  }
+
+  if (name === LOGS_FILTERS.STATUS) {
+    return getWithDependentValue(JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS);
   }
 
   return values;
