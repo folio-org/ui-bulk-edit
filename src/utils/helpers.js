@@ -1,7 +1,8 @@
 import { clone, setWith } from 'lodash';
 import {
   CAPABILITIES,
-  EDIT_CAPABILITIES_OPTIONS, JOB_STATUSES,
+  EDIT_CAPABILITIES_OPTIONS,
+  JOB_STATUSES,
   LOGS_FILTERS,
 } from '../constants';
 
