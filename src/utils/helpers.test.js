@@ -273,7 +273,7 @@ describe('getTransformedLogsFilterValue', () => {
     expect(result).toContain(JOB_STATUSES.REVIEWED_NO_MARC_RECORDS);
   });
 
-  it('should remove REVIEWED_NO_MARC_RECORDS to the array if REVIEW_CHANGES is not present', () => {
+  it('should remove REVIEWED_NO_MARC_RECORDS from the array if REVIEW_CHANGES is not present', () => {
     const values = ['other_value'];
     const result = getTransformedLogsFilterValue(LOGS_FILTERS.STATUS, values);
     expect(result).not.toContain(JOB_STATUSES.REVIEWED_NO_MARC_RECORDS);
