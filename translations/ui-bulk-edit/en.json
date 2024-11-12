@@ -151,12 +151,13 @@
   "start.downloadChangedRecords": "Download changed records (CSV)",
   "start.downloadChangedRecords.marc": "Download changed records (MARC)",
 
-  "category.loanType": "Loan type",
+  "category.loanType": "Loan and availability",
   "category.location": "Location",
   "category.itemNotes": "Item notes",
   "category.holdingsNotes": "Holdings notes",
   "category.holdingsLocation": "Holdings location",
   "category.electronicAccess": "Electronic access",
+  "category.administrativeData": "Administrative data",
   "category.instanceNotes": "Instance notes",
 
   "columns.USER.User name": "Username",
