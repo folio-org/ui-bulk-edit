@@ -36,8 +36,8 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   } = useSearchParams();
 
   const totalRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
-  const anotherCriteriaInProgress = progress && criteria !== progress;
-  const isPreviewEnabled = !anotherCriteriaInProgress && Boolean(id);
+  const isOtherTabProcessing = progress && criteria !== progress;
+  const isPreviewEnabled = !isOtherTabProcessing && Boolean(id);
 
   const {
     countOfRecords,
