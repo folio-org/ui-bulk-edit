@@ -4,7 +4,7 @@ import { useErrorMessages } from '../useErrorMessages';
 
 export const PREVIEW_ERRORS_KEY = 'PREVIEW_ERRORS_KEY';
 
-export const useErrorsPreview = ({ id }) => {
+export const useErrorsPreview = ({ id, queryOptions = {} }) => {
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: PREVIEW_ERRORS_KEY });
 
@@ -13,11 +13,10 @@ export const useErrorsPreview = ({ id }) => {
   const { data, isLoading } = useQuery(
     {
       queryKey: [namespaceKey, id],
-      cacheTime: 0,
-      enabled: !!id,
       queryFn: () => ky.get(`bulk-operations/${id}/errors`, { searchParams: { limit: 10 } }).json(),
       onError: showErrorMessage,
       onSuccess: showErrorMessage,
+      ...queryOptions,
     },
   );
 

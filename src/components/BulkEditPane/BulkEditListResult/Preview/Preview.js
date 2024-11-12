@@ -24,17 +24,20 @@ import {
 import { usePagination } from '../../../../hooks/usePagination';
 import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
 import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
-import { useSearchParams } from '../../../../hooks/useSearchParams';
+import { useSearchParams } from '../../../../hooks';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const {
     criteria,
     queryRecordType,
     step,
-    currentRecordType
+    currentRecordType,
+    progress,
   } = useSearchParams();
 
   const totalRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
+  const anotherCriteriaInProgress = progress && criteria !== progress;
+  const isPreviewEnabled = !anotherCriteriaInProgress && Boolean(id);
 
   const {
     countOfRecords,
@@ -55,10 +58,18 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     step,
     criteria,
     queryRecordType,
+    queryOptions: {
+      enabled: isPreviewEnabled,
+    },
     ...pagination,
   });
 
-  const { data } = useErrorsPreview({ id });
+  const { data } = useErrorsPreview({
+    id,
+    queryOptions: {
+      enabled: isPreviewEnabled,
+    },
+  });
 
   const errors = data?.errors || [];
 
