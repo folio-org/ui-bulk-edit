@@ -501,7 +501,7 @@
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "S3 からデータを取得できません。ホスティング プロバイダーに問い合わせて、S3 の設定を確認してください。詳細については、一括編集アプリ ログ (mod-bulk-operations および mod-data-export-worker モジュール) を参照してください。",
     "menuGroup.startEdit": "一括編集の開始",
     "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
-    "previewModal.message.empty.marc": "All instances have source FOLIO.  Use “Instances and  Administrative data” option for bulk edit.",
+    "previewModal.message.empty.marc": "All instances have source FOLIO. Use “Instances and  Administrative data” option for bulk edit.",
     "start.downloadChangedRecords.marc": "変更されたレコードをダウンロードする (MARC)",
     "layer.marc.error.ind": "入力内容を確認してください",
     "layer.marc.error.subfield": "入力内容を確認してください",
@@ -515,5 +515,6 @@
     "permission.inventory.view": "Bulk Edit: In app - View inventory records",
     "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
     "permission.users.edit": "Bulk edit: In app - Edit user records",
-    "permission.query.execute": "Bulk edit: Can build query"
+    "permission.query.execute": "Bulk edit: Can build query",
+    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes"
 }
