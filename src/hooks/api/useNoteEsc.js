@@ -6,7 +6,6 @@ import { useNamespace } from '@folio/stripes/core';
 
 import { getMappedAndSortedNotes } from '../../utils/helpers';
 import { PUBLISH_COORDINATOR_STATUSES_METHODS, usePublishCoordinator } from '../usePublishCoordinator';
-import { useErrorMessages } from '../useErrorMessages';
 
 const DEFAULT_DATA = {};
 
@@ -14,7 +13,6 @@ export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, note
   const [namespace] = useNamespace({ key: namespaceKey });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
   const { formatMessage } = useIntl();
-  const { showErrorMessage } = useErrorMessages();
 
   const { data = DEFAULT_DATA, isFetching } = useQuery({
     queryKey: [namespace, tenants, url, type],
@@ -29,8 +27,6 @@ export const useNotesEsc = ({ namespaceKey, tenants, type, categoryId, url, note
     keepPreviousData: true,
     cacheTime: Infinity,
     staleTime: Infinity,
-    onError: showErrorMessage,
-    onSuccess: showErrorMessage,
     ...options
   });
 
