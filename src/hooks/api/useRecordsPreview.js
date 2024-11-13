@@ -32,8 +32,6 @@ export const useRecordsPreview = ({
   const { data, refetch, isLoading, dataUpdatedAt, isFetching } = useQuery(
     {
       queryKey: [key, namespaceKey, id, step, limit, offset],
-      cacheTime: 0,
-      staleTime: 0,
       keepPreviousData: true,
       queryFn: () => {
         return ky.get(`bulk-operations/${id}/preview`, { searchParams: { limit, offset, step } }).json();
