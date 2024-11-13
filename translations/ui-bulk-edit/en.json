@@ -471,6 +471,7 @@
   "logs.status.SAVING_RECORDS_LOCALLY": "Saving records",
   "logs.status.DATA_MODIFICATION": "Data modification",
   "logs.status.REVIEW_CHANGES": "Reviewing changes",
+  "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
   "logs.status.COMPLETED": "Completed",
   "logs.status.COMPLETED_WITH_ERRORS": "Completed with errors",
   "logs.status.FAILED": "Failed",
