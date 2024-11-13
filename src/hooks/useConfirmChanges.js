@@ -45,6 +45,7 @@ export const useConfirmChanges = ({
 
   const closePreviewModal = () => {
     setIsPreviewModalOpened(false);
+    queryClient.resetQueries(BULK_OPERATION_DETAILS_KEY);
   };
 
   const confirmChanges = (payload) => {
