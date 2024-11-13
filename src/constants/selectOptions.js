@@ -50,8 +50,6 @@ export const getItemsWithPlaceholder = (items) => [
   ...items,
 ];
 
-export const getItemsWithoutPlaceholder = (items) => items.filter(item => item.value);
-
 export const identifierOptions = {
   [CAPABILITIES.USER]: [
     {
@@ -255,7 +253,6 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
   },
-  ...holdingsNotes,
   {
     value: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.permanentLocation' }),
@@ -268,6 +265,7 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.location' }),
   },
+  ...holdingsNotes,
 ];
 
 export const getInstanceOptions = (formatMessage, instanceNotes) => [
@@ -372,7 +370,6 @@ export const getItemsOptions = (formatMessage, itemNotes = []) => [
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
   },
-  ...itemNotes,
   {
     value: OPTIONS.CHECK_IN_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkInNote' }),
@@ -415,6 +412,7 @@ export const getItemsOptions = (formatMessage, itemNotes = []) => [
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.location' }),
   },
+  ...itemNotes,
 ];
 
 export const getItemStatusOptions = (formatMessage) => [
