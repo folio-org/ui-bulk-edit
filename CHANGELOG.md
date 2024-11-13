@@ -3,6 +3,7 @@
 ## In progress
 * [UIBULKED-540](https://folio-org.atlassian.net/browse/UIBULKED-540) Update identifiers names for Item record.
 * [UIPQB-126](https://folio-org.atlassian.net/browse/UIPQB-126) Use tenant timezone for building queries (adds use of permission `configuration.entries.collection.get`).
+* [UIBULKED-582](https://folio-org.atlassian.net/browse/UIBULKED-582) Temporarily remove error handling from publish-coordinator related logic.
 
 ## [4.2.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.0) (2024-10-31)
 
