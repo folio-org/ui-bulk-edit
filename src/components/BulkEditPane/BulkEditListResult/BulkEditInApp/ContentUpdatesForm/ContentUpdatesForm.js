@@ -14,7 +14,8 @@ import {
 } from '@folio/stripes/components';
 
 import {
-  ACTIONS, FINAL_ACTIONS,
+  ACTIONS,
+  FINAL_ACTIONS,
   OPTIONS
 } from '../../../../../constants';
 import css from '../../../BulkEditPane.css';
