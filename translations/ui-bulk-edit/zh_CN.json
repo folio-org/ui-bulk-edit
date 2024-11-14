@@ -515,5 +515,6 @@
     "permission.inventory.view": "Bulk Edit: In app - View inventory records",
     "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
     "permission.users.edit": "Bulk edit: In app - Edit user records",
-    "permission.query.execute": "Bulk edit: Can build query"
+    "permission.query.execute": "Bulk edit: Can build query",
+    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes"
 }
