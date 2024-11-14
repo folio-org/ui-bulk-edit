@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
 import PropTypes from 'prop-types';
 
 import { Modal } from '@folio/stripes/components';
@@ -13,7 +14,7 @@ import {
   FILE_KEYS,
   JOB_STATUSES,
 } from '../../../../constants';
-import { useBulkOperationStart } from '../../../../hooks/api';
+import { BULK_OPERATION_DETAILS_KEY, useBulkOperationStart } from '../../../../hooks/api';
 import { BulkEditPreviewModalFooter } from './BulkEditPreviewModalFooter';
 import { useSearchParams } from '../../../../hooks';
 import { BulkEditPreviewModalList } from './BulkEditPreviewModalList';
@@ -32,6 +33,7 @@ export const BulkEditPreviewModal = ({
   const { criteria, approach } = useSearchParams();
   const { showErrorMessage } = useErrorMessages();
   const { bulkOperationStart } = useBulkOperationStart();
+  const queryClient = useQueryClient();
 
   const hasLinkForDownload = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC] || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
 
@@ -46,6 +48,8 @@ export const BulkEditPreviewModal = ({
         approach: APPROACHES.IN_APP,
         step: EDITING_STEPS.COMMIT,
       });
+
+      queryClient.resetQueries(BULK_OPERATION_DETAILS_KEY);
 
       onChangesCommited();
 
