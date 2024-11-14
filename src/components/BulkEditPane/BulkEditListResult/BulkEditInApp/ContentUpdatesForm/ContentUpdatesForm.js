@@ -15,6 +15,7 @@ import {
 
 import {
   ACTIONS,
+  FINAL_ACTIONS,
   OPTIONS
 } from '../../../../../constants';
 import css from '../../../BulkEditPane.css';
@@ -224,8 +225,10 @@ export const ContentUpdatesForm = ({
 
         const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
         const filteredTenants = actionTenants.filter(Boolean);
+        // final action is the action which doesn't require any additional data after it
+        const isSecondActionFinal = FINAL_ACTIONS.includes(actions[1]?.name);
 
-        const activeTenants = filteredTenants.length === 1
+        const activeTenants = isSecondActionFinal || filteredTenants.length === 1
           ? filteredTenants.flat()
           : filteredTenants
             .flat()
