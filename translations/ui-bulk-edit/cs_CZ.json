@@ -501,7 +501,7 @@
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker).",
     "menuGroup.startEdit": "Spustit hromadné úpravy",
     "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "Nahraný soubor je prázdný.",
-    "previewModal.message.empty.marc": "All instances have source FOLIO.  Use “Instances and  Administrative data” option for bulk edit.",
+    "previewModal.message.empty.marc": "All instances have source FOLIO. Use “Instances and  Administrative data” option for bulk edit.",
     "start.downloadChangedRecords.marc": "Stáhnout změněné záznamy (MARC)",
     "layer.marc.error.ind": "Zkontrolujte prosím svůj vstup.",
     "layer.marc.error.subfield": "Zkontrolujte prosím svůj vstup.",
@@ -515,5 +515,6 @@
     "permission.inventory.view": "Hromadná úprava: V aplikaci - Zobrazit katalogové záznamy",
     "permission.inventory.edit": "Hromadná úprava: V aplikaci – Upravit katalogové záznamy",
     "permission.users.edit": "Bulk edit: In app - Edit user records",
-    "permission.query.execute": "Bulk edit: Can build query"
+    "permission.query.execute": "Bulk edit: Can build query",
+    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes"
 }
