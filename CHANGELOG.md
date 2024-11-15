@@ -2,13 +2,16 @@
 
 ## In progress
 
-## [4.2.1](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.1) (2024-11-08)
+## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
 
-* [UIBULKED-540](https://folio-org.atlassian.net/browse/UIBULKED-540) Update identifiers names for Item record.
 * [UIPQB-126](https://folio-org.atlassian.net/browse/UIPQB-126) Use tenant timezone for building queries (adds use of permission `configuration.entries.collection.get`).
 * [UIBULKED-582](https://folio-org.atlassian.net/browse/UIBULKED-582) Temporarily remove error handling from publish-coordinator related logic.
 * [UIBULKED-581](https://folio-org.atlassian.net/browse/UIBULKED-581) "Something went wrong" error notification displays
 * [UIBULKED-583](https://folio-org.atlassian.net/browse/UIBULKED-583) Include tenants array into request if there is "final" action selected.
+
+## [4.2.1](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.1) (2024-11-08)
+
+* [UIBULKED-540](https://folio-org.atlassian.net/browse/UIBULKED-540) Update identifiers names for Item record.
 
 ## [4.2.0](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.0) (2024-10-31)
 
