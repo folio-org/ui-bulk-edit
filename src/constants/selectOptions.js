@@ -50,8 +50,6 @@ export const getItemsWithPlaceholder = (items) => [
   ...items,
 ];
 
-export const getItemsWithoutPlaceholder = (items) => items.filter(item => item.value);
-
 export const identifierOptions = {
   [CAPABILITIES.USER]: [
     {
@@ -217,18 +215,13 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     value: OPTIONS.ADMINISTRATIVE_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
     disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
   },
   {
-    value: OPTIONS.ELECTRONIC_ACCESS_URI,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.uri' }),
+    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.suppress' }),
     disabled: false,
-    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
-  },
-  {
-    value: OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.urlRelationship' }),
-    disabled: false,
-    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
   },
   {
     value: OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT,
@@ -243,8 +236,20 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
   },
   {
+    value: OPTIONS.ELECTRONIC_ACCESS_URI,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.uri' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
+  },
+  {
     value: OPTIONS.ELECTRONIC_ACCESS_URL_PUBLIC_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.urlPublic' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
+  },
+  {
+    value: OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.urlRelationship' }),
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.electronicAccess' }),
   },
@@ -252,20 +257,15 @@ export const getHoldingsOptions = (formatMessage, holdingsNotes = []) => [
     value: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.permanentLocation' }),
     disabled: false,
-    categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingsLocation' }),
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.location' }),
   },
   {
     value: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.temporaryLocation' }),
     disabled: false,
-    categoryName: formatMessage({ id: 'ui-bulk-edit.category.holdingsLocation' }),
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.location' }),
   },
   ...holdingsNotes,
-  {
-    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.holdings.suppress' }),
-    disabled: false,
-  },
 ];
 
 export const getInstanceOptions = (formatMessage, instanceNotes) => [
@@ -273,16 +273,19 @@ export const getInstanceOptions = (formatMessage, instanceNotes) => [
     value: OPTIONS.ADMINISTRATIVE_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
     disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
   },
   {
     value: OPTIONS.STAFF_SUPPRESS,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.staffSuppress' }),
     disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
   },
   {
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.suppress' }),
     disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
   },
   ...instanceNotes
 ];
@@ -315,7 +318,7 @@ export const getInstanceNotes = (formatMessage, instanceNotes) => [
   ...instanceNotes,
 ];
 
-export const getNotesOptions = (formatMessage, itemNotes) => {
+export const getItemNotes = (formatMessage, itemNotes) => {
   return [
     {
       value: '',
@@ -355,11 +358,35 @@ export const getDuplicateNoteOptions = (formatMessage) => [
 ];
 
 export const getItemsOptions = (formatMessage, itemNotes = []) => [
-  ...getItemsWithoutPlaceholder(getNotesOptions(formatMessage, itemNotes)),
+  {
+    value: OPTIONS.ADMINISTRATIVE_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
+  },
+  {
+    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.suppressFromDiscovery' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
+  },
+  {
+    value: OPTIONS.CHECK_IN_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkInNote' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
+  },
+  {
+    value: OPTIONS.CHECK_OUT_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.checkOutNote' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
+  },
   {
     value: OPTIONS.STATUS,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.statusLabel' }),
     disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.loanType' }),
   },
   {
     value: OPTIONS.PERMANENT_LOAN_TYPE,
@@ -385,11 +412,7 @@ export const getItemsOptions = (formatMessage, itemNotes = []) => [
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.location' }),
   },
-  {
-    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
-    label: formatMessage({ id: 'ui-bulk-edit.layer.options.suppressFromDiscovery' }),
-    disabled: false,
-  },
+  ...itemNotes,
 ];
 
 export const getItemStatusOptions = (formatMessage) => [

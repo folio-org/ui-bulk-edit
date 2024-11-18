@@ -31,7 +31,7 @@ import {
   getHoldingsNotes, getInstanceNotes,
   getItemStatusOptions,
   getItemsWithPlaceholder,
-  getNotesOptions,
+  getItemNotes,
 } from '../../../../../constants';
 import {
   FIELD_VALUE_KEY,
@@ -98,7 +98,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsCapability });
   const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
 
-  const filteredAndMappedNotes = getNotesOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(itemsNotes, tenants) : itemNotes)
+  const filteredAndMappedNotes = getItemNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(itemsNotes, tenants) : itemNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value, tenant }) => ({ label, value, tenant }));
 
