@@ -30,7 +30,7 @@
     "error.uploadedFile": "Falha ao carregar arquivo",
     "start.downloadErrors": "Baixar erros (CSV)",
     "uploaderSubTitle.records": "Carregar arquivo CSV com registros editados",
-    "textArea.search": "Pesquisar",
+    "textArea.search": "Buscar",
     "textArea.resetAll": "Reiniciar tudo",
     "start.downloadMathcedRecords": "Baixar registros correspondentes (CSV)",
     "menuGroup.actions": "Ações",
@@ -262,7 +262,7 @@
     "layer.options.holdings.suppress": "Oculto da descoberta",
     "layer.options.items.markAsStaffOnly": "Marcar como apenas para a equipe",
     "layer.options.items.removeMarkAsStaffOnly": "Remover marca como apenas para a equipe",
-    "category.loanType": "Tipo de empréstimo",
+    "category.loanType": "Empréstimo e disponibilidade",
     "category.location": "Localização",
     "layer.options.items.removeAll": "Remover tudo",
     "layer.options.items.addNote": "Adicionar nota",
@@ -412,7 +412,7 @@
     "title.identifier": "Identificador",
     "title.query": "Consulta",
     "title.logs": "Logs",
-    "actions.findFullField": "Encontrar (pesquisa de campo completo)",
+    "actions.findFullField": "Encontrar (busca de campo completo)",
     "layer.action.apply.STAFF_ONLY": "Somente para a equipe",
     "category.instanceNotes": "Notas da instância",
     "start.edit.instance": "Instâncias e dados administrativos",
@@ -516,5 +516,6 @@
     "permission.inventory.edit": "Edição em massa: no aplicativo - Editar registros de catalogação",
     "permission.users.edit": "Edição em massa: no aplicativo - Editar registros de usuários",
     "permission.query.execute": "Edição em massa: pode criar uma consulta",
-    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes"
+    "logs.status.REVIEWED_NO_MARC_RECORDS": "Revisão de alterações",
+    "category.administrativeData": "Dados administrativos"
 }

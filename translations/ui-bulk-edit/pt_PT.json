@@ -262,7 +262,7 @@
     "layer.options.holdings.suppress": "Suppress from discovery",
     "layer.options.items.markAsStaffOnly": "Mark as staff only",
     "layer.options.items.removeMarkAsStaffOnly": "Remove mark as staff only",
-    "category.loanType": "Loan type",
+    "category.loanType": "Loan and availability",
     "category.location": "Location",
     "layer.options.items.removeAll": "Remove all",
     "layer.options.items.addNote": "Add note",
@@ -516,5 +516,6 @@
     "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
     "permission.users.edit": "Bulk edit: In app - Edit user records",
     "permission.query.execute": "Bulk edit: Can build query",
-    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes"
+    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
+    "category.administrativeData": "Administrative data"
 }

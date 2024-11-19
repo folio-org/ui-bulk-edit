@@ -516,5 +516,6 @@
     "permission.inventory.edit": "Hromadná úprava: V aplikaci – Upravit katalogové záznamy",
     "permission.users.edit": "Bulk edit: In app - Edit user records",
     "permission.query.execute": "Bulk edit: Can build query",
-    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes"
+    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
+    "category.administrativeData": "Administrative data"
 }
