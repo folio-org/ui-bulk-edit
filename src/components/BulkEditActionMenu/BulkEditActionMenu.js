@@ -70,7 +70,7 @@ const BulkEditActionMenu = ({
   const columns = visibleColumns || [];
   const visibleColumnKeys = getVisibleColumnsKeys(columns);
 
-  const isESC = stripes.user?.user?.consortium;
+  const isECS = stripes.user?.user?.consortium;
   const isStartBulkCsvActive = hasUserEditLocalPerm && currentRecordType === CAPABILITIES.USER;
   const isInitialStep = step === EDITING_STEPS.UPLOAD;
   const isStartBulkInAppActive =
@@ -80,7 +80,7 @@ const BulkEditActionMenu = ({
   const isStartMarkActive = (isStartBulkInAppActive || hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && currentRecordType === CAPABILITIES.INSTANCE && isInitialStep
   && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS].includes(bulkDetails?.status);
 
-  const isStartManualButtonVisible = isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && criteria !== CRITERIA.QUERY && !isESC;
+  const isStartManualButtonVisible = isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && criteria !== CRITERIA.QUERY && !isECS;
 
   const isLastUnselectedColumn = (value) => {
     return visibleColumnKeys?.length === 1 && visibleColumnKeys?.[0] === value;

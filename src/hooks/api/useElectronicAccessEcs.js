@@ -1,7 +1,7 @@
 import { useEcsCommon } from './useEcsCommon';
 
 const ELECTRONIC_PARAMS = {
-  KEY: 'electronicAccessEsc',
+  KEY: 'electronicAccessEcs',
   URL: 'electronic-access-relationships?limit=1000&query=cql.allRecords=1 sortby name'
 };
 

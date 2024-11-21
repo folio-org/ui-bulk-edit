@@ -1,4 +1,4 @@
-import { useNotesEsc } from './useNoteEcs';
+import { useNotesEcs } from './useNoteEcs';
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 
 const NOTE_ESC = {
@@ -9,7 +9,7 @@ const NOTE_ESC = {
 };
 
 export const useItemNotesEcs = (tenants, type, options = {}) => {
-  return useNotesEsc({
+  return useNotesEcs({
     namespaceKey: NOTE_ESC.NAMESPACE,
     tenants,
     type,

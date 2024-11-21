@@ -18,9 +18,9 @@ export const LocationControl = ({ bulkOperationId, option, actionValue, actionIn
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { locationsEsc, isFetching: isLocationEscLoading } = useLocationEcs(tenants, { enabled: isCentralTenant });
+  const { locationsEcs, isFetching: isLocationEcsLoading } = useLocationEcs(tenants, { enabled: isCentralTenant });
 
-  const title = getLabelByValue(locationsEsc, actionValue);
+  const title = getLabelByValue(locationsEcs, actionValue);
   const currentTenants = useCurrentUserTenants();
 
   return (
@@ -29,9 +29,9 @@ export const LocationControl = ({ bulkOperationId, option, actionValue, actionIn
         <>
           <Selection
             id="locations-esc"
-            loading={isLocationEscLoading}
+            loading={isLocationEcsLoading}
             value={actionValue}
-            dataOptions={locationsEsc}
+            dataOptions={locationsEcs}
             disabled
           />
           <FindLocation
@@ -44,7 +44,7 @@ export const LocationControl = ({ bulkOperationId, option, actionValue, actionIn
                 actionIndex,
                 value: loc[0].id,
                 fieldName: FIELD_VALUE_KEY,
-                tenants: getTenantsById(removeDuplicatesByValue(locationsEsc, tenants), loc[0].id)
+                tenants: getTenantsById(removeDuplicatesByValue(locationsEcs, tenants), loc[0].id)
               });
             }}
           />

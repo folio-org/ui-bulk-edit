@@ -18,16 +18,16 @@ export const HoldingNotesControl = ({ bulkOperationId, option, actionValue, acti
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
 
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEcs(tenants, 'action', { enabled: isCentralTenant });
+  const { notesEcs: holdingsNotesEcs, isFetching: isHoldingsNotesEcsLoading } = useHoldingsNotesEcs(tenants, 'action', { enabled: isCentralTenant });
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes();
 
-  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEsc, tenants) : holdingsNotes)
+  const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEcs, tenants) : holdingsNotes)
     .filter(obj => obj.value !== option)
     .map(({ label, value, disabled, tenant }) => ({ label, value, disabled, tenant }));
   const sortedHoldingsNotes = sortWithoutPlaceholder(filteredAndMappedHoldingsNotes);
   const title = getLabelByValue(sortedHoldingsNotes, actionValue);
 
-  if (isHoldingsNotesEscLoading) return <Loading size="large" />;
+  if (isHoldingsNotesEcsLoading) return <Loading size="large" />;
 
   return (
     <div title={title}>

@@ -17,12 +17,12 @@ export const LoanTypesControl = ({ bulkOperationId, actionValue, actionIndex, on
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
   const { loanTypes, isLoanTypesLoading } = useLoanTypes();
-  const { escData: loanTypesEsc, isFetching: isLoanTypesEscLoading } = useLoanTypesEcs(tenants, { enabled: isCentralTenant });
+  const { escData: loanTypesEcs, isFetching: isLoanTypesEcsLoading } = useLoanTypesEcs(tenants, { enabled: isCentralTenant });
 
-  const types = isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes;
+  const types = isCentralTenant ? removeDuplicatesByValue(loanTypesEcs, tenants) : loanTypes;
   const title = getLabelByValue(types, actionValue);
 
-  if (isLoanTypesEscLoading) return <Loading size="large" />;
+  if (isLoanTypesEcsLoading) return <Loading size="large" />;
 
   return (
     <div title={title}>
@@ -35,11 +35,11 @@ export const LoanTypesControl = ({ bulkOperationId, actionValue, actionIndex, on
             actionIndex,
             value,
             fieldName: FIELD_VALUE_KEY,
-            tenants: getTenantsById(removeDuplicatesByValue(loanTypesEsc, tenants), value)
+            tenants: getTenantsById(removeDuplicatesByValue(loanTypesEcs, tenants), value)
           });
         }}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
-        dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEsc, tenants) : loanTypes}
+        dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEcs, tenants) : loanTypes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
         dirty={!!actionValue}
       />

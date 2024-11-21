@@ -18,7 +18,7 @@ export const ItemNotesControl = ({ bulkOperationId, option, actionValue, actionI
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
   const { itemNotes, usItemNotesLoading } = useItemNotes();
-  const { notesEsc: itemsNotes, isFetching: isItemsNotesEscLoading } = useItemNotesEcs(tenants, 'action', { enabled: isCentralTenant });
+  const { notesEcs: itemsNotes, isFetching: isItemsNotesEcsLoading } = useItemNotesEcs(tenants, 'action', { enabled: isCentralTenant });
 
   const notes = isCentralTenant ? removeDuplicatesByValue(itemsNotes, tenants) : itemNotes;
   const filteredAndMappedNotes = getItemNotes(formatMessage, notes)
@@ -27,14 +27,14 @@ export const ItemNotesControl = ({ bulkOperationId, option, actionValue, actionI
   const sortedNotes = sortWithoutPlaceholder(filteredAndMappedNotes);
   const title = getLabelByValue(sortedNotes, actionValue);
 
-  if (isItemsNotesEscLoading) return <Loading size="large" />;
+  if (isItemsNotesEcsLoading) return <Loading size="large" />;
 
   return (
     <div title={title}>
       <Select
         id="noteType"
         value={actionValue}
-        disabled={usItemNotesLoading || isItemsNotesEscLoading}
+        disabled={usItemNotesLoading || isItemsNotesEcsLoading}
         onChange={e => onChange({
           actionIndex,
           value: e.target.value,

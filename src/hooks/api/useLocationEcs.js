@@ -5,7 +5,7 @@ import { usePublishCoordinator } from '../usePublishCoordinator';
 const DEFAULT_DATA = {};
 
 export const useLocationEcs = (tenants, options = {}) => {
-  const [namespace] = useNamespace({ key: 'locationsEsc' });
+  const [namespace] = useNamespace({ key: 'locationsEcs' });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
 
   const { data = DEFAULT_DATA, isFetching } = useQuery({
@@ -34,14 +34,14 @@ export const useLocationEcs = (tenants, options = {}) => {
     });
   };
 
-  const locationsEsc = locations().map((location) => ({
+  const locationsEcs = locations().map((location) => ({
     value: location.id,
     label: location.name,
     tenant: location.tenantName,
   }));
 
   return {
-    locationsEsc,
+    locationsEcs,
     isFetching
   };
 };

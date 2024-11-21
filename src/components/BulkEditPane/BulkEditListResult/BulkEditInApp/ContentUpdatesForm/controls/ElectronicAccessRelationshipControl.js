@@ -23,22 +23,22 @@ export const ElectronicAccessRelationshipControl = ({ bulkOperationId, allAction
 
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships();
-  const { escData: urlRelationshipsEsc, isFetching: isElectronicAccessEscLoading } = useElectronicAccessEcs(tenants, { enabled: isCentralTenant });
+  const { escData: urlRelationshipsEcs, isFetching: isElectronicAccessEcsLoading } = useElectronicAccessEcs(tenants, { enabled: isCentralTenant });
 
-  const filteredElectronicAccessRelationshipsEsc = urlRelationshipsEsc?.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
+  const filteredElectronicAccessRelationshipsEcs = urlRelationshipsEcs?.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
   const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
-  const relationships = isCentralTenant ? removeDuplicatesByValue(filteredElectronicAccessRelationshipsEsc, tenants) : filteredElectronicAccessRelationships;
+  const relationships = isCentralTenant ? removeDuplicatesByValue(filteredElectronicAccessRelationshipsEcs, tenants) : filteredElectronicAccessRelationships;
   const accessRelationshipsWithPlaceholder = getItemsWithPlaceholder(relationships);
   const title = getLabelByValue(accessRelationshipsWithPlaceholder, actionValue);
 
-  if (isElectronicAccessEscLoading || isElectronicAccessLoading) return <Loading size="large" />;
+  if (isElectronicAccessEcsLoading || isElectronicAccessLoading) return <Loading size="large" />;
 
   return (
     <div title={title}>
       <Select
         id="urlRelationship"
         value={actionValue}
-        loading={isElectronicAccessLoading || isElectronicAccessEscLoading}
+        loading={isElectronicAccessLoading || isElectronicAccessEcsLoading}
         onChange={e => onChange(
           {
             actionIndex,
