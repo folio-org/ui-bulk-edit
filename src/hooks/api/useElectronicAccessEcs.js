@@ -5,7 +5,7 @@ const ELECTRONIC_PARAMS = {
   URL: 'electronic-access-relationships?limit=1000&query=cql.allRecords=1 sortby name'
 };
 
-export const useElectronicAccessEsc = (tenants, options = {}) => {
+export const useElectronicAccessEcs = (tenants, options = {}) => {
   return useEcsCommon(
     ELECTRONIC_PARAMS.KEY,
     ELECTRONIC_PARAMS.URL,

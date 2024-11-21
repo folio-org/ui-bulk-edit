@@ -19,4 +19,4 @@ export * from './useItemNotesEcs';
 export * from './useHoldingsNotesEcs';
 export * from './useLocationEcs';
 export * from './useLoanTypesEcs';
-export * from './useElectronicAccessEsc';
+export * from './useElectronicAccessEcs';

@@ -9,7 +9,7 @@ import { FIELD_VALUE_KEY, getLabelByValue } from '../helpers';
 import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
 import {
   useBulkOperationTenants,
-  useElectronicAccessEsc,
+  useElectronicAccessEcs,
   useElectronicAccessRelationships
 } from '../../../../../../hooks/api';
 import { getItemsWithPlaceholder } from '../../../../../../constants';
@@ -23,7 +23,7 @@ export const ElectronicAccessRelationshipControl = ({ bulkOperationId, allAction
 
   const { data: tenants } = useBulkOperationTenants(bulkOperationId);
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships();
-  const { escData: urlRelationshipsEsc, isFetching: isElectronicAccessEscLoading } = useElectronicAccessEsc(tenants, { enabled: isCentralTenant });
+  const { escData: urlRelationshipsEsc, isFetching: isElectronicAccessEscLoading } = useElectronicAccessEcs(tenants, { enabled: isCentralTenant });
 
   const filteredElectronicAccessRelationshipsEsc = urlRelationshipsEsc?.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
   const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
