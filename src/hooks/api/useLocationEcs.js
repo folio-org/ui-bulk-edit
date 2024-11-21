@@ -4,7 +4,7 @@ import { usePublishCoordinator } from '../usePublishCoordinator';
 
 const DEFAULT_DATA = {};
 
-export const useLocationEsc = (tenants, options = {}) => {
+export const useLocationEcs = (tenants, options = {}) => {
   const [namespace] = useNamespace({ key: 'locationsEsc' });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
 

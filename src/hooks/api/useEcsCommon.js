@@ -4,7 +4,7 @@ import { usePublishCoordinator } from '../usePublishCoordinator';
 
 const DEFAULT_DATA = {};
 
-export const useEscCommon = (key, url, tenants, mapResponse, options = {}) => {
+export const useEcsCommon = (key, url, tenants, mapResponse, options = {}) => {
   const [namespace] = useNamespace({ key });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
 

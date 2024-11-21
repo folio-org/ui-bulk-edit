@@ -20,10 +20,10 @@ import {
   useHoldingsNotes,
   useInstanceNotes,
   useElectronicAccessRelationships,
-  useHoldingsNotesEsc,
-  useItemNotesEsc,
-  useLocationEsc,
-  useLoanTypesEsc,
+  useHoldingsNotesEcs,
+  useItemNotesEcs,
+  useLocationEcs,
+  useLoanTypesEcs,
   useElectronicAccessEsc
 } from '../../../../hooks/api';
 
@@ -94,15 +94,15 @@ describe('BulkEditInApp', () => {
       electronicAccessRelationships: [],
       isElectronicAccessLoading: false,
     });
-    useHoldingsNotesEsc.mockClear().mockReturnValue({
+    useHoldingsNotesEcs.mockClear().mockReturnValue({
       instanceNotes: [],
       isFetching: false,
     });
-    useItemNotesEsc.mockClear().mockReturnValue({
+    useItemNotesEcs.mockClear().mockReturnValue({
       itemNotes: [],
       isFetching: false,
     });
-    useLoanTypesEsc.mockClear().mockReturnValue({
+    useLoanTypesEcs.mockClear().mockReturnValue({
       loantypes: [],
       isFetching: false,
     });
@@ -110,7 +110,7 @@ describe('BulkEditInApp', () => {
       electronicAccessRelationships: [],
       isFetching: false,
     });
-    useLocationEsc.mockClear().mockReturnValue({
+    useLocationEcs.mockClear().mockReturnValue({
       locations: [],
       isFetching: false,
     });

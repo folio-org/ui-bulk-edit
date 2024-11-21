@@ -28,8 +28,8 @@ import {
   useHoldingsNotes,
   useInstanceNotes,
   useBulkOperationTenants,
-  useHoldingsNotesEsc,
-  useItemNotesEsc
+  useHoldingsNotesEcs,
+  useItemNotesEcs
 } from '../../../../hooks/api';
 import { sortAlphabetically } from '../../../../utils/sortAlphabetically';
 import {
@@ -61,8 +61,8 @@ export const BulkEditInApp = ({
   const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemRecordType });
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
-  const { notesEsc: itemNotesEsc, isFetching: isItemsNotesEscLoading } = useItemNotesEsc(tenants, 'option', { enabled: isItemRecordType && isCentralTenant && !isLoading });
-  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEsc(tenants, 'option', { enabled: isHoldingsRecordType && isCentralTenant && !isLoading });
+  const { notesEsc: itemNotesEsc, isFetching: isItemsNotesEscLoading } = useItemNotesEcs(tenants, 'option', { enabled: isItemRecordType && isCentralTenant && !isLoading });
+  const { notesEsc: holdingsNotesEsc, isFetching: isHoldingsNotesEscLoading } = useHoldingsNotesEcs(tenants, 'option', { enabled: isHoldingsRecordType && isCentralTenant && !isLoading });
 
   const options = useMemo(() => ({
     [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemNotesEsc : itemNotes, tenants)),

@@ -1,4 +1,4 @@
-import { useEscCommon } from './useEscCommon';
+import { useEcsCommon } from './useEcsCommon';
 
 const ELECTRONIC_PARAMS = {
   KEY: 'electronicAccessEsc',
@@ -6,7 +6,7 @@ const ELECTRONIC_PARAMS = {
 };
 
 export const useElectronicAccessEsc = (tenants, options = {}) => {
-  return useEscCommon(
+  return useEcsCommon(
     ELECTRONIC_PARAMS.KEY,
     ELECTRONIC_PARAMS.URL,
     tenants,

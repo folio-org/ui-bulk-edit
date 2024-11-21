@@ -9,11 +9,12 @@ import { createMemoryHistory } from 'history';
 import { runAxeTest } from '@folio/stripes-testing';
 import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 import { ValuesColumn } from './ValuesColumn';
-import { useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
+import { useElectronicAccessRelationships, useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
 import { CAPABILITIES, CONTROL_TYPES } from '../../../../../constants';
 
 jest.mock('../../../../../hooks/api/useLoanTypes');
 jest.mock('../../../../../hooks/api/usePatronGroup');
+jest.mock('../../../../../hooks/api/useElectronicAccess');
 
 const onChange = jest.fn();
 
@@ -47,6 +48,11 @@ describe('ValuesColumn Component', () => {
     useLoanTypes.mockReturnValue({
       isLoading: false,
       loanTypes: [],
+    });
+
+    useElectronicAccessRelationships.mockReturnValue({
+      isElectronicAccessLoading: false,
+      electronicAccessRelationships: [],
     });
   });
 
