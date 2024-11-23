@@ -419,3 +419,13 @@ export const getExtraActions = (option, action, formattedMessage) => {
       return [];
   }
 };
+
+export const getLabelByValue = (items, targetValue) => {
+  return items?.find((labeledValue) => labeledValue.value === targetValue)?.label;
+};
+
+export const sortWithoutPlaceholder = (array) => {
+  const [placeholder, ...rest] = array;
+
+  return [placeholder, ...rest.sort((a, b) => a.label.localeCompare(b.label))];
+};

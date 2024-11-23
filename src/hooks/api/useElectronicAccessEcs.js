@@ -1,12 +1,12 @@
-import { useEscCommon } from './useEscCommon';
+import { useEcsCommon } from './useEcsCommon';
 
 const ELECTRONIC_PARAMS = {
-  KEY: 'electronicAccessEsc',
+  KEY: 'electronicAccessEcs',
   URL: 'electronic-access-relationships?limit=1000&query=cql.allRecords=1 sortby name'
 };
 
-export const useElectronicAccessEsc = (tenants, options = {}) => {
-  return useEscCommon(
+export const useElectronicAccessEcs = (tenants, options = {}) => {
+  return useEcsCommon(
     ELECTRONIC_PARAMS.KEY,
     ELECTRONIC_PARAMS.URL,
     tenants,

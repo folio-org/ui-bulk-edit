@@ -20,11 +20,11 @@ import {
   useHoldingsNotes,
   useInstanceNotes,
   useElectronicAccessRelationships,
-  useHoldingsNotesEsc,
-  useItemNotesEsc,
-  useLocationEsc,
-  useLoanTypesEsc,
-  useElectronicAccessEsc
+  useHoldingsNotesEcs,
+  useItemNotesEcs,
+  useLocationEcs,
+  useLoanTypesEcs,
+  useElectronicAccessEcs
 } from '../../../../hooks/api';
 
 
@@ -39,11 +39,11 @@ jest.mock('../../../../hooks/api', () => ({
   useHoldingsNotes: jest.fn(),
   useInstanceNotes: jest.fn(),
   useElectronicAccessRelationships: jest.fn(),
-  useHoldingsNotesEsc: jest.fn(),
-  useItemNotesEsc: jest.fn(),
-  useLocationEsc: jest.fn(),
-  useLoanTypesEsc: jest.fn(),
-  useElectronicAccessEsc: jest.fn(),
+  useHoldingsNotesEcs: jest.fn(),
+  useItemNotesEcs: jest.fn(),
+  useLocationEcs: jest.fn(),
+  useLoanTypesEcs: jest.fn(),
+  useElectronicAccessEcs: jest.fn(),
 }));
 
 const fileName = 'Mock.csv';
@@ -94,23 +94,23 @@ describe('BulkEditInApp', () => {
       electronicAccessRelationships: [],
       isElectronicAccessLoading: false,
     });
-    useHoldingsNotesEsc.mockClear().mockReturnValue({
+    useHoldingsNotesEcs.mockClear().mockReturnValue({
       instanceNotes: [],
       isFetching: false,
     });
-    useItemNotesEsc.mockClear().mockReturnValue({
+    useItemNotesEcs.mockClear().mockReturnValue({
       itemNotes: [],
       isFetching: false,
     });
-    useLoanTypesEsc.mockClear().mockReturnValue({
+    useLoanTypesEcs.mockClear().mockReturnValue({
       loantypes: [],
       isFetching: false,
     });
-    useElectronicAccessEsc.mockClear().mockReturnValue({
+    useElectronicAccessEcs.mockClear().mockReturnValue({
       electronicAccessRelationships: [],
       isFetching: false,
     });
-    useLocationEsc.mockClear().mockReturnValue({
+    useLocationEcs.mockClear().mockReturnValue({
       locations: [],
       isFetching: false,
     });
