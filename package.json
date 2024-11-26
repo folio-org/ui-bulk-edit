@@ -38,9 +38,7 @@
       {
         "permissionName": "ui-bulk-edit.base-view.manage",
         "displayName": "Bulk Edit: View base permissions",
-        "replaces": [
-          "ui-bulk-edit.view.base"
-        ],
+        "replaces": ["ui-bulk-edit.view.base"],
         "visible": false,
         "subPermissions": [
           "module.bulk-edit.enabled",
@@ -58,9 +56,7 @@
       {
         "permissionName": "ui-bulk-edit.base-edit.manage",
         "displayName": "Bulk Edit: View edit permissions",
-        "replaces": [
-          "ui-bulk-edit.edit.base"
-        ],
+        "replaces": ["ui-bulk-edit.edit.base"],
         "visible": false,
         "subPermissions": [
           "ui-bulk-edit.base-view.manage",
@@ -88,9 +84,7 @@
       {
         "permissionName": "ui-bulk-edit.users.csv.view",
         "displayName": "Bulk Edit: Local - View user records",
-        "replaces": [
-          "ui-bulk-edit.view"
-        ],
+        "replaces": ["ui-bulk-edit.view"],
         "visible": true,
         "subPermissions": [
           "ui-bulk-edit.base-view.manage",
@@ -101,9 +95,7 @@
       {
         "permissionName": "ui-bulk-edit.users.csv.edit",
         "displayName": "Bulk Edit: Local - Edit user records",
-        "replaces": [
-          "ui-bulk-edit.edit"
-        ],
+        "replaces": ["ui-bulk-edit.edit"],
         "subPermissions": [
           "ui-bulk-edit.users.csv.view",
           "ui-bulk-edit.base-edit.manage",
@@ -114,9 +106,7 @@
       {
         "permissionName": "ui-bulk-edit.inventory.view",
         "displayName": "Bulk Edit: In app - View inventory records",
-        "replaces": [
-          "ui-bulk-edit.app-view"
-        ],
+        "replaces": ["ui-bulk-edit.app-view"],
         "subPermissions": [
           "ui-bulk-edit.base-view.manage",
           "ui-bulk-edit.base-edit.manage",
@@ -127,9 +117,7 @@
       {
         "permissionName": "ui-bulk-edit.inventory.edit",
         "displayName": "Bulk Edit: In app - Edit inventory records",
-        "replaces": [
-          "ui-bulk-edit.app-edit"
-        ],
+        "replaces": ["ui-bulk-edit.app-edit"],
         "subPermissions": [
           "ui-bulk-edit.inventory.view",
           "ui-bulk-edit.base-edit.manage",
@@ -143,9 +131,7 @@
       {
         "permissionName": "ui-bulk-edit.users.edit",
         "displayName": "Bulk edit: In app - Edit user records",
-        "replaces": [
-          "ui-bulk-edit.app-edit.users"
-        ],
+        "replaces": ["ui-bulk-edit.app-edit.users"],
         "subPermissions": [
           "ui-bulk-edit.base-edit.manage",
           "bulk-operations.item.users.get",
@@ -167,9 +153,7 @@
       {
         "permissionName": "ui-bulk-edit.query.execute",
         "displayName": "Bulk edit: Can build query",
-        "replaces": [
-          "ui-bulk-edit.query"
-        ],
+        "replaces": ["ui-bulk-edit.query"],
         "subPermissions": [
           "module.bulk-edit.enabled",
           "usergroups.item.get",
@@ -243,7 +227,6 @@
     "testing-library-selector": "^0.2.1"
   },
   "dependencies": {
-    "@folio/plugin-query-builder": "https://github.com/folio-org/ui-plugin-query-builder#ed4efa2fa0d49755e5c4020d538d18bb93859d36",
     "@folio/stripes-acq-components": "^6.0.0",
     "file-saver": "^2.0.5",
     "history": "^5.1.0",
