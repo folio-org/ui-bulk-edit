@@ -4,7 +4,7 @@ import { omit } from 'lodash';
 
 import { makeQueryBuilder } from '@folio/stripes-acq-components';
 import noop from 'lodash/noop';
-import { LOGS_FILTERS, PAGINATION_CONFIG as pagination } from '../../constants';
+import { LOGS_FILTERS } from '../../constants';
 import { useErrorMessages } from '../useErrorMessages';
 
 export const BULK_OPERATION_USERS_KEY = 'BULK_OPERATION_USERS_KEY';
@@ -24,15 +24,12 @@ export const useBulkOperationUsers = (filters, options) => {
 
   const searchParams = {
     query: logsQuery,
-    limit: pagination.limit,
-    offset: pagination.offset,
   };
 
   const { data, isLoading } = useQuery({
     queryKey: [namespaceKey, filters],
     queryFn: () => ky.get('bulk-operations/list-users', { searchParams }).json(),
     onError: showErrorMessage,
-    onSuccess: showErrorMessage,
     ...options,
   });
 

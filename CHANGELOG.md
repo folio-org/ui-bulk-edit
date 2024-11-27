@@ -1,6 +1,8 @@
 # Change history for ui-bulk-edit
 
 ## In progress
+* 
+* [UIBULKED-587](https://folio-org.atlassian.net/browse/UIBULKED-587) Only Users from the first page are displayed in "Users" dropdown on "Logs" page.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
 
