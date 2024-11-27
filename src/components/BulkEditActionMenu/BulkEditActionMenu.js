@@ -168,7 +168,7 @@ const BulkEditActionMenu = ({
                 onClick={() => handleOnStartEdit(APPROACHES.MARK)}
               >
                 <Icon icon="edit">
-                  <FormattedMessage id="ui-bulk-edit.start.edit.mark" />
+                  <FormattedMessage id="ui-bulk-edit.start.edit.marc" />
                 </Icon>
               </Button>
             )}
