@@ -1,0 +1,3404 @@
+{
+  "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": [
+    {
+      "type": 0,
+      "value": "The uploaded file is empty."
+    }
+  ],
+  "actionMenu.placeholder": [
+    {
+      "type": 0,
+      "value": "搜尋欄名稱"
+    }
+  ],
+  "actions.find": [
+    {
+      "type": 0,
+      "value": "Find"
+    }
+  ],
+  "actions.findEntireField": [
+    {
+      "type": 0,
+      "value": "Find (entire subfield search)"
+    }
+  ],
+  "actions.findFullField": [
+    {
+      "type": 0,
+      "value": "查找（全域檢索）"
+    }
+  ],
+  "actions.placeholder": [
+    {
+      "type": 0,
+      "value": "選擇操作"
+    }
+  ],
+  "ariaLabel.actionsSelect": [
+    {
+      "type": 0,
+      "value": "操作選擇"
+    }
+  ],
+  "ariaLabel.columnFilter": [
+    {
+      "type": 0,
+      "value": "列過濾器輸入"
+    }
+  ],
+  "ariaLabel.date": [
+    {
+      "type": 0,
+      "value": "日期"
+    }
+  ],
+  "ariaLabel.loanTypeSelect": [
+    {
+      "type": 0,
+      "value": "借閱類型選擇"
+    }
+  ],
+  "ariaLabel.location": [
+    {
+      "type": 0,
+      "value": "館藏地"
+    }
+  ],
+  "ariaLabel.patronGroupSelect": [
+    {
+      "type": 0,
+      "value": "讀者群組選擇"
+    }
+  ],
+  "ariaLabel.statusSelect": [
+    {
+      "type": 0,
+      "value": "狀態選擇"
+    }
+  ],
+  "ariaLabel.textArea": [
+    {
+      "type": 0,
+      "value": "文字區域"
+    }
+  ],
+  "ariaLabel.textField": [
+    {
+      "type": 0,
+      "value": "文本欄位"
+    }
+  ],
+  "ariaLabel.urlRelationshipSelect": [
+    {
+      "type": 0,
+      "value": "URL關係選擇"
+    }
+  ],
+  "cancel": [
+    {
+      "type": 0,
+      "value": "取消"
+    }
+  ],
+  "category.administrativeData": [
+    {
+      "type": 0,
+      "value": "Administrative data"
+    }
+  ],
+  "category.electronicAccess": [
+    {
+      "type": 0,
+      "value": "電子資源"
+    }
+  ],
+  "category.holdingsLocation": [
+    {
+      "type": 0,
+      "value": "館藏的館藏地"
+    }
+  ],
+  "category.holdingsNotes": [
+    {
+      "type": 0,
+      "value": "館藏附註"
+    }
+  ],
+  "category.instanceNotes": [
+    {
+      "type": 0,
+      "value": "實例附註"
+    }
+  ],
+  "category.itemNotes": [
+    {
+      "type": 0,
+      "value": "館藏附註"
+    }
+  ],
+  "category.loanType": [
+    {
+      "type": 0,
+      "value": "借閱類型"
+    }
+  ],
+  "category.location": [
+    {
+      "type": 0,
+      "value": "館藏地"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition format": [
+    {
+      "type": 0,
+      "value": "採購格式"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition method": [
+    {
+      "type": 0,
+      "value": "採購方式"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Action note": [
+    {
+      "type": 0,
+      "value": "操作說明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Administrative note": [
+    {
+      "type": 0,
+      "value": "管理用之附註"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Binding": [
+    {
+      "type": 0,
+      "value": "裝訂附註"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number": [
+    {
+      "type": 0,
+      "value": "索書號碼"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number prefix": [
+    {
+      "type": 0,
+      "value": "索書號碼前綴"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number suffix": [
+    {
+      "type": 0,
+      "value": "索書號後綴"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number type": [
+    {
+      "type": 0,
+      "value": "索書號類型"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy note": [
+    {
+      "type": 0,
+      "value": "複本附註"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy number": [
+    {
+      "type": 0,
+      "value": "複本號"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Digitization policy": [
+    {
+      "type": 0,
+      "value": "數位化政策"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Discovery suppress": [
+    {
+      "type": 0,
+      "value": "在探索服務中隱藏"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Effective location": [
+    {
+      "type": 0,
+      "value": "有效的館藏地"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic access": [
+    {
+      "type": 0,
+      "value": "電子存取"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic bookplate": [
+    {
+      "type": 0,
+      "value": "電子書牌"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former holdings Id": [
+    {
+      "type": 0,
+      "value": "Former holdings Id"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former ids": [
+    {
+      "type": 0,
+      "value": "先前的ID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.HRID": [
+    {
+      "type": 0,
+      "value": "館藏HRID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings HRID": [
+    {
+      "type": 0,
+      "value": "Holdings HRID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "Holdings UUID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings copy number": [
+    {
+      "type": 0,
+      "value": "Holdings copy number"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number": [
+    {
+      "type": 0,
+      "value": "Holdings level call number"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number prefix": [
+    {
+      "type": 0,
+      "value": "Holdings level call number prefix"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number suffix": [
+    {
+      "type": 0,
+      "value": "Holdings level call number suffix"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number type": [
+    {
+      "type": 0,
+      "value": "Holdings level call number type"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings permanent location": [
+    {
+      "type": 0,
+      "value": "Holdings permanent location"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings record id": [
+    {
+      "type": 0,
+      "value": "館藏ID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement": [
+    {
+      "type": 0,
+      "value": "Holdings statement"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for indexes": [
+    {
+      "type": 0,
+      "value": "Holdings statement for indexes"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for supplements": [
+    {
+      "type": 0,
+      "value": "Holdings statement for supplements"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements": [
+    {
+      "type": 0,
+      "value": "館藏說明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for indexes": [
+    {
+      "type": 0,
+      "value": "索引的館藏說明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for supplements": [
+    {
+      "type": 0,
+      "value": "補編的館藏說明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings temporary location": [
+    {
+      "type": 0,
+      "value": "Holdings temporary location"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings type": [
+    {
+      "type": 0,
+      "value": "館藏類型"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.ILL policy": [
+    {
+      "type": 0,
+      "value": "ILL policy"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Ill policy": [
+    {
+      "type": 0,
+      "value": "館際互借政策"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "實例（標題、出版商、出版日期）"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance HRID": [
+    {
+      "type": 0,
+      "value": "實例HRID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Item barcode": [
+    {
+      "type": 0,
+      "value": "館藏條碼"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Member": [
+    {
+      "type": 0,
+      "value": "Member"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Notes": [
+    {
+      "type": 0,
+      "value": "附註"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Number of items": [
+    {
+      "type": 0,
+      "value": "館藏數"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Order format": [
+    {
+      "type": 0,
+      "value": "Order format"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Permanent location": [
+    {
+      "type": 0,
+      "value": "永久館藏地"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Provenance": [
+    {
+      "type": 0,
+      "value": "出處附註"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receipt status": [
+    {
+      "type": 0,
+      "value": "發票狀態"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receiving history": [
+    {
+      "type": 0,
+      "value": "接收歷史記錄"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Reproduction": [
+    {
+      "type": 0,
+      "value": "複製說明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Retention policy": [
+    {
+      "type": 0,
+      "value": "保留政策"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Shelving title": [
+    {
+      "type": 0,
+      "value": "排架題名"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Source": [
+    {
+      "type": 0,
+      "value": "來源"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Statistical codes": [
+    {
+      "type": 0,
+      "value": "統計代碼"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Suppress from discovery"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Tags": [
+    {
+      "type": 0,
+      "value": "標籤"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Temporary location": [
+    {
+      "type": 0,
+      "value": "臨時館藏地"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Version": [
+    {
+      "type": 0,
+      "value": "版本"
+    }
+  ],
+  "columns.INSTANCE.Administrative note": [
+    {
+      "type": 0,
+      "value": "管理用之附註"
+    }
+  ],
+  "columns.INSTANCE.Cataloged date": [
+    {
+      "type": 0,
+      "value": "編目日期"
+    }
+  ],
+  "columns.INSTANCE.Contributors": [
+    {
+      "type": 0,
+      "value": "貢獻者"
+    }
+  ],
+  "columns.INSTANCE.Edition": [
+    {
+      "type": 0,
+      "value": "版本"
+    }
+  ],
+  "columns.INSTANCE.Formats": [
+    {
+      "type": 0,
+      "value": "格式"
+    }
+  ],
+  "columns.INSTANCE.Index title": [
+    {
+      "type": 0,
+      "value": "索引題名"
+    }
+  ],
+  "columns.INSTANCE.Instance HRID": [
+    {
+      "type": 0,
+      "value": "實例HRID"
+    }
+  ],
+  "columns.INSTANCE.Instance UUID": [
+    {
+      "type": 0,
+      "value": "實例UUID"
+    }
+  ],
+  "columns.INSTANCE.Instance status term": [
+    {
+      "type": 0,
+      "value": "實例狀態術語"
+    }
+  ],
+  "columns.INSTANCE.Languages": [
+    {
+      "type": 0,
+      "value": "語言"
+    }
+  ],
+  "columns.INSTANCE.Mode of issuance": [
+    {
+      "type": 0,
+      "value": "發行方式"
+    }
+  ],
+  "columns.INSTANCE.Nature of content": [
+    {
+      "type": 0,
+      "value": "內容性質"
+    }
+  ],
+  "columns.INSTANCE.Notes": [
+    {
+      "type": 0,
+      "value": "Notes"
+    }
+  ],
+  "columns.INSTANCE.Physical description": [
+    {
+      "type": 0,
+      "value": "稽核項"
+    }
+  ],
+  "columns.INSTANCE.Previously held": [
+    {
+      "type": 0,
+      "value": "先前擁有"
+    }
+  ],
+  "columns.INSTANCE.Publication frequency": [
+    {
+      "type": 0,
+      "value": "出版頻率"
+    }
+  ],
+  "columns.INSTANCE.Publication range": [
+    {
+      "type": 0,
+      "value": "出版範圍"
+    }
+  ],
+  "columns.INSTANCE.Resource title": [
+    {
+      "type": 0,
+      "value": "資源題名"
+    }
+  ],
+  "columns.INSTANCE.Resource type": [
+    {
+      "type": 0,
+      "value": "資源類型"
+    }
+  ],
+  "columns.INSTANCE.Series statements": [
+    {
+      "type": 0,
+      "value": "集叢項"
+    }
+  ],
+  "columns.INSTANCE.Source": [
+    {
+      "type": 0,
+      "value": "來源"
+    }
+  ],
+  "columns.INSTANCE.Staff suppress": [
+    {
+      "type": 0,
+      "value": "對館員隱藏"
+    }
+  ],
+  "columns.INSTANCE.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "在探索服務中隱藏"
+    }
+  ],
+  "columns.ITEM.Accession number": [
+    {
+      "type": 0,
+      "value": "Accession number"
+    }
+  ],
+  "columns.ITEM.Administrative note": [
+    {
+      "type": 0,
+      "value": "管理用之附註"
+    }
+  ],
+  "columns.ITEM.Barcode": [
+    {
+      "type": 0,
+      "value": "條碼"
+    }
+  ],
+  "columns.ITEM.Bound with titles": [
+    {
+      "type": 0,
+      "value": "Bound with titles"
+    }
+  ],
+  "columns.ITEM.Call Number": [
+    {
+      "type": 0,
+      "value": "索書號"
+    }
+  ],
+  "columns.ITEM.Check in note": [
+    {
+      "type": 0,
+      "value": "Check in note"
+    }
+  ],
+  "columns.ITEM.Check out note": [
+    {
+      "type": 0,
+      "value": "Check out note"
+    }
+  ],
+  "columns.ITEM.Chronology": [
+    {
+      "type": 0,
+      "value": "年表"
+    }
+  ],
+  "columns.ITEM.Circulation Notes": [
+    {
+      "type": 0,
+      "value": "流通附註"
+    }
+  ],
+  "columns.ITEM.Contributor Names": [
+    {
+      "type": 0,
+      "value": "貢獻者姓名"
+    }
+  ],
+  "columns.ITEM.Copy number": [
+    {
+      "type": 0,
+      "value": "Copy number"
+    }
+  ],
+  "columns.ITEM.Description of pieces": [
+    {
+      "type": 0,
+      "value": "Description of pieces"
+    }
+  ],
+  "columns.ITEM.Effective call number": [
+    {
+      "type": 0,
+      "value": "Effective call number"
+    }
+  ],
+  "columns.ITEM.Electronic access": [
+    {
+      "type": 0,
+      "value": "Electronic access"
+    }
+  ],
+  "columns.ITEM.Enumeration": [
+    {
+      "type": 0,
+      "value": "期數"
+    }
+  ],
+  "columns.ITEM.Former identifier": [
+    {
+      "type": 0,
+      "value": "Former identifier"
+    }
+  ],
+  "columns.ITEM.Holdings (Location, Call number)": [
+    {
+      "type": 0,
+      "value": "館藏 (館藏地, 索書號)"
+    }
+  ],
+  "columns.ITEM.Holdings Record Id": [
+    {
+      "type": 0,
+      "value": "館藏記錄 ID"
+    }
+  ],
+  "columns.ITEM.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "Holdings UUID"
+    }
+  ],
+  "columns.ITEM.In Transit Destination Service Point": [
+    {
+      "type": 0,
+      "value": "中轉目的地服務點"
+    }
+  ],
+  "columns.ITEM.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "Instance (Title, Publisher, Publication date)"
+    }
+  ],
+  "columns.ITEM.Is bound with": [
+    {
+      "type": 0,
+      "value": "Is bound with"
+    }
+  ],
+  "columns.ITEM.Item HRID": [
+    {
+      "type": 0,
+      "value": "單件HRID"
+    }
+  ],
+  "columns.ITEM.Item UUID": [
+    {
+      "type": 0,
+      "value": "Item UUID"
+    }
+  ],
+  "columns.ITEM.Item damaged status": [
+    {
+      "type": 0,
+      "value": "Item damaged status"
+    }
+  ],
+  "columns.ITEM.Item damaged status date": [
+    {
+      "type": 0,
+      "value": "Item damaged status date"
+    }
+  ],
+  "columns.ITEM.Item effective location": [
+    {
+      "type": 0,
+      "value": "Item effective location"
+    }
+  ],
+  "columns.ITEM.Item id": [
+    {
+      "type": 0,
+      "value": "單件HRID ID"
+    }
+  ],
+  "columns.ITEM.Item identifier": [
+    {
+      "type": 0,
+      "value": "Item identifier"
+    }
+  ],
+  "columns.ITEM.Item level call number": [
+    {
+      "type": 0,
+      "value": "Item level call number"
+    }
+  ],
+  "columns.ITEM.Item level call number prefix": [
+    {
+      "type": 0,
+      "value": "Item level call number prefix"
+    }
+  ],
+  "columns.ITEM.Item level call number suffix": [
+    {
+      "type": 0,
+      "value": "Item level call number suffix"
+    }
+  ],
+  "columns.ITEM.Item level call number type": [
+    {
+      "type": 0,
+      "value": "Item level call number type"
+    }
+  ],
+  "columns.ITEM.Item permanent location": [
+    {
+      "type": 0,
+      "value": "Item permanent location"
+    }
+  ],
+  "columns.ITEM.Item temporary location": [
+    {
+      "type": 0,
+      "value": "Item temporary location"
+    }
+  ],
+  "columns.ITEM.Last CheckIn": [
+    {
+      "type": 0,
+      "value": "上次歸還"
+    }
+  ],
+  "columns.ITEM.Material type": [
+    {
+      "type": 0,
+      "value": "Material type"
+    }
+  ],
+  "columns.ITEM.Member": [
+    {
+      "type": 0,
+      "value": "Member"
+    }
+  ],
+  "columns.ITEM.Missing pieces": [
+    {
+      "type": 0,
+      "value": "Missing pieces"
+    }
+  ],
+  "columns.ITEM.Missing pieces date": [
+    {
+      "type": 0,
+      "value": "Missing pieces date"
+    }
+  ],
+  "columns.ITEM.Notes": [
+    {
+      "type": 0,
+      "value": "附註"
+    }
+  ],
+  "columns.ITEM.Number of missing pieces": [
+    {
+      "type": 0,
+      "value": "Number of missing pieces"
+    }
+  ],
+  "columns.ITEM.Number of pieces": [
+    {
+      "type": 0,
+      "value": "Number of pieces"
+    }
+  ],
+  "columns.ITEM.Permanent loan type": [
+    {
+      "type": 0,
+      "value": "Permanent loan type"
+    }
+  ],
+  "columns.ITEM.Purchase Order Line Identifier": [
+    {
+      "type": 0,
+      "value": "採購訂單細項識別號"
+    }
+  ],
+  "columns.ITEM.Shelving order": [
+    {
+      "type": 0,
+      "value": "Shelving order"
+    }
+  ],
+  "columns.ITEM.Statistical codes": [
+    {
+      "type": 0,
+      "value": "Statistical codes"
+    }
+  ],
+  "columns.ITEM.Status": [
+    {
+      "type": 0,
+      "value": "狀態"
+    }
+  ],
+  "columns.ITEM.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Suppress from discovery"
+    }
+  ],
+  "columns.ITEM.Tags": [
+    {
+      "type": 0,
+      "value": "標籤"
+    }
+  ],
+  "columns.ITEM.Temporary loan type": [
+    {
+      "type": 0,
+      "value": "Temporary loan type"
+    }
+  ],
+  "columns.ITEM.Title": [
+    {
+      "type": 0,
+      "value": "題名"
+    }
+  ],
+  "columns.ITEM.Version": [
+    {
+      "type": 0,
+      "value": "版本"
+    }
+  ],
+  "columns.ITEM.Volume": [
+    {
+      "type": 0,
+      "value": "卷"
+    }
+  ],
+  "columns.ITEM.Year, caption": [
+    {
+      "type": 0,
+      "value": "Year, caption"
+    }
+  ],
+  "columns.USER.Active": [
+    {
+      "type": 0,
+      "value": "啟用"
+    }
+  ],
+  "columns.USER.Addresses": [
+    {
+      "type": 0,
+      "value": "地址"
+    }
+  ],
+  "columns.USER.Barcode": [
+    {
+      "type": 0,
+      "value": "條碼"
+    }
+  ],
+  "columns.USER.Created Date": [
+    {
+      "type": 0,
+      "value": "已建立記錄"
+    }
+  ],
+  "columns.USER.Custom fields": [
+    {
+      "type": 0,
+      "value": "自訂欄位"
+    }
+  ],
+  "columns.USER.Date Of Birth": [
+    {
+      "type": 0,
+      "value": "出生日期"
+    }
+  ],
+  "columns.USER.Departments": [
+    {
+      "type": 0,
+      "value": "系所"
+    }
+  ],
+  "columns.USER.Email": [
+    {
+      "type": 0,
+      "value": "電子郵件"
+    }
+  ],
+  "columns.USER.Enrollment date": [
+    {
+      "type": 0,
+      "value": "註冊日期"
+    }
+  ],
+  "columns.USER.Expiration date": [
+    {
+      "type": 0,
+      "value": "有效期限"
+    }
+  ],
+  "columns.USER.External system id": [
+    {
+      "type": 0,
+      "value": "外部系統ID"
+    }
+  ],
+  "columns.USER.First name": [
+    {
+      "type": 0,
+      "value": "名"
+    }
+  ],
+  "columns.USER.Last name": [
+    {
+      "type": 0,
+      "value": "姓"
+    }
+  ],
+  "columns.USER.Link to the profile picture": [
+    {
+      "type": 0,
+      "value": "連結到個人檔案圖片"
+    }
+  ],
+  "columns.USER.Middle name": [
+    {
+      "type": 0,
+      "value": "中間名"
+    }
+  ],
+  "columns.USER.Mobile phone": [
+    {
+      "type": 0,
+      "value": "行動電話"
+    }
+  ],
+  "columns.USER.Patron group": [
+    {
+      "type": 0,
+      "value": "讀者群組"
+    }
+  ],
+  "columns.USER.Phone": [
+    {
+      "type": 0,
+      "value": "電話"
+    }
+  ],
+  "columns.USER.Preferred contact type id": [
+    {
+      "type": 0,
+      "value": "偏好聯絡人類型 ID"
+    }
+  ],
+  "columns.USER.Preferred email communications": [
+    {
+      "type": 0,
+      "value": "Preferred email communications"
+    }
+  ],
+  "columns.USER.Preferred first name": [
+    {
+      "type": 0,
+      "value": "偏好名字"
+    }
+  ],
+  "columns.USER.Proxy for": [
+    {
+      "type": 0,
+      "value": "代理"
+    }
+  ],
+  "columns.USER.Tags": [
+    {
+      "type": 0,
+      "value": "標籤"
+    }
+  ],
+  "columns.USER.Type": [
+    {
+      "type": 0,
+      "value": "類型"
+    }
+  ],
+  "columns.USER.Updated date": [
+    {
+      "type": 0,
+      "value": "記錄已更新"
+    }
+  ],
+  "columns.USER.User id": [
+    {
+      "type": 0,
+      "value": "使用者ID"
+    }
+  ],
+  "columns.USER.User name": [
+    {
+      "type": 0,
+      "value": "使用者名稱"
+    }
+  ],
+  "columns.logs.actions": [
+    {
+      "type": 0,
+      "value": "操作"
+    }
+  ],
+  "columns.logs.approach": [
+    {
+      "type": 0,
+      "value": "Editing"
+    }
+  ],
+  "columns.logs.endTime": [
+    {
+      "type": 0,
+      "value": "結束"
+    }
+  ],
+  "columns.logs.entityType": [
+    {
+      "type": 0,
+      "value": "記錄類型"
+    }
+  ],
+  "columns.logs.hrId": [
+    {
+      "type": 0,
+      "value": "ID"
+    }
+  ],
+  "columns.logs.operationType": [
+    {
+      "type": 0,
+      "value": "批次操作類型"
+    }
+  ],
+  "columns.logs.processedNumOfRecords": [
+    {
+      "type": 0,
+      "value": "已處理"
+    }
+  ],
+  "columns.logs.startTime": [
+    {
+      "type": 0,
+      "value": "開始"
+    }
+  ],
+  "columns.logs.status": [
+    {
+      "type": 0,
+      "value": "狀態"
+    }
+  ],
+  "columns.logs.totalNumOfRecords": [
+    {
+      "type": 0,
+      "value": "記錄"
+    }
+  ],
+  "columns.logs.userId": [
+    {
+      "type": 0,
+      "value": "執行"
+    }
+  ],
+  "conformationModal.commitChanges": [
+    {
+      "type": 0,
+      "value": "提交更改"
+    }
+  ],
+  "conformationModal.message": [
+    {
+      "type": 0,
+      "value": "如果點選"
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "提交更改"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    },
+    {
+      "type": 0,
+      "value": "按鈕"
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "記錄將會更新。"
+    }
+  ],
+  "error.incorrectFormatted": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": "格式不正確。請更正格式並重新上傳檔案。"
+    }
+  ],
+  "error.mod-bulk-operations.not.confirm.changes.s3.issue": [
+    {
+      "type": 0,
+      "value": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules)."
+    }
+  ],
+  "error.mod-bulk-operations.not.download.file.from.s3": [
+    {
+      "type": 0,
+      "value": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules)."
+    }
+  ],
+  "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": [
+    {
+      "type": 0,
+      "value": "There is a problem with S3 configuration that prevents Bulk edit module to save files.  Please contact your hosting provider to check if the Bulk edit app has been configured correctly."
+    }
+  ],
+  "error.sww": [
+    {
+      "type": 0,
+      "value": "發生了一些問題 !"
+    }
+  ],
+  "error.uploadedFile": [
+    {
+      "type": 0,
+      "value": "上傳檔案失敗"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_HOLDINGS": [
+    {
+      "type": 0,
+      "value": "適用於所有館藏記錄"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_ITEMS": [
+    {
+      "type": 0,
+      "value": "適用於所有單件記錄"
+    }
+  ],
+  "layer.action.apply.ITEMS": [
+    {
+      "type": 0,
+      "value": "適用於單件記錄"
+    }
+  ],
+  "layer.action.apply.STAFF_ONLY": [
+    {
+      "type": 0,
+      "value": "只供職員使用"
+    }
+  ],
+  "layer.action.clear": [
+    {
+      "type": 0,
+      "value": "清除欄位"
+    }
+  ],
+  "layer.action.replace": [
+    {
+      "type": 0,
+      "value": "取代為"
+    }
+  ],
+  "layer.column.actions": [
+    {
+      "type": 0,
+      "value": "操作"
+    }
+  ],
+  "layer.column.data": [
+    {
+      "type": 0,
+      "value": "資料"
+    }
+  ],
+  "layer.column.field": [
+    {
+      "type": 0,
+      "value": "Field"
+    }
+  ],
+  "layer.column.ind1": [
+    {
+      "type": 0,
+      "value": "In.1"
+    }
+  ],
+  "layer.column.ind2": [
+    {
+      "type": 0,
+      "value": "In.2"
+    }
+  ],
+  "layer.column.options": [
+    {
+      "type": 0,
+      "value": "選項"
+    }
+  ],
+  "layer.column.subfield": [
+    {
+      "type": 0,
+      "value": "Subfield"
+    }
+  ],
+  "layer.confirmChanges": [
+    {
+      "type": 0,
+      "value": "確認更改"
+    }
+  ],
+  "layer.marc.error": [
+    {
+      "type": 0,
+      "value": "Only 5xx and 9xx edits are currently supported."
+    }
+  ],
+  "layer.marc.error.ind": [
+    {
+      "type": 0,
+      "value": "Please check your input."
+    }
+  ],
+  "layer.marc.error.limited": [
+    {
+      "type": 0,
+      "value": "Limited to 5xx and 9xx."
+    }
+  ],
+  "layer.marc.error.protected": [
+    {
+      "type": 0,
+      "value": "This field is protected."
+    }
+  ],
+  "layer.marc.error.subfield": [
+    {
+      "type": 0,
+      "value": "Please check your input."
+    }
+  ],
+  "layer.options.add": [
+    {
+      "type": 0,
+      "value": "Add"
+    }
+  ],
+  "layer.options.additionalSubfield": [
+    {
+      "type": 0,
+      "value": "Additional subfield"
+    }
+  ],
+  "layer.options.administrativeNote": [
+    {
+      "type": 0,
+      "value": "管理用之附註"
+    }
+  ],
+  "layer.options.append": [
+    {
+      "type": 0,
+      "value": "Append"
+    }
+  ],
+  "layer.options.available": [
+    {
+      "type": 0,
+      "value": "可用的"
+    }
+  ],
+  "layer.options.checkInNote": [
+    {
+      "type": 0,
+      "value": "歸還附註"
+    }
+  ],
+  "layer.options.checkOutNote": [
+    {
+      "type": 0,
+      "value": "借出附註"
+    }
+  ],
+  "layer.options.email": [
+    {
+      "type": 0,
+      "value": "電子郵件"
+    }
+  ],
+  "layer.options.expirationDate": [
+    {
+      "type": 0,
+      "value": "有效期限"
+    }
+  ],
+  "layer.options.holdings.linkText": [
+    {
+      "type": 0,
+      "value": "連結文字"
+    }
+  ],
+  "layer.options.holdings.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "指定資料"
+    }
+  ],
+  "layer.options.holdings.permanentLocation": [
+    {
+      "type": 0,
+      "value": "長期館藏地"
+    }
+  ],
+  "layer.options.holdings.suppress": [
+    {
+      "type": 0,
+      "value": "在探索服務中隱藏"
+    }
+  ],
+  "layer.options.holdings.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "臨時館藏地"
+    }
+  ],
+  "layer.options.holdings.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "layer.options.holdings.urlPublic": [
+    {
+      "type": 0,
+      "value": "URL 的公開附註"
+    }
+  ],
+  "layer.options.holdings.urlRelationship": [
+    {
+      "type": 0,
+      "value": "URL關係"
+    }
+  ],
+  "layer.options.inProcess": [
+    {
+      "type": 0,
+      "value": "In process"
+    }
+  ],
+  "layer.options.instances.staffSuppress": [
+    {
+      "type": 0,
+      "value": "對館員隱藏"
+    }
+  ],
+  "layer.options.instances.suppress": [
+    {
+      "type": 0,
+      "value": "在探索服務中隱藏"
+    }
+  ],
+  "layer.options.intellectual": [
+    {
+      "type": 0,
+      "value": "虛擬單件"
+    }
+  ],
+  "layer.options.items.addNote": [
+    {
+      "type": 0,
+      "value": "新增附註"
+    }
+  ],
+  "layer.options.items.changeNote": [
+    {
+      "type": 0,
+      "value": "更改附註類型"
+    }
+  ],
+  "layer.options.items.duplicateTo": [
+    {
+      "type": 0,
+      "value": "複製到"
+    }
+  ],
+  "layer.options.items.false": [
+    {
+      "type": 0,
+      "value": "錯誤"
+    }
+  ],
+  "layer.options.items.markAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "僅標記為職員"
+    }
+  ],
+  "layer.options.items.removeAll": [
+    {
+      "type": 0,
+      "value": "移除全部"
+    }
+  ],
+  "layer.options.items.removeMarkAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "刪除僅作為職員的標記"
+    }
+  ],
+  "layer.options.items.removeNote": [
+    {
+      "type": 0,
+      "value": "移除"
+    }
+  ],
+  "layer.options.items.true": [
+    {
+      "type": 0,
+      "value": "正確"
+    }
+  ],
+  "layer.options.longMissing": [
+    {
+      "type": 0,
+      "value": "長期遺失"
+    }
+  ],
+  "layer.options.missing": [
+    {
+      "type": 0,
+      "value": "遺失"
+    }
+  ],
+  "layer.options.non-requestable": [
+    {
+      "type": 0,
+      "value": "處理中（不可預約）"
+    }
+  ],
+  "layer.options.patronGroup": [
+    {
+      "type": 0,
+      "value": "讀者群組"
+    }
+  ],
+  "layer.options.permanentLoanType": [
+    {
+      "type": 0,
+      "value": "永久借閱類型"
+    }
+  ],
+  "layer.options.permanentLocation": [
+    {
+      "type": 0,
+      "value": "永久單件館藏地"
+    }
+  ],
+  "layer.options.placeholder": [
+    {
+      "type": 0,
+      "value": "選擇單件狀態"
+    }
+  ],
+  "layer.options.removeField": [
+    {
+      "type": 0,
+      "value": "Remove field"
+    }
+  ],
+  "layer.options.removeSubfield": [
+    {
+      "type": 0,
+      "value": "Remove subfield"
+    }
+  ],
+  "layer.options.replaceWith": [
+    {
+      "type": 0,
+      "value": "Replace with"
+    }
+  ],
+  "layer.options.restricted": [
+    {
+      "type": 0,
+      "value": "使用限制"
+    }
+  ],
+  "layer.options.statusLabel": [
+    {
+      "type": 0,
+      "value": "單件狀態"
+    }
+  ],
+  "layer.options.suppressFromDiscovery": [
+    {
+      "type": 0,
+      "value": "在探索服務中隱藏"
+    }
+  ],
+  "layer.options.temporaryLoanTypeLabel": [
+    {
+      "type": 0,
+      "value": "臨時借閱類型"
+    }
+  ],
+  "layer.options.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "臨時單件館藏地"
+    }
+  ],
+  "layer.options.unavailable": [
+    {
+      "type": 0,
+      "value": "不可用"
+    }
+  ],
+  "layer.options.unknown": [
+    {
+      "type": 0,
+      "value": "未知"
+    }
+  ],
+  "layer.options.withdrawn": [
+    {
+      "type": 0,
+      "value": "註銷"
+    }
+  ],
+  "layer.selectLoanType": [
+    {
+      "type": 0,
+      "value": "選擇借閱類型"
+    }
+  ],
+  "layer.selectLocation": [
+    {
+      "type": 0,
+      "value": "選擇館藏地"
+    }
+  ],
+  "layer.selectNoteType": [
+    {
+      "type": 0,
+      "value": "選擇附註類型"
+    }
+  ],
+  "layer.selectPatronGroup": [
+    {
+      "type": 0,
+      "value": "選擇讀者群組"
+    }
+  ],
+  "layer.selectType": [
+    {
+      "type": 0,
+      "value": "選擇附註類型"
+    }
+  ],
+  "layer.title": [
+    {
+      "type": 0,
+      "value": "批次更新"
+    }
+  ],
+  "list.actions.download": [
+    {
+      "type": 0,
+      "value": "下載"
+    }
+  ],
+  "list.criteriaTitle": [
+    {
+      "type": 0,
+      "value": "設定標準"
+    }
+  ],
+  "list.errors.info": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " : "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": "個條目 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": "筆記錄符合 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": "個錯誤"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " : "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": "條目 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": "筆記錄已更改 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": "個錯誤"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.info": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "批次編輯查詢： "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": "條目 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": "記錄已更改 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": "錯誤"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "批次編輯查詢： "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": "條目 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": "記錄已更改 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": "錯誤"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.table.code": [
+    {
+      "type": 0,
+      "value": "記錄識別號"
+    }
+  ],
+  "list.errors.table.link": [
+    {
+      "type": 0,
+      "value": "View latest version"
+    }
+  ],
+  "list.errors.table.message": [
+    {
+      "type": 0,
+      "value": "錯誤原因"
+    }
+  ],
+  "list.errors.title": [
+    {
+      "type": 0,
+      "value": "錯誤"
+    }
+  ],
+  "list.filters.capabilities.acquisition": [
+    {
+      "type": 0,
+      "value": "採購"
+    }
+  ],
+  "list.filters.capabilities.circulation": [
+    {
+      "type": 0,
+      "value": "流通"
+    }
+  ],
+  "list.filters.capabilities.holdings": [
+    {
+      "type": 0,
+      "value": "館藏庫-館藏"
+    }
+  ],
+  "list.filters.capabilities.instances": [
+    {
+      "type": 0,
+      "value": "館藏庫 - 實例"
+    }
+  ],
+  "list.filters.capabilities.inventory": [
+    {
+      "type": 0,
+      "value": "館藏庫：單件"
+    }
+  ],
+  "list.filters.capabilities.title": [
+    {
+      "type": 0,
+      "value": "記錄類型"
+    }
+  ],
+  "list.filters.capabilities.users": [
+    {
+      "type": 0,
+      "value": "使用者"
+    }
+  ],
+  "list.filters.identifier": [
+    {
+      "type": 0,
+      "value": "識別號"
+    }
+  ],
+  "list.filters.logs": [
+    {
+      "type": 0,
+      "value": "日誌紀錄"
+    }
+  ],
+  "list.filters.query": [
+    {
+      "type": 0,
+      "value": "查詢"
+    }
+  ],
+  "list.filters.recordIdentifier": [
+    {
+      "type": 0,
+      "value": "記錄識別號"
+    }
+  ],
+  "list.filters.recordIdentifier.externalIDs": [
+    {
+      "type": 0,
+      "value": "外部 ID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsHRID": [
+    {
+      "type": 0,
+      "value": "館藏HRID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "館藏 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.instanceHRID": [
+    {
+      "type": 0,
+      "value": "實例 HRID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.itemBarcodes": [
+    {
+      "type": 0,
+      "value": "單件條碼"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceHRID": [
+    {
+      "type": 0,
+      "value": "實例 HRID"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISBN": [
+    {
+      "type": 0,
+      "value": "國際標準書號 ISBN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISSN": [
+    {
+      "type": 0,
+      "value": "國際標準期刊號 ISSN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceUUID": [
+    {
+      "type": 0,
+      "value": "館藏 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.item.ItemHRIDs": [
+    {
+      "type": 0,
+      "value": "單件 HRIDs"
+    }
+  ],
+  "list.filters.recordIdentifier.item.UUID": [
+    {
+      "type": 0,
+      "value": "單件 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.item.accession": [
+    {
+      "type": 0,
+      "value": "單件入藏號"
+    }
+  ],
+  "list.filters.recordIdentifier.item.barcode": [
+    {
+      "type": 0,
+      "value": "單件條碼"
+    }
+  ],
+  "list.filters.recordIdentifier.item.former": [
+    {
+      "type": 0,
+      "value": "單件先前的識別號"
+    }
+  ],
+  "list.filters.recordIdentifier.item.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "館藏 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.placeholder": [
+    {
+      "type": 0,
+      "value": "選擇記錄識別號"
+    }
+  ],
+  "list.filters.recordIdentifier.userBarcodes": [
+    {
+      "type": 0,
+      "value": "使用者條碼"
+    }
+  ],
+  "list.filters.recordIdentifier.userUUIDs": [
+    {
+      "type": 0,
+      "value": "使用者 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.usernames": [
+    {
+      "type": 0,
+      "value": "使用者名稱"
+    }
+  ],
+  "list.logSubTitle": [
+    {
+      "type": 0,
+      "value": "設定開始批次更新的條件"
+    }
+  ],
+  "list.logSubTitle.changed": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "筆記錄已更改"
+    }
+  ],
+  "list.logSubTitle.matched": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "筆記錄匹配"
+    }
+  ],
+  "list.preview.electronicAccess.linkText": [
+    {
+      "type": 0,
+      "value": "連結文字"
+    }
+  ],
+  "list.preview.electronicAccess.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "指定資料"
+    }
+  ],
+  "list.preview.electronicAccess.publicNote": [
+    {
+      "type": 0,
+      "value": "公開附註"
+    }
+  ],
+  "list.preview.electronicAccess.relationship": [
+    {
+      "type": 0,
+      "value": "關係"
+    }
+  ],
+  "list.preview.electronicAccess.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "list.preview.table.status.false": [
+    {
+      "type": 0,
+      "value": "未啟用"
+    }
+  ],
+  "list.preview.table.status.true": [
+    {
+      "type": 0,
+      "value": "啟用"
+    }
+  ],
+  "list.preview.title": [
+    {
+      "type": 0,
+      "value": "預覽匹配的記錄"
+    }
+  ],
+  "list.preview.titleChanged": [
+    {
+      "type": 0,
+      "value": "記錄預覽已更改"
+    }
+  ],
+  "list.result.emptyMessage": [
+    {
+      "type": 0,
+      "value": "選擇記錄類型，然後選擇記錄識別號。"
+    }
+  ],
+  "list.result.emptyMessage.empty": [
+    {
+      "type": 0,
+      "value": "選擇記錄識別號"
+    }
+  ],
+  "list.result.emptyMessage.holdings": [
+    {
+      "type": 0,
+      "value": "選擇記錄識別號。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有館藏 HRID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.ID": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有館藏 UUID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有實例 HRID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有單件條碼的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.query": [
+    {
+      "type": 0,
+      "value": "按一下「查詢」按鈕查詢。"
+    }
+  ],
+  "list.result.emptyMessage.instance": [
+    {
+      "type": 0,
+      "value": "選擇記錄識別號。"
+    }
+  ],
+  "list.result.emptyMessage.instance.HRID": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有實例 HRID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.instance.ID": [
+    {
+      "type": 0,
+      "value": "拖曳或選擇具有實例 UUID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "拖曳或選擇帶有 ISBN 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有 ISSN 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.instance.query": [
+    {
+      "type": 0,
+      "value": "按一下「查詢」按鈕查詢。"
+    }
+  ],
+  "list.result.emptyMessage.item": [
+    {
+      "type": 0,
+      "value": "選擇記錄識別號"
+    }
+  ],
+  "list.result.emptyMessage.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有單件編號的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有單件條碼的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有單件前識別號的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有館藏 UUID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.item.HRID": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有單件 HRID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.item.ID": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有單件 UUID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.item.query": [
+    {
+      "type": 0,
+      "value": "按一下「查詢」按鈕查詢。"
+    }
+  ],
+  "list.result.emptyMessage.logs": [
+    {
+      "type": 0,
+      "value": "選擇一個篩選器來顯示結果。"
+    }
+  ],
+  "list.result.emptyMessage.query": [
+    {
+      "type": 0,
+      "value": "選擇一個記錄類型，然後按一下查詢按鈕。"
+    }
+  ],
+  "list.result.emptyMessage.user": [
+    {
+      "type": 0,
+      "value": "選擇記錄識別號。"
+    }
+  ],
+  "list.result.emptyMessage.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有使用者條碼的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "拖放或選擇具有外部 ID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.user.ID": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有使用者 UUID 的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "拖放或選擇帶有使用者名稱的檔案。"
+    }
+  ],
+  "list.result.emptyMessage.user.query": [
+    {
+      "type": 0,
+      "value": "按一下「查詢」按鈕查詢。"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "包含更新記錄的檔案"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含更新記錄的檔案"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "提交更改時遇到錯誤的檔案"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "提交更改時遇到錯誤的檔案"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "File with updated records"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "File with updated records"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "包含符合記錄的檔案"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含符合記錄的檔案"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "記錄在匹配過程中遇到錯誤的檔案"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "記錄在匹配過程中遇到錯誤的檔案"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "包含建議更改預覽的檔案"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含建議更改預覽的檔案"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "File with the preview of proposed changes"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "File with the preview of proposed changes"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile": [
+    {
+      "type": 0,
+      "value": "用於觸發批次編輯的檔案"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含受批次更新影響的記錄識別碼的檔案"
+    }
+  ],
+  "logs.approach.IN_APP": [
+    {
+      "type": 0,
+      "value": "In app"
+    }
+  ],
+  "logs.approach.MANUAL": [
+    {
+      "type": 0,
+      "value": "本地"
+    }
+  ],
+  "logs.approach.QUERY": [
+    {
+      "type": 0,
+      "value": "查詢"
+    }
+  ],
+  "logs.entityType.HOLDINGS_RECORD": [
+    {
+      "type": 0,
+      "value": "館藏庫 - 館藏"
+    }
+  ],
+  "logs.entityType.INSTANCE": [
+    {
+      "type": 0,
+      "value": "館藏庫 - 實例"
+    }
+  ],
+  "logs.entityType.INSTANCE_MARC": [
+    {
+      "type": 0,
+      "value": "Inventory - instances (MARC)"
+    }
+  ],
+  "logs.entityType.ITEM": [
+    {
+      "type": 0,
+      "value": "館藏庫 - 單件"
+    }
+  ],
+  "logs.entityType.USER": [
+    {
+      "type": 0,
+      "value": "使用者"
+    }
+  ],
+  "logs.filter.endDate": [
+    {
+      "type": 0,
+      "value": "結束"
+    }
+  ],
+  "logs.filter.option.delete": [
+    {
+      "type": 0,
+      "value": "刪除"
+    }
+  ],
+  "logs.filter.option.edit": [
+    {
+      "type": 0,
+      "value": "編輯"
+    }
+  ],
+  "logs.filter.startDate": [
+    {
+      "type": 0,
+      "value": "開始"
+    }
+  ],
+  "logs.filter.title.capability": [
+    {
+      "type": 0,
+      "value": "記錄類型"
+    }
+  ],
+  "logs.filter.title.status": [
+    {
+      "type": 0,
+      "value": "狀態"
+    }
+  ],
+  "logs.filter.title.types": [
+    {
+      "type": 0,
+      "value": "批次操作類型"
+    }
+  ],
+  "logs.filter.title.user": [
+    {
+      "type": 0,
+      "value": "使用者"
+    }
+  ],
+  "logs.filter.user.placeholder": [
+    {
+      "type": 0,
+      "value": "選擇使用者"
+    }
+  ],
+  "logs.filter.user.placeholder.empty": [
+    {
+      "type": 0,
+      "value": "List is empty"
+    }
+  ],
+  "logs.infoPopover": [
+    {
+      "type": 0,
+      "value": "檔案無法下載，因為自作業運行之日起已過去 30 天。"
+    }
+  ],
+  "logs.status.APPLY_CHANGES": [
+    {
+      "type": 0,
+      "value": "應用變更"
+    }
+  ],
+  "logs.status.COMPLETED": [
+    {
+      "type": 0,
+      "value": "完成"
+    }
+  ],
+  "logs.status.COMPLETED_WITH_ERRORS": [
+    {
+      "type": 0,
+      "value": "已完成但有錯誤"
+    }
+  ],
+  "logs.status.DATA_MODIFICATION": [
+    {
+      "type": 0,
+      "value": "資料修改"
+    }
+  ],
+  "logs.status.EXECUTING_QUERY": [
+    {
+      "type": 0,
+      "value": "執行查詢"
+    }
+  ],
+  "logs.status.FAILED": [
+    {
+      "type": 0,
+      "value": "失敗"
+    }
+  ],
+  "logs.status.NEW": [
+    {
+      "type": 0,
+      "value": "新增"
+    }
+  ],
+  "logs.status.RETRIEVING_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "Retrieving identifiers"
+    }
+  ],
+  "logs.status.RETRIEVING_RECORDS": [
+    {
+      "type": 0,
+      "value": "檢索記錄"
+    }
+  ],
+  "logs.status.REVIEWED_NO_MARC_RECORDS": [
+    {
+      "type": 0,
+      "value": "Reviewing changes"
+    }
+  ],
+  "logs.status.REVIEW_CHANGES": [
+    {
+      "type": 0,
+      "value": "審查變更"
+    }
+  ],
+  "logs.status.SAVED_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "Saving identifiers"
+    }
+  ],
+  "logs.status.SAVING_RECORDS_LOCALLY": [
+    {
+      "type": 0,
+      "value": "儲存紀錄"
+    }
+  ],
+  "menuGroup.actions": [
+    {
+      "type": 0,
+      "value": "操作"
+    }
+  ],
+  "menuGroup.showColumns": [
+    {
+      "type": 0,
+      "value": "顯示欄位"
+    }
+  ],
+  "menuGroup.startEdit": [
+    {
+      "type": 0,
+      "value": "Start bulk edit"
+    }
+  ],
+  "meta.logs.title": [
+    {
+      "type": 0,
+      "value": "批次編輯日誌紀錄"
+    }
+  ],
+  "meta.query.title": [
+    {
+      "type": 0,
+      "value": "批次編輯查詢"
+    }
+  ],
+  "meta.query.title.mark": [
+    {
+      "type": 0,
+      "value": "Bulk edit MARC fields query"
+    }
+  ],
+  "meta.title": [
+    {
+      "type": 0,
+      "value": "批次更新"
+    }
+  ],
+  "meta.title.conformationModal": [
+    {
+      "type": 0,
+      "value": "批次編輯： "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " "
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile": [
+    {
+      "type": 0,
+      "value": "批次更新 "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile.mark": [
+    {
+      "type": 0,
+      "value": "Bulk edit MARC fields - "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "modal.fileExtensions.actionButton": [
+    {
+      "type": 0,
+      "value": "選擇其他檔案上傳"
+    }
+  ],
+  "modal.fileExtensions.blocked.header": [
+    {
+      "type": 0,
+      "value": "無效檔案"
+    }
+  ],
+  "modal.fileExtensions.blocked.message": [
+    {
+      "type": 0,
+      "value": "只能上傳副檔名為 .csv 的檔案"
+    }
+  ],
+  "modal.fileExtensions.blocked.message2": [
+    {
+      "type": 0,
+      "value": "只能上傳一個副檔名為 .csv 的檔案。"
+    }
+  ],
+  "modal.next": [
+    {
+      "type": 0,
+      "value": "下一個"
+    }
+  ],
+  "modal.successfullMessage": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": "已成功上傳。"
+    }
+  ],
+  "options.placeholder": [
+    {
+      "type": 0,
+      "value": "選擇選項"
+    }
+  ],
+  "permission.inventory.edit": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: In app - Edit inventory records"
+    }
+  ],
+  "permission.inventory.view": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: In app - View inventory records"
+    }
+  ],
+  "permission.logs.view": [
+    {
+      "type": 0,
+      "value": "批次編輯：可以查看日誌紀錄"
+    }
+  ],
+  "permission.module.bulk-edit.enabled": [
+    {
+      "type": 0,
+      "value": "UI：批次編輯模組已啟用"
+    }
+  ],
+  "permission.query.execute": [
+    {
+      "type": 0,
+      "value": "Bulk edit: Can build query"
+    }
+  ],
+  "permission.users.csv.edit": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: Local - Edit user records"
+    }
+  ],
+  "permission.users.csv.view": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: Local - View user records"
+    }
+  ],
+  "permission.users.edit": [
+    {
+      "type": 0,
+      "value": "Bulk edit: In app - Edit user records"
+    }
+  ],
+  "permissionsModal.cancel": [
+    {
+      "type": 0,
+      "value": "取消"
+    }
+  ],
+  "permissionsModal.filter.assigned": [
+    {
+      "type": 0,
+      "value": "已指派"
+    }
+  ],
+  "permissionsModal.filter.assignmentStatus": [
+    {
+      "type": 0,
+      "value": "權限分配狀態"
+    }
+  ],
+  "permissionsModal.filter.permissionSets": [
+    {
+      "type": 0,
+      "value": "權限組合"
+    }
+  ],
+  "permissionsModal.filter.permissionTypes": [
+    {
+      "type": 0,
+      "value": "權限類型"
+    }
+  ],
+  "permissionsModal.filter.permissions": [
+    {
+      "type": 0,
+      "value": "權限"
+    }
+  ],
+  "permissionsModal.filter.resetAll": [
+    {
+      "type": 0,
+      "value": "全部重設"
+    }
+  ],
+  "permissionsModal.filter.search": [
+    {
+      "type": 0,
+      "value": "檢索"
+    }
+  ],
+  "permissionsModal.filter.title": [
+    {
+      "type": 0,
+      "value": "查詢與篩選"
+    }
+  ],
+  "permissionsModal.filter.unassigned": [
+    {
+      "type": 0,
+      "value": "未指派的"
+    }
+  ],
+  "permissionsModal.list.cell.assigned": [
+    {
+      "type": 0,
+      "value": "已指派"
+    }
+  ],
+  "permissionsModal.list.cell.permissionSets": [
+    {
+      "type": 0,
+      "value": "權限組合"
+    }
+  ],
+  "permissionsModal.list.cell.permissions": [
+    {
+      "type": 0,
+      "value": "權限"
+    }
+  ],
+  "permissionsModal.list.cell.unassigned": [
+    {
+      "type": 0,
+      "value": "未指派的"
+    }
+  ],
+  "permissionsModal.list.columns.name": [
+    {
+      "type": 0,
+      "value": "名稱"
+    }
+  ],
+  "permissionsModal.list.columns.status": [
+    {
+      "type": 0,
+      "value": "狀態"
+    }
+  ],
+  "permissionsModal.list.columns.type": [
+    {
+      "type": 0,
+      "value": "類型"
+    }
+  ],
+  "permissionsModal.list.subTitle": [
+    {
+      "type": 0,
+      "value": "找到"
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "權限"
+    }
+  ],
+  "permissionsModal.list.title": [
+    {
+      "type": 0,
+      "value": "權限"
+    }
+  ],
+  "permissionsModal.save": [
+    {
+      "type": 0,
+      "value": "儲存並關閉"
+    }
+  ],
+  "permissionsModal.title": [
+    {
+      "type": 0,
+      "value": "選擇權限"
+    }
+  ],
+  "permissionsModal.totalSelected": [
+    {
+      "type": 0,
+      "value": "所選總數： "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    }
+  ],
+  "preview.file.title": [
+    {
+      "type": 0,
+      "value": "檔案名稱： "
+    },
+    {
+      "type": 1,
+      "value": "fileUploadedName"
+    }
+  ],
+  "preview.query.title": [
+    {
+      "type": 0,
+      "value": "查詢： "
+    },
+    {
+      "type": 1,
+      "value": "queryText"
+    }
+  ],
+  "previewModal.areYouSure": [
+    {
+      "type": 0,
+      "value": "是否確定？"
+    }
+  ],
+  "previewModal.downloadPreview": [
+    {
+      "type": 0,
+      "value": "下載預覽"
+    }
+  ],
+  "previewModal.downloadPreview.marc": [
+    {
+      "type": 0,
+      "value": "Download preview in MARC format"
+    }
+  ],
+  "previewModal.keepEditing": [
+    {
+      "type": 0,
+      "value": "繼續編輯"
+    }
+  ],
+  "previewModal.message": [
+    {
+      "type": 0,
+      "value": "如果按一下「提交變更」按鈕，將會變更"
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "筆記錄。您可以選擇下載預覽以在儲存之前查看所有變更。"
+    }
+  ],
+  "previewModal.message.empty.marc": [
+    {
+      "type": 0,
+      "value": "All instances have source FOLIO. Use “Instances and  Administrative data” option for bulk edit."
+    }
+  ],
+  "previewModal.previewToBeChanged": [
+    {
+      "type": 0,
+      "value": "預覽要變更的記錄"
+    }
+  ],
+  "previewModal.saveAndClose": [
+    {
+      "type": 0,
+      "value": "提交更改"
+    }
+  ],
+  "progressBar.committing": [
+    {
+      "type": 0,
+      "value": "提交變更"
+    }
+  ],
+  "progressBar.title": [
+    {
+      "type": 0,
+      "value": "上傳"
+    },
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": "並檢索相關資料"
+    }
+  ],
+  "progresssBar.processing": [
+    {
+      "type": 0,
+      "value": "處理中"
+    }
+  ],
+  "progresssBar.retrieving": [
+    {
+      "type": 0,
+      "value": "檢索中..."
+    }
+  ],
+  "recordsSuccessfullyChanged": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "value"
+    },
+    {
+      "type": 0,
+      "value": "筆記錄已成功更改"
+    }
+  ],
+  "resetFilters": [
+    {
+      "type": 0,
+      "value": "全部重設"
+    }
+  ],
+  "retrievedDataList.title": [
+    {
+      "type": 0,
+      "value": "找到"
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "matched"
+    },
+    {
+      "type": 0,
+      "value": "匹配的"
+    },
+    {
+      "type": 1,
+      "value": "capability"
+    },
+    {
+      "type": 0,
+      "value": "記錄。"
+    }
+  ],
+  "start.delete": [
+    {
+      "type": 0,
+      "value": "開始批次刪除"
+    }
+  ],
+  "start.downloadChangedRecords": [
+    {
+      "type": 0,
+      "value": "下載已變動的紀錄 (CSV)"
+    }
+  ],
+  "start.downloadChangedRecords.marc": [
+    {
+      "type": 0,
+      "value": "Download changed records (MARC)"
+    }
+  ],
+  "start.downloadErrors": [
+    {
+      "type": 0,
+      "value": "下載錯誤 (CSV)"
+    }
+  ],
+  "start.downloadMathcedRecords": [
+    {
+      "type": 0,
+      "value": "下載符合的記錄 (CSV)"
+    }
+  ],
+  "start.edit": [
+    {
+      "type": 0,
+      "value": "開始批次更新"
+    }
+  ],
+  "start.edit.csv": [
+    {
+      "type": 0,
+      "value": "開始批次編輯（本地）"
+    }
+  ],
+  "start.edit.instance": [
+    {
+      "type": 0,
+      "value": "開始批次編輯 - 實例欄位"
+    }
+  ],
+  "start.edit.mark": [
+    {
+      "type": 0,
+      "value": "Instances with source MARC (POC)"
+    }
+  ],
+  "textArea.resetAll": [
+    {
+      "type": 0,
+      "value": "全部重設"
+    }
+  ],
+  "textArea.search": [
+    {
+      "type": 0,
+      "value": "檢索"
+    }
+  ],
+  "title.identifier": [
+    {
+      "type": 0,
+      "value": "識別號"
+    }
+  ],
+  "title.logs": [
+    {
+      "type": 0,
+      "value": "日誌紀錄"
+    }
+  ],
+  "title.mark": [
+    {
+      "type": 0,
+      "value": "Bulk edit MARC fields"
+    }
+  ],
+  "title.query": [
+    {
+      "type": 0,
+      "value": "查詢"
+    }
+  ],
+  "type.placeholder": [
+    {
+      "type": 0,
+      "value": "選擇類型"
+    }
+  ],
+  "uploaderActiveTitle": [
+    {
+      "type": 0,
+      "value": "取消以便繼續"
+    }
+  ],
+  "uploaderBtnText": [
+    {
+      "type": 0,
+      "value": "或是選擇檔案"
+    }
+  ],
+  "uploaderSubTitle": [
+    {
+      "type": 0,
+      "value": "選擇帶有記錄識別號的檔案"
+    }
+  ],
+  "uploaderSubTitle.empty": [
+    {
+      "type": 0,
+      "value": "選擇帶有記錄識別號的檔案"
+    }
+  ],
+  "uploaderSubTitle.holdings": [
+    {
+      "type": 0,
+      "value": "選擇帶有記錄識別號的檔案"
+    }
+  ],
+  "uploaderSubTitle.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "選擇包含館藏 HRID 的檔案"
+    }
+  ],
+  "uploaderSubTitle.holdings.ID": [
+    {
+      "type": 0,
+      "value": "選擇具有館藏 UUID 的檔案"
+    }
+  ],
+  "uploaderSubTitle.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "選擇具有實例 HRID 的檔案"
+    }
+  ],
+  "uploaderSubTitle.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "選擇帶有單件條碼的檔案"
+    }
+  ],
+  "uploaderSubTitle.instance": [
+    {
+      "type": 0,
+      "value": "選擇帶有記錄識別號的檔案"
+    }
+  ],
+  "uploaderSubTitle.instance.HRID": [
+    {
+      "type": 0,
+      "value": "選擇具有實例 HRID 的檔案"
+    }
+  ],
+  "uploaderSubTitle.instance.ID": [
+    {
+      "type": 0,
+      "value": "選擇具有實例 UUID 的檔案"
+    }
+  ],
+  "uploaderSubTitle.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "選擇帶有 ISBN 的檔案"
+    }
+  ],
+  "uploaderSubTitle.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "選擇帶有 ISSN 的檔案"
+    }
+  ],
+  "uploaderSubTitle.item": [
+    {
+      "type": 0,
+      "value": "選擇帶有記錄識別號的檔案"
+    }
+  ],
+  "uploaderSubTitle.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "選擇帶有單件入藏號的檔案"
+    }
+  ],
+  "uploaderSubTitle.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "選擇帶有單件條碼的檔案"
+    }
+  ],
+  "uploaderSubTitle.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "選擇帶有單件前識別號的檔案"
+    }
+  ],
+  "uploaderSubTitle.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "選擇具有館藏 UUID 的檔案"
+    }
+  ],
+  "uploaderSubTitle.item.HRID": [
+    {
+      "type": 0,
+      "value": "選擇包含單件 HRID 的文件"
+    }
+  ],
+  "uploaderSubTitle.item.ID": [
+    {
+      "type": 0,
+      "value": "選擇具有單件 UUID 的檔案"
+    }
+  ],
+  "uploaderSubTitle.records": [
+    {
+      "type": 0,
+      "value": "上傳包含已編輯記錄的 CSV 檔案"
+    }
+  ],
+  "uploaderSubTitle.user": [
+    {
+      "type": 0,
+      "value": "選擇帶有記錄識別號的檔案"
+    }
+  ],
+  "uploaderSubTitle.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "選擇帶有使用者條碼的檔案"
+    }
+  ],
+  "uploaderSubTitle.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "選擇具有外部 ID 的檔案"
+    }
+  ],
+  "uploaderSubTitle.user.ID": [
+    {
+      "type": 0,
+      "value": "選擇具有使用者 UUID 的檔案"
+    }
+  ],
+  "uploaderSubTitle.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "選擇帶有使用者名稱的檔案"
+    }
+  ],
+  "uploaderTitle": [
+    {
+      "type": 0,
+      "value": "拖放"
+    }
+  ],
+  "uploading": [
+    {
+      "type": 0,
+      "value": "上傳中"
+    }
+  ]
+}

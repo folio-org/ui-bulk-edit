@@ -1,0 +1,3376 @@
+{
+  "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": [
+    {
+      "type": 0,
+      "value": "Nahraný soubor je prázdný."
+    }
+  ],
+  "actionMenu.placeholder": [
+    {
+      "type": 0,
+      "value": "Název vyhledávacího sloupce"
+    }
+  ],
+  "actions.find": [
+    {
+      "type": 0,
+      "value": "Najít"
+    }
+  ],
+  "actions.findEntireField": [
+    {
+      "type": 0,
+      "value": "Najít (hledání v celém podpoli)"
+    }
+  ],
+  "actions.findFullField": [
+    {
+      "type": 0,
+      "value": "Najít (hledání v celém poli)"
+    }
+  ],
+  "actions.placeholder": [
+    {
+      "type": 0,
+      "value": "Vybrat akci"
+    }
+  ],
+  "ariaLabel.actionsSelect": [
+    {
+      "type": 0,
+      "value": "Vybrat akce"
+    }
+  ],
+  "ariaLabel.columnFilter": [
+    {
+      "type": 0,
+      "value": "Vstup filtru sloupců"
+    }
+  ],
+  "ariaLabel.date": [
+    {
+      "type": 0,
+      "value": "Datum"
+    }
+  ],
+  "ariaLabel.loanTypeSelect": [
+    {
+      "type": 0,
+      "value": "Vybrat typ výpůjčky"
+    }
+  ],
+  "ariaLabel.location": [
+    {
+      "type": 0,
+      "value": "Lokace"
+    }
+  ],
+  "ariaLabel.patronGroupSelect": [
+    {
+      "type": 0,
+      "value": "Vybrat skupinu čtenářů"
+    }
+  ],
+  "ariaLabel.statusSelect": [
+    {
+      "type": 0,
+      "value": "Vybrat stav"
+    }
+  ],
+  "ariaLabel.textArea": [
+    {
+      "type": 0,
+      "value": "Textová oblast"
+    }
+  ],
+  "ariaLabel.textField": [
+    {
+      "type": 0,
+      "value": "Textové pole"
+    }
+  ],
+  "ariaLabel.urlRelationshipSelect": [
+    {
+      "type": 0,
+      "value": "Vybrat vztah URL"
+    }
+  ],
+  "cancel": [
+    {
+      "type": 0,
+      "value": "Zrušit"
+    }
+  ],
+  "category.administrativeData": [
+    {
+      "type": 0,
+      "value": "Administrative data"
+    }
+  ],
+  "category.electronicAccess": [
+    {
+      "type": 0,
+      "value": "Elektronický přístup"
+    }
+  ],
+  "category.holdingsLocation": [
+    {
+      "type": 0,
+      "value": "Lokace holdingů"
+    }
+  ],
+  "category.holdingsNotes": [
+    {
+      "type": 0,
+      "value": "Poznámky holdingů"
+    }
+  ],
+  "category.instanceNotes": [
+    {
+      "type": 0,
+      "value": "Poznámky k titulu"
+    }
+  ],
+  "category.itemNotes": [
+    {
+      "type": 0,
+      "value": "Poznámky jednotky"
+    }
+  ],
+  "category.loanType": [
+    {
+      "type": 0,
+      "value": "Typ výpůjčky"
+    }
+  ],
+  "category.location": [
+    {
+      "type": 0,
+      "value": "Lokace"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition format": [
+    {
+      "type": 0,
+      "value": "Formát akvizice"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition method": [
+    {
+      "type": 0,
+      "value": "Akviziční metoda"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Action note": [
+    {
+      "type": 0,
+      "value": "Poznámka k akci"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Administrative note": [
+    {
+      "type": 0,
+      "value": "Administrativní poznámka"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Binding": [
+    {
+      "type": 0,
+      "value": "Poznámka vazby"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number": [
+    {
+      "type": 0,
+      "value": "Signatura"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number prefix": [
+    {
+      "type": 0,
+      "value": "Prefix signatury"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number suffix": [
+    {
+      "type": 0,
+      "value": "Suffix signatury"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number type": [
+    {
+      "type": 0,
+      "value": "Typ signatury"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy note": [
+    {
+      "type": 0,
+      "value": "Kopírovat poznámku"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy number": [
+    {
+      "type": 0,
+      "value": "Číslo kopie"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Digitization policy": [
+    {
+      "type": 0,
+      "value": "Pravidla digitalizace"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Discovery suppress": [
+    {
+      "type": 0,
+      "value": "Vyřadit z vyhledávání"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Effective location": [
+    {
+      "type": 0,
+      "value": "Efektivní lokace"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic access": [
+    {
+      "type": 0,
+      "value": "Elektronický přístup"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic bookplate": [
+    {
+      "type": 0,
+      "value": "Poznámka elektronická knižní deska"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former holdings Id": [
+    {
+      "type": 0,
+      "value": "ID bývalého holdingu"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former ids": [
+    {
+      "type": 0,
+      "value": "Bývalé ID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.HRID": [
+    {
+      "type": 0,
+      "value": "HRID holdingů"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings HRID": [
+    {
+      "type": 0,
+      "value": "HRID holdingů"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "UUID holdingů"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings copy number": [
+    {
+      "type": 0,
+      "value": "Číslo kopie holdingu"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number": [
+    {
+      "type": 0,
+      "value": "Holdingy úroveň signatury"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number prefix": [
+    {
+      "type": 0,
+      "value": "Holdingy úroveň prefix signatury"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number suffix": [
+    {
+      "type": 0,
+      "value": "Holdingy úroveň suffix signatury"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number type": [
+    {
+      "type": 0,
+      "value": "Holdingy úroveň signatury typ"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings permanent location": [
+    {
+      "type": 0,
+      "value": "Trvalá lokace holdingů"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings record id": [
+    {
+      "type": 0,
+      "value": "ID holdingů"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement": [
+    {
+      "type": 0,
+      "value": "Holdingy prohlášení"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for indexes": [
+    {
+      "type": 0,
+      "value": "Holdingy prohlášení pro indexy"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for supplements": [
+    {
+      "type": 0,
+      "value": "Holdingy prohlášení pro doplňky"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements": [
+    {
+      "type": 0,
+      "value": "Holdingy prohlášení"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for indexes": [
+    {
+      "type": 0,
+      "value": "Holdingy prohlášení pro indexy"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for supplements": [
+    {
+      "type": 0,
+      "value": "Holdingy prohlášení pro doplňky"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings temporary location": [
+    {
+      "type": 0,
+      "value": "Dočasná lokace holgingů"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings type": [
+    {
+      "type": 0,
+      "value": "Typ holdingu"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.ILL policy": [
+    {
+      "type": 0,
+      "value": "Pravidla MVS"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Ill policy": [
+    {
+      "type": 0,
+      "value": "Pravidla MVS"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "Titul (Název, Vydavatel, Datum publikace)"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance HRID": [
+    {
+      "type": 0,
+      "value": "HRID titulu"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Item barcode": [
+    {
+      "type": 0,
+      "value": "Čárový kód jednotky"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Member": [
+    {
+      "type": 0,
+      "value": "Člen"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Notes": [
+    {
+      "type": 0,
+      "value": "Poznámky"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Number of items": [
+    {
+      "type": 0,
+      "value": "Počet jednotek"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Order format": [
+    {
+      "type": 0,
+      "value": "Formát objednávky"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Permanent location": [
+    {
+      "type": 0,
+      "value": "Trvalá lokace"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Provenance": [
+    {
+      "type": 0,
+      "value": "Poznámka k původu"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receipt status": [
+    {
+      "type": 0,
+      "value": "Stav příjmu"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receiving history": [
+    {
+      "type": 0,
+      "value": "Historie příjmu"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Reproduction": [
+    {
+      "type": 0,
+      "value": "Poznámka k reprodukci"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Retention policy": [
+    {
+      "type": 0,
+      "value": "Pravidla uchovávání informací"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Shelving title": [
+    {
+      "type": 0,
+      "value": "Název regálu"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Source": [
+    {
+      "type": 0,
+      "value": "Zdroj"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Statistical codes": [
+    {
+      "type": 0,
+      "value": "Statistické kódy"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Vyřadit z vyhledávání"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Tags": [
+    {
+      "type": 0,
+      "value": "Štítky"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Temporary location": [
+    {
+      "type": 0,
+      "value": "Dočasná lokace"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Version": [
+    {
+      "type": 0,
+      "value": "Verze"
+    }
+  ],
+  "columns.INSTANCE.Administrative note": [
+    {
+      "type": 0,
+      "value": "Administrativní poznámka"
+    }
+  ],
+  "columns.INSTANCE.Cataloged date": [
+    {
+      "type": 0,
+      "value": "Katalogizované datum"
+    }
+  ],
+  "columns.INSTANCE.Contributors": [
+    {
+      "type": 0,
+      "value": "Autoři"
+    }
+  ],
+  "columns.INSTANCE.Edition": [
+    {
+      "type": 0,
+      "value": "Edice"
+    }
+  ],
+  "columns.INSTANCE.Formats": [
+    {
+      "type": 0,
+      "value": "Formáty"
+    }
+  ],
+  "columns.INSTANCE.Index title": [
+    {
+      "type": 0,
+      "value": "Název indexu"
+    }
+  ],
+  "columns.INSTANCE.Instance HRID": [
+    {
+      "type": 0,
+      "value": "HRID titulu"
+    }
+  ],
+  "columns.INSTANCE.Instance UUID": [
+    {
+      "type": 0,
+      "value": "UUID titulu"
+    }
+  ],
+  "columns.INSTANCE.Instance status term": [
+    {
+      "type": 0,
+      "value": "Termín stavu titulu"
+    }
+  ],
+  "columns.INSTANCE.Languages": [
+    {
+      "type": 0,
+      "value": "Jazyky"
+    }
+  ],
+  "columns.INSTANCE.Mode of issuance": [
+    {
+      "type": 0,
+      "value": "Způsob vydání"
+    }
+  ],
+  "columns.INSTANCE.Nature of content": [
+    {
+      "type": 0,
+      "value": "Povaha obsahu"
+    }
+  ],
+  "columns.INSTANCE.Notes": [
+    {
+      "type": 0,
+      "value": "Poznámky"
+    }
+  ],
+  "columns.INSTANCE.Physical description": [
+    {
+      "type": 0,
+      "value": "Fyzický popis"
+    }
+  ],
+  "columns.INSTANCE.Previously held": [
+    {
+      "type": 0,
+      "value": "Dříve držené"
+    }
+  ],
+  "columns.INSTANCE.Publication frequency": [
+    {
+      "type": 0,
+      "value": "Četnost publikování"
+    }
+  ],
+  "columns.INSTANCE.Publication range": [
+    {
+      "type": 0,
+      "value": "Rozsah publikace"
+    }
+  ],
+  "columns.INSTANCE.Resource title": [
+    {
+      "type": 0,
+      "value": "Název zdroje"
+    }
+  ],
+  "columns.INSTANCE.Resource type": [
+    {
+      "type": 0,
+      "value": "Typ zdroje"
+    }
+  ],
+  "columns.INSTANCE.Series statements": [
+    {
+      "type": 0,
+      "value": "Sady prohlášení"
+    }
+  ],
+  "columns.INSTANCE.Source": [
+    {
+      "type": 0,
+      "value": "Zdroj"
+    }
+  ],
+  "columns.INSTANCE.Staff suppress": [
+    {
+      "type": 0,
+      "value": "Potlačení zaměstnanců"
+    }
+  ],
+  "columns.INSTANCE.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Vyřadit z vyhledávání"
+    }
+  ],
+  "columns.ITEM.Accession number": [
+    {
+      "type": 0,
+      "value": "Přístupové číslo"
+    }
+  ],
+  "columns.ITEM.Administrative note": [
+    {
+      "type": 0,
+      "value": "Administrativní poznámka"
+    }
+  ],
+  "columns.ITEM.Barcode": [
+    {
+      "type": 0,
+      "value": "Čárový kód"
+    }
+  ],
+  "columns.ITEM.Bound with titles": [
+    {
+      "type": 0,
+      "value": "Svázáno s názvy"
+    }
+  ],
+  "columns.ITEM.Call Number": [
+    {
+      "type": 0,
+      "value": "Signatura"
+    }
+  ],
+  "columns.ITEM.Check in note": [
+    {
+      "type": 0,
+      "value": "Poznámka Návratu"
+    }
+  ],
+  "columns.ITEM.Check out note": [
+    {
+      "type": 0,
+      "value": "Poznámka Výpůjčky"
+    }
+  ],
+  "columns.ITEM.Chronology": [
+    {
+      "type": 0,
+      "value": "Chronologie"
+    }
+  ],
+  "columns.ITEM.Circulation Notes": [
+    {
+      "type": 0,
+      "value": "Cirkulační poznámky"
+    }
+  ],
+  "columns.ITEM.Contributor Names": [
+    {
+      "type": 0,
+      "value": "Jména autorů"
+    }
+  ],
+  "columns.ITEM.Copy number": [
+    {
+      "type": 0,
+      "value": "Číslo kopie"
+    }
+  ],
+  "columns.ITEM.Description of pieces": [
+    {
+      "type": 0,
+      "value": "Popis kusů"
+    }
+  ],
+  "columns.ITEM.Effective call number": [
+    {
+      "type": 0,
+      "value": "Efektivní signatura"
+    }
+  ],
+  "columns.ITEM.Electronic access": [
+    {
+      "type": 0,
+      "value": "Elektronický přístup"
+    }
+  ],
+  "columns.ITEM.Enumeration": [
+    {
+      "type": 0,
+      "value": "Výčet"
+    }
+  ],
+  "columns.ITEM.Former identifier": [
+    {
+      "type": 0,
+      "value": "Původní identifikátor"
+    }
+  ],
+  "columns.ITEM.Holdings (Location, Call number)": [
+    {
+      "type": 0,
+      "value": "Holdingy (Lokace, Signatura)"
+    }
+  ],
+  "columns.ITEM.Holdings Record Id": [
+    {
+      "type": 0,
+      "value": "ID záznamu holdingu"
+    }
+  ],
+  "columns.ITEM.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "UUID holdingů"
+    }
+  ],
+  "columns.ITEM.In Transit Destination Service Point": [
+    {
+      "type": 0,
+      "value": "V přepravě, cílový pult služeb"
+    }
+  ],
+  "columns.ITEM.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "Titul (Název, Vydavatel, Datum publikace)"
+    }
+  ],
+  "columns.ITEM.Is bound with": [
+    {
+      "type": 0,
+      "value": "Je svázán s"
+    }
+  ],
+  "columns.ITEM.Item HRID": [
+    {
+      "type": 0,
+      "value": "HRID jednotky"
+    }
+  ],
+  "columns.ITEM.Item UUID": [
+    {
+      "type": 0,
+      "value": "UUID jednotky"
+    }
+  ],
+  "columns.ITEM.Item damaged status": [
+    {
+      "type": 0,
+      "value": "Stav poškozené jednotky"
+    }
+  ],
+  "columns.ITEM.Item damaged status date": [
+    {
+      "type": 0,
+      "value": "Datum poškozeného stavu jednotky"
+    }
+  ],
+  "columns.ITEM.Item effective location": [
+    {
+      "type": 0,
+      "value": "Efektivní lokace jednotky"
+    }
+  ],
+  "columns.ITEM.Item id": [
+    {
+      "type": 0,
+      "value": "ID jednotky"
+    }
+  ],
+  "columns.ITEM.Item identifier": [
+    {
+      "type": 0,
+      "value": "Identifikátor jednotky"
+    }
+  ],
+  "columns.ITEM.Item level call number": [
+    {
+      "type": 0,
+      "value": "Signatura na úrovni jednotky"
+    }
+  ],
+  "columns.ITEM.Item level call number prefix": [
+    {
+      "type": 0,
+      "value": "Prefix signatury na úrovni jednotky"
+    }
+  ],
+  "columns.ITEM.Item level call number suffix": [
+    {
+      "type": 0,
+      "value": "Přípona signatury na úrovni suffix"
+    }
+  ],
+  "columns.ITEM.Item level call number type": [
+    {
+      "type": 0,
+      "value": "Typ signatury na úrovni jednotky"
+    }
+  ],
+  "columns.ITEM.Item permanent location": [
+    {
+      "type": 0,
+      "value": "Trvalá lokace jednotky"
+    }
+  ],
+  "columns.ITEM.Item temporary location": [
+    {
+      "type": 0,
+      "value": "Dočasná lokace jednotky"
+    }
+  ],
+  "columns.ITEM.Last CheckIn": [
+    {
+      "type": 0,
+      "value": "Poslední návrat"
+    }
+  ],
+  "columns.ITEM.Material type": [
+    {
+      "type": 0,
+      "value": "Typ materiálu"
+    }
+  ],
+  "columns.ITEM.Member": [
+    {
+      "type": 0,
+      "value": "Člen"
+    }
+  ],
+  "columns.ITEM.Missing pieces": [
+    {
+      "type": 0,
+      "value": "Chybějící kusy"
+    }
+  ],
+  "columns.ITEM.Missing pieces date": [
+    {
+      "type": 0,
+      "value": "Datum chybějících kusů"
+    }
+  ],
+  "columns.ITEM.Notes": [
+    {
+      "type": 0,
+      "value": "Poznámky"
+    }
+  ],
+  "columns.ITEM.Number of missing pieces": [
+    {
+      "type": 0,
+      "value": "Počet chybějících kusů"
+    }
+  ],
+  "columns.ITEM.Number of pieces": [
+    {
+      "type": 0,
+      "value": "Počet kusů"
+    }
+  ],
+  "columns.ITEM.Permanent loan type": [
+    {
+      "type": 0,
+      "value": "Typ trvalé výpůjčky"
+    }
+  ],
+  "columns.ITEM.Purchase Order Line Identifier": [
+    {
+      "type": 0,
+      "value": "Identifikátor řádku nákupní objednávky"
+    }
+  ],
+  "columns.ITEM.Shelving order": [
+    {
+      "type": 0,
+      "value": "Pořadí regálů"
+    }
+  ],
+  "columns.ITEM.Statistical codes": [
+    {
+      "type": 0,
+      "value": "Statistické kódy"
+    }
+  ],
+  "columns.ITEM.Status": [
+    {
+      "type": 0,
+      "value": "Stav"
+    }
+  ],
+  "columns.ITEM.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Vyřadit z vyhledávání"
+    }
+  ],
+  "columns.ITEM.Tags": [
+    {
+      "type": 0,
+      "value": "Štítky"
+    }
+  ],
+  "columns.ITEM.Temporary loan type": [
+    {
+      "type": 0,
+      "value": "Typ dočasné výpůjčky"
+    }
+  ],
+  "columns.ITEM.Title": [
+    {
+      "type": 0,
+      "value": "Název"
+    }
+  ],
+  "columns.ITEM.Version": [
+    {
+      "type": 0,
+      "value": "Verze"
+    }
+  ],
+  "columns.ITEM.Volume": [
+    {
+      "type": 0,
+      "value": "Svazek"
+    }
+  ],
+  "columns.ITEM.Year, caption": [
+    {
+      "type": 0,
+      "value": "Rok, titulek"
+    }
+  ],
+  "columns.USER.Active": [
+    {
+      "type": 0,
+      "value": "Aktivní"
+    }
+  ],
+  "columns.USER.Addresses": [
+    {
+      "type": 0,
+      "value": "Adresy"
+    }
+  ],
+  "columns.USER.Barcode": [
+    {
+      "type": 0,
+      "value": "Čárový kód"
+    }
+  ],
+  "columns.USER.Created Date": [
+    {
+      "type": 0,
+      "value": "Záznam vytvořen"
+    }
+  ],
+  "columns.USER.Custom fields": [
+    {
+      "type": 0,
+      "value": "Vlastní pole"
+    }
+  ],
+  "columns.USER.Date Of Birth": [
+    {
+      "type": 0,
+      "value": "Datum narození"
+    }
+  ],
+  "columns.USER.Departments": [
+    {
+      "type": 0,
+      "value": "Oddělení"
+    }
+  ],
+  "columns.USER.Email": [
+    {
+      "type": 0,
+      "value": "E-mail"
+    }
+  ],
+  "columns.USER.Enrollment date": [
+    {
+      "type": 0,
+      "value": "Datum zápisu"
+    }
+  ],
+  "columns.USER.Expiration date": [
+    {
+      "type": 0,
+      "value": "Datum platnosti"
+    }
+  ],
+  "columns.USER.External system id": [
+    {
+      "type": 0,
+      "value": "ID externího systému"
+    }
+  ],
+  "columns.USER.First name": [
+    {
+      "type": 0,
+      "value": "Křestní jméno"
+    }
+  ],
+  "columns.USER.Last name": [
+    {
+      "type": 0,
+      "value": "Příjmení"
+    }
+  ],
+  "columns.USER.Link to the profile picture": [
+    {
+      "type": 0,
+      "value": "Odkaz na profilový obrázek"
+    }
+  ],
+  "columns.USER.Middle name": [
+    {
+      "type": 0,
+      "value": "Střední jméno"
+    }
+  ],
+  "columns.USER.Mobile phone": [
+    {
+      "type": 0,
+      "value": "Mobilní telefon"
+    }
+  ],
+  "columns.USER.Patron group": [
+    {
+      "type": 0,
+      "value": "Kategorie čtenáře"
+    }
+  ],
+  "columns.USER.Phone": [
+    {
+      "type": 0,
+      "value": "Telefon"
+    }
+  ],
+  "columns.USER.Preferred contact type id": [
+    {
+      "type": 0,
+      "value": "ID preferovaného typu kontaktu"
+    }
+  ],
+  "columns.USER.Preferred email communications": [
+    {
+      "type": 0,
+      "value": "Preferovaná e-mailová komunikace"
+    }
+  ],
+  "columns.USER.Preferred first name": [
+    {
+      "type": 0,
+      "value": "Preferované křestní jméno"
+    }
+  ],
+  "columns.USER.Proxy for": [
+    {
+      "type": 0,
+      "value": "Zástupce pro"
+    }
+  ],
+  "columns.USER.Tags": [
+    {
+      "type": 0,
+      "value": "Štítky"
+    }
+  ],
+  "columns.USER.Type": [
+    {
+      "type": 0,
+      "value": "Typ"
+    }
+  ],
+  "columns.USER.Updated date": [
+    {
+      "type": 0,
+      "value": "Záznam aktualizován"
+    }
+  ],
+  "columns.USER.User id": [
+    {
+      "type": 0,
+      "value": "ID uživatele"
+    }
+  ],
+  "columns.USER.User name": [
+    {
+      "type": 0,
+      "value": "Uživatelské jméno"
+    }
+  ],
+  "columns.logs.actions": [
+    {
+      "type": 0,
+      "value": "Akce"
+    }
+  ],
+  "columns.logs.approach": [
+    {
+      "type": 0,
+      "value": "Úpravy"
+    }
+  ],
+  "columns.logs.endTime": [
+    {
+      "type": 0,
+      "value": "Ukončeno"
+    }
+  ],
+  "columns.logs.entityType": [
+    {
+      "type": 0,
+      "value": "Typ záznamu"
+    }
+  ],
+  "columns.logs.hrId": [
+    {
+      "type": 0,
+      "value": "ID"
+    }
+  ],
+  "columns.logs.operationType": [
+    {
+      "type": 0,
+      "value": "Typ hromadné operace"
+    }
+  ],
+  "columns.logs.processedNumOfRecords": [
+    {
+      "type": 0,
+      "value": "Zpracováno"
+    }
+  ],
+  "columns.logs.startTime": [
+    {
+      "type": 0,
+      "value": "Zahájeno"
+    }
+  ],
+  "columns.logs.status": [
+    {
+      "type": 0,
+      "value": "Stav"
+    }
+  ],
+  "columns.logs.totalNumOfRecords": [
+    {
+      "type": 0,
+      "value": "# záznamů"
+    }
+  ],
+  "columns.logs.userId": [
+    {
+      "type": 0,
+      "value": "Provozuje"
+    }
+  ],
+  "conformationModal.commitChanges": [
+    {
+      "type": 0,
+      "value": "Provést změny"
+    }
+  ],
+  "conformationModal.message": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " záznamů bude aktualizováno, pokud kliknete na tlačítko "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Potvrdit změny"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    },
+    {
+      "type": 0,
+      "value": " ."
+    }
+  ],
+  "error.incorrectFormatted": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": " je nesprávně naformátován. Opravte prosím formátování a nahrajte soubor znovu."
+    }
+  ],
+  "error.mod-bulk-operations.not.confirm.changes.s3.issue": [
+    {
+      "type": 0,
+      "value": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker)."
+    }
+  ],
+  "error.mod-bulk-operations.not.download.file.from.s3": [
+    {
+      "type": 0,
+      "value": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker)."
+    }
+  ],
+  "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": [
+    {
+      "type": 0,
+      "value": "Vyskytl se problém s konfigurací S3, který brání modulu hromadné úpravy ukládat soubory. Obraťte se na svého poskytovatele hostingu a zjistěte, zda byla aplikace pro hromadné úpravy správně nakonfigurována."
+    }
+  ],
+  "error.sww": [
+    {
+      "type": 0,
+      "value": "Něco se pokazilo"
+    }
+  ],
+  "error.uploadedFile": [
+    {
+      "type": 0,
+      "value": "Nepodařilo se nahrát soubor"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_HOLDINGS": [
+    {
+      "type": 0,
+      "value": "Vztahuje se na všechny záznamy holdingů"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_ITEMS": [
+    {
+      "type": 0,
+      "value": "Použít na všechny záznamy jednotek"
+    }
+  ],
+  "layer.action.apply.ITEMS": [
+    {
+      "type": 0,
+      "value": "Použít na záznamy jednotek"
+    }
+  ],
+  "layer.action.apply.STAFF_ONLY": [
+    {
+      "type": 0,
+      "value": "Pouze pro zaměstnance"
+    }
+  ],
+  "layer.action.clear": [
+    {
+      "type": 0,
+      "value": "Vymazat pole"
+    }
+  ],
+  "layer.action.replace": [
+    {
+      "type": 0,
+      "value": "Nahradit za"
+    }
+  ],
+  "layer.column.actions": [
+    {
+      "type": 0,
+      "value": "Akce"
+    }
+  ],
+  "layer.column.data": [
+    {
+      "type": 0,
+      "value": "Data"
+    }
+  ],
+  "layer.column.field": [
+    {
+      "type": 0,
+      "value": "Pole"
+    }
+  ],
+  "layer.column.ind1": [
+    {
+      "type": 0,
+      "value": "In.1"
+    }
+  ],
+  "layer.column.ind2": [
+    {
+      "type": 0,
+      "value": "In.2"
+    }
+  ],
+  "layer.column.options": [
+    {
+      "type": 0,
+      "value": "Možnosti"
+    }
+  ],
+  "layer.column.subfield": [
+    {
+      "type": 0,
+      "value": "Podpole"
+    }
+  ],
+  "layer.confirmChanges": [
+    {
+      "type": 0,
+      "value": "Potvrďte změny"
+    }
+  ],
+  "layer.marc.error": [
+    {
+      "type": 0,
+      "value": "V současné době jsou podporovány pouze úpravy 5xx a 9xx."
+    }
+  ],
+  "layer.marc.error.ind": [
+    {
+      "type": 0,
+      "value": "Zkontrolujte prosím svůj vstup."
+    }
+  ],
+  "layer.marc.error.limited": [
+    {
+      "type": 0,
+      "value": "Omezeno na 5xx a 9xx."
+    }
+  ],
+  "layer.marc.error.protected": [
+    {
+      "type": 0,
+      "value": "Toto pole je chráněno."
+    }
+  ],
+  "layer.marc.error.subfield": [
+    {
+      "type": 0,
+      "value": "Zkontrolujte prosím svůj vstup."
+    }
+  ],
+  "layer.options.add": [
+    {
+      "type": 0,
+      "value": "Přidat"
+    }
+  ],
+  "layer.options.additionalSubfield": [
+    {
+      "type": 0,
+      "value": "Další podpole"
+    }
+  ],
+  "layer.options.administrativeNote": [
+    {
+      "type": 0,
+      "value": "Administrativní poznámka"
+    }
+  ],
+  "layer.options.append": [
+    {
+      "type": 0,
+      "value": "Připojit"
+    }
+  ],
+  "layer.options.available": [
+    {
+      "type": 0,
+      "value": "Dostupné"
+    }
+  ],
+  "layer.options.checkInNote": [
+    {
+      "type": 0,
+      "value": "Poznámka Návratu"
+    }
+  ],
+  "layer.options.checkOutNote": [
+    {
+      "type": 0,
+      "value": "Poznámka Výpůjčky"
+    }
+  ],
+  "layer.options.email": [
+    {
+      "type": 0,
+      "value": "E-mail"
+    }
+  ],
+  "layer.options.expirationDate": [
+    {
+      "type": 0,
+      "value": "Datum platnosti"
+    }
+  ],
+  "layer.options.holdings.linkText": [
+    {
+      "type": 0,
+      "value": "Text odkazu"
+    }
+  ],
+  "layer.options.holdings.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "Materiály specifikované"
+    }
+  ],
+  "layer.options.holdings.permanentLocation": [
+    {
+      "type": 0,
+      "value": "Trvalá lokace holdingů"
+    }
+  ],
+  "layer.options.holdings.suppress": [
+    {
+      "type": 0,
+      "value": "Vyřadit z vyhledávání"
+    }
+  ],
+  "layer.options.holdings.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "Dočasná lokace holdingů"
+    }
+  ],
+  "layer.options.holdings.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "layer.options.holdings.urlPublic": [
+    {
+      "type": 0,
+      "value": "Veřejná poznámka URL"
+    }
+  ],
+  "layer.options.holdings.urlRelationship": [
+    {
+      "type": 0,
+      "value": "Vztah URL"
+    }
+  ],
+  "layer.options.inProcess": [
+    {
+      "type": 0,
+      "value": "Ve zpracování"
+    }
+  ],
+  "layer.options.instances.staffSuppress": [
+    {
+      "type": 0,
+      "value": "Potlačení zaměstnanců"
+    }
+  ],
+  "layer.options.instances.suppress": [
+    {
+      "type": 0,
+      "value": "Vyřadit z vyhledávání"
+    }
+  ],
+  "layer.options.intellectual": [
+    {
+      "type": 0,
+      "value": "Duševní jednotka"
+    }
+  ],
+  "layer.options.items.addNote": [
+    {
+      "type": 0,
+      "value": "Přidat poznámku"
+    }
+  ],
+  "layer.options.items.changeNote": [
+    {
+      "type": 0,
+      "value": "Změnit typ poznámky"
+    }
+  ],
+  "layer.options.items.duplicateTo": [
+    {
+      "type": 0,
+      "value": "Duplikovat do"
+    }
+  ],
+  "layer.options.items.false": [
+    {
+      "type": 0,
+      "value": "Nastavit jako deaktivováno"
+    }
+  ],
+  "layer.options.items.markAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "Označit jako pouze pro zaměstnance"
+    }
+  ],
+  "layer.options.items.removeAll": [
+    {
+      "type": 0,
+      "value": "Odebrat všechny"
+    }
+  ],
+  "layer.options.items.removeMarkAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "Odstranit příznak pouze pro zaměstnance"
+    }
+  ],
+  "layer.options.items.removeNote": [
+    {
+      "type": 0,
+      "value": "Odstranit"
+    }
+  ],
+  "layer.options.items.true": [
+    {
+      "type": 0,
+      "value": "Nastavte true"
+    }
+  ],
+  "layer.options.longMissing": [
+    {
+      "type": 0,
+      "value": "Dlouho chybí"
+    }
+  ],
+  "layer.options.missing": [
+    {
+      "type": 0,
+      "value": "Chybějící"
+    }
+  ],
+  "layer.options.non-requestable": [
+    {
+      "type": 0,
+      "value": "Probíhá (nevyžádané)"
+    }
+  ],
+  "layer.options.patronGroup": [
+    {
+      "type": 0,
+      "value": "Kategorie čtenáře"
+    }
+  ],
+  "layer.options.permanentLoanType": [
+    {
+      "type": 0,
+      "value": "Typ trvalé výpůjčky"
+    }
+  ],
+  "layer.options.permanentLocation": [
+    {
+      "type": 0,
+      "value": "Trvalá lokace jednotky"
+    }
+  ],
+  "layer.options.placeholder": [
+    {
+      "type": 0,
+      "value": "Vyberte stav jednotky"
+    }
+  ],
+  "layer.options.removeField": [
+    {
+      "type": 0,
+      "value": "Odstranit pole"
+    }
+  ],
+  "layer.options.removeSubfield": [
+    {
+      "type": 0,
+      "value": "Odstranit podpole"
+    }
+  ],
+  "layer.options.replaceWith": [
+    {
+      "type": 0,
+      "value": "Nahradit za"
+    }
+  ],
+  "layer.options.restricted": [
+    {
+      "type": 0,
+      "value": "Omezený"
+    }
+  ],
+  "layer.options.statusLabel": [
+    {
+      "type": 0,
+      "value": "Stav jednotky"
+    }
+  ],
+  "layer.options.suppressFromDiscovery": [
+    {
+      "type": 0,
+      "value": "Vyřadit z vyhledávání"
+    }
+  ],
+  "layer.options.temporaryLoanTypeLabel": [
+    {
+      "type": 0,
+      "value": "Typ dočasné výpůjčky"
+    }
+  ],
+  "layer.options.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "Dočasná lokace jednotky"
+    }
+  ],
+  "layer.options.unavailable": [
+    {
+      "type": 0,
+      "value": "Nedostupná"
+    }
+  ],
+  "layer.options.unknown": [
+    {
+      "type": 0,
+      "value": "Neznámý"
+    }
+  ],
+  "layer.options.withdrawn": [
+    {
+      "type": 0,
+      "value": "Staženo"
+    }
+  ],
+  "layer.selectLoanType": [
+    {
+      "type": 0,
+      "value": "Vybrat typ výpůjčky"
+    }
+  ],
+  "layer.selectLocation": [
+    {
+      "type": 0,
+      "value": "Zvolit lokaci"
+    }
+  ],
+  "layer.selectNoteType": [
+    {
+      "type": 0,
+      "value": "Vybrat typ poznámky"
+    }
+  ],
+  "layer.selectPatronGroup": [
+    {
+      "type": 0,
+      "value": "Vybrat skupinu čtenáře"
+    }
+  ],
+  "layer.selectType": [
+    {
+      "type": 0,
+      "value": "Vybrat typ poznámky"
+    }
+  ],
+  "layer.title": [
+    {
+      "type": 0,
+      "value": "Hromadné úpravy"
+    }
+  ],
+  "list.actions.download": [
+    {
+      "type": 0,
+      "value": "Stáhnout"
+    }
+  ],
+  "list.criteriaTitle": [
+    {
+      "type": 0,
+      "value": "Nastavte kritéria"
+    }
+  ],
+  "list.errors.info": [
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": ": "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " položek * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " záznamů odpovídá * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " chyb"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": ": "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " položek * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " záznamů změněno * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " chyb"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.info": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Hromadné úpravy dotazu: "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " položky * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " odpovídající záznamy * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " chyby"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Hromadné úpravy dotazu: "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " položky * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " záznamy změněny * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " chyby"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.table.code": [
+    {
+      "type": 0,
+      "value": "Identifikátor záznamu"
+    }
+  ],
+  "list.errors.table.link": [
+    {
+      "type": 0,
+      "value": "Zobrazit nejnovější verzi"
+    }
+  ],
+  "list.errors.table.message": [
+    {
+      "type": 0,
+      "value": "Důvod chyby"
+    }
+  ],
+  "list.errors.title": [
+    {
+      "type": 0,
+      "value": "Chyby"
+    }
+  ],
+  "list.filters.capabilities.acquisition": [
+    {
+      "type": 0,
+      "value": "Akvizice"
+    }
+  ],
+  "list.filters.capabilities.circulation": [
+    {
+      "type": 0,
+      "value": "Cirkulace"
+    }
+  ],
+  "list.filters.capabilities.holdings": [
+    {
+      "type": 0,
+      "value": "Katalog - holdingy"
+    }
+  ],
+  "list.filters.capabilities.instances": [
+    {
+      "type": 0,
+      "value": "Katalog: tituly"
+    }
+  ],
+  "list.filters.capabilities.inventory": [
+    {
+      "type": 0,
+      "value": "Katalog - jednotky"
+    }
+  ],
+  "list.filters.capabilities.title": [
+    {
+      "type": 0,
+      "value": "Typy záznamů"
+    }
+  ],
+  "list.filters.capabilities.users": [
+    {
+      "type": 0,
+      "value": "Uživatelé"
+    }
+  ],
+  "list.filters.identifier": [
+    {
+      "type": 0,
+      "value": "Identifikátor"
+    }
+  ],
+  "list.filters.logs": [
+    {
+      "type": 0,
+      "value": "Logy"
+    }
+  ],
+  "list.filters.query": [
+    {
+      "type": 0,
+      "value": "Dotaz"
+    }
+  ],
+  "list.filters.recordIdentifier": [
+    {
+      "type": 0,
+      "value": "Identifikátor záznamu"
+    }
+  ],
+  "list.filters.recordIdentifier.externalIDs": [
+    {
+      "type": 0,
+      "value": "Externí ID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsHRID": [
+    {
+      "type": 0,
+      "value": "HRID holdingů"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "UUID holdingů"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.instanceHRID": [
+    {
+      "type": 0,
+      "value": "HRID titulu"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.itemBarcodes": [
+    {
+      "type": 0,
+      "value": "Čárové kódy jednotek"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceHRID": [
+    {
+      "type": 0,
+      "value": "HRID titulu"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISBN": [
+    {
+      "type": 0,
+      "value": "ISBN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISSN": [
+    {
+      "type": 0,
+      "value": "ISSN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceUUID": [
+    {
+      "type": 0,
+      "value": "UUID titulů"
+    }
+  ],
+  "list.filters.recordIdentifier.item.ItemHRIDs": [
+    {
+      "type": 0,
+      "value": "HRID jednotek"
+    }
+  ],
+  "list.filters.recordIdentifier.item.UUID": [
+    {
+      "type": 0,
+      "value": "UUID jednotek"
+    }
+  ],
+  "list.filters.recordIdentifier.item.accession": [
+    {
+      "type": 0,
+      "value": "Přírůstkové čísla jednotky."
+    }
+  ],
+  "list.filters.recordIdentifier.item.barcode": [
+    {
+      "type": 0,
+      "value": "Čárové kódy jednotek"
+    }
+  ],
+  "list.filters.recordIdentifier.item.former": [
+    {
+      "type": 0,
+      "value": "Původní identifikátory jednotky"
+    }
+  ],
+  "list.filters.recordIdentifier.item.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "UUID holdingů"
+    }
+  ],
+  "list.filters.recordIdentifier.placeholder": [
+    {
+      "type": 0,
+      "value": "Vybrat identifikátor záznamu"
+    }
+  ],
+  "list.filters.recordIdentifier.userBarcodes": [
+    {
+      "type": 0,
+      "value": "Uživatelské čárové kódy"
+    }
+  ],
+  "list.filters.recordIdentifier.userUUIDs": [
+    {
+      "type": 0,
+      "value": "UUID uživatelů"
+    }
+  ],
+  "list.filters.recordIdentifier.usernames": [
+    {
+      "type": 0,
+      "value": "Uživatelská jména"
+    }
+  ],
+  "list.logSubTitle": [
+    {
+      "type": 0,
+      "value": "Nastavte kritéria pro zahájení hromadných úprav"
+    }
+  ],
+  "list.logSubTitle.changed": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " záznamů změněno"
+    }
+  ],
+  "list.logSubTitle.matched": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " záznamů se shoduje"
+    }
+  ],
+  "list.preview.electronicAccess.linkText": [
+    {
+      "type": 0,
+      "value": "Text odkazu"
+    }
+  ],
+  "list.preview.electronicAccess.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "Materiály specifikované"
+    }
+  ],
+  "list.preview.electronicAccess.publicNote": [
+    {
+      "type": 0,
+      "value": "Veřejná poznámka"
+    }
+  ],
+  "list.preview.electronicAccess.relationship": [
+    {
+      "type": 0,
+      "value": "Vztah"
+    }
+  ],
+  "list.preview.electronicAccess.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "list.preview.table.status.false": [
+    {
+      "type": 0,
+      "value": "Neaktivní"
+    }
+  ],
+  "list.preview.table.status.true": [
+    {
+      "type": 0,
+      "value": "Aktivní"
+    }
+  ],
+  "list.preview.title": [
+    {
+      "type": 0,
+      "value": "Náhled porovnaného záznamu"
+    }
+  ],
+  "list.preview.titleChanged": [
+    {
+      "type": 0,
+      "value": "Náhled záznamu změněn"
+    }
+  ],
+  "list.result.emptyMessage": [
+    {
+      "type": 0,
+      "value": "Vyberat typ záznamu a poté identifikátor záznamu."
+    }
+  ],
+  "list.result.emptyMessage.empty": [
+    {
+      "type": 0,
+      "value": "Vyberat identifikátor záznamu."
+    }
+  ],
+  "list.result.emptyMessage.holdings": [
+    {
+      "type": 0,
+      "value": "Vyberat identifikátor záznamu."
+    }
+  ],
+  "list.result.emptyMessage.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s HRID holdingů."
+    }
+  ],
+  "list.result.emptyMessage.holdings.ID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s UUID holdingů."
+    }
+  ],
+  "list.result.emptyMessage.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s HRID titulů."
+    }
+  ],
+  "list.result.emptyMessage.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s čárovými kódy jednotky."
+    }
+  ],
+  "list.result.emptyMessage.holdings.query": [
+    {
+      "type": 0,
+      "value": "Dotaz sestavíte kliknutím na tlačítko Sestavit dotaz."
+    }
+  ],
+  "list.result.emptyMessage.instance": [
+    {
+      "type": 0,
+      "value": "Vyberat identifikátor záznamu."
+    }
+  ],
+  "list.result.emptyMessage.instance.HRID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s HRID titulů"
+    }
+  ],
+  "list.result.emptyMessage.instance.ID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s UUID titulů"
+    }
+  ],
+  "list.result.emptyMessage.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s ISBN"
+    }
+  ],
+  "list.result.emptyMessage.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s ISSN"
+    }
+  ],
+  "list.result.emptyMessage.instance.query": [
+    {
+      "type": 0,
+      "value": "Dotaz sestavíte kliknutím na tlačítko Sestavit dotaz."
+    }
+  ],
+  "list.result.emptyMessage.item": [
+    {
+      "type": 0,
+      "value": "Vyberat identifikátor záznamu."
+    }
+  ],
+  "list.result.emptyMessage.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s přístupovými čísly jednotky."
+    }
+  ],
+  "list.result.emptyMessage.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s čárovými kódy jednotky."
+    }
+  ],
+  "list.result.emptyMessage.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s původními identifikátory jednotky."
+    }
+  ],
+  "list.result.emptyMessage.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s UUID holdingů."
+    }
+  ],
+  "list.result.emptyMessage.item.HRID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s HRID jednotek."
+    }
+  ],
+  "list.result.emptyMessage.item.ID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s UUID jednotek."
+    }
+  ],
+  "list.result.emptyMessage.item.query": [
+    {
+      "type": 0,
+      "value": "Dotaz sestavíte kliknutím na tlačítko Sestavit dotaz."
+    }
+  ],
+  "list.result.emptyMessage.logs": [
+    {
+      "type": 0,
+      "value": "Vybrat filtr pro zobrazení výsledků."
+    }
+  ],
+  "list.result.emptyMessage.query": [
+    {
+      "type": 0,
+      "value": "Vyberte typ záznamu a klikněte na tlačítko Sestavit dotaz."
+    }
+  ],
+  "list.result.emptyMessage.user": [
+    {
+      "type": 0,
+      "value": "Vyberat identifikátor záznamu."
+    }
+  ],
+  "list.result.emptyMessage.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s uživatelskými čárovými kódy"
+    }
+  ],
+  "list.result.emptyMessage.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s externími ID"
+    }
+  ],
+  "list.result.emptyMessage.user.ID": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s uživatelskými UUID"
+    }
+  ],
+  "list.result.emptyMessage.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "Přetáhnout nebo vybrat soubor s uživatelskými jmény"
+    }
+  ],
+  "list.result.emptyMessage.user.query": [
+    {
+      "type": 0,
+      "value": "Dotaz sestavíte kliknutím na tlačítko Sestavit dotaz."
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "Soubor s aktualizovanými záznamy"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Soubor s aktualizovanými záznamy"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "Soubor s chybami, ke kterým došlo při provádění změn"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Soubor s chybami, ke kterým došlo při provádění změn"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "Soubor s aktualizovanými záznamy"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Soubor s aktualizovanými záznamy"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "Soubor s odpovídajícími záznamy"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Soubor se záznamy porovnání"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "Soubor s chybami zjištěnými během porovnávání záznamů"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Soubor s chybami zjištěnými během porovnávání záznamů"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "Soubor s náhledem navrhovaných změn"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Soubor s náhledem navrhovaných změn"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "Soubor s náhledem navrhovaných změn"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Soubor s náhledem navrhovaných změn"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile": [
+    {
+      "type": 0,
+      "value": "Soubor, který byl použit ke spuštění hromadné úpravy"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Soubor s identifikátory záznamů ovlivněných hromadnou aktualizací"
+    }
+  ],
+  "logs.approach.IN_APP": [
+    {
+      "type": 0,
+      "value": "V aplikaci"
+    }
+  ],
+  "logs.approach.MANUAL": [
+    {
+      "type": 0,
+      "value": "Místní"
+    }
+  ],
+  "logs.approach.QUERY": [
+    {
+      "type": 0,
+      "value": "Dotaz"
+    }
+  ],
+  "logs.entityType.HOLDINGS_RECORD": [
+    {
+      "type": 0,
+      "value": "Katalog - holdingy"
+    }
+  ],
+  "logs.entityType.INSTANCE": [
+    {
+      "type": 0,
+      "value": "Katalog: tituly"
+    }
+  ],
+  "logs.entityType.INSTANCE_MARC": [
+    {
+      "type": 0,
+      "value": "Katalog: tituly (MARC)"
+    }
+  ],
+  "logs.entityType.ITEM": [
+    {
+      "type": 0,
+      "value": "Katalog - jednotky"
+    }
+  ],
+  "logs.entityType.USER": [
+    {
+      "type": 0,
+      "value": "Uživatelé"
+    }
+  ],
+  "logs.filter.endDate": [
+    {
+      "type": 0,
+      "value": "Ukončeno"
+    }
+  ],
+  "logs.filter.option.delete": [
+    {
+      "type": 0,
+      "value": "Smazat"
+    }
+  ],
+  "logs.filter.option.edit": [
+    {
+      "type": 0,
+      "value": "Upravit"
+    }
+  ],
+  "logs.filter.startDate": [
+    {
+      "type": 0,
+      "value": "Zahájeno"
+    }
+  ],
+  "logs.filter.title.capability": [
+    {
+      "type": 0,
+      "value": "Typy záznamů"
+    }
+  ],
+  "logs.filter.title.status": [
+    {
+      "type": 0,
+      "value": "Stavy"
+    }
+  ],
+  "logs.filter.title.types": [
+    {
+      "type": 0,
+      "value": "Typ hromadné operace"
+    }
+  ],
+  "logs.filter.title.user": [
+    {
+      "type": 0,
+      "value": "Uživatel"
+    }
+  ],
+  "logs.filter.user.placeholder": [
+    {
+      "type": 0,
+      "value": "Vybrat uživatele"
+    }
+  ],
+  "logs.filter.user.placeholder.empty": [
+    {
+      "type": 0,
+      "value": "Seznam je prázdný"
+    }
+  ],
+  "logs.infoPopover": [
+    {
+      "type": 0,
+      "value": "Soubory nejsou k dispozici ke stažení, protože od data spuštění úlohy uplynulo 30 dní."
+    }
+  ],
+  "logs.status.APPLY_CHANGES": [
+    {
+      "type": 0,
+      "value": "Použít změny"
+    }
+  ],
+  "logs.status.COMPLETED": [
+    {
+      "type": 0,
+      "value": "Dokončeno"
+    }
+  ],
+  "logs.status.COMPLETED_WITH_ERRORS": [
+    {
+      "type": 0,
+      "value": "Dokončeno s chybami"
+    }
+  ],
+  "logs.status.DATA_MODIFICATION": [
+    {
+      "type": 0,
+      "value": "Úprava dat"
+    }
+  ],
+  "logs.status.EXECUTING_QUERY": [
+    {
+      "type": 0,
+      "value": "Spouštění dotazu"
+    }
+  ],
+  "logs.status.FAILED": [
+    {
+      "type": 0,
+      "value": "Neúspěšný"
+    }
+  ],
+  "logs.status.NEW": [
+    {
+      "type": 0,
+      "value": "Nový"
+    }
+  ],
+  "logs.status.RETRIEVING_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "Získávání identifikátorů"
+    }
+  ],
+  "logs.status.RETRIEVING_RECORDS": [
+    {
+      "type": 0,
+      "value": "Získávání záznamů"
+    }
+  ],
+  "logs.status.REVIEWED_NO_MARC_RECORDS": [
+    {
+      "type": 0,
+      "value": "Reviewing changes"
+    }
+  ],
+  "logs.status.REVIEW_CHANGES": [
+    {
+      "type": 0,
+      "value": "Kontrola změn"
+    }
+  ],
+  "logs.status.SAVED_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "Ukládání identifikátorů"
+    }
+  ],
+  "logs.status.SAVING_RECORDS_LOCALLY": [
+    {
+      "type": 0,
+      "value": "Ukládání záznamů"
+    }
+  ],
+  "menuGroup.actions": [
+    {
+      "type": 0,
+      "value": "Akce"
+    }
+  ],
+  "menuGroup.showColumns": [
+    {
+      "type": 0,
+      "value": "Zobrazit sloupce"
+    }
+  ],
+  "menuGroup.startEdit": [
+    {
+      "type": 0,
+      "value": "Spustit hromadné úpravy"
+    }
+  ],
+  "meta.logs.title": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava logů"
+    }
+  ],
+  "meta.query.title": [
+    {
+      "type": 0,
+      "value": "Dotaz pro hromadnou úpravu"
+    }
+  ],
+  "meta.query.title.mark": [
+    {
+      "type": 0,
+      "value": "Dotaz pro hromadnou úpravu polí MARC"
+    }
+  ],
+  "meta.title": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava"
+    }
+  ],
+  "meta.title.conformationModal": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava: "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile.mark": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava polí MARC - "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "modal.fileExtensions.actionButton": [
+    {
+      "type": 0,
+      "value": "Vybrat jiný soubor k nahrání"
+    }
+  ],
+  "modal.fileExtensions.blocked.header": [
+    {
+      "type": 0,
+      "value": "Neplatný soubor"
+    }
+  ],
+  "modal.fileExtensions.blocked.message": [
+    {
+      "type": 0,
+      "value": "Nahrát lze pouze soubor s příponou .csv."
+    }
+  ],
+  "modal.fileExtensions.blocked.message2": [
+    {
+      "type": 0,
+      "value": "Lze nahrát pouze jeden soubor s příponou .csv."
+    }
+  ],
+  "modal.next": [
+    {
+      "type": 0,
+      "value": "Další"
+    }
+  ],
+  "modal.successfullMessage": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": " úspěšně nahrán."
+    }
+  ],
+  "options.placeholder": [
+    {
+      "type": 0,
+      "value": "Vybrat možnost"
+    }
+  ],
+  "permission.inventory.edit": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava: V aplikaci – Upravit katalogové záznamy"
+    }
+  ],
+  "permission.inventory.view": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava: V aplikaci - Zobrazit katalogové záznamy"
+    }
+  ],
+  "permission.logs.view": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava - Může prohlížet logy"
+    }
+  ],
+  "permission.module.bulk-edit.enabled": [
+    {
+      "type": 0,
+      "value": "UI: Modul pro hromadné úpravy je povolen"
+    }
+  ],
+  "permission.query.execute": [
+    {
+      "type": 0,
+      "value": "Bulk edit: Can build query"
+    }
+  ],
+  "permission.users.csv.edit": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava: Místní - Úprava uživatelských záznamů"
+    }
+  ],
+  "permission.users.csv.view": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava: Místní - Zobrazení uživatelských záznamů"
+    }
+  ],
+  "permission.users.edit": [
+    {
+      "type": 0,
+      "value": "Bulk edit: In app - Edit user records"
+    }
+  ],
+  "permissionsModal.cancel": [
+    {
+      "type": 0,
+      "value": "Zrušit"
+    }
+  ],
+  "permissionsModal.filter.assigned": [
+    {
+      "type": 0,
+      "value": "Přiřazeno"
+    }
+  ],
+  "permissionsModal.filter.assignmentStatus": [
+    {
+      "type": 0,
+      "value": "Stav přiřazení oprávnění"
+    }
+  ],
+  "permissionsModal.filter.permissionSets": [
+    {
+      "type": 0,
+      "value": "Sady oprávnění"
+    }
+  ],
+  "permissionsModal.filter.permissionTypes": [
+    {
+      "type": 0,
+      "value": "Typy oprávnění"
+    }
+  ],
+  "permissionsModal.filter.permissions": [
+    {
+      "type": 0,
+      "value": "Oprávnění"
+    }
+  ],
+  "permissionsModal.filter.resetAll": [
+    {
+      "type": 0,
+      "value": "Obnovit vše"
+    }
+  ],
+  "permissionsModal.filter.search": [
+    {
+      "type": 0,
+      "value": "Vyhledat"
+    }
+  ],
+  "permissionsModal.filter.title": [
+    {
+      "type": 0,
+      "value": "Vyhledat a filtrovat"
+    }
+  ],
+  "permissionsModal.filter.unassigned": [
+    {
+      "type": 0,
+      "value": "Nepřiřazeno"
+    }
+  ],
+  "permissionsModal.list.cell.assigned": [
+    {
+      "type": 0,
+      "value": "Přiřazeno"
+    }
+  ],
+  "permissionsModal.list.cell.permissionSets": [
+    {
+      "type": 0,
+      "value": "Sada oprávnění"
+    }
+  ],
+  "permissionsModal.list.cell.permissions": [
+    {
+      "type": 0,
+      "value": "Oprávnění"
+    }
+  ],
+  "permissionsModal.list.cell.unassigned": [
+    {
+      "type": 0,
+      "value": "Nepřiřazeno"
+    }
+  ],
+  "permissionsModal.list.columns.name": [
+    {
+      "type": 0,
+      "value": "Jméno"
+    }
+  ],
+  "permissionsModal.list.columns.status": [
+    {
+      "type": 0,
+      "value": "Stav"
+    }
+  ],
+  "permissionsModal.list.columns.type": [
+    {
+      "type": 0,
+      "value": "Typ"
+    }
+  ],
+  "permissionsModal.list.subTitle": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " nalezených oprávnění"
+    }
+  ],
+  "permissionsModal.list.title": [
+    {
+      "type": 0,
+      "value": "Oprávnění"
+    }
+  ],
+  "permissionsModal.save": [
+    {
+      "type": 0,
+      "value": "Uložit a zavřít"
+    }
+  ],
+  "permissionsModal.title": [
+    {
+      "type": 0,
+      "value": "Vyberte Oprávnění"
+    }
+  ],
+  "permissionsModal.totalSelected": [
+    {
+      "type": 0,
+      "value": "Celkem vybráno: "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    }
+  ],
+  "preview.file.title": [
+    {
+      "type": 0,
+      "value": "Název souboru: "
+    },
+    {
+      "type": 1,
+      "value": "fileUploadedName"
+    }
+  ],
+  "preview.query.title": [
+    {
+      "type": 0,
+      "value": "Dotaz: "
+    },
+    {
+      "type": 1,
+      "value": "queryText"
+    }
+  ],
+  "previewModal.areYouSure": [
+    {
+      "type": 0,
+      "value": "Opravdu?"
+    }
+  ],
+  "previewModal.downloadPreview": [
+    {
+      "type": 0,
+      "value": "Stáhnout náhled"
+    }
+  ],
+  "previewModal.downloadPreview.marc": [
+    {
+      "type": 0,
+      "value": "Stáhnout náhled ve formátu MARC"
+    }
+  ],
+  "previewModal.keepEditing": [
+    {
+      "type": 0,
+      "value": "Pokračovat v úpravách"
+    }
+  ],
+  "previewModal.message": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " záznamů se změní, pokud kliknete na tlačítko Uložit a zavřít. Můžete zvolit Stáhnout náhled a zkontrolovat všechny změny před uložením."
+    }
+  ],
+  "previewModal.message.empty.marc": [
+    {
+      "type": 0,
+      "value": "All instances have source FOLIO. Use “Instances and  Administrative data” option for bulk edit."
+    }
+  ],
+  "previewModal.previewToBeChanged": [
+    {
+      "type": 0,
+      "value": "Náhled záznamů, které mají být změněny"
+    }
+  ],
+  "previewModal.saveAndClose": [
+    {
+      "type": 0,
+      "value": "Provést změny"
+    }
+  ],
+  "progressBar.committing": [
+    {
+      "type": 0,
+      "value": "Provádění změn"
+    }
+  ],
+  "progressBar.title": [
+    {
+      "type": 0,
+      "value": "Nahrání "
+    },
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " a načtení relevantních dat"
+    }
+  ],
+  "progresssBar.processing": [
+    {
+      "type": 0,
+      "value": "Zpracování"
+    }
+  ],
+  "progresssBar.retrieving": [
+    {
+      "type": 0,
+      "value": "Získávání"
+    }
+  ],
+  "recordsSuccessfullyChanged": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "value"
+    },
+    {
+      "type": 0,
+      "value": " záznamů bylo úspěšně změněno"
+    }
+  ],
+  "resetFilters": [
+    {
+      "type": 0,
+      "value": "Obnovit vše"
+    }
+  ],
+  "retrievedDataList.title": [
+    {
+      "type": 0,
+      "value": "Nalezeno "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "matched"
+    },
+    {
+      "type": 0,
+      "value": " odpovídajících "
+    },
+    {
+      "type": 1,
+      "value": "capability"
+    },
+    {
+      "type": 0,
+      "value": " záznamů."
+    }
+  ],
+  "start.delete": [
+    {
+      "type": 0,
+      "value": "Zahájit hromadné mazání"
+    }
+  ],
+  "start.downloadChangedRecords": [
+    {
+      "type": 0,
+      "value": "Stáhnout změněné záznamy (CSV)"
+    }
+  ],
+  "start.downloadChangedRecords.marc": [
+    {
+      "type": 0,
+      "value": "Stáhnout změněné záznamy (MARC)"
+    }
+  ],
+  "start.downloadErrors": [
+    {
+      "type": 0,
+      "value": "Stáhnout chyby (CSV)"
+    }
+  ],
+  "start.downloadMathcedRecords": [
+    {
+      "type": 0,
+      "value": "Stažení odpovídajících záznamů (CSV)"
+    }
+  ],
+  "start.edit": [
+    {
+      "type": 0,
+      "value": "Spustit hromadné úpravy"
+    }
+  ],
+  "start.edit.csv": [
+    {
+      "type": 0,
+      "value": "Spustit hromadnou úpravu (Místní)"
+    }
+  ],
+  "start.edit.instance": [
+    {
+      "type": 0,
+      "value": "Tituly a administrativní údaje"
+    }
+  ],
+  "start.edit.mark": [
+    {
+      "type": 0,
+      "value": "Tituly se zdrojem MARC (POC)"
+    }
+  ],
+  "textArea.resetAll": [
+    {
+      "type": 0,
+      "value": "Obnovit vše"
+    }
+  ],
+  "textArea.search": [
+    {
+      "type": 0,
+      "value": "Vyhledat"
+    }
+  ],
+  "title.identifier": [
+    {
+      "type": 0,
+      "value": "Identifikátor"
+    }
+  ],
+  "title.logs": [
+    {
+      "type": 0,
+      "value": "Logy"
+    }
+  ],
+  "title.mark": [
+    {
+      "type": 0,
+      "value": "Hromadná úprava polí MARC"
+    }
+  ],
+  "title.query": [
+    {
+      "type": 0,
+      "value": "Dotaz"
+    }
+  ],
+  "type.placeholder": [
+    {
+      "type": 0,
+      "value": "Vybrat typ"
+    }
+  ],
+  "uploaderActiveTitle": [
+    {
+      "type": 0,
+      "value": "Chcete-li pokračovat, pusťte"
+    }
+  ],
+  "uploaderBtnText": [
+    {
+      "type": 0,
+      "value": "nebo vybrat soubor"
+    }
+  ],
+  "uploaderSubTitle": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s identifikátory záznamu."
+    }
+  ],
+  "uploaderSubTitle.empty": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s identifikátory záznamu."
+    }
+  ],
+  "uploaderSubTitle.holdings": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s identifikátory záznamu."
+    }
+  ],
+  "uploaderSubTitle.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "Vyberte soubor s HRID holdingů."
+    }
+  ],
+  "uploaderSubTitle.holdings.ID": [
+    {
+      "type": 0,
+      "value": "Vyberte soubor s UUID jednotek."
+    }
+  ],
+  "uploaderSubTitle.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "Vyberte soubor s HRID titulů."
+    }
+  ],
+  "uploaderSubTitle.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "Vyberte soubor s čárovým kódem jednotky."
+    }
+  ],
+  "uploaderSubTitle.instance": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s identifikátory záznamu."
+    }
+  ],
+  "uploaderSubTitle.instance.HRID": [
+    {
+      "type": 0,
+      "value": "Vyberte soubor s HRID titulů."
+    }
+  ],
+  "uploaderSubTitle.instance.ID": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s UUID titulů."
+    }
+  ],
+  "uploaderSubTitle.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s ISBN."
+    }
+  ],
+  "uploaderSubTitle.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s ISSN."
+    }
+  ],
+  "uploaderSubTitle.item": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s identifikátory záznamu."
+    }
+  ],
+  "uploaderSubTitle.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s přístupovými čísly jednotky."
+    }
+  ],
+  "uploaderSubTitle.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "Vyberte soubor s čárovým kódem jednotky."
+    }
+  ],
+  "uploaderSubTitle.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s původními identifikátory jednotky."
+    }
+  ],
+  "uploaderSubTitle.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "Vyberte soubor s UUID jednotek."
+    }
+  ],
+  "uploaderSubTitle.item.HRID": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s HRID jednotek."
+    }
+  ],
+  "uploaderSubTitle.item.ID": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s UUID jednotek."
+    }
+  ],
+  "uploaderSubTitle.records": [
+    {
+      "type": 0,
+      "value": "Nahrajte soubor CSV s upravenými záznamy."
+    }
+  ],
+  "uploaderSubTitle.user": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s identifikátory záznamu."
+    }
+  ],
+  "uploaderSubTitle.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s uživatelskými čárovými kódy."
+    }
+  ],
+  "uploaderSubTitle.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s externími ID."
+    }
+  ],
+  "uploaderSubTitle.user.ID": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s uživatelskými UUID."
+    }
+  ],
+  "uploaderSubTitle.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "Vybrat soubor s uživatelskými jmény."
+    }
+  ],
+  "uploaderTitle": [
+    {
+      "type": 0,
+      "value": "Přetáhnout"
+    }
+  ],
+  "uploading": [
+    {
+      "type": 0,
+      "value": "Nahrávání"
+    }
+  ]
+}

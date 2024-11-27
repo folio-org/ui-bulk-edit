@@ -1,0 +1,3384 @@
+{
+  "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": [
+    {
+      "type": 0,
+      "value": "The uploaded file is empty."
+    }
+  ],
+  "actionMenu.placeholder": [
+    {
+      "type": 0,
+      "value": "Search column name"
+    }
+  ],
+  "actions.find": [
+    {
+      "type": 0,
+      "value": "Find"
+    }
+  ],
+  "actions.findEntireField": [
+    {
+      "type": 0,
+      "value": "Find (entire subfield search)"
+    }
+  ],
+  "actions.findFullField": [
+    {
+      "type": 0,
+      "value": "Find (full field search)"
+    }
+  ],
+  "actions.placeholder": [
+    {
+      "type": 0,
+      "value": "Select action"
+    }
+  ],
+  "ariaLabel.actionsSelect": [
+    {
+      "type": 0,
+      "value": "Actions select"
+    }
+  ],
+  "ariaLabel.columnFilter": [
+    {
+      "type": 0,
+      "value": "Column filter input"
+    }
+  ],
+  "ariaLabel.date": [
+    {
+      "type": 0,
+      "value": "日付"
+    }
+  ],
+  "ariaLabel.loanTypeSelect": [
+    {
+      "type": 0,
+      "value": "貸出タイプの選択"
+    }
+  ],
+  "ariaLabel.location": [
+    {
+      "type": 0,
+      "value": "所在"
+    }
+  ],
+  "ariaLabel.patronGroupSelect": [
+    {
+      "type": 0,
+      "value": "利用者グループの選択"
+    }
+  ],
+  "ariaLabel.statusSelect": [
+    {
+      "type": 0,
+      "value": "Status select"
+    }
+  ],
+  "ariaLabel.textArea": [
+    {
+      "type": 0,
+      "value": "テキストエリア"
+    }
+  ],
+  "ariaLabel.textField": [
+    {
+      "type": 0,
+      "value": "テキストフィールド"
+    }
+  ],
+  "ariaLabel.urlRelationshipSelect": [
+    {
+      "type": 0,
+      "value": "Url relationship select"
+    }
+  ],
+  "cancel": [
+    {
+      "type": 0,
+      "value": "キャンセル"
+    }
+  ],
+  "category.administrativeData": [
+    {
+      "type": 0,
+      "value": "Administrative data"
+    }
+  ],
+  "category.electronicAccess": [
+    {
+      "type": 0,
+      "value": "電子アクセス"
+    }
+  ],
+  "category.holdingsLocation": [
+    {
+      "type": 0,
+      "value": "所蔵所在"
+    }
+  ],
+  "category.holdingsNotes": [
+    {
+      "type": 0,
+      "value": "所蔵ノート"
+    }
+  ],
+  "category.instanceNotes": [
+    {
+      "type": 0,
+      "value": "インスタンスノート"
+    }
+  ],
+  "category.itemNotes": [
+    {
+      "type": 0,
+      "value": "資料ノート"
+    }
+  ],
+  "category.loanType": [
+    {
+      "type": 0,
+      "value": "貸出タイプ"
+    }
+  ],
+  "category.location": [
+    {
+      "type": 0,
+      "value": "所在"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition format": [
+    {
+      "type": 0,
+      "value": "収集フォーマット"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition method": [
+    {
+      "type": 0,
+      "value": "Acquisition method"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Action note": [
+    {
+      "type": 0,
+      "value": "アクションノート"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Administrative note": [
+    {
+      "type": 0,
+      "value": "管理ノート"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Binding": [
+    {
+      "type": 0,
+      "value": "製本メモ"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number": [
+    {
+      "type": 0,
+      "value": "コールナンバー"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number prefix": [
+    {
+      "type": 0,
+      "value": "請求記号の接頭語"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number suffix": [
+    {
+      "type": 0,
+      "value": "請求記号の接尾語"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number type": [
+    {
+      "type": 0,
+      "value": "コールナンバータイプ"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy note": [
+    {
+      "type": 0,
+      "value": "メモをコピーする"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy number": [
+    {
+      "type": 0,
+      "value": "コピー番号"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Digitization policy": [
+    {
+      "type": 0,
+      "value": "Digitization policy"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Discovery suppress": [
+    {
+      "type": 0,
+      "value": "Suppress from discovery"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Effective location": [
+    {
+      "type": 0,
+      "value": "有効所在"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic access": [
+    {
+      "type": 0,
+      "value": "電子アクセス"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic bookplate": [
+    {
+      "type": 0,
+      "value": "Electronic bookplate note"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former holdings Id": [
+    {
+      "type": 0,
+      "value": "以前の所蔵 ID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former ids": [
+    {
+      "type": 0,
+      "value": "以前のID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.HRID": [
+    {
+      "type": 0,
+      "value": "所蔵 URID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings HRID": [
+    {
+      "type": 0,
+      "value": "所蔵 HRID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "所蔵 UUID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings copy number": [
+    {
+      "type": 0,
+      "value": "Holdings copy number"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number": [
+    {
+      "type": 0,
+      "value": "所蔵レベルの請求記号"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number prefix": [
+    {
+      "type": 0,
+      "value": "所蔵レベルの請求記号の接頭語"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number suffix": [
+    {
+      "type": 0,
+      "value": "所蔵レベルの請求記号の接尾語"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number type": [
+    {
+      "type": 0,
+      "value": "所蔵レベルの請求記号タイプ"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings permanent location": [
+    {
+      "type": 0,
+      "value": "所蔵一時所在"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings record id": [
+    {
+      "type": 0,
+      "value": "所蔵 ID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement": [
+    {
+      "type": 0,
+      "value": "Holdings statement"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for indexes": [
+    {
+      "type": 0,
+      "value": "Holdings statement for indexes"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for supplements": [
+    {
+      "type": 0,
+      "value": "Holdings statement for supplements"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements": [
+    {
+      "type": 0,
+      "value": "Holdings statements"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for indexes": [
+    {
+      "type": 0,
+      "value": "Holdings statements for indexes"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for supplements": [
+    {
+      "type": 0,
+      "value": "Holdings statements for supplements"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings temporary location": [
+    {
+      "type": 0,
+      "value": "所蔵一時所在"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings type": [
+    {
+      "type": 0,
+      "value": "所蔵タイプ"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.ILL policy": [
+    {
+      "type": 0,
+      "value": "ILLポリシー"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Ill policy": [
+    {
+      "type": 0,
+      "value": "ILLポリシー"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "Instance (Title, Publisher, Publication date)"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance HRID": [
+    {
+      "type": 0,
+      "value": "インスタンス HRID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Item barcode": [
+    {
+      "type": 0,
+      "value": "アイテム - バーコード"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Member": [
+    {
+      "type": 0,
+      "value": "Member"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Notes": [
+    {
+      "type": 0,
+      "value": "ノート"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Number of items": [
+    {
+      "type": 0,
+      "value": "資料数"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Order format": [
+    {
+      "type": 0,
+      "value": "発注フォーマット"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Permanent location": [
+    {
+      "type": 0,
+      "value": "通常所在"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Provenance": [
+    {
+      "type": 0,
+      "value": "Provenance note"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receipt status": [
+    {
+      "type": 0,
+      "value": "Receipt status"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receiving history": [
+    {
+      "type": 0,
+      "value": "受入履歴"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Reproduction": [
+    {
+      "type": 0,
+      "value": "Reproduction note"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Retention policy": [
+    {
+      "type": 0,
+      "value": "Retention policy"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Shelving title": [
+    {
+      "type": 0,
+      "value": "Shelving title"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Source": [
+    {
+      "type": 0,
+      "value": "ソース"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Statistical codes": [
+    {
+      "type": 0,
+      "value": "統計コード"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Suppress from discovery"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Tags": [
+    {
+      "type": 0,
+      "value": "タグ"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Temporary location": [
+    {
+      "type": 0,
+      "value": "一時所在"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Version": [
+    {
+      "type": 0,
+      "value": "バージョン"
+    }
+  ],
+  "columns.INSTANCE.Administrative note": [
+    {
+      "type": 0,
+      "value": "管理用メモ"
+    }
+  ],
+  "columns.INSTANCE.Cataloged date": [
+    {
+      "type": 0,
+      "value": "カタログ日"
+    }
+  ],
+  "columns.INSTANCE.Contributors": [
+    {
+      "type": 0,
+      "value": "寄与者"
+    }
+  ],
+  "columns.INSTANCE.Edition": [
+    {
+      "type": 0,
+      "value": "版"
+    }
+  ],
+  "columns.INSTANCE.Formats": [
+    {
+      "type": 0,
+      "value": "フォーマット"
+    }
+  ],
+  "columns.INSTANCE.Index title": [
+    {
+      "type": 0,
+      "value": "インデックスタイトル"
+    }
+  ],
+  "columns.INSTANCE.Instance HRID": [
+    {
+      "type": 0,
+      "value": "インスタンスHRID"
+    }
+  ],
+  "columns.INSTANCE.Instance UUID": [
+    {
+      "type": 0,
+      "value": "インスタンス UUID"
+    }
+  ],
+  "columns.INSTANCE.Instance status term": [
+    {
+      "type": 0,
+      "value": "インスタンスステータス用語"
+    }
+  ],
+  "columns.INSTANCE.Languages": [
+    {
+      "type": 0,
+      "value": "言語"
+    }
+  ],
+  "columns.INSTANCE.Mode of issuance": [
+    {
+      "type": 0,
+      "value": "Mode of issuance"
+    }
+  ],
+  "columns.INSTANCE.Nature of content": [
+    {
+      "type": 0,
+      "value": "コンテンツの性質"
+    }
+  ],
+  "columns.INSTANCE.Notes": [
+    {
+      "type": 0,
+      "value": "ノート"
+    }
+  ],
+  "columns.INSTANCE.Physical description": [
+    {
+      "type": 0,
+      "value": "Physical description"
+    }
+  ],
+  "columns.INSTANCE.Previously held": [
+    {
+      "type": 0,
+      "value": "Previously held"
+    }
+  ],
+  "columns.INSTANCE.Publication frequency": [
+    {
+      "type": 0,
+      "value": "Publication frequency"
+    }
+  ],
+  "columns.INSTANCE.Publication range": [
+    {
+      "type": 0,
+      "value": "出版範囲"
+    }
+  ],
+  "columns.INSTANCE.Resource title": [
+    {
+      "type": 0,
+      "value": "リソースのタイトル"
+    }
+  ],
+  "columns.INSTANCE.Resource type": [
+    {
+      "type": 0,
+      "value": "リソースタイプ"
+    }
+  ],
+  "columns.INSTANCE.Series statements": [
+    {
+      "type": 0,
+      "value": "Series statements"
+    }
+  ],
+  "columns.INSTANCE.Source": [
+    {
+      "type": 0,
+      "value": "ソース"
+    }
+  ],
+  "columns.INSTANCE.Staff suppress": [
+    {
+      "type": 0,
+      "value": "Staff suppress"
+    }
+  ],
+  "columns.INSTANCE.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "ディスカバリーからの排除"
+    }
+  ],
+  "columns.ITEM.Accession number": [
+    {
+      "type": 0,
+      "value": "受入番号"
+    }
+  ],
+  "columns.ITEM.Administrative note": [
+    {
+      "type": 0,
+      "value": "管理ノート"
+    }
+  ],
+  "columns.ITEM.Barcode": [
+    {
+      "type": 0,
+      "value": "バーコード"
+    }
+  ],
+  "columns.ITEM.Bound with titles": [
+    {
+      "type": 0,
+      "value": "Bound with titles"
+    }
+  ],
+  "columns.ITEM.Call Number": [
+    {
+      "type": 0,
+      "value": "請求記号"
+    }
+  ],
+  "columns.ITEM.Check in note": [
+    {
+      "type": 0,
+      "value": "返却ノート"
+    }
+  ],
+  "columns.ITEM.Check out note": [
+    {
+      "type": 0,
+      "value": "貸出ノート"
+    }
+  ],
+  "columns.ITEM.Chronology": [
+    {
+      "type": 0,
+      "value": "年表"
+    }
+  ],
+  "columns.ITEM.Circulation Notes": [
+    {
+      "type": 0,
+      "value": "貸出/返却 ノート"
+    }
+  ],
+  "columns.ITEM.Contributor Names": [
+    {
+      "type": 0,
+      "value": "寄与者名称"
+    }
+  ],
+  "columns.ITEM.Copy number": [
+    {
+      "type": 0,
+      "value": "Copy number"
+    }
+  ],
+  "columns.ITEM.Description of pieces": [
+    {
+      "type": 0,
+      "value": "Description of pieces"
+    }
+  ],
+  "columns.ITEM.Effective call number": [
+    {
+      "type": 0,
+      "value": "Effective call number"
+    }
+  ],
+  "columns.ITEM.Electronic access": [
+    {
+      "type": 0,
+      "value": "電子アクセス"
+    }
+  ],
+  "columns.ITEM.Enumeration": [
+    {
+      "type": 0,
+      "value": "Enumeration"
+    }
+  ],
+  "columns.ITEM.Former identifier": [
+    {
+      "type": 0,
+      "value": "以前のID"
+    }
+  ],
+  "columns.ITEM.Holdings (Location, Call number)": [
+    {
+      "type": 0,
+      "value": "所蔵（所在, 請求記号）"
+    }
+  ],
+  "columns.ITEM.Holdings Record Id": [
+    {
+      "type": 0,
+      "value": "所蔵レコード ID"
+    }
+  ],
+  "columns.ITEM.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "所蔵 UUID"
+    }
+  ],
+  "columns.ITEM.In Transit Destination Service Point": [
+    {
+      "type": 0,
+      "value": "In transit destination service point"
+    }
+  ],
+  "columns.ITEM.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "インスタンス（タイトル、出版者、出版日）"
+    }
+  ],
+  "columns.ITEM.Is bound with": [
+    {
+      "type": 0,
+      "value": "Is bound with"
+    }
+  ],
+  "columns.ITEM.Item HRID": [
+    {
+      "type": 0,
+      "value": "資料 HRID"
+    }
+  ],
+  "columns.ITEM.Item UUID": [
+    {
+      "type": 0,
+      "value": "資料 UUID"
+    }
+  ],
+  "columns.ITEM.Item damaged status": [
+    {
+      "type": 0,
+      "value": "資料破損ステータス"
+    }
+  ],
+  "columns.ITEM.Item damaged status date": [
+    {
+      "type": 0,
+      "value": "Item damaged status date"
+    }
+  ],
+  "columns.ITEM.Item effective location": [
+    {
+      "type": 0,
+      "value": "資料有効所在"
+    }
+  ],
+  "columns.ITEM.Item id": [
+    {
+      "type": 0,
+      "value": "アイテム ID"
+    }
+  ],
+  "columns.ITEM.Item identifier": [
+    {
+      "type": 0,
+      "value": "資料 ID"
+    }
+  ],
+  "columns.ITEM.Item level call number": [
+    {
+      "type": 0,
+      "value": "資料レベルの請求記号"
+    }
+  ],
+  "columns.ITEM.Item level call number prefix": [
+    {
+      "type": 0,
+      "value": "資料レベルの請求記号の接頭語"
+    }
+  ],
+  "columns.ITEM.Item level call number suffix": [
+    {
+      "type": 0,
+      "value": "資料レベルの請求記号の接尾語"
+    }
+  ],
+  "columns.ITEM.Item level call number type": [
+    {
+      "type": 0,
+      "value": "資料レベルの請求記号タイプ"
+    }
+  ],
+  "columns.ITEM.Item permanent location": [
+    {
+      "type": 0,
+      "value": "資料通常所在"
+    }
+  ],
+  "columns.ITEM.Item temporary location": [
+    {
+      "type": 0,
+      "value": "資料一時所在"
+    }
+  ],
+  "columns.ITEM.Last CheckIn": [
+    {
+      "type": 0,
+      "value": "最終返却"
+    }
+  ],
+  "columns.ITEM.Material type": [
+    {
+      "type": 0,
+      "value": "資料種別"
+    }
+  ],
+  "columns.ITEM.Member": [
+    {
+      "type": 0,
+      "value": "Member"
+    }
+  ],
+  "columns.ITEM.Missing pieces": [
+    {
+      "type": 0,
+      "value": "Missing pieces"
+    }
+  ],
+  "columns.ITEM.Missing pieces date": [
+    {
+      "type": 0,
+      "value": "Missing pieces date"
+    }
+  ],
+  "columns.ITEM.Notes": [
+    {
+      "type": 0,
+      "value": "ノート"
+    }
+  ],
+  "columns.ITEM.Number of missing pieces": [
+    {
+      "type": 0,
+      "value": "Number of missing pieces"
+    }
+  ],
+  "columns.ITEM.Number of pieces": [
+    {
+      "type": 0,
+      "value": "Number of pieces"
+    }
+  ],
+  "columns.ITEM.Permanent loan type": [
+    {
+      "type": 0,
+      "value": "通常貸出タイプ"
+    }
+  ],
+  "columns.ITEM.Purchase Order Line Identifier": [
+    {
+      "type": 0,
+      "value": "発注明細 ID"
+    }
+  ],
+  "columns.ITEM.Shelving order": [
+    {
+      "type": 0,
+      "value": "Shelving order"
+    }
+  ],
+  "columns.ITEM.Statistical codes": [
+    {
+      "type": 0,
+      "value": "統計コード"
+    }
+  ],
+  "columns.ITEM.Status": [
+    {
+      "type": 0,
+      "value": "ステータス"
+    }
+  ],
+  "columns.ITEM.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Suppress from discovery"
+    }
+  ],
+  "columns.ITEM.Tags": [
+    {
+      "type": 0,
+      "value": "タグ"
+    }
+  ],
+  "columns.ITEM.Temporary loan type": [
+    {
+      "type": 0,
+      "value": "一時貸出タイプ"
+    }
+  ],
+  "columns.ITEM.Title": [
+    {
+      "type": 0,
+      "value": "タイトル"
+    }
+  ],
+  "columns.ITEM.Version": [
+    {
+      "type": 0,
+      "value": "バージョン"
+    }
+  ],
+  "columns.ITEM.Volume": [
+    {
+      "type": 0,
+      "value": "巻"
+    }
+  ],
+  "columns.ITEM.Year, caption": [
+    {
+      "type": 0,
+      "value": "Year, caption"
+    }
+  ],
+  "columns.USER.Active": [
+    {
+      "type": 0,
+      "value": "有効"
+    }
+  ],
+  "columns.USER.Addresses": [
+    {
+      "type": 0,
+      "value": "Addresses"
+    }
+  ],
+  "columns.USER.Barcode": [
+    {
+      "type": 0,
+      "value": "バーコード"
+    }
+  ],
+  "columns.USER.Created Date": [
+    {
+      "type": 0,
+      "value": "Record created"
+    }
+  ],
+  "columns.USER.Custom fields": [
+    {
+      "type": 0,
+      "value": "カスタムフィールド"
+    }
+  ],
+  "columns.USER.Date Of Birth": [
+    {
+      "type": 0,
+      "value": "出生日"
+    }
+  ],
+  "columns.USER.Departments": [
+    {
+      "type": 0,
+      "value": "部門"
+    }
+  ],
+  "columns.USER.Email": [
+    {
+      "type": 0,
+      "value": "電子メール"
+    }
+  ],
+  "columns.USER.Enrollment date": [
+    {
+      "type": 0,
+      "value": "登録日"
+    }
+  ],
+  "columns.USER.Expiration date": [
+    {
+      "type": 0,
+      "value": "有効期限"
+    }
+  ],
+  "columns.USER.External system id": [
+    {
+      "type": 0,
+      "value": "学部システムID"
+    }
+  ],
+  "columns.USER.First name": [
+    {
+      "type": 0,
+      "value": "名"
+    }
+  ],
+  "columns.USER.Last name": [
+    {
+      "type": 0,
+      "value": "姓"
+    }
+  ],
+  "columns.USER.Link to the profile picture": [
+    {
+      "type": 0,
+      "value": "Link to the profile picture"
+    }
+  ],
+  "columns.USER.Middle name": [
+    {
+      "type": 0,
+      "value": "ミドルネーム"
+    }
+  ],
+  "columns.USER.Mobile phone": [
+    {
+      "type": 0,
+      "value": "携帯電話"
+    }
+  ],
+  "columns.USER.Patron group": [
+    {
+      "type": 0,
+      "value": "利用者グループ"
+    }
+  ],
+  "columns.USER.Phone": [
+    {
+      "type": 0,
+      "value": "電話番号"
+    }
+  ],
+  "columns.USER.Preferred contact type id": [
+    {
+      "type": 0,
+      "value": "Preferred contact type id"
+    }
+  ],
+  "columns.USER.Preferred email communications": [
+    {
+      "type": 0,
+      "value": "Preferred email communications"
+    }
+  ],
+  "columns.USER.Preferred first name": [
+    {
+      "type": 0,
+      "value": "Preferred first name"
+    }
+  ],
+  "columns.USER.Proxy for": [
+    {
+      "type": 0,
+      "value": "Proxy for"
+    }
+  ],
+  "columns.USER.Tags": [
+    {
+      "type": 0,
+      "value": "タグ"
+    }
+  ],
+  "columns.USER.Type": [
+    {
+      "type": 0,
+      "value": "タイプ"
+    }
+  ],
+  "columns.USER.Updated date": [
+    {
+      "type": 0,
+      "value": "Record updated"
+    }
+  ],
+  "columns.USER.User id": [
+    {
+      "type": 0,
+      "value": "ユーザー ID"
+    }
+  ],
+  "columns.USER.User name": [
+    {
+      "type": 0,
+      "value": "ユーザー名"
+    }
+  ],
+  "columns.logs.actions": [
+    {
+      "type": 0,
+      "value": "Actions"
+    }
+  ],
+  "columns.logs.approach": [
+    {
+      "type": 0,
+      "value": "編集"
+    }
+  ],
+  "columns.logs.endTime": [
+    {
+      "type": 0,
+      "value": "終了"
+    }
+  ],
+  "columns.logs.entityType": [
+    {
+      "type": 0,
+      "value": "レコードタイプ"
+    }
+  ],
+  "columns.logs.hrId": [
+    {
+      "type": 0,
+      "value": "ID"
+    }
+  ],
+  "columns.logs.operationType": [
+    {
+      "type": 0,
+      "value": "Bulk operation type"
+    }
+  ],
+  "columns.logs.processedNumOfRecords": [
+    {
+      "type": 0,
+      "value": "Processed"
+    }
+  ],
+  "columns.logs.startTime": [
+    {
+      "type": 0,
+      "value": "Started"
+    }
+  ],
+  "columns.logs.status": [
+    {
+      "type": 0,
+      "value": "ステータス"
+    }
+  ],
+  "columns.logs.totalNumOfRecords": [
+    {
+      "type": 0,
+      "value": "# of records"
+    }
+  ],
+  "columns.logs.userId": [
+    {
+      "type": 0,
+      "value": "Run by"
+    }
+  ],
+  "conformationModal.commitChanges": [
+    {
+      "type": 0,
+      "value": "Commit changes"
+    }
+  ],
+  "conformationModal.message": [
+    {
+      "type": 0,
+      "value": "[ "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "変更をコミット"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    },
+    {
+      "type": 0,
+      "value": "ボタンをクリックすると、 "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "件のレコードが更新されます。"
+    }
+  ],
+  "error.incorrectFormatted": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": "フォーマットが正しくありません。フォーマットを修正して、ファイルを再度アップロードしてください。"
+    }
+  ],
+  "error.mod-bulk-operations.not.confirm.changes.s3.issue": [
+    {
+      "type": 0,
+      "value": "S3 からデータを取得できません。ホスティング プロバイダーに問い合わせて、S3 の設定を確認してください。詳細については、一括編集アプリ ログ (mod-bulk-operations および mod-data-export-worker モジュール) を参照してください。"
+    }
+  ],
+  "error.mod-bulk-operations.not.download.file.from.s3": [
+    {
+      "type": 0,
+      "value": "S3 からデータを取得できません。ホスティング プロバイダーに問い合わせて、S3 の設定を確認してください。詳細については、一括編集アプリ ログ (mod-bulk-operations および mod-data-export-worker モジュール) を参照してください。"
+    }
+  ],
+  "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": [
+    {
+      "type": 0,
+      "value": "S3 構成に問題があり、一括編集モジュールがファイルを保存できません。ホスティング プロバイダーに問い合わせて、一括編集アプリが正しく構成されているかどうかを確認してください。"
+    }
+  ],
+  "error.sww": [
+    {
+      "type": 0,
+      "value": "問題が発生しました"
+    }
+  ],
+  "error.uploadedFile": [
+    {
+      "type": 0,
+      "value": "Fail to upload file"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_HOLDINGS": [
+    {
+      "type": 0,
+      "value": "全ての所蔵レコードに適用"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_ITEMS": [
+    {
+      "type": 0,
+      "value": "Apply to all items records"
+    }
+  ],
+  "layer.action.apply.ITEMS": [
+    {
+      "type": 0,
+      "value": "Apply to items records"
+    }
+  ],
+  "layer.action.apply.STAFF_ONLY": [
+    {
+      "type": 0,
+      "value": "スタッフのみ"
+    }
+  ],
+  "layer.action.clear": [
+    {
+      "type": 0,
+      "value": "Clear field"
+    }
+  ],
+  "layer.action.replace": [
+    {
+      "type": 0,
+      "value": "Replace with"
+    }
+  ],
+  "layer.column.actions": [
+    {
+      "type": 0,
+      "value": "Actions"
+    }
+  ],
+  "layer.column.data": [
+    {
+      "type": 0,
+      "value": "データ"
+    }
+  ],
+  "layer.column.field": [
+    {
+      "type": 0,
+      "value": "フィールド"
+    }
+  ],
+  "layer.column.ind1": [
+    {
+      "type": 0,
+      "value": "In.1"
+    }
+  ],
+  "layer.column.ind2": [
+    {
+      "type": 0,
+      "value": "In.2"
+    }
+  ],
+  "layer.column.options": [
+    {
+      "type": 0,
+      "value": "Options"
+    }
+  ],
+  "layer.column.subfield": [
+    {
+      "type": 0,
+      "value": "サブフィールド"
+    }
+  ],
+  "layer.confirmChanges": [
+    {
+      "type": 0,
+      "value": "変更の確認"
+    }
+  ],
+  "layer.marc.error": [
+    {
+      "type": 0,
+      "value": "現在、5xx および 9xx の編集のみがサポートされています"
+    }
+  ],
+  "layer.marc.error.ind": [
+    {
+      "type": 0,
+      "value": "入力内容を確認してください"
+    }
+  ],
+  "layer.marc.error.limited": [
+    {
+      "type": 0,
+      "value": "5xx および 9xx に限定されます"
+    }
+  ],
+  "layer.marc.error.protected": [
+    {
+      "type": 0,
+      "value": "このフィールドは保護されています"
+    }
+  ],
+  "layer.marc.error.subfield": [
+    {
+      "type": 0,
+      "value": "入力内容を確認してください"
+    }
+  ],
+  "layer.options.add": [
+    {
+      "type": 0,
+      "value": "追加"
+    }
+  ],
+  "layer.options.additionalSubfield": [
+    {
+      "type": 0,
+      "value": "追加サブフィールド"
+    }
+  ],
+  "layer.options.administrativeNote": [
+    {
+      "type": 0,
+      "value": "管理ノート"
+    }
+  ],
+  "layer.options.append": [
+    {
+      "type": 0,
+      "value": "Append"
+    }
+  ],
+  "layer.options.available": [
+    {
+      "type": 0,
+      "value": "利用可"
+    }
+  ],
+  "layer.options.checkInNote": [
+    {
+      "type": 0,
+      "value": "返却ノート"
+    }
+  ],
+  "layer.options.checkOutNote": [
+    {
+      "type": 0,
+      "value": "貸出ノート"
+    }
+  ],
+  "layer.options.email": [
+    {
+      "type": 0,
+      "value": "Eメール"
+    }
+  ],
+  "layer.options.expirationDate": [
+    {
+      "type": 0,
+      "value": "Expiration date"
+    }
+  ],
+  "layer.options.holdings.linkText": [
+    {
+      "type": 0,
+      "value": "リンクテキスト"
+    }
+  ],
+  "layer.options.holdings.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "Materials specified"
+    }
+  ],
+  "layer.options.holdings.permanentLocation": [
+    {
+      "type": 0,
+      "value": "通常所蔵所在"
+    }
+  ],
+  "layer.options.holdings.suppress": [
+    {
+      "type": 0,
+      "value": "Suppress from discovery"
+    }
+  ],
+  "layer.options.holdings.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "一時所蔵所在"
+    }
+  ],
+  "layer.options.holdings.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "layer.options.holdings.urlPublic": [
+    {
+      "type": 0,
+      "value": "URL 公開ノート"
+    }
+  ],
+  "layer.options.holdings.urlRelationship": [
+    {
+      "type": 0,
+      "value": "URL Relationship"
+    }
+  ],
+  "layer.options.inProcess": [
+    {
+      "type": 0,
+      "value": "In process"
+    }
+  ],
+  "layer.options.instances.staffSuppress": [
+    {
+      "type": 0,
+      "value": "Staff suppress"
+    }
+  ],
+  "layer.options.instances.suppress": [
+    {
+      "type": 0,
+      "value": "ディスカバリーから除外する"
+    }
+  ],
+  "layer.options.intellectual": [
+    {
+      "type": 0,
+      "value": "Intellectual item"
+    }
+  ],
+  "layer.options.items.addNote": [
+    {
+      "type": 0,
+      "value": "ノートの追加"
+    }
+  ],
+  "layer.options.items.changeNote": [
+    {
+      "type": 0,
+      "value": "ノートタイプの変更"
+    }
+  ],
+  "layer.options.items.duplicateTo": [
+    {
+      "type": 0,
+      "value": "Duplicate to"
+    }
+  ],
+  "layer.options.items.false": [
+    {
+      "type": 0,
+      "value": "Set false"
+    }
+  ],
+  "layer.options.items.markAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "Mark as staff only"
+    }
+  ],
+  "layer.options.items.removeAll": [
+    {
+      "type": 0,
+      "value": "全て削除"
+    }
+  ],
+  "layer.options.items.removeMarkAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "Remove mark as staff only"
+    }
+  ],
+  "layer.options.items.removeNote": [
+    {
+      "type": 0,
+      "value": "Remove"
+    }
+  ],
+  "layer.options.items.true": [
+    {
+      "type": 0,
+      "value": "Set true"
+    }
+  ],
+  "layer.options.longMissing": [
+    {
+      "type": 0,
+      "value": "長期不明"
+    }
+  ],
+  "layer.options.missing": [
+    {
+      "type": 0,
+      "value": "不明"
+    }
+  ],
+  "layer.options.non-requestable": [
+    {
+      "type": 0,
+      "value": "処理中（リクエスト不可）"
+    }
+  ],
+  "layer.options.patronGroup": [
+    {
+      "type": 0,
+      "value": "利用者グループ"
+    }
+  ],
+  "layer.options.permanentLoanType": [
+    {
+      "type": 0,
+      "value": "通常貸出タイプ"
+    }
+  ],
+  "layer.options.permanentLocation": [
+    {
+      "type": 0,
+      "value": "通常資料所在"
+    }
+  ],
+  "layer.options.placeholder": [
+    {
+      "type": 0,
+      "value": "資料ステータスの選択"
+    }
+  ],
+  "layer.options.removeField": [
+    {
+      "type": 0,
+      "value": "フィールドの削除"
+    }
+  ],
+  "layer.options.removeSubfield": [
+    {
+      "type": 0,
+      "value": "サブフィールドの削除"
+    }
+  ],
+  "layer.options.replaceWith": [
+    {
+      "type": 0,
+      "value": "Replace with"
+    }
+  ],
+  "layer.options.restricted": [
+    {
+      "type": 0,
+      "value": "Restricted"
+    }
+  ],
+  "layer.options.statusLabel": [
+    {
+      "type": 0,
+      "value": "資料のステータス"
+    }
+  ],
+  "layer.options.suppressFromDiscovery": [
+    {
+      "type": 0,
+      "value": "Suppress from discovery"
+    }
+  ],
+  "layer.options.temporaryLoanTypeLabel": [
+    {
+      "type": 0,
+      "value": "一時貸出タイプ"
+    }
+  ],
+  "layer.options.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "一時資料所在"
+    }
+  ],
+  "layer.options.unavailable": [
+    {
+      "type": 0,
+      "value": "利用不可"
+    }
+  ],
+  "layer.options.unknown": [
+    {
+      "type": 0,
+      "value": "不明"
+    }
+  ],
+  "layer.options.withdrawn": [
+    {
+      "type": 0,
+      "value": "Withdrawn"
+    }
+  ],
+  "layer.selectLoanType": [
+    {
+      "type": 0,
+      "value": "貸出タイプの選択"
+    }
+  ],
+  "layer.selectLocation": [
+    {
+      "type": 0,
+      "value": "所在の選択"
+    }
+  ],
+  "layer.selectNoteType": [
+    {
+      "type": 0,
+      "value": "ノートタイプの選択"
+    }
+  ],
+  "layer.selectPatronGroup": [
+    {
+      "type": 0,
+      "value": "利用者グループの選択"
+    }
+  ],
+  "layer.selectType": [
+    {
+      "type": 0,
+      "value": "ノートタイプの選択"
+    }
+  ],
+  "layer.title": [
+    {
+      "type": 0,
+      "value": "一括編集"
+    }
+  ],
+  "list.actions.download": [
+    {
+      "type": 0,
+      "value": "ダウンロード"
+    }
+  ],
+  "list.criteriaTitle": [
+    {
+      "type": 0,
+      "value": "Set criteria"
+    }
+  ],
+  "list.errors.info": [
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": ": "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " entries * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " records matched * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " errors"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": ": "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " entries * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " records changed * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " errors"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.info": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Bulk edit query: "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " entries * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " records matched * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " errors"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "一括編集クエリ: "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": "エントリ * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": "レコードが変更されました * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": "エラー"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.table.code": [
+    {
+      "type": 0,
+      "value": "レコードID"
+    }
+  ],
+  "list.errors.table.link": [
+    {
+      "type": 0,
+      "value": "最新バージョンの表示"
+    }
+  ],
+  "list.errors.table.message": [
+    {
+      "type": 0,
+      "value": "エラーの理由"
+    }
+  ],
+  "list.errors.title": [
+    {
+      "type": 0,
+      "value": "エラー"
+    }
+  ],
+  "list.filters.capabilities.acquisition": [
+    {
+      "type": 0,
+      "value": "収集"
+    }
+  ],
+  "list.filters.capabilities.circulation": [
+    {
+      "type": 0,
+      "value": "貸出/返却"
+    }
+  ],
+  "list.filters.capabilities.holdings": [
+    {
+      "type": 0,
+      "value": "インベントリ - 所蔵"
+    }
+  ],
+  "list.filters.capabilities.instances": [
+    {
+      "type": 0,
+      "value": "インベントリ - インスタンス"
+    }
+  ],
+  "list.filters.capabilities.inventory": [
+    {
+      "type": 0,
+      "value": "インベントリ - 資料"
+    }
+  ],
+  "list.filters.capabilities.title": [
+    {
+      "type": 0,
+      "value": "Record types"
+    }
+  ],
+  "list.filters.capabilities.users": [
+    {
+      "type": 0,
+      "value": "ユーザー"
+    }
+  ],
+  "list.filters.identifier": [
+    {
+      "type": 0,
+      "value": "ID"
+    }
+  ],
+  "list.filters.logs": [
+    {
+      "type": 0,
+      "value": "ログ"
+    }
+  ],
+  "list.filters.query": [
+    {
+      "type": 0,
+      "value": "クエリ"
+    }
+  ],
+  "list.filters.recordIdentifier": [
+    {
+      "type": 0,
+      "value": "レコードID"
+    }
+  ],
+  "list.filters.recordIdentifier.externalIDs": [
+    {
+      "type": 0,
+      "value": "外部ID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsHRID": [
+    {
+      "type": 0,
+      "value": "所蔵 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "所蔵 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.instanceHRID": [
+    {
+      "type": 0,
+      "value": "インスタンスHRID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.itemBarcodes": [
+    {
+      "type": 0,
+      "value": "資料バーコード"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceHRID": [
+    {
+      "type": 0,
+      "value": "インスタンスHRID"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISBN": [
+    {
+      "type": 0,
+      "value": "ISBN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISSN": [
+    {
+      "type": 0,
+      "value": "ISSN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceUUID": [
+    {
+      "type": 0,
+      "value": "インスタンスUUID"
+    }
+  ],
+  "list.filters.recordIdentifier.item.ItemHRIDs": [
+    {
+      "type": 0,
+      "value": "資料 HRID"
+    }
+  ],
+  "list.filters.recordIdentifier.item.UUID": [
+    {
+      "type": 0,
+      "value": "資料 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.item.accession": [
+    {
+      "type": 0,
+      "value": "Item accession numbers"
+    }
+  ],
+  "list.filters.recordIdentifier.item.barcode": [
+    {
+      "type": 0,
+      "value": "資料バーコード"
+    }
+  ],
+  "list.filters.recordIdentifier.item.former": [
+    {
+      "type": 0,
+      "value": "以前の資料 ID"
+    }
+  ],
+  "list.filters.recordIdentifier.item.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "所蔵 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.placeholder": [
+    {
+      "type": 0,
+      "value": "レコードIDの選択"
+    }
+  ],
+  "list.filters.recordIdentifier.userBarcodes": [
+    {
+      "type": 0,
+      "value": "ユーザーバーコード"
+    }
+  ],
+  "list.filters.recordIdentifier.userUUIDs": [
+    {
+      "type": 0,
+      "value": "ユーザー UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.usernames": [
+    {
+      "type": 0,
+      "value": "ユーザー名"
+    }
+  ],
+  "list.logSubTitle": [
+    {
+      "type": 0,
+      "value": "Set criteria to start bulk edit"
+    }
+  ],
+  "list.logSubTitle.changed": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " records changed"
+    }
+  ],
+  "list.logSubTitle.matched": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " records match"
+    }
+  ],
+  "list.preview.electronicAccess.linkText": [
+    {
+      "type": 0,
+      "value": "リンクテキスト"
+    }
+  ],
+  "list.preview.electronicAccess.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "Materials specified"
+    }
+  ],
+  "list.preview.electronicAccess.publicNote": [
+    {
+      "type": 0,
+      "value": "公開ノート"
+    }
+  ],
+  "list.preview.electronicAccess.relationship": [
+    {
+      "type": 0,
+      "value": "関係"
+    }
+  ],
+  "list.preview.electronicAccess.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "list.preview.table.status.false": [
+    {
+      "type": 0,
+      "value": "無効"
+    }
+  ],
+  "list.preview.table.status.true": [
+    {
+      "type": 0,
+      "value": "有効"
+    }
+  ],
+  "list.preview.title": [
+    {
+      "type": 0,
+      "value": "Preview of record matched"
+    }
+  ],
+  "list.preview.titleChanged": [
+    {
+      "type": 0,
+      "value": "Preview of record changed"
+    }
+  ],
+  "list.result.emptyMessage": [
+    {
+      "type": 0,
+      "value": "レコード タイプを選択し、次にレコードIDを選択します。"
+    }
+  ],
+  "list.result.emptyMessage.empty": [
+    {
+      "type": 0,
+      "value": "レコードIDの選択"
+    }
+  ],
+  "list.result.emptyMessage.holdings": [
+    {
+      "type": 0,
+      "value": "レコードIDの選択"
+    }
+  ],
+  "list.result.emptyMessage.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "所蔵HRIDを含むファイルをドラッグ アンド ドロップするか、選択します"
+    }
+  ],
+  "list.result.emptyMessage.holdings.ID": [
+    {
+      "type": 0,
+      "value": "Drag and drop or choose file with holdings UUIDs."
+    }
+  ],
+  "list.result.emptyMessage.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "インスタンス HRID を含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "資料バーコードを含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.query": [
+    {
+      "type": 0,
+      "value": "クエリを構築するには、「クエリの構築」ボタンをクリックします。"
+    }
+  ],
+  "list.result.emptyMessage.instance": [
+    {
+      "type": 0,
+      "value": "レコードIDの選択"
+    }
+  ],
+  "list.result.emptyMessage.instance.HRID": [
+    {
+      "type": 0,
+      "value": "インスタンス HRID を含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.instance.ID": [
+    {
+      "type": 0,
+      "value": "インスタンス UUID を含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "ISBN を含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "ISSN を含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.instance.query": [
+    {
+      "type": 0,
+      "value": "クエリを構築するには、「クエリの構築」ボタンをクリックします。"
+    }
+  ],
+  "list.result.emptyMessage.item": [
+    {
+      "type": 0,
+      "value": "レコードIDの選択"
+    }
+  ],
+  "list.result.emptyMessage.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "Drag and drop or choose file with item accession numbers."
+    }
+  ],
+  "list.result.emptyMessage.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "資料バーコードを含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "以前の資料 IDを持つファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "所蔵UUID を含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.item.HRID": [
+    {
+      "type": 0,
+      "value": "資料 HRIDを持つファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.item.ID": [
+    {
+      "type": 0,
+      "value": "資料 UUIDを持つファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.item.query": [
+    {
+      "type": 0,
+      "value": "クエリを構築するには、「クエリの構築」ボタンをクリックします"
+    }
+  ],
+  "list.result.emptyMessage.logs": [
+    {
+      "type": 0,
+      "value": "Choose a filter to show results."
+    }
+  ],
+  "list.result.emptyMessage.query": [
+    {
+      "type": 0,
+      "value": "レコード タイプを選択し、[クエリの構築] ボタンをクリックします。"
+    }
+  ],
+  "list.result.emptyMessage.user": [
+    {
+      "type": 0,
+      "value": "レコードIDの選択"
+    }
+  ],
+  "list.result.emptyMessage.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "ユーザーバーコードを含むファイルをドラッグアンドドロップするか、選択します"
+    }
+  ],
+  "list.result.emptyMessage.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "外部 ID を含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.user.ID": [
+    {
+      "type": 0,
+      "value": "ユーザー UUID を含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "ユーザー名を含むファイルをドラッグ アンド ドロップするか、選択します。"
+    }
+  ],
+  "list.result.emptyMessage.user.query": [
+    {
+      "type": 0,
+      "value": "クエリを構築するには、「クエリの構築」ボタンをクリックします。"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "File with updated records"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "File with updated records"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "File with errors encountered when committing the changes"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "File with errors encountered when committing the changes"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "更新済レコードを含むファイル"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "更新済レコードを含むファイル"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "File with the matching records"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "File with the matching records"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "File with errors encountered during the record matching"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "File with errors encountered during the record matching"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "File with the preview of proposed changes"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "File with the preview of proposed changes"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "File with the preview of proposed changes"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "File with the preview of proposed changes"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile": [
+    {
+      "type": 0,
+      "value": "File that was used to trigger the bulk edit"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "File with identifiers of the records affected by bulk update"
+    }
+  ],
+  "logs.approach.IN_APP": [
+    {
+      "type": 0,
+      "value": "In app"
+    }
+  ],
+  "logs.approach.MANUAL": [
+    {
+      "type": 0,
+      "value": "CSV"
+    }
+  ],
+  "logs.approach.QUERY": [
+    {
+      "type": 0,
+      "value": "クエリ"
+    }
+  ],
+  "logs.entityType.HOLDINGS_RECORD": [
+    {
+      "type": 0,
+      "value": "インベントリ - 所蔵"
+    }
+  ],
+  "logs.entityType.INSTANCE": [
+    {
+      "type": 0,
+      "value": "インベントリ - インスタンス"
+    }
+  ],
+  "logs.entityType.INSTANCE_MARC": [
+    {
+      "type": 0,
+      "value": "インベントリ - インスタンス (MARC)"
+    }
+  ],
+  "logs.entityType.ITEM": [
+    {
+      "type": 0,
+      "value": "インベントリ - 資料"
+    }
+  ],
+  "logs.entityType.USER": [
+    {
+      "type": 0,
+      "value": "ユーザー"
+    }
+  ],
+  "logs.filter.endDate": [
+    {
+      "type": 0,
+      "value": "終了"
+    }
+  ],
+  "logs.filter.option.delete": [
+    {
+      "type": 0,
+      "value": "削除"
+    }
+  ],
+  "logs.filter.option.edit": [
+    {
+      "type": 0,
+      "value": "編集"
+    }
+  ],
+  "logs.filter.startDate": [
+    {
+      "type": 0,
+      "value": "開始"
+    }
+  ],
+  "logs.filter.title.capability": [
+    {
+      "type": 0,
+      "value": "レコードタイプ"
+    }
+  ],
+  "logs.filter.title.status": [
+    {
+      "type": 0,
+      "value": "ステータス"
+    }
+  ],
+  "logs.filter.title.types": [
+    {
+      "type": 0,
+      "value": "Bulk operation type"
+    }
+  ],
+  "logs.filter.title.user": [
+    {
+      "type": 0,
+      "value": "ユーザー"
+    }
+  ],
+  "logs.filter.user.placeholder": [
+    {
+      "type": 0,
+      "value": "ユーザーの選択"
+    }
+  ],
+  "logs.filter.user.placeholder.empty": [
+    {
+      "type": 0,
+      "value": "リストは空です"
+    }
+  ],
+  "logs.infoPopover": [
+    {
+      "type": 0,
+      "value": "Files are unavailable for download because 30 days have elapsed since the date the job was run."
+    }
+  ],
+  "logs.status.APPLY_CHANGES": [
+    {
+      "type": 0,
+      "value": "変更の適用"
+    }
+  ],
+  "logs.status.COMPLETED": [
+    {
+      "type": 0,
+      "value": "完了"
+    }
+  ],
+  "logs.status.COMPLETED_WITH_ERRORS": [
+    {
+      "type": 0,
+      "value": "エラーありで完了"
+    }
+  ],
+  "logs.status.DATA_MODIFICATION": [
+    {
+      "type": 0,
+      "value": "Data modification"
+    }
+  ],
+  "logs.status.EXECUTING_QUERY": [
+    {
+      "type": 0,
+      "value": "クエリの実行"
+    }
+  ],
+  "logs.status.FAILED": [
+    {
+      "type": 0,
+      "value": "失敗"
+    }
+  ],
+  "logs.status.NEW": [
+    {
+      "type": 0,
+      "value": "新規"
+    }
+  ],
+  "logs.status.RETRIEVING_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "Retrieving identifiers"
+    }
+  ],
+  "logs.status.RETRIEVING_RECORDS": [
+    {
+      "type": 0,
+      "value": "Retrieving records"
+    }
+  ],
+  "logs.status.REVIEWED_NO_MARC_RECORDS": [
+    {
+      "type": 0,
+      "value": "Reviewing changes"
+    }
+  ],
+  "logs.status.REVIEW_CHANGES": [
+    {
+      "type": 0,
+      "value": "Reviewing changes"
+    }
+  ],
+  "logs.status.SAVED_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "IDの保存"
+    }
+  ],
+  "logs.status.SAVING_RECORDS_LOCALLY": [
+    {
+      "type": 0,
+      "value": "Saving records"
+    }
+  ],
+  "menuGroup.actions": [
+    {
+      "type": 0,
+      "value": "アクション"
+    }
+  ],
+  "menuGroup.showColumns": [
+    {
+      "type": 0,
+      "value": "カラムを表示"
+    }
+  ],
+  "menuGroup.startEdit": [
+    {
+      "type": 0,
+      "value": "一括編集の開始"
+    }
+  ],
+  "meta.logs.title": [
+    {
+      "type": 0,
+      "value": "ログの一括編集"
+    }
+  ],
+  "meta.query.title": [
+    {
+      "type": 0,
+      "value": "一括編集クエリ"
+    }
+  ],
+  "meta.query.title.mark": [
+    {
+      "type": 0,
+      "value": "MARC フィールドクエリの一括編集"
+    }
+  ],
+  "meta.title": [
+    {
+      "type": 0,
+      "value": "一括編集"
+    }
+  ],
+  "meta.title.conformationModal": [
+    {
+      "type": 0,
+      "value": "一括編集: "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " "
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile": [
+    {
+      "type": 0,
+      "value": "一括編集"
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile.mark": [
+    {
+      "type": 0,
+      "value": "MARCフィールドの一括編集"
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "modal.fileExtensions.actionButton": [
+    {
+      "type": 0,
+      "value": "Choose other file to upload"
+    }
+  ],
+  "modal.fileExtensions.blocked.header": [
+    {
+      "type": 0,
+      "value": "無効なファイル"
+    }
+  ],
+  "modal.fileExtensions.blocked.message": [
+    {
+      "type": 0,
+      "value": "Only file with .csv extension can be uploaded."
+    }
+  ],
+  "modal.fileExtensions.blocked.message2": [
+    {
+      "type": 0,
+      "value": "Only one file with .csv extension can be uploaded."
+    }
+  ],
+  "modal.next": [
+    {
+      "type": 0,
+      "value": "次"
+    }
+  ],
+  "modal.successfullMessage": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": " successfully uploaded."
+    }
+  ],
+  "options.placeholder": [
+    {
+      "type": 0,
+      "value": "Select option"
+    }
+  ],
+  "permission.inventory.edit": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: In app - Edit inventory records"
+    }
+  ],
+  "permission.inventory.view": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: In app - View inventory records"
+    }
+  ],
+  "permission.logs.view": [
+    {
+      "type": 0,
+      "value": "一括編集: ログを表示できます"
+    }
+  ],
+  "permission.module.bulk-edit.enabled": [
+    {
+      "type": 0,
+      "value": "UI: Bulk edit module is enabled"
+    }
+  ],
+  "permission.query.execute": [
+    {
+      "type": 0,
+      "value": "Bulk edit: Can build query"
+    }
+  ],
+  "permission.users.csv.edit": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: Local - Edit user records"
+    }
+  ],
+  "permission.users.csv.view": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: Local - View user records"
+    }
+  ],
+  "permission.users.edit": [
+    {
+      "type": 0,
+      "value": "Bulk edit: In app - Edit user records"
+    }
+  ],
+  "permissionsModal.cancel": [
+    {
+      "type": 0,
+      "value": "キャンセル"
+    }
+  ],
+  "permissionsModal.filter.assigned": [
+    {
+      "type": 0,
+      "value": "割当済"
+    }
+  ],
+  "permissionsModal.filter.assignmentStatus": [
+    {
+      "type": 0,
+      "value": "Permission assignment status"
+    }
+  ],
+  "permissionsModal.filter.permissionSets": [
+    {
+      "type": 0,
+      "value": "Permission sets"
+    }
+  ],
+  "permissionsModal.filter.permissionTypes": [
+    {
+      "type": 0,
+      "value": "Permission types"
+    }
+  ],
+  "permissionsModal.filter.permissions": [
+    {
+      "type": 0,
+      "value": "Permissions"
+    }
+  ],
+  "permissionsModal.filter.resetAll": [
+    {
+      "type": 0,
+      "value": "全てリセット"
+    }
+  ],
+  "permissionsModal.filter.search": [
+    {
+      "type": 0,
+      "value": "Search"
+    }
+  ],
+  "permissionsModal.filter.title": [
+    {
+      "type": 0,
+      "value": "Search & filter"
+    }
+  ],
+  "permissionsModal.filter.unassigned": [
+    {
+      "type": 0,
+      "value": "未割当"
+    }
+  ],
+  "permissionsModal.list.cell.assigned": [
+    {
+      "type": 0,
+      "value": "割当済"
+    }
+  ],
+  "permissionsModal.list.cell.permissionSets": [
+    {
+      "type": 0,
+      "value": "アクセス権限セット"
+    }
+  ],
+  "permissionsModal.list.cell.permissions": [
+    {
+      "type": 0,
+      "value": "Permission"
+    }
+  ],
+  "permissionsModal.list.cell.unassigned": [
+    {
+      "type": 0,
+      "value": "未割当"
+    }
+  ],
+  "permissionsModal.list.columns.name": [
+    {
+      "type": 0,
+      "value": "名称"
+    }
+  ],
+  "permissionsModal.list.columns.status": [
+    {
+      "type": 0,
+      "value": "ステータス"
+    }
+  ],
+  "permissionsModal.list.columns.type": [
+    {
+      "type": 0,
+      "value": "タイプ"
+    }
+  ],
+  "permissionsModal.list.subTitle": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " permissions found"
+    }
+  ],
+  "permissionsModal.list.title": [
+    {
+      "type": 0,
+      "value": "Permissions"
+    }
+  ],
+  "permissionsModal.save": [
+    {
+      "type": 0,
+      "value": "保存して閉じる"
+    }
+  ],
+  "permissionsModal.title": [
+    {
+      "type": 0,
+      "value": "Select Permissions"
+    }
+  ],
+  "permissionsModal.totalSelected": [
+    {
+      "type": 0,
+      "value": "選択済合計:  "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    }
+  ],
+  "preview.file.title": [
+    {
+      "type": 0,
+      "value": "ファイル名: "
+    },
+    {
+      "type": 1,
+      "value": "fileUploadedName"
+    }
+  ],
+  "preview.query.title": [
+    {
+      "type": 0,
+      "value": "クエリ: "
+    },
+    {
+      "type": 1,
+      "value": "queryText"
+    }
+  ],
+  "previewModal.areYouSure": [
+    {
+      "type": 0,
+      "value": "本当にいいですか？"
+    }
+  ],
+  "previewModal.downloadPreview": [
+    {
+      "type": 0,
+      "value": "Download preview"
+    }
+  ],
+  "previewModal.downloadPreview.marc": [
+    {
+      "type": 0,
+      "value": "MARC形式でプレビューをダウンロード"
+    }
+  ],
+  "previewModal.keepEditing": [
+    {
+      "type": 0,
+      "value": "編集を続ける"
+    }
+  ],
+  "previewModal.message": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving."
+    }
+  ],
+  "previewModal.message.empty.marc": [
+    {
+      "type": 0,
+      "value": "All instances have source FOLIO. Use “Instances and  Administrative data” option for bulk edit."
+    }
+  ],
+  "previewModal.previewToBeChanged": [
+    {
+      "type": 0,
+      "value": "Preview of records to be changed"
+    }
+  ],
+  "previewModal.saveAndClose": [
+    {
+      "type": 0,
+      "value": "Commit changes"
+    }
+  ],
+  "progressBar.committing": [
+    {
+      "type": 0,
+      "value": "Committing changes"
+    }
+  ],
+  "progressBar.title": [
+    {
+      "type": 0,
+      "value": "Uploading "
+    },
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " and retrieving relevant data"
+    }
+  ],
+  "progresssBar.processing": [
+    {
+      "type": 0,
+      "value": "Processing"
+    }
+  ],
+  "progresssBar.retrieving": [
+    {
+      "type": 0,
+      "value": "Retrieving"
+    }
+  ],
+  "recordsSuccessfullyChanged": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "value"
+    },
+    {
+      "type": 0,
+      "value": " records have been successfully changed"
+    }
+  ],
+  "resetFilters": [
+    {
+      "type": 0,
+      "value": "全てリセット"
+    }
+  ],
+  "retrievedDataList.title": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "matched"
+    },
+    {
+      "type": 0,
+      "value": " matching "
+    },
+    {
+      "type": 1,
+      "value": "capability"
+    },
+    {
+      "type": 0,
+      "value": " records found."
+    }
+  ],
+  "start.delete": [
+    {
+      "type": 0,
+      "value": "Start bulk delete"
+    }
+  ],
+  "start.downloadChangedRecords": [
+    {
+      "type": 0,
+      "value": "Download changed records (CSV)"
+    }
+  ],
+  "start.downloadChangedRecords.marc": [
+    {
+      "type": 0,
+      "value": "変更されたレコードをダウンロードする (MARC)"
+    }
+  ],
+  "start.downloadErrors": [
+    {
+      "type": 0,
+      "value": "ダウンロードエラー（CSV）"
+    }
+  ],
+  "start.downloadMathcedRecords": [
+    {
+      "type": 0,
+      "value": "一致したレコードのダウンロード（CSV）"
+    }
+  ],
+  "start.edit": [
+    {
+      "type": 0,
+      "value": "一括編集の開始"
+    }
+  ],
+  "start.edit.csv": [
+    {
+      "type": 0,
+      "value": "Start bulk edit (Local)"
+    }
+  ],
+  "start.edit.instance": [
+    {
+      "type": 0,
+      "value": "一括編集開始 - インスタンスフィールド"
+    }
+  ],
+  "start.edit.mark": [
+    {
+      "type": 0,
+      "value": "一括編集の開始 - MARCフィールド"
+    }
+  ],
+  "textArea.resetAll": [
+    {
+      "type": 0,
+      "value": "全てリセット"
+    }
+  ],
+  "textArea.search": [
+    {
+      "type": 0,
+      "value": "検索"
+    }
+  ],
+  "title.identifier": [
+    {
+      "type": 0,
+      "value": "ID"
+    }
+  ],
+  "title.logs": [
+    {
+      "type": 0,
+      "value": "ログ"
+    }
+  ],
+  "title.mark": [
+    {
+      "type": 0,
+      "value": "MARCフィールドの一括編集"
+    }
+  ],
+  "title.query": [
+    {
+      "type": 0,
+      "value": "クエリ"
+    }
+  ],
+  "type.placeholder": [
+    {
+      "type": 0,
+      "value": "タイプの選択"
+    }
+  ],
+  "uploaderActiveTitle": [
+    {
+      "type": 0,
+      "value": "ドロップして継続"
+    }
+  ],
+  "uploaderBtnText": [
+    {
+      "type": 0,
+      "value": "or choose file"
+    }
+  ],
+  "uploaderSubTitle": [
+    {
+      "type": 0,
+      "value": "レコード IDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.empty": [
+    {
+      "type": 0,
+      "value": "レコード IDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.holdings": [
+    {
+      "type": 0,
+      "value": "レコード IDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "所蔵HRIDを含むファイルを選択"
+    }
+  ],
+  "uploaderSubTitle.holdings.ID": [
+    {
+      "type": 0,
+      "value": "Select a file with holdings UUIDs."
+    }
+  ],
+  "uploaderSubTitle.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "インスタンスHRIDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "資料バーコードを含むファイルを選択します"
+    }
+  ],
+  "uploaderSubTitle.instance": [
+    {
+      "type": 0,
+      "value": "レコード IDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.instance.HRID": [
+    {
+      "type": 0,
+      "value": "インスタンスHRIDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.instance.ID": [
+    {
+      "type": 0,
+      "value": "インスタンスUUIDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "ISBNを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "ISSNを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.item": [
+    {
+      "type": 0,
+      "value": "レコード IDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "Select a file with item accession numbers."
+    }
+  ],
+  "uploaderSubTitle.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "資料バーコードを含むファイルを選択します"
+    }
+  ],
+  "uploaderSubTitle.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "以前のIDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "所蔵 UUIDを含むファイルを選択"
+    }
+  ],
+  "uploaderSubTitle.item.HRID": [
+    {
+      "type": 0,
+      "value": "資料 HRIDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.item.ID": [
+    {
+      "type": 0,
+      "value": "資料 UUIDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.records": [
+    {
+      "type": 0,
+      "value": "Upload CSV file with edited records."
+    }
+  ],
+  "uploaderSubTitle.user": [
+    {
+      "type": 0,
+      "value": "レコード IDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "ユーザーバーコードを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "外部IDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.user.ID": [
+    {
+      "type": 0,
+      "value": "ユーザーUUIDを含むファイルの選択"
+    }
+  ],
+  "uploaderSubTitle.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "ユーザー名を含むファイルの選択"
+    }
+  ],
+  "uploaderTitle": [
+    {
+      "type": 0,
+      "value": "ドラッグ&ドロップ"
+    }
+  ],
+  "uploading": [
+    {
+      "type": 0,
+      "value": "アップロード"
+    }
+  ]
+}

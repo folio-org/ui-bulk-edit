@@ -1,0 +1,3384 @@
+{
+  "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": [
+    {
+      "type": 0,
+      "value": "O arquivo enviado está vazio."
+    }
+  ],
+  "actionMenu.placeholder": [
+    {
+      "type": 0,
+      "value": "Nome da coluna de busca"
+    }
+  ],
+  "actions.find": [
+    {
+      "type": 0,
+      "value": "Buscar"
+    }
+  ],
+  "actions.findEntireField": [
+    {
+      "type": 0,
+      "value": "Localizar (buscar de subcampo inteiro)"
+    }
+  ],
+  "actions.findFullField": [
+    {
+      "type": 0,
+      "value": "Encontrar (busca de campo completo)"
+    }
+  ],
+  "actions.placeholder": [
+    {
+      "type": 0,
+      "value": "Selecione a ação"
+    }
+  ],
+  "ariaLabel.actionsSelect": [
+    {
+      "type": 0,
+      "value": "Selecionar ações"
+    }
+  ],
+  "ariaLabel.columnFilter": [
+    {
+      "type": 0,
+      "value": "Entrada de filtro de coluna"
+    }
+  ],
+  "ariaLabel.date": [
+    {
+      "type": 0,
+      "value": "Data"
+    }
+  ],
+  "ariaLabel.loanTypeSelect": [
+    {
+      "type": 0,
+      "value": "Selecionar tipo de empréstimo"
+    }
+  ],
+  "ariaLabel.location": [
+    {
+      "type": 0,
+      "value": "Localização"
+    }
+  ],
+  "ariaLabel.patronGroupSelect": [
+    {
+      "type": 0,
+      "value": "Selecionar grupo de usuário"
+    }
+  ],
+  "ariaLabel.statusSelect": [
+    {
+      "type": 0,
+      "value": "Selecionar status"
+    }
+  ],
+  "ariaLabel.textArea": [
+    {
+      "type": 0,
+      "value": "Área de texto"
+    }
+  ],
+  "ariaLabel.textField": [
+    {
+      "type": 0,
+      "value": "Campo de texto"
+    }
+  ],
+  "ariaLabel.urlRelationshipSelect": [
+    {
+      "type": 0,
+      "value": "Seleção de relacionamento da URL"
+    }
+  ],
+  "cancel": [
+    {
+      "type": 0,
+      "value": "Cancelar"
+    }
+  ],
+  "category.administrativeData": [
+    {
+      "type": 0,
+      "value": "Dados administrativos"
+    }
+  ],
+  "category.electronicAccess": [
+    {
+      "type": 0,
+      "value": "Acesso eletrônico"
+    }
+  ],
+  "category.holdingsLocation": [
+    {
+      "type": 0,
+      "value": "Localização do coleção"
+    }
+  ],
+  "category.holdingsNotes": [
+    {
+      "type": 0,
+      "value": "Notas de coleção"
+    }
+  ],
+  "category.instanceNotes": [
+    {
+      "type": 0,
+      "value": "Notas da instância"
+    }
+  ],
+  "category.itemNotes": [
+    {
+      "type": 0,
+      "value": "Notas do item"
+    }
+  ],
+  "category.loanType": [
+    {
+      "type": 0,
+      "value": "Empréstimo e disponibilidade"
+    }
+  ],
+  "category.location": [
+    {
+      "type": 0,
+      "value": "Localização"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition format": [
+    {
+      "type": 0,
+      "value": "Formato de aquisição"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition method": [
+    {
+      "type": 0,
+      "value": "Método de aquisição"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Action note": [
+    {
+      "type": 0,
+      "value": "Nota de ação"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Administrative note": [
+    {
+      "type": 0,
+      "value": "Nota administrativa"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Binding": [
+    {
+      "type": 0,
+      "value": "Nota de encadernação"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number": [
+    {
+      "type": 0,
+      "value": "Número de chamada"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number prefix": [
+    {
+      "type": 0,
+      "value": "Prefixo do número de chamada"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number suffix": [
+    {
+      "type": 0,
+      "value": "Sufixo do número de chamada"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number type": [
+    {
+      "type": 0,
+      "value": "Tipo de número de chamada"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy note": [
+    {
+      "type": 0,
+      "value": "Nota de cópia"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy number": [
+    {
+      "type": 0,
+      "value": "Número de cópia"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Digitization policy": [
+    {
+      "type": 0,
+      "value": "Política de digitalização"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Discovery suppress": [
+    {
+      "type": 0,
+      "value": "Oculto da descoberta"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Effective location": [
+    {
+      "type": 0,
+      "value": "Localização efetiva"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic access": [
+    {
+      "type": 0,
+      "value": "Acesso eletrônico"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic bookplate": [
+    {
+      "type": 0,
+      "value": "Nota de ex-libris eletrônico"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former holdings Id": [
+    {
+      "type": 0,
+      "value": "ID de coleção anterior"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former ids": [
+    {
+      "type": 0,
+      "value": "Ids anteriores"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.HRID": [
+    {
+      "type": 0,
+      "value": "HRID de coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings HRID": [
+    {
+      "type": 0,
+      "value": "HRID de coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "UUID da coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings copy number": [
+    {
+      "type": 0,
+      "value": "Número da cópia da coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number": [
+    {
+      "type": 0,
+      "value": "Número de chamada de coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number prefix": [
+    {
+      "type": 0,
+      "value": "Prefixo do número de chamada de coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number suffix": [
+    {
+      "type": 0,
+      "value": "Sufixo do número de chamada de coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number type": [
+    {
+      "type": 0,
+      "value": "Tipo de número de chamada de coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings permanent location": [
+    {
+      "type": 0,
+      "value": "Localização permanente da coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings record id": [
+    {
+      "type": 0,
+      "value": "ID da coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement": [
+    {
+      "type": 0,
+      "value": "Declaração de coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for indexes": [
+    {
+      "type": 0,
+      "value": "Declaração de coleção para índices"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for supplements": [
+    {
+      "type": 0,
+      "value": "Declaração de coleção para suplementos"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements": [
+    {
+      "type": 0,
+      "value": "Declaração de coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for indexes": [
+    {
+      "type": 0,
+      "value": "Declaração de coleção para índices"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for supplements": [
+    {
+      "type": 0,
+      "value": "Declaração de coleção para suplementos"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings temporary location": [
+    {
+      "type": 0,
+      "value": "Localização temporária da coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings type": [
+    {
+      "type": 0,
+      "value": "Tipo de coleção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.ILL policy": [
+    {
+      "type": 0,
+      "value": "Política de EEB"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Ill policy": [
+    {
+      "type": 0,
+      "value": "Política de Empréstimo Entre Bibliotecas"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "Instância (Título, Editora, Data de publicação)"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance HRID": [
+    {
+      "type": 0,
+      "value": "HRID da instância"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Item barcode": [
+    {
+      "type": 0,
+      "value": "Código de barras do item"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Member": [
+    {
+      "type": 0,
+      "value": "Membro"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Notes": [
+    {
+      "type": 0,
+      "value": "Notas"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Number of items": [
+    {
+      "type": 0,
+      "value": "Número de itens"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Order format": [
+    {
+      "type": 0,
+      "value": "Formato do pedido"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Permanent location": [
+    {
+      "type": 0,
+      "value": "Localização permanente"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Provenance": [
+    {
+      "type": 0,
+      "value": "Nota de proveniência"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receipt status": [
+    {
+      "type": 0,
+      "value": "Status de recebimento"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receiving history": [
+    {
+      "type": 0,
+      "value": "Histórico de recebimento"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Reproduction": [
+    {
+      "type": 0,
+      "value": "Nota de reprodução"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Retention policy": [
+    {
+      "type": 0,
+      "value": "Política de retenção"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Shelving title": [
+    {
+      "type": 0,
+      "value": "Título da estante"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Source": [
+    {
+      "type": 0,
+      "value": "Fonte"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Statistical codes": [
+    {
+      "type": 0,
+      "value": "Códigos estatísticos"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Oculto da descoberta"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Tags": [
+    {
+      "type": 0,
+      "value": "Tags"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Temporary location": [
+    {
+      "type": 0,
+      "value": "Localização temporária"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Version": [
+    {
+      "type": 0,
+      "value": "Versão"
+    }
+  ],
+  "columns.INSTANCE.Administrative note": [
+    {
+      "type": 0,
+      "value": "Nota administrativa"
+    }
+  ],
+  "columns.INSTANCE.Cataloged date": [
+    {
+      "type": 0,
+      "value": "Data da catalogação"
+    }
+  ],
+  "columns.INSTANCE.Contributors": [
+    {
+      "type": 0,
+      "value": "Colaboradores"
+    }
+  ],
+  "columns.INSTANCE.Edition": [
+    {
+      "type": 0,
+      "value": "Edição"
+    }
+  ],
+  "columns.INSTANCE.Formats": [
+    {
+      "type": 0,
+      "value": "Formatos"
+    }
+  ],
+  "columns.INSTANCE.Index title": [
+    {
+      "type": 0,
+      "value": "Título do índice"
+    }
+  ],
+  "columns.INSTANCE.Instance HRID": [
+    {
+      "type": 0,
+      "value": "HRID da instância"
+    }
+  ],
+  "columns.INSTANCE.Instance UUID": [
+    {
+      "type": 0,
+      "value": "UUID da instância"
+    }
+  ],
+  "columns.INSTANCE.Instance status term": [
+    {
+      "type": 0,
+      "value": "Termo do status da instância"
+    }
+  ],
+  "columns.INSTANCE.Languages": [
+    {
+      "type": 0,
+      "value": "Idiomas"
+    }
+  ],
+  "columns.INSTANCE.Mode of issuance": [
+    {
+      "type": 0,
+      "value": "Modo de emissão"
+    }
+  ],
+  "columns.INSTANCE.Nature of content": [
+    {
+      "type": 0,
+      "value": "Natureza do conteúdo"
+    }
+  ],
+  "columns.INSTANCE.Notes": [
+    {
+      "type": 0,
+      "value": "Notas"
+    }
+  ],
+  "columns.INSTANCE.Physical description": [
+    {
+      "type": 0,
+      "value": "Descrição física"
+    }
+  ],
+  "columns.INSTANCE.Previously held": [
+    {
+      "type": 0,
+      "value": "Anteriormente realizada"
+    }
+  ],
+  "columns.INSTANCE.Publication frequency": [
+    {
+      "type": 0,
+      "value": "Frequência de publicação"
+    }
+  ],
+  "columns.INSTANCE.Publication range": [
+    {
+      "type": 0,
+      "value": "Intervalo de publicação"
+    }
+  ],
+  "columns.INSTANCE.Resource title": [
+    {
+      "type": 0,
+      "value": "Título do recurso"
+    }
+  ],
+  "columns.INSTANCE.Resource type": [
+    {
+      "type": 0,
+      "value": "Tipo de recurso"
+    }
+  ],
+  "columns.INSTANCE.Series statements": [
+    {
+      "type": 0,
+      "value": "Declaração de série"
+    }
+  ],
+  "columns.INSTANCE.Source": [
+    {
+      "type": 0,
+      "value": "Fonte"
+    }
+  ],
+  "columns.INSTANCE.Staff suppress": [
+    {
+      "type": 0,
+      "value": "Ocultar para a equipe"
+    }
+  ],
+  "columns.INSTANCE.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Oculto da descoberta"
+    }
+  ],
+  "columns.ITEM.Accession number": [
+    {
+      "type": 0,
+      "value": "Número de acesso"
+    }
+  ],
+  "columns.ITEM.Administrative note": [
+    {
+      "type": 0,
+      "value": "Nota administrativa"
+    }
+  ],
+  "columns.ITEM.Barcode": [
+    {
+      "type": 0,
+      "value": "Código de barras"
+    }
+  ],
+  "columns.ITEM.Bound with titles": [
+    {
+      "type": 0,
+      "value": "Encadernado com títulos"
+    }
+  ],
+  "columns.ITEM.Call Number": [
+    {
+      "type": 0,
+      "value": "Número de chamada"
+    }
+  ],
+  "columns.ITEM.Check in note": [
+    {
+      "type": 0,
+      "value": "Notas de devolução"
+    }
+  ],
+  "columns.ITEM.Check out note": [
+    {
+      "type": 0,
+      "value": "Notas de empréstimo"
+    }
+  ],
+  "columns.ITEM.Chronology": [
+    {
+      "type": 0,
+      "value": "Cronologia"
+    }
+  ],
+  "columns.ITEM.Circulation Notes": [
+    {
+      "type": 0,
+      "value": "Notas de circulação"
+    }
+  ],
+  "columns.ITEM.Contributor Names": [
+    {
+      "type": 0,
+      "value": "Nomes de colaborador"
+    }
+  ],
+  "columns.ITEM.Copy number": [
+    {
+      "type": 0,
+      "value": "Número de cópia"
+    }
+  ],
+  "columns.ITEM.Description of pieces": [
+    {
+      "type": 0,
+      "value": "Descrição das partes"
+    }
+  ],
+  "columns.ITEM.Effective call number": [
+    {
+      "type": 0,
+      "value": "Número de chamada efetivo"
+    }
+  ],
+  "columns.ITEM.Electronic access": [
+    {
+      "type": 0,
+      "value": "Acesso eletrônico"
+    }
+  ],
+  "columns.ITEM.Enumeration": [
+    {
+      "type": 0,
+      "value": "Enumeração"
+    }
+  ],
+  "columns.ITEM.Former identifier": [
+    {
+      "type": 0,
+      "value": "Identificador anterior"
+    }
+  ],
+  "columns.ITEM.Holdings (Location, Call number)": [
+    {
+      "type": 0,
+      "value": "Coleção (localização, número de chamada)"
+    }
+  ],
+  "columns.ITEM.Holdings Record Id": [
+    {
+      "type": 0,
+      "value": "ID dos registros de coleção"
+    }
+  ],
+  "columns.ITEM.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "UUID da coleção"
+    }
+  ],
+  "columns.ITEM.In Transit Destination Service Point": [
+    {
+      "type": 0,
+      "value": "Ponto de serviço de destino em trânsito"
+    }
+  ],
+  "columns.ITEM.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "Instância (Título, Editora, Data de publicação)"
+    }
+  ],
+  "columns.ITEM.Is bound with": [
+    {
+      "type": 0,
+      "value": "Está encadernado com"
+    }
+  ],
+  "columns.ITEM.Item HRID": [
+    {
+      "type": 0,
+      "value": "HRID do item"
+    }
+  ],
+  "columns.ITEM.Item UUID": [
+    {
+      "type": 0,
+      "value": "UUID do item"
+    }
+  ],
+  "columns.ITEM.Item damaged status": [
+    {
+      "type": 0,
+      "value": "Status de item danificado"
+    }
+  ],
+  "columns.ITEM.Item damaged status date": [
+    {
+      "type": 0,
+      "value": "Data de status do item danificado"
+    }
+  ],
+  "columns.ITEM.Item effective location": [
+    {
+      "type": 0,
+      "value": "Localização efetiva do item"
+    }
+  ],
+  "columns.ITEM.Item id": [
+    {
+      "type": 0,
+      "value": "ID do item"
+    }
+  ],
+  "columns.ITEM.Item identifier": [
+    {
+      "type": 0,
+      "value": "Identificador de item"
+    }
+  ],
+  "columns.ITEM.Item level call number": [
+    {
+      "type": 0,
+      "value": "Número de chamada no nível do item"
+    }
+  ],
+  "columns.ITEM.Item level call number prefix": [
+    {
+      "type": 0,
+      "value": "Prefixo do número de chamada no nível do item"
+    }
+  ],
+  "columns.ITEM.Item level call number suffix": [
+    {
+      "type": 0,
+      "value": "Sufixo do número de chamada no nível do item"
+    }
+  ],
+  "columns.ITEM.Item level call number type": [
+    {
+      "type": 0,
+      "value": "Tipo de número de chamada no nível do item"
+    }
+  ],
+  "columns.ITEM.Item permanent location": [
+    {
+      "type": 0,
+      "value": "Local permanente do item"
+    }
+  ],
+  "columns.ITEM.Item temporary location": [
+    {
+      "type": 0,
+      "value": "Localização temporária do item"
+    }
+  ],
+  "columns.ITEM.Last CheckIn": [
+    {
+      "type": 0,
+      "value": "Última devolução"
+    }
+  ],
+  "columns.ITEM.Material type": [
+    {
+      "type": 0,
+      "value": "Tipo de material"
+    }
+  ],
+  "columns.ITEM.Member": [
+    {
+      "type": 0,
+      "value": "Membro"
+    }
+  ],
+  "columns.ITEM.Missing pieces": [
+    {
+      "type": 0,
+      "value": "Partes faltantes"
+    }
+  ],
+  "columns.ITEM.Missing pieces date": [
+    {
+      "type": 0,
+      "value": "Data das partes faltantes"
+    }
+  ],
+  "columns.ITEM.Notes": [
+    {
+      "type": 0,
+      "value": "Notas"
+    }
+  ],
+  "columns.ITEM.Number of missing pieces": [
+    {
+      "type": 0,
+      "value": "Número de partes faltantes"
+    }
+  ],
+  "columns.ITEM.Number of pieces": [
+    {
+      "type": 0,
+      "value": "Número de partes"
+    }
+  ],
+  "columns.ITEM.Permanent loan type": [
+    {
+      "type": 0,
+      "value": "Tipo de empréstimo permanente"
+    }
+  ],
+  "columns.ITEM.Purchase Order Line Identifier": [
+    {
+      "type": 0,
+      "value": "Identificador de linha do pedido de compra"
+    }
+  ],
+  "columns.ITEM.Shelving order": [
+    {
+      "type": 0,
+      "value": "Ordem de arquivamento"
+    }
+  ],
+  "columns.ITEM.Statistical codes": [
+    {
+      "type": 0,
+      "value": "Códigos estatísticos"
+    }
+  ],
+  "columns.ITEM.Status": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "columns.ITEM.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "Oculto da descoberta"
+    }
+  ],
+  "columns.ITEM.Tags": [
+    {
+      "type": 0,
+      "value": "Tags"
+    }
+  ],
+  "columns.ITEM.Temporary loan type": [
+    {
+      "type": 0,
+      "value": "Tipo de empréstimo temporário"
+    }
+  ],
+  "columns.ITEM.Title": [
+    {
+      "type": 0,
+      "value": "Título"
+    }
+  ],
+  "columns.ITEM.Version": [
+    {
+      "type": 0,
+      "value": "Versão"
+    }
+  ],
+  "columns.ITEM.Volume": [
+    {
+      "type": 0,
+      "value": "Volume"
+    }
+  ],
+  "columns.ITEM.Year, caption": [
+    {
+      "type": 0,
+      "value": "Ano, legenda"
+    }
+  ],
+  "columns.USER.Active": [
+    {
+      "type": 0,
+      "value": "Ativo"
+    }
+  ],
+  "columns.USER.Addresses": [
+    {
+      "type": 0,
+      "value": "Endereços"
+    }
+  ],
+  "columns.USER.Barcode": [
+    {
+      "type": 0,
+      "value": "Código de barras"
+    }
+  ],
+  "columns.USER.Created Date": [
+    {
+      "type": 0,
+      "value": "Registro criado"
+    }
+  ],
+  "columns.USER.Custom fields": [
+    {
+      "type": 0,
+      "value": "Campos personalizados"
+    }
+  ],
+  "columns.USER.Date Of Birth": [
+    {
+      "type": 0,
+      "value": "Data de nascimento"
+    }
+  ],
+  "columns.USER.Departments": [
+    {
+      "type": 0,
+      "value": "Departamentos"
+    }
+  ],
+  "columns.USER.Email": [
+    {
+      "type": 0,
+      "value": "E-mail"
+    }
+  ],
+  "columns.USER.Enrollment date": [
+    {
+      "type": 0,
+      "value": "Data de inscrição"
+    }
+  ],
+  "columns.USER.Expiration date": [
+    {
+      "type": 0,
+      "value": "Data de validade"
+    }
+  ],
+  "columns.USER.External system id": [
+    {
+      "type": 0,
+      "value": "ID do sistema externo"
+    }
+  ],
+  "columns.USER.First name": [
+    {
+      "type": 0,
+      "value": "Primeiro nome"
+    }
+  ],
+  "columns.USER.Last name": [
+    {
+      "type": 0,
+      "value": "Sobrenome"
+    }
+  ],
+  "columns.USER.Link to the profile picture": [
+    {
+      "type": 0,
+      "value": "Link para a foto do perfil"
+    }
+  ],
+  "columns.USER.Middle name": [
+    {
+      "type": 0,
+      "value": "Nome do meio"
+    }
+  ],
+  "columns.USER.Mobile phone": [
+    {
+      "type": 0,
+      "value": "Celular"
+    }
+  ],
+  "columns.USER.Patron group": [
+    {
+      "type": 0,
+      "value": "Grupo de usuários"
+    }
+  ],
+  "columns.USER.Phone": [
+    {
+      "type": 0,
+      "value": "Telefone"
+    }
+  ],
+  "columns.USER.Preferred contact type id": [
+    {
+      "type": 0,
+      "value": "ID do tipo de contato preferido"
+    }
+  ],
+  "columns.USER.Preferred email communications": [
+    {
+      "type": 0,
+      "value": "Comunicações preferenciais por e-mail"
+    }
+  ],
+  "columns.USER.Preferred first name": [
+    {
+      "type": 0,
+      "value": "Nome Preferido/Social"
+    }
+  ],
+  "columns.USER.Proxy for": [
+    {
+      "type": 0,
+      "value": "Procurador para"
+    }
+  ],
+  "columns.USER.Tags": [
+    {
+      "type": 0,
+      "value": "Tags"
+    }
+  ],
+  "columns.USER.Type": [
+    {
+      "type": 0,
+      "value": "Tipo"
+    }
+  ],
+  "columns.USER.Updated date": [
+    {
+      "type": 0,
+      "value": "Registro atualizado"
+    }
+  ],
+  "columns.USER.User id": [
+    {
+      "type": 0,
+      "value": "ID do usuário"
+    }
+  ],
+  "columns.USER.User name": [
+    {
+      "type": 0,
+      "value": "Nome de usuário"
+    }
+  ],
+  "columns.logs.actions": [
+    {
+      "type": 0,
+      "value": "Ações"
+    }
+  ],
+  "columns.logs.approach": [
+    {
+      "type": 0,
+      "value": "Editando"
+    }
+  ],
+  "columns.logs.endTime": [
+    {
+      "type": 0,
+      "value": "Finalizado"
+    }
+  ],
+  "columns.logs.entityType": [
+    {
+      "type": 0,
+      "value": "Tipo de registro"
+    }
+  ],
+  "columns.logs.hrId": [
+    {
+      "type": 0,
+      "value": "ID"
+    }
+  ],
+  "columns.logs.operationType": [
+    {
+      "type": 0,
+      "value": "Tipo de operação em lote"
+    }
+  ],
+  "columns.logs.processedNumOfRecords": [
+    {
+      "type": 0,
+      "value": "Processado"
+    }
+  ],
+  "columns.logs.startTime": [
+    {
+      "type": 0,
+      "value": "Iniciado"
+    }
+  ],
+  "columns.logs.status": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "columns.logs.totalNumOfRecords": [
+    {
+      "type": 0,
+      "value": "Núm. de registros"
+    }
+  ],
+  "columns.logs.userId": [
+    {
+      "type": 0,
+      "value": "Executado por"
+    }
+  ],
+  "conformationModal.commitChanges": [
+    {
+      "type": 0,
+      "value": "Confirmar as alterações"
+    }
+  ],
+  "conformationModal.message": [
+    {
+      "type": 0,
+      "value": "Os registros "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " serão atualizados se o botão "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Confirmar alterações"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    },
+    {
+      "type": 0,
+      "value": " for clicado."
+    }
+  ],
+  "error.incorrectFormatted": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": " está formatado incorretamente. Corrija a formatação e carregue o arquivo novamente."
+    }
+  ],
+  "error.mod-bulk-operations.not.confirm.changes.s3.issue": [
+    {
+      "type": 0,
+      "value": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker)."
+    }
+  ],
+  "error.mod-bulk-operations.not.download.file.from.s3": [
+    {
+      "type": 0,
+      "value": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker)."
+    }
+  ],
+  "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": [
+    {
+      "type": 0,
+      "value": "Há um problema com a configuração do S3 que impede que o módulo Edição em massa salve arquivos.  Entre em contato com seu provedor de hospedagem para verificar se o aplicativo Edição em massa foi configurado corretamente."
+    }
+  ],
+  "error.sww": [
+    {
+      "type": 0,
+      "value": "Algo deu errado."
+    }
+  ],
+  "error.uploadedFile": [
+    {
+      "type": 0,
+      "value": "Falha ao carregar arquivo"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_HOLDINGS": [
+    {
+      "type": 0,
+      "value": "Aplicar a todos os registros de coleção"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_ITEMS": [
+    {
+      "type": 0,
+      "value": "Aplicar a todos os registros de itens"
+    }
+  ],
+  "layer.action.apply.ITEMS": [
+    {
+      "type": 0,
+      "value": "Aplicar aos registros de itens"
+    }
+  ],
+  "layer.action.apply.STAFF_ONLY": [
+    {
+      "type": 0,
+      "value": "Somente para a equipe"
+    }
+  ],
+  "layer.action.clear": [
+    {
+      "type": 0,
+      "value": "Limpar campo(s)"
+    }
+  ],
+  "layer.action.replace": [
+    {
+      "type": 0,
+      "value": "Substituir por"
+    }
+  ],
+  "layer.column.actions": [
+    {
+      "type": 0,
+      "value": "Ações"
+    }
+  ],
+  "layer.column.data": [
+    {
+      "type": 0,
+      "value": "Dados"
+    }
+  ],
+  "layer.column.field": [
+    {
+      "type": 0,
+      "value": "Campo"
+    }
+  ],
+  "layer.column.ind1": [
+    {
+      "type": 0,
+      "value": "In.1"
+    }
+  ],
+  "layer.column.ind2": [
+    {
+      "type": 0,
+      "value": "In.2"
+    }
+  ],
+  "layer.column.options": [
+    {
+      "type": 0,
+      "value": "Opções"
+    }
+  ],
+  "layer.column.subfield": [
+    {
+      "type": 0,
+      "value": "Subcampo"
+    }
+  ],
+  "layer.confirmChanges": [
+    {
+      "type": 0,
+      "value": "Confirmar alterações"
+    }
+  ],
+  "layer.marc.error": [
+    {
+      "type": 0,
+      "value": "Apenas edições nos campos 5xx e 9xx são suportadas atualmente"
+    }
+  ],
+  "layer.marc.error.ind": [
+    {
+      "type": 0,
+      "value": "Por favor, verifique sua entrada."
+    }
+  ],
+  "layer.marc.error.limited": [
+    {
+      "type": 0,
+      "value": "Limitado a 5xx e 9xx."
+    }
+  ],
+  "layer.marc.error.protected": [
+    {
+      "type": 0,
+      "value": "Este campo está protegido."
+    }
+  ],
+  "layer.marc.error.subfield": [
+    {
+      "type": 0,
+      "value": "Por favor, verifique sua entrada."
+    }
+  ],
+  "layer.options.add": [
+    {
+      "type": 0,
+      "value": "Adicionar"
+    }
+  ],
+  "layer.options.additionalSubfield": [
+    {
+      "type": 0,
+      "value": "Subcampo adicional"
+    }
+  ],
+  "layer.options.administrativeNote": [
+    {
+      "type": 0,
+      "value": "Nota administrativa"
+    }
+  ],
+  "layer.options.append": [
+    {
+      "type": 0,
+      "value": "Acrescentar"
+    }
+  ],
+  "layer.options.available": [
+    {
+      "type": 0,
+      "value": "Disponível"
+    }
+  ],
+  "layer.options.checkInNote": [
+    {
+      "type": 0,
+      "value": "Nota de devolução"
+    }
+  ],
+  "layer.options.checkOutNote": [
+    {
+      "type": 0,
+      "value": "Nota de empréstimo"
+    }
+  ],
+  "layer.options.email": [
+    {
+      "type": 0,
+      "value": "E-mail"
+    }
+  ],
+  "layer.options.expirationDate": [
+    {
+      "type": 0,
+      "value": "Data de expiração"
+    }
+  ],
+  "layer.options.holdings.linkText": [
+    {
+      "type": 0,
+      "value": "Texto do link"
+    }
+  ],
+  "layer.options.holdings.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "Materiais especificados"
+    }
+  ],
+  "layer.options.holdings.permanentLocation": [
+    {
+      "type": 0,
+      "value": "Localização da coleção permanente"
+    }
+  ],
+  "layer.options.holdings.suppress": [
+    {
+      "type": 0,
+      "value": "Oculto da descoberta"
+    }
+  ],
+  "layer.options.holdings.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "Localização da coleção temporária"
+    }
+  ],
+  "layer.options.holdings.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "layer.options.holdings.urlPublic": [
+    {
+      "type": 0,
+      "value": "URL da nota pública"
+    }
+  ],
+  "layer.options.holdings.urlRelationship": [
+    {
+      "type": 0,
+      "value": "Relacionamento da URL"
+    }
+  ],
+  "layer.options.inProcess": [
+    {
+      "type": 0,
+      "value": "Em processo"
+    }
+  ],
+  "layer.options.instances.staffSuppress": [
+    {
+      "type": 0,
+      "value": "Ocultar para a equipe"
+    }
+  ],
+  "layer.options.instances.suppress": [
+    {
+      "type": 0,
+      "value": "Oculto da descoberta"
+    }
+  ],
+  "layer.options.intellectual": [
+    {
+      "type": 0,
+      "value": "Item intelectual"
+    }
+  ],
+  "layer.options.items.addNote": [
+    {
+      "type": 0,
+      "value": "Adicionar nota"
+    }
+  ],
+  "layer.options.items.changeNote": [
+    {
+      "type": 0,
+      "value": "Alterar tipo de nota"
+    }
+  ],
+  "layer.options.items.duplicateTo": [
+    {
+      "type": 0,
+      "value": "Duplicar para"
+    }
+  ],
+  "layer.options.items.false": [
+    {
+      "type": 0,
+      "value": "Definido como falso"
+    }
+  ],
+  "layer.options.items.markAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "Marcar como apenas para a equipe"
+    }
+  ],
+  "layer.options.items.removeAll": [
+    {
+      "type": 0,
+      "value": "Remover tudo"
+    }
+  ],
+  "layer.options.items.removeMarkAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "Remover marca como apenas para a equipe"
+    }
+  ],
+  "layer.options.items.removeNote": [
+    {
+      "type": 0,
+      "value": "Remover"
+    }
+  ],
+  "layer.options.items.true": [
+    {
+      "type": 0,
+      "value": "Definido como verdadeiro"
+    }
+  ],
+  "layer.options.longMissing": [
+    {
+      "type": 0,
+      "value": "Desaparecido há muito tempo"
+    }
+  ],
+  "layer.options.missing": [
+    {
+      "type": 0,
+      "value": "Desaparecido"
+    }
+  ],
+  "layer.options.non-requestable": [
+    {
+      "type": 0,
+      "value": "Em processamento (não-solicitável)"
+    }
+  ],
+  "layer.options.patronGroup": [
+    {
+      "type": 0,
+      "value": "Grupo de usuários"
+    }
+  ],
+  "layer.options.permanentLoanType": [
+    {
+      "type": 0,
+      "value": "Tipo de empréstimo permanente"
+    }
+  ],
+  "layer.options.permanentLocation": [
+    {
+      "type": 0,
+      "value": "Localização permanente do item"
+    }
+  ],
+  "layer.options.placeholder": [
+    {
+      "type": 0,
+      "value": "Selecione o status do item"
+    }
+  ],
+  "layer.options.removeField": [
+    {
+      "type": 0,
+      "value": "Remover campo"
+    }
+  ],
+  "layer.options.removeSubfield": [
+    {
+      "type": 0,
+      "value": "Remover subcampo"
+    }
+  ],
+  "layer.options.replaceWith": [
+    {
+      "type": 0,
+      "value": "Substituir por"
+    }
+  ],
+  "layer.options.restricted": [
+    {
+      "type": 0,
+      "value": "Restrito"
+    }
+  ],
+  "layer.options.statusLabel": [
+    {
+      "type": 0,
+      "value": "Status do item"
+    }
+  ],
+  "layer.options.suppressFromDiscovery": [
+    {
+      "type": 0,
+      "value": "Oculto da descoberta"
+    }
+  ],
+  "layer.options.temporaryLoanTypeLabel": [
+    {
+      "type": 0,
+      "value": "Tipo de empréstimo temporário"
+    }
+  ],
+  "layer.options.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "Localização temporária do item"
+    }
+  ],
+  "layer.options.unavailable": [
+    {
+      "type": 0,
+      "value": "Indisponível"
+    }
+  ],
+  "layer.options.unknown": [
+    {
+      "type": 0,
+      "value": "Desconhecido"
+    }
+  ],
+  "layer.options.withdrawn": [
+    {
+      "type": 0,
+      "value": "Descartado"
+    }
+  ],
+  "layer.selectLoanType": [
+    {
+      "type": 0,
+      "value": "Selecione o tipo de empréstimo"
+    }
+  ],
+  "layer.selectLocation": [
+    {
+      "type": 0,
+      "value": "Selecionar localização"
+    }
+  ],
+  "layer.selectNoteType": [
+    {
+      "type": 0,
+      "value": "Selecione o tipo de nota"
+    }
+  ],
+  "layer.selectPatronGroup": [
+    {
+      "type": 0,
+      "value": "Selecionar grupo de usuários"
+    }
+  ],
+  "layer.selectType": [
+    {
+      "type": 0,
+      "value": "Selecione o tipo de nota"
+    }
+  ],
+  "layer.title": [
+    {
+      "type": 0,
+      "value": "Edições em lote"
+    }
+  ],
+  "list.actions.download": [
+    {
+      "type": 0,
+      "value": "Baixar"
+    }
+  ],
+  "list.criteriaTitle": [
+    {
+      "type": 0,
+      "value": "Definir critérios"
+    }
+  ],
+  "list.errors.info": [
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " : "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " entradas * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " registros correspondidos * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " erros"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " : "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " entradas * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " registros alterados * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " erros"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.info": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Consulta de edição em massa: "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " entradas * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " registros correspondentes * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " erros"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Consulta de edição em massa: "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": " entradas * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": " registros alterados * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": " erros"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.table.code": [
+    {
+      "type": 0,
+      "value": "Identificador de registro"
+    }
+  ],
+  "list.errors.table.link": [
+    {
+      "type": 0,
+      "value": "Ver versão mais recente"
+    }
+  ],
+  "list.errors.table.message": [
+    {
+      "type": 0,
+      "value": "Motivo do erro"
+    }
+  ],
+  "list.errors.title": [
+    {
+      "type": 0,
+      "value": "Erros"
+    }
+  ],
+  "list.filters.capabilities.acquisition": [
+    {
+      "type": 0,
+      "value": "Aquisição"
+    }
+  ],
+  "list.filters.capabilities.circulation": [
+    {
+      "type": 0,
+      "value": "Circulação"
+    }
+  ],
+  "list.filters.capabilities.holdings": [
+    {
+      "type": 0,
+      "value": "Inventário - coleção"
+    }
+  ],
+  "list.filters.capabilities.instances": [
+    {
+      "type": 0,
+      "value": "Inventário - instâncias"
+    }
+  ],
+  "list.filters.capabilities.inventory": [
+    {
+      "type": 0,
+      "value": "Inventário - exemplares"
+    }
+  ],
+  "list.filters.capabilities.title": [
+    {
+      "type": 0,
+      "value": "Tipos de registro"
+    }
+  ],
+  "list.filters.capabilities.users": [
+    {
+      "type": 0,
+      "value": "Usuários"
+    }
+  ],
+  "list.filters.identifier": [
+    {
+      "type": 0,
+      "value": "Identificador"
+    }
+  ],
+  "list.filters.logs": [
+    {
+      "type": 0,
+      "value": "Logs"
+    }
+  ],
+  "list.filters.query": [
+    {
+      "type": 0,
+      "value": "Consulta"
+    }
+  ],
+  "list.filters.recordIdentifier": [
+    {
+      "type": 0,
+      "value": "Identificador de registro"
+    }
+  ],
+  "list.filters.recordIdentifier.externalIDs": [
+    {
+      "type": 0,
+      "value": "IDs externos"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsHRID": [
+    {
+      "type": 0,
+      "value": "HRIDs de coleção"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "UUIDs da coleção"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.instanceHRID": [
+    {
+      "type": 0,
+      "value": "HRIDs de instância"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.itemBarcodes": [
+    {
+      "type": 0,
+      "value": "Códigos de barras do item"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceHRID": [
+    {
+      "type": 0,
+      "value": "HRIDs de instância"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISBN": [
+    {
+      "type": 0,
+      "value": "ISBN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISSN": [
+    {
+      "type": 0,
+      "value": "ISSN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceUUID": [
+    {
+      "type": 0,
+      "value": "UUIDs de instância"
+    }
+  ],
+  "list.filters.recordIdentifier.item.ItemHRIDs": [
+    {
+      "type": 0,
+      "value": "HRIDs de exemplares"
+    }
+  ],
+  "list.filters.recordIdentifier.item.UUID": [
+    {
+      "type": 0,
+      "value": "UUIDs de exemplares"
+    }
+  ],
+  "list.filters.recordIdentifier.item.accession": [
+    {
+      "type": 0,
+      "value": "Número de acesso do exemplar"
+    }
+  ],
+  "list.filters.recordIdentifier.item.barcode": [
+    {
+      "type": 0,
+      "value": "Códigos de barras de exemplares"
+    }
+  ],
+  "list.filters.recordIdentifier.item.former": [
+    {
+      "type": 0,
+      "value": "Identificador anterior do exemplar"
+    }
+  ],
+  "list.filters.recordIdentifier.item.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "UUIDs da coleção"
+    }
+  ],
+  "list.filters.recordIdentifier.placeholder": [
+    {
+      "type": 0,
+      "value": "Selecione o identificador de registro"
+    }
+  ],
+  "list.filters.recordIdentifier.userBarcodes": [
+    {
+      "type": 0,
+      "value": "Códigos de barras do usuário"
+    }
+  ],
+  "list.filters.recordIdentifier.userUUIDs": [
+    {
+      "type": 0,
+      "value": "UUIDs de usuário"
+    }
+  ],
+  "list.filters.recordIdentifier.usernames": [
+    {
+      "type": 0,
+      "value": "Nomes de usuário"
+    }
+  ],
+  "list.logSubTitle": [
+    {
+      "type": 0,
+      "value": "Definir critérios para iniciar a edição em lote"
+    }
+  ],
+  "list.logSubTitle.changed": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " registros alterados"
+    }
+  ],
+  "list.logSubTitle.matched": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " registros correspondem"
+    }
+  ],
+  "list.preview.electronicAccess.linkText": [
+    {
+      "type": 0,
+      "value": "Texto do link"
+    }
+  ],
+  "list.preview.electronicAccess.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "Materiais especificados"
+    }
+  ],
+  "list.preview.electronicAccess.publicNote": [
+    {
+      "type": 0,
+      "value": "Nota pública"
+    }
+  ],
+  "list.preview.electronicAccess.relationship": [
+    {
+      "type": 0,
+      "value": "Relacionamento"
+    }
+  ],
+  "list.preview.electronicAccess.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "list.preview.table.status.false": [
+    {
+      "type": 0,
+      "value": "Inativo"
+    }
+  ],
+  "list.preview.table.status.true": [
+    {
+      "type": 0,
+      "value": "Ativo"
+    }
+  ],
+  "list.preview.title": [
+    {
+      "type": 0,
+      "value": "Pré-visualização do registro encontrado"
+    }
+  ],
+  "list.preview.titleChanged": [
+    {
+      "type": 0,
+      "value": "Pré-visualização do registro alterado"
+    }
+  ],
+  "list.result.emptyMessage": [
+    {
+      "type": 0,
+      "value": "Selecione um tipo de registro e, em seguida, um identificador de registro."
+    }
+  ],
+  "list.result.emptyMessage.empty": [
+    {
+      "type": 0,
+      "value": "Selecione um identificador de registro."
+    }
+  ],
+  "list.result.emptyMessage.holdings": [
+    {
+      "type": 0,
+      "value": "Selecione um identificador de registro."
+    }
+  ],
+  "list.result.emptyMessage.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com HRIDs de acervo."
+    }
+  ],
+  "list.result.emptyMessage.holdings.ID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com UUIDs de coleção."
+    }
+  ],
+  "list.result.emptyMessage.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com HRIDs de instância."
+    }
+  ],
+  "list.result.emptyMessage.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com o código de barras de exemplares."
+    }
+  ],
+  "list.result.emptyMessage.holdings.query": [
+    {
+      "type": 0,
+      "value": "Clique no botão Criar consulta para criar a consulta."
+    }
+  ],
+  "list.result.emptyMessage.instance": [
+    {
+      "type": 0,
+      "value": "Selecione um identificador de registro."
+    }
+  ],
+  "list.result.emptyMessage.instance.HRID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com HRIDs de instância."
+    }
+  ],
+  "list.result.emptyMessage.instance.ID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com UUIDs de instância."
+    }
+  ],
+  "list.result.emptyMessage.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha um arquivo com ISBN."
+    }
+  ],
+  "list.result.emptyMessage.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com ISSN."
+    }
+  ],
+  "list.result.emptyMessage.instance.query": [
+    {
+      "type": 0,
+      "value": "Clique no botão Criar consulta para criar a consulta."
+    }
+  ],
+  "list.result.emptyMessage.item": [
+    {
+      "type": 0,
+      "value": "Selecione um identificador de registro."
+    }
+  ],
+  "list.result.emptyMessage.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com o número de acesso dos exemplares."
+    }
+  ],
+  "list.result.emptyMessage.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com o código de barras de exemplares."
+    }
+  ],
+  "list.result.emptyMessage.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com o identificador anterior dos exemplares."
+    }
+  ],
+  "list.result.emptyMessage.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com UUIDs de coleção."
+    }
+  ],
+  "list.result.emptyMessage.item.HRID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com os HRIDs do item."
+    }
+  ],
+  "list.result.emptyMessage.item.ID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com os UUIDs do item."
+    }
+  ],
+  "list.result.emptyMessage.item.query": [
+    {
+      "type": 0,
+      "value": "Clique no botão Criar consulta para criar a consulta."
+    }
+  ],
+  "list.result.emptyMessage.logs": [
+    {
+      "type": 0,
+      "value": "Escolha um filtro para mostrar os resultados."
+    }
+  ],
+  "list.result.emptyMessage.query": [
+    {
+      "type": 0,
+      "value": "Selecione um tipo de registro e clique no botão Criar consulta."
+    }
+  ],
+  "list.result.emptyMessage.user": [
+    {
+      "type": 0,
+      "value": "Selecione um identificador de registro."
+    }
+  ],
+  "list.result.emptyMessage.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com códigos de barras de usuário."
+    }
+  ],
+  "list.result.emptyMessage.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com IDs externos."
+    }
+  ],
+  "list.result.emptyMessage.user.ID": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha um arquivo com UUIDs de usuário."
+    }
+  ],
+  "list.result.emptyMessage.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "Arraste e solte ou escolha o arquivo com nomes de usuário."
+    }
+  ],
+  "list.result.emptyMessage.user.query": [
+    {
+      "type": 0,
+      "value": "Clique no botão Criar consulta para criar a consulta."
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "Arquivo com registros atualizados"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Arquivo com registros atualizados"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "Arquivo com erros encontrados ao confirmar as alterações"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Arquivo com erros encontrados ao confirmar as alterações"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "Arquivo com registros atualizados"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Arquivo com registros atualizados"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "Arquivo com os registros correspondentes"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Arquivo com os registros correspondentes"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "Arquivo com erros encontrados durante a correspondência de registros"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Arquivo com erros encontrados durante a correspondência de registros"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "Arquivo com a pré-visualização das alterações propostas"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Arquivo com a pré-visualização das alterações propostas"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "Arquivo com a pré-visualização das alterações propostas"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Arquivo com a pré-visualização das alterações propostas"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile": [
+    {
+      "type": 0,
+      "value": "Arquivo que foi usado para acionar a edição em massa"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "Arquivo com identificadores dos registros afetados pela edição em lote"
+    }
+  ],
+  "logs.approach.IN_APP": [
+    {
+      "type": 0,
+      "value": "No aplicativo"
+    }
+  ],
+  "logs.approach.MANUAL": [
+    {
+      "type": 0,
+      "value": "Local"
+    }
+  ],
+  "logs.approach.QUERY": [
+    {
+      "type": 0,
+      "value": "Consulta"
+    }
+  ],
+  "logs.entityType.HOLDINGS_RECORD": [
+    {
+      "type": 0,
+      "value": "Inventário - Coleção"
+    }
+  ],
+  "logs.entityType.INSTANCE": [
+    {
+      "type": 0,
+      "value": "Inventário - instâncias"
+    }
+  ],
+  "logs.entityType.INSTANCE_MARC": [
+    {
+      "type": 0,
+      "value": "Inventário - instâncias (MARC)"
+    }
+  ],
+  "logs.entityType.ITEM": [
+    {
+      "type": 0,
+      "value": "Inventário - itens"
+    }
+  ],
+  "logs.entityType.USER": [
+    {
+      "type": 0,
+      "value": "Usuários"
+    }
+  ],
+  "logs.filter.endDate": [
+    {
+      "type": 0,
+      "value": "Data de término"
+    }
+  ],
+  "logs.filter.option.delete": [
+    {
+      "type": 0,
+      "value": "Excluir"
+    }
+  ],
+  "logs.filter.option.edit": [
+    {
+      "type": 0,
+      "value": "Editar"
+    }
+  ],
+  "logs.filter.startDate": [
+    {
+      "type": 0,
+      "value": "Data de início"
+    }
+  ],
+  "logs.filter.title.capability": [
+    {
+      "type": 0,
+      "value": "Tipos de registro"
+    }
+  ],
+  "logs.filter.title.status": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "logs.filter.title.types": [
+    {
+      "type": 0,
+      "value": "Tipo de operação em lote"
+    }
+  ],
+  "logs.filter.title.user": [
+    {
+      "type": 0,
+      "value": "Usuário"
+    }
+  ],
+  "logs.filter.user.placeholder": [
+    {
+      "type": 0,
+      "value": "Escolha o usuário"
+    }
+  ],
+  "logs.filter.user.placeholder.empty": [
+    {
+      "type": 0,
+      "value": "A lista está vazia"
+    }
+  ],
+  "logs.infoPopover": [
+    {
+      "type": 0,
+      "value": "Os arquivos estão indisponíveis para download porque 30 dias se passaram desde a data em que o trabalho foi executado."
+    }
+  ],
+  "logs.status.APPLY_CHANGES": [
+    {
+      "type": 0,
+      "value": "Aplicar mudanças"
+    }
+  ],
+  "logs.status.COMPLETED": [
+    {
+      "type": 0,
+      "value": "Concluído"
+    }
+  ],
+  "logs.status.COMPLETED_WITH_ERRORS": [
+    {
+      "type": 0,
+      "value": "Concluído com erros"
+    }
+  ],
+  "logs.status.DATA_MODIFICATION": [
+    {
+      "type": 0,
+      "value": "Modificação de dados"
+    }
+  ],
+  "logs.status.EXECUTING_QUERY": [
+    {
+      "type": 0,
+      "value": "Executando consulta"
+    }
+  ],
+  "logs.status.FAILED": [
+    {
+      "type": 0,
+      "value": "Falhou"
+    }
+  ],
+  "logs.status.NEW": [
+    {
+      "type": 0,
+      "value": "Novo"
+    }
+  ],
+  "logs.status.RETRIEVING_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "Recuperando identificadores"
+    }
+  ],
+  "logs.status.RETRIEVING_RECORDS": [
+    {
+      "type": 0,
+      "value": "Recuperando registros"
+    }
+  ],
+  "logs.status.REVIEWED_NO_MARC_RECORDS": [
+    {
+      "type": 0,
+      "value": "Revisão de alterações"
+    }
+  ],
+  "logs.status.REVIEW_CHANGES": [
+    {
+      "type": 0,
+      "value": "Revisando alterações"
+    }
+  ],
+  "logs.status.SAVED_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "Salvando identificadores"
+    }
+  ],
+  "logs.status.SAVING_RECORDS_LOCALLY": [
+    {
+      "type": 0,
+      "value": "Salvando registros"
+    }
+  ],
+  "menuGroup.actions": [
+    {
+      "type": 0,
+      "value": "Ações"
+    }
+  ],
+  "menuGroup.showColumns": [
+    {
+      "type": 0,
+      "value": "Mostrar colunas"
+    }
+  ],
+  "menuGroup.startEdit": [
+    {
+      "type": 0,
+      "value": "Iniciar edição em lote"
+    }
+  ],
+  "meta.logs.title": [
+    {
+      "type": 0,
+      "value": "Logs de edição em massa"
+    }
+  ],
+  "meta.query.title": [
+    {
+      "type": 0,
+      "value": "Consulta de edição em massa"
+    }
+  ],
+  "meta.query.title.mark": [
+    {
+      "type": 0,
+      "value": "Consulta de edição em massa de campos MARC"
+    }
+  ],
+  "meta.title": [
+    {
+      "type": 0,
+      "value": "Edição em massa"
+    }
+  ],
+  "meta.title.conformationModal": [
+    {
+      "type": 0,
+      "value": "Editar em lote "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile": [
+    {
+      "type": 0,
+      "value": "Editar em lote "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile.mark": [
+    {
+      "type": 0,
+      "value": "Edição em massa de campos MARC - "
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "modal.fileExtensions.actionButton": [
+    {
+      "type": 0,
+      "value": "Escolha outro arquivo para carregar"
+    }
+  ],
+  "modal.fileExtensions.blocked.header": [
+    {
+      "type": 0,
+      "value": "Arquivo inválido"
+    }
+  ],
+  "modal.fileExtensions.blocked.message": [
+    {
+      "type": 0,
+      "value": "Somente arquivos com extensão .csv podem ser carregados"
+    }
+  ],
+  "modal.fileExtensions.blocked.message2": [
+    {
+      "type": 0,
+      "value": "Apenas um arquivo com extensão .csv pode ser carregado."
+    }
+  ],
+  "modal.next": [
+    {
+      "type": 0,
+      "value": "Próximo"
+    }
+  ],
+  "modal.successfullMessage": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": " carregado com sucesso."
+    }
+  ],
+  "options.placeholder": [
+    {
+      "type": 0,
+      "value": "Selecione a opção"
+    }
+  ],
+  "permission.inventory.edit": [
+    {
+      "type": 0,
+      "value": "Edição em massa: no aplicativo - Editar registros de catalogação"
+    }
+  ],
+  "permission.inventory.view": [
+    {
+      "type": 0,
+      "value": "Edição em massa: no aplicativo - Visualizar registros de inventário"
+    }
+  ],
+  "permission.logs.view": [
+    {
+      "type": 0,
+      "value": "Edição em massa: pode visualizar logs"
+    }
+  ],
+  "permission.module.bulk-edit.enabled": [
+    {
+      "type": 0,
+      "value": "Interface do Usuário: o módulo de edição em massa está ativado"
+    }
+  ],
+  "permission.query.execute": [
+    {
+      "type": 0,
+      "value": "Edição em massa: pode criar uma consulta"
+    }
+  ],
+  "permission.users.csv.edit": [
+    {
+      "type": 0,
+      "value": "Edição em massa: Local - Editar registros de usuários"
+    }
+  ],
+  "permission.users.csv.view": [
+    {
+      "type": 0,
+      "value": "Edição em Massa: Local - Visualizar registros de usuários"
+    }
+  ],
+  "permission.users.edit": [
+    {
+      "type": 0,
+      "value": "Edição em massa: no aplicativo - Editar registros de usuários"
+    }
+  ],
+  "permissionsModal.cancel": [
+    {
+      "type": 0,
+      "value": "Cancelar"
+    }
+  ],
+  "permissionsModal.filter.assigned": [
+    {
+      "type": 0,
+      "value": "Atribuído"
+    }
+  ],
+  "permissionsModal.filter.assignmentStatus": [
+    {
+      "type": 0,
+      "value": "Status de atribuição de permissão"
+    }
+  ],
+  "permissionsModal.filter.permissionSets": [
+    {
+      "type": 0,
+      "value": "Conjunto de permissões"
+    }
+  ],
+  "permissionsModal.filter.permissionTypes": [
+    {
+      "type": 0,
+      "value": "Tipos de permissões"
+    }
+  ],
+  "permissionsModal.filter.permissions": [
+    {
+      "type": 0,
+      "value": "Permissões"
+    }
+  ],
+  "permissionsModal.filter.resetAll": [
+    {
+      "type": 0,
+      "value": "Reiniciar tudo"
+    }
+  ],
+  "permissionsModal.filter.search": [
+    {
+      "type": 0,
+      "value": "Busca"
+    }
+  ],
+  "permissionsModal.filter.title": [
+    {
+      "type": 0,
+      "value": "Buscar e filtrar"
+    }
+  ],
+  "permissionsModal.filter.unassigned": [
+    {
+      "type": 0,
+      "value": "Não atribuído"
+    }
+  ],
+  "permissionsModal.list.cell.assigned": [
+    {
+      "type": 0,
+      "value": "Atribuído"
+    }
+  ],
+  "permissionsModal.list.cell.permissionSets": [
+    {
+      "type": 0,
+      "value": "Conjunto de permissões"
+    }
+  ],
+  "permissionsModal.list.cell.permissions": [
+    {
+      "type": 0,
+      "value": "Permissão"
+    }
+  ],
+  "permissionsModal.list.cell.unassigned": [
+    {
+      "type": 0,
+      "value": "Não atribuído"
+    }
+  ],
+  "permissionsModal.list.columns.name": [
+    {
+      "type": 0,
+      "value": "Nome"
+    }
+  ],
+  "permissionsModal.list.columns.status": [
+    {
+      "type": 0,
+      "value": "Status"
+    }
+  ],
+  "permissionsModal.list.columns.type": [
+    {
+      "type": 0,
+      "value": "Tipo"
+    }
+  ],
+  "permissionsModal.list.subTitle": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " permissões encontradas"
+    }
+  ],
+  "permissionsModal.list.title": [
+    {
+      "type": 0,
+      "value": "Permissões"
+    }
+  ],
+  "permissionsModal.save": [
+    {
+      "type": 0,
+      "value": "Salvar e fechar"
+    }
+  ],
+  "permissionsModal.title": [
+    {
+      "type": 0,
+      "value": "Selecionar permissões"
+    }
+  ],
+  "permissionsModal.totalSelected": [
+    {
+      "type": 0,
+      "value": "Total selecionado: "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    }
+  ],
+  "preview.file.title": [
+    {
+      "type": 0,
+      "value": "Nome do arquivo: "
+    },
+    {
+      "type": 1,
+      "value": "fileUploadedName"
+    }
+  ],
+  "preview.query.title": [
+    {
+      "type": 0,
+      "value": "Consulta: "
+    },
+    {
+      "type": 1,
+      "value": "queryText"
+    }
+  ],
+  "previewModal.areYouSure": [
+    {
+      "type": 0,
+      "value": "Tem certeza?"
+    }
+  ],
+  "previewModal.downloadPreview": [
+    {
+      "type": 0,
+      "value": "Baixar pré-visualização"
+    }
+  ],
+  "previewModal.downloadPreview.marc": [
+    {
+      "type": 0,
+      "value": "Baixar a pré-visualização no formato MARC"
+    }
+  ],
+  "previewModal.keepEditing": [
+    {
+      "type": 0,
+      "value": "Continue editando"
+    }
+  ],
+  "previewModal.message": [
+    {
+      "type": 0,
+      "value": "Os registros "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " serão alterados se o botão Confirmar alterações for clicado. Você pode escolher Baixar prévia para revisar todas as alterações antes de salvar."
+    }
+  ],
+  "previewModal.message.empty.marc": [
+    {
+      "type": 0,
+      "value": "Todas as instâncias têm fonte FOLIO.  Use a opção \"Instâncias e dados administrativos\" para edição em massa."
+    }
+  ],
+  "previewModal.previewToBeChanged": [
+    {
+      "type": 0,
+      "value": "Pré-visualização de registros a serem alterados"
+    }
+  ],
+  "previewModal.saveAndClose": [
+    {
+      "type": 0,
+      "value": "Confirmar as alterações"
+    }
+  ],
+  "progressBar.committing": [
+    {
+      "type": 0,
+      "value": "Confirmando alterações"
+    }
+  ],
+  "progressBar.title": [
+    {
+      "type": 0,
+      "value": "Carregando "
+    },
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " e recuperando dados relevantes"
+    }
+  ],
+  "progresssBar.processing": [
+    {
+      "type": 0,
+      "value": "Em processamento"
+    }
+  ],
+  "progresssBar.retrieving": [
+    {
+      "type": 0,
+      "value": "Recuperando"
+    }
+  ],
+  "recordsSuccessfullyChanged": [
+    {
+      "type": 0,
+      "value": "Os registros "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "value"
+    },
+    {
+      "type": 0,
+      "value": " foram alterados com sucesso"
+    }
+  ],
+  "resetFilters": [
+    {
+      "type": 0,
+      "value": "Reiniciar tudo"
+    }
+  ],
+  "retrievedDataList.title": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "matched"
+    },
+    {
+      "type": 0,
+      "value": " registros correspondentes a "
+    },
+    {
+      "type": 1,
+      "value": "capability"
+    },
+    {
+      "type": 0,
+      "value": " encontrados."
+    }
+  ],
+  "start.delete": [
+    {
+      "type": 0,
+      "value": "Iniciar exclusão em lote"
+    }
+  ],
+  "start.downloadChangedRecords": [
+    {
+      "type": 0,
+      "value": "Baixar registros modificados (CSV)"
+    }
+  ],
+  "start.downloadChangedRecords.marc": [
+    {
+      "type": 0,
+      "value": "Baixar registros alterados (MARC)"
+    }
+  ],
+  "start.downloadErrors": [
+    {
+      "type": 0,
+      "value": "Baixar erros (CSV)"
+    }
+  ],
+  "start.downloadMathcedRecords": [
+    {
+      "type": 0,
+      "value": "Baixar registros correspondentes (CSV)"
+    }
+  ],
+  "start.edit": [
+    {
+      "type": 0,
+      "value": "Iniciar edição em lote"
+    }
+  ],
+  "start.edit.csv": [
+    {
+      "type": 0,
+      "value": "Iniciar edição em massa (Local)"
+    }
+  ],
+  "start.edit.instance": [
+    {
+      "type": 0,
+      "value": "Instâncias e dados administrativos"
+    }
+  ],
+  "start.edit.mark": [
+    {
+      "type": 0,
+      "value": "Instâncias com fonte MARC (POC)"
+    }
+  ],
+  "textArea.resetAll": [
+    {
+      "type": 0,
+      "value": "Reiniciar tudo"
+    }
+  ],
+  "textArea.search": [
+    {
+      "type": 0,
+      "value": "Buscar"
+    }
+  ],
+  "title.identifier": [
+    {
+      "type": 0,
+      "value": "Identificador"
+    }
+  ],
+  "title.logs": [
+    {
+      "type": 0,
+      "value": "Logs"
+    }
+  ],
+  "title.mark": [
+    {
+      "type": 0,
+      "value": "Edição em massa de campos MARC"
+    }
+  ],
+  "title.query": [
+    {
+      "type": 0,
+      "value": "Consulta"
+    }
+  ],
+  "type.placeholder": [
+    {
+      "type": 0,
+      "value": "Selecione o tipo"
+    }
+  ],
+  "uploaderActiveTitle": [
+    {
+      "type": 0,
+      "value": "Solte para continuar"
+    }
+  ],
+  "uploaderBtnText": [
+    {
+      "type": 0,
+      "value": "ou escolha o arquivo"
+    }
+  ],
+  "uploaderSubTitle": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com identificadores de registro"
+    }
+  ],
+  "uploaderSubTitle.empty": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com identificadores de registro"
+    }
+  ],
+  "uploaderSubTitle.holdings": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com identificadores de registro"
+    }
+  ],
+  "uploaderSubTitle.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com HRIDs de holdings"
+    }
+  ],
+  "uploaderSubTitle.holdings.ID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com os UUIDs de holdings"
+    }
+  ],
+  "uploaderSubTitle.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com HRIDs de instância"
+    }
+  ],
+  "uploaderSubTitle.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com código de barras de exemplares"
+    }
+  ],
+  "uploaderSubTitle.instance": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com identificadores de registro"
+    }
+  ],
+  "uploaderSubTitle.instance.HRID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com HRIDs de instância"
+    }
+  ],
+  "uploaderSubTitle.instance.ID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com UUIDs de instância"
+    }
+  ],
+  "uploaderSubTitle.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com ISBN"
+    }
+  ],
+  "uploaderSubTitle.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com ISSN"
+    }
+  ],
+  "uploaderSubTitle.item": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com identificadores de registro."
+    }
+  ],
+  "uploaderSubTitle.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com o número de acesso do exemplar"
+    }
+  ],
+  "uploaderSubTitle.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com código de barras de exemplares."
+    }
+  ],
+  "uploaderSubTitle.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com o identificador anterior do exemplar"
+    }
+  ],
+  "uploaderSubTitle.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com os UUIDs de holdings."
+    }
+  ],
+  "uploaderSubTitle.item.HRID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com HRIDs de exemplares"
+    }
+  ],
+  "uploaderSubTitle.item.ID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com UUIDs de exemplares."
+    }
+  ],
+  "uploaderSubTitle.records": [
+    {
+      "type": 0,
+      "value": "Carregar arquivo CSV com registros editados"
+    }
+  ],
+  "uploaderSubTitle.user": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com identificadores de registro"
+    }
+  ],
+  "uploaderSubTitle.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com os códigos de barras de usuários"
+    }
+  ],
+  "uploaderSubTitle.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com IDs externos"
+    }
+  ],
+  "uploaderSubTitle.user.ID": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com os UUIDs de usuários"
+    }
+  ],
+  "uploaderSubTitle.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "Selecione um arquivo com nomes de usuário"
+    }
+  ],
+  "uploaderTitle": [
+    {
+      "type": 0,
+      "value": "Arrastar e soltar"
+    }
+  ],
+  "uploading": [
+    {
+      "type": 0,
+      "value": "Carregando"
+    }
+  ]
+}

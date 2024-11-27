@@ -139,7 +139,7 @@
 
   "start.edit": "Start bulk edit",
   "start.edit.instance": "FOLIO Instances",
-  "start.edit.mark": "Instances with source MARC",
+  "start.edit.marc": "Instances with source MARC",
   "start.edit.csv": "Start bulk edit (Local)",
   "start.delete": "Start bulk delete",
 

@@ -1,0 +1,3412 @@
+{
+  "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": [
+    {
+      "type": 0,
+      "value": "上传文件为空。"
+    }
+  ],
+  "actionMenu.placeholder": [
+    {
+      "type": 0,
+      "value": "搜索栏名称"
+    }
+  ],
+  "actions.find": [
+    {
+      "type": 0,
+      "value": "查找"
+    }
+  ],
+  "actions.findEntireField": [
+    {
+      "type": 0,
+      "value": "查找（整个子字段搜索）"
+    }
+  ],
+  "actions.findFullField": [
+    {
+      "type": 0,
+      "value": "查找（全字段搜索）"
+    }
+  ],
+  "actions.placeholder": [
+    {
+      "type": 0,
+      "value": "选择操作"
+    }
+  ],
+  "ariaLabel.actionsSelect": [
+    {
+      "type": 0,
+      "value": "操作选择"
+    }
+  ],
+  "ariaLabel.columnFilter": [
+    {
+      "type": 0,
+      "value": "列筛选输入"
+    }
+  ],
+  "ariaLabel.date": [
+    {
+      "type": 0,
+      "value": "日期"
+    }
+  ],
+  "ariaLabel.loanTypeSelect": [
+    {
+      "type": 0,
+      "value": "借阅类型选择"
+    }
+  ],
+  "ariaLabel.location": [
+    {
+      "type": 0,
+      "value": "位置"
+    }
+  ],
+  "ariaLabel.patronGroupSelect": [
+    {
+      "type": 0,
+      "value": "读者组选择"
+    }
+  ],
+  "ariaLabel.statusSelect": [
+    {
+      "type": 0,
+      "value": "状态选择"
+    }
+  ],
+  "ariaLabel.textArea": [
+    {
+      "type": 0,
+      "value": "文本区"
+    }
+  ],
+  "ariaLabel.textField": [
+    {
+      "type": 0,
+      "value": "文本字段"
+    }
+  ],
+  "ariaLabel.urlRelationshipSelect": [
+    {
+      "type": 0,
+      "value": "URL关系选择"
+    }
+  ],
+  "cancel": [
+    {
+      "type": 0,
+      "value": "取消"
+    }
+  ],
+  "category.administrativeData": [
+    {
+      "type": 0,
+      "value": "Administrative data"
+    }
+  ],
+  "category.electronicAccess": [
+    {
+      "type": 0,
+      "value": "电子访问"
+    }
+  ],
+  "category.holdingsLocation": [
+    {
+      "type": 0,
+      "value": "馆藏位置"
+    }
+  ],
+  "category.holdingsNotes": [
+    {
+      "type": 0,
+      "value": "馆藏附注"
+    }
+  ],
+  "category.instanceNotes": [
+    {
+      "type": 0,
+      "value": "实例附注"
+    }
+  ],
+  "category.itemNotes": [
+    {
+      "type": 0,
+      "value": "单件附注"
+    }
+  ],
+  "category.loanType": [
+    {
+      "type": 0,
+      "value": "借阅类型"
+    }
+  ],
+  "category.location": [
+    {
+      "type": 0,
+      "value": "位置"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition format": [
+    {
+      "type": 0,
+      "value": "采购格式"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Acquisition method": [
+    {
+      "type": 0,
+      "value": "采购方式"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Action note": [
+    {
+      "type": 0,
+      "value": "操作说明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Administrative note": [
+    {
+      "type": 0,
+      "value": "管理说明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Binding": [
+    {
+      "type": 0,
+      "value": "装订附注"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number": [
+    {
+      "type": 0,
+      "value": "索书号"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number prefix": [
+    {
+      "type": 0,
+      "value": "索书号前缀"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number suffix": [
+    {
+      "type": 0,
+      "value": "索书号后缀"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Call number type": [
+    {
+      "type": 0,
+      "value": "索书号类型"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy note": [
+    {
+      "type": 0,
+      "value": "复本附注"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Copy number": [
+    {
+      "type": 0,
+      "value": "复本数"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Digitization policy": [
+    {
+      "type": 0,
+      "value": "数字化政策"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Discovery suppress": [
+    {
+      "type": 0,
+      "value": "在发现中隐藏"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Effective location": [
+    {
+      "type": 0,
+      "value": "有效馆藏地"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic access": [
+    {
+      "type": 0,
+      "value": "电子访问"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Electronic bookplate": [
+    {
+      "type": 0,
+      "value": "电子书标签附注"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former holdings Id": [
+    {
+      "type": 0,
+      "value": "先前馆藏ID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Former ids": [
+    {
+      "type": 0,
+      "value": "先前ID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.HRID": [
+    {
+      "type": 0,
+      "value": "馆藏HRID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings HRID": [
+    {
+      "type": 0,
+      "value": "馆藏HRID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "馆藏UUID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings copy number": [
+    {
+      "type": 0,
+      "value": "馆藏复本号"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number": [
+    {
+      "type": 0,
+      "value": "馆藏级索书号"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number prefix": [
+    {
+      "type": 0,
+      "value": "馆藏级索书号前缀"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number suffix": [
+    {
+      "type": 0,
+      "value": "馆藏级索书号后缀"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings level call number type": [
+    {
+      "type": 0,
+      "value": "馆藏级索书号类型"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings permanent location": [
+    {
+      "type": 0,
+      "value": "馆藏永久位置"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings record id": [
+    {
+      "type": 0,
+      "value": "馆藏ID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement": [
+    {
+      "type": 0,
+      "value": "馆藏说明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for indexes": [
+    {
+      "type": 0,
+      "value": "馆藏说明用于索引"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statement for supplements": [
+    {
+      "type": 0,
+      "value": "馆藏 补编说明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements": [
+    {
+      "type": 0,
+      "value": "馆藏说明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for indexes": [
+    {
+      "type": 0,
+      "value": "索引的馆藏说明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings statements for supplements": [
+    {
+      "type": 0,
+      "value": "馆藏 补编说明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings temporary location": [
+    {
+      "type": 0,
+      "value": "馆藏临时位置"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Holdings type": [
+    {
+      "type": 0,
+      "value": "馆藏类型"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.ILL policy": [
+    {
+      "type": 0,
+      "value": "馆际互借政策"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Ill policy": [
+    {
+      "type": 0,
+      "value": "馆际互借政策"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "实例（题名、出版者、出版日期）"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Instance HRID": [
+    {
+      "type": 0,
+      "value": "实例HRID"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Item barcode": [
+    {
+      "type": 0,
+      "value": "单件条码"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Member": [
+    {
+      "type": 0,
+      "value": "Member"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Notes": [
+    {
+      "type": 0,
+      "value": "附注"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Number of items": [
+    {
+      "type": 0,
+      "value": "件数"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Order format": [
+    {
+      "type": 0,
+      "value": "订单格式"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Permanent location": [
+    {
+      "type": 0,
+      "value": "永久馆藏地"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Provenance": [
+    {
+      "type": 0,
+      "value": "出处附注"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receipt status": [
+    {
+      "type": 0,
+      "value": "接收状态"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Receiving history": [
+    {
+      "type": 0,
+      "value": "接收历史"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Reproduction": [
+    {
+      "type": 0,
+      "value": "复制说明"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Retention policy": [
+    {
+      "type": 0,
+      "value": "保留政策"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Shelving title": [
+    {
+      "type": 0,
+      "value": "排架题名"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Source": [
+    {
+      "type": 0,
+      "value": "来源"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Statistical codes": [
+    {
+      "type": 0,
+      "value": "统计代码"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "在发现中隐藏"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Tags": [
+    {
+      "type": 0,
+      "value": "标签"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Temporary location": [
+    {
+      "type": 0,
+      "value": "临时馆藏地"
+    }
+  ],
+  "columns.HOLDINGS_RECORD.Version": [
+    {
+      "type": 0,
+      "value": "版本"
+    }
+  ],
+  "columns.INSTANCE.Administrative note": [
+    {
+      "type": 0,
+      "value": "管理说明"
+    }
+  ],
+  "columns.INSTANCE.Cataloged date": [
+    {
+      "type": 0,
+      "value": "编目日期"
+    }
+  ],
+  "columns.INSTANCE.Contributors": [
+    {
+      "type": 0,
+      "value": "贡献者"
+    }
+  ],
+  "columns.INSTANCE.Edition": [
+    {
+      "type": 0,
+      "value": "版本"
+    }
+  ],
+  "columns.INSTANCE.Formats": [
+    {
+      "type": 0,
+      "value": "格式"
+    }
+  ],
+  "columns.INSTANCE.Index title": [
+    {
+      "type": 0,
+      "value": "索引标题"
+    }
+  ],
+  "columns.INSTANCE.Instance HRID": [
+    {
+      "type": 0,
+      "value": "实例HRID"
+    }
+  ],
+  "columns.INSTANCE.Instance UUID": [
+    {
+      "type": 0,
+      "value": "实例UUID"
+    }
+  ],
+  "columns.INSTANCE.Instance status term": [
+    {
+      "type": 0,
+      "value": "实例状态术语"
+    }
+  ],
+  "columns.INSTANCE.Languages": [
+    {
+      "type": 0,
+      "value": "语言"
+    }
+  ],
+  "columns.INSTANCE.Mode of issuance": [
+    {
+      "type": 0,
+      "value": "发行方式"
+    }
+  ],
+  "columns.INSTANCE.Nature of content": [
+    {
+      "type": 0,
+      "value": "内容的性质"
+    }
+  ],
+  "columns.INSTANCE.Notes": [
+    {
+      "type": 0,
+      "value": "附注"
+    }
+  ],
+  "columns.INSTANCE.Physical description": [
+    {
+      "type": 0,
+      "value": "物理描述"
+    }
+  ],
+  "columns.INSTANCE.Previously held": [
+    {
+      "type": 0,
+      "value": "先前拥有"
+    }
+  ],
+  "columns.INSTANCE.Publication frequency": [
+    {
+      "type": 0,
+      "value": "出版频率"
+    }
+  ],
+  "columns.INSTANCE.Publication range": [
+    {
+      "type": 0,
+      "value": "出版范围"
+    }
+  ],
+  "columns.INSTANCE.Resource title": [
+    {
+      "type": 0,
+      "value": "资源题名"
+    }
+  ],
+  "columns.INSTANCE.Resource type": [
+    {
+      "type": 0,
+      "value": "资源类型"
+    }
+  ],
+  "columns.INSTANCE.Series statements": [
+    {
+      "type": 0,
+      "value": "丛编说明"
+    }
+  ],
+  "columns.INSTANCE.Source": [
+    {
+      "type": 0,
+      "value": "来源"
+    }
+  ],
+  "columns.INSTANCE.Staff suppress": [
+    {
+      "type": 0,
+      "value": "员工隐藏"
+    }
+  ],
+  "columns.INSTANCE.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "在发现中隐藏"
+    }
+  ],
+  "columns.ITEM.Accession number": [
+    {
+      "type": 0,
+      "value": "入藏号"
+    }
+  ],
+  "columns.ITEM.Administrative note": [
+    {
+      "type": 0,
+      "value": "管理说明"
+    }
+  ],
+  "columns.ITEM.Barcode": [
+    {
+      "type": 0,
+      "value": "条码"
+    }
+  ],
+  "columns.ITEM.Bound with titles": [
+    {
+      "type": 0,
+      "value": "与题名绑定"
+    }
+  ],
+  "columns.ITEM.Call Number": [
+    {
+      "type": 0,
+      "value": "索书号"
+    }
+  ],
+  "columns.ITEM.Check in note": [
+    {
+      "type": 0,
+      "value": "归还附注"
+    }
+  ],
+  "columns.ITEM.Check out note": [
+    {
+      "type": 0,
+      "value": "借出附注"
+    }
+  ],
+  "columns.ITEM.Chronology": [
+    {
+      "type": 0,
+      "value": "年表"
+    }
+  ],
+  "columns.ITEM.Circulation Notes": [
+    {
+      "type": 0,
+      "value": "流通附注"
+    }
+  ],
+  "columns.ITEM.Contributor Names": [
+    {
+      "type": 0,
+      "value": "贡献者名称"
+    }
+  ],
+  "columns.ITEM.Copy number": [
+    {
+      "type": 0,
+      "value": "复本号码"
+    }
+  ],
+  "columns.ITEM.Description of pieces": [
+    {
+      "type": 0,
+      "value": "件的描述"
+    }
+  ],
+  "columns.ITEM.Effective call number": [
+    {
+      "type": 0,
+      "value": "有效的索书号"
+    }
+  ],
+  "columns.ITEM.Electronic access": [
+    {
+      "type": 0,
+      "value": "电子访问"
+    }
+  ],
+  "columns.ITEM.Enumeration": [
+    {
+      "type": 0,
+      "value": "期数"
+    }
+  ],
+  "columns.ITEM.Former identifier": [
+    {
+      "type": 0,
+      "value": "以前的标识符"
+    }
+  ],
+  "columns.ITEM.Holdings (Location, Call number)": [
+    {
+      "type": 0,
+      "value": "馆藏（位置、索书号）"
+    }
+  ],
+  "columns.ITEM.Holdings Record Id": [
+    {
+      "type": 0,
+      "value": "馆藏记录ID"
+    }
+  ],
+  "columns.ITEM.Holdings UUID": [
+    {
+      "type": 0,
+      "value": "馆藏UUID"
+    }
+  ],
+  "columns.ITEM.In Transit Destination Service Point": [
+    {
+      "type": 0,
+      "value": "中转目的地服务点"
+    }
+  ],
+  "columns.ITEM.Instance (Title, Publisher, Publication date)": [
+    {
+      "type": 0,
+      "value": "实例（题名、出版者、出版日期）"
+    }
+  ],
+  "columns.ITEM.Is bound with": [
+    {
+      "type": 0,
+      "value": "绑定"
+    }
+  ],
+  "columns.ITEM.Item HRID": [
+    {
+      "type": 0,
+      "value": "单件HRID"
+    }
+  ],
+  "columns.ITEM.Item UUID": [
+    {
+      "type": 0,
+      "value": "单件UUID"
+    }
+  ],
+  "columns.ITEM.Item damaged status": [
+    {
+      "type": 0,
+      "value": "单件损坏状态"
+    }
+  ],
+  "columns.ITEM.Item damaged status date": [
+    {
+      "type": 0,
+      "value": "单件损坏状态日期"
+    }
+  ],
+  "columns.ITEM.Item effective location": [
+    {
+      "type": 0,
+      "value": "单件有效馆藏地"
+    }
+  ],
+  "columns.ITEM.Item id": [
+    {
+      "type": 0,
+      "value": "单件ID"
+    }
+  ],
+  "columns.ITEM.Item identifier": [
+    {
+      "type": 0,
+      "value": "单件标识符"
+    }
+  ],
+  "columns.ITEM.Item level call number": [
+    {
+      "type": 0,
+      "value": "单件级索书号"
+    }
+  ],
+  "columns.ITEM.Item level call number prefix": [
+    {
+      "type": 0,
+      "value": "单件级索书号前缀"
+    }
+  ],
+  "columns.ITEM.Item level call number suffix": [
+    {
+      "type": 0,
+      "value": "单件级索书号后缀"
+    }
+  ],
+  "columns.ITEM.Item level call number type": [
+    {
+      "type": 0,
+      "value": "单件级索书号类型"
+    }
+  ],
+  "columns.ITEM.Item permanent location": [
+    {
+      "type": 0,
+      "value": "单件永久馆藏地"
+    }
+  ],
+  "columns.ITEM.Item temporary location": [
+    {
+      "type": 0,
+      "value": "单件临时馆藏地"
+    }
+  ],
+  "columns.ITEM.Last CheckIn": [
+    {
+      "type": 0,
+      "value": "上次归还"
+    }
+  ],
+  "columns.ITEM.Material type": [
+    {
+      "type": 0,
+      "value": "资料类型"
+    }
+  ],
+  "columns.ITEM.Member": [
+    {
+      "type": 0,
+      "value": "Member"
+    }
+  ],
+  "columns.ITEM.Missing pieces": [
+    {
+      "type": 0,
+      "value": "缺失件"
+    }
+  ],
+  "columns.ITEM.Missing pieces date": [
+    {
+      "type": 0,
+      "value": "缺失件日期"
+    }
+  ],
+  "columns.ITEM.Notes": [
+    {
+      "type": 0,
+      "value": "附注"
+    }
+  ],
+  "columns.ITEM.Number of missing pieces": [
+    {
+      "type": 0,
+      "value": "缺失件数量"
+    }
+  ],
+  "columns.ITEM.Number of pieces": [
+    {
+      "type": 0,
+      "value": "件数"
+    }
+  ],
+  "columns.ITEM.Permanent loan type": [
+    {
+      "type": 0,
+      "value": "永久借阅类型"
+    }
+  ],
+  "columns.ITEM.Purchase Order Line Identifier": [
+    {
+      "type": 0,
+      "value": "采购订单行标识符"
+    }
+  ],
+  "columns.ITEM.Shelving order": [
+    {
+      "type": 0,
+      "value": "排架次序"
+    }
+  ],
+  "columns.ITEM.Statistical codes": [
+    {
+      "type": 0,
+      "value": "统计代码"
+    }
+  ],
+  "columns.ITEM.Status": [
+    {
+      "type": 0,
+      "value": "状态"
+    }
+  ],
+  "columns.ITEM.Suppress from discovery": [
+    {
+      "type": 0,
+      "value": "在发现中隐藏"
+    }
+  ],
+  "columns.ITEM.Tags": [
+    {
+      "type": 0,
+      "value": "标签"
+    }
+  ],
+  "columns.ITEM.Temporary loan type": [
+    {
+      "type": 0,
+      "value": "临时借阅类型"
+    }
+  ],
+  "columns.ITEM.Title": [
+    {
+      "type": 0,
+      "value": "题名"
+    }
+  ],
+  "columns.ITEM.Version": [
+    {
+      "type": 0,
+      "value": "版本"
+    }
+  ],
+  "columns.ITEM.Volume": [
+    {
+      "type": 0,
+      "value": "卷"
+    }
+  ],
+  "columns.ITEM.Year, caption": [
+    {
+      "type": 0,
+      "value": "年份, 标题"
+    }
+  ],
+  "columns.USER.Active": [
+    {
+      "type": 0,
+      "value": "激活"
+    }
+  ],
+  "columns.USER.Addresses": [
+    {
+      "type": 0,
+      "value": "地址"
+    }
+  ],
+  "columns.USER.Barcode": [
+    {
+      "type": 0,
+      "value": "条码"
+    }
+  ],
+  "columns.USER.Created Date": [
+    {
+      "type": 0,
+      "value": "记录已创建"
+    }
+  ],
+  "columns.USER.Custom fields": [
+    {
+      "type": 0,
+      "value": "自定义字段"
+    }
+  ],
+  "columns.USER.Date Of Birth": [
+    {
+      "type": 0,
+      "value": "生日"
+    }
+  ],
+  "columns.USER.Departments": [
+    {
+      "type": 0,
+      "value": "部门/系"
+    }
+  ],
+  "columns.USER.Email": [
+    {
+      "type": 0,
+      "value": "电子邮件"
+    }
+  ],
+  "columns.USER.Enrollment date": [
+    {
+      "type": 0,
+      "value": "注册日期"
+    }
+  ],
+  "columns.USER.Expiration date": [
+    {
+      "type": 0,
+      "value": "失效日期"
+    }
+  ],
+  "columns.USER.External system id": [
+    {
+      "type": 0,
+      "value": "外部系统ID"
+    }
+  ],
+  "columns.USER.First name": [
+    {
+      "type": 0,
+      "value": "名"
+    }
+  ],
+  "columns.USER.Last name": [
+    {
+      "type": 0,
+      "value": "姓"
+    }
+  ],
+  "columns.USER.Link to the profile picture": [
+    {
+      "type": 0,
+      "value": "个人资料图片链接"
+    }
+  ],
+  "columns.USER.Middle name": [
+    {
+      "type": 0,
+      "value": "中间名"
+    }
+  ],
+  "columns.USER.Mobile phone": [
+    {
+      "type": 0,
+      "value": "手机"
+    }
+  ],
+  "columns.USER.Patron group": [
+    {
+      "type": 0,
+      "value": "读者组"
+    }
+  ],
+  "columns.USER.Phone": [
+    {
+      "type": 0,
+      "value": "电话"
+    }
+  ],
+  "columns.USER.Preferred contact type id": [
+    {
+      "type": 0,
+      "value": "首选联系人类型ID"
+    }
+  ],
+  "columns.USER.Preferred email communications": [
+    {
+      "type": 0,
+      "value": "首选电子邮件通讯"
+    }
+  ],
+  "columns.USER.Preferred first name": [
+    {
+      "type": 0,
+      "value": "首选名字"
+    }
+  ],
+  "columns.USER.Proxy for": [
+    {
+      "type": 0,
+      "value": "代理"
+    }
+  ],
+  "columns.USER.Tags": [
+    {
+      "type": 0,
+      "value": "标签"
+    }
+  ],
+  "columns.USER.Type": [
+    {
+      "type": 0,
+      "value": "类型"
+    }
+  ],
+  "columns.USER.Updated date": [
+    {
+      "type": 0,
+      "value": "记录已更新"
+    }
+  ],
+  "columns.USER.User id": [
+    {
+      "type": 0,
+      "value": "用户id"
+    }
+  ],
+  "columns.USER.User name": [
+    {
+      "type": 0,
+      "value": "用户名"
+    }
+  ],
+  "columns.logs.actions": [
+    {
+      "type": 0,
+      "value": "操作"
+    }
+  ],
+  "columns.logs.approach": [
+    {
+      "type": 0,
+      "value": "编辑"
+    }
+  ],
+  "columns.logs.endTime": [
+    {
+      "type": 0,
+      "value": "已结束"
+    }
+  ],
+  "columns.logs.entityType": [
+    {
+      "type": 0,
+      "value": "记录类型"
+    }
+  ],
+  "columns.logs.hrId": [
+    {
+      "type": 0,
+      "value": "ID"
+    }
+  ],
+  "columns.logs.operationType": [
+    {
+      "type": 0,
+      "value": "批量操作类型"
+    }
+  ],
+  "columns.logs.processedNumOfRecords": [
+    {
+      "type": 0,
+      "value": "已处理"
+    }
+  ],
+  "columns.logs.startTime": [
+    {
+      "type": 0,
+      "value": "已开始"
+    }
+  ],
+  "columns.logs.status": [
+    {
+      "type": 0,
+      "value": "状态"
+    }
+  ],
+  "columns.logs.totalNumOfRecords": [
+    {
+      "type": 0,
+      "value": "记录数"
+    }
+  ],
+  "columns.logs.userId": [
+    {
+      "type": 0,
+      "value": "运行方"
+    }
+  ],
+  "conformationModal.commitChanges": [
+    {
+      "type": 0,
+      "value": "提交更改"
+    }
+  ],
+  "conformationModal.message": [
+    {
+      "type": 0,
+      "value": "如果点击"
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "提交更改"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    },
+    {
+      "type": 0,
+      "value": "按钮"
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "记录将被更新。"
+    }
+  ],
+  "error.incorrectFormatted": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": "格式不正确。请更正格式并重新上传文件。"
+    }
+  ],
+  "error.mod-bulk-operations.not.confirm.changes.s3.issue": [
+    {
+      "type": 0,
+      "value": "从 S3 检索数据时出现问题。请联系您的托管服务提供商检查 S3 配置。更多详情请参阅批量编辑应用程序日志（mod-bulk-operations 和 mod-data-export-worker 模块）。"
+    }
+  ],
+  "error.mod-bulk-operations.not.download.file.from.s3": [
+    {
+      "type": 0,
+      "value": "从 S3 检索数据时出现问题。请联系您的托管服务提供商检查 S3 配置。更多详情请参阅批量编辑应用程序日志（mod-bulk-operations 和 mod-data-export-worker 模块）。"
+    }
+  ],
+  "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": [
+    {
+      "type": 0,
+      "value": "S3 配置存在问题，导致批量编辑模块无法保存文件。请联系您的托管服务提供商，检查批量编辑应用程序是否已正确配置。"
+    }
+  ],
+  "error.sww": [
+    {
+      "type": 0,
+      "value": "出问题了"
+    }
+  ],
+  "error.uploadedFile": [
+    {
+      "type": 0,
+      "value": "上传文件失败"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_HOLDINGS": [
+    {
+      "type": 0,
+      "value": "应用于所有馆藏记录"
+    }
+  ],
+  "layer.action.apply.APPLY_TO_ITEMS": [
+    {
+      "type": 0,
+      "value": "应用于所有单件记录"
+    }
+  ],
+  "layer.action.apply.ITEMS": [
+    {
+      "type": 0,
+      "value": "应用于单件记录"
+    }
+  ],
+  "layer.action.apply.STAFF_ONLY": [
+    {
+      "type": 0,
+      "value": "仅限员工"
+    }
+  ],
+  "layer.action.clear": [
+    {
+      "type": 0,
+      "value": "清除字段"
+    }
+  ],
+  "layer.action.replace": [
+    {
+      "type": 0,
+      "value": "替换为"
+    }
+  ],
+  "layer.column.actions": [
+    {
+      "type": 0,
+      "value": "操作"
+    }
+  ],
+  "layer.column.data": [
+    {
+      "type": 0,
+      "value": "数据"
+    }
+  ],
+  "layer.column.field": [
+    {
+      "type": 0,
+      "value": "字段"
+    }
+  ],
+  "layer.column.ind1": [
+    {
+      "type": 0,
+      "value": "第1指示符"
+    }
+  ],
+  "layer.column.ind2": [
+    {
+      "type": 0,
+      "value": "第2指示符"
+    }
+  ],
+  "layer.column.options": [
+    {
+      "type": 0,
+      "value": "选项"
+    }
+  ],
+  "layer.column.subfield": [
+    {
+      "type": 0,
+      "value": "子字段"
+    }
+  ],
+  "layer.confirmChanges": [
+    {
+      "type": 0,
+      "value": "确认更改"
+    }
+  ],
+  "layer.marc.error": [
+    {
+      "type": 0,
+      "value": "目前仅支持 5xx 和 9xx 编辑。"
+    }
+  ],
+  "layer.marc.error.ind": [
+    {
+      "type": 0,
+      "value": "请检查您的输入。"
+    }
+  ],
+  "layer.marc.error.limited": [
+    {
+      "type": 0,
+      "value": "限制为 5xx 和 9xx。"
+    }
+  ],
+  "layer.marc.error.protected": [
+    {
+      "type": 0,
+      "value": "该字段受保护。"
+    }
+  ],
+  "layer.marc.error.subfield": [
+    {
+      "type": 0,
+      "value": "请检查您的输入。"
+    }
+  ],
+  "layer.options.add": [
+    {
+      "type": 0,
+      "value": "添加"
+    }
+  ],
+  "layer.options.additionalSubfield": [
+    {
+      "type": 0,
+      "value": "附加子字段"
+    }
+  ],
+  "layer.options.administrativeNote": [
+    {
+      "type": 0,
+      "value": "管理说明"
+    }
+  ],
+  "layer.options.append": [
+    {
+      "type": 0,
+      "value": "附加"
+    }
+  ],
+  "layer.options.available": [
+    {
+      "type": 0,
+      "value": "可用"
+    }
+  ],
+  "layer.options.checkInNote": [
+    {
+      "type": 0,
+      "value": "归还附注"
+    }
+  ],
+  "layer.options.checkOutNote": [
+    {
+      "type": 0,
+      "value": "借出附注"
+    }
+  ],
+  "layer.options.email": [
+    {
+      "type": 0,
+      "value": "电子邮件"
+    }
+  ],
+  "layer.options.expirationDate": [
+    {
+      "type": 0,
+      "value": "失效日期"
+    }
+  ],
+  "layer.options.holdings.linkText": [
+    {
+      "type": 0,
+      "value": "链接文字"
+    }
+  ],
+  "layer.options.holdings.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "指定资料"
+    }
+  ],
+  "layer.options.holdings.permanentLocation": [
+    {
+      "type": 0,
+      "value": "永久馆藏地"
+    }
+  ],
+  "layer.options.holdings.suppress": [
+    {
+      "type": 0,
+      "value": "在发现中隐藏"
+    }
+  ],
+  "layer.options.holdings.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "临时馆藏地"
+    }
+  ],
+  "layer.options.holdings.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "layer.options.holdings.urlPublic": [
+    {
+      "type": 0,
+      "value": "URL公开附注"
+    }
+  ],
+  "layer.options.holdings.urlRelationship": [
+    {
+      "type": 0,
+      "value": "URL关系"
+    }
+  ],
+  "layer.options.inProcess": [
+    {
+      "type": 0,
+      "value": "处理中"
+    }
+  ],
+  "layer.options.instances.staffSuppress": [
+    {
+      "type": 0,
+      "value": "员工隐藏"
+    }
+  ],
+  "layer.options.instances.suppress": [
+    {
+      "type": 0,
+      "value": "在发现中隐藏"
+    }
+  ],
+  "layer.options.intellectual": [
+    {
+      "type": 0,
+      "value": "虚拟单件"
+    }
+  ],
+  "layer.options.items.addNote": [
+    {
+      "type": 0,
+      "value": "添加附注"
+    }
+  ],
+  "layer.options.items.changeNote": [
+    {
+      "type": 0,
+      "value": "更改附注类型"
+    }
+  ],
+  "layer.options.items.duplicateTo": [
+    {
+      "type": 0,
+      "value": "复制到"
+    }
+  ],
+  "layer.options.items.false": [
+    {
+      "type": 0,
+      "value": "设置为假"
+    }
+  ],
+  "layer.options.items.markAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "标记为仅员工"
+    }
+  ],
+  "layer.options.items.removeAll": [
+    {
+      "type": 0,
+      "value": "移除全部"
+    }
+  ],
+  "layer.options.items.removeMarkAsStaffOnly": [
+    {
+      "type": 0,
+      "value": "移除仅员工的标记"
+    }
+  ],
+  "layer.options.items.removeNote": [
+    {
+      "type": 0,
+      "value": "移除"
+    }
+  ],
+  "layer.options.items.true": [
+    {
+      "type": 0,
+      "value": "设置为真"
+    }
+  ],
+  "layer.options.longMissing": [
+    {
+      "type": 0,
+      "value": "遗失已久"
+    }
+  ],
+  "layer.options.missing": [
+    {
+      "type": 0,
+      "value": "遗失"
+    }
+  ],
+  "layer.options.non-requestable": [
+    {
+      "type": 0,
+      "value": "处理中（不可请求）"
+    }
+  ],
+  "layer.options.patronGroup": [
+    {
+      "type": 0,
+      "value": "读者组"
+    }
+  ],
+  "layer.options.permanentLoanType": [
+    {
+      "type": 0,
+      "value": "永久借阅类型"
+    }
+  ],
+  "layer.options.permanentLocation": [
+    {
+      "type": 0,
+      "value": "永久单件馆藏地"
+    }
+  ],
+  "layer.options.placeholder": [
+    {
+      "type": 0,
+      "value": "选择单件状态"
+    }
+  ],
+  "layer.options.removeField": [
+    {
+      "type": 0,
+      "value": "移除字段"
+    }
+  ],
+  "layer.options.removeSubfield": [
+    {
+      "type": 0,
+      "value": "移除子字段"
+    }
+  ],
+  "layer.options.replaceWith": [
+    {
+      "type": 0,
+      "value": "替换为"
+    }
+  ],
+  "layer.options.restricted": [
+    {
+      "type": 0,
+      "value": "使用受限"
+    }
+  ],
+  "layer.options.statusLabel": [
+    {
+      "type": 0,
+      "value": "单件状态"
+    }
+  ],
+  "layer.options.suppressFromDiscovery": [
+    {
+      "type": 0,
+      "value": "在发现中隐藏"
+    }
+  ],
+  "layer.options.temporaryLoanTypeLabel": [
+    {
+      "type": 0,
+      "value": "临时借阅类型"
+    }
+  ],
+  "layer.options.temporaryLocation": [
+    {
+      "type": 0,
+      "value": "临时单件馆藏地"
+    }
+  ],
+  "layer.options.unavailable": [
+    {
+      "type": 0,
+      "value": "不可用"
+    }
+  ],
+  "layer.options.unknown": [
+    {
+      "type": 0,
+      "value": "未知"
+    }
+  ],
+  "layer.options.withdrawn": [
+    {
+      "type": 0,
+      "value": "已剔除"
+    }
+  ],
+  "layer.selectLoanType": [
+    {
+      "type": 0,
+      "value": "选择借阅类型"
+    }
+  ],
+  "layer.selectLocation": [
+    {
+      "type": 0,
+      "value": "选择位置"
+    }
+  ],
+  "layer.selectNoteType": [
+    {
+      "type": 0,
+      "value": "选择附注类型"
+    }
+  ],
+  "layer.selectPatronGroup": [
+    {
+      "type": 0,
+      "value": "选择读者组"
+    }
+  ],
+  "layer.selectType": [
+    {
+      "type": 0,
+      "value": "选择附注类型"
+    }
+  ],
+  "layer.title": [
+    {
+      "type": 0,
+      "value": "批量编辑"
+    }
+  ],
+  "list.actions.download": [
+    {
+      "type": 0,
+      "value": "下载"
+    }
+  ],
+  "list.criteriaTitle": [
+    {
+      "type": 0,
+      "value": "设定条件"
+    }
+  ],
+  "list.errors.info": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " : "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": "个款目 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": "条记录匹配 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": "个错误"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " : "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": "款目 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": "条记录已更改 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": "个错误"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.info": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "批量编辑查询： "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": "款目 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": "记录已匹配 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": "个错误"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.query.infoProcessed": [
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "批量编辑查询： "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "entries"
+        },
+        {
+          "type": 0,
+          "value": "款目 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "matched"
+        },
+        {
+          "type": 0,
+          "value": "记录已更改 * "
+        },
+        {
+          "style": null,
+          "type": 2,
+          "value": "errors"
+        },
+        {
+          "type": 0,
+          "value": "个错误"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "list.errors.table.code": [
+    {
+      "type": 0,
+      "value": "记录标识符"
+    }
+  ],
+  "list.errors.table.link": [
+    {
+      "type": 0,
+      "value": "查看最新版本"
+    }
+  ],
+  "list.errors.table.message": [
+    {
+      "type": 0,
+      "value": "错误原因"
+    }
+  ],
+  "list.errors.title": [
+    {
+      "type": 0,
+      "value": "错误"
+    }
+  ],
+  "list.filters.capabilities.acquisition": [
+    {
+      "type": 0,
+      "value": "采访"
+    }
+  ],
+  "list.filters.capabilities.circulation": [
+    {
+      "type": 0,
+      "value": "流通"
+    }
+  ],
+  "list.filters.capabilities.holdings": [
+    {
+      "type": 0,
+      "value": "典藏 - 馆藏"
+    }
+  ],
+  "list.filters.capabilities.instances": [
+    {
+      "type": 0,
+      "value": "典藏 - 实例"
+    }
+  ],
+  "list.filters.capabilities.inventory": [
+    {
+      "type": 0,
+      "value": "典藏-单件"
+    }
+  ],
+  "list.filters.capabilities.title": [
+    {
+      "type": 0,
+      "value": "记录类型"
+    }
+  ],
+  "list.filters.capabilities.users": [
+    {
+      "type": 0,
+      "value": "用户"
+    }
+  ],
+  "list.filters.identifier": [
+    {
+      "type": 0,
+      "value": "标识符"
+    }
+  ],
+  "list.filters.logs": [
+    {
+      "type": 0,
+      "value": "日志"
+    }
+  ],
+  "list.filters.query": [
+    {
+      "type": 0,
+      "value": "查询"
+    }
+  ],
+  "list.filters.recordIdentifier": [
+    {
+      "type": 0,
+      "value": "记录标识符"
+    }
+  ],
+  "list.filters.recordIdentifier.externalIDs": [
+    {
+      "type": 0,
+      "value": "外部ID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsHRID": [
+    {
+      "type": 0,
+      "value": "馆藏HRID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "馆藏UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.instanceHRID": [
+    {
+      "type": 0,
+      "value": "实例HRID"
+    }
+  ],
+  "list.filters.recordIdentifier.holdings.itemBarcodes": [
+    {
+      "type": 0,
+      "value": "单件条码"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceHRID": [
+    {
+      "type": 0,
+      "value": "实例HRID"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISBN": [
+    {
+      "type": 0,
+      "value": "ISBN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceISSN": [
+    {
+      "type": 0,
+      "value": "ISSN"
+    }
+  ],
+  "list.filters.recordIdentifier.instance.instanceUUID": [
+    {
+      "type": 0,
+      "value": "实例 UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.item.ItemHRIDs": [
+    {
+      "type": 0,
+      "value": "单件HRID"
+    }
+  ],
+  "list.filters.recordIdentifier.item.UUID": [
+    {
+      "type": 0,
+      "value": "单件UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.item.accession": [
+    {
+      "type": 0,
+      "value": "单件入藏号"
+    }
+  ],
+  "list.filters.recordIdentifier.item.barcode": [
+    {
+      "type": 0,
+      "value": "单件条码"
+    }
+  ],
+  "list.filters.recordIdentifier.item.former": [
+    {
+      "type": 0,
+      "value": "单件前标识符"
+    }
+  ],
+  "list.filters.recordIdentifier.item.holdingsUUID": [
+    {
+      "type": 0,
+      "value": "馆藏UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.placeholder": [
+    {
+      "type": 0,
+      "value": "选择记录标识符"
+    }
+  ],
+  "list.filters.recordIdentifier.userBarcodes": [
+    {
+      "type": 0,
+      "value": "用户条码"
+    }
+  ],
+  "list.filters.recordIdentifier.userUUIDs": [
+    {
+      "type": 0,
+      "value": "用户UUID"
+    }
+  ],
+  "list.filters.recordIdentifier.usernames": [
+    {
+      "type": 0,
+      "value": "用户名"
+    }
+  ],
+  "list.logSubTitle": [
+    {
+      "type": 0,
+      "value": "设置条件以开始批量编辑"
+    }
+  ],
+  "list.logSubTitle.changed": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "条记录已更改"
+    }
+  ],
+  "list.logSubTitle.matched": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "条记录匹配"
+    }
+  ],
+  "list.preview.electronicAccess.linkText": [
+    {
+      "type": 0,
+      "value": "链接文字"
+    }
+  ],
+  "list.preview.electronicAccess.materialsSpecified": [
+    {
+      "type": 0,
+      "value": "指定资料"
+    }
+  ],
+  "list.preview.electronicAccess.publicNote": [
+    {
+      "type": 0,
+      "value": "公开附注"
+    }
+  ],
+  "list.preview.electronicAccess.relationship": [
+    {
+      "type": 0,
+      "value": "关系"
+    }
+  ],
+  "list.preview.electronicAccess.uri": [
+    {
+      "type": 0,
+      "value": "URI"
+    }
+  ],
+  "list.preview.table.status.false": [
+    {
+      "type": 0,
+      "value": "未激活"
+    }
+  ],
+  "list.preview.table.status.true": [
+    {
+      "type": 0,
+      "value": "激活"
+    }
+  ],
+  "list.preview.title": [
+    {
+      "type": 0,
+      "value": "匹配记录预览"
+    }
+  ],
+  "list.preview.titleChanged": [
+    {
+      "type": 0,
+      "value": "记录预览已更改"
+    }
+  ],
+  "list.result.emptyMessage": [
+    {
+      "type": 0,
+      "value": "选择记录类型，然后选择记录标识符。"
+    }
+  ],
+  "list.result.emptyMessage.empty": [
+    {
+      "type": 0,
+      "value": "选择记录标识符。"
+    }
+  ],
+  "list.result.emptyMessage.holdings": [
+    {
+      "type": 0,
+      "value": "选择记录标识符。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有馆藏 HRID 的文件。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.ID": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有馆藏UUID的文件。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "拖放或选择具有实例HRID的文件。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有单件条码的文件。"
+    }
+  ],
+  "list.result.emptyMessage.holdings.query": [
+    {
+      "type": 0,
+      "value": "单击“构建查询”按钮构建查询。"
+    }
+  ],
+  "list.result.emptyMessage.instance": [
+    {
+      "type": 0,
+      "value": "选择记录标识符。"
+    }
+  ],
+  "list.result.emptyMessage.instance.HRID": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有实例 HRID 的文件。"
+    }
+  ],
+  "list.result.emptyMessage.instance.ID": [
+    {
+      "type": 0,
+      "value": "拖放或选择具有实例 UUID 的文件。"
+    }
+  ],
+  "list.result.emptyMessage.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有 ISBN 的文件。"
+    }
+  ],
+  "list.result.emptyMessage.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有 ISSN 的文件。"
+    }
+  ],
+  "list.result.emptyMessage.instance.query": [
+    {
+      "type": 0,
+      "value": "单击“构建查询”按钮构建查询。"
+    }
+  ],
+  "list.result.emptyMessage.item": [
+    {
+      "type": 0,
+      "value": "选择记录标识符。"
+    }
+  ],
+  "list.result.emptyMessage.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "拖放或选择具有单件入藏号的文件。"
+    }
+  ],
+  "list.result.emptyMessage.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有单件条码的文件。"
+    }
+  ],
+  "list.result.emptyMessage.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "拖放或选择具有单件前标识符的文件。"
+    }
+  ],
+  "list.result.emptyMessage.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "拖放或选择具有馆藏UUID的文件。"
+    }
+  ],
+  "list.result.emptyMessage.item.HRID": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有单件 HRID 的文件。"
+    }
+  ],
+  "list.result.emptyMessage.item.ID": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有单件 UUID 的文件。"
+    }
+  ],
+  "list.result.emptyMessage.item.query": [
+    {
+      "type": 0,
+      "value": "单击“构建查询”按钮构建查询。"
+    }
+  ],
+  "list.result.emptyMessage.logs": [
+    {
+      "type": 0,
+      "value": "选择一个筛选来显示结果。"
+    }
+  ],
+  "list.result.emptyMessage.query": [
+    {
+      "type": 0,
+      "value": "选择记录类型，然后单击构建查询按钮。"
+    }
+  ],
+  "list.result.emptyMessage.user": [
+    {
+      "type": 0,
+      "value": "选择记录标识符。"
+    }
+  ],
+  "list.result.emptyMessage.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有用户条码的文件。"
+    }
+  ],
+  "list.result.emptyMessage.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有外部 ID 的文件。"
+    }
+  ],
+  "list.result.emptyMessage.user.ID": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有用户 UUID 的文件。"
+    }
+  ],
+  "list.result.emptyMessage.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "拖放或选择带有用户名的文件。"
+    }
+  ],
+  "list.result.emptyMessage.user.query": [
+    {
+      "type": 0,
+      "value": "单击“构建查询”按钮构建查询。"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "包含已更新记录的文件"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含已更新记录的文件"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "提交更改时遇到错误的文件"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "提交更改时遇到错误的文件"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "包含已更新记录的文件"
+    }
+  ],
+  "logs.actions.linkToCommittedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含已更新记录的文件"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "包含匹配记录的文件"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含匹配记录的文件"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile": [
+    {
+      "type": 0,
+      "value": "在记录匹配时遇到错误的文件"
+    }
+  ],
+  "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "在记录匹配时遇到错误的文件"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile": [
+    {
+      "type": 0,
+      "value": "包含建议更改预览的文件"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含建议更改预览的文件"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile": [
+    {
+      "type": 0,
+      "value": "包含建议更改预览的文件"
+    }
+  ],
+  "logs.actions.linkToModifiedRecordsMarcFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含建议更改预览的文件"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile": [
+    {
+      "type": 0,
+      "value": "用于触发批量编辑的文件"
+    }
+  ],
+  "logs.actions.linkToTriggeringCsvFile.QUERY": [
+    {
+      "type": 0,
+      "value": "包含受批量更新影响的记录标识符的文件"
+    }
+  ],
+  "logs.approach.IN_APP": [
+    {
+      "type": 0,
+      "value": "在app中"
+    }
+  ],
+  "logs.approach.MANUAL": [
+    {
+      "type": 0,
+      "value": "本地"
+    }
+  ],
+  "logs.approach.QUERY": [
+    {
+      "type": 0,
+      "value": "查询"
+    }
+  ],
+  "logs.entityType.HOLDINGS_RECORD": [
+    {
+      "type": 0,
+      "value": "典藏 - 馆藏"
+    }
+  ],
+  "logs.entityType.INSTANCE": [
+    {
+      "type": 0,
+      "value": "典藏 - 实例"
+    }
+  ],
+  "logs.entityType.INSTANCE_MARC": [
+    {
+      "type": 0,
+      "value": "典藏- 实例 (MARC)"
+    }
+  ],
+  "logs.entityType.ITEM": [
+    {
+      "type": 0,
+      "value": "典藏-单件"
+    }
+  ],
+  "logs.entityType.USER": [
+    {
+      "type": 0,
+      "value": "用户"
+    }
+  ],
+  "logs.filter.endDate": [
+    {
+      "type": 0,
+      "value": "终止日期"
+    }
+  ],
+  "logs.filter.option.delete": [
+    {
+      "type": 0,
+      "value": "删除"
+    }
+  ],
+  "logs.filter.option.edit": [
+    {
+      "type": 0,
+      "value": "编辑"
+    }
+  ],
+  "logs.filter.startDate": [
+    {
+      "type": 0,
+      "value": "起始日期"
+    }
+  ],
+  "logs.filter.title.capability": [
+    {
+      "type": 0,
+      "value": "记录类型"
+    }
+  ],
+  "logs.filter.title.status": [
+    {
+      "type": 0,
+      "value": "状态"
+    }
+  ],
+  "logs.filter.title.types": [
+    {
+      "type": 0,
+      "value": "批量操作类型"
+    }
+  ],
+  "logs.filter.title.user": [
+    {
+      "type": 0,
+      "value": "用户"
+    }
+  ],
+  "logs.filter.user.placeholder": [
+    {
+      "type": 0,
+      "value": "选择用户"
+    }
+  ],
+  "logs.filter.user.placeholder.empty": [
+    {
+      "type": 0,
+      "value": "列表为空"
+    }
+  ],
+  "logs.infoPopover": [
+    {
+      "type": 0,
+      "value": "文件无法下载，因为自任务运行之日起已过去 30 天。"
+    }
+  ],
+  "logs.status.APPLY_CHANGES": [
+    {
+      "type": 0,
+      "value": "应用更改"
+    }
+  ],
+  "logs.status.COMPLETED": [
+    {
+      "type": 0,
+      "value": "已完成"
+    }
+  ],
+  "logs.status.COMPLETED_WITH_ERRORS": [
+    {
+      "type": 0,
+      "value": "含错完成"
+    }
+  ],
+  "logs.status.DATA_MODIFICATION": [
+    {
+      "type": 0,
+      "value": "数据修改"
+    }
+  ],
+  "logs.status.EXECUTING_QUERY": [
+    {
+      "type": 0,
+      "value": "执行查询"
+    }
+  ],
+  "logs.status.FAILED": [
+    {
+      "type": 0,
+      "value": "失败"
+    }
+  ],
+  "logs.status.NEW": [
+    {
+      "type": 0,
+      "value": "新建"
+    }
+  ],
+  "logs.status.RETRIEVING_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "检索标识符"
+    }
+  ],
+  "logs.status.RETRIEVING_RECORDS": [
+    {
+      "type": 0,
+      "value": "检索记录"
+    }
+  ],
+  "logs.status.REVIEWED_NO_MARC_RECORDS": [
+    {
+      "type": 0,
+      "value": "Reviewing changes"
+    }
+  ],
+  "logs.status.REVIEW_CHANGES": [
+    {
+      "type": 0,
+      "value": "审查更改"
+    }
+  ],
+  "logs.status.SAVED_IDENTIFIERS": [
+    {
+      "type": 0,
+      "value": "保存标识符"
+    }
+  ],
+  "logs.status.SAVING_RECORDS_LOCALLY": [
+    {
+      "type": 0,
+      "value": "保存记录"
+    }
+  ],
+  "menuGroup.actions": [
+    {
+      "type": 0,
+      "value": "操作"
+    }
+  ],
+  "menuGroup.showColumns": [
+    {
+      "type": 0,
+      "value": "显示列"
+    }
+  ],
+  "menuGroup.startEdit": [
+    {
+      "type": 0,
+      "value": "开始批编辑"
+    }
+  ],
+  "meta.logs.title": [
+    {
+      "type": 0,
+      "value": "批量编辑日志"
+    }
+  ],
+  "meta.query.title": [
+    {
+      "type": 0,
+      "value": "批量编辑查询"
+    }
+  ],
+  "meta.query.title.mark": [
+    {
+      "type": 0,
+      "value": "批量编辑 MARC 字段 查询"
+    }
+  ],
+  "meta.title": [
+    {
+      "type": 0,
+      "value": "批量编辑"
+    }
+  ],
+  "meta.title.conformationModal": [
+    {
+      "type": 0,
+      "value": "批量编辑："
+    },
+    {
+      "children": [
+        {
+          "type": 1,
+          "value": "fileName"
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile": [
+    {
+      "type": 0,
+      "value": "批量编辑"
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " "
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "meta.title.uploadedFile.mark": [
+    {
+      "type": 0,
+      "value": "批量编辑 MARC 字段 - "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": " "
+        },
+        {
+          "type": 1,
+          "value": "fileName"
+        },
+        {
+          "type": 0,
+          "value": " "
+        }
+      ],
+      "type": 8,
+      "value": "b"
+    }
+  ],
+  "modal.fileExtensions.actionButton": [
+    {
+      "type": 0,
+      "value": "选择其他文件上传"
+    }
+  ],
+  "modal.fileExtensions.blocked.header": [
+    {
+      "type": 0,
+      "value": "无效文件"
+    }
+  ],
+  "modal.fileExtensions.blocked.message": [
+    {
+      "type": 0,
+      "value": "只能上传具有csv扩展名的文件"
+    }
+  ],
+  "modal.fileExtensions.blocked.message2": [
+    {
+      "type": 0,
+      "value": "只能上传一个扩展名为 .csv 的文件。"
+    }
+  ],
+  "modal.next": [
+    {
+      "type": 0,
+      "value": "下一个"
+    }
+  ],
+  "modal.successfullMessage": [
+    {
+      "type": 1,
+      "value": "fileName"
+    },
+    {
+      "type": 0,
+      "value": "已成功上传。"
+    }
+  ],
+  "options.placeholder": [
+    {
+      "type": 0,
+      "value": "选择选项"
+    }
+  ],
+  "permission.inventory.edit": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: In app - Edit inventory records"
+    }
+  ],
+  "permission.inventory.view": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: In app - View inventory records"
+    }
+  ],
+  "permission.logs.view": [
+    {
+      "type": 0,
+      "value": "批量编辑 - 可以查看日志"
+    }
+  ],
+  "permission.module.bulk-edit.enabled": [
+    {
+      "type": 0,
+      "value": "UI：批量编辑模块已启用"
+    }
+  ],
+  "permission.query.execute": [
+    {
+      "type": 0,
+      "value": "Bulk edit: Can build query"
+    }
+  ],
+  "permission.users.csv.edit": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: Local - Edit user records"
+    }
+  ],
+  "permission.users.csv.view": [
+    {
+      "type": 0,
+      "value": "Bulk Edit: Local - View user records"
+    }
+  ],
+  "permission.users.edit": [
+    {
+      "type": 0,
+      "value": "Bulk edit: In app - Edit user records"
+    }
+  ],
+  "permissionsModal.cancel": [
+    {
+      "type": 0,
+      "value": "取消"
+    }
+  ],
+  "permissionsModal.filter.assigned": [
+    {
+      "type": 0,
+      "value": "已分配"
+    }
+  ],
+  "permissionsModal.filter.assignmentStatus": [
+    {
+      "type": 0,
+      "value": "权限分配状态"
+    }
+  ],
+  "permissionsModal.filter.permissionSets": [
+    {
+      "type": 0,
+      "value": "权限集"
+    }
+  ],
+  "permissionsModal.filter.permissionTypes": [
+    {
+      "type": 0,
+      "value": "权限类型"
+    }
+  ],
+  "permissionsModal.filter.permissions": [
+    {
+      "type": 0,
+      "value": "权限"
+    }
+  ],
+  "permissionsModal.filter.resetAll": [
+    {
+      "type": 0,
+      "value": "全部重置"
+    }
+  ],
+  "permissionsModal.filter.search": [
+    {
+      "type": 0,
+      "value": "搜索"
+    }
+  ],
+  "permissionsModal.filter.title": [
+    {
+      "type": 0,
+      "value": "搜索和筛选"
+    }
+  ],
+  "permissionsModal.filter.unassigned": [
+    {
+      "type": 0,
+      "value": "未分配"
+    }
+  ],
+  "permissionsModal.list.cell.assigned": [
+    {
+      "type": 0,
+      "value": "已分配"
+    }
+  ],
+  "permissionsModal.list.cell.permissionSets": [
+    {
+      "type": 0,
+      "value": "权限集"
+    }
+  ],
+  "permissionsModal.list.cell.permissions": [
+    {
+      "type": 0,
+      "value": "权限"
+    }
+  ],
+  "permissionsModal.list.cell.unassigned": [
+    {
+      "type": 0,
+      "value": "未分配"
+    }
+  ],
+  "permissionsModal.list.columns.name": [
+    {
+      "type": 0,
+      "value": "名称"
+    }
+  ],
+  "permissionsModal.list.columns.status": [
+    {
+      "type": 0,
+      "value": "状态"
+    }
+  ],
+  "permissionsModal.list.columns.type": [
+    {
+      "type": 0,
+      "value": "类型"
+    }
+  ],
+  "permissionsModal.list.subTitle": [
+    {
+      "type": 0,
+      "value": "找到"
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "个权限"
+    }
+  ],
+  "permissionsModal.list.title": [
+    {
+      "type": 0,
+      "value": "权限"
+    }
+  ],
+  "permissionsModal.save": [
+    {
+      "type": 0,
+      "value": "保存并关闭"
+    }
+  ],
+  "permissionsModal.title": [
+    {
+      "type": 0,
+      "value": "选择权限"
+    }
+  ],
+  "permissionsModal.totalSelected": [
+    {
+      "type": 0,
+      "value": "已选总数： "
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    }
+  ],
+  "preview.file.title": [
+    {
+      "type": 0,
+      "value": "文件名: "
+    },
+    {
+      "type": 1,
+      "value": "fileUploadedName"
+    }
+  ],
+  "preview.query.title": [
+    {
+      "type": 0,
+      "value": "查询: "
+    },
+    {
+      "type": 1,
+      "value": "queryText"
+    }
+  ],
+  "previewModal.areYouSure": [
+    {
+      "type": 0,
+      "value": "是否确定？"
+    }
+  ],
+  "previewModal.downloadPreview": [
+    {
+      "type": 0,
+      "value": "下载预览"
+    }
+  ],
+  "previewModal.downloadPreview.marc": [
+    {
+      "type": 0,
+      "value": "以 MARC 格式下载预览"
+    }
+  ],
+  "previewModal.keepEditing": [
+    {
+      "type": 0,
+      "value": "继续编辑"
+    }
+  ],
+  "previewModal.message": [
+    {
+      "type": 0,
+      "value": "如果单击“提交更改”按钮，将更改"
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "条记录。可以选择“下载预览”以在保存之前查看所有更改。"
+    }
+  ],
+  "previewModal.message.empty.marc": [
+    {
+      "type": 0,
+      "value": "所有实例都有来源 FOLIO。使用“实例和管理数据”选项进行批量编辑。"
+    }
+  ],
+  "previewModal.previewToBeChanged": [
+    {
+      "type": 0,
+      "value": "预览要更改的记录"
+    }
+  ],
+  "previewModal.saveAndClose": [
+    {
+      "type": 0,
+      "value": "承诺改变"
+    }
+  ],
+  "progressBar.committing": [
+    {
+      "type": 0,
+      "value": "提交更改"
+    }
+  ],
+  "progressBar.title": [
+    {
+      "type": 0,
+      "value": "上传"
+    },
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": "并检索相关数据"
+    }
+  ],
+  "progresssBar.processing": [
+    {
+      "type": 0,
+      "value": "处理中"
+    }
+  ],
+  "progresssBar.retrieving": [
+    {
+      "type": 0,
+      "value": "检索"
+    }
+  ],
+  "recordsSuccessfullyChanged": [
+    {
+      "style": null,
+      "type": 2,
+      "value": "value"
+    },
+    {
+      "type": 0,
+      "value": "条记录已成功更改"
+    }
+  ],
+  "resetFilters": [
+    {
+      "type": 0,
+      "value": "全部重置"
+    }
+  ],
+  "retrievedDataList.title": [
+    {
+      "type": 0,
+      "value": "找到"
+    },
+    {
+      "style": null,
+      "type": 2,
+      "value": "matched"
+    },
+    {
+      "type": 0,
+      "value": "匹配的"
+    },
+    {
+      "type": 1,
+      "value": "capability"
+    },
+    {
+      "type": 0,
+      "value": "记录。"
+    }
+  ],
+  "start.delete": [
+    {
+      "type": 0,
+      "value": "开始批删除"
+    }
+  ],
+  "start.downloadChangedRecords": [
+    {
+      "type": 0,
+      "value": "下载已更改记录 (CSV)"
+    }
+  ],
+  "start.downloadChangedRecords.marc": [
+    {
+      "type": 0,
+      "value": "下载更改的记录 (MARC)"
+    }
+  ],
+  "start.downloadErrors": [
+    {
+      "type": 0,
+      "value": "下载错误(CSV)"
+    }
+  ],
+  "start.downloadMathcedRecords": [
+    {
+      "type": 0,
+      "value": "下载匹配的记录(CSV)"
+    }
+  ],
+  "start.edit": [
+    {
+      "type": 0,
+      "value": "开始批编辑"
+    }
+  ],
+  "start.edit.csv": [
+    {
+      "type": 0,
+      "value": "开始批量编辑（本地）"
+    }
+  ],
+  "start.edit.instance": [
+    {
+      "type": 0,
+      "value": "实例和管理数据"
+    }
+  ],
+  "start.edit.mark": [
+    {
+      "type": 0,
+      "value": "具有源 MARC (POC) 的实例"
+    }
+  ],
+  "textArea.resetAll": [
+    {
+      "type": 0,
+      "value": "全部重置"
+    }
+  ],
+  "textArea.search": [
+    {
+      "type": 0,
+      "value": "搜索"
+    }
+  ],
+  "title.identifier": [
+    {
+      "type": 0,
+      "value": "标识符"
+    }
+  ],
+  "title.logs": [
+    {
+      "type": 0,
+      "value": "日志"
+    }
+  ],
+  "title.mark": [
+    {
+      "type": 0,
+      "value": "批量编辑 MARC 字段"
+    }
+  ],
+  "title.query": [
+    {
+      "type": 0,
+      "value": "查询"
+    }
+  ],
+  "type.placeholder": [
+    {
+      "type": 0,
+      "value": "选择类型"
+    }
+  ],
+  "uploaderActiveTitle": [
+    {
+      "type": 0,
+      "value": "放下以开始"
+    }
+  ],
+  "uploaderBtnText": [
+    {
+      "type": 0,
+      "value": "或选择文件"
+    }
+  ],
+  "uploaderSubTitle": [
+    {
+      "type": 0,
+      "value": "选择带有记录标识符的文件"
+    }
+  ],
+  "uploaderSubTitle.empty": [
+    {
+      "type": 0,
+      "value": "选择带有记录标识符的文件"
+    }
+  ],
+  "uploaderSubTitle.holdings": [
+    {
+      "type": 0,
+      "value": "选择带有记录标识符的文件"
+    }
+  ],
+  "uploaderSubTitle.holdings.HRID": [
+    {
+      "type": 0,
+      "value": "选择具有馆藏HRID的文件"
+    }
+  ],
+  "uploaderSubTitle.holdings.ID": [
+    {
+      "type": 0,
+      "value": "选择带有馆藏UUID的文件"
+    }
+  ],
+  "uploaderSubTitle.holdings.INSTANCE_HRID": [
+    {
+      "type": 0,
+      "value": "选择带有实例HRID的文件"
+    }
+  ],
+  "uploaderSubTitle.holdings.ITEM_BARCODE": [
+    {
+      "type": 0,
+      "value": "选择带具有单件条码的文件"
+    }
+  ],
+  "uploaderSubTitle.instance": [
+    {
+      "type": 0,
+      "value": "选择带有记录标识符的文件"
+    }
+  ],
+  "uploaderSubTitle.instance.HRID": [
+    {
+      "type": 0,
+      "value": "选择带有实例HRID的文件"
+    }
+  ],
+  "uploaderSubTitle.instance.ID": [
+    {
+      "type": 0,
+      "value": "选择带有实例 UUID 的文件"
+    }
+  ],
+  "uploaderSubTitle.instance.ISBN": [
+    {
+      "type": 0,
+      "value": "选择带有 ISBN 的文件"
+    }
+  ],
+  "uploaderSubTitle.instance.ISSN": [
+    {
+      "type": 0,
+      "value": "选择带有 ISSN 的文件"
+    }
+  ],
+  "uploaderSubTitle.item": [
+    {
+      "type": 0,
+      "value": "选择带有记录标识符的文件"
+    }
+  ],
+  "uploaderSubTitle.item.ACCESSION_NUMBER": [
+    {
+      "type": 0,
+      "value": "选择具有单件入藏号的文件"
+    }
+  ],
+  "uploaderSubTitle.item.BARCODE": [
+    {
+      "type": 0,
+      "value": "选择带有单件条码的文件"
+    }
+  ],
+  "uploaderSubTitle.item.FORMER_IDS": [
+    {
+      "type": 0,
+      "value": "选择具有单件前标识符的文件"
+    }
+  ],
+  "uploaderSubTitle.item.HOLDINGS_RECORD_ID": [
+    {
+      "type": 0,
+      "value": "选择具有馆藏UUID的文件"
+    }
+  ],
+  "uploaderSubTitle.item.HRID": [
+    {
+      "type": 0,
+      "value": "选择具有单件HRID的文件"
+    }
+  ],
+  "uploaderSubTitle.item.ID": [
+    {
+      "type": 0,
+      "value": "选择具有单件UUID的文件"
+    }
+  ],
+  "uploaderSubTitle.records": [
+    {
+      "type": 0,
+      "value": "上传已编辑记录的CSV文件"
+    }
+  ],
+  "uploaderSubTitle.user": [
+    {
+      "type": 0,
+      "value": "选择带有记录标识符的文件"
+    }
+  ],
+  "uploaderSubTitle.user.BARCODE": [
+    {
+      "type": 0,
+      "value": "选择带用户条码的文件"
+    }
+  ],
+  "uploaderSubTitle.user.EXTERNAL_SYSTEM_ID": [
+    {
+      "type": 0,
+      "value": "选择带外部ID的文件"
+    }
+  ],
+  "uploaderSubTitle.user.ID": [
+    {
+      "type": 0,
+      "value": "选择带用户UUID的文件"
+    }
+  ],
+  "uploaderSubTitle.user.USER_NAME": [
+    {
+      "type": 0,
+      "value": "选择带有用户名的文件"
+    }
+  ],
+  "uploaderTitle": [
+    {
+      "type": 0,
+      "value": "拖放"
+    }
+  ],
+  "uploading": [
+    {
+      "type": 0,
+      "value": "上传中"
+    }
+  ]
+}
