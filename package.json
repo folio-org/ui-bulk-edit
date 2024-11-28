@@ -196,7 +196,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.18.6",
     "@folio/eslint-config-stripes": "^7.0.0",
-    "@folio/stripes": "^9.0.0",
+    "@folio/stripes": "^9.2.0",
     "@folio/stripes-cli": "^3.0.0",
     "@folio/stripes-data-transfer-components": "^6.1.0",
     "@folio/stripes-testing": "^4.4.0",
