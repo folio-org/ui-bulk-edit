@@ -418,7 +418,6 @@
     "start.edit.instance": "实例和管理数据",
     "list.errors.table.link": "查看最新版本",
     "actions.find": "查找",
-    "start.edit.mark": "具有源 MARC (POC) 的实例",
     "logs.status.RETRIEVING_IDENTIFIERS": "检索标识符",
     "logs.status.SAVED_IDENTIFIERS": "保存标识符",
     "meta.title.uploadedFile.mark": "批量编辑 MARC 字段 - <b> {fileName} </b>",
@@ -517,5 +516,6 @@
     "permission.users.edit": "Bulk edit: In app - Edit user records",
     "permission.query.execute": "Bulk edit: Can build query",
     "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
-    "category.administrativeData": "Administrative data"
+    "category.administrativeData": "Administrative data",
+    "start.edit.marc": "Instances with source MARC"
 }

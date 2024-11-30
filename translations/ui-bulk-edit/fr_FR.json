@@ -418,7 +418,6 @@
     "start.edit.instance": "Lancer la modification par lots - Champs de notice",
     "list.errors.table.link": "View latest version",
     "actions.find": "Rechercher",
-    "start.edit.mark": "Notices avec source MARC (POC)",
     "logs.status.RETRIEVING_IDENTIFIERS": "Retrieving identifiers",
     "logs.status.SAVED_IDENTIFIERS": "Saving identifiers",
     "meta.title.uploadedFile.mark": "Bulk edit MARC fields - <b>{fileName}</b>",
@@ -517,5 +516,6 @@
     "permission.users.edit": "Bulk edit: In app - Edit user records",
     "permission.query.execute": "Bulk edit: Can build query",
     "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
-    "category.administrativeData": "Administrative data"
+    "category.administrativeData": "Administrative data",
+    "start.edit.marc": "Instances with source MARC"
 }

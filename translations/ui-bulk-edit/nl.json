@@ -418,7 +418,6 @@
     "start.edit.instance": "Bulkbewerking starten - Instance-velden",
     "list.errors.table.link": "Laatste versie bekijken",
     "actions.find": "Zoeken",
-    "start.edit.mark": "Bulkbewerking starten - MARC-velden",
     "logs.status.RETRIEVING_IDENTIFIERS": "Identificatiekenmerken ophalen",
     "logs.status.SAVED_IDENTIFIERS": "Identificatiekenmerken opslaan",
     "meta.title.uploadedFile.mark": "MARC-velden in bulk bewerken - <b>{fileName}</b>",
@@ -517,5 +516,6 @@
     "permission.users.edit": "Bulk edit: In app - Edit user records",
     "permission.query.execute": "Bulk edit: Can build query",
     "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
-    "category.administrativeData": "Administrative data"
+    "category.administrativeData": "Administrative data",
+    "start.edit.marc": "Instances with source MARC"
 }
