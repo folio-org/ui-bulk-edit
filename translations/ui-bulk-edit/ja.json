@@ -418,7 +418,6 @@
     "start.edit.instance": "一括編集開始 - インスタンスフィールド",
     "list.errors.table.link": "最新バージョンの表示",
     "actions.find": "Find",
-    "start.edit.mark": "一括編集の開始 - MARCフィールド",
     "logs.status.RETRIEVING_IDENTIFIERS": "Retrieving identifiers",
     "logs.status.SAVED_IDENTIFIERS": "IDの保存",
     "meta.title.uploadedFile.mark": "MARCフィールドの一括編集<b>{fileName}</b>",
@@ -517,5 +516,6 @@
     "permission.users.edit": "Bulk edit: In app - Edit user records",
     "permission.query.execute": "Bulk edit: Can build query",
     "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
-    "category.administrativeData": "Administrative data"
+    "category.administrativeData": "Administrative data",
+    "start.edit.marc": "Instances with source MARC"
 }

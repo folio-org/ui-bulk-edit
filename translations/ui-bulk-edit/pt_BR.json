@@ -418,7 +418,6 @@
     "start.edit.instance": "Instâncias e dados administrativos",
     "list.errors.table.link": "Ver versão mais recente",
     "actions.find": "Buscar",
-    "start.edit.mark": "Instâncias com fonte MARC (POC)",
     "logs.status.RETRIEVING_IDENTIFIERS": "Recuperando identificadores",
     "logs.status.SAVED_IDENTIFIERS": "Salvando identificadores",
     "meta.title.uploadedFile.mark": "Edição em massa de campos MARC - <b>{fileName}</b>",
@@ -517,5 +516,6 @@
     "permission.users.edit": "Edição em massa: no aplicativo - Editar registros de usuários",
     "permission.query.execute": "Edição em massa: pode criar uma consulta",
     "logs.status.REVIEWED_NO_MARC_RECORDS": "Revisão de alterações",
-    "category.administrativeData": "Dados administrativos"
+    "category.administrativeData": "Dados administrativos",
+    "start.edit.marc": "Instances with source MARC"
 }
