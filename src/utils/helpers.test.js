@@ -4,7 +4,7 @@ import {
   getTransformedLogsFilterValue,
   removeDuplicatesByValue
 } from './helpers';
-import { CAPABILITIES, JOB_STATUSES, LOGS_FILTERS } from '../constants';
+import { CAPABILITIES, JOB_STATUSES } from '../constants';
 
 describe('customFilter', () => {
   const dataOptions = [
@@ -226,14 +226,14 @@ describe('getTenantsById', () => {
 describe('getTransformedLogsFilterValue', () => {
   it('should add INSTANCE_MARC to the array if INSTANCE is present', () => {
     const values = [CAPABILITIES.INSTANCE];
-    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
+    const result = getTransformedLogsFilterValue(values);
     expect(result).toContain(CAPABILITIES.INSTANCE);
     expect(result).toContain(CAPABILITIES.INSTANCE_MARC);
   });
 
   it('should not add INSTANCE_MARC if it is already present', () => {
     const values = [CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC];
-    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
+    const result = getTransformedLogsFilterValue(values);
     expect(result).toContain(CAPABILITIES.INSTANCE);
     expect(result).toContain(CAPABILITIES.INSTANCE_MARC);
     expect(result.length).toBe(2);
@@ -241,41 +241,41 @@ describe('getTransformedLogsFilterValue', () => {
 
   it('should remove INSTANCE_MARC from the array if INSTANCE is not present', () => {
     const values = [CAPABILITIES.INSTANCE_MARC, 'other_value'];
-    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
+    const result = getTransformedLogsFilterValue(values);
     expect(result).not.toContain(CAPABILITIES.INSTANCE_MARC);
     expect(result).toContain('other_value');
   });
 
   it('should return the same array if INSTANCE and INSTANCE_MARC are not present', () => {
     const values = ['other_value'];
-    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
+    const result = getTransformedLogsFilterValue(values);
     expect(result).toEqual(values);
   });
 
   it('should not modify the original input array', () => {
     const values = [CAPABILITIES.INSTANCE];
-    const result = getTransformedLogsFilterValue(LOGS_FILTERS.CAPABILITY, values);
+    const result = getTransformedLogsFilterValue(values);
     expect(values).not.toContain(CAPABILITIES.INSTANCE_MARC);
     expect(result).toContain(CAPABILITIES.INSTANCE_MARC);
   });
 
   it('should not modify the original userID', () => {
     const values = 'userID';
-    const result = getTransformedLogsFilterValue(LOGS_FILTERS.USER, values);
+    const result = getTransformedLogsFilterValue(values);
     expect(values).not.toContain(CAPABILITIES.INSTANCE_MARC);
     expect(result).toContain('userID');
   });
 
   it('should add REVIEWED_NO_MARC_RECORDS to the array if REVIEW_CHANGES is present', () => {
     const values = [JOB_STATUSES.REVIEW_CHANGES];
-    const result = getTransformedLogsFilterValue(LOGS_FILTERS.STATUS, values);
+    const result = getTransformedLogsFilterValue(values);
     expect(result).toContain(JOB_STATUSES.REVIEW_CHANGES);
     expect(result).toContain(JOB_STATUSES.REVIEWED_NO_MARC_RECORDS);
   });
 
   it('should remove REVIEWED_NO_MARC_RECORDS from the array if REVIEW_CHANGES is not present', () => {
     const values = ['other_value'];
-    const result = getTransformedLogsFilterValue(LOGS_FILTERS.STATUS, values);
+    const result = getTransformedLogsFilterValue(values);
     expect(result).not.toContain(JOB_STATUSES.REVIEWED_NO_MARC_RECORDS);
     expect(result).toContain('other_value');
   });
