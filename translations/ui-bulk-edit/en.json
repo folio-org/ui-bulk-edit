@@ -471,6 +471,7 @@
   "logs.status.RETRIEVING_RECORDS": "Retrieving records",
   "logs.status.SAVING_RECORDS_LOCALLY": "Saving records",
   "logs.status.DATA_MODIFICATION": "Data modification",
+  "logs.status.DATA_MODIFICATION_IN_PROGRESS": "Data modification",
   "logs.status.REVIEW_CHANGES": "Reviewing changes",
   "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
   "logs.status.COMPLETED": "Completed",

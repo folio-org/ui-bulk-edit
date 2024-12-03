@@ -2,8 +2,7 @@ import { clone, setWith } from 'lodash';
 import {
   CAPABILITIES,
   EDIT_CAPABILITIES_OPTIONS,
-  JOB_STATUSES,
-  LOGS_FILTERS,
+  LOGS_FILTER_DEPENDENCY_MAP,
 } from '../constants';
 
 export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
@@ -161,20 +160,19 @@ export const filterByIds = (items, ids) => {
   return items.filter(item => ids.includes(item.id));
 };
 
-export const getTransformedLogsFilterValue = (name, values) => {
-  const getWithDependentValue = (triggerValue, dependentValue) => {
-    return values.includes(triggerValue)
-      ? [...new Set([...values, dependentValue])]
-      : values.filter(value => value !== dependentValue);
-  };
+export const getTransformedLogsFilterValue = (values) => {
+  // ignore case when values is not an array (ex. user ID filter)
+  if (!Array.isArray(values)) return values;
 
-  if (name === LOGS_FILTERS.CAPABILITY) {
-    return getWithDependentValue(CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC);
+  const result = new Set(values);
+
+  for (const [value, dependentValue] of Object.entries(LOGS_FILTER_DEPENDENCY_MAP)) {
+    if (result.has(value)) {
+      result.add(dependentValue);
+    } else {
+      result.delete(dependentValue);
+    }
   }
 
-  if (name === LOGS_FILTERS.STATUS) {
-    return getWithDependentValue(JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS);
-  }
-
-  return values;
+  return Array.from(result);
 };
