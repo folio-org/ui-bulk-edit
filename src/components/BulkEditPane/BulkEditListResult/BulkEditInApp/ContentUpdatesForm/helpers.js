@@ -1,4 +1,5 @@
 import moment from 'moment/moment';
+import uniqueId from 'lodash/uniqueId';
 import {
   CONTROL_TYPES,
   OPTIONS,
@@ -17,7 +18,7 @@ import {
   suppressFromDiscActions,
   statusActions,
   noteActions,
-  noteActionsWithMark,
+  noteActionsWithMarc,
   noteActionsWithDuplicate,
   electronicAccess,
 } from '../../../../../constants';
@@ -80,21 +81,20 @@ export const getDefaultActions = ({
   option,
   options,
   capability,
-  formatMessage
 }) => {
-  const replaceClearDefaultActions = replaceClearActions(formatMessage);
-  const emailDefaultFindActions = emailActionsFind(formatMessage);
-  const emailDefaultReplaceActions = emailActionsReplace(formatMessage);
-  const patronDefaultActions = patronActions(formatMessage);
-  const expirationDefaultActions = expirationActions(formatMessage);
-  const holdingsLocationDefaultActions = permanentHoldingsLocation(formatMessage);
-  const suppressDefaultActions = suppressFromDiscActions(formatMessage);
-  const statusDefaultActions = statusActions(formatMessage);
-  const loanDefaultActions = permanentLoanTypeActions(formatMessage);
-  const noteDefaultActions = noteActions(formatMessage);
-  const noteWithMarkDefaultActions = noteActionsWithMark(formatMessage);
-  const noteDuplicateDefaultActions = noteActionsWithDuplicate(formatMessage);
-  const electronicAccessActions = electronicAccess(formatMessage);
+  const replaceClearDefaultActions = replaceClearActions();
+  const emailDefaultFindActions = emailActionsFind();
+  const emailDefaultReplaceActions = emailActionsReplace();
+  const patronDefaultActions = patronActions();
+  const expirationDefaultActions = expirationActions();
+  const holdingsLocationDefaultActions = permanentHoldingsLocation();
+  const suppressDefaultActions = suppressFromDiscActions();
+  const statusDefaultActions = statusActions();
+  const loanDefaultActions = permanentLoanTypeActions();
+  const noteDefaultActions = noteActions();
+  const noteWithMarcDefaultActions = noteActionsWithMarc();
+  const noteDuplicateDefaultActions = noteActionsWithDuplicate();
+  const electronicAccessActions = electronicAccess();
 
   const replaceClearInitialVal = replaceClearDefaultActions[0].value;
 
@@ -299,13 +299,13 @@ export const getDefaultActions = ({
         actions: [
           null,
           {
-            actionsList: noteWithMarkDefaultActions,
+            actionsList: noteWithMarcDefaultActions,
             controlType: (action) => {
               return action === ACTIONS.CHANGE_TYPE
                 ? CONTROL_TYPES.NOTE_SELECT
                 : CONTROL_TYPES.TEXTAREA;
             },
-            [ACTION_VALUE_KEY]: noteWithMarkDefaultActions[0].value,
+            [ACTION_VALUE_KEY]: noteWithMarcDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
             [ACTION_PARAMETERS_KEY]: getActionParameters(opt, capability),
           },
@@ -352,7 +352,7 @@ export const getDefaultActions = ({
 
 export const isContentUpdatesFormValid = (contentUpdates) => {
   return contentUpdates?.every(({ actions, option }) => {
-    return option && actions.every(act => {
+    return option && actions?.every(act => {
       const { type, updated, initial = null } = act;
 
       // for FINAL_ACTIONS 'updated' is not required
@@ -388,7 +388,7 @@ export const getFilteredFields = (initialFields) => {
   });
 };
 
-export const getExtraActions = (option, action, formattedMessage) => {
+export const getExtraActions = (option, action) => {
   switch (`${option}-${action}`) {
     case `${OPTIONS.ITEM_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.ADMINISTRATIVE_NOTE}-${ACTIONS.FIND}`:
@@ -401,17 +401,17 @@ export const getExtraActions = (option, action, formattedMessage) => {
     case `${OPTIONS.INSTANCE_NOTE}-${ACTIONS.FIND}`:
     case `${OPTIONS.ELECTRONIC_ACCESS_URL_PUBLIC_NOTE}-${ACTIONS.FIND}`:
       return [{
-        actionsList: commonAdditionalActions(formattedMessage),
+        actionsList: commonAdditionalActions(),
         controlType: () => CONTROL_TYPES.TEXTAREA,
-        [ACTION_VALUE_KEY]: commonAdditionalActions(formattedMessage)[0].value,
+        [ACTION_VALUE_KEY]: commonAdditionalActions()[0].value,
         [FIELD_VALUE_KEY]: '',
       }];
 
     case `${OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP}-${ACTIONS.FIND}`:
       return [{
-        actionsList: commonAdditionalActions(formattedMessage),
+        actionsList: commonAdditionalActions(),
         controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
-        [ACTION_VALUE_KEY]: commonAdditionalActions(formattedMessage)[0].value,
+        [ACTION_VALUE_KEY]: commonAdditionalActions()[0].value,
         [FIELD_VALUE_KEY]: '',
       }];
 
@@ -428,4 +428,64 @@ export const sortWithoutPlaceholder = (array) => {
   const [placeholder, ...rest] = array;
 
   return [placeholder, ...rest.sort((a, b) => a.label.localeCompare(b.label))];
+};
+
+export const getMappedContentUpdates = (fields, options) => fields.map(
+  // eslint-disable-next-line no-shadow
+  ({ parameters, tenants, option, actionsDetails: { actions } }) => {
+    const [initial, updated] = actions.map(action => action?.value ?? null);
+    const actionTenants = actions.map(action => action?.tenants);
+    const sourceOption = options.find(o => o.value === option);
+    const optionType = sourceOption?.type;
+    const mappedOption = optionType || option; // if option has type, use it, otherwise use option value (required for ITEM_NOTE cases)
+    // generate action type key with '_' delimiter
+    const typeKey = actions
+      .filter(Boolean)
+      .map(action => action?.name ?? null).join('_');
+
+    const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
+    const filteredTenants = actionTenants.filter(Boolean);
+    // final action is the action which doesn't require any additional data after it
+    const isSecondActionFinal = FINAL_ACTIONS.includes(actions[1]?.name);
+
+    const activeTenants = isSecondActionFinal || filteredTenants.length === 1
+      ? filteredTenants.flat()
+      : filteredTenants
+        .flat()
+        .filter((tenant, index, array) => array.indexOf(tenant) !== index);
+
+    // That tenants array need when we use find and replace action with two different action values
+    const updatedTenants = filteredTenants[1] || [];
+    const type = ACTIONS[typeKey];
+
+    return {
+      option: mappedOption,
+      tenants: tenants?.filter(Boolean),
+      actions: [{
+        type,
+        initial,
+        updated,
+        tenants: activeTenants,
+        updated_tenants: updatedTenants,
+        parameters: [
+          ...(parameters || []),
+          ...(actionParameters || []),
+        ],
+      }],
+    };
+  },
+);
+
+export const getFieldTemplate = (options, capability) => {
+  return ({
+    id: uniqueId(),
+    options,
+    option: '',
+    tenants: [],
+    actionsDetails: getDefaultActions({
+      option: '',
+      capability,
+      options,
+    }),
+  });
 };

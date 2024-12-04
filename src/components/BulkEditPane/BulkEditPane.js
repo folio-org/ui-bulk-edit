@@ -15,7 +15,7 @@ import {
   useSearchParams,
   useResetAppState,
   useInAppApproach,
-  useMarkApproach,
+  useMarcApproach,
   useManualApproach
 } from '../../hooks';
 import {
@@ -37,7 +37,7 @@ import { BulkEditIdentifiers } from './BulkEditIdentifiers/BulkEditIdentifiers';
 import { useResetFilters } from '../../hooks/useResetFilters';
 
 import { BulkEditInAppLayer } from './BulkEditInAppLayer/BulkEditInAppLayer';
-import { BulkEditMarkLayer } from './BulkEditMarkLayer/BulkEditMarkLayer';
+import { BulkEditMarcLayer } from './BulkEditMarcLayer/BulkEditMarcLayer';
 
 export const BulkEditPane = () => {
   const [isFileUploaded, setIsFileUploaded] = useState(false);
@@ -57,19 +57,17 @@ export const BulkEditPane = () => {
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, additionalQueryKeys: [step] });
   const { filtersTab } = useResetFilters();
 
-  const inAppApproach = useInAppApproach();
   const {
     openInAppLayer,
-    closeInAppLayer
-  } = inAppApproach;
+    closeInAppLayer,
+    isInAppLayerOpen,
+  } = useInAppApproach();
 
-  const markApproach = useMarkApproach();
   const {
-    fields,
-    setFields,
-    openMarkLayer,
-    closeMarkLayer
-  } = markApproach;
+    openMarcLayer,
+    closeMarcLayer,
+    isMarcLayerOpen
+  } = useMarcApproach();
 
   const {
     isBulkEditModalOpen,
@@ -90,7 +88,7 @@ export const BulkEditPane = () => {
     return <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: initialFileName }} />;
   }, [bulkDetails?.userFriendlyQuery, initialFileName]);
 
-  const providerValue = useMemo(() => ({
+  const providerValue = {
     countOfRecords,
     setCountOfRecords,
     visibleColumns,
@@ -98,18 +96,8 @@ export const BulkEditPane = () => {
     confirmedFileName,
     isFileUploaded,
     setIsFileUploaded,
-    setFields,
-    fields,
     title,
-  }), [
-    countOfRecords,
-    visibleColumns,
-    confirmedFileName,
-    isFileUploaded,
-    setFields,
-    fields,
-    title
-  ]);
+  };
 
   useFileDownload({
     queryKey: QUERY_KEY_DOWNLOAD_ACTION_MENU,
@@ -134,7 +122,7 @@ export const BulkEditPane = () => {
     setVisibleColumns,
     filtersTab,
     closeInAppLayer,
-    closeMarkLayer,
+    closeMarcLayer,
   });
 
   const handleStartBulkEdit = useCallback((approach) => {
@@ -146,10 +134,10 @@ export const BulkEditPane = () => {
       openManualModal();
     }
 
-    if (approach === APPROACHES.MARK) {
-      openMarkLayer();
+    if (approach === APPROACHES.MARC) {
+      openMarcLayer();
     }
-  }, [openInAppLayer, openManualModal, openMarkLayer]);
+  }, [openInAppLayer, openManualModal, openMarcLayer]);
 
   const renderActionMenu = ({ onToggle }) => isActionMenuVisible && (
     <BulkEditActionMenu
@@ -161,16 +149,22 @@ export const BulkEditPane = () => {
 
   const renderLayers = (paneProps) => (
     <>
-      <BulkEditInAppLayer
-        bulkOperationId={bulkOperationId}
-        paneProps={paneProps}
-        {...inAppApproach}
-      />
-      <BulkEditMarkLayer
-        bulkOperationId={bulkOperationId}
-        paneProps={paneProps}
-        {...markApproach}
-      />
+      {isInAppLayerOpen && (
+        <BulkEditInAppLayer
+          bulkOperationId={bulkOperationId}
+          paneProps={paneProps}
+          onInAppLayerClose={closeInAppLayer}
+          isInAppLayerOpen={isInAppLayerOpen}
+        />
+      )}
+      {isMarcLayerOpen && (
+        <BulkEditMarcLayer
+          bulkOperationId={bulkOperationId}
+          paneProps={paneProps}
+          onMarcLayerClose={closeMarcLayer}
+          isMarcLayerOpen={isMarcLayerOpen}
+        />
+      )}
       <BulkEditManualUploadModal
         operationId={bulkOperationId}
         open={isBulkEditModalOpen}

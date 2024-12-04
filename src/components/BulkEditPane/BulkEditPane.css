@@ -24,14 +24,13 @@
 }
 
 .column.fallback {
-    width: calc(max(5%, 80px) + 140px);
+    width: calc(max(5%, 85px) + 140px);
 }
 
 .headerCell.field,
 .column.field {
     width: 5%;
-    padding-left: 5px;
-    min-width: 80px;
+    min-width: 85px;
 }
 
 .headerCell.in,
@@ -79,15 +78,11 @@
     padding-right: 10px;
 }
 
-.row, .markRow {
+.row, .marcRow {
     line-height: var(--line-height);
     margin: 0;
     box-sizing: border-box;
     justify-content: flex-end;
-}
-
-.row {
-    background: var(--color-fill);
 }
 
 .subRow {
@@ -95,11 +90,11 @@
 }
 
 .row [class^="repeatableFieldList"],
-.markRow [class^="repeatableFieldList"] {
+.marcRow [class^="repeatableFieldList"] {
     margin: 0;
 }
 
-.markFieldRow {
+.marcFieldRow {
     background: var(--color-fill-table-row-odd);
 }
 

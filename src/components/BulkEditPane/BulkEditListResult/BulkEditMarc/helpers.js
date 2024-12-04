@@ -9,8 +9,8 @@ import {
   getRemoveFieldAction,
   getRemoveSubfieldAction,
   getReplaceWithAction,
-  markActions,
-} from '../../../../constants/markActions';
+  marcActions,
+} from '../../../../constants/marcActions';
 
 
 export const TAG_FIELD_MAX_LENGTH = 3;
@@ -35,7 +35,7 @@ export const getDataTemplate = ({
   value: '',
 });
 
-export const getDefaultMarkTemplate = (id) => ({
+export const getMarcFieldTemplate = (id) => ({
   id,
   tag: '',
   ind1: '\\',
@@ -44,7 +44,7 @@ export const getDefaultMarkTemplate = (id) => ({
   actions: [
     {
       meta: {
-        options: markActions(),
+        options: marcActions(),
         required: true,
       },
       name: '',

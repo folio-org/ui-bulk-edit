@@ -1,8 +1,8 @@
-import { getMarkFormErrors } from './validation';
-import { ACTIONS } from '../../../../constants/markActions';
+import { getMarcFormErrors } from './validation';
+import { ACTIONS } from '../../../../constants/marcActions';
 import { DATA_KEYS } from './helpers';
 
-describe('getMarkFormErrors', () => {
+describe('getMarcFormErrors', () => {
   it('should return no errors for valid input', () => {
     const validInput = [
       {
@@ -33,7 +33,7 @@ describe('getMarkFormErrors', () => {
       }
     ];
 
-    const errors = getMarkFormErrors(validInput);
+    const errors = getMarcFormErrors(validInput);
     expect(errors).toEqual({});
   });
 
@@ -67,7 +67,7 @@ describe('getMarkFormErrors', () => {
       }
     ];
 
-    const errors = getMarkFormErrors(invalidInput);
+    const errors = getMarcFormErrors(invalidInput);
     expect(errors).toEqual({
       '[0].tag': 'ui-bulk-edit.layer.marc.error',
       '[0].subfield': 'ui-bulk-edit.layer.marc.error.subfield',
@@ -106,7 +106,7 @@ describe('getMarkFormErrors', () => {
       }
     ];
 
-    const errors = getMarkFormErrors(invalidInput);
+    const errors = getMarcFormErrors(invalidInput);
     expect(errors).toEqual({
       '[0].tag': 'ui-bulk-edit.layer.marc.error',
       '[0].subfield': 'ui-bulk-edit.layer.marc.error.subfield',

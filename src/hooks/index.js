@@ -7,4 +7,4 @@ export * from './useSearchParams';
 export * from './useManualApproach';
 export * from './useResetAppState';
 export * from './useInAppApproach';
-export * from './useMarkApproach';
+export * from './useMarcApproach';

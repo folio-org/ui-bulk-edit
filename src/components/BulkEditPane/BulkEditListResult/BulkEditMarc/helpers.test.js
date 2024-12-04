@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { DATA_KEYS, getDataTemplate, getFieldWithMaxColumns, getNextDataControls } from './helpers';
-import { ACTIONS } from '../../../../constants/markActions';
+import { ACTIONS } from '../../../../constants/marcActions';
 
 describe('getFieldWithMaxColumns', () => {
   test('should return the field with the maximum columns', () => {

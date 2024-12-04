@@ -7,6 +7,7 @@
 * [UIBULKED-587](https://folio-org.atlassian.net/browse/UIBULKED-587) Only Users from the first page are displayed in "Users" dropdown on "Logs" page.
 * [UIBULKED-560](https://folio-org.atlassian.net/browse/UIBULKED-560) Update actions menu.
 * [UIBULKED-585](https://folio-org.atlassian.net/browse/UUIBULKED-585) Adding missing translation and filters.
+* [UIBULKED-561](https://folio-org.atlassian.net/browse/UUIBULKED-561) Add administrative data accordion to MARC bulk edit form.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
 

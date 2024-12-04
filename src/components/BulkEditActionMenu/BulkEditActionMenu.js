@@ -77,7 +77,7 @@ const BulkEditActionMenu = ({
        hasEditPerm
     && isInitialStep
     && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS].includes(bulkDetails?.status);
-  const isStartMarkActive = (isStartBulkInAppActive || hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && currentRecordType === CAPABILITIES.INSTANCE && isInitialStep
+  const isStartMarcActive = (isStartBulkInAppActive || hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && currentRecordType === CAPABILITIES.INSTANCE && isInitialStep
   && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS].includes(bulkDetails?.status);
 
   const isStartManualButtonVisible = isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && criteria !== CRITERIA.QUERY && !isECS;
@@ -146,7 +146,7 @@ const BulkEditActionMenu = ({
             </Icon>
           </Button>
         )}
-        {isStartMarkActive && (
+        {isStartMarcActive && (
           <ActionMenuGroup
             title={<FormattedMessage id="ui-bulk-edit.menuGroup.startEdit" />}
           >
@@ -163,9 +163,9 @@ const BulkEditActionMenu = ({
             )}
             {(hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && (
               <Button
-                data-testid="startMarkAction"
+                data-testid="startMarcAction"
                 buttonStyle="dropdownItem"
-                onClick={() => handleOnStartEdit(APPROACHES.MARK)}
+                onClick={() => handleOnStartEdit(APPROACHES.MARC)}
               >
                 <Icon icon="edit">
                   <FormattedMessage id="ui-bulk-edit.start.edit.marc" />

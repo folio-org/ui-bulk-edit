@@ -1,13 +1,13 @@
 {
   "meta.title": "Bulk edit",
   "meta.title.uploadedFile": "Bulk edit <b>{fileName}</b>",
-  "meta.title.uploadedFile.mark": "Bulk edit MARC fields - <b>{fileName}</b>",
+  "meta.title.uploadedFile.marc": "Bulk edit MARC fields - <b>{fileName}</b>",
   "meta.title.conformationModal": "Bulk edit: <b>{fileName}</b>",
   "meta.logs.title": "Bulk edit logs",
   "meta.query.title": "Bulk edit query",
-  "meta.query.title.mark": "Bulk edit MARC fields query",
+  "meta.query.title.marc": "Bulk edit MARC fields query",
   "title.identifier": "Identifier",
-  "title.mark": "Bulk edit MARC fields",
+  "title.marc": "Bulk edit MARC fields",
   "title.query": "Query",
   "title.logs": "Logs",
 
@@ -350,6 +350,8 @@
   "preview.query.title": "Query: {queryText}",
 
   "layer.title": "Bulk edits",
+  "layer.title.administrative": "Bulk edits for administrative data",
+  "layer.title.marc": "Bulk edits for instances with source MARC",
   "layer.confirmChanges": "Confirm changes",
   "actions.placeholder": "Select action",
   "options.placeholder": "Select option",
@@ -423,9 +425,9 @@
   "layer.options.checkInNote": "Check in note",
   "layer.options.checkOutNote": "Check out note",
   "layer.options.holdings.uri": "URI",
-  "layer.marc.error": "Only 5xx and 9xx edits are currently supported.",
+  "layer.marc.error": "Bulk edit of MARC control fields 00X is not supported.",
   "layer.marc.error.protected": "This field is protected.",
-  "layer.marc.error.limited": "Limited to 5xx and 9xx.",
+  "layer.marc.error.limited": "Bulk edit of 00x fields is not supported.",
   "layer.marc.error.ind": "Please check your input.",
   "layer.marc.error.subfield": "Please check your input.",
 

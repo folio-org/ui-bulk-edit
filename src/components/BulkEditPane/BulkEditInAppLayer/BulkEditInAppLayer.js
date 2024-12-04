@@ -1,25 +1,79 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
+
+import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditInApp } from '../BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
-import { getContentUpdatesBody } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
-import { QUERY_KEY_DOWNLOAD_PREVIEW_MODAL, useContentUpdate } from '../../../hooks/api';
+import {
+  getContentUpdatesBody,
+  getMappedContentUpdates,
+  isContentUpdatesFormValid
+} from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
+import {
+  QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
+  useBulkOperationTenants,
+  useContentUpdate,
+  useHoldingsNotes,
+  useHoldingsNotesEcs,
+  useInstanceNotes,
+  useItemNotes,
+  useItemNotesEcs
+} from '../../../hooks/api';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
 import { savePreviewFile } from '../../../utils/files';
+import { useSearchParams } from '../../../hooks';
+import {
+  CAPABILITIES,
+  getHoldingsOptions,
+  getInstanceOptions,
+  getItemsOptions,
+  getUserOptions
+} from '../../../constants';
+import { removeDuplicatesByValue } from '../../../utils/helpers';
+import { sortAlphabetically } from '../../../utils/sortAlphabetically';
 
 
 export const BulkEditInAppLayer = ({
   bulkOperationId,
-  contentUpdates,
-  setContentUpdates,
   isInAppLayerOpen,
   paneProps,
-  isInAppFormValid,
-  closeInAppLayer,
+  onInAppLayerClose,
 }) => {
+  const stripes = useStripes();
+  const isCentralTenant = checkIfUserInCentralTenant(stripes);
+
+  const { formatMessage } = useIntl();
+  const { currentRecordType } = useSearchParams();
+
+  const isItemRecordType = currentRecordType === CAPABILITIES.ITEM;
+  const isHoldingsRecordType = currentRecordType === CAPABILITIES.HOLDING;
+  const isInstanceRecordType = currentRecordType === CAPABILITIES.INSTANCE;
+
+  const { data: tenants, isLoading } = useBulkOperationTenants(bulkOperationId);
+  const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemRecordType });
+  const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
+  const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
+  const { notesEcs: itemNotesEcs, isFetching: isItemsNotesEcsLoading } = useItemNotesEcs(tenants, 'option', { enabled: isItemRecordType && isCentralTenant && !isLoading });
+  const { notesEcs: holdingsNotesEcs, isFetching: isHoldingsNotesEcsLoading } = useHoldingsNotesEcs(tenants, 'option', { enabled: isHoldingsRecordType && isCentralTenant && !isLoading });
+
+  const options = ({
+    [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemNotesEcs : itemNotes, tenants)),
+    [CAPABILITIES.USER]: getUserOptions(formatMessage),
+    [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEcs, tenants) : holdingsNotes),
+    [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage, instanceNotes),
+  })[currentRecordType];
+
+  const areAllOptionsLoaded = options && !isItemNotesLoading && !isInstanceNotesLoading && !isItemsNotesEcsLoading && !isHoldingsNotesLoading && !isHoldingsNotesEcsLoading;
+  const sortedOptions = sortAlphabetically(options, formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
+
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
+
+  const [fields, setFields] = useState([]);
+  const contentUpdates = getMappedContentUpdates(fields, options);
+  const isInAppFormValid = isContentUpdatesFormValid(contentUpdates);
 
   const {
     isPreviewModalOpened,
@@ -31,7 +85,6 @@ export const BulkEditInAppLayer = ({
     closePreviewModal,
   } = useConfirmChanges({
     queryDownloadKey: QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
-    updateFn: contentUpdate,
     bulkOperationId,
     onDownloadSuccess: (fileData, searchParams) => {
       const { approach, initialFileName } = searchParams;
@@ -47,17 +100,19 @@ export const BulkEditInAppLayer = ({
 
   const handleChangesCommited = () => {
     closePreviewModal();
-    closeInAppLayer();
+    onInAppLayerClose();
   };
 
   const handleConfirm = () => {
-    const contentUpdatesBody = getContentUpdatesBody({
+    const contentUpdateBody = getContentUpdatesBody({
       bulkOperationId,
       contentUpdates,
       totalRecords,
     });
 
-    confirmChanges({ contentUpdates: contentUpdatesBody });
+    confirmChanges([
+      contentUpdate(contentUpdateBody)
+    ]);
   };
 
   return (
@@ -65,12 +120,15 @@ export const BulkEditInAppLayer = ({
       <BulkEditLayer
         isLayerOpen={isInAppLayerOpen}
         isConfirmDisabled={!isInAppFormValid}
-        onLayerClose={closeInAppLayer}
+        onLayerClose={onInAppLayerClose}
         onConfirm={handleConfirm}
         {...paneProps}
       >
         <BulkEditInApp
-          onContentUpdatesChanged={setContentUpdates}
+          fields={fields}
+          setFields={setFields}
+          options={sortedOptions}
+          areAllOptionsLoaded={areAllOptionsLoaded}
         />
       </BulkEditLayer>
 
@@ -88,14 +146,7 @@ export const BulkEditInAppLayer = ({
 
 BulkEditInAppLayer.propTypes = {
   bulkOperationId: PropTypes.string,
-  contentUpdates: PropTypes.arrayOf(PropTypes.object),
-  setContentUpdates: PropTypes.func,
   isInAppLayerOpen: PropTypes.bool,
-  isPreviewModalOpened: PropTypes.bool,
   paneProps: PropTypes.object,
-  isInAppFormValid: PropTypes.bool,
-  closeInAppLayer: PropTypes.func,
-  openInAppPreviewModal: PropTypes.func,
-  closeInAppPreviewModal: PropTypes.func,
-  closePreviewAndLayer: PropTypes.func,
+  onInAppLayerClose: PropTypes.func,
 };

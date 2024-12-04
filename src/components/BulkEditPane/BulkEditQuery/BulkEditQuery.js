@@ -31,8 +31,8 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
 
   const paneTitle = useMemo(() => {
     if (isQueryTabWithPreview) {
-      const id = approach === APPROACHES.MARK
-        ? 'ui-bulk-edit.meta.query.title.mark'
+      const id = approach === APPROACHES.MARC
+        ? 'ui-bulk-edit.meta.query.title.marc'
         : 'ui-bulk-edit.meta.query.title';
 
       return <FormattedMessage id={id} />;
