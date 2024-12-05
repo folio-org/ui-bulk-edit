@@ -33,10 +33,8 @@ describe('useInAppApproach', () => {
   it('should initialize with default values', () => {
     const { result } = renderHook(() => useInAppApproach());
 
-    expect(result.current.contentUpdates).toBe(null);
     expect(result.current.isInAppLayerOpen).toBe(false);
     expect(result.current.isPreviewModalOpened).toBe(false);
-    expect(result.current.isInAppFormValid).toBe(true);
   });
 
   it('should open in-app layer and set param', () => {

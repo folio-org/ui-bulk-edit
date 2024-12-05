@@ -2,11 +2,11 @@ import { useMutation } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import { useErrorMessages } from '../useErrorMessages';
 
-export const useMarkContentUpdate = ({ id }) => {
+export const useMarcContentUpdate = ({ id }) => {
   const ky = useOkapiKy();
   const { showErrorMessage } = useErrorMessages();
 
-  const { data, mutateAsync: markContentUpdate, isLoading } = useMutation({
+  const { data, mutateAsync: marcContentUpdate, isLoading } = useMutation({
     mutationFn: (json) => {
       return ky.post(`bulk-operations/${id}/marc-content-update`, {
         json,
@@ -16,5 +16,5 @@ export const useMarkContentUpdate = ({ id }) => {
     onSuccess: showErrorMessage,
   });
 
-  return { markContentUpdate, isLoading, data };
+  return { marcContentUpdate, isLoading, data };
 };

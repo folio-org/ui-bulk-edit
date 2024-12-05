@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditInApp } from '../BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
-import { getContentUpdatesBody } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
-import { QUERY_KEY_DOWNLOAD_PREVIEW_MODAL, useContentUpdate } from '../../../hooks/api';
+import {
+  getContentUpdatesBody,
+  getMappedContentUpdates,
+  isContentUpdatesFormValid
+} from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
+import {
+  QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
+  useContentUpdate,
+} from '../../../hooks/api';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
 import { savePreviewFile } from '../../../utils/files';
+import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
 
 
 export const BulkEditInAppLayer = ({
   bulkOperationId,
-  contentUpdates,
-  setContentUpdates,
   isInAppLayerOpen,
   paneProps,
-  isInAppFormValid,
-  closeInAppLayer,
+  onInAppLayerClose,
 }) => {
+  const [fields, setFields] = useState([]);
+
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(bulkOperationId);
+
+  const contentUpdates = getMappedContentUpdates(fields, options);
+  const isInAppFormValid = isContentUpdatesFormValid(contentUpdates);
 
   const {
     isPreviewModalOpened,
@@ -31,7 +42,6 @@ export const BulkEditInAppLayer = ({
     closePreviewModal,
   } = useConfirmChanges({
     queryDownloadKey: QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
-    updateFn: contentUpdate,
     bulkOperationId,
     onDownloadSuccess: (fileData, searchParams) => {
       const { approach, initialFileName } = searchParams;
@@ -47,17 +57,19 @@ export const BulkEditInAppLayer = ({
 
   const handleChangesCommited = () => {
     closePreviewModal();
-    closeInAppLayer();
+    onInAppLayerClose();
   };
 
   const handleConfirm = () => {
-    const contentUpdatesBody = getContentUpdatesBody({
+    const contentUpdateBody = getContentUpdatesBody({
       bulkOperationId,
       contentUpdates,
       totalRecords,
     });
 
-    confirmChanges({ contentUpdates: contentUpdatesBody });
+    confirmChanges([
+      contentUpdate(contentUpdateBody)
+    ]);
   };
 
   return (
@@ -65,12 +77,15 @@ export const BulkEditInAppLayer = ({
       <BulkEditLayer
         isLayerOpen={isInAppLayerOpen}
         isConfirmDisabled={!isInAppFormValid}
-        onLayerClose={closeInAppLayer}
+        onLayerClose={onInAppLayerClose}
         onConfirm={handleConfirm}
         {...paneProps}
       >
         <BulkEditInApp
-          onContentUpdatesChanged={setContentUpdates}
+          fields={fields}
+          setFields={setFields}
+          options={options}
+          areAllOptionsLoaded={areAllOptionsLoaded}
         />
       </BulkEditLayer>
 
@@ -88,14 +103,7 @@ export const BulkEditInAppLayer = ({
 
 BulkEditInAppLayer.propTypes = {
   bulkOperationId: PropTypes.string,
-  contentUpdates: PropTypes.arrayOf(PropTypes.object),
-  setContentUpdates: PropTypes.func,
   isInAppLayerOpen: PropTypes.bool,
-  isPreviewModalOpened: PropTypes.bool,
   paneProps: PropTypes.object,
-  isInAppFormValid: PropTypes.bool,
-  closeInAppLayer: PropTypes.func,
-  openInAppPreviewModal: PropTypes.func,
-  closeInAppPreviewModal: PropTypes.func,
-  closePreviewAndLayer: PropTypes.func,
+  onInAppLayerClose: PropTypes.func,
 };

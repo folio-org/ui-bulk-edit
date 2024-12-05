@@ -290,6 +290,24 @@ export const getInstanceOptions = (formatMessage, instanceNotes) => [
   ...instanceNotes
 ];
 
+export const getAdministrativeDataOptions = (formatMessage) => [
+  {
+    value: OPTIONS.ADMINISTRATIVE_NOTE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.STAFF_SUPPRESS,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.staffSuppress' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.suppress' }),
+    disabled: false,
+  },
+];
+
 export const getHoldingsNotes = (formatMessage, holdingsNotes) => [
   {
     value: '',

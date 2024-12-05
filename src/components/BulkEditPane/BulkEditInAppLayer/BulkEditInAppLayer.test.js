@@ -2,19 +2,19 @@ import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import noop from 'lodash/noop';
 
 import { runAxeTest } from '@folio/stripes-testing';
 
-import '../../../../../test/jest/__mock__';
+import '../../../../test/jest/__mock__';
 import { FormattedMessage } from 'react-intl';
 import React from 'react';
-import { flushPromises } from '../../../../../test/jest/utils/fileUpload';
-import { queryClient } from '../../../../../test/jest/utils/queryClient';
+import { flushPromises } from '../../../../test/jest/utils/fileUpload';
+import { queryClient } from '../../../../test/jest/utils/queryClient';
 
-import { CAPABILITIES } from '../../../../constants';
+import { CAPABILITIES } from '../../../constants';
 
-import { BulkEditInApp } from './BulkEditInApp';
-import { RootContext } from '../../../../context/RootContext';
+import { RootContext } from '../../../context/RootContext';
 import {
   useItemNotes,
   useHoldingsNotes,
@@ -25,16 +25,17 @@ import {
   useLocationEcs,
   useLoanTypesEcs,
   useElectronicAccessEcs
-} from '../../../../hooks/api';
+} from '../../../hooks/api';
+import { BulkEditInAppLayer } from './BulkEditInAppLayer';
 
 
-jest.mock('../../../../hooks', () => ({
-  ...jest.requireActual('../../../../hooks'),
+jest.mock('../../../hooks', () => ({
+  ...jest.requireActual('../../../hooks'),
   useBulkPermissions: jest.fn(),
 }));
 
-jest.mock('../../../../hooks/api', () => ({
-  ...jest.requireActual('../../../../hooks/api'),
+jest.mock('../../../hooks/api', () => ({
+  ...jest.requireActual('../../../hooks/api'),
   useItemNotes: jest.fn(),
   useHoldingsNotes: jest.fn(),
   useInstanceNotes: jest.fn(),
@@ -48,7 +49,7 @@ jest.mock('../../../../hooks/api', () => ({
 
 const fileName = 'Mock.csv';
 
-const renderBulkEditInApp = ({ capability }) => {
+const renderBulkEditInAppLayer = ({ capability }) => {
   const params = new URLSearchParams({
     capabilities: capability,
     identifier: 'BARCODE',
@@ -63,9 +64,11 @@ const renderBulkEditInApp = ({ capability }) => {
           title: <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: 'fileName' }} />,
         }}
         >
-          <BulkEditInApp
-            onContentUpdatesChanged={() => {}}
-            capabilities={capability}
+          <BulkEditInAppLayer
+            bulkOperationId="bulkOperationId"
+            isInAppLayerOpen
+            paneProps={{}}
+            onInAppLayerClose={noop}
           />
         </RootContext.Provider>
       </MemoryRouter>
@@ -117,7 +120,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display correct title', () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    renderBulkEditInAppLayer({ capability: CAPABILITIES.ITEM });
 
     expect(screen.getByText('ui-bulk-edit.preview.file.title')).toBeVisible();
   });
@@ -127,13 +130,13 @@ describe('BulkEditInApp', () => {
       /layer.column.options/,
       /layer.column.actions/,
     ];
-    renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    renderBulkEditInAppLayer({ capability: CAPABILITIES.ITEM });
 
     titles.forEach((el) => expect(screen.getByText(el)).toBeVisible());
   });
 
   it('should display added row after plus button click', async () => {
-    const { getByLabelText, getAllByLabelText } = renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    const { getByLabelText, getAllByLabelText } = renderBulkEditInAppLayer({ capability: CAPABILITIES.ITEM });
 
     const plusButton = getByLabelText('plus-sign');
 
@@ -153,7 +156,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display select right select options on inventory tab', () => {
-    const { getByRole } = renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    const { getByRole } = renderBulkEditInAppLayer({ capability: CAPABILITIES.ITEM });
 
     const options = [
       /layer.options.permanentLocation/,
@@ -178,7 +181,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display correct status options in action select', async () => {
-    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    const { getByRole, getByTestId } = renderBulkEditInAppLayer({ capability: CAPABILITIES.ITEM });
 
     const options = [
       /layer.options.available/,
@@ -225,7 +228,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display item permanent location options', async () => {
-    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    const { getByRole, getByTestId } = renderBulkEditInAppLayer({ capability: CAPABILITIES.ITEM });
 
     const options = [
       /layer.action.replace/,
@@ -256,7 +259,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display expiration date', async () => {
-    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.USER });
+    const { getByRole, getByTestId } = renderBulkEditInAppLayer({ capability: CAPABILITIES.USER });
 
     const selectionBtn = getByRole('button', { name: /options.placeholder/ });
     userEvent.click(selectionBtn);
@@ -276,7 +279,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display patron group', async () => {
-    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.USER });
+    const { getByRole, getByTestId } = renderBulkEditInAppLayer({ capability: CAPABILITIES.USER });
 
     const selectionBtn = getByRole('button', { name: /options.placeholder/ });
     userEvent.click(selectionBtn);
@@ -300,7 +303,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display holdings permanent location', async () => {
-    const { getByTestId, getByRole } = renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+    const { getByTestId, getByRole } = renderBulkEditInAppLayer({ capability: CAPABILITIES.HOLDING });
 
     const selectionBtn = getByRole('button', { name: /options.placeholder/ });
     userEvent.click(selectionBtn);
@@ -323,7 +326,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display holdings set to true is checked by default', async () => {
-    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+    const { getByRole, getByTestId } = renderBulkEditInAppLayer({ capability: CAPABILITIES.HOLDING });
 
     const selectionBtn = getByRole('button', { name: /options.placeholder/ });
     userEvent.click(selectionBtn);
@@ -351,7 +354,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display holdings set to false is unchecked by default', async () => {
-    const { getByRole, getByTestId } = renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+    const { getByRole, getByTestId } = renderBulkEditInAppLayer({ capability: CAPABILITIES.HOLDING });
 
     const selectionBtn = getByRole('button', { name: /options.placeholder/ });
     userEvent.click(selectionBtn);
@@ -379,7 +382,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should display holding temporary location options', async () => {
-    const { getByTestId, getByRole } = renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+    const { getByTestId, getByRole } = renderBulkEditInAppLayer({ capability: CAPABILITIES.HOLDING });
 
     const options = [
       /layer.action.replace/,
@@ -407,7 +410,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should render with no axe errors in holding form', async () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.HOLDING });
+    renderBulkEditInAppLayer({ capability: CAPABILITIES.HOLDING });
 
     await runAxeTest({
       rootNode: document.body,
@@ -415,7 +418,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should render with no axe errors in user form', async () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.USER });
+    renderBulkEditInAppLayer({ capability: CAPABILITIES.USER });
 
     await runAxeTest({
       rootNode: document.body,
@@ -423,7 +426,7 @@ describe('BulkEditInApp', () => {
   });
 
   it('should render with no axe errors in item form', async () => {
-    renderBulkEditInApp({ capability: CAPABILITIES.ITEM });
+    renderBulkEditInAppLayer({ capability: CAPABILITIES.ITEM });
 
     await runAxeTest({
       rootNode: document.body,

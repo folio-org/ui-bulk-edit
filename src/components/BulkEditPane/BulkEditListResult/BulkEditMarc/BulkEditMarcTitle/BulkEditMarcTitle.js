@@ -1,16 +1,15 @@
-import React, { Fragment, useContext } from 'react';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Col, Icon, Label, Row, Tooltip } from '@folio/stripes/components';
 
-import { RootContext } from '../../../../../context/RootContext';
 import { DATA_KEYS, getFieldWithMaxColumns } from '../helpers';
 
 import css from '../../../BulkEditPane.css';
 
 
-const BulkEditMarkTitle = () => {
-  const { fields } = useContext(RootContext);
+const BulkEditMarcTitle = ({ fields }) => {
   const longestField = getFieldWithMaxColumns(fields);
 
   return (
@@ -98,4 +97,8 @@ const BulkEditMarkTitle = () => {
   );
 };
 
-export default BulkEditMarkTitle;
+BulkEditMarcTitle.propTypes = {
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+export default BulkEditMarcTitle;

@@ -37,8 +37,8 @@ export const BulkEditIdentifiers = ({
 
   const paneTitle = useMemo(() => {
     if ((processedFileName || initialFileName) && isIdentifierTabWithPreview) {
-      const id = approach === APPROACHES.MARK
-        ? 'ui-bulk-edit.meta.title.uploadedFile.mark'
+      const id = approach === APPROACHES.MARC
+        ? 'ui-bulk-edit.meta.title.uploadedFile.marc'
         : 'ui-bulk-edit.meta.title.uploadedFile';
       return (
         <FormattedMessage

@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl';
+
 export const ACTIONS = {
   // actions
   ADD_TO_EXISTING: 'ADD_TO_EXISTING',
@@ -33,149 +35,149 @@ export const REQUIRES_INITIAL_ACTIONS = [
   ACTIONS.FIND_REMOVE_THESE,
 ];
 
-export const getPlaceholder = (formatMessage) => ({
+export const getPlaceholder = () => ({
   value: '',
-  label: formatMessage({ id: 'ui-bulk-edit.actions.placeholder' }),
+  label:  <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
   disabled: true,
 });
 
-export const getFindFullFieldAction = (formatMessage) => ({
+export const getFindFullFieldAction = () => ({
   value: ACTIONS.FIND,
-  label: formatMessage({ id: 'ui-bulk-edit.actions.findFullField' }),
+  label:  <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
   disabled: false,
 });
 
-export const getFindAction = (formatMessage) => ({
+export const getFindAction = () => ({
   value: ACTIONS.FIND,
-  label: formatMessage({ id: 'ui-bulk-edit.actions.find' }),
+  label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
   disabled: false,
 });
 
-export const getReplaceAction = (formatMessage) => ({
+export const getReplaceAction = () => ({
   value: ACTIONS.REPLACE_WITH,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.action.replace' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
   disabled: false,
 });
 
-export const getClearAction = (formatMessage) => ({
+export const getClearAction = () => ({
   value: ACTIONS.CLEAR_FIELD,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.action.clear' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.action.clear" />,
   disabled: false,
 });
 
-export const getSetToTrueAction = (formatMessage) => ({
+export const getSetToTrueAction = () => ({
   value: ACTIONS.SET_TO_TRUE,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.true' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.true" />,
   disabled: false,
 });
 
-export const getSetToFalseAction = (formatMessage) => ({
+export const getSetToFalseAction = () => ({
   value: ACTIONS.SET_TO_FALSE,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.false' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.false" />,
   disabled: false,
 });
 
-export const getChangeNoteTypeAction = (formatMessage) => ({
+export const getChangeNoteTypeAction = () => ({
   value: ACTIONS.CHANGE_TYPE,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.changeNote' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.changeNote" />,
   disabled: false,
 });
 
-export const getMarkAsStuffOnlyAction = (formatMessage) => ({
+export const getMarcAsStuffOnlyAction = () => ({
   value: ACTIONS.MARK_AS_STAFF_ONLY,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.markAsStaffOnly' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.markAsStaffOnly" />,
   disabled: false,
 });
 
-export const getRemoveMarkAsStuffOnlyAction = (formatMessage) => ({
+export const getRemoveMarcAsStuffOnlyAction = () => ({
   value: ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.removeMarkAsStaffOnly' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeMarkAsStaffOnly" />,
   disabled: false,
 });
 
-export const getRemoveAllAction = (formatMessage) => ({
+export const getRemoveAllAction = () => ({
   value: ACTIONS.REMOVE_ALL,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.removeAll' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeAll" />,
   disabled: false,
 });
 
-export const getAddToExistingAction = (formatMessage) => ({
+export const getAddToExistingAction = () => ({
   value: ACTIONS.ADD_TO_EXISTING,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.addNote' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.addNote" />,
   disabled: false,
 });
 
-export const getAddAction = (formatMessage) => ({
+export const getAddAction = () => ({
   value: ACTIONS.ADD_TO_EXISTING,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.add' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.add" />,
   disabled: false,
 });
 
-export const getRemoveTheseAction = (formatMessage) => ({
+export const getRemoveTheseAction = () => ({
   value: ACTIONS.REMOVE_THESE,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.removeNote' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeNote" />,
   disabled: false,
 });
 
-export const getDuplicateToNoteAction = (formatMessage) => ({
+export const getDuplicateToNoteAction = () => ({
   value: ACTIONS.DUPLICATE,
-  label: formatMessage({ id: 'ui-bulk-edit.layer.options.items.duplicateTo' }),
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.duplicateTo" />,
   disabled: false,
 });
 
-export const emailActionsFind = (formatMessage) => [getFindAction(formatMessage)];
-export const emailActionsReplace = (formatMessage) => [getReplaceAction(formatMessage)];
-export const patronActions = (formatMessage) => [getReplaceAction(formatMessage)];
-export const expirationActions = (formatMessage) => [getReplaceAction(formatMessage)];
-export const statusActions = (formatMessage) => [getReplaceAction(formatMessage)];
-export const permanentLoanTypeActions = (formatMessage) => [getReplaceAction(formatMessage)];
-export const permanentHoldingsLocation = (formatMessage) => [getReplaceAction(formatMessage)];
-export const replaceClearActions = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getReplaceAction(formatMessage),
-  getClearAction(formatMessage),
+export const emailActionsFind = () => [getFindAction()];
+export const emailActionsReplace = () => [getReplaceAction()];
+export const patronActions = () => [getReplaceAction()];
+export const expirationActions = () => [getReplaceAction()];
+export const statusActions = () => [getReplaceAction()];
+export const permanentLoanTypeActions = () => [getReplaceAction()];
+export const permanentHoldingsLocation = () => [getReplaceAction()];
+export const replaceClearActions = () => [
+  getPlaceholder(),
+  getReplaceAction(),
+  getClearAction(),
 ];
-export const suppressFromDiscActions = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getSetToTrueAction(formatMessage),
-  getSetToFalseAction(formatMessage),
+export const suppressFromDiscActions = () => [
+  getPlaceholder(),
+  getSetToTrueAction(),
+  getSetToFalseAction(),
 ];
-export const noteActions = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getAddToExistingAction(formatMessage),
-  getRemoveAllAction(formatMessage),
-  getFindFullFieldAction(formatMessage),
-  getChangeNoteTypeAction(formatMessage),
-];
-
-export const noteActionsWithMark = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getMarkAsStuffOnlyAction(formatMessage),
-  getRemoveMarkAsStuffOnlyAction(formatMessage),
-  getAddToExistingAction(formatMessage),
-  getRemoveAllAction(formatMessage),
-  getFindFullFieldAction(formatMessage),
-  getChangeNoteTypeAction(formatMessage),
+export const noteActions = () => [
+  getPlaceholder(),
+  getAddToExistingAction(),
+  getRemoveAllAction(),
+  getFindFullFieldAction(),
+  getChangeNoteTypeAction(),
 ];
 
-export const electronicAccess = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getClearAction(formatMessage),
-  getFindFullFieldAction(formatMessage),
-  getReplaceAction(formatMessage),
+export const noteActionsWithMarc = () => [
+  getPlaceholder(),
+  getMarcAsStuffOnlyAction(),
+  getRemoveMarcAsStuffOnlyAction(),
+  getAddToExistingAction(),
+  getRemoveAllAction(),
+  getFindFullFieldAction(),
+  getChangeNoteTypeAction(),
 ];
-export const noteActionsWithDuplicate = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getMarkAsStuffOnlyAction(formatMessage),
-  getRemoveMarkAsStuffOnlyAction(formatMessage),
-  getAddToExistingAction(formatMessage),
-  getRemoveAllAction(formatMessage),
-  getFindFullFieldAction(formatMessage),
-  getChangeNoteTypeAction(formatMessage),
-  getDuplicateToNoteAction(formatMessage),
+
+export const electronicAccess = () => [
+  getPlaceholder(),
+  getClearAction(),
+  getFindFullFieldAction(),
+  getReplaceAction(),
 ];
-export const commonAdditionalActions = (formatMessage) => [
-  getPlaceholder(formatMessage),
-  getReplaceAction(formatMessage),
-  getRemoveTheseAction(formatMessage),
+export const noteActionsWithDuplicate = () => [
+  getPlaceholder(),
+  getMarcAsStuffOnlyAction(),
+  getRemoveMarcAsStuffOnlyAction(),
+  getAddToExistingAction(),
+  getRemoveAllAction(),
+  getFindFullFieldAction(),
+  getChangeNoteTypeAction(),
+  getDuplicateToNoteAction(),
+];
+export const commonAdditionalActions = () => [
+  getPlaceholder(),
+  getReplaceAction(),
+  getRemoveTheseAction(),
 ];

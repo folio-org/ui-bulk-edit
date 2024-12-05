@@ -41,15 +41,13 @@ const subfieldSchema = {
     .nullable()),
 };
 
+const latinRegex = /^[a-zA-Z0-9\s\\]+$/;
 
 const schema = array(object({
   tag: string().required().test(
-    'is-in-range',
+    'is-valid-tag',
     'ui-bulk-edit.layer.marc.error',
-    (value) => {
-      const parsedValue = Number(value);
-      return (parsedValue >= 500 && parsedValue <= 599) || (parsedValue >= 900 && parsedValue <= 999);
-    },
+    (value) => Number(value) > 9,
   ),
   ind1: string()
     .required()
@@ -57,7 +55,7 @@ const schema = array(object({
     .test(
       'is-latin',
       'ui-bulk-edit.layer.marc.error.ind',
-      (value) => /^[a-zA-Z0-9\s\\]+$/.test(value) // Латинские символы, цифры, пробелы и обратная косая черта
+      (value) => latinRegex.test(value)
     ),
   ind2: string()
     .required()
@@ -65,7 +63,7 @@ const schema = array(object({
     .test(
       'is-latin',
       'ui-bulk-edit.layer.marc.error.ind',
-      (value) => /^[a-zA-Z0-9\s\\]+$/.test(value) // Латинские символы, цифры, пробелы и обратная косая черта
+      (value) => latinRegex.test(value)
     ),
   subfields: array(object(subfieldSchema)).nullable(),
   ...subfieldSchema,
@@ -74,7 +72,7 @@ const schema = array(object({
 }));
 
 
-export const getMarkFormErrors = (fields) => {
+export const getMarcFormErrors = (fields) => {
   let errors = {};
   const cleanedFields = fields.map(field => {
     return ({

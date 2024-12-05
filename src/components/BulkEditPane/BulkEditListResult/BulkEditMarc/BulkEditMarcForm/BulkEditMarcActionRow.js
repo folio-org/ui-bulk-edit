@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -7,18 +7,17 @@ import { Col, Select, TextArea, TextField } from '@folio/stripes/components';
 import get from 'lodash/get';
 import css from '../../../BulkEditPane.css';
 import { DATA_KEYS, getFieldWithMaxColumns, SUBFIELD_MAX_LENGTH } from '../helpers';
-import { RootContext } from '../../../../../context/RootContext';
-import { getMarkFormErrors } from '../validation';
+import { getMarcFormErrors } from '../validation';
 
 
-const BulkEditMarkActionRow = ({
+const BulkEditMarcActionRow = ({
+  fields,
   subfieldIndex = null,
   actions,
   rowIndex,
   onActionChange,
   onDataChange,
 }) => {
-  const { fields } = useContext(RootContext);
   const { formatMessage } = useIntl();
 
   const longestField = getFieldWithMaxColumns(fields);
@@ -33,12 +32,11 @@ const BulkEditMarkActionRow = ({
     const emptySubfieldColumn = longestField?.actions[actionIndex].data[dataIndex].key !== data.key
       && <Col className={`${css.column} ${css.subfield}`} />;
 
-    const errors = getMarkFormErrors(fields);
+    const errors = getMarcFormErrors(fields);
     const subFieldErrorId = get(errors, `[${rowIndex}].actions[${actionIndex}].data[${dataIndex}].value`);
-    const subfieldErrorMessage = subFieldErrorId && data.value.length === SUBFIELD_MAX_LENGTH ?
-      formatMessage({ id: subFieldErrorId })
-      :
-      '';
+    const subfieldErrorMessage = subFieldErrorId && data.value.length === SUBFIELD_MAX_LENGTH
+      ? formatMessage({ id: subFieldErrorId })
+      : '';
 
     switch (data.key) {
       case DATA_KEYS.VALUE:
@@ -95,10 +93,8 @@ const BulkEditMarkActionRow = ({
               maxLength={SUBFIELD_MAX_LENGTH}
             />
             {data.meta.required && (
-            <span className={css.asterisk} aria-hidden>
-              *
-            </span>)
-              }
+              <span className={css.asterisk} aria-hidden>*</span>
+            )}
           </Col>
         );
 
@@ -127,17 +123,20 @@ const BulkEditMarkActionRow = ({
           fullWidth
         />
         {(action.meta.required && actionIndex > 0) && (
-        <span className={css.asterisk} aria-hidden>
-          *
-        </span>)
-          }
+          <span className={css.asterisk} aria-hidden>*</span>
+        )}
       </Col>
-      {action.data.map((data, dataIndex) => renderDataControl(data, actionIndex, dataIndex))}
+      {action.data.map((data, dataIndex) => (
+        <Fragment key={dataIndex}>
+          {renderDataControl(data, actionIndex, dataIndex)}
+        </Fragment>
+      ))}
     </Fragment>
   ));
 };
 
-BulkEditMarkActionRow.propTypes = {
+BulkEditMarcActionRow.propTypes = {
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
   actions: PropTypes.arrayOf(PropTypes.object).isRequired,
   rowIndex: PropTypes.number.isRequired,
   subfieldIndex: PropTypes.number,
@@ -145,4 +144,4 @@ BulkEditMarkActionRow.propTypes = {
   onDataChange: PropTypes.func.isRequired,
 };
 
-export default BulkEditMarkActionRow;
+export default BulkEditMarcActionRow;

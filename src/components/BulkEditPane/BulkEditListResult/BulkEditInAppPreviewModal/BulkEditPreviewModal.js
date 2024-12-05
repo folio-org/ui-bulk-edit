@@ -37,7 +37,7 @@ export const BulkEditPreviewModal = ({
 
   const hasLinkForDownload = bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK_MARC] || bulkDetails?.[FILE_KEYS.PROPOSED_CHANGES_LINK];
 
-  const downloadLabel = approach === APPROACHES.MARK
+  const downloadLabel = approach === APPROACHES.MARC
     ? <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview.marc" />
     : <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />;
 

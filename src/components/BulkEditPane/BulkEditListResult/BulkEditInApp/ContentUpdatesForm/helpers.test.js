@@ -1,3 +1,4 @@
+import { FormattedMessage } from 'react-intl';
 import {
   ACTIONS,
   CONTROL_TYPES,
@@ -207,8 +208,8 @@ describe('ContentUpdatesForm helpers', () => {
               {
                 actionsList: [{
                   value: ACTIONS.FIND,
-                  disabled: false,
-                  label: undefined
+                  label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
+                  disabled: false
                 }],
                 controlType,
                 [ACTION_VALUE_KEY]: ACTIONS.FIND,
@@ -217,8 +218,8 @@ describe('ContentUpdatesForm helpers', () => {
               {
                 actionsList: [{
                   value: ACTIONS.REPLACE_WITH,
+                  label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                   disabled: false,
-                  label: undefined
                 }],
                 controlType,
                 [ACTION_VALUE_KEY]: ACTIONS.REPLACE_WITH,
@@ -242,7 +243,7 @@ describe('ContentUpdatesForm helpers', () => {
               {
                 actionsList: [{
                   value: ACTIONS.REPLACE_WITH,
-                  label: undefined,
+                  label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                   disabled: false
                 }],
                 controlType: () => CONTROL_TYPES.PATRON_GROUP_SELECT,
@@ -268,7 +269,8 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: ACTIONS.REPLACE_WITH,
-                    disabled: false
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
+                    disabled: false,
                   }],
                   [ACTION_VALUE_KEY]: ACTIONS.REPLACE_WITH,
                   [FIELD_VALUE_KEY]: '',
@@ -294,18 +296,18 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: '',
+                    label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                     disabled: true,
-                    label: undefined
                   },
                   {
                     value: ACTIONS.REPLACE_WITH,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                     disabled: false,
-                    label: undefined,
                   },
                   {
                     value: ACTIONS.CLEAR_FIELD,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.clear" />,
                     disabled: false,
-                    label: undefined,
                   },
                   ],
                   controlType,
@@ -333,8 +335,8 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: ACTIONS.REPLACE_WITH,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                     disabled: false,
-                    label: undefined
                   }],
                   controlType,
                   [ACTION_VALUE_KEY]: ACTIONS.REPLACE_WITH,
@@ -359,18 +361,18 @@ describe('ContentUpdatesForm helpers', () => {
               {
                 actionsList: [{
                   value: '',
+                  label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                   disabled: true,
-                  label: undefined
                 },
                 {
                   value: ACTIONS.REPLACE_WITH,
+                  label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                   disabled: false,
-                  label: undefined,
                 },
                 {
                   value: ACTIONS.CLEAR_FIELD,
+                  label: <FormattedMessage id="ui-bulk-edit.layer.action.clear" />,
                   disabled: false,
-                  label: undefined,
                 },
                 ],
                 controlType: () => CONTROL_TYPES.LOCATION,
@@ -396,16 +398,16 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: '',
+                    label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                     disabled: true,
-                    label: undefined
                   }, {
                     value: ACTIONS.SET_TO_TRUE,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.options.items.true" />,
                     disabled: false,
-                    label: undefined
                   }, {
                     value: ACTIONS.SET_TO_FALSE,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.options.items.false" />,
                     disabled: false,
-                    label: undefined
                   }],
                   [ACTION_VALUE_KEY]: '',
                   [FIELD_VALUE_KEY]: '',
@@ -433,16 +435,16 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: '',
+                    label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                     disabled: true,
-                    label: undefined
                   }, {
                     value: ACTIONS.SET_TO_TRUE,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.options.items.true" />,
                     disabled: false,
-                    label: undefined
                   }, {
                     value: ACTIONS.SET_TO_FALSE,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.options.items.false" />,
                     disabled: false,
-                    label: undefined
                   }],
                   [ACTION_VALUE_KEY]: '',
                   [FIELD_VALUE_KEY]: '',
@@ -473,18 +475,18 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: '',
+                    label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                     disabled: true,
-                    label: undefined
                   },
                   {
                     value: ACTIONS.REPLACE_WITH,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                     disabled: false,
-                    label: undefined,
                   },
                   {
                     value: ACTIONS.CLEAR_FIELD,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.clear" />,
                     disabled: false,
-                    label: undefined,
                   },
                   ],
                   controlType,
@@ -512,8 +514,8 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: ACTIONS.REPLACE_WITH,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                     disabled: false,
-                    label: undefined
                   }],
                   controlType,
                   [ACTION_VALUE_KEY]: ACTIONS.REPLACE_WITH,
@@ -540,18 +542,18 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: '',
+                    label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                     disabled: true,
-                    label: undefined,
                   },
                   {
                     value: ACTIONS.REPLACE_WITH,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                     disabled: false,
-                    label: undefined,
                   },
                   {
                     value: ACTIONS.CLEAR_FIELD,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.clear" />,
                     disabled: false,
-                    label: undefined,
                   },
                   ],
                   controlType,
@@ -579,8 +581,8 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: ACTIONS.REPLACE_WITH,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                     disabled: false,
-                    label: undefined
                   }],
                   controlType,
                   [ACTION_VALUE_KEY]: ACTIONS.REPLACE_WITH,
@@ -613,43 +615,43 @@ describe('ContentUpdatesForm helpers', () => {
                     actionsList: [
                       {
                         value: '',
+                        label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                         disabled: true,
-                        label: undefined
                       },
                       {
                         value: ACTIONS.MARK_AS_STAFF_ONLY,
+                        label: <FormattedMessage id="ui-bulk-edit.layer.options.items.markAsStaffOnly" />,
                         disabled: false,
-                        label: undefined
                       },
                       {
                         value: ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
+                        label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeMarkAsStaffOnly" />,
                         disabled: false,
-                        label: undefined
                       },
                       {
                         value: ACTIONS.ADD_TO_EXISTING,
+                        label: <FormattedMessage id="ui-bulk-edit.layer.options.items.addNote" />,
                         disabled: false,
-                        label: undefined
                       },
                       {
                         value: ACTIONS.REMOVE_ALL,
+                        label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeAll" />,
                         disabled: false,
-                        label: undefined
                       },
                       {
                         value: ACTIONS.FIND,
+                        label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
                         disabled: false,
-                        label: undefined
                       },
                       {
                         value: ACTIONS.CHANGE_TYPE,
+                        label: <FormattedMessage id="ui-bulk-edit.layer.options.items.changeNote" />,
                         disabled: false,
-                        label: undefined,
                       },
                       {
                         value: ACTIONS.DUPLICATE,
+                        label: <FormattedMessage id="ui-bulk-edit.layer.options.items.duplicateTo" />,
                         disabled: false,
-                        label: undefined,
                       },
                     ],
                     controlType: () => CONTROL_TYPES.TEXTAREA,
@@ -685,40 +687,39 @@ describe('ContentUpdatesForm helpers', () => {
                 {
                   actionsList: [{
                     value: '',
+                    label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                     disabled: true,
-                    label: undefined,
                   },
                   {
                     value: ACTIONS.MARK_AS_STAFF_ONLY,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.options.items.markAsStaffOnly" />,
                     disabled: false,
-                    label: undefined
                   },
                   {
                     value: ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeMarkAsStaffOnly" />,
                     disabled: false,
-                    label: undefined
                   },
                   {
                     value: ACTIONS.ADD_TO_EXISTING,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.options.items.addNote" />,
                     disabled: false,
-                    label: undefined
                   },
                   {
                     value: ACTIONS.REMOVE_ALL,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeAll" />,
                     disabled: false,
-                    label: undefined
                   },
                   {
                     value: ACTIONS.FIND,
+                    label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
                     disabled: false,
-                    label: undefined
                   },
                   {
                     value: ACTIONS.CHANGE_TYPE,
+                    label: <FormattedMessage id="ui-bulk-edit.layer.options.items.changeNote" />,
                     disabled: false,
-                    label: undefined,
-                  },
-                  ],
+                  }],
                   controlType: (action) => {
                     return action === ACTIONS.CHANGE_TYPE
                       ? CONTROL_TYPES.NOTE_SELECT
@@ -755,23 +756,23 @@ describe('ContentUpdatesForm helpers', () => {
                   actionsList: [
                     {
                       value: '',
+                      label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                       disabled: true,
-                      label: undefined
                     },
                     {
                       value: ACTIONS.CLEAR_FIELD,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.action.clear" />,
                       disabled: false,
-                      label: undefined,
                     },
                     {
                       value: ACTIONS.FIND,
+                      label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
                       disabled: false,
-                      label: undefined,
                     },
                     {
                       value: ACTIONS.REPLACE_WITH,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
                       disabled: false,
-                      label: undefined,
                     },
                   ],
                   controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
@@ -803,26 +804,27 @@ describe('ContentUpdatesForm helpers', () => {
               actions: [
                 null,
                 {
-                  actionsList: [{
-                    value: '',
-                    disabled: true,
-                    label: undefined,
-                  },
-                  {
-                    value: ACTIONS.CLEAR_FIELD,
-                    disabled: false,
-                    label: undefined
-                  },
-                  {
-                    value: ACTIONS.FIND,
-                    disabled: false,
-                    label: undefined
-                  },
-                  {
-                    value: ACTIONS.REPLACE_WITH,
-                    disabled: false,
-                    label: undefined
-                  },
+                  actionsList: [
+                    {
+                      value: '',
+                      label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
+                      disabled: true,
+                    },
+                    {
+                      value: ACTIONS.CLEAR_FIELD,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.action.clear" />,
+                      disabled: false,
+                    },
+                    {
+                      value: ACTIONS.FIND,
+                      label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
+                      disabled: false,
+                    },
+                    {
+                      value: ACTIONS.REPLACE_WITH,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
+                      disabled: false,
+                    },
                   ],
                   controlType: () => CONTROL_TYPES.TEXTAREA,
                   [ACTION_VALUE_KEY]: '',
@@ -846,26 +848,27 @@ describe('ContentUpdatesForm helpers', () => {
               actions: [
                 null,
                 {
-                  actionsList: [{
-                    value: '',
-                    disabled: true,
-                    label: undefined,
-                  },
-                  {
-                    value: ACTIONS.CLEAR_FIELD,
-                    disabled: false,
-                    label: undefined
-                  },
-                  {
-                    value: ACTIONS.FIND,
-                    disabled: false,
-                    label: undefined
-                  },
-                  {
-                    value: ACTIONS.REPLACE_WITH,
-                    disabled: false,
-                    label: undefined
-                  },
+                  actionsList: [
+                    {
+                      value: '',
+                      label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
+                      disabled: true,
+                    },
+                    {
+                      value: ACTIONS.CLEAR_FIELD,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.action.clear" />,
+                      disabled: false,
+                    },
+                    {
+                      value: ACTIONS.FIND,
+                      label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
+                      disabled: false,
+                    },
+                    {
+                      value: ACTIONS.REPLACE_WITH,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.action.replace" />,
+                      disabled: false,
+                    },
                   ],
                   controlType: () => CONTROL_TYPES.TEXTAREA,
                   [ACTION_VALUE_KEY]: '',
@@ -967,35 +970,35 @@ describe('ContentUpdatesForm helpers', () => {
             {
               actionsList: [{
                 value: '',
+                label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
                 disabled: true,
-                label: undefined
               }, {
                 value: ACTIONS.MARK_AS_STAFF_ONLY,
+                label: <FormattedMessage id="ui-bulk-edit.layer.options.items.markAsStaffOnly" />,
                 disabled: false,
-                label: undefined
               }, {
                 value: ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
+                label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeMarkAsStaffOnly" />,
                 disabled: false,
-                label: undefined
               }, {
                 value: ACTIONS.ADD_TO_EXISTING,
+                label: <FormattedMessage id="ui-bulk-edit.layer.options.items.addNote" />,
                 disabled: false,
-                label: undefined
               },
               {
                 value: ACTIONS.REMOVE_ALL,
+                label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeAll" />,
                 disabled: false,
-                label: undefined
               },
               {
                 value: ACTIONS.FIND,
+                label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
                 disabled: false,
-                label: undefined
               },
               {
                 value: ACTIONS.CHANGE_TYPE,
+                label: <FormattedMessage id="ui-bulk-edit.layer.options.items.changeNote" />,
                 disabled: false,
-                label: undefined,
               }],
               [ACTION_VALUE_KEY]: '',
               [FIELD_VALUE_KEY]: '',

@@ -11,7 +11,7 @@ export const useResetAppState = ({
   setCountOfRecords,
   filtersTab,
   closeInAppLayer,
-  closeMarkLayer,
+  closeMarcLayer,
 }) => {
   const history = useHistory();
   const queryClient = useQueryClient();
@@ -49,7 +49,7 @@ export const useResetAppState = ({
       });
 
       closeInAppLayer();
-      closeMarkLayer();
+      closeMarcLayer();
     }
   }, [
     history,
@@ -58,7 +58,7 @@ export const useResetAppState = ({
     setCountOfRecords,
     filtersTab.logsTab,
     closeInAppLayer,
-    closeMarkLayer,
+    closeMarcLayer,
     queryClient,
   ]);
 };

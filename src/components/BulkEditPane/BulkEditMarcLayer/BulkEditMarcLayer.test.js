@@ -14,12 +14,14 @@ import '../../../../test/jest/__mock__';
 import userEvent from '@testing-library/user-event';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 import { APPROACHES, CAPABILITIES, CRITERIA, IDENTIFIERS } from '../../../constants';
-import { BulkEditMarkLayer } from './BulkEditMarkLayer';
+import { BulkEditMarcLayer } from './BulkEditMarcLayer';
 import { RootContext } from '../../../context/RootContext';
-import { getDefaultMarkTemplate } from '../BulkEditListResult/BulkEditMark/helpers';
-import { ACTIONS } from '../../../constants/markActions';
+import { getMarcFieldTemplate } from '../BulkEditListResult/BulkEditMarc/helpers';
+import { ACTIONS } from '../../../constants/marcActions';
 
 const mockConfirmChanges = jest.fn();
+const mockMarcContentUpdate = jest.fn().mockReturnValue('marcContentUpdate');
+const mockContentUpdate = jest.fn();
 
 jest.mock('../../../hooks/useConfirmChanges', () => ({
   useConfirmChanges: jest.fn(() => ({
@@ -28,7 +30,19 @@ jest.mock('../../../hooks/useConfirmChanges', () => ({
   })),
 }));
 
-const closeMarkLayerFn = jest.fn();
+jest.mock('../../../hooks/api/useMarcContentUpdate', () => ({
+  useMarcContentUpdate: jest.fn(() => ({
+    marcContentUpdate: mockMarcContentUpdate,
+  })),
+}));
+
+jest.mock('../../../hooks/api/useContentUpdate', () => ({
+  useContentUpdate: jest.fn(() => ({
+    contentUpdate: mockContentUpdate,
+  })),
+}));
+
+const closeMarcLayerFn = jest.fn();
 const setCountOfRecordsMockFn = jest.fn();
 const title = 'Title';
 const fileName = 'TestMock.cvs';
@@ -37,18 +51,18 @@ const paneSub = 'Pane Sub Title';
 const paneFooter = 'Pane Footer';
 
 const WrapComponent = ({ children }) => {
-  const [fields, setFields] = React.useState([getDefaultMarkTemplate(uniqueId())]);
+  const [fields, setFields] = React.useState([getMarcFieldTemplate(uniqueId())]);
 
   return children(fields, setFields);
 };
 
-const renderBulkEditMarkLayer = ({ criteria }) => {
+const renderBulkEditMarcLayer = ({ criteria }) => {
   const params = new URLSearchParams({
     criteria,
-    approach: APPROACHES.MARK,
-    capabilities: CAPABILITIES.USER,
-    identifier: IDENTIFIERS.ID,
-    fileName: 'barcodes.csv',
+    approach: APPROACHES.MARC,
+    capabilities: CAPABILITIES.INSTANCE_MARC,
+    identifier: IDENTIFIERS.INSTANCE_HRID,
+    fileName: 'instances.csv',
   }).toString();
   return render(
     <QueryClientProvider client={queryClient}>
@@ -63,10 +77,10 @@ const renderBulkEditMarkLayer = ({ criteria }) => {
           }}
           >
             <MemoryRouter initialEntries={[`/bulk-edit/1/preview?${params}`]}>
-              <BulkEditMarkLayer
-                closeMarkLayer={closeMarkLayerFn}
-                isMarkLayerOpen
-                isMarkFieldsValid
+              <BulkEditMarcLayer
+                bulkOperationId="1"
+                onMarcLayerClose={closeMarcLayerFn}
+                isMarcLayerOpen
                 paneProps={{
                   paneTitle,
                   paneSub,
@@ -82,9 +96,9 @@ const renderBulkEditMarkLayer = ({ criteria }) => {
   );
 };
 
-describe('BulkEditMarkLayer', () => {
+describe('BulkEditMarcLayer', () => {
   it('should render correct layer titles', () => {
-    const { getByText } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    const { getByText } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
     expect(getByText(title))
       .toBeVisible();
@@ -94,12 +108,12 @@ describe('BulkEditMarkLayer', () => {
       .toBeVisible();
   });
 
-  it('should render correct Mark Repeatable fields', () => {
+  it('should render correct Marc Repeatable fields', () => {
     const {
       getByText,
       getAllByText,
       getByRole,
-    } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
     // columns
     expect(getByText('ui-bulk-edit.layer.column.field'))
@@ -111,7 +125,7 @@ describe('BulkEditMarkLayer', () => {
     expect(getByText('ui-bulk-edit.layer.column.subfield'))
       .toBeVisible();
     expect(getAllByText('ui-bulk-edit.layer.column.actions').length)
-      .toBe(3);
+      .toBe(4); // 3 actions for MarcField + 1 for Administrative data
 
     // tooltips
     expect(getByText('ui-bulk-edit.layer.marc.error.limited'))
@@ -131,7 +145,7 @@ describe('BulkEditMarkLayer', () => {
   });
 
   it('should call setFields when value changed + only 3 chars allowed', async () => {
-    const { getByRole } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
 
@@ -146,31 +160,15 @@ describe('BulkEditMarkLayer', () => {
     });
   });
 
-  it('should show error message if value is not between 5xx and 9xx ', async () => {
-    const { getByRole } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+  it('should show error message if value is 00x', async () => {
+    const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
 
     expect(inputField)
       .toHaveValue('');
 
-    userEvent.type(inputField, '123');
-
-    await waitFor(() => {
-      expect(screen.getByText('ui-bulk-edit.layer.marc.error'))
-        .toBeVisible();
-    });
-  });
-
-  it('should show error message if value is not between 5xx and 9xx ', async () => {
-    const { getByRole } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
-
-    const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
-
-    expect(inputField)
-      .toHaveValue('');
-
-    userEvent.type(inputField, '123');
+    userEvent.type(inputField, '002');
 
     await waitFor(() => {
       expect(screen.getByText('ui-bulk-edit.layer.marc.error'))
@@ -179,7 +177,7 @@ describe('BulkEditMarkLayer', () => {
   });
 
   it('should put backslash in ind1 field if its empty', async () => {
-    renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const inputField = screen.getByTestId('ind1-0');
 
@@ -197,28 +195,27 @@ describe('BulkEditMarkLayer', () => {
   });
 
   it('should add and remove rows when + or trash buttons clicked', async () => {
-    const {
-      getByRole,
-      getAllByRole
-    } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    const { getAllByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const addBtn = getByRole('button', { name: /plus-sign/i });
-    const trashBtn = getByRole('button', { name: /trash/i });
+    const marcAccordion = getAllByRole('region')[2];
 
-    expect(getAllByRole('button', { name: /plus-sign/i }).length)
+    const addBtn = within(marcAccordion).getByRole('button', { name: /plus-sign/i });
+    const trashBtn = within(marcAccordion).getByRole('button', { name: /trash/i });
+
+    expect(within(marcAccordion).getAllByRole('button', { name: /plus-sign/i }).length)
       .toBe(1);
 
     userEvent.click(addBtn);
 
     await waitFor(() => {
-      expect(getAllByRole('button', { name: /plus-sign/i }).length)
+      expect(within(marcAccordion).getAllByRole('button', { name: /plus-sign/i }).length)
         .toBe(2);
     });
 
     userEvent.click(trashBtn);
 
     await waitFor(() => {
-      expect(getAllByRole('button', { name: /plus-sign/i }).length)
+      expect(within(marcAccordion).getAllByRole('button', { name: /plus-sign/i }).length)
         .toBe(1);
     });
   });
@@ -230,7 +227,7 @@ describe('BulkEditMarkLayer', () => {
       getByTestId,
       getByRole,
       getAllByRole
-    } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
 
@@ -292,7 +289,7 @@ describe('BulkEditMarkLayer', () => {
     const {
       getByRole,
       getAllByRole
-    } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
 
@@ -317,11 +314,17 @@ describe('BulkEditMarkLayer', () => {
   it('should call "confirm changes" function', async () => {
     const {
       getByRole,
-    } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+      getAllByRole,
+    } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
+    const marcAccordion = getAllByRole('region')[2];
 
-    // select first action
+    const actionSelect = within(marcAccordion).getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
+    const inputField = within(marcAccordion).getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
+    const inputSubField = within(marcAccordion).getByRole('textbox', { name: /ui-bulk-edit.layer.column.subfield/i });
+
+    userEvent.type(inputField, '555');
+    userEvent.type(inputSubField, 'a');
     userEvent.selectOptions(actionSelect, ACTIONS.REMOVE_ALL);
 
     const confirmChangesBtn = getByRole('button', { name: /ui-bulk-edit.layer.confirmChanges/i });
@@ -329,34 +332,14 @@ describe('BulkEditMarkLayer', () => {
     userEvent.click(confirmChangesBtn);
 
     await waitFor(() => {
-      expect(mockConfirmChanges).toHaveBeenCalledWith({
-        bulkOperationMarcRules: [
-          {
-            actions: [
-              {
-                data: [],
-                name: 'REMOVE_ALL',
-              },
-            ],
-            bulkOperationId: undefined,
-            id: expect.anything(),
-            ind1: '\\',
-            ind2: '\\',
-            parameters: [],
-            subfield: '',
-            subfields: [],
-            tag: '',
-          },
-        ],
-        totalRecords: 1,
-      });
+      expect(mockConfirmChanges).toHaveBeenCalledWith(['marcContentUpdate']);
     });
   });
 
   it('should show info popover if field 999 and indicators are "f"', async () => {
     const {
       getByRole,
-    } = renderBulkEditMarkLayer({ criteria: CRITERIA.IDENTIFIER });
+    } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
     const ind1Field = getByRole('textbox', { name: /ui-bulk-edit.layer.column.ind1/i });

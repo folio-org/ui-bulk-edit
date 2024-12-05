@@ -1,4 +1,5 @@
-import React, { Fragment, useContext } from 'react';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import noop from 'lodash/noop';
 import uniqueId from 'lodash/uniqueId';
 
@@ -8,27 +9,28 @@ import {
   getNextAction,
   getSubfieldTemplate,
   getNextDataControls,
-  getDefaultMarkTemplate,
+  getMarcFieldTemplate,
 } from '../helpers';
-import { getMarkFormErrors } from '../validation';
-import { RootContext } from '../../../../../context/RootContext';
-import { ACTIONS } from '../../../../../constants/markActions';
+import { getMarcFormErrors } from '../validation';
+import { ACTIONS } from '../../../../../constants/marcActions';
 import { setIn } from '../../../../../utils/helpers';
-import BulkEditMarkFormField from './BulkEditMarkFormField';
-import BulkEditMarkFormSubfield from './BulkEditMarkFormSubfield';
+import BulkEditMarcFormField from './BulkEditMarcFormField';
+import BulkEditMarcFormSubfield from './BulkEditMarcFormSubfield';
 import css from '../../../BulkEditPane.css';
 
 
-const BulkEditMarkForm = () => {
-  const { fields, setFields } = useContext(RootContext);
-  const errors = getMarkFormErrors(fields);
+const BulkEditMarcForm = ({
+  fields,
+  setFields,
+}) => {
+  const errors = getMarcFormErrors(fields);
 
   const handleAddField = (e) => {
     const { rowIndex } = e.target.dataset;
 
     const newFields = [
       ...fields.slice(0, Number(rowIndex) + 1),
-      getDefaultMarkTemplate(uniqueId()),
+      getMarcFieldTemplate(uniqueId()),
       ...fields.slice(Number(rowIndex) + 1)
     ];
 
@@ -181,12 +183,13 @@ const BulkEditMarkForm = () => {
       <RepeatableField
         getFieldUniqueKey={(field) => field.id}
         fields={fields}
-        className={css.markRow}
+        className={css.marcRow}
         onAdd={noop}
         renderField={(field, index) => {
           return (
             <Fragment key={field.id}>
-              <BulkEditMarkFormField
+              <BulkEditMarcFormField
+                fields={fields}
                 field={field}
                 index={index}
                 onChange={handleChange}
@@ -201,8 +204,9 @@ const BulkEditMarkForm = () => {
                 onBlur={handleOnBlur}
               />
               {field.subfields.map((subfield, subfieldIndex) => (
-                <BulkEditMarkFormSubfield
+                <BulkEditMarcFormSubfield
                   key={subfield.id}
+                  fields={fields}
                   field={field}
                   subfield={subfield}
                   index={index}
@@ -223,4 +227,9 @@ const BulkEditMarkForm = () => {
   );
 };
 
-export default BulkEditMarkForm;
+BulkEditMarcForm.propTypes = {
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setFields: PropTypes.func.isRequired,
+};
+
+export default BulkEditMarcForm;
