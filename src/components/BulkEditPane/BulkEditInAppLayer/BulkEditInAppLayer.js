@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useIntl } from 'react-intl';
-
-import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditInApp } from '../BulkEditListResult/BulkEditInApp/BulkEditInApp';
@@ -14,26 +11,11 @@ import {
 } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 import {
   QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
-  useBulkOperationTenants,
   useContentUpdate,
-  useHoldingsNotes,
-  useHoldingsNotesEcs,
-  useInstanceNotes,
-  useItemNotes,
-  useItemNotesEcs
 } from '../../../hooks/api';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
 import { savePreviewFile } from '../../../utils/files';
-import { useSearchParams } from '../../../hooks';
-import {
-  CAPABILITIES,
-  getHoldingsOptions,
-  getInstanceOptions,
-  getItemsOptions,
-  getUserOptions
-} from '../../../constants';
-import { removeDuplicatesByValue } from '../../../utils/helpers';
-import { sortAlphabetically } from '../../../utils/sortAlphabetically';
+import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
 
 
 export const BulkEditInAppLayer = ({
@@ -42,36 +24,11 @@ export const BulkEditInAppLayer = ({
   paneProps,
   onInAppLayerClose,
 }) => {
-  const stripes = useStripes();
-  const isCentralTenant = checkIfUserInCentralTenant(stripes);
-
-  const { formatMessage } = useIntl();
-  const { currentRecordType } = useSearchParams();
-
-  const isItemRecordType = currentRecordType === CAPABILITIES.ITEM;
-  const isHoldingsRecordType = currentRecordType === CAPABILITIES.HOLDING;
-  const isInstanceRecordType = currentRecordType === CAPABILITIES.INSTANCE;
-
-  const { data: tenants, isLoading } = useBulkOperationTenants(bulkOperationId);
-  const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemRecordType });
-  const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
-  const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
-  const { notesEcs: itemNotesEcs, isFetching: isItemsNotesEcsLoading } = useItemNotesEcs(tenants, 'option', { enabled: isItemRecordType && isCentralTenant && !isLoading });
-  const { notesEcs: holdingsNotesEcs, isFetching: isHoldingsNotesEcsLoading } = useHoldingsNotesEcs(tenants, 'option', { enabled: isHoldingsRecordType && isCentralTenant && !isLoading });
-
-  const options = ({
-    [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, removeDuplicatesByValue(isCentralTenant ? itemNotesEcs : itemNotes, tenants)),
-    [CAPABILITIES.USER]: getUserOptions(formatMessage),
-    [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEcs, tenants) : holdingsNotes),
-    [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage, instanceNotes),
-  })[currentRecordType];
-
-  const areAllOptionsLoaded = options && !isItemNotesLoading && !isInstanceNotesLoading && !isItemsNotesEcsLoading && !isHoldingsNotesLoading && !isHoldingsNotesEcsLoading;
-  const sortedOptions = sortAlphabetically(options, formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
+  const [fields, setFields] = useState([]);
 
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(bulkOperationId);
 
-  const [fields, setFields] = useState([]);
   const contentUpdates = getMappedContentUpdates(fields, options);
   const isInAppFormValid = isContentUpdatesFormValid(contentUpdates);
 
@@ -127,7 +84,7 @@ export const BulkEditInAppLayer = ({
         <BulkEditInApp
           fields={fields}
           setFields={setFields}
-          options={sortedOptions}
+          options={options}
           areAllOptionsLoaded={areAllOptionsLoaded}
         />
       </BulkEditLayer>

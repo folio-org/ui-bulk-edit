@@ -11,7 +11,6 @@ export const useMarcApproach = () => {
 
   const closeMarcLayer = useCallback(() => {
     setIsMarcLayerOpen(false);
-    // setMarcFields(initialFields);
     setParam('approach', null);
   }, [setParam]);
 

@@ -3,39 +3,39 @@ import { sortAlphabetically, sortAlphabeticallyWithoutGroups } from './sortAlpha
 describe('sortAlphabetically', () => {
   it('should sort the array alphabetically', () => {
     const inputArray = [
-      { label: 'URL public note' },
-      { label: 'Link text' },
-      { label: 'Available' },
+      { label: 'URL public note', value: 'URL public note' },
+      { label: 'Link text', value: 'Link text' },
+      { label: 'Available', value: 'Available' },
     ];
 
     const expectedOutput = [
-      { label: 'Available' },
-      { label: 'Link text' },
-      { label: 'URL public note' },
+      { label: 'Available', value: 'Available' },
+      { label: 'Link text', value: 'Link text' },
+      { label: 'URL public note', value: 'URL public note' },
     ];
 
-    const result = sortAlphabetically(inputArray, '');
+    const result = sortAlphabetically(inputArray);
 
     expect(result).toEqual(expectedOutput);
   });
 
   it('should handle a placeholder value and move it to the beginning', () => {
     const inputArray = [
-      { label: 'URL public note' },
-      { label: 'Link text' },
-      { label: 'Available' },
-      { label: 'Placeholder' },
+      { label: 'URL public note', value: 'URL public note' },
+      { label: 'Link text', value: 'Link text' },
+      { label: 'Available', value: 'Available' },
+      { label: 'Placeholder', value: '' },
     ];
 
     const expectedOutput = [
-      { label: 'Placeholder' },
-      { label: 'Available' },
-      { label: 'Link text' },
-      { label: 'URL public note' },
+      { label: 'Placeholder', value: '' },
+      { label: 'Available', value: 'Available' },
+      { label: 'Link text', value: 'Link text' },
+      { label: 'URL public note', value: 'URL public note' },
 
     ];
 
-    const result = sortAlphabetically(inputArray, 'Placeholder');
+    const result = sortAlphabetically(inputArray);
 
     expect(result).toEqual(expectedOutput);
   });
@@ -44,20 +44,20 @@ describe('sortAlphabetically', () => {
 describe('sortAlphabeticallyActions', () => {
   it('should sort the array alphabetically with placeholder priority', () => {
     const array = [
-      { label: 'Replace with' },
-      { label: 'Clear field' },
-      { label: 'Change note type' },
-      { label: 'Placeholder' },
+      { label: 'Replace with', value: 'Replace with' },
+      { label: 'Clear field', value: 'Clear field' },
+      { label: 'Change note type', value: 'Change note type' },
+      { label: 'Placeholder', value: '' },
     ];
 
-    const sortedArray = sortAlphabeticallyWithoutGroups(array, 'Placeholder');
+    const sortedArray = sortAlphabeticallyWithoutGroups(array);
 
     // Your expected sorted array based on the logic in the function
     const expectedSortedArray = [
-      { label: 'Placeholder' },
-      { label: 'Change note type' },
-      { label: 'Clear field' },
-      { label: 'Replace with' },
+      { label: 'Placeholder', value: '' },
+      { label: 'Change note type', value: 'Change note type' },
+      { label: 'Clear field', value: 'Clear field' },
+      { label: 'Replace with', value: 'Replace with' },
     ];
 
     expect(sortedArray).toEqual(expectedSortedArray);

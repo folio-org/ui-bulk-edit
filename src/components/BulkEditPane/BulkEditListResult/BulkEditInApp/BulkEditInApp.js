@@ -11,8 +11,8 @@ import {
 
 import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
 import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
-
 import { RootContext } from '../../../../context/RootContext';
+
 
 export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields }) => {
   const { title } = useContext(RootContext);
