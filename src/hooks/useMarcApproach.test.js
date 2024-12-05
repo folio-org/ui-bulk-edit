@@ -69,7 +69,6 @@ describe('useMarcApproach', () => {
     const { result } = renderHook(() => useMarcApproach());
 
     expect(result.current.isMarcLayerOpen).toBe(false);
-    expect(result.current.isMarcFieldsValid).toBe(true);
   });
 
   test('should open marc layer and set param', () => {

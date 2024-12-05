@@ -34,10 +34,9 @@ const BulkEditMarcActionRow = ({
 
     const errors = getMarcFormErrors(fields);
     const subFieldErrorId = get(errors, `[${rowIndex}].actions[${actionIndex}].data[${dataIndex}].value`);
-    const subfieldErrorMessage = subFieldErrorId && data.value.length === SUBFIELD_MAX_LENGTH ?
-      formatMessage({ id: subFieldErrorId })
-      :
-      '';
+    const subfieldErrorMessage = subFieldErrorId && data.value.length === SUBFIELD_MAX_LENGTH
+      ? formatMessage({ id: subFieldErrorId })
+      : '';
 
     switch (data.key) {
       case DATA_KEYS.VALUE:
@@ -94,10 +93,8 @@ const BulkEditMarcActionRow = ({
               maxLength={SUBFIELD_MAX_LENGTH}
             />
             {data.meta.required && (
-            <span className={css.asterisk} aria-hidden>
-              *
-            </span>)
-              }
+              <span className={css.asterisk} aria-hidden>*</span>
+            )}
           </Col>
         );
 
@@ -126,12 +123,14 @@ const BulkEditMarcActionRow = ({
           fullWidth
         />
         {(action.meta.required && actionIndex > 0) && (
-        <span className={css.asterisk} aria-hidden>
-          *
-        </span>)
-          }
+          <span className={css.asterisk} aria-hidden>*</span>
+        )}
       </Col>
-      {action.data.map((data, dataIndex) => renderDataControl(data, actionIndex, dataIndex))}
+      {action.data.map((data, dataIndex) => (
+        <Fragment key={dataIndex}>
+          {renderDataControl(data, actionIndex, dataIndex)}
+        </Fragment>
+      ))}
     </Fragment>
   ));
 };

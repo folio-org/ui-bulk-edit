@@ -430,51 +430,50 @@ export const sortWithoutPlaceholder = (array) => {
   return [placeholder, ...rest.sort((a, b) => a.label.localeCompare(b.label))];
 };
 
-export const getMappedContentUpdates = (fields, options) => fields.map(
-  // eslint-disable-next-line no-shadow
-  ({ parameters, tenants, option, actionsDetails: { actions } }) => {
-    const [initial, updated] = actions.map(action => action?.value ?? null);
-    const actionTenants = actions.map(action => action?.tenants);
-    const sourceOption = options.find(o => o.value === option);
-    const optionType = sourceOption?.type;
-    const mappedOption = optionType || option; // if option has type, use it, otherwise use option value (required for ITEM_NOTE cases)
-    // generate action type key with '_' delimiter
-    const typeKey = actions
-      .filter(Boolean)
-      .map(action => action?.name ?? null).join('_');
+export const getMappedContentUpdates = (fields, options) => fields.map(({
+  parameters, tenants, option, actionsDetails: { actions }
+}) => {
+  const [initial, updated] = actions.map(action => action?.value ?? null);
+  const actionTenants = actions.map(action => action?.tenants);
+  const sourceOption = options.find(o => o.value === option);
+  const optionType = sourceOption?.type;
+  const mappedOption = optionType || option; // if option has type, use it, otherwise use option value (required for ITEM_NOTE cases)
+  // generate action type key with '_' delimiter
+  const typeKey = actions
+    .filter(Boolean)
+    .map(action => action?.name ?? null).join('_');
 
-    const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
-    const filteredTenants = actionTenants.filter(Boolean);
-    // final action is the action which doesn't require any additional data after it
-    const isSecondActionFinal = FINAL_ACTIONS.includes(actions[1]?.name);
+  const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
+  const filteredTenants = actionTenants.filter(Boolean);
+  // final action is the action which doesn't require any additional data after it
+  const isSecondActionFinal = FINAL_ACTIONS.includes(actions[1]?.name);
 
-    const activeTenants = isSecondActionFinal || filteredTenants.length === 1
-      ? filteredTenants.flat()
-      : filteredTenants
-        .flat()
-        .filter((tenant, index, array) => array.indexOf(tenant) !== index);
+  const activeTenants = isSecondActionFinal || filteredTenants.length === 1
+    ? filteredTenants.flat()
+    : filteredTenants
+      .flat()
+      .filter((tenant, index, array) => array.indexOf(tenant) !== index);
 
-    // That tenants array need when we use find and replace action with two different action values
-    const updatedTenants = filteredTenants[1] || [];
-    const type = ACTIONS[typeKey];
+  // That tenants array need when we use find and replace action with two different action values
+  const updatedTenants = filteredTenants[1] || [];
+  const type = ACTIONS[typeKey];
 
-    return {
-      option: mappedOption,
-      tenants: tenants?.filter(Boolean),
-      actions: [{
-        type,
-        initial,
-        updated,
-        tenants: activeTenants,
-        updated_tenants: updatedTenants,
-        parameters: [
-          ...(parameters || []),
-          ...(actionParameters || []),
-        ],
-      }],
-    };
-  },
-);
+  return {
+    option: mappedOption,
+    tenants: tenants?.filter(Boolean),
+    actions: [{
+      type,
+      initial,
+      updated,
+      tenants: activeTenants,
+      updated_tenants: updatedTenants,
+      parameters: [
+        ...(parameters || []),
+        ...(actionParameters || []),
+      ],
+    }],
+  };
+});
 
 export const getFieldTemplate = (options, capability) => {
   return ({

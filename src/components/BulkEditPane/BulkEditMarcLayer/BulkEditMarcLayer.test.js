@@ -20,11 +20,25 @@ import { getMarcFieldTemplate } from '../BulkEditListResult/BulkEditMarc/helpers
 import { ACTIONS } from '../../../constants/marcActions';
 
 const mockConfirmChanges = jest.fn();
+const mockMarcContentUpdate = jest.fn().mockReturnValue('marcContentUpdate');
+const mockContentUpdate = jest.fn();
 
 jest.mock('../../../hooks/useConfirmChanges', () => ({
   useConfirmChanges: jest.fn(() => ({
     confirmChanges: mockConfirmChanges,
     totalRecords: 1,
+  })),
+}));
+
+jest.mock('../../../hooks/api/useMarcContentUpdate', () => ({
+  useMarcContentUpdate: jest.fn(() => ({
+    marcContentUpdate: mockMarcContentUpdate,
+  })),
+}));
+
+jest.mock('../../../hooks/api/useContentUpdate', () => ({
+  useContentUpdate: jest.fn(() => ({
+    contentUpdate: mockContentUpdate,
   })),
 }));
 
@@ -46,9 +60,9 @@ const renderBulkEditMarcLayer = ({ criteria }) => {
   const params = new URLSearchParams({
     criteria,
     approach: APPROACHES.MARC,
-    capabilities: CAPABILITIES.USER,
-    identifier: IDENTIFIERS.ID,
-    fileName: 'barcodes.csv',
+    capabilities: CAPABILITIES.INSTANCE_MARC,
+    identifier: IDENTIFIERS.INSTANCE_HRID,
+    fileName: 'instances.csv',
   }).toString();
   return render(
     <QueryClientProvider client={queryClient}>
@@ -64,9 +78,9 @@ const renderBulkEditMarcLayer = ({ criteria }) => {
           >
             <MemoryRouter initialEntries={[`/bulk-edit/1/preview?${params}`]}>
               <BulkEditMarcLayer
-                closeMarcLayer={closeMarcLayerFn}
+                bulkOperationId="1"
+                onMarcLayerClose={closeMarcLayerFn}
                 isMarcLayerOpen
-                isMarcFieldsValid
                 paneProps={{
                   paneTitle,
                   paneSub,
@@ -111,7 +125,7 @@ describe('BulkEditMarcLayer', () => {
     expect(getByText('ui-bulk-edit.layer.column.subfield'))
       .toBeVisible();
     expect(getAllByText('ui-bulk-edit.layer.column.actions').length)
-      .toBe(3);
+      .toBe(4); // 3 actions for MarcField + 1 for Administrative data
 
     // tooltips
     expect(getByText('ui-bulk-edit.layer.marc.error.limited'))
@@ -146,7 +160,7 @@ describe('BulkEditMarcLayer', () => {
     });
   });
 
-  it('should show error message if value is not between 5xx and 9xx ', async () => {
+  it('should show error message if value is 00x', async () => {
     const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
     const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
@@ -154,23 +168,7 @@ describe('BulkEditMarcLayer', () => {
     expect(inputField)
       .toHaveValue('');
 
-    userEvent.type(inputField, '123');
-
-    await waitFor(() => {
-      expect(screen.getByText('ui-bulk-edit.layer.marc.error'))
-        .toBeVisible();
-    });
-  });
-
-  it('should show error message if value is not between 5xx and 9xx ', async () => {
-    const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
-
-    const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
-
-    expect(inputField)
-      .toHaveValue('');
-
-    userEvent.type(inputField, '123');
+    userEvent.type(inputField, '002');
 
     await waitFor(() => {
       expect(screen.getByText('ui-bulk-edit.layer.marc.error'))
@@ -197,28 +195,27 @@ describe('BulkEditMarcLayer', () => {
   });
 
   it('should add and remove rows when + or trash buttons clicked', async () => {
-    const {
-      getByRole,
-      getAllByRole
-    } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
+    const { getAllByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const addBtn = getByRole('button', { name: /plus-sign/i });
-    const trashBtn = getByRole('button', { name: /trash/i });
+    const marcAccordion = getAllByRole('region')[2];
 
-    expect(getAllByRole('button', { name: /plus-sign/i }).length)
+    const addBtn = within(marcAccordion).getByRole('button', { name: /plus-sign/i });
+    const trashBtn = within(marcAccordion).getByRole('button', { name: /trash/i });
+
+    expect(within(marcAccordion).getAllByRole('button', { name: /plus-sign/i }).length)
       .toBe(1);
 
     userEvent.click(addBtn);
 
     await waitFor(() => {
-      expect(getAllByRole('button', { name: /plus-sign/i }).length)
+      expect(within(marcAccordion).getAllByRole('button', { name: /plus-sign/i }).length)
         .toBe(2);
     });
 
     userEvent.click(trashBtn);
 
     await waitFor(() => {
-      expect(getAllByRole('button', { name: /plus-sign/i }).length)
+      expect(within(marcAccordion).getAllByRole('button', { name: /plus-sign/i }).length)
         .toBe(1);
     });
   });
@@ -317,11 +314,17 @@ describe('BulkEditMarcLayer', () => {
   it('should call "confirm changes" function', async () => {
     const {
       getByRole,
+      getAllByRole,
     } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
+    const marcAccordion = getAllByRole('region')[2];
 
-    // select first action
+    const actionSelect = within(marcAccordion).getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
+    const inputField = within(marcAccordion).getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
+    const inputSubField = within(marcAccordion).getByRole('textbox', { name: /ui-bulk-edit.layer.column.subfield/i });
+
+    userEvent.type(inputField, '555');
+    userEvent.type(inputSubField, 'a');
     userEvent.selectOptions(actionSelect, ACTIONS.REMOVE_ALL);
 
     const confirmChangesBtn = getByRole('button', { name: /ui-bulk-edit.layer.confirmChanges/i });
@@ -329,27 +332,7 @@ describe('BulkEditMarcLayer', () => {
     userEvent.click(confirmChangesBtn);
 
     await waitFor(() => {
-      expect(mockConfirmChanges).toHaveBeenCalledWith({
-        bulkOperationMarcRules: [
-          {
-            actions: [
-              {
-                data: [],
-                name: 'REMOVE_ALL',
-              },
-            ],
-            bulkOperationId: undefined,
-            id: expect.anything(),
-            ind1: '\\',
-            ind2: '\\',
-            parameters: [],
-            subfield: '',
-            subfields: [],
-            tag: '',
-          },
-        ],
-        totalRecords: 1,
-      });
+      expect(mockConfirmChanges).toHaveBeenCalledWith(['marcContentUpdate']);
     });
   });
 
