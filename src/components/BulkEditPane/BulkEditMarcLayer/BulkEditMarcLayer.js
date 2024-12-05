@@ -26,11 +26,15 @@ export const BulkEditMarcLayer = ({
   paneProps,
 }) => {
   const { formatMessage } = useIntl();
-  const options = getAdministrativeDataOptions(formatMessage);
-  const sortedOptions = sortAlphabetically(options, formatMessage({ id:'ui-bulk-edit.options.placeholder' }));
 
   const [fields, setFields] = useState([]);
   const [marcFields, setMarcFields] = useState([getMarcFieldTemplate(uniqueId())]);
+
+  const { marcContentUpdate } = useMarcContentUpdate({ id: bulkOperationId });
+  const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
+
+  const options = getAdministrativeDataOptions(formatMessage);
+  const sortedOptions = sortAlphabetically(options);
 
   const marcFormErrors = getMarcFormErrors(marcFields);
   const contentUpdates = getMappedContentUpdates(fields, options);
@@ -38,9 +42,6 @@ export const BulkEditMarcLayer = ({
   const isMarcFieldsValid = Object.keys(marcFormErrors).length === 0;
   const isAdministrativeFormValid = isContentUpdatesFormValid(contentUpdates);
   const isAnyFormValid = isMarcFieldsValid || isAdministrativeFormValid;
-
-  const { marcContentUpdate } = useMarcContentUpdate({ id: bulkOperationId });
-  const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
 
   const {
     isPreviewModalOpened,
