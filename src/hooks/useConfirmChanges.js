@@ -21,7 +21,6 @@ import { useErrorMessages } from './useErrorMessages';
 import { pollForStatus } from '../utils/pollForStatus';
 
 export const useConfirmChanges = ({
-  updateFn,
   queryDownloadKey,
   bulkOperationId,
   onDownloadSuccess,
@@ -47,7 +46,7 @@ export const useConfirmChanges = ({
     setIsPreviewModalOpened(false);
   };
 
-  const confirmChanges = (payload) => {
+  const confirmChanges = (updaters) => {
     setIsPreviewLoading(true);
 
     queryClient.removeQueries(PREVIEW_MODAL_KEY);
@@ -57,8 +56,9 @@ export const useConfirmChanges = ({
     );
 
     openPreviewModal();
+
     pollForStatus(ky, bulkOperationId)
-      .then(() => updateFn(payload))
+      .then(() => Promise.all(updaters))
       .then(() => bulkOperationStart({
         id: bulkOperationId,
         approach: APPROACHES.IN_APP,

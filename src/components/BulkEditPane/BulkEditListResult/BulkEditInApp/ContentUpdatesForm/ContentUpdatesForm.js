@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import noop from 'lodash/noop';
 import uniqueId from 'lodash/uniqueId';
@@ -13,12 +13,7 @@ import {
   StripesOverlayWrapper
 } from '@folio/stripes/components';
 
-import {
-  ACTIONS,
-  FINAL_ACTIONS,
-  OPTIONS
-} from '../../../../../constants';
-import css from '../../../BulkEditPane.css';
+import { OPTIONS } from '../../../../../constants';
 import { ActionsRow } from './ActionsRow';
 import {
   ACTION_VALUE_KEY,
@@ -27,6 +22,7 @@ import {
   isAddButtonShown,
   getFilteredFields,
   getExtraActions,
+  getFieldTemplate,
 } from './helpers';
 import {
   customFilter,
@@ -34,18 +30,16 @@ import {
   groupByCategory
 } from '../../../../../utils/helpers';
 import { useSearchParams } from '../../../../../hooks';
+import css from '../../../BulkEditPane.css';
 
-export const ContentUpdatesForm = ({
-  onContentUpdatesChanged,
-  options,
-  fields,
-  setFields,
-  fieldTemplate,
-}) => {
+export const ContentUpdatesForm = ({ fields, setFields, options }) => {
   const { formatMessage } = useIntl();
-  const {
-    currentRecordType,
-  } = useSearchParams();
+  const { currentRecordType } = useSearchParams();
+
+  useEffect(() => {
+    setFields([getFieldTemplate(options, currentRecordType)]);
+    // eslint-disable-next-line
+  }, []);
 
   const handleOptionChange = (option, index, tenants = []) => {
     const mappedFields = fields.map((field, i) => {
@@ -62,7 +56,6 @@ export const ContentUpdatesForm = ({
             capability: currentRecordType,
             option,
             options,
-            formatMessage
           }),
         };
       }
@@ -112,7 +105,7 @@ export const ContentUpdatesForm = ({
       const sourceOption = options.find(o => o.value === field.option);
       const optionType = sourceOption?.type;
       const option = optionType || field.option;
-      const extraActions = getExtraActions(option, value, formatMessage);
+      const extraActions = getExtraActions(option, value);
       const firstAvailableAction = finalActions.find(Boolean);
 
       if (extraActions?.length) {
@@ -178,7 +171,7 @@ export const ContentUpdatesForm = ({
 
   const handleAdd = () => {
     const filteredFields = getFilteredFields([...fields, {
-      ...fieldTemplate,
+      ...getFieldTemplate(options, currentRecordType),
       id: uniqueId(),
       actionsDetails: {
         type: null,
@@ -198,7 +191,6 @@ export const ContentUpdatesForm = ({
             capability: currentRecordType,
             option,
             options,
-            formatMessage
           }),
         })
         : f;
@@ -209,56 +201,6 @@ export const ContentUpdatesForm = ({
     setFields(finalizedFields);
   };
 
-  useEffect(() => {
-    const mappedContentUpdates = fields.map(
-      // eslint-disable-next-line no-shadow
-      ({ parameters, tenants, option, actionsDetails: { actions } }) => {
-        const [initial, updated] = actions.map(action => action?.value ?? null);
-        const actionTenants = actions.map(action => action?.tenants);
-        const sourceOption = options.find(o => o.value === option);
-        const optionType = sourceOption?.type;
-        const mappedOption = optionType || option; // if option has type, use it, otherwise use option value (required for ITEM_NOTE cases)
-        // generate action type key with '_' delimiter
-        const typeKey = actions
-          .filter(Boolean)
-          .map(action => action?.name ?? null).join('_');
-
-        const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
-        const filteredTenants = actionTenants.filter(Boolean);
-        // final action is the action which doesn't require any additional data after it
-        const isSecondActionFinal = FINAL_ACTIONS.includes(actions[1]?.name);
-
-        const activeTenants = isSecondActionFinal || filteredTenants.length === 1
-          ? filteredTenants.flat()
-          : filteredTenants
-            .flat()
-            .filter((tenant, index, array) => array.indexOf(tenant) !== index);
-
-        // That tenants array need when we use find and replace action with two different action values
-        const updatedTenants = filteredTenants[1] || [];
-        const type = ACTIONS[typeKey];
-
-        return {
-          option: mappedOption,
-          tenants: tenants?.filter(Boolean),
-          actions: [{
-            type,
-            initial,
-            updated,
-            tenants: activeTenants,
-            updated_tenants: updatedTenants,
-            parameters: [
-              ...(parameters || []),
-              ...(actionParameters || []),
-            ],
-          }],
-        };
-      },
-    );
-
-    onContentUpdatesChanged(mappedContentUpdates);
-  }, [fields, options, onContentUpdatesChanged, currentRecordType]);
-
   return (
     <StripesOverlayWrapper>
       <RepeatableField
@@ -268,7 +210,7 @@ export const ContentUpdatesForm = ({
         onAdd={noop}
         renderField={(field, index) => {
           return (
-            <Row data-testid={`row-${index}`}>
+            <Row data-testid={`row-${index}`} className={css.marcFieldRow}>
               <Col xs={2} sm={2} className={css.column}>
                 <Selection
                   dataOptions={groupByCategory(field.options)}
@@ -312,9 +254,7 @@ export const ContentUpdatesForm = ({
 };
 
 ContentUpdatesForm.propTypes = {
-  onContentUpdatesChanged: PropTypes.func,
   options: PropTypes.arrayOf(PropTypes.object),
   fields: PropTypes.arrayOf(PropTypes.object),
-  fieldTemplate: PropTypes.object,
   setFields: PropTypes.func,
 };

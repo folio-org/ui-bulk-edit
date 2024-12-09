@@ -1,9 +1,10 @@
-export const sortAlphabetically = (array, placeholder) => array?.sort((a, b) => {
+export const sortAlphabetically = (array) => array?.sort((a, b) => {
   const collator = new Intl.Collator();
 
-  if (a.label === placeholder) {
+  // empty values are always first as they are placeholders
+  if (!a.value) {
     return -1;
-  } else if (b.label === placeholder) {
+  } else if (!b.value) {
     return 1;
   }
   // Compare based on category
@@ -27,13 +28,13 @@ export const sortAlphabetically = (array, placeholder) => array?.sort((a, b) => 
   return categoryComparison;
 });
 
-export const sortAlphabeticallyWithoutGroups = (array, placeholder) => {
+export const sortAlphabeticallyWithoutGroups = (array) => {
   const collator = new Intl.Collator();
 
   return array?.sort((a, b) => {
-    if (a.label === placeholder) {
+    if (!a.value) {
       return -1;
-    } else if (b.label === placeholder) {
+    } else if (!b.value) {
       return 1;
     } else {
       return collator.compare(a.label, b.label);

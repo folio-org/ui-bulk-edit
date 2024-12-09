@@ -1,18 +1,12 @@
 import { useCallback, useState } from 'react';
 
-import {
-  isContentUpdatesFormValid
-} from '../components/BulkEditPane/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 import { APPROACHES } from '../constants';
 import { useSearchParams } from './useSearchParams';
 
 export const useInAppApproach = () => {
   const { setParam } = useSearchParams();
-  const [contentUpdates, setContentUpdates] = useState(null);
   const [isInAppLayerOpen, setIsInAppLayerOpen] = useState(false);
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
-
-  const isInAppFormValid = isContentUpdatesFormValid(contentUpdates);
 
   const openInAppLayer = useCallback(() => {
     setIsInAppLayerOpen(true);
@@ -33,8 +27,6 @@ export const useInAppApproach = () => {
   }, []);
 
   return {
-    contentUpdates,
-    setContentUpdates,
     isInAppLayerOpen,
     setIsInAppLayerOpen,
     isPreviewModalOpened,
@@ -43,6 +35,5 @@ export const useInAppApproach = () => {
     openInAppLayer,
     openInAppPreviewModal,
     closeInAppPreviewModal,
-    isInAppFormValid
   };
 };

@@ -7,9 +7,9 @@ export const useContentUpdate = ({ id }) => {
   const { showErrorMessage } = useErrorMessages();
 
   const { data, mutateAsync: contentUpdate, isLoading } = useMutation({
-    mutationFn: ({ contentUpdates }) => {
+    mutationFn: (json) => {
       return ky.post(`bulk-operations/${id}/content-update`, {
-        json: contentUpdates,
+        json,
       }).json();
     },
     onError: showErrorMessage,

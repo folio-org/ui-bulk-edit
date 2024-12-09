@@ -6,15 +6,15 @@ import get from 'lodash/get';
 import { Col, InfoPopover, Row, TextField } from '@folio/stripes/components';
 
 import { INDICATOR_FIELD_MAX_LENGTH, SUBFIELD_MAX_LENGTH, TAG_FIELD_MAX_LENGTH } from '../helpers';
-import BulkEditMarkActionRow from './BulkEditMarkActionRow';
-import BulkEditMarkActions from './BulkEditMarkActions';
+import BulkEditMarcActionRow from './BulkEditMarcActionRow';
+import BulkEditMarcActions from './BulkEditMarcActions';
 
 import css from '../../../BulkEditPane.css';
 
 
 const isIndicatorDirty = (value) => value?.length && value !== '\\';
 
-const BulkEditMarkFormField = ({
+const BulkEditMarcFormField = ({
   field,
   index,
   onChange,
@@ -27,6 +27,7 @@ const BulkEditMarkFormField = ({
   addingDisabled,
   onBlur,
   errors,
+  fields
 }) => {
   const { formatMessage } = useIntl();
   const subfieldsCount = field.subfields.length;
@@ -71,7 +72,7 @@ const BulkEditMarkFormField = ({
   };
 
   return (
-    <Row data-testid={`row-${index}`} className={css.markFieldRow}>
+    <Row data-testid={`row-${index}`} className={css.marcFieldRow}>
       <Col className={`${css.column} ${css.field}`}>
         <TextField
           onChange={onChange}
@@ -139,7 +140,8 @@ const BulkEditMarkFormField = ({
         />
         {renderInfoPopover()}
       </Col>
-      <BulkEditMarkActionRow
+      <BulkEditMarcActionRow
+        fields={fields}
         actions={field.actions}
         rowIndex={index}
         errors={errors}
@@ -147,7 +149,7 @@ const BulkEditMarkFormField = ({
         onDataChange={onDataChange}
       />
 
-      <BulkEditMarkActions
+      <BulkEditMarcActions
         rowIndex={index}
         onAdd={onAddField}
         onRemove={onRemoveField}
@@ -158,7 +160,7 @@ const BulkEditMarkFormField = ({
   );
 };
 
-BulkEditMarkFormField.propTypes = {
+BulkEditMarcFormField.propTypes = {
   field: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -171,6 +173,7 @@ BulkEditMarkFormField.propTypes = {
   addingDisabled: PropTypes.bool,
   onBlur: PropTypes.func,
   errors: PropTypes.object,
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default BulkEditMarkFormField;
+export default BulkEditMarcFormField;

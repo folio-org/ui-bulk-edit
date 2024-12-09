@@ -6,12 +6,12 @@ import { Col, Row, TextField } from '@folio/stripes/components';
 
 import get from 'lodash/get';
 import { SUBFIELD_MAX_LENGTH } from '../helpers';
-import BulkEditMarkActionRow from './BulkEditMarkActionRow';
-import BulkEditMarkActions from './BulkEditMarkActions';
+import BulkEditMarcActionRow from './BulkEditMarcActionRow';
+import BulkEditMarcActions from './BulkEditMarcActions';
 import css from '../../../BulkEditPane.css';
 
 
-const BulkEditMarkFormSubfield = ({
+const BulkEditMarcFormSubfield = ({
   field,
   subfield,
   subfieldIndex,
@@ -21,7 +21,8 @@ const BulkEditMarkFormSubfield = ({
   onActionChange,
   onAddField,
   onRemoveField,
-  errors
+  errors,
+  fields
 }) => {
   const { formatMessage } = useIntl();
   const subfieldsCount = field.subfields.length;
@@ -52,14 +53,15 @@ const BulkEditMarkFormSubfield = ({
           aria-label={formatMessage({ id: 'ui-bulk-edit.layer.column.subfield' })}
         />
       </Col>
-      <BulkEditMarkActionRow
+      <BulkEditMarcActionRow
+        fields={fields}
         actions={subfield.actions}
         rowIndex={index}
         subfieldIndex={subfieldIndex}
         onActionChange={onActionChange}
         onDataChange={onDataChange}
       />
-      <BulkEditMarkActions
+      <BulkEditMarcActions
         fields={field.subfields}
         rowIndex={index}
         subfieldIndex={subfieldIndex}
@@ -71,7 +73,7 @@ const BulkEditMarkFormSubfield = ({
   );
 };
 
-BulkEditMarkFormSubfield.propTypes = {
+BulkEditMarcFormSubfield.propTypes = {
   field: PropTypes.object.isRequired,
   subfield: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
@@ -82,6 +84,7 @@ BulkEditMarkFormSubfield.propTypes = {
   onAddField: PropTypes.func.isRequired,
   onRemoveField: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default BulkEditMarkFormSubfield;
+export default BulkEditMarcFormSubfield;

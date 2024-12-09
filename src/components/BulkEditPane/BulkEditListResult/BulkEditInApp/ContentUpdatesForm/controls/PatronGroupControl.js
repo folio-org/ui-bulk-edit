@@ -35,7 +35,7 @@ export const PatronGroupControl = ({ actionValue, actionIndex, onChange }) => {
       label: formatMessage({ id: 'ui-bulk-edit.layer.selectPatronGroup' }),
     }]
   );
-  const patronGroups = sortAlphabeticallyWithoutGroups(groups, formatMessage({ id: 'ui-bulk-edit.layer.selectPatronGroup' }));
+  const patronGroups = sortAlphabeticallyWithoutGroups(groups);
   const title = getLabelByValue(patronGroups, actionValue);
 
   return (

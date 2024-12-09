@@ -35,9 +35,9 @@ export const savePreviewFile = ({
   approach,
   initialFileName,
 }) => {
-  const extension = approach === APPROACHES.MARK ? 'mrc' : 'csv';
+  const extension = approach === APPROACHES.MARC ? 'mrc' : 'csv';
 
-  const initialFileNameByApproach = approach === APPROACHES.MARK
+  const initialFileNameByApproach = approach === APPROACHES.MARC
     ? changeExtension(initialFileName, extension)
     : initialFileName;
 

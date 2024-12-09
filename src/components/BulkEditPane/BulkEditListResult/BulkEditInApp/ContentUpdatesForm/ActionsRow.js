@@ -19,7 +19,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
   return actions.map((action, actionIndex) => {
     if (!action) return null;
 
-    const sortedActions = sortAlphabeticallyWithoutGroups(action.actionsList, formatMessage({ id: 'ui-bulk-edit.actions.placeholder' }));
+    const sortedActions = sortAlphabeticallyWithoutGroups(action.actionsList);
 
     return (
       <Fragment key={actionIndex}>

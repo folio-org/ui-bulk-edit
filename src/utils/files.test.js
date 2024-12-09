@@ -54,11 +54,11 @@ describe('files', () => {
       jest.clearAllMocks();
     });
 
-    it('should save the file with the correct name and extension for MARK approach', () => {
+    it('should save the file with the correct name and extension for MARC approach', () => {
       const bulkOperationId = '123';
       const fileData = 'data';
       const initialFileName = 'abc.csv';
-      const approach = APPROACHES.MARK;
+      const approach = APPROACHES.MARC;
 
       getFormattedFilePrefixDate.mockReturnValue('2024-08-09');
 
@@ -100,7 +100,7 @@ describe('files', () => {
       const bulkOperationId = '123';
       const fileData = 'data';
       const initialFileName = '';
-      const approach = APPROACHES.MARK;
+      const approach = APPROACHES.MARC;
 
       getFormattedFilePrefixDate.mockReturnValue('2024-08-09');
 

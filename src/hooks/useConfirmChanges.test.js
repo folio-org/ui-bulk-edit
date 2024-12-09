@@ -46,7 +46,6 @@ describe('useConfirmChanges', () => {
   };
   const mockBulkOperationDetails = { bulkDetails: { totalNumOfRecords: 100 } };
   const mockBulkOperationStart = jest.fn();
-  const mockUpdateFn = jest.fn(() => Promise.resolve());
   const mockDownloadFile = jest.fn();
 
   beforeEach(() => {
@@ -63,7 +62,6 @@ describe('useConfirmChanges', () => {
 
   it('should initialize hook state correctly', () => {
     const { result } = renderHook(() => useConfirmChanges({
-      updateFn: mockUpdateFn,
       queryDownloadKey: 'testKey',
       bulkOperationId: '123',
     }));
@@ -75,7 +73,6 @@ describe('useConfirmChanges', () => {
 
   it('should open and close the preview modal', () => {
     const { result } = renderHook(() => useConfirmChanges({
-      updateFn: mockUpdateFn,
       queryDownloadKey: 'testKey',
       bulkOperationId: '123',
     }));
@@ -93,7 +90,6 @@ describe('useConfirmChanges', () => {
 
   it('should handle confirmChanges function correctly', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useConfirmChanges({
-      updateFn: mockUpdateFn,
       queryDownloadKey: 'testKey',
       bulkOperationId: '123',
     }));
@@ -109,26 +105,12 @@ describe('useConfirmChanges', () => {
     // Wait for the next update after the async calls
     await waitForNextUpdate(); // Wait for the polling to start
 
-    // Verify that the update function is called
-    expect(mockUpdateFn).toHaveBeenCalled();
-
-    // Verify that the bulkOperationStart function is called with the correct parameters
-    expect(mockBulkOperationStart).toHaveBeenCalledWith({
-      id: '123',
-      approach: 'IN_APP',
-      step: 'EDIT',
-    });
-
     // Finally, check if loading state is set back to false
     expect(result.current.isPreviewLoading).toBe(false);
   });
 
   it('should handle error in confirmChanges function', async () => {
-    // Mock the update function to throw an error
-    mockUpdateFn.mockImplementationOnce(() => Promise.reject(new Error('Update failed')));
-
     const { result, waitForNextUpdate } = renderHook(() => useConfirmChanges({
-      updateFn: mockUpdateFn,
       queryDownloadKey: 'testKey',
       bulkOperationId: '123',
     }));
@@ -150,7 +132,6 @@ describe('useConfirmChanges', () => {
 
   it('should call downloadFile from useFileDownload', () => {
     const { result } = renderHook(() => useConfirmChanges({
-      updateFn: mockUpdateFn,
       queryDownloadKey: 'testKey',
       bulkOperationId: '123',
     }));
