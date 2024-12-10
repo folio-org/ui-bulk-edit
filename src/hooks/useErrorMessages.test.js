@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { useIntl } from 'react-intl';
 import { useShowCallout } from '@folio/stripes-acq-components';
 import { useErrorMessages } from './useErrorMessages';
-import { ERRORS } from '../constants';
+import { ERROR_STATUSES, ERRORS } from '../constants';
 
 jest.mock('react-intl', () => ({
   useIntl: jest.fn(),
@@ -113,6 +113,89 @@ describe('useErrorMessages', () => {
     expect(showCalloutMock).toHaveBeenCalledWith({
       type: 'error',
       message: 'ui-bulk-edit.error.incorrectFormatted.testFileName',
+    });
+  });
+
+  describe('showExternalModuleError', () => {
+    it('should show an error message using the status code if message not provided', () => {
+      const { result } = renderHook(() => useErrorMessages());
+
+      result.current.showExternalModuleError('TestModule', { status: 404 });
+
+      expect(showCalloutMock)
+        .toHaveBeenCalledWith({
+          type: 'error',
+          message: `TestModule returns status code: 404 - ${ERROR_STATUSES[404]}.`,
+        });
+    });
+
+    it('should show an error message using the "message" property if it exists', () => {
+      const { result } = renderHook(() => useErrorMessages());
+
+      const errorMessage = 'Something went wrong';
+      result.current.showExternalModuleError('TestModule', { message: errorMessage });
+
+      expect(showCalloutMock)
+        .toHaveBeenCalledWith({
+          type: 'error',
+          message: `TestModule returns status code: 500 - ${errorMessage}.`,
+        });
+    });
+
+    it('should show an error message using the message if message corresponds to a known status string', () => {
+      const { result } = renderHook(() => useErrorMessages());
+
+      const errorMessage = 'Not Found';
+      result.current.showExternalModuleError('TestModule', {
+        status: 403,
+        message: errorMessage
+      });
+
+      expect(showCalloutMock)
+        .toHaveBeenCalledWith({
+          type: 'error',
+          message: 'TestModule returns status code: 403 - Not Found.',
+        });
+    });
+
+    it('should show a generic status error message if neither a valid message nor a recognized message key is provided', () => {
+      const { result } = renderHook(() => useErrorMessages());
+
+      result.current.showExternalModuleError('TestModule', { status: 418 });
+
+      expect(showCalloutMock)
+        .toHaveBeenCalledWith({
+          type: 'error',
+          message: `TestModule returns status code: 418 - ${ERROR_STATUSES[418]}.`,
+        });
+    });
+
+    it('should default to 500 if no status is provided and message is empty', () => {
+      const { result } = renderHook(() => useErrorMessages());
+
+      result.current.showExternalModuleError('TestModule', {});
+
+      expect(showCalloutMock)
+        .toHaveBeenCalledWith({
+          type: 'error',
+          message: `TestModule returns status code: 500 - ${ERROR_STATUSES[500]}.`,
+        });
+    });
+
+    it('should handle a scenario where the module returns a non-standard error message', () => {
+      const { result } = renderHook(() => useErrorMessages());
+
+      const nonStandardMessage = 'Custom module error occurred';
+      result.current.showExternalModuleError('TestModule', {
+        status: 501,
+        message: nonStandardMessage
+      });
+
+      expect(showCalloutMock)
+        .toHaveBeenCalledWith({
+          type: 'error',
+          message: `TestModule returns status code: 501 - ${nonStandardMessage}.`,
+        });
     });
   });
 });
