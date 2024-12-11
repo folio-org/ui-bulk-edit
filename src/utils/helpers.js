@@ -180,3 +180,14 @@ export const getTransformedLogsFilterValue = (values) => {
 
   return Array.from(result);
 };
+
+export const getMappedStatisticalCodes = ([statisticalCodeTypes, statisticalCodesArr]) => {
+  return statisticalCodesArr.map((statisticalCode) => {
+    const type = statisticalCodeTypes.find((codeType) => codeType.id === statisticalCode.statisticalCodeTypeId);
+
+    return {
+      label: `${type.name}: ${statisticalCode.code} - ${statisticalCode.name}`,
+      value: statisticalCode.id,
+    };
+  });
+};

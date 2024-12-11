@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 
 import { useErrorMessages } from '../useErrorMessages';
+import { getMappedStatisticalCodes } from '../../utils/helpers';
 
 
 export const STATISTICAL_CODES_KEY = 'STATISTICAL_CODES_KEY';
@@ -25,23 +26,15 @@ export const useStatisticalCodes = (options = {}) => {
         ky.get('statistical-codes', sharedParams).json()
           .then(response => response.statisticalCodes),
       ]),
-      select: ([statisticalCodeTypes, statisticalCodesArr]) => {
-        return statisticalCodesArr.map((statisticalCode) => {
-          const type = statisticalCodeTypes.find((codeType) => codeType.id === statisticalCode.statisticalCodeTypeId);
-
-          return {
-            label: `${type.name}: ${statisticalCode.code} - ${statisticalCode.name}`,
-            value: statisticalCode.id,
-          };
-        });
-      },
+      initialData: [],
+      select: getMappedStatisticalCodes,
       onError: showErrorMessage,
       ...options,
     },
   );
 
   return {
-    statisticalCodes: statisticalCodes || [],
+    statisticalCodes,
     isStatisticalCodesLoading,
   };
 };
