@@ -20,7 +20,8 @@ import {
   noteActions,
   noteActionsWithMarc,
   noteActionsWithDuplicate,
-  electronicAccess, statisticalCodeActions,
+  electronicAccess,
+  statisticalCodeActions,
 } from '../../../../../constants';
 import { getActionParameters } from '../../../../../constants/actionParameters';
 
