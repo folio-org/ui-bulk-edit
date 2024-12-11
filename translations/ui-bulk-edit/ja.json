@@ -420,9 +420,6 @@
     "actions.find": "Find",
     "logs.status.RETRIEVING_IDENTIFIERS": "Retrieving identifiers",
     "logs.status.SAVED_IDENTIFIERS": "IDの保存",
-    "meta.title.uploadedFile.mark": "MARCフィールドの一括編集<b>{fileName}</b>",
-    "meta.query.title.mark": "MARC フィールドクエリの一括編集",
-    "title.mark": "MARCフィールドの一括編集",
     "layer.column.field": "フィールド",
     "layer.column.subfield": "サブフィールド",
     "layer.options.add": "追加",
@@ -517,5 +514,11 @@
     "permission.query.execute": "Bulk edit: Can build query",
     "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
     "category.administrativeData": "Administrative data",
-    "start.edit.marc": "Instances with source MARC"
+    "start.edit.marc": "Instances with source MARC",
+    "logs.status.DATA_MODIFICATION_IN_PROGRESS": "Data modification",
+    "meta.title.uploadedFile.marc": "Bulk edit MARC fields - <b>{fileName}</b>",
+    "meta.query.title.marc": "Bulk edit MARC fields query",
+    "title.marc": "Bulk edit MARC fields",
+    "layer.title.administrative": "Bulk edits for administrative data",
+    "layer.title.marc": "Bulk edits for instances with source MARC"
 }
