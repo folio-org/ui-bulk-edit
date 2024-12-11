@@ -20,7 +20,7 @@ import {
   noteActions,
   noteActionsWithMarc,
   noteActionsWithDuplicate,
-  electronicAccess,
+  electronicAccess, statisticalCodeActions,
 } from '../../../../../constants';
 import { getActionParameters } from '../../../../../constants/actionParameters';
 
@@ -89,6 +89,7 @@ export const getDefaultActions = ({
   const expirationDefaultActions = expirationActions();
   const holdingsLocationDefaultActions = permanentHoldingsLocation();
   const suppressDefaultActions = suppressFromDiscActions();
+  const statisticalCodeDefaultActions = statisticalCodeActions();
   const statusDefaultActions = statusActions();
   const loanDefaultActions = permanentLoanTypeActions();
   const noteDefaultActions = noteActions();
@@ -193,6 +194,19 @@ export const getDefaultActions = ({
             [ACTION_VALUE_KEY]: suppressDefaultActions[0].value,
             [FIELD_VALUE_KEY]: '',
             [ACTION_PARAMETERS_KEY]: getActionParameters(opt, capability),
+          },
+        ],
+      };
+    case OPTIONS.STATISTICAL_CODE:
+      return {
+        type: '',
+        actions: [
+          null,
+          {
+            actionsList: statisticalCodeDefaultActions,
+            controlType: () => CONTROL_TYPES.STATISTICAL_CODES_SELECT,
+            [ACTION_VALUE_KEY]: statisticalCodeDefaultActions[0].value,
+            [FIELD_VALUE_KEY]: '',
           },
         ],
       };
@@ -425,6 +439,8 @@ export const getLabelByValue = (items, targetValue) => {
 };
 
 export const sortWithoutPlaceholder = (array) => {
+  if (!array.length) return [];
+
   const [placeholder, ...rest] = array;
 
   return [placeholder, ...rest.sort((a, b) => a.label.localeCompare(b.label))];
@@ -433,7 +449,13 @@ export const sortWithoutPlaceholder = (array) => {
 export const getMappedContentUpdates = (fields, options) => fields.map(({
   parameters, tenants, option, actionsDetails: { actions }
 }) => {
-  const [initial, updated] = actions.map(action => action?.value ?? null);
+  const [initial, updated] = actions.map(action => {
+    if (Array.isArray(action?.value)) {
+      return action.value.map(item => item?.value).join(',');
+    }
+
+    return action?.value || null;
+  });
   const actionTenants = actions.map(action => action?.tenants);
   const sourceOption = options.find(o => o.value === option);
   const optionType = sourceOption?.type;

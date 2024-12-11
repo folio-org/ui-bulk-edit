@@ -27,6 +27,7 @@ import { InstanceNotesControl } from './controls/InstanceNotesControl';
 import { ElectronicAccessRelationshipControl } from './controls/ElectronicAccessRelationshipControl';
 import { DuplicateNoteControl } from './controls/DuplicateNotesControl';
 import { StatusControl } from './controls/StatusControl';
+import { InstanceStatisticalCodesControl } from './controls/InstanceStatisticalCodesControl';
 
 
 export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option }) => {
@@ -150,6 +151,14 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
     />
   );
 
+  const renderStatisticalCodesSelect = () => controlType === CONTROL_TYPES.STATISTICAL_CODES_SELECT && (
+    <InstanceStatisticalCodesControl
+      actionIndex={actionIndex}
+      actionValue={action.value}
+      onChange={onChange}
+    />
+  );
+
   return (
     <>
       {renderTextField()}
@@ -162,6 +171,7 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
       {renderNoteTypeSelect()}
       {renderNoteDuplicateTypeSelect()}
       {renderElectronicAccessRelationshipSelect()}
+      {renderStatisticalCodesSelect()}
     </>
   );
 };

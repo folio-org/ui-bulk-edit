@@ -110,6 +110,10 @@ export const customFilter = (value, dataOptions) => {
   }, []);
 };
 
+export const customMultiSelectionFilter = (value, dataOptions) => {
+  return { renderedItems: customFilter(value, dataOptions) };
+};
+
 export const setIn = (obj, path, value) => {
   return setWith(clone(obj), path, value, clone);
 };

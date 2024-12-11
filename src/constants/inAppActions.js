@@ -12,6 +12,7 @@ export const ACTIONS = {
   MARK_AS_STAFF_ONLY: 'MARK_AS_STAFF_ONLY',
   REMOVE_MARK_AS_STAFF_ONLY: 'REMOVE_MARK_AS_STAFF_ONLY',
   REMOVE_ALL: 'REMOVE_ALL',
+  REMOVE_SOME: 'REMOVE_SOME',
   CHANGE_TYPE: 'CHANGE_TYPE',
   DUPLICATE: 'DUPLICATE',
 
@@ -119,6 +120,12 @@ export const getRemoveTheseAction = () => ({
   disabled: false,
 });
 
+export const getRemoveSomeAction = () => ({
+  value: ACTIONS.REMOVE_SOME,
+  label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeNote" />,
+  disabled: false,
+});
+
 export const getDuplicateToNoteAction = () => ({
   value: ACTIONS.DUPLICATE,
   label: <FormattedMessage id="ui-bulk-edit.layer.options.items.duplicateTo" />,
@@ -142,6 +149,14 @@ export const suppressFromDiscActions = () => [
   getSetToTrueAction(),
   getSetToFalseAction(),
 ];
+
+export const statisticalCodeActions = () => [
+  getPlaceholder(),
+  getAddAction(),
+  getRemoveSomeAction(),
+  getRemoveAllAction(),
+];
+
 export const noteActions = () => [
   getPlaceholder(),
   getAddToExistingAction(),
