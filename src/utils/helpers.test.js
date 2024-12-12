@@ -1,5 +1,6 @@
 import {
-  customFilter, getMappedStatisticalCodes,
+  customFilter,
+  getMappedStatisticalCodes,
   getTenantsById,
   getTransformedLogsFilterValue,
   removeDuplicatesByValue
