@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import '../../../../../../test/jest/__mock__/reactIntl.mock';
 import { IntlProvider } from 'react-intl';
@@ -9,25 +9,33 @@ import { createMemoryHistory } from 'history';
 import { runAxeTest } from '@folio/stripes-testing';
 import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 import { ValuesColumn } from './ValuesColumn';
-import { useElectronicAccessRelationships, useLoanTypes, usePatronGroup } from '../../../../../hooks/api';
+import {
+  useElectronicAccessRelationships,
+  useLoanTypes,
+  usePatronGroup,
+  useStatisticalCodes
+} from '../../../../../hooks/api';
 import { CAPABILITIES, CONTROL_TYPES } from '../../../../../constants';
+
 
 jest.mock('../../../../../hooks/api/useLoanTypes');
 jest.mock('../../../../../hooks/api/usePatronGroup');
 jest.mock('../../../../../hooks/api/useElectronicAccess');
+jest.mock('../../../../../hooks/api/useStatisticalCodes');
 
 const onChange = jest.fn();
 
 const history = createMemoryHistory();
 
-const mockAction = {
-  type: '',
-  name: 'testName',
-  value: 'testValue',
-};
+const renderComponent = (actionType, override = {}) => {
+  const action = {
+    type: '',
+    name: 'testName',
+    value: 'testValue',
+    controlType: actionType,
+    ...override,
+  };
 
-const renderComponent = (actionType) => {
-  const action = { ...mockAction, controlType: actionType };
   return render(
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
@@ -54,11 +62,15 @@ describe('ValuesColumn Component', () => {
       isElectronicAccessLoading: false,
       electronicAccessRelationships: [],
     });
+
+    useStatisticalCodes.mockReturnValue({
+      statisticalCodes: [],
+      isStatisticalCodesLoading: false,
+    });
   });
 
   afterEach(() => {
-    usePatronGroup.mockReset();
-    useLoanTypes.mockReset();
+    cleanup();
   });
 
   it('should render TextField when action type is INPUT', async () => {
@@ -187,6 +199,22 @@ describe('ValuesColumn Component', () => {
     expect(element).toBeInTheDocument();
 
     fireEvent.change(element, { target: { value: 'RESOURCE' } });
+
+    await waitFor(() => expect(onChange).toHaveBeenCalled());
+  });
+
+  it('should render select with statistical codes when action type is ADD, or REMOVE_SOME', async () => {
+    const { getByRole } = renderComponent(
+      () => CONTROL_TYPES.STATISTICAL_CODES_SELECT,
+      {
+        value: [{ label: 'test', value: 'test' }],
+      }
+    );
+    const element = getByRole('combobox');
+
+    expect(element).toBeInTheDocument();
+
+    fireEvent.change(element, [{ label: 'test', value: 'test' }]);
 
     await waitFor(() => expect(onChange).toHaveBeenCalled());
   });

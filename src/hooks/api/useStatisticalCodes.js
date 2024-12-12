@@ -15,7 +15,7 @@ export const useStatisticalCodes = (options = {}) => {
 
   const sharedParams = { searchParams: { query: 'cql.allRecords=1', limit: 1000 } };
 
-  const { data: statisticalCodes, isLoading: isStatisticalCodesLoading } = useQuery(
+  const { data, isLoading: isStatisticalCodesLoading } = useQuery(
     {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
@@ -26,12 +26,13 @@ export const useStatisticalCodes = (options = {}) => {
         ky.get('statistical-codes', sharedParams).json()
           .then(response => response.statisticalCodes),
       ]),
-      initialData: [],
       select: getMappedStatisticalCodes,
       onError: showErrorMessage,
       ...options,
     },
   );
+
+  const statisticalCodes = data || [];
 
   return {
     statisticalCodes,

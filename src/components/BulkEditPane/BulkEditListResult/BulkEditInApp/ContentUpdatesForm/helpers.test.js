@@ -879,6 +879,50 @@ describe('ContentUpdatesForm helpers', () => {
           );
       });
 
+      it('returns the correct object for the ELECTRONIC_ACCESS_MATERIALS_SPECIFIED option', () => {
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.STATISTICAL_CODE,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.INSTANCE
+        })))
+          .toEqual(
+            JSON.stringify({
+              type: '',
+              actions: [
+                null,
+                {
+                  actionsList: [
+                    {
+                      value: '',
+                      label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
+                      disabled: true,
+                    },
+                    {
+                      value: ACTIONS.ADD_TO_EXISTING,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.options.add" />,
+                      disabled: false,
+                    },
+                    {
+                      value: ACTIONS.REMOVE_SOME,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeNote" />,
+                      disabled: false,
+                    },
+                    {
+                      value: ACTIONS.REMOVE_ALL,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeAll" />,
+                      disabled: false,
+                    },
+                  ],
+                  controlType: () => CONTROL_TYPES.STATISTICAL_CODES_SELECT,
+                  [ACTION_VALUE_KEY]: '',
+                  [FIELD_VALUE_KEY]: '',
+                },
+              ],
+            }),
+          );
+      });
+
       it('returns the correct object for the default case', () => {
         expect(getDefaultActions({
           option: 'unknown',

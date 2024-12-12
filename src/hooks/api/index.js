@@ -20,3 +20,4 @@ export * from './useHoldingsNotesEcs';
 export * from './useLocationEcs';
 export * from './useLoanTypesEcs';
 export * from './useElectronicAccessEcs';
+export * from './useStatisticalCodes';

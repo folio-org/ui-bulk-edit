@@ -153,9 +153,8 @@ export const ValuesColumn = ({ action, allActions, actionIndex, onChange, option
 
   const renderStatisticalCodesSelect = () => controlType === CONTROL_TYPES.STATISTICAL_CODES_SELECT && (
     <InstanceStatisticalCodesControl
-      actionIndex={actionIndex}
-      actionValue={action.value}
-      onChange={onChange}
+      actionName={action.name}
+      {...sharedProps}
     />
   );
 

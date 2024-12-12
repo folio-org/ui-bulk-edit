@@ -1,5 +1,5 @@
 import {
-  customFilter,
+  customFilter, getMappedStatisticalCodes,
   getTenantsById,
   getTransformedLogsFilterValue,
   removeDuplicatesByValue
@@ -278,5 +278,78 @@ describe('getTransformedLogsFilterValue', () => {
     const result = getTransformedLogsFilterValue(values);
     expect(result).not.toContain(JOB_STATUSES.REVIEWED_NO_MARC_RECORDS);
     expect(result).toContain('other_value');
+  });
+});
+
+describe('getMappedStatisticalCodes', () => {
+  test('should correctly map statistical codes with corresponding types', () => {
+    const statisticalCodeTypes = [
+      { id: '1', name: 'Type A' },
+      { id: '2', name: 'Type B' },
+    ];
+
+    const statisticalCodesArr = [
+      { id: 'code1', statisticalCodeTypeId: '1', code: '001', name: 'Code One' },
+      { id: 'code2', statisticalCodeTypeId: '2', code: '002', name: 'Code Two' },
+    ];
+
+    const expected = [
+      { label: 'Type A: 001 - Code One', value: 'code1' },
+      { label: 'Type B: 002 - Code Two', value: 'code2' },
+    ];
+
+    const result = getMappedStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+    expect(result).toEqual(expected);
+  });
+
+  test('should return an empty array when statisticalCodesArr is empty', () => {
+    const statisticalCodeTypes = [
+      { id: '1', name: 'Type A' },
+      { id: '2', name: 'Type B' },
+    ];
+
+    const statisticalCodesArr = [];
+
+    const expected = [];
+
+    const result = getMappedStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+    expect(result).toEqual(expected);
+  });
+
+  test('should throw an error when a statistical code has no matching type', () => {
+    const statisticalCodeTypes = [
+      { id: '1', name: 'Type A' },
+    ];
+
+    const statisticalCodesArr = [
+      { id: 'code1', statisticalCodeTypeId: '2', code: '002', name: 'Code Two' },
+    ];
+
+    expect(() => {
+      getMappedStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+    }).toThrow(TypeError);
+  });
+
+  test('should correctly map multiple statistical codes', () => {
+    const statisticalCodeTypes = [
+      { id: '1', name: 'Type A' },
+      { id: '2', name: 'Type B' },
+      { id: '3', name: 'Type C' },
+    ];
+
+    const statisticalCodesArr = [
+      { id: 'code1', statisticalCodeTypeId: '1', code: '001', name: 'Code One' },
+      { id: 'code2', statisticalCodeTypeId: '2', code: '002', name: 'Code Two' },
+      { id: 'code3', statisticalCodeTypeId: '3', code: '003', name: 'Code Three' },
+    ];
+
+    const expected = [
+      { label: 'Type A: 001 - Code One', value: 'code1' },
+      { label: 'Type B: 002 - Code Two', value: 'code2' },
+      { label: 'Type C: 003 - Code Three', value: 'code3' },
+    ];
+
+    const result = getMappedStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+    expect(result).toEqual(expected);
   });
 });

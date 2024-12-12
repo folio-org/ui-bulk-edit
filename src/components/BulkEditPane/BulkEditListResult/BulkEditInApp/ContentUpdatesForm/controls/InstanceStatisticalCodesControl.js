@@ -9,7 +9,7 @@ import { useStatisticalCodes } from '../../../../../../hooks/api/useStatisticalC
 import { customMultiSelectionFilter } from '../../../../../../utils/helpers';
 
 
-export const InstanceStatisticalCodesControl = ({ actionValue, actionIndex, onChange }) => {
+export const InstanceStatisticalCodesControl = ({ actionName, actionValue, actionIndex, onChange }) => {
   const { formatMessage } = useIntl();
 
   const { statisticalCodes, isStatisticalCodesLoading } = useStatisticalCodes();
@@ -21,7 +21,7 @@ export const InstanceStatisticalCodesControl = ({ actionValue, actionIndex, onCh
   return (
     <div title={title}>
       <MultiSelection
-        key={actionValue}
+        key={actionName}
         id="statisticalCodes"
         value={actionValue}
         onChange={value => {
@@ -43,6 +43,7 @@ export const InstanceStatisticalCodesControl = ({ actionValue, actionIndex, onCh
 
 InstanceStatisticalCodesControl.propTypes = {
   actionValue: PropTypes.arrayOf(PropTypes.object),
+  actionName: PropTypes.string,
   actionIndex: PropTypes.number,
   onChange: PropTypes.func,
 };
