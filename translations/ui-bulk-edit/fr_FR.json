@@ -514,7 +514,7 @@
     "permission.query.execute": "Bulk edit: Can build query",
     "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
     "category.administrativeData": "Administrative data",
-    "start.edit.marc": "Instances with source MARC",
+    "start.edit.marc": "Notices avec source MARC",
     "logs.status.DATA_MODIFICATION_IN_PROGRESS": "Data modification",
     "meta.title.uploadedFile.marc": "Bulk edit MARC fields - <b>{fileName}</b>",
     "meta.query.title.marc": "Bulk edit MARC fields query",
