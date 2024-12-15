@@ -516,9 +516,9 @@
     "category.administrativeData": "Administrativní údaje",
     "start.edit.marc": "Tituly se zdrojem MARC",
     "logs.status.DATA_MODIFICATION_IN_PROGRESS": "Úprava dat",
-    "meta.title.uploadedFile.marc": "Bulk edit MARC fields - <b>{fileName}</b>",
-    "meta.query.title.marc": "Bulk edit MARC fields query",
-    "title.marc": "Bulk edit MARC fields",
+    "meta.title.uploadedFile.marc": "Hromadná úprava polí MARC - <b>{fileName}</b>",
+    "meta.query.title.marc": "Dotaz pro hromadnou úpravu polí MARC",
+    "title.marc": "Hromadná úprava polí MARC",
     "layer.title.administrative": "Bulk edits for administrative data",
     "layer.title.marc": "Bulk edits for instances with source MARC"
 }
