@@ -16,6 +16,14 @@ export const InstanceStatisticalCodesControl = ({ actionName, actionValue, actio
   const sortedStatisticalCodes = sortWithoutPlaceholder(statisticalCodes);
   const title = getLabelByValue(sortedStatisticalCodes, actionValue);
 
+  const handleChange = value => {
+    onChange({
+      actionIndex,
+      value,
+      fieldName: FIELD_VALUE_KEY,
+    });
+  };
+
   if (isStatisticalCodesLoading) return <Loading size="large" />;
 
   return (
@@ -24,13 +32,7 @@ export const InstanceStatisticalCodesControl = ({ actionName, actionValue, actio
         key={actionName}
         id="statisticalCodes"
         value={actionValue}
-        onChange={value => {
-          onChange({
-            actionIndex,
-            value,
-            fieldName: FIELD_VALUE_KEY,
-          });
-        }}
+        onChange={handleChange}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.statisticalCode' })}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statisticalCode' })}
         dataOptions={statisticalCodes}

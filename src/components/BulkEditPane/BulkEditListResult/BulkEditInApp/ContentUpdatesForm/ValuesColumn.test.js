@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor, cleanup } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import '../../../../../../test/jest/__mock__/reactIntl.mock';
 import { IntlProvider } from 'react-intl';
@@ -67,10 +67,6 @@ describe('ValuesColumn Component', () => {
       statisticalCodes: [],
       isStatisticalCodesLoading: false,
     });
-  });
-
-  afterEach(() => {
-    cleanup();
   });
 
   it('should render TextField when action type is INPUT', async () => {
