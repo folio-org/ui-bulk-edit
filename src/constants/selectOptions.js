@@ -10,6 +10,7 @@ export const OPTIONS = {
   TEMPORARY_LOCATION: 'TEMPORARY_LOCATION',
   PERMANENT_LOCATION: 'PERMANENT_LOCATION',
   SUPPRESS_FROM_DISCOVERY: 'SUPPRESS_FROM_DISCOVERY',
+  STATISTICAL_CODE: 'STATISTICAL_CODE',
   STAFF_SUPPRESS: 'STAFF_SUPPRESS',
   STATUS: 'STATUS',
   EXPIRATION_DATE: 'EXPIRATION_DATE',
@@ -287,6 +288,12 @@ export const getInstanceOptions = (formatMessage, instanceNotes) => [
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
   },
+  {
+    value: OPTIONS.STATISTICAL_CODE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.statisticalCode' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
+  },
   ...instanceNotes
 ];
 
@@ -304,6 +311,11 @@ export const getAdministrativeDataOptions = (formatMessage) => [
   {
     value: OPTIONS.SUPPRESS_FROM_DISCOVERY,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.suppress' }),
+    disabled: false,
+  },
+  {
+    value: OPTIONS.STATISTICAL_CODE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.statisticalCode' }),
     disabled: false,
   },
 ];
