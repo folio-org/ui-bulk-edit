@@ -29,7 +29,6 @@ jest.mock('../../../hooks/api', () => ({
   useErrorsPreview: () => ({
     errors: [],
   }),
-  useUserGroupsMap: () => ({}),
 }));
 
 const setCountOfRecordsMock = jest.fn();
