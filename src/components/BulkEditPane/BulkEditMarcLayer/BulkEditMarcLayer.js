@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { useIntl } from 'react-intl';
 import uniqueId from 'lodash/uniqueId';
+
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditMarc } from '../BulkEditListResult/BulkEditMarc/BulkEditMarc';
 import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
 import { getMarcFieldTemplate, getTransformedField } from '../BulkEditListResult/BulkEditMarc/helpers';
 import { useMarcContentUpdate } from '../../../hooks/api/useMarcContentUpdate';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
-import { QUERY_KEY_DOWNLOAD_MARC_PREVIEW_MODAL, useContentUpdate } from '../../../hooks/api';
-import { savePreviewFile } from '../../../utils/files';
+import { useContentUpdate } from '../../../hooks/api';
 import {
-  getContentUpdatesBody, getMappedContentUpdates,
+  getContentUpdatesBody,
+  getMappedContentUpdates,
   isContentUpdatesFormValid
 } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 import { getMarcFormErrors } from '../BulkEditListResult/BulkEditMarc/validation';
 import { getAdministrativeDataOptions } from '../../../constants';
 import { sortAlphabetically } from '../../../utils/sortAlphabetically';
+import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
+import { useCommitChanges } from '../../../hooks/useCommitChanges';
+
 
 export const BulkEditMarcLayer = ({
   bulkOperationId,
@@ -48,28 +51,20 @@ export const BulkEditMarcLayer = ({
     isPreviewLoading,
     bulkDetails,
     totalRecords,
-    downloadFile,
     confirmChanges,
     closePreviewModal,
-  } = useConfirmChanges({
-    queryDownloadKey: QUERY_KEY_DOWNLOAD_MARC_PREVIEW_MODAL,
-    bulkOperationId,
-    onDownloadSuccess: (fileData, searchParams) => {
-      const { approach, initialFileName } = searchParams;
+  } = useConfirmChanges({ bulkOperationId });
 
-      savePreviewFile({
-        bulkOperationId,
-        fileData,
-        approach,
-        initialFileName,
-      });
-    },
+  const { commitChanges } = useCommitChanges({
+    bulkOperationId,
+    onChangesCommited: () => {
+      closePreviewModal();
+      onMarcLayerClose();
+    }
   });
 
-  const handleChangesCommited = () => {
-    closePreviewModal();
-    onMarcLayerClose();
-  };
+  const hasBothFiles = bulkDetails?.linkToModifiedRecordsCsvFile && bulkDetails?.linkToModifiedRecordsMarcFile;
+  const areMarcAndCsvReady = hasBothFiles || !isPreviewLoading;
 
   const handleConfirm = () => {
     const bulkOperationMarcRules = marcFields
@@ -116,11 +111,16 @@ export const BulkEditMarcLayer = ({
 
       <BulkEditPreviewModal
         isPreviewLoading={isPreviewLoading}
-        bulkDetails={bulkDetails}
         open={isPreviewModalOpened}
-        onDownload={downloadFile}
         onKeepEditing={closePreviewModal}
-        onChangesCommited={handleChangesCommited}
+        modalFooter={
+          <BulkEditPreviewModalFooter
+            bulkOperationId={bulkOperationId}
+            buttonsDisabled={!areMarcAndCsvReady}
+            onCommitChanges={commitChanges}
+            onKeepEditing={closePreviewModal}
+          />
+        }
       />
     </>
   );
