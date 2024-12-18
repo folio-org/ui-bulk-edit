@@ -520,5 +520,9 @@
     "meta.query.title.marc": "Consulta de edição em massa de campos MARC",
     "title.marc": "Edição em massa de campos MARC",
     "layer.title.administrative": "Edições em massa para dados administrativos",
-    "layer.title.marc": "Edições em massa para instâncias com MARC de origem"
+    "layer.title.marc": "Edições em massa para instâncias com MARC de origem",
+    "columns.INSTANCE.Statistical code": "Código estatístico",
+    "layer.options.instances.statisticalCode": "Código estatístico",
+    "layer.statisticalCode": "Selecione o código estatístico",
+    "ariaLabel.statisticalCode": "Seleção de código estatístico"
 }

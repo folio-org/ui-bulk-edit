@@ -309,7 +309,7 @@
     "uploaderSubTitle.empty": "選擇帶有記錄識別號的檔案",
     "logs.filter.title.user": "使用者",
     "logs.filter.user.placeholder": "選擇使用者",
-    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "實例（標題、出版商、出版日期）",
+    "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "實例 ( 標題、出版商、出版日期 )",
     "category.holdingsNotes": "館藏附註",
     "category.holdingsLocation": "館藏的館藏地",
     "category.electronicAccess": "電子資源",
@@ -412,7 +412,7 @@
     "title.identifier": "識別號",
     "title.query": "查詢",
     "title.logs": "日誌紀錄",
-    "actions.findFullField": "查找（全域檢索）",
+    "actions.findFullField": "查找 ( 全域檢索 )",
     "layer.action.apply.STAFF_ONLY": "只供職員使用",
     "category.instanceNotes": "實例附註",
     "start.edit.instance": "開始批次編輯 - 實例欄位",
@@ -448,7 +448,7 @@
     "columns.HOLDINGS_RECORD.Holdings statement for supplements": "Holdings statement for supplements",
     "columns.HOLDINGS_RECORD.Holdings statement for indexes": "Holdings statement for indexes",
     "columns.HOLDINGS_RECORD.ILL policy": "ILL policy",
-    "columns.HOLDINGS_RECORD.Order format": "Order format",
+    "columns.HOLDINGS_RECORD.Order format": "訂單格式",
     "columns.ITEM.Former identifier": "Former identifier",
     "columns.ITEM.Suppress from discovery": "Suppress from discovery",
     "columns.ITEM.Shelving order": "Shelving order",
@@ -520,5 +520,9 @@
     "meta.query.title.marc": "Bulk edit MARC fields query",
     "title.marc": "Bulk edit MARC fields",
     "layer.title.administrative": "Bulk edits for administrative data",
-    "layer.title.marc": "Bulk edits for instances with source MARC"
+    "layer.title.marc": "Bulk edits for instances with source MARC",
+    "columns.INSTANCE.Statistical code": "Statistical code",
+    "layer.options.instances.statisticalCode": "Statistical code",
+    "layer.statisticalCode": "Select statistical code",
+    "ariaLabel.statisticalCode": "Statistical code select"
 }
