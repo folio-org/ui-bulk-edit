@@ -1,7 +1,6 @@
 import { saveAs } from 'file-saver';
 
 import { getFormattedFilePrefixDate } from './date';
-import { APPROACHES } from '../constants';
 
 
 export const getFileName = (item, triggeredFile) => {
@@ -32,16 +31,10 @@ export const changeExtension = (fileName, extension) => {
 export const savePreviewFile = ({
   bulkOperationId,
   fileData,
-  approach,
+  extension,
   initialFileName,
 }) => {
-  const extension = approach === APPROACHES.MARC ? 'mrc' : 'csv';
-
-  const initialFileNameByApproach = approach === APPROACHES.MARC
-    ? changeExtension(initialFileName, extension)
-    : initialFileName;
-
-  const fileName = initialFileNameByApproach || `Query-${bulkOperationId}.${extension}`;
+  const fileName = initialFileName || `Query-${bulkOperationId}.${extension}`;
 
   saveAs(new Blob([fileData]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
 };

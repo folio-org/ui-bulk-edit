@@ -33,9 +33,7 @@ const BulkEditLogsActions = ({ item }) => {
     queryKey: QUERY_KEY_DOWNLOAD_LOGS,
     enabled: false,
     id: item.id,
-    fileInfo: {
-      fileContentType: linkNamesMap[triggeredFile],
-    },
+    fileContentType: linkNamesMap[triggeredFile],
     onSuccess: data => {
       saveAs(new Blob([data]), getFileName(item, triggeredFile));
       setTriggeredFile(null);

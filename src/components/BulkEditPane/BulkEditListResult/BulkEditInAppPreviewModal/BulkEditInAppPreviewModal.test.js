@@ -2,10 +2,8 @@ import { QueryClientProvider } from 'react-query';
 import { MemoryRouter } from 'react-router';
 
 import {
-  act,
   render,
   screen,
-  fireEvent
 } from '@testing-library/react';
 
 import { useOkapiKy } from '@folio/stripes/core';
@@ -16,11 +14,7 @@ import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
 import { queryClient } from '../../../../../test/jest/utils/queryClient';
 import { RootContext } from '../../../../context/RootContext';
 
-import {
-  ACTIONS,
-  OPTIONS,
-  JOB_STATUSES,
-} from '../../../../constants';
+import { JOB_STATUSES } from '../../../../constants';
 import {
   useBulkOperationDetails,
   useRecordsPreview,
@@ -37,14 +31,12 @@ const bulkOperation = bulkEditLogsData[0];
 const visibleColumns = [];
 const setVisibleColumns = jest.fn();
 const onKeepEditing = jest.fn();
-const onChangesCommited = jest.fn();
 
 const defaultProps = {
   open: true,
-  bulkOperationId: bulkOperation.id.toString(),
   onKeepEditing,
-  onChangesCommited,
-  contentUpdates: undefined,
+  isPreviewLoading: false,
+  modalFooter: <div>Footer</div>,
 };
 
 const renderPreviewModal = (props = defaultProps, fileName = 'barcodes.csv') => {
@@ -92,28 +84,7 @@ describe('BulkEditInAppPreviewModal', () => {
       });
   });
 
-  it('should call all footer handlers', () => {
-    renderPreviewModal();
-
-    fireEvent.click(screen.getByText('ui-bulk-edit.previewModal.keepEditing'));
-    expect(onKeepEditing).toHaveBeenCalled();
-  });
-
-  it('should call all footer handlers without fileName', () => {
-    renderPreviewModal(defaultProps, '');
-
-    fireEvent.click(screen.getByText('ui-bulk-edit.previewModal.downloadPreview'));
-  });
-
   it('should display preview records when available', async () => {
-    const contentUpdates = [
-      {
-        option: OPTIONS.STATUS,
-        actions: [{
-          type: ACTIONS.CLEAR_FIELD,
-        }],
-      },
-    ];
     const uuidColumn = {
       value: 'uuid',
       label: 'uuid',
@@ -129,17 +100,18 @@ describe('BulkEditInAppPreviewModal', () => {
       status: JOB_STATUSES.REVIEW_CHANGES,
     });
 
-    await act(async () => {
-      renderPreviewModal({
-        ...defaultProps,
-        contentUpdates,
-      });
-    });
+    await renderPreviewModal();
 
     expect(screen.getByText('ui-bulk-edit.previewModal.previewToBeChanged')).toBeInTheDocument();
 
     await runAxeTest({
       rootNode: document.body,
     });
+  });
+
+  it('should display footer if provided', async () => {
+    await renderPreviewModal();
+
+    expect(screen.getByText('Footer')).toBeInTheDocument();
   });
 });

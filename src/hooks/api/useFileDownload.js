@@ -4,12 +4,12 @@ import { useErrorMessages } from '../useErrorMessages';
 
 export const QUERY_KEY_DOWNLOAD_LOGS = 'downloadLogs';
 export const QUERY_KEY_DOWNLOAD_ACTION_MENU = 'downloadActionMenu';
-export const QUERY_KEY_DOWNLOAD_PREVIEW_MODAL = 'downloadPreviewModal';
+export const QUERY_KEY_DOWNLOAD_ADMINISTRATIVE_PREVIEW_MODAL = 'downloadPreviewModal';
 export const QUERY_KEY_DOWNLOAD_MARC_PREVIEW_MODAL = 'downloadMarcPreviewModal';
 
 export const useFileDownload = ({
   id,
-  fileInfo,
+  fileContentType,
   onSuccess,
   onSettled,
   queryKey,
@@ -21,11 +21,11 @@ export const useFileDownload = ({
 
   const { refetch, isFetching } = useQuery(
     {
-      queryKey: [namespaceKey, id, fileInfo],
+      queryKey: [namespaceKey, id, fileContentType],
       queryFn: () => ky.get(`bulk-operations/${id}/download`, {
-        searchParams: { fileContentType: fileInfo?.fileContentType },
+        searchParams: { fileContentType },
       }).blob(),
-      enabled: !!fileInfo,
+      enabled: !!fileContentType,
       onSuccess: response => {
         showErrorMessage(response);
         onSuccess?.(response);
