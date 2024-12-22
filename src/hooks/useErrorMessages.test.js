@@ -1,8 +1,11 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { useIntl } from 'react-intl';
+import { getReasonPhrase } from 'http-status-codes';
+
 import { useShowCallout } from '@folio/stripes-acq-components';
+
 import { useErrorMessages } from './useErrorMessages';
-import { ERROR_STATUSES, ERRORS } from '../constants';
+import { ERRORS } from '../constants';
 
 jest.mock('react-intl', () => ({
   useIntl: jest.fn(),
@@ -125,7 +128,7 @@ describe('useErrorMessages', () => {
       expect(showCalloutMock)
         .toHaveBeenCalledWith({
           type: 'error',
-          message: `TestModule returns status code: 404 - ${ERROR_STATUSES[404]}.`,
+          message: `TestModule returns status code: 404 - ${getReasonPhrase(404)}.`,
         });
     });
 
@@ -166,7 +169,7 @@ describe('useErrorMessages', () => {
       expect(showCalloutMock)
         .toHaveBeenCalledWith({
           type: 'error',
-          message: `TestModule returns status code: 418 - ${ERROR_STATUSES[418]}.`,
+          message: `TestModule returns status code: 418 - ${getReasonPhrase(418)}.`,
         });
     });
 
@@ -178,7 +181,7 @@ describe('useErrorMessages', () => {
       expect(showCalloutMock)
         .toHaveBeenCalledWith({
           type: 'error',
-          message: `TestModule returns status code: 500 - ${ERROR_STATUSES[500]}.`,
+          message: `TestModule returns status code: 500 - ${getReasonPhrase(500)}.`,
         });
     });
 
