@@ -9,7 +9,7 @@ import {
   useStripes,
 } from '@folio/stripes/core';
 
-import { APPROACHES, EDITING_STEPS } from '../../../constants';
+import { APPROACHES, EDITING_STEPS, RECORD_TYPES_MAPPING } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
 import { RootContext } from '../../../context/RootContext';
 import { BulkEditListResult } from '../BulkEditListResult';
@@ -26,6 +26,7 @@ export const BulkEditIdentifiers = ({
     approach,
     processedFileName,
     initialFileName,
+    currentRecordType,
   } = useSearchParams();
 
   const {
@@ -57,7 +58,7 @@ export const BulkEditIdentifiers = ({
     return (
       <FormattedMessage
         id={`ui-bulk-edit.list.logSubTitle.${step === EDITING_STEPS.UPLOAD ? 'matched' : 'changed'}`}
-        values={{ count: countOfRecords }}
+        values={{ count: countOfRecords, recordType: RECORD_TYPES_MAPPING[currentRecordType] }}
       />
     );
   }, [isIdentifierTabWithPreview, countOfRecords, step]);

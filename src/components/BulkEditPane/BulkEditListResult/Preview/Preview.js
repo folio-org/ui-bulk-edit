@@ -19,7 +19,8 @@ import {
 import {
   CRITERIA,
   EDITING_STEPS,
-  PAGINATION_CONFIG
+  PAGINATION_CONFIG,
+  ERRORS_PAGINATION_CONFIG
 } from '../../../../constants';
 import { usePagination } from '../../../../hooks/usePagination';
 import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
@@ -36,13 +37,13 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   } = useSearchParams();
 
   const totalRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
+  const totalErrors = step === EDITING_STEPS.COMMIT ? bulkDetails?.committedNumOfErrors : bulkDetails?.matchedNumOfErrors;
   const isOtherTabProcessing = progress && criteria !== progress;
   const isPreviewEnabled = !isOtherTabProcessing && Boolean(id);
 
   const {
     countOfRecords,
     countOfErrors,
-    totalCount,
     visibleColumns,
   } = useBulkOperationStats({ bulkDetails, step });
 
@@ -64,14 +65,16 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     ...pagination,
   });
 
-  const { data } = useErrorsPreview({
-    id,
-    queryOptions: {
-      enabled: isPreviewEnabled,
-    },
-  });
+  const {
+    pagination: errorsPagination,
+    changePage: changeErrorPage,
+  } = usePagination(ERRORS_PAGINATION_CONFIG);
 
-  const errors = data?.errors || [];
+  const { errors, isFetching: isErrorsFetching } = useErrorsPreview({
+    id,
+    enabled: isPreviewEnabled,
+    ...errorsPagination,
+  });
 
   if (!((bulkDetails.fqlQuery && criteria === CRITERIA.QUERY) || (criteria !== CRITERIA.QUERY && !bulkDetails.fqlQuery))) {
     return <NoResultsMessage />;
@@ -113,10 +116,11 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
           {Boolean(errors?.length) && (
             <ErrorsAccordion
               errors={errors}
-              entries={totalCount}
-              matched={countOfRecords}
+              pagination={errorsPagination}
               countOfErrors={countOfErrors}
-              isInitial={isInitial}
+              totalCountOfErrors={totalErrors}
+              loading={isErrorsFetching}
+              onChangePage={changeErrorPage}
             />
           )}
         </div>
