@@ -44,6 +44,12 @@ const renderErrorMessage = (error, isLinkAvailable) => {
   );
 };
 
+const getResultsFormatter = ({ isLinkAvailable }) => ({
+  type: () => <FormattedMessage id="ui-bulk-edit.list.errors.table.status.ERROR" />,
+  key: error => getParam(error, ERROR_PARAMETERS_KEYS.IDENTIFIER),
+  message: error => renderErrorMessage(error, isLinkAvailable),
+});
+
 const ErrorsAccordion = ({
   errors = [],
   countOfErrors,
@@ -58,13 +64,7 @@ const ErrorsAccordion = ({
   const isCentralTenant = tenantId === centralTenant;
   const { capabilities } = useSearchParams();
   const isLinkAvailable = (isCentralTenant && capabilities === CAPABILITIES.INSTANCE) || !isCentralTenant;
-
-  const resultsFormatter = {
-    type: () => <FormattedMessage id="ui-bulk-edit.list.errors.table.status.ERROR" />,
-    key: error => getParam(error, ERROR_PARAMETERS_KEYS.IDENTIFIER),
-    message: error => renderErrorMessage(error, isLinkAvailable),
-  };
-
+  const resultsFormatter = getResultsFormatter({ isLinkAvailable });
   const errorLength = errors.length;
 
   const [opened, setOpened] = useState(!!errorLength);
