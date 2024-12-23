@@ -51,7 +51,7 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
         values={{ count: countOfRecords, recordType: RECORD_TYPES_MAPPING[currentRecordType] }}
       />
     );
-  }, [isQueryTabWithPreview, countOfRecords, step]);
+  }, [isQueryTabWithPreview, countOfRecords, step, currentRecordType]);
 
   const paneSub = useMemo(() => {
     return (

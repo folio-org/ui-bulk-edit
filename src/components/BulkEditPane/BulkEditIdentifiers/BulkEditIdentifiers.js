@@ -61,7 +61,7 @@ export const BulkEditIdentifiers = ({
         values={{ count: countOfRecords, recordType: RECORD_TYPES_MAPPING[currentRecordType] }}
       />
     );
-  }, [isIdentifierTabWithPreview, countOfRecords, step]);
+  }, [isIdentifierTabWithPreview, countOfRecords, step, currentRecordType]);
 
   const paneSub = useMemo(() => {
     return (step === EDITING_STEPS.UPLOAD || step === EDITING_STEPS.COMMIT) && isIdentifierTabWithPreview
