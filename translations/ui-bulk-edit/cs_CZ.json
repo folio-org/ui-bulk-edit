@@ -420,9 +420,6 @@
     "actions.find": "Najít",
     "logs.status.RETRIEVING_IDENTIFIERS": "Získávání identifikátorů",
     "logs.status.SAVED_IDENTIFIERS": "Ukládání identifikátorů",
-    "meta.title.uploadedFile.mark": "Hromadná úprava polí MARC - <b>{fileName}</b>",
-    "meta.query.title.mark": "Dotaz pro hromadnou úpravu polí MARC",
-    "title.mark": "Hromadná úprava polí MARC",
     "layer.column.field": "Pole",
     "layer.column.subfield": "Podpole",
     "layer.options.add": "Přidat",
@@ -517,5 +514,11 @@
     "permission.query.execute": "Bulk edit: Can build query",
     "logs.status.REVIEWED_NO_MARC_RECORDS": "Kontrola změn",
     "category.administrativeData": "Administrativní údaje",
-    "start.edit.marc": "Tituly se zdrojem MARC"
+    "start.edit.marc": "Tituly se zdrojem MARC",
+    "logs.status.DATA_MODIFICATION_IN_PROGRESS": "Úprava dat",
+    "meta.title.uploadedFile.marc": "Hromadná úprava polí MARC - <b>{fileName}</b>",
+    "meta.query.title.marc": "Dotaz pro hromadnou úpravu polí MARC",
+    "title.marc": "Hromadná úprava polí MARC",
+    "layer.title.administrative": "Bulk edits for administrative data",
+    "layer.title.marc": "Bulk edits for instances with source MARC"
 }

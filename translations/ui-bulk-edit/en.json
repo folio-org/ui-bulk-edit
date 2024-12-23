@@ -326,6 +326,7 @@
   "columns.INSTANCE.Publication frequency": "Publication frequency",
   "columns.INSTANCE.Publication range": "Publication range",
   "columns.INSTANCE.Notes" : "Notes",
+  "columns.INSTANCE.Statistical code" : "Statistical code",
 
   "columns.logs.hrId": "ID",
   "columns.logs.operationType": "Bulk operation type",
@@ -384,6 +385,7 @@
   "layer.options.holdings.urlPublic": "URL public note",
   "layer.options.instances.staffSuppress": "Staff suppress",
   "layer.options.instances.suppress": "Suppress from discovery",
+  "layer.options.instances.statisticalCode": "Statistical code",
   "layer.options.expirationDate": "Expiration date",
   "layer.options.email": "Email",
   "layer.options.patronGroup": "Patron group",
@@ -409,6 +411,7 @@
   "layer.selectLocation": "Select location",
   "layer.selectPatronGroup": "Select patron group",
   "layer.selectLoanType": "Select loan type",
+  "layer.statisticalCode": "Select statistical code",
   "layer.selectNoteType": "Select note type",
   "layer.selectType": "Select note type",
   "layer.options.items.true": "Set true",
@@ -517,6 +520,7 @@
   "ariaLabel.location": "Location",
   "ariaLabel.statusSelect": "Status select",
   "ariaLabel.loanTypeSelect": "Loan type select",
+  "ariaLabel.statisticalCode": "Statistical code select",
   "ariaLabel.urlRelationshipSelect": "Url relationship select",
   "ariaLabel.columnFilter": "Column filter input",
 

@@ -78,7 +78,9 @@
           "consortia.publications-results.item.get",
           "consortium-search.institutions.collection.get",
           "consortium-search.campuses.collection.get",
-          "consortium-search.libraries.collection.get"
+          "consortium-search.libraries.collection.get",
+          "inventory-storage.statistical-codes.collection.get",
+          "inventory-storage.statistical-code-types.collection.get"
         ]
       },
       {
