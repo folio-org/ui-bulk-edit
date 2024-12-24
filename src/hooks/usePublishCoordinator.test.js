@@ -18,6 +18,10 @@ import {
   PUBLISH_COORDINATOR_STATUSES
 } from './usePublishCoordinator';
 
+jest.mock('./useErrorMessages', () => ({
+  useErrorMessages: jest.fn().mockReturnValue({ showExternalModuleError: jest.fn() }),
+}));
+
 const queryClient = new QueryClient();
 
 // eslint-disable-next-line react/prop-types
