@@ -52,9 +52,8 @@ const getResultsFormatter = ({ isLinkAvailable }) => ({
 
 const ErrorsAccordion = ({
   errors = [],
-  countOfErrors,
-  totalCountOfErrors,
-  loading,
+  totalErrors,
+  isFetching,
   pagination,
   onChangePage,
 }) => {
@@ -89,7 +88,7 @@ const ErrorsAccordion = ({
               <FormattedMessage
                 id="ui-bulk-edit.list.errors.info"
                 values={{
-                  errors: countOfErrors,
+                  errors: totalErrors,
                   warnings: 0,
                 }}
               />
@@ -107,14 +106,14 @@ const ErrorsAccordion = ({
                 columnMapping={columnMapping}
                 formatter={resultsFormatter}
                 visibleColumns={visibleColumns}
-                loading={loading}
+                loading={isFetching}
                 autosize
               />
             </div>
             {errors.length > 0 && (
               <PrevNextPagination
                 {...pagination}
-                totalCount={totalCountOfErrors}
+                totalCount={totalErrors}
                 disabled={false}
                 onChange={onChangePage}
               />
@@ -128,9 +127,8 @@ const ErrorsAccordion = ({
 
 ErrorsAccordion.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.object),
-  countOfErrors: PropTypes.number,
-  totalCountOfErrors: PropTypes.number,
-  loading: PropTypes.bool,
+  totalErrors: PropTypes.number,
+  isFetching: PropTypes.bool,
   pagination: {
     limit: PropTypes.number,
     offset: PropTypes.number,
