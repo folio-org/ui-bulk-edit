@@ -19,7 +19,8 @@ import {
 import {
   CRITERIA,
   EDITING_STEPS,
-  PAGINATION_CONFIG
+  PAGINATION_CONFIG,
+  ERRORS_PAGINATION_CONFIG
 } from '../../../../constants';
 import { usePagination } from '../../../../hooks/usePagination';
 import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
@@ -35,23 +36,22 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     progress,
   } = useSearchParams();
 
-  const totalRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
+  const totalNumOfRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
   const isOtherTabProcessing = progress && criteria !== progress;
   const isPreviewEnabled = !isOtherTabProcessing && Boolean(id);
 
   const {
     countOfRecords,
     countOfErrors,
-    totalCount,
     visibleColumns,
   } = useBulkOperationStats({ bulkDetails, step });
 
   const {
-    pagination,
-    changePage,
+    pagination: previewPagination,
+    changePage: changePreviewPage,
   } = usePagination(PAGINATION_CONFIG);
 
-  const { contentData, columns, columnMapping, isFetching } = useRecordsPreview({
+  const { contentData, columns, columnMapping, isFetching: isPreviewFetching } = useRecordsPreview({
     key: RECORDS_PREVIEW_KEY,
     capabilities: currentRecordType,
     id,
@@ -61,21 +61,24 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     queryOptions: {
       enabled: isPreviewEnabled,
     },
-    ...pagination,
+    ...previewPagination,
   });
 
-  const { data } = useErrorsPreview({
+  const {
+    pagination: errorsPagination,
+    changePage: changeErrorPage,
+  } = usePagination(ERRORS_PAGINATION_CONFIG);
+
+  const { errors, isFetching: isErrorsFetching } = useErrorsPreview({
     id,
-    queryOptions: {
-      enabled: isPreviewEnabled,
-    },
+    enabled: isPreviewEnabled,
+    ...errorsPagination,
   });
-
-  const errors = data?.errors || [];
 
   if (!((bulkDetails.fqlQuery && criteria === CRITERIA.QUERY) || (criteria !== CRITERIA.QUERY && !bulkDetails.fqlQuery))) {
     return <NoResultsMessage />;
   }
+
   return (
     <AccordionStatus>
       <div className={css.previewContainer}>
@@ -97,26 +100,26 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
         <div className={css.previewAccordionOuter}>
           {Boolean(contentData?.length) && (
             <PreviewAccordion
-              totalRecords={totalRecords}
+              totalRecords={totalNumOfRecords}
               isInitial={isInitial}
               columns={columns}
               contentData={contentData}
               columnMapping={columnMapping}
               visibleColumns={visibleColumns}
               step={step}
-              onChangePage={changePage}
-              pagination={pagination}
-              isFetching={isFetching}
+              onChangePage={changePreviewPage}
+              pagination={previewPagination}
+              isFetching={isPreviewFetching}
             />
           )}
 
           {Boolean(errors?.length) && (
             <ErrorsAccordion
               errors={errors}
-              entries={totalCount}
-              matched={countOfRecords}
-              countOfErrors={countOfErrors}
-              isInitial={isInitial}
+              totalErrors={countOfErrors}
+              onChangePage={changeErrorPage}
+              pagination={errorsPagination}
+              isFetching={isErrorsFetching}
             />
           )}
         </div>

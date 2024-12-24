@@ -140,7 +140,19 @@ export const PAGINATION_CONFIG = {
   offset: 0,
 };
 
+export const ERRORS_PAGINATION_CONFIG = {
+  limit: PREVIEW_LIMITS.ERRORS,
+  offset: 0,
+};
+
 export const ERROR_PARAMETERS_KEYS = {
   IDENTIFIER: 'IDENTIFIER',
   LINK: 'LINK',
+};
+
+export const RECORD_TYPES_MAPPING = {
+  [CAPABILITIES.HOLDING]: 'holding',
+  [CAPABILITIES.INSTANCE]: 'instance',
+  [CAPABILITIES.ITEM]: 'item',
+  [CAPABILITIES.USER]: 'user',
 };
