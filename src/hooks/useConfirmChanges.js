@@ -38,7 +38,7 @@ export const useConfirmChanges = ({ bulkOperationId }) => {
     setIsPreviewModalOpened(false);
   };
 
-  const confirmChanges = (updaters) => {
+  const confirmChanges = (updateSequence) => {
     setIsPreviewLoading(true);
 
     queryClient.removeQueries(PREVIEW_MODAL_KEY);
@@ -50,7 +50,7 @@ export const useConfirmChanges = ({ bulkOperationId }) => {
     openPreviewModal();
 
     pollForStatus(ky, bulkOperationId)
-      .then(() => Promise.all(updaters))
+      .then(updateSequence)
       .then(() => bulkOperationStart({
         id: bulkOperationId,
         approach: APPROACHES.IN_APP,

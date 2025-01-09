@@ -73,22 +73,31 @@ export const BulkEditMarcLayer = ({
         ...getTransformedField(field),
       }));
 
-    const marcUpdateBody = {
-      bulkOperationMarcRules,
-      totalRecords,
+    const marcDefaultBody = {
+      bulkOperationMarcRules: [],
+      totalRecords: 0,
     };
 
-    const administrativeBody = getContentUpdatesBody({
+    const administrativeDefaultBody = {
+      bulkOperationRules: [],
+      totalRecords: 0,
+    };
+
+    const marcUpdateBody = isMarcFieldsValid ? {
+      bulkOperationMarcRules,
+      totalRecords,
+    } : marcDefaultBody;
+
+    const administrativeBody = isAdministrativeFormValid ? getContentUpdatesBody({
       bulkOperationId,
       contentUpdates,
       totalRecords,
-    });
+    }) : administrativeDefaultBody;
 
-    // send updates only for valid forms
-    confirmChanges([
-      ...(isMarcFieldsValid ? [marcContentUpdate(marcUpdateBody)] : []),
-      ...(isAdministrativeFormValid ? [contentUpdate(administrativeBody)] : []),
-    ]);
+    const updateSequence = () => contentUpdate(administrativeBody)
+      .then(() => marcContentUpdate(marcUpdateBody));
+
+    confirmChanges(updateSequence);
   };
 
   return (
