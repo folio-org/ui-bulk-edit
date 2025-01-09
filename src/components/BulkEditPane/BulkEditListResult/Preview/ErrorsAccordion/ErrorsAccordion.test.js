@@ -10,9 +10,7 @@ import ErrorsAccordion from './ErrorsAccordion';
 
 const defaultProps = {
   errors: errorsPreview.errors,
-  entries: 5,
   countOfErrors: errorsPreview.errors.length,
-  matched: 4,
 };
 
 const renderPreviewAccordion = (history, props = defaultProps) => {
@@ -27,19 +25,9 @@ describe('ErrorsAccordion', () => {
   it('should render preview accordion', () => {
     const mockHistory = ['/bulk-edit/1/preview'];
 
-    renderPreviewAccordion(mockHistory, { ...defaultProps, initial: true });
+    renderPreviewAccordion(mockHistory, { ...defaultProps });
 
     expect(screen.getByText(/errors.info/)).toBeVisible();
-    expect(screen.getByText(/errors.table.code/)).toBeVisible();
-    expect(screen.getByText(errorsPreview.errors[0].message)).toBeVisible();
-  });
-
-  it('should render preview accordion for bulk edit query', () => {
-    const mockHistory = ['/bulk-edit/1/preview?criteria=query'];
-
-    renderPreviewAccordion(mockHistory, { ...defaultProps, initial: true });
-
-    expect(screen.getByText(/errors.query.info/)).toBeVisible();
     expect(screen.getByText(/errors.table.code/)).toBeVisible();
     expect(screen.getByText(errorsPreview.errors[0].message)).toBeVisible();
   });
@@ -47,7 +35,7 @@ describe('ErrorsAccordion', () => {
   it('should render with no axe errors', async () => {
     const mockHistory = ['/bulk-edit/1/preview'];
 
-    renderPreviewAccordion(mockHistory, { ...defaultProps, initial: true });
+    renderPreviewAccordion(mockHistory, { ...defaultProps });
 
     await runAxeTest({
       rootNode: document.body,
@@ -57,9 +45,8 @@ describe('ErrorsAccordion', () => {
   it('should render preview accordion', () => {
     const mockHistory = ['/bulk-edit/1/preview'];
 
-    renderPreviewAccordion(mockHistory, { ...defaultProps, initial: false });
+    renderPreviewAccordion(mockHistory, { ...defaultProps });
 
-    expect(screen.getByText(/errors.infoProcessed/)).toBeVisible();
     expect(screen.getByText(/errors.table.code/)).toBeVisible();
     expect(screen.getByText(errorsPreview.errors[0].message)).toBeVisible();
   });
@@ -67,16 +54,16 @@ describe('ErrorsAccordion', () => {
   it('should hide content when title was clicked', () => {
     const mockHistory = ['/bulk-edit/1/preview'];
 
-    const { getByRole } = renderPreviewAccordion(mockHistory, { ...defaultProps, initial: false });
+    const { getByRole } = renderPreviewAccordion(mockHistory, { ...defaultProps });
 
-    expect(screen.getByText(/errors.infoProcessed/)).toBeVisible();
+    expect(screen.getByText(/list.errors.info/)).toBeVisible();
 
     const titleButton = getByRole('button', { name: /ui-bulk-edit.list.errors.title/ });
 
     userEvent.click(titleButton);
 
     waitFor(() => {
-      expect(screen.getByText(/errors.infoProcessed/)).not.toBeVisible();
+      expect(screen.getByText(/list.errors.info/)).not.toBeVisible();
     });
   });
 });

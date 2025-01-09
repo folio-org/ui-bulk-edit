@@ -9,6 +9,9 @@ import {
   useStripes,
 } from '@folio/stripes/core';
 
+import { MOD_CONSORTIA } from '../constants';
+import { useErrorMessages } from './useErrorMessages';
+
 export const PUBLISH_COORDINATOR_STATUSES = {
   COMPLETE: 'COMPLETE',
   ERROR: 'ERROR',
@@ -44,6 +47,7 @@ export const usePublishCoordinator = (namespace, options = {}) => {
   const ky = useOkapiKy();
   const stripes = useStripes();
   const abortController = useRef(new AbortController());
+  const { showExternalModuleError } = useErrorMessages();
 
   const consortium = stripes.user?.user?.consortium;
   const baseApi = `${CONSORTIA_API}/${consortium?.id}/${PUBLICATIONS_API}`;
@@ -51,7 +55,8 @@ export const usePublishCoordinator = (namespace, options = {}) => {
   const getPublicationResults = useCallback((id, { signal }) => {
     return ky.get(`${baseApi}/${id}/results`, { signal })
       .json()
-      .then(formatPublicationResult);
+      .then(formatPublicationResult)
+      .catch((error) => showExternalModuleError(MOD_CONSORTIA, error));
   }, [ky, baseApi]);
 
   const getPublicationDetails = useCallback(async (requestId, { signal } = {}) => {
@@ -83,7 +88,8 @@ export const usePublishCoordinator = (namespace, options = {}) => {
 
     return ky.post(baseApi, { json, signal })
       .json()
-      .then(res => getPublicationResponse(res, { signal }));
+      .then(res => getPublicationResponse(res, { signal }))
+      .catch((error) => showExternalModuleError(MOD_CONSORTIA, error));
   }, [baseApi, getPublicationResponse, ky, options.signal]);
 
   return {

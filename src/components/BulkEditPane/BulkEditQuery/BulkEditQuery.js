@@ -10,7 +10,7 @@ import {
 import { Pane } from '@folio/stripes/components';
 
 import { BulkEditListResult } from '../BulkEditListResult';
-import { APPROACHES, EDITING_STEPS } from '../../../constants';
+import { APPROACHES, EDITING_STEPS, RECORD_TYPES_MAPPING } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
 import { RootContext } from '../../../context/RootContext';
 
@@ -18,6 +18,7 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   const {
     step,
     approach,
+    currentRecordType
   } = useSearchParams();
   const intl = useIntl();
 
@@ -47,10 +48,10 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
     return (
       <FormattedMessage
         id={`ui-bulk-edit.list.logSubTitle.${step === EDITING_STEPS.UPLOAD ? 'matched' : 'changed'}`}
-        values={{ count: countOfRecords }}
+        values={{ count: countOfRecords, recordType: RECORD_TYPES_MAPPING[currentRecordType] }}
       />
     );
-  }, [isQueryTabWithPreview, countOfRecords, step]);
+  }, [isQueryTabWithPreview, countOfRecords, step, currentRecordType]);
 
   const paneSub = useMemo(() => {
     return (

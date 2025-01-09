@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl';
 import { useShowCallout } from '@folio/stripes-acq-components';
+import { getReasonPhrase } from 'http-status-codes';
 
 import { ERRORS } from '../constants';
 import { useSearchParams } from './useSearchParams';
@@ -41,7 +42,26 @@ export const useErrorMessages = () => {
     }
   };
 
+  const showExternalModuleError = (moduleName, error) => {
+    const status = error?.status ?? 500;
+    const initialErrorMessage = error?.message;
+
+    let displayMessage = '';
+
+    try {
+      displayMessage = getReasonPhrase(initialErrorMessage); // Some modules return the error message as a known status
+    } catch {
+      const statusErrorMessage = getReasonPhrase(status);
+
+      // Determine displayMessage details based on priority: initialErrorMessage > statusErrorMessage
+      displayMessage = initialErrorMessage || statusErrorMessage;
+    }
+
+    showError(`${moduleName} returns status code: ${status} - ${displayMessage}.`);
+  };
+
   return {
     showErrorMessage,
+    showExternalModuleError,
   };
 };
