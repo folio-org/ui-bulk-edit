@@ -113,7 +113,7 @@ describe('useConfirmChanges', () => {
     }));
 
     act(() => {
-      result.current.confirmChanges({});
+      result.current.confirmChanges(() => Promise.reject(new Error()));
     });
 
     // Check if loading state is set
