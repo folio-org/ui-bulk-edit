@@ -243,7 +243,7 @@
     "columns.HOLDINGS_RECORD.Number of items": "Exemplarzahl",
     "columns.HOLDINGS_RECORD.Receiving history": "Inventarisierungshistorie",
     "columns.HOLDINGS_RECORD.Discovery suppress": "Nachweis unterdrückt",
-    "columns.HOLDINGS_RECORD.Statistical codes": "Statistikcodes",
+    "columns.HOLDINGS_RECORD.Statistical codes": "Statistische Codes",
     "columns.HOLDINGS_RECORD.Tags": "Tags",
     "columns.HOLDINGS_RECORD.Source": "Quelle",
     "columns.HOLDINGS_RECORD.Instance HRID": "Instance HRID",
