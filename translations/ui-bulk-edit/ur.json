@@ -68,7 +68,7 @@
     "previewModal.message": "{count, number} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
     "previewModal.previewToBeChanged": "Preview of records to be changed",
     "previewModal.keepEditing": "Keep editing",
-    "previewModal.downloadPreview": "Download preview",
+    "previewModal.downloadPreview": "Download preview in CSV format",
     "previewModal.saveAndClose": "Commit changes",
     "progressBar.title": "Uploading {title} and retrieving relevant data",
     "progresssBar.retrieving": "Retrieving",
