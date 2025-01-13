@@ -9,13 +9,11 @@ import {
   getMappedContentUpdates,
   isContentUpdatesFormValid
 } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
-import {
-  QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
-  useContentUpdate,
-} from '../../../hooks/api';
+import { useContentUpdate } from '../../../hooks/api';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
-import { savePreviewFile } from '../../../utils/files';
 import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
+import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
+import { useCommitChanges } from '../../../hooks/useCommitChanges';
 
 
 export const BulkEditInAppLayer = ({
@@ -37,28 +35,20 @@ export const BulkEditInAppLayer = ({
     isPreviewLoading,
     bulkDetails,
     totalRecords,
-    downloadFile,
     confirmChanges,
     closePreviewModal,
-  } = useConfirmChanges({
-    queryDownloadKey: QUERY_KEY_DOWNLOAD_PREVIEW_MODAL,
-    bulkOperationId,
-    onDownloadSuccess: (fileData, searchParams) => {
-      const { approach, initialFileName } = searchParams;
+  } = useConfirmChanges({ bulkOperationId });
 
-      savePreviewFile({
-        bulkOperationId,
-        fileData,
-        approach,
-        initialFileName,
-      });
-    },
+  const { commitChanges } = useCommitChanges({
+    bulkOperationId,
+    onChangesCommited: () => {
+      closePreviewModal();
+      onInAppLayerClose();
+    }
   });
 
-  const handleChangesCommited = () => {
-    closePreviewModal();
-    onInAppLayerClose();
-  };
+  const isCsvFileReady = bulkDetails?.linkToModifiedRecordsCsvFile
+    || !isPreviewLoading;
 
   const handleConfirm = () => {
     const contentUpdateBody = getContentUpdatesBody({
@@ -93,9 +83,14 @@ export const BulkEditInAppLayer = ({
         isPreviewLoading={isPreviewLoading}
         bulkDetails={bulkDetails}
         open={isPreviewModalOpened}
-        onDownload={downloadFile}
-        onKeepEditing={closePreviewModal}
-        onChangesCommited={handleChangesCommited}
+        modalFooter={
+          <BulkEditPreviewModalFooter
+            bulkOperationId={bulkOperationId}
+            buttonsDisabled={!isCsvFileReady}
+            onCommitChanges={commitChanges}
+            onKeepEditing={closePreviewModal}
+          />
+        }
       />
     </>
   );

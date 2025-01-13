@@ -7,27 +7,19 @@ import {
   BULK_OPERATION_DETAILS_KEY,
   useBulkOperationDetails,
   useBulkOperationStart,
-  useFileDownload
 } from './api';
 import {
   APPROACHES,
   EDITING_STEPS,
-  FILE_SEARCH_PARAMS,
   JOB_STATUSES,
 } from '../constants';
-import { useSearchParams } from './useSearchParams';
 
 import { useErrorMessages } from './useErrorMessages';
 import { pollForStatus } from '../utils/pollForStatus';
 
-export const useConfirmChanges = ({
-  queryDownloadKey,
-  bulkOperationId,
-  onDownloadSuccess,
-}) => {
+export const useConfirmChanges = ({ bulkOperationId }) => {
   const queryClient = useQueryClient();
   const ky = useOkapiKy();
-  const searchParams = useSearchParams();
   const { showErrorMessage } = useErrorMessages();
 
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
@@ -46,7 +38,7 @@ export const useConfirmChanges = ({
     setIsPreviewModalOpened(false);
   };
 
-  const confirmChanges = (updaters) => {
+  const confirmChanges = (updateSequence) => {
     setIsPreviewLoading(true);
 
     queryClient.removeQueries(PREVIEW_MODAL_KEY);
@@ -58,7 +50,7 @@ export const useConfirmChanges = ({
     openPreviewModal();
 
     pollForStatus(ky, bulkOperationId)
-      .then(() => Promise.all(updaters))
+      .then(updateSequence)
       .then(() => bulkOperationStart({
         id: bulkOperationId,
         approach: APPROACHES.IN_APP,
@@ -74,24 +66,12 @@ export const useConfirmChanges = ({
       });
   };
 
-  const { refetch: downloadFile, isFetching: isFileDownloading } = useFileDownload({
-    queryKey: queryDownloadKey,
-    enabled: false, // to prevent automatic file fetch in preview modal
-    id: bulkOperationId,
-    fileInfo: {
-      fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
-    },
-    onSuccess: (data) => onDownloadSuccess(data, searchParams),
-  });
-
   return {
     totalRecords,
     bulkDetails,
     isPreviewModalOpened,
     isPreviewLoading,
     setIsPreviewLoading,
-    isFileDownloading,
-    downloadFile,
     openPreviewModal,
     closePreviewModal,
     confirmChanges,

@@ -5,7 +5,7 @@ import { useShowCallout } from '@folio/stripes-acq-components';
 
 import '../../test/jest/__mock__/reactIntl.mock';
 
-import { useBulkOperationDetails, useBulkOperationStart, useFileDownload } from './api';
+import { useBulkOperationDetails, useBulkOperationStart } from './api';
 import { useSearchParams } from './useSearchParams';
 import { useConfirmChanges } from './useConfirmChanges';
 import { pollForStatus } from '../utils/pollForStatus';
@@ -27,7 +27,6 @@ jest.mock('@folio/stripes-acq-components', () => ({
 jest.mock('./api', () => ({
   useBulkOperationDetails: jest.fn(),
   useBulkOperationStart: jest.fn(),
-  useFileDownload: jest.fn(),
 }));
 
 jest.mock('./useSearchParams', () => ({
@@ -46,7 +45,6 @@ describe('useConfirmChanges', () => {
   };
   const mockBulkOperationDetails = { bulkDetails: { totalNumOfRecords: 100 } };
   const mockBulkOperationStart = jest.fn();
-  const mockDownloadFile = jest.fn();
 
   beforeEach(() => {
     useShowCallout.mockReturnValue(mockCallout);
@@ -54,7 +52,6 @@ describe('useConfirmChanges', () => {
     useBulkOperationDetails.mockReturnValue(mockBulkOperationDetails);
     useBulkOperationStart.mockReturnValue({ bulkOperationStart: mockBulkOperationStart });
     useSearchParams.mockReturnValue({ criteria: 'testCriteria', initialFileName: 'initialFileName' });
-    useFileDownload.mockReturnValue({ refetch: mockDownloadFile, isFetching: false });
     pollForStatus.mockImplementation(() => Promise.resolve());
 
     jest.clearAllMocks();
@@ -116,7 +113,7 @@ describe('useConfirmChanges', () => {
     }));
 
     act(() => {
-      result.current.confirmChanges({});
+      result.current.confirmChanges(() => Promise.reject(new Error()));
     });
 
     // Check if loading state is set
@@ -128,18 +125,5 @@ describe('useConfirmChanges', () => {
     // Check that loading state is set back to false after handling the error
     expect(result.current.isPreviewLoading).toBe(false);
     expect(result.current.isPreviewModalOpened).toBe(false); // Modal should close on error
-  });
-
-  it('should call downloadFile from useFileDownload', () => {
-    const { result } = renderHook(() => useConfirmChanges({
-      queryDownloadKey: 'testKey',
-      bulkOperationId: '123',
-    }));
-
-    act(() => {
-      result.current.downloadFile();
-    });
-
-    expect(mockDownloadFile).toHaveBeenCalled();
   });
 });

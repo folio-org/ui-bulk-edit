@@ -103,9 +103,7 @@ export const BulkEditPane = () => {
     queryKey: QUERY_KEY_DOWNLOAD_ACTION_MENU,
     enabled: !!fileInfo,
     id: bulkOperationId,
-    fileInfo: {
-      fileContentType: FILE_SEARCH_PARAMS[fileInfo?.param]?.replace('_MARC', ''),
-    },
+    fileContentType: FILE_SEARCH_PARAMS[fileInfo?.param]?.replace('_MARC', ''),
     onSuccess: data => {
       /* istanbul ignore next */
       saveAs(new Blob([data]), fileInfo?.bulkDetails[FILE_TO_LINK[fileInfo?.param]].split('/')[1]);

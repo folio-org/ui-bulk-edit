@@ -20,8 +20,8 @@ import { getMarcFieldTemplate } from '../BulkEditListResult/BulkEditMarc/helpers
 import { ACTIONS } from '../../../constants/marcActions';
 
 const mockConfirmChanges = jest.fn();
-const mockMarcContentUpdate = jest.fn().mockReturnValue('marcContentUpdate');
-const mockContentUpdate = jest.fn();
+const mockMarcContentUpdate = jest.fn().mockReturnValue(Promise.resolve('marcContentUpdate'));
+const mockContentUpdate = jest.fn().mockReturnValue(Promise.resolve('administrativeContentUpdate'));
 
 jest.mock('../../../hooks/useConfirmChanges', () => ({
   useConfirmChanges: jest.fn(() => ({
@@ -332,7 +332,7 @@ describe('BulkEditMarcLayer', () => {
     userEvent.click(confirmChangesBtn);
 
     await waitFor(() => {
-      expect(mockConfirmChanges).toHaveBeenCalledWith(['marcContentUpdate']);
+      expect(mockConfirmChanges).toHaveBeenCalledWith(expect.any(Function));
     });
   });
 

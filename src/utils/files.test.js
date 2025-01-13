@@ -2,7 +2,6 @@ import { saveAs } from 'file-saver';
 
 import { getFileName, changeExtension, savePreviewFile } from './files';
 import { getFormattedFilePrefixDate } from './date';
-import { APPROACHES } from '../constants';
 
 
 jest.mock('./date', () => ({
@@ -57,15 +56,15 @@ describe('files', () => {
     it('should save the file with the correct name and extension for MARC approach', () => {
       const bulkOperationId = '123';
       const fileData = 'data';
-      const initialFileName = 'abc.csv';
-      const approach = APPROACHES.MARC;
+      const initialFileName = 'abc.mrc';
+      const extension = 'mrc';
 
       getFormattedFilePrefixDate.mockReturnValue('2024-08-09');
 
       savePreviewFile({
         bulkOperationId,
         fileData,
-        approach,
+        extension,
         initialFileName,
       });
 
@@ -79,14 +78,14 @@ describe('files', () => {
       const bulkOperationId = '123';
       const fileData = 'data';
       const initialFileName = 'abc.csv';
-      const approach = APPROACHES.IN_APP;
+      const extension = 'csv';
 
       getFormattedFilePrefixDate.mockReturnValue('2024-08-09');
 
       savePreviewFile({
         bulkOperationId,
         fileData,
-        approach,
+        extension,
         initialFileName,
       });
 
@@ -100,14 +99,14 @@ describe('files', () => {
       const bulkOperationId = '123';
       const fileData = 'data';
       const initialFileName = '';
-      const approach = APPROACHES.MARC;
+      const extension = 'mrc';
 
       getFormattedFilePrefixDate.mockReturnValue('2024-08-09');
 
       savePreviewFile({
         bulkOperationId,
         fileData,
-        approach,
+        extension,
         initialFileName,
       });
 
