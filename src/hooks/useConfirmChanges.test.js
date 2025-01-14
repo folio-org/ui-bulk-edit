@@ -65,7 +65,7 @@ describe('useConfirmChanges', () => {
 
     expect(result.current.totalRecords).toBe(100);
     expect(result.current.isPreviewModalOpened).toBe(false);
-    expect(result.current.isPreviewLoading).toBe(false);
+    expect(result.current.isJobPreparing).toBe(false);
   });
 
   it('should open and close the preview modal', () => {
@@ -97,13 +97,13 @@ describe('useConfirmChanges', () => {
     });
 
     // Check if loading state is set
-    expect(result.current.isPreviewLoading).toBe(true);
+    expect(result.current.isJobPreparing).toBe(true);
 
     // Wait for the next update after the async calls
     await waitForNextUpdate(); // Wait for the polling to start
 
     // Finally, check if loading state is set back to false
-    expect(result.current.isPreviewLoading).toBe(false);
+    expect(result.current.isJobPreparing).toBe(false);
   });
 
   it('should handle error in confirmChanges function', async () => {
@@ -117,13 +117,28 @@ describe('useConfirmChanges', () => {
     });
 
     // Check if loading state is set
-    expect(result.current.isPreviewLoading).toBe(true);
+    expect(result.current.isJobPreparing).toBe(true);
 
     // Wait for the next update after the async calls
     await waitForNextUpdate();
 
     // Check that loading state is set back to false after handling the error
-    expect(result.current.isPreviewLoading).toBe(false);
+    expect(result.current.isJobPreparing).toBe(false);
     expect(result.current.isPreviewModalOpened).toBe(false); // Modal should close on error
+  });
+
+  it('should handle changePreviewSettled function correctly', async () => {
+    const { result } = renderHook(() => useConfirmChanges({
+      queryDownloadKey: 'testKey',
+      bulkOperationId: '123',
+    }));
+
+    expect(result.current.isPreviewSettled).toBe(false);
+
+    act(() => {
+      result.current.changePreviewSettled();
+    });
+
+    expect(result.current.isPreviewSettled).toBe(true);
   });
 });
