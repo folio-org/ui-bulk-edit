@@ -3,6 +3,7 @@ import uniqueId from 'lodash/uniqueId';
 import {
   CONTROL_TYPES,
   OPTIONS,
+  APPROACHES,
   BASE_DATE_FORMAT,
   FINAL_ACTIONS,
   ACTIONS,
@@ -22,6 +23,7 @@ import {
   noteActionsWithDuplicate,
   electronicAccess,
   statisticalCodeActions,
+  noteActionsMarc,
 } from '../../../../../constants';
 import { getActionParameters } from '../../../../../constants/actionParameters';
 
@@ -82,6 +84,7 @@ export const getDefaultActions = ({
   option,
   options,
   capability,
+  approach,
 }) => {
   const replaceClearDefaultActions = replaceClearActions();
   const emailDefaultFindActions = emailActionsFind();
@@ -94,6 +97,7 @@ export const getDefaultActions = ({
   const statusDefaultActions = statusActions();
   const loanDefaultActions = permanentLoanTypeActions();
   const noteDefaultActions = noteActions();
+  const noteDefaultActionsMarc = noteActionsMarc();
   const noteWithMarcDefaultActions = noteActionsWithMarc();
   const noteDuplicateDefaultActions = noteActionsWithDuplicate();
   const electronicAccessActions = electronicAccess();
@@ -272,7 +276,9 @@ export const getDefaultActions = ({
         actions: [
           null,
           {
-            actionsList: noteDefaultActions,
+            actionsList: approach === APPROACHES.MARC
+              ? noteDefaultActionsMarc
+              : noteDefaultActions,
             controlType: (action) => {
               return action === ACTIONS.CHANGE_TYPE
                 ? CONTROL_TYPES.NOTE_SELECT
@@ -498,7 +504,7 @@ export const getMappedContentUpdates = (fields, options) => fields.map(({
   };
 });
 
-export const getFieldTemplate = (options, capability) => {
+export const getFieldTemplate = (options, capability, approach) => {
   return ({
     id: uniqueId(),
     options,
@@ -507,6 +513,7 @@ export const getFieldTemplate = (options, capability) => {
     actionsDetails: getDefaultActions({
       option: '',
       capability,
+      approach,
       options,
     }),
   });
