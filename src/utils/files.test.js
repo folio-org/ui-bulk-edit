@@ -54,65 +54,20 @@ describe('files', () => {
     });
 
     it('should save the file with the correct name and extension for MARC approach', () => {
-      const bulkOperationId = '123';
+      const name = '2024-08-09-Updates-Preview-abc.mrc';
       const fileData = 'data';
-      const initialFileName = 'abc.mrc';
-      const extension = 'mrc';
+      const fileName = `bulkId/${name}`;
 
       getFormattedFilePrefixDate.mockReturnValue('2024-08-09');
 
       savePreviewFile({
-        bulkOperationId,
+        fileName,
         fileData,
-        extension,
-        initialFileName,
       });
 
       expect(saveAs).toHaveBeenCalledWith(
         new Blob([fileData]),
-        '2024-08-09-Updates-Preview-abc.mrc'
-      );
-    });
-
-    it('should save the file with the correct name and extension for OTHER approach', () => {
-      const bulkOperationId = '123';
-      const fileData = 'data';
-      const initialFileName = 'abc.csv';
-      const extension = 'csv';
-
-      getFormattedFilePrefixDate.mockReturnValue('2024-08-09');
-
-      savePreviewFile({
-        bulkOperationId,
-        fileData,
-        extension,
-        initialFileName,
-      });
-
-      expect(saveAs).toHaveBeenCalledWith(
-        new Blob([fileData]),
-        '2024-08-09-Updates-Preview-abc.csv'
-      );
-    });
-
-    it('should save the file with default name if initialFileName is empty', () => {
-      const bulkOperationId = '123';
-      const fileData = 'data';
-      const initialFileName = '';
-      const extension = 'mrc';
-
-      getFormattedFilePrefixDate.mockReturnValue('2024-08-09');
-
-      savePreviewFile({
-        bulkOperationId,
-        fileData,
-        extension,
-        initialFileName,
-      });
-
-      expect(saveAs).toHaveBeenCalledWith(
-        new Blob([fileData]),
-        '2024-08-09-Updates-Preview-Query-123.mrc'
+        name,
       );
     });
   });

@@ -85,7 +85,7 @@ export const BulkEditInAppLayer = ({
         open={isPreviewModalOpened}
         modalFooter={
           <BulkEditPreviewModalFooter
-            bulkOperationId={bulkOperationId}
+            bulkDetails={bulkDetails}
             buttonsDisabled={!isCsvFileReady}
             onCommitChanges={commitChanges}
             onKeepEditing={closePreviewModal}
