@@ -868,7 +868,7 @@ describe('ContentUpdatesForm helpers', () => {
                     },
                     {
                       value: ACTIONS.FIND,
-                      label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
+                      label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
                       disabled: false,
                     },
                   ],
