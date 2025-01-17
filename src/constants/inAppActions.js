@@ -157,11 +157,15 @@ export const statisticalCodeActions = () => [
   getRemoveAllAction(),
 ];
 
-export const noteActions = () => [
+export const noteActionsMarc = () => [
   getPlaceholder(),
   getAddToExistingAction(),
   getRemoveAllAction(),
   getFindAction(),
+];
+
+export const noteActions = () => [
+  ...noteActionsMarc(),
   getChangeNoteTypeAction(),
 ];
 

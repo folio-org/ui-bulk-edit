@@ -34,10 +34,10 @@ import css from '../../../BulkEditPane.css';
 
 export const ContentUpdatesForm = ({ fields, setFields, options }) => {
   const { formatMessage } = useIntl();
-  const { currentRecordType } = useSearchParams();
+  const { currentRecordType, approach } = useSearchParams();
 
   useEffect(() => {
-    setFields([getFieldTemplate(options, currentRecordType)]);
+    setFields([getFieldTemplate(options, currentRecordType, approach)]);
     // eslint-disable-next-line
   }, []);
 
@@ -56,6 +56,7 @@ export const ContentUpdatesForm = ({ fields, setFields, options }) => {
             capability: currentRecordType,
             option,
             options,
+            approach,
           }),
         };
       }
@@ -171,7 +172,7 @@ export const ContentUpdatesForm = ({ fields, setFields, options }) => {
 
   const handleAdd = () => {
     const filteredFields = getFilteredFields([...fields, {
-      ...getFieldTemplate(options, currentRecordType),
+      ...getFieldTemplate(options, currentRecordType, approach),
       id: uniqueId(),
       actionsDetails: {
         type: null,
@@ -191,6 +192,7 @@ export const ContentUpdatesForm = ({ fields, setFields, options }) => {
             capability: currentRecordType,
             option,
             options,
+            approach,
           }),
         })
         : f;
