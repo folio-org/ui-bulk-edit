@@ -124,7 +124,7 @@ export const BulkEditMarcLayer = ({
         onKeepEditing={closePreviewModal}
         modalFooter={
           <BulkEditPreviewModalFooter
-            bulkOperationId={bulkOperationId}
+            bulkDetails={bulkDetails}
             buttonsDisabled={!areMarcAndCsvReady}
             onCommitChanges={commitChanges}
             onKeepEditing={closePreviewModal}
