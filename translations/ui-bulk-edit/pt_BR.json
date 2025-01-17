@@ -68,7 +68,7 @@
     "previewModal.message": "Os registros {count, number} serão alterados se o botão Confirmar alterações for clicado. Você pode escolher Baixar prévia para revisar todas as alterações antes de salvar.",
     "previewModal.previewToBeChanged": "Pré-visualização de registros a serem alterados",
     "previewModal.keepEditing": "Continue editando",
-    "previewModal.downloadPreview": "Baixar pré-visualização",
+    "previewModal.downloadPreview": "Baixar a pré-visualização em formato CSV",
     "previewModal.saveAndClose": "Confirmar as alterações",
     "progressBar.title": "Carregando {title} e recuperando dados relevantes",
     "progresssBar.retrieving": "Recuperando",
