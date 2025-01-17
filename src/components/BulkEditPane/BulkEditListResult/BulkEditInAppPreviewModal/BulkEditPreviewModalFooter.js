@@ -6,33 +6,31 @@ import { Button } from '@folio/stripes/components';
 
 import css from './BulkEditInAppPreviewModal.css';
 import { useSearchParams } from '../../../../hooks';
-import { APPROACHES, FILE_EXTENSION, FILE_SEARCH_PARAMS } from '../../../../constants';
+import { APPROACHES, FILE_SEARCH_PARAMS } from '../../../../constants';
 import {
   QUERY_KEY_DOWNLOAD_ADMINISTRATIVE_PREVIEW_MODAL,
   QUERY_KEY_DOWNLOAD_MARC_PREVIEW_MODAL,
   useFileDownload
 } from '../../../../hooks/api';
-import { changeExtension, savePreviewFile } from '../../../../utils/files';
+import { savePreviewFile } from '../../../../utils/files';
 
 export const BulkEditPreviewModalFooter = ({
-  bulkOperationId,
+  bulkDetails,
   buttonsDisabled,
   onKeepEditing,
   onCommitChanges,
 }) => {
-  const { approach, initialFileName } = useSearchParams();
+  const { approach } = useSearchParams();
 
   const { refetch: downloadCsvPreview } = useFileDownload({
     queryKey: QUERY_KEY_DOWNLOAD_ADMINISTRATIVE_PREVIEW_MODAL,
     enabled: false,
-    id: bulkOperationId,
+    id: bulkDetails?.id,
     fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
     onSuccess: (fileData) => {
       savePreviewFile({
-        bulkOperationId,
+        fileName: bulkDetails?.linkToModifiedRecordsCsvFile,
         fileData,
-        initialFileName,
-        extension: FILE_EXTENSION.CSV,
       });
     },
   });
@@ -40,14 +38,12 @@ export const BulkEditPreviewModalFooter = ({
   const { refetch: downloadMarcPreview } = useFileDownload({
     queryKey: QUERY_KEY_DOWNLOAD_MARC_PREVIEW_MODAL,
     enabled: false,
-    id: bulkOperationId,
+    id: bulkDetails?.id,
     fileContentType: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_MARC_FILE,
     onSuccess: (fileData) => {
       savePreviewFile({
-        bulkOperationId,
+        fileName: bulkDetails?.linkToModifiedRecordsMarcFile,
         fileData,
-        initialFileName: changeExtension(initialFileName, FILE_EXTENSION.MRC),
-        extension: FILE_EXTENSION.MRC,
       });
     },
   });
@@ -73,7 +69,7 @@ export const BulkEditPreviewModalFooter = ({
 };
 
 BulkEditPreviewModalFooter.propTypes = {
-  bulkOperationId: PropTypes.string.isRequired,
+  bulkDetails: PropTypes.object,
   buttonsDisabled: PropTypes.bool,
   onKeepEditing: PropTypes.func,
   onCommitChanges: PropTypes.func,
