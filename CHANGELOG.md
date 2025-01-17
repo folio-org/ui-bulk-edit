@@ -12,6 +12,7 @@
 * [UIBULKED-574](https://folio-org.atlassian.net/browse/UIBULKED-574) Updates to Errors component.
 * [UIBULKED-571](https://folio-org.atlassian.net/browse/UIBULKED-571) Errors in response to UI calls.
 * [UIBULKED-568](https://folio-org.atlassian.net/browse/UIBULKED-568) Populating Are you sure? form
+* [UIBULKED-543](https://folio-org.atlassian.net/browse/UIBULKED-543) Rename Find (full field search) to Find.
 * [UIBULKED-599](https://folio-org.atlassian.net/browse/UIBULKED-599) Change Administrative note type is not supported for MARC instances.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)

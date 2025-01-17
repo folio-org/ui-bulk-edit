@@ -161,7 +161,7 @@ export const noteActionsMarc = () => [
   getPlaceholder(),
   getAddToExistingAction(),
   getRemoveAllAction(),
-  getFindFullFieldAction(),
+  getFindAction(),
 ];
 
 export const noteActions = () => [
@@ -175,23 +175,31 @@ export const noteActionsWithMarc = () => [
   getRemoveMarcAsStuffOnlyAction(),
   getAddToExistingAction(),
   getRemoveAllAction(),
-  getFindFullFieldAction(),
+  getFindAction(),
   getChangeNoteTypeAction(),
 ];
 
 export const electronicAccess = () => [
   getPlaceholder(),
   getClearAction(),
+  getFindAction(),
+  getReplaceAction(),
+];
+
+export const electronicAccessWithFindFullField = () => [
+  getPlaceholder(),
+  getClearAction(),
   getFindFullFieldAction(),
   getReplaceAction(),
 ];
+
 export const noteActionsWithDuplicate = () => [
   getPlaceholder(),
   getMarcAsStuffOnlyAction(),
   getRemoveMarcAsStuffOnlyAction(),
   getAddToExistingAction(),
   getRemoveAllAction(),
-  getFindFullFieldAction(),
+  getFindAction(),
   getChangeNoteTypeAction(),
   getDuplicateToNoteAction(),
 ];
