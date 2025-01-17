@@ -22,6 +22,7 @@ import {
   noteActionsWithDuplicate,
   electronicAccess,
   statisticalCodeActions,
+  electronicAccessWithFindFullField,
 } from '../../../../../constants';
 import { getActionParameters } from '../../../../../constants/actionParameters';
 
@@ -97,6 +98,7 @@ export const getDefaultActions = ({
   const noteWithMarcDefaultActions = noteActionsWithMarc();
   const noteDuplicateDefaultActions = noteActionsWithDuplicate();
   const electronicAccessActions = electronicAccess();
+  const electronicAccessFindFullFieldActions = electronicAccessWithFindFullField();
 
   const replaceClearInitialVal = replaceClearDefaultActions[0].value;
 
@@ -333,9 +335,9 @@ export const getDefaultActions = ({
         actions: [
           null,
           {
-            actionsList: electronicAccessActions,
+            actionsList: electronicAccessFindFullFieldActions,
             controlType: () => CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
-            [ACTION_VALUE_KEY]: electronicAccessActions[0].value,
+            [ACTION_VALUE_KEY]: electronicAccessFindFullFieldActions[0].value,
             [FIELD_VALUE_KEY]: '',
           },
         ],
