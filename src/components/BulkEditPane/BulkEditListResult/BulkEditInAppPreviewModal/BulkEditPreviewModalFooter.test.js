@@ -31,7 +31,7 @@ jest.mock('../../../../utils/files', () => ({
 const renderModalFooter = (overwrite = {}) => {
   return render(
     <BulkEditPreviewModalFooter
-      bulkOperationId="123"
+      bulkOperation={{ id: '123' }}
       buttonsDisabled
       onKeepEditing={jest.fn()}
       onCommitChanges={jest.fn()}

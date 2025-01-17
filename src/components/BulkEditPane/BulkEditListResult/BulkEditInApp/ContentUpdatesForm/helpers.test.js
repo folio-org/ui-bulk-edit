@@ -5,6 +5,7 @@ import {
   OPTIONS,
   commonAdditionalActions,
   CAPABILITIES,
+  APPROACHES,
   PARAMETERS_KEYS,
 } from '../../../../../constants';
 
@@ -640,7 +641,7 @@ describe('ContentUpdatesForm helpers', () => {
                       },
                       {
                         value: ACTIONS.FIND,
-                        label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
+                        label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
                         disabled: false,
                       },
                       {
@@ -712,7 +713,7 @@ describe('ContentUpdatesForm helpers', () => {
                   },
                   {
                     value: ACTIONS.FIND,
-                    label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
+                    label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
                     disabled: false,
                   },
                   {
@@ -817,7 +818,7 @@ describe('ContentUpdatesForm helpers', () => {
                     },
                     {
                       value: ACTIONS.FIND,
-                      label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
+                      label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
                       disabled: false,
                     },
                     {
@@ -833,6 +834,51 @@ describe('ContentUpdatesForm helpers', () => {
               ],
             }),
           ));
+      });
+
+      it('returns the correct object for the ADMINISTRATIVE_NOTE option using instance marc', () => {
+        expect(JSON.stringify(getDefaultActions({
+          option: OPTIONS.ADMINISTRATIVE_NOTE,
+          options: [],
+          formatMessage,
+          capability: CAPABILITIES.INSTANCE,
+          approach: APPROACHES.MARC
+        })))
+          .toEqual(
+            JSON.stringify({
+              type: '',
+              actions: [
+                null,
+                {
+                  actionsList: [
+                    {
+                      value: '',
+                      label: <FormattedMessage id="ui-bulk-edit.actions.placeholder" />,
+                      disabled: true,
+                    },
+                    {
+                      value: ACTIONS.ADD_TO_EXISTING,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.options.items.addNote" />,
+                      disabled: false,
+                    },
+                    {
+                      value: ACTIONS.REMOVE_ALL,
+                      label: <FormattedMessage id="ui-bulk-edit.layer.options.items.removeAll" />,
+                      disabled: false,
+                    },
+                    {
+                      value: ACTIONS.FIND,
+                      label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
+                      disabled: false,
+                    },
+                  ],
+                  controlType: () => CONTROL_TYPES.TEXTAREA,
+                  [ACTION_VALUE_KEY]: '',
+                  [FIELD_VALUE_KEY]: '',
+                },
+              ],
+            })
+          );
       });
 
       it('returns the correct object for the ELECTRONIC_ACCESS_MATERIALS_SPECIFIED option', () => {
@@ -861,7 +907,7 @@ describe('ContentUpdatesForm helpers', () => {
                     },
                     {
                       value: ACTIONS.FIND,
-                      label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
+                      label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
                       disabled: false,
                     },
                     {
@@ -1036,7 +1082,7 @@ describe('ContentUpdatesForm helpers', () => {
               },
               {
                 value: ACTIONS.FIND,
-                label: <FormattedMessage id="ui-bulk-edit.actions.findFullField" />,
+                label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
                 disabled: false,
               },
               {

@@ -14,11 +14,6 @@ export const FILE_KEYS = {
   TRIGGERING_FILE: 'linkToTriggeringCsvFile',
 };
 
-export const FILE_EXTENSION = {
-  CSV: 'csv',
-  MRC: 'mrc',
-};
-
 // use as API key for /download
 export const FILE_SEARCH_PARAMS = {
   MATCHED_RECORDS_FILE: 'MATCHED_RECORDS_FILE',

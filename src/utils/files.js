@@ -29,12 +29,10 @@ export const changeExtension = (fileName, extension) => {
 };
 
 export const savePreviewFile = ({
-  bulkOperationId,
+  fileName,
   fileData,
-  extension,
-  initialFileName,
 }) => {
-  const fileName = initialFileName || `Query-${bulkOperationId}.${extension}`;
+  const name = fileName.split('/')[1];
 
-  saveAs(new Blob([fileData]), `${getFormattedFilePrefixDate()}-Updates-Preview-${fileName}`);
+  saveAs(new Blob([fileData]), name);
 };
