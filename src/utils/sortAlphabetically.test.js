@@ -1,4 +1,8 @@
-import { sortAlphabetically, sortAlphabeticallyWithoutGroups } from './sortAlphabetically';
+import {
+  sortAlphabetically,
+  sortAlphabeticallyWithoutGroups,
+  sortAlphabeticallyComponentLabels
+} from './sortAlphabetically';
 
 describe('sortAlphabetically', () => {
   it('should sort the array alphabetically', () => {
@@ -61,5 +65,78 @@ describe('sortAlphabeticallyActions', () => {
     ];
 
     expect(sortedArray).toEqual(expectedSortedArray);
+  });
+});
+
+describe('sortAlphabeticallyComponentLabels', () => {
+  const formatMessage = jest.fn(({ id }) => {
+    const messages = {
+      'label1': 'Build',
+      'label2': 'Change',
+      'label3': 'Delete',
+      'label4': 'Remove all'
+    };
+    return messages[id] || id;
+  });
+
+  it('should return an empty array if the input is undefined or null', () => {
+    expect(sortAlphabeticallyComponentLabels(undefined, formatMessage)).toEqual([]);
+    expect(sortAlphabeticallyComponentLabels(null, formatMessage)).toEqual([]);
+  });
+
+  it('should keep placeholders (empty values) at the top', () => {
+    const input = [
+      { value: '', label: { props: { id: 'placeholder' } } },
+      { value: '1', label: { props: { id: 'label1' } } },
+      { value: '2', label: { props: { id: 'label2' } } },
+    ];
+
+    const sorted = sortAlphabeticallyComponentLabels(input, formatMessage);
+    expect(sorted[0].value).toBe('');
+  });
+
+  it('should sort labels alphabetically based on their translated values', () => {
+    const input = [
+      { value: '1', label: { props: { id: 'label3' } } },
+      { value: '2', label: { props: { id: 'label1' } } },
+      { value: '3', label: { props: { id: 'label2' } } },
+    ];
+
+    const sorted = sortAlphabeticallyComponentLabels(input, formatMessage);
+
+    expect(sorted.map(item => item.label.props.id)).toEqual([
+      'label1',
+      'label2',
+      'label3',
+    ]);
+  });
+
+  it('should handle multiple placeholders correctly', () => {
+    const input = [
+      { value: '', label: { props: { id: 'placeholder1' } } },
+      { value: '1', label: { props: { id: 'label4' } } },
+      { value: '2', label: { props: { id: 'label1' } } },
+    ];
+
+    const sorted = sortAlphabeticallyComponentLabels(input, formatMessage);
+
+    expect(sorted[0].value).toBe('');
+    expect(sorted.map(item => item.label.props.id)).toEqual([
+      'placeholder1',
+      'label1',
+      'label4',
+    ]);
+  });
+
+  it('should not modify the original array', () => {
+    const input = [
+      { value: '1', label: { props: { id: 'label3' } } },
+      { value: '2', label: { props: { id: 'label1' } } },
+    ];
+
+    const original = [...input];
+    sortAlphabeticallyComponentLabels(input, formatMessage);
+
+    expect(input).toEqual(original);
   });
 });
