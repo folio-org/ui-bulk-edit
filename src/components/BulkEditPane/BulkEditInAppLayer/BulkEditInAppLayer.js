@@ -32,11 +32,13 @@ export const BulkEditInAppLayer = ({
 
   const {
     isPreviewModalOpened,
-    isPreviewLoading,
+    isJobPreparing,
+    isPreviewSettled,
     bulkDetails,
     totalRecords,
     confirmChanges,
     closePreviewModal,
+    changePreviewSettled,
   } = useConfirmChanges({ bulkOperationId });
 
   const { commitChanges } = useCommitChanges({
@@ -47,8 +49,7 @@ export const BulkEditInAppLayer = ({
     }
   });
 
-  const isCsvFileReady = bulkDetails?.linkToModifiedRecordsCsvFile
-    || !isPreviewLoading;
+  const isCsvFileReady = bulkDetails?.linkToModifiedRecordsCsvFile && isPreviewSettled;
 
   const handleConfirm = () => {
     const contentUpdateBody = getContentUpdatesBody({
@@ -80,8 +81,10 @@ export const BulkEditInAppLayer = ({
       </BulkEditLayer>
 
       <BulkEditPreviewModal
-        isPreviewLoading={isPreviewLoading}
-        bulkDetails={bulkDetails}
+        isJobPreparing={isJobPreparing}
+        isPreviewSettled={isPreviewSettled}
+        onPreviewSettled={changePreviewSettled}
+        onKeepEditing={closePreviewModal}
         open={isPreviewModalOpened}
         modalFooter={
           <BulkEditPreviewModalFooter

@@ -48,11 +48,13 @@ export const BulkEditMarcLayer = ({
 
   const {
     isPreviewModalOpened,
-    isPreviewLoading,
+    isJobPreparing,
+    isPreviewSettled,
     bulkDetails,
     totalRecords,
     confirmChanges,
     closePreviewModal,
+    changePreviewSettled,
   } = useConfirmChanges({ bulkOperationId });
 
   const { commitChanges } = useCommitChanges({
@@ -64,7 +66,7 @@ export const BulkEditMarcLayer = ({
   });
 
   const hasBothFiles = bulkDetails?.linkToModifiedRecordsCsvFile && bulkDetails?.linkToModifiedRecordsMarcFile;
-  const areMarcAndCsvReady = hasBothFiles || !isPreviewLoading;
+  const areMarcAndCsvReady = hasBothFiles && isPreviewSettled;
 
   const handleConfirm = () => {
     const bulkOperationMarcRules = marcFields
@@ -119,9 +121,11 @@ export const BulkEditMarcLayer = ({
       </BulkEditLayer>
 
       <BulkEditPreviewModal
-        isPreviewLoading={isPreviewLoading}
-        open={isPreviewModalOpened}
+        isJobPreparing={isJobPreparing}
+        isPreviewSettled={isPreviewSettled}
         onKeepEditing={closePreviewModal}
+        open={isPreviewModalOpened}
+        onPreviewSettled={changePreviewSettled}
         modalFooter={
           <BulkEditPreviewModalFooter
             bulkDetails={bulkDetails}

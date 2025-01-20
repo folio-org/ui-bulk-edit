@@ -23,7 +23,8 @@ export const useConfirmChanges = ({ bulkOperationId }) => {
   const { showErrorMessage } = useErrorMessages();
 
   const [isPreviewModalOpened, setIsPreviewModalOpened] = useState(false);
-  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
+  const [isJobPreparing, setIsJobPreparing] = useState(false);
+  const [isPreviewSettled, setIsPreviewSettled] = useState(false);
 
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
   const { bulkOperationStart } = useBulkOperationStart();
@@ -35,11 +36,16 @@ export const useConfirmChanges = ({ bulkOperationId }) => {
   };
 
   const closePreviewModal = () => {
+    setIsPreviewSettled(false);
     setIsPreviewModalOpened(false);
   };
 
+  const changePreviewSettled = () => {
+    setIsPreviewSettled(true);
+  };
+
   const confirmChanges = (updateSequence) => {
-    setIsPreviewLoading(true);
+    setIsJobPreparing(true);
 
     queryClient.removeQueries(PREVIEW_MODAL_KEY);
     queryClient.setQueriesData(
@@ -62,7 +68,7 @@ export const useConfirmChanges = ({ bulkOperationId }) => {
         closePreviewModal();
       })
       .finally(() => {
-        setIsPreviewLoading(false);
+        setIsJobPreparing(false);
       });
   };
 
@@ -70,8 +76,9 @@ export const useConfirmChanges = ({ bulkOperationId }) => {
     totalRecords,
     bulkDetails,
     isPreviewModalOpened,
-    isPreviewLoading,
-    setIsPreviewLoading,
+    isJobPreparing,
+    isPreviewSettled,
+    changePreviewSettled,
     openPreviewModal,
     closePreviewModal,
     confirmChanges,

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage,
@@ -34,6 +34,8 @@ import { useErrorMessages } from '../../../../hooks/useErrorMessages';
 
 export const BulkEditPreviewModalList = ({
   onPreviewError,
+  onPreviewSettled,
+  isPreviewSettled,
 }) => {
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
   const { visibleColumns } = useContext(RootContext);
@@ -44,8 +46,7 @@ export const BulkEditPreviewModalList = ({
     changePage,
   } = usePagination(PAGINATION_CONFIG);
 
-  const [previewLoaded, setPreviewLoaded] = useState(false);
-  const interval = previewLoaded ? 0 : 1000;
+  const interval = isPreviewSettled ? 0 : 1000;
   const { bulkDetails } = useBulkOperationDetails({
     id: bulkOperationId,
     interval,
@@ -65,14 +66,11 @@ export const BulkEditPreviewModalList = ({
     capabilities: currentRecordType,
     queryOptions: {
       enabled,
-      onSuccess: showErrorMessage,
       onError: (error) => {
         showErrorMessage(error);
         onPreviewError();
       },
-      onSettled: () => {
-        setPreviewLoaded(true);
-      }
+      onSettled: onPreviewSettled,
     },
     ...pagination,
   });
@@ -129,4 +127,6 @@ export const BulkEditPreviewModalList = ({
 
 BulkEditPreviewModalList.propTypes = {
   onPreviewError: PropTypes.func,
+  onPreviewSettled: PropTypes.func,
+  isPreviewSettled: PropTypes.bool,
 };
