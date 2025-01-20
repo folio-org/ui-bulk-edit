@@ -31,11 +31,14 @@ const bulkOperation = bulkEditLogsData[0];
 const visibleColumns = [];
 const setVisibleColumns = jest.fn();
 const onKeepEditing = jest.fn();
+const onPreviewSettled = jest.fn();
 
 const defaultProps = {
   open: true,
   onKeepEditing,
-  isPreviewLoading: false,
+  onPreviewSettled,
+  isJobPreparing: false,
+  isPreviewSettled: false,
   modalFooter: <div>Footer</div>,
 };
 
@@ -82,6 +85,12 @@ describe('BulkEditInAppPreviewModal', () => {
           json: () => ({}),
         }),
       });
+  });
+
+  it('should render spinner if isJobPreparing set to true', async () => {
+    await renderPreviewModal({ ...defaultProps, isJobPreparing: true });
+
+    expect(screen.getByTestId('preloader')).toBeInTheDocument();
   });
 
   it('should display preview records when available', async () => {

@@ -10,9 +10,11 @@ import { BulkEditPreviewModalList } from './BulkEditPreviewModalList';
 
 export const BulkEditPreviewModal = ({
   open,
-  isPreviewLoading,
+  isJobPreparing,
   modalFooter,
   onKeepEditing,
+  isPreviewSettled,
+  onPreviewSettled,
 }) => {
   return (
     <Modal
@@ -24,11 +26,13 @@ export const BulkEditPreviewModal = ({
       dismissible
       onClose={onKeepEditing}
     >
-      {isPreviewLoading ?
+      {isJobPreparing ?
         <Preloader />
         :
         <BulkEditPreviewModalList
           onPreviewError={onKeepEditing}
+          onPreviewSettled={onPreviewSettled}
+          isPreviewSettled={isPreviewSettled}
         />
       }
     </Modal>
@@ -37,7 +41,9 @@ export const BulkEditPreviewModal = ({
 
 BulkEditPreviewModal.propTypes = {
   open: PropTypes.bool,
-  isPreviewLoading: PropTypes.bool,
+  isJobPreparing: PropTypes.bool,
   modalFooter: PropTypes.node,
+  isPreviewSettled: PropTypes.bool,
   onKeepEditing: PropTypes.func,
+  onPreviewSettled: PropTypes.func,
 };
