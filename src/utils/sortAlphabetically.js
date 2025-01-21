@@ -41,3 +41,25 @@ export const sortAlphabeticallyWithoutGroups = (array) => {
     }
   });
 };
+
+export const sortAlphabeticallyComponentLabels = (array, formatMessage) => {
+  const collator = new Intl.Collator();
+
+  if (!array) {
+    return [];
+  }
+
+  return [...array].sort((a, b) => {
+    // empty values are always first as they are placeholders
+    if (!a.value) {
+      return -1;
+    } else if (!b.value) {
+      return 1;
+    } else {
+      return collator.compare(
+        formatMessage({ id: a.label.props.id }),
+        formatMessage({ id: b.label.props.id })
+      );
+    }
+  });
+};
