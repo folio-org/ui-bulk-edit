@@ -2,20 +2,9 @@ import { FormattedMessage } from 'react-intl';
 import React from 'react';
 import { EDITING_STEPS } from './core';
 
-// use as marks that getFileName are ready
-export const FILE_KEYS = {
-  MATCHING_RECORDS_LINK: 'linkToMatchedRecordsCsvFile',
-  MATCHING_ERRORS_LINK: 'linkToMatchedRecordsErrorsCsvFile',
-  PROPOSED_CHANGES_LINK: 'linkToModifiedRecordsCsvFile',
-  PROPOSED_CHANGES_LINK_MARC: 'linkToModifiedRecordsMarcFile',
-  UPDATE_CHANGES_LINK_MARC: 'linkToCommittedRecordsMarcFile',
-  UPDATED_RECORDS_LINK: 'linkToCommittedRecordsCsvFile',
-  UPDATED_ERRORS_LINK: 'linkToCommittedRecordsErrorsCsvFile',
-  TRIGGERING_FILE: 'linkToTriggeringCsvFile',
-};
-
 // use as API key for /download
 export const FILE_SEARCH_PARAMS = {
+  TRIGGERING_FILE: 'TRIGGERING_FILE',
   MATCHED_RECORDS_FILE: 'MATCHED_RECORDS_FILE',
   RECORD_MATCHING_ERROR_FILE: 'RECORD_MATCHING_ERROR_FILE',
   COMMITTED_RECORDS_FILE: 'COMMITTED_RECORDS_FILE',
@@ -25,42 +14,57 @@ export const FILE_SEARCH_PARAMS = {
   PROPOSED_CHANGES_MARC_FILE: 'PROPOSED_CHANGES_MARC_FILE',
 };
 
-export const FILE_TO_LINK = {
-  MATCHED_RECORDS_FILE: 'linkToMatchedRecordsCsvFile',
-  RECORD_MATCHING_ERROR_FILE: 'linkToMatchedRecordsErrorsCsvFile',
-  COMMITTED_RECORDS_FILE: 'linkToCommittedRecordsCsvFile',
-  COMMITTING_CHANGES_ERROR_FILE: 'linkToCommittedRecordsErrorsCsvFile',
-  PROPOSED_CHANGES_FILE: 'linkToModifiedRecordsCsvFile',
-  COMMITTED_RECORDS_MARC_FILE: 'linkToCommittedRecordsMarcFile'
+// use as marks that getFileName are ready
+export const FILE_KEYS = {
+  [FILE_SEARCH_PARAMS.MATCHED_RECORDS_FILE]: 'linkToMatchedRecordsCsvFile',
+  [FILE_SEARCH_PARAMS.RECORD_MATCHING_ERROR_FILE]: 'linkToMatchedRecordsErrorsCsvFile',
+  [FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE]: 'linkToModifiedRecordsCsvFile',
+  [FILE_SEARCH_PARAMS.PROPOSED_CHANGES_MARC_FILE]: 'linkToModifiedRecordsMarcFile',
+  [FILE_SEARCH_PARAMS.COMMITTED_RECORDS_MARC_FILE]: 'linkToCommittedRecordsMarcFile',
+  [FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE]: 'linkToCommittedRecordsCsvFile',
+  [FILE_SEARCH_PARAMS.COMMITTING_CHANGES_ERROR_FILE]: 'linkToCommittedRecordsErrorsCsvFile',
+  TRIGGERING_FILE: 'linkToTriggeringCsvFile',
+};
+
+export const LINK_KEYS = {
+  linkToTriggeringCsvFile: FILE_SEARCH_PARAMS.TRIGGERING_FILE,
+  linkToMatchedRecordsCsvFile: FILE_SEARCH_PARAMS.MATCHED_RECORDS_FILE,
+  linkToMatchedRecordsErrorsCsvFile: FILE_SEARCH_PARAMS.RECORD_MATCHING_ERROR_FILE,
+  linkToModifiedRecordsCsvFile: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
+  linkToModifiedRecordsMarcFile: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_MARC_FILE,
+  linkToCommittedRecordsMarcFile: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_MARC_FILE,
+  linkToCommittedRecordsCsvFile: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE,
+  linkToCommittedRecordsErrorsCsvFile: FILE_SEARCH_PARAMS.COMMITTING_CHANGES_ERROR_FILE,
+  expired: 'expired',
 };
 
 export const getDownloadLinks = ({ perms, step }) => [
   {
-    KEY: FILE_KEYS.MATCHING_RECORDS_LINK,
+    KEY: FILE_KEYS.MATCHED_RECORDS_FILE,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.MATCHED_RECORDS_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadMatchedRecords" />,
     IS_VISIBLE: perms.hasAnyEditPermissions && step === EDITING_STEPS.UPLOAD,
   },
   {
-    KEY: FILE_KEYS.UPDATED_RECORDS_LINK,
+    KEY: FILE_KEYS.COMMITTED_RECORDS_FILE,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadChangedRecords" />,
     IS_VISIBLE: perms.hasAnyEditPermissions,
   },
   {
-    KEY: FILE_KEYS.UPDATE_CHANGES_LINK_MARC,
+    KEY: FILE_KEYS.COMMITTED_RECORDS_MARC_FILE,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_MARC_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadChangedRecords.marc" />,
     IS_VISIBLE: perms.hasAnyEditPermissions,
   },
   {
-    KEY: FILE_KEYS.MATCHING_ERRORS_LINK,
+    KEY: FILE_KEYS.RECORD_MATCHING_ERROR_FILE,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.RECORD_MATCHING_ERROR_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />,
     IS_VISIBLE: perms.hasAnyEditPermissions && step === EDITING_STEPS.UPLOAD,
   },
   {
-    KEY: FILE_KEYS.UPDATED_ERRORS_LINK,
+    KEY: FILE_KEYS.COMMITTING_CHANGES_ERROR_FILE,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTING_CHANGES_ERROR_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadErrors" />,
     IS_VISIBLE: perms.hasAnyEditPermissions && step === EDITING_STEPS.COMMIT,

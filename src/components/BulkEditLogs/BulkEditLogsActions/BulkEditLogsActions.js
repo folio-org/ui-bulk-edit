@@ -15,7 +15,7 @@ import {
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import { QUERY_KEY_DOWNLOAD_LOGS, useFileDownload } from '../../../hooks/api';
-import { APPROACHES, CAPABILITIES, linkNamesMap } from '../../../constants';
+import { APPROACHES, CAPABILITIES, LINK_KEYS } from '../../../constants';
 import { useBulkPermissions } from '../../../hooks';
 import { savePreviewFile } from '../../../utils/files';
 
@@ -32,7 +32,7 @@ const BulkEditLogsActions = ({ item }) => {
     queryKey: QUERY_KEY_DOWNLOAD_LOGS,
     enabled: false,
     id: item.id,
-    fileContentType: linkNamesMap[triggeredFile],
+    fileContentType: LINK_KEYS[triggeredFile],
     onSuccess: fileData => {
       savePreviewFile({
         fileName: item?.[triggeredFile],
@@ -53,7 +53,7 @@ const BulkEditLogsActions = ({ item }) => {
     setTriggeredFile(file);
   };
 
-  const availableFiles = Object.keys(linkNamesMap).filter(linkName => item[linkName]);
+  const availableFiles = Object.keys(LINK_KEYS).filter(linkName => item[linkName]);
 
   const renderTrigger = useCallback(({ triggerRef, onToggle, ariaProps, keyHandler }) => (
     <IconButton

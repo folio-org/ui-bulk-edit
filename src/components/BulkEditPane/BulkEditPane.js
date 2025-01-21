@@ -21,7 +21,7 @@ import {
   CRITERIA,
   APPROACHES,
   FILE_SEARCH_PARAMS,
-  FILE_TO_LINK,
+  FILE_KEYS,
 } from '../../constants';
 import { RootContext } from '../../context/RootContext';
 import { BulkEditLogs } from '../BulkEditLogs/BulkEditLogs';
@@ -107,7 +107,7 @@ export const BulkEditPane = () => {
     onSuccess: fileData => {
       savePreviewFile({
         fileData,
-        fileName: fileInfo?.bulkDetails[FILE_TO_LINK[fileInfo?.param]],
+        fileName: fileInfo?.bulkDetails[FILE_KEYS[fileInfo?.param]],
       });
     },
     onSettled: () => {
