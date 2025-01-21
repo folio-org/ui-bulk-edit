@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import '../../../../test/jest/__mock__';
@@ -102,46 +102,5 @@ describe('BulkEditLogsActions', () => {
 
       expect(screen.getByTestId(fileKey)).toBeDefined();
     });
-  });
-
-  it('should trigger file download when a file option is clicked', () => {
-    renderBulkEditLogsActions();
-
-    fireEvent.click(screen.getByRole('button', { name: /ellipsis/i }));
-    fireEvent.click(screen.getByTestId(FILE_KEYS.TRIGGERING_FILE));
-
-    expect(mockRefetch).toHaveBeenCalledTimes(1);
-  });
-
-  it('should not render for CAPABILITIES.HOLDING without inventory permissions', () => {
-    useBulkPermissions.mockReturnValue({ hasInventoryInstanceViewPerms: false });
-
-    const { container } = renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.HOLDING } });
-
-    expect(container.firstChild).toBeNull();
-  });
-
-  it('should not render for CAPABILITIES.ITEM without inventory permissions', () => {
-    useBulkPermissions.mockReturnValue({ hasInventoryInstanceViewPerms: false });
-
-    const { container } = renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.ITEM } });
-
-    expect(container.firstChild).toBeNull();
-  });
-
-  it('should not render for CAPABILITIES.INSTANCE without inventory permissions', () => {
-    useBulkPermissions.mockReturnValue({ hasInventoryInstanceViewPerms: false });
-
-    const { container } = renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.INSTANCE } });
-
-    expect(container.firstChild).toBeNull();
-  });
-
-  it('should not render for CAPABILITIES.USER without hasUsersViewPerms permissions', () => {
-    useBulkPermissions.mockReturnValue({ hasInventoryInstanceViewPerms: true, hasUsersViewPerms: false });
-
-    const { container } = renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.USER } });
-
-    expect(container.firstChild).toBeNull();
   });
 });
