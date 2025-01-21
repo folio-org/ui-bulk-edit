@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import '../../../../test/jest/__mock__';
@@ -17,6 +17,7 @@ import {
 } from '../../../constants';
 import BulkEditLogsActions from './BulkEditLogsActions';
 import { useBulkPermissions } from '../../../hooks';
+import { useFileDownload } from '../../../hooks/api';
 
 const linksWithoutExpired = omit(LINK_KEYS, ['expired']);
 
@@ -34,6 +35,11 @@ const bulkOperationWithExpired = {
 jest.mock('../../../hooks', () => ({
   ...jest.requireActual('../../../hooks'),
   useBulkPermissions: jest.fn(),
+  useFileDownload: jest.fn(),
+}));
+
+jest.mock('../../../hooks/api', () => ({
+  useFileDownload: jest.fn(),
 }));
 
 jest.mock('../../../hooks/useSearchParams', () => ({
@@ -49,6 +55,19 @@ const renderBulkEditLogsActions = ({ item = bulkOperation } = {}) => {
 };
 
 describe('BulkEditLogsActions', () => {
+  const mockPermissions = {
+    hasUsersViewPerms: true,
+    hasInventoryInstanceViewPerms: true,
+  };
+  const mockRefetch = jest.fn();
+
+  beforeEach(() => {
+    useBulkPermissions.mockReturnValue(mockPermissions);
+    useFileDownload.mockReturnValue({
+      refetch: mockRefetch,
+    });
+  });
+
   beforeEach(() => {
     useOkapiKy.mockClear().mockReturnValue({});
   });
@@ -83,5 +102,46 @@ describe('BulkEditLogsActions', () => {
 
       expect(screen.getByTestId(fileKey)).toBeDefined();
     });
+  });
+
+  it('should trigger file download when a file option is clicked', () => {
+    renderBulkEditLogsActions();
+
+    fireEvent.click(screen.getByRole('button', { name: /ellipsis/i }));
+    fireEvent.click(screen.getByTestId(FILE_KEYS.TRIGGERING_FILE));
+
+    expect(mockRefetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not render for CAPABILITIES.HOLDING without inventory permissions', () => {
+    useBulkPermissions.mockReturnValue({ hasInventoryInstanceViewPerms: false });
+
+    const { container } = renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.HOLDING } });
+
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('should not render for CAPABILITIES.ITEM without inventory permissions', () => {
+    useBulkPermissions.mockReturnValue({ hasInventoryInstanceViewPerms: false });
+
+    const { container } = renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.ITEM } });
+
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('should not render for CAPABILITIES.INSTANCE without inventory permissions', () => {
+    useBulkPermissions.mockReturnValue({ hasInventoryInstanceViewPerms: false });
+
+    const { container } = renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.INSTANCE } });
+
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('should not render for CAPABILITIES.USER without hasUsersViewPerms permissions', () => {
+    useBulkPermissions.mockReturnValue({ hasInventoryInstanceViewPerms: true, hasUsersViewPerms: false });
+
+    const { container } = renderBulkEditLogsActions({ item: { ...bulkOperation, entityType: CAPABILITIES.USER } });
+
+    expect(container.firstChild).toBeNull();
   });
 });
