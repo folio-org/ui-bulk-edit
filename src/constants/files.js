@@ -16,14 +16,14 @@ export const FILE_SEARCH_PARAMS = {
 
 // use as marks that getFileName are ready
 export const FILE_KEYS = {
-  [FILE_SEARCH_PARAMS.MATCHED_RECORDS_FILE]: 'linkToMatchedRecordsCsvFile',
-  [FILE_SEARCH_PARAMS.RECORD_MATCHING_ERROR_FILE]: 'linkToMatchedRecordsErrorsCsvFile',
-  [FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE]: 'linkToModifiedRecordsCsvFile',
-  [FILE_SEARCH_PARAMS.PROPOSED_CHANGES_MARC_FILE]: 'linkToModifiedRecordsMarcFile',
-  [FILE_SEARCH_PARAMS.COMMITTED_RECORDS_MARC_FILE]: 'linkToCommittedRecordsMarcFile',
-  [FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE]: 'linkToCommittedRecordsCsvFile',
-  [FILE_SEARCH_PARAMS.COMMITTING_CHANGES_ERROR_FILE]: 'linkToCommittedRecordsErrorsCsvFile',
   TRIGGERING_FILE: 'linkToTriggeringCsvFile',
+  MATCHED_RECORDS_FILE: 'linkToMatchedRecordsCsvFile',
+  RECORD_MATCHING_ERROR_FILE: 'linkToMatchedRecordsErrorsCsvFile',
+  COMMITTED_RECORDS_FILE: 'linkToCommittedRecordsCsvFile',
+  COMMITTED_RECORDS_MARC_FILE: 'linkToCommittedRecordsMarcFile',
+  COMMITTING_CHANGES_ERROR_FILE: 'linkToCommittedRecordsErrorsCsvFile',
+  PROPOSED_CHANGES_FILE: 'linkToModifiedRecordsCsvFile',
+  PROPOSED_CHANGES_MARC_FILE: 'linkToModifiedRecordsMarcFile',
 };
 
 export const LINK_KEYS = {
@@ -32,8 +32,8 @@ export const LINK_KEYS = {
   linkToMatchedRecordsErrorsCsvFile: FILE_SEARCH_PARAMS.RECORD_MATCHING_ERROR_FILE,
   linkToModifiedRecordsCsvFile: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
   linkToModifiedRecordsMarcFile: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_MARC_FILE,
-  linkToCommittedRecordsMarcFile: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_MARC_FILE,
   linkToCommittedRecordsCsvFile: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE,
+  linkToCommittedRecordsMarcFile: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_MARC_FILE,
   linkToCommittedRecordsErrorsCsvFile: FILE_SEARCH_PARAMS.COMMITTING_CHANGES_ERROR_FILE,
   expired: 'expired',
 };

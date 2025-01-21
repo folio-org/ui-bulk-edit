@@ -33,13 +33,14 @@ jest.mock('../../hooks/api', () => ({
 
 const onEdit = jest.fn();
 const onToggle = jest.fn();
+const links = Object.values(FILE_KEYS).reduce((acc, key) => {
+  acc[key] = key;
+  return acc;
+}, {});
 const bulkOperation = {
   ...bulkEditLogsData[0],
   status: JOB_STATUSES.DATA_MODIFICATION,
-  [FILE_KEYS.MATCHING_RECORDS_LINK]: FILE_KEYS.MATCHING_RECORDS_LINK,
-  [FILE_KEYS.UPDATED_RECORDS_LINK]: FILE_KEYS.UPDATED_RECORDS_LINK,
-  [FILE_KEYS.MATCHING_ERRORS_LINK]: FILE_KEYS.MATCHING_ERRORS_LINK,
-  [FILE_KEYS.UPDATED_ERRORS_LINK]: FILE_KEYS.UPDATED_ERRORS_LINK,
+  ...links,
 };
 const defaultProviderState = {
   visibleColumns: [
