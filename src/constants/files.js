@@ -19,10 +19,10 @@ export const FILE_SEARCH_PARAMS = {
   MATCHED_RECORDS_FILE: 'MATCHED_RECORDS_FILE',
   RECORD_MATCHING_ERROR_FILE: 'RECORD_MATCHING_ERROR_FILE',
   COMMITTED_RECORDS_FILE: 'COMMITTED_RECORDS_FILE',
+  COMMITTED_RECORDS_MARC_FILE: 'COMMITTED_RECORDS_MARC_FILE',
   COMMITTING_CHANGES_ERROR_FILE: 'COMMITTING_CHANGES_ERROR_FILE',
   PROPOSED_CHANGES_FILE: 'PROPOSED_CHANGES_FILE',
   PROPOSED_CHANGES_MARC_FILE: 'PROPOSED_CHANGES_MARC_FILE',
-  COMMITTED_RECORDS_FILE_MARC: 'COMMITTED_RECORDS_FILE_MARC',
 };
 
 export const FILE_TO_LINK = {
@@ -31,14 +31,14 @@ export const FILE_TO_LINK = {
   COMMITTED_RECORDS_FILE: 'linkToCommittedRecordsCsvFile',
   COMMITTING_CHANGES_ERROR_FILE: 'linkToCommittedRecordsErrorsCsvFile',
   PROPOSED_CHANGES_FILE: 'linkToModifiedRecordsCsvFile',
-  COMMITTED_RECORDS_FILE_MARC: 'linkToCommittedRecordsMarcFile'
+  COMMITTED_RECORDS_MARC_FILE: 'linkToCommittedRecordsMarcFile'
 };
 
 export const getDownloadLinks = ({ perms, step }) => [
   {
     KEY: FILE_KEYS.MATCHING_RECORDS_LINK,
     SEARCH_PARAM: FILE_SEARCH_PARAMS.MATCHED_RECORDS_FILE,
-    LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadMathcedRecords" />,
+    LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadMatchedRecords" />,
     IS_VISIBLE: perms.hasAnyEditPermissions && step === EDITING_STEPS.UPLOAD,
   },
   {
@@ -49,7 +49,7 @@ export const getDownloadLinks = ({ perms, step }) => [
   },
   {
     KEY: FILE_KEYS.UPDATE_CHANGES_LINK_MARC,
-    SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_FILE_MARC,
+    SEARCH_PARAM: FILE_SEARCH_PARAMS.COMMITTED_RECORDS_MARC_FILE,
     LINK_NAME: <FormattedMessage id="ui-bulk-edit.start.downloadChangedRecords.marc" />,
     IS_VISIBLE: perms.hasAnyEditPermissions,
   },

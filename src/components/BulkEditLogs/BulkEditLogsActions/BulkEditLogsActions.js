@@ -4,7 +4,6 @@ import React, {
   useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
-import { saveAs } from 'file-saver';
 import {
   IconButton,
   DropdownMenu,
@@ -18,10 +17,10 @@ import { FormattedMessage } from 'react-intl';
 import { QUERY_KEY_DOWNLOAD_LOGS, useFileDownload } from '../../../hooks/api';
 import { APPROACHES, CAPABILITIES, linkNamesMap } from '../../../constants';
 import { useBulkPermissions } from '../../../hooks';
-import { getFileName } from '../../../utils/files';
+import { savePreviewFile } from '../../../utils/files';
 
 const BulkEditLogsActions = ({ item }) => {
-  const fileNamePostfix = item.fqlQueryId ? `.${APPROACHES.QUERY}` : '';
+  const fileNamePostfix = item?.fqlQueryId ? `.${APPROACHES.QUERY}` : '';
 
   const {
     hasUsersViewPerms,
@@ -34,8 +33,12 @@ const BulkEditLogsActions = ({ item }) => {
     enabled: false,
     id: item.id,
     fileContentType: linkNamesMap[triggeredFile],
-    onSuccess: data => {
-      saveAs(new Blob([data]), getFileName(item, triggeredFile));
+    onSuccess: fileData => {
+      savePreviewFile({
+        fileName: item?.[triggeredFile],
+        fileData,
+      });
+
       setTriggeredFile(null);
     },
   });
