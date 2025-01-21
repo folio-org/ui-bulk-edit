@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import '../../../../test/jest/__mock__';
+import { omit } from 'lodash';
 import {
   bulkEditLogsData,
   bulkEditLogsDataWithExpiredFlag,
@@ -17,21 +18,18 @@ import {
 import BulkEditLogsActions from './BulkEditLogsActions';
 import { useBulkPermissions } from '../../../hooks';
 
-const links = Object.values(FILE_KEYS).reduce((acc, key) => {
-  acc[key] = key;
-  return acc;
-}, {});
+const linksWithoutExpired = omit(LINK_KEYS, ['expired']);
 
 const bulkOperation = {
   ...bulkEditLogsData[0],
   status: JOB_STATUSES.DATA_MODIFICATION,
-  ...links,
+  ...linksWithoutExpired,
 };
 
 const bulkOperationWithExpired = {
   ...bulkEditLogsDataWithExpiredFlag[0],
   status: JOB_STATUSES.DATA_MODIFICATION,
-  ...links,
+  ...linksWithoutExpired,
 };
 jest.mock('../../../hooks', () => ({
   ...jest.requireActual('../../../hooks'),
