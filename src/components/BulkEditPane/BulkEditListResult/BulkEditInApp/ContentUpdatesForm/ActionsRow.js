@@ -10,7 +10,7 @@ import { FINAL_ACTIONS } from '../../../../../constants';
 import { ACTION_VALUE_KEY } from './helpers';
 import { ValuesColumn } from './ValuesColumn';
 import { AdditionalActionParameters } from './AdditionalActionParameters';
-import { sortAlphabeticallyWithoutGroups } from '../../../../../utils/sortAlphabetically';
+import { sortAlphabeticallyComponentLabels } from '../../../../../utils/sortAlphabetically';
 import css from '../../../BulkEditPane.css';
 
 export const ActionsRow = ({ option, actions, onChange }) => {
@@ -19,7 +19,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
   return actions.map((action, actionIndex) => {
     if (!action) return null;
 
-    const sortedActions = sortAlphabeticallyWithoutGroups(action.actionsList);
+    const sortedActions = sortAlphabeticallyComponentLabels(action.actionsList, formatMessage);
 
     return (
       <Fragment key={actionIndex}>

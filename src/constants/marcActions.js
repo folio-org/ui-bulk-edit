@@ -18,9 +18,9 @@ export const getPlaceholder = () => ({
   disabled: true,
 });
 
-export const getFindEntireFieldAction = () => ({
+export const getFindAction = () => ({
   value: ACTIONS.FIND,
-  label: <FormattedMessage id="ui-bulk-edit.actions.findEntireField" />,
+  label: <FormattedMessage id="ui-bulk-edit.actions.find" />,
   disabled: false,
 });
 
@@ -69,6 +69,6 @@ export const getReplaceWithAction = () => ({
 export const marcActions = () => [
   getPlaceholder(),
   getAddAction(),
-  getFindEntireFieldAction(),
+  getFindAction(),
   getRemoveAllAction(),
 ];
