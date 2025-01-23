@@ -7,6 +7,11 @@ export const PREVIEW_LIMITS = {
   RECORDS: 100,
 };
 
+export const ERROR_TYPES = {
+  WARNING: 'WARNING',
+  ERROR: 'ERROR',
+};
+
 export const APPROACHES = {
   IN_APP: 'IN_APP',
   MANUAL: 'MANUAL',

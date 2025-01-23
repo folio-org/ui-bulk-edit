@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -26,6 +26,7 @@ import { usePagination } from '../../../../hooks/usePagination';
 import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
 import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
 import { useSearchParams } from '../../../../hooks';
+import { useErrorType } from '../../../../hooks/useErrorType';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const {
@@ -43,8 +44,14 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const {
     countOfRecords,
     countOfErrors,
+    countOfWarnings,
     visibleColumns,
   } = useBulkOperationStats({ bulkDetails, step });
+
+  const { errorType, toggleErrorType } = useErrorType({
+    countOfErrors,
+    countOfWarnings
+  });
 
   const {
     pagination: previewPagination,
@@ -71,6 +78,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
   const { errors, isFetching: isErrorsFetching } = useErrorsPreview({
     id,
+    errorType,
     enabled: isPreviewEnabled,
     ...errorsPagination,
   });
@@ -117,7 +125,10 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
             <ErrorsAccordion
               errors={errors}
               totalErrors={countOfErrors}
+              totalWarnings={countOfWarnings}
+              errorType={errorType}
               onChangePage={changeErrorPage}
+              onShowWarnings={toggleErrorType}
               pagination={errorsPagination}
               isFetching={isErrorsFetching}
             />

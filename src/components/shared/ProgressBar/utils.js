@@ -10,7 +10,7 @@ export const getBulkOperationStep = (bulkOperation) => {
     case bulkOperation.status === JOB_STATUSES.COMPLETED:
     case (
       bulkOperation.status === JOB_STATUSES.COMPLETED_WITH_ERRORS
-      && Boolean(bulkOperation.committedNumOfErrors)
+      && (Boolean(bulkOperation.committedNumOfErrors) || Boolean(bulkOperation.committedNumOfWarnings))
     ):
       return EDITING_STEPS.COMMIT;
     case bulkOperation.status === JOB_STATUSES.DATA_MODIFICATION:

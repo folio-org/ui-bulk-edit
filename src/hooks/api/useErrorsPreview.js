@@ -10,6 +10,7 @@ export const useErrorsPreview = ({
   enabled,
   offset = 0,
   limit = PREVIEW_LIMITS.ERRORS,
+  errorType,
 }) => {
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: PREVIEW_ERRORS_KEY });
@@ -18,8 +19,8 @@ export const useErrorsPreview = ({
 
   const { data, isFetching } = useQuery(
     {
-      queryKey: [namespaceKey, id, limit, offset],
-      queryFn: () => ky.get(`bulk-operations/${id}/errors`, { searchParams: { limit, offset } }).json(),
+      queryKey: [namespaceKey, id, limit, offset, errorType],
+      queryFn: () => ky.get(`bulk-operations/${id}/errors`, { searchParams: { limit, offset, errorType } }).json(),
       onError: showErrorMessage,
       onSuccess: showErrorMessage,
       keepPreviousData: true,
