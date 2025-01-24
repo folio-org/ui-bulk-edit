@@ -12,7 +12,7 @@ import { useStripes } from '@folio/stripes/core';
 import { PrevNextPagination } from '@folio/stripes-acq-components';
 import css from '../Preview.css';
 import { useSearchParams } from '../../../../../hooks';
-import { CAPABILITIES, ERROR_PARAMETERS_KEYS } from '../../../../../constants';
+import { CAPABILITIES, ERROR_PARAMETERS_KEYS, ERROR_TYPES } from '../../../../../constants';
 
 const getParam = (error, key) => error.parameters.find(param => param.key === key)?.value;
 
@@ -23,6 +23,14 @@ const columnMapping = {
 };
 
 const visibleColumns = Object.keys(columnMapping);
+
+const renderErrorType = (error) => {
+  if (!error.type || error.type === ERROR_TYPES.ERROR) {
+    return <FormattedMessage id="ui-bulk-edit.list.errors.table.status.ERROR" />;
+  }
+
+  return <FormattedMessage id="ui-bulk-edit.list.errors.table.status.WARNING" />;
+};
 
 const renderErrorMessage = (error, isLinkAvailable) => {
   const link = getParam(error, ERROR_PARAMETERS_KEYS.LINK);
@@ -45,16 +53,19 @@ const renderErrorMessage = (error, isLinkAvailable) => {
 };
 
 const getResultsFormatter = ({ isLinkAvailable }) => ({
-  type: () => <FormattedMessage id="ui-bulk-edit.list.errors.table.status.ERROR" />,
+  type: renderErrorType,
   key: error => getParam(error, ERROR_PARAMETERS_KEYS.IDENTIFIER),
   message: error => renderErrorMessage(error, isLinkAvailable),
 });
 
 const ErrorsAccordion = ({
   errors = [],
+  errorType,
   totalErrors,
+  totalWarnings,
   isFetching,
   pagination,
+  onShowWarnings,
   onChangePage,
 }) => {
   const { user, okapi } = useStripes();
@@ -65,13 +76,11 @@ const ErrorsAccordion = ({
   const isLinkAvailable = (isCentralTenant && capabilities === CAPABILITIES.INSTANCE) || !isCentralTenant;
   const resultsFormatter = getResultsFormatter({ isLinkAvailable });
   const errorLength = errors.length;
+  // temporary solution to calculate total errors and warnings, until backend will provide it in scope of MODBULKOPS-451
+  const totalErrorsAndWarnings = errorType === ERROR_TYPES.ERROR ? totalErrors : totalErrors + totalWarnings;
+  const isWarningsCheckboxDisabled = !totalWarnings || !totalErrors;
 
   const [opened, setOpened] = useState(!!errorLength);
-  const [showWarnings, setShowWarnings] = useState(false);
-
-  const handleShowWarnings = () => {
-    setShowWarnings(prev => !prev);
-  };
 
   return (
     <div className={css.previewAccordion}>
@@ -89,13 +98,14 @@ const ErrorsAccordion = ({
                 id="ui-bulk-edit.list.errors.info"
                 values={{
                   errors: totalErrors,
-                  warnings: 0,
+                  warnings: totalWarnings,
                 }}
               />
               <Checkbox
                 label={<FormattedMessage id="ui-bulk-edit.list.errors.checkbox" />}
-                checked={showWarnings}
-                onChange={handleShowWarnings}
+                checked={!errorType}
+                onChange={onShowWarnings}
+                disabled={isWarningsCheckboxDisabled}
               />
             </Layout>
           </Headline>
@@ -113,7 +123,7 @@ const ErrorsAccordion = ({
             {errors.length > 0 && (
               <PrevNextPagination
                 {...pagination}
-                totalCount={totalErrors}
+                totalCount={totalErrorsAndWarnings}
                 disabled={false}
                 onChange={onChangePage}
               />
@@ -128,11 +138,14 @@ const ErrorsAccordion = ({
 ErrorsAccordion.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.object),
   totalErrors: PropTypes.number,
+  totalWarnings: PropTypes.number,
+  errorType: PropTypes.string,
   isFetching: PropTypes.bool,
   pagination: {
     limit: PropTypes.number,
     offset: PropTypes.number,
   },
+  onShowWarnings: PropTypes.func,
   onChangePage: PropTypes.func,
 };
 
