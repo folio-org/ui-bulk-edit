@@ -5,7 +5,7 @@ import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 
 import { useErrorMessages } from '../useErrorMessages';
 import { useErrorsPreview, PREVIEW_ERRORS_KEY } from './useErrorsPreview';
-import { ERROR_TYPES, PREVIEW_LIMITS } from '../../constants';
+import { EDITING_STEPS, ERROR_TYPES, PREVIEW_LIMITS } from '../../constants';
 
 jest.mock('react-query', () => ({
   useQuery: jest.fn(),
@@ -43,7 +43,8 @@ describe('useErrorsPreview', () => {
     const { result } = renderHook(() => useErrorsPreview({
       id: '123',
       enabled: true,
-      errorType: ERROR_TYPES.ERROR
+      errorType: ERROR_TYPES.ERROR,
+      step: EDITING_STEPS.UPLOAD,
     }));
 
     expect(result.current.errors).toEqual(['error1', 'error2']);
@@ -52,7 +53,7 @@ describe('useErrorsPreview', () => {
     expect(useNamespace).toHaveBeenCalledWith({ key: PREVIEW_ERRORS_KEY });
     expect(useQuery).toHaveBeenCalledWith(
       expect.objectContaining({
-        queryKey: [PREVIEW_ERRORS_KEY, '123', PREVIEW_LIMITS.ERRORS, 0, ERROR_TYPES.ERROR],
+        queryKey: [PREVIEW_ERRORS_KEY, '123', PREVIEW_LIMITS.ERRORS, 0, ERROR_TYPES.ERROR, EDITING_STEPS.UPLOAD],
         queryFn: expect.any(Function),
         enabled: true,
       })
