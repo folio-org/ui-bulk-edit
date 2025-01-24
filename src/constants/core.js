@@ -156,7 +156,7 @@ export const ERROR_PARAMETERS_KEYS = {
 };
 
 export const RECORD_TYPES_MAPPING = {
-  [CAPABILITIES.HOLDING]: 'holding',
+  [CAPABILITIES.HOLDING]: 'holdings',
   [CAPABILITIES.INSTANCE]: 'instance',
   [CAPABILITIES.ITEM]: 'item',
   [CAPABILITIES.USER]: 'user',
