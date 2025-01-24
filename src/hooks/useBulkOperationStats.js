@@ -21,7 +21,7 @@ export const useBulkOperationStats = ({ bulkDetails, step }) => {
 
     const countWarnings = isInitialPreview
       ? bulkDetails.matchedNumOfWarnings
-      : bulkDetails.сommittedNumOfWarnings;
+      : bulkDetails.committedNumOfWarnings;
 
     setCountOfErrors(countErrors);
     setCountOfWarnings(countWarnings);

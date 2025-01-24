@@ -78,6 +78,7 @@ const ErrorsAccordion = ({
   const errorLength = errors.length;
   // temporary solution to calculate total errors and warnings, until backend will provide it in scope of MODBULKOPS-451
   const totalErrorsAndWarnings = errorType === ERROR_TYPES.ERROR ? totalErrors : totalErrors + totalWarnings;
+  const isWarningsCheckboxDisabled = !totalWarnings || (totalWarnings && !totalErrors);
 
   const [opened, setOpened] = useState(!!errorLength);
 
@@ -104,7 +105,7 @@ const ErrorsAccordion = ({
                 label={<FormattedMessage id="ui-bulk-edit.list.errors.checkbox" />}
                 checked={!errorType}
                 onChange={onShowWarnings}
-                disabled={!totalWarnings}
+                disabled={isWarningsCheckboxDisabled}
               />
             </Layout>
           </Headline>
