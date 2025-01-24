@@ -78,6 +78,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
   const { errors, isFetching: isErrorsFetching } = useErrorsPreview({
     id,
+    step,
     errorType,
     enabled: isPreviewEnabled,
     ...errorsPagination,
