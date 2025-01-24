@@ -25,7 +25,7 @@ const columnMapping = {
 const visibleColumns = Object.keys(columnMapping);
 
 const renderErrorType = (error) => {
-  if (error.type === ERROR_TYPES.ERROR) {
+  if (!error.type || error.type === ERROR_TYPES.ERROR) {
     return <FormattedMessage id="ui-bulk-edit.list.errors.table.status.ERROR" />;
   }
 
