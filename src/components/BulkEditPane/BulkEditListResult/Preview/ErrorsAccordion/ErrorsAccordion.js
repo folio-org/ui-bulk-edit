@@ -78,7 +78,7 @@ const ErrorsAccordion = ({
   const errorLength = errors.length;
   // temporary solution to calculate total errors and warnings, until backend will provide it in scope of MODBULKOPS-451
   const totalErrorsAndWarnings = errorType === ERROR_TYPES.ERROR ? totalErrors : totalErrors + totalWarnings;
-  const isWarningsCheckboxDisabled = !totalWarnings || (totalWarnings && !totalErrors);
+  const isWarningsCheckboxDisabled = !totalWarnings || !totalErrors;
 
   const [opened, setOpened] = useState(!!errorLength);
 

@@ -83,6 +83,11 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     ...errorsPagination,
   });
 
+  const handleToggleWarnings = () => {
+    changeErrorPage(ERRORS_PAGINATION_CONFIG);
+    toggleErrorType();
+  };
+
   if (!((bulkDetails.fqlQuery && criteria === CRITERIA.QUERY) || (criteria !== CRITERIA.QUERY && !bulkDetails.fqlQuery))) {
     return <NoResultsMessage />;
   }
@@ -128,7 +133,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
               totalWarnings={countOfWarnings}
               errorType={errorType}
               onChangePage={changeErrorPage}
-              onShowWarnings={toggleErrorType}
+              onShowWarnings={handleToggleWarnings}
               pagination={errorsPagination}
               isFetching={isErrorsFetching}
             />
