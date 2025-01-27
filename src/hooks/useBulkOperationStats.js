@@ -5,6 +5,7 @@ import { RootContext } from '../context/RootContext';
 export const useBulkOperationStats = ({ bulkDetails, step }) => {
   const { countOfRecords, setCountOfRecords, visibleColumns } = useContext(RootContext);
   const [countOfErrors, setCountOfErrors] = useState(0);
+  const [countOfWarnings, setCountOfWarnings] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
@@ -18,7 +19,12 @@ export const useBulkOperationStats = ({ bulkDetails, step }) => {
       ? bulkDetails.matchedNumOfErrors
       : bulkDetails.committedNumOfErrors;
 
+    const countWarnings = isInitialPreview
+      ? bulkDetails.matchedNumOfWarnings
+      : bulkDetails.committedNumOfWarnings;
+
     setCountOfErrors(countErrors);
+    setCountOfWarnings(countWarnings);
     setCountOfRecords(countRecords);
     setTotalCount(isInitialPreview ? bulkDetails.totalNumOfRecords : bulkDetails.matchedNumOfRecords);
   }, [
@@ -32,6 +38,7 @@ export const useBulkOperationStats = ({ bulkDetails, step }) => {
   return {
     countOfRecords,
     countOfErrors,
+    countOfWarnings,
     totalCount,
     visibleColumns,
   };

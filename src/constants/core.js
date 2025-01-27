@@ -7,6 +7,11 @@ export const PREVIEW_LIMITS = {
   RECORDS: 100,
 };
 
+export const ERROR_TYPES = {
+  WARNING: 'WARNING',
+  ERROR: 'ERROR',
+};
+
 export const APPROACHES = {
   IN_APP: 'IN_APP',
   MANUAL: 'MANUAL',
@@ -151,7 +156,7 @@ export const ERROR_PARAMETERS_KEYS = {
 };
 
 export const RECORD_TYPES_MAPPING = {
-  [CAPABILITIES.HOLDING]: 'holding',
+  [CAPABILITIES.HOLDING]: 'holdings',
   [CAPABILITIES.INSTANCE]: 'instance',
   [CAPABILITIES.ITEM]: 'item',
   [CAPABILITIES.USER]: 'user',

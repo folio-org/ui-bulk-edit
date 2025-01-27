@@ -26,6 +26,7 @@ import { usePagination } from '../../../../hooks/usePagination';
 import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
 import { NoResultsMessage } from '../NoResultsMessage/NoResultsMessage';
 import { useSearchParams } from '../../../../hooks';
+import { useErrorType } from '../../../../hooks/useErrorType';
 
 export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const {
@@ -43,8 +44,14 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
   const {
     countOfRecords,
     countOfErrors,
+    countOfWarnings,
     visibleColumns,
   } = useBulkOperationStats({ bulkDetails, step });
+
+  const { errorType, toggleErrorType } = useErrorType({
+    countOfErrors,
+    countOfWarnings
+  });
 
   const {
     pagination: previewPagination,
@@ -71,9 +78,16 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
   const { errors, isFetching: isErrorsFetching } = useErrorsPreview({
     id,
+    step,
+    errorType,
     enabled: isPreviewEnabled,
     ...errorsPagination,
   });
+
+  const handleToggleWarnings = () => {
+    changeErrorPage(ERRORS_PAGINATION_CONFIG);
+    toggleErrorType();
+  };
 
   if (!((bulkDetails.fqlQuery && criteria === CRITERIA.QUERY) || (criteria !== CRITERIA.QUERY && !bulkDetails.fqlQuery))) {
     return <NoResultsMessage />;
@@ -117,7 +131,10 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
             <ErrorsAccordion
               errors={errors}
               totalErrors={countOfErrors}
+              totalWarnings={countOfWarnings}
+              errorType={errorType}
               onChangePage={changeErrorPage}
+              onShowWarnings={handleToggleWarnings}
               pagination={errorsPagination}
               isFetching={isErrorsFetching}
             />
