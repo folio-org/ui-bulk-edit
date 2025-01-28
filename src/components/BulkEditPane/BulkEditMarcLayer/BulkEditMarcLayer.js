@@ -14,7 +14,7 @@ import { useContentUpdate } from '../../../hooks/api';
 import {
   getContentUpdatesBody,
   getMappedContentUpdates,
-  isContentUpdatesFormValid
+  isContentUpdatesFormValid, isMarcContentUpdatesFormValid
 } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 import { sortAlphabetically } from '../../../utils/sortAlphabetically';
 import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
@@ -50,12 +50,16 @@ export const BulkEditMarcLayer = ({
   const marcContentUpdatesWithoutId = marcContentUpdates.map(item => omit(item, ['id']));
   const contentUpdates = getMappedContentUpdates(fields, options);
 
-  const isMarcFieldsValid = Object.keys(marcFormErrors).length === 0;
+  const isMarcFormValid = isMarcContentUpdatesFormValid(marcFormErrors);
   const isAdministrativeFormValid = isContentUpdatesFormValid(contentUpdates);
+
   const isAdministrativeFormPristine = !isEqual(ADMINISTRATIVE_FORM_INITIAL_STATE, contentUpdates);
   const isMarcFormPristine = !isEqual(MARC_FORM_INITIAL_STATE, marcContentUpdatesWithoutId);
+
+  // state is valid if at least one form is filled and valid and another one is not pristine or both forms are filled and valid
   const areFormsStateValid = (isAdministrativeFormValid && !isMarcFormPristine)
-    || (isMarcFieldsValid && !isAdministrativeFormPristine);
+    || (isMarcFormValid && !isAdministrativeFormPristine)
+    || (isAdministrativeFormValid && isMarcFormValid);
 
   const {
     isPreviewModalOpened,
@@ -85,7 +89,7 @@ export const BulkEditMarcLayer = ({
       ...item
     }));
 
-    const marcUpdateBody = isMarcFieldsValid ? {
+    const marcUpdateBody = isMarcFormValid ? {
       bulkOperationMarcRules,
       totalRecords,
     } : MARC_DEFAULT_BODY;
