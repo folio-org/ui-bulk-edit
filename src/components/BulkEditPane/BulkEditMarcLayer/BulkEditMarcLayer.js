@@ -54,13 +54,15 @@ export const BulkEditMarcLayer = ({
   const isMarcFormValid = isMarcContentUpdatesFormValid(marcFormErrors);
   const isAdministrativeFormValid = isContentUpdatesFormValid(contentUpdates);
 
-  const isAdministrativeFormPristine = !isEqual(ADMINISTRATIVE_FORM_INITIAL_STATE, contentUpdates);
-  const isMarcFormPristine = !isEqual(MARC_FORM_INITIAL_STATE, marcContentUpdatesWithoutId);
+  const isAdministrativeFormPristine = isEqual(ADMINISTRATIVE_FORM_INITIAL_STATE, contentUpdates);
+  const isMarcFormPristine = isEqual(MARC_FORM_INITIAL_STATE, marcContentUpdatesWithoutId);
 
-  // state is valid if at least one form is filled and valid and another one is not pristine or both forms are filled and valid
-  const areFormsStateValid = (isAdministrativeFormValid && !isMarcFormPristine)
-    || (isMarcFormValid && !isAdministrativeFormPristine)
-    || (isAdministrativeFormValid && isMarcFormValid);
+  const areBothFormsValid = isAdministrativeFormValid && isMarcFormValid;
+  const isOnlyAdministrativeValid = isAdministrativeFormValid && isMarcFormPristine;
+  const isOnlyMarcFormValid = isMarcFormValid && isAdministrativeFormPristine;
+
+  // If at least one form is valid, we can confirm changes
+  const areFormsStateValid = isOnlyAdministrativeValid || isOnlyMarcFormValid || areBothFormsValid;
 
   const {
     isPreviewModalOpened,
