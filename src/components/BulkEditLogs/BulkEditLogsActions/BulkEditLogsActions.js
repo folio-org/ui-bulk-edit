@@ -4,7 +4,6 @@ import React, {
   useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
-import { saveAs } from 'file-saver';
 import {
   IconButton,
   DropdownMenu,
@@ -16,12 +15,12 @@ import {
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import { QUERY_KEY_DOWNLOAD_LOGS, useFileDownload } from '../../../hooks/api';
-import { APPROACHES, CAPABILITIES, linkNamesMap } from '../../../constants';
+import { APPROACHES, CAPABILITIES, LINK_KEYS } from '../../../constants';
 import { useBulkPermissions } from '../../../hooks';
-import { getFileName } from '../../../utils/files';
+import { savePreviewFile } from '../../../utils/files';
 
 const BulkEditLogsActions = ({ item }) => {
-  const fileNamePostfix = item.fqlQueryId ? `.${APPROACHES.QUERY}` : '';
+  const fileNamePostfix = item?.fqlQueryId ? `.${APPROACHES.QUERY}` : '';
 
   const {
     hasUsersViewPerms,
@@ -33,9 +32,13 @@ const BulkEditLogsActions = ({ item }) => {
     queryKey: QUERY_KEY_DOWNLOAD_LOGS,
     enabled: false,
     id: item.id,
-    fileContentType: linkNamesMap[triggeredFile],
-    onSuccess: data => {
-      saveAs(new Blob([data]), getFileName(item, triggeredFile));
+    fileContentType: LINK_KEYS[triggeredFile],
+    onSuccess: fileData => {
+      savePreviewFile({
+        fileName: item?.[triggeredFile],
+        fileData,
+      });
+
       setTriggeredFile(null);
     },
   });
@@ -50,7 +53,7 @@ const BulkEditLogsActions = ({ item }) => {
     setTriggeredFile(file);
   };
 
-  const availableFiles = Object.keys(linkNamesMap).filter(linkName => item[linkName]);
+  const availableFiles = Object.keys(LINK_KEYS).filter(linkName => item[linkName]);
 
   const renderTrigger = useCallback(({ triggerRef, onToggle, ariaProps, keyHandler }) => (
     <IconButton

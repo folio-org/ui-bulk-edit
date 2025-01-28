@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { saveAs } from 'file-saver';
 
 import {
   Pane,
@@ -22,7 +21,7 @@ import {
   CRITERIA,
   APPROACHES,
   FILE_SEARCH_PARAMS,
-  FILE_TO_LINK,
+  FILE_KEYS,
 } from '../../constants';
 import { RootContext } from '../../context/RootContext';
 import { BulkEditLogs } from '../BulkEditLogs/BulkEditLogs';
@@ -38,6 +37,7 @@ import { useResetFilters } from '../../hooks/useResetFilters';
 
 import { BulkEditInAppLayer } from './BulkEditInAppLayer/BulkEditInAppLayer';
 import { BulkEditMarcLayer } from './BulkEditMarcLayer/BulkEditMarcLayer';
+import { savePreviewFile } from '../../utils/files';
 
 export const BulkEditPane = () => {
   const [isFileUploaded, setIsFileUploaded] = useState(false);
@@ -103,10 +103,12 @@ export const BulkEditPane = () => {
     queryKey: QUERY_KEY_DOWNLOAD_ACTION_MENU,
     enabled: !!fileInfo,
     id: bulkOperationId,
-    fileContentType: FILE_SEARCH_PARAMS[fileInfo?.param]?.replace('_MARC', ''),
-    onSuccess: data => {
-      /* istanbul ignore next */
-      saveAs(new Blob([data]), fileInfo?.bulkDetails[FILE_TO_LINK[fileInfo?.param]].split('/')[1]);
+    fileContentType: FILE_SEARCH_PARAMS[fileInfo?.param],
+    onSuccess: fileData => {
+      savePreviewFile({
+        fileData,
+        fileName: fileInfo?.bulkDetails[FILE_KEYS[fileInfo?.param]],
+      });
     },
     onSettled: () => {
       /* istanbul ignore next */
