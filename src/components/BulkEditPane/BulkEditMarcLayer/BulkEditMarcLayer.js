@@ -14,7 +14,8 @@ import { useContentUpdate } from '../../../hooks/api';
 import {
   getContentUpdatesBody,
   getMappedContentUpdates,
-  isContentUpdatesFormValid, isMarcContentUpdatesFormValid
+  isContentUpdatesFormValid,
+  isMarcContentUpdatesFormValid
 } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 import { sortAlphabetically } from '../../../utils/sortAlphabetically';
 import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
