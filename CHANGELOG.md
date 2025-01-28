@@ -18,6 +18,7 @@
 * [UIBULKED-599](https://folio-org.atlassian.net/browse/UIBULKED-599) Change Administrative note type is not supported for MARC instances.
 * [UIBULKED-589](https://folio-org.atlassian.net/browse/UIBULKED-589) Make options in the "Actions" dropdown in "Bulk edits" in alphabetical order.
 * [UIBULKED-588](https://folio-org.atlassian.net/browse/IBULKED-588) Displaying errors and warnings.
+* [UIBULKED-570](https://folio-org.atlassian.net/browse/UIBULKED-570) Downloading files from Logs tab
 * [UIBULKED-605](https://folio-org.atlassian.net/browse/UIBULKED-605) Enabling Confirm changes button based on forms state.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
