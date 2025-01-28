@@ -61,7 +61,9 @@ export const BulkEditMarcLayer = ({
   const isOnlyAdministrativeValid = isAdministrativeFormValid && isMarcFormPristine;
   const isOnlyMarcFormValid = isMarcFormValid && isAdministrativeFormPristine;
 
-  // If at least one form is valid, we can confirm changes
+  // we can confirm the changes if either:
+  // both forms are changed-and-valid
+  // one is changed-and-valid and the other pristine
   const areFormsStateValid = isOnlyAdministrativeValid || isOnlyMarcFormValid || areBothFormsValid;
 
   const {
