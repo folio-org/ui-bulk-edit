@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
+import PropTypes from 'prop-types';
 import uniqueId from 'lodash/uniqueId';
+import { omit, isEqual } from 'lodash';
 
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditMarc } from '../BulkEditListResult/BulkEditMarc/BulkEditMarc';
@@ -13,14 +14,20 @@ import { useContentUpdate } from '../../../hooks/api';
 import {
   getContentUpdatesBody,
   getMappedContentUpdates,
-  isContentUpdatesFormValid
+  isContentUpdatesFormValid,
+  isMarcContentUpdatesFormValid
 } from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
-import { getMarcFormErrors } from '../BulkEditListResult/BulkEditMarc/validation';
-import { getAdministrativeDataOptions } from '../../../constants';
 import { sortAlphabetically } from '../../../utils/sortAlphabetically';
 import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
 import { useCommitChanges } from '../../../hooks/useCommitChanges';
-
+import { getAdministrativeDataOptions } from '../../../constants';
+import { getMarcFormErrors } from '../BulkEditListResult/BulkEditMarc/validation';
+import {
+  ADMINISTRATIVE_DEFAULT_BODY,
+  ADMINISTRATIVE_FORM_INITIAL_STATE,
+  MARC_DEFAULT_BODY,
+  MARC_FORM_INITIAL_STATE
+} from '../../../constants/forms';
 
 export const BulkEditMarcLayer = ({
   bulkOperationId,
@@ -40,11 +47,24 @@ export const BulkEditMarcLayer = ({
   const sortedOptions = sortAlphabetically(options);
 
   const marcFormErrors = getMarcFormErrors(marcFields);
+  const marcContentUpdates = marcFields.map(getTransformedField);
+  const marcContentUpdatesWithoutId = marcContentUpdates.map(item => omit(item, ['id']));
   const contentUpdates = getMappedContentUpdates(fields, options);
 
-  const isMarcFieldsValid = Object.keys(marcFormErrors).length === 0;
+  const isMarcFormValid = isMarcContentUpdatesFormValid(marcFormErrors);
   const isAdministrativeFormValid = isContentUpdatesFormValid(contentUpdates);
-  const isAnyFormValid = isMarcFieldsValid || isAdministrativeFormValid;
+
+  const isAdministrativeFormPristine = isEqual(ADMINISTRATIVE_FORM_INITIAL_STATE, contentUpdates);
+  const isMarcFormPristine = isEqual(MARC_FORM_INITIAL_STATE, marcContentUpdatesWithoutId);
+
+  const areBothFormsValid = isAdministrativeFormValid && isMarcFormValid;
+  const isOnlyAdministrativeValid = isAdministrativeFormValid && isMarcFormPristine;
+  const isOnlyMarcFormValid = isMarcFormValid && isAdministrativeFormPristine;
+
+  // we can confirm the changes if either:
+  // both forms are changed-and-valid
+  // one is changed-and-valid and the other pristine
+  const areFormsStateValid = isOnlyAdministrativeValid || isOnlyMarcFormValid || areBothFormsValid;
 
   const {
     isPreviewModalOpened,
@@ -69,32 +89,21 @@ export const BulkEditMarcLayer = ({
   const areMarcAndCsvReady = hasBothFiles && isPreviewSettled;
 
   const handleConfirm = () => {
-    const bulkOperationMarcRules = marcFields
-      .map(field => ({
-        bulkOperationId,
-        ...getTransformedField(field),
-      }));
+    const bulkOperationMarcRules = marcContentUpdates.map((item) => ({
+      bulkOperationId,
+      ...item
+    }));
 
-    const marcDefaultBody = {
-      bulkOperationMarcRules: [],
-      totalRecords: 0,
-    };
-
-    const administrativeDefaultBody = {
-      bulkOperationRules: [],
-      totalRecords: 0,
-    };
-
-    const marcUpdateBody = isMarcFieldsValid ? {
+    const marcUpdateBody = isMarcFormValid ? {
       bulkOperationMarcRules,
       totalRecords,
-    } : marcDefaultBody;
+    } : MARC_DEFAULT_BODY;
 
     const administrativeBody = isAdministrativeFormValid ? getContentUpdatesBody({
       bulkOperationId,
       contentUpdates,
       totalRecords,
-    }) : administrativeDefaultBody;
+    }) : ADMINISTRATIVE_DEFAULT_BODY;
 
     const updateSequence = () => contentUpdate(administrativeBody)
       .then(() => marcContentUpdate(marcUpdateBody));
@@ -106,7 +115,7 @@ export const BulkEditMarcLayer = ({
     <>
       <BulkEditLayer
         isLayerOpen={isMarcLayerOpen}
-        isConfirmDisabled={!isAnyFormValid}
+        isConfirmDisabled={!areFormsStateValid}
         onLayerClose={onMarcLayerClose}
         onConfirm={handleConfirm}
         {...paneProps}

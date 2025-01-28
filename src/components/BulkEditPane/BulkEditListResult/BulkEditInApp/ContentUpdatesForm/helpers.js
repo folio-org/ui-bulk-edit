@@ -398,6 +398,10 @@ export const isContentUpdatesFormValid = (contentUpdates) => {
   });
 };
 
+export const isMarcContentUpdatesFormValid = (errors) => {
+  return Object.keys(errors).length === 0;
+};
+
 export const getFilteredFields = (initialFields) => {
   return initialFields.map(f => {
     const uniqOptions = new Set(initialFields.map(i => i.option));
