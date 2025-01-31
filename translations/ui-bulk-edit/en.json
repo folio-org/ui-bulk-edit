@@ -483,6 +483,7 @@
   "logs.status.COMPLETED_WITH_ERRORS": "Completed with errors",
   "logs.status.FAILED": "Failed",
   "logs.status.APPLY_CHANGES": "Apply changes",
+  "logs.status.APPLY_MARC_CHANGES": "Apply changes",
   "logs.status.EXECUTING_QUERY": "Executing query",
   "logs.status.RETRIEVING_IDENTIFIERS": "Retrieving identifiers",
   "logs.status.SAVED_IDENTIFIERS": "Saving identifiers",
