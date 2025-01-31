@@ -70,7 +70,7 @@ export const BulkEditPreviewModalList = ({
         showErrorMessage(error);
         onPreviewError();
       },
-      onSettled: onPreviewSettled,
+      onSuccess: onPreviewSettled,
     },
     ...pagination,
   });
