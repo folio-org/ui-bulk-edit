@@ -20,7 +20,8 @@ import {
   CRITERIA,
   EDITING_STEPS,
   PAGINATION_CONFIG,
-  ERRORS_PAGINATION_CONFIG, JOB_STATUSES
+  ERRORS_PAGINATION_CONFIG,
+  JOB_STATUSES
 } from '../../../../constants';
 import { usePagination } from '../../../../hooks/usePagination';
 import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
