@@ -54,6 +54,8 @@ export const BulkEditPreviewModalList = ({
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
   const enabled = [JOB_STATUSES.REVIEWED_NO_MARC_RECORDS, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
+  const numberOfUnsupportedEntities = bulkDetails?.numberOfUnsupportedEntites || 0;
+  const numberOfSupportedEntities = bulkDetails?.processedNumOfRecords - numberOfUnsupportedEntities;
 
   const {
     contentData,
@@ -78,10 +80,21 @@ export const BulkEditPreviewModalList = ({
   if (!contentData) return <Preloader />;
 
   const renderMessageBanner = () => {
-    if (bulkDetails?.status === JOB_STATUSES.REVIEWED_NO_MARC_RECORDS) {
+    if (numberOfSupportedEntities === 0) {
       return (
         <MessageBanner type="warning">
-          <FormattedMessage id="ui-bulk-edit.previewModal.message.empty.marc" />
+          <FormattedMessage id="ui-bulk-edit.previewModal.message.empty.notSupported" />
+        </MessageBanner>
+      );
+    }
+
+    if (numberOfSupportedEntities && numberOfUnsupportedEntities) {
+      return (
+        <MessageBanner type="warning">
+          <FormattedMessage
+            id="ui-bulk-edit.previewModal.message.empty.partlySupported"
+            values={{ numberOfUnsupportedEntities, numberOfSupportedEntities }}
+          />
         </MessageBanner>
       );
     }
