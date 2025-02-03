@@ -54,7 +54,7 @@ export const BulkEditPreviewModalList = ({
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
   const enabled = [JOB_STATUSES.REVIEWED_NO_MARC_RECORDS, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
-  const numberOfUnsupportedEntities = bulkDetails?.numberOfUnsupportedEntites || 0;
+  const numberOfUnsupportedEntities = bulkDetails?.numberOfUnsupportedEntities || 0;
   const numberOfSupportedEntities = bulkDetails?.processedNumOfRecords - numberOfUnsupportedEntities;
 
   const {
