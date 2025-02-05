@@ -437,7 +437,8 @@
   "actionMenu.placeholder": "Search column name",
 
   "previewModal.message": "{count, number} records will be changed if the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving.",
-  "previewModal.message.empty.marc": "All instances have source FOLIO. Use “Instances and  Administrative data” option for bulk edit.",
+  "previewModal.message.empty.notSupported": "No instances can be updated because none have source MARC.",
+  "previewModal.message.empty.partlySupported": "{numberOfSupportedEntities, number} records will be changed when the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving. {numberOfUnsupportedEntities, number} instances have source that is not supported by MARC records bulk edit and cannot be updated.",
   "previewModal.previewToBeChanged": "Preview of records to be changed",
   "previewModal.keepEditing": "Keep editing",
   "previewModal.downloadPreview": "Download preview in CSV format",
