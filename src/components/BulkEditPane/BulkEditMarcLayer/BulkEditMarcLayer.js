@@ -86,8 +86,7 @@ export const BulkEditMarcLayer = ({
   });
 
   const hasBothFiles = bulkDetails?.linkToModifiedRecordsCsvFile && bulkDetails?.linkToModifiedRecordsMarcFile;
-  const numberOfUnsupportedEntities = bulkDetails?.numberOfUnsupportedEntites || 0;
-  const numberOfSupportedEntities = bulkDetails?.processedNumOfRecords - numberOfUnsupportedEntities;
+  const numberOfSupportedEntities = bulkDetails?.processedNumOfRecords;
   const areMarcAndCsvReady = hasBothFiles && isPreviewSettled && numberOfSupportedEntities > 0;
 
   const handleConfirm = () => {

@@ -47,7 +47,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
   const totalNumOfRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
   const isOtherTabProcessing = progress && criteria !== progress;
-  const statusesForPreview = [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.COMPLETED, JOB_STATUSES.COMPLETED_WITH_ERRORS];
+  const statusesForPreview = [JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS, JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.COMPLETED, JOB_STATUSES.COMPLETED_WITH_ERRORS];
   const isPreviewEnabled = !isOtherTabProcessing && Boolean(id) && statusesForPreview.includes(bulkDetails?.status);
   const isErrorsPreviewEnabled = isPreviewEnabled && (countOfErrors > 0 || countOfWarnings > 0);
 

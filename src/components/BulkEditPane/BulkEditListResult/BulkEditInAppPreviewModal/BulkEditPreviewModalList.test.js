@@ -83,9 +83,9 @@ describe('BulkEditPreviewModalList', () => {
 
   const defaultBulkDetails = {
     id: 'bulkOpId',
-    status: JOB_STATUSES.REVIEWED_NO_MARC_RECORDS,
+    status: JOB_STATUSES.REVIEW_CHANGES,
     processedNumOfRecords: 10,
-    numberOfUnsupportedEntities: 0,
+    matchedNumOfRecords: 10,
   };
 
   const defaultRecordsPreview = {
@@ -112,8 +112,7 @@ describe('BulkEditPreviewModalList', () => {
     useBulkOperationDetails.mockReturnValue({
       bulkDetails: {
         ...defaultBulkDetails,
-        processedNumOfRecords: 5,
-        numberOfUnsupportedEntities: 5, // supported = 0
+        status: JOB_STATUSES.REVIEWED_NO_MARC_RECORDS,
       },
     });
 
@@ -130,8 +129,8 @@ describe('BulkEditPreviewModalList', () => {
     useBulkOperationDetails.mockReturnValue({
       bulkDetails: {
         ...defaultBulkDetails,
-        processedNumOfRecords: 10,
-        numberOfUnsupportedEntities: 3, // supported = 7
+        processedNumOfRecords: 7,
+        matchedNumOfRecords: 10, // unsupported = 3
       },
     });
 
@@ -155,7 +154,7 @@ describe('BulkEditPreviewModalList', () => {
       bulkDetails: {
         ...defaultBulkDetails,
         processedNumOfRecords: 8,
-        numberOfUnsupportedEntities: 0,
+        matchedNumOfRecords: 8,
       },
     });
 
