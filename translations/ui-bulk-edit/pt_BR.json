@@ -32,7 +32,6 @@
     "uploaderSubTitle.records": "Carregar arquivo CSV com registros editados",
     "textArea.search": "Buscar",
     "textArea.resetAll": "Reiniciar tudo",
-    "start.downloadMathcedRecords": "Baixar registros correspondentes (CSV)",
     "menuGroup.actions": "Ações",
     "menuGroup.showColumns": "Mostrar colunas",
     "meta.title.conformationModal": "Editar em lote <b>{fileName}</b>",
@@ -426,7 +425,6 @@
     "layer.options.removeField": "Remover campo",
     "layer.options.removeSubfield": "Remover subcampo",
     "layer.options.replaceWith": "Substituir por",
-    "actions.findEntireField": "Localizar (buscar de subcampo inteiro)",
     "layer.marc.error": "A edição em massa dos campos de controle MARC 00X não é permitida.",
     "layer.column.ind1": "In.1",
     "layer.column.ind2": "In.2",
@@ -525,5 +523,6 @@
     "list.errors.checkbox": "Mostrar avisos",
     "list.errors.table.status": "Status",
     "list.errors.table.status.ERROR": "Erro",
-    "list.errors.table.status.WARNING": "Aviso"
+    "list.errors.table.status.WARNING": "Aviso",
+    "start.downloadMatchedRecords": "Download matched records (CSV)"
 }

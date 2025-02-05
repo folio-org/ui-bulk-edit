@@ -20,7 +20,8 @@ import {
   CRITERIA,
   EDITING_STEPS,
   PAGINATION_CONFIG,
-  ERRORS_PAGINATION_CONFIG
+  ERRORS_PAGINATION_CONFIG,
+  JOB_STATUSES
 } from '../../../../constants';
 import { usePagination } from '../../../../hooks/usePagination';
 import { useBulkOperationStats } from '../../../../hooks/useBulkOperationStats';
@@ -37,16 +38,18 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     progress,
   } = useSearchParams();
 
-  const totalNumOfRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
-  const isOtherTabProcessing = progress && criteria !== progress;
-  const isPreviewEnabled = !isOtherTabProcessing && Boolean(id);
-
   const {
     countOfRecords,
     countOfErrors,
     countOfWarnings,
     visibleColumns,
   } = useBulkOperationStats({ bulkDetails, step });
+
+  const totalNumOfRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
+  const isOtherTabProcessing = progress && criteria !== progress;
+  const statusesForPreview = [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.COMPLETED, JOB_STATUSES.COMPLETED_WITH_ERRORS];
+  const isPreviewEnabled = !isOtherTabProcessing && Boolean(id) && statusesForPreview.includes(bulkDetails?.status);
+  const isErrorsPreviewEnabled = isPreviewEnabled && (countOfErrors > 0 || countOfWarnings > 0);
 
   const { errorType, toggleErrorType } = useErrorType({
     countOfErrors,
@@ -80,7 +83,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     id,
     step,
     errorType,
-    enabled: isPreviewEnabled,
+    enabled: isErrorsPreviewEnabled,
     ...errorsPagination,
   });
 
@@ -156,6 +159,7 @@ Preview.propTypes = {
     processedNumOfRecords: PropTypes.number,
     matchedNumOfErrors: PropTypes.number,
     committedNumOfErrors: PropTypes.number,
-    fqlQuery: PropTypes.string
+    fqlQuery: PropTypes.string,
+    status: PropTypes.string,
   }),
 };

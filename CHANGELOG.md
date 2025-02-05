@@ -20,6 +20,7 @@
 * [UIBULKED-588](https://folio-org.atlassian.net/browse/IBULKED-588) Displaying errors and warnings.
 * [UIBULKED-570](https://folio-org.atlassian.net/browse/UIBULKED-570) Downloading files from Logs tab
 * [UIBULKED-605](https://folio-org.atlassian.net/browse/UIBULKED-605) Enabling Confirm changes button based on forms state.
+* [UIBULKED-606](https://folio-org.atlassian.net/browse/UIBULKED-606) Update upload-artifact actions from v3 to v4.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
 

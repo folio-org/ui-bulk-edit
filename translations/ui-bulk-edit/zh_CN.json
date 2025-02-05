@@ -32,7 +32,6 @@
     "uploaderSubTitle.records": "上传已编辑记录的CSV文件",
     "textArea.search": "搜索",
     "textArea.resetAll": "全部重置",
-    "start.downloadMathcedRecords": "下载匹配的记录(CSV)",
     "menuGroup.actions": "操作",
     "menuGroup.showColumns": "显示列",
     "meta.title.conformationModal": "批量编辑：<b>{fileName}</b>",
@@ -426,7 +425,6 @@
     "layer.options.removeField": "移除字段",
     "layer.options.removeSubfield": "移除子字段",
     "layer.options.replaceWith": "替换为",
-    "actions.findEntireField": "查找（整个子字段搜索）",
     "layer.marc.error": "目前仅支持 5xx 和 9xx 编辑。",
     "layer.column.ind1": "第1指示符",
     "layer.column.ind2": "第2指示符",
@@ -525,5 +523,6 @@
     "list.errors.checkbox": "Show warnings",
     "list.errors.table.status": "Status",
     "list.errors.table.status.ERROR": "Error",
-    "list.errors.table.status.WARNING": "Warning"
+    "list.errors.table.status.WARNING": "Warning",
+    "start.downloadMatchedRecords": "Download matched records (CSV)"
 }
