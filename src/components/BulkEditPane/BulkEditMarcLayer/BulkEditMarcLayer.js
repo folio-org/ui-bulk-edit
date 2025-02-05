@@ -28,7 +28,6 @@ import {
   MARC_DEFAULT_BODY,
   MARC_FORM_INITIAL_STATE
 } from '../../../constants/forms';
-import { useInAppFormRules } from '../../../hooks/useInAppFormRules';
 
 export const BulkEditMarcLayer = ({
   bulkOperationId,
@@ -85,8 +84,6 @@ export const BulkEditMarcLayer = ({
       onMarcLayerClose();
     }
   });
-
-  // useInAppFormRules({ fields, setFields });
 
   const hasBothFiles = bulkDetails?.linkToModifiedRecordsCsvFile && bulkDetails?.linkToModifiedRecordsMarcFile;
   const areMarcAndCsvReady = hasBothFiles && isPreviewSettled;

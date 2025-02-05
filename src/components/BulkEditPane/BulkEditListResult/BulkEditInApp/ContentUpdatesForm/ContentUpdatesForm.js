@@ -165,11 +165,12 @@ export const ContentUpdatesForm = ({ fields, setFields, options }) => {
       return field;
     });
 
-    const finalizedFields = hasActionChanged
+    // Check if there are rules should be applied based on if action changed and option value
+    const fieldsWithRules = hasActionChanged
       ? getFieldsWithRules({ fields: mappedFields, option, value, rowIndex })
       : mappedFields;
 
-    setFields(finalizedFields);
+    setFields(fieldsWithRules);
   };
 
   const handleRemove = (index) => {
