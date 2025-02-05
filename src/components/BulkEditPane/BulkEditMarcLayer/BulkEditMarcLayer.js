@@ -86,8 +86,7 @@ export const BulkEditMarcLayer = ({
   });
 
   const hasBothFiles = bulkDetails?.linkToModifiedRecordsCsvFile && bulkDetails?.linkToModifiedRecordsMarcFile;
-  const numberOfSupportedEntities = bulkDetails?.processedNumOfRecords;
-  const areMarcAndCsvReady = hasBothFiles && isPreviewSettled && numberOfSupportedEntities > 0;
+  const areMarcAndCsvReady = hasBothFiles && isPreviewSettled;
 
   const handleConfirm = () => {
     const bulkOperationMarcRules = marcContentUpdates.map((item) => ({
