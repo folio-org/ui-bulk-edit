@@ -46,10 +46,6 @@ export const getFormattedDate = (value) => {
   return `${moment(date).format(format)}.000Z`;
 };
 
-export const isAddButtonShown = (index, fields, options) => {
-  return index === fields.length - 1 && fields.length !== options.length;
-};
-
 export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRecords }) => {
   const bulkOperationRules = contentUpdates.reduce((acc, item) => {
     const formattedItem = () => {
@@ -402,17 +398,118 @@ export const isMarcContentUpdatesFormValid = (errors) => {
   return Object.keys(errors).length === 0;
 };
 
+const getExceptionalOptions = (fields) => {
+  const allStatisticalCodes = fields.filter(({ option }) => option === OPTIONS.STATISTICAL_CODE);
+  const removeAllField = fields.find(({ option, actionsDetails }) => {
+    return option === OPTIONS.STATISTICAL_CODE && actionsDetails.actions.filter(Boolean)
+      .some(({ name }) => name === ACTIONS.REMOVE_ALL);
+  });
+
+  return allStatisticalCodes.length < 2 && !removeAllField ? [OPTIONS.STATISTICAL_CODE] : [];
+};
+
 export const getFilteredFields = (initialFields) => {
   return initialFields.map(f => {
     const uniqOptions = new Set(initialFields.map(i => i.option));
 
-    const optionsExceptCurrent = [...uniqOptions].filter(u => u !== f.option);
+    const optionsExceptCurrent = [...uniqOptions].filter(u => u !== f.option && !getExceptionalOptions(initialFields).includes(u));
 
     return {
       ...f,
-      options: f.options.filter(o => !optionsExceptCurrent.includes(o.value)),
+      options: f.options.map(o => ({ ...o, hidden: optionsExceptCurrent.includes(o.value) })),
     };
   });
+};
+
+export const getFieldsWithRules = ({ fields, option, value, rowIndex }) => {
+  if (option !== OPTIONS.STATISTICAL_CODE) return fields;
+
+  return fields.map((field, i) => {
+    const isCurrentRow = i === rowIndex;
+    const isStatisticalCode = field.option === OPTIONS.STATISTICAL_CODE;
+
+    if (value === ACTIONS.REMOVE_ALL && isStatisticalCode && !isCurrentRow) {
+      return null; // Remove this item
+    }
+
+    return {
+      ...field,
+      options: field.options.map(o => ({
+        ...o,
+        hidden: o.value === OPTIONS.STATISTICAL_CODE
+          ? (value === ACTIONS.REMOVE_ALL)
+          : o.hidden,
+      })),
+    };
+  }).filter(Boolean); // Remove null values
+};
+
+export const getNormalizedFieldsRules = (fields) => {
+  const statisticalCodeFields = fields.reduce((acc, field, index) => {
+    const actions = field.actionsDetails.actions.filter(Boolean);
+
+    if (field.option === OPTIONS.STATISTICAL_CODE) {
+      acc.push({
+        selectedActions: actions.map(({ name }) => name),
+        availableActions: actions[0]?.actionsList.map(({ value }) => value),
+        index,
+      });
+    }
+
+    return acc;
+  }, []);
+
+  const addActionIndex = statisticalCodeFields.findIndex(({ selectedActions }) => {
+    return selectedActions.includes(ACTIONS.ADD_TO_EXISTING);
+  });
+
+  const removeActionIndex = statisticalCodeFields.findIndex(({ selectedActions }) => {
+    return selectedActions.includes(ACTIONS.REMOVE_SOME);
+  });
+
+  return statisticalCodeFields.reduce((acc, elem, index) => {
+    let item = elem;
+
+    if (addActionIndex !== -1 && addActionIndex !== index) {
+      item = {
+        ...item,
+        availableActions: item.availableActions.filter((action) => {
+          return action === ACTIONS.REMOVE_SOME || !action;
+        })
+      };
+    }
+
+    if (removeActionIndex !== -1 && removeActionIndex !== index) {
+      item = {
+        ...item,
+        availableActions: item.availableActions.filter((action) => {
+          return action === ACTIONS.ADD_TO_EXISTING || !action;
+        })
+      };
+    }
+
+    acc[elem.index] = item;
+
+    return acc;
+  }, {});
+};
+
+export const getExceptionalOptionsLength = (fields) => {
+  const statisticalCodes = fields.filter(({ option }) => option === OPTIONS.STATISTICAL_CODE);
+
+  const removeAllActionIndex = fields.findIndex(({ option, actionsDetails }) => {
+    return option === OPTIONS.STATISTICAL_CODE && actionsDetails.actions.filter(Boolean)
+      .some(({ name }) => name === ACTIONS.REMOVE_ALL);
+  });
+
+  return statisticalCodes.length === 1 && removeAllActionIndex === -1 ? 1 : 0;
+};
+
+export const isAddButtonShown = (index, fields, options) => {
+  console.log(fields);
+  console.log(options);
+  const maxFieldsLength = options.length + getExceptionalOptionsLength(fields);
+  return index === fields.length - 1 && fields.length < maxFieldsLength;
 };
 
 export const getExtraActions = (option, action) => {

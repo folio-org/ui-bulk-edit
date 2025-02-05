@@ -23,6 +23,8 @@ import {
   getFilteredFields,
   getExtraActions,
   getFieldTemplate,
+  getFieldsWithRules,
+  getNormalizedFieldsRules,
 } from './helpers';
 import {
   customFilter,
@@ -35,6 +37,7 @@ import css from '../../../BulkEditPane.css';
 export const ContentUpdatesForm = ({ fields, setFields, options }) => {
   const { formatMessage } = useIntl();
   const { currentRecordType, approach } = useSearchParams();
+  const normalizedFieldsRules = getNormalizedFieldsRules(fields);
 
   useEffect(() => {
     setFields([getFieldTemplate(options, currentRecordType, approach)]);
@@ -119,10 +122,11 @@ export const ContentUpdatesForm = ({ fields, setFields, options }) => {
     return finalActions;
   };
 
-  const handleChange = ({ rowIndex, actionIndex, value, fieldName, tenants = [] }) => {
-    setFields(fieldsArr => fieldsArr.map((field, i) => {
+  const handleChange = ({ rowIndex, actionIndex, value, fieldName, tenants = [], option }) => {
+    const hasActionChanged = fieldName === ACTION_VALUE_KEY;
+
+    const mappedFields = fields.map((field, i) => {
       if (i === rowIndex) {
-        const hasActionChanged = fieldName === ACTION_VALUE_KEY;
         const hasValueChanged = fieldName === FIELD_VALUE_KEY && actionIndex === 0 && field.option === OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP;
 
         const sharedArgs = {
@@ -159,7 +163,13 @@ export const ContentUpdatesForm = ({ fields, setFields, options }) => {
       }
 
       return field;
-    }));
+    });
+
+    const finalizedFields = hasActionChanged
+      ? getFieldsWithRules({ fields: mappedFields, option, value, rowIndex })
+      : mappedFields;
+
+    setFields(finalizedFields);
   };
 
   const handleRemove = (index) => {
@@ -211,11 +221,13 @@ export const ContentUpdatesForm = ({ fields, setFields, options }) => {
         className={css.row}
         onAdd={noop}
         renderField={(field, index) => {
+          const filteredOptions = field.options.filter(o => !o.hidden);
+
           return (
             <Row data-testid={`row-${index}`} className={css.marcFieldRow}>
               <Col xs={2} sm={2} className={css.column}>
                 <Selection
-                  dataOptions={groupByCategory(field.options)}
+                  dataOptions={groupByCategory(filteredOptions)}
                   value={field.option}
                   onChange={(value) => handleOptionChange(value, index, getTenantsById(field.options, value))}
                   placeholder={formatMessage({ id:'ui-bulk-edit.options.placeholder' })}
@@ -227,9 +239,10 @@ export const ContentUpdatesForm = ({ fields, setFields, options }) => {
                 />
               </Col>
               <ActionsRow
+                fieldsRules={normalizedFieldsRules[index]}
                 option={field.option}
                 actions={field.actionsDetails.actions}
-                onChange={(values) => handleChange({ ...values, rowIndex: index })}
+                onChange={(values) => handleChange({ ...values, rowIndex: index, option: field.option })}
               />
               <div className={css.actionButtonsWrapper}>
                 {isAddButtonShown(index, fields, options) && (

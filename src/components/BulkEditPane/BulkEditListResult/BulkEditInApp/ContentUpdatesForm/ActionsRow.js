@@ -13,13 +13,16 @@ import { AdditionalActionParameters } from './AdditionalActionParameters';
 import { sortAlphabeticallyComponentLabels } from '../../../../../utils/sortAlphabetically';
 import css from '../../../BulkEditPane.css';
 
-export const ActionsRow = ({ option, actions, onChange }) => {
+export const ActionsRow = ({ fieldsRules, option, actions, onChange }) => {
   const { formatMessage } = useIntl();
 
   return actions.map((action, actionIndex) => {
     if (!action) return null;
 
-    const sortedActions = sortAlphabeticallyComponentLabels(action.actionsList, formatMessage);
+    const filteredActions = fieldsRules
+      ? action.actionsList.filter(({ value }) => fieldsRules.availableActions.includes(value))
+      : action.actionsList;
+    const sortedActions = sortAlphabeticallyComponentLabels(filteredActions, formatMessage);
 
     return (
       <Fragment key={actionIndex}>
@@ -29,7 +32,7 @@ export const ActionsRow = ({ option, actions, onChange }) => {
             dataOptions={sortedActions}
             value={action.name}
             onChange={(e) => onChange({ actionIndex, value: e.target.value, fieldName: ACTION_VALUE_KEY })}
-            disabled={action.actionsList?.length === 1}
+            disabled={filteredActions?.length === 1}
             data-testid={`select-actions-${actionIndex}`}
             aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.actionsSelect' })}
             marginBottom0
