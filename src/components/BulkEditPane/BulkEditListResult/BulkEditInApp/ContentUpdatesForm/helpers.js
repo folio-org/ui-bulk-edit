@@ -472,8 +472,12 @@ export const getFieldsWithRules = ({ fields, option, value, rowIndex }) => {
   return fields.map((field, i) => {
     const isCurrentRow = i === rowIndex;
     const isStatisticalCode = field.option === OPTIONS.STATISTICAL_CODE;
+    const removeActionIndex = getActionIndex(fields, ACTIONS.REMOVE_SOME);
+    const addActionIndex = getActionIndex(fields, ACTIONS.ADD_TO_EXISTING);
+    const hasAddAndRemove = removeActionIndex !== -1 && addActionIndex !== -1;
+    const hasRemoveAll = value === ACTIONS.REMOVE_ALL;
 
-    if (value === ACTIONS.REMOVE_ALL && isStatisticalCode && !isCurrentRow) {
+    if (hasRemoveAll && isStatisticalCode && !isCurrentRow) {
       return null; // Remove this item
     }
 
@@ -482,7 +486,9 @@ export const getFieldsWithRules = ({ fields, option, value, rowIndex }) => {
       options: field.options.map(o => ({
         ...o,
         hidden: o.value === OPTIONS.STATISTICAL_CODE
-          ? (value === ACTIONS.REMOVE_ALL)
+          // we should hide options in all other select menus if we already have REMOVE_ALL action
+          // or if we have both ADD_TO_EXISTING and REMOVE_SOME actions
+          ? hasRemoveAll || hasAddAndRemove
           : o.hidden,
       })),
     };

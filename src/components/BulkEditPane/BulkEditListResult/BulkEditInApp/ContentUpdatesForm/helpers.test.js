@@ -1794,6 +1794,68 @@ describe('ContentUpdatesForm helpers', () => {
         expect(result).toEqual(expected);
       });
 
+      it('should update the hidden property on each option when ADD_TO_EXISTING and REMOVE_SOME selected', () => {
+        const fields = [
+          {
+            option: OPTIONS.STATISTICAL_CODE,
+            options: [
+              { value: OPTIONS.STATISTICAL_CODE, hidden: true },
+              { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
+            ],
+            actionsDetails: { actions: [{ name: ACTIONS.ADD_TO_EXISTING }] },
+          },
+          {
+            option: OPTIONS.STATISTICAL_CODE,
+            options: [
+              { value: OPTIONS.STATISTICAL_CODE, hidden: true },
+              { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
+            ],
+            actionsDetails: { actions: [{ name: ACTIONS.REMOVE_SOME }] },
+          },
+          {
+            option: OPTIONS.ADMINISTRATIVE_NOTE,
+            options: [
+              { value: OPTIONS.STATISTICAL_CODE, hidden: false },
+              { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
+            ],
+          },
+        ];
+
+        const result = getFieldsWithRules({
+          fields,
+          option: OPTIONS.STATISTICAL_CODE,
+          value: 'SOME_OTHER_ACTION',
+          rowIndex: 0,
+        });
+
+        const expected = [
+          {
+            ...fields[0],
+            options: [
+              { value: OPTIONS.STATISTICAL_CODE, hidden: true }, // updated because (false)
+              { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
+            ],
+          },
+          {
+            ...fields[1],
+            options: [
+              { value: OPTIONS.STATISTICAL_CODE, hidden: true }, // updated because (false)
+              { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
+            ],
+          },
+          {
+            ...fields[2],
+            options: [
+              { value: OPTIONS.STATISTICAL_CODE, hidden: true },
+              { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
+            ],
+          },
+        ];
+
+        expect(result).toEqual(expected);
+      });
+
+
       it('should return an empty array when fields array is empty', () => {
         const result = getFieldsWithRules({
           fields: [],
