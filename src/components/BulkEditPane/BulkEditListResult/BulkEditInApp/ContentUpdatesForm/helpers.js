@@ -462,7 +462,7 @@ export const isAddButtonShown = (index, fields, options) => {
 /**
  * Processes an array of fields using rules for STATISTICAL_CODE.
  * - Returns fields unchanged if `option` is not STATISTICAL_CODE.
- * - When `value` is REMOVE_ALL:
+ * - When `value` is REMOVE_ALL or there are both ADD_TO_EXISTING and REMOVE_SOME actions:
  *    - Removes any STATISTICAL_CODE field not at `rowIndex`.
  *    - Sets `hidden` to true for STATISTICAL_CODE options.
  */
