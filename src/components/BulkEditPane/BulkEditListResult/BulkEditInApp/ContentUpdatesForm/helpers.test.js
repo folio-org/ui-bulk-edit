@@ -1837,14 +1837,14 @@ describe('ContentUpdatesForm helpers', () => {
           {
             ...fields[0],
             options: [
-              { value: OPTIONS.STATISTICAL_CODE, hidden: true }, // updated because (false)
+              { value: OPTIONS.STATISTICAL_CODE, hidden: true },
               { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
             ],
           },
           {
             ...fields[1],
             options: [
-              { value: OPTIONS.STATISTICAL_CODE, hidden: true }, // updated because (false)
+              { value: OPTIONS.STATISTICAL_CODE, hidden: true },
               { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
             ],
           },
