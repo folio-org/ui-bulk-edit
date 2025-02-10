@@ -1702,6 +1702,7 @@ describe('ContentUpdatesForm helpers', () => {
               { value: OPTIONS.STATISTICAL_CODE, hidden: true },
               { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
             ],
+            actionsDetails: { actions: [{ name: ACTIONS.REMOVE_ALL }] },
           },
           {
             option: OPTIONS.ADMINISTRATIVE_NOTE,
@@ -1709,6 +1710,7 @@ describe('ContentUpdatesForm helpers', () => {
               { value: OPTIONS.STATISTICAL_CODE, hidden: true },
               { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: true },
             ],
+            actionsDetails: { actions: [{ name: ACTIONS.REMOVE_ALL }] },
           },
         ];
 
@@ -1747,6 +1749,7 @@ describe('ContentUpdatesForm helpers', () => {
               { value: OPTIONS.STATISTICAL_CODE, hidden: false },
               { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: false },
             ],
+            actionsDetails: { actions: [{ name: ACTIONS.REMOVE_ALL }] },
             id: 1,
           },
           {
@@ -1755,6 +1758,7 @@ describe('ContentUpdatesForm helpers', () => {
               { value: OPTIONS.STATISTICAL_CODE, hidden: false },
               { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: false },
             ],
+            actionsDetails: { actions: [{ name: ACTIONS.REMOVE_ALL }] },
             id: 2,
           },
           {
@@ -1763,6 +1767,7 @@ describe('ContentUpdatesForm helpers', () => {
               { value: OPTIONS.STATISTICAL_CODE, hidden: false },
               { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: false },
             ],
+            actionsDetails: { actions: [{ name: ACTIONS.REMOVE_ALL }] },
             id: 3,
           },
         ];
