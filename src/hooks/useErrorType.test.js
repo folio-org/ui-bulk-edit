@@ -2,47 +2,89 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import { useErrorType } from './useErrorType';
 import { ERROR_TYPES } from '../constants';
 
-describe('useErrorType', () => {
-  it('should initialize with no error type if only warnings exist', () => {
-    const { result } = renderHook(() => useErrorType({ countOfErrors: 0, countOfWarnings: 1 }));
+describe('useErrorType hook', () => {
+  test('should return null errorType when there are no errors or warnings', () => {
+    const { result } = renderHook(() => useErrorType({ countOfErrors: 0, countOfWarnings: 0 }));
+
+    expect(result.current.errorType).toBeNull();
+    expect(result.current.hasErrorsOrWarnings).toBe(false);
+    expect(result.current.hasOnlyWarnings).toBe(false);
+  });
+
+  test('should return ERROR_TYPES.ERROR when errors exist', () => {
+    const { result } = renderHook(() => useErrorType({ countOfErrors: 3, countOfWarnings: 0 }));
+
+    expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
+    expect(result.current.hasErrorsOrWarnings).toBe(true);
+    expect(result.current.hasOnlyWarnings).toBe(false);
+  });
+
+  test('should return ERROR_TYPES.ERROR when errors and warnings exist', () => {
+    const { result } = renderHook(() => useErrorType({ countOfErrors: 3, countOfWarnings: 3 }));
+
+    expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
+    expect(result.current.hasErrorsOrWarnings).toBe(true);
+    expect(result.current.hasOnlyWarnings).toBe(false);
+  });
+
+  test('should return an empty string when only warnings exist', () => {
+    const { result } = renderHook(() => useErrorType({ countOfErrors: 0, countOfWarnings: 2 }));
+
     expect(result.current.errorType).toBe('');
+    expect(result.current.hasErrorsOrWarnings).toBe(true);
+    expect(result.current.hasOnlyWarnings).toBe(true);
   });
 
-  it('should initialize with error type if errors exist', () => {
-    const { result } = renderHook(() => useErrorType({ countOfErrors: 1, countOfWarnings: 0 }));
-    expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
-  });
-
-  it('should toggle error type when toggleErrorType is called', () => {
-    const { result } = renderHook(() => useErrorType({ countOfErrors: 1, countOfWarnings: 0 }));
+  test('toggleShowWarnings should toggle between showing warnings and errors (errors scenario)', () => {
+    const { result } = renderHook(() => useErrorType({ countOfErrors: 2, countOfWarnings: 0 }));
 
     expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
 
+    // Toggle: should switch to show warnings (showWarnings becomes true).
     act(() => {
-      result.current.toggleErrorType();
+      result.current.toggleShowWarnings();
     });
+    expect(result.current.errorType).toBe(''); // Now showing warnings
+
+    // Toggle again: should switch back to showing errors.
+    act(() => {
+      result.current.toggleShowWarnings();
+    });
+    expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
+  });
+
+  test('toggleShowWarnings should toggle correctly when only warnings exist', () => {
+    const { result } = renderHook(() => useErrorType({ countOfErrors: 0, countOfWarnings: 3 }));
+
     expect(result.current.errorType).toBe('');
 
+    // Toggle: should invert showWarnings (now false) so errorType returns ERROR_TYPES.ERROR.
     act(() => {
-      result.current.toggleErrorType();
+      result.current.toggleShowWarnings();
     });
     expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
   });
 
-  it('should reset error type when the input props change', () => {
+  test('should update state when counts change', () => {
     const { result, rerender } = renderHook(
-      ({ countOfErrors, countOfWarnings }) => useErrorType({ countOfErrors, countOfWarnings }),
+      ({ errors, warnings }) => useErrorType({ countOfErrors: errors, countOfWarnings: warnings }),
       {
-        initialProps: { countOfErrors: 1, countOfWarnings: 0 },
+        initialProps: { errors: 1, warnings: 0 },
       }
     );
 
+    // Initially, errors exist so errorType is ERROR_TYPES.ERROR.
     expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
+    expect(result.current.hasErrorsOrWarnings).toBe(true);
 
-    rerender({ countOfErrors: 0, countOfWarnings: 1 });
+    // Change props to only warnings.
+    rerender({ errors: 0, warnings: 4 });
     expect(result.current.errorType).toBe('');
+    expect(result.current.hasOnlyWarnings).toBe(true);
 
-    rerender({ countOfErrors: 2, countOfWarnings: 0 });
-    expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
+    // Change props to no errors or warnings.
+    rerender({ errors: 0, warnings: 0 });
+    expect(result.current.errorType).toBeNull();
+    expect(result.current.hasErrorsOrWarnings).toBe(false);
   });
 });
