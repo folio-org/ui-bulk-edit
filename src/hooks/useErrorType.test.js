@@ -40,13 +40,11 @@ describe('useErrorType hook', () => {
 
     expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
 
-    // Toggle: should switch to show warnings (showWarnings becomes true).
     act(() => {
       result.current.toggleShowWarnings();
     });
-    expect(result.current.errorType).toBe(''); // Now showing warnings
+    expect(result.current.errorType).toBe('');
 
-    // Toggle again: should switch back to showing errors.
     act(() => {
       result.current.toggleShowWarnings();
     });
@@ -58,7 +56,6 @@ describe('useErrorType hook', () => {
 
     expect(result.current.errorType).toBe('');
 
-    // Toggle: should invert showWarnings (now false) so errorType returns ERROR_TYPES.ERROR.
     act(() => {
       result.current.toggleShowWarnings();
     });
@@ -73,16 +70,13 @@ describe('useErrorType hook', () => {
       }
     );
 
-    // Initially, errors exist so errorType is ERROR_TYPES.ERROR.
     expect(result.current.errorType).toBe(ERROR_TYPES.ERROR);
     expect(result.current.hasErrorsOrWarnings).toBe(true);
 
-    // Change props to only warnings.
     rerender({ errors: 0, warnings: 4 });
     expect(result.current.errorType).toBe('');
     expect(result.current.hasOnlyWarnings).toBe(true);
 
-    // Change props to no errors or warnings.
     rerender({ errors: 0, warnings: 0 });
     expect(result.current.errorType).toBeNull();
     expect(result.current.hasErrorsOrWarnings).toBe(false);
