@@ -23,6 +23,7 @@
 * [UIBULKED-606](https://folio-org.atlassian.net/browse/UIBULKED-606) Update upload-artifact actions from v3 to v4.
 * [UIBULKED-584](https://folio-org.atlassian.net/browse/UIBULKED-584) Handling instances with sources other than MARC.
 * [UIBULKED-685](https://folio-org.atlassian.net/browse/UIBULKED-685) Support multiple edits to statistical codes in one bulk edit job.
+* [UIBULKED-612](https://folio-org.atlassian.net/browse/UIBULKED-612) Preview of errors&warnings is re-rendered in the process of uploading from time to time.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
 

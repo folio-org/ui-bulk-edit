@@ -45,16 +45,17 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     visibleColumns,
   } = useBulkOperationStats({ bulkDetails, step });
 
+  const { errorType, hasErrorsOrWarnings, toggleShowWarnings } = useErrorType({
+    countOfErrors,
+    countOfWarnings
+  });
+
   const totalNumOfRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
   const isOtherTabProcessing = progress && criteria !== progress;
   const statusesForPreview = [JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS, JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.COMPLETED, JOB_STATUSES.COMPLETED_WITH_ERRORS];
   const isPreviewEnabled = !isOtherTabProcessing && Boolean(id) && statusesForPreview.includes(bulkDetails?.status);
-  const isErrorsPreviewEnabled = isPreviewEnabled && (countOfErrors > 0 || countOfWarnings > 0);
-
-  const { errorType, toggleErrorType } = useErrorType({
-    countOfErrors,
-    countOfWarnings
-  });
+  const hasErrorType = errorType !== null;
+  const isErrorsPreviewEnabled = isPreviewEnabled && hasErrorType && hasErrorsOrWarnings;
 
   const {
     pagination: previewPagination,
@@ -89,7 +90,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
 
   const handleToggleWarnings = () => {
     changeErrorPage(ERRORS_PAGINATION_CONFIG);
-    toggleErrorType();
+    toggleShowWarnings();
   };
 
   if (!((bulkDetails.fqlQuery && criteria === CRITERIA.QUERY) || (criteria !== CRITERIA.QUERY && !bulkDetails.fqlQuery))) {

@@ -1,22 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { ERROR_TYPES } from '../constants';
 
-// empty string is used to reset the error type and show both errors and warnings
-const getDynamicErrorType = (condition) => (condition ? '' : ERROR_TYPES.ERROR);
-
 export const useErrorType = ({ countOfErrors, countOfWarnings }) => {
+  const hasErrorsOrWarnings = countOfErrors > 0 || countOfWarnings > 0;
   const hasOnlyWarnings = countOfErrors === 0 && countOfWarnings > 0;
-  const initialErrorType = getDynamicErrorType(hasOnlyWarnings);
 
-  const [errorType, setErrorType] = useState(initialErrorType);
-
-  const toggleErrorType = () => {
-    setErrorType(getDynamicErrorType(!!errorType));
-  };
+  /**
+   * Based on this state errorType will be set:
+   * - `true`  => show both (represented by an empty string)
+   * - `false` => show errors (ERROR_TYPES.ERROR)
+   * - `null`  => initial state (no errors or warnings)
+   */
+  const [showWarnings, setShowWarnings] = useState(null);
 
   useEffect(() => {
-    setErrorType(initialErrorType);
-  }, [initialErrorType]);
+    if (hasOnlyWarnings) {
+      setShowWarnings(true);
+    } else if (hasErrorsOrWarnings) {
+      setShowWarnings(false);
+    } else {
+      setShowWarnings(null);
+    }
+  }, [hasOnlyWarnings, hasErrorsOrWarnings]);
 
-  return { errorType, toggleErrorType };
+  const toggleShowWarnings = () => {
+    setShowWarnings(prev => !prev);
+  };
+
+  const errorType = useMemo(() => {
+    if (showWarnings === null) return null;
+
+    return showWarnings ? '' : ERROR_TYPES.ERROR;
+  }, [showWarnings]);
+
+  return {
+    errorType,
+    hasOnlyWarnings,
+    hasErrorsOrWarnings,
+    toggleShowWarnings,
+  };
 };
