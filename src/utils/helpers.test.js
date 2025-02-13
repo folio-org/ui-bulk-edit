@@ -1,5 +1,5 @@
 import {
-  customFilter,
+  customFilter, findRecordType,
   getMappedStatisticalCodes,
   getTenantsById,
   getTransformedLogsFilterValue,
@@ -352,5 +352,52 @@ describe('getMappedStatisticalCodes', () => {
 
     const result = getMappedStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
     expect(result).toEqual(expected);
+  });
+});
+
+describe('findRecordType', () => {
+  const formatMessageMock = jest.fn(({ id }) => `translated-${id}`);
+
+  it('should find a record type matching by id', () => {
+    const expectedId = 'd0213d22-32cf-490f-9196-d81c3c66e53f';
+    const expectedLabelKey = 'ui-bulk-edit.entityType.composite_item_details';
+    const expectedLabel = `translated-${expectedLabelKey}`;
+
+    const recordTypes = [
+      { id: expectedId, label: 'some-other-label' },
+      { id: 'another-id', label: expectedLabel },
+    ];
+
+    const result = findRecordType(recordTypes, 'ITEM', formatMessageMock);
+    expect(result).toEqual(recordTypes[0]);
+    expect(formatMessageMock).toHaveBeenCalledWith({ id: expectedLabelKey });
+  });
+
+  it('should find a record type matching by label', () => {
+    const expectedId = '6b08439b-4f8e-4468-8046-ea620f5cfb74';
+    const expectedLabelKey = 'ui-bulk-edit.entityType.composite_instances';
+    const expectedLabel = `translated-${expectedLabelKey}`;
+
+    const recordTypes = [
+      { id: 'non-matching-id', label: expectedLabel },
+      { id: expectedId, label: 'other-label' },
+    ];
+
+    const result = findRecordType(recordTypes, 'INSTANCE', formatMessageMock);
+    expect(result).toEqual(recordTypes[0]);
+    expect(formatMessageMock).toHaveBeenCalledWith({ id: expectedLabelKey });
+  });
+
+  it('should return undefined if no record type matches', () => {
+    const recordTypes = [
+      { id: 'non-matching-id', label: 'non-matching-label' },
+    ];
+    const result = findRecordType(recordTypes, 'ITEM', formatMessageMock);
+    expect(result).toBeUndefined();
+  });
+
+  it('should return undefined if recordTypes is undefined', () => {
+    const result = findRecordType(undefined, 'ITEM', formatMessageMock);
+    expect(result).toBeUndefined();
   });
 });

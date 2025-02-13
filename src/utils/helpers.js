@@ -3,6 +3,7 @@ import {
   CAPABILITIES,
   EDIT_CAPABILITIES_OPTIONS,
   LOGS_FILTER_DEPENDENCY_MAP,
+  RECORD_TYPES_META,
 } from '../constants';
 
 export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
@@ -191,3 +192,21 @@ export const getMappedStatisticalCodes = ([statisticalCodeTypes, statisticalCode
     };
   });
 };
+
+const getRecordTypesMeta = (type, formatMessage) => {
+  const item = RECORD_TYPES_META[type];
+
+  return item
+    ? {
+      id: item.id,
+      label: formatMessage({ id: item.labelKey }),
+    }
+    : null;
+};
+
+export const findRecordType = (recordTypes, targetRecordType, formatMessage) => {
+  const meta = getRecordTypesMeta(targetRecordType, formatMessage);
+
+  return recordTypes?.find(({ id, label }) => id === meta?.id || label === meta?.label);
+};
+
