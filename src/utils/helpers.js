@@ -204,8 +204,8 @@ const getRecordTypesMeta = (type, formatMessage) => {
     : null;
 };
 
-export const findRecordType = (recordTypes, targetRecordType, formatMessage) => {
-  const meta = getRecordTypesMeta(targetRecordType, formatMessage);
+export const findRecordType = (recordTypes, selectedType, formatMessage) => {
+  const meta = getRecordTypesMeta(selectedType, formatMessage);
 
   return recordTypes?.find(({ id, label }) => id === meta?.id || label === meta?.label);
 };
