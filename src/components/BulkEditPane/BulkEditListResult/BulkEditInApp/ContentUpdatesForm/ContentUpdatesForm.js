@@ -167,7 +167,7 @@ export const ContentUpdatesForm = ({ fields, setFields, options }) => {
 
     // Check if there are rules should be applied based on if action changed and option value
     const fieldsWithRules = hasActionChanged
-      ? getFieldsWithRules({ fields: mappedFields, option, value, rowIndex })
+      ? getFieldsWithRules({ fields: mappedFields, option, rowIndex })
       : mappedFields;
 
     setFields(fieldsWithRules);

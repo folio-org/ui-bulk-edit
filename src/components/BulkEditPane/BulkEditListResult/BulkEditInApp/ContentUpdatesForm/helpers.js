@@ -398,6 +398,16 @@ export const isMarcContentUpdatesFormValid = (errors) => {
   return Object.keys(errors).length === 0;
 };
 
+export const getStatisticalCodesIndexes = (fields) => {
+  return fields.reduce((acc, { option }, index) => {
+    if (option === OPTIONS.STATISTICAL_CODE) {
+      acc.push(index);
+    }
+
+    return acc;
+  }, []);
+};
+
 export const getActionIndex = (fields, action) => fields.findIndex(({ option, actionsDetails }) => {
   return option === OPTIONS.STATISTICAL_CODE && actionsDetails.actions.filter(Boolean)
     .some(({ name }) => name === action);
@@ -466,7 +476,7 @@ export const isAddButtonShown = (index, fields, options) => {
  *    - Removes any STATISTICAL_CODE field not at `rowIndex`.
  *    - Sets `hidden` to true for STATISTICAL_CODE options.
  */
-export const getFieldsWithRules = ({ fields, option, value, rowIndex }) => {
+export const getFieldsWithRules = ({ fields, option, rowIndex }) => {
   if (option !== OPTIONS.STATISTICAL_CODE) return fields;
 
   return fields.map((field, i) => {
@@ -474,20 +484,40 @@ export const getFieldsWithRules = ({ fields, option, value, rowIndex }) => {
     const isStatisticalCode = field.option === OPTIONS.STATISTICAL_CODE;
     const removeActionIndex = getActionIndex(fields, ACTIONS.REMOVE_SOME);
     const addActionIndex = getActionIndex(fields, ACTIONS.ADD_TO_EXISTING);
+    const removeAllIndex = getActionIndex(fields, ACTIONS.REMOVE_ALL);
+    const statisticalCodesIndexes = getStatisticalCodesIndexes(fields);
+    const hasMaxStatisticalCodes = statisticalCodesIndexes.length === 2;
     const hasAddAndRemove = removeActionIndex !== -1 && addActionIndex !== -1;
-    const hasRemoveAll = value === ACTIONS.REMOVE_ALL;
+    const hasRemoveAll = removeAllIndex !== -1;
 
     if (hasRemoveAll && isStatisticalCode && !isCurrentRow) {
       return null; // Remove this item
     }
 
+    const isOptionHidden = (o) => {
+      if (o.value === OPTIONS.STATISTICAL_CODE) {
+        // If there is a REMOVE_ALL action, hide the STATISTICAL_CODE option for all other fields
+        if (hasRemoveAll) {
+          return i !== removeAllIndex;
+          // If there are REMOVE_SOME and ADD_TO_EXISTING actions, hide the STATISTICAL_CODE option for all other fields
+        } else if (hasAddAndRemove) {
+          return i !== removeActionIndex && i !== addActionIndex;
+          // If there are two STATISTICAL_CODE fields, hide the STATISTICAL_CODE option for all other fields
+        } else if (hasMaxStatisticalCodes) {
+          return statisticalCodesIndexes.every(index => index !== i);
+        } else {
+          return false;
+        }
+      }
+
+      return o.hidden;
+    };
+
     return {
       ...field,
       options: field.options.map(o => ({
         ...o,
-        hidden: o.value === OPTIONS.STATISTICAL_CODE
-          ? hasRemoveAll || hasAddAndRemove
-          : o.hidden,
+        hidden: isOptionHidden(o),
       })),
     };
   }).filter(Boolean);
