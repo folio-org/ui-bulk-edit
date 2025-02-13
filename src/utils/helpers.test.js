@@ -1,5 +1,6 @@
 import {
-  customFilter, findRecordType,
+  customFilter,
+  findRecordType,
   getMappedStatisticalCodes,
   getTenantsById,
   getTransformedLogsFilterValue,
