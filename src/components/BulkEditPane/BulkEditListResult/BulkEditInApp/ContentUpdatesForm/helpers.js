@@ -481,6 +481,8 @@ export const getFieldsWithRules = ({ fields, option, rowIndex }) => {
 
   return fields.map((field, i) => {
     const isCurrentRow = i === rowIndex;
+    const firstEmptyOptionIndex = fields.findIndex(({ option: optionValue }) => !optionValue);
+    const isFirstEmpty = fields.length === 5 && i === firstEmptyOptionIndex; // 5 is the maximum number of fields
     const isStatisticalCode = field.option === OPTIONS.STATISTICAL_CODE;
     const removeActionIndex = getActionIndex(fields, ACTIONS.REMOVE_SOME);
     const addActionIndex = getActionIndex(fields, ACTIONS.ADD_TO_EXISTING);
@@ -490,7 +492,7 @@ export const getFieldsWithRules = ({ fields, option, rowIndex }) => {
     const hasAddAndRemove = removeActionIndex !== -1 && addActionIndex !== -1;
     const hasRemoveAll = removeAllIndex !== -1;
 
-    if (hasRemoveAll && isStatisticalCode && !isCurrentRow) {
+    if (hasRemoveAll && (isStatisticalCode || isFirstEmpty) && !isCurrentRow) {
       return null; // Remove this item
     }
 
