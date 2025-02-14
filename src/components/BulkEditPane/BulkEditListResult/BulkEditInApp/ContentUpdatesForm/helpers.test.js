@@ -1799,6 +1799,53 @@ describe('ContentUpdatesForm helpers', () => {
         expect(result).toEqual(expected);
       });
 
+      it('should remove first empty row when REMOVE_ALL selected and max count of fields added', () => {
+        const fields = [
+          {
+            option: OPTIONS.STATISTICAL_CODE,
+            options: [
+              { value: OPTIONS.STATISTICAL_CODE, hidden: false },
+              { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: false },
+            ],
+            actionsDetails: { actions: [{ name: ACTIONS.REMOVE_ALL }] },
+            id: 1,
+          },
+          {
+            option: '',
+            options: [
+              { value: OPTIONS.STATISTICAL_CODE, hidden: true },
+              { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: false },
+            ],
+            actionsDetails: { actions: [{ name: '' }] },
+            id: 2,
+          },
+          {
+            option: '',
+            options: [
+              { value: OPTIONS.STATISTICAL_CODE, hidden: true },
+              { value: OPTIONS.ADMINISTRATIVE_NOTE, hidden: false },
+            ],
+            actionsDetails: { actions: [{ name: '' }] },
+            id: 3,
+          },
+        ];
+
+        const result = getFieldsWithRules({
+          fields,
+          option: OPTIONS.STATISTICAL_CODE,
+          value: ACTIONS.REMOVE_ALL,
+          rowIndex: 0,
+        });
+
+        // fields[1] - first empty row removed
+        const expected = [
+          fields[0],
+          fields[2]
+        ];
+
+        expect(result).toEqual(expected);
+      });
+
       it('should update the hidden property on each option when ADD_TO_EXISTING and REMOVE_SOME selected', () => {
         const fields = [
           {

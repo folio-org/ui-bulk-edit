@@ -480,9 +480,10 @@ export const getFieldsWithRules = ({ fields, option, rowIndex }) => {
   if (option !== OPTIONS.STATISTICAL_CODE) return fields;
 
   return fields.map((field, i) => {
+    const maxFieldsLength = fields[0].options.length + 1; // +1 for extra STATISTICAL_CODE
     const isCurrentRow = i === rowIndex;
     const firstEmptyOptionIndex = fields.findIndex(({ option: optionValue }) => !optionValue);
-    const isFirstEmpty = fields.length === 5 && i === firstEmptyOptionIndex; // 5 is the maximum number of fields
+    const isFirstEmpty = fields.length === maxFieldsLength && i === firstEmptyOptionIndex;
     const isStatisticalCode = field.option === OPTIONS.STATISTICAL_CODE;
     const removeActionIndex = getActionIndex(fields, ACTIONS.REMOVE_SOME);
     const addActionIndex = getActionIndex(fields, ACTIONS.ADD_TO_EXISTING);
