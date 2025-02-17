@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
@@ -19,15 +20,22 @@ export const useCommitChanges = ({
   const { showErrorMessage } = useErrorMessages();
   const { bulkOperationStart } = useBulkOperationStart();
 
+  const [isCommitting, setIsCommitting] = useState(false);
+
   const commitChanges = async () => {
+    setIsCommitting(true);
+
     try {
-      await bulkOperationStart({
+      const result = await bulkOperationStart({
         id: bulkOperationId,
         approach: APPROACHES.IN_APP,
         step: EDITING_STEPS.COMMIT,
       });
 
-      await queryClient.resetQueries(BULK_OPERATION_DETAILS_KEY);
+      queryClient.setQueriesData(BULK_OPERATION_DETAILS_KEY, {
+        ...result,
+        processedNumOfRecords: 0 // it's required to show correct progress on next step
+      });
 
       onChangesCommited();
 
@@ -39,8 +47,10 @@ export const useCommitChanges = ({
       });
     } catch (e) {
       showErrorMessage(e);
+    } finally {
+      setIsCommitting(false);
     }
   };
 
-  return { commitChanges };
+  return { commitChanges, isCommitting };
 };

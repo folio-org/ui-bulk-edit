@@ -41,7 +41,7 @@ export const BulkEditInAppLayer = ({
     changePreviewSettled,
   } = useConfirmChanges({ bulkOperationId });
 
-  const { commitChanges } = useCommitChanges({
+  const { commitChanges, isCommitting } = useCommitChanges({
     bulkOperationId,
     onChangesCommited: () => {
       closePreviewModal();
@@ -89,7 +89,7 @@ export const BulkEditInAppLayer = ({
         modalFooter={
           <BulkEditPreviewModalFooter
             bulkDetails={bulkDetails}
-            buttonsDisabled={!isCsvFileReady}
+            buttonsDisabled={!isCsvFileReady || isCommitting}
             onCommitChanges={commitChanges}
             onKeepEditing={closePreviewModal}
           />

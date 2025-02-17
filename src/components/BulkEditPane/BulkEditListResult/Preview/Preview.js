@@ -18,7 +18,6 @@ import {
 } from '../../../../hooks/api';
 import {
   CRITERIA,
-  EDITING_STEPS,
   PAGINATION_CONFIG,
   ERRORS_PAGINATION_CONFIG,
   JOB_STATUSES
@@ -50,7 +49,6 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
     countOfWarnings
   });
 
-  const totalNumOfRecords = step === EDITING_STEPS.COMMIT ? bulkDetails?.processedNumOfRecords : bulkDetails?.matchedNumOfRecords;
   const isOtherTabProcessing = progress && criteria !== progress;
   const statusesForPreview = [JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS, JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.COMPLETED, JOB_STATUSES.COMPLETED_WITH_ERRORS];
   const isPreviewEnabled = !isOtherTabProcessing && Boolean(id) && statusesForPreview.includes(bulkDetails?.status);
@@ -118,7 +116,7 @@ export const Preview = ({ id, title, isInitial, bulkDetails }) => {
         <div className={css.previewAccordionOuter}>
           {Boolean(contentData?.length) && (
             <PreviewAccordion
-              totalRecords={totalNumOfRecords}
+              totalRecords={countOfRecords}
               isInitial={isInitial}
               columns={columns}
               contentData={contentData}
