@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [UIBULKED-617](https://folio-org.atlassian.net/browse/UIBULKED-617) The Build query button remains disabled for some languages.
+
 ## [4.2.3](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.3) (2024-11-28)
 
 * [UIBULKED-587](https://folio-org.atlassian.net/browse/UIBULKED-587) Only Users from the first page are displayed in "Users" dropdown on "Logs" page.

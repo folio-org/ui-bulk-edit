@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 
 import { Pluggable } from '@folio/stripes/core';
 import { buildSearch } from '@folio/stripes-acq-components';
@@ -12,12 +13,13 @@ import {
   useLocationFilters,
   usePathParams
 } from '../../../../hooks';
-import { getCapabilityOptions } from '../../../../utils/helpers';
-import { CRITERIA, QUERY_FILTERS, RECORD_TYPES } from '../../../../constants';
+import { findRecordType, getCapabilityOptions } from '../../../../utils/helpers';
+import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
 import { RootContext } from '../../../../context/RootContext';
 
 export const QueryTab = () => {
   const history = useHistory();
+  const { formatMessage } = useIntl();
 
   const {
     queryRecordType,
@@ -54,7 +56,7 @@ export const QueryTab = () => {
 
   const [recordType] = activeFilters[QUERY_FILTERS.RECORD_TYPE] || [];
   const capabilitiesFilterOptions = getCapabilityOptions(criteria, permissions);
-  const recordTypeId = recordTypes?.find(type => type.label === RECORD_TYPES[recordType])?.id;
+  const recordTypeId = findRecordType(recordTypes, recordType, formatMessage)?.id;
   const isQueryBuilderEnabledForUsers = hasUsersViewPerms && (hasCsvViewPerms || hasInAppUsersEditPerms);
   const isQueryBuilderEnabledForItems = hasInventoryInstanceViewPerms && hasInAppViewPerms;
   const isQueryBuilderDisabled =

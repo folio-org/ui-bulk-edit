@@ -4,6 +4,7 @@ import {
   EDIT_CAPABILITIES_OPTIONS,
   JOB_STATUSES,
   LOGS_FILTERS,
+  RECORD_TYPES_META,
 } from '../constants';
 
 export const isCapabilityDisabled = (capabilityValue, view, perms = {}) => {
@@ -178,3 +179,21 @@ export const getTransformedLogsFilterValue = (name, values) => {
 
   return values;
 };
+
+const getRecordTypesMeta = (type, formatMessage) => {
+  const item = RECORD_TYPES_META[type];
+
+  return item
+    ? {
+      id: item.id,
+      label: formatMessage({ id: item.labelKey }),
+    }
+    : null;
+};
+
+export const findRecordType = (recordTypes, selectedType, formatMessage) => {
+  const meta = getRecordTypesMeta(selectedType, formatMessage);
+
+  return recordTypes?.find(({ id, label }) => id === meta?.id || label === meta?.label);
+};
+

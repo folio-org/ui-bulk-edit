@@ -22,11 +22,23 @@ export const CAPABILITIES = {
   USER: 'USER',
 };
 
-export const RECORD_TYPES = {
-  [CAPABILITIES.HOLDING]: 'Holdings',
-  [CAPABILITIES.INSTANCE]: 'Instances',
-  [CAPABILITIES.ITEM]: 'Items',
-  [CAPABILITIES.USER]: 'Users',
+export const RECORD_TYPES_META = {
+  [CAPABILITIES.ITEM]: {
+    id: 'd0213d22-32cf-490f-9196-d81c3c66e53f',
+    labelKey: 'ui-bulk-edit.entityType.composite_item_details',
+  },
+  [CAPABILITIES.INSTANCE]: {
+    id: '6b08439b-4f8e-4468-8046-ea620f5cfb74',
+    labelKey: 'ui-bulk-edit.entityType.composite_instances',
+  },
+  [CAPABILITIES.HOLDING]: {
+    id: '8418e512-feac-4a6a-a56d-9006aab31e33',
+    labelKey: 'ui-bulk-edit.entityType.simple_holdings_record',
+  },
+  [CAPABILITIES.USER]: {
+    id: 'ddc93926-d15a-4a45-9d9c-93eadc3d9bbf',
+    labelKey: 'ui-bulk-edit.entityType.composite_user_details',
+  },
 };
 
 export const IDENTIFIERS = {

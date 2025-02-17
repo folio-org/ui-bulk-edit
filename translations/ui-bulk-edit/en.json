@@ -549,5 +549,10 @@
   "error.uploadedFile": "Fail to upload file",
   "error.sww": "Something went wrong",
   "error.incorrectFormatted": "{fileName} is formatted incorrectly. Please correct the formatting and upload the file again.",
-  "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty."
+  "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
+
+  "entityType.composite_item_details": "Items",
+  "entityType.composite_instances": "Instances",
+  "entityType.composite_holdings_record": "Holdings",
+  "entityType.composite_user_details": "Users"
 }
