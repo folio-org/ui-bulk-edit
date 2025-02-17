@@ -25,6 +25,7 @@
 * [UIBULKED-685](https://folio-org.atlassian.net/browse/UIBULKED-685) Support multiple edits to statistical codes in one bulk edit job.
 * [UIBULKED-612](https://folio-org.atlassian.net/browse/UIBULKED-612) Preview of errors&warnings is re-rendered in the process of uploading from time to time.
 * [UIBULKED-607](https://folio-org.atlassian.net/browse/UIBULKED-607) Migrate to shared GA workflows.
+* [UIBULKED-617](https://folio-org.atlassian.net/browse/UIBULKED-617) The Build query button remains disabled for some languages.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
 
