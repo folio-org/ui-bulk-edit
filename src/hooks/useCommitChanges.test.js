@@ -37,7 +37,7 @@ jest.mock('./api', () => ({
 }));
 
 const mockBulkOperationStart = jest.fn();
-const mockResetQueries = jest.fn();
+const mockSetQueriesData = jest.fn();
 const mockReplace = jest.fn();
 const mockShowErrorMessage = jest.fn();
 
@@ -51,7 +51,7 @@ describe('useCommitChanges', () => {
     });
 
     useQueryClient.mockReturnValue({
-      resetQueries: mockResetQueries,
+      setQueriesData: mockSetQueriesData,
     });
 
     buildSearch.mockImplementation(({ progress }, search) => `?progress=${progress}&${search}`);
@@ -85,7 +85,7 @@ describe('useCommitChanges', () => {
       approach: APPROACHES.IN_APP,
       step: EDITING_STEPS.COMMIT,
     });
-    expect(mockResetQueries).toHaveBeenCalledWith('bulkOperationDetailsKey');
+    expect(mockSetQueriesData).toHaveBeenCalledWith('bulkOperationDetailsKey', { processedNumOfRecords: 0 });
     expect(onChangesCommited).toHaveBeenCalled();
     expect(mockReplace).toHaveBeenCalledWith({
       pathname: '/bulk-edit/123/preview',
