@@ -492,7 +492,6 @@
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
     "menuGroup.startEdit": "Start bulk edit",
     "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
-    "previewModal.message.empty.marc": "All instances have source FOLIO. Use “Instances and  Administrative data” option for bulk edit.",
     "start.downloadChangedRecords.marc": "Download changed records (MARC)",
     "layer.marc.error.ind": "Please check your input.",
     "layer.marc.error.subfield": "Please check your input.",
@@ -524,5 +523,12 @@
     "list.errors.table.status": "Status",
     "list.errors.table.status.ERROR": "Error",
     "list.errors.table.status.WARNING": "Warning",
-    "start.downloadMatchedRecords": "Download matched records (CSV)"
+    "start.downloadMatchedRecords": "Download matched records (CSV)",
+    "logs.status.APPLY_MARC_CHANGES": "Apply changes",
+    "previewModal.message.empty.notSupported": "Żadnej instancji nie można zaktualizować, ponieważ żadna nie ma źródła MARC.",
+    "previewModal.message.empty.partlySupported": "{numberOfSupportedEntities, number} rekordy zostaną zmienione po kliknięciu przycisku Zatwierdź zmiany. Możesz wybrać opcję Pobierz podgląd, aby przejrzeć wszystkie zmiany przed zapisaniem. {numberOfUnsupportedEntities, number} instancje mają źródło, które nie jest obsługiwane przez edycję masową rekordów MARC i nie mogą zostać zaktualizowane.",
+    "entityType.composite_item_details": "Egzemplarze",
+    "entityType.composite_instances": "Instancje",
+    "entityType.composite_holdings_record": "Zasoby",
+    "entityType.composite_user_details": "Użytkownicy"
 }
