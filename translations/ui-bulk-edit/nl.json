@@ -492,7 +492,6 @@
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Er is een probleem met het ophalen van gegevens van S3. Neem contact op met uw hostingprovider om de S3-configuratie te controleren. Verdere details zijn beschikbaar in de Bulk edit app logs (mod-bulk-operations en mod-data-export-worker modules).",
     "menuGroup.startEdit": "Bulkbewerking starten",
     "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
-    "previewModal.message.empty.marc": "All instances have source FOLIO. Use “Instances and  Administrative data” option for bulk edit.",
     "start.downloadChangedRecords.marc": "Download changed records (MARC)",
     "layer.marc.error.ind": "Please check your input.",
     "layer.marc.error.subfield": "Please check your input.",
@@ -524,5 +523,12 @@
     "list.errors.table.status": "Status",
     "list.errors.table.status.ERROR": "Error",
     "list.errors.table.status.WARNING": "Warning",
-    "start.downloadMatchedRecords": "Download matched records (CSV)"
+    "start.downloadMatchedRecords": "Download matched records (CSV)",
+    "logs.status.APPLY_MARC_CHANGES": "Apply changes",
+    "previewModal.message.empty.notSupported": "No instances can be updated because none have source MARC.",
+    "previewModal.message.empty.partlySupported": "{numberOfSupportedEntities, number} records will be changed when the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving. {numberOfUnsupportedEntities, number} instances have source that is not supported by MARC records bulk edit and cannot be updated.",
+    "entityType.composite_item_details": "Items",
+    "entityType.composite_instances": "Instances",
+    "entityType.composite_holdings_record": "Holdings",
+    "entityType.composite_user_details": "Users"
 }
