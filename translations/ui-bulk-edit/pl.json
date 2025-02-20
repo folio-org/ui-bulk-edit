@@ -516,5 +516,9 @@
     "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
     "permission.users.edit": "Bulk edit: In app - Edit user records",
     "permission.query.execute": "Bulk edit: Can build query",
-    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes"
+    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
+    "entityType.composite_item_details": "Egzemplarze",
+    "entityType.composite_instances": "Instancje",
+    "entityType.composite_holdings_record": "Zasoby",
+    "entityType.composite_user_details": "Użytkownicy"
 }

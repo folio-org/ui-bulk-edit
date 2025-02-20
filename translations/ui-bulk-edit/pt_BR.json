@@ -516,5 +516,9 @@
     "permission.inventory.edit": "Edição em massa: no aplicativo - Editar registros de catalogação",
     "permission.users.edit": "Edição em massa: no aplicativo - Editar registros de usuários",
     "permission.query.execute": "Edição em massa: pode criar uma consulta",
-    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes"
+    "logs.status.REVIEWED_NO_MARC_RECORDS": "Reviewing changes",
+    "entityType.composite_item_details": "Itens",
+    "entityType.composite_instances": "Instâncias",
+    "entityType.composite_holdings_record": "Coleções",
+    "entityType.composite_user_details": "Usuários"
 }
