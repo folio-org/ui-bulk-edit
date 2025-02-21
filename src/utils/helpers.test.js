@@ -1,5 +1,6 @@
 import {
   customFilter,
+  findRecordType,
   getTenantsById,
   getTransformedLogsFilterValue,
   removeDuplicatesByValue

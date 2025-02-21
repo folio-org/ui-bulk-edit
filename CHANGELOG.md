@@ -2,31 +2,14 @@
 
 ## In progress
 
+## [4.2.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.4) (2025-02-21)
+
 * [UIBULKED-617](https://folio-org.atlassian.net/browse/UIBULKED-617) The Build query button remains disabled for some languages.
 * [UIBULKED-607](https://folio-org.atlassian.net/browse/UIBULKED-607) Migrate to shared GA workflows.
 
 ## [4.2.3](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.3) (2024-11-28)
 
 * [UIBULKED-587](https://folio-org.atlassian.net/browse/UIBULKED-587) Only Users from the first page are displayed in "Users" dropdown on "Logs" page.
-* [UIBULKED-560](https://folio-org.atlassian.net/browse/UIBULKED-560) Update actions menu.
-* [UIBULKED-585](https://folio-org.atlassian.net/browse/UUIBULKED-585) Adding missing translation and filters.
-* [UIBULKED-561](https://folio-org.atlassian.net/browse/UUIBULKED-561) Add administrative data accordion to MARC bulk edit form.
-* [UIBULKED-562](https://folio-org.atlassian.net/browse/UIBULKED-562) Include statistical code option on Instances bulk edit forms.
-* [UIBULKED-574](https://folio-org.atlassian.net/browse/UIBULKED-574) Updates to Errors component.
-* [UIBULKED-571](https://folio-org.atlassian.net/browse/UIBULKED-571) Errors in response to UI calls.
-* [UIBULKED-568](https://folio-org.atlassian.net/browse/UIBULKED-568) Populating Are you sure? form
-* [UIBULKED-543](https://folio-org.atlassian.net/browse/UIBULKED-543) Rename Find (full field search) to Find.
-* [UIBULKED-599](https://folio-org.atlassian.net/browse/UIBULKED-599) Change Administrative note type is not supported for MARC instances.
-* [UIBULKED-597](https://folio-org.atlassian.net/browse/UIBULKED-597) Commit changes button enabled before preview is populated
-* [UIBULKED-599](https://folio-org.atlassian.net/browse/UIBULKED-599) Change Administrative note type is not supported for MARC instances.
-* [UIBULKED-589](https://folio-org.atlassian.net/browse/UIBULKED-589) Make options in the "Actions" dropdown in "Bulk edits" in alphabetical order.
-* [UIBULKED-588](https://folio-org.atlassian.net/browse/IBULKED-588) Displaying errors and warnings.
-* [UIBULKED-570](https://folio-org.atlassian.net/browse/UIBULKED-570) Downloading files from Logs tab
-* [UIBULKED-605](https://folio-org.atlassian.net/browse/UIBULKED-605) Enabling Confirm changes button based on forms state.
-* [UIBULKED-606](https://folio-org.atlassian.net/browse/UIBULKED-606) Update upload-artifact actions from v3 to v4.
-* [UIBULKED-584](https://folio-org.atlassian.net/browse/UIBULKED-584) Handling instances with sources other than MARC.
-* [UIBULKED-685](https://folio-org.atlassian.net/browse/UIBULKED-685) Support multiple edits to statistical codes in one bulk edit job.
-* [UIBULKED-612](https://folio-org.atlassian.net/browse/UIBULKED-612) Preview of errors&warnings is re-rendered in the process of uploading from time to time.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
 
