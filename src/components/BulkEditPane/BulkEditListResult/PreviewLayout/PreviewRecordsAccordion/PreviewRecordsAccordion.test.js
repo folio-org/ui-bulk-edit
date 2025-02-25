@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import '../../../../../../test/jest/__mock__';
 
-import PreviewAccordion from './PreviewAccordion';
+import { PreviewRecordsAccordion } from './PreviewRecordsAccordion';
 import { RootContext } from '../../../../../context/RootContext';
 
 const users = [
@@ -72,7 +72,7 @@ const renderPreviewAccordion = ({
       visibleColumns,
     }}
     >
-      <PreviewAccordion
+      <PreviewRecordsAccordion
         contentData={items}
         visibleColumns={visibleColumns}
         columnMapping={columnMapping}

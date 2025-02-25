@@ -40,7 +40,7 @@ const BulkEditManualUploadModal = ({
   const { identifier, criteria } = useSearchParams();
 
   const { fileUpload } = useUpload();
-  const { bulkOperationStart } = useBulkOperationStart();
+  const { bulkOperationStart, isLoading: isBulkOperationStarting } = useBulkOperationStart();
 
   const [isDropZoneActive, setIsDropZoneActive] = useState(false);
 
@@ -173,6 +173,7 @@ const BulkEditManualUploadModal = ({
         <Button
           buttonStyle="primary"
           onClick={handleCommitChanges}
+          disabled={isBulkOperationStarting}
         >
           {confirmLabel}
         </Button>

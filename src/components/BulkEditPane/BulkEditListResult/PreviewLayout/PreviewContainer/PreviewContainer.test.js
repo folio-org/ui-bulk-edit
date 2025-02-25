@@ -3,20 +3,20 @@ import { QueryClientProvider } from 'react-query';
 
 import { logDOM, render, screen } from '@testing-library/react';
 
-import '../../../../../test/jest/__mock__';
+import '../../../../../../test/jest/__mock__';
 
 import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
-import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
-import { queryClient } from '../../../../../test/jest/utils/queryClient';
+import { bulkEditLogsData } from '../../../../../../test/jest/__mock__/fakeData';
+import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 
-import { RootContext } from '../../../../context/RootContext';
-import { Preview } from './Preview';
-import { CRITERIA } from '../../../../constants';
+import { RootContext } from '../../../../../context/RootContext';
+import { PreviewContainer } from './PreviewContainer';
+import { CRITERIA } from '../../../../../constants';
 
-jest.mock('./PreviewAccordion', () => ({
-  PreviewAccordion: () => 'PreviewAccordion',
+jest.mock('../PreviewRecordsAccordion/PreviewRecordsAccordionContainer', () => ({
+  PreviewRecordsAccordionContainer: () => 'PreviewRecordsAccordionContainer',
 }));
 
 const bulkOperation = bulkEditLogsData[0];
@@ -34,7 +34,7 @@ const renderPreview = (props = defaultProps, criteria = 'query') => {
     <MemoryRouter initialEntries={[`/bulk-edit/1?queryText=patronGroup%3D%3D"1"&criteria=${criteria}`]}>
       <QueryClientProvider client={queryClient}>
         <RootContext.Provider value={{ setCountOfRecords: setCountOfRecordsMock }}>
-          <Preview {...props} />
+          <PreviewContainer {...props} />
         </RootContext.Provider>
       </QueryClientProvider>
     </MemoryRouter>,
