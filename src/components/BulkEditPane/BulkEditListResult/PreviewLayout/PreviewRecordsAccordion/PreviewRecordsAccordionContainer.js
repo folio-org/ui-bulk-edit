@@ -9,13 +9,12 @@ import { PAGINATION_CONFIG } from '../../../../../constants';
 import { RECORDS_PREVIEW_KEY, useRecordsPreview } from '../../../../../hooks/api';
 import { useBulkOperationStats } from '../../../../../hooks/useBulkOperationStats';
 import { useSearchParams } from '../../../../../hooks';
+import { iseRecordsPreviewAvailable } from '../helpers';
 
 import css from '../Preview.css';
 
 
 export const PreviewRecordsAccordionContainer = ({ bulkDetails }) => {
-  const id = bulkDetails.id;
-
   const {
     criteria,
     queryRecordType,
@@ -28,7 +27,7 @@ export const PreviewRecordsAccordionContainer = ({ bulkDetails }) => {
     visibleColumns,
   } = useBulkOperationStats({ bulkDetails, step });
 
-  const isRecordsPreviewEnabled = countOfRecords > 0 && Boolean(id);
+  const isRecordsPreviewEnabled = iseRecordsPreviewAvailable(bulkDetails, step);
 
   const {
     pagination: previewPagination,
@@ -38,7 +37,7 @@ export const PreviewRecordsAccordionContainer = ({ bulkDetails }) => {
   const { contentData, columns, columnMapping, isFetching: isPreviewFetching, isLoading: isPreviewLoading } = useRecordsPreview({
     key: RECORDS_PREVIEW_KEY,
     capabilities: currentRecordType,
-    id,
+    id: bulkDetails.id,
     step,
     criteria,
     queryRecordType,
@@ -56,7 +55,7 @@ export const PreviewRecordsAccordionContainer = ({ bulkDetails }) => {
     );
   }
 
-  if (contentData?.length === 0) {
+  if (!contentData?.length) {
     return null;
   }
 

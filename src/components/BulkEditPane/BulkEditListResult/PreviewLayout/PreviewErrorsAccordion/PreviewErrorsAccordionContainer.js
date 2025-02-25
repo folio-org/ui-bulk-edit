@@ -9,13 +9,13 @@ import { ERRORS_PAGINATION_CONFIG } from '../../../../../constants';
 import { useErrorsPreview } from '../../../../../hooks/api';
 import { useErrorType } from '../../../../../hooks/useErrorType';
 import { useBulkOperationStats } from '../../../../../hooks/useBulkOperationStats';
+import { useSearchParams } from '../../../../../hooks';
+import { isErrorsPreviewAvailable } from '../helpers';
 
 import css from '../Preview.css';
-import { useSearchParams } from '../../../../../hooks';
 
 
 export const PreviewErrorsAccordionContainer = ({ bulkDetails }) => {
-  const id = bulkDetails.id;
   const { step } = useSearchParams();
 
   const {
@@ -23,13 +23,13 @@ export const PreviewErrorsAccordionContainer = ({ bulkDetails }) => {
     countOfWarnings,
   } = useBulkOperationStats({ bulkDetails, step });
 
-  const { errorType, hasErrorsOrWarnings, toggleShowWarnings } = useErrorType({
+  const { errorType, toggleShowWarnings } = useErrorType({
     countOfErrors,
     countOfWarnings
   });
 
   const hasErrorType = errorType !== null;
-  const isErrorsPreviewEnabled = hasErrorType && hasErrorsOrWarnings && Boolean(id);
+  const isErrorsPreviewEnabled = hasErrorType && isErrorsPreviewAvailable(bulkDetails, step);
 
   const {
     pagination: errorsPagination,
@@ -37,7 +37,7 @@ export const PreviewErrorsAccordionContainer = ({ bulkDetails }) => {
   } = usePagination(ERRORS_PAGINATION_CONFIG);
 
   const { errors, isFetching: isErrorsFetching, isLoading: isErrorsLoading } = useErrorsPreview({
-    id,
+    id: bulkDetails.id,
     step,
     errorType,
     enabled: isErrorsPreviewEnabled,
@@ -57,7 +57,7 @@ export const PreviewErrorsAccordionContainer = ({ bulkDetails }) => {
     );
   }
 
-  if (errors?.length === 0) {
+  if (!errors?.length) {
     return null;
   }
 

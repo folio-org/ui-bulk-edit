@@ -34,7 +34,11 @@ export const useCommitChanges = ({
 
       queryClient.setQueriesData(BULK_OPERATION_DETAILS_KEY, {
         ...result,
-        processedNumOfRecords: 0 // it's required to show correct progress on next step
+        processedNumOfRecords: 0, // it's required to show correct progress on next step
+        matchedNumOfRecords: 0,
+        committedNumOfRecords: 0,
+        matchedNumOfErrors: 0,
+        committedNumOfErrors: 0,
       });
 
       onChangesCommited();
