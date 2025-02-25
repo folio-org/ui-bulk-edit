@@ -29,8 +29,6 @@ export const PreviewRecordsAccordion = memo(({
   const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
-  if (!contentData?.length) return null;
-
   return (
     <div className={css.previewAccordion}>
       <Accordion
