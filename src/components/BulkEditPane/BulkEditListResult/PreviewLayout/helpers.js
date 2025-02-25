@@ -1,5 +1,6 @@
 import { EDITING_STEPS, JOB_STATUSES } from '../../../../constants';
 
+// Array of bulk operation statuses that indicate the operation is in its initial preview phase (UPLOAD phase).
 const initialPreviewStatuses = [
   JOB_STATUSES.DATA_MODIFICATION,
   JOB_STATUSES.DATA_MODIFICATION_IN_PROGRESS,
@@ -7,6 +8,14 @@ const initialPreviewStatuses = [
   JOB_STATUSES.REVIEWED_NO_MARC_RECORDS
 ];
 
+/**
+ * Computes and returns various statistics for a bulk operation based on the current step.
+ *   - countOfRecords: The number of records relevant to the current step.
+ *   - countOfErrors: The number of errors relevant to the current step.
+ *   - countOfWarnings: The number of warnings relevant to the current step.
+ *   - totalCount: The total count of records, which differs based on the step.
+ *   - isInitialPreview: A boolean indicating whether the current step is the initial preview (UPLOAD).
+ */
 export const getBulkOperationStatsByStep = (bulkDetails, step) => {
   const isInitialPreview = step === EDITING_STEPS.UPLOAD;
 
@@ -35,6 +44,11 @@ export const getBulkOperationStatsByStep = (bulkDetails, step) => {
   };
 };
 
+/**
+ * Determines whether a records preview is available for the bulk operation.
+ * Based on it useQuery `enabled` prop will be true or false.
+ * It used to prevent unnecessary requests to the server.
+ */
 export const iseRecordsPreviewAvailable = (bulkDetails, step) => {
   const { isInitialPreview, countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
 
@@ -50,6 +64,11 @@ export const iseRecordsPreviewAvailable = (bulkDetails, step) => {
   }
 };
 
+/**
+ * Determines whether an errors preview is available for the bulk operation.
+ * Based on it useQuery `enabled` prop will be true or false.
+ * It used to prevent unnecessary requests to the server.
+ */
 export const isErrorsPreviewAvailable = (bulkDetails, step) => {
   const { isInitialPreview, countOfErrors, countOfWarnings } = getBulkOperationStatsByStep(bulkDetails, step);
 
