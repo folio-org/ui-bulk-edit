@@ -66,7 +66,6 @@ PreviewRecordsAccordion.propTypes = {
   contentData: PropTypes.arrayOf(PropTypes.object),
   columnMapping: PropTypes.object,
   visibleColumns: PropTypes.arrayOf(PropTypes.object),
-  step: PropTypes.string,
   pagination: PropTypes.shape({
     offset: PropTypes.number,
     limit: PropTypes.number,

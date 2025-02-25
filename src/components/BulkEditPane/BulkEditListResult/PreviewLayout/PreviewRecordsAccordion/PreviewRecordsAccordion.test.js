@@ -4,6 +4,12 @@ import '../../../../../../test/jest/__mock__';
 
 import { PreviewRecordsAccordion } from './PreviewRecordsAccordion';
 import { RootContext } from '../../../../../context/RootContext';
+import { useSearchParams } from '../../../../../hooks';
+
+
+jest.mock('../../../../../hooks', () => ({
+  useSearchParams: jest.fn().mockReturnValue({ step: 'UPLOAD' }),
+}));
 
 const users = [
   {
@@ -57,7 +63,6 @@ const holdingsItems = [
 const renderPreviewAccordion = ({
   items,
   visibleColumns,
-  initial = true,
 }) => {
   const columnMapping = visibleColumns.reduce((acc, column) => {
     acc[column.value] = `${column.value} header`;
@@ -76,8 +81,10 @@ const renderPreviewAccordion = ({
         contentData={items}
         visibleColumns={visibleColumns}
         columnMapping={columnMapping}
-        initial={initial}
-        step="UPLOAD"
+        totalRecords={items.length}
+        isFetching={false}
+        onChangePage={jest.fn()}
+        pagination={{}}
       />
     </RootContext.Provider>,
   );
@@ -88,17 +95,17 @@ describe('PreviewAccordion', () => {
     renderPreviewAccordion({
       items: [],
       visibleColumns: [],
-      initial: true,
     });
 
     expect(screen.getByText(/list.preview.title/)).toBeVisible();
   });
 
   it('should display correct title for results preview', () => {
+    useSearchParams.mockReturnValue({ step: 'COMMIT' });
+
     renderPreviewAccordion({
       items: [],
       visibleColumns: [],
-      initial: false,
     });
 
     expect(screen.getByText(/list.preview.titleChanged/)).toBeVisible();
