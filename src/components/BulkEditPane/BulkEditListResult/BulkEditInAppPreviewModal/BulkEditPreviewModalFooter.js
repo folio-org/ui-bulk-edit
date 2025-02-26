@@ -22,7 +22,7 @@ export const BulkEditPreviewModalFooter = ({
 }) => {
   const { approach } = useSearchParams();
 
-  const { refetch: downloadCsvPreview } = useFileDownload({
+  const { refetch: downloadCsvPreview, isFetching: isAdministrativeFetching } = useFileDownload({
     queryKey: QUERY_KEY_DOWNLOAD_ADMINISTRATIVE_PREVIEW_MODAL,
     enabled: false,
     id: bulkDetails?.id,
@@ -35,7 +35,7 @@ export const BulkEditPreviewModalFooter = ({
     },
   });
 
-  const { refetch: downloadMarcPreview } = useFileDownload({
+  const { refetch: downloadMarcPreview, isFetching: isMarcFetching } = useFileDownload({
     queryKey: QUERY_KEY_DOWNLOAD_MARC_PREVIEW_MODAL,
     enabled: false,
     id: bulkDetails?.id,
@@ -53,11 +53,11 @@ export const BulkEditPreviewModalFooter = ({
       <Button onClick={onKeepEditing}>
         <FormattedMessage id="ui-bulk-edit.previewModal.keepEditing" />
       </Button>
-      <Button onClick={downloadCsvPreview} disabled={buttonsDisabled}>
+      <Button onClick={downloadCsvPreview} disabled={buttonsDisabled || isAdministrativeFetching}>
         <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />
       </Button>
       {approach === APPROACHES.MARC && (
-        <Button onClick={downloadMarcPreview} disabled={buttonsDisabled}>
+        <Button onClick={downloadMarcPreview} disabled={buttonsDisabled || isMarcFetching}>
           <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview.marc" />
         </Button>
       )}
