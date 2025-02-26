@@ -45,11 +45,13 @@ export const PreviewContainer = ({ id, title, bulkDetails }) => {
           </MessageBanner>
         </Headline>
         )}
-        {title && (
-        <Headline size="large" margin="medium">
-          {title}
-        </Headline>
-        )}
+        <div className={css.titleContainer}>
+          {title && (
+            <Headline size="large" margin="medium">
+              {title}
+            </Headline>
+          )}
+        </div>
         <div className={css.previewAccordionOuter}>
           {shouldShowPreview && (
             <>

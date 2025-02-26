@@ -29,6 +29,10 @@
     height: 100%;
 }
 
+.titleContainer {
+    min-height: 45px;
+}
+
 .previewAccordionOuter,
 .errorAccordionOuter {
     display: flex;
