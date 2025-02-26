@@ -38,7 +38,6 @@ export const PreviewLayout = () => {
   return (
     <PreviewContainer
       title={title}
-      id={id}
       bulkDetails={bulkDetails}
     />
   );

@@ -14,10 +14,10 @@ import { PrevNextPagination } from '@folio/stripes-acq-components';
 
 import { useSearchParams } from '../../../../../hooks';
 import { CAPABILITIES, ERROR_TYPES } from '../../../../../constants';
-import { getPreviewErrorsFormatter } from '../../../../../utils/errorsFormatters';
+import { getPreviewErrorsResultFormatter } from '../../../../../utils/formatters';
+import { previewErrorsColumnsMapping } from '../../../../../utils/mappers';
 
 import css from '../Preview.css';
-import { previewErrorsColumnsMapping } from '../../../../../utils/mappers';
 
 
 export const PreviewErrorsAccordion = ({
@@ -38,7 +38,7 @@ export const PreviewErrorsAccordion = ({
   const tenantId = okapi.tenant;
   const isCentralTenant = tenantId === centralTenant;
   const isLinkAvailable = (isCentralTenant && capabilities === CAPABILITIES.INSTANCE) || !isCentralTenant;
-  const resultsFormatter = getPreviewErrorsFormatter({ isLinkAvailable });
+  const resultsFormatter = getPreviewErrorsResultFormatter({ isLinkAvailable });
   const errorLength = errors.length;
   // temporary solution to calculate total errors and warnings, until backend will provide it in scope of MODBULKOPS-451
   const totalErrorsAndWarnings = errorType === ERROR_TYPES.ERROR ? totalErrors : totalErrors + totalWarnings;

@@ -30,7 +30,7 @@
 }
 
 .titleContainer {
-    min-height: 45px;
+    min-height: 45px; /* 45px is the height of the title + margin bottom */
 }
 
 .previewAccordionOuter,

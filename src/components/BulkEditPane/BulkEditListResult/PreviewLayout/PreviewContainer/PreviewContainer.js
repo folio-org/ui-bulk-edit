@@ -19,12 +19,12 @@ import { useBulkOperationStats } from '../../../../../hooks/useBulkOperationStat
 import css from '../Preview.css';
 
 
-export const PreviewContainer = ({ id, title, bulkDetails }) => {
+export const PreviewContainer = ({ title, bulkDetails }) => {
   const { criteria, step, progress } = useSearchParams();
   const isInitial = step === EDITING_STEPS.UPLOAD;
 
   const isOtherTabProcessing = progress && criteria !== progress;
-  const shouldShowPreview = !isOtherTabProcessing && Boolean(id) && Boolean(bulkDetails);
+  const shouldShowPreview = !isOtherTabProcessing && Boolean(bulkDetails);
 
   const { countOfRecords } = useBulkOperationStats({ bulkDetails, step });
 
@@ -66,7 +66,6 @@ export const PreviewContainer = ({ id, title, bulkDetails }) => {
 };
 
 PreviewContainer.propTypes = {
-  id: PropTypes.string,
   title: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   bulkDetails: PropTypes.shape({
     totalNumOfRecords: PropTypes.number,

@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router';
 import { QueryClientProvider } from 'react-query';
 
-import { logDOM, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import '../../../../../../test/jest/__mock__';
 
@@ -13,7 +13,7 @@ import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 
 import { RootContext } from '../../../../../context/RootContext';
 import { PreviewContainer } from './PreviewContainer';
-import { CRITERIA } from '../../../../../constants';
+
 
 jest.mock('../PreviewRecordsAccordion/PreviewRecordsAccordionContainer', () => ({
   PreviewRecordsAccordionContainer: () => 'PreviewRecordsAccordionContainer',
@@ -24,9 +24,7 @@ const setCountOfRecordsMock = jest.fn();
 
 const defaultProps = {
   title: 'preview.query.title',
-  initial: false,
   bulkDetails: bulkOperation,
-  id: bulkOperation.id,
 };
 
 const renderPreview = (props = defaultProps, criteria = 'query') => {
@@ -59,7 +57,7 @@ describe('Preview', () => {
   });
 
   it('displays Bulk edit', () => {
-    renderPreview({ ...defaultProps, initial: true });
+    renderPreview();
 
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
   });
@@ -95,11 +93,5 @@ describe('Preview Query', () => {
     await runAxeTest({
       rootNode: document.body,
     });
-  });
-
-  it('should render no message', async () => {
-    renderPreview(defaultProps, CRITERIA.IDENTIFIER);
-
-    logDOM();
   });
 });
