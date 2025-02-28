@@ -123,7 +123,7 @@ describe('useErrorMessages', () => {
     it('should show an error message using the status code if message not provided', () => {
       const { result } = renderHook(() => useErrorMessages());
 
-      result.current.showExternalModuleError('TestModule', { status: 404 });
+      result.current.showExternalModuleError('TestModule', { response: { status: 404 } });
 
       expect(showCalloutMock)
         .toHaveBeenCalledWith({
@@ -150,7 +150,7 @@ describe('useErrorMessages', () => {
 
       const errorMessage = 'Not Found';
       result.current.showExternalModuleError('TestModule', {
-        status: 403,
+        response: { status: 403 },
         message: errorMessage
       });
 
@@ -164,7 +164,7 @@ describe('useErrorMessages', () => {
     it('should show a generic status error message if neither a valid message nor a recognized message key is provided', () => {
       const { result } = renderHook(() => useErrorMessages());
 
-      result.current.showExternalModuleError('TestModule', { status: 418 });
+      result.current.showExternalModuleError('TestModule', { response: { status: 418 } });
 
       expect(showCalloutMock)
         .toHaveBeenCalledWith({
@@ -176,7 +176,7 @@ describe('useErrorMessages', () => {
     it('should default to 500 if no status is provided and message is empty', () => {
       const { result } = renderHook(() => useErrorMessages());
 
-      result.current.showExternalModuleError('TestModule', {});
+      result.current.showExternalModuleError('TestModule', { response: undefined });
 
       expect(showCalloutMock)
         .toHaveBeenCalledWith({
@@ -190,7 +190,7 @@ describe('useErrorMessages', () => {
 
       const nonStandardMessage = 'Custom module error occurred';
       result.current.showExternalModuleError('TestModule', {
-        status: 501,
+        response: { status: 501 },
         message: nonStandardMessage
       });
 
