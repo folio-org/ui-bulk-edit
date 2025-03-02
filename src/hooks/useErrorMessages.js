@@ -43,8 +43,8 @@ export const useErrorMessages = () => {
   };
 
   const showExternalModuleError = (moduleName, error) => {
-    const status = error.response?.status ?? 500;
-    const initialErrorMessage = error.message;
+    const status = error?.response?.status ?? 500;
+    const initialErrorMessage = error?.message;
 
     let displayMessage = '';
 
