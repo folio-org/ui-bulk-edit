@@ -13,7 +13,7 @@ import { useStripes } from '@folio/stripes/core';
 import { PrevNextPagination } from '@folio/stripes-acq-components';
 
 import { useSearchParams } from '../../../../../hooks';
-import { CAPABILITIES, ERROR_TYPES } from '../../../../../constants';
+import { CAPABILITIES } from '../../../../../constants';
 import { getPreviewErrorsResultFormatter } from '../../../../../utils/formatters';
 import { previewErrorsColumnsMapping } from '../../../../../utils/mappers';
 
@@ -22,6 +22,7 @@ import css from '../Preview.css';
 
 export const PreviewErrorsAccordion = ({
   errors = [],
+  totalErrorRecords,
   errorType,
   totalErrors,
   totalWarnings,
@@ -39,12 +40,9 @@ export const PreviewErrorsAccordion = ({
   const isCentralTenant = tenantId === centralTenant;
   const isLinkAvailable = (isCentralTenant && capabilities === CAPABILITIES.INSTANCE) || !isCentralTenant;
   const resultsFormatter = getPreviewErrorsResultFormatter({ isLinkAvailable });
-  const errorLength = errors.length;
-  // temporary solution to calculate total errors and warnings, until backend will provide it in scope of MODBULKOPS-451
-  const totalErrorsAndWarnings = errorType === ERROR_TYPES.ERROR ? totalErrors : totalErrors + totalWarnings;
   const isWarningsCheckboxDisabled = !totalWarnings || !totalErrors;
 
-  const [opened, setOpened] = useState(!!errorLength);
+  const [opened, setOpened] = useState(!!totalErrorRecords);
 
   return (
     <div className={css.previewAccordion}>
@@ -84,11 +82,10 @@ export const PreviewErrorsAccordion = ({
                 autosize
               />
             </div>
-            {errors.length > 0 && (
+            {totalErrorRecords > 0 && (
               <PrevNextPagination
                 {...pagination}
-                totalCount={totalErrorsAndWarnings}
-                disabled={false}
+                totalCount={totalErrorRecords}
                 onChange={onChangePage}
               />
             )}
@@ -101,6 +98,7 @@ export const PreviewErrorsAccordion = ({
 
 PreviewErrorsAccordion.propTypes = {
   errors: PropTypes.arrayOf(PropTypes.object),
+  totalErrorRecords: PropTypes.number,
   totalErrors: PropTypes.number,
   totalWarnings: PropTypes.number,
   errorType: PropTypes.string,
