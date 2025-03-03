@@ -1,7 +1,10 @@
 import { useQuery } from 'react-query';
+
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+
 import { useErrorMessages } from '../useErrorMessages';
 import { PREVIEW_LIMITS } from '../../constants';
+
 
 export const PREVIEW_ERRORS_KEY = 'PREVIEW_ERRORS_KEY';
 
@@ -18,7 +21,7 @@ export const useErrorsPreview = ({
 
   const { showErrorMessage } = useErrorMessages();
 
-  const { data, isFetching } = useQuery(
+  const { data, isFetching, isLoading } = useQuery(
     {
       queryKey: [namespaceKey, id, limit, offset, errorType, step],
       queryFn: () => ky.get(`bulk-operations/${id}/errors`, { searchParams: { limit, offset, errorType } }).json(),
@@ -32,5 +35,6 @@ export const useErrorsPreview = ({
   return {
     errors: data?.errors || [],
     isFetching,
+    isLoading,
   };
 };

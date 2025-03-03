@@ -1,10 +1,8 @@
-import {
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import { NoResultsMessage } from './NoResultsMessage/NoResultsMessage';
-import PreviewContainer from './PreviewContainer/PreviewContainer';
+import { PreviewLayout } from './PreviewLayout/PreviewLayout';
+
 
 const BulkEditListResult = () => {
   return (
@@ -16,7 +14,7 @@ const BulkEditListResult = () => {
       />
       <Route
         path="/bulk-edit/:id/preview"
-        component={PreviewContainer}
+        component={PreviewLayout}
         exact
       />
     </Switch>

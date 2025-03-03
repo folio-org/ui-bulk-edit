@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { runAxeTest } from '@folio/stripes-testing';
 import { errorsPreview } from '../../../../../../test/jest/__mock__/fakeData';
 
-import ErrorsAccordion from './ErrorsAccordion';
+import { PreviewErrorsAccordion } from './PreviewErrorsAccordion';
 
 const defaultProps = {
   errors: errorsPreview.errors,
@@ -16,7 +16,7 @@ const defaultProps = {
 const renderPreviewAccordion = (history, props = defaultProps) => {
   return render(
     <MemoryRouter initialEntries={history}>
-      <ErrorsAccordion {...props} />
+      <PreviewErrorsAccordion {...props} />
     </MemoryRouter>,
   );
 };
