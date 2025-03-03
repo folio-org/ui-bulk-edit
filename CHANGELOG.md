@@ -26,6 +26,8 @@
 * [UIBULKED-612](https://folio-org.atlassian.net/browse/UIBULKED-612) Preview of errors&warnings is re-rendered in the process of uploading from time to time.
 * [UIBULKED-607](https://folio-org.atlassian.net/browse/UIBULKED-607) Migrate to shared GA workflows.
 * [UIBULKED-617](https://folio-org.atlassian.net/browse/UIBULKED-617) The Build query button remains disabled for some languages.
+* [UIBULKED-610](https://folio-org.atlassian.net/browse/UIBULKED-610) *BREAKING* migrate react-intl to v7.
+* [UIBULKED-609](https://folio-org.atlassian.net/browse/UIBULKED-609) *BREAKING* migrate stripes-* dependencies.
 * [UIBULKED-614](https://folio-org.atlassian.net/browse/UIBULKED-614) Improve bulk-edit module UX.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
