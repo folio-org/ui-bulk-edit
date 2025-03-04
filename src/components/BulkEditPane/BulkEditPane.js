@@ -83,10 +83,12 @@ export const BulkEditPane = () => {
   const isActionMenuVisible = (isQueryTabWithPreview || isIdentifierTabWithPreview) && isActionMenuShown && !isLogsTab;
 
   const title = useMemo(() => {
-    if (bulkDetails?.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;
+    if (!bulkDetails) return null;
+
+    if (bulkDetails.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;
 
     return <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: initialFileName }} />;
-  }, [bulkDetails?.userFriendlyQuery, initialFileName]);
+  }, [bulkDetails, initialFileName]);
 
   const providerValue = {
     countOfRecords,

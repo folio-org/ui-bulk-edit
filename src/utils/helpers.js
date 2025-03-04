@@ -209,4 +209,3 @@ export const findRecordType = (recordTypes, selectedType, formatMessage) => {
 
   return recordTypes?.find(({ id, label }) => id === meta?.id || label === meta?.label);
 };
-

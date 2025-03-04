@@ -1,19 +1,12 @@
-import {
-  FormattedUTCDate,
-} from '@folio/stripes/components';
-import {
-  FolioFormattedTime,
-} from '@folio/stripes-acq-components';
+import { FormattedUTCDate } from '@folio/stripes/components';
+import { FolioFormattedTime } from '@folio/stripes-acq-components';
 
-import {
-  CAPABILITIES,
-  CUSTOM_ENTITY_COLUMNS,
-} from '../../constants';
-
+import { CAPABILITIES, CUSTOM_ENTITY_COLUMNS } from '../constants';
 import { getMappedTableData, DATA_TYPES } from './mappers';
 import {
   ElectronicAccessTable
-} from '../../components/BulkEditPane/BulkEditListResult/Preview/ElectronicAccessTable/ElectronicAccessTable';
+} from '../components/BulkEditPane/BulkEditListResult/PreviewLayout/ElectronicAccessTable/ElectronicAccessTable';
+
 
 const intl = {
   formatMessage: jest.fn(),

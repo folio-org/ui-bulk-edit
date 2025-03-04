@@ -1,22 +1,22 @@
 import { MemoryRouter } from 'react-router';
 import { QueryClientProvider } from 'react-query';
 
-import { logDOM, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-import '../../../../../test/jest/__mock__';
+import '../../../../../../test/jest/__mock__';
 
 import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 
-import { bulkEditLogsData } from '../../../../../test/jest/__mock__/fakeData';
-import { queryClient } from '../../../../../test/jest/utils/queryClient';
+import { bulkEditLogsData } from '../../../../../../test/jest/__mock__/fakeData';
+import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 
-import { RootContext } from '../../../../context/RootContext';
-import { Preview } from './Preview';
-import { CRITERIA } from '../../../../constants';
+import { RootContext } from '../../../../../context/RootContext';
+import { PreviewContainer } from './PreviewContainer';
 
-jest.mock('./PreviewAccordion', () => ({
-  PreviewAccordion: () => 'PreviewAccordion',
+
+jest.mock('../PreviewRecordsAccordion/PreviewRecordsAccordionContainer', () => ({
+  PreviewRecordsAccordionContainer: () => 'PreviewRecordsAccordionContainer',
 }));
 
 const bulkOperation = bulkEditLogsData[0];
@@ -24,9 +24,7 @@ const setCountOfRecordsMock = jest.fn();
 
 const defaultProps = {
   title: 'preview.query.title',
-  initial: false,
   bulkDetails: bulkOperation,
-  id: bulkOperation.id,
 };
 
 const renderPreview = (props = defaultProps, criteria = 'query') => {
@@ -34,7 +32,7 @@ const renderPreview = (props = defaultProps, criteria = 'query') => {
     <MemoryRouter initialEntries={[`/bulk-edit/1?queryText=patronGroup%3D%3D"1"&criteria=${criteria}`]}>
       <QueryClientProvider client={queryClient}>
         <RootContext.Provider value={{ setCountOfRecords: setCountOfRecordsMock }}>
-          <Preview {...props} />
+          <PreviewContainer {...props} />
         </RootContext.Provider>
       </QueryClientProvider>
     </MemoryRouter>,
@@ -59,7 +57,7 @@ describe('Preview', () => {
   });
 
   it('displays Bulk edit', () => {
-    renderPreview({ ...defaultProps, initial: true });
+    renderPreview();
 
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
   });
@@ -95,11 +93,5 @@ describe('Preview Query', () => {
     await runAxeTest({
       rootNode: document.body,
     });
-  });
-
-  it('should render no message', async () => {
-    renderPreview(defaultProps, CRITERIA.IDENTIFIER);
-
-    logDOM();
   });
 });

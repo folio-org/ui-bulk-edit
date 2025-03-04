@@ -16,8 +16,8 @@ import { RootContext } from '../../../context/RootContext';
 import BulkEditListResult from './BulkEditListResult';
 import { useBulkOperationDetails } from '../../../hooks/api';
 
-jest.mock('./Preview/PreviewAccordion', () => ({
-  PreviewAccordion: () => 'PreviewAccordion',
+jest.mock('./PreviewLayout/PreviewRecordsAccordion/PreviewRecordsAccordion', () => ({
+  PreviewRecordsAccordion: () => 'PreviewRecordsAccordion',
 }));
 
 jest.mock('../../../hooks/api', () => ({

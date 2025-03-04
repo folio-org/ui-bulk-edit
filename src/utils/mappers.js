@@ -1,20 +1,18 @@
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
-  FormattedUTCDate,
-} from '@folio/stripes/components';
-import {
-  FolioFormattedTime,
-} from '@folio/stripes-acq-components';
+import { FormattedUTCDate } from '@folio/stripes/components';
+import { FolioFormattedTime } from '@folio/stripes-acq-components';
 
 import {
   CAPABILITIES,
   CRITERIA,
   CUSTOM_ENTITY_COLUMNS,
-} from '../../constants';
+} from '../constants';
 import {
   ElectronicAccessTable
-} from '../../components/BulkEditPane/BulkEditListResult/Preview/ElectronicAccessTable/ElectronicAccessTable';
+} from '../components/BulkEditPane/BulkEditListResult/PreviewLayout/ElectronicAccessTable/ElectronicAccessTable';
+
 
 export const DATA_TYPES = {
   NUMERIC: 'NUMERIC',
@@ -94,6 +92,12 @@ export const getMappedTableData = ({ data, capabilities, criteria, queryRecordTy
     columns,
     contentData,
   };
+};
+
+export const previewErrorsColumnsMapping = {
+  type: <FormattedMessage id="ui-bulk-edit.list.errors.table.status" />,
+  key: <FormattedMessage id="ui-bulk-edit.list.errors.table.code" />,
+  message: <FormattedMessage id="ui-bulk-edit.list.errors.table.message" />,
 };
 
 

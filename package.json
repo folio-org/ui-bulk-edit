@@ -165,6 +165,7 @@
           "inventory-storage.call-number-types.item.get",
           "inventory-storage.call-number-types.item.get",
           "inventory-storage.electronic-access-relationships.item.get",
+          "fqm.version.get",
           "fqm.entityTypes.collection.get",
           "fqm.entityTypes.item.get",
           "fqm.entityTypes.item.columnValues.get",

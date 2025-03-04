@@ -1,31 +1,32 @@
 import React, { memo } from 'react';
 import { PropTypes } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import {
-  Accordion,
-  MultiColumnList,
-} from '@folio/stripes/components';
+
+import { Accordion, MultiColumnList } from '@folio/stripes/components';
 import { PrevNextPagination } from '@folio/stripes-acq-components';
+
 import { PREVIEW_COLUMN_WIDTHS } from '../../../../PermissionsModal/constants/lists';
 import { getVisibleColumnsKeys } from '../../../../../utils/helpers';
+import { EDITING_STEPS } from '../../../../../constants';
+
 import css from '../Preview.css';
+import { useSearchParams } from '../../../../../hooks';
 
 
-const PreviewAccordion = ({
+export const PreviewRecordsAccordion = memo(({
   contentData,
   columnMapping,
   visibleColumns,
-  isInitial,
-  step,
   totalRecords,
   pagination,
   onChangePage,
   isFetching,
 }) => {
+  const { step } = useSearchParams();
+
+  const isInitial = step === EDITING_STEPS.UPLOAD;
   const translationKey = isInitial ? 'title' : 'titleChanged';
-
   const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
-
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
   return (
@@ -58,15 +59,13 @@ const PreviewAccordion = ({
       </Accordion>
     </div>
   );
-};
+});
 
-PreviewAccordion.propTypes = {
+PreviewRecordsAccordion.propTypes = {
   totalRecords: PropTypes.number,
   contentData: PropTypes.arrayOf(PropTypes.object),
   columnMapping: PropTypes.object,
   visibleColumns: PropTypes.arrayOf(PropTypes.object),
-  isInitial: PropTypes.bool,
-  step: PropTypes.string,
   pagination: PropTypes.shape({
     offset: PropTypes.number,
     limit: PropTypes.number,
@@ -74,5 +73,3 @@ PreviewAccordion.propTypes = {
   onChangePage: PropTypes.func,
   isFetching: PropTypes.bool,
 };
-
-export default memo(PreviewAccordion);
