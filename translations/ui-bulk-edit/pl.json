@@ -524,7 +524,7 @@
     "list.errors.table.status.ERROR": "Error",
     "list.errors.table.status.WARNING": "Warning",
     "start.downloadMatchedRecords": "Download matched records (CSV)",
-    "logs.status.APPLY_MARC_CHANGES": "Apply changes",
+    "logs.status.APPLY_MARC_CHANGES": "Zastosuj zmiany",
     "previewModal.message.empty.notSupported": "Żadnej instancji nie można zaktualizować, ponieważ żadna nie ma źródła MARC.",
     "previewModal.message.empty.partlySupported": "{numberOfSupportedEntities, number} rekordy zostaną zmienione po kliknięciu przycisku Zatwierdź zmiany. Możesz wybrać opcję Pobierz podgląd, aby przejrzeć wszystkie zmiany przed zapisaniem. {numberOfUnsupportedEntities, number} instancje mają źródło, które nie jest obsługiwane przez edycję masową rekordów MARC i nie mogą zostać zaktualizowane.",
     "entityType.composite_item_details": "Egzemplarze",
