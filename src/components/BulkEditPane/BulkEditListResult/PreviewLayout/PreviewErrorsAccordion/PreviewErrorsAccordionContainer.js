@@ -36,7 +36,7 @@ export const PreviewErrorsAccordionContainer = ({ bulkDetails }) => {
     changePage: changeErrorPage,
   } = usePagination(ERRORS_PAGINATION_CONFIG);
 
-  const { errors, isFetching: isErrorsFetching, isLoading: isErrorsLoading } = useErrorsPreview({
+  const { errors, isFetching: isErrorsFetching, totalErrorRecords, isLoading: isErrorsLoading } = useErrorsPreview({
     id: bulkDetails.id,
     step,
     errorType,
@@ -64,6 +64,7 @@ export const PreviewErrorsAccordionContainer = ({ bulkDetails }) => {
   return (
     <PreviewErrorsAccordion
       errors={errors}
+      totalErrorRecords={totalErrorRecords}
       totalErrors={countOfErrors}
       totalWarnings={countOfWarnings}
       errorType={errorType}
