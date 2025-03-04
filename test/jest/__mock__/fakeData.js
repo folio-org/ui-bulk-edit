@@ -218,4 +218,5 @@ export const errorsPreview = {
       ],
     },
   ],
+  totalRecords: 1,
 };

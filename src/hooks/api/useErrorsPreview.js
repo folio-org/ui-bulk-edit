@@ -34,6 +34,7 @@ export const useErrorsPreview = ({
 
   return {
     errors: data?.errors || [],
+    totalErrorRecords: data?.totalRecords || 0,
     isFetching,
     isLoading,
   };

@@ -10,7 +10,7 @@ import { PreviewErrorsAccordion } from './PreviewErrorsAccordion';
 
 const defaultProps = {
   errors: errorsPreview.errors,
-  countOfErrors: errorsPreview.errors.length,
+  totalErrorRecords: errorsPreview.totalRecords,
 };
 
 const renderPreviewAccordion = (history, props = defaultProps) => {
