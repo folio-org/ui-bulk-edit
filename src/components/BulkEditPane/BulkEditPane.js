@@ -38,6 +38,7 @@ import { useResetFilters } from '../../hooks/useResetFilters';
 import { BulkEditInAppLayer } from './BulkEditInAppLayer/BulkEditInAppLayer';
 import { BulkEditMarcLayer } from './BulkEditMarcLayer/BulkEditMarcLayer';
 import { savePreviewFile } from '../../utils/files';
+import { getBulkOperationStatsByStep } from './BulkEditListResult/PreviewLayout/helpers';
 
 export const BulkEditPane = () => {
   const [isFileUploaded, setIsFileUploaded] = useState(false);
@@ -51,6 +52,7 @@ export const BulkEditPane = () => {
   const {
     step,
     criteria,
+    progress,
     initialFileName,
   } = useSearchParams();
 
@@ -75,20 +77,19 @@ export const BulkEditPane = () => {
     closeManualModal,
   } = useManualApproach();
 
+  const { hasAnyFilesToDownload } = getBulkOperationStatsByStep(bulkDetails, step);
+
   const isLogsTab = criteria === CRITERIA.LOGS;
   const isQueryTab = criteria === CRITERIA.QUERY;
   const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
-  const isQueryTabWithPreview = isQueryTab && visibleColumns?.length && bulkDetails?.fqlQuery;
-  const isIdentifierTabWithPreview = isIdentifierTab && visibleColumns?.length && !bulkDetails?.fqlQuery;
-  const isActionMenuVisible = (isQueryTabWithPreview || isIdentifierTabWithPreview) && isActionMenuShown && !isLogsTab;
+  const isQueryOrIdentifierCriteria = (isQueryTab && bulkDetails?.fqlQuery) || (isIdentifierTab && !bulkDetails?.fqlQuery);
+  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && hasAnyFilesToDownload && !progress;
 
   const title = useMemo(() => {
-    if (!bulkDetails) return null;
-
-    if (bulkDetails.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;
+    if (bulkDetails?.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;
 
     return <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: initialFileName }} />;
-  }, [bulkDetails, initialFileName]);
+  }, [bulkDetails?.userFriendlyQuery, initialFileName]);
 
   const providerValue = {
     countOfRecords,
