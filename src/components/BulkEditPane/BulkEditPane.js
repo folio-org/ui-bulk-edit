@@ -52,7 +52,6 @@ export const BulkEditPane = () => {
   const {
     step,
     criteria,
-    progress,
     initialFileName,
   } = useSearchParams();
 
