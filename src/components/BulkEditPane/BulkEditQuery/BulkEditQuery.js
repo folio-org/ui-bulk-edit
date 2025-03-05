@@ -25,9 +25,8 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
 
   const { countOfRecords } = useContext(RootContext);
   const stripes = useStripes();
-
-  const { hasAnyFilesToDownload } = getBulkOperationStatsByStep(bulkDetails, step);
-  const isQueryCriteria = bulkDetails?.fqlQuery && hasAnyFilesToDownload;
+  const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
+  const isQueryCriteria = bulkDetails?.fqlQuery && isOperationInPreviewStatus;
 
   const paneTitle = useMemo(() => {
     if (isQueryCriteria) {
@@ -53,10 +52,10 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   }, [isQueryCriteria, countOfRecords, step, currentRecordType]);
 
   const paneSub = useMemo(() => {
-    return hasAnyFilesToDownload && isQueryCriteria
+    return isOperationInPreviewStatus && isQueryCriteria
       ? paneSubtitleUpdated
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />;
-  }, [hasAnyFilesToDownload, paneSubtitleUpdated, isQueryCriteria]);
+  }, [isOperationInPreviewStatus, paneSubtitleUpdated, isQueryCriteria]);
 
   const paneProps = {
     defaultWidth: 'fill',

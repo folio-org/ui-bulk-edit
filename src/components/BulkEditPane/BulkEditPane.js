@@ -77,13 +77,13 @@ export const BulkEditPane = () => {
     closeManualModal,
   } = useManualApproach();
 
-  const { hasAnyFilesToDownload } = getBulkOperationStatsByStep(bulkDetails, step);
+  const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
 
   const isLogsTab = criteria === CRITERIA.LOGS;
   const isQueryTab = criteria === CRITERIA.QUERY;
   const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
   const isQueryOrIdentifierCriteria = (isQueryTab && bulkDetails?.fqlQuery) || (isIdentifierTab && !bulkDetails?.fqlQuery);
-  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && hasAnyFilesToDownload && !progress;
+  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && isOperationInPreviewStatus;
 
   const title = useMemo(() => {
     if (bulkDetails?.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;

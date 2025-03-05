@@ -46,6 +46,8 @@ export const useBulkOperationDetails = ({
     ...options,
   });
 
+  console.log(data?.status);
+
   return {
     bulkDetails: data,
     isLoading,
