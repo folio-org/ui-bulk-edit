@@ -23,6 +23,7 @@ describe('getBulkOperationStatsByStep', () => {
       countOfErrors: bulkDetails.matchedNumOfErrors,
       countOfWarnings: bulkDetails.matchedNumOfWarnings,
       totalCount: bulkDetails.totalNumOfRecords,
+      isOperationInPreviewStatus: false,
       isInitialPreview: true,
     });
   });
@@ -34,6 +35,7 @@ describe('getBulkOperationStatsByStep', () => {
       countOfErrors: bulkDetails.committedNumOfErrors,
       countOfWarnings: bulkDetails.committedNumOfWarnings,
       totalCount: bulkDetails.matchedNumOfRecords,
+      isOperationInPreviewStatus: false,
       isInitialPreview: false,
     });
   });

@@ -9,6 +9,19 @@ const initialPreviewStatuses = [
   JOB_STATUSES.COMPLETED_WITH_ERRORS
 ];
 
+// Array of bulk operation statuses that indicate the operation is in its last preview phase (COMMIT phase).
+const commitPreviewStatuses = [
+  JOB_STATUSES.COMPLETED,
+  JOB_STATUSES.COMPLETED_WITH_ERRORS
+];
+
+export const possiblePreviewStatuses = [
+  ...initialPreviewStatuses,
+  ...commitPreviewStatuses,
+  JOB_STATUSES.APPLY_CHANGES,
+  JOB_STATUSES.APPLY_MARC_CHANGES
+];
+
 /**
  * Computes and returns various statistics for a bulk operation based on the current step.
  *   - countOfRecords: The number of records relevant to the current step.
@@ -17,7 +30,7 @@ const initialPreviewStatuses = [
  *   - totalCount: The total count of records, which differs based on the step.
  *   - isInitialPreview: A boolean indicating whether the current step is the initial preview (UPLOAD).
  */
-export const getBulkOperationStatsByStep = (bulkDetails, step) => {
+export const getBulkOperationStatsByStep = (bulkDetails = {}, step) => {
   const isInitialPreview = step === EDITING_STEPS.UPLOAD;
 
   const countOfRecords = isInitialPreview
@@ -36,12 +49,15 @@ export const getBulkOperationStatsByStep = (bulkDetails, step) => {
     ? bulkDetails.totalNumOfRecords
     : bulkDetails.matchedNumOfRecords;
 
+  const isOperationInPreviewStatus = possiblePreviewStatuses.includes(bulkDetails.status);
+
   return {
     countOfRecords,
     countOfErrors,
     countOfWarnings,
     totalCount,
-    isInitialPreview
+    isInitialPreview,
+    isOperationInPreviewStatus
   };
 };
 
@@ -58,10 +74,7 @@ export const iseRecordsPreviewAvailable = (bulkDetails, step) => {
   if (isInitialPreview) {
     return initialPreviewStatuses.includes(bulkDetails.status) && hasRecords;
   } else {
-    return [
-      JOB_STATUSES.COMPLETED,
-      JOB_STATUSES.COMPLETED_WITH_ERRORS
-    ].includes(bulkDetails.status) && hasRecords;
+    return commitPreviewStatuses.includes(bulkDetails.status) && hasRecords;
   }
 };
 

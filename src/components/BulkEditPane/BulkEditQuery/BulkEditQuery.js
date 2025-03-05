@@ -13,6 +13,7 @@ import { BulkEditListResult } from '../BulkEditListResult';
 import { APPROACHES, EDITING_STEPS, RECORD_TYPES_MAPPING } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
 import { RootContext } from '../../../context/RootContext';
+import { getBulkOperationStatsByStep } from '../BulkEditListResult/PreviewLayout/helpers';
 
 export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   const {
@@ -22,16 +23,13 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   } = useSearchParams();
   const intl = useIntl();
 
-  const {
-    visibleColumns,
-    countOfRecords,
-  } = useContext(RootContext);
+  const { countOfRecords } = useContext(RootContext);
   const stripes = useStripes();
-
-  const isQueryTabWithPreview = visibleColumns?.length && bulkDetails?.fqlQuery;
+  const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
+  const isQueryCriteria = bulkDetails?.fqlQuery && isOperationInPreviewStatus;
 
   const paneTitle = useMemo(() => {
-    if (isQueryTabWithPreview) {
+    if (isQueryCriteria) {
       const id = approach === APPROACHES.MARC
         ? 'ui-bulk-edit.meta.query.title.marc'
         : 'ui-bulk-edit.meta.query.title';
@@ -40,10 +38,10 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
     }
 
     return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [isQueryTabWithPreview, approach]);
+  }, [isQueryCriteria, approach]);
 
   const paneSubtitleUpdated = useMemo(() => {
-    if (!isQueryTabWithPreview) return null;
+    if (!isQueryCriteria) return null;
 
     return (
       <FormattedMessage
@@ -51,15 +49,13 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
         values={{ count: countOfRecords, recordType: RECORD_TYPES_MAPPING[currentRecordType] }}
       />
     );
-  }, [isQueryTabWithPreview, countOfRecords, step, currentRecordType]);
+  }, [isQueryCriteria, countOfRecords, step, currentRecordType]);
 
   const paneSub = useMemo(() => {
-    return (
-      (step === EDITING_STEPS.UPLOAD || step === EDITING_STEPS.COMMIT) && isQueryTabWithPreview
-        ? paneSubtitleUpdated
-        : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />
-    );
-  }, [isQueryTabWithPreview, step, paneSubtitleUpdated]);
+    return isOperationInPreviewStatus && isQueryCriteria
+      ? paneSubtitleUpdated
+      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />;
+  }, [isOperationInPreviewStatus, paneSubtitleUpdated, isQueryCriteria]);
 
   const paneProps = {
     defaultWidth: 'fill',

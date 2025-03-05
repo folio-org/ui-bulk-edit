@@ -13,6 +13,7 @@ import { APPROACHES, EDITING_STEPS, RECORD_TYPES_MAPPING } from '../../../consta
 import { useSearchParams } from '../../../hooks';
 import { RootContext } from '../../../context/RootContext';
 import { BulkEditListResult } from '../BulkEditListResult';
+import { getBulkOperationStatsByStep } from '../BulkEditListResult/PreviewLayout/helpers';
 
 export const BulkEditIdentifiers = ({
   children,
@@ -29,15 +30,13 @@ export const BulkEditIdentifiers = ({
     currentRecordType,
   } = useSearchParams();
 
-  const {
-    visibleColumns,
-    countOfRecords,
-  } = useContext(RootContext);
+  const { countOfRecords } = useContext(RootContext);
+  const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
 
-  const isIdentifierTabWithPreview = visibleColumns?.length && !bulkDetails?.fqlQuery;
+  const isIdentifierCriteria = !bulkDetails?.fqlQuery && isOperationInPreviewStatus;
 
   const paneTitle = useMemo(() => {
-    if ((processedFileName || initialFileName) && isIdentifierTabWithPreview) {
+    if ((processedFileName || initialFileName) && isIdentifierCriteria) {
       const id = approach === APPROACHES.MARC
         ? 'ui-bulk-edit.meta.title.uploadedFile.marc'
         : 'ui-bulk-edit.meta.title.uploadedFile';
@@ -50,10 +49,10 @@ export const BulkEditIdentifiers = ({
     }
 
     return <FormattedMessage id="ui-bulk-edit.meta.title" />;
-  }, [processedFileName, initialFileName, isIdentifierTabWithPreview, approach]);
+  }, [processedFileName, initialFileName, isIdentifierCriteria, approach]);
 
   const paneSubUpdated = useMemo(() => {
-    if (!isIdentifierTabWithPreview) return null;
+    if (!isIdentifierCriteria) return null;
 
     return (
       <FormattedMessage
@@ -61,13 +60,13 @@ export const BulkEditIdentifiers = ({
         values={{ count: countOfRecords, recordType: RECORD_TYPES_MAPPING[currentRecordType] }}
       />
     );
-  }, [isIdentifierTabWithPreview, countOfRecords, step, currentRecordType]);
+  }, [isIdentifierCriteria, countOfRecords, step, currentRecordType]);
 
   const paneSub = useMemo(() => {
-    return (step === EDITING_STEPS.UPLOAD || step === EDITING_STEPS.COMMIT) && isIdentifierTabWithPreview
+    return isOperationInPreviewStatus && isIdentifierCriteria
       ? paneSubUpdated
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />;
-  }, [step, paneSubUpdated, isIdentifierTabWithPreview]);
+  }, [isOperationInPreviewStatus, paneSubUpdated, isIdentifierCriteria]);
 
   const paneProps = {
     defaultWidth: 'fill',
