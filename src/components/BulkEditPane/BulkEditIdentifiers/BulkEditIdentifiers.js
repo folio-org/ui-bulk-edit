@@ -30,10 +30,10 @@ export const BulkEditIdentifiers = ({
     currentRecordType,
   } = useSearchParams();
 
-  const { countOfRecords } = useContext(RootContext);
+  const { countOfRecords, visibleColumns } = useContext(RootContext);
   const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
 
-  const isIdentifierCriteria = !bulkDetails?.fqlQuery && isOperationInPreviewStatus;
+  const isIdentifierCriteria = !bulkDetails?.fqlQuery && (isOperationInPreviewStatus || visibleColumns?.length);
 
   const paneTitle = useMemo(() => {
     if ((processedFileName || initialFileName) && isIdentifierCriteria) {

@@ -82,7 +82,7 @@ export const BulkEditPane = () => {
   const isQueryTab = criteria === CRITERIA.QUERY;
   const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
   const isQueryOrIdentifierCriteria = (isQueryTab && bulkDetails?.fqlQuery) || (isIdentifierTab && !bulkDetails?.fqlQuery);
-  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && isOperationInPreviewStatus;
+  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && (isOperationInPreviewStatus || visibleColumns?.length);
 
   const title = useMemo(() => {
     if (bulkDetails?.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;
