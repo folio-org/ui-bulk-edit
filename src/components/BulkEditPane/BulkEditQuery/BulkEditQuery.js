@@ -23,10 +23,11 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   } = useSearchParams();
   const intl = useIntl();
 
-  const { countOfRecords } = useContext(RootContext);
+  const { countOfRecords, visibleColumns } = useContext(RootContext);
   const stripes = useStripes();
   const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
-  const isQueryCriteria = bulkDetails?.fqlQuery && isOperationInPreviewStatus;
+  const isInPreviewOrHasColumns = isOperationInPreviewStatus || visibleColumns?.length;
+  const isQueryCriteria = bulkDetails?.fqlQuery && isInPreviewOrHasColumns;
 
   const paneTitle = useMemo(() => {
     if (isQueryCriteria) {
@@ -52,10 +53,10 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   }, [isQueryCriteria, countOfRecords, step, currentRecordType]);
 
   const paneSub = useMemo(() => {
-    return isOperationInPreviewStatus && isQueryCriteria
+    return isInPreviewOrHasColumns && isQueryCriteria
       ? paneSubtitleUpdated
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />;
-  }, [isOperationInPreviewStatus, paneSubtitleUpdated, isQueryCriteria]);
+  }, [isInPreviewOrHasColumns, paneSubtitleUpdated, isQueryCriteria]);
 
   const paneProps = {
     defaultWidth: 'fill',
