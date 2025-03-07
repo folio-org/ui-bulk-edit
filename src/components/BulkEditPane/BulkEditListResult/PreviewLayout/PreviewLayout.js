@@ -16,12 +16,11 @@ export const PreviewLayout = () => {
   const { title } = useContext(RootContext);
   const { id } = useParams();
   const {
-    step,
     criteria,
     progress
   } = useSearchParams();
 
-  const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step, progress] });
+  const { bulkDetails, isLoading } = useBulkOperationDetails({ id });
 
   if (progress === criteria) return <ProgressBar />;
 

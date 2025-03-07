@@ -55,7 +55,7 @@ export const BulkEditPane = () => {
     initialFileName,
   } = useSearchParams();
 
-  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId, additionalQueryKeys: [step] });
+  const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
   const { filtersTab } = useResetFilters();
 
   const {
@@ -77,12 +77,11 @@ export const BulkEditPane = () => {
   } = useManualApproach();
 
   const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
-  const isInPreviewOrHasColumns = isOperationInPreviewStatus || visibleColumns?.length;
   const isLogsTab = criteria === CRITERIA.LOGS;
   const isQueryTab = criteria === CRITERIA.QUERY;
   const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
   const isQueryOrIdentifierCriteria = (isQueryTab && bulkDetails?.fqlQuery) || (isIdentifierTab && !bulkDetails?.fqlQuery);
-  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && isInPreviewOrHasColumns;
+  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && isOperationInPreviewStatus;
 
   const title = useMemo(() => {
     if (bulkDetails?.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;

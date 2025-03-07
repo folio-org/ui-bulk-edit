@@ -30,11 +30,10 @@ export const BulkEditIdentifiers = ({
     currentRecordType,
   } = useSearchParams();
 
-  const { countOfRecords, visibleColumns } = useContext(RootContext);
+  const { countOfRecords } = useContext(RootContext);
   const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
 
-  const isInPreviewOrHasColumns = isOperationInPreviewStatus || visibleColumns?.length;
-  const isIdentifierCriteria = !bulkDetails?.fqlQuery && isInPreviewOrHasColumns;
+  const isIdentifierCriteria = !bulkDetails?.fqlQuery && isOperationInPreviewStatus;
 
   const paneTitle = useMemo(() => {
     if ((processedFileName || initialFileName) && isIdentifierCriteria) {
@@ -64,10 +63,10 @@ export const BulkEditIdentifiers = ({
   }, [isIdentifierCriteria, countOfRecords, step, currentRecordType]);
 
   const paneSub = useMemo(() => {
-    return isInPreviewOrHasColumns && isIdentifierCriteria
+    return isIdentifierCriteria
       ? paneSubUpdated
       : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />;
-  }, [isInPreviewOrHasColumns, paneSubUpdated, isIdentifierCriteria]);
+  }, [paneSubUpdated, isIdentifierCriteria]);
 
   const paneProps = {
     defaultWidth: 'fill',

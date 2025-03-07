@@ -24,7 +24,7 @@ export const useResetAppState = ({
       setCountOfRecords(0);
 
       // clear bulkOperation information
-      queryClient.setQueryData(BULK_OPERATION_DETAILS_KEY, () => ({ data: undefined }));
+      queryClient.removeQueries({ queryKey: [BULK_OPERATION_DETAILS_KEY] });
 
       // reset confirmed file name
       setConfirmedFileName(null);
