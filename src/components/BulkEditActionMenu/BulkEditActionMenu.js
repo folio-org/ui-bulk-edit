@@ -59,7 +59,7 @@ const BulkEditActionMenu = ({
   } = perms;
 
   const { id } = usePathParams('/bulk-edit/:id');
-  const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step] });
+  const { bulkDetails, isLoading } = useBulkOperationDetails({ id });
 
   const hasEditPerm = (hasHoldingsInventoryEdit && currentRecordType === CAPABILITIES.HOLDING)
       || (hasItemInventoryEdit && currentRecordType === CAPABILITIES.ITEM)

@@ -21,7 +21,7 @@ export const PreviewLayout = () => {
     progress
   } = useSearchParams();
 
-  const { bulkDetails, isLoading } = useBulkOperationDetails({ id, additionalQueryKeys: [step, progress] });
+  const { bulkDetails, isLoading } = useBulkOperationDetails({ id });
 
   if (progress === criteria) return <ProgressBar />;
 
