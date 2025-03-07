@@ -16,7 +16,6 @@ export const PreviewLayout = () => {
   const { title } = useContext(RootContext);
   const { id } = useParams();
   const {
-    step,
     criteria,
     progress
   } = useSearchParams();
