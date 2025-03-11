@@ -11,6 +11,7 @@ import {
 } from '@folio/stripes/components';
 import { buildSearch, useShowCallout } from '@folio/stripes-acq-components';
 
+import { useQueryClient } from 'react-query';
 import {
   APPROACHES,
   CAPABILITIES,
@@ -21,6 +22,7 @@ import {
 import {
   useUpload,
   useBulkOperationStart,
+  BULK_OPERATION_DETAILS_KEY,
 } from '../../../../hooks/api';
 import { useBulkOperationDelete } from '../../../../hooks/api/useBulkOperationDelete';
 import { ListFileUploader } from '../../../shared/ListFileUploader';
@@ -38,6 +40,7 @@ const BulkEditManualUploadModal = ({
   const callout = useShowCallout();
   const controller = useRef(null);
   const { identifier, criteria } = useSearchParams();
+  const queryClient = useQueryClient();
 
   const { fileUpload } = useUpload();
   const { bulkOperationStart, isLoading: isBulkOperationStarting } = useBulkOperationStart();
@@ -98,13 +101,18 @@ const BulkEditManualUploadModal = ({
 
   const handleCommitChanges = async () => {
     try {
-      const { committedNumOfRecords } = await bulkOperationStart({
+      const result = await bulkOperationStart({
         id: operationId,
         step: EDITING_STEPS.COMMIT,
         approach: APPROACHES.MANUAL,
       });
 
-      setCountOfRecords(committedNumOfRecords);
+      setCountOfRecords(result.committedNumOfRecords);
+
+      queryClient.setQueriesData(BULK_OPERATION_DETAILS_KEY, {
+        ...result,
+        processedNumOfRecords: 0 // it's required to show correct progress on next step
+      });
 
       history.replace({
         pathname: `/bulk-edit/${operationId}/preview`,
@@ -132,14 +140,16 @@ const BulkEditManualUploadModal = ({
       });
 
       if (!uploadResponse?.errorMessage) {
-        const { matchedNumOfRecords } = await bulkOperationStart({
+        const result = await bulkOperationStart({
           id: operationId,
           step: EDITING_STEPS.EDIT,
           approach: APPROACHES.MANUAL,
         });
 
+        queryClient.setQueriesData(BULK_OPERATION_DETAILS_KEY, result);
+
         setFileName(fileToUpload.name);
-        setCountOfRecords(matchedNumOfRecords);
+        setCountOfRecords(result?.matchedNumOfRecords);
       }
 
       setIsLoading(false);
