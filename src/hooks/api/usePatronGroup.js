@@ -3,6 +3,7 @@ import {
 } from 'react-query';
 
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+import { useModuleInfo } from '@folio/stripes-core';
 import { useErrorMessages } from '../useErrorMessages';
 import { MOD_USERS } from '../../constants';
 
@@ -11,6 +12,7 @@ export const PATRON_GROUP_KEY = 'PATRON_GROUP_KEY';
 export const usePatronGroup = (options = {}) => {
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: PATRON_GROUP_KEY });
+  const module = useModuleInfo('/mod-users');
   const { showExternalModuleError } = useErrorMessages();
 
   const { data, isLoading } = useQuery(
