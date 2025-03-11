@@ -12,7 +12,7 @@ export const PATRON_GROUP_KEY = 'PATRON_GROUP_KEY';
 export const usePatronGroup = (options = {}) => {
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: PATRON_GROUP_KEY });
-  const module = useModuleInfo('/mod-users');
+  const module = useModuleInfo('/users');
   const { showExternalModuleError } = useErrorMessages();
 
   const { data, isLoading } = useQuery(
