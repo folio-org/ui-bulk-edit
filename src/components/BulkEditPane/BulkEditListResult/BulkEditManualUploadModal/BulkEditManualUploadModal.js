@@ -21,7 +21,8 @@ import {
 } from '../../../../constants';
 import {
   useUpload,
-  useBulkOperationStart, BULK_OPERATION_DETAILS_KEY,
+  useBulkOperationStart,
+  BULK_OPERATION_DETAILS_KEY,
 } from '../../../../hooks/api';
 import { useBulkOperationDelete } from '../../../../hooks/api/useBulkOperationDelete';
 import { ListFileUploader } from '../../../shared/ListFileUploader';
