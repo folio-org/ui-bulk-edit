@@ -4,7 +4,6 @@
 
 * [UIBULKED-566](https://folio-org.atlassian.net/browse/UIBULKED-566) Bulk edit form - options cleanup.
 * [UIBULKED-580](https://folio-org.atlassian.net/browse/UIBULKED-580) Refactor of publish coordinator related logic.
-* [UIBULKED-587](https://folio-org.atlassian.net/browse/UIBULKED-587) Only Users from the first page are displayed in "Users" dropdown on "Logs" page.
 * [UIBULKED-560](https://folio-org.atlassian.net/browse/UIBULKED-560) Update actions menu.
 * [UIBULKED-585](https://folio-org.atlassian.net/browse/UUIBULKED-585) Adding missing translation and filters.
 * [UIBULKED-561](https://folio-org.atlassian.net/browse/UUIBULKED-561) Add administrative data accordion to MARC bulk edit form.
@@ -24,14 +23,21 @@
 * [UIBULKED-584](https://folio-org.atlassian.net/browse/UIBULKED-584) Handling instances with sources other than MARC.
 * [UIBULKED-685](https://folio-org.atlassian.net/browse/UIBULKED-685) Support multiple edits to statistical codes in one bulk edit job.
 * [UIBULKED-612](https://folio-org.atlassian.net/browse/UIBULKED-612) Preview of errors&warnings is re-rendered in the process of uploading from time to time.
-* [UIBULKED-607](https://folio-org.atlassian.net/browse/UIBULKED-607) Migrate to shared GA workflows.
-* [UIBULKED-617](https://folio-org.atlassian.net/browse/UIBULKED-617) The Build query button remains disabled for some languages.
 * [UIBULKED-610](https://folio-org.atlassian.net/browse/UIBULKED-610) *BREAKING* migrate react-intl to v7.
 * [UIBULKED-609](https://folio-org.atlassian.net/browse/UIBULKED-609) *BREAKING* migrate stripes-* dependencies.
 * [UIBULKED-614](https://folio-org.atlassian.net/browse/UIBULKED-614) Improve bulk-edit module UX.
 * [UIBULKED-615](https://folio-org.atlassian.net/browse/UIBULKED-615) Refactor error accordions to use accurate error count.
 * [UIBULKED-604](https://folio-org.atlassian.net/browse/UIBULKED-604) Show status from network in error message.
 * [UIBULKED-650](https://folio-org.atlassian.net/browse/UIBULKED-650) Update cache after start bulk operation (Local approach).
+
+## [4.2.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.4) (2025-02-21)
+
+* [UIBULKED-617](https://folio-org.atlassian.net/browse/UIBULKED-617) The Build query button remains disabled for some languages.
+* [UIBULKED-607](https://folio-org.atlassian.net/browse/UIBULKED-607) Migrate to shared GA workflows.
+
+## [4.2.3](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.3) (2024-11-28)
+
+* [UIBULKED-587](https://folio-org.atlassian.net/browse/UIBULKED-587) Only Users from the first page are displayed in "Users" dropdown on "Logs" page.
 
 ## [4.2.2](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.2) (2024-11-15)
 
