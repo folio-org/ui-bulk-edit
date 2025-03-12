@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
+
 * [UIBULKED-566](https://folio-org.atlassian.net/browse/UIBULKED-566) Bulk edit form - options cleanup.
 * [UIBULKED-580](https://folio-org.atlassian.net/browse/UIBULKED-580) Refactor of publish coordinator related logic.
 * [UIBULKED-560](https://folio-org.atlassian.net/browse/UIBULKED-560) Update actions menu.
