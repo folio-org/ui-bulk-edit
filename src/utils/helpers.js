@@ -185,10 +185,6 @@ export const getTransformedLogsFilterValue = (values) => {
 /**
  * Maps and sorts statistical codes based on type, code, and name.
  *
- * This function receives two arrays:
- *  - statisticalCodeTypes: an array of objects representing the statistical code types.
- *  - statisticalCodesArr: an array of statistical code objects.
- *
  * The function sorts the statisticalCodesArr using the following rules:
  *  1. By the name of their corresponding statistical code type.
  *  2. Then by the statistical code's `code` property.
