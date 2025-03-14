@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [UIBULKED-620](https://folio-org.atlassian.net/browse/UIBULKED-620) Alphabetical order of statistical codes on bulk edit form.
+
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
 * [UIBULKED-566](https://folio-org.atlassian.net/browse/UIBULKED-566) Bulk edit form - options cleanup.

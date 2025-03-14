@@ -182,15 +182,45 @@ export const getTransformedLogsFilterValue = (values) => {
   return Array.from(result);
 };
 
-export const getMappedStatisticalCodes = ([statisticalCodeTypes, statisticalCodesArr]) => {
-  return statisticalCodesArr.map((statisticalCode) => {
-    const type = statisticalCodeTypes.find((codeType) => codeType.id === statisticalCode.statisticalCodeTypeId);
+/**
+ * Maps and sorts statistical codes based on type, code, and name.
+ *
+ * This function receives two arrays:
+ *  - statisticalCodeTypes: an array of objects representing the statistical code types.
+ *  - statisticalCodesArr: an array of statistical code objects.
+ *
+ * The function sorts the statisticalCodesArr using the following rules:
+ *  1. By the name of their corresponding statistical code type.
+ *  2. Then by the statistical code's `code` property.
+ *  3. Finally by the statistical code's `name` property.
+ *
+ * After sorting, each statistical code is mapped to an object with { label, value } properties.
+ *
+ * @param {[Array, Array]} params - An array containing the statisticalCodeTypes and statisticalCodesArr arrays.
+ * @returns {Array} - A new sorted and mapped array of statistical code objects.
+ */
+export const mapAndSortStatisticalCodes = ([statisticalCodeTypes, statisticalCodesArr]) => {
+  return statisticalCodesArr
+    .slice()
+    .sort((a, b) => {
+      const typeA = statisticalCodeTypes.find(codeType => codeType.id === a.statisticalCodeTypeId);
+      const typeB = statisticalCodeTypes.find(codeType => codeType.id === b.statisticalCodeTypeId);
 
-    return {
-      label: `${type.name}: ${statisticalCode.code} - ${statisticalCode.name}`,
-      value: statisticalCode.id,
-    };
-  });
+      const typeComparison = typeA.name.localeCompare(typeB.name, undefined, { sensitivity: 'base' });
+      if (typeComparison !== 0) return typeComparison;
+
+      const codeComparison = a.code.localeCompare(b.code, undefined, { sensitivity: 'base' });
+      if (codeComparison !== 0) return codeComparison;
+
+      return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+    })
+    .map((statisticalCode) => {
+      const type = statisticalCodeTypes.find((codeType) => codeType.id === statisticalCode.statisticalCodeTypeId);
+      return {
+        label: `${type.name}: ${statisticalCode.code} - ${statisticalCode.name}`,
+        value: statisticalCode.id,
+      };
+    });
 };
 
 const getRecordTypesMeta = (type, formatMessage) => {

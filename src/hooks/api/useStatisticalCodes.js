@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 
 import { useErrorMessages } from '../useErrorMessages';
-import { getMappedStatisticalCodes } from '../../utils/helpers';
+import { mapAndSortStatisticalCodes } from '../../utils/helpers';
 
 
 export const STATISTICAL_CODES_KEY = 'STATISTICAL_CODES_KEY';
@@ -26,7 +26,7 @@ export const useStatisticalCodes = (options = {}) => {
         ky.get('statistical-codes', sharedParams).json()
           .then(response => response.statisticalCodes),
       ]),
-      select: getMappedStatisticalCodes,
+      select: mapAndSortStatisticalCodes,
       onError: showErrorMessage,
       ...options,
     },
