@@ -283,7 +283,7 @@ describe('getTransformedLogsFilterValue', () => {
   });
 });
 
-describe('getMappedAndSortedStatisticalCodes', () => {
+describe('mapAndSortStatisticalCodes', () => {
   test('should correctly map statistical codes with corresponding types', () => {
     const statisticalCodeTypes = [
       { id: '1', name: 'Type A' },
