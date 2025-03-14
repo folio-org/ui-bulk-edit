@@ -5,7 +5,7 @@ import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 
 import { useErrorMessages } from '../useErrorMessages';
 import { useStatisticalCodes, STATISTICAL_CODES_KEY } from './useStatisticalCodes';
-import { getMappedStatisticalCodes } from '../../utils/helpers';
+import { mapAndSortStatisticalCodes } from '../../utils/helpers';
 
 
 jest.mock('@folio/stripes/core', () => ({
@@ -18,7 +18,7 @@ jest.mock('../useErrorMessages', () => ({
 }));
 
 jest.mock('../../utils/helpers', () => ({
-  getMappedStatisticalCodes: jest.fn(),
+  mapAndSortStatisticalCodes: jest.fn(),
 }));
 
 describe('useStatisticalCodes', () => {
@@ -40,7 +40,7 @@ describe('useStatisticalCodes', () => {
     useNamespace.mockReturnValue([mockNamespaceKey]);
     useOkapiKy.mockReturnValue(mockKy);
     useErrorMessages.mockReturnValue({ showErrorMessage: mockShowErrorMessage });
-    getMappedStatisticalCodes.mockReturnValue(mockMappedStatisticalCodes);
+    mapAndSortStatisticalCodes.mockReturnValue(mockMappedStatisticalCodes);
   });
 
   it('should fetch and return statistical codes data', async () => {
@@ -75,7 +75,7 @@ describe('useStatisticalCodes', () => {
     expect(mockKy.get).toHaveBeenCalledWith('statistical-codes', {
       searchParams: { query: 'cql.allRecords=1', limit: 1000 },
     });
-    expect(getMappedStatisticalCodes).toHaveBeenCalledWith([
+    expect(mapAndSortStatisticalCodes).toHaveBeenCalledWith([
       statisticalCodeTypes,
       statisticalCodes,
     ]);

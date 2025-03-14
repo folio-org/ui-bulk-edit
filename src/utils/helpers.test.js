@@ -1,7 +1,7 @@
 import {
   customFilter,
   findRecordType,
-  getMappedStatisticalCodes,
+  mapAndSortStatisticalCodes,
   getTenantsById,
   getTransformedLogsFilterValue,
   removeDuplicatesByValue
@@ -283,7 +283,7 @@ describe('getTransformedLogsFilterValue', () => {
   });
 });
 
-describe('getMappedStatisticalCodes', () => {
+describe('mapAndSortStatisticalCodes', () => {
   test('should correctly map statistical codes with corresponding types', () => {
     const statisticalCodeTypes = [
       { id: '1', name: 'Type A' },
@@ -300,7 +300,7 @@ describe('getMappedStatisticalCodes', () => {
       { label: 'Type B: 002 - Code Two', value: 'code2' },
     ];
 
-    const result = getMappedStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+    const result = mapAndSortStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
     expect(result).toEqual(expected);
   });
 
@@ -314,7 +314,7 @@ describe('getMappedStatisticalCodes', () => {
 
     const expected = [];
 
-    const result = getMappedStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+    const result = mapAndSortStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
     expect(result).toEqual(expected);
   });
 
@@ -328,7 +328,7 @@ describe('getMappedStatisticalCodes', () => {
     ];
 
     expect(() => {
-      getMappedStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+      mapAndSortStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
     }).toThrow(TypeError);
   });
 
@@ -351,8 +351,50 @@ describe('getMappedStatisticalCodes', () => {
       { label: 'Type C: 003 - Code Three', value: 'code3' },
     ];
 
-    const result = getMappedStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+    const result = mapAndSortStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
     expect(result).toEqual(expected);
+  });
+
+  it('should correctly sort and map statistical codes', () => {
+    const statisticalCodeTypes = [
+      { id: 1, name: 'Type A' },
+      { id: 2, name: 'Type B' },
+      { id: 3, name: 'Type C' },
+    ];
+
+    const statisticalCodesArr = [
+      { id: 101, statisticalCodeTypeId: 2, code: '001', name: 'Code 1' },
+      { id: 102, statisticalCodeTypeId: 1, code: '002', name: 'Code 2' },
+      { id: 103, statisticalCodeTypeId: 2, code: '001', name: 'Code 0' },
+      { id: 104, statisticalCodeTypeId: 3, code: '001', name: 'Code 3' },
+      { id: 105, statisticalCodeTypeId: 1, code: '001', name: 'Code 1' },
+    ];
+
+    const result = mapAndSortStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+
+    const expected = [
+      { label: 'Type A: 001 - Code 1', value: 105 },
+      { label: 'Type A: 002 - Code 2', value: 102 },
+      { label: 'Type B: 001 - Code 0', value: 103 },
+      { label: 'Type B: 001 - Code 1', value: 101 },
+      { label: 'Type C: 001 - Code 3', value: 104 },
+    ];
+
+    expect(result).toEqual(expected);
+  });
+
+  it('should not mutate the original statisticalCodesArr', () => {
+    const statisticalCodeTypes = [{ id: 1, name: 'Type A' }];
+    const statisticalCodesArr = [
+      { id: 1, statisticalCodeTypeId: 1, code: '002', name: 'B' },
+      { id: 2, statisticalCodeTypeId: 1, code: '001', name: 'A' },
+    ];
+
+    const originalArray = [...statisticalCodesArr];
+
+    mapAndSortStatisticalCodes([statisticalCodeTypes, statisticalCodesArr]);
+
+    expect(statisticalCodesArr).toEqual(originalArray);
   });
 });
 
