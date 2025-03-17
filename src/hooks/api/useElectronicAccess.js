@@ -18,7 +18,7 @@ export const useElectronicAccessRelationships = (options = {}) => {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get(`${path}?limit=1000&query=cql.allRecords=1 sortby name`).json(),
+      queryFn: () => ky.get(path, { searchParams: { query: 'cql.allRecords=1 sortby name', limit: 1000 } }).json(),
       onError: showExternalModuleError,
       ...options,
     },

@@ -19,7 +19,7 @@ export const useAllPermissions = (options = {}) => {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get(`${path}?length=10000&query=(visible==true)`).json(),
+      queryFn: () => ky.get(path, { searchParams: { query: '(visible==true)', length: 1000 } }).json(),
       select: (data) => data?.permissions.map((permission) => ({
         ...permission,
         type: permission.mutable ? FILTER_KEYS.PERMISSION_SETS : FILTER_KEYS.PERMISSIONS,

@@ -18,7 +18,7 @@ export const useLoanTypes = (options = {}) => {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get(`${path}?query=cql.allRecords%3D1%20sortby%20name&limit=1000`).json(),
+      queryFn: () => ky.get(path, { searchParams: { query: "cql.allRecords=1 sortby name", limit: 1000 }}).json(),
       onError: showExternalModuleError,
       ...options,
     },
