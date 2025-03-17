@@ -3,6 +3,7 @@
 ## In progress
 
 * [UIBULKED-620](https://folio-org.atlassian.net/browse/UIBULKED-620) Alphabetical order of statistical codes on bulk edit form.
+* [UIBULKED-616](https://folio-org.atlassian.net/browse/UIBULKED-616) Replace hardcoded module names with generic hook.
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 

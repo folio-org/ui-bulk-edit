@@ -1,15 +1,24 @@
 import { useIntl } from 'react-intl';
-import { useShowCallout } from '@folio/stripes-acq-components';
 import { getReasonPhrase } from 'http-status-codes';
+
+import { useShowCallout } from '@folio/stripes-acq-components';
+import { useModuleInfo } from '@folio/stripes/core';
 
 import { ERRORS } from '../constants';
 import { useSearchParams } from './useSearchParams';
 
-
-export const useErrorMessages = () => {
+/**
+ * Custom hook for handling and displaying error messages.
+ *
+ * @param {Object} params - Hook parameters. Default is empty object.
+ * @param {string} params.path - The API path to fetch relevant information about backend module.
+ * @returns {Object} - Functions for error handling.
+ */
+export const useErrorMessages = ({ path } = {}) => {
   const intl = useIntl();
   const callout = useShowCallout();
   const { initialFileName } = useSearchParams();
+  const module = useModuleInfo(path);
 
   const showError = (message) => {
     callout({
@@ -42,7 +51,7 @@ export const useErrorMessages = () => {
     }
   };
 
-  const showExternalModuleError = (moduleName, error) => {
+  const showExternalModuleError = (error) => {
     const status = error?.response?.status ?? 500;
     const initialErrorMessage = error?.message;
 
@@ -57,7 +66,7 @@ export const useErrorMessages = () => {
       displayMessage = initialErrorMessage || statusErrorMessage;
     }
 
-    showError(`${moduleName} returns status code: ${status} - ${displayMessage}.`);
+    showError(`${module?.name} returns status code: ${status} - ${displayMessage}.`);
   };
 
   return {
