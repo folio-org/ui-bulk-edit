@@ -41,9 +41,6 @@ export const buildStripes = (otherProperties = {}) => ({
     },
   },
   withOkapi: true,
-  discovery : {
-    interfaceProviders: [],
-  },
   ...otherProperties,
 });
 
