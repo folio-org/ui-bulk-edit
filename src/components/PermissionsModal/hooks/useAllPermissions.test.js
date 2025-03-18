@@ -9,6 +9,9 @@ jest.mock('../../../hooks/useSearchParams', () => ({
   useSearchParams: jest.fn().mockReturnValue({ initialFileName: 'initialFileName' }),
 }));
 
+jest.mock('../../../hooks/useErrorMessages', () => ({
+  useErrorMessages: jest.fn().mockReturnValue({ showExternalModuleError: jest.fn() }),
+}));
 
 jest.mock('react-query', () => ({
   useQuery: jest.fn(),

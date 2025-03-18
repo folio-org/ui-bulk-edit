@@ -41,6 +41,9 @@ export const buildStripes = (otherProperties = {}) => ({
     },
   },
   withOkapi: true,
+  discovery : {
+    interfaceProviders: [],
+  },
   ...otherProperties,
 });
 
@@ -101,6 +104,7 @@ const mockStripesCore = {
   useNamespace: ({ key }) => [`@folio/bulk-edit:${key}`],
   TitleManager: ({ children }) => <>{children}</>,
   checkIfUserInMemberTenant: () => true,
+  useModuleInfo: jest.fn().mockImplementationOnce(() => ({ name: 'TestModule' })),
 };
 
 jest.mock('@folio/stripes/core', () => ({

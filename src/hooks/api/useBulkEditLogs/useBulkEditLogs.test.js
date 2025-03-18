@@ -13,6 +13,10 @@ jest.mock('../../useSearchParams', () => ({
   useSearchParams: jest.fn().mockReturnValue({ initialFileName: 'initialFileName' }),
 }));
 
+jest.mock('../../useErrorMessages', () => ({
+  useErrorMessages: jest.fn().mockReturnValue({ showExternalModuleError: jest.fn() }),
+}));
+
 const users = [
   {
     id: 'userId',
