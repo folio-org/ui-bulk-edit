@@ -27,6 +27,10 @@ jest.mock('../../../../hooks/api', () => ({
   useRecordsPreview: jest.fn(),
 }));
 
+jest.mock('../../../../hooks/useErrorMessages', () => ({
+  useErrorMessages: jest.fn().mockReturnValue({ showExternalModuleError: jest.fn() }),
+}));
+
 const bulkOperation = bulkEditLogsData[0];
 const visibleColumns = [];
 const setVisibleColumns = jest.fn();

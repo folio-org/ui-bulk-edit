@@ -1,22 +1,26 @@
-import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
+
+import { useNamespace, useOkapiKy, useStripes } from '@folio/stripes/core';
+
 import { useErrorMessages } from '../useErrorMessages';
-import { MOD_INVENTORY_STORAGE } from '../../constants';
+
 
 export const ELECTRONIC_ACCESS_RELATIONSHIPS_KEY = 'ELECTRONIC_ACCESS_RELATIONSHIPS_KEY';
 
 export const useElectronicAccessRelationships = (options = {}) => {
+  const stripes = useStripes();
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: ELECTRONIC_ACCESS_RELATIONSHIPS_KEY });
-  const { showExternalModuleError } = useErrorMessages();
+  const path = 'electronic-access-relationships';
+  const { showExternalModuleError } = useErrorMessages({ path });
 
   const { data, isLoading: isElectronicAccessLoading } = useQuery(
     {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get('electronic-access-relationships?limit=1000&query=cql.allRecords=1 sortby name').json(),
-      onError: (error) => showExternalModuleError(MOD_INVENTORY_STORAGE, error),
+      queryFn: () => ky.get(path, { searchParams: { query: 'cql.allRecords=1 sortby name', limit: stripes.config.maxUnpagedResourceCount } }).json(),
+      onError: showExternalModuleError,
       ...options,
     },
   );

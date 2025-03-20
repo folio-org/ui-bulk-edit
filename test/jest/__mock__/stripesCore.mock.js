@@ -3,7 +3,8 @@ export const buildStripes = (otherProperties = {}) => ({
   clone: buildStripes,
   connect: Comp => Comp,
   config: {
-    platformName: 'bulk-edit'
+    platformName: 'bulk-edit',
+    maxUnpagedResourceCount: 1000,
   },
   currency: 'USD',
   hasInterface: jest.fn().mockReturnValue(true),
@@ -101,6 +102,7 @@ const mockStripesCore = {
   useNamespace: ({ key }) => [`@folio/bulk-edit:${key}`],
   TitleManager: ({ children }) => <>{children}</>,
   checkIfUserInMemberTenant: () => true,
+  useModuleInfo: jest.fn().mockImplementationOnce(() => ({ name: 'TestModule' })),
 };
 
 jest.mock('@folio/stripes/core', () => ({

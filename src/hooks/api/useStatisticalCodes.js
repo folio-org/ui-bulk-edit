@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import { useErrorMessages } from '../useErrorMessages';
 import { mapAndSortStatisticalCodes } from '../../utils/helpers';
@@ -9,11 +9,12 @@ import { mapAndSortStatisticalCodes } from '../../utils/helpers';
 export const STATISTICAL_CODES_KEY = 'STATISTICAL_CODES_KEY';
 
 export const useStatisticalCodes = (options = {}) => {
+  const stripes = useStripes();
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: STATISTICAL_CODES_KEY });
   const { showErrorMessage } = useErrorMessages();
 
-  const sharedParams = { searchParams: { query: 'cql.allRecords=1', limit: 1000 } };
+  const sharedParams = { searchParams: { query: 'cql.allRecords=1', limit: stripes.config.maxUnpagedResourceCount } };
 
   const { data, isLoading: isStatisticalCodesLoading } = useQuery(
     {

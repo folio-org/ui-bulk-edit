@@ -9,6 +9,7 @@ import { useLoanTypes, LOAN_TYPES_KEY } from './useLoanTypes';
 jest.mock('@folio/stripes/core', () => ({
   useNamespace: jest.fn(),
   useOkapiKy: jest.fn(),
+  useStripes: jest.fn().mockReturnValue(({ config: { maxUnpagedResourceCount: 1000 } })),
 }));
 
 jest.mock('react-query', () => ({

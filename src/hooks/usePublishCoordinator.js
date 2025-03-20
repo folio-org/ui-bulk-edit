@@ -1,16 +1,10 @@
 import partititon from 'lodash/partition';
-import {
-  useCallback,
-  useRef
-} from 'react';
+import { useCallback, useRef } from 'react';
 
-import {
-  useOkapiKy,
-  useStripes,
-} from '@folio/stripes/core';
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
-import { MOD_CONSORTIA } from '../constants';
 import { useErrorMessages } from './useErrorMessages';
+
 
 export const PUBLISH_COORDINATOR_STATUSES = {
   COMPLETE: 'COMPLETE',
@@ -47,7 +41,7 @@ export const usePublishCoordinator = (namespace, options = {}) => {
   const ky = useOkapiKy();
   const stripes = useStripes();
   const abortController = useRef(new AbortController());
-  const { showExternalModuleError } = useErrorMessages();
+  const { showExternalModuleError } = useErrorMessages({ path: CONSORTIA_API });
 
   const consortium = stripes.user?.user?.consortium;
   const baseApi = `${CONSORTIA_API}/${consortium?.id}/${PUBLICATIONS_API}`;
@@ -56,8 +50,8 @@ export const usePublishCoordinator = (namespace, options = {}) => {
     return ky.get(`${baseApi}/${id}/results`, { signal })
       .json()
       .then(formatPublicationResult)
-      .catch((error) => showExternalModuleError(MOD_CONSORTIA, error));
-  }, [ky, baseApi]);
+      .catch(showExternalModuleError);
+  }, [ky, baseApi, showExternalModuleError]);
 
   const getPublicationDetails = useCallback(async (requestId, { signal } = {}) => {
     const { id, status } = await ky.get(`${baseApi}/${requestId}`, { signal }).json();
@@ -89,8 +83,8 @@ export const usePublishCoordinator = (namespace, options = {}) => {
     return ky.post(baseApi, { json, signal })
       .json()
       .then(res => getPublicationResponse(res, { signal }))
-      .catch((error) => showExternalModuleError(MOD_CONSORTIA, error));
-  }, [baseApi, getPublicationResponse, ky, options.signal]);
+      .catch(showExternalModuleError);
+  }, [baseApi, getPublicationResponse, ky, options.signal, showExternalModuleError]);
 
   return {
     initPublicationRequest,

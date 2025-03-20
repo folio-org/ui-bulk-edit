@@ -22,6 +22,9 @@ jest.mock('../../../../../hooks/api/useLoanTypes');
 jest.mock('../../../../../hooks/api/usePatronGroup');
 jest.mock('../../../../../hooks/api/useElectronicAccess');
 jest.mock('../../../../../hooks/api/useStatisticalCodes');
+jest.mock('../../../../../hooks/useErrorMessages', () => ({
+  useErrorMessages: jest.fn().mockReturnValue({ showExternalModuleError: jest.fn() }),
+}));
 
 const onChange = jest.fn();
 

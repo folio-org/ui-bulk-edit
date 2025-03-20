@@ -15,6 +15,7 @@ jest.mock('@folio/stripes/core', () => ({
   ...jest.requireActual('@folio/stripes/core'),
   useOkapiKy: jest.fn(),
   useNamespace: jest.fn().mockReturnValue(['1', '2', '3']),
+  useModuleInfo: jest.fn().mockReturnValue({ name: 'TestModule' }),
 }));
 
 jest.mock('../../hooks/useSearchParams', () => ({

@@ -11,6 +11,7 @@ import { mapAndSortStatisticalCodes } from '../../utils/helpers';
 jest.mock('@folio/stripes/core', () => ({
   useNamespace: jest.fn(),
   useOkapiKy: jest.fn(),
+  useStripes: jest.fn().mockReturnValue(({ config: { maxUnpagedResourceCount: 1000 } })),
 }));
 
 jest.mock('../useErrorMessages', () => ({

@@ -1,26 +1,31 @@
-import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
 import { useMemo } from 'react';
-import { MOD_INVENTORY_STORAGE, OPTIONS, PARAMETERS_KEYS } from '../../constants';
+
+import { useNamespace, useOkapiKy, useStripes } from '@folio/stripes/core';
+
+import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 import { getMappedAndSortedNotes } from '../../utils/helpers';
 import { useErrorMessages } from '../useErrorMessages';
+
 
 export const INSTANCE_NOTES_KEY = 'INSTANCE_NOTES_KEY';
 
 export const useInstanceNotes = (options = {}) => {
   const ky = useOkapiKy();
+  const stripes = useStripes();
   const [namespaceKey] = useNamespace({ key: INSTANCE_NOTES_KEY });
   const { formatMessage } = useIntl();
-  const { showExternalModuleError } = useErrorMessages();
+  const path = 'instance-note-types';
+  const { showExternalModuleError } = useErrorMessages({ path });
 
   const { data, isLoading: isInstanceNotesLoading } = useQuery(
     {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get('instance-note-types', { searchParams: { limit: 1000 } }).json(),
-      onError: (error) => showExternalModuleError(MOD_INVENTORY_STORAGE, error),
+      queryFn: () => ky.get(path, { searchParams: { limit: stripes.config.maxUnpagedResourceCount } }).json(),
+      onError: showExternalModuleError,
       ...options,
     },
   );

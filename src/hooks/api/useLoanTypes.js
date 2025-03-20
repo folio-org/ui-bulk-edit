@@ -1,22 +1,26 @@
-import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
+
+import { useNamespace, useOkapiKy, useStripes } from '@folio/stripes/core';
+
 import { useErrorMessages } from '../useErrorMessages';
-import { MOD_INVENTORY_STORAGE } from '../../constants';
+
 
 export const LOAN_TYPES_KEY = 'LOAN_TYPES_KEY';
 
 export const useLoanTypes = (options = {}) => {
+  const stripes = useStripes();
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: LOAN_TYPES_KEY });
-  const { showExternalModuleError } = useErrorMessages();
+  const path = 'loan-types';
+  const { showExternalModuleError } = useErrorMessages({ path });
 
   const { data, isLoading } = useQuery(
     {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get('loan-types?query=cql.allRecords%3D1%20sortby%20name&limit=1000').json(),
-      onError: (error) => showExternalModuleError(MOD_INVENTORY_STORAGE, error),
+      queryFn: () => ky.get(path, { searchParams: { query: 'cql.allRecords=1 sortby name', limit: stripes.config.maxUnpagedResourceCount } }).json(),
+      onError: showExternalModuleError,
       ...options,
     },
   );
