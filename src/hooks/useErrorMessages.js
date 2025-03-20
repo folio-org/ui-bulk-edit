@@ -14,7 +14,7 @@ import { useSearchParams } from './useSearchParams';
  * @param {string} params.path - The API path to fetch relevant information about backend module.
  * @returns {Object} - Functions for error handling.
  */
-export const useErrorMessages = ({ path } = {}) => {
+export const useErrorMessages = ({ path = '' } = {}) => {
   const intl = useIntl();
   const callout = useShowCallout();
   const { initialFileName } = useSearchParams();
