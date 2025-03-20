@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import { useErrorMessages } from '../useErrorMessages';
 
@@ -8,6 +8,7 @@ import { useErrorMessages } from '../useErrorMessages';
 export const LOAN_TYPES_KEY = 'LOAN_TYPES_KEY';
 
 export const useLoanTypes = (options = {}) => {
+  const stripes = useStripes();
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: LOAN_TYPES_KEY });
   const path = 'loan-types';
@@ -18,7 +19,7 @@ export const useLoanTypes = (options = {}) => {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get(path, { searchParams: { query: "cql.allRecords=1 sortby name", limit: 1000 }}).json(),
+      queryFn: () => ky.get(path, { searchParams: { query: 'cql.allRecords=1 sortby name', limit: stripes.config.maxUnpagedResourceCount } }).json(),
       onError: showExternalModuleError,
       ...options,
     },

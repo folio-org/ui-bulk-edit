@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
 import { useMemo } from 'react';
 
-import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 import { getMappedAndSortedNotes } from '../../utils/helpers';
@@ -13,6 +13,7 @@ export const INSTANCE_NOTES_KEY = 'INSTANCE_NOTES_KEY';
 
 export const useInstanceNotes = (options = {}) => {
   const ky = useOkapiKy();
+  const stripes = useStripes();
   const [namespaceKey] = useNamespace({ key: INSTANCE_NOTES_KEY });
   const { formatMessage } = useIntl();
   const path = 'instance-note-types';
@@ -23,7 +24,7 @@ export const useInstanceNotes = (options = {}) => {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get(path, { searchParams: { limit: 1000 } }).json(),
+      queryFn: () => ky.get(path, { searchParams: { limit: stripes.config.maxUnpagedResourceCount } }).json(),
       onError: showExternalModuleError,
       ...options,
     },

@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
 import { useMemo } from 'react';
 
-import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import { OPTIONS, PARAMETERS_KEYS } from '../../constants';
 import { getMappedAndSortedNotes } from '../../utils/helpers';
@@ -13,6 +13,7 @@ export const HOLDINGS_NOTES_KEY = 'HOLDINGS_NOTES_KEY';
 
 export const useHoldingsNotes = (options = {}) => {
   const ky = useOkapiKy();
+  const stripes = useStripes();
   const [namespaceKey] = useNamespace({ key: HOLDINGS_NOTES_KEY });
   const { formatMessage } = useIntl();
   const path = 'holdings-note-types';
@@ -23,7 +24,7 @@ export const useHoldingsNotes = (options = {}) => {
       queryKey: [namespaceKey],
       cacheTime: Infinity,
       staleTime: Infinity,
-      queryFn: () => ky.get(path, { searchParams: { limit: 1000 } }).json(),
+      queryFn: () => ky.get(path, { searchParams: { limit: stripes.config.maxUnpagedResourceCount } }).json(),
       onError: showExternalModuleError,
       ...options,
     },

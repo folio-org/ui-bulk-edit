@@ -3,7 +3,8 @@ export const buildStripes = (otherProperties = {}) => ({
   clone: buildStripes,
   connect: Comp => Comp,
   config: {
-    platformName: 'bulk-edit'
+    platformName: 'bulk-edit',
+    maxUnpagedResourceCount: 1000,
   },
   currency: 'USD',
   hasInterface: jest.fn().mockReturnValue(true),
