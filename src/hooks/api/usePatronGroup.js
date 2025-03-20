@@ -2,7 +2,7 @@ import {
   useQuery,
 } from 'react-query';
 
-import { useNamespace, useOkapiKy } from '@folio/stripes/core';
+import { useNamespace, useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import { useErrorMessages } from '../useErrorMessages';
 
@@ -10,6 +10,7 @@ import { useErrorMessages } from '../useErrorMessages';
 export const PATRON_GROUP_KEY = 'PATRON_GROUP_KEY';
 
 export const usePatronGroup = (options = {}) => {
+  const stripes = useStripes();
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: PATRON_GROUP_KEY });
   const { showExternalModuleError } = useErrorMessages({ path: 'groups' });
@@ -21,7 +22,7 @@ export const usePatronGroup = (options = {}) => {
       staleTime: Infinity,
       onError: showExternalModuleError,
       queryFn: async () => {
-        const { usergroups } = await ky.get('groups', { searchParams: { limit: 200 } }).json();
+        const { usergroups } = await ky.get('groups', { searchParams: { limit: stripes.config.maxUnpagedResourceCount } }).json();
 
         return usergroups.reduce((acc, { group, desc, id }) => {
           const patronGroup = {
