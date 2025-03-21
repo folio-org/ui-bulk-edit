@@ -363,7 +363,7 @@
     "columns.INSTANCE.Administrative note": "Administrativní poznámka",
     "columns.INSTANCE.Index title": "Název indexu",
     "columns.INSTANCE.Series statements": "Údaje o edici",
-    "columns.INSTANCE.Edition": "Edice",
+    "columns.INSTANCE.Edition": "Vydání",
     "columns.INSTANCE.Physical description": "Fyzický popis",
     "columns.INSTANCE.Nature of content": "Povaha obsahu",
     "columns.INSTANCE.Formats": "Formáty",
