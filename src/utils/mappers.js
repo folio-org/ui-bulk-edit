@@ -40,7 +40,7 @@ const formatData = ({ capability, column, data }) => {
       return <FormattedUTCDate value={data} />;
     case dataType === DATA_TYPES.DATE_TIME:
       return <FolioFormattedTime dateString={data} />;
-    case capability === CAPABILITIES.HOLDING && field === CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS:
+    case [CAPABILITIES.HOLDING, CAPABILITIES.INSTANCE].includes(capability) && field === CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS:
       return <ElectronicAccessTable value={data} />;
     default:
       return data;
