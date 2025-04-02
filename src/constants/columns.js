@@ -78,6 +78,7 @@ export const CUSTOM_ENTITY_COLUMNS = {
   EXPIRATION_DATE: 'Expiration date',
   DATE_OF_BIRTH: 'Date Of Birth',
   ELECTRONIC_ACCESS: 'Electronic access',
+  SUBJECT: 'Subject',
   CATALOGED_DATE: 'Cataloged date',
   MISSING_PIECES_DATE: 'Missing pieces date',
   ITEM_DAMAGE_STATUS_DATE: 'Item damaged status date',

@@ -86,6 +86,11 @@
   "list.preview.electronicAccess.materialsSpecified": "Materials specified",
   "list.preview.electronicAccess.publicNote": "Public note",
 
+  "list.preview.subject.subjectHeadings": "Subject headings",
+  "list.preview.subject.subjectSource": "Subject source",
+  "list.preview.subject.subjectType": "Subject type",
+
+
   "list.preview.table.status.true": "Active",
   "list.preview.table.status.false": "Inactive",
 

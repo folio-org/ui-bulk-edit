@@ -10,8 +10,9 @@ import {
   CUSTOM_ENTITY_COLUMNS,
 } from '../constants';
 import {
-  ElectronicAccessTable
-} from '../components/BulkEditPane/BulkEditListResult/PreviewLayout/ElectronicAccessTable/ElectronicAccessTable';
+  EmbeddedTable
+} from '../components/BulkEditPane/BulkEditListResult/PreviewLayout/EmbeddedTable/EmbeddedTable';
+import { ELECTRONIC_ACCESS_HEAD_TITLES, SUBJECT_HEAD_TITLES } from '../components/PermissionsModal/constants/lists';
 
 
 export const DATA_TYPES = {
@@ -41,7 +42,9 @@ const formatData = ({ capability, column, data }) => {
     case dataType === DATA_TYPES.DATE_TIME:
       return <FolioFormattedTime dateString={data} />;
     case [CAPABILITIES.HOLDING, CAPABILITIES.INSTANCE].includes(capability) && field === CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS:
-      return <ElectronicAccessTable value={data} />;
+      return <EmbeddedTable value={data} headTitles={ELECTRONIC_ACCESS_HEAD_TITLES} />;
+    case [CAPABILITIES.INSTANCE].includes(capability) && field === CUSTOM_ENTITY_COLUMNS.SUBJECT:
+      return <EmbeddedTable value={data} headTitles={SUBJECT_HEAD_TITLES} />;
     default:
       return data;
   }

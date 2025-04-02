@@ -18,13 +18,20 @@ export const PERMISSIONS_COLUMN_WIDTHS = {
 };
 
 export const ELECTRONIC_ACCESS_HEAD_TITLES = [
-  { key: 'relationship', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.relationship" /> },
-  { key: 'uri', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.uri" /> },
-  { key: 'linkText', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.linkText" /> },
-  { key: 'materialsSpecified', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.materialsSpecified" /> },
-  { key: 'publicNote', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.publicNote" /> },
+  { key: 'relationship', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.relationship" />, width: '15%' },
+  { key: 'uri', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.uri" />, width: '30%' },
+  { key: 'linkText', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.linkText" />, width: '15%' },
+  { key: 'materialsSpecified', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.materialsSpecified" />, width: '15%' },
+  { key: 'publicNote', value: <FormattedMessage id="ui-bulk-edit.list.preview.electronicAccess.publicNote" />, width: '20%' },
+];
+
+export const SUBJECT_HEAD_TITLES = [
+  { key: 'subjectHeadings', value: <FormattedMessage id="ui-bulk-edit.list.preview.subject.subjectHeadings" />, width: '35%' },
+  { key: 'subjectSource', value: <FormattedMessage id="ui-bulk-edit.list.preview.subject.subjectSource" />, width: '35%' },
+  { key: 'subjectType', value: <FormattedMessage id="ui-bulk-edit.list.preview.subject.subjectType" />, width: '30%' },
 ];
 
 export const PREVIEW_COLUMN_WIDTHS = {
   [CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS]: '850px',
+  [CUSTOM_ENTITY_COLUMNS.SUBJECT]: '600px',
 };
