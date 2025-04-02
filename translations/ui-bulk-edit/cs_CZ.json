@@ -350,7 +350,7 @@
     "logs.entityType.INSTANCE": "Katalog: tituly",
     "columns.INSTANCE.Suppress from discovery": "Vyřadit z vyhledávání",
     "columns.INSTANCE.Instance HRID": "HRID titulu",
-    "columns.INSTANCE.Instance status term": "Termín stavu titulu",
+    "columns.INSTANCE.Instance status term": "Stav titulu",
     "columns.INSTANCE.Resource title": "Název zdroje",
     "columns.INSTANCE.Contributors": "Autoři",
     "columns.INSTANCE.Resource type": "Typ zdroje",
@@ -366,7 +366,7 @@
     "columns.INSTANCE.Edition": "Vydání",
     "columns.INSTANCE.Physical description": "Fyzický popis",
     "columns.INSTANCE.Nature of content": "Povaha obsahu",
-    "columns.INSTANCE.Formats": "Formáty",
+    "columns.INSTANCE.Formats": "Typ média -- Typ nosiče",
     "columns.INSTANCE.Languages": "Jazyky",
     "columns.INSTANCE.Publication frequency": "Četnost publikování",
     "columns.INSTANCE.Publication range": "Rozsah publikace",
@@ -425,7 +425,7 @@
     "layer.options.removeField": "Odstranit pole",
     "layer.options.removeSubfield": "Odstranit podpole",
     "layer.options.replaceWith": "Nahradit za",
-    "layer.marc.error": "V současné době jsou podporovány pouze úpravy 5xx a 9xx.",
+    "layer.marc.error": "Hromadná úprava kontrolních polí MARC 00X není podporována.",
     "layer.column.ind1": "In.1",
     "layer.column.ind2": "In.2",
     "columns.HOLDINGS_RECORD.Holdings UUID": "UUID holdingů",
@@ -485,7 +485,7 @@
     "logs.entityType.INSTANCE_MARC": "Katalog: tituly (MARC)",
     "previewModal.downloadPreview.marc": "Stáhnout náhled ve formátu MARC",
     "layer.marc.error.protected": "Toto pole je chráněno.",
-    "layer.marc.error.limited": "Omezeno na 5xx a 9xx.",
+    "layer.marc.error.limited": "Hromadné úpravy polí 00x nejsou podporovány.",
     "columns.logs.approach": "Úpravy",
     "error.mod-bulk-operations.not.upload.file.s3.invalid.configuration": "Vyskytl se problém s konfigurací S3, který brání modulu hromadné úpravy ukládat soubory. Obraťte se na svého poskytovatele hostingu a zjistěte, zda byla aplikace pro hromadné úpravy správně nakonfigurována.",
     "error.mod-bulk-operations.not.download.file.from.s3": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker).",
@@ -530,5 +530,6 @@
     "entityType.composite_item_details": "Jednotky",
     "entityType.composite_instances": "Tituly",
     "entityType.composite_holdings_record": "Holdingy",
-    "entityType.composite_user_details": "Uživatelé"
+    "entityType.composite_user_details": "Uživatelé",
+    "columns.INSTANCE.Electronic access": "Elektronický přístup"
 }

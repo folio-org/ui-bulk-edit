@@ -530,5 +530,6 @@
     "entityType.composite_item_details": "Itens",
     "entityType.composite_instances": "Instâncias",
     "entityType.composite_holdings_record": "Coleções",
-    "entityType.composite_user_details": "Usuários"
+    "entityType.composite_user_details": "Usuários",
+    "columns.INSTANCE.Electronic access": "Electronic access"
 }

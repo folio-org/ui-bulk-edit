@@ -530,5 +530,6 @@
     "entityType.composite_item_details": "單件",
     "entityType.composite_instances": "實例",
     "entityType.composite_holdings_record": "館藏",
-    "entityType.composite_user_details": "使用者"
+    "entityType.composite_user_details": "使用者",
+    "columns.INSTANCE.Electronic access": "Electronic access"
 }
