@@ -525,10 +525,11 @@
     "list.errors.table.status.WARNING": "Warning",
     "start.downloadMatchedRecords": "Download matched records (CSV)",
     "logs.status.APPLY_MARC_CHANGES": "Apply changes",
-    "previewModal.message.empty.notSupported": "No instances can be updated because none have source MARC.",
-    "previewModal.message.empty.partlySupported": "{numberOfSupportedEntities, number} records will be changed when the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving. {numberOfUnsupportedEntities, number} instances have source that is not supported by MARC records bulk edit and cannot be updated.",
-    "entityType.composite_item_details": "Items",
-    "entityType.composite_instances": "Instances",
-    "entityType.composite_holdings_record": "Holdings",
-    "entityType.composite_user_details": "Users"
+    "previewModal.message.empty.notSupported": "لا يمكن تحديث أي أوعية لأنه لا يوجد أي منها يحتوي على مصدر مارك.",
+    "previewModal.message.empty.partlySupported": "سيتم تغيير {numberOfSupportedEntities, number} تسجيلة عند النقر على زر تأكيد التغييرات. يمكنك اختيار تنزيل المعاينة لمراجعة جميع التغييرات قبل الحفظ. تحتوي {numberOfUnsupportedEntities, number} وعاء على مصدر غير مدعوم من تسجيلات مارك، ولا يمكن تحديثه.",
+    "entityType.composite_item_details": "المواد",
+    "entityType.composite_instances": "الأوعية",
+    "entityType.composite_holdings_record": "المقتنيات",
+    "entityType.composite_user_details": "المستخدمين",
+    "columns.INSTANCE.Electronic access": "وصول إلكتروني"
 }

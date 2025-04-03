@@ -530,5 +530,6 @@
     "entityType.composite_item_details": "Egzemplarze",
     "entityType.composite_instances": "Instancje",
     "entityType.composite_holdings_record": "Zasoby",
-    "entityType.composite_user_details": "Użytkownicy"
+    "entityType.composite_user_details": "Użytkownicy",
+    "columns.INSTANCE.Electronic access": "Electronic access"
 }
