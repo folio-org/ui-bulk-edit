@@ -5,6 +5,7 @@
 * [UIBULKED-620](https://folio-org.atlassian.net/browse/UIBULKED-620) Alphabetical order of statistical codes on bulk edit form.
 * [UIBULKED-616](https://folio-org.atlassian.net/browse/UIBULKED-616) Replace hardcoded module names with generic hook.
 * [UIBULKED-642](https://folio-org.atlassian.net/browse/UIBULKED-642) Rendering Instance record Electronic access in UI.
+* [UIBULKED-665](https://folio-org.atlassian.net/browse/UIBULKED-665) Show error link for central tenant when using bulk-edit query.
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 

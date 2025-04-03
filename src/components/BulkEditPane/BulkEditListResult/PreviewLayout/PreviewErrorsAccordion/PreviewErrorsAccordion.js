@@ -32,13 +32,12 @@ export const PreviewErrorsAccordion = ({
   onChangePage,
 }) => {
   const { user, okapi } = useStripes();
-  const { capabilities } = useSearchParams();
-
+  const { currentRecordType } = useSearchParams();
   const visibleColumns = Object.keys(previewErrorsColumnsMapping);
   const centralTenant = user?.user?.consortium?.centralTenantId;
   const tenantId = okapi.tenant;
   const isCentralTenant = tenantId === centralTenant;
-  const isLinkAvailable = (isCentralTenant && capabilities === CAPABILITIES.INSTANCE) || !isCentralTenant;
+  const isLinkAvailable = (isCentralTenant && currentRecordType === CAPABILITIES.INSTANCE) || !isCentralTenant;
   const resultsFormatter = getPreviewErrorsResultFormatter({ isLinkAvailable });
   const isWarningsCheckboxDisabled = !totalWarnings || !totalErrors;
 
