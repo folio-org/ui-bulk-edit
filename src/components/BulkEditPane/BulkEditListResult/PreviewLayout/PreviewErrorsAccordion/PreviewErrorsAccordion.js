@@ -33,6 +33,7 @@ export const PreviewErrorsAccordion = ({
 }) => {
   const { user, okapi } = useStripes();
   const { currentRecordType } = useSearchParams();
+
   const visibleColumns = Object.keys(previewErrorsColumnsMapping);
   const centralTenant = user?.user?.consortium?.centralTenantId;
   const tenantId = okapi.tenant;
