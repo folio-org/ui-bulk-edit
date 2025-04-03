@@ -20,7 +20,13 @@ export const EmbeddedTable = ({ value, headTitles }) => {
         </tr>
       </thead>
       <tbody>
-        {tableBodyRows.map((row, index) => <tr key={`${row}-${index}`}>{row.map((cell, cellIndex) => <td key={`cell-${index}-${cellIndex}`}>{cell}</td>)}</tr>)}
+        {tableBodyRows.map((row, index) => (
+          <tr key={`${row}-${index}`}>
+            {row.map((cell, cellIndex) => (
+              <td key={`cell-${index}-${cellIndex}`}>{cell}</td>
+            ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   );
