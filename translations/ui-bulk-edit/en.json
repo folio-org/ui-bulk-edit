@@ -77,8 +77,8 @@
   "list.filters.capabilities.instances": "Inventory - instances",
   "list.filters.capabilities.circulation": "Circulation",
   "list.filters.capabilities.acquisition": "Acquisition",
-  "list.preview.title": "Preview of record matched",
-  "list.preview.titleChanged": "Preview of record changed",
+  "list.preview.title": "Preview of records matched",
+  "list.preview.titleChanged": "Preview of records changed",
 
   "list.preview.electronicAccess.relationship": "Relationship",
   "list.preview.electronicAccess.uri": "URI",
