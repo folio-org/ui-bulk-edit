@@ -4,8 +4,8 @@ import { FolioFormattedTime } from '@folio/stripes-acq-components';
 import { CAPABILITIES, CUSTOM_ENTITY_COLUMNS } from '../constants';
 import { getMappedTableData, DATA_TYPES } from './mappers';
 import {
-  ElectronicAccessTable
-} from '../components/BulkEditPane/BulkEditListResult/PreviewLayout/ElectronicAccessTable/ElectronicAccessTable';
+  EmbeddedTable
+} from '../components/BulkEditPane/BulkEditListResult/PreviewLayout/EmbeddedTable/EmbeddedTable';
 
 
 const intl = {
@@ -138,7 +138,7 @@ describe('mappers', () => {
 
       const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.HOLDING });
 
-      expect(contentData[0][electronicAccessColumn.value].type).toEqual(ElectronicAccessTable);
+      expect(contentData[0][electronicAccessColumn.value].type).toEqual(EmbeddedTable);
     });
   });
 });
