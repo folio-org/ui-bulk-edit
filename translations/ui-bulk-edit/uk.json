@@ -39,7 +39,7 @@
     "recordsSuccessfullyChanged": "{value, number} records have been successfully changed",
     "error.sww": "Something went wrong",
     "list.logSubTitle.matched": "{count, number} {recordType} records matched",
-    "list.preview.title": "Preview of record matched",
+    "list.preview.title": "Preview of records matched",
     "preview.file.title": "Filename: {fileUploadedName}",
     "preview.query.title": "Query: {queryText}",
     "list.errors.title": "Errors & warnings",
@@ -99,7 +99,7 @@
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "Select a file with holdings UUIDs.",
     "layer.selectLocation": "Select location",
     "list.logSubTitle.changed": "{count, number} {recordType} records changed",
-    "list.preview.titleChanged": "Preview of record changed",
+    "list.preview.titleChanged": "Preview of records changed",
     "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded.",
     "layer.options.expirationDate": "Expiration date",
     "layer.options.permanentLocation": "Permanent item location",
@@ -531,5 +531,9 @@
     "entityType.composite_instances": "Біб.записи (інстанси)",
     "entityType.composite_holdings_record": "Дані про фонди (холдінгси)",
     "entityType.composite_user_details": "Користувачі",
-    "columns.INSTANCE.Electronic access": "Електронний доступ"
+    "columns.INSTANCE.Electronic access": "Електронний доступ",
+    "list.preview.subject.subjectHeadings": "Subject headings",
+    "list.preview.subject.subjectSource": "Subject source",
+    "list.preview.subject.subjectType": "Subject type",
+    "columns.INSTANCE.Subject": "Subject"
 }

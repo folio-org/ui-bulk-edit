@@ -308,7 +308,7 @@
     "logs.filter.title.user": "Uživatel",
     "logs.filter.user.placeholder": "Vybrat uživatele",
     "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Titul (Název, Vydavatel, Datum publikace)",
-    "category.holdingsNotes": "Poznámky holdingů",
+    "category.holdingsNotes": "Poznámky k holdingům",
     "category.holdingsLocation": "Lokace holdingů",
     "category.electronicAccess": "Elektronický přístup",
     "layer.options.holdings.uri": "URI",
@@ -531,5 +531,9 @@
     "entityType.composite_instances": "Tituly",
     "entityType.composite_holdings_record": "Holdingy",
     "entityType.composite_user_details": "Uživatelé",
-    "columns.INSTANCE.Electronic access": "Elektronický přístup"
+    "columns.INSTANCE.Electronic access": "Elektronický přístup",
+    "list.preview.subject.subjectHeadings": "Předmětová hesla",
+    "list.preview.subject.subjectSource": "Heslář/tezaurus",
+    "list.preview.subject.subjectType": "Předmětová kategorie",
+    "columns.INSTANCE.Subject": "Předmět"
 }

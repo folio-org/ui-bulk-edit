@@ -39,7 +39,7 @@
     "recordsSuccessfullyChanged": "{value, number} records have been successfully changed",
     "error.sww": "問題が発生しました",
     "list.logSubTitle.matched": "{count, number} {recordType} records matched",
-    "list.preview.title": "Preview of record matched",
+    "list.preview.title": "Preview of records matched",
     "preview.file.title": "ファイル名: {fileUploadedName}",
     "preview.query.title": "クエリ: {queryText}",
     "list.errors.title": "エラー",
@@ -99,7 +99,7 @@
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "所蔵 UUIDを含むファイルを選択",
     "layer.selectLocation": "所在の選択",
     "list.logSubTitle.changed": "{count, number} {recordType} records changed",
-    "list.preview.titleChanged": "Preview of record changed",
+    "list.preview.titleChanged": "Preview of records changed",
     "modal.fileExtensions.blocked.message2": "Only one file with .csv extension can be uploaded.",
     "layer.options.expirationDate": "Expiration date",
     "layer.options.permanentLocation": "通常資料所在",
@@ -531,5 +531,9 @@
     "entityType.composite_instances": "Instances",
     "entityType.composite_holdings_record": "Holdings",
     "entityType.composite_user_details": "Users",
-    "columns.INSTANCE.Electronic access": "Electronic access"
+    "columns.INSTANCE.Electronic access": "Electronic access",
+    "list.preview.subject.subjectHeadings": "Subject headings",
+    "list.preview.subject.subjectSource": "Subject source",
+    "list.preview.subject.subjectType": "Subject type",
+    "columns.INSTANCE.Subject": "Subject"
 }

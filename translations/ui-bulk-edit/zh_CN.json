@@ -525,11 +525,15 @@
     "list.errors.table.status.WARNING": "警告",
     "start.downloadMatchedRecords": "下载匹配的记录(CSV)",
     "logs.status.APPLY_MARC_CHANGES": "应用更改",
-    "previewModal.message.empty.notSupported": "No instances can be updated because none have source MARC.",
-    "previewModal.message.empty.partlySupported": "{numberOfSupportedEntities, number} records will be changed when the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving. {numberOfUnsupportedEntities, number} instances have source that is not supported by MARC records bulk edit and cannot be updated.",
-    "entityType.composite_item_details": "Items",
-    "entityType.composite_instances": "Instances",
-    "entityType.composite_holdings_record": "Holdings",
-    "entityType.composite_user_details": "Users",
-    "columns.INSTANCE.Electronic access": "Electronic access"
+    "previewModal.message.empty.notSupported": "由于没有源 MARC，因此无法更新任何实例。",
+    "previewModal.message.empty.partlySupported": "单击“提交更改”按钮后，将更改{numberOfSupportedEntities, number}个记录。可以选择下载预览，在保存之前查看所有更改。 {numberOfUnsupportedEntities, number}个实例的来源不受 MARC 记录批量编辑支持，因此无法更新。",
+    "entityType.composite_item_details": "单件",
+    "entityType.composite_instances": "实例",
+    "entityType.composite_holdings_record": "馆藏",
+    "entityType.composite_user_details": "用户",
+    "columns.INSTANCE.Electronic access": "电子访问",
+    "list.preview.subject.subjectHeadings": "Subject headings",
+    "list.preview.subject.subjectSource": "Subject source",
+    "list.preview.subject.subjectType": "Subject type",
+    "columns.INSTANCE.Subject": "Subject"
 }

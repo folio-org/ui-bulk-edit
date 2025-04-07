@@ -531,5 +531,9 @@
     "entityType.composite_instances": "Instances",
     "entityType.composite_holdings_record": "Holdings",
     "entityType.composite_user_details": "Users",
-    "columns.INSTANCE.Electronic access": "Electronic access"
+    "columns.INSTANCE.Electronic access": "Electronic access",
+    "list.preview.subject.subjectHeadings": "Subject headings",
+    "list.preview.subject.subjectSource": "Subject source",
+    "list.preview.subject.subjectType": "Subject type",
+    "columns.INSTANCE.Subject": "Subject"
 }
