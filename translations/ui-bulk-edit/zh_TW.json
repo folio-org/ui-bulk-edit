@@ -531,5 +531,9 @@
     "entityType.composite_instances": "實例",
     "entityType.composite_holdings_record": "館藏",
     "entityType.composite_user_details": "使用者",
-    "columns.INSTANCE.Electronic access": "Electronic access"
+    "columns.INSTANCE.Electronic access": "Electronic access",
+    "list.preview.subject.subjectHeadings": "Subject headings",
+    "list.preview.subject.subjectSource": "Subject source",
+    "list.preview.subject.subjectType": "Subject type",
+    "columns.INSTANCE.Subject": "Subject"
 }
