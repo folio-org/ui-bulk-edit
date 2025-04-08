@@ -8,6 +8,7 @@
 * [UIBULKED-665](https://folio-org.atlassian.net/browse/UIBULKED-665) Show error link for central tenant when using bulk-edit query.
 * [UIBULKED-644](https://folio-org.atlassian.net/browse/UIBULKED-644) Rendering Instance record Subject data in UI.
 * [UIBULKED-649](https://folio-org.atlassian.net/browse/UIBULKED-649) Correct plurals on records matched and confirmation forms.
+* [UIBULKED-645](https://folio-org.atlassian.net/browse/UIBULKED-645) Rendering Instance record Classification in UI.
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
