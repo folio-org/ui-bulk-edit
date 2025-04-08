@@ -31,7 +31,13 @@ export const SUBJECT_HEAD_TITLES = [
   { key: 'subjectType', value: <FormattedMessage id="ui-bulk-edit.list.preview.subject.subjectType" />, width: '30%' },
 ];
 
+export const CLASSIFICATION_HEAD_TITLES = [
+  { key: 'identifierType', value: <FormattedMessage id="ui-bulk-edit.list.preview.classification.identifierType" />, width: '30%' },
+  { key: 'classification', value: <FormattedMessage id="ui-bulk-edit.list.preview.classification.classification" />, width: '70%' },
+];
+
 export const PREVIEW_COLUMN_WIDTHS = {
   [CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS]: '850px',
   [CUSTOM_ENTITY_COLUMNS.SUBJECT]: '600px',
+  [CUSTOM_ENTITY_COLUMNS.CLASSIFICATION]: '400px',
 };

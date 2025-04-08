@@ -45,6 +45,7 @@ export const PreviewRecordsAccordion = memo(({
               columnWidths={PREVIEW_COLUMN_WIDTHS}
               autosize
               loading={isFetching}
+              getCellClassName={css.alignCell}
             />
           </div>
           {contentData.length > 0 && (

@@ -10,6 +10,10 @@
     flex-grow: 1;
 }
 
+.previewAccordionList [role="gridcell"] {
+    align-items: flex-start;
+}
+
 .previewAccordion:has([aria-expanded="false"]) {
     flex-grow: 0;
 }
