@@ -15,6 +15,7 @@ import {
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { PREVIEW_COLUMN_WIDTHS } from '../../../PermissionsModal/constants/lists';
 import css from './BulkEditInAppPreviewModal.css';
+import previewCss from '../PreviewLayout/Preview.css';
 import { usePagination } from '../../../../hooks/usePagination';
 import {
   EDITING_STEPS,
@@ -124,6 +125,9 @@ export const BulkEditPreviewModalList = ({
         columnIdPrefix="in-app"
         columnWidths={PREVIEW_COLUMN_WIDTHS}
         loading={isFetching}
+        getCellClass={(defaultCellStyle) => {
+          return `${defaultCellStyle} ${previewCss.cellAlign}`;
+        }}
       />
 
       {contentData.length > 0 && (
