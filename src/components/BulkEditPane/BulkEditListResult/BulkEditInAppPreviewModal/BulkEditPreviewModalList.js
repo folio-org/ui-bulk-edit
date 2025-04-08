@@ -116,19 +116,19 @@ export const BulkEditPreviewModalList = ({
       />
       </strong>
 
-      <MultiColumnList
-        striped
-        contentData={contentData}
-        columnMapping={columnMapping}
-        visibleColumns={visibleColumnKeys}
-        maxHeight={300}
-        columnIdPrefix="in-app"
-        columnWidths={PREVIEW_COLUMN_WIDTHS}
-        loading={isFetching}
-        getCellClass={(defaultCellStyle) => {
-          return `${defaultCellStyle} ${previewCss.cellAlign}`;
-        }}
-      />
+      <div className={previewCss.previewAccordionList}>
+        <MultiColumnList
+          striped
+          contentData={contentData}
+          columnMapping={columnMapping}
+          visibleColumns={visibleColumnKeys}
+          maxHeight={300}
+          columnIdPrefix="in-app"
+          columnWidths={PREVIEW_COLUMN_WIDTHS}
+          loading={isFetching}
+        />
+      </div>
+
 
       {contentData.length > 0 && (
         <PrevNextPagination
