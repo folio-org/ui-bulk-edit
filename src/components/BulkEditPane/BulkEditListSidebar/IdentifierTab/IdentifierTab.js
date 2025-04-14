@@ -4,6 +4,7 @@ import React, {
   useMemo,
   useState
 } from 'react';
+import PropTypes from 'prop-types';
 import { buildSearch } from '@folio/stripes-acq-components';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -200,4 +201,8 @@ export const IdentifierTab = ({ onClearState }) => {
       />
     </>
   );
+};
+
+IdentifierTab.propTypes = {
+  onClearState: PropTypes.func.isRequired,
 };
