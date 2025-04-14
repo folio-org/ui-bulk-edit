@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 
@@ -15,9 +15,9 @@ import {
 } from '../../../../hooks';
 import { findRecordType, getCapabilityOptions } from '../../../../utils/helpers';
 import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
-import { RootContext } from '../../../../context/RootContext';
 
-export const QueryTab = () => {
+
+export const QueryTab = ({ onClearState }) => {
   const history = useHistory();
   const { formatMessage } = useIntl();
 
@@ -28,11 +28,6 @@ export const QueryTab = () => {
     initialFileName
   } = useSearchParams();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-
-  const {
-    setIsFileUploaded,
-    setVisibleColumns,
-  } = useContext(RootContext);
 
   const { recordTypes } = useRecordTypes();
   const permissions = useBulkPermissions();
@@ -86,8 +81,7 @@ export const QueryTab = () => {
       }, history.location.search),
     });
 
-    setIsFileUploaded(false);
-    setVisibleColumns(null);
+    onClearState();
   };
 
   const onQueryRunSuccess = ({ id }) => {
