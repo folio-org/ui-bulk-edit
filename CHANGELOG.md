@@ -2,6 +2,8 @@
 
 ## In progress
 
+* [UIBULKED-671](https://folio-org.atlassian.net/browse/UIBULKED-671) Reset count of records when changing record type or identifier.
+
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
 * [UIBULKED-566](https://folio-org.atlassian.net/browse/UIBULKED-566) Bulk edit form - options cleanup.
