@@ -4,6 +4,7 @@ import React, {
   useMemo,
   useState
 } from 'react';
+import PropTypes from 'prop-types';
 import { buildSearch } from '@folio/stripes-acq-components';
 import { FormattedMessage } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -26,7 +27,7 @@ import { getIsDisabledByPerm } from '../utils/getIsDisabledByPerm';
 import { RootContext } from '../../../../context/RootContext';
 import { useErrorMessages } from '../../../../hooks/useErrorMessages';
 
-export const IdentifierTab = () => {
+export const IdentifierTab = ({ onClearState }) => {
   const history = useHistory();
   const location = useLocation();
   const permissions = useBulkPermissions();
@@ -35,7 +36,6 @@ export const IdentifierTab = () => {
   const {
     isFileUploaded,
     setIsFileUploaded,
-    setVisibleColumns,
   } = useContext(RootContext);
 
   const {
@@ -99,12 +99,10 @@ export const IdentifierTab = () => {
       }, history.location.search),
     });
 
-    setIsFileUploaded(false);
-    setVisibleColumns(null);
+    onClearState();
   }, [
     history,
-    setIsFileUploaded,
-    setVisibleColumns,
+    onClearState,
   ]);
 
   const handleCapabilityChange = (e) => {
@@ -120,8 +118,7 @@ export const IdentifierTab = () => {
       }, history.location.search),
     });
 
-    setVisibleColumns(null);
-    setIsFileUploaded(false);
+    onClearState();
   };
 
   const handleDragEnter = () => {
@@ -204,4 +201,8 @@ export const IdentifierTab = () => {
       />
     </>
   );
+};
+
+IdentifierTab.propTypes = {
+  onClearState: PropTypes.func.isRequired,
 };
