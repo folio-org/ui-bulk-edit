@@ -82,7 +82,7 @@
     "layer.options.restricted": "Restricted",
     "layer.options.unavailable": "Indisponible",
     "layer.options.unknown": "Unknown",
-    "layer.options.placeholder": "Select item status",
+    "layer.options.placeholder": "Sélectionner le statut d'exemplaire",
     "list.result.emptyMessage.item": "Select a record identifier.",
     "list.result.emptyMessage.item.BARCODE": "Glisser-déposer ou choisir un fichier avec les code-barres d'exemplaires.",
     "list.result.emptyMessage.item.ID": "Drag and drop or choose file with item UUIDs.",
@@ -259,7 +259,7 @@
     "progresssBar.processing": "Processing",
     "layer.options.holdings.suppress": "Masquer dans l'outil de découverte",
     "layer.options.items.markAsStaffOnly": "Marquer comme pour le personnel uniquement",
-    "layer.options.items.removeMarkAsStaffOnly": "Remove mark as staff only",
+    "layer.options.items.removeMarkAsStaffOnly": "Retirer \"marqué comme pour le personnel uniquement\"",
     "category.loanType": "Loan and availability",
     "category.location": "Emplacement",
     "layer.options.items.removeAll": "Remove all",
@@ -497,7 +497,7 @@
     "layer.marc.error.subfield": "Please check your input.",
     "logs.actions.linkToCommittedRecordsMarcFile": "File with updated records (MARC)",
     "logs.actions.linkToCommittedRecordsMarcFile.QUERY": "File with updated records (MARC)",
-    "layer.options.inProcess": "In process",
+    "layer.options.inProcess": "En traitement",
     "columns.ITEM.Member": "Member",
     "columns.HOLDINGS_RECORD.Member": "Membre",
     "permission.users.csv.view": "Bulk Edit: Local - View user records",
@@ -535,5 +535,8 @@
     "list.preview.subject.subjectHeadings": "Subject headings",
     "list.preview.subject.subjectSource": "Subject source",
     "list.preview.subject.subjectType": "Subject type",
-    "columns.INSTANCE.Subject": "Subject"
+    "columns.INSTANCE.Subject": "Subject",
+    "list.preview.classification.identifierType": "Classification identifier type",
+    "list.preview.classification.classification": "Classification",
+    "columns.INSTANCE.Classification": "Classification"
 }

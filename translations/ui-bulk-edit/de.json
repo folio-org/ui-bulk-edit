@@ -535,5 +535,8 @@
     "list.preview.subject.subjectHeadings": "Subject headings",
     "list.preview.subject.subjectSource": "Subject source",
     "list.preview.subject.subjectType": "Subject type",
-    "columns.INSTANCE.Subject": "Subject"
+    "columns.INSTANCE.Subject": "Subject",
+    "list.preview.classification.identifierType": "Classification identifier type",
+    "list.preview.classification.classification": "Classification",
+    "columns.INSTANCE.Classification": "Classification"
 }
