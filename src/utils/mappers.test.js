@@ -124,21 +124,54 @@ describe('mappers', () => {
       expect(contentData[0][statusColumn.value].props.id).toBe('ui-bulk-edit.list.preview.table.status.true');
     });
 
-    it('should render Electronic access as a table', () => {
-      const electronicAccessColumn = {
-        value: CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS,
-        label: CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS,
-        visible: true,
-      };
-      const row = ['true'];
-      const data = {
-        header: [electronicAccessColumn],
-        rows: [{ row }],
-      };
+    it('should render columns as a table', () => {
+      // Columns: Classification, Subject, Electronic access for holding and instance
+      const tableColumns = [
+        {
+          capabilities: CAPABILITIES.HOLDING,
+          meta: {
+            value: CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS,
+            label: CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS,
+            visible: true,
+          }
+        },
+        {
+          capabilities: CAPABILITIES.INSTANCE,
+          meta: {
+            value: CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS,
+            label: CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS,
+            visible: true,
+          }
+        },
+        {
+          capabilities: CAPABILITIES.INSTANCE,
+          meta: {
+            value: CUSTOM_ENTITY_COLUMNS.SUBJECT,
+            label: CUSTOM_ENTITY_COLUMNS.SUBJECT,
+            visible: true,
+          }
+        },
+        {
+          capabilities: CAPABILITIES.INSTANCE,
+          meta: {
+            value: CUSTOM_ENTITY_COLUMNS.CLASSIFICATION,
+            label: CUSTOM_ENTITY_COLUMNS.CLASSIFICATION,
+            visible: true,
+          }
+        }
+      ];
 
-      const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.HOLDING });
+      tableColumns.forEach(({ capabilities, meta }) => {
+        const row = ['true'];
+        const data = {
+          header: [meta],
+          rows: [{ row }],
+        };
 
-      expect(contentData[0][electronicAccessColumn.value].type).toEqual(EmbeddedTable);
+        const { contentData } = getMappedTableData({ data, intl, capabilities });
+
+        expect(contentData[0][meta.value].type).toEqual(EmbeddedTable);
+      });
     });
   });
 });

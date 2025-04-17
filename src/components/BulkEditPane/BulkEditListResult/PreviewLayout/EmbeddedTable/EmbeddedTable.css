@@ -13,4 +13,13 @@
 .EmbeddedTable th, .EmbeddedTable td {
     border: 1px solid var(--color-border-p2);
     padding: var(--gutter-static-one-third) var(--gutter-static-two-thirds);
+    vertical-align: top;
+}
+
+.EmbeddedTable th:first-of-type, .EmbeddedTable td:first-of-type {
+    border-left: none;
+}
+
+.EmbeddedTable th:last-of-type, .EmbeddedTable td:last-of-type {
+    border-right: none;
 }
