@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [5.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.1) (2025-04-17)
+
 * [UIBULKED-671](https://folio-org.atlassian.net/browse/UIBULKED-671) Reset count of records when changing record type or identifier.
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
