@@ -1,6 +1,5 @@
 .EmbeddedTable {
     width: calc(100% + calc (2 * var(--gutter-static-two-thirds)));
-    height: calc(100% + 10px);
     margin: calc(-1 * var(--gutter-static-one-third)) calc(-1 * var(--gutter-static-two-thirds));
     border-collapse: collapse;
     flex-grow: 1;
