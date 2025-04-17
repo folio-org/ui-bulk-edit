@@ -2,6 +2,8 @@
 
 ## In progress
 
+## [5.0.2](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.2) (2025-04-17)
+
 * [UIBULKED-665](https://folio-org.atlassian.net/browse/UIBULKED-665) Show error link for central tenant when using bulk-edit query.
 
 ## [5.0.1](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.1) (2025-04-17)
