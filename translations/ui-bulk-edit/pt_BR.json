@@ -39,7 +39,7 @@
     "recordsSuccessfullyChanged": "Os registros {value, number} foram alterados com sucesso",
     "error.sww": "Algo deu errado.",
     "list.logSubTitle.matched": "{count, number} {recordType} registros correspondem",
-    "list.preview.title": "Prévia do registro encontrado",
+    "list.preview.title": "Prévia de registros correspondentes",
     "preview.file.title": "Nome do arquivo: {fileUploadedName}",
     "preview.query.title": "Consulta: {queryText}",
     "list.errors.title": "Erros e avisos",
@@ -99,7 +99,7 @@
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "Selecione um arquivo com os UUIDs de holdings.",
     "layer.selectLocation": "Selecionar localização",
     "list.logSubTitle.changed": "{count, number} {recordType} registros alterados",
-    "list.preview.titleChanged": "Prévia do registro alterado",
+    "list.preview.titleChanged": "Prévia de registros alterados",
     "modal.fileExtensions.blocked.message2": "Apenas um arquivo com extensão .csv pode ser carregado.",
     "layer.options.expirationDate": "Data de expiração",
     "layer.options.permanentLocation": "Localização permanente do item",
@@ -532,8 +532,11 @@
     "entityType.composite_holdings_record": "Coleções",
     "entityType.composite_user_details": "Usuários",
     "columns.INSTANCE.Electronic access": "Acesso eletrônico",
-    "list.preview.subject.subjectHeadings": "Subject headings",
-    "list.preview.subject.subjectSource": "Subject source",
-    "list.preview.subject.subjectType": "Subject type",
-    "columns.INSTANCE.Subject": "Subject"
+    "list.preview.subject.subjectHeadings": "Cabeçalhos de assunto",
+    "list.preview.subject.subjectSource": "Fonte do assunto",
+    "list.preview.subject.subjectType": "Tipo de assunto",
+    "columns.INSTANCE.Subject": "Assunto",
+    "list.preview.classification.identifierType": "Classification identifier type",
+    "list.preview.classification.classification": "Classification",
+    "columns.INSTANCE.Classification": "Classification"
 }

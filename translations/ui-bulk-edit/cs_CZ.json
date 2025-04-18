@@ -309,7 +309,7 @@
     "logs.filter.user.placeholder": "Vybrat uživatele",
     "columns.HOLDINGS_RECORD.Instance (Title, Publisher, Publication date)": "Titul (Název, Vydavatel, Datum publikace)",
     "category.holdingsNotes": "Poznámky k holdingům",
-    "category.holdingsLocation": "Lokace holdingů",
+    "category.holdingsLocation": "Lokace holdingu",
     "category.electronicAccess": "Elektronický přístup",
     "layer.options.holdings.uri": "URI",
     "columns.HOLDINGS_RECORD.Action note": "Poznámka k akci",
@@ -535,5 +535,8 @@
     "list.preview.subject.subjectHeadings": "Předmětová hesla",
     "list.preview.subject.subjectSource": "Heslář/tezaurus",
     "list.preview.subject.subjectType": "Předmětová kategorie",
-    "columns.INSTANCE.Subject": "Předmět"
+    "columns.INSTANCE.Subject": "Předmět",
+    "list.preview.classification.identifierType": "Classification identifier type",
+    "list.preview.classification.classification": "Classification",
+    "columns.INSTANCE.Classification": "Classification"
 }

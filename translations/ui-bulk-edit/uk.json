@@ -532,8 +532,11 @@
     "entityType.composite_holdings_record": "Дані про фонди (холдінгси)",
     "entityType.composite_user_details": "Користувачі",
     "columns.INSTANCE.Electronic access": "Електронний доступ",
-    "list.preview.subject.subjectHeadings": "Subject headings",
-    "list.preview.subject.subjectSource": "Subject source",
-    "list.preview.subject.subjectType": "Subject type",
-    "columns.INSTANCE.Subject": "Subject"
+    "list.preview.subject.subjectHeadings": "Предметні рубрики",
+    "list.preview.subject.subjectSource": "Джерело предмета",
+    "list.preview.subject.subjectType": "Тип предмета",
+    "columns.INSTANCE.Subject": "Предмет",
+    "list.preview.classification.identifierType": "Classification identifier type",
+    "list.preview.classification.classification": "Classification",
+    "columns.INSTANCE.Classification": "Classification"
 }
