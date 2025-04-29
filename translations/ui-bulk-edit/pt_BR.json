@@ -536,7 +536,7 @@
     "list.preview.subject.subjectSource": "Fonte do assunto",
     "list.preview.subject.subjectType": "Tipo de assunto",
     "columns.INSTANCE.Subject": "Assunto",
-    "list.preview.classification.identifierType": "Classification identifier type",
-    "list.preview.classification.classification": "Classification",
-    "columns.INSTANCE.Classification": "Classification"
+    "list.preview.classification.identifierType": "Tipo de identificador de classificação",
+    "list.preview.classification.classification": "Classificação",
+    "columns.INSTANCE.Classification": "Classificação"
 }

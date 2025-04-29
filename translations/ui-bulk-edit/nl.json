@@ -531,12 +531,12 @@
     "entityType.composite_instances": "Instanties",
     "entityType.composite_holdings_record": "Holdings",
     "entityType.composite_user_details": "Gebruikers",
-    "columns.INSTANCE.Electronic access": "Electronic access",
-    "list.preview.subject.subjectHeadings": "Subject headings",
-    "list.preview.subject.subjectSource": "Subject source",
-    "list.preview.subject.subjectType": "Subject type",
-    "columns.INSTANCE.Subject": "Subject",
-    "list.preview.classification.identifierType": "Classification identifier type",
-    "list.preview.classification.classification": "Classification",
-    "columns.INSTANCE.Classification": "Classification"
+    "columns.INSTANCE.Electronic access": "Digitaal toegankelijk",
+    "list.preview.subject.subjectHeadings": "Onderwerpen",
+    "list.preview.subject.subjectSource": "Onderwerp bron",
+    "list.preview.subject.subjectType": "Onderwerp",
+    "columns.INSTANCE.Subject": "Onderwerp",
+    "list.preview.classification.identifierType": "Type Classificatiekenmerk",
+    "list.preview.classification.classification": "Classificatie",
+    "columns.INSTANCE.Classification": "Classificatie"
 }
