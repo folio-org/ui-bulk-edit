@@ -21,8 +21,6 @@ import {
 
 import React, { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-
-
 import dayjs from 'dayjs';
 import {
   LOGS_FILTERS,
