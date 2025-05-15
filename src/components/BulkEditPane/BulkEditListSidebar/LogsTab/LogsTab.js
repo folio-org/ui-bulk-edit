@@ -98,10 +98,7 @@ export const LogsTab = () => {
   };
 
   const getDateFilter = (startDate, endDate) => {
-    const endDateCorrected = dayjs
-      .utc(endDate)
-      .add(1, 'day')
-      .format(DATE_FORMAT);
+    const endDateCorrected = dayjs.utc(endDate).add(1, 'day').format(DATE_FORMAT);
 
     return `${startDate}:${endDateCorrected}`;
   };
