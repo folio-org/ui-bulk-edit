@@ -1,7 +1,6 @@
 import { saveAs } from 'file-saver';
 
 import { changeExtension, savePreviewFile } from './files';
-import { getFormattedFilePrefixDate } from './date';
 
 
 jest.mock('./date', () => ({
@@ -34,8 +33,6 @@ describe('files', () => {
       const name = '2024-08-09-Updates-Preview-abc.mrc';
       const fileData = 'data';
       const fileName = `bulkId/${name}`;
-
-      getFormattedFilePrefixDate.mockReturnValue('2024-08-09');
 
       savePreviewFile({
         fileName,

@@ -1,5 +1,5 @@
-import moment from 'moment/moment';
 import uniqueId from 'lodash/uniqueId';
+import dayjs from '../../../../../utils/dayjs';
 import {
   CONTROL_TYPES,
   OPTIONS,
@@ -43,7 +43,7 @@ export const getFormattedDate = (value) => {
   const date = `${value} 23:59:59`;
   const format = `${BASE_DATE_FORMAT}[T]HH:mm:ss`;
 
-  return `${moment(date).format(format)}.000Z`;
+  return `${dayjs.utc(date).format(format)}.000Z`;
 };
 
 export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRecords }) => {
