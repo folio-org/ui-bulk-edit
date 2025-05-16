@@ -21,7 +21,6 @@ import {
 
 import React, { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import dayjs from 'dayjs';
 import {
   LOGS_FILTERS,
   FILTER_OPTIONS,
@@ -31,6 +30,7 @@ import { useBulkOperationUsers } from '../../../../hooks/api/useBulkOperationUse
 import { getFullName } from '../../../../utils/getFullName';
 import { useLocationFilters, useLogsQueryParams, useSearchParams } from '../../../../hooks';
 import { customFilter, getTransformedLogsFilterValue } from '../../../../utils/helpers';
+import dayjs from '../../../../utils/dayjs';
 
 export const LogsTab = () => {
   const intl = useIntl();
