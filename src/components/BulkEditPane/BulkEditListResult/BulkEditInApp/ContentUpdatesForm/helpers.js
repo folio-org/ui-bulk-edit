@@ -1,5 +1,5 @@
 import uniqueId from 'lodash/uniqueId';
-import dayjs from '../../../../../utils/dayjs';
+import { dayjs } from '@folio/stripes/components';
 import {
   CONTROL_TYPES,
   OPTIONS,

@@ -8,6 +8,7 @@ import {
   Accordion,
   FilterAccordionHeader,
   Selection,
+  dayjs,
 } from '@folio/stripes/components';
 import {
   createClearFilterHandler,
@@ -30,7 +31,7 @@ import { useBulkOperationUsers } from '../../../../hooks/api/useBulkOperationUse
 import { getFullName } from '../../../../utils/getFullName';
 import { useLocationFilters, useLogsQueryParams, useSearchParams } from '../../../../hooks';
 import { customFilter, getTransformedLogsFilterValue } from '../../../../utils/helpers';
-import dayjs from '../../../../utils/dayjs';
+
 
 export const LogsTab = () => {
   const intl = useIntl();
