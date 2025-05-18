@@ -3,10 +3,6 @@ import { saveAs } from 'file-saver';
 import { changeExtension, savePreviewFile } from './files';
 
 
-jest.mock('./date', () => ({
-  getFormattedFilePrefixDate: jest.fn(() => 'mockedDate'),
-}));
-
 jest.mock('file-saver', () => ({
   saveAs: jest.fn(),
 }));
