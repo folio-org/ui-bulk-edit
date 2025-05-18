@@ -329,7 +329,7 @@
     "list.preview.electronicAccess.uri": "URI",
     "list.preview.electronicAccess.linkText": "Texte du lien",
     "list.preview.electronicAccess.materialsSpecified": "Materials specified",
-    "list.preview.electronicAccess.publicNote": "Public note",
+    "list.preview.electronicAccess.publicNote": "URL public note",
     "ariaLabel.columnFilter": "Column filter input",
     "actionMenu.placeholder": "Search column name",
     "list.result.emptyMessage.instance": "Sélectionner un identifiant de notice",
