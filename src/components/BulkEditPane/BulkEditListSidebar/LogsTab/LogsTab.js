@@ -8,6 +8,7 @@ import {
   Accordion,
   FilterAccordionHeader,
   Selection,
+  dayjs,
 } from '@folio/stripes/components';
 import {
   createClearFilterHandler,
@@ -21,7 +22,6 @@ import {
 
 import React, { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
-import moment from 'moment';
 import {
   LOGS_FILTERS,
   FILTER_OPTIONS,
@@ -31,6 +31,7 @@ import { useBulkOperationUsers } from '../../../../hooks/api/useBulkOperationUse
 import { getFullName } from '../../../../utils/getFullName';
 import { useLocationFilters, useLogsQueryParams, useSearchParams } from '../../../../hooks';
 import { customFilter, getTransformedLogsFilterValue } from '../../../../utils/helpers';
+
 
 export const LogsTab = () => {
   const intl = useIntl();
@@ -81,8 +82,8 @@ export const LogsTab = () => {
 
     if (filterValue) {
       const [startDateString, endDateString] = filterValue[0].split(':');
-      const endDate = moment.utc(endDateString);
-      const startDate = moment.utc(startDateString);
+      const endDate = dayjs.utc(endDateString);
+      const startDate = dayjs.utc(startDateString);
 
       dateRange = {
         startDate: startDate.isValid()
@@ -98,7 +99,7 @@ export const LogsTab = () => {
   };
 
   const getDateFilter = (startDate, endDate) => {
-    const endDateCorrected = moment.utc(endDate).add(1, 'days').format(DATE_FORMAT);
+    const endDateCorrected = dayjs.utc(endDate).add(1, 'day').format(DATE_FORMAT);
 
     return `${startDate}:${endDateCorrected}`;
   };

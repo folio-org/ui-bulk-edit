@@ -389,7 +389,7 @@
   "layer.options.holdings.temporaryLocation": "Temporary holdings location",
   "layer.options.holdings.permanentLocation": "Permanent holdings location",
   "layer.options.holdings.suppress": "Suppress from discovery",
-  "layer.options.holdings.urlRelationship": "URL Relationship",
+  "layer.options.holdings.urlRelationship": "URL relationship",
   "layer.options.holdings.linkText": "Link text",
   "layer.options.holdings.materialsSpecified": "Materials specified",
   "layer.options.holdings.urlPublic": "URL public note",

@@ -11,6 +11,7 @@
 * [UIBULKED-671](https://folio-org.atlassian.net/browse/UIBULKED-671) Reset count of records when changing record type or identifier.
 * [UIBULKED-645](https://folio-org.atlassian.net/browse/UIBULKED-645) Rendering Instance record Classification in UI.
 * [UIBULKED-670](https://folio-org.atlassian.net/browse/UIBULKED-670) Rename Electronic access columns.
+* [UIBULKED-646](https://folio-org.atlassian.net/browse/UIBULKED-646) Replace moment with day.js
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
