@@ -522,7 +522,8 @@
   "permission.inventory.edit": "Bulk Edit: In app - Edit inventory records",
   "permission.users.edit": "Bulk edit: In app - Edit user records",
   "permission.logs.view": "Bulk edit: Can view logs",
-  "permission.query.execute": "Bulk edit: Can build query",
+  "permission.settings.view": "Bulk edit: Can build query",
+  "permission.settings.edit": "Settings (Bulk edit): Can view, add, update profiles",
 
   "ariaLabel.actionsSelect": "Actions select",
   "ariaLabel.textField": "Text field",
@@ -574,5 +575,14 @@
   "entityType.composite_item_details": "Items",
   "entityType.composite_instances": "Instances",
   "entityType.composite_holdings_record": "Holdings",
-  "entityType.composite_user_details": "Users"
+  "entityType.composite_user_details": "Users",
+
+  "settings.paneTitle": "Bulk edit",
+  "settings.inventoryProfiles": "Inventory profiles",
+  "settings.otherProfiles": "Other profiles",
+
+  "settings.holdingsProfiles": "Holdings bulk edit profiles",
+  "settings.itemProfiles": "Items bulk edit profiles",
+  "settings.instanceProfiles": "Instances bulk edit profiles",
+  "settings.userProfiles": "Users bulk edit profiles"
 }

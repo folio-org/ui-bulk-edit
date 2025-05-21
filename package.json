@@ -7,7 +7,8 @@
   "license": "Apache-2.0",
   "stripes": {
     "actsAs": [
-      "app"
+      "app",
+      "settings"
     ],
     "displayName": "ui-bulk-edit.meta.title",
     "route": "/bulk-edit",
@@ -23,7 +24,28 @@
         "name": "app",
         "alt": "View and manage bulk edit",
         "title": "Bulk edit"
+      },
+      {
+        "name": "holdings",
+        "alt": "",
+        "title": "Holding"
+      },
+      {
+        "name": "item",
+        "alt": "",
+        "title": "Item"
+      },
+      {
+        "name": "instance",
+        "alt": "",
+        "title": "Instance"
+      },
+      {
+        "name": "user",
+        "alt": "",
+        "title": "User"
       }
+
     ],
     "stripesDeps": [
       "@folio/stripes-acq-components"
@@ -173,6 +195,30 @@
           "fqm.query.async.post",
           "fqm.query.async.delete",
           "bulk-operations.item.query.post"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "settings.bulk-edit.enabled",
+        "displayName": "Settings bulk-edit enabled",
+        "subPermissions": [
+          "settings.enabled"
+        ],
+        "visible": false
+      },
+      {
+        "permissionName": "ui-bulk-edit.settings.view",
+        "displayName": "Settings (Bulk edit): Can view only",
+        "subPermissions": [
+          "settings.bulk-edit.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-bulk-edit.settings.edit",
+        "displayName": "Settings (Bulk edit): Can view, add, update profiles",
+        "subPermissions": [
+          "ui-bulk-edit.settings.view"
         ],
         "visible": true
       }

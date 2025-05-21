@@ -2,9 +2,16 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { BulkEditPane } from './BulkEditPane/BulkEditPane';
 
-const BulkEdit = () => {
+import { BulkEditPane } from './BulkEditPane/BulkEditPane';
+import { BulkEditSettings } from '../settings/BulkEditSettings';
+
+
+const BulkEdit = (props) => {
+  if (props.showSettings) {
+    return <BulkEditSettings {...props} />;
+  }
+
   return (
     <Switch>
       <Route
