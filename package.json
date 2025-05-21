@@ -27,22 +27,22 @@
       },
       {
         "name": "holdings",
-        "alt": "",
-        "title": "Holding"
+        "alt": "Holdings",
+        "title": "Holdings"
       },
       {
         "name": "item",
-        "alt": "",
+        "alt": "Item",
         "title": "Item"
       },
       {
         "name": "instance",
-        "alt": "",
+        "alt": "Instance",
         "title": "Instance"
       },
       {
         "name": "user",
-        "alt": "",
+        "alt": "User",
         "title": "User"
       }
 
