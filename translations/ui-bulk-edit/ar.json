@@ -318,7 +318,7 @@
     "columns.HOLDINGS_RECORD.Electronic bookplate": "ملاحظة لوحة الكتاب الإلكترونية",
     "columns.HOLDINGS_RECORD.Provenance": "ملاحظة المنشأ",
     "columns.HOLDINGS_RECORD.Reproduction": "ملاحظة إعادة الإنتاج",
-    "layer.options.holdings.urlRelationship": "URL Relationship",
+    "layer.options.holdings.urlRelationship": "URL relationship",
     "layer.selectType": "حدد نوع الملاحظة",
     "ariaLabel.urlRelationshipSelect": "تحديد علاقة عنوان URL",
     "type.placeholder": "Select type",

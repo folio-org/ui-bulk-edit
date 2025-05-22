@@ -318,7 +318,7 @@
     "columns.HOLDINGS_RECORD.Electronic bookplate": "Nota de ex-libris eletrônico",
     "columns.HOLDINGS_RECORD.Provenance": "Nota de proveniência",
     "columns.HOLDINGS_RECORD.Reproduction": "Nota de reprodução",
-    "layer.options.holdings.urlRelationship": "Relacionamento da URL",
+    "layer.options.holdings.urlRelationship": "URL de relacionamento",
     "layer.selectType": "Selecione o tipo de nota",
     "ariaLabel.urlRelationshipSelect": "Seleção de relacionamento da URL",
     "type.placeholder": "Selecione o tipo",
