@@ -36,6 +36,13 @@ export const CLASSIFICATION_HEAD_TITLES = [
   { key: 'classification', value: <FormattedMessage id="ui-bulk-edit.list.preview.classification.classification" />, width: '70%' },
 ];
 
+export const PUBLICATION_HEAD_TITLES = [
+  { key: 'publisher', value: <FormattedMessage id="ui-bulk-edit.list.preview.publication.publisher" />, width: '25%' },
+  { key: 'publisherRole', value: <FormattedMessage id="ui-bulk-edit.list.preview.publication.publisherRole" />, width: '25%' },
+  { key: 'placeOfPublication', value: <FormattedMessage id="ui-bulk-edit.list.preview.publication.placeOfPublication" />, width: '25%' },
+  { key: 'publicationDate', value: <FormattedMessage id="ui-bulk-edit.list.preview.publication.publicationDate" />, width: '25%' },
+];
+
 export const PREVIEW_COLUMN_WIDTHS = {
   [CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS]: '850px',
   [CUSTOM_ENTITY_COLUMNS.SUBJECT]: '600px',
