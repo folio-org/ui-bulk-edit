@@ -64,6 +64,10 @@ export const useBulkPermissions = () => {
   const hasLogInstanceViewPerms = hasLogViewPerms && hasInstancePerms;
   const hasLogUsersPerms = (hasUsersPerms || hasUsersViewPerms) && hasLogViewPerms;
 
+  // Settings perms
+  const hasSettingsViewPerms = stripes.hasPerm('ui-bulk-edit.settings.view');
+  const hasSettingsEditPerms = stripes.hasPerm('ui-bulk-edit.settings.edit');
+
   return {
     // base
     hasCsvViewPerms,
@@ -75,6 +79,8 @@ export const useBulkPermissions = () => {
     hasQueryPerms,
     hasInventoryInstanceViewPerms,
     hasInstancePerms,
+    hasSettingsViewPerms,
+    hasSettingsEditPerms,
 
     // derived
     isActionMenuShown,

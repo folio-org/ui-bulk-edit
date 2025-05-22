@@ -19,18 +19,22 @@ jest.mock('../hooks/useErrorMessages', () => ({
   useErrorMessages: jest.fn().mockReturnValue({ showErrorMessage: jest.fn() }),
 }));
 
+jest.mock('../settings/BulkEditSettings', () => ({
+  BulkEditSettings: () => 'BulkEditSettings',
+}));
+
 jest.mock('./BulkEditPane/BulkEditListResult', () => ({
   BulkEditListResult: () => 'BulkEditListResult',
 }));
 
 const history = createMemoryHistory();
 
-const renderBulkEdit = (type = 'USERS') => {
+const renderBulkEdit = (type = 'USERS', bulkEditProps = {}) => {
   render(
     <IntlProvider locale="en">
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={[`/bulk-edit?capabilities=${type}&identifier=BARCODE&criteria=identifier`]}>
-          <BulkEdit />
+          <BulkEdit {...bulkEditProps} />
         </MemoryRouter>,
       </QueryClientProvider>,
     </IntlProvider>
@@ -190,6 +194,12 @@ describe('BulkEdit', () => {
       fireEvent.drop(fileInput, event);
       return flushPromises();
     });
+  });
+
+  it('should render settings when showSettings is present', async () => {
+    renderBulkEdit('USERS', { showSettings: true });
+
+    expect(screen.getByText(/BulkEditSettings/)).toBeVisible();
   });
 
   describe('Should show expected messages if getFileName are not valid', () => {
