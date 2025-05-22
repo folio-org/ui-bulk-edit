@@ -318,7 +318,7 @@
     "columns.HOLDINGS_RECORD.Electronic bookplate": "Electronic bookplate note",
     "columns.HOLDINGS_RECORD.Provenance": "Provenance note",
     "columns.HOLDINGS_RECORD.Reproduction": "Reproduction note",
-    "layer.options.holdings.urlRelationship": "URL Relationship",
+    "layer.options.holdings.urlRelationship": "URL relationship",
     "layer.selectType": "ノートタイプの選択",
     "ariaLabel.urlRelationshipSelect": "Url relationship select",
     "type.placeholder": "タイプの選択",
