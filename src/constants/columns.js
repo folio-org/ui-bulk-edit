@@ -80,6 +80,7 @@ export const CUSTOM_ENTITY_COLUMNS = {
   ELECTRONIC_ACCESS: 'Electronic access',
   SUBJECT: 'Subject',
   CLASSIFICATION: 'Classification',
+  PUBLICATION: 'Publication',
   CATALOGED_DATE: 'Cataloged date',
   MISSING_PIECES_DATE: 'Missing pieces date',
   ITEM_DAMAGE_STATUS_DATE: 'Item damaged status date',

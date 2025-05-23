@@ -93,6 +93,11 @@
   "list.preview.classification.identifierType": "Classification identifier type",
   "list.preview.classification.classification": "Classification",
 
+  "list.preview.publication.publisher": "Publisher",
+  "list.preview.publication.publisherRole": "Publisher role",
+  "list.preview.publication.placeOfPublication": "Place of publication",
+  "list.preview.publication.publicationDate": "Publication date",
+
   "list.preview.table.status.true": "Active",
   "list.preview.table.status.false": "Inactive",
 
@@ -338,6 +343,7 @@
   "columns.INSTANCE.Electronic access": "Electronic access",
   "columns.INSTANCE.Subject": "Subject",
   "columns.INSTANCE.Classification": "Classification",
+  "columns.INSTANCE.Publication": "Publication",
 
   "columns.logs.hrId": "ID",
   "columns.logs.operationType": "Bulk operation type",
