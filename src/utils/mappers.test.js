@@ -158,6 +158,14 @@ describe('mappers', () => {
             label: CUSTOM_ENTITY_COLUMNS.CLASSIFICATION,
             visible: true,
           }
+        },
+        {
+          capabilities: CAPABILITIES.INSTANCE,
+          meta: {
+            value: CUSTOM_ENTITY_COLUMNS.PUBLICATION,
+            label: CUSTOM_ENTITY_COLUMNS.PUBLICATION,
+            visible: true,
+          }
         }
       ];
 

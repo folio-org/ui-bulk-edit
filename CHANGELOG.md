@@ -13,6 +13,7 @@
 * [UIBULKED-670](https://folio-org.atlassian.net/browse/UIBULKED-670) Rename Electronic access columns.
 * [UIBULKED-646](https://folio-org.atlassian.net/browse/UIBULKED-646) Replace moment with day.js
 * [UIBULKED-618](https://folio-org.atlassian.net/browse/UIBULKED-618) Adding Bulk Edit to Settings and Displaying Profile Categories
+* [UIBULKED-643](https://folio-org.atlassian.net/browse/UIBULKED-643) Rendering Instance record Publication data in UI
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
