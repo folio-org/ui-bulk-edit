@@ -1,6 +1,7 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { useStripes } from '@folio/stripes/core';
 
 import { BulkEditSettings } from './BulkEditSettings';
@@ -43,13 +44,13 @@ jest.mock('../hooks', () => ({
   useBulkPermissions: jest.fn(),
 }));
 
+const mockStripes = { hasPerm: jest.fn(() => true) };
+
+beforeEach(() => {
+  useStripes.mockReturnValue(mockStripes);
+});
+
 describe('BulkEditSettings', () => {
-  const mockStripes = { hasPerm: jest.fn(() => true) };
-
-  beforeEach(() => {
-    useStripes.mockReturnValue(mockStripes);
-  });
-
   const expectLabel = (label) => {
     expect(screen.getByText(label)).toBeInTheDocument();
   };
@@ -124,5 +125,29 @@ describe('BulkEditSettings', () => {
     expect(screen.queryByText('ui-bulk-edit.settings.inventoryProfiles')).not.toBeInTheDocument();
     expect(screen.queryByText('ui-bulk-edit.settings.otherProfiles')).not.toBeInTheDocument();
     expect(screen.queryByText('ui-bulk-edit.settings.userProfiles')).not.toBeInTheDocument();
+  });
+});
+
+describe('Document titles', () => {
+  const testCases = [
+    { path: '/settings/bulk-edit', title: 'ui-bulk-edit.titleManager.settings' },
+    { path: '/settings/bulk-edit/holdings-profiles', title: 'ui-bulk-edit.titleManager.settings.holdingsProfiles' },
+    { path: '/settings/bulk-edit/users-profiles', title: 'ui-bulk-edit.titleManager.settings.usersProfiles' },
+    { path: '/settings/bulk-edit/items-profiles', title: 'ui-bulk-edit.titleManager.settings.itemsProfiles' },
+    { path: '/settings/bulk-edit/instances-profiles', title: 'ui-bulk-edit.titleManager.settings.instancesProfiles' },
+  ];
+
+  testCases.forEach(({ path, title }) => {
+    test(`renders ${path} and sets title to "${title}"`, () => {
+      render(
+        <MemoryRouter initialEntries={[path]}>
+          <BulkEditSettings />
+        </MemoryRouter>
+      );
+
+      waitFor(() => {
+        expect(document.title).toBe(title);
+      });
+    });
   });
 });

@@ -210,7 +210,8 @@
         "permissionName": "ui-bulk-edit.settings.view",
         "displayName": "Settings (Bulk edit): Can view only",
         "subPermissions": [
-          "settings.bulk-edit.enabled"
+          "settings.bulk-edit.enabled",
+          "mod-settings.entries.collection.get"
         ],
         "visible": true
       },
