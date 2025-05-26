@@ -1,18 +1,28 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen, waitFor } from '@testing-library/react';
 import { useStripes } from '@folio/stripes/core';
 
 import { BulkEditSettings } from './BulkEditSettings';
 import { useBulkPermissions } from '../hooks';
+import { HoldingsProfiles } from './profiles/HoldingsProfiles';
+import { UsersProfiles } from './profiles/UsersProfiles';
+import { ItemsProfiles } from './profiles/ItemsProfiles';
+import { InstancesProfiles } from './profiles/InstancesProfiles';
 
 
 jest.mock('@folio/stripes/core', () => ({
   ...jest.requireActual('@folio/stripes/core'),
   useStripes: jest.fn(),
   AppIcon: ({ children }) => <span>{children}</span>,
-  TitleManager: ({ children }) => <>{children}</>,
+  TitleManager: ({ children, page }) => (
+    <>
+      <head>
+        <title>{page}</title>
+      </head>
+      {children}
+    </>
+  ),
 }));
 
 jest.mock('@folio/stripes/smart-components', () => ({
@@ -130,22 +140,17 @@ describe('BulkEditSettings', () => {
 
 describe('Document titles', () => {
   const testCases = [
-    { path: '/settings/bulk-edit', title: 'ui-bulk-edit.titleManager.settings' },
-    { path: '/settings/bulk-edit/holdings-profiles', title: 'ui-bulk-edit.titleManager.settings.holdingsProfiles' },
-    { path: '/settings/bulk-edit/users-profiles', title: 'ui-bulk-edit.titleManager.settings.usersProfiles' },
-    { path: '/settings/bulk-edit/items-profiles', title: 'ui-bulk-edit.titleManager.settings.itemsProfiles' },
-    { path: '/settings/bulk-edit/instances-profiles', title: 'ui-bulk-edit.titleManager.settings.instancesProfiles' },
+    { path: '/settings/bulk-edit/holdings-profiles', title: 'ui-bulk-edit.titleManager.settings.holdingsProfiles', Component: HoldingsProfiles },
+    { path: '/settings/bulk-edit/users-profiles', title: 'ui-bulk-edit.titleManager.settings.usersProfiles', Component: UsersProfiles },
+    { path: '/settings/bulk-edit/items-profiles', title: 'ui-bulk-edit.titleManager.settings.itemsProfiles', Component: ItemsProfiles },
+    { path: '/settings/bulk-edit/instances-profiles', title: 'ui-bulk-edit.titleManager.settings.instancesProfiles', Component: InstancesProfiles },
   ];
 
-  testCases.forEach(({ path, title }) => {
-    test(`renders ${path} and sets title to "${title}"`, () => {
-      render(
-        <MemoryRouter initialEntries={[path]}>
-          <BulkEditSettings />
-        </MemoryRouter>
-      );
+  testCases.forEach(({ path, title, Component }) => {
+    test(`renders ${path} and sets title to "${title}"`, async () => {
+      render(<Component />);
 
-      waitFor(() => {
+      await waitFor(() => {
         expect(document.title).toBe(title);
       });
     });
