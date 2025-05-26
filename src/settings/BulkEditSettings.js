@@ -12,7 +12,7 @@ import { UsersProfiles } from './profiles/UsersProfiles';
 export const BulkEditSettings = (props) => {
   const stripes = useStripes();
   const { formatMessage } = useIntl();
-  const { hasSettingsViewPerms, hasInAppEditPerms, hasInAppUsersEditPerms, hasCsvEditPerms } = useBulkPermissions();
+  const { hasSettingsViewPerms, hasInAppViewPerms, hasInAppUsersEditPerms, hasCsvViewPerms } = useBulkPermissions();
 
   const renderMenuGroupLabel = (title) => (
     <TitleManager page={formatMessage({ id: 'ui-bulk-edit.titleManager.settings' })}>
@@ -30,7 +30,7 @@ export const BulkEditSettings = (props) => {
     </AppIcon>
   );
 
-  const inventoryProfilesSection = hasInAppEditPerms ? [{
+  const inventoryProfilesSection = hasInAppViewPerms ? [{
     label: renderMenuGroupLabel(formatMessage({ id: 'ui-bulk-edit.settings.inventoryProfiles' })),
     pages: [
       {
@@ -51,7 +51,7 @@ export const BulkEditSettings = (props) => {
     ]
   }] : [];
 
-  const otherProfilesSection = hasCsvEditPerms || hasInAppUsersEditPerms ? [{
+  const otherProfilesSection = hasCsvViewPerms || hasInAppUsersEditPerms ? [{
     label: renderMenuGroupLabel(formatMessage({ id: 'ui-bulk-edit.settings.otherProfiles' })),
     pages: [
       {

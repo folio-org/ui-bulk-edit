@@ -58,9 +58,9 @@ describe('BulkEditSettings', () => {
   it('renders all menu items when all permissions are granted', () => {
     useBulkPermissions.mockReturnValue({
       hasSettingsViewPerms: true,
-      hasInAppEditPerms: true,
+      hasInAppViewPerms: true,
       hasInAppUsersEditPerms: true,
-      hasCsvEditPerms: true,
+      hasCsvViewPerms: true,
     });
 
     render(<BulkEditSettings />);
@@ -77,9 +77,9 @@ describe('BulkEditSettings', () => {
   it('renders only inventory profiles if only in-app edit permission is granted', () => {
     useBulkPermissions.mockReturnValue({
       hasSettingsViewPerms: true,
-      hasInAppEditPerms: true,
+      hasInAppViewPerms: true,
       hasInAppUsersEditPerms: false,
-      hasCsvEditPerms: false,
+      hasCsvViewPerms: false,
     });
 
     render(<BulkEditSettings />);
@@ -97,9 +97,9 @@ describe('BulkEditSettings', () => {
   it('renders only other profiles if user or CSV edit permissions are granted', () => {
     useBulkPermissions.mockReturnValue({
       hasSettingsViewPerms: true,
-      hasInAppEditPerms: false,
+      hasInAppViewPerms: false,
       hasInAppUsersEditPerms: true,
-      hasCsvEditPerms: false,
+      hasCsvViewPerms: false,
     });
 
     render(<BulkEditSettings />);
@@ -115,9 +115,9 @@ describe('BulkEditSettings', () => {
   it('renders nothing if settings view permission is missing', () => {
     useBulkPermissions.mockReturnValue({
       hasSettingsViewPerms: false,
-      hasInAppEditPerms: true,
+      hasInAppViewPerms: true,
       hasInAppUsersEditPerms: true,
-      hasCsvEditPerms: true,
+      hasCsvViewPerms: true,
     });
 
     render(<BulkEditSettings />);
