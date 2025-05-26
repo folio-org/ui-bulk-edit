@@ -140,14 +140,14 @@ describe('BulkEditSettings', () => {
 
 describe('Document titles', () => {
   const testCases = [
-    { path: '/settings/bulk-edit/holdings-profiles', title: 'ui-bulk-edit.titleManager.settings.holdingsProfiles', Component: HoldingsProfiles },
-    { path: '/settings/bulk-edit/users-profiles', title: 'ui-bulk-edit.titleManager.settings.usersProfiles', Component: UsersProfiles },
-    { path: '/settings/bulk-edit/items-profiles', title: 'ui-bulk-edit.titleManager.settings.itemsProfiles', Component: ItemsProfiles },
-    { path: '/settings/bulk-edit/instances-profiles', title: 'ui-bulk-edit.titleManager.settings.instancesProfiles', Component: InstancesProfiles },
+    { title: 'ui-bulk-edit.titleManager.settings.holdingsProfiles', Component: HoldingsProfiles },
+    { title: 'ui-bulk-edit.titleManager.settings.usersProfiles', Component: UsersProfiles },
+    { title: 'ui-bulk-edit.titleManager.settings.itemsProfiles', Component: ItemsProfiles },
+    { title: 'ui-bulk-edit.titleManager.settings.instancesProfiles', Component: InstancesProfiles },
   ];
 
-  testCases.forEach(({ path, title, Component }) => {
-    test(`renders ${path} and sets title to "${title}"`, async () => {
+  testCases.forEach(({ title, Component }) => {
+    test(`renders "${Component.name}" and sets title to "${title}"`, async () => {
       render(<Component />);
 
       await waitFor(() => {
