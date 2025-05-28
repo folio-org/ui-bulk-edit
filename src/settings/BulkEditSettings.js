@@ -4,19 +4,18 @@ import { Settings } from '@folio/stripes/smart-components';
 import { AppIcon, TitleManager, useStripes } from '@folio/stripes/core';
 
 import { useBulkPermissions } from '../hooks';
-
-// This component is a placeholder for the actual components that will be used in the settings pages.
-const TempComponent = () => {
-  return null;
-};
+import { HoldingsProfiles } from './profiles/HoldingsProfiles';
+import { InstancesProfiles } from './profiles/InstancesProfiles';
+import { ItemsProfiles } from './profiles/ItemsProfiles';
+import { UsersProfiles } from './profiles/UsersProfiles';
 
 export const BulkEditSettings = (props) => {
   const stripes = useStripes();
   const { formatMessage } = useIntl();
-  const { hasSettingsViewPerms, hasInAppEditPerms, hasInAppUsersEditPerms, hasCsvEditPerms } = useBulkPermissions();
+  const { hasSettingsViewPerms, hasInAppViewPerms, hasInAppUsersEditPerms, hasCsvViewPerms } = useBulkPermissions();
 
   const renderMenuGroupLabel = (title) => (
-    <TitleManager page={title}>
+    <TitleManager page={formatMessage({ id: 'ui-bulk-edit.titleManager.settings' })}>
       {title}
     </TitleManager>
   );
@@ -31,34 +30,34 @@ export const BulkEditSettings = (props) => {
     </AppIcon>
   );
 
-  const inventoryProfilesSection = hasInAppEditPerms ? [{
+  const inventoryProfilesSection = hasInAppViewPerms ? [{
     label: renderMenuGroupLabel(formatMessage({ id: 'ui-bulk-edit.settings.inventoryProfiles' })),
     pages: [
       {
         route: 'holdings-profiles',
         label: renderMenuItemLabel('holdings', 'holdingsProfiles'),
-        component: TempComponent,
+        component: HoldingsProfiles,
       },
       {
-        route: 'instance-profiles',
+        route: 'instances-profiles',
         label: renderMenuItemLabel('instance', 'instanceProfiles'),
-        component: TempComponent,
+        component: InstancesProfiles,
       },
       {
-        route: 'item-profiles',
+        route: 'items-profiles',
         label: renderMenuItemLabel('item', 'itemProfiles'),
-        component: TempComponent,
+        component: ItemsProfiles,
       },
     ]
   }] : [];
 
-  const otherProfilesSection = hasCsvEditPerms || hasInAppUsersEditPerms ? [{
+  const otherProfilesSection = hasCsvViewPerms || hasInAppUsersEditPerms ? [{
     label: renderMenuGroupLabel(formatMessage({ id: 'ui-bulk-edit.settings.otherProfiles' })),
     pages: [
       {
-        route: 'user-profiles',
+        route: 'users-profiles',
         label: renderMenuItemLabel('user', 'userProfiles'),
-        component: TempComponent,
+        component: UsersProfiles
       },
     ]
   }] : [];

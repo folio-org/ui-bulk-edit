@@ -591,5 +591,11 @@
   "settings.holdingsProfiles": "Holdings bulk edit profiles",
   "settings.itemProfiles": "Items bulk edit profiles",
   "settings.instanceProfiles": "Instances bulk edit profiles",
-  "settings.userProfiles": "Users bulk edit profiles"
+  "settings.userProfiles": "Users bulk edit profiles",
+
+  "titleManager.settings": "Bulk edit settings",
+  "titleManager.settings.holdingsProfiles": "Bulk edit settings - Holdings bulk edit profiles",
+  "titleManager.settings.instancesProfiles": "Bulk edit settings - Instances bulk edit profiles",
+  "titleManager.settings.itemsProfiles": "Bulk edit settings - Items bulk edit profiles",
+  "titleManager.settings.usersProfiles": "Bulk edit settings - Users bulk edit profiles"
 }
