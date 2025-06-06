@@ -39,7 +39,7 @@
     "recordsSuccessfullyChanged": "{value, number} záznamů bylo úspěšně změněno",
     "error.sww": "Něco se pokazilo",
     "list.logSubTitle.matched": "{count, number} {recordType} záznamů se shoduje",
-    "list.preview.title": "Náhled porovnaného záznamu",
+    "list.preview.title": "Náhled odpovídajících záznamů",
     "preview.file.title": "Název souboru: {fileUploadedName}",
     "preview.query.title": "Dotaz: {queryText}",
     "list.errors.title": "Chyby a varování",
