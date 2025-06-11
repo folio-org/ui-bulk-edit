@@ -1,44 +1,64 @@
 import { array, object, string } from 'yup';
 
-import { INDICATOR_FIELD_MAX_LENGTH, SUBFIELD_MAX_LENGTH } from './helpers';
+import { INDICATOR_FIELD_MAX_LENGTH } from './helpers';
+import { ACTIONS } from '../../../../constants/marcActions';
 
 
 const subfieldSchema = {
   subfield: string()
     .required()
-    .length(SUBFIELD_MAX_LENGTH)
     .test(
       'is-valid-subfield',
       'ui-bulk-edit.layer.marc.error.subfield',
-      (value) => /^[a-z-0-9]+$/.test(value),
+      value => /^[a-z-0-9]+$/.test(value),
     ),
-  actions: array(object({
-    name: string()
-      .test(
-        'action-name',
-        '',
-        (value, context) => {
-          return context.parent.meta.required ? !!value : true;
-        },
-      ),
-    data: array(object({
-      key: string().required(),
-      value: string()
-        .required()
-        .test(
-          'is-valid-additional-subfield',
-          'ui-bulk-edit.layer.marc.error.subfield',
-          (value, context) => {
-            const { key } = context.parent;
-            if (key === 'SUBFIELD') {
-              return /^[a-z-0-9]+$/.test(value);
-            }
-            return true;
+
+  actions: array()
+    .of(
+      object({
+        name: string(),
+        data: array()
+          .of(
+            object({
+              key: string().required(),
+              value: string()
+                .required()
+                .test(
+                  'is-valid-additional-subfield',
+                  'ui-bulk-edit.layer.marc.error.subfield',
+                  (value, context) => {
+                    const { key } = context.parent;
+                    if (key === 'SUBFIELD') {
+                      return /^[a-z-0-9]+$/.test(value);
+                    }
+                    return true;
+                  }
+                ),
+            })
+          )
+          .nullable(),
+      })
+    )
+    .test(
+      'second-name-required',
+      'ui-bulk-edit.layer.marc.error.actionNameRequired',
+      (actions, context) => {
+        if (!actions) return true;
+
+        const firstName = actions[0]?.name;
+        if (firstName !== ACTIONS.ADD_TO_EXISTING) {
+          const second = actions[1];
+          if (second && (!second?.name || !second.name.trim())) {
+            return context.createError({
+              path: `${context.path}[1].name`,
+              message: 'ui-bulk-edit.layer.marc.error.actionNameRequired',
+            });
           }
-        ),
-    })),
-  })
-    .nullable()),
+        }
+
+        return true;
+      }
+    ),
 };
 
 const latinRegex = /^[a-zA-Z0-9\s\\]+$/;
@@ -67,25 +87,27 @@ const schema = array(object({
     ),
   subfields: array(object(subfieldSchema)).nullable(),
   ...subfieldSchema,
-}).test('tag-999', 'ui-bulk-edit.layer.marc.error.protected', (value) => {
-  return !(value.tag === '999' && value.ind1 === 'f' && value.ind2 === 'f');
-}));
+}).test(
+  'tag-999',
+  'ui-bulk-edit.layer.marc.error.protected',
+  (value, context) => {
+    if (value.tag === '999' && value.ind1 === 'f' && value.ind2 === 'f') {
+      return context.createError({
+        path: `${context.path}.subfield`,
+        message: 'ui-bulk-edit.layer.marc.error.protected',
+      });
+    }
+
+    return true;
+  }
+));
 
 
 export const getMarcFormErrors = (fields) => {
   let errors = {};
-  const cleanedFields = fields.map(field => {
-    return ({
-      ...field,
-      actions: field.actions.filter(Boolean).map(action => ({
-        ...action,
-        data: action.data.filter(Boolean),
-      })),
-    });
-  });
 
   try {
-    schema.validateSync(cleanedFields, { strict: true, abortEarly: false });
+    schema.validateSync(fields, { strict: true, abortEarly: false });
   } catch (e) {
     errors = e.inner?.reduce((acc, error) => {
       acc[error.path] = error.message;

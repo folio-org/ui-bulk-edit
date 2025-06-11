@@ -47,7 +47,6 @@ describe('getMarcFormErrors', () => {
         'subfield': '',
         'actions': [
           {
-            'meta': { required: true },
             'name': ACTIONS.ADD_TO_EXISTING,
             'data': [
               {
@@ -57,7 +56,6 @@ describe('getMarcFormErrors', () => {
             ]
           },
           {
-            'meta': { required: false },
             'name': '',
             'data': []
           }
@@ -86,7 +84,6 @@ describe('getMarcFormErrors', () => {
         subfield: '',
         actions: [
           {
-            meta: { required: true },
             name: ACTIONS.ADD_TO_EXISTING,
             data: [
               {
@@ -96,7 +93,6 @@ describe('getMarcFormErrors', () => {
             ]
           },
           {
-            meta: { required: false },
             name: '',
             data: []
           }

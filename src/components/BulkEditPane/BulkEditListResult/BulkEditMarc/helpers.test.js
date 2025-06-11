@@ -1,7 +1,4 @@
-import { FormattedMessage } from 'react-intl';
-
-import { DATA_KEYS, getDataTemplate, getFieldWithMaxColumns, getNextDataControls } from './helpers';
-import { ACTIONS } from '../../../../constants/marcActions';
+import { DATA_KEYS, getFieldWithMaxColumns } from './helpers';
 
 describe('getFieldWithMaxColumns', () => {
   test('should return the field with the maximum columns', () => {
@@ -80,43 +77,5 @@ describe('getFieldWithMaxColumns', () => {
 
     const maxField = getFieldWithMaxColumns(fields);
     expect(maxField).toEqual(fields[0]);
-  });
-});
-
-describe('getNextDataControls', () => {
-  const defaultTemplate = getDataTemplate();
-  const appendTemplate = getDataTemplate({
-    key: DATA_KEYS.SUBFIELD,
-    title: <FormattedMessage id="ui-bulk-edit.layer.column.subfield" />,
-  });
-
-  test('should return correct template for ACTIONS.ADD_TO_EXISTING', () => {
-    const result = getNextDataControls(ACTIONS.ADD_TO_EXISTING);
-    expect(result).toEqual([defaultTemplate]);
-  });
-
-  test('should return correct template for ACTIONS.FIND', () => {
-    const result = getNextDataControls(ACTIONS.FIND);
-    expect(result).toEqual([defaultTemplate]);
-  });
-
-  test('should return correct template for ACTIONS.REPLACE_WITH', () => {
-    const result = getNextDataControls(ACTIONS.REPLACE_WITH);
-    expect(result).toEqual([defaultTemplate]);
-  });
-
-  test('should return correct templates for ACTIONS.APPEND', () => {
-    const result = getNextDataControls(ACTIONS.APPEND);
-    expect(result).toEqual([appendTemplate, defaultTemplate]);
-  });
-
-  test('should return empty array for ACTIONS.REMOVE_ALL', () => {
-    const result = getNextDataControls(ACTIONS.REMOVE_ALL);
-    expect(result).toEqual([]);
-  });
-
-  test('should return empty array for unknown action', () => {
-    const result = getNextDataControls('UNKNOWN_ACTION');
-    expect(result).toEqual([]);
   });
 });

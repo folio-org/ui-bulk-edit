@@ -1,16 +1,5 @@
-import { FormattedMessage } from 'react-intl';
-
-import {
-  ACTIONS,
-  getAddAction,
-  getAdditionalSubfieldAction,
-  getAppendAction,
-  getPlaceholder,
-  getRemoveFieldAction,
-  getRemoveSubfieldAction,
-  getReplaceWithAction,
-  marcActions,
-} from '../../../../constants/marcActions';
+import { ACTIONS } from '../../../../constants/marcActions';
+import { CONTROL_TYPES } from '../../../../constants';
 
 
 export const TAG_FIELD_MAX_LENGTH = 3;
@@ -22,19 +11,6 @@ export const DATA_KEYS = {
   SUBFIELD: 'SUBFIELD',
 };
 
-export const getDataTemplate = ({
-  required = true,
-  key = DATA_KEYS.VALUE,
-  title = <FormattedMessage id="ui-bulk-edit.layer.column.data" />,
-} = {}) => ({
-  meta: {
-    title,
-    required,
-  },
-  key,
-  value: '',
-});
-
 export const getMarcFieldTemplate = (id) => ({
   id,
   tag: '',
@@ -43,15 +19,10 @@ export const getMarcFieldTemplate = (id) => ({
   subfield: '',
   actions: [
     {
-      meta: {
-        options: marcActions(),
-        required: true,
-      },
       name: '',
       data: []
     },
   ],
-  parameters: [],
   subfields: [],
 });
 
@@ -60,35 +31,15 @@ export const getSubfieldTemplate = (id) => ({
   subfield: '',
   actions: [
     {
-      meta: {
-        options: [
-          getPlaceholder(),
-          getAddAction(),
-        ],
-        disabled: true,
-        required: true,
-      },
       name: ACTIONS.ADD_TO_EXISTING,
       data: [
         {
-          meta: {
-            title: <FormattedMessage id="ui-bulk-edit.layer.column.data" />,
-            required: true,
-          },
           key: DATA_KEYS.VALUE,
           value: '',
         }
       ]
     },
     {
-      meta: {
-        options: [
-          getPlaceholder(),
-          getAdditionalSubfieldAction(),
-        ],
-        disabled: false,
-        required: false,
-      },
       name: '',
       data: []
     },
@@ -98,30 +49,8 @@ export const getSubfieldTemplate = (id) => ({
 export const getNextAction = (action) => {
   switch (action) {
     case ACTIONS.ADD_TO_EXISTING:
-      return {
-        meta: {
-          options: [
-            getPlaceholder(),
-            getAdditionalSubfieldAction(),
-          ],
-          disabled: false,
-          required: false,
-        },
-        name: '',
-        data: [],
-      };
     case ACTIONS.FIND:
       return {
-        meta: {
-          required: true,
-          options: [
-            getPlaceholder(),
-            getAppendAction(),
-            getRemoveFieldAction(),
-            getRemoveSubfieldAction(),
-            getReplaceWithAction(),
-          ],
-        },
         name: '',
         data: [],
       };
@@ -132,22 +61,14 @@ export const getNextAction = (action) => {
   }
 };
 
-export const getNextDataControls = (action) => {
+export const getNextData = (action) => {
   switch (action) {
     case ACTIONS.ADD_TO_EXISTING:
     case ACTIONS.FIND:
     case ACTIONS.REPLACE_WITH:
-      return [
-        getDataTemplate(),
-      ];
+      return [{ key: DATA_KEYS.VALUE, value: '' }];
     case ACTIONS.APPEND:
-      return [
-        getDataTemplate({
-          key: DATA_KEYS.SUBFIELD,
-          title: <FormattedMessage id="ui-bulk-edit.layer.column.subfield" />,
-        }),
-        getDataTemplate(),
-      ];
+      return [{ key: DATA_KEYS.SUBFIELD, value: '' }, { key: DATA_KEYS.VALUE, value: '' }];
     case ACTIONS.REMOVE_ALL:
       return [];
     default:
@@ -175,17 +96,38 @@ export const getFieldWithMaxColumns = (fields) => {
   }, fields[0]);
 };
 
-export const getTransformedField = (field) => ({
-  ...field,
-  // if subfields exist, recursively transform them
-  ...(field.subfields && { subfields: field?.subfields.filter(Boolean).map(getTransformedField) }),
-  // transform actions and data
-  actions: field.actions.filter(Boolean).map(action => {
-    const { name, data } = action;
+export const getOverridesByKey = (key) => {
+  switch (key) {
+    case DATA_KEYS.SUBFIELD:
+      return {
+        type: CONTROL_TYPES.INPUT,
+        className: 'subfield',
+        maxLength: SUBFIELD_MAX_LENGTH,
+        required: true,
+        key,
+      };
+    case DATA_KEYS.VALUE:
+      return {
+        type: CONTROL_TYPES.TEXTAREA,
+        className: 'data',
+        required: true,
+        key,
+      };
+    default:
+      return key;
+  }
+};
 
-    return {
-      name,
-      data: data.filter(Boolean).map(({ key, value }) => ({ key, value })),
-    };
-  }),
-});
+/**
+ * Converts an array path (e.g. [0, 'subfield', 2, 'name'])
+ * into a path string ("[0].subfield[2].name").
+ */
+export const pathArrayToString = (pathArray) => {
+  return pathArray.reduce((acc, segment) => {
+    if (typeof segment === 'number') {
+      return `${acc}[${segment}]`;
+    }
+
+    return acc ? `${acc}.${segment}` : segment;
+  }, '');
+};

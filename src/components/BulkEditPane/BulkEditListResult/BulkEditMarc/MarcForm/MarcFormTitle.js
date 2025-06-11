@@ -9,7 +9,7 @@ import { DATA_KEYS, getFieldWithMaxColumns } from '../helpers';
 import css from '../../../BulkEditPane.css';
 
 
-const BulkEditMarcTitle = ({ fields }) => {
+export const MarcFormTitle = ({ fields }) => {
   const longestField = getFieldWithMaxColumns(fields);
 
   return (
@@ -65,7 +65,7 @@ const BulkEditMarcTitle = ({ fields }) => {
             key={index}
             className={`${css.headerCell} ${css.actions}`}
           >
-            <Label required={action.meta.required && index < 1}>
+            <Label required={index === 0}>
               <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
             </Label>
             <div className={css.splitter} />
@@ -76,7 +76,11 @@ const BulkEditMarcTitle = ({ fields }) => {
               className={`${css.headerCell} ${data.key === DATA_KEYS.VALUE ? css.data : css.subfield}`}
             >
               <Label>
-                {data.meta.title}
+                {data.key === DATA_KEYS.VALUE ? (
+                  <FormattedMessage id="ui-bulk-edit.layer.column.data" />
+                ) : (
+                  <FormattedMessage id="ui-bulk-edit.layer.column.subfield" />
+                )}
               </Label>
               <div className={css.splitter} />
             </Col>
@@ -97,8 +101,6 @@ const BulkEditMarcTitle = ({ fields }) => {
   );
 };
 
-BulkEditMarcTitle.propTypes = {
+MarcFormTitle.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
-export default BulkEditMarcTitle;
