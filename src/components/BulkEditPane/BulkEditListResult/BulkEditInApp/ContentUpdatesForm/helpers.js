@@ -394,7 +394,7 @@ export const isContentUpdatesFormValid = (contentUpdates) => {
   });
 };
 
-export const isMarcContentUpdatesFormValid = (errors = {}) => {
+export const isMarcContentUpdatesFormValid = (errors) => {
   return Object.keys(errors).length === 0;
 };
 
