@@ -60,7 +60,6 @@ describe('getMarcFormErrors', () => {
             'data': []
           }
         ],
-        'parameters': [],
         'subfields': []
       }
     ];
@@ -87,7 +86,7 @@ describe('getMarcFormErrors', () => {
             name: ACTIONS.ADD_TO_EXISTING,
             data: [
               {
-                key: 'SUBFIELD',
+                key: DATA_KEYS.SUBFIELD,
                 value: '!',
               }
             ]
@@ -97,7 +96,6 @@ describe('getMarcFormErrors', () => {
             data: []
           }
         ],
-        parameters: [],
         subfields: []
       }
     ];
@@ -107,6 +105,72 @@ describe('getMarcFormErrors', () => {
       '[0].subfield': 'ui-bulk-edit.layer.marc.error.subfield',
       '[0].actions[0].data[0].value': 'ui-bulk-edit.layer.marc.error.subfield',
       '[0].tag': 'ui-bulk-edit.layer.marc.error',
+    });
+  });
+
+  it('should return errors for combination 999 + f + f - field is protected', () => {
+    const invalidInput = [
+      {
+        id: '202',
+        tag: '999',
+        ind1: 'f',
+        ind2: 'f',
+        subfield: 'a',
+        actions: [
+          {
+            name: ACTIONS.ADD_TO_EXISTING,
+            data: [
+              {
+                key: DATA_KEYS.SUBFIELD,
+                value: 'f',
+              }
+            ]
+          },
+          {
+            name: ACTIONS.FIND,
+            data: []
+          }
+        ],
+        subfields: []
+      }
+    ];
+
+    const errors = getMarcFormErrors(invalidInput);
+    expect(errors).toEqual({
+      '[0].subfield': 'ui-bulk-edit.layer.marc.error.protected',
+    });
+  });
+
+  it('should return errors when second action is required', () => {
+    const invalidInput = [
+      {
+        id: '202',
+        tag: '555',
+        ind1: 'a',
+        ind2: 'a',
+        subfield: 'a',
+        actions: [
+          {
+            name: ACTIONS.FIND,
+            data: [
+              {
+                key: DATA_KEYS.VALUE,
+                value: 'f',
+              }
+            ]
+          },
+          {
+            name: '',
+            data: []
+          }
+        ],
+        subfields: []
+      }
+    ];
+
+    const errors = getMarcFormErrors(invalidInput);
+    expect(errors).toEqual({
+      '[0].actions[1].name': 'ui-bulk-edit.layer.marc.error.actionNameRequired',
     });
   });
 });

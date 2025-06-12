@@ -7,7 +7,6 @@ import {
 import { useSearchParams } from './useSearchParams';
 import { APPROACHES } from '../constants';
 import { useMarcApproach } from './useMarcApproach';
-import { marcActions } from '../constants/marcActions';
 import { getMarcFormErrors } from '../components/BulkEditPane/BulkEditListResult/BulkEditMarc/validation';
 
 
@@ -33,15 +32,10 @@ describe('getDefaultMarcTemplate', () => {
       subfield: '',
       actions: [
         {
-          meta: {
-            options: marcActions(),
-            required: true,
-          },
           name: '',
           data: []
         },
       ],
-      parameters: [],
       subfields: [],
     };
 
