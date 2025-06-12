@@ -60,9 +60,8 @@ export const MarcFormTitle = ({ fields }) => {
         <div className={css.splitter} />
       </Col>
       {longestField.actions.map((action, index) => !!action && (
-        <Fragment key={index}>
+        <Fragment key={action.name}>
           <Col
-            key={index}
             className={`${css.headerCell} ${css.actions}`}
           >
             <Label required={index === 0}>

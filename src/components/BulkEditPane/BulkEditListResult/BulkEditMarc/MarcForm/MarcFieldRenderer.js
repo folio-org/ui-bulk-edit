@@ -77,11 +77,11 @@ export const MarcFieldRenderer = ({
 
   if (type === CONTROL_TYPES.ARRAY) {
     return value.map((subItem, idx) => (
-      <Fragment key={idx}>
-        {itemSchema.map((subField, index) => {
+      <Fragment key={subItem.id}>
+        {itemSchema.map((subField) => {
           return (
             <MarcFieldRenderer
-              key={String(subField.name) + index}
+              key={subField.name}
               field={subField}
               ctx={{ index: idx, parentArray: value }}
               onChange={onChange}
