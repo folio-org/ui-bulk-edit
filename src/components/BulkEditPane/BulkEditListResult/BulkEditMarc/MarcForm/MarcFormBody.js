@@ -32,38 +32,38 @@ export const MarcFormBody = ({
 
   const handleChange = ({ path, val, name }) => {
     const newFields = setIn(fields, [...path, name], val);
-
     setFields(newFields);
   };
 
   const handleActionChange = ({ path, val }) => {
+    // Set the selected action and default data entries
     const withUpdatedAction = setIn(fields, path, {
       name: val,
       data: getNextData(val)
     });
 
     if (val === ACTIONS.ADDITIONAL_SUBFIELD) {
+      // Add a new subfield template when additional-subfield action chosen
       const [rowIndex] = path;
-
-      const withUpdatedSubfields = updateIn(withUpdatedAction, [rowIndex, 'subfields'], (subfields) => {
-        const newSubfield = getSubfieldTemplate(uniqueId());
-        return [...subfields, newSubfield];
-      });
-
+      const withUpdatedSubfields = updateIn(
+        withUpdatedAction,
+        [rowIndex, 'subfields'],
+        subfields => [...subfields, getSubfieldTemplate(uniqueId())]
+      );
       setFields(withUpdatedSubfields);
     } else {
+      // Clear any existing subfields and adjust next action slots
       const [rowIndex, actionsKey, actionIndex] = path;
-
       const withClearedSubfields = setIn(withUpdatedAction, [rowIndex, 'subfields'], []);
-
       const nextAction = getNextAction(val);
 
       if (actionIndex === 0) {
-        const withNextActions = updateIn(withClearedSubfields, [rowIndex, actionsKey], prevActions => [
-          prevActions[actionIndex],
-          ...(nextAction ? [nextAction] : []),
-        ]);
-
+        // If editing primary action, reset secondary slot
+        const withNextActions = updateIn(
+          withClearedSubfields,
+          [rowIndex, actionsKey],
+          prev => [prev[0], ...(nextAction ? [nextAction] : [])]
+        );
         setFields(withNextActions);
       } else {
         setFields(withClearedSubfields);
@@ -72,66 +72,45 @@ export const MarcFormBody = ({
   };
 
   const handleAddField = (e) => {
-    const { rowIndex } = e.target.dataset;
-
+    const rowIndex = Number(e.target.dataset.rowIndex);
     const newFields = [
-      ...fields.slice(0, Number(rowIndex) + 1),
+      ...fields.slice(0, rowIndex + 1),
       getMarcFieldTemplate(uniqueId()),
-      ...fields.slice(Number(rowIndex) + 1)
+      ...fields.slice(rowIndex + 1)
     ];
-
     setFields(newFields);
   };
 
   const handleRemoveField = (e) => {
-    const { rowIndex } = e.target.dataset;
-
-    const newFields = fields.filter((_, idx) => idx !== Number(rowIndex));
-
-    setFields(newFields);
+    const rowIndex = Number(e.target.dataset.rowIndex);
+    setFields(fields.filter((_, idx) => idx !== rowIndex));
   };
 
   const handleRemoveSubfield = (e) => {
-    const { rowIndex, subfieldIndex } = e.target.dataset;
+    const rowIndex = Number(e.target.dataset.rowIndex);
+    const subfieldIndex = Number(e.target.dataset.subfieldIndex);
     const subfields = fields[rowIndex].subfields;
 
-    // remove the subfield at the specified index and update actions in previous
-    const filteredSubfields = subfields
-      .filter((_, idx) => idx !== Number(subfieldIndex));
+    const filtered = subfields.filter((_, idx) => idx !== subfieldIndex);
+    let updated = setIn(fields, [rowIndex, 'subfields'], filtered);
 
-    const withUpdatedSubfields = setIn(fields, [rowIndex, 'subfields'], filteredSubfields);
-
-    const areSubfieldsEmpty = filteredSubfields.length === 0;
-    const lastSubfieldIndex = filteredSubfields.length - 1;
-    const secondActionPath = ['actions', 1, 'name'];
-
-    if (areSubfieldsEmpty) {
-      // if there are no subfields left, clear the actions
-      const withUpdatedFields = setIn(withUpdatedSubfields, [rowIndex, ...secondActionPath], '');
-
-      setFields(withUpdatedFields);
+    if (filtered.length === 0) {
+      // Clear secondary action when no subfields remain
+      updated = setIn(updated, [rowIndex, 'actions', 1, 'name'], '');
     } else {
-      // if there are still subfields, clear the action in the previous subfield
-      const withClearedSubfields = setIn(withUpdatedSubfields, [
-        rowIndex,
-        'subfields',
-        lastSubfieldIndex,
-        ...secondActionPath
-      ], '');
-
-      setFields(withClearedSubfields);
+      // Clear action name of the last remaining subfield
+      updated = setIn(
+        updated,
+        [rowIndex, 'subfields', filtered.length - 1, 'actions', 1, 'name'],
+        ''
+      );
     }
+    setFields(updated);
   };
 
-  const handleBlur = ({
-    path,
-    val,
-    name,
-  }) => {
-    if (['ind1', 'ind2'].includes(name)) {
-      const newValue = !val || val.trim() === '' ? '\\' : val;
-
-      handleChange({ path, val: newValue, name });
+  const handleBlur = ({ path, val, name }) => {
+    if (['ind1', 'ind2'].includes(name) && (!val || val.trim() === '')) {
+      handleChange({ path, val: '\\', name });
     }
   };
 
@@ -144,77 +123,79 @@ export const MarcFormBody = ({
   return (
     <StripesOverlayWrapper>
       <RepeatableField
-        getFieldUniqueKey={(field) => field.id}
+        getFieldUniqueKey={field => field.id}
         fields={fields}
         className={css.marcRow}
         onAdd={noop}
-        renderField={(item, index) => {
-          return (
-            <Fragment key={item.id}>
-              <Row data-testid={`row-${index}`} className={css.marcFieldRow}>
-                {schema.map(field => {
-                  return (
+        renderField={(item, index) => (
+          <Fragment key={item.id}>
+            <Row data-testid={`row-${index}`} className={css.marcFieldRow}>
+              {schema.map(field => (
+                <MarcFieldRenderer
+                  key={field.name}
+                  field={field}
+                  item={item}
+                  ctx={{ index }}
+                  errors={errors}
+                  rootPath={[index]}
+                  onChange={handleChange}
+                  onActionChange={handleActionChange}
+                  onBlur={handleBlur}
+                  onFocus={handleFocus}
+                />
+              ))}
+              <MarcFormActions
+                rowIndex={index}
+                onAdd={handleAddField}
+                onRemove={handleRemoveField}
+                removingDisabled={fields.length === 1}
+                addingDisabled={item.subfields.length > 0}
+              />
+            </Row>
+            {item.subfields.map((subfield, subfieldIndex) => {
+              const isAddingDisabled = subfieldIndex !== item.subfields.length - 1;
+              return (
+                <Row key={subfield.id} data-testid={`subfield-row-${subfieldIndex}`} className={css.subRow}>
+                  {subfieldsSchema.map(field => (
                     <MarcFieldRenderer
+                      key={field.name}
                       field={field}
-                      item={item}
-                      ctx={{ index }}
+                      item={subfield}
+                      ctx={{ index: subfieldIndex }}
                       errors={errors}
-                      rootPath={[index]}
+                      rootPath={[index, 'subfields', subfieldIndex]}
                       onChange={handleChange}
                       onActionChange={handleActionChange}
                       onBlur={handleBlur}
                       onFocus={handleFocus}
                     />
-                  );
-                })}
-                <MarcFormActions
-                  rowIndex={index}
-                  onAdd={handleAddField}
-                  onRemove={handleRemoveField}
-                  removingDisabled={fields.length === 1}
-                  addingDisabled={item.subfields.length > 0}
-                />
-              </Row>
-              {item.subfields.map((subfield, subfieldIndex) => {
-                const isAddingDisabled = subfieldIndex !== item.subfields.length - 1;
-
-                return (
-                  <Row key={subfieldIndex} data-testid={`subfield-row-${subfieldIndex}`} className={css.subRow}>
-                    {subfieldsSchema.map(field => {
-                      return (
-                        <MarcFieldRenderer
-                          field={field}
-                          item={subfield}
-                          ctx={{ index: subfieldIndex }}
-                          errors={errors}
-                          rootPath={[index, 'subfields', subfieldIndex]}
-                          onChange={handleChange}
-                          onActionChange={handleActionChange}
-                          onBlur={handleBlur}
-                          onFocus={handleFocus}
-                        />
-                      );
-                    })}
-                    <MarcFormActions
-                      fields={item.subfields}
-                      rowIndex={index}
-                      subfieldIndex={subfieldIndex}
-                      onAdd={handleAddField}
-                      onRemove={handleRemoveSubfield}
-                      addingDisabled={isAddingDisabled}
-                    />
-                  </Row>
-                );
-              })}
-            </Fragment>
-          );
-        }}
+                  ))}
+                  <MarcFormActions
+                    fields={item.subfields}
+                    rowIndex={index}
+                    subfieldIndex={subfieldIndex}
+                    onAdd={handleAddField}
+                    onRemove={handleRemoveSubfield}
+                    addingDisabled={isAddingDisabled}
+                  />
+                </Row>
+              );
+            })}
+          </Fragment>
+        )}
       />
     </StripesOverlayWrapper>
   );
 };
 
 MarcFormBody.propTypes = {
-  fields: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  fields: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      subfields: PropTypes.arrayOf(
+        PropTypes.shape({ id: PropTypes.string.isRequired })
+      ).isRequired,
+    })
+  ).isRequired,
   setFields: PropTypes.func.isRequired,
 };

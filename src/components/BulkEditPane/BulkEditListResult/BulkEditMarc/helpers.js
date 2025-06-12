@@ -11,6 +11,11 @@ export const DATA_KEYS = {
   SUBFIELD: 'SUBFIELD',
 };
 
+/**
+ * Creates a new MARC field template with default values.
+ * @param {string|number} id - Unique identifier for this field instance.
+ * @returns {Object} New field object with default structure.
+ */
 export const getMarcFieldTemplate = (id) => ({
   id,
   tag: '',
@@ -21,11 +26,16 @@ export const getMarcFieldTemplate = (id) => ({
     {
       name: '',
       data: []
-    },
+    }
   ],
-  subfields: [],
+  subfields: []
 });
 
+/**
+ * Creates a new subfield template with default actions.
+ * @param {string|number} id - Unique identifier for this subfield.
+ * @returns {Object} New subfield object with default actions and data.
+ */
 export const getSubfieldTemplate = (id) => ({
   id,
   subfield: '',
@@ -35,32 +45,44 @@ export const getSubfieldTemplate = (id) => ({
       data: [
         {
           key: DATA_KEYS.VALUE,
-          value: '',
+          value: ''
         }
       ]
     },
     {
       name: '',
       data: []
-    },
-  ],
+    }
+  ]
 });
 
+/**
+ * Determines the next action placeholder based on the current action.
+ * @param {string} action - The current action type.
+ * @returns {Object|null} A new action object template or null if none.
+ */
 export const getNextAction = (action) => {
   switch (action) {
     case ACTIONS.ADD_TO_EXISTING:
     case ACTIONS.FIND:
+      // After adding or finding, reset to an empty action slot
       return {
         name: '',
         data: [],
       };
     case ACTIONS.REMOVE_ALL:
+      // No further action after removing all
       return null;
     default:
       return null;
   }
 };
 
+/**
+ * Provides default data entries for a given action type.
+ * @param {string} action - The action type for which data template is needed.
+ * @returns {Array<Object>} Array of data key/value pairs.
+ */
 export const getNextData = (action) => {
   switch (action) {
     case ACTIONS.ADD_TO_EXISTING:
@@ -68,14 +90,25 @@ export const getNextData = (action) => {
     case ACTIONS.REPLACE_WITH:
       return [{ key: DATA_KEYS.VALUE, value: '' }];
     case ACTIONS.APPEND:
-      return [{ key: DATA_KEYS.SUBFIELD, value: '' }, { key: DATA_KEYS.VALUE, value: '' }];
+      // Append requires both a target subfield and a value
+      return [
+        { key: DATA_KEYS.SUBFIELD, value: '' },
+        { key: DATA_KEYS.VALUE, value: '' }
+      ];
     case ACTIONS.REMOVE_ALL:
+      // Removing all requires no extra data
       return [];
     default:
       return [];
   }
 };
 
+/**
+ * Calculates how many columns a field will occupy in the UI based on actions and data.
+ * This is used to determine the head layout of the bulk edit form.
+ * @param {Object} field - The field object containing actions and data arrays.
+ * @returns {number} Total column count.
+ */
 const getMaxFieldColumnsCount = (field) => {
   let sum = field.actions.filter(Boolean).length;
 
@@ -86,16 +119,22 @@ const getMaxFieldColumnsCount = (field) => {
   return sum;
 };
 
+/**
+ * Finds the field with the maximum number of columns among a list.
+ * @param {Array<Object>} fields - Array of field objects.
+ * @returns {Object} The field object with the greatest column count.
+ */
 export const getFieldWithMaxColumns = (fields) => {
   return fields.reduce((acc, item) => {
-    if (getMaxFieldColumnsCount(item) > getMaxFieldColumnsCount(acc)) {
-      return item;
-    }
-
-    return acc;
+    return getMaxFieldColumnsCount(item) > getMaxFieldColumnsCount(acc) ? item : acc;
   }, fields[0]);
 };
 
+/**
+ * Provides overrides for control rendering based on the data key.
+ * @param {string} key - DATA_KEYS value indicating which override to apply.
+ * @returns {Object|string} Configuration overrides or the key if none.
+ */
 export const getOverridesByKey = (key) => {
   switch (key) {
     case DATA_KEYS.SUBFIELD:
@@ -114,20 +153,21 @@ export const getOverridesByKey = (key) => {
         key,
       };
     default:
+      // Return the raw key if no specific overrides exist
       return key;
   }
 };
 
 /**
- * Converts an array path (e.g. [0, 'subfield', 2, 'name'])
- * into a path string ("[0].subfield[2].name").
+ * Converts an array-based path to a dot-and-bracket notation string.
+ * @param {Array<string|number>} pathArray - e.g. [0, 'subfield', 2, 'name'].
+ * @returns {string} Path string, e.g. "[0].subfield[2].name".
  */
 export const pathArrayToString = (pathArray) => {
   return pathArray.reduce((acc, segment) => {
     if (typeof segment === 'number') {
       return `${acc}[${segment}]`;
     }
-
     return acc ? `${acc}.${segment}` : segment;
   }, '');
 };

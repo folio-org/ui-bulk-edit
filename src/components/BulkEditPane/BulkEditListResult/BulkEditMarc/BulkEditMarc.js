@@ -54,9 +54,9 @@ export const BulkEditMarc = ({
 };
 
 BulkEditMarc.propTypes = {
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  marcFields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   setFields: PropTypes.func.isRequired,
-  marcFields: PropTypes.arrayOf(PropTypes.object).isRequired,
   setMarcFields: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

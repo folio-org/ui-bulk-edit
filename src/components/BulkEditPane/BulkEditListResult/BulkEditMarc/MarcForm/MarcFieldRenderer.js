@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Col, InfoPopover, Select, TextArea, TextField } from '@folio/stripes/components';
@@ -139,4 +140,41 @@ export const MarcFieldRenderer = ({
       {isRequired && <span className={css.asterisk} aria-hidden>*</span>}
     </Col>
   );
+};
+
+MarcFieldRenderer.propTypes = {
+  field: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    required: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    options: PropTypes.func,
+    showWhen: PropTypes.func,
+    className: PropTypes.string,
+    itemSchema: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        type: PropTypes.string,
+        required: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+      })
+    ),
+    maxLength: PropTypes.number,
+    dirty: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    showError: PropTypes.bool,
+  }).isRequired,
+  item: PropTypes.shape({
+    key: PropTypes.string,
+  }).isRequired,
+  rootPath: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ).isRequired,
+  ctx: PropTypes.shape({
+    index: PropTypes.number,
+    parentArray: PropTypes.arrayOf(PropTypes.shape({})),
+  }),
+  errors: PropTypes.objectOf(PropTypes.string),
+  onChange: PropTypes.func.isRequired,
+  onFocus: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  onActionChange: PropTypes.func.isRequired,
 };

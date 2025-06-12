@@ -102,5 +102,5 @@ export const MarcFormTitle = ({ fields }) => {
 };
 
 MarcFormTitle.propTypes = {
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
