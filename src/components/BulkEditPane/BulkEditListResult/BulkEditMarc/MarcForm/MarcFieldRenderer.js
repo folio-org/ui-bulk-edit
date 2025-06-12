@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, memo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -18,7 +18,7 @@ const popoverMap = {
   )
 };
 
-export const MarcFieldRenderer = ({
+export const MarcFieldRenderer = memo(({
   field,
   item,
   rootPath,
@@ -99,7 +99,7 @@ export const MarcFieldRenderer = ({
   }
 
   return (
-    <Col className={`${css.column} ${css[className]}`}>
+    <Col className={`${css.column} ${css[className]} ${item.margin && css.margin}`}>
       {type === CONTROL_TYPES.INPUT && (
         <TextField
           {...commonProps}
@@ -140,7 +140,7 @@ export const MarcFieldRenderer = ({
       {isRequired && <span className={css.asterisk} aria-hidden>*</span>}
     </Col>
   );
-};
+});
 
 MarcFieldRenderer.propTypes = {
   field: PropTypes.shape({

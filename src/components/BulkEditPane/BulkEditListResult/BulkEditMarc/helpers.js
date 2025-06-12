@@ -171,3 +171,47 @@ export const pathArrayToString = (pathArray) => {
     return acc ? `${acc}.${segment}` : segment;
   }, '');
 };
+
+/**
+ * Adds a fallback CSS class to the data entries of the secondary action
+ * for any MARC field that does not contain a ‘SUBFIELD’ action.
+ * It's used to have margin spacing for fields that do not have subfields in other rows.
+ *
+ * @param {Array<Object>} fields - Array of MARC field objects, each with an `actions` array.
+ * @returns {Array<Object>} A new array of fields where any field lacking a SUBFIELD action
+ *                          has its second action's data entries tagged with margin: true`.
+ */
+export const injectMargins = (fields) => {
+  // Identify which field indexes already include a DATA_KEYS.SUBFIELD action
+  const allSubfieldIndexes = fields.reduce((acc, field, index) => {
+    const subfieldIndex = field.actions.findIndex(action => action.data.some(data => data.key === DATA_KEYS.SUBFIELD));
+    if (subfieldIndex !== -1) {
+      acc.push(index);
+    }
+    return acc;
+  }, []);
+
+  // For each field, if any field has a SUBFIELD somewhere, then all fields without it
+  // should receive a margin class on the second action's data entries
+  return fields.map((field, fieldIndex) => {
+    const hasAnySubfield = allSubfieldIndexes.length > 0;
+    const needsMargin = hasAnySubfield && !allSubfieldIndexes.includes(fieldIndex);
+
+    if (!needsMargin) {
+      return field;
+    }
+
+    return {
+      ...field,
+      actions: field.actions.map((action, idx) => {
+        if (idx === 1) {
+          return {
+            ...action,
+            data: action.data.map(d => ({ ...d, margin: true })),
+          };
+        }
+        return action;
+      }),
+    };
+  });
+};
