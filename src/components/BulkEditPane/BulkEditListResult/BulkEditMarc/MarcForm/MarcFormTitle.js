@@ -70,9 +70,9 @@ export const MarcFormTitle = ({ fields }) => {
             </Label>
             <div className={css.splitter} />
           </Col>
-          {action.data.map((data, dataIndex) => (
+          {action.data.map((data) => (
             <Col
-              key={dataIndex}
+              key={data.key}
               className={`${css.headerCell} ${data.key === DATA_KEYS.VALUE ? css.data : css.subfield}`}
             >
               <Label>

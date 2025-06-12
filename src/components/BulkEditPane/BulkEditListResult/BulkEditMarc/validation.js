@@ -48,11 +48,13 @@ const subfieldSchema = {
       'ui-bulk-edit.layer.marc.error.actionNameRequired',
       (actions, context) => {
         if (!actions) return true;
+
         const firstName = actions[0]?.name;
         // If the first action is not ADD_TO_EXISTING, ensure a second action name is provided
         if (firstName !== ACTIONS.ADD_TO_EXISTING) {
           const second = actions[1];
-          if (second && (!second.name || !second.name.trim())) {
+
+          if (!second?.name?.trim()) {
             return context.createError({
               path: `${context.path}[1].name`, // Point error to second action's name property
               message: 'ui-bulk-edit.layer.marc.error.actionNameRequired',
