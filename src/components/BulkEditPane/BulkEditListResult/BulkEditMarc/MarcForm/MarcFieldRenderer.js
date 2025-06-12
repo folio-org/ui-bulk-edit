@@ -164,6 +164,7 @@ MarcFieldRenderer.propTypes = {
   }).isRequired,
   item: PropTypes.shape({
     key: PropTypes.string,
+    margin: PropTypes.bool,
   }).isRequired,
   rootPath: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
