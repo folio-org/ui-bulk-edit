@@ -491,7 +491,7 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "هناك مشكلة في استرداد البيانات من S3. يرجى التواصل مع مزود خدمة الاستضافة للتحقق من إعدادات S3. تتوفر المزيد من التفاصيل في تحرير سجلات التطبيقات بالجملة (mod-bulk-operations وmod-data-export-worker).",
     "menuGroup.startEdit": "بدء التحرير بالجملة",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "الملف المرفوع فارغ.",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "الملف المرفوع فارغ.",
     "start.downloadChangedRecords.marc": "تنزيل التسجيلات المتغيرة (مارك)",
     "layer.marc.error.ind": "Please check your input.",
     "layer.marc.error.subfield": "Please check your input.",

@@ -491,7 +491,7 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker).",
     "menuGroup.startEdit": "Iniciar edição em massa",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "O arquivo enviado está vazio.",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "O arquivo enviado está vazio.",
     "start.downloadChangedRecords.marc": "Baixar registros alterados (MARC)",
     "layer.marc.error.ind": "Por favor, verifique sua entrada.",
     "layer.marc.error.subfield": "Por favor, verifique sua entrada.",
