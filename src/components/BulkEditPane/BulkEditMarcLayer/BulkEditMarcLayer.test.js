@@ -125,29 +125,29 @@ describe('BulkEditMarcLayer', () => {
     expect(getByText('ui-bulk-edit.layer.column.subfield'))
       .toBeVisible();
     expect(getAllByText('ui-bulk-edit.layer.column.actions').length)
-      .toBe(4); // 3 actions for MarcField + 1 for Administrative data
+      .toBe(3); // 2 actions for MarcField + 1 for Administrative data
 
     // tooltips
     expect(getByText('ui-bulk-edit.layer.marc.error.limited'))
       .toBeVisible();
 
     // controls
-    expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i }))
+    expect(getByRole('textbox', { name: /tag/i }))
       .toBeVisible();
-    expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.ind1/i }))
+    expect(getByRole('textbox', { name: /ind1/i }))
       .toBeVisible();
-    expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.ind2/i }))
+    expect(getByRole('textbox', { name: /ind2/i }))
       .toBeVisible();
-    expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.subfield/i }))
+    expect(getByRole('textbox', { name: /subfield/i }))
       .toBeVisible();
-    expect(getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i }))
+    expect(getByRole('combobox', { name: /name/i }))
       .toBeVisible();
   });
 
   it('should call setFields when value changed + only 3 chars allowed', async () => {
     const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
+    const inputField = getByRole('textbox', { name: /tag/i });
 
     expect(inputField)
       .toHaveValue('');
@@ -163,7 +163,7 @@ describe('BulkEditMarcLayer', () => {
   it('should show error message if value is 00x', async () => {
     const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
+    const inputField = getByRole('textbox', { name: /tag/i });
 
     expect(inputField)
       .toHaveValue('');
@@ -229,20 +229,20 @@ describe('BulkEditMarcLayer', () => {
       getAllByRole
     } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
+    const actionSelect = getByRole('combobox', { name: /name/i });
 
     // select first action
     userEvent.selectOptions(actionSelect, ACTIONS.ADD_TO_EXISTING);
 
     await waitFor(() => {
-      expect(getByRole('textbox', { name: /ui-bulk-edit.layer.column.data/i }))
+      expect(getByRole('textbox', { name: /value/i }))
         .toBeVisible();
-      expect(getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i }))
+      expect(getAllByRole('combobox', { name: /name/i }))
         .toHaveLength(2);
     });
 
     // select second action
-    const secondAction = getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })[1];
+    const secondAction = getAllByRole('combobox', { name: /name/i })[1];
 
     userEvent.selectOptions(secondAction, ACTIONS.ADDITIONAL_SUBFIELD);
 
@@ -253,7 +253,7 @@ describe('BulkEditMarcLayer', () => {
     });
 
     const secondSubfieldAction = within(getByTestId('subfield-row-0'))
-      .getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })[1];
+      .getAllByRole('combobox', { name: /name/i })[1];
 
     userEvent.selectOptions(secondSubfieldAction, ACTIONS.ADDITIONAL_SUBFIELD);
 
@@ -280,7 +280,7 @@ describe('BulkEditMarcLayer', () => {
     userEvent.click(lastTrashButton);
 
     await waitFor(() => {
-      expect(getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })[1])
+      expect(getAllByRole('combobox', { name: /name/i })[1])
         .toHaveValue('');
     });
   });
@@ -291,23 +291,23 @@ describe('BulkEditMarcLayer', () => {
       getAllByRole
     } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const actionSelect = getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
+    const actionSelect = getByRole('combobox', { name: /name/i });
 
     // select first action
     userEvent.selectOptions(actionSelect, ACTIONS.FIND);
 
     await waitFor(() => {
-      expect(getAllByRole('textbox', { name: /ui-bulk-edit.layer.column.data/i })).toHaveLength(1);
-      expect(getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })).toHaveLength(2);
+      expect(getAllByRole('textbox', { name: /value/i })).toHaveLength(1);
+      expect(getAllByRole('combobox', { name: /name/i })).toHaveLength(2);
     });
 
     // select second action
-    const secondAction = getAllByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i })[1];
+    const secondAction = getAllByRole('combobox', { name: /name/i })[1];
 
     userEvent.selectOptions(secondAction, ACTIONS.REPLACE_WITH);
 
     await waitFor(() => {
-      expect(getAllByRole('textbox', { name: /ui-bulk-edit.layer.column.data/i })).toHaveLength(2);
+      expect(getAllByRole('textbox', { name: /value/i })).toHaveLength(2);
     });
   });
 
@@ -319,15 +319,15 @@ describe('BulkEditMarcLayer', () => {
 
     const marcAccordion = getAllByRole('region')[2];
 
-    const actionSelect = within(marcAccordion).getByRole('combobox', { name: /ui-bulk-edit.layer.column.action/i });
-    const inputField = within(marcAccordion).getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
-    const inputSubField = within(marcAccordion).getByRole('textbox', { name: /ui-bulk-edit.layer.column.subfield/i });
+    const actionSelect = within(marcAccordion).getByRole('combobox', { name: /name/i });
+    const inputField = within(marcAccordion).getByRole('textbox', { name: /tag/i });
+    const inputSubField = within(marcAccordion).getByRole('textbox', { name: /subfield/i });
 
     userEvent.type(inputField, '555');
     userEvent.type(inputSubField, 'a');
     userEvent.selectOptions(actionSelect, ACTIONS.REMOVE_ALL);
 
-    const confirmChangesBtn = getByRole('button', { name: /ui-bulk-edit.layer.confirmChanges/i });
+    const confirmChangesBtn = getByRole('button', { name: /confirmChanges/i });
 
     userEvent.click(confirmChangesBtn);
 
@@ -341,9 +341,9 @@ describe('BulkEditMarcLayer', () => {
       getByRole,
     } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
-    const inputField = getByRole('textbox', { name: /ui-bulk-edit.layer.column.field/i });
-    const ind1Field = getByRole('textbox', { name: /ui-bulk-edit.layer.column.ind1/i });
-    const ind2Field = getByRole('textbox', { name: /ui-bulk-edit.layer.column.ind2/i });
+    const inputField = getByRole('textbox', { name: /tag/i });
+    const ind1Field = getByRole('textbox', { name: /ind1/i });
+    const ind2Field = getByRole('textbox', { name: /ind2/i });
 
     userEvent.type(inputField, '999');
     userEvent.type(ind1Field, 'f');
