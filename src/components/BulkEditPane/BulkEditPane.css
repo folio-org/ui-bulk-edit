@@ -56,10 +56,6 @@
     width: 13%;
 }
 
-.column.margin {
-    margin-left: max(5%, 80px);
-}
-
 .headerCell.fill {
     flex-grow: 1;
 }

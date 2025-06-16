@@ -1,4 +1,7 @@
-import { DATA_KEYS, getFieldWithMaxColumns, injectMargins } from './helpers';
+import { FormattedMessage } from 'react-intl';
+
+import { DATA_KEYS, getDataTemplate, getFieldWithMaxColumns, getNextDataControls } from './helpers';
+import { ACTIONS } from '../../../../constants/marcActions';
 
 describe('getFieldWithMaxColumns', () => {
   test('should return the field with the maximum columns', () => {
@@ -80,68 +83,40 @@ describe('getFieldWithMaxColumns', () => {
   });
 });
 
-
-describe('injectMargins', () => {
-  const baseField = (actions) => ({ tag: '100', actions });
-
-  it('returns original fields when no SUBFIELD action present anywhere', () => {
-    const fields = [
-      baseField([{ name: 'A', data: [{ key: 'X', value: '1' }] }]),
-      baseField([{ name: 'B', data: [{ key: 'Y', value: '2' }] }]),
-    ];
-    const result = injectMargins(fields);
-    expect(result).toEqual(fields);
+describe('getNextDataControls', () => {
+  const defaultTemplate = getDataTemplate();
+  const appendTemplate = getDataTemplate({
+    key: DATA_KEYS.SUBFIELD,
+    title: <FormattedMessage id="ui-bulk-edit.layer.column.subfield" />,
   });
 
-  it('adds margin class to second action data of fields without SUBFIELD when one has it', () => {
-    const withSub = baseField([
-      { name: 'sub', data: [{ key: DATA_KEYS.SUBFIELD, value: 'a' }] },
-      { name: 'other', data: [{ key: 'Z', value: '3' }] }
-    ]);
-    const withoutSub = baseField([
-      { name: 'first', data: [{ key: 'X', value: '1' }] },
-      { name: 'second', data: [{ key: 'Y', value: '2' }] }
-    ]);
-
-    const fields = [withSub, withoutSub];
-    const result = injectMargins(fields);
-
-    expect(result[0]).toEqual(withSub);
-
-    expect(result[1].actions[1].data).toEqual(
-      withoutSub.actions[1].data.map(d => ({ ...d, margin: true }))
-    );
+  test('should return correct template for ACTIONS.ADD_TO_EXISTING', () => {
+    const result = getNextDataControls(ACTIONS.ADD_TO_EXISTING);
+    expect(result).toEqual([defaultTemplate]);
   });
 
-  it('does not modify fields that already contain SUBFIELD action', () => {
-    const fields = [
-      baseField([
-        { name: 'x', data: [{ key: DATA_KEYS.SUBFIELD, value: 'b' }] },
-        { name: 'y', data: [{ key: 'Z', value: '3' }] }
-      ])
-    ];
-    const result = injectMargins(fields);
-    expect(result).toEqual(fields);
+  test('should return correct template for ACTIONS.FIND', () => {
+    const result = getNextDataControls(ACTIONS.FIND);
+    expect(result).toEqual([defaultTemplate]);
   });
 
-  it('handles multiple fields with mixed presence', () => {
-    const f1 = baseField([
-      { name: 'a', data: [{ key: 'X', value: '1' }] },
-      { name: 'b', data: [{ key: 'Y', value: '2' }] }
-    ]);
-    const f2 = baseField([
-      { name: 'c', data: [{ key: DATA_KEYS.SUBFIELD, value: 'c' }] },
-      { name: 'd', data: [{ key: 'W', value: '4' }] }
-    ]);
-    const f3 = baseField([
-      { name: 'e', data: [{ key: 'P', value: '5' }] },
-      { name: 'f', data: [{ key: 'Q', value: '6' }] }
-    ]);
+  test('should return correct template for ACTIONS.REPLACE_WITH', () => {
+    const result = getNextDataControls(ACTIONS.REPLACE_WITH);
+    expect(result).toEqual([defaultTemplate]);
+  });
 
-    const result = injectMargins([f1, f2, f3]);
+  test('should return correct templates for ACTIONS.APPEND', () => {
+    const result = getNextDataControls(ACTIONS.APPEND);
+    expect(result).toEqual([appendTemplate, defaultTemplate]);
+  });
 
-    expect(result[1]).toEqual(f2);
-    expect(result[0].actions[1].data.every(d => d.margin)).toBe(true);
-    expect(result[2].actions[1].data.every(d => d.margin)).toBe(true);
+  test('should return empty array for ACTIONS.REMOVE_ALL', () => {
+    const result = getNextDataControls(ACTIONS.REMOVE_ALL);
+    expect(result).toEqual([]);
+  });
+
+  test('should return empty array for unknown action', () => {
+    const result = getNextDataControls('UNKNOWN_ACTION');
+    expect(result).toEqual([]);
   });
 });
