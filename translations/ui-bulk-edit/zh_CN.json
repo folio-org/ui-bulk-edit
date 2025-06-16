@@ -189,7 +189,7 @@
     "columns.USER.Email": "电子邮件",
     "columns.USER.Phone": "电话",
     "columns.USER.Mobile phone": "手机",
-    "columns.USER.Date Of Birth": "生日",
+    "columns.USER.Date of birth": "生日",
     "columns.USER.Addresses": "地址",
     "columns.USER.Preferred contact type id": "首选联系人类型ID",
     "columns.USER.Enrollment date": "注册日期",

@@ -189,7 +189,7 @@
     "columns.USER.Email": "البريد الإلكتروني",
     "columns.USER.Phone": "الهاتف",
     "columns.USER.Mobile phone": "الهاتف المحمول",
-    "columns.USER.Date Of Birth": "تاريخ الميلاد",
+    "columns.USER.Date of birth": "تاريخ الميلاد",
     "columns.USER.Addresses": "العناوين",
     "columns.USER.Preferred contact type id": "معرف نوع جهة الاتصال المفضل",
     "columns.USER.Enrollment date": "تاريخ التسجيل",

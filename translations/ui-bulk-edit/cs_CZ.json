@@ -189,7 +189,7 @@
     "columns.USER.Email": "E-mail",
     "columns.USER.Phone": "Telefon",
     "columns.USER.Mobile phone": "Mobilní telefon",
-    "columns.USER.Date Of Birth": "Datum narození",
+    "columns.USER.Date of birth": "Datum narození",
     "columns.USER.Addresses": "Adresy",
     "columns.USER.Preferred contact type id": "ID preferovaného typu kontaktu",
     "columns.USER.Enrollment date": "Datum zápisu",
