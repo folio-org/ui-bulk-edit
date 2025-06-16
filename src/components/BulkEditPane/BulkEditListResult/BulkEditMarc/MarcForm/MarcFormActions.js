@@ -6,7 +6,7 @@ import noop from 'lodash/noop';
 import css from '../../../BulkEditPane.css';
 
 
-const BulkEditMarcActions = ({
+const MarcFormActions = ({
   addingDisabled = false,
   removingDisabled = false,
   onAdd = noop,
@@ -40,7 +40,7 @@ const BulkEditMarcActions = ({
   );
 };
 
-BulkEditMarcActions.propTypes = {
+MarcFormActions.propTypes = {
   addingDisabled: PropTypes.bool,
   removingDisabled: PropTypes.bool,
   rowIndex: PropTypes.number.isRequired,
@@ -49,4 +49,4 @@ BulkEditMarcActions.propTypes = {
   onRemove: PropTypes.func.isRequired,
 };
 
-export default BulkEditMarcActions;
+export default MarcFormActions;
