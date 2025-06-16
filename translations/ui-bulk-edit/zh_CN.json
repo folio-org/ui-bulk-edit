@@ -491,7 +491,7 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "从 S3 检索数据时出现问题。请联系您的托管服务提供商检查 S3 配置。更多详情请参阅批量编辑应用程序日志 : mod-bulk-operations 和 mod-data-export-worker 模块 ) 。",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "从 S3 检索数据时出现问题。请联系您的托管服务提供商检查 S3 配置。更多详情请参阅批量编辑应用程序日志 : mod-bulk-operations 和 mod-data-export-worker 模块 ) 。",
     "menuGroup.startEdit": "开始批编辑",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "上传文件为空。",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "上传文件为空。",
     "start.downloadChangedRecords.marc": "下载更改的记录 (MARC)",
     "layer.marc.error.ind": "请检查您的输入。",
     "layer.marc.error.subfield": "请检查您的输入。",

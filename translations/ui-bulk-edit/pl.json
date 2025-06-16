@@ -491,7 +491,7 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
     "menuGroup.startEdit": "Rozpocznij edycję masową",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "Przesłany plik jest pusty.",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "Przesłany plik jest pusty.",
     "start.downloadChangedRecords.marc": "Download changed records (MARC)",
     "layer.marc.error.ind": "Please check your input.",
     "layer.marc.error.subfield": "Please check your input.",
