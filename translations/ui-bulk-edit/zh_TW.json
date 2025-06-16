@@ -189,7 +189,7 @@
     "columns.USER.Email": "電子郵件",
     "columns.USER.Phone": "電話",
     "columns.USER.Mobile phone": "行動電話",
-    "columns.USER.Date Of Birth": "出生日期",
+    "columns.USER.Date of birth": "出生日期",
     "columns.USER.Addresses": "地址",
     "columns.USER.Preferred contact type id": "偏好聯絡人類型 ID",
     "columns.USER.Enrollment date": "註冊日期",

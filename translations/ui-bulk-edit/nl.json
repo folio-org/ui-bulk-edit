@@ -189,7 +189,7 @@
     "columns.USER.Email": "E-mail",
     "columns.USER.Phone": "Telefoonnummer",
     "columns.USER.Mobile phone": "Mobiele telefoonnummer",
-    "columns.USER.Date Of Birth": "Geboortedatum",
+    "columns.USER.Date of birth": "Geboortedatum",
     "columns.USER.Addresses": "Adressen",
     "columns.USER.Preferred contact type id": "Geprefereerde contactmethode",
     "columns.USER.Enrollment date": "Datum ingeschreven",

@@ -189,7 +189,7 @@
     "columns.USER.Email": "Correo electrónico",
     "columns.USER.Phone": "Teléfono",
     "columns.USER.Mobile phone": "Teléfono móvil",
-    "columns.USER.Date Of Birth": "Fecha de nacimiento",
+    "columns.USER.Date of birth": "Fecha de nacimiento",
     "columns.USER.Addresses": "Direcciones",
     "columns.USER.Preferred contact type id": "Id de tipo de contacto preferido",
     "columns.USER.Enrollment date": "Fecha de inscripción",
