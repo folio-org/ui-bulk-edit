@@ -491,7 +491,7 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker).",
     "menuGroup.startEdit": "Spustit hromadné úpravy",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "Nahraný soubor je prázdný.",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "Nahraný soubor je prázdný.",
     "start.downloadChangedRecords.marc": "Stáhnout změněné záznamy (MARC)",
     "layer.marc.error.ind": "Zkontrolujte prosím svůj vstup.",
     "layer.marc.error.subfield": "Zkontrolujte prosím svůj vstup.",

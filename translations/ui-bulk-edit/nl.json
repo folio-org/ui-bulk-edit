@@ -491,7 +491,7 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "Er is een probleem met het ophalen van gegevens van S3. Neem contact op met uw hostingprovider om de S3-configuratie te controleren. Verdere details zijn beschikbaar in de logs van de Bulk edit-app (mod-bulk-operations en mod-data-export-worker modules).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Er is een probleem met het ophalen van gegevens van S3. Neem contact op met uw hostingprovider om de S3-configuratie te controleren. Verdere details zijn beschikbaar in de Bulk edit app logs (mod-bulk-operations en mod-data-export-worker modules).",
     "menuGroup.startEdit": "Bulkbewerking starten",
-    "File uploading failed, reason: Cannot upload a file. Reason: file is empty.": "Het geüploade bestand is leeg.",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "Het geüploade bestand is leeg.",
     "start.downloadChangedRecords.marc": "Gewijzigde records downloaden (MARC)",
     "layer.marc.error.ind": "Controleer uw invoer.",
     "layer.marc.error.subfield": "Controleer uw invoer.",

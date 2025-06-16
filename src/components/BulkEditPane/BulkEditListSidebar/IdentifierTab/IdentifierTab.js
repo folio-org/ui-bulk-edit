@@ -138,6 +138,8 @@ export const IdentifierTab = ({ onClearState }) => {
       });
 
       if (!uploadErrorMessage) {
+        setIsFileUploaded(true);
+
         const { status, errorMessage } = await bulkOperationStart({
           id,
           step: EDITING_STEPS.UPLOAD,
@@ -151,9 +153,8 @@ export const IdentifierTab = ({ onClearState }) => {
           search: buildSearch({ fileName: fileToUpload.name, progress: CRITERIA.IDENTIFIER }, location.search),
         });
       }
-
-      setIsFileUploaded(true);
     } catch (error) {
+      setIsFileUploaded(false);
       showErrorMessage({ errorMessage: error.message }, { fileName: fileToUpload.name });
     }
   };
