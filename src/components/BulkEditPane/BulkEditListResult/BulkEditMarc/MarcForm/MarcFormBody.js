@@ -24,7 +24,6 @@ import MarcFormActions from './MarcFormActions';
 
 import css from '../../../BulkEditPane.css';
 
-
 export const MarcFormBody = ({ fields, setFields }) => {
   const errors = useMemo(() => getMarcFormErrors(fields), [fields]);
 
