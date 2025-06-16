@@ -1,4 +1,4 @@
-import { clone, setWith, cloneDeep, update } from 'lodash';
+import { clone, setWith } from 'lodash';
 import {
   CAPABILITIES,
   EDIT_CAPABILITIES_OPTIONS,
@@ -117,11 +117,6 @@ export const customMultiSelectionFilter = (value, dataOptions) => {
 
 export const setIn = (obj, path, value) => {
   return setWith(clone(obj), path, value, clone);
-};
-
-export const updateIn = (obj, path, updater) => {
-  const copy = cloneDeep(obj);
-  return update(copy, path, updater);
 };
 
 export const removeDuplicatesByValue = (arr = [], tenants = []) => {

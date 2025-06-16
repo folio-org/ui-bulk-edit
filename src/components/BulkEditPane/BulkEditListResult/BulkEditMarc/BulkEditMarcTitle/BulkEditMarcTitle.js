@@ -9,7 +9,7 @@ import { DATA_KEYS, getFieldWithMaxColumns } from '../helpers';
 import css from '../../../BulkEditPane.css';
 
 
-export const MarcFormTitle = ({ fields }) => {
+const BulkEditMarcTitle = ({ fields }) => {
   const longestField = getFieldWithMaxColumns(fields);
 
   return (
@@ -60,26 +60,23 @@ export const MarcFormTitle = ({ fields }) => {
         <div className={css.splitter} />
       </Col>
       {longestField.actions.map((action, index) => !!action && (
-        <Fragment key={action.name}>
+        <Fragment key={index}>
           <Col
+            key={index}
             className={`${css.headerCell} ${css.actions}`}
           >
-            <Label required={index === 0}>
+            <Label required={action.meta.required && index < 1}>
               <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
             </Label>
             <div className={css.splitter} />
           </Col>
-          {action.data.map((data) => (
+          {action.data.map((data, dataIndex) => (
             <Col
-              key={data.key}
+              key={dataIndex}
               className={`${css.headerCell} ${data.key === DATA_KEYS.VALUE ? css.data : css.subfield}`}
             >
               <Label>
-                {data.key === DATA_KEYS.VALUE ? (
-                  <FormattedMessage id="ui-bulk-edit.layer.column.data" />
-                ) : (
-                  <FormattedMessage id="ui-bulk-edit.layer.column.subfield" />
-                )}
+                {data.meta.title}
               </Label>
               <div className={css.splitter} />
             </Col>
@@ -100,6 +97,8 @@ export const MarcFormTitle = ({ fields }) => {
   );
 };
 
-MarcFormTitle.propTypes = {
-  fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+BulkEditMarcTitle.propTypes = {
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
+export default BulkEditMarcTitle;
