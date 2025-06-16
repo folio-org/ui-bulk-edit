@@ -7,7 +7,7 @@ import { omit, isEqual } from 'lodash';
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditMarc } from '../BulkEditListResult/BulkEditMarc/BulkEditMarc';
 import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
-import { getMarcFieldTemplate, getTransformedField } from '../BulkEditListResult/BulkEditMarc/helpers';
+import { getMarcFieldTemplate } from '../BulkEditListResult/BulkEditMarc/helpers';
 import { useMarcContentUpdate } from '../../../hooks/api/useMarcContentUpdate';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
 import { useContentUpdate } from '../../../hooks/api';
@@ -47,8 +47,7 @@ export const BulkEditMarcLayer = ({
   const sortedOptions = sortAlphabetically(options);
 
   const marcFormErrors = getMarcFormErrors(marcFields);
-  const marcContentUpdates = marcFields.map(getTransformedField);
-  const marcContentUpdatesWithoutId = marcContentUpdates.map(item => omit(item, ['id']));
+  const marcContentUpdatesWithoutId = marcFields.map(item => omit(item, ['id']));
   const contentUpdates = getMappedContentUpdates(fields, options);
 
   const isMarcFormValid = isMarcContentUpdatesFormValid(marcFormErrors);
@@ -89,7 +88,7 @@ export const BulkEditMarcLayer = ({
   const areMarcAndCsvReady = hasBothFiles && isPreviewSettled;
 
   const handleConfirm = () => {
-    const bulkOperationMarcRules = marcContentUpdates.map((item) => ({
+    const bulkOperationMarcRules = marcFields.map((item) => ({
       bulkOperationId,
       ...item
     }));
