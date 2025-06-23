@@ -16,7 +16,7 @@ import { queryClient } from '../../../../test/jest/utils/queryClient';
 import { APPROACHES, CAPABILITIES, CRITERIA, IDENTIFIERS } from '../../../constants';
 import { BulkEditMarcLayer } from './BulkEditMarcLayer';
 import { RootContext } from '../../../context/RootContext';
-import { getMarcFieldTemplate } from '../BulkEditListResult/BulkEditMarc/helpers';
+import { marcFieldTemplate } from '../BulkEditListResult/BulkEditMarc/helpers';
 import { ACTIONS } from '../../../constants/marcActions';
 
 const mockConfirmChanges = jest.fn();
@@ -51,7 +51,7 @@ const paneSub = 'Pane Sub Title';
 const paneFooter = 'Pane Footer';
 
 const WrapComponent = ({ children }) => {
-  const [fields, setFields] = React.useState([getMarcFieldTemplate(uniqueId())]);
+  const [fields, setFields] = React.useState([marcFieldTemplate(uniqueId())]);
 
   return children(fields, setFields);
 };

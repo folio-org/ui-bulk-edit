@@ -1,33 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import uniqueId from 'lodash/uniqueId';
-import { omit, isEqual } from 'lodash';
 
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditMarc } from '../BulkEditListResult/BulkEditMarc/BulkEditMarc';
 import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
-import { getMarcFieldTemplate } from '../BulkEditListResult/BulkEditMarc/helpers';
+import { marcFieldTemplate } from '../BulkEditListResult/BulkEditMarc/helpers';
 import { useMarcContentUpdate } from '../../../hooks/api/useMarcContentUpdate';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
 import { useContentUpdate } from '../../../hooks/api';
 import {
   getContentUpdatesBody,
+  folioFieldTemplate,
   getMappedContentUpdates,
-  isContentUpdatesFormValid,
-  isMarcContentUpdatesFormValid
-} from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
+} from '../BulkEditListResult/BulkEditFolio/helpers';
 import { sortAlphabetically } from '../../../utils/sortAlphabetically';
 import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
 import { useCommitChanges } from '../../../hooks/useCommitChanges';
 import { getAdministrativeDataOptions } from '../../../constants';
-import { getMarcFormErrors } from '../BulkEditListResult/BulkEditMarc/validation';
-import {
-  ADMINISTRATIVE_DEFAULT_BODY,
-  ADMINISTRATIVE_FORM_INITIAL_STATE,
-  MARC_DEFAULT_BODY,
-  MARC_FORM_INITIAL_STATE
-} from '../../../constants/forms';
+import { validationSchema as marcSchema } from '../BulkEditListResult/BulkEditMarc/validation';
+import { validationSchema as administrativeSchema } from '../BulkEditListResult/BulkEditFolio/validation';
+import { ADMINISTRATIVE_DEFAULT_BODY, MARC_DEFAULT_BODY } from '../../../constants/forms';
+import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
 
 export const BulkEditMarcLayer = ({
   bulkOperationId,
@@ -37,24 +31,22 @@ export const BulkEditMarcLayer = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const [fields, setFields] = useState([]);
-  const [marcFields, setMarcFields] = useState([getMarcFieldTemplate(uniqueId())]);
-
   const { marcContentUpdate } = useMarcContentUpdate({ id: bulkOperationId });
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
 
-  const options = getAdministrativeDataOptions(formatMessage);
-  const sortedOptions = sortAlphabetically(options);
+  const { fields, setFields, isValid: isAdministrativeFormValid, isPristine: isAdministrativeFormPristine } = useBulkEditForm({
+    validationSchema: administrativeSchema,
+    template: folioFieldTemplate
+  });
 
-  const marcFormErrors = getMarcFormErrors(marcFields);
-  const marcContentUpdatesWithoutId = marcFields.map(item => omit(item, ['id']));
+  const { fields: marcFields, setFields: setMarcFields, isValid: isMarcFormValid, isPristine: isMarcFormPristine } = useBulkEditForm({
+    validationSchema: marcSchema,
+    template: marcFieldTemplate
+  });
+
+  const options = sortAlphabetically(getAdministrativeDataOptions(formatMessage));
+
   const contentUpdates = getMappedContentUpdates(fields, options);
-
-  const isMarcFormValid = isMarcContentUpdatesFormValid(marcFormErrors);
-  const isAdministrativeFormValid = isContentUpdatesFormValid(contentUpdates);
-
-  const isAdministrativeFormPristine = isEqual(ADMINISTRATIVE_FORM_INITIAL_STATE, contentUpdates);
-  const isMarcFormPristine = isEqual(MARC_FORM_INITIAL_STATE, marcContentUpdatesWithoutId);
 
   const areBothFormsValid = isAdministrativeFormValid && isMarcFormValid;
   const isOnlyAdministrativeValid = isAdministrativeFormValid && isMarcFormPristine;
@@ -124,7 +116,7 @@ export const BulkEditMarcLayer = ({
           setFields={setFields}
           marcFields={marcFields}
           setMarcFields={setMarcFields}
-          options={sortedOptions}
+          options={options}
         />
       </BulkEditLayer>
 
@@ -149,7 +141,7 @@ export const BulkEditMarcLayer = ({
 
 BulkEditMarcLayer.propTypes = {
   bulkOperationId: PropTypes.string,
-  paneProps: PropTypes.object,
+  paneProps: PropTypes.shape({}),
   isMarcLayerOpen: PropTypes.bool,
   onMarcLayerClose: PropTypes.func,
 };

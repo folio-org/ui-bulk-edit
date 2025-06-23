@@ -1,20 +1,17 @@
 import { useEffect } from 'react';
 import { ACTIONS } from '../constants';
-import {
-  ACTION_PARAMETERS_KEY,
-} from '../components/BulkEditPane/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 
-export const useDerivativeModification = ({ onChange, action, actionIndex }) => {
+export const useDerivativeModification = ({ actionParameters, action, name, path, onChange }) => {
   useEffect(() => {
-    if ([ACTIONS.SET_TO_TRUE, ACTIONS.SET_TO_FALSE].includes(action.name)) {
+    if ([ACTIONS.SET_TO_TRUE, ACTIONS.SET_TO_FALSE].includes(action)) {
       onChange({
-        actionIndex,
-        value: action.parameters?.map((param) => ({ ...param, value: action.name === ACTIONS.SET_TO_TRUE })),
-        fieldName: ACTION_PARAMETERS_KEY
+        path,
+        name,
+        val: actionParameters?.map((param) => ({ ...param, value: action === ACTIONS.SET_TO_TRUE })),
       });
     }
   },
   // Here we disabled that rule, coz update of deps will lead to maximum deps update
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  [action.name]);
+  [action]);
 };

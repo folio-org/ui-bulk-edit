@@ -10,22 +10,22 @@ import {
 
 import {
   getSubfieldTemplate,
-  getMarcFieldTemplate,
+  marcFieldTemplate,
   getNextData,
   getNextAction,
   injectMargins,
 } from '../helpers';
-import { getMarcFormErrors } from '../validation';
 import { ACTIONS } from '../../../../../constants/marcActions';
-import { setIn, updateIn } from '../../../../../utils/helpers';
+import { setIn, updateIn, getFormErrors } from '../../../../../utils/helpers';
 import { schema, subfieldsSchema } from '../schema';
 import { MarcFieldRenderer } from './MarcFieldRenderer';
 import MarcFormActions from './MarcFormActions';
+import { validationSchema } from '../validation';
 
 import css from '../../../BulkEditPane.css';
 
 export const MarcFormBody = ({ fields, setFields }) => {
-  const errors = useMemo(() => getMarcFormErrors(fields), [fields]);
+  const errors = useMemo(() => getFormErrors(fields, validationSchema), [fields]);
 
   const enhancedFields = useMemo(() => injectMargins(fields), [fields]);
 
@@ -70,7 +70,7 @@ export const MarcFormBody = ({ fields, setFields }) => {
     const rowIndex = Number(e.target.dataset.rowIndex);
     const newFields = [
       ...fields.slice(0, rowIndex + 1),
-      getMarcFieldTemplate(uniqueId()),
+      marcFieldTemplate(uniqueId()),
       ...fields.slice(rowIndex + 1)
     ];
     setFields(newFields);
