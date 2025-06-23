@@ -26,7 +26,7 @@ import {
   useLoanTypesEcs,
   useElectronicAccessEcs
 } from '../../../hooks/api';
-import { BulkEditInAppLayer } from './BulkEditInAppLayer';
+import { BulkEditFolioLayer } from './BulkEditFolioLayer';
 
 
 jest.mock('../../../hooks', () => ({
@@ -64,7 +64,7 @@ const renderBulkEditInAppLayer = ({ capability }) => {
           title: <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: 'fileName' }} />,
         }}
         >
-          <BulkEditInAppLayer
+          <BulkEditFolioLayer
             bulkOperationId="bulkOperationId"
             isInAppLayerOpen
             paneProps={{}}

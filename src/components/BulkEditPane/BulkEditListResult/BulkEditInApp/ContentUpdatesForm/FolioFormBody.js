@@ -1,0 +1,174 @@
+import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
+import { useIntl } from 'react-intl';
+import { noop, uniqueId } from 'lodash';
+
+import {
+  IconButton,
+  Col,
+  Row,
+  RepeatableField,
+  Selection,
+  StripesOverlayWrapper
+} from '@folio/stripes/components';
+
+import { folioFieldTemplate, getFieldsWithRules, getOptionsWithRules } from '../helpers';
+import { customFilter, groupByCategory, setIn, updateIn } from '../../../../../utils/helpers';
+import { useSearchParams } from '../../../../../hooks';
+import { schema } from '../schema';
+import { FolioFieldRenderer } from './FolioFieldRenderer';
+import { getDefaultActionState, getNextActionState } from '../controlsConfig';
+
+import css from '../../../BulkEditPane.css';
+
+export const FolioFormBody = ({ options, fields, setFields }) => {
+  const { formatMessage } = useIntl();
+  const { currentRecordType } = useSearchParams();
+
+  const handleRemoveField = useCallback((e) => {
+    const index = parseInt(e.currentTarget.dataset.rowIndex, 10);
+
+    setFields(prevFields => prevFields.filter((_, i) => i !== index));
+  }, [setFields]);
+
+  const handleAddField = useCallback(() => {
+    setFields(prevFields => [...prevFields, folioFieldTemplate(uniqueId())]);
+  }, [setFields]);
+
+  const handleOptionChange = useCallback(({ path, val }) => {
+    const updatedField = updateIn(fields, path, (field) => {
+      const sourceOption = options.find(o => o.value === val);
+      const parameters = sourceOption?.parameters;
+      const option = sourceOption.type || val;
+
+      const actionsDetails = getDefaultActionState(option, currentRecordType);
+
+      return {
+        ...field,
+        option,
+        parameters,
+        actionsDetails
+      };
+    });
+
+    setFields(updatedField);
+  }, [fields, options, currentRecordType, setFields]);
+
+  const handleActionChange = useCallback(({ path, val, name, option, ctx }) => {
+    const [rowIndex, actionsDetails, actions] = path;
+
+    const withUpdatedActionName = updateIn(fields, path, (action) => ({
+      ...action,
+      [name]: val,
+      value: '' // reset value when action is changed
+    }));
+
+    // If this is the first action in the row, we need to update the next actions based on the selected values
+    if (ctx.index === 0) {
+      const nextActions = getNextActionState(option, val);
+
+      const withUpdatedNextActions = updateIn(withUpdatedActionName, [rowIndex, actionsDetails, actions], (actionsArr) => [
+        actionsArr[0], // keep the first action as is
+        ...nextActions
+      ]);
+
+      const withFiltrationRules = getFieldsWithRules({
+        option,
+        fields: withUpdatedNextActions,
+        action: val,
+        rowId: ctx.row.id,
+      });
+
+      setFields(withFiltrationRules);
+    } else {
+      // If this is not the first action, we just update the current action
+      setFields(withUpdatedActionName);
+    }
+  }, [fields, setFields]);
+
+  const handleValueChange = useCallback(({ path, val, name }) => {
+    const newFields = setIn(fields, [...path, name], val);
+
+    setFields(newFields);
+  }, [fields, setFields]);
+
+  return (
+    <StripesOverlayWrapper>
+      <RepeatableField
+        getFieldUniqueKey={(field) => field.id}
+        fields={fields}
+        className={css.row}
+        onAdd={noop}
+        renderField={(item, index) => {
+          const usedOptions = fields.map(field => field.option);
+
+          const { filteredOptions, maxRowsCount } = getOptionsWithRules({
+            fields,
+            options,
+            usedOptions
+          });
+
+          const groupedOptions = groupByCategory(filteredOptions);
+          const isAddButtonShown = index === fields.length - 1 && index !== maxRowsCount - 1;
+
+          return (
+            <Row data-testid={`row-${index}`} className={css.marcFieldRow}>
+              {maxRowsCount}
+              <Col xs={2} sm={2} className={css.column}>
+                <Selection
+                  dataOptions={groupedOptions}
+                  value={item.option}
+                  onChange={(value) => handleOptionChange({ path: [index], val: value })}
+                  placeholder={formatMessage({ id:'ui-bulk-edit.options.placeholder' })}
+                  dirty={!!item.option}
+                  ariaLabel={`select-option-${index}`}
+                  marginBottom0
+                  listMaxHeight="calc(45vh - 65px)" // 65px - for fixed header
+                  onFilter={customFilter}
+                />
+              </Col>
+              {item.actionsDetails && schema.map(field => (
+                <FolioFieldRenderer
+                  key={field.name}
+                  option={item.option}
+                  field={field}
+                  fields={fields}
+                  item={item.actionsDetails}
+                  ctx={{ index, row: item }}
+                  path={[index, 'actionsDetails']}
+                  allOptions={options}
+                  onChange={handleValueChange}
+                  onActionChange={handleActionChange}
+                />
+              ))}
+
+              <div className={css.actionButtonsWrapper}>
+                {isAddButtonShown && (
+                  <IconButton
+                    icon="plus-sign"
+                    size="medium"
+                    onClick={handleAddField}
+                    data-testid={`add-button-${index}`}
+                  />
+                )}
+                <IconButton
+                  icon="trash"
+                  data-row-index={index}
+                  onClick={handleRemoveField}
+                  disabled={fields.length === 1}
+                  data-testid={`remove-button-${index}`}
+                />
+              </div>
+            </Row>
+          );
+        }}
+      />
+    </StripesOverlayWrapper>
+  );
+};
+
+FolioFormBody.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.shape({})),
+  fields: PropTypes.arrayOf(PropTypes.shape({})),
+  setFields: PropTypes.func,
+};

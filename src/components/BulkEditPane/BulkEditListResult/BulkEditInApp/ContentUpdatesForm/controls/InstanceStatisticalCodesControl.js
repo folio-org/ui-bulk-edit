@@ -4,23 +4,23 @@ import { useIntl } from 'react-intl';
 
 import { Loading, MultiSelection } from '@folio/stripes/components';
 
-import { FIELD_VALUE_KEY, getLabelByValue, sortWithoutPlaceholder } from '../helpers';
-import { useStatisticalCodes } from '../../../../../../hooks/api/useStatisticalCodes';
+import { getLabelByValue, sortWithoutPlaceholder } from '../../helpers';
+import { useStatisticalCodes } from '../../../../../../hooks/api';
 import { customMultiSelectionFilter } from '../../../../../../utils/helpers';
 
 
-export const InstanceStatisticalCodesControl = ({ actionName, actionValue, actionIndex, onChange }) => {
+export const InstanceStatisticalCodesControl = ({ value, name, path, onChange }) => {
   const { formatMessage } = useIntl();
 
   const { statisticalCodes, isStatisticalCodesLoading } = useStatisticalCodes();
   const sortedStatisticalCodes = sortWithoutPlaceholder(statisticalCodes);
-  const title = getLabelByValue(sortedStatisticalCodes, actionValue);
+  const title = getLabelByValue(sortedStatisticalCodes, value);
 
-  const handleChange = value => {
+  const handleChange = val => {
     onChange({
-      actionIndex,
-      value,
-      fieldName: FIELD_VALUE_KEY,
+      path,
+      name,
+      val,
     });
   };
 
@@ -29,14 +29,13 @@ export const InstanceStatisticalCodesControl = ({ actionName, actionValue, actio
   return (
     <div title={title}>
       <MultiSelection
-        key={actionName}
         id="statisticalCodes"
-        value={actionValue}
+        value={value}
         onChange={handleChange}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.statisticalCode' })}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statisticalCode' })}
         dataOptions={statisticalCodes}
-        dirty={!!actionValue}
+        dirty={!!value}
         filter={customMultiSelectionFilter}
       />
     </div>
@@ -44,8 +43,8 @@ export const InstanceStatisticalCodesControl = ({ actionName, actionValue, actio
 };
 
 InstanceStatisticalCodesControl.propTypes = {
-  actionValue: PropTypes.arrayOf(PropTypes.object),
-  actionName: PropTypes.string,
-  actionIndex: PropTypes.number,
+  value: PropTypes.string,
+  path: PropTypes.string,
+  name: PropTypes.string,
   onChange: PropTypes.func,
 };

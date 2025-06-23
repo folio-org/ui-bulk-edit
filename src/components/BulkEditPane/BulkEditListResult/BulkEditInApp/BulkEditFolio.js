@@ -9,12 +9,12 @@ import {
   Layout,
 } from '@folio/stripes/components';
 
-import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
-import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
+import { FolioFormTitle } from './ContentUpdatesForm/FolioFormTitle';
+import { FolioFormBody } from './ContentUpdatesForm/FolioFormBody';
 import { RootContext } from '../../../../context/RootContext';
 
 
-export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields }) => {
+export const BulkEditFolio = ({ areAllOptionsLoaded, options, fields, setFields }) => {
   const { title } = useContext(RootContext);
 
   return (
@@ -27,10 +27,10 @@ export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields 
       >
         {areAllOptionsLoaded ? (
           <>
-            <BulkEditInAppTitle
+            <FolioFormTitle
               fields={fields}
             />
-            <ContentUpdatesForm
+            <FolioFormBody
               fields={fields}
               setFields={setFields}
               options={options}
@@ -46,9 +46,9 @@ export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields 
   );
 };
 
-BulkEditInApp.propTypes = {
+BulkEditFolio.propTypes = {
   areAllOptionsLoaded: PropTypes.bool.isRequired,
-  options: PropTypes.arrayOf(PropTypes.object),
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   setFields: PropTypes.func.isRequired,
 };

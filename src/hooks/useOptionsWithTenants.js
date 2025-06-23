@@ -22,7 +22,7 @@ import { removeDuplicatesByValue } from '../utils/helpers';
 import { sortAlphabetically } from '../utils/sortAlphabetically';
 
 
-export const useOptionsWithTenants = (bulkOperationId) => {
+export const useOptionsWithTenants = () => {
   const stripes = useStripes();
   const { formatMessage } = useIntl();
   const { currentRecordType } = useSearchParams();
@@ -31,15 +31,15 @@ export const useOptionsWithTenants = (bulkOperationId) => {
   const isHoldingsRecordType = currentRecordType === CAPABILITIES.HOLDING;
   const isInstanceRecordType = currentRecordType === CAPABILITIES.INSTANCE;
 
-  const { data: tenants, isLoading } = useBulkOperationTenants(bulkOperationId);
+  const { tenants, isTenantsLoading } = useBulkOperationTenants();
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
 
   const { itemNotes, isItemNotesLoading } = useItemNotes({ enabled: isItemRecordType });
-  const { notesEcs: itemNotesEcs, isFetching: isItemsNotesEcsLoading } = useItemNotesEcs(tenants, 'option', { enabled: isItemRecordType && isCentralTenant && !isLoading });
+  const { notesEcs: itemNotesEcs, isFetching: isItemsNotesEcsLoading } = useItemNotesEcs(tenants, 'option', { enabled: isItemRecordType && isCentralTenant && !isTenantsLoading });
 
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes({ enabled: isHoldingsRecordType });
-  const { notesEcs: holdingsNotesEcs, isFetching: isHoldingsNotesEcsLoading } = useHoldingsNotesEcs(tenants, 'option', { enabled: isHoldingsRecordType && isCentralTenant && !isLoading });
+  const { notesEcs: holdingsNotesEcs, isFetching: isHoldingsNotesEcsLoading } = useHoldingsNotesEcs(tenants, 'option', { enabled: isHoldingsRecordType && isCentralTenant && !isTenantsLoading });
 
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes({ enabled: isInstanceRecordType });
 

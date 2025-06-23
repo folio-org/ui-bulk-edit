@@ -1,9 +1,8 @@
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { runAxeTest } from '@folio/stripes-testing'; // for expect assertions
-import { AdditionalActionParameters } from './AdditionalActionParameters';
-import { ACTIONS, PARAMETERS_KEYS } from '../../../../../constants';
-import { ACTION_PARAMETERS_KEY } from './helpers';
+import { ActionParameters } from './ActionParameters';
+import { ACTIONS, PARAMETERS_KEYS } from '../../../../../../constants';
 
 describe('AdditionalActionParameters', () => {
   const mockAction = {
@@ -36,7 +35,7 @@ describe('AdditionalActionParameters', () => {
 
   it('renders checkboxes based on action parameters', () => {
     const { getByLabelText } = render(
-      <AdditionalActionParameters action={mockAction} actionIndex={0} onChange={() => {}} />
+      <ActionParameters action={mockAction} actionIndex={0} onChange={() => {}} />
     );
 
     expect(getByLabelText(`ui-bulk-edit.layer.action.apply.${PARAMETERS_KEYS.APPLY_TO_ITEMS}`)).toBeInTheDocument();
@@ -44,7 +43,7 @@ describe('AdditionalActionParameters', () => {
 
   it('should render with no axe errors', async () => {
     render(
-      <AdditionalActionParameters action={mockAction} actionIndex={0} onChange={() => {}} />
+      <ActionParameters action={mockAction} actionIndex={0} onChange={() => {}} />
     );
 
     await runAxeTest({
@@ -56,7 +55,7 @@ describe('AdditionalActionParameters', () => {
     const mockOnChange = jest.fn();
 
     const { getByLabelText } = render(
-      <AdditionalActionParameters action={mockAction} actionIndex={0} onChange={mockOnChange} />
+      <ActionParameters action={mockAction} actionIndex={0} onChange={mockOnChange} />
     );
 
     fireEvent.click(getByLabelText(`ui-bulk-edit.layer.action.apply.${PARAMETERS_KEYS.APPLY_TO_ITEMS}`));
@@ -64,7 +63,7 @@ describe('AdditionalActionParameters', () => {
     expect(mockOnChange).toHaveBeenCalledWith({
       actionIndex: 0,
       value: [{ key: PARAMETERS_KEYS.APPLY_TO_ITEMS, value: false }],
-      fieldName: ACTION_PARAMETERS_KEY,
+      fieldName: 'parameters',
     });
   });
 
@@ -75,7 +74,7 @@ describe('AdditionalActionParameters', () => {
     };
 
     const { queryByText } = render(
-      <AdditionalActionParameters action={overrideMockAction} actionIndex={0} onChange={() => {}} />
+      <ActionParameters action={overrideMockAction} actionIndex={0} onChange={() => {}} />
     );
 
     expect(queryByText(`ui-bulk-edit.layer.action.apply.${PARAMETERS_KEYS.APPLY_TO_ITEMS}`)).toBeNull();
@@ -95,7 +94,7 @@ describe('AdditionalActionParameters', () => {
     };
 
     const { queryByText } = render(
-      <AdditionalActionParameters action={overrideMockAction} actionIndex={0} onChange={() => {}} />
+      <ActionParameters action={overrideMockAction} actionIndex={0} onChange={() => {}} />
     );
 
     expect(queryByText(`ui-bulk-edit.layer.action.apply.${PARAMETERS_KEYS.STAFF_ONLY}`)).not.toBeNull();
@@ -115,7 +114,7 @@ describe('AdditionalActionParameters', () => {
     };
 
     const { queryByText } = render(
-      <AdditionalActionParameters action={overrideMockAction} actionIndex={0} onChange={() => {}} />
+      <ActionParameters action={overrideMockAction} actionIndex={0} onChange={() => {}} />
     );
 
     expect(queryByText(`ui-bulk-edit.layer.action.apply.${PARAMETERS_KEYS.STAFF_ONLY}`)).toBeNull();

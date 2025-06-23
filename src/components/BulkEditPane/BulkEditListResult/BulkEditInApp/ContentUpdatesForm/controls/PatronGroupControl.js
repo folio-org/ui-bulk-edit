@@ -5,13 +5,13 @@ import { useIntl } from 'react-intl';
 import { Select } from '@folio/stripes/components';
 
 import { sortAlphabeticallyWithoutGroups } from '../../../../../../utils/sortAlphabetically';
-import { FIELD_VALUE_KEY, getLabelByValue } from '../helpers';
+import { getLabelByValue } from '../../helpers';
 import { usePatronGroup } from '../../../../../../hooks/api';
 import { CAPABILITIES } from '../../../../../../constants';
 import { useSearchParams } from '../../../../../../hooks';
 
 
-export const PatronGroupControl = ({ actionValue, actionIndex, onChange }) => {
+export const PatronGroupControl = ({ value, path, name, onChange }) => {
   const { formatMessage } = useIntl();
   const { currentRecordType } = useSearchParams();
 
@@ -36,25 +36,26 @@ export const PatronGroupControl = ({ actionValue, actionIndex, onChange }) => {
     }]
   );
   const patronGroups = sortAlphabeticallyWithoutGroups(groups);
-  const title = getLabelByValue(patronGroups, actionValue);
+  const title = getLabelByValue(patronGroups, value);
 
   return (
     <div title={title}>
       <Select
         dataOptions={patronGroups}
-        value={actionValue}
-        onChange={e => onChange({ actionIndex, value: e.target.value, fieldName: FIELD_VALUE_KEY })}
-        data-testid={`select-patronGroup-${actionIndex}`}
+        value={value}
+        onChange={e => onChange({ path, val: e.target.value, name })}
+        data-testid={`select-patronGroup-${path}`}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.patronGroupSelect' })}
         marginBottom0
-        dirty={!!actionValue}
+        dirty={!!value}
       />
     </div>
   );
 };
 
 PatronGroupControl.propTypes = {
-  actionValue: PropTypes.string,
-  actionIndex: PropTypes.number,
+  value: PropTypes.string,
+  path: PropTypes.string,
+  name: PropTypes.string,
   onChange: PropTypes.func,
 };

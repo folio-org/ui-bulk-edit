@@ -1,34 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
-import { BulkEditInApp } from '../BulkEditListResult/BulkEditInApp/BulkEditInApp';
+import { BulkEditFolio } from '../BulkEditListResult/BulkEditInApp/BulkEditFolio';
 import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
 import {
   getContentUpdatesBody,
-  getMappedContentUpdates,
-  isContentUpdatesFormValid
-} from '../BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
+  folioFieldTemplate,
+  getMappedContentUpdates
+} from '../BulkEditListResult/BulkEditInApp/helpers';
 import { useContentUpdate } from '../../../hooks/api';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
 import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
 import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
 import { useCommitChanges } from '../../../hooks/useCommitChanges';
+import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
+import { validationSchema } from '../BulkEditListResult/BulkEditInApp/validation';
 
 
-export const BulkEditInAppLayer = ({
+export const BulkEditFolioLayer = ({
   bulkOperationId,
   isInAppLayerOpen,
   paneProps,
   onInAppLayerClose,
 }) => {
-  const [fields, setFields] = useState([]);
-
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
-  const { options, areAllOptionsLoaded } = useOptionsWithTenants(bulkOperationId);
-
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants();
+  const { fields, setFields, isValid } = useBulkEditForm({
+    validationSchema,
+    template: folioFieldTemplate
+  });
   const contentUpdates = getMappedContentUpdates(fields, options);
-  const isInAppFormValid = isContentUpdatesFormValid(contentUpdates);
 
   const {
     isPreviewModalOpened,
@@ -67,12 +69,12 @@ export const BulkEditInAppLayer = ({
     <>
       <BulkEditLayer
         isLayerOpen={isInAppLayerOpen}
-        isConfirmDisabled={!isInAppFormValid}
+        isConfirmDisabled={!isValid}
         onLayerClose={onInAppLayerClose}
         onConfirm={handleConfirm}
         {...paneProps}
       >
-        <BulkEditInApp
+        <BulkEditFolio
           fields={fields}
           setFields={setFields}
           options={options}
@@ -99,9 +101,9 @@ export const BulkEditInAppLayer = ({
   );
 };
 
-BulkEditInAppLayer.propTypes = {
+BulkEditFolioLayer.propTypes = {
   bulkOperationId: PropTypes.string,
   isInAppLayerOpen: PropTypes.bool,
-  paneProps: PropTypes.object,
+  paneProps: PropTypes.shape({}),
   onInAppLayerClose: PropTypes.func,
 };

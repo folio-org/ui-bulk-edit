@@ -8,8 +8,8 @@ import { TitleManager, useStripes } from '@folio/stripes/core';
 import { RootContext } from '../../../../context/RootContext';
 import { MarcFormBody } from './MarcForm/MarcFormBody';
 import { MarcFormTitle } from './MarcForm/MarcFormTitle';
-import { BulkEditInAppTitle } from '../BulkEditInApp/BulkEditInAppTitle/BulkEditInAppTitle';
-import { ContentUpdatesForm } from '../BulkEditInApp/ContentUpdatesForm/ContentUpdatesForm';
+import { FolioFormTitle } from '../BulkEditInApp/ContentUpdatesForm/FolioFormTitle';
+import { FolioFormBody } from '../BulkEditInApp/ContentUpdatesForm/FolioFormBody';
 
 
 export const BulkEditMarc = ({
@@ -31,8 +31,8 @@ export const BulkEditMarc = ({
       <Accordion
         label={<FormattedMessage id="ui-bulk-edit.layer.title.administrative" />}
       >
-        <BulkEditInAppTitle fields={fields} />
-        <ContentUpdatesForm
+        <FolioFormTitle fields={fields} />
+        <FolioFormBody
           fields={fields}
           setFields={setFields}
           options={options}

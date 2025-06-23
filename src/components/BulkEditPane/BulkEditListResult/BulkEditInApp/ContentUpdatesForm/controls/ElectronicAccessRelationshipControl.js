@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { Loading, Select } from '@folio/stripes/components';
 import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
-import { FIELD_VALUE_KEY, getLabelByValue } from '../helpers';
+import { getLabelByValue } from '../../helpers';
 import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
 import {
   useBulkOperationTenants,
@@ -15,21 +15,21 @@ import {
 import { getItemsWithPlaceholder } from '../../../../../../constants';
 
 
-export const ElectronicAccessRelationshipControl = ({ bulkOperationId, allActions, actionValue, actionIndex, onChange }) => {
+export const ElectronicAccessRelationshipControl = ({ allActions, value, path, name, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
 
-  const { data: tenants } = useBulkOperationTenants(bulkOperationId);
+  const { tenants } = useBulkOperationTenants();
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccessRelationships();
   const { escData: urlRelationshipsEcs, isFetching: isElectronicAccessEcsLoading } = useElectronicAccessEcs(tenants, { enabled: isCentralTenant });
 
-  const filteredElectronicAccessRelationshipsEcs = urlRelationshipsEcs?.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
-  const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => actionIndex === 0 || item.value !== allActions[0]?.value);
+  const filteredElectronicAccessRelationshipsEcs = urlRelationshipsEcs?.filter(item => item.value !== allActions[0]?.value);
+  const filteredElectronicAccessRelationships = electronicAccessRelationships.filter(item => item.value !== allActions[0]?.value);
   const relationships = isCentralTenant ? removeDuplicatesByValue(filteredElectronicAccessRelationshipsEcs, tenants) : filteredElectronicAccessRelationships;
   const accessRelationshipsWithPlaceholder = getItemsWithPlaceholder(relationships);
-  const title = getLabelByValue(accessRelationshipsWithPlaceholder, actionValue);
+  const title = getLabelByValue(accessRelationshipsWithPlaceholder, value);
 
   if (isElectronicAccessEcsLoading || isElectronicAccessLoading) return <Loading size="large" />;
 
@@ -37,29 +37,26 @@ export const ElectronicAccessRelationshipControl = ({ bulkOperationId, allAction
     <div title={title}>
       <Select
         id="urlRelationship"
-        value={actionValue}
+        value={value}
         loading={isElectronicAccessLoading || isElectronicAccessEcsLoading}
-        onChange={e => onChange(
-          {
-            actionIndex,
-            value: e.target.value,
-            fieldName: FIELD_VALUE_KEY,
-            tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
-          }
-        )}
+        onChange={e => onChange({
+          path,
+          name,
+          val: e.target.value,
+          tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
+        })}
         dataOptions={accessRelationshipsWithPlaceholder}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
         marginBottom0
-        dirty={!!actionValue}
+        dirty={!!value}
       />
     </div>
   );
 };
 
 ElectronicAccessRelationshipControl.propTypes = {
-  bulkOperationId: PropTypes.string,
-  allActions: PropTypes.arrayOf(PropTypes.object),
-  actionValue: PropTypes.string,
-  actionIndex: PropTypes.number,
+  value: PropTypes.string,
+  path: PropTypes.string,
+  name: PropTypes.string,
   onChange: PropTypes.func,
 };

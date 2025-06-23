@@ -4,37 +4,38 @@ import { useIntl } from 'react-intl';
 
 import { Select } from '@folio/stripes/components';
 
-import { FIELD_VALUE_KEY, getLabelByValue } from '../helpers';
+import { getLabelByValue } from '../../helpers';
 import { getItemStatusOptions } from '../../../../../../constants';
 
 
-export const StatusControl = ({ actionValue, actionIndex, onChange }) => {
+export const StatusControl = ({ value, path, name, onChange }) => {
   const { formatMessage } = useIntl();
 
   const statuses = getItemStatusOptions(formatMessage);
-  const title = getLabelByValue(statuses, actionValue);
+  const title = getLabelByValue(statuses, value);
 
   return (
     <div title={title}>
       <Select
         dataOptions={statuses}
-        value={actionValue}
+        value={value}
         onChange={e => onChange({
-          actionIndex,
-          value: e.target.value,
-          fieldName: FIELD_VALUE_KEY
+          path,
+          val: e.target.value,
+          name
         })}
-        data-testid={`select-statuses-${actionIndex}`}
+        data-testid={`select-statuses-${path}`}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statusSelect' })}
         marginBottom0
-        dirty={!!actionValue}
+        dirty={!!value}
       />
     </div>
   );
 };
 
 StatusControl.propTypes = {
-  actionValue: PropTypes.string,
-  actionIndex: PropTypes.number,
+  value: PropTypes.string,
+  path: PropTypes.string,
+  name: PropTypes.string,
   onChange: PropTypes.func,
 };
