@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import uniqueId from 'lodash/uniqueId';
 
 import {
-  getMarcFieldTemplate,
+  marcFieldTemplate,
 } from '../components/BulkEditPane/BulkEditListResult/BulkEditMarc/helpers';
 import { useSearchParams } from './useSearchParams';
 import { APPROACHES } from '../constants';
@@ -39,7 +39,7 @@ describe('getDefaultMarcTemplate', () => {
       subfields: [],
     };
 
-    expect(getMarcFieldTemplate(id)).toEqual(expectedTemplate);
+    expect(marcFieldTemplate(id)).toEqual(expectedTemplate);
   });
 });
 

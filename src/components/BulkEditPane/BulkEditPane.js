@@ -35,7 +35,7 @@ import { BulkEditQuery } from './BulkEditQuery/BulkEditQuery';
 import { BulkEditIdentifiers } from './BulkEditIdentifiers/BulkEditIdentifiers';
 import { useResetFilters } from '../../hooks/useResetFilters';
 
-import { BulkEditInAppLayer } from './BulkEditInAppLayer/BulkEditInAppLayer';
+import { BulkEditFolioLayer } from './BulkEditFolioLayer/BulkEditFolioLayer';
 import { BulkEditMarcLayer } from './BulkEditMarcLayer/BulkEditMarcLayer';
 import { savePreviewFile } from '../../utils/files';
 import { getBulkOperationStatsByStep } from './BulkEditListResult/PreviewLayout/helpers';
@@ -151,7 +151,7 @@ export const BulkEditPane = () => {
   const renderLayers = (paneProps) => (
     <>
       {isInAppLayerOpen && (
-        <BulkEditInAppLayer
+        <BulkEditFolioLayer
           bulkOperationId={bulkOperationId}
           paneProps={paneProps}
           onInAppLayerClose={closeInAppLayer}

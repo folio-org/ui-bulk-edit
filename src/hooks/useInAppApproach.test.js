@@ -1,9 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 
 import { useSearchParams } from './useSearchParams';
-import {
-  isContentUpdatesFormValid
-} from '../components/BulkEditPane/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers';
 import { useInAppApproach } from './useInAppApproach';
 import { APPROACHES } from '../constants';
 
@@ -12,18 +9,12 @@ jest.mock('./useSearchParams', () => ({
   useSearchParams: jest.fn(),
 }));
 
-jest.mock('../components/BulkEditPane/BulkEditListResult/BulkEditInApp/ContentUpdatesForm/helpers', () => ({
-  isContentUpdatesFormValid: jest.fn(),
-}));
-
-
 describe('useInAppApproach', () => {
   let setParamMock;
 
   beforeEach(() => {
     setParamMock = jest.fn();
     useSearchParams.mockReturnValue({ setParam: setParamMock });
-    isContentUpdatesFormValid.mockReturnValue(true);
   });
 
   afterEach(() => {

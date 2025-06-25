@@ -4,35 +4,30 @@ import { useIntl } from 'react-intl';
 
 import { Select } from '@folio/stripes/components';
 
-import { FIELD_VALUE_KEY, getLabelByValue } from '../helpers';
+import { getLabelByValue } from '../../helpers';
 import { getDuplicateNoteOptions } from '../../../../../../constants';
 import { usePreselectedValue } from '../../../../../../hooks/usePreselectedValue';
 
 
-export const DuplicateNoteControl = ({ option, action, actionIndex, onChange }) => {
+export const DuplicateNoteControl = ({ option, value, controlType, name, path, onChange }) => {
   const { formatMessage } = useIntl();
 
   const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
-  const controlType = action.controlType(action.name);
-  const title = getLabelByValue(duplicateNoteOptions, action.value);
+  const title = getLabelByValue(duplicateNoteOptions, value);
 
-  usePreselectedValue(controlType, duplicateNoteOptions, onChange, actionIndex);
+  usePreselectedValue(controlType, duplicateNoteOptions, onChange, path);
 
   return (
     <div title={title}>
       <Select
         id="noteTypeDuplicate"
-        value={action.value}
+        value={value}
         disabled
-        onChange={e => onChange({
-          actionIndex,
-          value: e.target.value,
-          fieldName: FIELD_VALUE_KEY
-        })}
+        onChange={e => onChange({ path, val: e.target.value, name })}
         dataOptions={duplicateNoteOptions}
-        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.duplicateSelect' })}
         marginBottom0
-        dirty={!!action.value}
+        dirty={!!value}
       />
     </div>
   );
@@ -40,7 +35,11 @@ export const DuplicateNoteControl = ({ option, action, actionIndex, onChange }) 
 
 DuplicateNoteControl.propTypes = {
   option: PropTypes.string,
-  action: PropTypes.object,
-  actionIndex: PropTypes.number,
+  value: PropTypes.string,
+  path: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+  name: PropTypes.string,
+  controlType: PropTypes.string,
   onChange: PropTypes.func,
 };

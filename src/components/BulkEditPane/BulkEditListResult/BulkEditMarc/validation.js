@@ -73,7 +73,7 @@ const latinRegex = /^[a-zA-Z0-9\s\\]+$/;
  * Top-level schema for validating an array of MARC field objects.
  * Validates tags, indicators, and nested subfields according to MARC rules.
  */
-const schema = array(
+export const validationSchema = array(
   object({
     tag: string()
       .required()
@@ -115,23 +115,3 @@ const schema = array(
     }
   )
 );
-
-/**
- * Validates an array of MARC field data against the schema.
- * @param {Array<Object>} fields - The collection of field objects to validate.
- * @returns {Object} A map of error paths to their corresponding error message IDs.
- */
-export const getMarcFormErrors = (fields) => {
-  let errors = {};
-
-  try {
-    schema.validateSync(fields, { strict: true, abortEarly: false });
-  } catch (e) {
-    errors = e.inner?.reduce((acc, error) => {
-      acc[error.path] = error.message;
-      return acc;
-    }, {});
-  }
-
-  return errors;
-};

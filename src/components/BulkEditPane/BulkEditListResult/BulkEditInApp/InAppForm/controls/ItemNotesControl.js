@@ -5,55 +5,57 @@ import { useIntl } from 'react-intl';
 import { Loading, Select } from '@folio/stripes/components';
 import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
-import { FIELD_VALUE_KEY, getLabelByValue, sortWithoutPlaceholder } from '../helpers';
+import { getLabelByValue, sortWithoutPlaceholder } from '../../helpers';
 import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
 import { useBulkOperationTenants, useItemNotes, useItemNotesEcs } from '../../../../../../hooks/api';
 import { getItemNotes } from '../../../../../../constants';
 
 
-export const ItemNotesControl = ({ bulkOperationId, option, actionValue, actionIndex, onChange }) => {
+export const ItemNotesControl = ({ parameters, option, value, path, name, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
-  const { data: tenants } = useBulkOperationTenants(bulkOperationId);
-  const { itemNotes, usItemNotesLoading } = useItemNotes();
+  const { tenants } = useBulkOperationTenants();
+  const { itemNotes, isItemNotesLoading } = useItemNotes();
   const { notesEcs: itemsNotes, isFetching: isItemsNotesEcsLoading } = useItemNotesEcs(tenants, 'action', { enabled: isCentralTenant });
 
   const notes = isCentralTenant ? removeDuplicatesByValue(itemsNotes, tenants) : itemNotes;
   const filteredAndMappedNotes = getItemNotes(formatMessage, notes)
-    .filter(obj => obj.value !== option)
-    .map(({ label, value, tenant }) => ({ label, value, tenant }));
+    .filter(obj => (parameters ? !parameters.map(param => param.value).includes(obj.value) : obj.value !== option))
+    .map(({ label, value: val, tenant }) => ({ label, value: val, tenant }));
   const sortedNotes = sortWithoutPlaceholder(filteredAndMappedNotes);
-  const title = getLabelByValue(sortedNotes, actionValue);
+  const title = getLabelByValue(sortedNotes, path);
 
-  if (isItemsNotesEcsLoading) return <Loading size="large" />;
+  if (isItemsNotesEcsLoading || isItemNotesLoading) return <Loading size="large" />;
 
   return (
     <div title={title}>
       <Select
         id="noteType"
-        value={actionValue}
-        disabled={usItemNotesLoading || isItemsNotesEcsLoading}
+        value={value}
         onChange={e => onChange({
-          actionIndex,
-          value: e.target.value,
-          fieldName: FIELD_VALUE_KEY,
+          path,
+          name,
+          val: e.target.value,
           tenants: getTenantsById(sortedNotes, e.target.value),
         })}
         dataOptions={sortedNotes}
-        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.itemNotes' })}
         marginBottom0
-        dirty={!!actionValue}
+        dirty={!!value}
       />
     </div>
   );
 };
 
 ItemNotesControl.propTypes = {
-  bulkOperationId: PropTypes.string,
+  parameters: PropTypes.arrayOf(PropTypes.shape({})),
   option: PropTypes.string,
-  actionValue: PropTypes.string,
-  actionIndex: PropTypes.number,
+  value: PropTypes.string,
+  path: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+  name: PropTypes.string,
   onChange: PropTypes.func,
 };
