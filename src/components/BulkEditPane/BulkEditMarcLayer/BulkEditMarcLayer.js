@@ -13,13 +13,13 @@ import {
   getContentUpdatesBody,
   folioFieldTemplate,
   getMappedContentUpdates,
-} from '../BulkEditListResult/BulkEditFolio/helpers';
+} from '../BulkEditListResult/BulkEditInApp/helpers';
 import { sortAlphabetically } from '../../../utils/sortAlphabetically';
 import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
 import { useCommitChanges } from '../../../hooks/useCommitChanges';
 import { getAdministrativeDataOptions } from '../../../constants';
 import { validationSchema as marcSchema } from '../BulkEditListResult/BulkEditMarc/validation';
-import { validationSchema as administrativeSchema } from '../BulkEditListResult/BulkEditFolio/validation';
+import { validationSchema as administrativeSchema } from '../BulkEditListResult/BulkEditInApp/validation';
 import { ADMINISTRATIVE_DEFAULT_BODY, MARC_DEFAULT_BODY } from '../../../constants/forms';
 import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
 

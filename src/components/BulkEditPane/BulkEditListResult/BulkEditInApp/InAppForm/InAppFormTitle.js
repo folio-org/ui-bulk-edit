@@ -32,7 +32,7 @@ const getMaxField = (fields) => {
   }, fields[0]);
 };
 
-export const FolioFormTitle = ({ fields }) => {
+export const InAppFormTitle = ({ fields }) => {
   if (!fields.length) return null;
 
   const maxField = getMaxField(fields);
@@ -82,6 +82,6 @@ export const FolioFormTitle = ({ fields }) => {
   );
 };
 
-FolioFormTitle.propTypes = {
+InAppFormTitle.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };

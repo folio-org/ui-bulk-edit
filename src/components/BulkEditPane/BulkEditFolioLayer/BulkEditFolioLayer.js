@@ -2,20 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
-import { BulkEditFolio } from '../BulkEditListResult/BulkEditFolio/BulkEditFolio';
+import { BulkEditInApp } from '../BulkEditListResult/BulkEditInApp/BulkEditInApp';
 import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
 import {
   getContentUpdatesBody,
   folioFieldTemplate,
   getMappedContentUpdates
-} from '../BulkEditListResult/BulkEditFolio/helpers';
+} from '../BulkEditListResult/BulkEditInApp/helpers';
 import { useContentUpdate } from '../../../hooks/api';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
 import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
 import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
 import { useCommitChanges } from '../../../hooks/useCommitChanges';
 import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
-import { validationSchema } from '../BulkEditListResult/BulkEditFolio/validation';
+import { validationSchema } from '../BulkEditListResult/BulkEditInApp/validation';
 
 
 export const BulkEditFolioLayer = ({
@@ -74,7 +74,7 @@ export const BulkEditFolioLayer = ({
         onConfirm={handleConfirm}
         {...paneProps}
       >
-        <BulkEditFolio
+        <BulkEditInApp
           fields={fields}
           setFields={setFields}
           options={options}

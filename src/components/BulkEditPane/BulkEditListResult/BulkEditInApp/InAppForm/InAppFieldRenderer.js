@@ -22,7 +22,7 @@ import { sortAlphabeticallyComponentLabels } from '../../../../../utils/sortAlph
 
 import css from '../../../BulkEditPane.css';
 
-export const FolioFieldRenderer = memo(({
+export const InAppFieldRenderer = memo(({
   field,
   item,
   option,
@@ -76,7 +76,7 @@ export const FolioFieldRenderer = memo(({
         <Fragment key={subItem.id}>
           {itemSchema.map((subField) => {
             return (
-              <FolioFieldRenderer
+              <InAppFieldRenderer
                 key={subField.name}
                 option={option}
                 field={subField}
@@ -234,7 +234,7 @@ export const FolioFieldRenderer = memo(({
   );
 });
 
-FolioFieldRenderer.propTypes = {
+InAppFieldRenderer.propTypes = {
   option: PropTypes.string.isRequired,
   allOptions: PropTypes.arrayOf(PropTypes.shape({})),
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

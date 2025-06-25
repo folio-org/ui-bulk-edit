@@ -16,12 +16,12 @@ import { folioFieldTemplate, getFieldsWithRules, getOptionsWithRules, getPresele
 import { customFilter, groupByCategory, setIn, updateIn } from '../../../../../utils/helpers';
 import { useSearchParams } from '../../../../../hooks';
 import { schema } from '../schema';
-import { FolioFieldRenderer } from './FolioFieldRenderer';
+import { InAppFieldRenderer } from './InAppFieldRenderer';
 import { getDefaultActionState, getNextActionState } from '../controlsConfig';
 
 import css from '../../../BulkEditPane.css';
 
-export const FolioFormBody = ({ options, fields, setFields }) => {
+export const InAppFormBody = ({ options, fields, setFields }) => {
   const { formatMessage } = useIntl();
   const { currentRecordType } = useSearchParams();
 
@@ -125,7 +125,7 @@ export const FolioFormBody = ({ options, fields, setFields }) => {
                 />
               </Col>
               {item.actionsDetails && schema.map(field => (
-                <FolioFieldRenderer
+                <InAppFieldRenderer
                   key={field.name}
                   option={item.option}
                   field={field}
@@ -164,7 +164,7 @@ export const FolioFormBody = ({ options, fields, setFields }) => {
   );
 };
 
-FolioFormBody.propTypes = {
+InAppFormBody.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({})),
   fields: PropTypes.arrayOf(PropTypes.shape({})),
   setFields: PropTypes.func,

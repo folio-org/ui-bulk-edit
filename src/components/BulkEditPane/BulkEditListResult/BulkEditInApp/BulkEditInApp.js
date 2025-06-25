@@ -9,12 +9,12 @@ import {
   Layout,
 } from '@folio/stripes/components';
 
-import { FolioFormTitle } from './FolioForm/FolioFormTitle';
-import { FolioFormBody } from './FolioForm/FolioFormBody';
+import { InAppFormTitle } from './InAppForm/InAppFormTitle';
+import { InAppFormBody } from './InAppForm/InAppFormBody';
 import { RootContext } from '../../../../context/RootContext';
 
 
-export const BulkEditFolio = ({ areAllOptionsLoaded, options, fields, setFields }) => {
+export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields }) => {
   const { title } = useContext(RootContext);
 
   return (
@@ -27,10 +27,10 @@ export const BulkEditFolio = ({ areAllOptionsLoaded, options, fields, setFields 
       >
         {areAllOptionsLoaded ? (
           <>
-            <FolioFormTitle
+            <InAppFormTitle
               fields={fields}
             />
-            <FolioFormBody
+            <InAppFormBody
               fields={fields}
               setFields={setFields}
               options={options}
@@ -46,7 +46,7 @@ export const BulkEditFolio = ({ areAllOptionsLoaded, options, fields, setFields 
   );
 };
 
-BulkEditFolio.propTypes = {
+BulkEditInApp.propTypes = {
   areAllOptionsLoaded: PropTypes.bool.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

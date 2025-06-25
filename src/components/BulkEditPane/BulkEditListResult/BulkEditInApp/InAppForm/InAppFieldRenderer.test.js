@@ -6,7 +6,7 @@ import { QueryClientProvider } from 'react-query';
 import '@testing-library/jest-dom/extend-expect';
 
 import { createMemoryHistory } from 'history';
-import { FolioFieldRenderer } from './FolioFieldRenderer';
+import { InAppFieldRenderer } from './InAppFieldRenderer';
 import { CONTROL_TYPES, CAPABILITIES } from '../../../../../constants';
 import { useSearchParams } from '../../../../../hooks';
 import { queryClient } from '../../../../../../test/jest/utils/queryClient';
@@ -83,7 +83,7 @@ describe('FolioFieldRenderer (integration)', () => {
     <Router history={history}>
       <QueryClientProvider client={queryClient}>
         <IntlProvider locale="en">
-          <FolioFieldRenderer {...defaultProps} {...overrides} />
+          <InAppFieldRenderer {...defaultProps} {...overrides} />
         </IntlProvider>
       </QueryClientProvider>
     </Router>
