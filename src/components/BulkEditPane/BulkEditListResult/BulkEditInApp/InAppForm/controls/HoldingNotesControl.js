@@ -6,26 +6,26 @@ import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 import { Loading, Select } from '@folio/stripes/components';
 
 import { useBulkOperationTenants, useHoldingsNotes, useHoldingsNotesEcs } from '../../../../../../hooks/api';
-import { FIELD_VALUE_KEY, getLabelByValue, sortWithoutPlaceholder } from '../helpers';
+import { getLabelByValue, sortWithoutPlaceholder } from '../../helpers';
 import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
 import { getHoldingsNotes } from '../../../../../../constants';
 
 
-export const HoldingNotesControl = ({ bulkOperationId, option, actionValue, actionIndex, onChange }) => {
+export const HoldingNotesControl = ({ parameters, option, value, path, name, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
 
-  const { data: tenants } = useBulkOperationTenants(bulkOperationId);
+  const { tenants } = useBulkOperationTenants();
   const { notesEcs: holdingsNotesEcs, isFetching: isHoldingsNotesEcsLoading } = useHoldingsNotesEcs(tenants, 'action', { enabled: isCentralTenant });
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes();
 
   const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEcs, tenants) : holdingsNotes)
-    .filter(obj => obj.value !== option)
-    .map(({ label, value, disabled, tenant }) => ({ label, value, disabled, tenant }));
+    .filter(obj => (parameters ? !parameters.map(param => param.value).includes(obj.value) : obj.value !== option))
+    .map(({ label, value: val, disabled, tenant }) => ({ label, value: val, disabled, tenant }));
   const sortedHoldingsNotes = sortWithoutPlaceholder(filteredAndMappedHoldingsNotes);
-  const title = getLabelByValue(sortedHoldingsNotes, actionValue);
+  const title = getLabelByValue(sortedHoldingsNotes, value);
 
   if (isHoldingsNotesEcsLoading) return <Loading size="large" />;
 
@@ -33,27 +33,30 @@ export const HoldingNotesControl = ({ bulkOperationId, option, actionValue, acti
     <div title={title}>
       <Select
         id="noteHoldingsType"
-        value={actionValue}
+        value={value}
         loading={isHoldingsNotesLoading}
         onChange={e => onChange({
-          actionIndex,
-          value: e.target.value,
-          fieldName: FIELD_VALUE_KEY,
+          path,
+          name,
+          val: e.target.value,
           tenants: getTenantsById(sortedHoldingsNotes, e.target.value)
         })}
         dataOptions={sortedHoldingsNotes}
-        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
+        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.holdingsNotes' })}
         marginBottom0
-        dirty={!!actionValue}
+        dirty={!!value}
       />
     </div>
   );
 };
 
 HoldingNotesControl.propTypes = {
-  bulkOperationId: PropTypes.string,
   option: PropTypes.string,
-  actionValue: PropTypes.string,
-  actionIndex: PropTypes.number,
+  parameters: PropTypes.arrayOf(PropTypes.shape({})),
+  value: PropTypes.string,
+  path: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+  name: PropTypes.string,
   onChange: PropTypes.func,
 };

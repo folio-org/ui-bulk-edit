@@ -1,3 +1,4 @@
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 import { act, render, screen, waitFor } from '@testing-library/react';
@@ -8,8 +9,6 @@ import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../test/jest/__mock__';
 import { FormattedMessage } from 'react-intl';
-import React from 'react';
-import { flushPromises } from '../../../../test/jest/utils/fileUpload';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
 
 import { CAPABILITIES } from '../../../constants';
@@ -19,14 +18,15 @@ import {
   useItemNotes,
   useHoldingsNotes,
   useInstanceNotes,
-  useElectronicAccessRelationships,
+  useElectronicAccess,
   useHoldingsNotesEcs,
   useItemNotesEcs,
   useLocationEcs,
   useLoanTypesEcs,
-  useElectronicAccessEcs
+  useElectronicAccessEcs,
+  useBulkOperationDetails
 } from '../../../hooks/api';
-import { BulkEditInAppLayer } from './BulkEditInAppLayer';
+import { BulkEditFolioLayer } from './BulkEditFolioLayer';
 
 
 jest.mock('../../../hooks', () => ({
@@ -39,12 +39,13 @@ jest.mock('../../../hooks/api', () => ({
   useItemNotes: jest.fn(),
   useHoldingsNotes: jest.fn(),
   useInstanceNotes: jest.fn(),
-  useElectronicAccessRelationships: jest.fn(),
+  useElectronicAccess: jest.fn(),
   useHoldingsNotesEcs: jest.fn(),
   useItemNotesEcs: jest.fn(),
   useLocationEcs: jest.fn(),
   useLoanTypesEcs: jest.fn(),
   useElectronicAccessEcs: jest.fn(),
+  useBulkOperationDetails: jest.fn(),
 }));
 
 const fileName = 'Mock.csv';
@@ -64,7 +65,7 @@ const renderBulkEditInAppLayer = ({ capability }) => {
           title: <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: 'fileName' }} />,
         }}
         >
-          <BulkEditInAppLayer
+          <BulkEditFolioLayer
             bulkOperationId="bulkOperationId"
             isInAppLayerOpen
             paneProps={{}}
@@ -93,7 +94,7 @@ describe('BulkEditInApp', () => {
       isInstanceNotesLoading: false,
     });
 
-    useElectronicAccessRelationships.mockClear().mockReturnValue({
+    useElectronicAccess.mockClear().mockReturnValue({
       electronicAccessRelationships: [],
       isElectronicAccessLoading: false,
     });
@@ -116,6 +117,12 @@ describe('BulkEditInApp', () => {
     useLocationEcs.mockClear().mockReturnValue({
       locations: [],
       isFetching: false,
+    });
+    useBulkOperationDetails.mockClear().mockReturnValue({
+      bulkDetails: {},
+      isLoading: false,
+      clearInterval: () => {},
+      clearIntervalAndRedirect: () => {},
     });
   });
 
@@ -202,30 +209,26 @@ describe('BulkEditInApp', () => {
     userEvent.click(optionStatus);
 
     await waitFor(() => {
-      expect(getByTestId('select-actions-1')).toBeInTheDocument();
+      expect(getByTestId('select-actions-0')).toBeInTheDocument();
     });
-
-    const selectAction = getByTestId('select-actions-1');
-    const actionReplace = getByRole('option', { name: /layer.action.replace/ });
-
-    act(() => userEvent.selectOptions(selectAction, actionReplace));
-
-    await flushPromises();
 
     options.forEach((el) => expect(getByRole('option', { name: el })).toBeVisible());
 
-    const selectStatus = getByTestId('select-statuses-1');
+    await waitFor(() => {
+      expect(getByTestId('select-statuses-0')).toBeVisible();
+    });
+
+    const selectStatus = getByTestId('select-statuses-0');
     const itemStatus = getByRole('option', { name: /layer.options.missing/ });
 
-    act(() => {
-      userEvent.selectOptions(
-        selectStatus,
-        itemStatus,
-      );
-    });
+    userEvent.selectOptions(
+      selectStatus,
+      itemStatus,
+    );
 
     expect(itemStatus.selected).toBeTruthy();
   });
+
 
   it('should display item permanent location options', async () => {
     const { getByRole, getByTestId } = renderBulkEditInAppLayer({ capability: CAPABILITIES.ITEM });
@@ -247,7 +250,7 @@ describe('BulkEditInApp', () => {
     });
 
     const optionReplace = getByRole('option', { name: /layer.action.replace/ });
-    const selectAction = getByTestId('select-actions-1');
+    const selectAction = getByTestId('select-actions-0');
 
     userEvent.click(selectionBtn);
 
@@ -268,10 +271,10 @@ describe('BulkEditInApp', () => {
     userEvent.click(optionStatus);
 
     await waitFor(() => {
-      expect(getByTestId('dataPicker-experation-date-1')).toBeInTheDocument();
+      expect(getByTestId('dataPicker-experation-date-0')).toBeInTheDocument();
     });
 
-    const dataPicker = getByTestId('dataPicker-experation-date-1');
+    const dataPicker = getByTestId('dataPicker-experation-date-0');
 
     userEvent.type(dataPicker, '2000-01-01 00:00:00.000Z');
 
@@ -288,16 +291,16 @@ describe('BulkEditInApp', () => {
     userEvent.click(optionStatus);
 
     await waitFor(() => {
-      expect(getByTestId('select-patronGroup-1')).toBeInTheDocument();
+      expect(getByTestId('select-patronGroup-0')).toBeInTheDocument();
     });
 
-    const selectPatronGroup = getByTestId('select-patronGroup-1');
+    const selectPatronGroup = getByTestId('select-patronGroup-0');
     const optionPatronGroup = getByRole('option', { name: /layer.selectPatronGroup/ });
 
-    act(() => userEvent.selectOptions(
+    userEvent.selectOptions(
       selectPatronGroup,
       optionPatronGroup,
-    ));
+    );
 
     expect(optionPatronGroup.selected).toBeTruthy();
   });
@@ -316,7 +319,7 @@ describe('BulkEditInApp', () => {
     });
 
     const actionReplace = getByRole('option', { name: /layer.action.replace/ });
-    const selectAction = getByTestId('select-actions-1');
+    const selectAction = getByTestId('select-actions-0');
 
     act(() => userEvent.selectOptions(selectAction, actionReplace));
 
@@ -339,7 +342,7 @@ describe('BulkEditInApp', () => {
     });
 
     const actionSetToTrue = getByRole('option', { name: /layer.options.items.true/ });
-    const selectAction = getByTestId('select-actions-1');
+    const selectAction = getByTestId('select-actions-0');
 
     act(() => userEvent.selectOptions(selectAction, actionSetToTrue));
 
@@ -367,7 +370,7 @@ describe('BulkEditInApp', () => {
     });
 
     const actionSetToFalse = getByRole('option', { name: /layer.options.items.false/ });
-    const selectAction = getByTestId('select-actions-1');
+    const selectAction = getByTestId('select-actions-0');
 
     act(() => userEvent.selectOptions(selectAction, actionSetToFalse));
 
@@ -400,7 +403,7 @@ describe('BulkEditInApp', () => {
     });
 
     const optionReplace = getByRole('option', { name: /layer.action.replace/ });
-    const selectAction = getByTestId('select-actions-1');
+    const selectAction = getByTestId('select-actions-0');
 
     options.forEach((el) => expect(getByRole('option', { name: el })).toBeVisible());
 
