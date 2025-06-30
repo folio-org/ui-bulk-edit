@@ -7,7 +7,7 @@ import { useErrorMessages } from '../useErrorMessages';
 
 export const ELECTRONIC_ACCESS_RELATIONSHIPS_KEY = 'ELECTRONIC_ACCESS_RELATIONSHIPS_KEY';
 
-export const useElectronicAccessRelationships = (options = {}) => {
+export const useElectronicAccess = (options = {}) => {
   const stripes = useStripes();
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key: ELECTRONIC_ACCESS_RELATIONSHIPS_KEY });

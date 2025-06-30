@@ -16,8 +16,8 @@ export const DATA_KEYS = {
  * @param {string|number} id - Unique identifier for this field instance.
  * @returns {Object} New field object with default structure.
  */
-export const getMarcFieldTemplate = (id) => ({
-  id,
+export const marcFieldTemplate = (id) => ({
+  ...(id ? { id } : {}),
   tag: '',
   ind1: '\\',
   ind2: '\\',

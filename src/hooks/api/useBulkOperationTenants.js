@@ -2,15 +2,17 @@ import { useQuery } from 'react-query';
 
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useErrorMessages } from '../useErrorMessages';
+import { usePathParams } from '../usePathParams';
 
 export const BULK_TENANTS_KEY = 'BULK_TENANTS_KEY';
 
-export const useBulkOperationTenants = (id, options = {}) => {
+export const useBulkOperationTenants = () => {
   const ky = useOkapiKy();
   const [namespace] = useNamespace({ key: BULK_TENANTS_KEY });
+  const { id } = usePathParams('/bulk-edit/:id');
   const { showExternalModuleError } = useErrorMessages();
 
-  const { data, isLoading } = useQuery({
+  const { data: tenants, isLoading: isTenantsLoading } = useQuery({
     queryKey: [namespace],
     queryFn: () => ky.get(`bulk-operations/used-tenants/${id}`).json(),
     keepPreviousData: true,
@@ -18,11 +20,10 @@ export const useBulkOperationTenants = (id, options = {}) => {
     staleTime: Infinity,
     enabled: !!id,
     onError: showExternalModuleError,
-    ...options,
   });
 
   return {
-    data,
-    isLoading,
+    tenants,
+    isTenantsLoading,
   };
 };

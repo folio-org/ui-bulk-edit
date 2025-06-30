@@ -9,8 +9,8 @@ import {
   Layout,
 } from '@folio/stripes/components';
 
-import { BulkEditInAppTitle } from './BulkEditInAppTitle/BulkEditInAppTitle';
-import { ContentUpdatesForm } from './ContentUpdatesForm/ContentUpdatesForm';
+import { InAppFormTitle } from './InAppForm/InAppFormTitle';
+import { InAppFormBody } from './InAppForm/InAppFormBody';
 import { RootContext } from '../../../../context/RootContext';
 
 
@@ -27,10 +27,10 @@ export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields 
       >
         {areAllOptionsLoaded ? (
           <>
-            <BulkEditInAppTitle
+            <InAppFormTitle
               fields={fields}
             />
-            <ContentUpdatesForm
+            <InAppFormBody
               fields={fields}
               setFields={setFields}
               options={options}
@@ -48,7 +48,7 @@ export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields 
 
 BulkEditInApp.propTypes = {
   areAllOptionsLoaded: PropTypes.bool.isRequired,
-  options: PropTypes.arrayOf(PropTypes.object),
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   setFields: PropTypes.func.isRequired,
 };

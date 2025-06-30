@@ -256,7 +256,6 @@
     "@testing-library/react": "^11.0.2",
     "@testing-library/react-hooks": "^5.1.0",
     "@testing-library/user-event": "^12.8.3",
-    "babel-jest": "^26.4.2",
     "core-js": "^3.6.1",
     "eslint": "^7.32.0",
     "eslint-import-resolver-webpack": "^0.13.2",
@@ -264,7 +263,6 @@
     "eslint-plugin-jest": "^24.0.0",
     "faker": "^4.1.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.4.2",
     "jest-css-modules": "^2.1.0",
     "jest-junit": "^11.1.0",
     "react": "^18.2.0",
@@ -274,7 +272,8 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.3",
-    "testing-library-selector": "^0.2.1"
+    "testing-library-selector": "^0.2.1",
+    "@folio/jest-config-stripes": "^3.0.0"
   },
   "dependencies": {
     "@folio/stripes-acq-components": "^7.0.0",
