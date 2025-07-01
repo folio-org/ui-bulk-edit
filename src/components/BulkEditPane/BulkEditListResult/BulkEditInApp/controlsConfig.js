@@ -23,14 +23,10 @@ import {
 } from '../../../../constants';
 import { getActionParameters } from '../../../../constants/actionParameters';
 
-const twoEmpty = {
-  actions: [
-    { name: '', value: '' },
-    { name: '', value: '' },
-  ]
-};
-
-const secondOnly = {
+/**
+ * Defines default action entry template, used when the first action is not from "FINAL" actions.
+ */
+const initialState = {
   actions: [
     { name: '', value: '' },
   ]
@@ -82,7 +78,7 @@ const firstActionConfig = {
   [OPTIONS.TEMPORARY_HOLDINGS_LOCATION]: {
     actions: replaceClearActions(),
     controlType: CONTROL_TYPES.LOCATION,
-    initialState: secondOnly
+    initialState
   },
   [OPTIONS.PERMANENT_HOLDINGS_LOCATION]: {
     actions: permanentHoldingsLocation(),
@@ -97,23 +93,27 @@ const firstActionConfig = {
   [OPTIONS.TEMPORARY_LOCATION]: {
     actions: replaceClearActions(),
     controlType: CONTROL_TYPES.LOCATION,
-    initialState: twoEmpty,
+    initialState,
   },
   [OPTIONS.PERMANENT_LOCATION]: {
     actions: replaceClearActions(),
     controlType: CONTROL_TYPES.LOCATION,
-    initialState: twoEmpty,
+    initialState,
   },
 
   [OPTIONS.TEMPORARY_LOAN_TYPE]: {
     actions: replaceClearActions(),
     controlType: CONTROL_TYPES.LOAN_TYPE,
-    initialState: secondOnly,
+    initialState,
   },
   [OPTIONS.PERMANENT_LOAN_TYPE]: {
     actions: permanentLoanTypeActions(),
     controlType: CONTROL_TYPES.LOAN_TYPE,
-    initialState: secondOnly,
+    initialState: {
+      actions: [
+        { name: ACTIONS.REPLACE_WITH, value: '' },
+      ]
+    },
   },
 
   [OPTIONS.SUPPRESS_FROM_DISCOVERY]: {
@@ -146,7 +146,7 @@ const firstActionConfig = {
   [OPTIONS.STATISTICAL_CODE]: {
     actions: statisticalCodeActions(),
     controlType: CONTROL_TYPES.STATISTICAL_CODES_SELECT,
-    initialState: secondOnly,
+    initialState,
   },
   [OPTIONS.STATUS]: {
     actions: statusActions(),
@@ -167,7 +167,7 @@ const firstActionConfig = {
     controlType: action => (action === ACTIONS.CHANGE_TYPE
       ? CONTROL_TYPES.NOTE_SELECT
       : CONTROL_TYPES.TEXTAREA),
-    initialState: secondOnly,
+    initialState,
   },
 
   [OPTIONS.CHECK_IN_NOTE]: {
@@ -254,28 +254,28 @@ const firstActionConfig = {
   [OPTIONS.ELECTRONIC_ACCESS_URL_RELATIONSHIP]: {
     actions: electronicAccessWithFindFullField(),
     controlType: CONTROL_TYPES.ELECTRONIC_ACCESS_RELATIONSHIP_SELECT,
-    initialState: secondOnly,
+    initialState,
   },
 
   [OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT]: {
     actions: electronicAccess(),
     controlType: CONTROL_TYPES.TEXTAREA,
-    initialState: secondOnly,
+    initialState,
   },
   [OPTIONS.ELECTRONIC_ACCESS_MATERIALS_SPECIFIED]: {
     actions: electronicAccess(),
     controlType: CONTROL_TYPES.TEXTAREA,
-    initialState: secondOnly,
+    initialState,
   },
   [OPTIONS.ELECTRONIC_ACCESS_URI]: {
     actions: electronicAccess(),
     controlType: CONTROL_TYPES.TEXTAREA,
-    initialState: secondOnly,
+    initialState,
   },
   [OPTIONS.ELECTRONIC_ACCESS_URL_PUBLIC_NOTE]: {
     actions: electronicAccess(),
     controlType: CONTROL_TYPES.TEXTAREA,
-    initialState: secondOnly,
+    initialState,
   },
 };
 
