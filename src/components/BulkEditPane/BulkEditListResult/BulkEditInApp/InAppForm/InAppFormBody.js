@@ -12,8 +12,14 @@ import {
   StripesOverlayWrapper
 } from '@folio/stripes/components';
 
-import { folioFieldTemplate, getFieldsWithRules, getOptionsWithRules, getPreselectedValue } from '../helpers';
-import { customFilter, groupByCategory, setIn, updateIn } from '../../../../../utils/helpers';
+import {
+  folioFieldTemplate,
+  getFieldsWithRules,
+  getOptionsWithRules,
+  getOptionType,
+  getPreselectedValue
+} from '../helpers';
+import { customFilter, groupByCategory, updateIn } from '../../../../../utils/helpers';
 import { useSearchParams } from '../../../../../hooks';
 import { schema } from '../schema';
 import { InAppFieldRenderer } from './InAppFieldRenderer';
@@ -37,15 +43,15 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
 
   const handleOptionChange = useCallback(({ path, val }) => {
     const updatedField = updateIn(fields, path, (field) => {
+      const optionType = getOptionType(val, options);
       const sourceOption = options.find(o => o.value === val);
       const parameters = sourceOption?.parameters;
-      const option = sourceOption.type || val;
 
-      const actionsDetails = getDefaultActionState(option, currentRecordType);
+      const actionsDetails = getDefaultActionState(optionType, currentRecordType);
 
       return {
         ...field,
-        option,
+        option: val,
         parameters,
         actionsDetails
       };
@@ -60,12 +66,14 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
     const withUpdatedActionName = updateIn(fields, path, (action) => ({
       ...action,
       [name]: val,
+      tenants: [],
       value: getPreselectedValue(option, val)
     }));
 
     // If this is the first action in the row, we need to update the next actions based on the selected values
     if (ctx.index === 0) {
-      const nextActions = getNextActionState(option, val);
+      const optionType = getOptionType(option, options);
+      const nextActions = getNextActionState(optionType, val);
 
       const withUpdatedNextActions = updateIn(withUpdatedActionName, [rowIndex, actionsDetails, actions], (actionsArr) => [
         actionsArr[0], // keep the first action as is
@@ -84,12 +92,33 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
       // If this is not the first action, we just update the current action
       setFields(withUpdatedActionName);
     }
-  }, [fields, setFields]);
+  }, [fields, setFields, options]);
 
-  const handleValueChange = useCallback(({ path, val, name }) => {
-    const newFields = setIn(fields, [...path, name], val);
+  const handleValueChange = useCallback(({ path, val, tenants, resetNext }) => {
+    const [rowIndex, actionsDetails, actions, actionIndex] = path;
 
-    setFields(newFields);
+    const withUpdatedActionValueAndTenants = updateIn(fields, path, (action) => ({
+      ...action,
+      tenants: tenants || [],
+      value: val
+    }));
+
+    /**
+     * If this is the first action in the row and resetNext is true,
+     * we need to reset the next action's value and tenants
+     * as there can be conflicting values.
+     */
+    if (actionIndex === 0 && resetNext) {
+      const withResetNexAction = updateIn(withUpdatedActionValueAndTenants, [rowIndex, actionsDetails, actions, 1], () => ({
+        name: '',
+        tenants: [],
+        value: ''
+      }));
+
+      setFields(withResetNexAction);
+    } else {
+      setFields(withUpdatedActionValueAndTenants);
+    }
   }, [fields, setFields]);
 
   return (

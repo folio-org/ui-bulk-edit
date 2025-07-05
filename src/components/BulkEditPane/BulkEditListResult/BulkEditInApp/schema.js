@@ -1,8 +1,10 @@
 import {
   CONTROL_TYPES,
   FINAL_ACTIONS,
+  NOTES_PARAMETERS_KEYS,
 } from '../../../../constants';
 import { getControlType, getDefaultActionLists, getNextActionLists, getNextControlType } from './controlsConfig';
+import { getOptionType } from './helpers';
 
 /**
  * Bulk edit schema definition for the ‘actions’ array control.
@@ -24,11 +26,14 @@ export const schema = [
         disabled: false,
         colSize: 2,
         dirty: (value) => !!value,
-        options: ({ index, option, recordType, parentArray }) => {
+        options: ({ index, option, recordType, parentArray, allOptions }) => {
+          const optionType = getOptionType(option, allOptions);
+
           if (index === 0) {
-            return getDefaultActionLists(option, recordType);
+            return getDefaultActionLists(optionType, recordType);
           }
-          return getNextActionLists(option, parentArray[0]?.name);
+
+          return getNextActionLists(optionType, parentArray[0]?.name);
         },
       },
       {
@@ -49,20 +54,23 @@ export const schema = [
          * @param {Array} context.parentArray
          * @returns {string}
          */
-        type: ({ option, index, parentArray }) => {
+        type: ({ option, index, parentArray, allOptions }) => {
+          const optionType = getOptionType(option, allOptions);
+
           if (index === 0) {
             const action = parentArray[index]?.name;
-            return getControlType(option, action);
+            return getControlType(optionType, action);
           }
 
           const prevAction = parentArray[index - 1]?.name;
-          return getNextControlType(option, prevAction);
+          return getNextControlType(optionType, prevAction);
         },
 
         /**
          * Determines visibility of the value field:
          * - Hidden for final actions with no parameters.
          * - Always shown if action name is present and parameters exist.
+         * - Hidden for notes parameters as they are not editable.
          * @param {Object} context
          * @param {number} context.index
          * @param {Array} context.parentArray
@@ -70,7 +78,8 @@ export const schema = [
          */
         showWhen: ({ index, parentArray }) => {
           const { name, parameters } = parentArray[index];
-          const filteredParams = parameters?.filter(param => !(param.onlyForActions && !param.onlyForActions.includes(name)));
+          const filteredParams = parameters?.filter(param => !(param.onlyForActions && !param.onlyForActions.includes(name))
+            && !NOTES_PARAMETERS_KEYS.includes(param.key));
 
           return name && (
             !FINAL_ACTIONS.includes(name)

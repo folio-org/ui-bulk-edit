@@ -5,10 +5,10 @@ import {
   BASE_DATE_FORMAT,
   FINAL_ACTIONS,
   ACTIONS,
-  PARAMETERS_KEYS,
+  NOTES_PARAMETERS_KEYS,
+  getRemoveSomeAction,
   getPlaceholder,
   getAddAction,
-  getRemoveSomeAction,
 } from '../../../../constants';
 
 export const TEMPORARY_LOCATIONS = [
@@ -19,6 +19,18 @@ export const TEMPORARY_LOCATIONS = [
 const OPTIONS_MAP = {
   [OPTIONS.TEMPORARY_HOLDINGS_LOCATION]: OPTIONS.TEMPORARY_LOCATION,
   [OPTIONS.PERMANENT_HOLDINGS_LOCATION]: OPTIONS.PERMANENT_LOCATION,
+};
+
+/**
+ * Retrieves the type of option based on its value and available options.
+ * Existing type means that the value is one of the NOTES options.
+ *
+ * @param value - can be Enum option value or note type id
+ * @param allOptions - array of all options
+ * @returns {string} return one of the OPTIONS, initial or determined by note type id
+ */
+export const getOptionType = (value, allOptions) => {
+  return allOptions.find(o => o.value === value)?.type || value;
 };
 
 /**
@@ -154,13 +166,7 @@ export const getOptionsWithRules = ({ fields, options, item }) => {
   const hasAddOrRemoveSome = addIndex !== -1 || removeSomeIndex !== -1;
 
   const usedOptions = fields.reduce((acc, field) => {
-    const noteParamKeys = [
-      PARAMETERS_KEYS.HOLDINGS_NOTE_TYPE_ID_KEY,
-      PARAMETERS_KEYS.INSTANCE_NOTE_TYPE_ID_KEY,
-      PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY
-    ];
-
-    const noteParam = field.parameters?.find(param => noteParamKeys.includes(param.key));
+    const noteParam = field.parameters?.find(param => NOTES_PARAMETERS_KEYS.includes(param.key));
 
     if (noteParam) {
       acc.push(noteParam.value);
