@@ -42,7 +42,8 @@ export const ElectronicAccessRelationshipControl = ({ ctx, value, path, name, on
           path,
           name,
           val: e.target.value,
-          tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value)
+          tenants: getTenantsById(accessRelationshipsWithPlaceholder, e.target.value),
+          resetNext: true,
         })}
         dataOptions={accessRelationshipsWithPlaceholder}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
