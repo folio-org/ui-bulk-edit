@@ -42,17 +42,17 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
     setFields(prevFields => [...prevFields, folioFieldTemplate(uniqueId())]);
   }, [setFields]);
 
-  const handleOptionChange = useCallback(({ path, val }) => {
+  const handleOptionChange = useCallback(({ path, val: option }) => {
     const updatedField = updateIn(fields, path, (field) => {
-      const optionType = getOptionType(val, options);
-      const sourceOption = options.find(o => o.value === val);
+      const optionType = getOptionType(option, options);
+      const sourceOption = options.find(o => o.value === option);
       const parameters = sourceOption?.parameters;
 
       const actionsDetails = getDefaultActionState(optionType, currentRecordType);
 
       return {
         ...field,
-        option: val,
+        option,
         parameters,
         actionsDetails
       };
@@ -61,21 +61,20 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
     setFields(updatedField);
   }, [fields, options, currentRecordType, setFields]);
 
-  const handleActionChange = useCallback(({ path, val, name, option, ctx }) => {
+  const handleActionChange = useCallback(({ path, val: action, name, option, ctx }) => {
     const [rowIndex, actionsDetails, actions] = path;
 
-    const withUpdatedActionName = updateIn(fields, path, (action) => ({
-      ...action,
-      [name]: val,
-      tenants: [],
-      parameters: getPreselectedParams(val, action.parameters),
-      value: getPreselectedValue(option, val)
+    const withUpdatedActionName = updateIn(fields, path, () => ({
+      [name]: action,
+      tenants: [], // reset tenants when action changes
+      parameters: getPreselectedParams(action, action.parameters),
+      value: getPreselectedValue(option, action)
     }));
 
     // If this is the first action in the row, we need to update the next actions based on the selected values
     if (ctx.index === 0) {
       const optionType = getOptionType(option, options);
-      const nextActions = getNextActionState(optionType, val);
+      const nextActions = getNextActionState(optionType, action);
 
       const withUpdatedNextActions = updateIn(withUpdatedActionName, [rowIndex, actionsDetails, actions], (actionsArr) => [
         actionsArr[0], // keep the first action as is
@@ -84,8 +83,8 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
 
       const withFiltrationRules = getFieldsWithRules({
         option,
+        action,
         fields: withUpdatedNextActions,
-        action: val,
         rowId: ctx.row.id,
       });
 
