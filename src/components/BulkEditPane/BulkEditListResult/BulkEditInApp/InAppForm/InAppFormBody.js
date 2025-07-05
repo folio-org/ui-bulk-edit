@@ -64,10 +64,10 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
   const handleActionChange = useCallback(({ path, val: action, name, option, ctx }) => {
     const [rowIndex, actionsDetails, actions] = path;
 
-    const withUpdatedActionName = updateIn(fields, path, () => ({
+    const withUpdatedActionName = updateIn(fields, path, (currentAction) => ({
       [name]: action,
       tenants: [], // reset tenants when action changes
-      parameters: getPreselectedParams(action, action.parameters),
+      parameters: getPreselectedParams(action, currentAction.parameters),
       value: getPreselectedValue(option, action)
     }));
 
