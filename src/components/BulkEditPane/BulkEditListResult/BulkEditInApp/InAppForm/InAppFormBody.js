@@ -17,6 +17,7 @@ import {
   getFieldsWithRules,
   getOptionsWithRules,
   getOptionType,
+  getPreselectedParams,
   getPreselectedValue
 } from '../helpers';
 import { customFilter, groupByCategory, updateIn } from '../../../../../utils/helpers';
@@ -67,6 +68,7 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
       ...action,
       [name]: val,
       tenants: [],
+      parameters: getPreselectedParams(val, action.parameters),
       value: getPreselectedValue(option, val)
     }));
 

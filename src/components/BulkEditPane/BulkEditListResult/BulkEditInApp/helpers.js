@@ -221,6 +221,22 @@ export const getPreselectedValue = (option, action) => {
   return '';
 };
 
+
+/**
+ * Returns preselected parameters based on the action type.
+ * If the action is to set a boolean value, it updates the value
+ * @param action
+ * @param params
+ * @returns {Array} Array of parameters with updated values.
+ */
+export const getPreselectedParams = (action, params = []) => {
+  if ([ACTIONS.SET_TO_TRUE, ACTIONS.SET_TO_FALSE].includes(action)) {
+    return params.map((param) => ({ ...param, value: action === ACTIONS.SET_TO_TRUE }));
+  }
+
+  return params;
+};
+
 /**
  * Finds the display label for a given option value from a list.
  *
