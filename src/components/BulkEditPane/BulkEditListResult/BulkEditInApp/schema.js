@@ -1,10 +1,6 @@
-import {
-  CONTROL_TYPES,
-  FINAL_ACTIONS,
-  NOTES_PARAMETERS_KEYS,
-} from '../../../../constants';
+import { CONTROL_TYPES } from '../../../../constants';
 import { getControlType, getDefaultActionLists, getNextActionLists, getNextControlType } from './controlsConfig';
-import { getOptionType } from './helpers';
+import { getOptionType, shouldShowValueColumn } from './helpers';
 
 /**
  * Bulk edit schema definition for the ‘actions’ array control.
@@ -78,13 +74,8 @@ export const schema = [
          */
         showWhen: ({ index, parentArray }) => {
           const { name, parameters } = parentArray[index];
-          const filteredParams = parameters?.filter(param => !(param.onlyForActions && !param.onlyForActions.includes(name))
-            && !NOTES_PARAMETERS_KEYS.includes(param.key));
 
-          return name && (
-            !FINAL_ACTIONS.includes(name)
-            || filteredParams?.length > 0
-          );
+          return shouldShowValueColumn(name, parameters);
         }
       },
     ]

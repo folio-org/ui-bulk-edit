@@ -5,6 +5,7 @@ import { Col, Row, Label } from '@folio/stripes/components';
 
 import { Fragment } from 'react';
 import { FINAL_ACTIONS } from '../../../../../constants';
+import { shouldShowValueColumn } from '../helpers';
 
 import css from '../../../BulkEditPane.css';
 
@@ -58,7 +59,7 @@ export const InAppFormTitle = ({ fields }) => {
             </Label>
             <div className={css.splitter} />
           </Col>
-          {item.name && !FINAL_ACTIONS.includes(item.name) && (
+          {shouldShowValueColumn(item.name, item.parameters) && (
             <Col
               className={css.headerCell}
               sm={2}

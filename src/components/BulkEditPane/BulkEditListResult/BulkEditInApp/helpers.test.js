@@ -11,14 +11,14 @@ import {
   sortWithoutPlaceholder,
   getMappedContentUpdates,
   folioFieldTemplate,
-  getPreselectedParams,
+  getPreselectedParams, shouldShowValueColumn,
 } from './helpers';
 import {
   OPTIONS,
   ACTIONS,
   getAddAction,
   getPlaceholder,
-  getRemoveSomeAction, PARAMETERS_KEYS
+  getRemoveSomeAction, PARAMETERS_KEYS, FINAL_ACTIONS, NOTES_PARAMETERS_KEYS
 } from '../../../../constants';
 
 describe('TEMPORARY_LOCATIONS', () => {
@@ -462,5 +462,60 @@ describe('getPreselectedParams', () => {
 
     expect(resultTrue).toEqual([]);
     expect(resultFalse).toEqual([]);
+  });
+});
+
+describe('shouldShowValueColumn', () => {
+  const dummyParam = (overrides = {}) => ({
+    key: PARAMETERS_KEYS.STAFF_ONLY,
+    value: true,
+    ...overrides,
+  });
+
+  it('returns false when name is falsy', () => {
+    expect(shouldShowValueColumn('', [{ key: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY, value: 'some id' }])).toBeFalsy();
+    expect(shouldShowValueColumn(null, [])).toBeFalsy();
+    expect(shouldShowValueColumn(undefined, undefined)).toBeFalsy();
+  });
+
+  it('returns true for a non-final action regardless of parameters', () => {
+    const action = ACTIONS.ADD_TO_EXISTING;
+    expect(FINAL_ACTIONS).not.toContain(action);
+    expect(shouldShowValueColumn(action, [])).toBe(true);
+    expect(shouldShowValueColumn(action, undefined)).toBe(true);
+  });
+
+  it('hides value column for final actions with no relevant parameters', () => {
+    const finalAction = FINAL_ACTIONS[0];
+    const params = [
+      dummyParam({ onlyForActions: [ACTIONS.FIND] }),
+      { key: NOTES_PARAMETERS_KEYS[0], value: 'ignored' },
+    ];
+    expect(shouldShowValueColumn(finalAction, params)).toBe(false);
+  });
+
+  it('shows value column for final actions if there is at least one relevant parameter', () => {
+    const finalAction = FINAL_ACTIONS[0];
+    const allowedParam = dummyParam({ onlyForActions: [finalAction] });
+    const globalParam = dummyParam();
+    expect(shouldShowValueColumn(finalAction, [allowedParam])).toBe(true);
+    expect(shouldShowValueColumn(finalAction, [globalParam])).toBe(true);
+  });
+
+  it('filters out parameters whose keys are in NOTES_PARAMETERS_KEYS', () => {
+    const action = FINAL_ACTIONS[0];
+    const noteParam = { key: NOTES_PARAMETERS_KEYS[0], value: 'note' };
+    const goodParam = dummyParam({ onlyForActions: [action] });
+
+    expect(shouldShowValueColumn(action, [noteParam, goodParam])).toBe(true);
+  });
+
+  it('filters out parameters with onlyForActions that do not include the action', () => {
+    const action = FINAL_ACTIONS[0];
+    const mismatchedParam = dummyParam({ onlyForActions: [ACTIONS.REMOVE_SOME] });
+    const matchedParam = dummyParam({ onlyForActions: [action] });
+
+    expect(shouldShowValueColumn(action, [mismatchedParam, matchedParam])).toBe(true);
+    expect(shouldShowValueColumn(action, [mismatchedParam])).toBe(false);
   });
 });

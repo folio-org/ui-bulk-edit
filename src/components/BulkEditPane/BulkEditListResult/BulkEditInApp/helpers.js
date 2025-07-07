@@ -325,6 +325,23 @@ export const getMappedContentUpdates = (fields, options) => fields.map((field) =
 });
 
 /**
+ * Checks if the value column should be displayed for a given action name and parameters.
+ * @param {string} name
+ * @param {Array} parameters
+ * @returns {boolean}
+ */
+export const shouldShowValueColumn = (name, parameters) => {
+  const filteredParams = parameters?.filter(param => !(param.onlyForActions && !param.onlyForActions.includes(name))
+    && !NOTES_PARAMETERS_KEYS.includes(param.key));
+
+  return name && (
+    !FINAL_ACTIONS.includes(name)
+    || filteredParams?.length > 0
+  );
+};
+
+
+/**
  * Creates a blank folio field template structure, optionally with an ID.
  *
  * @param {string} [id] - Optional unique identifier for the field row.
