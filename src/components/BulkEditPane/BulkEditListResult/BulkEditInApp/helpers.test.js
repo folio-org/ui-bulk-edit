@@ -11,14 +11,18 @@ import {
   sortWithoutPlaceholder,
   getMappedContentUpdates,
   folioFieldTemplate,
-  getPreselectedParams, shouldShowValueColumn,
+  getPreselectedParams,
+  shouldShowValueColumn,
 } from './helpers';
 import {
   OPTIONS,
   ACTIONS,
+  PARAMETERS_KEYS,
+  FINAL_ACTIONS,
+  NOTES_PARAMETERS_KEYS,
   getAddAction,
   getPlaceholder,
-  getRemoveSomeAction, PARAMETERS_KEYS, FINAL_ACTIONS, NOTES_PARAMETERS_KEYS
+  getRemoveSomeAction,
 } from '../../../../constants';
 
 describe('TEMPORARY_LOCATIONS', () => {
