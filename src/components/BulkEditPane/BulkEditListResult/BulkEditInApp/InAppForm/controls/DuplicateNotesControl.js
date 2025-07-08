@@ -6,16 +6,13 @@ import { Select } from '@folio/stripes/components';
 
 import { getLabelByValue } from '../../helpers';
 import { getDuplicateNoteOptions } from '../../../../../../constants';
-import { usePreselectedValue } from '../../../../../../hooks/usePreselectedValue';
 
 
-export const DuplicateNoteControl = ({ option, value, controlType, name, path, onChange }) => {
+export const DuplicateNoteControl = ({ option, value, name, path, onChange }) => {
   const { formatMessage } = useIntl();
 
   const duplicateNoteOptions = getDuplicateNoteOptions(formatMessage).filter(el => el.value !== option);
   const title = getLabelByValue(duplicateNoteOptions, value);
-
-  usePreselectedValue(controlType, duplicateNoteOptions, onChange, path);
 
   return (
     <div title={title}>
@@ -40,6 +37,5 @@ DuplicateNoteControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
-  controlType: PropTypes.string,
   onChange: PropTypes.func,
 };

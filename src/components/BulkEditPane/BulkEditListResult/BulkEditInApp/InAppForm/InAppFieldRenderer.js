@@ -204,7 +204,6 @@ export const InAppFieldRenderer = memo(({
         <DuplicateNoteControl
           key={item.name}
           option={option}
-          controlType={type}
           {...sharedProps}
         />
       )}
