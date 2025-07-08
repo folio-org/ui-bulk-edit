@@ -46,7 +46,7 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
     isLoading,
   } = useQuery(
     {
-      queryKey: [namespace],
+      queryKey: [namespace, entityType, tenantId],
       queryFn: ({ signal }) => fetchAllRecords(
         {
           GET: ({ params: searchParams }) => (

@@ -2,7 +2,7 @@ import { useIntl } from 'react-intl';
 
 import { TitleManager } from '@folio/stripes/core';
 
-import { BulkEditProfilesPane } from '../../components/BulkEditProfilesPane';
+import { BulkEditProfilesPane } from '../../components/BulkEditProfiles';
 import { CAPABILITIES } from '../../constants';
 
 export const HoldingsProfiles = () => {

@@ -1,0 +1,8 @@
+.paneContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.profilesList {
+  flex: auto;
+}
