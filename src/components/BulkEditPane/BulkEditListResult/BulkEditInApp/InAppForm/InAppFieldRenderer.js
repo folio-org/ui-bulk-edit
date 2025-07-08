@@ -51,7 +51,7 @@ export const InAppFieldRenderer = memo(({
   const value = item[name];
   const fullPath = [...path, name];
   const isDirty = typeof dirty === 'function' ? dirty(value) : dirty;
-  const controlType = typeof type === 'function' ? type({ ...ctx, option, recordType: currentRecordType }) : type;
+  const controlType = typeof type === 'function' ? type({ ...ctx, option, allOptions, recordType: currentRecordType }) : type;
   const actions = options?.({ ...ctx, option, allOptions, recordType: currentRecordType }) || [];
   const actionsWithRules = getActionsWithRules({
     row: ctx.row,

@@ -11,13 +11,18 @@ import {
   sortWithoutPlaceholder,
   getMappedContentUpdates,
   folioFieldTemplate,
+  getPreselectedParams,
+  shouldShowValueColumn,
 } from './helpers';
 import {
   OPTIONS,
   ACTIONS,
+  PARAMETERS_KEYS,
+  FINAL_ACTIONS,
+  NOTES_PARAMETERS_KEYS,
   getAddAction,
   getPlaceholder,
-  getRemoveSomeAction
+  getRemoveSomeAction,
 } from '../../../../constants';
 
 describe('TEMPORARY_LOCATIONS', () => {
@@ -401,5 +406,120 @@ describe('folioFieldTemplate', () => {
       tenants: [],
       actionsDetails: [],
     });
+  });
+});
+
+describe('getPreselectedParams', () => {
+  const sampleParams = [
+    { name: PARAMETERS_KEYS.STAFF_ONLY, value: false },
+    { name: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY, value: true },
+  ];
+
+  it('returns an empty array when no params are provided', () => {
+    const result = getPreselectedParams(ACTIONS.SET_TO_TRUE);
+    expect(result).toEqual([]);
+    expect(Array.isArray(result)).toBe(true);
+  });
+
+  it('sets all values to true when action is SET_TO_TRUE', () => {
+    const originals = sampleParams.map(p => ({ ...p }));
+    const result = getPreselectedParams(ACTIONS.SET_TO_TRUE, sampleParams);
+
+    expect(result).toEqual([
+      { name: PARAMETERS_KEYS.STAFF_ONLY, value: true },
+      { name: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY, value: true },
+    ]);
+
+    expect(sampleParams).toEqual(originals);
+
+    result.forEach((r, i) => {
+      expect(r).not.toBe(sampleParams[i]);
+    });
+  });
+
+  it('sets all values to false when action is SET_TO_FALSE', () => {
+    const originals = sampleParams.map(p => ({ ...p }));
+    const result = getPreselectedParams(ACTIONS.SET_TO_FALSE, sampleParams);
+
+    expect(result).toEqual([
+      { name: PARAMETERS_KEYS.STAFF_ONLY, value: false },
+      { name: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY, value: false },
+    ]);
+
+    expect(sampleParams).toEqual(originals);
+
+    result.forEach((r, i) => {
+      expect(r).not.toBe(sampleParams[i]);
+    });
+  });
+
+  it('returns the exact same array for other actions', () => {
+    const paramsCopy = [...sampleParams];
+    const result = getPreselectedParams(ACTIONS.REMOVE_SOME, paramsCopy);
+    expect(result).toBe(paramsCopy);
+  });
+
+  it('maps an empty array to a new empty array for SET actions', () => {
+    const empty = [];
+    const resultTrue = getPreselectedParams(ACTIONS.SET_TO_TRUE, empty);
+    const resultFalse = getPreselectedParams(ACTIONS.SET_TO_FALSE, empty);
+
+    expect(resultTrue).toEqual([]);
+    expect(resultFalse).toEqual([]);
+  });
+});
+
+describe('shouldShowValueColumn', () => {
+  const dummyParam = (overrides = {}) => ({
+    key: PARAMETERS_KEYS.STAFF_ONLY,
+    value: true,
+    ...overrides,
+  });
+
+  it('returns false when name is falsy', () => {
+    expect(shouldShowValueColumn('', [{ key: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY, value: 'some id' }])).toBeFalsy();
+    expect(shouldShowValueColumn(null, [])).toBeFalsy();
+    expect(shouldShowValueColumn(undefined, undefined)).toBeFalsy();
+  });
+
+  it('returns true for a non-final action regardless of parameters', () => {
+    const action = ACTIONS.ADD_TO_EXISTING;
+    expect(FINAL_ACTIONS).not.toContain(action);
+    expect(shouldShowValueColumn(action, [])).toBe(true);
+    expect(shouldShowValueColumn(action, undefined)).toBe(true);
+  });
+
+  it('hides value column for final actions with no relevant parameters', () => {
+    const finalAction = FINAL_ACTIONS[0];
+    const params = [
+      dummyParam({ onlyForActions: [ACTIONS.FIND] }),
+      { key: NOTES_PARAMETERS_KEYS[0], value: 'ignored' },
+    ];
+    expect(shouldShowValueColumn(finalAction, params)).toBe(false);
+  });
+
+  it('shows value column for final actions if there is at least one relevant parameter', () => {
+    const finalAction = FINAL_ACTIONS[0];
+    const allowedParam = dummyParam({ onlyForActions: [finalAction] });
+    const globalParam = dummyParam();
+    expect(shouldShowValueColumn(finalAction, [allowedParam])).toBe(true);
+    expect(shouldShowValueColumn(finalAction, [globalParam])).toBe(true);
+  });
+
+  it('filters out parameters whose keys are in NOTES_PARAMETERS_KEYS', () => {
+    const action = FINAL_ACTIONS[0];
+    const noteParam = { key: NOTES_PARAMETERS_KEYS[0], value: 'note' };
+    const goodParam = dummyParam({ onlyForActions: [action] });
+
+    expect(shouldShowValueColumn(action, [noteParam, goodParam])).toBe(true);
+  });
+
+  it('filters out parameters with onlyForActions that do not include the action', () => {
+    const action = FINAL_ACTIONS[0];
+    const mismatchedParam = dummyParam({ onlyForActions: [ACTIONS.REMOVE_SOME] });
+    const matchedParam = dummyParam({ onlyForActions: [action] });
+
+    expect(shouldShowValueColumn(action, [mismatchedParam, matchedParam])).toBe(true);
+    expect(shouldShowValueColumn(action, [mismatchedParam])).toBe(false);
   });
 });

@@ -42,6 +42,12 @@ export const PARAMETERS_KEYS = {
   STAFF_ONLY: 'STAFF_ONLY',
 };
 
+export const NOTES_PARAMETERS_KEYS = [
+  PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY,
+  PARAMETERS_KEYS.HOLDINGS_NOTE_TYPE_ID_KEY,
+  PARAMETERS_KEYS.INSTANCE_NOTE_TYPE_ID_KEY,
+];
+
 export const getItemsWithPlaceholder = (items) => [
   {
     value: '',

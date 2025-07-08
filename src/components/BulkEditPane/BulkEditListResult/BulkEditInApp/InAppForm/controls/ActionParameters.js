@@ -4,19 +4,18 @@ import { useIntl } from 'react-intl';
 
 import { Checkbox } from '@folio/stripes/components';
 
-import { useDerivativeModification } from '../../../../../../hooks';
+import { NOTES_PARAMETERS_KEYS } from '../../../../../../constants';
 
 import css from '../../../../BulkEditPane.css';
 
 export const ActionParameters = memo(({ actionParameters, action, path, name, onChange }) => {
   const { formatMessage } = useIntl();
 
-  useDerivativeModification({ onChange, actionParameters, path, action, name });
-
   return (
     <div className={css.additionalParameters}>
       {actionParameters?.map((parameter, idx) => {
-        if (parameter.onlyForActions && !parameter.onlyForActions.includes(action)) return null;
+        if ((parameter.onlyForActions && !parameter.onlyForActions.includes(action))
+          || NOTES_PARAMETERS_KEYS.includes(parameter.key)) return null;
 
         return (
           <Checkbox
