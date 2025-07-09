@@ -9,14 +9,16 @@ import {
   useState,
   useTransition,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage,
+  useIntl,
+} from 'react-intl';
 import {
   useHistory,
   useLocation,
 } from 'react-router-dom';
 
 import {
-  LoadingPane,
   Pane,
   PaneHeader,
   SearchField,
@@ -48,6 +50,7 @@ export const BulkEditProfilesPane = ({
 }) => {
   const [isPending, startTransition] = useTransition();
 
+  const intl = useIntl();
   const location = useLocation();
   const history = useHistory();
 
@@ -74,7 +77,7 @@ export const BulkEditProfilesPane = ({
 
   const {
     isFetching,
-    isLoading,
+    isLoading: isProfilesLoading,
     profiles,
   } = useBulkEditProfiles({ entityType });
 
@@ -122,7 +125,7 @@ export const BulkEditProfilesPane = ({
   }, [debouncedHistoryPush, location.pathname, location.search]);
 
   const renderHeader = useCallback((renderProps) => {
-    const paneSub = !isLoading && (
+    const paneSub = !isProfilesLoading && (
       <FormattedMessage
         id="ui-bulk-edit.settings.profiles.paneSub"
         values={{ count }}
@@ -136,11 +139,9 @@ export const BulkEditProfilesPane = ({
         paneSub={paneSub}
       />
     );
-  }, [count, isLoading, title]);
+  }, [count, isProfilesLoading, title]);
 
-  if (isLoading || isUsersLoading) {
-    return <LoadingPane renderHeader={renderHeader} />;
-  }
+  const isLoading = isFetching || isUsersLoading || isPending;
 
   return (
     <Pane
@@ -149,24 +150,20 @@ export const BulkEditProfilesPane = ({
     >
       <div className={css.paneContent}>
         <SearchField
-          id={`input-search-${entityType}-field`}
+          ariaLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.search.label' })}
           clearSearchId={`input-${entityType}-search-field-clear-button`}
-          // ariaLabel={formatTranslationChunks(
-          //   intl.formatMessage(
-          //     { id: 'stripes-smart-components.searchFieldLabel' },
-          //     { moduleName: intl.formatMessage({ id: searchLabelKey }) }
-          //   )
-          // )}
+          id={`input-search-${entityType}-field`}
+          loading={isLoading}
           marginBottom0
-          value={searchTerm}
           onChange={onSearchChange}
           onClear={onSearchChange}
+          value={searchTerm}
         />
         <div className={css.profilesList}>
           <BulkEditProfiles
             changeSorting={changeLSorting}
             entityType={entityType}
-            isLoading={isFetching || isPending}
+            isLoading={isLoading}
             profiles={filteredProfiles}
             searchTerm={searchTerm}
             sortOrder={sortOrder}
