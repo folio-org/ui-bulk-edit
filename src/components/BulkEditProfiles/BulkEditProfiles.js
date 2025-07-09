@@ -98,9 +98,12 @@ export const BulkEditProfiles = ({
 };
 
 BulkEditProfiles.propTypes = {
+  changeSorting: PropTypes.func.isRequired,
   entityType: PropTypes.oneOf(Object.values(CAPABILITIES)),
   isLoading: PropTypes.bool,
   profiles: PropTypes.arrayOf(bulkEditProfilePropTypeShape).isRequired,
   searchTerm: PropTypes.string,
+  sortOrder: PropTypes.string.isRequired,
+  sortDirection: PropTypes.string.isRequired,
   users: PropTypes.arrayOf(userPropTypeShape).isRequired,
 };
