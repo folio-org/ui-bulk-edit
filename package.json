@@ -45,7 +45,6 @@
         "alt": "User",
         "title": "User"
       }
-
     ],
     "stripesDeps": [
       "@folio/stripes-acq-components"
@@ -60,7 +59,9 @@
       {
         "permissionName": "ui-bulk-edit.base-view.manage",
         "displayName": "Bulk Edit: View base permissions",
-        "replaces": ["ui-bulk-edit.view.base"],
+        "replaces": [
+          "ui-bulk-edit.view.base"
+        ],
         "visible": false,
         "subPermissions": [
           "module.bulk-edit.enabled",
@@ -78,7 +79,9 @@
       {
         "permissionName": "ui-bulk-edit.base-edit.manage",
         "displayName": "Bulk Edit: View edit permissions",
-        "replaces": ["ui-bulk-edit.edit.base"],
+        "replaces": [
+          "ui-bulk-edit.edit.base"
+        ],
         "visible": false,
         "subPermissions": [
           "ui-bulk-edit.base-view.manage",
@@ -108,7 +111,9 @@
       {
         "permissionName": "ui-bulk-edit.users.csv.view",
         "displayName": "Bulk Edit: Local - View user records",
-        "replaces": ["ui-bulk-edit.view"],
+        "replaces": [
+          "ui-bulk-edit.view"
+        ],
         "visible": true,
         "subPermissions": [
           "ui-bulk-edit.base-view.manage",
@@ -119,7 +124,9 @@
       {
         "permissionName": "ui-bulk-edit.users.csv.edit",
         "displayName": "Bulk Edit: Local - Edit user records",
-        "replaces": ["ui-bulk-edit.edit"],
+        "replaces": [
+          "ui-bulk-edit.edit"
+        ],
         "subPermissions": [
           "ui-bulk-edit.users.csv.view",
           "ui-bulk-edit.base-edit.manage",
@@ -130,7 +137,9 @@
       {
         "permissionName": "ui-bulk-edit.inventory.view",
         "displayName": "Bulk Edit: In app - View inventory records",
-        "replaces": ["ui-bulk-edit.app-view"],
+        "replaces": [
+          "ui-bulk-edit.app-view"
+        ],
         "subPermissions": [
           "ui-bulk-edit.base-view.manage",
           "ui-bulk-edit.base-edit.manage",
@@ -141,7 +150,9 @@
       {
         "permissionName": "ui-bulk-edit.inventory.edit",
         "displayName": "Bulk Edit: In app - Edit inventory records",
-        "replaces": ["ui-bulk-edit.app-edit"],
+        "replaces": [
+          "ui-bulk-edit.app-edit"
+        ],
         "subPermissions": [
           "ui-bulk-edit.inventory.view",
           "ui-bulk-edit.base-edit.manage",
@@ -155,7 +166,9 @@
       {
         "permissionName": "ui-bulk-edit.users.edit",
         "displayName": "Bulk edit: In app - Edit user records",
-        "replaces": ["ui-bulk-edit.app-edit.users"],
+        "replaces": [
+          "ui-bulk-edit.app-edit.users"
+        ],
         "subPermissions": [
           "ui-bulk-edit.base-edit.manage",
           "bulk-operations.item.users.get",
@@ -177,7 +190,9 @@
       {
         "permissionName": "ui-bulk-edit.query.execute",
         "displayName": "Bulk edit: Can build query",
-        "replaces": ["ui-bulk-edit.query"],
+        "replaces": [
+          "ui-bulk-edit.query"
+        ],
         "subPermissions": [
           "module.bulk-edit.enabled",
           "usergroups.item.get",
@@ -246,16 +261,11 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.18.6",
     "@folio/eslint-config-stripes": "^8.0.0",
+    "@folio/jest-config-stripes": "^3.0.0",
     "@folio/stripes": "^10.0.0",
     "@folio/stripes-cli": "^4.0.0",
     "@folio/stripes-testing": "^5.0.0",
     "@formatjs/cli": "^6.1.3",
-    "@testing-library/dom": "^8.19.0",
-    "@testing-library/jest-dom": "^5.11.1",
-    "@testing-library/react": "^11.0.2",
-    "@testing-library/react-hooks": "^5.1.0",
-    "@testing-library/user-event": "^12.8.3",
-    "babel-jest": "^26.4.2",
     "core-js": "^3.6.1",
     "eslint": "^7.32.0",
     "eslint-import-resolver-webpack": "^0.13.2",
@@ -263,9 +273,6 @@
     "eslint-plugin-jest": "^24.0.0",
     "faker": "^4.1.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.4.2",
-    "jest-css-modules": "^2.1.0",
-    "jest-junit": "^11.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^7.1.5",
@@ -280,8 +287,8 @@
     "@folio/stripes-data-transfer-components": "^7.0.0",
     "file-saver": "^2.0.5",
     "history": "^5.1.0",
-    "lodash": "^4.17.5",
     "http-status-codes": "^2.3.0",
+    "lodash": "^4.17.5",
     "prop-types": "^15.5.10",
     "query-string": "^6.1.0",
     "react-final-form": "^6.5.2",
