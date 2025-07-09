@@ -12,7 +12,7 @@ import { getLabelByValue, TEMPORARY_LOCATIONS } from '../../helpers';
 import { useBulkOperationTenants, useLocationEcs } from '../../../../../../hooks/api';
 
 
-export const LocationControl = ({ option, value, path, name, onChange }) => {
+export const LocationControl = ({ option, value, path, name, ctx, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
@@ -55,7 +55,7 @@ export const LocationControl = ({ option, value, path, name, onChange }) => {
             value={value}
             onSelect={(loc) => onChange({ path, val: loc?.id, name })}
             placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLocation' })}
-            data-test-id={`textField-${path}`}
+            data-test-id={`textField-${ctx.index}`}
             aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}
             dirty={!!value}
           />
@@ -68,7 +68,7 @@ export const LocationControl = ({ option, value, path, name, onChange }) => {
               name,
             })
             }
-            data-testid={`locationLookup-${path}`}
+            data-testid={`locationLookup-${ctx.index}`}
           />
         </>
       )}
@@ -83,5 +83,11 @@ LocationControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
+  ctx: PropTypes.shape({
+    index: PropTypes.number.isRequired,
+    parentArray: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+    })).isRequired,
+  }).isRequired,
   onChange: PropTypes.func,
 };

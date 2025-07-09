@@ -117,7 +117,7 @@ export const InAppFieldRenderer = memo(({
         <TextField
           value={value}
           onChange={e => onChange({ path, val: e.target.value, name })}
-          data-testid={`input-email-${path}`}
+          data-testid={`input-email-${ctx.index}`}
           aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textField' })}
           marginBottom0
           dirty={!!value}
@@ -128,7 +128,7 @@ export const InAppFieldRenderer = memo(({
         <TextArea
           value={value}
           onChange={e => onChange({ path, val: e.target.value, name })}
-          data-testid={`input-textarea-${path}`}
+          data-testid={`input-textarea-${ctx.index}`}
           aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textArea' })}
           marginBottom0
           dirty={!!value}
@@ -155,6 +155,7 @@ export const InAppFieldRenderer = memo(({
         <LocationControl
           key={item.name}
           option={option}
+          ctx={ctx}
           {...sharedProps}
         />
       )}
