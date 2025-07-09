@@ -69,7 +69,11 @@ export const schema = [
         showWhen: null,
         disabled: false,
         required: ({ index, parentArray }) => {
-          return index === 1 && parentArray[0]?.name === ACTIONS.FIND;
+          if (index === 1) {
+            return parentArray[0]?.name === ACTIONS.FIND;
+          }
+
+          return true;
         },
         dirty: (value) => !!value?.length,
         options: ({

@@ -62,12 +62,14 @@ export const MarcFieldRenderer = memo(({
   const dataOptions = options?.(ctx);
   const ariaLabel = formatMessage({ id: `ui-bulk-edit.layer.column.${name}` });
   const error = showError && value.length === maxLength && errorMessage;
+  const isFirstAction = ctx.index === 0 && name === 'name';
 
   const commonProps = {
     value,
     name,
-    required,
     error,
+    required: isRequired,
+    'data-row-index': rootPath[0],
     'aria-label': ariaLabel,
     dirty: isDirty,
     disabled: isDisabled,
@@ -110,6 +112,7 @@ export const MarcFieldRenderer = memo(({
           onChange={e => onChange({ path: rootPath, val: e.target.value, key: item.key, name })}
           onBlur={e => onBlur({ path: rootPath, val: e.target.value, name, event: e })}
           onFocus={e => onFocus({ path: rootPath, val: e.target.value, name, event: e })}
+          data-data-index={ctx.index}
         />
       )}
 
@@ -122,6 +125,7 @@ export const MarcFieldRenderer = memo(({
           placeholder=""
           hasClearIcon={false}
           onChange={e => onChange({ path: rootPath, val: e.target.value, key: item.key, name })}
+          data-data-index={ctx.index}
         />
       )}
 
@@ -138,7 +142,7 @@ export const MarcFieldRenderer = memo(({
 
       {popoverMap[errorMessageId]}
 
-      {isRequired && <span className={css.asterisk} aria-hidden>*</span>}
+      {isRequired && !isFirstAction && <span className={css.asterisk} aria-hidden>*</span>}
     </Col>
   );
 });
