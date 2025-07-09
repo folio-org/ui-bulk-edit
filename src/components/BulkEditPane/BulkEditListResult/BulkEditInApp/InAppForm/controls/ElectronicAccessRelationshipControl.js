@@ -36,6 +36,7 @@ export const ElectronicAccessRelationshipControl = ({ ctx, value, path, name, on
   return (
     <div title={title}>
       <Select
+        id="urlRelationship"
         value={value}
         loading={isElectronicAccessLoading || isElectronicAccessEcsLoading}
         onChange={e => onChange({

@@ -132,6 +132,7 @@ export const MarcFieldRenderer = memo(({
           fullWidth
           validStylesEnabled
           onChange={e => onActionChange({ path: rootPath, val: e.target.value, name })}
+          data-action-index={ctx.index}
         />
       )}
 
