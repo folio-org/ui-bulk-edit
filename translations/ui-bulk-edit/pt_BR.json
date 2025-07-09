@@ -189,7 +189,6 @@
     "columns.USER.Email": "E-mail",
     "columns.USER.Phone": "Telefone",
     "columns.USER.Mobile phone": "Celular",
-    "columns.USER.Date of birth": "Data de nascimento",
     "columns.USER.Addresses": "Endereços",
     "columns.USER.Preferred contact type id": "ID do tipo de contato preferido",
     "columns.USER.Enrollment date": "Data de inscrição",
@@ -491,7 +490,6 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Há um problema para recuperar dados do S3.   Entre em contato com o provedor de hospedagem para verificar a configuração do S3.  Mais detalhes estão disponíveis nos logs do aplicativo Edição em massa (módulos mod-bulk-operations e mod-data-export-worker).",
     "menuGroup.startEdit": "Iniciar edição em massa",
-    "File uploading failed : Cannot upload a file. Reason: file is empty.": "O arquivo enviado está vazio.",
     "start.downloadChangedRecords.marc": "Baixar registros alterados (MARC)",
     "layer.marc.error.ind": "Por favor, verifique sua entrada.",
     "layer.marc.error.subfield": "Por favor, verifique sua entrada.",
@@ -557,5 +555,7 @@
     "titleManager.settings.holdingsProfiles": "Configurações de edição em massa - perfis de edição em massa de coleções",
     "titleManager.settings.instancesProfiles": "Configurações de edição em massa - perfis de edição em massa de instâncias",
     "titleManager.settings.itemsProfiles": "Configurações de edição em massa - perfis de edição em massa de itens",
-    "titleManager.settings.usersProfiles": "Configurações de edição em massa - perfis de edição em massa de usuários"
+    "titleManager.settings.usersProfiles": "Configurações de edição em massa - perfis de edição em massa de usuários",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "O arquivo enviado está vazio.",
+    "columns.USER.Date of birth": "Data de nascimento"
 }

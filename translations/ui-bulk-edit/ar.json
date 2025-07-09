@@ -53,7 +53,7 @@
     "list.filters.recordIdentifier.item.UUID": "المعرّفات الفريدة العمومية للمادة",
     "list.filters.recordIdentifier.item.ItemHRIDs": "أرقام التعريف القابل للقراءة بشرياً للمادة",
     "list.filters.recordIdentifier.item.former": "معرّف المادة السابق",
-    "list.filters.recordIdentifier.item.accession": "رقم انضمام المادة",
+    "list.filters.recordIdentifier.item.accession": "رقم قيد المادة",
     "list.filters.recordIdentifier.item.holdingsUUID": "المعرفات الفريدة العمومية للمقتنيات",
     "start.edit.csv": "بدء التحرير بالجملة (CSV)",
     "start.downloadChangedRecords": "تنزيل التسجيلات المتغيرة (CSV)",
@@ -189,7 +189,6 @@
     "columns.USER.Email": "البريد الإلكتروني",
     "columns.USER.Phone": "الهاتف",
     "columns.USER.Mobile phone": "الهاتف المحمول",
-    "columns.USER.Date of birth": "تاريخ الميلاد",
     "columns.USER.Addresses": "العناوين",
     "columns.USER.Preferred contact type id": "معرف نوع جهة الاتصال المفضل",
     "columns.USER.Enrollment date": "تاريخ التسجيل",
@@ -447,7 +446,7 @@
     "columns.ITEM.Former identifier": "المعرّف السابق",
     "columns.ITEM.Suppress from discovery": "حجب عن الاكتشاف",
     "columns.ITEM.Shelving order": "ترتيب الرف",
-    "columns.ITEM.Accession number": "رقم الانضمام",
+    "columns.ITEM.Accession number": "رقم القيد",
     "columns.ITEM.Item level call number": "رقم الاستدعاء على مستوى المادة",
     "columns.ITEM.Item level call number prefix": "بادئة رقم الاستدعاء على مستوى المادة",
     "columns.ITEM.Item level call number suffix": "لاحقة رقم الاستدعاء على مستوى المادة",
@@ -491,7 +490,6 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "هناك مشكلة في استرداد البيانات من S3. يرجى التواصل مع مزود خدمة الاستضافة للتحقق من إعدادات S3. تتوفر المزيد من التفاصيل في تحرير سجلات التطبيقات بالجملة (mod-bulk-operations وmod-data-export-worker).",
     "menuGroup.startEdit": "بدء التحرير بالجملة",
-    "File uploading failed : Cannot upload a file. Reason: file is empty.": "الملف المرفوع فارغ.",
     "start.downloadChangedRecords.marc": "تنزيل التسجيلات المتغيرة (مارك)",
     "layer.marc.error.ind": "Please check your input.",
     "layer.marc.error.subfield": "Please check your input.",
@@ -557,5 +555,7 @@
     "titleManager.settings.holdingsProfiles": "Bulk edit settings - Holdings bulk edit profiles",
     "titleManager.settings.instancesProfiles": "Bulk edit settings - Instances bulk edit profiles",
     "titleManager.settings.itemsProfiles": "Bulk edit settings - Items bulk edit profiles",
-    "titleManager.settings.usersProfiles": "Bulk edit settings - Users bulk edit profiles"
+    "titleManager.settings.usersProfiles": "Bulk edit settings - Users bulk edit profiles",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
+    "columns.USER.Date of birth": "Birth date"
 }

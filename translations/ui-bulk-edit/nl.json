@@ -189,7 +189,6 @@
     "columns.USER.Email": "E-mail",
     "columns.USER.Phone": "Telefoonnummer",
     "columns.USER.Mobile phone": "Mobiele telefoonnummer",
-    "columns.USER.Date of birth": "Geboortedatum",
     "columns.USER.Addresses": "Adressen",
     "columns.USER.Preferred contact type id": "Geprefereerde contactmethode",
     "columns.USER.Enrollment date": "Datum ingeschreven",
@@ -491,7 +490,6 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "Er is een probleem met het ophalen van gegevens van S3. Neem contact op met uw hostingprovider om de S3-configuratie te controleren. Verdere details zijn beschikbaar in de logs van de Bulk edit-app (mod-bulk-operations en mod-data-export-worker modules).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Er is een probleem met het ophalen van gegevens van S3. Neem contact op met uw hostingprovider om de S3-configuratie te controleren. Verdere details zijn beschikbaar in de Bulk edit app logs (mod-bulk-operations en mod-data-export-worker modules).",
     "menuGroup.startEdit": "Bulkbewerking starten",
-    "File uploading failed : Cannot upload a file. Reason: file is empty.": "Het geüploade bestand is leeg.",
     "start.downloadChangedRecords.marc": "Gewijzigde records downloaden (MARC)",
     "layer.marc.error.ind": "Controleer uw invoer.",
     "layer.marc.error.subfield": "Controleer uw invoer.",
@@ -553,9 +551,11 @@
     "list.preview.publication.placeOfPublication": "Plaats van publicatie",
     "list.preview.publication.publicationDate": "Publicatiedatum",
     "columns.INSTANCE.Publication": "Publicatie",
-    "titleManager.settings": "Bulk edit settings",
-    "titleManager.settings.holdingsProfiles": "Bulk edit settings - Holdings bulk edit profiles",
-    "titleManager.settings.instancesProfiles": "Bulk edit settings - Instances bulk edit profiles",
-    "titleManager.settings.itemsProfiles": "Bulk edit settings - Items bulk edit profiles",
-    "titleManager.settings.usersProfiles": "Bulk edit settings - Users bulk edit profiles"
+    "titleManager.settings": "Instellingen in bulk bewerken",
+    "titleManager.settings.holdingsProfiles": "Instellingen bulk bewerken - Holdings profielen bulk bewerken",
+    "titleManager.settings.instancesProfiles": "Instellingen in bulk bewerken - Instances profielen in bulk bewerken",
+    "titleManager.settings.itemsProfiles": "Instellingen bulk bewerken - Items profielen bulk bewerken",
+    "titleManager.settings.usersProfiles": "Instellingen voor bulkbewerking - Gebruikers bewerken profielen in bulk",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "Het geüploade bestand is leeg.",
+    "columns.USER.Date of birth": "Geboortedatum"
 }

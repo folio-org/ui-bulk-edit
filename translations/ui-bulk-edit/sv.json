@@ -189,7 +189,6 @@
     "columns.USER.Email": "Email",
     "columns.USER.Phone": "Phone",
     "columns.USER.Mobile phone": "Mobile phone",
-    "columns.USER.Date of birth": "Birth date",
     "columns.USER.Addresses": "Addresses",
     "columns.USER.Preferred contact type id": "Preferred contact type id",
     "columns.USER.Enrollment date": "Date enrolled",
@@ -491,7 +490,6 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "There is a problem to retrieve data from S3.   Please contact your hosting provider to check S3 configuration.  Further details are available in Bulk edit app logs (mod-bulk-operations and mod-data-export-worker modules).",
     "menuGroup.startEdit": "Start bulk edit",
-    "File uploading failed : Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
     "start.downloadChangedRecords.marc": "Download changed records (MARC)",
     "layer.marc.error.ind": "Please check your input.",
     "layer.marc.error.subfield": "Please check your input.",
@@ -557,5 +555,7 @@
     "titleManager.settings.holdingsProfiles": "Bulk edit settings - Holdings bulk edit profiles",
     "titleManager.settings.instancesProfiles": "Bulk edit settings - Instances bulk edit profiles",
     "titleManager.settings.itemsProfiles": "Bulk edit settings - Items bulk edit profiles",
-    "titleManager.settings.usersProfiles": "Bulk edit settings - Users bulk edit profiles"
+    "titleManager.settings.usersProfiles": "Bulk edit settings - Users bulk edit profiles",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "The uploaded file is empty.",
+    "columns.USER.Date of birth": "Birth date"
 }
