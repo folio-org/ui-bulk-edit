@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   act,
   render,
@@ -6,10 +5,9 @@ import {
   waitFor,
   within,
   cleanup,
-} from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+} from '@folio/jest-config-stripes/testing-library/react';
 import { QueryClientProvider } from 'react-query';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import { PermissionsModal } from './PermissionsModal';
 import { queryClient } from '../../../test/jest/utils/queryClient';
@@ -89,7 +87,7 @@ describe('PermissionsModal', () => {
     expect(modalTitle).toBeInTheDocument();
   });
 
-  it('should call onCancel and onSave callbacks', () => {
+  it('should call onCancel and onSave callbacks', async () => {
     renderComponent();
 
     const saveButton = screen.getByText('ui-bulk-edit.permissionsModal.save');
@@ -98,10 +96,14 @@ describe('PermissionsModal', () => {
     expect(saveButton).toBeInTheDocument();
     expect(cancelButton).toBeInTheDocument();
 
-    userEvent.click(saveButton);
+    await act(async () => {
+      await userEvent.click(saveButton);
+    });
     expect(onSaveMock).toHaveBeenCalled();
 
-    userEvent.click(cancelButton);
+    await act(async () => {
+      await userEvent.click(cancelButton);
+    });
     expect(onCloseMock).toHaveBeenCalled();
   });
 
@@ -139,9 +141,10 @@ describe('PermissionsModal', () => {
     const searchInput = screen.getByTestId('search-permissions');
     const submitButton = screen.getByText('ui-bulk-edit.permissionsModal.filter.search');
 
-    userEvent.type(searchInput, 'Bulk Edit');
-
-    userEvent.click(submitButton);
+    await act(async () => {
+      await userEvent.type(searchInput, 'Bulk Edit');
+      await userEvent.click(submitButton);
+    });
 
     await waitFor(() => {
       checkRowsLength(1);
@@ -153,8 +156,8 @@ describe('PermissionsModal', () => {
 
     const typeCheckbox = screen.getByRole('checkbox', { name: 'ui-bulk-edit.permissionsModal.filter.permissions', hidden: true });
 
-    act(() => {
-      userEvent.click(typeCheckbox);
+    await act(async () => {
+      await userEvent.click(typeCheckbox);
     });
 
     await waitFor(() => {
@@ -169,8 +172,8 @@ describe('PermissionsModal', () => {
 
     userEvent.click(row0Checkbox);
 
-    act(() => {
-      userEvent.click(statusCheckbox);
+    await act(async () => {
+      await userEvent.click(statusCheckbox);
     });
 
     await waitFor(() => {

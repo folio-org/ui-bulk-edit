@@ -593,6 +593,15 @@
   "settings.instanceProfiles": "Instances bulk edit profiles",
   "settings.userProfiles": "Users bulk edit profiles",
 
+  "settings.profiles.empty": "<b>No profiles available.</b>",
+  "settings.profiles.columns.name": "Name",
+  "settings.profiles.columns.description": "Description",
+  "settings.profiles.columns.updated": "Updated",
+  "settings.profiles.columns.updatedBy": "Updated by",
+  "settings.profiles.columns.status": "Status",
+  "settings.profiles.paneSub": "{count, number} profiles found",
+  "settings.profiles.search.label": "Search bulk edit profiles",
+
   "titleManager.settings": "Bulk edit settings",
   "titleManager.settings.holdingsProfiles": "Bulk edit settings - Holdings bulk edit profiles",
   "titleManager.settings.instancesProfiles": "Bulk edit settings - Instances bulk edit profiles",

@@ -2,7 +2,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import '../../../../test/jest/__mock__';
