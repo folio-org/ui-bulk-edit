@@ -406,7 +406,6 @@ describe('BulkEditInApp', () => {
     await waitFor(() => {
       const checkbox = screen.getByRole('checkbox');
 
-      // expect(optionStatus).toHaveAttribute('aria-selected', 'true');
       expect(checkbox).not.toBeChecked();
     });
   });

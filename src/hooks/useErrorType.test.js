@@ -1,4 +1,5 @@
-import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react-hooks';import { useErrorType } from './useErrorType';
+import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react-hooks';
+import { useErrorType } from './useErrorType';
 import { ERROR_TYPES } from '../constants';
 
 describe('useErrorType hook', () => {

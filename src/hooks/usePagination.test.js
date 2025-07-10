@@ -1,4 +1,5 @@
-import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react-hooks';import { usePagination } from './usePagination';
+import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react-hooks';
+import { usePagination } from './usePagination';
 
 describe('usePagination', () => {
   test('initial state is set correctly', () => {

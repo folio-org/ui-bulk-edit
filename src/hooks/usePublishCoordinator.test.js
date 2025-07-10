@@ -3,7 +3,8 @@ import {
   QueryClientProvider,
 } from 'react-query';
 
-import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';import { useOkapiKy } from '@folio/stripes/core';
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import {
   pcPostRequest,

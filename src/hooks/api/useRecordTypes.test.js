@@ -1,4 +1,5 @@
-import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';import { useOkapiKy } from '@folio/stripes/core';
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';
+import { useOkapiKy } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
 import { act } from '@folio/jest-config-stripes/testing-library/react';
 import { useRecordTypes } from './useRecordTypes';

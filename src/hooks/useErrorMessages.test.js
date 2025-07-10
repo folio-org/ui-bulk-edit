@@ -1,4 +1,5 @@
-import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';import { useIntl } from 'react-intl';
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';
+import { useIntl } from 'react-intl';
 import { getReasonPhrase } from 'http-status-codes';
 
 import { useShowCallout } from '@folio/stripes-acq-components';

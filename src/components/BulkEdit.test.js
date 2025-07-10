@@ -72,7 +72,6 @@ describe('BulkEdit', () => {
     renderBulkEdit();
 
     expect(screen.getByRole('button', { name: /list.filters.identifier/ })).toBeEnabled();
-    // expect(screen.getByRole('button', { name: /list.filters.query/ })).toBeEnabled();
   });
 
 
@@ -81,12 +80,6 @@ describe('BulkEdit', () => {
 
     // const queryButton = screen.getByRole('button', { name: /list.filters.query/ });
     const identifierButton = screen.getByRole('button', { name: /list.filters.identifier/ });
-
-    /* act(() => {
-      userEvent.click(queryButton);
-    }); */
-
-    // expect(queryButton).toHaveAttribute('class', 'button primary');
 
     await act(async () => {
       await userEvent.click(identifierButton);
