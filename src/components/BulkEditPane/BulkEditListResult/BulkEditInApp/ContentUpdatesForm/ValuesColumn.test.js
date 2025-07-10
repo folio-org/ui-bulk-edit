@@ -1,6 +1,5 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import { render, fireEvent, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import '../../../../../../test/jest/__mock__/reactIntl.mock';
 import { IntlProvider } from 'react-intl';
 import { QueryClientProvider } from 'react-query';

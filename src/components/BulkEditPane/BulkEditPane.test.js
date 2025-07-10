@@ -1,11 +1,11 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 
 import '../../../test/jest/__mock__';
 
-import userEvent from '@testing-library/user-event';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 import { queryClient } from '../../../test/jest/utils/queryClient';

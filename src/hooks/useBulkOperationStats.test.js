@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';
 import { EDITING_STEPS } from '../constants';
 import { useBulkOperationStats } from './useBulkOperationStats';
 

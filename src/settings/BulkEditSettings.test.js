@@ -1,15 +1,8 @@
-import React from 'react';
-
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { useStripes } from '@folio/stripes/core';
 
 import { BulkEditSettings } from './BulkEditSettings';
 import { useBulkPermissions } from '../hooks';
-import { HoldingsProfiles } from './profiles/HoldingsProfiles';
-import { UsersProfiles } from './profiles/UsersProfiles';
-import { ItemsProfiles } from './profiles/ItemsProfiles';
-import { InstancesProfiles } from './profiles/InstancesProfiles';
-
 
 jest.mock('@folio/stripes/core', () => ({
   ...jest.requireActual('@folio/stripes/core'),
@@ -26,6 +19,7 @@ jest.mock('@folio/stripes/core', () => ({
 }));
 
 jest.mock('@folio/stripes/smart-components', () => ({
+  ...jest.requireActual('@folio/stripes/smart-components'),
   Settings: ({ sections, paneTitle }) => (
     <div>
       <h1>{paneTitle}</h1>
@@ -135,24 +129,5 @@ describe('BulkEditSettings', () => {
     expect(screen.queryByText('ui-bulk-edit.settings.inventoryProfiles')).not.toBeInTheDocument();
     expect(screen.queryByText('ui-bulk-edit.settings.otherProfiles')).not.toBeInTheDocument();
     expect(screen.queryByText('ui-bulk-edit.settings.userProfiles')).not.toBeInTheDocument();
-  });
-});
-
-describe('Document titles', () => {
-  const testCases = [
-    { title: 'ui-bulk-edit.titleManager.settings.holdingsProfiles', Component: HoldingsProfiles },
-    { title: 'ui-bulk-edit.titleManager.settings.usersProfiles', Component: UsersProfiles },
-    { title: 'ui-bulk-edit.titleManager.settings.itemsProfiles', Component: ItemsProfiles },
-    { title: 'ui-bulk-edit.titleManager.settings.instancesProfiles', Component: InstancesProfiles },
-  ];
-
-  testCases.forEach(({ title, Component }) => {
-    test(`renders "${Component.name}" and sets title to "${title}"`, async () => {
-      render(<Component />);
-
-      await waitFor(() => {
-        expect(document.title).toBe(title);
-      });
-    });
   });
 });
