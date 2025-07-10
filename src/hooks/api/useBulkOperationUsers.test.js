@@ -6,8 +6,8 @@ import {
 import '../../../test/jest/__mock__/reactIntl.mock';
 
 import { useOkapiKy } from '@folio/stripes/core';
-import { renderHook } from '@testing-library/react-hooks';
-import { waitFor, act } from '@testing-library/react';
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';
+import { waitFor, act } from '@folio/jest-config-stripes/testing-library/react';
 
 import { useBulkOperationUsers } from './useBulkOperationUsers';
 

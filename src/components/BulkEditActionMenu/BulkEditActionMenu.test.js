@@ -1,6 +1,5 @@
-import React from 'react';
-import { act, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 
@@ -144,7 +143,7 @@ describe('BulkEditActionMenu', () => {
     expect(screen.getByTestId('startInAppAction')).toBeVisible();
   });
 
-  it('should start bulk edit when inn-app action was called', () => {
+  it('should start bulk edit when inn-app action was called (itme)', async () => {
     onEdit.mockClear();
     onToggle.mockClear();
 
@@ -154,7 +153,7 @@ describe('BulkEditActionMenu', () => {
       providerState: { ...defaultProviderState, visibleColumns: [], countOfRecords: 10 },
     });
 
-    userEvent.click(screen.getByTestId('startInAppAction'));
+    await userEvent.click(screen.getByTestId('startInAppAction'));
 
     expect(onEdit).toHaveBeenCalledWith(APPROACHES.IN_APP);
     expect(onToggle).toHaveBeenCalled();
@@ -170,7 +169,7 @@ describe('BulkEditActionMenu', () => {
     expect(screen.getByTestId('startCsvAction')).toBeVisible();
   });
 
-  it('should start bulk edit when inn-app action was called', () => {
+  it('should start bulk edit when inn-app action was called (user manual)', async () => {
     onEdit.mockClear();
     onToggle.mockClear();
 
@@ -180,7 +179,7 @@ describe('BulkEditActionMenu', () => {
       providerState: { ...defaultProviderState, visibleColumns: [], countOfRecords: 10 },
     });
 
-    userEvent.click(screen.getByTestId('startCsvAction'));
+    await userEvent.click(screen.getByTestId('startCsvAction'));
 
     expect(onEdit).toHaveBeenCalledWith(APPROACHES.MANUAL);
     expect(onToggle).toHaveBeenCalled();
@@ -198,7 +197,7 @@ describe('BulkEditActionMenu', () => {
     expect(screen.getByText('ui-bulk-edit.columns.USER.uuid')).toBeVisible();
   });
 
-  it('should change visibleColumns when checkbox is pressed ', () => {
+  it('should change visibleColumns when checkbox is pressed ', async () => {
     const setVisibleColumns = jest.fn();
 
     renderBulkEditActionMenu({
@@ -207,7 +206,9 @@ describe('BulkEditActionMenu', () => {
       providerState: { ...defaultProviderState, setVisibleColumns, countOfRecords: 1 },
     });
 
-    act(() => userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid')));
+    await act(async () => {
+      await userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid'));
+    });
 
     expect(setVisibleColumns).toHaveBeenCalledWith([
       { ...defaultProviderState.visibleColumns[0], selected: true },
@@ -215,7 +216,7 @@ describe('BulkEditActionMenu', () => {
     ]);
   });
 
-  it('should filter columns based on value in input', () => {
+  it('should filter columns based on value in input', async () => {
     const setVisibleColumns = jest.fn();
 
     const { getByRole, queryByText } = renderBulkEditActionMenu({
@@ -224,7 +225,9 @@ describe('BulkEditActionMenu', () => {
       providerState: { ...defaultProviderState, setVisibleColumns, countOfRecords: 1 },
     });
 
-    act(() => userEvent.type(getByRole('textbox'), 'name'));
+    await act(async () => {
+      await userEvent.type(getByRole('textbox'), 'name');
+    });
 
     expect(queryByText('ui-bulk-edit.columns.USER.name')).toBeVisible();
     expect(queryByText('ui-bulk-edit.columns.USER.uuid')).not.toBeInTheDocument();
@@ -245,7 +248,7 @@ describe('BulkEditActionMenu', () => {
       },
     });
 
-    act(() => userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid')));
+    userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid'));
 
     expect(setVisibleColumns).not.toHaveBeenCalledWith();
   });

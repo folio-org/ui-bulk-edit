@@ -1,13 +1,11 @@
-import React from 'react';
 import { MemoryRouter } from 'react-router';
 import { QueryClientProvider } from 'react-query';
 import {
-  act,
   fireEvent,
   render,
   screen,
-} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+} from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import '../../../../../test/jest/__mock__';
 import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
@@ -70,7 +68,7 @@ describe('LogsFilters', () => {
 
     filterButton.forEach(el => expect(screen.getByRole('button', { name: el })).toBeEnabled());
     filterButton.forEach(el => {
-      act(() => userEvent.click(screen.getByRole('button', { name: el })));
+      userEvent.click(screen.getByRole('button', { name: el }));
     });
   });
 

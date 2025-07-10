@@ -1,7 +1,6 @@
 import { useQuery } from 'react-query';
 import { useIntl } from 'react-intl';
-import { renderHook } from '@testing-library/react-hooks';
-
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';
 import { useNamespace } from '@folio/stripes/core';
 
 import { usePublishCoordinator } from '../usePublishCoordinator';

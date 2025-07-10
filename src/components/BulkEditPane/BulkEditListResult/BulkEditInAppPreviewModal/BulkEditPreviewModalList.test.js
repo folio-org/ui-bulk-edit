@@ -1,6 +1,4 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { BulkEditPreviewModalList } from './BulkEditPreviewModalList';
 import { RootContext } from '../../../../context/RootContext';
 import { JOB_STATUSES } from '../../../../constants';
