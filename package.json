@@ -226,7 +226,9 @@
         "displayName": "Settings (Bulk edit): Can view only",
         "subPermissions": [
           "settings.bulk-edit.enabled",
-          "mod-settings.entries.collection.get"
+          "mod-settings.entries.collection.get",
+          "bulk-operations.profiles.collection.get",
+          "users.collection.get"
         ],
         "visible": true
       },
