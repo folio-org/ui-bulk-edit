@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
-import { noop, uniqueId } from 'lodash';
+import { noop, uniqueId, get } from 'lodash';
 
 import {
   IconButton,
@@ -104,13 +104,17 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
       value: val
     }));
 
+    const pathToReset = [rowIndex, actionsDetails, actions, 1];
+    const actionToReset = get(withUpdatedActionValueAndTenants, pathToReset);
+
     /**
-     * If this is the first action in the row and resetNext is true,
+     * If this is the first action in the row, resetNext is true and has a next action,
      * we need to reset the next action's value and tenants
      * as there can be conflicting values.
      */
-    if (actionIndex === 0 && resetNext) {
-      const withResetNexAction = updateIn(withUpdatedActionValueAndTenants, [rowIndex, actionsDetails, actions, 1], () => ({
+
+    if (actionIndex === 0 && resetNext && actionToReset) {
+      const withResetNexAction = updateIn(withUpdatedActionValueAndTenants, pathToReset, () => ({
         name: '',
         tenants: [],
         value: ''

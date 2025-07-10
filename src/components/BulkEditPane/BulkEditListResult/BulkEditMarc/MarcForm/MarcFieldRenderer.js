@@ -69,7 +69,8 @@ export const MarcFieldRenderer = memo(({
     name,
     error,
     required: isRequired,
-    'data-row-index': rootPath[0],
+    'data-row-index': fullPath[0], // fullPath[0] is the row index
+    'data-action-index': fullPath[2], // fullPath[2] is the action index
     'aria-label': ariaLabel,
     dirty: isDirty,
     disabled: isDisabled,
@@ -136,7 +137,6 @@ export const MarcFieldRenderer = memo(({
           fullWidth
           validStylesEnabled
           onChange={e => onActionChange({ path: rootPath, val: e.target.value, name })}
-          data-action-index={ctx.index}
         />
       )}
 
