@@ -1,5 +1,4 @@
-import { renderHook, act } from '@testing-library/react-hooks';
-import { useQuery } from 'react-query';
+import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react-hooks';import { useQuery } from 'react-query';
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useHistory } from 'react-router-dom';
 import { useBulkOperationDetails, BULK_OPERATION_DETAILS_KEY } from './useBulkOperationDetails';

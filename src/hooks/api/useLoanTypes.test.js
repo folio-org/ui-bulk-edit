@@ -1,5 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
-import { useQuery } from 'react-query';
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';import { useQuery } from 'react-query';
 
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 

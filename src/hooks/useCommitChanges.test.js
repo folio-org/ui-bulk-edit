@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react-hooks';
 
 import { buildSearch } from '@folio/stripes-acq-components';
 

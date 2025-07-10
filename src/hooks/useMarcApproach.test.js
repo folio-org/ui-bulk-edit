@@ -1,5 +1,4 @@
-import { renderHook, act } from '@testing-library/react-hooks';
-import uniqueId from 'lodash/uniqueId';
+import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react-hooks';import uniqueId from 'lodash/uniqueId';
 
 import {
   getMarcFieldTemplate,

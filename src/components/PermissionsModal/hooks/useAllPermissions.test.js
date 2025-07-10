@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';
 import { useQuery } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import { useAllPermissions } from './useAllPermissions'; // Adjust the import path as per your project structure

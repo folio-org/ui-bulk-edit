@@ -1,5 +1,5 @@
 import { useQueryClient } from 'react-query';
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react-hooks';
 
 import { useShowCallout } from '@folio/stripes-acq-components';
 

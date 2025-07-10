@@ -1,6 +1,5 @@
-import React from 'react';
-import { act, render, screen, fireEvent, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { act, render, screen, fireEvent, waitFor } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { QueryClientProvider } from 'react-query';
@@ -77,7 +76,7 @@ describe('BulkEdit', () => {
   });
 
 
-  it('should change active filter criteria ', () => {
+  it('should change active filter criteria ', async () => {
     renderBulkEdit();
 
     // const queryButton = screen.getByRole('button', { name: /list.filters.query/ });
@@ -89,8 +88,8 @@ describe('BulkEdit', () => {
 
     // expect(queryButton).toHaveAttribute('class', 'button primary');
 
-    act(() => {
-      userEvent.click(identifierButton);
+    await act(async () => {
+      await userEvent.click(identifierButton);
     });
 
     expect(identifierButton).toHaveAttribute('class', 'button primary');
@@ -102,11 +101,11 @@ describe('BulkEdit', () => {
     expect(screen.getByRole('combobox', { name: 'ui-bulk-edit.list.filters.recordIdentifier' })).toBeEnabled();
   });
 
-  it('should display select right select options on inventory tab', () => {
+  it('should display select right select options on inventory tab', async () => {
     renderBulkEdit();
 
-    act(() => {
-      userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.inventory/ }));
+    await act(async () => {
+      await userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.inventory/ }));
     });
 
     const options = [
@@ -124,10 +123,9 @@ describe('BulkEdit', () => {
 
     options.forEach((el) => expect(screen.getByRole('option', { name: el })).toBeVisible());
 
-    act(() => userEvent.selectOptions(
-      selectRecordIdentifier,
-      itemFormer,
-    ));
+    await act(async () => {
+      await userEvent.selectOptions(selectRecordIdentifier, itemFormer);
+    });
 
     expect(itemFormer.selected).toBe(true);
   });
