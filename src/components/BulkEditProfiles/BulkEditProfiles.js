@@ -59,10 +59,6 @@ const getResultsFormatter = (entityType, searchTerm, users) => {
   };
 };
 
-const COLUMN_WIDTHS = {
-  [COLUMNS.name]: '30%',
-};
-
 export const BulkEditProfiles = ({
   changeSorting,
   entityType,
@@ -80,12 +76,12 @@ export const BulkEditProfiles = ({
 
   return (
     <MultiColumnList
+      autosize
       id={`${entityType}-profiles-list`}
       formatter={formatter}
       visibleColumns={VISIBLE_COLUMNS}
       sortOrder={sortOrder}
       sortDirection={sortDirection}
-      columnWidths={COLUMN_WIDTHS}
       columnMapping={COLUMN_MAPPING}
       isEmptyMessage={isEmptyMessage}
       contentData={profiles}
@@ -93,6 +89,7 @@ export const BulkEditProfiles = ({
       totalCount={profiles.length}
       loading={isLoading}
       onHeaderClick={changeSorting}
+      virtualize
     />
   );
 };
