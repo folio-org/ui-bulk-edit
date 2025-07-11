@@ -15,6 +15,10 @@
 * [UIBULKED-618](https://folio-org.atlassian.net/browse/UIBULKED-618) Adding Bulk Edit to Settings and Displaying Profile Categories
 * [UIBULKED-643](https://folio-org.atlassian.net/browse/UIBULKED-643) Rendering Instance record Publication data in UI
 * [UIBULKED-619](https://folio-org.atlassian.net/browse/UIBULKED-643) Displaying the list of bulk edit profiles in a selected category
+* [UIBULKED-679](https://folio-org.atlassian.net/browse/UIBULKED-679) Migrate MARC bulk-edit form configuration from mixed React state into a single, abstract JSON schema
+* [UIBULKED-683](https://folio-org.atlassian.net/browse/UIBULKED-683) Refactor bulk-edit form configuration from mixed React state into abstract JSON schemas
+* [UIBULKED-681](https://folio-org.atlassian.net/browse/UIBULKED-681) Fix bulk-edit ITEMS form problems
+* [UIBULKED-682](https://folio-org.atlassian.net/browse/UIBULKED-682) Fix bulk-edit HOLDINGS form problems
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
