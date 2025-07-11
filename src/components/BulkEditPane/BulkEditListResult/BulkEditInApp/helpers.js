@@ -278,14 +278,22 @@ export const getMappedContentUpdates = (fields, options) => fields.map((field) =
 
   const [firstAction, secondAction] = actions.map(action => {
     if (Array.isArray(action?.value)) {
-      return action.value.map(item => item?.value).join(',');
+      return {
+        ...action,
+        value: action.value.map(item => item?.value).join(',')
+      };
     }
-    return action?.value || null;
+
+    return {
+      ...action,
+      value: action?.value || null,
+    };
   });
 
-  const hasBothActions = firstAction && secondAction;
-  const initial = firstAction;
-  const updated = hasBothActions ? secondAction : firstAction;
+  const hasBothValues = firstAction && secondAction;
+  const hasOnlyFirstAction = firstAction && !secondAction;
+  const initial = hasOnlyFirstAction ? null : firstAction.value;
+  const updated = hasBothValues ? secondAction.value : firstAction.value;
 
   const actionTenants = actions.map(action => action?.tenants);
   const sourceOption = options.find(o => o.value === option);
