@@ -6,6 +6,7 @@ import {
   Icon,
   MultiColumnList,
 } from '@folio/stripes/components';
+import { AppIcon } from '@folio/stripes/core';
 import { getFullName } from '@folio/stripes/util';
 import {
   DateColumn,
@@ -26,6 +27,8 @@ import {
   VISIBLE_COLUMNS,
 } from './constants';
 
+import css from './BulkEditProfiles.css';
+
 const isEmptyMessage = <FormattedMessage id="ui-bulk-edit.settings.profiles.empty" />;
 
 const getResultsFormatter = (entityType, searchTerm, users) => {
@@ -34,9 +37,17 @@ const getResultsFormatter = (entityType, searchTerm, users) => {
   return {
     [COLUMNS.name]: (profile) => (
       <DefaultColumn
-        iconKey={RECORD_TYPES_MAPPING[entityType]}
-        value={profile.name}
         searchTerm={searchTerm}
+        value={(
+          <span className={css.nameCell}>
+            <AppIcon
+              app="bulk-edit"
+              iconKey={RECORD_TYPES_MAPPING[entityType]}
+              size="small"
+            />
+            {profile.name}
+          </span>
+        )}
       />
     ),
     [COLUMNS.description]: (profile) => (
@@ -89,6 +100,7 @@ export const BulkEditProfiles = ({
       totalCount={profiles.length}
       loading={isLoading}
       onHeaderClick={changeSorting}
+      showSortIndicator
       virtualize
     />
   );

@@ -9,10 +9,25 @@ import {
   fetchAllRecords,
 } from '@folio/stripes-acq-components';
 
-import { BULK_EDIT_PROFILES_API } from '../../constants';
+import {
+  BULK_EDIT_PROFILES_API,
+  CAPABILITIES,
+} from '../../constants';
 
 const NAMESPACE_KEY = 'bulk-edit-profiles';
 const DEFAULT_DATA = [];
+
+const ENTITY_TYPE_DICT = {
+  [CAPABILITIES.INSTANCE]: [CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC],
+};
+
+const groupByEntityType = (entityType) => (builder) => {
+  const entityTypes = ENTITY_TYPE_DICT[entityType] || [entityType];
+
+  entityTypes.reduce((acc, curr) => {
+    return acc.or().equal('entityType', curr);
+  }, builder);
+};
 
 export const useBulkEditProfiles = (params = {}, options = {}) => {
   const { entityType } = params;
@@ -29,7 +44,7 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
   const searchQuery = entityType
     ? (
       cqlBuilder
-        .equal('entityType', entityType)
+        .group(groupByEntityType(entityType))
         .sortBy('name', 'asc')
         .build()
     )

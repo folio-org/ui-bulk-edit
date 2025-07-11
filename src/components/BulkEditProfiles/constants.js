@@ -34,7 +34,6 @@ export const FILTER_SORT_CONFIG = {
     name: { type: 'string' },
     description: { type: 'string' },
     updatedDate: { type: 'date' },
-    updatedBy: { type: 'string' },
     status: { type: 'string' },
   },
   searchIndexes: Object.values(COLUMNS),
