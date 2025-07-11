@@ -30,19 +30,17 @@ const isEmptyMessage = <FormattedMessage id="ui-bulk-edit.settings.profiles.empt
 const getResultsFormatter = (entityType, searchTerm) => {
   return {
     [COLUMNS.name]: (profile) => (
-      <DefaultColumn
-        searchTerm={searchTerm}
-        value={(
-          <span className={css.nameCell}>
-            <AppIcon
-              app="bulk-edit"
-              iconKey={RECORD_TYPES_MAPPING[entityType]}
-              size="small"
-            />
-            {profile.name}
-          </span>
-        )}
-      />
+      <span className={css.nameCell}>
+        <AppIcon
+          app="bulk-edit"
+          iconKey={RECORD_TYPES_MAPPING[entityType]}
+          size="small"
+        />
+        <DefaultColumn
+          searchTerm={searchTerm}
+          value={profile.name}
+        />
+      </span>
     ),
     [COLUMNS.description]: (profile) => (
       <DefaultColumn
