@@ -17,10 +17,7 @@ import {
   CAPABILITIES,
   RECORD_TYPES_MAPPING,
 } from '../../constants';
-import {
-  bulkEditProfilePropTypeShape,
-  userPropTypeShape,
-} from '../../shapes';
+import { bulkEditProfilePropTypeShape } from '../../shapes';
 import {
   COLUMN_MAPPING,
   COLUMNS,
@@ -31,9 +28,7 @@ import css from './BulkEditProfiles.css';
 
 const isEmptyMessage = <FormattedMessage id="ui-bulk-edit.settings.profiles.empty" />;
 
-const getResultsFormatter = (entityType, searchTerm, users) => {
-  const usersMap = users.reduce((acc, user) => acc.set(user.id, user), new Map());
-
+const getResultsFormatter = (entityType, searchTerm, usersMap) => {
   return {
     [COLUMNS.name]: (profile) => (
       <DefaultColumn
@@ -78,11 +73,11 @@ export const BulkEditProfiles = ({
   searchTerm,
   sortOrder,
   sortDirection,
-  users,
+  usersMap,
 }) => {
   const formatter = useMemo(
-    () => getResultsFormatter(entityType, searchTerm, users),
-    [entityType, searchTerm, users],
+    () => getResultsFormatter(entityType, searchTerm, usersMap),
+    [entityType, searchTerm, usersMap],
   );
 
   return (
@@ -114,5 +109,5 @@ BulkEditProfiles.propTypes = {
   searchTerm: PropTypes.string,
   sortOrder: PropTypes.string.isRequired,
   sortDirection: PropTypes.string.isRequired,
-  users: PropTypes.arrayOf(userPropTypeShape).isRequired,
+  usersMap: PropTypes.instanceOf(Map).isRequired,
 };

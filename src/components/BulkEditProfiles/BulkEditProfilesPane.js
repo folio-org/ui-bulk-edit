@@ -25,7 +25,6 @@ import {
 } from '@folio/stripes/components';
 import {
   buildSearch,
-  DESC_DIRECTION,
   filterAndSort,
   SEARCH_PARAMETER,
   SORTING_DIRECTION_PARAMETER,
@@ -45,24 +44,6 @@ import {
 } from './constants';
 
 import css from './BulkEditProfilesPane.css';
-
-const getFiltersConfig = (users, sortDirection) => {
-  const usersMap = users?.reduce((acc, user) => acc.set(user.id, user), new Map());
-
-  return {
-    ...FILTER_SORT_CONFIG,
-    sortingConfig: {
-      ...FILTER_SORT_CONFIG.sortingConfig,
-      updatedBy: {
-        customSort: (a, b) => {
-          const result = getFullName(usersMap.get(a.updatedBy))?.localeCompare(getFullName(usersMap.get(b.updatedBy)));
-
-          return sortDirection === DESC_DIRECTION ? -result : result;
-        },
-      },
-    },
-  };
-};
 
 export const BulkEditProfilesPane = ({
   entityType,
@@ -108,6 +89,8 @@ export const BulkEditProfilesPane = ({
     users,
   } = useUsersBatch(userIds);
 
+  const usersMap = useMemo(() => new Map(users.map(user => [user.id, user])), [users]);
+
   const [filteredProfiles, setFilteredProfiles] = useState(profiles);
 
   /*
@@ -120,17 +103,20 @@ export const BulkEditProfilesPane = ({
     startTransition(() => {
       setFilteredProfiles(() => {
         return filterAndSort(
-          getFiltersConfig(users, sortDirection),
+          FILTER_SORT_CONFIG,
           {
             [SEARCH_PARAMETER]: locationSearchQuery,
             [SORTING_PARAMETER]: sortOrder,
             [SORTING_DIRECTION_PARAMETER]: sortDirection,
           },
-          profiles,
+          profiles.map(profile => ({
+            ...profile,
+            userFullName: getFullName(usersMap.get(profile.updatedBy)),
+          })),
         );
       });
     });
-  }, [profiles, locationSearchQuery, sortOrder, sortDirection, users]);
+  }, [profiles, locationSearchQuery, sortOrder, sortDirection, usersMap]);
 
   const onSearchChange = useCallback((e) => {
     const value = e?.target?.value;
@@ -186,7 +172,7 @@ export const BulkEditProfilesPane = ({
             searchTerm={searchTerm}
             sortOrder={sortOrder}
             sortDirection={sortDirection}
-            users={users}
+            usersMap={usersMap}
           />
         </div>
       </div>
