@@ -101,6 +101,11 @@ export const BulkEditProfilesPane = ({
    */
   useEffect(() => {
     startTransition(() => {
+      const hydratedProfiles = profiles.map(profile => ({
+        ...profile,
+        userFullName: getFullName(usersMap.get(profile.updatedBy)),
+      }));
+
       setFilteredProfiles(() => {
         return filterAndSort(
           FILTER_SORT_CONFIG,
@@ -109,10 +114,7 @@ export const BulkEditProfilesPane = ({
             [SORTING_PARAMETER]: sortOrder,
             [SORTING_DIRECTION_PARAMETER]: sortDirection,
           },
-          profiles.map(profile => ({
-            ...profile,
-            userFullName: getFullName(usersMap.get(profile.updatedBy)),
-          })),
+          hydratedProfiles,
         );
       });
     });
@@ -172,7 +174,6 @@ export const BulkEditProfilesPane = ({
             searchTerm={searchTerm}
             sortOrder={sortOrder}
             sortDirection={sortDirection}
-            usersMap={usersMap}
           />
         </div>
       </div>

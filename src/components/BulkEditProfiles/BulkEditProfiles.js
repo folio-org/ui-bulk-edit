@@ -7,7 +7,6 @@ import {
   MultiColumnList,
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
-import { getFullName } from '@folio/stripes/util';
 import {
   DateColumn,
   DefaultColumn,
@@ -28,7 +27,7 @@ import css from './BulkEditProfiles.css';
 
 const isEmptyMessage = <FormattedMessage id="ui-bulk-edit.settings.profiles.empty" />;
 
-const getResultsFormatter = (entityType, searchTerm, usersMap) => {
+const getResultsFormatter = (entityType, searchTerm) => {
   return {
     [COLUMNS.name]: (profile) => (
       <DefaultColumn
@@ -54,7 +53,7 @@ const getResultsFormatter = (entityType, searchTerm, usersMap) => {
     [COLUMNS.updated]: (profile) => <DateColumn value={profile.updated} />,
     [COLUMNS.updatedBy]: (profile) => (
       <DefaultColumn
-        value={getFullName(usersMap.get(profile.updatedBy))}
+        value={profile.userFullName}
         searchTerm={searchTerm}
         iconKey="user"
       />
@@ -73,11 +72,10 @@ export const BulkEditProfiles = ({
   searchTerm,
   sortOrder,
   sortDirection,
-  usersMap,
 }) => {
   const formatter = useMemo(
-    () => getResultsFormatter(entityType, searchTerm, usersMap),
-    [entityType, searchTerm, usersMap],
+    () => getResultsFormatter(entityType, searchTerm),
+    [entityType, searchTerm],
   );
 
   return (
@@ -109,5 +107,4 @@ BulkEditProfiles.propTypes = {
   searchTerm: PropTypes.string,
   sortOrder: PropTypes.string.isRequired,
   sortDirection: PropTypes.string.isRequired,
-  usersMap: PropTypes.instanceOf(Map).isRequired,
 };

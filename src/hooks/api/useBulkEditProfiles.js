@@ -24,9 +24,9 @@ const ENTITY_TYPE_DICT = {
 const groupByEntityType = (entityType) => (builder) => {
   const entityTypes = ENTITY_TYPE_DICT[entityType] || [entityType];
 
-  entityTypes.reduce((acc, curr) => {
-    return acc.or().equal('entityType', curr);
-  }, builder);
+  entityTypes.forEach((t) => {
+    builder.or().equal('entityType', t);
+  });
 };
 
 export const useBulkEditProfiles = (params = {}, options = {}) => {
