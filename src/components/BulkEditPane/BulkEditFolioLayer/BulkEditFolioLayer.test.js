@@ -225,7 +225,7 @@ describe('BulkEditInApp', () => {
       expect(getByTestId('select-actions-0')).toBeInTheDocument();
     });
 
-    const selectAction = getByTestId('select-actions-1');
+    const selectAction = getByTestId('select-actions-0');
     const actionReplace = getByRole('option', { name: /layer.action.replace/ });
 
     await act(async () => {
