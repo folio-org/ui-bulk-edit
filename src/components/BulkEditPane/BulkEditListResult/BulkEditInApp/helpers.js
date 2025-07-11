@@ -278,24 +278,35 @@ export const getMappedContentUpdates = (fields, options) => fields.map((field) =
 
   const [firstAction, secondAction] = actions.map(action => {
     if (Array.isArray(action?.value)) {
-      return action.value.map(item => item?.value).join(',');
+      return {
+        ...action,
+        value: action.value.map(item => item?.value).join(',')
+      };
     }
-    return action?.value || null;
+
+    return {
+      ...action,
+      value: action?.value || null,
+    };
   });
-  const hasBothActions = firstAction && secondAction;
-  const initial = hasBothActions ? firstAction : null;
-  const updated = hasBothActions ? secondAction : firstAction;
+
+  const hasBothValues = firstAction && secondAction;
+  const hasOnlyFirstAction = firstAction && !secondAction;
+  const initial = hasOnlyFirstAction ? null : firstAction.value;
+  const updated = hasBothValues ? secondAction.value : firstAction.value;
 
   const actionTenants = actions.map(action => action?.tenants);
   const sourceOption = options.find(o => o.value === option);
   const optionType = sourceOption?.type;
-  const mappedOption = optionType || option;
+  const mappedOption = optionType || option; // if option has type, use it, otherwise use option value (required for ITEM_NOTE cases)
+  // generate action type key with '_' delimiter
   const typeKey = actions
     .filter(Boolean)
     .map(action => action?.name ?? null).join('_');
 
   const actionParameters = actions.find(action => Boolean(action?.parameters))?.parameters;
   const filteredTenants = actionTenants.filter(Boolean);
+  // final action is the action which doesn't require any additional data after it
   const isSecondActionFinal = FINAL_ACTIONS.includes(actions[1]?.name);
 
   const activeTenants = isSecondActionFinal || filteredTenants.length === 1
@@ -304,6 +315,7 @@ export const getMappedContentUpdates = (fields, options) => fields.map((field) =
       .flat()
       .filter((tenant, index, array) => array.indexOf(tenant) !== index);
 
+  // That tenants array need when we use find and replace action with two different action values
   const updatedTenants = filteredTenants[1] || [];
   const type = ACTIONS[typeKey];
 
