@@ -20,6 +20,7 @@ import { bulkEditProfilePropTypeShape } from '../../shapes';
 import {
   COLUMN_MAPPING,
   COLUMNS,
+  NON_INTERACTIVE_HEADERS,
   VISIBLE_COLUMNS,
 } from './constants';
 
@@ -48,7 +49,7 @@ const getResultsFormatter = (entityType, searchTerm) => {
         searchTerm={searchTerm}
       />
     ),
-    [COLUMNS.updated]: (profile) => <DateColumn value={profile.updated} />,
+    [COLUMNS.updatedDate]: (profile) => <DateColumn value={profile.updatedDate} />,
     [COLUMNS.updatedBy]: (profile) => (
       <DefaultColumn
         value={profile.userFullName}
@@ -87,6 +88,7 @@ export const BulkEditProfiles = ({
       columnMapping={COLUMN_MAPPING}
       isEmptyMessage={isEmptyMessage}
       contentData={profiles}
+      nonInteractiveHeaders={NON_INTERACTIVE_HEADERS}
       pageAmount={profiles.length}
       totalCount={profiles.length}
       loading={isLoading}

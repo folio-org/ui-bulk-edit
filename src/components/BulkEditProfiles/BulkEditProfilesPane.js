@@ -40,7 +40,7 @@ import { BulkEditProfiles } from './BulkEditProfiles';
 import {
   DEFAULT_SORTING,
   FILTER_SORT_CONFIG,
-  VISIBLE_COLUMNS,
+  SORTABLE_COLUMNS,
 } from './constants';
 
 import css from './BulkEditProfilesPane.css';
@@ -72,7 +72,7 @@ export const BulkEditProfilesPane = ({
     location,
     history,
     noop,
-    VISIBLE_COLUMNS,
+    SORTABLE_COLUMNS,
     DEFAULT_SORTING,
   );
 

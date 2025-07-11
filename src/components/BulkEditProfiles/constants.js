@@ -1,3 +1,4 @@
+import difference from 'lodash/difference';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -9,7 +10,7 @@ import {
 export const COLUMNS = {
   name: 'name',
   description: 'description',
-  updated: 'updated',
+  updatedDate: 'updatedDate',
   updatedBy: 'updatedBy',
   status: 'status',
 };
@@ -17,7 +18,7 @@ export const COLUMNS = {
 export const COLUMN_MAPPING = {
   [COLUMNS.name]: <FormattedMessage id="ui-bulk-edit.settings.profiles.columns.name" />,
   [COLUMNS.description]: <FormattedMessage id="ui-bulk-edit.settings.profiles.columns.description" />,
-  [COLUMNS.updated]: <FormattedMessage id="ui-bulk-edit.settings.profiles.columns.updated" />,
+  [COLUMNS.updatedDate]: <FormattedMessage id="ui-bulk-edit.settings.profiles.columns.updated" />,
   [COLUMNS.updatedBy]: <FormattedMessage id="ui-bulk-edit.settings.profiles.columns.updatedBy" />,
   [COLUMNS.status]: <FormattedMessage id="ui-bulk-edit.settings.profiles.columns.status" />,
 };
@@ -40,5 +41,12 @@ export const FILTER_SORT_CONFIG = {
     },
     status: { type: 'string' },
   },
-  searchIndexes: Object.values(COLUMNS),
+  searchIndexes: [
+    COLUMNS.name,
+    COLUMNS.description,
+    'userFullName',
+  ],
 };
+
+export const NON_INTERACTIVE_HEADERS = [COLUMNS.description, COLUMNS.status];
+export const SORTABLE_COLUMNS = difference(VISIBLE_COLUMNS, NON_INTERACTIVE_HEADERS);
