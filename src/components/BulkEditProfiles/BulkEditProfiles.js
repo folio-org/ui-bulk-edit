@@ -6,7 +6,7 @@ import {
   Icon,
   MultiColumnList,
 } from '@folio/stripes/components';
-import { getFullName } from '@folio/stripes/util';
+import { AppIcon } from '@folio/stripes/core';
 import {
   DateColumn,
   DefaultColumn,
@@ -16,28 +16,32 @@ import {
   CAPABILITIES,
   RECORD_TYPES_MAPPING,
 } from '../../constants';
-import {
-  bulkEditProfilePropTypeShape,
-  userPropTypeShape,
-} from '../../shapes';
+import { bulkEditProfilePropTypeShape } from '../../shapes';
 import {
   COLUMN_MAPPING,
   COLUMNS,
+  NON_INTERACTIVE_HEADERS,
   VISIBLE_COLUMNS,
 } from './constants';
 
+import css from './BulkEditProfiles.css';
+
 const isEmptyMessage = <FormattedMessage id="ui-bulk-edit.settings.profiles.empty" />;
 
-const getResultsFormatter = (entityType, searchTerm, users) => {
-  const usersMap = users.reduce((acc, user) => acc.set(user.id, user), new Map());
-
+const getResultsFormatter = (entityType, searchTerm) => {
   return {
     [COLUMNS.name]: (profile) => (
-      <DefaultColumn
-        iconKey={RECORD_TYPES_MAPPING[entityType]}
-        value={profile.name}
-        searchTerm={searchTerm}
-      />
+      <span className={css.nameCell}>
+        <AppIcon
+          app="bulk-edit"
+          iconKey={RECORD_TYPES_MAPPING[entityType]}
+          size="small"
+        />
+        <DefaultColumn
+          searchTerm={searchTerm}
+          value={profile.name}
+        />
+      </span>
     ),
     [COLUMNS.description]: (profile) => (
       <DefaultColumn
@@ -45,10 +49,10 @@ const getResultsFormatter = (entityType, searchTerm, users) => {
         searchTerm={searchTerm}
       />
     ),
-    [COLUMNS.updated]: (profile) => <DateColumn value={profile.updated} />,
+    [COLUMNS.updatedDate]: (profile) => <DateColumn value={profile.updatedDate} />,
     [COLUMNS.updatedBy]: (profile) => (
       <DefaultColumn
-        value={getFullName(usersMap.get(profile.updatedBy))}
+        value={profile.userFullName}
         searchTerm={searchTerm}
         iconKey="user"
       />
@@ -67,11 +71,10 @@ export const BulkEditProfiles = ({
   searchTerm,
   sortOrder,
   sortDirection,
-  users,
 }) => {
   const formatter = useMemo(
-    () => getResultsFormatter(entityType, searchTerm, users),
-    [entityType, searchTerm, users],
+    () => getResultsFormatter(entityType, searchTerm),
+    [entityType, searchTerm],
   );
 
   return (
@@ -85,10 +88,12 @@ export const BulkEditProfiles = ({
       columnMapping={COLUMN_MAPPING}
       isEmptyMessage={isEmptyMessage}
       contentData={profiles}
+      nonInteractiveHeaders={NON_INTERACTIVE_HEADERS}
       pageAmount={profiles.length}
       totalCount={profiles.length}
       loading={isLoading}
       onHeaderClick={changeSorting}
+      showSortIndicator
       virtualize
     />
   );
@@ -102,5 +107,4 @@ BulkEditProfiles.propTypes = {
   searchTerm: PropTypes.string,
   sortOrder: PropTypes.string.isRequired,
   sortDirection: PropTypes.string.isRequired,
-  users: PropTypes.arrayOf(userPropTypeShape).isRequired,
 };

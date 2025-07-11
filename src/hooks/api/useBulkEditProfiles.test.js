@@ -46,7 +46,7 @@ describe('useBulkEditProfiles', () => {
   });
 
   it('should fetch bulk edit profiles with the correct parameters', async () => {
-    const entityType = CAPABILITIES.INSTANCE_MARC;
+    const entityType = CAPABILITIES.INSTANCE;
     const params = { entityType };
 
     const first = renderHook(() => useBulkEditProfiles(params), { wrapper });
@@ -54,7 +54,7 @@ describe('useBulkEditProfiles', () => {
     await waitFor(() => expect(first.result.current.isFetching).toBeFalsy());
 
     expect(kyMock.get).toHaveBeenLastCalledWith(BULK_EDIT_PROFILES_API, expect.objectContaining({
-      searchParams: expect.objectContaining({ query: `entityType=="${entityType}" sortBy name/sort.ascending` }),
+      searchParams: expect.objectContaining({ query: `(entityType=="${CAPABILITIES.INSTANCE}" OR entityType=="${CAPABILITIES.INSTANCE_MARC}") sortBy name/sort.ascending` }),
     }));
     expect(first.result.current.profiles).toEqual(profiles);
 
