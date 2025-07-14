@@ -24,24 +24,21 @@ import {
   VISIBLE_COLUMNS,
 } from './constants';
 
-import css from './BulkEditProfiles.css';
-
 const isEmptyMessage = <FormattedMessage id="ui-bulk-edit.settings.profiles.empty" />;
 
 const getResultsFormatter = (entityType, searchTerm) => {
   return {
     [COLUMNS.name]: (profile) => (
-      <span className={css.nameCell}>
-        <AppIcon
-          app="bulk-edit"
-          iconKey={RECORD_TYPES_MAPPING[entityType]}
-          size="small"
-        />
+      <AppIcon
+        app="bulk-edit"
+        iconKey={RECORD_TYPES_MAPPING[entityType]}
+        size="small"
+      >
         <DefaultColumn
           searchTerm={searchTerm}
           value={profile.name}
         />
-      </span>
+      </AppIcon>
     ),
     [COLUMNS.description]: (profile) => (
       <DefaultColumn

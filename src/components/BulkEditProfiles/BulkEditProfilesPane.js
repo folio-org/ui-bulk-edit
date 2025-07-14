@@ -23,6 +23,8 @@ import {
   PaneHeader,
   SearchField,
 } from '@folio/stripes/components';
+import { AppIcon } from '@folio/stripes/core';
+import { getFullName } from '@folio/stripes/util';
 import {
   buildSearch,
   filterAndSort,
@@ -32,9 +34,11 @@ import {
   useLocationSorting,
   useUsersBatch,
 } from '@folio/stripes-acq-components';
-import { getFullName } from '@folio/stripes/util';
 
-import { CAPABILITIES } from '../../constants';
+import {
+  CAPABILITIES,
+  RECORD_TYPES_MAPPING,
+} from '../../constants';
 import { useBulkEditProfiles } from '../../hooks/api';
 import { BulkEditProfiles } from './BulkEditProfiles';
 import {
@@ -141,7 +145,15 @@ export const BulkEditProfilesPane = ({
     return (
       <PaneHeader
         {...renderProps}
-        paneTitle={title}
+        paneTitle={(
+          <AppIcon
+            app="bulk-edit"
+            iconKey={RECORD_TYPES_MAPPING[entityType]}
+            size="small"
+          >
+            {title}
+          </AppIcon>
+        )}
         paneSub={paneSub}
       />
     );
