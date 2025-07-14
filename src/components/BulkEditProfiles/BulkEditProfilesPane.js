@@ -157,7 +157,7 @@ export const BulkEditProfilesPane = ({
         paneSub={paneSub}
       />
     );
-  }, [filteredProfiles?.length, isProfilesLoading, title]);
+  }, [entityType, filteredProfiles?.length, isProfilesLoading, title]);
 
   const isLoading = isFetching || isUsersLoading || isPending;
 
