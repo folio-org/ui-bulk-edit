@@ -43,6 +43,7 @@ export const MarcFieldRenderer = memo(({
     className,
     itemSchema,
     maxLength,
+    actionIndexInPath,
     dirty,
     showError,
   } = updatedField;
@@ -70,7 +71,7 @@ export const MarcFieldRenderer = memo(({
     error,
     required: isRequired,
     'data-row-index': fullPath[0], // fullPath[0] is the row index
-    'data-action-index':  ctx.index,
+    'data-action-index': fullPath[actionIndexInPath],
     'aria-label': ariaLabel,
     dirty: isDirty,
     disabled: isDisabled,

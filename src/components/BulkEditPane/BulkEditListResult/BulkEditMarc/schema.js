@@ -68,6 +68,7 @@ export const schema = [
         className: 'actions',
         showWhen: null,
         disabled: false,
+        actionIndexInPath: 2,
         required: ({ index, parentArray }) => {
           if (index === 1) {
             return parentArray[0]?.name === ACTIONS.FIND;
@@ -118,8 +119,9 @@ export const schema = [
             name: 'value',
             label: { id: 'ui-bulk-edit.layer.column.data' },
             type: CONTROL_TYPES.TEXTAREA,
-            dirty: (value) => !!value?.length,
-            required: true
+            required: true,
+            actionIndexInPath: 2,
+            dirty: (value) => !!value?.length
           }
         ]
       }
@@ -167,6 +169,7 @@ export const subfieldsSchema = [
         type: CONTROL_TYPES.SELECT_MENU,
         className: 'actions',
         showWhen: null,
+        actionIndexInPath: 4,
         disabled: ({ index }) => index === 0,
         dirty: (value) => !!value?.length,
         options: ({
@@ -194,6 +197,7 @@ export const subfieldsSchema = [
             type: CONTROL_TYPES.TEXTAREA,
             maxLength: 0,
             required: true,
+            actionIndexInPath: 4,
             dirty: (value) => !!value?.length,
           }
         ]
