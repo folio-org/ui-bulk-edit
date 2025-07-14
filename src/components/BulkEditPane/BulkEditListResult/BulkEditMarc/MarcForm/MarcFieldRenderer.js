@@ -70,7 +70,7 @@ export const MarcFieldRenderer = memo(({
     error,
     required: isRequired,
     'data-row-index': fullPath[0], // fullPath[0] is the row index
-    'data-action-index': fullPath[2], // fullPath[2] is the action index
+    'data-action-index':  ctx.index,
     'aria-label': ariaLabel,
     dirty: isDirty,
     disabled: isDisabled,
