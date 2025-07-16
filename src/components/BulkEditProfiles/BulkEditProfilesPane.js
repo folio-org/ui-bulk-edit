@@ -23,6 +23,8 @@ import {
   PaneHeader,
   SearchField,
 } from '@folio/stripes/components';
+import { AppIcon } from '@folio/stripes/core';
+import { getFullName } from '@folio/stripes/util';
 import {
   buildSearch,
   filterAndSort,
@@ -33,13 +35,16 @@ import {
   useUsersBatch,
 } from '@folio/stripes-acq-components';
 
-import { CAPABILITIES } from '../../constants';
+import {
+  CAPABILITIES,
+  RECORD_TYPES_MAPPING,
+} from '../../constants';
 import { useBulkEditProfiles } from '../../hooks/api';
 import { BulkEditProfiles } from './BulkEditProfiles';
 import {
   DEFAULT_SORTING,
   FILTER_SORT_CONFIG,
-  VISIBLE_COLUMNS,
+  SORTABLE_COLUMNS,
 } from './constants';
 
 import css from './BulkEditProfilesPane.css';
@@ -71,7 +76,7 @@ export const BulkEditProfilesPane = ({
     location,
     history,
     noop,
-    VISIBLE_COLUMNS,
+    SORTABLE_COLUMNS,
     DEFAULT_SORTING,
   );
 
@@ -88,7 +93,7 @@ export const BulkEditProfilesPane = ({
     users,
   } = useUsersBatch(userIds);
 
-  const count = profiles.length;
+  const usersMap = useMemo(() => new Map(users.map(user => [user.id, user])), [users]);
 
   const [filteredProfiles, setFilteredProfiles] = useState(profiles);
 
@@ -100,6 +105,11 @@ export const BulkEditProfilesPane = ({
    */
   useEffect(() => {
     startTransition(() => {
+      const hydratedProfiles = profiles.map(profile => ({
+        ...profile,
+        userFullName: getFullName(usersMap.get(profile.updatedBy)),
+      }));
+
       setFilteredProfiles(() => {
         return filterAndSort(
           FILTER_SORT_CONFIG,
@@ -108,11 +118,11 @@ export const BulkEditProfilesPane = ({
             [SORTING_PARAMETER]: sortOrder,
             [SORTING_DIRECTION_PARAMETER]: sortDirection,
           },
-          profiles,
+          hydratedProfiles,
         );
       });
     });
-  }, [profiles, locationSearchQuery, sortOrder, sortDirection]);
+  }, [profiles, locationSearchQuery, sortOrder, sortDirection, usersMap]);
 
   const onSearchChange = useCallback((e) => {
     const value = e?.target?.value;
@@ -128,18 +138,26 @@ export const BulkEditProfilesPane = ({
     const paneSub = !isProfilesLoading && (
       <FormattedMessage
         id="ui-bulk-edit.settings.profiles.paneSub"
-        values={{ count }}
+        values={{ count: filteredProfiles?.length }}
       />
     );
 
     return (
       <PaneHeader
         {...renderProps}
-        paneTitle={title}
+        paneTitle={(
+          <AppIcon
+            app="bulk-edit"
+            iconKey={RECORD_TYPES_MAPPING[entityType]}
+            size="small"
+          >
+            {title}
+          </AppIcon>
+        )}
         paneSub={paneSub}
       />
     );
-  }, [count, isProfilesLoading, title]);
+  }, [entityType, filteredProfiles?.length, isProfilesLoading, title]);
 
   const isLoading = isFetching || isUsersLoading || isPending;
 
@@ -168,7 +186,6 @@ export const BulkEditProfilesPane = ({
             searchTerm={searchTerm}
             sortOrder={sortOrder}
             sortDirection={sortDirection}
-            users={users}
           />
         </div>
       </div>

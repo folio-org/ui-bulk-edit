@@ -16,6 +16,7 @@ const mockProfiles = [
     updatedBy: 'user1',
     locked: false,
     entityType: CAPABILITIES.USER,
+    userFullName: 'Doe, John',
   },
   {
     id: '2',
@@ -25,6 +26,7 @@ const mockProfiles = [
     updatedBy: 'user2',
     locked: true,
     entityType: CAPABILITIES.ITEM,
+    userFullName: 'Smith, Jane',
   },
   {
     id: '3',
@@ -34,23 +36,7 @@ const mockProfiles = [
     updatedBy: 'user1',
     locked: false,
     entityType: CAPABILITIES.HOLDING,
-  },
-];
-
-const mockUsers = [
-  {
-    id: 'user1',
-    personal: {
-      firstName: 'John',
-      lastName: 'Doe',
-    },
-  },
-  {
-    id: 'user2',
-    personal: {
-      firstName: 'Jane',
-      lastName: 'Smith',
-    },
+    userFullName: 'Doe, John',
   },
 ];
 
@@ -61,7 +47,6 @@ const defaultProps = {
   searchTerm: '',
   sortOrder: 'name',
   sortDirection: 'ascending',
-  users: mockUsers,
   changeSorting: jest.fn(),
 };
 
