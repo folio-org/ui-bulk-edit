@@ -308,7 +308,7 @@ const nextActionConfig = {
  * @param {string} approach - The current approach MARC, IN_APP or MANUAL
  * @returns {Array} Array of action identifiers.
  */
-export function getDefaultActionLists(option, recordType, approach) {
+export function getDefaultActionLists(option, recordType, approach = APPROACHES.IN_APP) {
   const cfg = firstActionConfig[option];
 
   if (!cfg) return [];

@@ -32,7 +32,7 @@ describe('actionConfig utilities', () => {
     });
 
     it('returns noteActionsMarc for ADMINISTRATIVE_NOTE with MARC record type', () => {
-      const list = getDefaultActionLists(OPTIONS.ADMINISTRATIVE_NOTE, APPROACHES.MARC);
+      const list = getDefaultActionLists(OPTIONS.ADMINISTRATIVE_NOTE, CAPABILITIES.INSTANCE, APPROACHES.MARC);
       expect(list).toEqual(noteActionsMarc());
     });
 
