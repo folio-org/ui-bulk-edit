@@ -1,5 +1,4 @@
-import { render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import { render, fireEvent } from '@folio/jest-config-stripes/testing-library/react';
 import { runAxeTest } from '@folio/stripes-testing'; // for expect assertions
 import { ActionParameters } from './ActionParameters';
 import { ACTIONS, PARAMETERS_KEYS } from '../../../../../../constants';

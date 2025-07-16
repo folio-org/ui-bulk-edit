@@ -1,9 +1,8 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { QueryClientProvider } from 'react-query';
-import '@testing-library/jest-dom/extend-expect';
 
 import { createMemoryHistory } from 'history';
 import { InAppFieldRenderer } from './InAppFieldRenderer';
