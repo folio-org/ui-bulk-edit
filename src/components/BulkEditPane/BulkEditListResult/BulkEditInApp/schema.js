@@ -22,11 +22,11 @@ export const schema = [
         disabled: false,
         colSize: 2,
         dirty: (value) => !!value,
-        options: ({ index, option, recordType, parentArray, allOptions }) => {
+        options: ({ index, option, recordType, parentArray, allOptions, approach }) => {
           const optionType = getOptionType(option, allOptions);
 
           if (index === 0) {
-            return getDefaultActionLists(optionType, recordType);
+            return getDefaultActionLists(optionType, recordType, approach);
           }
 
           return getNextActionLists(optionType, parentArray[0]?.name);

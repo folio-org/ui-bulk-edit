@@ -53,6 +53,7 @@ export const schema = [
     className: 'subfield',
     maxLength: SUBFIELD_MAX_LENGTH,
     disabled: false,
+    showError: true,
     dirty: (value) => !!value?.length,
   },
   {
@@ -121,6 +122,7 @@ export const schema = [
             type: CONTROL_TYPES.TEXTAREA,
             required: true,
             actionIndexInPath: 2,
+            showError: true,
             dirty: (value) => !!value?.length
           }
         ]

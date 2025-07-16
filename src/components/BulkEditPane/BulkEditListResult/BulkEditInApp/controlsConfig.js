@@ -159,8 +159,8 @@ const firstActionConfig = {
   },
 
   [OPTIONS.ADMINISTRATIVE_NOTE]: {
-    actions: recordType => {
-      return recordType === APPROACHES.MARC
+    actions: (_, approach) => {
+      return approach === APPROACHES.MARC
         ? noteActionsMarc()
         : noteActions();
     },
@@ -305,15 +305,16 @@ const nextActionConfig = {
  *
  * @param {string} option - The option key being edited.
  * @param {string} recordType - The record type context (e.g. USER, INSTANCE, ITEM etc.).
+ * @param {string} approach - The current approach MARC, IN_APP or MANUAL
  * @returns {Array} Array of action identifiers.
  */
-export function getDefaultActionLists(option, recordType) {
+export function getDefaultActionLists(option, recordType, approach) {
   const cfg = firstActionConfig[option];
 
   if (!cfg) return [];
 
   return typeof cfg.actions === 'function'
-    ? cfg.actions(recordType)
+    ? cfg.actions(recordType, approach)
     : cfg.actions;
 }
 

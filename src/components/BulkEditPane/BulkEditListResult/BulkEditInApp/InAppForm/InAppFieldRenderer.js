@@ -34,7 +34,7 @@ export const InAppFieldRenderer = memo(({
   onActionChange,
 }) => {
   const { formatMessage } = useIntl();
-  const { currentRecordType } = useSearchParams();
+  const { currentRecordType, approach } = useSearchParams();
 
   const {
     name,
@@ -52,7 +52,7 @@ export const InAppFieldRenderer = memo(({
   const fullPath = [...path, name];
   const isDirty = typeof dirty === 'function' ? dirty(value) : dirty;
   const controlType = typeof type === 'function' ? type({ ...ctx, option, allOptions, recordType: currentRecordType }) : type;
-  const actions = options?.({ ...ctx, option, allOptions, recordType: currentRecordType }) || [];
+  const actions = options?.({ ...ctx, option, allOptions, recordType: currentRecordType, approach }) || [];
   const actionsWithRules = getActionsWithRules({
     row: ctx.row,
     option,
