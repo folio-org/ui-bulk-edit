@@ -189,7 +189,6 @@
     "columns.USER.Email": "E-mail",
     "columns.USER.Phone": "Telefon",
     "columns.USER.Mobile phone": "Mobilní telefon",
-    "columns.USER.Date of birth": "Datum narození",
     "columns.USER.Addresses": "Adresy",
     "columns.USER.Preferred contact type id": "ID preferovaného typu kontaktu",
     "columns.USER.Enrollment date": "Datum zápisu",
@@ -491,7 +490,6 @@
     "error.mod-bulk-operations.not.download.file.from.s3": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker).",
     "error.mod-bulk-operations.not.confirm.changes.s3.issue": "Při načítání dat z S3 došlo k problému. Chcete-li zkontrolovat konfiguraci S3, kontaktujte svého poskytovatele hostingu. Další detaily jsou k dispozici v logu aplikace pro hromadné úpravy (moduly mod-hromadné-operace a mod-data-export-worker).",
     "menuGroup.startEdit": "Spustit hromadné úpravy",
-    "File uploading failed : Cannot upload a file. Reason: file is empty.": "Nahraný soubor je prázdný.",
     "start.downloadChangedRecords.marc": "Stáhnout změněné záznamy (MARC)",
     "layer.marc.error.ind": "Zkontrolujte prosím svůj vstup.",
     "layer.marc.error.subfield": "Zkontrolujte prosím svůj vstup.",
@@ -557,5 +555,15 @@
     "titleManager.settings.holdingsProfiles": "Nastavení hromadných úprav – profily hromadných úprav Holdingů",
     "titleManager.settings.instancesProfiles": "Nastavení hromadných úprav – profily hromadných úprav Titulů",
     "titleManager.settings.itemsProfiles": "Nastavení hromadných úprav - profily hromadných úprav Jednotek",
-    "titleManager.settings.usersProfiles": "Nastavení hromadných úprav – profily hromadných úprav Uživatelů"
+    "titleManager.settings.usersProfiles": "Nastavení hromadných úprav – profily hromadných úprav Uživatelů",
+    "File uploading failed : Cannot upload a file. Reason: file is empty.": "Nahraný soubor je prázdný.",
+    "columns.USER.Date of birth": "Datum narození",
+    "settings.profiles.empty": "<b>Nejsou k dispozici žádné profily.</b>",
+    "settings.profiles.columns.name": "Název",
+    "settings.profiles.columns.description": "Popis",
+    "settings.profiles.columns.updated": "Aktualizováno",
+    "settings.profiles.columns.updatedBy": "Aktualizoval",
+    "settings.profiles.columns.status": "Stav",
+    "settings.profiles.paneSub": "{count, number} {count, plural, one { nalezený profil } few {nalezené profily} other { nalezených profilů }}",
+    "settings.profiles.search.label": "Prohledávání profilů hromadných úprav"
 }
