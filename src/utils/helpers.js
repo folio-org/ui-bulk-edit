@@ -1,4 +1,4 @@
-import { clone, setWith } from 'lodash';
+import { clone, setWith, cloneDeep, update } from 'lodash';
 import {
   CAPABILITIES,
   EDIT_CAPABILITIES_OPTIONS,
@@ -119,6 +119,11 @@ export const setIn = (obj, path, value) => {
   return setWith(clone(obj), path, value, clone);
 };
 
+export const updateIn = (obj, path, updater) => {
+  const copy = cloneDeep(obj);
+  return update(copy, path, updater);
+};
+
 export const removeDuplicatesByValue = (arr = [], tenants = []) => {
   const valueMap = new Map();
 
@@ -234,4 +239,25 @@ export const findRecordType = (recordTypes, selectedType, formatMessage) => {
   const meta = getRecordTypesMeta(selectedType, formatMessage);
 
   return recordTypes?.find(({ id, label }) => id === meta?.id || label === meta?.label);
+};
+
+/**
+ * Validates an array of field data against the schema.
+ * @param {Array<Object>} fields - The collection of field objects to validate.
+ * @param {Object} schema - The validation schema to use.
+ * @returns {Object} A map of error paths to their corresponding error message IDs.
+ */
+export const getFormErrors = (fields, schema) => {
+  let errors = {};
+
+  try {
+    schema.validateSync(fields, { strict: true, abortEarly: false });
+  } catch (e) {
+    errors = e.inner?.reduce((acc, error) => {
+      acc[error.path] = error.message;
+      return acc;
+    }, {});
+  }
+
+  return errors;
 };

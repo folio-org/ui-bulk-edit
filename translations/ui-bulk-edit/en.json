@@ -379,6 +379,8 @@
   "layer.column.options": "Options",
   "layer.column.actions": "Actions",
   "layer.column.data": "Data",
+  "layer.column.value": "Data",
+  "layer.column.name": "Actions select",
   "layer.column.field": "Field",
   "layer.column.ind1": "In.1",
   "layer.column.ind2": "In.2",
