@@ -20,7 +20,7 @@ import {
   getPreselectedParams,
   getPreselectedValue
 } from '../helpers';
-import { customFilter, groupByCategory, updateIn } from '../../../../../utils/helpers';
+import { customFilter, getTenantsById, groupByCategory, updateIn } from '../../../../../utils/helpers';
 import { useSearchParams } from '../../../../../hooks';
 import { schema } from '../schema';
 import { InAppFieldRenderer } from './InAppFieldRenderer';
@@ -42,7 +42,7 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
     setFields(prevFields => [...prevFields, folioFieldTemplate(uniqueId())]);
   }, [setFields]);
 
-  const handleOptionChange = useCallback(({ path, val: option }) => {
+  const handleOptionChange = useCallback(({ path, val: option, tenants = [] }) => {
     const updatedField = updateIn(fields, path, (field) => {
       const optionType = getOptionType(option, options);
       const sourceOption = options.find(o => o.value === option);
@@ -53,6 +53,7 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
       return {
         ...field,
         option,
+        tenants,
         parameters,
         actionsDetails
       };
@@ -149,7 +150,7 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
                 <Selection
                   dataOptions={groupedOptions}
                   value={item.option}
-                  onChange={(value) => handleOptionChange({ path: [index], val: value })}
+                  onChange={(value) => handleOptionChange({ path: [index], val: value, tenants: getTenantsById(options, value) })}
                   placeholder={formatMessage({ id:'ui-bulk-edit.options.placeholder' })}
                   dirty={!!item.option}
                   ariaLabel={`select-option-${index}`}
