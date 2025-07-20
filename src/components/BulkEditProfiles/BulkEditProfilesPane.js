@@ -14,8 +14,10 @@ import {
   useIntl,
 } from 'react-intl';
 import {
+  Route,
   useHistory,
   useLocation,
+  useRouteMatch,
 } from 'react-router-dom';
 
 import {
@@ -40,6 +42,7 @@ import {
   RECORD_TYPES_MAPPING,
 } from '../../constants';
 import { useBulkEditProfiles } from '../../hooks/api';
+import { BulkEditProfileDetails } from './BulkEditProfileDetails';
 import { BulkEditProfiles } from './BulkEditProfiles';
 import {
   DEFAULT_SORTING,
@@ -58,6 +61,7 @@ export const BulkEditProfilesPane = ({
   const intl = useIntl();
   const location = useLocation();
   const history = useHistory();
+  const { path } = useRouteMatch();
 
   const locationSearchQuery = queryString.parse(location.search)?.[SEARCH_PARAMETER];
 
@@ -161,35 +165,56 @@ export const BulkEditProfilesPane = ({
 
   const isLoading = isFetching || isUsersLoading || isPending;
 
+  const onCloseDetailsPane = useCallback(() => {
+    history.push({
+      pathname: path,
+      search: location.search,
+    });
+  }, [history, location.search, path]);
+
   return (
-    <Pane
-      defaultWidth="fill"
-      renderHeader={renderHeader}
-    >
-      <div className={css.paneContent}>
-        <SearchField
-          ariaLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.search.label' })}
-          clearSearchId={`input-${entityType}-search-field-clear-button`}
-          id={`input-search-${entityType}-field`}
-          loading={isLoading}
-          marginBottom0
-          onChange={onSearchChange}
-          onClear={onSearchChange}
-          value={searchTerm}
-        />
-        <div className={css.profilesList}>
-          <BulkEditProfiles
-            changeSorting={changeLSorting}
-            entityType={entityType}
-            isLoading={isLoading}
-            profiles={filteredProfiles}
-            searchTerm={searchTerm}
-            sortOrder={sortOrder}
-            sortDirection={sortDirection}
+    <>
+      <Pane
+        defaultWidth="fill"
+        renderHeader={renderHeader}
+      >
+        <div className={css.paneContent}>
+          <SearchField
+            ariaLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.search.label' })}
+            clearSearchId={`input-${entityType}-search-field-clear-button`}
+            id={`input-search-${entityType}-field`}
+            loading={isLoading}
+            marginBottom0
+            onChange={onSearchChange}
+            onClear={onSearchChange}
+            value={searchTerm}
           />
+          <div className={css.profilesList}>
+            <BulkEditProfiles
+              changeSorting={changeLSorting}
+              entityType={entityType}
+              isLoading={isLoading}
+              profiles={filteredProfiles}
+              searchTerm={searchTerm}
+              sortOrder={sortOrder}
+              sortDirection={sortDirection}
+            />
+          </div>
         </div>
-      </div>
-    </Pane>
+      </Pane>
+
+      <Route
+        exact
+        path={`${path}/:id/view`}
+        render={(props) => (
+          <BulkEditProfileDetails
+            {...props}
+            entityType={entityType}
+            onClose={onCloseDetailsPane}
+          />
+        )}
+      />
+    </>
   );
 };
 
