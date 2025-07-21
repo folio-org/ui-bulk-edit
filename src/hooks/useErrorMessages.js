@@ -11,14 +11,18 @@ import { useSearchParams } from './useSearchParams';
  * Custom hook for handling and displaying error messages.
  *
  * @param {Object} params - Hook parameters. Default is empty object.
+ * @param {string} params.messageSuffix - Suffix to append to error messages.
  * @param {string} params.path - The API path to fetch relevant information about backend module.
  * @returns {Object} - Functions for error handling.
  */
-export const useErrorMessages = ({ path = '' } = {}) => {
+export const useErrorMessages = ({ path = '', messageSuffix = '' } = {}) => {
   const intl = useIntl();
   const callout = useShowCallout();
   const { initialFileName } = useSearchParams();
   const module = useModuleInfo(path);
+  const getMessageWithSuffix = (message) => {
+    return messageSuffix ? `${messageSuffix} ${message}` : message;
+  };
 
   const showError = (message) => {
     callout({
@@ -36,18 +40,18 @@ export const useErrorMessages = ({ path = '' } = {}) => {
 
     // show translated message if it exists
     if (translatedMessage) {
-      showError(translatedMessage);
+      showError(getMessageWithSuffix(translatedMessage));
       // otherwise show an error message we have
     } else if (message) {
       // if error message contains token error, show a special message
       if (message?.includes(ERRORS.TOKEN)) {
-        showError(intl.formatMessage({ id: 'ui-bulk-edit.error.incorrectFormatted' }, { fileName: meta?.fileName || initialFileName }));
+        showError(getMessageWithSuffix(intl.formatMessage({ id: 'ui-bulk-edit.error.incorrectFormatted' }, { fileName: meta?.fileName || initialFileName })));
       } else {
-        showError(message);
+        showError(getMessageWithSuffix(message));
       }
       // if there is no error message but it's error instance, show sww error message
     } else if (res instanceof Error) {
-      showError(intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }));
+      showError(messageSuffix + intl.formatMessage({ id: 'ui-bulk-edit.error.sww' }));
     }
   };
 

@@ -16,6 +16,7 @@ import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppP
 import { useCommitChanges } from '../../../hooks/useCommitChanges';
 import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
 import { validationSchema } from '../BulkEditListResult/BulkEditInApp/validation';
+import { useSearchParams } from '../../../hooks';
 
 
 export const BulkEditFolioLayer = ({
@@ -24,8 +25,9 @@ export const BulkEditFolioLayer = ({
   paneProps,
   onInAppLayerClose,
 }) => {
+  const { currentRecordType } = useSearchParams();
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
-  const { options, areAllOptionsLoaded } = useOptionsWithTenants();
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(currentRecordType);
   const { fields, setFields, isValid } = useBulkEditForm({
     validationSchema,
     template: folioFieldTemplate

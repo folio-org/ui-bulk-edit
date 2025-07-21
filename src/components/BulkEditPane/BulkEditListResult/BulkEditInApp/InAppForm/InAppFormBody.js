@@ -21,16 +21,14 @@ import {
   getPreselectedValue
 } from '../helpers';
 import { customFilter, groupByCategory, updateIn } from '../../../../../utils/helpers';
-import { useSearchParams } from '../../../../../hooks';
 import { schema } from '../schema';
 import { InAppFieldRenderer } from './InAppFieldRenderer';
 import { getDefaultActionState, getNextActionState } from '../controlsConfig';
 
 import css from '../../../BulkEditPane.css';
 
-export const InAppFormBody = ({ options, fields, setFields }) => {
+export const InAppFormBody = ({ options, fields, setFields, recordType, approach }) => {
   const { formatMessage } = useIntl();
-  const { currentRecordType } = useSearchParams();
 
   const handleRemoveField = useCallback((e) => {
     const index = parseInt(e.currentTarget.dataset.rowIndex, 10);
@@ -48,7 +46,7 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
       const sourceOption = options.find(o => o.value === option);
       const parameters = sourceOption?.parameters;
 
-      const actionsDetails = getDefaultActionState(optionType, currentRecordType);
+      const actionsDetails = getDefaultActionState(optionType, recordType);
 
       return {
         ...field,
@@ -59,7 +57,7 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
     });
 
     setFields(updatedField);
-  }, [fields, options, currentRecordType, setFields]);
+  }, [fields, options, recordType, setFields]);
 
   const handleActionChange = useCallback(({ path, val: action, name, option, ctx }) => {
     const [rowIndex, actionsDetails, actions] = path;
@@ -167,6 +165,8 @@ export const InAppFormBody = ({ options, fields, setFields }) => {
                   item={item.actionsDetails}
                   ctx={{ index, row: item }}
                   path={[index, 'actionsDetails']}
+                  recordType={recordType}
+                  approach={approach}
                   allOptions={options}
                   onChange={handleValueChange}
                   onActionChange={handleActionChange}
