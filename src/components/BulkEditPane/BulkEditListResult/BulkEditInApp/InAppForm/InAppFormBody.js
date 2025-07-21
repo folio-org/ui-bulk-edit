@@ -20,7 +20,7 @@ import {
   getPreselectedParams,
   getPreselectedValue
 } from '../helpers';
-import { customFilter, groupByCategory, updateIn } from '../../../../../utils/helpers';
+import { customFilter, getTenantsById, groupByCategory, updateIn } from '../../../../../utils/helpers';
 import { schema } from '../schema';
 import { InAppFieldRenderer } from './InAppFieldRenderer';
 import { getDefaultActionState, getNextActionState } from '../controlsConfig';
@@ -45,12 +45,13 @@ export const InAppFormBody = ({ options, fields, setFields, recordType, approach
       const optionType = getOptionType(option, options);
       const sourceOption = options.find(o => o.value === option);
       const parameters = sourceOption?.parameters;
-
+      const tenants = getTenantsById(options, option) || [];
       const actionsDetails = getDefaultActionState(optionType, recordType);
 
       return {
         ...field,
         option,
+        tenants,
         parameters,
         actionsDetails
       };
