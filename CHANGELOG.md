@@ -19,6 +19,7 @@
 * [UIBULKED-683](https://folio-org.atlassian.net/browse/UIBULKED-683) Refactor bulk-edit form configuration from mixed React state into abstract JSON schemas
 * [UIBULKED-681](https://folio-org.atlassian.net/browse/UIBULKED-681) Fix bulk-edit ITEMS form problems
 * [UIBULKED-682](https://folio-org.atlassian.net/browse/UIBULKED-682) Fix bulk-edit HOLDINGS form problems
+* [UIBULKED-653](https://folio-org.atlassian.net/browse/UIBULKED-653) Add "Create profile" form
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
