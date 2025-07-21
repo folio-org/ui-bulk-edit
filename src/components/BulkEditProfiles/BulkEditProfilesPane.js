@@ -21,6 +21,7 @@ import {
 } from 'react-router-dom';
 
 import {
+  Layer,
   Pane,
   PaneHeader,
   SearchField,
@@ -207,11 +208,13 @@ export const BulkEditProfilesPane = ({
         exact
         path={`${path}/:id/view`}
         render={(props) => (
-          <BulkEditProfileDetails
-            {...props}
-            entityType={entityType}
-            onClose={onCloseDetailsPane}
-          />
+          <Layer isOpen>
+            <BulkEditProfileDetails
+              {...props}
+              entityType={entityType}
+              onClose={onCloseDetailsPane}
+            />
+          </Layer>
         )}
       />
     </>
