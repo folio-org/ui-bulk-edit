@@ -2,6 +2,7 @@ import {
   render,
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { runAxeTest } from '@folio/stripes-testing';
 
 import { CAPABILITIES } from '../../constants';
@@ -61,5 +62,15 @@ describe('BulkEditProfileDetails', () => {
     const { container } = renderBulkEditProfileDetails();
 
     await runAxeTest({ rootNode: container });
+  });
+
+  describe('Shortcuts', () => {
+    it('should close the view when Escape key is pressed', async () => {
+      renderBulkEditProfileDetails();
+
+      await userEvent.keyboard('{Escape}');
+
+      expect(defaultProps.onClose).toHaveBeenCalled();
+    });
   });
 });
