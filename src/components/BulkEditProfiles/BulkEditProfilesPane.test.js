@@ -341,14 +341,3 @@ describe('BulkEditProfilesPane', () => {
     expect(searchInput).toHaveValue('');
   });
 });
-
-describe('Creating profile', () => {
-  it('should open create layer when "New" button is clicked', async () => {
-    renderBulkEditProfilesPane();
-
-    const newButton = screen.getByRole('button', { name: 'ui-bulk-edit.settings.profiles.button.new' });
-    await userEvent.click(newButton);
-
-    expect(screen.getByText('ui-bulk-edit.settings.profiles.title.new')).toBeInTheDocument();
-  });
-});

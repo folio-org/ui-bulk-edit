@@ -6,7 +6,7 @@ import { QueryClientProvider } from 'react-query';
 
 import { createMemoryHistory } from 'history';
 import { InAppFieldRenderer } from './InAppFieldRenderer';
-import { CONTROL_TYPES, CAPABILITIES } from '../../../../../constants';
+import { CONTROL_TYPES, CAPABILITIES, APPROACHES } from '../../../../../constants';
 import { useSearchParams } from '../../../../../hooks';
 import { queryClient } from '../../../../../../test/jest/utils/queryClient';
 import '../../../../../../test/jest/__mock__/reactIntl.mock';
@@ -63,6 +63,8 @@ describe('FolioFieldRenderer (integration)', () => {
       ...baseField,
       type: CONTROL_TYPES.INPUT
     },
+    recordType: CAPABILITIES.ITEM,
+    approach: APPROACHES.IN_APP,
     item: { fieldName: 'initial' },
     option: {},
     path: [0, 'path'],
@@ -234,6 +236,7 @@ describe('FolioFieldRenderer (integration)', () => {
       });
 
       renderMe({
+        recordType: CAPABILITIES.HOLDING,
         field: {
           ...baseField,
           type: CONTROL_TYPES.NOTE_SELECT
@@ -274,6 +277,7 @@ describe('FolioFieldRenderer (integration)', () => {
       });
 
       renderMe({
+        recordType: CAPABILITIES.INSTANCE,
         field: {
           ...baseField,
           type: CONTROL_TYPES.NOTE_SELECT
