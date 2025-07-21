@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, Modal } from '@folio/stripes/components';
@@ -31,4 +32,10 @@ export const PreventFormCloseModal = ({ open, onKeepEditing, onClose }) => {
       <FormattedMessage id="ui-bulk-edit.previewModal.unsavedChanges" />
     </Modal>
   );
+};
+
+PreventFormCloseModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onKeepEditing: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };

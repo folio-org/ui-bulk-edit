@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useProfileCreate } from '../../../hooks/api/useProfileCreate';
 import { BulkEditProfilesForm } from './BulkEditProfilesForm';
 
@@ -17,4 +18,9 @@ export const BulkEditCreateProfile = ({ entityType, onClose }) => {
       onSave={handleSave}
     />
   );
+};
+
+BulkEditCreateProfile.propTypes = {
+  entityType: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
 };

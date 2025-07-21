@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import {
   ExpandAllButton,
@@ -221,4 +222,10 @@ export const BulkEditProfilesForm = ({ entityType, onClose, onSave }) => {
       />
     </Pane>
   );
+};
+
+BulkEditProfilesForm.propTypes = {
+  entityType: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
 };

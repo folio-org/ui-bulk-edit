@@ -201,6 +201,8 @@ export const InAppFormBody = ({ options, fields, setFields, recordType, approach
 
 InAppFormBody.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({})),
+  recordType: PropTypes.string,
+  approach: PropTypes.string,
   fields: PropTypes.arrayOf(PropTypes.shape({})),
   setFields: PropTypes.func,
 };

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { TitleManager } from '@folio/stripes/core';
 import { useIntl } from 'react-intl';
 import { BulkEditProfilesPane } from '../../components/BulkEditProfiles';
@@ -15,4 +16,8 @@ export const ProfilesContainer = ({ entityType }) => {
       />
     </TitleManager>
   );
+};
+
+ProfilesContainer.propTypes = {
+  entityType: PropTypes.string.isRequired,
 };
