@@ -73,6 +73,7 @@ export const BulkEditProfileDetails = ({
     return deleteProfile({ profileId: id })
       .then(() => {
         showCallout({ messageId: 'ui-bulk-edit.settings.profiles.details.action.delete.success' });
+        onClose();
       })
       .catch(() => {
         showCallout({
@@ -80,7 +81,7 @@ export const BulkEditProfileDetails = ({
           type: 'error',
         });
       });
-  }, [deleteProfile, id, showCallout, toggleDeleteProfileModalModal]);
+  }, [deleteProfile, id, onClose, showCallout, toggleDeleteProfileModalModal]);
 
   const renderActionMenu = useCallback(({ onToggle }) => {
     return (
