@@ -602,6 +602,13 @@
   "settings.profiles.columns.updatedBy": "Updated by",
   "settings.profiles.columns.status": "Status",
   "settings.profiles.details.summary": "Summary",
+  "settings.profiles.details.action.delete.modal.heading.holdings": "Delete holdings records bulk edit profile",
+  "settings.profiles.details.action.delete.modal.heading.instance": "Delete instance records bulk edit profile",
+  "settings.profiles.details.action.delete.modal.heading.item": "Delete item records bulk edit profile",
+  "settings.profiles.details.action.delete.modal.heading.user": "Delete user records bulk edit profile",
+  "settings.profiles.details.action.delete.modal.message": "Delete \"<b>{name}</b>\" profile?",
+  "settings.profiles.details.action.delete.success": "Profile successfully deleted.",
+  "settings.profiles.details.action.delete.error": "Failed to delete profile.",
   "settings.profiles.paneSub": "{count, number} {count, plural, one {profile found} other {profiles found}}",
   "settings.profiles.search.label": "Search bulk edit profiles",
 

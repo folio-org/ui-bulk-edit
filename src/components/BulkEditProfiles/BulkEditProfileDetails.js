@@ -1,38 +1,52 @@
 import PropTypes from 'prop-types';
-import ReactRouterPropTypes from 'react-router-prop-types';
 import {
   useCallback,
   useMemo,
   useRef,
 } from 'react';
 import { FormattedMessage } from 'react-intl';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
 import {
   Accordion,
   AccordionSet,
   AccordionStatus,
+  Button,
   checkScope,
   Col,
   collapseAllSections,
+  ConfirmationModal,
   ExpandAllButton,
   expandAllSections,
   HasCommand,
+  Icon,
   KeyValue,
   Loading,
   LoadingPane,
+  MenuSection,
   Pane,
   PaneHeader,
   Row,
 } from '@folio/stripes/components';
-import { AppIcon } from '@folio/stripes/core';
+import {
+  AppIcon,
+  IfPermission,
+} from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';
-import { handleKeyCommand } from '@folio/stripes-acq-components';
+import {
+  handleKeyCommand,
+  useModalToggle,
+  useShowCallout,
+} from '@folio/stripes-acq-components';
 
 import {
   CAPABILITIES,
   RECORD_TYPES_MAPPING,
 } from '../../constants';
-import { useBulkEditProfile } from '../../hooks/api';
+import {
+  useBulkEditProfile,
+  useBulkEditProfileMutation,
+} from '../../hooks/api';
 import { PROFILE_DETAILS_ACCORDIONS } from './constants';
 
 const { SUMMARY } = PROFILE_DETAILS_ACCORDIONS;
@@ -43,11 +57,53 @@ export const BulkEditProfileDetails = ({
   onClose,
 }) => {
   const accordionStatusRef = useRef();
+  const [isDeleteProfileModalOpen, toggleDeleteProfileModalModal] = useModalToggle();
+  const showCallout = useShowCallout();
 
   const {
     isLoading,
     profile,
   } = useBulkEditProfile(id);
+
+  const { deleteProfile } = useBulkEditProfileMutation();
+
+  const handleProfileDelete = useCallback(() => {
+    toggleDeleteProfileModalModal();
+
+    return deleteProfile({ profileId: id })
+      .then(() => {
+        showCallout({ messageId: 'ui-bulk-edit.settings.profiles.details.action.delete.success' });
+      })
+      .catch(() => {
+        showCallout({
+          messageId: 'ui-bulk-edit.settings.profiles.details.action.delete.error',
+          type: 'error',
+        });
+      });
+  }, [deleteProfile, id, showCallout, toggleDeleteProfileModalModal]);
+
+  const renderActionMenu = useCallback(({ onToggle }) => {
+    return (
+      <MenuSection id="bulk-edit-profile-action-menu">
+        <IfPermission perm="bulk-operations.profiles.item.delete">
+          <Button
+            buttonStyle="dropdownItem"
+            onClick={() => {
+              toggleDeleteProfileModalModal();
+              onToggle();
+            }}
+          >
+            <Icon
+              size="small"
+              icon="trash"
+            >
+              <FormattedMessage id="stripes-core.button.delete" />
+            </Icon>
+          </Button>
+        </IfPermission>
+      </MenuSection>
+    );
+  }, [toggleDeleteProfileModalModal]);
 
   const renderHeader = useCallback((renderProps) => {
     const paneTitle = (
@@ -63,11 +119,12 @@ export const BulkEditProfileDetails = ({
     return (
       <PaneHeader
         {...renderProps}
+        actionMenu={renderActionMenu}
         paneTitle={paneTitle}
         onClose={onClose}
       />
     );
-  }, [entityType, isLoading, onClose, profile?.name]);
+  }, [entityType, isLoading, onClose, profile?.name, renderActionMenu]);
 
   const metadata = useMemo(() => (
     profile?.metadata || {
@@ -164,6 +221,24 @@ export const BulkEditProfileDetails = ({
             </AccordionStatus>
           </Col>
         </Row>
+
+        <ConfirmationModal
+          confirmLabel={<FormattedMessage id="stripes-core.button.delete" />}
+          heading={
+            <FormattedMessage
+              id={`ui-bulk-edit.settings.profiles.details.action.delete.modal.heading.${RECORD_TYPES_MAPPING[entityType]}`}
+            />
+          }
+          onConfirm={handleProfileDelete}
+          onCancel={toggleDeleteProfileModalModal}
+          open={isDeleteProfileModalOpen}
+          message={(
+            <FormattedMessage
+              id="ui-bulk-edit.settings.profiles.details.action.delete.modal.message"
+              values={{ name: profile?.name }}
+            />
+          )}
+        />
       </Pane>
     </HasCommand>
   );
