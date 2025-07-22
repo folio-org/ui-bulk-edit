@@ -4,10 +4,13 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { runAxeTest } from '@folio/stripes-testing';
+import { handleKeyCommand } from '@folio/stripes-acq-components';
 
 import { CAPABILITIES } from '../../constants';
 import { useBulkEditProfile } from '../../hooks/api';
 import { BulkEditProfileDetails } from './BulkEditProfileDetails';
+
+jest.unmock('@folio/stripes/components');
 
 jest.mock('@folio/stripes/smart-components', () => ({
   ...jest.requireActual('@folio/stripes/smart-components'),
@@ -71,6 +74,22 @@ describe('BulkEditProfileDetails', () => {
       await userEvent.keyboard('{Escape}');
 
       expect(defaultProps.onClose).toHaveBeenCalled();
+    });
+
+    it('should collapse all sections when "collapseAllSections" command is triggered', async () => {
+      renderBulkEditProfileDetails();
+
+      await userEvent.keyboard('{Control>}{Alt>}{g}{/Alt}{/Control}');
+
+      expect(handleKeyCommand).toHaveBeenCalledWith(expect.any(Function));
+    });
+
+    it('should collapse all sections when "expandAllSections" command is triggered', async () => {
+      renderBulkEditProfileDetails();
+
+      await userEvent.keyboard('{Control>}{Alt>}{b}{/Alt}{/Control}');
+
+      expect(handleKeyCommand).toHaveBeenCalledWith(expect.any(Function));
     });
   });
 });
