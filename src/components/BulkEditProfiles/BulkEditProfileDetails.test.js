@@ -7,7 +7,10 @@ import { runAxeTest } from '@folio/stripes-testing';
 import { handleKeyCommand } from '@folio/stripes-acq-components';
 
 import { CAPABILITIES } from '../../constants';
-import { useBulkEditProfile } from '../../hooks/api';
+import {
+  useBulkEditProfile,
+  useBulkEditProfileMutation,
+} from '../../hooks/api';
 import { BulkEditProfileDetails } from './BulkEditProfileDetails';
 
 jest.unmock('@folio/stripes/components');
@@ -24,6 +27,7 @@ jest.mock('@folio/stripes-acq-components', () => ({
 
 jest.mock('../../hooks/api', () => ({
   useBulkEditProfile: jest.fn(),
+  useBulkEditProfileMutation: jest.fn(),
 }));
 
 const profileMock = {
@@ -46,8 +50,11 @@ const renderBulkEditProfileDetails = (props = {}) => render(
 );
 
 describe('BulkEditProfileDetails', () => {
+  const deleteProfile = jest.fn();
+
   beforeEach(() => {
     useBulkEditProfile.mockReturnValue({ profile: profileMock });
+    useBulkEditProfileMutation.mockReturnValue({ deleteProfile });
   });
 
   afterEach(() => {
