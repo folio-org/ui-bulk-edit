@@ -55,6 +55,7 @@ export const BulkEditProfileDetails = ({
   entityType,
   match: { params: { id } },
   onClose,
+  refetch,
 }) => {
   const accordionStatusRef = useRef();
   const [isDeleteProfileModalOpen, toggleDeleteProfileModalModal] = useModalToggle();
@@ -65,7 +66,10 @@ export const BulkEditProfileDetails = ({
     profile,
   } = useBulkEditProfile(id);
 
-  const { deleteProfile } = useBulkEditProfileMutation();
+  const {
+    deleteProfile,
+    isLoading: isDeletingProfile,
+  } = useBulkEditProfileMutation();
 
   const handleProfileDelete = useCallback(() => {
     toggleDeleteProfileModalModal();
@@ -73,6 +77,7 @@ export const BulkEditProfileDetails = ({
     return deleteProfile({ profileId: id })
       .then(() => {
         showCallout({ messageId: 'ui-bulk-edit.settings.profiles.details.action.delete.success' });
+        refetch();
         onClose();
       })
       .catch(() => {
@@ -81,7 +86,7 @@ export const BulkEditProfileDetails = ({
           type: 'error',
         });
       });
-  }, [deleteProfile, id, onClose, showCallout, toggleDeleteProfileModalModal]);
+  }, [deleteProfile, id, onClose, refetch, showCallout, toggleDeleteProfileModalModal]);
 
   const renderActionMenu = useCallback(({ onToggle }) => {
     return (
@@ -89,6 +94,7 @@ export const BulkEditProfileDetails = ({
         <IfPermission perm="bulk-operations.profiles.item.delete">
           <Button
             buttonStyle="dropdownItem"
+            disabled={isDeletingProfile}
             onClick={() => {
               toggleDeleteProfileModalModal();
               onToggle();
@@ -104,7 +110,7 @@ export const BulkEditProfileDetails = ({
         </IfPermission>
       </MenuSection>
     );
-  }, [toggleDeleteProfileModalModal]);
+  }, [isDeletingProfile, toggleDeleteProfileModalModal]);
 
   const renderHeader = useCallback((renderProps) => {
     const paneTitle = (
@@ -249,4 +255,5 @@ BulkEditProfileDetails.propTypes = {
   entityType: PropTypes.oneOf(Object.values(CAPABILITIES)).isRequired,
   match: ReactRouterPropTypes.match.isRequired,
   onClose: PropTypes.func.isRequired,
+  refetch: PropTypes.func.isRequired,
 };

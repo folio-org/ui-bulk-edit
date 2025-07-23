@@ -59,6 +59,7 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
     data,
     isFetching,
     isLoading,
+    refetch,
   } = useQuery(
     {
       queryKey: [namespace, entityType, tenantId],
@@ -81,5 +82,6 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
     isFetching,
     isLoading,
     profiles: data ?? DEFAULT_DATA,
+    refetch,
   };
 };
