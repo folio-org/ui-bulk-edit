@@ -21,6 +21,12 @@ export const ACTIONS = {
   REMOVE_THESE: 'REMOVE_THESE',
 };
 
+// GRANULAR_ACTIONS_MAP - map of actions that concatenated to find single actions.
+export const GRANULAR_ACTIONS_MAP = {
+  FIND_AND_REMOVE_THESE: [ACTIONS.FIND, ACTIONS.REMOVE_THESE],
+  FIND_AND_REPLACE: [ACTIONS.FIND, ACTIONS.REPLACE_WITH],
+};
+
 // FINAL_ACTIONS - final actions in scope of row. Not possible select anything after choosing it in row.
 export const FINAL_ACTIONS = [
   ACTIONS.CLEAR_FIELD,
@@ -30,10 +36,6 @@ export const FINAL_ACTIONS = [
   ACTIONS.REMOVE_MARK_AS_STAFF_ONLY,
   ACTIONS.REMOVE_ALL,
   ACTIONS.REMOVE_THESE,
-];
-
-export const REQUIRES_INITIAL_ACTIONS = [
-  ACTIONS.FIND_REMOVE_THESE,
 ];
 
 export const getPlaceholder = () => ({

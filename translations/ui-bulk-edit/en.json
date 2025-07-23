@@ -613,7 +613,9 @@
   "settings.profiles.form.description": "Description",
   "settings.profiles.form.lockProfile": "Lock profile",
   "settings.profiles.form.create.success": "Profile successfully created.",
+  "settings.profiles.form.update.success": "Profile successfully updated.",
   "settings.profiles.form.create.error": "Following error prevented saving the profile:",
+  "settings.profiles.form.update.error": "Following error prevented updating the profile:",
 
   "titleManager.settings": "Bulk edit settings",
   "titleManager.settings.holdings": "Bulk edit settings - Holdings bulk edit profiles",

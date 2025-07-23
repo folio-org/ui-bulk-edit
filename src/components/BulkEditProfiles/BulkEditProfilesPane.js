@@ -53,7 +53,8 @@ import {
 import { useBulkPermissions } from '../../hooks';
 
 import css from './BulkEditProfilesPane.css';
-import { BulkEditCreateProfile } from './forms/BulkEditCreateProfile';
+import { BulkEditCreateProfile } from './BulkEditCreateProfile';
+import { BulkEditUpdateProfile } from './BulkEditUpdateProfile';
 
 export const BulkEditProfilesPane = ({
   entityType,
@@ -234,11 +235,10 @@ export const BulkEditProfilesPane = ({
 
       <Route
         exact
-        path={`${path}/:id/view`}
-        render={(props) => (
+        path={`${path}/:id`}
+        render={() => (
           <Layer isOpen>
             <BulkEditProfileDetails
-              {...props}
               entityType={entityType}
               onClose={onCloseDetailsPane}
             />
@@ -252,6 +252,18 @@ export const BulkEditProfilesPane = ({
         render={() => (
           <Layer isOpen>
             <BulkEditCreateProfile
+              entityType={entityType}
+              onClose={closeFormLayer}
+            />
+          </Layer>
+        )}
+      />
+      <Route
+        exact
+        path={`${path}/:id/edit`}
+        render={() => (
+          <Layer isOpen>
+            <BulkEditUpdateProfile
               entityType={entityType}
               onClose={closeFormLayer}
             />

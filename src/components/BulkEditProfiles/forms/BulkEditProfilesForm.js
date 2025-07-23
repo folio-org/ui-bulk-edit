@@ -10,7 +10,6 @@ import {
   Col,
   Label,
   Layout,
-  Loading,
   Pane,
   PaneFooter,
   Row,
@@ -25,15 +24,14 @@ import { validationSchema } from '../../BulkEditPane/BulkEditListResult/BulkEdit
 import {
   folioFieldTemplate,
   getContentUpdatesBody,
-  getMappedContentUpdates
+  getMappedContentUpdates,
 } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
 import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
 import { APPROACHES, RECORD_TYPES_MAPPING } from '../../../constants';
-import { InAppFormTitle } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppFormTitle';
-import { InAppFormBody } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppFormBody';
 import { profilesValidationSchema } from './validation';
 import { getFormErrors } from '../../../utils/helpers';
 import { PreventFormCloseModal } from './PreventFormCloseModal';
+import { InAppForm } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
 
 const initialFormState = (entityType) => ({
   name: '',
@@ -42,23 +40,24 @@ const initialFormState = (entityType) => ({
   entityType,
 });
 
-export const BulkEditProfilesForm = ({ entityType, onClose, onSave }) => {
+export const BulkEditProfilesForm = ({ title, entityType, initialValues, initialRuleDetails, onClose, onSave }) => {
   const intl = useIntl();
   const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType);
   const { fields, setFields, isValid: areContentUpdatesValid, isPristine: isContentUpdatePristine } = useBulkEditForm({
     validationSchema,
-    template: folioFieldTemplate
+    initialValues: initialRuleDetails,
+    template: folioFieldTemplate,
   });
-  const [formState, setFormState] = useState(initialFormState(entityType));
+  const initial = initialValues || initialFormState(entityType);
   const [preventModalOpen, setPreventModalOpen] = useState(false);
-
+  const [formState, setFormState] = useState(initial);
   const { name, description, locked } = formState;
-  const friendlyEntityType = RECORD_TYPES_MAPPING[entityType];
 
   const errors = getFormErrors(formState, profilesValidationSchema);
   const isFormValid = Object.keys(errors).length === 0;
-  const isSaveDisabled = !areContentUpdatesValid || !isFormValid;
-  const isFormPristine = isEqual(formState, initialFormState(entityType));
+  const isFormPristine = isEqual(formState, initial);
+  const isFullFormPristine = isFormPristine && isContentUpdatePristine;
+  const isSaveDisabled = !areContentUpdatesValid || !isFormValid || isFullFormPristine;
 
   const openPreventModal = () => {
     setPreventModalOpen(true);
@@ -69,7 +68,7 @@ export const BulkEditProfilesForm = ({ entityType, onClose, onSave }) => {
   };
 
   const handleTryClose = () => {
-    if (isContentUpdatePristine && isFormPristine) {
+    if (isFullFormPristine) {
       onClose();
     } else {
       openPreventModal();
@@ -106,11 +105,8 @@ export const BulkEditProfilesForm = ({ entityType, onClose, onSave }) => {
     });
   };
 
-  const appIcon = <AppIcon app="bulk-edit" iconKey={friendlyEntityType} />;
-  const paneTitle = intl.formatMessage(
-    { id: 'ui-bulk-edit.settings.profiles.title.new' },
-    { entityType: friendlyEntityType }
-  );
+  const appIcon = <AppIcon app="bulk-edit" iconKey={RECORD_TYPES_MAPPING[entityType]} />;
+
   const paneFooter = (
     (
       <PaneFooter
@@ -143,7 +139,7 @@ export const BulkEditProfilesForm = ({ entityType, onClose, onSave }) => {
   return (
     <Pane
       defaultWidth="fill"
-      paneTitle={paneTitle}
+      paneTitle={title}
       appIcon={appIcon}
       dismissible
       footer={paneFooter}
@@ -194,24 +190,14 @@ export const BulkEditProfilesForm = ({ entityType, onClose, onSave }) => {
         <Accordion
           label={intl.formatMessage({ id: 'ui-bulk-edit.layer.title' })}
         >
-          {areAllOptionsLoaded ? (
-            <>
-              <InAppFormTitle
-                fields={fields}
-              />
-              <InAppFormBody
-                fields={fields}
-                setFields={setFields}
-                options={options}
-                recordType={entityType}
-                approach={APPROACHES.IN_APP}
-              />
-            </>
-          ) : (
-            <Layout className="display-flex centerContent">
-              <Loading size="large" />
-            </Layout>
-          )}
+          <InAppForm
+            fields={fields}
+            setFields={setFields}
+            options={options}
+            recordType={entityType}
+            approach={APPROACHES.IN_APP}
+            loading={!areAllOptionsLoaded}
+          />
         </Accordion>
       </AccordionSet>
 

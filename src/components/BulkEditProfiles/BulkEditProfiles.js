@@ -39,7 +39,7 @@ const getResultsFormatter = (entityType, searchTerm, path, search) => {
         iconKey={RECORD_TYPES_MAPPING[entityType]}
         size="small"
       >
-        <TextLink to={`${path}/${profile.id}/view${search}`}>
+        <TextLink to={`${path}/${profile.id}${search}`}>
           <DefaultColumn
             searchTerm={searchTerm}
             value={profile.name}

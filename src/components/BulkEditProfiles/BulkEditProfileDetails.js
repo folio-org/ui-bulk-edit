@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
-import ReactRouterPropTypes from 'react-router-prop-types';
+import { useHistory } from 'react-router-dom';
 import React, {
   useCallback,
   useMemo,
   useRef,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
   Accordion,
   AccordionSet,
   AccordionStatus,
+  Button,
   Checkbox,
   checkScope,
   Col,
@@ -18,20 +19,22 @@ import {
   ExpandAllButton,
   expandAllSections,
   HasCommand,
-  Headline,
+  Headline, Icon,
   KeyValue,
   Label,
   Layout,
   Loading,
   LoadingPane,
+  MenuSection,
   Pane,
   PaneHeader,
   Row,
 } from '@folio/stripes/components';
-import { AppIcon } from '@folio/stripes/core';
+import { AppIcon, IfPermission } from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 import { handleKeyCommand } from '@folio/stripes-acq-components';
 
+import { useParams } from 'react-router';
 import {
   CAPABILITIES,
   RECORD_TYPES_MAPPING,
@@ -43,15 +46,43 @@ const { SUMMARY } = PROFILE_DETAILS_ACCORDIONS;
 
 export const BulkEditProfileDetails = ({
   entityType,
-  match: { params: { id } },
   onClose,
 }) => {
+  const intl = useIntl();
+  const { id } = useParams();
+  const history = useHistory();
   const accordionStatusRef = useRef();
 
   const {
     isLoading,
     profile,
   } = useBulkEditProfile(id);
+
+  const renderActionMenu = useCallback(() => {
+    return (
+      <MenuSection id="bulk-edit-profile-action-menu">
+        <IfPermission perm="ui-bulk-edit.settings.create">
+          <Button
+            aria-label={intl.formatMessage({ id: 'stripes-core.button.edit' })}
+            buttonStyle="dropdownItem"
+            onClick={() => {
+              history.push({
+                pathname: `${id}/edit`,
+                search: history.location.search,
+              });
+            }}
+          >
+            <Icon
+              size="small"
+              icon="edit"
+            >
+              <FormattedMessage id="stripes-core.button.edit" />
+            </Icon>
+          </Button>
+        </IfPermission>
+      </MenuSection>
+    );
+  }, [intl, history, id]);
 
   const renderHeader = useCallback((renderProps) => {
     const paneTitle = (
@@ -118,6 +149,7 @@ export const BulkEditProfileDetails = ({
         defaultWidth="fill"
         id="pane-bulk-edit-profile-details"
         renderHeader={renderHeader}
+        actionMenu={renderActionMenu}
         dismissible
       >
         <Headline size="xx-large" margin="none" tag="h1">
@@ -185,6 +217,5 @@ export const BulkEditProfileDetails = ({
 
 BulkEditProfileDetails.propTypes = {
   entityType: PropTypes.oneOf(Object.values(CAPABILITIES)).isRequired,
-  match: ReactRouterPropTypes.match.isRequired,
   onClose: PropTypes.func.isRequired,
 };

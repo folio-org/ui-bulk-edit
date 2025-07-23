@@ -11,6 +11,7 @@ import { MarcFormTitle } from './MarcForm/MarcFormTitle';
 import { InAppFormTitle } from '../BulkEditInApp/InAppForm/InAppFormTitle';
 import { InAppFormBody } from '../BulkEditInApp/InAppForm/InAppFormBody';
 import { useSearchParams } from '../../../../hooks';
+import { InAppForm } from '../BulkEditInApp/InAppForm/InAppForm';
 
 
 export const BulkEditMarc = ({
@@ -33,6 +34,13 @@ export const BulkEditMarc = ({
       <Accordion
         label={<FormattedMessage id="ui-bulk-edit.layer.title.administrative" />}
       >
+        <InAppForm
+          fields={fields}
+          setFields={setFields}
+          options={options}
+          recordType={currentRecordType}
+          approach={approach}
+        />
         <InAppFormTitle fields={fields} />
         <InAppFormBody
           fields={fields}

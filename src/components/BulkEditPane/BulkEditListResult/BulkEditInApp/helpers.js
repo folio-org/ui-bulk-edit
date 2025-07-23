@@ -1,4 +1,5 @@
 import { dayjs } from '@folio/stripes/components';
+import { uniqueId } from 'lodash';
 
 import {
   OPTIONS,
@@ -6,9 +7,11 @@ import {
   FINAL_ACTIONS,
   ACTIONS,
   NOTES_PARAMETERS_KEYS,
+  GRANULAR_ACTIONS_MAP,
+  PARAMETERS_KEYS,
   getRemoveSomeAction,
   getPlaceholder,
-  getAddAction,
+  getAddAction, BOOLEAN_PARAMETERS_KEYS,
 } from '../../../../constants';
 
 export const TEMPORARY_LOCATIONS = [
@@ -83,6 +86,54 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
     bulkOperationRules,
     totalRecords,
   };
+};
+
+/**
+ * Maps rule details from the backend into a source format that can be used
+ * as the initial state of a form.
+ *
+ * @param {Array} ruleDetails - Array of rule detail objects from the backend.
+ * @returns {Array} Array of formatted rule objects ready to be used as initial state of form.
+ */
+export const ruleDetailsToSource = (ruleDetails) => {
+  return ruleDetails?.map(rule => {
+    const { option, tenants, actions } = rule;
+    const action = actions[0] || {};
+    const noteParam = action.parameters?.find(param => NOTES_PARAMETERS_KEYS.includes(param.key));
+    const [firstAction, secondAction] = GRANULAR_ACTIONS_MAP[action.type] || [action.type];
+    const mappedParameters = action.parameters?.map(param => {
+      if (BOOLEAN_PARAMETERS_KEYS.includes(param.key)) {
+        return {
+          ...param,
+          ...(param.key === PARAMETERS_KEYS.STAFF_ONLY ? { onlyForActions: [ACTIONS.ADD_TO_EXISTING] } : {}), // staff only parameter is only for ADD_TO_EXISTING action
+          value: param.value === 'true' || param.value === true, // Ensure boolean values are true/false as BE is sending strings
+        };
+      }
+
+      return param;
+    });
+
+    return {
+      id: uniqueId(),
+      option: noteParam?.value || option,
+      tenants,
+      actionsDetails: {
+        actions: [
+          {
+            name: firstAction,
+            value: action.initial || action.updated,
+            parameters: mappedParameters,
+            tenants: action.tenants,
+          },
+          ...(secondAction ? [{
+            name: secondAction,
+            value: action.updated,
+            tenants: action.tenants,
+          }] : [])
+        ]
+      },
+    };
+  });
 };
 
 /**

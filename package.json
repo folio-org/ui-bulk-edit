@@ -237,7 +237,8 @@
         "displayName": "Settings (Bulk edit): Can view, add, update profiles",
         "subPermissions": [
           "ui-bulk-edit.settings.view",
-          "bulk-operations.profiles.item.post"
+          "bulk-operations.profiles.item.post",
+          "bulk-operations.profiles.item.put"
         ],
         "visible": true
       }

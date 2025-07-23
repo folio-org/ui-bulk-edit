@@ -10,7 +10,8 @@ export const useBulkEditForm = ({ initialValues, validationSchema, template }) =
   const isValid = Object.keys(errors).length === 0;
 
   const fieldsWithoutId = fields.map(item => omit(item, ['id']));
-  const isPristine = isEqual([template()], fieldsWithoutId);
+  const initialValuesWithoutId = initialValues?.map(item => omit(item, ['id']));
+  const isPristine = isEqual(initialValuesWithoutId || [template()], fieldsWithoutId);
 
   return {
     fields,
