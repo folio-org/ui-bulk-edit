@@ -26,6 +26,11 @@ jest.mock('../../hooks/api', () => ({
   useBulkEditProfile: jest.fn(),
 }));
 
+jest.mock('react-router', () => ({
+  ...jest.requireActual('react-router'),
+  useParams: () => ({ id: '123' })
+}));
+
 const profileMock = {
   id: '123',
   name: 'Test Profile',
@@ -34,7 +39,6 @@ const profileMock = {
 
 const defaultProps = {
   entityType: CAPABILITIES.USER,
-  match: { params: { id: '123' } },
   onClose: jest.fn(),
 };
 
