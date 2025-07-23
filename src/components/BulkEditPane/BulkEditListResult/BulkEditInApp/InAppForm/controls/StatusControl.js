@@ -8,7 +8,7 @@ import { getLabelByValue } from '../../helpers';
 import { getItemStatusOptions } from '../../../../../../constants';
 
 
-export const StatusControl = ({ value, path, name, ctx, onChange }) => {
+export const StatusControl = ({ value, path, name, ctx, readOnly, onChange }) => {
   const { formatMessage } = useIntl();
 
   const statuses = getItemStatusOptions(formatMessage);
@@ -28,6 +28,7 @@ export const StatusControl = ({ value, path, name, ctx, onChange }) => {
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statusSelect' })}
         marginBottom0
         dirty={!!value}
+        disabled={readOnly}
       />
     </div>
   );
@@ -39,6 +40,7 @@ StatusControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
+  readOnly: PropTypes.bool,
   ctx: PropTypes.shape({
     index: PropTypes.number,
   }),

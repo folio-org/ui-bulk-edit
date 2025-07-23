@@ -11,7 +11,7 @@ import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils
 import { getHoldingsNotes } from '../../../../../../constants';
 
 
-export const HoldingNotesControl = ({ parameters, option, value, path, name, onChange }) => {
+export const HoldingNotesControl = ({ parameters, option, value, path, name, readOnly, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
@@ -45,6 +45,7 @@ export const HoldingNotesControl = ({ parameters, option, value, path, name, onC
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.holdingsNotes' })}
         marginBottom0
         dirty={!!value}
+        disabled={readOnly}
       />
     </div>
   );
@@ -58,5 +59,6 @@ HoldingNotesControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
+  readOnly: PropTypes.bool,
   onChange: PropTypes.func,
 };

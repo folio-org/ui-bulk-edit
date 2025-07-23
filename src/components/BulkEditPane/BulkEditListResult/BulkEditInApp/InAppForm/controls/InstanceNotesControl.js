@@ -9,7 +9,7 @@ import { getInstanceNotes } from '../../../../../../constants';
 import { useInstanceNotes } from '../../../../../../hooks/api';
 
 
-export const InstanceNotesControl = ({ parameters, option, value, path, name, onChange }) => {
+export const InstanceNotesControl = ({ parameters, option, value, path, name, readOnly, onChange }) => {
   const { formatMessage } = useIntl();
 
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes();
@@ -36,6 +36,7 @@ export const InstanceNotesControl = ({ parameters, option, value, path, name, on
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.instanceNotes' })}
         marginBottom0
         dirty={!!value}
+        disabled={readOnly}
       />
     </div>
   );
@@ -49,5 +50,6 @@ InstanceNotesControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ).isRequired,
   name: PropTypes.string,
+  readOnly: PropTypes.bool,
   onChange: PropTypes.func,
 };

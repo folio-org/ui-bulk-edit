@@ -26,6 +26,7 @@ export const InAppFieldRenderer = memo(({
   item,
   option,
   path,
+  readOnly,
   ctx,
   allOptions,
   fields,
@@ -66,6 +67,7 @@ export const InAppFieldRenderer = memo(({
     path,
     name,
     onChange,
+    readOnly,
   };
 
   if (controlType === CONTROL_TYPES.ARRAY) {
@@ -89,6 +91,7 @@ export const InAppFieldRenderer = memo(({
                 approach={approach}
                 allOptions={allOptions}
                 path={[...fullPath, idx]}
+                readOnly={readOnly}
               />
             );
           })}
@@ -110,7 +113,7 @@ export const InAppFieldRenderer = memo(({
           marginBottom0
           fullWidth
           validStylesEnabled
-          disabled={sortedActionsList.length === 1}
+          disabled={sortedActionsList.length === 1 || readOnly}
           onChange={e => onActionChange({ path, val: e.target.value, name, option, ctx })}
         />
       )}
@@ -123,6 +126,7 @@ export const InAppFieldRenderer = memo(({
           aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.textField' })}
           marginBottom0
           dirty={!!value}
+          disabled={readOnly}
         />
       )}
 
@@ -136,6 +140,7 @@ export const InAppFieldRenderer = memo(({
           dirty={!!value}
           fullWidth
           lockWidth
+          disabled={readOnly}
         />
       )}
 
@@ -150,6 +155,7 @@ export const InAppFieldRenderer = memo(({
           aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.date' })}
           marginBottom0
           dirty={!!value}
+          disabled={readOnly}
         />
       )}
 
@@ -230,6 +236,7 @@ export const InAppFieldRenderer = memo(({
           path={path}
           action={item.name}
           onChange={onChange}
+          readOnly={readOnly}
         />
       )}
     </Col>
@@ -239,6 +246,7 @@ export const InAppFieldRenderer = memo(({
 InAppFieldRenderer.propTypes = {
   option: PropTypes.string.isRequired,
   recordType: PropTypes.string.isRequired,
+  readOnly: PropTypes.bool,
   approach: PropTypes.string.isRequired,
   allOptions: PropTypes.arrayOf(PropTypes.shape({})),
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,

@@ -8,7 +8,7 @@ import { NOTES_PARAMETERS_KEYS } from '../../../../../../constants';
 
 import css from '../../../../BulkEditPane.css';
 
-export const ActionParameters = memo(({ actionParameters, action, path, name, onChange }) => {
+export const ActionParameters = memo(({ actionParameters, action, path, name, readOnly, onChange }) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -24,6 +24,7 @@ export const ActionParameters = memo(({ actionParameters, action, path, name, on
             label={formatMessage({ id: `ui-bulk-edit.layer.action.apply.${parameter.key}` })}
             checked={parameter.value}
             onChange={e => onChange({ path: [...path, name, idx], val: e.target.checked, name: 'value' })}
+            disabled={readOnly}
           />
         );
       })}
@@ -42,5 +43,6 @@ ActionParameters.propTypes = {
   ).isRequired,
   name: PropTypes.string.isRequired,
   action: PropTypes.string.isRequired,
+  readOnly: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 };

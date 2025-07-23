@@ -10,7 +10,7 @@ import { usePatronGroup } from '../../../../../../hooks/api';
 import { CAPABILITIES } from '../../../../../../constants';
 
 
-export const PatronGroupControl = ({ value, path, name, ctx, recordType, onChange }) => {
+export const PatronGroupControl = ({ value, path, name, ctx, recordType, readOnly, onChange }) => {
   const { formatMessage } = useIntl();
 
   const isUserCapability = recordType === CAPABILITIES.USER;
@@ -46,6 +46,7 @@ export const PatronGroupControl = ({ value, path, name, ctx, recordType, onChang
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.patronGroupSelect' })}
         marginBottom0
         dirty={!!value}
+        disabled={readOnly}
       />
     </div>
   );
@@ -58,6 +59,7 @@ PatronGroupControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
+  readOnly: PropTypes.bool,
   ctx: PropTypes.shape({
     index: PropTypes.number
   }),

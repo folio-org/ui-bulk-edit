@@ -9,7 +9,7 @@ import { useStatisticalCodes } from '../../../../../../hooks/api';
 import { customMultiSelectionFilter } from '../../../../../../utils/helpers';
 
 
-export const InstanceStatisticalCodesControl = ({ value, name, path, onChange }) => {
+export const InstanceStatisticalCodesControl = ({ value, name, path, readOnly, onChange }) => {
   const { formatMessage } = useIntl();
 
   const { statisticalCodes, isStatisticalCodesLoading } = useStatisticalCodes();
@@ -37,6 +37,7 @@ export const InstanceStatisticalCodesControl = ({ value, name, path, onChange })
         dataOptions={statisticalCodes}
         dirty={!!value}
         filter={customMultiSelectionFilter}
+        disabled={readOnly}
       />
     </div>
   );
@@ -48,5 +49,6 @@ InstanceStatisticalCodesControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
+  readOnly: PropTypes.bool,
   onChange: PropTypes.func,
 };
