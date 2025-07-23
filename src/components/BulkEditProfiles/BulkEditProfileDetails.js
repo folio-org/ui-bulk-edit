@@ -4,7 +4,10 @@ import {
   useMemo,
   useRef,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage,
+  useIntl,
+} from 'react-intl';
 import ReactRouterPropTypes from 'react-router-prop-types';
 
 import {
@@ -57,6 +60,7 @@ export const BulkEditProfileDetails = ({
   onClose,
   refetch,
 }) => {
+  const intl = useIntl();
   const accordionStatusRef = useRef();
   const [isDeleteProfileModalOpen, toggleDeleteProfileModalModal] = useModalToggle();
   const showCallout = useShowCallout();
@@ -93,6 +97,7 @@ export const BulkEditProfileDetails = ({
       <MenuSection id="bulk-edit-profile-action-menu">
         <IfPermission perm="bulk-operations.profiles.item.delete">
           <Button
+            aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}
             buttonStyle="dropdownItem"
             disabled={isDeletingProfile}
             onClick={() => {
@@ -110,7 +115,7 @@ export const BulkEditProfileDetails = ({
         </IfPermission>
       </MenuSection>
     );
-  }, [isDeletingProfile, toggleDeleteProfileModalModal]);
+  }, [intl, isDeletingProfile, toggleDeleteProfileModalModal]);
 
   const renderHeader = useCallback((renderProps) => {
     const paneTitle = (

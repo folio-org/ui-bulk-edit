@@ -50,7 +50,7 @@ const renderBulkEditProfileDetails = (props = {}) => render(
 );
 
 describe('BulkEditProfileDetails', () => {
-  const deleteProfile = jest.fn();
+  const deleteProfile = jest.fn(() => Promise.resolve());
 
   beforeEach(() => {
     useBulkEditProfile.mockReturnValue({ profile: profileMock });
@@ -97,6 +97,21 @@ describe('BulkEditProfileDetails', () => {
       await userEvent.keyboard('{Control>}{Alt>}{b}{/Alt}{/Control}');
 
       expect(handleKeyCommand).toHaveBeenCalledWith(expect.any(Function));
+    });
+  });
+
+  describe('Actions', () => {
+    it('should call handle profile delete when delete action is triggered', async () => {
+      renderBulkEditProfileDetails();
+
+      await userEvent.click(screen.getByRole('button', { name: 'Icon' }));
+      await userEvent.click(screen.getByLabelText(/button.delete/));
+
+      expect(screen.getByText(/delete.modal.message/)).toBeInTheDocument();
+
+      await userEvent.click(screen.getByRole('button', { name: 'stripes-core.button.delete' }));
+
+      expect(deleteProfile).toHaveBeenCalledWith({ profileId: profileMock.id });
     });
   });
 });
