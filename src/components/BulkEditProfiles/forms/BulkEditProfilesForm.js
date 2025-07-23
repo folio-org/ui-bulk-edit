@@ -150,7 +150,7 @@ export const BulkEditProfilesForm = ({ entityType, onClose, onSave }) => {
       onClose={handleTryClose}
     >
       <AccordionSet>
-        <Layout className="flex justify-end padding-bottom-gutter">
+        <Layout className="flex justify-end">
           <ExpandAllButton />
         </Layout>
         <Accordion
