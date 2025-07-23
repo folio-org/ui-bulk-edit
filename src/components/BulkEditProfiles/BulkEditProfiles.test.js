@@ -1,3 +1,5 @@
+import { MemoryRouter } from 'react-router-dom';
+
 import {
   render,
   screen,
@@ -54,7 +56,8 @@ const renderBulkEditProfiles = (props = {}) => render(
   <BulkEditProfiles
     {...defaultProps}
     {...props}
-  />
+  />,
+  { wrapper: MemoryRouter },
 );
 
 describe('BulkEditProfiles', () => {

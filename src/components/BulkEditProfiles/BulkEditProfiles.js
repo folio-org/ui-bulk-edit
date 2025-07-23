@@ -1,10 +1,15 @@
 import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
+import {
+  useLocation,
+  useRouteMatch,
+} from 'react-router-dom';
 
 import {
   Icon,
   MultiColumnList,
+  TextLink,
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import {
@@ -26,7 +31,7 @@ import {
 
 const isEmptyMessage = <FormattedMessage id="ui-bulk-edit.settings.profiles.empty" />;
 
-const getResultsFormatter = (entityType, searchTerm) => {
+const getResultsFormatter = (entityType, searchTerm, path, search) => {
   return {
     [COLUMNS.name]: (profile) => (
       <AppIcon
@@ -34,10 +39,12 @@ const getResultsFormatter = (entityType, searchTerm) => {
         iconKey={RECORD_TYPES_MAPPING[entityType]}
         size="small"
       >
-        <DefaultColumn
-          searchTerm={searchTerm}
-          value={profile.name}
-        />
+        <TextLink to={`${path}/${profile.id}/view${search}`}>
+          <DefaultColumn
+            searchTerm={searchTerm}
+            value={profile.name}
+          />
+        </TextLink>
       </AppIcon>
     ),
     [COLUMNS.description]: (profile) => (
@@ -69,9 +76,12 @@ export const BulkEditProfiles = ({
   sortOrder,
   sortDirection,
 }) => {
+  const { search } = useLocation();
+  const { path } = useRouteMatch();
+
   const formatter = useMemo(
-    () => getResultsFormatter(entityType, searchTerm),
-    [entityType, searchTerm],
+    () => getResultsFormatter(entityType, searchTerm, path, search),
+    [entityType, path, searchTerm, search],
   );
 
   return (

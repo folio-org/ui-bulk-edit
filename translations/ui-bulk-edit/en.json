@@ -603,6 +603,7 @@
   "settings.profiles.columns.updated": "Updated",
   "settings.profiles.columns.updatedBy": "Updated by",
   "settings.profiles.columns.status": "Status",
+  "settings.profiles.details.summary": "Summary",
   "settings.profiles.paneSub": "{count, number} {count, plural, one {profile found} other {profiles found}}",
   "settings.profiles.search.label": "Search bulk edit profiles",
   "settings.profiles.button.new": "New",

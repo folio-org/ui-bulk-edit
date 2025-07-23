@@ -43,6 +43,7 @@ import {
   RECORD_TYPES_MAPPING,
 } from '../../constants';
 import { useBulkEditProfiles } from '../../hooks/api';
+import { BulkEditProfileDetails } from './BulkEditProfileDetails';
 import { BulkEditProfiles } from './BulkEditProfiles';
 import {
   DEFAULT_SORTING,
@@ -195,6 +196,13 @@ export const BulkEditProfilesPane = ({
 
   const isLoading = isFetching || isUsersLoading || isPending;
 
+  const onCloseDetailsPane = useCallback(() => {
+    history.push({
+      pathname: path,
+      search: location.search,
+    });
+  }, [history, location.search, path]);
+
   return (
     <Pane
       defaultWidth="fill"
@@ -223,6 +231,20 @@ export const BulkEditProfilesPane = ({
           />
         </div>
       </div>
+
+      <Route
+        exact
+        path={`${path}/:id/view`}
+        render={(props) => (
+          <Layer isOpen>
+            <BulkEditProfileDetails
+              {...props}
+              entityType={entityType}
+              onClose={onCloseDetailsPane}
+            />
+          </Layer>
+        )}
+      />
 
       <Route
         exact

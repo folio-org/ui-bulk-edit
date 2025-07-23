@@ -50,3 +50,7 @@ export const FILTER_SORT_CONFIG = {
 
 export const NON_INTERACTIVE_HEADERS = [COLUMNS.description, COLUMNS.status];
 export const SORTABLE_COLUMNS = difference(VISIBLE_COLUMNS, NON_INTERACTIVE_HEADERS);
+
+export const PROFILE_DETAILS_ACCORDIONS = {
+  SUMMARY: 'summary',
+};

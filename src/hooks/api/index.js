@@ -1,4 +1,5 @@
 export * from './useBulkEditLogs';
+export * from './useBulkEditProfile';
 export * from './useBulkEditProfiles';
 export * from './useBulkOperationDetails';
 export * from './useBulkOperationStart';

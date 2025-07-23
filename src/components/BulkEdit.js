@@ -4,22 +4,33 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { BulkEditPane } from './BulkEditPane/BulkEditPane';
+import {
+  CommandList,
+  defaultKeyboardShortcuts,
+} from '@folio/stripes/components';
+
 import { BulkEditSettings } from '../settings/BulkEditSettings';
+import { BulkEditPane } from './BulkEditPane/BulkEditPane';
 
 
 const BulkEdit = (props) => {
   if (props.showSettings) {
-    return <BulkEditSettings {...props} />;
+    return (
+      <CommandList commands={defaultKeyboardShortcuts}>
+        <BulkEditSettings {...props} />;
+      </CommandList>
+    );
   }
 
   return (
-    <Switch>
-      <Route
-        path="/bulk-edit"
-        component={BulkEditPane}
-      />
-    </Switch>
+    <CommandList commands={defaultKeyboardShortcuts}>
+      <Switch>
+        <Route
+          path="/bulk-edit"
+          component={BulkEditPane}
+        />
+      </Switch>
+    </CommandList>
   );
 };
 
