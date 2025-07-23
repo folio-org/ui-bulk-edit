@@ -459,10 +459,12 @@
   "previewModal.message.empty.partlySupported": "{numberOfSupportedEntities, number} records will be changed when the Commit changes button is clicked. You may choose Download preview to review all changes prior to saving. {numberOfUnsupportedEntities, number} instances have source that is not supported by MARC records bulk edit and cannot be updated.",
   "previewModal.previewToBeChanged": "Preview of records to be changed",
   "previewModal.keepEditing": "Keep editing",
+  "previewModal.closeWithoutSaving": "Close without saving",
   "previewModal.downloadPreview": "Download preview in CSV format",
   "previewModal.downloadPreview.marc": "Download preview in MARC format",
   "previewModal.saveAndClose": "Commit changes",
   "previewModal.areYouSure": "Are you sure?",
+  "previewModal.unsavedChanges": "There are unsaved changes",
 
   "progressBar.title": "Uploading {title} and retrieving relevant data",
   "progresssBar.retrieving": "Retrieving",
@@ -590,10 +592,10 @@
   "settings.inventoryProfiles": "Inventory profiles",
   "settings.otherProfiles": "Other profiles",
 
-  "settings.holdingsProfiles": "Holdings bulk edit profiles",
-  "settings.itemProfiles": "Items bulk edit profiles",
-  "settings.instanceProfiles": "Instances bulk edit profiles",
-  "settings.userProfiles": "Users bulk edit profiles",
+  "settings.holdings": "Holdings bulk edit profiles",
+  "settings.instance": "Instances bulk edit profiles",
+  "settings.item": "Items bulk edit profiles",
+  "settings.user": "Users bulk edit profiles",
 
   "settings.profiles.empty": "<b>No profiles available.</b>",
   "settings.profiles.columns.name": "Name",
@@ -604,10 +606,18 @@
   "settings.profiles.details.summary": "Summary",
   "settings.profiles.paneSub": "{count, number} {count, plural, one {profile found} other {profiles found}}",
   "settings.profiles.search.label": "Search bulk edit profiles",
+  "settings.profiles.button.new": "New",
+  "settings.profiles.title.new": "New {entityType} bulk edit profile",
+  "settings.profiles.title.summary": "Summary",
+  "settings.profiles.form.name": "Name",
+  "settings.profiles.form.description": "Description",
+  "settings.profiles.form.lockProfile": "Lock profile",
+  "settings.profiles.form.create.success": "Profile successfully created.",
+  "settings.profiles.form.create.error": "Following error prevented saving the profile:",
 
   "titleManager.settings": "Bulk edit settings",
-  "titleManager.settings.holdingsProfiles": "Bulk edit settings - Holdings bulk edit profiles",
-  "titleManager.settings.instancesProfiles": "Bulk edit settings - Instances bulk edit profiles",
-  "titleManager.settings.itemsProfiles": "Bulk edit settings - Items bulk edit profiles",
-  "titleManager.settings.usersProfiles": "Bulk edit settings - Users bulk edit profiles"
+  "titleManager.settings.holdings": "Bulk edit settings - Holdings bulk edit profiles",
+  "titleManager.settings.instance": "Bulk edit settings - Instances bulk edit profiles",
+  "titleManager.settings.item": "Bulk edit settings - Items bulk edit profiles",
+  "titleManager.settings.user": "Bulk edit settings - Users bulk edit profiles"
 }

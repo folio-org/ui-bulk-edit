@@ -4,10 +4,8 @@ import { Settings } from '@folio/stripes/smart-components';
 import { AppIcon, TitleManager, useStripes } from '@folio/stripes/core';
 
 import { useBulkPermissions } from '../hooks';
-import { HoldingsProfiles } from './profiles/HoldingsProfiles';
-import { InstancesProfiles } from './profiles/InstancesProfiles';
-import { ItemsProfiles } from './profiles/ItemsProfiles';
-import { UsersProfiles } from './profiles/UsersProfiles';
+import { ProfilesContainer } from './profiles/ProfilesContainer';
+import { CAPABILITIES } from '../constants';
 
 export const BulkEditSettings = (props) => {
   const stripes = useStripes();
@@ -36,17 +34,17 @@ export const BulkEditSettings = (props) => {
       {
         route: 'holdings-profiles',
         label: renderMenuItemLabel('holdings', 'holdingsProfiles'),
-        component: HoldingsProfiles,
+        component: () => <ProfilesContainer entityType={CAPABILITIES.HOLDING} />,
       },
       {
         route: 'instances-profiles',
         label: renderMenuItemLabel('instance', 'instanceProfiles'),
-        component: InstancesProfiles,
+        component: () => <ProfilesContainer entityType={CAPABILITIES.INSTANCE} />,
       },
       {
         route: 'items-profiles',
         label: renderMenuItemLabel('item', 'itemProfiles'),
-        component: ItemsProfiles,
+        component: () => <ProfilesContainer entityType={CAPABILITIES.ITEM} />,
       },
     ]
   }] : [];
@@ -57,7 +55,7 @@ export const BulkEditSettings = (props) => {
       {
         route: 'users-profiles',
         label: renderMenuItemLabel('user', 'userProfiles'),
-        component: UsersProfiles
+        component: () => <ProfilesContainer entityType={CAPABILITIES.USER} />
       },
     ]
   }] : [];

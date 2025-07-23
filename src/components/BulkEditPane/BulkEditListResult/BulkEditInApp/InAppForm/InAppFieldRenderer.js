@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl';
 
 import { Col, Datepicker, Select, TextArea, TextField } from '@folio/stripes/components';
 
-import { useSearchParams } from '../../../../../hooks';
 import { LocationControl } from './controls/LocationControl';
 import { PatronGroupControl } from './controls/PatronGroupControl';
 import { StatusControl } from './controls/StatusControl';
@@ -30,11 +29,12 @@ export const InAppFieldRenderer = memo(({
   ctx,
   allOptions,
   fields,
+  recordType,
+  approach,
   onChange,
   onActionChange,
 }) => {
   const { formatMessage } = useIntl();
-  const { currentRecordType, approach } = useSearchParams();
 
   const {
     name,
@@ -51,8 +51,8 @@ export const InAppFieldRenderer = memo(({
   const value = item[name];
   const fullPath = [...path, name];
   const isDirty = typeof dirty === 'function' ? dirty(value) : dirty;
-  const controlType = typeof type === 'function' ? type({ ...ctx, option, allOptions, recordType: currentRecordType }) : type;
-  const actions = options?.({ ...ctx, option, allOptions, recordType: currentRecordType, approach }) || [];
+  const controlType = typeof type === 'function' ? type({ ...ctx, option, allOptions, recordType }) : type;
+  const actions = options?.({ ...ctx, option, allOptions, recordType, approach }) || [];
   const actionsWithRules = getActionsWithRules({
     row: ctx.row,
     option,
@@ -85,6 +85,8 @@ export const InAppFieldRenderer = memo(({
                 onChange={onChange}
                 onActionChange={onActionChange}
                 item={subItem}
+                recordType={recordType}
+                approach={approach}
                 allOptions={allOptions}
                 path={[...fullPath, idx]}
               />
@@ -161,7 +163,7 @@ export const InAppFieldRenderer = memo(({
       )}
 
       {controlType === CONTROL_TYPES.PATRON_GROUP_SELECT && (
-        <PatronGroupControl key={item.name} {...sharedProps} ctx={ctx} />
+        <PatronGroupControl key={item.name} {...sharedProps} ctx={ctx} recordType={recordType} />
       )}
 
       {controlType === CONTROL_TYPES.STATUS_SELECT && (
@@ -174,7 +176,7 @@ export const InAppFieldRenderer = memo(({
 
       {controlType === CONTROL_TYPES.NOTE_SELECT && (
         <>
-          {currentRecordType === CAPABILITIES.HOLDING && (
+          {recordType === CAPABILITIES.HOLDING && (
             <HoldingNotesControl
               key={item.name}
               option={option}
@@ -182,7 +184,7 @@ export const InAppFieldRenderer = memo(({
               {...sharedProps}
             />
           )}
-          {currentRecordType === CAPABILITIES.ITEM && (
+          {recordType === CAPABILITIES.ITEM && (
             <ItemNotesControl
               key={item.name}
               option={option}
@@ -190,7 +192,7 @@ export const InAppFieldRenderer = memo(({
               {...sharedProps}
             />
           )}
-          {currentRecordType === CAPABILITIES.INSTANCE && (
+          {recordType === CAPABILITIES.INSTANCE && (
             <InstanceNotesControl
               key={item.name}
               option={option}
@@ -236,6 +238,8 @@ export const InAppFieldRenderer = memo(({
 
 InAppFieldRenderer.propTypes = {
   option: PropTypes.string.isRequired,
+  recordType: PropTypes.string.isRequired,
+  approach: PropTypes.string.isRequired,
   allOptions: PropTypes.arrayOf(PropTypes.shape({})),
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   field: PropTypes.shape({

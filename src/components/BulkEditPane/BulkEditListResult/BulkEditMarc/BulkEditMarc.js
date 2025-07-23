@@ -10,6 +10,7 @@ import { MarcFormBody } from './MarcForm/MarcFormBody';
 import { MarcFormTitle } from './MarcForm/MarcFormTitle';
 import { InAppFormTitle } from '../BulkEditInApp/InAppForm/InAppFormTitle';
 import { InAppFormBody } from '../BulkEditInApp/InAppForm/InAppFormBody';
+import { useSearchParams } from '../../../../hooks';
 
 
 export const BulkEditMarc = ({
@@ -22,6 +23,7 @@ export const BulkEditMarc = ({
   const stripes = useStripes();
   const intl = useIntl();
   const { title } = useContext(RootContext);
+  const { currentRecordType, approach } = useSearchParams();
 
   return (
     <TitleManager stripes={stripes} record={intl.formatMessage({ id: 'ui-bulk-edit.title.marc' })}>
@@ -36,6 +38,8 @@ export const BulkEditMarc = ({
           fields={fields}
           setFields={setFields}
           options={options}
+          recordType={currentRecordType}
+          approach={approach}
         />
       </Accordion>
       <Layout className="marginTop1">
