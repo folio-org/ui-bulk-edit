@@ -15,7 +15,7 @@ import {
 import { getItemsWithPlaceholder } from '../../../../../../constants';
 
 
-export const ElectronicAccessRelationshipControl = ({ ctx, value, path, name, readOnly, onChange }) => {
+export const ElectronicAccessRelationshipControl = ({ ctx, value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
@@ -50,7 +50,7 @@ export const ElectronicAccessRelationshipControl = ({ ctx, value, path, name, re
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.urlRelationshipSelect' })}
         marginBottom0
         dirty={!!value}
-        disabled={readOnly}
+        disabled={disabled}
       />
     </div>
   );
@@ -68,6 +68,6 @@ ElectronicAccessRelationshipControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
-  readOnly: PropTypes.bool,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func,
 };

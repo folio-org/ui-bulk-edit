@@ -9,7 +9,7 @@ import { useStatisticalCodes } from '../../../../../../hooks/api';
 import { customMultiSelectionFilter } from '../../../../../../utils/helpers';
 
 
-export const InstanceStatisticalCodesControl = ({ value, name, path, readOnly, onChange }) => {
+export const InstanceStatisticalCodesControl = ({ value, name, path, disabled, onChange }) => {
   const { formatMessage } = useIntl();
 
   const { statisticalCodes, isStatisticalCodesLoading } = useStatisticalCodes();
@@ -26,18 +26,22 @@ export const InstanceStatisticalCodesControl = ({ value, name, path, readOnly, o
 
   if (isStatisticalCodesLoading) return <Loading size="large" />;
 
+  const arrayValue = statisticalCodes.filter(statisticalCode => {
+    return value.map(code => code.value).includes(statisticalCode.value);
+  });
+
   return (
     <div title={title}>
       <MultiSelection
         id="statisticalCodes"
-        value={value}
+        value={arrayValue}
         onChange={handleChange}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.statisticalCode' })}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statisticalCode' })}
         dataOptions={statisticalCodes}
         dirty={!!value}
         filter={customMultiSelectionFilter}
-        disabled={readOnly}
+        disabled={disabled}
       />
     </div>
   );
@@ -49,6 +53,6 @@ InstanceStatisticalCodesControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
-  readOnly: PropTypes.bool,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func,
 };

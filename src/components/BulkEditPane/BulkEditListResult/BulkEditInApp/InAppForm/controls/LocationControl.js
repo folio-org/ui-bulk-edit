@@ -12,7 +12,7 @@ import { getLabelByValue, TEMPORARY_LOCATIONS } from '../../helpers';
 import { useBulkOperationTenants, useLocationEcs } from '../../../../../../hooks/api';
 
 
-export const LocationControl = ({ option, value, path, name, ctx, readOnly, onChange }) => {
+export const LocationControl = ({ option, value, path, name, ctx, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
@@ -39,7 +39,7 @@ export const LocationControl = ({ option, value, path, name, ctx, readOnly, onCh
             crossTenant
             tenantsList={filterByIds(currentTenants, tenants)}
             tenantId={tenants[0]}
-            disabled={readOnly}
+            disabled={disabled}
             onRecordsSelect={(loc) => {
               onChange({
                 path,
@@ -59,7 +59,7 @@ export const LocationControl = ({ option, value, path, name, ctx, readOnly, onCh
             data-test-id={`textField-${ctx.index}`}
             aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}
             dirty={!!value}
-            disabled={readOnly}
+            disabled={disabled}
           />
           <LocationLookup
             marginBottom0
@@ -70,7 +70,7 @@ export const LocationControl = ({ option, value, path, name, ctx, readOnly, onCh
               name,
             })
             }
-            disabled={readOnly}
+            disabled={disabled}
             data-testid={`locationLookup-${ctx.index}`}
           />
         </>

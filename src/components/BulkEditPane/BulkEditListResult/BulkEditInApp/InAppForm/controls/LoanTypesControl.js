@@ -10,7 +10,7 @@ import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils
 import { useBulkOperationTenants, useLoanTypes, useLoanTypesEcs } from '../../../../../../hooks/api';
 
 
-export const LoanTypesControl = ({ value, path, name, readOnly, onChange }) => {
+export const LoanTypesControl = ({ value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
@@ -42,7 +42,7 @@ export const LoanTypesControl = ({ value, path, name, readOnly, onChange }) => {
         dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEcs, tenants) : loanTypes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
         dirty={!!value}
-        disabled={readOnly}
+        disabled={disabled}
       />
     </div>
   );
@@ -51,6 +51,7 @@ export const LoanTypesControl = ({ value, path, name, readOnly, onChange }) => {
 LoanTypesControl.propTypes = {
   value: PropTypes.string,
   name: PropTypes.string,
+  disabled: PropTypes.bool,
   path: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),

@@ -25,6 +25,11 @@ const OPTIONS_MAP = {
   [OPTIONS.PERMANENT_HOLDINGS_LOCATION]: OPTIONS.PERMANENT_LOCATION,
 };
 
+export const OPTIONS_MAP_REVERSED = {
+  [OPTIONS.TEMPORARY_LOCATION]: OPTIONS.TEMPORARY_HOLDINGS_LOCATION,
+  [OPTIONS.PERMANENT_LOCATION]: OPTIONS.PERMANENT_HOLDINGS_LOCATION,
+};
+
 /**
  * Retrieves the type of option based on its value and available options.
  * Existing type means that the value is one of the NOTES options.
@@ -101,6 +106,8 @@ export const ruleDetailsToSource = (ruleDetails) => {
     const { option, tenants, actions } = rule;
     const action = actions[0] || {};
     const noteParam = action.parameters?.find(param => NOTES_PARAMETERS_KEYS.includes(param.key));
+    const optionValue = OPTIONS_MAP_REVERSED[option] || option;
+    const finalOptionValue = noteParam?.value || optionValue;
     const [firstAction, secondAction] = GRANULAR_ACTIONS_MAP[action.type] || [action.type];
     const mappedParameters = action.parameters?.map(param => {
       if (BOOLEAN_PARAMETERS_KEYS.includes(param.key)) {
@@ -113,16 +120,21 @@ export const ruleDetailsToSource = (ruleDetails) => {
 
       return param;
     });
+    let firstActionValue = action.initial || action.updated;
+
+    if (finalOptionValue === OPTIONS.STATISTICAL_CODE && firstActionValue) {
+      firstActionValue = firstActionValue.split(',').map(value => ({ value }));
+    }
 
     return {
       id: uniqueId(),
-      option: noteParam?.value || option,
+      option: noteParam?.value || optionValue,
       tenants,
       actionsDetails: {
         actions: [
           {
             name: firstAction,
-            value: action.initial || action.updated,
+            value: firstActionValue,
             parameters: mappedParameters,
             tenants: action.tenants,
           },

@@ -11,7 +11,7 @@ export const InAppForm = ({
   options,
   recordType,
   approach,
-  readOnly,
+  disabled,
   loading
 }) => {
   if (loading) {
@@ -32,7 +32,7 @@ export const InAppForm = ({
         options={options}
         recordType={recordType}
         approach={approach}
-        readOnly={readOnly}
+        disabled={disabled}
       />
     </>
   );
@@ -44,6 +44,6 @@ InAppForm.propTypes = {
   options: PropTypes.shape({}).isRequired,
   recordType: PropTypes.string.isRequired,
   approach: PropTypes.string.isRequired,
-  readOnly: PropTypes.bool,
+  disabled: PropTypes.bool,
   loading: PropTypes.bool
 };
