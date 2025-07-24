@@ -220,6 +220,15 @@ export const BulkEditProfilesForm = ({
 
 BulkEditProfilesForm.propTypes = {
   entityType: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  initialValues: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    locked: PropTypes.bool,
+    entityType: PropTypes.string,
+  }),
+  initialRuleDetails: PropTypes.arrayOf(PropTypes.shape({})),
+  isLoading: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
 };
