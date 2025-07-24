@@ -16,9 +16,7 @@ import { BulkEditPane } from './BulkEditPane/BulkEditPane';
 const BulkEdit = (props) => {
   if (props.showSettings) {
     return (
-      <CommandList commands={defaultKeyboardShortcuts}>
-        <BulkEditSettings {...props} />;
-      </CommandList>
+      <BulkEditSettings {...props} />
     );
   }
 

@@ -26,7 +26,7 @@ import {
   PaneHeader,
   SearchField,
 } from '@folio/stripes/components';
-import { AppIcon } from '@folio/stripes/core';
+import { AppIcon, TitleManager } from '@folio/stripes/core';
 import { getFullName } from '@folio/stripes/util';
 import {
   buildSearch,
@@ -66,7 +66,6 @@ export const BulkEditProfilesPane = ({
   const history = useHistory();
   const { path } = useRouteMatch();
   const { hasSettingsCreatePerms } = useBulkPermissions();
-
   const locationSearchQuery = queryString.parse(location.search)?.[SEARCH_PARAMETER];
 
   const [
@@ -248,18 +247,6 @@ export const BulkEditProfilesPane = ({
 
       <Route
         exact
-        path={`${path}/create`}
-        render={() => (
-          <Layer isOpen>
-            <BulkEditCreateProfile
-              entityType={entityType}
-              onClose={closeFormLayer}
-            />
-          </Layer>
-        )}
-      />
-      <Route
-        exact
         path={`${path}/:id/edit`}
         render={() => (
           <Layer isOpen>
@@ -268,6 +255,21 @@ export const BulkEditProfilesPane = ({
               onClose={closeFormLayer}
             />
           </Layer>
+        )}
+      />
+
+      <Route
+        exact
+        path={`${path}/create`}
+        render={() => (
+          <TitleManager>
+            <Layer isOpen>
+              <BulkEditCreateProfile
+                entityType={entityType}
+                onClose={closeFormLayer}
+              />
+            </Layer>
+          </TitleManager>
         )}
       />
     </Pane>

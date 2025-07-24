@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 
+import { TitleManager } from '@folio/stripes/core';
 import { useProfileUpdate } from '../../hooks/api/useProfileUpdate';
 import { BulkEditProfilesForm } from './forms/BulkEditProfilesForm';
 import { useBulkEditProfile } from '../../hooks/api';
@@ -11,7 +12,7 @@ import { ruleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEdit
 export const BulkEditUpdateProfile = ({ entityType, onClose }) => {
   const { id } = useParams();
   const { profile, isLoading } = useBulkEditProfile(id);
-  const { updateProfile } = useProfileUpdate({
+  const { updateProfile, isProfileUpdating } = useProfileUpdate({
     id,
     onSuccess: onClose
   });
@@ -30,14 +31,17 @@ export const BulkEditUpdateProfile = ({ entityType, onClose }) => {
   if (isLoading) return <Preloader />;
 
   return (
-    <BulkEditProfilesForm
-      entityType={entityType}
-      title={profile.name}
-      onClose={onClose}
-      onSave={handleSave}
-      initialValues={initialValues}
-      initialRuleDetails={ruleDetailsToSource(profile.ruleDetails)}
-    />
+    <TitleManager record={profile?.name}>
+      <BulkEditProfilesForm
+        entityType={entityType}
+        title={profile.name}
+        onClose={onClose}
+        onSave={handleSave}
+        initialValues={initialValues}
+        initialRuleDetails={ruleDetailsToSource(profile.ruleDetails)}
+        isLoading={isProfileUpdating}
+      />
+    </TitleManager>
   );
 };
 

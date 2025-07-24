@@ -181,3 +181,11 @@ export const RECORD_TYPES_MAPPING = {
   [CAPABILITIES.ITEM]: 'item',
   [CAPABILITIES.USER]: 'user',
 };
+
+export const RECORD_TYPES_PROFILES_MAPPING = {
+  [CAPABILITIES.HOLDING]: 'holdings',
+  [CAPABILITIES.INSTANCE]: 'FOLIO instances',
+  [CAPABILITIES.INSTANCE_MARC]: 'instances with source MARC',
+  [CAPABILITIES.ITEM]: 'items',
+  [CAPABILITIES.USER]: 'users',
+};

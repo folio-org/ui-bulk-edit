@@ -40,7 +40,15 @@ const initialFormState = (entityType) => ({
   entityType,
 });
 
-export const BulkEditProfilesForm = ({ title, entityType, initialValues, initialRuleDetails, onClose, onSave }) => {
+export const BulkEditProfilesForm = ({
+  title,
+  entityType,
+  initialValues,
+  initialRuleDetails,
+  isLoading,
+  onClose,
+  onSave
+}) => {
   const intl = useIntl();
   const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType);
   const { fields, setFields, isValid: areContentUpdatesValid, isPristine: isContentUpdatePristine } = useBulkEditForm({
@@ -127,7 +135,7 @@ export const BulkEditProfilesForm = ({ title, entityType, initialValues, initial
             marginBottom0
             onClick={handleSave}
             type="submit"
-            disabled={isSaveDisabled}
+            disabled={isSaveDisabled || isLoading}
           >
             <FormattedMessage id="stripes-components.saveAndClose" />
           </Button>

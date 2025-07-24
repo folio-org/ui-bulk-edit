@@ -23,6 +23,14 @@ export const COLUMN_MAPPING = {
   [COLUMNS.status]: <FormattedMessage id="ui-bulk-edit.settings.profiles.columns.status" />,
 };
 
+export const COLUMN_WIDTHS = {
+  [COLUMNS.name]: '20%',
+  [COLUMNS.description]: '35%',
+  [COLUMNS.updatedDate]: '125px',
+  [COLUMNS.updatedBy]: '20%',
+  [COLUMNS.status]: '80px',
+};
+
 export const VISIBLE_COLUMNS = Object.keys(COLUMN_MAPPING);
 
 export const DEFAULT_SORTING = {

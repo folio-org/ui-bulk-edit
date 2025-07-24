@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
+import { TitleManager } from '@folio/stripes/core';
+
 import { useProfileCreate } from '../../hooks/api/useProfileCreate';
 import { BulkEditProfilesForm } from './forms/BulkEditProfilesForm';
-import { RECORD_TYPES_MAPPING } from '../../constants';
+import { RECORD_TYPES_PROFILES_MAPPING } from '../../constants';
 
 export const BulkEditCreateProfile = ({ entityType, onClose }) => {
   const intl = useIntl();
-  const { createProfile } = useProfileCreate({
+  const { createProfile, isProfileCreating } = useProfileCreate({
     onSuccess: onClose
   });
 
@@ -15,19 +17,22 @@ export const BulkEditCreateProfile = ({ entityType, onClose }) => {
     await createProfile(body);
   };
 
-  const friendlyEntityType = RECORD_TYPES_MAPPING[entityType];
+  const friendlyEntityType = RECORD_TYPES_PROFILES_MAPPING[entityType];
   const title = intl.formatMessage(
     { id: 'ui-bulk-edit.settings.profiles.title.new' },
     { entityType: friendlyEntityType }
   );
 
   return (
-    <BulkEditProfilesForm
-      entityType={entityType}
-      title={title}
-      onClose={onClose}
-      onSave={handleSave}
-    />
+    <TitleManager record={title}>
+      <BulkEditProfilesForm
+        entityType={entityType}
+        title={title}
+        onClose={onClose}
+        onSave={handleSave}
+        isLoading={isProfileCreating}
+      />
+    </TitleManager>
   );
 };
 
