@@ -12,10 +12,12 @@ import {
 import { InAppFormTitle } from './InAppForm/InAppFormTitle';
 import { InAppFormBody } from './InAppForm/InAppFormBody';
 import { RootContext } from '../../../../context/RootContext';
+import { useSearchParams } from '../../../../hooks';
 
 
 export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields }) => {
   const { title } = useContext(RootContext);
+  const { currentRecordType, approach } = useSearchParams();
 
   return (
     <>
@@ -34,6 +36,8 @@ export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields 
               fields={fields}
               setFields={setFields}
               options={options}
+              recordType={currentRecordType}
+              approach={approach}
             />
           </>
         ) : (

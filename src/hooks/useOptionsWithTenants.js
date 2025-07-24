@@ -2,7 +2,6 @@ import { useIntl } from 'react-intl';
 
 import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
-import { useSearchParams } from './useSearchParams';
 import {
   CAPABILITIES,
   getHoldingsOptions,
@@ -22,14 +21,12 @@ import { removeDuplicatesByValue } from '../utils/helpers';
 import { sortAlphabetically } from '../utils/sortAlphabetically';
 
 
-export const useOptionsWithTenants = () => {
+export const useOptionsWithTenants = (recordType) => {
   const stripes = useStripes();
   const { formatMessage } = useIntl();
-  const { currentRecordType } = useSearchParams();
-
-  const isItemRecordType = currentRecordType === CAPABILITIES.ITEM;
-  const isHoldingsRecordType = currentRecordType === CAPABILITIES.HOLDING;
-  const isInstanceRecordType = currentRecordType === CAPABILITIES.INSTANCE;
+  const isItemRecordType = recordType === CAPABILITIES.ITEM;
+  const isHoldingsRecordType = recordType === CAPABILITIES.HOLDING;
+  const isInstanceRecordType = recordType === CAPABILITIES.INSTANCE;
 
   const { tenants, isTenantsLoading } = useBulkOperationTenants();
 
@@ -54,7 +51,7 @@ export const useOptionsWithTenants = () => {
     [CAPABILITIES.ITEM]: getItemsOptions(formatMessage, itemsWithoutDuplicates),
     [CAPABILITIES.HOLDING]: getHoldingsOptions(formatMessage, holdingsWithoutDuplicates),
     [CAPABILITIES.INSTANCE]: getInstanceOptions(formatMessage, instanceNotes),
-  })[currentRecordType];
+  })[recordType];
 
   const areAllOptionsLoaded = optionsByType && !isItemNotesLoading && !isInstanceNotesLoading && !isItemsNotesEcsLoading && !isHoldingsNotesLoading && !isHoldingsNotesEcsLoading;
   const options = sortAlphabetically(optionsByType);

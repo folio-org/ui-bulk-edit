@@ -1,14 +1,13 @@
-import debounce from 'lodash/debounce';
-import noop from 'lodash/noop';
-import PropTypes from 'prop-types';
-import queryString from 'query-string';
-import {
+import React, {
   useCallback,
   useEffect,
   useMemo,
   useState,
   useTransition,
 } from 'react';
+import { debounce, noop } from 'lodash';
+import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import {
   FormattedMessage,
   useIntl,
@@ -17,10 +16,11 @@ import {
   Route,
   useHistory,
   useLocation,
-  useRouteMatch,
 } from 'react-router-dom';
+import { useRouteMatch } from 'react-router';
 
 import {
+  Button,
   Layer,
   Pane,
   PaneHeader,
@@ -50,19 +50,21 @@ import {
   FILTER_SORT_CONFIG,
   SORTABLE_COLUMNS,
 } from './constants';
+import { useBulkPermissions } from '../../hooks';
 
 import css from './BulkEditProfilesPane.css';
+import { BulkEditCreateProfile } from './forms/BulkEditCreateProfile';
 
 export const BulkEditProfilesPane = ({
   entityType,
   title,
 }) => {
   const [isPending, startTransition] = useTransition();
-
   const intl = useIntl();
   const location = useLocation();
   const history = useHistory();
   const { path } = useRouteMatch();
+  const { hasSettingsCreatePerms } = useBulkPermissions();
 
   const locationSearchQuery = queryString.parse(location.search)?.[SEARCH_PARAMETER];
 
@@ -140,6 +142,20 @@ export const BulkEditProfilesPane = ({
     });
   }, [debouncedHistoryPush, location.pathname, location.search]);
 
+  const openCreateProfile = useCallback(() => {
+    history.push({
+      pathname: `${path}/create`,
+      search: location.search,
+    });
+  }, [history, location.search, path]);
+
+  const closeFormLayer = useCallback(() => {
+    history.push({
+      pathname: path,
+      search: location.search,
+    });
+  }, [history, location.search, path]);
+
   const renderHeader = useCallback((renderProps) => {
     const paneSub = !isProfilesLoading && (
       <FormattedMessage
@@ -148,22 +164,36 @@ export const BulkEditProfilesPane = ({
       />
     );
 
+    const newButton = hasSettingsCreatePerms && (
+      <Button
+        buttonStyle="primary"
+        id="create-new-profile"
+        marginBottom0
+        onClick={openCreateProfile}
+      >
+        <FormattedMessage id="ui-bulk-edit.settings.profiles.button.new" />
+      </Button>
+    );
+
+    const paneTitle = (
+      <AppIcon
+        app="bulk-edit"
+        iconKey={RECORD_TYPES_MAPPING[entityType]}
+        size="small"
+      >
+        {title}
+      </AppIcon>
+    );
+
     return (
       <PaneHeader
         {...renderProps}
-        paneTitle={(
-          <AppIcon
-            app="bulk-edit"
-            iconKey={RECORD_TYPES_MAPPING[entityType]}
-            size="small"
-          >
-            {title}
-          </AppIcon>
-        )}
+        paneTitle={paneTitle}
+        lastMenu={newButton}
         paneSub={paneSub}
       />
     );
-  }, [entityType, filteredProfiles?.length, isProfilesLoading, title]);
+  }, [entityType, filteredProfiles, isProfilesLoading, openCreateProfile, title, hasSettingsCreatePerms]);
 
   const isLoading = isFetching || isUsersLoading || isPending;
 
@@ -175,35 +205,33 @@ export const BulkEditProfilesPane = ({
   }, [history, location.search, path]);
 
   return (
-    <>
-      <Pane
-        defaultWidth="fill"
-        renderHeader={renderHeader}
-      >
-        <div className={css.paneContent}>
-          <SearchField
-            ariaLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.search.label' })}
-            clearSearchId={`input-${entityType}-search-field-clear-button`}
-            id={`input-search-${entityType}-field`}
-            loading={isLoading}
-            marginBottom0
-            onChange={onSearchChange}
-            onClear={onSearchChange}
-            value={searchTerm}
+    <Pane
+      defaultWidth="fill"
+      renderHeader={renderHeader}
+    >
+      <div className={css.paneContent}>
+        <SearchField
+          ariaLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.search.label' })}
+          clearSearchId={`input-${entityType}-search-field-clear-button`}
+          id={`input-search-${entityType}-field`}
+          loading={isLoading}
+          marginBottom0
+          onChange={onSearchChange}
+          onClear={onSearchChange}
+          value={searchTerm}
+        />
+        <div className={css.profilesList}>
+          <BulkEditProfiles
+            changeSorting={changeLSorting}
+            entityType={entityType}
+            isLoading={isLoading}
+            profiles={filteredProfiles}
+            searchTerm={searchTerm}
+            sortOrder={sortOrder}
+            sortDirection={sortDirection}
           />
-          <div className={css.profilesList}>
-            <BulkEditProfiles
-              changeSorting={changeLSorting}
-              entityType={entityType}
-              isLoading={isLoading}
-              profiles={filteredProfiles}
-              searchTerm={searchTerm}
-              sortOrder={sortOrder}
-              sortDirection={sortDirection}
-            />
-          </div>
         </div>
-      </Pane>
+      </div>
 
       <Route
         exact
@@ -219,7 +247,20 @@ export const BulkEditProfilesPane = ({
           </Layer>
         )}
       />
-    </>
+
+      <Route
+        exact
+        path={`${path}/create`}
+        render={() => (
+          <Layer isOpen>
+            <BulkEditCreateProfile
+              entityType={entityType}
+              onClose={closeFormLayer}
+            />
+          </Layer>
+        )}
+      />
+    </Pane>
   );
 };
 

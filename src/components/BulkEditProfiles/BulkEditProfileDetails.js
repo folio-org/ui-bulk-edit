@@ -15,6 +15,7 @@ import {
   AccordionSet,
   AccordionStatus,
   Button,
+  Checkbox,
   checkScope,
   Col,
   collapseAllSections,
@@ -22,8 +23,11 @@ import {
   ExpandAllButton,
   expandAllSections,
   HasCommand,
+  Headline,
   Icon,
   KeyValue,
+  Label,
+  Layout,
   Loading,
   LoadingPane,
   MenuSection,
@@ -185,54 +189,63 @@ export const BulkEditProfileDetails = ({
         renderHeader={renderHeader}
         dismissible
       >
-        <Row>
-          <Col
-            xs={12}
-            md={8}
-            mdOffset={2}
-          >
-            <AccordionStatus ref={accordionStatusRef}>
-              <Row end="xs">
+        <Headline size="xx-large" margin="none" tag="h1">
+          {profile?.name}
+        </Headline>
+        <AccordionStatus ref={accordionStatusRef}>
+          <Layout className="flex justify-end">
+            <ExpandAllButton />
+          </Layout>
+
+          <AccordionSet>
+            <Accordion
+              id={SUMMARY}
+              label={<FormattedMessage id={`ui-bulk-edit.settings.profiles.details.${SUMMARY}`} />}
+            >
+              <Row>
                 <Col xs={12}>
-                  <ExpandAllButton />
+                  <ViewMetaData metadata={metadata} />
                 </Col>
               </Row>
-
-              <AccordionSet>
-
-                <Accordion
-                  id={SUMMARY}
-                  label={<FormattedMessage id={`ui-bulk-edit.settings.profiles.details.${SUMMARY}`} />}
+              <Row start="xs">
+                <Col
+                  xs={6}
+                  lg={3}
                 >
-                  <Row>
-                    <Col xs={12}>
-                      <ViewMetaData metadata={metadata} />
-                    </Col>
-                  </Row>
-                  <Row start="xs">
-                    <Col
-                      xs={6}
-                      lg={3}
-                    >
-                      <KeyValue
-                        label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.name" />}
-                        value={profile?.name}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={12}>
-                      <KeyValue
-                        label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.description" />}
-                        value={profile?.description}
-                      />
-                    </Col>
-                  </Row>
-                </Accordion>
-              </AccordionSet>
-            </AccordionStatus>
-          </Col>
-        </Row>
+                  <KeyValue
+                    label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.name" />}
+                    value={profile?.name}
+                  />
+                </Col>
+                <Col
+                  xs={6}
+                  lg={3}
+                >
+                  <fieldset>
+                    <Label for="lockProfile">
+                      <FormattedMessage id="ui-bulk-edit.settings.profiles.form.lockProfile" />
+                    </Label>
+                    <Checkbox
+                      id="lockProfile"
+                      name="lockProfile"
+                      inline
+                      checked={profile?.locked}
+                      disabled
+                    />
+                  </fieldset>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <KeyValue
+                    label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.description" />}
+                    value={profile?.description}
+                  />
+                </Col>
+              </Row>
+            </Accordion>
+          </AccordionSet>
+        </AccordionStatus>
 
         <ConfirmationModal
           confirmLabel={<FormattedMessage id="stripes-core.button.delete" />}

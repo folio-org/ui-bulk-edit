@@ -243,15 +243,15 @@ export const findRecordType = (recordTypes, selectedType, formatMessage) => {
 
 /**
  * Validates an array of field data against the schema.
- * @param {Array<Object>} fields - The collection of field objects to validate.
+ * @param {Object} object - Object to validate.
  * @param {Object} schema - The validation schema to use.
  * @returns {Object} A map of error paths to their corresponding error message IDs.
  */
-export const getFormErrors = (fields, schema) => {
+export const getFormErrors = (object, schema) => {
   let errors = {};
 
   try {
-    schema.validateSync(fields, { strict: true, abortEarly: false });
+    schema.validateSync(object, { strict: true, abortEarly: false });
   } catch (e) {
     errors = e.inner?.reduce((acc, error) => {
       acc[error.path] = error.message;

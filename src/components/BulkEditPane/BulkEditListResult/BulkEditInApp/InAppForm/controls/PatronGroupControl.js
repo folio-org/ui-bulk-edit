@@ -8,14 +8,12 @@ import { sortAlphabeticallyWithoutGroups } from '../../../../../../utils/sortAlp
 import { getLabelByValue } from '../../helpers';
 import { usePatronGroup } from '../../../../../../hooks/api';
 import { CAPABILITIES } from '../../../../../../constants';
-import { useSearchParams } from '../../../../../../hooks';
 
 
-export const PatronGroupControl = ({ value, path, name, ctx, onChange }) => {
+export const PatronGroupControl = ({ value, path, name, ctx, recordType, onChange }) => {
   const { formatMessage } = useIntl();
-  const { currentRecordType } = useSearchParams();
 
-  const isUserCapability = currentRecordType === CAPABILITIES.USER;
+  const isUserCapability = recordType === CAPABILITIES.USER;
 
   const { userGroups } = usePatronGroup({ enabled: isUserCapability });
 
@@ -55,6 +53,7 @@ export const PatronGroupControl = ({ value, path, name, ctx, onChange }) => {
 
 PatronGroupControl.propTypes = {
   value: PropTypes.string,
+  recordType: PropTypes.string,
   path: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),

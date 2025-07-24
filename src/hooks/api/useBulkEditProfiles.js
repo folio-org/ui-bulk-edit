@@ -14,7 +14,7 @@ import {
   CAPABILITIES,
 } from '../../constants';
 
-const NAMESPACE_KEY = 'bulk-edit-profiles';
+export const BULK_EDIT_PROFILES_KEY = 'BULK_EDIT_PROFILES_KEY';
 const DEFAULT_DATA = [];
 
 const ENTITY_TYPE_DICT = {
@@ -38,7 +38,7 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
   } = options;
 
   const ky = useOkapiKy({ tenant: tenantId });
-  const [namespace] = useNamespace({ key: NAMESPACE_KEY });
+  const [namespace] = useNamespace({ key: BULK_EDIT_PROFILES_KEY });
 
   const cqlBuilder = new CQLBuilder();
   const searchQuery = entityType
