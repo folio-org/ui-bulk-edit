@@ -86,6 +86,7 @@ LocationControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
+  disabled: PropTypes.bool,
   ctx: PropTypes.shape({
     index: PropTypes.number.isRequired,
     parentArray: PropTypes.arrayOf(PropTypes.shape({

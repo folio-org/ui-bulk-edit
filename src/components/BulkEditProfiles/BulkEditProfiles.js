@@ -3,7 +3,6 @@ import { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   useHistory,
-  useLocation,
   useRouteMatch
 } from 'react-router-dom';
 
@@ -76,12 +75,11 @@ export const BulkEditProfiles = ({
   sortDirection,
 }) => {
   const history = useHistory();
-  const { search } = useLocation();
   const { path } = useRouteMatch();
 
   const formatter = useMemo(
-    () => getResultsFormatter(entityType, searchTerm, path, search),
-    [entityType, path, searchTerm, search],
+    () => getResultsFormatter(entityType, searchTerm),
+    [entityType, searchTerm],
   );
 
   const handleRowClick = useCallback((e, profile) => {
