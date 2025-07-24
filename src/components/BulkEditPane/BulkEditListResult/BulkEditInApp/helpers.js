@@ -9,9 +9,10 @@ import {
   NOTES_PARAMETERS_KEYS,
   GRANULAR_ACTIONS_MAP,
   PARAMETERS_KEYS,
+  BOOLEAN_PARAMETERS_KEYS,
   getRemoveSomeAction,
   getPlaceholder,
-  getAddAction, BOOLEAN_PARAMETERS_KEYS,
+  getAddAction
 } from '../../../../constants';
 
 export const TEMPORARY_LOCATIONS = [
