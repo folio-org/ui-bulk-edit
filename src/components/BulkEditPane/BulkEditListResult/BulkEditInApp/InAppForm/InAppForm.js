@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { Layout, Loading } from '@folio/stripes/components';
 
 import { InAppFormTitle } from './InAppFormTitle';
@@ -34,4 +36,14 @@ export const InAppForm = ({
       />
     </>
   );
+};
+
+InAppForm.propTypes = {
+  fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  setFields: PropTypes.func.isRequired,
+  options: PropTypes.shape({}).isRequired,
+  recordType: PropTypes.string.isRequired,
+  approach: PropTypes.string.isRequired,
+  readOnly: PropTypes.bool,
+  loading: PropTypes.bool
 };

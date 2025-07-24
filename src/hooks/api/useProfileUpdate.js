@@ -12,7 +12,7 @@ export const useProfileUpdate = ({ id, onSuccess }) => {
   const [namespace] = useNamespace({ key: BULK_EDIT_PROFILES_KEY });
   const { formatMessage } = useIntl();
   const { showErrorMessage } = useErrorMessages({
-    messageSuffix: formatMessage({ id: 'ui-bulk-edit.settings.profiles.form.create.error' })
+    messageSuffix: formatMessage({ id: 'ui-bulk-edit.settings.profiles.form.update.error' })
   });
 
   const { mutateAsync: updateProfile, isLoading: isProfileUpdating } = useMutation({
