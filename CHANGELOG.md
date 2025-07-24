@@ -21,6 +21,7 @@
 * [UIBULKED-682](https://folio-org.atlassian.net/browse/UIBULKED-682) Fix bulk-edit HOLDINGS form problems
 * [UIBULKED-688](https://folio-org.atlassian.net/browse/UIBULKED-688) View "Summary" of existing bulk edit profile
 * [UIBULKED-653](https://folio-org.atlassian.net/browse/UIBULKED-653) Add "Create profile" form
+* [UIBULKED-663](https://folio-org.atlassian.net/browse/UIBULKED-663) Deleting a bulk edit profile
 * [UIBULKED-658](https://folio-org.atlassian.net/browse/UIBULKED-658) Add "Update profile" form
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)

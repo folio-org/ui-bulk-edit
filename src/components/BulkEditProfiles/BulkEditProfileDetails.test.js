@@ -7,7 +7,10 @@ import { runAxeTest } from '@folio/stripes-testing';
 import { handleKeyCommand } from '@folio/stripes-acq-components';
 
 import { CAPABILITIES } from '../../constants';
-import { useBulkEditProfile } from '../../hooks/api';
+import {
+  useBulkEditProfile,
+  useBulkEditProfileMutation,
+} from '../../hooks/api';
 import { BulkEditProfileDetails } from './BulkEditProfileDetails';
 
 jest.unmock('@folio/stripes/components');
@@ -24,6 +27,7 @@ jest.mock('@folio/stripes-acq-components', () => ({
 
 jest.mock('../../hooks/api', () => ({
   useBulkEditProfile: jest.fn(),
+  useBulkEditProfileMutation: jest.fn(),
 }));
 
 jest.mock('react-router', () => ({
@@ -50,8 +54,11 @@ const renderBulkEditProfileDetails = (props = {}) => render(
 );
 
 describe('BulkEditProfileDetails', () => {
+  const deleteProfile = jest.fn(() => Promise.resolve());
+
   beforeEach(() => {
     useBulkEditProfile.mockReturnValue({ profile: profileMock });
+    useBulkEditProfileMutation.mockReturnValue({ deleteProfile });
   });
 
   afterEach(() => {
@@ -94,6 +101,21 @@ describe('BulkEditProfileDetails', () => {
       await userEvent.keyboard('{Control>}{Alt>}{b}{/Alt}{/Control}');
 
       expect(handleKeyCommand).toHaveBeenCalledWith(expect.any(Function));
+    });
+  });
+
+  describe('Actions', () => {
+    it('should call handle profile delete when delete action is triggered', async () => {
+      renderBulkEditProfileDetails();
+
+      await userEvent.click(screen.getByRole('button', { name: 'Icon' }));
+      await userEvent.click(screen.getByLabelText(/button.delete/));
+
+      expect(screen.getByText(/delete.modal.message/)).toBeInTheDocument();
+
+      await userEvent.click(screen.getByRole('button', { name: 'stripes-core.button.delete' }));
+
+      expect(deleteProfile).toHaveBeenCalledWith({ profileId: profileMock.id });
     });
   });
 });
