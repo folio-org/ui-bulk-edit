@@ -4,6 +4,7 @@ import { useShowCallout } from '@folio/stripes-acq-components';
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useErrorMessages } from '../useErrorMessages';
 import { BULK_EDIT_PROFILES_KEY } from './useBulkEditProfiles';
+import { BULK_EDIT_PROFILES_API } from '../../constants';
 
 export const useProfileCreate = ({ onSuccess }) => {
   const ky = useOkapiKy();
@@ -17,7 +18,7 @@ export const useProfileCreate = ({ onSuccess }) => {
 
   const { mutateAsync: createProfile, isLoading: isProfileCreating } = useMutation({
     mutationFn: (json) => {
-      return ky.post('bulk-operations/profiles', {
+      return ky.post(BULK_EDIT_PROFILES_API, {
         json,
       }).json();
     },

@@ -40,7 +40,6 @@ import { ViewMetaData } from '@folio/stripes/smart-components';
 import {
   handleKeyCommand,
   useModalToggle,
-  useShowCallout,
 } from '@folio/stripes-acq-components';
 
 import { useParams } from 'react-router';
@@ -50,7 +49,7 @@ import {
 } from '../../constants';
 import {
   useBulkEditProfile,
-  useBulkEditProfileMutation,
+  useProfileDelete,
 } from '../../hooks/api';
 import { PROFILE_DETAILS_ACCORDIONS } from './constants';
 
@@ -65,7 +64,6 @@ export const BulkEditProfileDetails = ({
   const history = useHistory();
   const accordionStatusRef = useRef();
   const [isDeleteProfileModalOpen, toggleDeleteProfileModalModal] = useModalToggle();
-  const showCallout = useShowCallout();
 
   const {
     isLoading,
@@ -74,24 +72,16 @@ export const BulkEditProfileDetails = ({
 
   const {
     deleteProfile,
-    isLoading: isDeletingProfile,
-  } = useBulkEditProfileMutation();
+    isDeletingProfile,
+  } = useProfileDelete({
+    onSuccess: onClose
+  });
 
-  const handleProfileDelete = useCallback(() => {
+  const handleProfileDelete = useCallback(async () => {
     toggleDeleteProfileModalModal();
 
-    return deleteProfile({ profileId: id })
-      .then(() => {
-        showCallout({ messageId: 'ui-bulk-edit.settings.profiles.details.action.delete.success' });
-        onClose();
-      })
-      .catch(() => {
-        showCallout({
-          messageId: 'ui-bulk-edit.settings.profiles.details.action.delete.error',
-          type: 'error',
-        });
-      });
-  }, [deleteProfile, id, onClose, showCallout, toggleDeleteProfileModalModal]);
+    await deleteProfile({ profileId: id });
+  }, [deleteProfile, id, toggleDeleteProfileModalModal]);
 
   const renderActionMenu = useCallback(({ onToggle }) => {
     return (
@@ -101,6 +91,7 @@ export const BulkEditProfileDetails = ({
             aria-label={intl.formatMessage({ id: 'stripes-core.button.edit' })}
             buttonStyle="dropdownItem"
             onClick={() => {
+              onToggle();
               history.push({
                 pathname: `${id}/edit`,
                 search: history.location.search,

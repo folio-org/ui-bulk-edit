@@ -91,7 +91,6 @@ export const BulkEditProfilesPane = ({
     isFetching,
     isLoading: isProfilesLoading,
     profiles,
-    refetch,
   } = useBulkEditProfiles({ entityType });
 
   const userIds = useMemo(() => profiles.map(profile => profile.updatedBy), [profiles]);
@@ -241,7 +240,6 @@ export const BulkEditProfilesPane = ({
             <BulkEditProfileDetails
               entityType={entityType}
               onClose={onCloseDetailsPane}
-              refetch={refetch}
             />
           </Layer>
         )}
