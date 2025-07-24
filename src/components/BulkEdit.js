@@ -1,8 +1,8 @@
-import {
-  Switch,
-  Route,
-} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {
+  Route,
+  Switch,
+} from 'react-router-dom';
 
 import {
   CommandList,

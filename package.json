@@ -240,6 +240,15 @@
           "bulk-operations.profiles.item.post"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-bulk-edit.settings.delete",
+        "displayName": "Settings (Bulk edit): Can delete profiles",
+        "subPermissions": [
+          "ui-bulk-edit.settings.view",
+          "bulk-operations.profiles.item.delete"
+        ],
+        "visible": true
       }
     ]
   },
