@@ -26,7 +26,6 @@ export const PreventFormCloseModal = ({ open, onKeepEditing, onClose }) => {
       label={<FormattedMessage id="ui-bulk-edit.previewModal.areYouSure" />}
       aria-label="PreviewModal"
       footer={modalFooter}
-      dismissible
       onClose={onKeepEditing}
     >
       <FormattedMessage id="ui-bulk-edit.previewModal.unsavedChanges" />
