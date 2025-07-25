@@ -26,7 +26,7 @@ export const InstanceStatisticalCodesControl = ({ value, name, path, disabled, o
 
   if (isStatisticalCodesLoading) return <Loading size="large" />;
 
-  const arrayValue = statisticalCodes.filter(statisticalCode => {
+  const selectedStatisticalCodes = statisticalCodes.filter(statisticalCode => {
     return value.map(code => code.value).includes(statisticalCode.value);
   });
 
@@ -34,7 +34,7 @@ export const InstanceStatisticalCodesControl = ({ value, name, path, disabled, o
     <div title={title}>
       <MultiSelection
         id="statisticalCodes"
-        value={arrayValue}
+        value={selectedStatisticalCodes}
         onChange={handleChange}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.statisticalCode' })}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statisticalCode' })}

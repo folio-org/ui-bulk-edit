@@ -64,8 +64,7 @@ describe('useProfileUpdate', () => {
     );
 
     await act(async () => {
-      const data = { foo: 'bar' };
-      await result.current.updateProfile(data);
+      await result.current.updateProfile({ foo: 'bar' });
     });
 
     expect(mockPut).toHaveBeenCalledWith(
@@ -98,13 +97,11 @@ describe('useProfileUpdate', () => {
     });
 
     expect(mockShowErrorMessage).toHaveBeenCalledTimes(1);
-
     expect(mockShowErrorMessage).toHaveBeenCalledWith(
       testError,
       { a: 1 },
       undefined
     );
-
     expect(mockCallout).not.toHaveBeenCalled();
     expect(mockInvalidate).not.toHaveBeenCalled();
     expect(mockOnSuccess).not.toHaveBeenCalled();
@@ -115,23 +112,32 @@ describe('useProfileUpdate', () => {
     const pending = new Promise(res => { resolveJson = res; });
     mockPut.mockReturnValueOnce({ json: () => pending });
 
-    const { result, waitForNextUpdate } = renderHook(
+    const { result } = renderHook(
       () => useProfileUpdate({ id: 'X', onSuccess: jest.fn() }),
       { wrapper: createWrapper() }
     );
 
+    let mutationPromise;
     act(() => {
-      result.current.updateProfile({}).catch(() => {});
+      mutationPromise = result.current.updateProfile({}).catch(() => {});
     });
 
-    await waitForNextUpdate();
+    await act(async () => {
+      await new Promise(r => setTimeout(r, 0));
+    });
     expect(result.current.isProfileUpdating).toBe(true);
 
     act(() => {
-      resolveJson({ done: true });
+      resolveJson({ success: true });
     });
 
-    await waitForNextUpdate();
+    await act(async () => {
+      await new Promise(r => setTimeout(r, 0));
+    });
     expect(result.current.isProfileUpdating).toBe(false);
+
+    await act(async () => {
+      await mutationPromise;
+    });
   });
 });

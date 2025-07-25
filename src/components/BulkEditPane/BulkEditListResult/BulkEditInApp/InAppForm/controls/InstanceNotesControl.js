@@ -16,7 +16,7 @@ export const InstanceNotesControl = ({ parameters, option, value, path, name, di
 
   const filteredAndMappedInstanceNotes = getInstanceNotes(formatMessage, instanceNotes)
     .filter(obj => (parameters ? !parameters.map(param => param.value).includes(obj.value) : obj.value !== option))
-    .map(({ label, value: val, disabled }) => ({ label, value: val, disabled }));
+    .map(({ label, value: val, disabled: disabledValue }) => ({ label, value: val, disabled: disabledValue }));
   const sortedInstanceNotes = sortWithoutPlaceholder(filteredAndMappedInstanceNotes);
   const title = getLabelByValue(sortedInstanceNotes, value);
 
