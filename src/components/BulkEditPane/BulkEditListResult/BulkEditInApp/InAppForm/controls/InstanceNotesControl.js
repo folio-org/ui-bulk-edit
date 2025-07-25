@@ -9,14 +9,14 @@ import { getInstanceNotes } from '../../../../../../constants';
 import { useInstanceNotes } from '../../../../../../hooks/api';
 
 
-export const InstanceNotesControl = ({ parameters, option, value, path, name, onChange }) => {
+export const InstanceNotesControl = ({ parameters, option, value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
 
   const { instanceNotes, isInstanceNotesLoading } = useInstanceNotes();
 
   const filteredAndMappedInstanceNotes = getInstanceNotes(formatMessage, instanceNotes)
     .filter(obj => (parameters ? !parameters.map(param => param.value).includes(obj.value) : obj.value !== option))
-    .map(({ label, value: val, disabled }) => ({ label, value: val, disabled }));
+    .map(({ label, value: val, disabled: disabledValue }) => ({ label, value: val, disabled: disabledValue }));
   const sortedInstanceNotes = sortWithoutPlaceholder(filteredAndMappedInstanceNotes);
   const title = getLabelByValue(sortedInstanceNotes, value);
 
@@ -36,6 +36,7 @@ export const InstanceNotesControl = ({ parameters, option, value, path, name, on
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.instanceNotes' })}
         marginBottom0
         dirty={!!value}
+        disabled={disabled}
       />
     </div>
   );
@@ -49,5 +50,6 @@ InstanceNotesControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ).isRequired,
   name: PropTypes.string,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func,
 };

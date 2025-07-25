@@ -1,6 +1,6 @@
 export * from './useBulkEditLogs';
 export * from './useBulkEditProfile';
-export * from './useBulkEditProfileMutation';
+export * from './useProfileDelete';
 export * from './useBulkEditProfiles';
 export * from './useBulkOperationDetails';
 export * from './useBulkOperationStart';

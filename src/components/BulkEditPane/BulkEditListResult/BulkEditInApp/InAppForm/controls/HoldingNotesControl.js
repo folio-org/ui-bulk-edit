@@ -11,7 +11,7 @@ import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils
 import { getHoldingsNotes } from '../../../../../../constants';
 
 
-export const HoldingNotesControl = ({ parameters, option, value, path, name, onChange }) => {
+export const HoldingNotesControl = ({ parameters, option, value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
@@ -23,7 +23,7 @@ export const HoldingNotesControl = ({ parameters, option, value, path, name, onC
 
   const filteredAndMappedHoldingsNotes = getHoldingsNotes(formatMessage, isCentralTenant ? removeDuplicatesByValue(holdingsNotesEcs, tenants) : holdingsNotes)
     .filter(obj => (parameters ? !parameters.map(param => param.value).includes(obj.value) : obj.value !== option))
-    .map(({ label, value: val, disabled, tenant }) => ({ label, value: val, disabled, tenant }));
+    .map(({ label, value: val, disabled: noteDisabled, tenant }) => ({ label, value: val, disabled: noteDisabled, tenant }));
   const sortedHoldingsNotes = sortWithoutPlaceholder(filteredAndMappedHoldingsNotes);
   const title = getLabelByValue(sortedHoldingsNotes, value);
 
@@ -45,6 +45,7 @@ export const HoldingNotesControl = ({ parameters, option, value, path, name, onC
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.holdingsNotes' })}
         marginBottom0
         dirty={!!value}
+        disabled={disabled}
       />
     </div>
   );
@@ -58,5 +59,6 @@ HoldingNotesControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func,
 };

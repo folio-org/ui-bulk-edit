@@ -5,14 +5,11 @@ import { useContext } from 'react';
 import {
   Headline,
   Accordion,
-  Loading,
-  Layout,
 } from '@folio/stripes/components';
 
-import { InAppFormTitle } from './InAppForm/InAppFormTitle';
-import { InAppFormBody } from './InAppForm/InAppFormBody';
 import { RootContext } from '../../../../context/RootContext';
 import { useSearchParams } from '../../../../hooks';
+import { InAppForm } from './InAppForm/InAppForm';
 
 
 export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields }) => {
@@ -27,24 +24,14 @@ export const BulkEditInApp = ({ areAllOptionsLoaded, options, fields, setFields 
       <Accordion
         label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
       >
-        {areAllOptionsLoaded ? (
-          <>
-            <InAppFormTitle
-              fields={fields}
-            />
-            <InAppFormBody
-              fields={fields}
-              setFields={setFields}
-              options={options}
-              recordType={currentRecordType}
-              approach={approach}
-            />
-          </>
-        ) : (
-          <Layout className="display-flex centerContent">
-            <Loading size="large" />
-          </Layout>
-        )}
+        <InAppForm
+          fields={fields}
+          setFields={setFields}
+          options={options}
+          approach={approach}
+          recordType={currentRecordType}
+          loading={!areAllOptionsLoaded}
+        />
       </Accordion>
     </>
   );

@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
 import { AppIcon, TitleManager, useStripes } from '@folio/stripes/core';
 
+import { CommandList, defaultKeyboardShortcuts } from '@folio/stripes/components';
 import { useBulkPermissions } from '../hooks';
 import { ProfilesContainer } from './profiles/ProfilesContainer';
 import { CAPABILITIES } from '../constants';
@@ -66,11 +67,14 @@ export const BulkEditSettings = (props) => {
   ] : [];
 
   return (
-    <Settings
-      {...props}
-      stripes={stripes}
-      sections={sections}
-      paneTitle={formatMessage({ id: 'ui-bulk-edit.settings.paneTitle' })}
-    />
+    <CommandList commands={defaultKeyboardShortcuts}>
+      <Settings
+        {...props}
+        navPaneWidth="15%"
+        stripes={stripes}
+        sections={sections}
+        paneTitle={formatMessage({ id: 'ui-bulk-edit.settings.paneTitle' })}
+      />
+    </CommandList>
   );
 };

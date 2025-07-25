@@ -13,6 +13,7 @@ import {
   folioFieldTemplate,
   getPreselectedParams,
   shouldShowValueColumn,
+  ruleDetailsToSource,
 } from './helpers';
 import {
   OPTIONS,
@@ -20,6 +21,8 @@ import {
   PARAMETERS_KEYS,
   FINAL_ACTIONS,
   NOTES_PARAMETERS_KEYS,
+  GRANULAR_ACTIONS_MAP,
+  BOOLEAN_PARAMETERS_KEYS,
   getAddAction,
   getPlaceholder,
   getRemoveSomeAction,
@@ -521,5 +524,153 @@ describe('shouldShowValueColumn', () => {
 
     expect(shouldShowValueColumn(action, [mismatchedParam, matchedParam])).toBe(true);
     expect(shouldShowValueColumn(action, [mismatchedParam])).toBe(false);
+  });
+});
+
+describe('ruleDetailsToSource (no constant mocks)', () => {
+  const noteKey = NOTES_PARAMETERS_KEYS[0];
+  const [boolKey1 = PARAMETERS_KEYS.APPLY_TO_ITEMS] = BOOLEAN_PARAMETERS_KEYS;
+  const staffOnlyKey = PARAMETERS_KEYS.STAFF_ONLY;
+
+  const twoActionEntry = Object.entries(GRANULAR_ACTIONS_MAP || {}).find(
+    ([, arr]) => Array.isArray(arr) && arr.length === 2
+  );
+  const singleActionEntry = Object.entries(GRANULAR_ACTIONS_MAP || {}).find(
+    ([, arr]) => Array.isArray(arr) && arr.length === 1
+  );
+
+  it('returns undefined on undefined/null input', () => {
+    expect(ruleDetailsToSource(undefined)).toBeUndefined();
+    expect(ruleDetailsToSource(null)).toBeUndefined();
+  });
+
+  it(
+    'uses note param as option, splits granular actions, coerces booleans, adds onlyForActions for STAFF_ONLY',
+    () => {
+      const [typeWithTwo, [firstActionName, secondActionName]] = twoActionEntry;
+      const data = [
+        {
+          option: 'fallback',
+          tenants: ['tenantA'],
+          actions: [
+            {
+              type: typeWithTwo,
+              initial: 'oldVal',
+              updated: 'newVal',
+              tenants: ['tenantB'],
+              parameters: [
+                { key: noteKey, value: 'Note value' },
+                { key: boolKey1, value: 'true' },
+                { key: staffOnlyKey, value: 'false' },
+                { key: 'other', value: 'x' },
+              ],
+            },
+          ],
+        },
+      ];
+
+      const [mapped] = ruleDetailsToSource(data);
+
+      expect(mapped.id).toEqual(expect.any(String));
+      expect(mapped.option).toBe('Note value');
+      expect(mapped.tenants).toEqual(['tenantA']);
+
+      const { actions } = mapped.actionsDetails;
+      expect(actions).toHaveLength(2);
+
+      expect(actions[0]).toMatchObject({
+        name: firstActionName,
+        value: 'oldVal',
+        tenants: ['tenantB'],
+      });
+
+      const params = actions[0].parameters;
+      expect(params.find(p => p.key === boolKey1)?.value).toBe(true);
+      const staffOnlyParam = params.find(p => p.key === staffOnlyKey);
+      expect(staffOnlyParam.value).toBe(false);
+      expect(staffOnlyParam.onlyForActions).toEqual([ACTIONS.ADD_TO_EXISTING]);
+
+      expect(actions[1]).toMatchObject({
+        name: secondActionName,
+        value: 'newVal',
+        tenants: ['tenantB'],
+      });
+    }
+  );
+
+  it('falls back to rule.option when no note parameter is present and handles single-action mapping', () => {
+    const singleType = singleActionEntry?.[0] || 'TYPE_NOT_IN_MAP';
+    const singleActionName = singleActionEntry?.[1][0] || singleType;
+
+    const data = [
+      {
+        option: 'no-note',
+        tenants: ['t1'],
+        actions: [
+          {
+            type: singleType,
+            updated: 'u1',
+            tenants: ['t2'],
+            parameters: [{ key: 'foo', value: 'bar' }],
+          },
+        ],
+      },
+    ];
+
+    const [mapped] = ruleDetailsToSource(data);
+    expect(mapped.option).toBe('no-note');
+    expect(mapped.actionsDetails.actions).toHaveLength(1);
+    expect(mapped.actionsDetails.actions[0]).toMatchObject({
+      name: singleActionName,
+      value: 'u1',
+      tenants: ['t2'],
+    });
+  });
+
+  it('coerces only BOOLEAN_PARAMETERS_KEYS, leaves others untouched', () => {
+    const data = [
+      {
+        option: 'x',
+        tenants: [],
+        actions: [
+          {
+            type: singleActionEntry?.[0] || 'TYPE_NOT_IN_MAP',
+            updated: 'v',
+            tenants: [],
+            parameters: [
+              { key: boolKey1, value: 'false' },
+              { key: staffOnlyKey, value: true },
+              { key: 'notBoolean', value: 'true' },
+            ],
+          },
+        ],
+      },
+    ];
+
+    const [{ actionsDetails }] = ruleDetailsToSource(data);
+    const params = actionsDetails.actions[0].parameters;
+    expect(params.find(p => p.key === boolKey1)?.value).toBe(false);
+    expect(params.find(p => p.key === staffOnlyKey)?.value).toBe(true);
+    expect(params.find(p => p.key === 'notBoolean')?.value).toBe('true');
+  });
+
+  it('gracefully handles an empty actions array', () => {
+    const data = [
+      {
+        option: 'opt',
+        tenants: ['t1'],
+        actions: [],
+      },
+    ];
+
+    const [mapped] = ruleDetailsToSource(data);
+    const first = mapped.actionsDetails.actions[0];
+
+    expect(first).toMatchObject({
+      name: undefined,
+      value: undefined,
+      parameters: undefined,
+      tenants: undefined,
+    });
   });
 });

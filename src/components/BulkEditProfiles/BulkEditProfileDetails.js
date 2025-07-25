@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import {
+import { useHistory } from 'react-router-dom';
+import React, {
   useCallback,
   useMemo,
   useRef,
@@ -8,7 +9,6 @@ import {
   FormattedMessage,
   useIntl,
 } from 'react-intl';
-import ReactRouterPropTypes from 'react-router-prop-types';
 
 import {
   Accordion,
@@ -35,24 +35,22 @@ import {
   PaneHeader,
   Row,
 } from '@folio/stripes/components';
-import {
-  AppIcon,
-  IfPermission,
-} from '@folio/stripes/core';
+import { AppIcon, IfPermission, TitleManager } from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 import {
   handleKeyCommand,
   useModalToggle,
-  useShowCallout,
 } from '@folio/stripes-acq-components';
 
+import { useParams } from 'react-router';
 import {
   CAPABILITIES,
   RECORD_TYPES_MAPPING,
+  RECORD_TYPES_PROFILES_MAPPING,
 } from '../../constants';
 import {
   useBulkEditProfile,
-  useBulkEditProfileMutation,
+  useProfileDelete,
 } from '../../hooks/api';
 import { PROFILE_DETAILS_ACCORDIONS } from './constants';
 
@@ -60,14 +58,13 @@ const { SUMMARY } = PROFILE_DETAILS_ACCORDIONS;
 
 export const BulkEditProfileDetails = ({
   entityType,
-  match: { params: { id } },
   onClose,
-  refetch,
 }) => {
   const intl = useIntl();
+  const { id } = useParams();
+  const history = useHistory();
   const accordionStatusRef = useRef();
   const [isDeleteProfileModalOpen, toggleDeleteProfileModalModal] = useModalToggle();
-  const showCallout = useShowCallout();
 
   const {
     isLoading,
@@ -76,50 +73,61 @@ export const BulkEditProfileDetails = ({
 
   const {
     deleteProfile,
-    isLoading: isDeletingProfile,
-  } = useBulkEditProfileMutation();
+    isDeletingProfile,
+  } = useProfileDelete({
+    onSuccess: onClose
+  });
 
-  const handleProfileDelete = useCallback(() => {
+  const handleProfileDelete = useCallback(async () => {
     toggleDeleteProfileModalModal();
 
-    return deleteProfile({ profileId: id })
-      .then(() => {
-        showCallout({ messageId: 'ui-bulk-edit.settings.profiles.details.action.delete.success' });
-        refetch();
-        onClose();
-      })
-      .catch(() => {
-        showCallout({
-          messageId: 'ui-bulk-edit.settings.profiles.details.action.delete.error',
-          type: 'error',
-        });
-      });
-  }, [deleteProfile, id, onClose, refetch, showCallout, toggleDeleteProfileModalModal]);
+    await deleteProfile({ profileId: id });
+  }, [deleteProfile, id, toggleDeleteProfileModalModal]);
 
   const renderActionMenu = useCallback(({ onToggle }) => {
     return (
-      <MenuSection id="bulk-edit-profile-action-menu">
-        <IfPermission perm="bulk-operations.profiles.item.delete">
+      <IfPermission perm="ui-bulk-edit.settings.create">
+        <MenuSection id="bulk-edit-profile-action-menu">
           <Button
-            aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}
+            aria-label={intl.formatMessage({ id: 'stripes-core.button.edit' })}
             buttonStyle="dropdownItem"
-            disabled={isDeletingProfile}
             onClick={() => {
-              toggleDeleteProfileModalModal();
               onToggle();
+              history.push({
+                pathname: `${id}/edit`,
+                search: history.location.search,
+              });
             }}
           >
             <Icon
               size="small"
-              icon="trash"
+              icon="edit"
             >
-              <FormattedMessage id="stripes-core.button.delete" />
+              <FormattedMessage id="stripes-core.button.edit" />
             </Icon>
           </Button>
-        </IfPermission>
-      </MenuSection>
+          <IfPermission perm="ui-bulk-edit.settings.delete">
+            <Button
+              aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}
+              buttonStyle="dropdownItem"
+              disabled={isDeletingProfile}
+              onClick={() => {
+                toggleDeleteProfileModalModal();
+                onToggle();
+              }}
+            >
+              <Icon
+                size="small"
+                icon="trash"
+              >
+                <FormattedMessage id="stripes-core.button.delete" />
+              </Icon>
+            </Button>
+          </IfPermission>
+        </MenuSection>
+      </IfPermission>
     );
-  }, [intl, isDeletingProfile, toggleDeleteProfileModalModal]);
+  }, [intl, history, id, isDeletingProfile, toggleDeleteProfileModalModal]);
 
   const renderHeader = useCallback((renderProps) => {
     const paneTitle = (
@@ -183,95 +191,98 @@ export const BulkEditProfileDetails = ({
       isWithinScope={checkScope}
       scope={document.body}
     >
-      <Pane
-        defaultWidth="fill"
-        id="pane-bulk-edit-profile-details"
-        renderHeader={renderHeader}
-        dismissible
-      >
-        <Headline size="xx-large" margin="none" tag="h1">
-          {profile?.name}
-        </Headline>
-        <AccordionStatus ref={accordionStatusRef}>
-          <Layout className="flex justify-end">
-            <ExpandAllButton />
-          </Layout>
+      <TitleManager record={profile?.name}>
+        <Pane
+          defaultWidth="fill"
+          id="pane-bulk-edit-profile-details"
+          renderHeader={renderHeader}
+          actionMenu={renderActionMenu}
+          dismissible
+        >
+          <Headline size="x-large" margin="none" tag="h1">
+            {profile?.name}
+          </Headline>
+          <AccordionStatus ref={accordionStatusRef}>
+            <Layout className="flex justify-end">
+              <ExpandAllButton />
+            </Layout>
 
-          <AccordionSet>
-            <Accordion
-              id={SUMMARY}
-              label={<FormattedMessage id={`ui-bulk-edit.settings.profiles.details.${SUMMARY}`} />}
-            >
-              <Row>
-                <Col xs={12}>
-                  <ViewMetaData metadata={metadata} />
-                </Col>
-              </Row>
-              <Row start="xs">
-                <Col
-                  xs={6}
-                  lg={3}
-                >
-                  <KeyValue
-                    label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.name" />}
-                    value={profile?.name}
-                  />
-                </Col>
-                <Col
-                  xs={6}
-                  lg={3}
-                >
-                  <fieldset>
-                    <Label for="lockProfile">
-                      <FormattedMessage id="ui-bulk-edit.settings.profiles.form.lockProfile" />
-                    </Label>
-                    <Checkbox
-                      id="lockProfile"
-                      name="lockProfile"
-                      inline
-                      checked={profile?.locked}
-                      disabled
+            <AccordionSet>
+
+              <Accordion
+                id={SUMMARY}
+                label={<FormattedMessage id={`ui-bulk-edit.settings.profiles.details.${SUMMARY}`} />}
+              >
+                <Row>
+                  <Col xs={12}>
+                    <ViewMetaData metadata={metadata} />
+                  </Col>
+                </Row>
+                <Row start="xs">
+                  <Col
+                    xs={6}
+                    lg={3}
+                  >
+                    <KeyValue
+                      label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.name" />}
+                      value={profile?.name}
                     />
-                  </fieldset>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12}>
-                  <KeyValue
-                    label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.description" />}
-                    value={profile?.description}
-                  />
-                </Col>
-              </Row>
-            </Accordion>
-          </AccordionSet>
-        </AccordionStatus>
+                  </Col>
+                  <Col
+                    xs={6}
+                    lg={3}
+                  >
+                    <fieldset>
+                      <Label for="lockProfile">
+                        <FormattedMessage id="ui-bulk-edit.settings.profiles.form.lockProfile" />
+                      </Label>
+                      <Checkbox
+                        id="lockProfile"
+                        name="lockProfile"
+                        inline
+                        checked={profile?.locked}
+                        disabled
+                      />
+                    </fieldset>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12}>
+                    <KeyValue
+                      label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.description" />}
+                      value={profile?.description}
+                    />
+                  </Col>
+                </Row>
+              </Accordion>
+            </AccordionSet>
+          </AccordionStatus>
 
-        <ConfirmationModal
-          confirmLabel={<FormattedMessage id="stripes-core.button.delete" />}
-          heading={
-            <FormattedMessage
-              id={`ui-bulk-edit.settings.profiles.details.action.delete.modal.heading.${RECORD_TYPES_MAPPING[entityType]}`}
-            />
-          }
-          onConfirm={handleProfileDelete}
-          onCancel={toggleDeleteProfileModalModal}
-          open={isDeleteProfileModalOpen}
-          message={(
-            <FormattedMessage
-              id="ui-bulk-edit.settings.profiles.details.action.delete.modal.message"
-              values={{ name: profile?.name }}
-            />
-          )}
-        />
-      </Pane>
+          <ConfirmationModal
+            confirmLabel={<FormattedMessage id="stripes-core.button.delete" />}
+            heading={
+              <FormattedMessage
+                id="ui-bulk-edit.settings.profiles.details.action.delete.modal.heading"
+                values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[entityType] }}
+              />
+            }
+            onConfirm={handleProfileDelete}
+            onCancel={toggleDeleteProfileModalModal}
+            open={isDeleteProfileModalOpen}
+            message={(
+              <FormattedMessage
+                id="ui-bulk-edit.settings.profiles.details.action.delete.modal.message"
+                values={{ name: profile?.name }}
+              />
+            )}
+          />
+        </Pane>
+      </TitleManager>
     </HasCommand>
   );
 };
 
 BulkEditProfileDetails.propTypes = {
   entityType: PropTypes.oneOf(Object.values(CAPABILITIES)).isRequired,
-  match: ReactRouterPropTypes.match.isRequired,
   onClose: PropTypes.func.isRequired,
-  refetch: PropTypes.func.isRequired,
 };

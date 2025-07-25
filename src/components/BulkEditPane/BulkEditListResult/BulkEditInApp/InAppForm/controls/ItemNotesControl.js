@@ -11,7 +11,7 @@ import { useBulkOperationTenants, useItemNotes, useItemNotesEcs } from '../../..
 import { getItemNotes } from '../../../../../../constants';
 
 
-export const ItemNotesControl = ({ parameters, option, value, path, name, onChange }) => {
+export const ItemNotesControl = ({ parameters, option, value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
@@ -44,6 +44,7 @@ export const ItemNotesControl = ({ parameters, option, value, path, name, onChan
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.itemNotes' })}
         marginBottom0
         dirty={!!value}
+        disabled={disabled}
       />
     </div>
   );
@@ -57,5 +58,6 @@ ItemNotesControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func,
 };

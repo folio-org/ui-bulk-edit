@@ -6,26 +6,26 @@ import { useErrorMessages } from '../useErrorMessages';
 import { BULK_EDIT_PROFILES_KEY } from './useBulkEditProfiles';
 import { BULK_EDIT_PROFILES_API } from '../../constants';
 
-export const useProfileCreate = ({ onSuccess }) => {
+export const useProfileUpdate = ({ id, onSuccess }) => {
   const ky = useOkapiKy();
   const callout = useShowCallout();
   const client = useQueryClient();
   const [namespace] = useNamespace({ key: BULK_EDIT_PROFILES_KEY });
   const { formatMessage } = useIntl();
   const { showErrorMessage } = useErrorMessages({
-    messageSuffix: formatMessage({ id: 'ui-bulk-edit.settings.profiles.form.create.error' })
+    messageSuffix: formatMessage({ id: 'ui-bulk-edit.settings.profiles.form.update.error' })
   });
 
-  const { mutateAsync: createProfile, isLoading: isProfileCreating } = useMutation({
+  const { mutateAsync: updateProfile, isLoading: isProfileUpdating } = useMutation({
     mutationFn: (json) => {
-      return ky.post(BULK_EDIT_PROFILES_API, {
+      return ky.put(`${BULK_EDIT_PROFILES_API}/${id}`, {
         json,
       }).json();
     },
     onError: showErrorMessage,
     onSuccess: () => {
       callout({
-        message: formatMessage({ id: 'ui-bulk-edit.settings.profiles.form.create.success' }),
+        message: formatMessage({ id: 'ui-bulk-edit.settings.profiles.form.update.success' }),
         type: 'success',
       });
 
@@ -36,7 +36,7 @@ export const useProfileCreate = ({ onSuccess }) => {
   });
 
   return {
-    createProfile,
-    isProfileCreating,
+    updateProfile,
+    isProfileUpdating,
   };
 };

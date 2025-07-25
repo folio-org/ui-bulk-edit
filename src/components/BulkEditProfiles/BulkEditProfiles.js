@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  useLocation,
-  useRouteMatch,
+  useHistory,
+  useRouteMatch
 } from 'react-router-dom';
+
 
 import {
   Icon,
   MultiColumnList,
-  TextLink,
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import {
@@ -23,7 +23,7 @@ import {
 } from '../../constants';
 import { bulkEditProfilePropTypeShape } from '../../shapes';
 import {
-  COLUMN_MAPPING,
+  COLUMN_MAPPING, COLUMN_WIDTHS,
   COLUMNS,
   NON_INTERACTIVE_HEADERS,
   VISIBLE_COLUMNS,
@@ -31,7 +31,7 @@ import {
 
 const isEmptyMessage = <FormattedMessage id="ui-bulk-edit.settings.profiles.empty" />;
 
-const getResultsFormatter = (entityType, searchTerm, path, search) => {
+const getResultsFormatter = (entityType, searchTerm) => {
   return {
     [COLUMNS.name]: (profile) => (
       <AppIcon
@@ -39,12 +39,10 @@ const getResultsFormatter = (entityType, searchTerm, path, search) => {
         iconKey={RECORD_TYPES_MAPPING[entityType]}
         size="small"
       >
-        <TextLink to={`${path}/${profile.id}/view${search}`}>
-          <DefaultColumn
-            searchTerm={searchTerm}
-            value={profile.name}
-          />
-        </TextLink>
+        <DefaultColumn
+          searchTerm={searchTerm}
+          value={profile.name}
+        />
       </AppIcon>
     ),
     [COLUMNS.description]: (profile) => (
@@ -76,13 +74,21 @@ export const BulkEditProfiles = ({
   sortOrder,
   sortDirection,
 }) => {
-  const { search } = useLocation();
+  const history = useHistory();
   const { path } = useRouteMatch();
 
   const formatter = useMemo(
-    () => getResultsFormatter(entityType, searchTerm, path, search),
-    [entityType, path, searchTerm, search],
+    () => getResultsFormatter(entityType, searchTerm),
+    [entityType, searchTerm],
   );
+
+  const handleRowClick = useCallback((e, profile) => {
+    e.stopPropagation();
+    history.push({
+      pathname: `${path}/${profile.id}`,
+      search: history.location.search,
+    });
+  }, [history, path]);
 
   return (
     <MultiColumnList
@@ -93,6 +99,7 @@ export const BulkEditProfiles = ({
       sortOrder={sortOrder}
       sortDirection={sortDirection}
       columnMapping={COLUMN_MAPPING}
+      columnWidths={COLUMN_WIDTHS}
       isEmptyMessage={isEmptyMessage}
       contentData={profiles}
       nonInteractiveHeaders={NON_INTERACTIVE_HEADERS}
@@ -100,6 +107,7 @@ export const BulkEditProfiles = ({
       totalCount={profiles.length}
       loading={isLoading}
       onHeaderClick={changeSorting}
+      onRowClick={handleRowClick}
       showSortIndicator
       virtualize
     />

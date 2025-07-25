@@ -12,7 +12,7 @@ import { getLabelByValue, TEMPORARY_LOCATIONS } from '../../helpers';
 import { useBulkOperationTenants, useLocationEcs } from '../../../../../../hooks/api';
 
 
-export const LocationControl = ({ option, value, path, name, ctx, onChange }) => {
+export const LocationControl = ({ option, value, path, name, ctx, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
 
@@ -39,6 +39,7 @@ export const LocationControl = ({ option, value, path, name, ctx, onChange }) =>
             crossTenant
             tenantsList={filterByIds(currentTenants, tenants)}
             tenantId={tenants[0]}
+            disabled={disabled}
             onRecordsSelect={(loc) => {
               onChange({
                 path,
@@ -58,6 +59,7 @@ export const LocationControl = ({ option, value, path, name, ctx, onChange }) =>
             data-test-id={`textField-${ctx.index}`}
             aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.location' })}
             dirty={!!value}
+            disabled={disabled}
           />
           <LocationLookup
             marginBottom0
@@ -68,6 +70,7 @@ export const LocationControl = ({ option, value, path, name, ctx, onChange }) =>
               name,
             })
             }
+            disabled={disabled}
             data-testid={`locationLookup-${ctx.index}`}
           />
         </>
@@ -83,6 +86,7 @@ LocationControl.propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
   name: PropTypes.string,
+  disabled: PropTypes.bool,
   ctx: PropTypes.shape({
     index: PropTypes.number.isRequired,
     parentArray: PropTypes.arrayOf(PropTypes.shape({

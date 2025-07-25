@@ -27,7 +27,7 @@ import { getDefaultActionState, getNextActionState } from '../controlsConfig';
 
 import css from '../../../BulkEditPane.css';
 
-export const InAppFormBody = ({ options, fields, setFields, recordType, approach }) => {
+export const InAppFormBody = ({ options, fields, setFields, recordType, approach, disabled }) => {
   const { formatMessage } = useIntl();
 
   const handleRemoveField = useCallback((e) => {
@@ -155,6 +155,7 @@ export const InAppFormBody = ({ options, fields, setFields, recordType, approach
                   marginBottom0
                   listMaxHeight="calc(45vh - 65px)" // 65px - for fixed header
                   onFilter={customFilter}
+                  disabled={disabled}
                 />
               </Col>
               {item.actionsDetails && schema.map(field => (
@@ -171,6 +172,7 @@ export const InAppFormBody = ({ options, fields, setFields, recordType, approach
                   allOptions={options}
                   onChange={handleValueChange}
                   onActionChange={handleActionChange}
+                  disabled={disabled}
                 />
               ))}
 
@@ -180,6 +182,7 @@ export const InAppFormBody = ({ options, fields, setFields, recordType, approach
                     icon="plus-sign"
                     size="medium"
                     onClick={handleAddField}
+                    disabled={disabled}
                     data-testid={`add-button-${index}`}
                   />
                 )}
@@ -187,7 +190,7 @@ export const InAppFormBody = ({ options, fields, setFields, recordType, approach
                   icon="trash"
                   data-row-index={index}
                   onClick={handleRemoveField}
-                  disabled={fields.length === 1}
+                  disabled={fields.length === 1 || disabled}
                   data-testid={`remove-button-${index}`}
                 />
               </div>
@@ -202,6 +205,7 @@ export const InAppFormBody = ({ options, fields, setFields, recordType, approach
 InAppFormBody.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({})),
   recordType: PropTypes.string,
+  disabled: PropTypes.bool,
   approach: PropTypes.string,
   fields: PropTypes.arrayOf(PropTypes.shape({})),
   setFields: PropTypes.func,

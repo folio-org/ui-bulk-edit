@@ -26,7 +26,7 @@ import {
   PaneHeader,
   SearchField,
 } from '@folio/stripes/components';
-import { AppIcon } from '@folio/stripes/core';
+import { AppIcon, TitleManager } from '@folio/stripes/core';
 import { getFullName } from '@folio/stripes/util';
 import {
   buildSearch,
@@ -53,7 +53,8 @@ import {
 import { useBulkPermissions } from '../../hooks';
 
 import css from './BulkEditProfilesPane.css';
-import { BulkEditCreateProfile } from './forms/BulkEditCreateProfile';
+import { BulkEditCreateProfile } from './BulkEditCreateProfile';
+import { BulkEditUpdateProfile } from './BulkEditUpdateProfile';
 
 export const BulkEditProfilesPane = ({
   entityType,
@@ -65,7 +66,6 @@ export const BulkEditProfilesPane = ({
   const history = useHistory();
   const { path } = useRouteMatch();
   const { hasSettingsCreatePerms } = useBulkPermissions();
-
   const locationSearchQuery = queryString.parse(location.search)?.[SEARCH_PARAMETER];
 
   const [
@@ -91,7 +91,6 @@ export const BulkEditProfilesPane = ({
     isFetching,
     isLoading: isProfilesLoading,
     profiles,
-    refetch,
   } = useBulkEditProfiles({ entityType });
 
   const userIds = useMemo(() => profiles.map(profile => profile.updatedBy), [profiles]);
@@ -235,14 +234,25 @@ export const BulkEditProfilesPane = ({
 
       <Route
         exact
-        path={`${path}/:id/view`}
-        render={(props) => (
+        path={`${path}/:id`}
+        render={() => (
           <Layer isOpen>
             <BulkEditProfileDetails
-              {...props}
               entityType={entityType}
               onClose={onCloseDetailsPane}
-              refetch={refetch}
+            />
+          </Layer>
+        )}
+      />
+
+      <Route
+        exact
+        path={`${path}/:id/edit`}
+        render={() => (
+          <Layer isOpen>
+            <BulkEditUpdateProfile
+              entityType={entityType}
+              onClose={closeFormLayer}
             />
           </Layer>
         )}
@@ -252,12 +262,14 @@ export const BulkEditProfilesPane = ({
         exact
         path={`${path}/create`}
         render={() => (
-          <Layer isOpen>
-            <BulkEditCreateProfile
-              entityType={entityType}
-              onClose={closeFormLayer}
-            />
-          </Layer>
+          <TitleManager>
+            <Layer isOpen>
+              <BulkEditCreateProfile
+                entityType={entityType}
+                onClose={closeFormLayer}
+              />
+            </Layer>
+          </TitleManager>
         )}
       />
     </Pane>

@@ -228,7 +228,14 @@
           "settings.bulk-edit.enabled",
           "mod-settings.entries.collection.get",
           "bulk-operations.profiles.collection.get",
-          "users.collection.get"
+          "users.collection.get",
+          "ui-bulk-edit.base-view.manage",
+          "ui-bulk-edit.base-edit.manage",
+          "bulk-operations.item.inventory.get",
+          "inventory-storage.item-note-types.collection.get",
+          "inventory-storage.holdings-note-types.collection.get",
+          "inventory-storage.instance-note-types.collection.get",
+          "inventory-storage.electronic-access-relationships.collection.get"
         ],
         "visible": true
       },
@@ -237,7 +244,8 @@
         "displayName": "Settings (Bulk edit): Can view, add, update profiles",
         "subPermissions": [
           "ui-bulk-edit.settings.view",
-          "bulk-operations.profiles.item.post"
+          "bulk-operations.profiles.item.post",
+          "bulk-operations.profiles.item.put"
         ],
         "visible": true
       },
