@@ -46,6 +46,7 @@ import { useParams } from 'react-router';
 import {
   CAPABILITIES,
   RECORD_TYPES_MAPPING,
+  RECORD_TYPES_PROFILES_MAPPING,
 } from '../../constants';
 import {
   useBulkEditProfile,
@@ -85,8 +86,8 @@ export const BulkEditProfileDetails = ({
 
   const renderActionMenu = useCallback(({ onToggle }) => {
     return (
-      <MenuSection id="bulk-edit-profile-action-menu">
-        <IfPermission perm="ui-bulk-edit.settings.create">
+      <IfPermission perm="ui-bulk-edit.settings.create">
+        <MenuSection id="bulk-edit-profile-action-menu">
           <Button
             aria-label={intl.formatMessage({ id: 'stripes-core.button.edit' })}
             buttonStyle="dropdownItem"
@@ -105,26 +106,26 @@ export const BulkEditProfileDetails = ({
               <FormattedMessage id="stripes-core.button.edit" />
             </Icon>
           </Button>
-        </IfPermission>
-        <IfPermission perm="bulk-operations.profiles.item.delete">
-          <Button
-            aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}
-            buttonStyle="dropdownItem"
-            disabled={isDeletingProfile}
-            onClick={() => {
-              toggleDeleteProfileModalModal();
-              onToggle();
-            }}
-          >
-            <Icon
-              size="small"
-              icon="trash"
+          <IfPermission perm="ui-bulk-edit.settings.delete">
+            <Button
+              aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}
+              buttonStyle="dropdownItem"
+              disabled={isDeletingProfile}
+              onClick={() => {
+                toggleDeleteProfileModalModal();
+                onToggle();
+              }}
             >
-              <FormattedMessage id="stripes-core.button.delete" />
-            </Icon>
-          </Button>
-        </IfPermission>
-      </MenuSection>
+              <Icon
+                size="small"
+                icon="trash"
+              >
+                <FormattedMessage id="stripes-core.button.delete" />
+              </Icon>
+            </Button>
+          </IfPermission>
+        </MenuSection>
+      </IfPermission>
     );
   }, [intl, history, id, isDeletingProfile, toggleDeleteProfileModalModal]);
 
@@ -261,7 +262,8 @@ export const BulkEditProfileDetails = ({
             confirmLabel={<FormattedMessage id="stripes-core.button.delete" />}
             heading={
               <FormattedMessage
-                id={`ui-bulk-edit.settings.profiles.details.action.delete.modal.heading.${RECORD_TYPES_MAPPING[entityType]}`}
+                id="ui-bulk-edit.settings.profiles.details.action.delete.modal.heading"
+                values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[entityType] }}
               />
             }
             onConfirm={handleProfileDelete}
