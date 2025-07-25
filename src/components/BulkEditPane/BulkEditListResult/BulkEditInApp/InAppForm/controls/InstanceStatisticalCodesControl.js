@@ -27,7 +27,7 @@ export const InstanceStatisticalCodesControl = ({ value, name, path, disabled, o
   if (isStatisticalCodesLoading) return <Loading size="large" />;
 
   const selectedStatisticalCodes = statisticalCodes.filter(statisticalCode => {
-    return value.map(code => code.value).includes(statisticalCode.value);
+    return value ? value.map(code => code.value).includes(statisticalCode.value) : value;
   });
 
   return (
