@@ -25,7 +25,8 @@ import {
   BOOLEAN_PARAMETERS_KEYS,
   getAddAction,
   getPlaceholder,
-  getRemoveSomeAction, CAPABILITIES,
+  getRemoveSomeAction,
+  CAPABILITIES,
 } from '../../../../constants';
 
 describe('TEMPORARY_LOCATIONS', () => {
