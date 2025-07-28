@@ -35,7 +35,7 @@ import {
   PaneHeader,
   Row,
 } from '@folio/stripes/components';
-import { AppIcon, IfPermission, TitleManager } from '@folio/stripes/core';
+import { AppIcon, TitleManager } from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 import {
   handleKeyCommand,
@@ -53,6 +53,7 @@ import {
   useProfileDelete,
 } from '../../hooks/api';
 import { PROFILE_DETAILS_ACCORDIONS } from './constants';
+import { useBulkPermissions } from '../../hooks';
 
 const { SUMMARY } = PROFILE_DETAILS_ACCORDIONS;
 
@@ -64,6 +65,7 @@ export const BulkEditProfileDetails = ({
   const { id } = useParams();
   const history = useHistory();
   const accordionStatusRef = useRef();
+  const { hasSettingsCreatePerms, hasSettingsDeletePerms } = useBulkPermissions();
   const [isDeleteProfileModalOpen, toggleDeleteProfileModalModal] = useModalToggle();
 
   const {
@@ -85,49 +87,55 @@ export const BulkEditProfileDetails = ({
   }, [deleteProfile, id, toggleDeleteProfileModalModal]);
 
   const renderActionMenu = useCallback(({ onToggle }) => {
-    return (
-      <IfPermission perm="ui-bulk-edit.settings.create">
-        <MenuSection id="bulk-edit-profile-action-menu">
+    return hasSettingsCreatePerms && (
+      <MenuSection id="bulk-edit-profile-action-menu">
+        <Button
+          aria-label={intl.formatMessage({ id: 'stripes-core.button.edit' })}
+          buttonStyle="dropdownItem"
+          onClick={() => {
+            onToggle();
+            history.push({
+              pathname: `${id}/edit`,
+              search: history.location.search,
+            });
+          }}
+        >
+          <Icon
+            size="small"
+            icon="edit"
+          >
+            <FormattedMessage id="stripes-core.button.edit" />
+          </Icon>
+        </Button>
+        {hasSettingsDeletePerms && (
           <Button
-            aria-label={intl.formatMessage({ id: 'stripes-core.button.edit' })}
+            aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}
             buttonStyle="dropdownItem"
+            disabled={isDeletingProfile}
             onClick={() => {
+              toggleDeleteProfileModalModal();
               onToggle();
-              history.push({
-                pathname: `${id}/edit`,
-                search: history.location.search,
-              });
             }}
           >
             <Icon
               size="small"
-              icon="edit"
+              icon="trash"
             >
-              <FormattedMessage id="stripes-core.button.edit" />
+              <FormattedMessage id="stripes-core.button.delete" />
             </Icon>
           </Button>
-          <IfPermission perm="ui-bulk-edit.settings.delete">
-            <Button
-              aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}
-              buttonStyle="dropdownItem"
-              disabled={isDeletingProfile}
-              onClick={() => {
-                toggleDeleteProfileModalModal();
-                onToggle();
-              }}
-            >
-              <Icon
-                size="small"
-                icon="trash"
-              >
-                <FormattedMessage id="stripes-core.button.delete" />
-              </Icon>
-            </Button>
-          </IfPermission>
-        </MenuSection>
-      </IfPermission>
+        )}
+      </MenuSection>
     );
-  }, [intl, history, id, isDeletingProfile, toggleDeleteProfileModalModal]);
+  }, [
+    intl,
+    history,
+    id,
+    isDeletingProfile,
+    toggleDeleteProfileModalModal,
+    hasSettingsCreatePerms,
+    hasSettingsDeletePerms
+  ]);
 
   const renderHeader = useCallback((renderProps) => {
     const paneTitle = (

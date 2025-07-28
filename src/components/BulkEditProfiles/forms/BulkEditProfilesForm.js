@@ -14,7 +14,8 @@ import {
   PaneFooter,
   Row,
   TextArea,
-  TextField
+  TextField,
+  ConfirmationModal
 } from '@folio/stripes/components';
 
 import { AppIcon } from '@folio/stripes/core';
@@ -30,7 +31,6 @@ import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
 import { APPROACHES, RECORD_TYPES_MAPPING } from '../../../constants';
 import { profilesValidationSchema } from './validation';
 import { getFormErrors } from '../../../utils/helpers';
-import { PreventFormCloseModal } from './PreventFormCloseModal';
 import { InAppForm } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
 
 const initialFormState = (entityType) => ({
@@ -209,10 +209,14 @@ export const BulkEditProfilesForm = ({
         </Accordion>
       </AccordionSet>
 
-      <PreventFormCloseModal
+      <ConfirmationModal
         open={preventModalOpen}
-        onClose={handleLayerClose}
-        onKeepEditing={closePreventModal}
+        heading={<FormattedMessage id="ui-bulk-edit.previewModal.areYouSure" />}
+        message={<FormattedMessage id="ui-bulk-edit.previewModal.unsavedChanges" />}
+        confirmLabel={<FormattedMessage id="ui-bulk-edit.previewModal.keepEditing" />}
+        cancelLabel={<FormattedMessage id="ui-bulk-edit.previewModal.closeWithoutSaving" />}
+        onConfirm={closePreventModal}
+        onCancel={handleLayerClose}
       />
     </Pane>
   );

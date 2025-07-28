@@ -38,7 +38,7 @@ export const BulkEditUpdateProfile = ({ entityType, onClose }) => {
         onClose={onClose}
         onSave={handleSave}
         initialValues={initialValues}
-        initialRuleDetails={ruleDetailsToSource(profile.ruleDetails)}
+        initialRuleDetails={ruleDetailsToSource(profile.ruleDetails, entityType)}
         isLoading={isProfileUpdating}
       />
     </TitleManager>
