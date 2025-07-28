@@ -25,7 +25,7 @@ import {
   BOOLEAN_PARAMETERS_KEYS,
   getAddAction,
   getPlaceholder,
-  getRemoveSomeAction,
+  getRemoveSomeAction, CAPABILITIES,
 } from '../../../../constants';
 
 describe('TEMPORARY_LOCATIONS', () => {
@@ -624,6 +624,33 @@ describe('ruleDetailsToSource (no constant mocks)', () => {
       name: singleActionName,
       value: 'u1',
       tenants: ['t2'],
+    });
+  });
+
+  it('map option value for HOLDINGS record type', () => {
+    const singleType = singleActionEntry?.[0] || 'TYPE_NOT_IN_MAP';
+    const singleActionName = singleActionEntry?.[1][0] || singleType;
+
+    const data = [
+      {
+        option: OPTIONS.PERMANENT_LOCATION,
+        tenants: [],
+        actions: [
+          {
+            type: singleType,
+            updated: 'location1',
+            tenants: [],
+          },
+        ],
+      },
+    ];
+
+    const [mapped] = ruleDetailsToSource(data, CAPABILITIES.HOLDING);
+    expect(mapped.option).toBe(OPTIONS.PERMANENT_HOLDINGS_LOCATION);
+    expect(mapped.actionsDetails.actions).toHaveLength(1);
+    expect(mapped.actionsDetails.actions[0]).toMatchObject({
+      name: singleActionName,
+      value: 'location1',
     });
   });
 
