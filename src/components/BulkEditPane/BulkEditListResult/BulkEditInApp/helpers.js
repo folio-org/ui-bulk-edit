@@ -10,6 +10,7 @@ import {
   GRANULAR_ACTIONS_MAP,
   PARAMETERS_KEYS,
   BOOLEAN_PARAMETERS_KEYS,
+  CAPABILITIES,
   getRemoveSomeAction,
   getPlaceholder,
   getAddAction
@@ -99,14 +100,19 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
  * as the initial state of a form.
  *
  * @param {Array} ruleDetails - Array of rule detail objects from the backend.
+ * @param {string} entityType - The type of entity these rules apply to.
  * @returns {Array} Array of formatted rule objects ready to be used as initial state of form.
  */
-export const ruleDetailsToSource = (ruleDetails) => {
+export const ruleDetailsToSource = (ruleDetails, entityType) => {
   return ruleDetails?.map(rule => {
     const { option, tenants, actions } = rule;
     const action = actions[0] || {};
     const noteParam = action.parameters?.find(param => NOTES_PARAMETERS_KEYS.includes(param.key));
-    const optionValue = OPTIONS_MAP_REVERSED[option] || option;
+    // for holding entity type we need to map options to the correct values
+    // they are different when sending and getting data from BE
+    const optionValue = entityType === CAPABILITIES.HOLDING
+      ? OPTIONS_MAP_REVERSED[option] || option
+      : option;
     const finalOptionValue = noteParam?.value || optionValue;
     const [firstAction, secondAction] = GRANULAR_ACTIONS_MAP[action.type] || [action.type];
     const mappedParameters = action.parameters?.map(param => {
@@ -128,7 +134,7 @@ export const ruleDetailsToSource = (ruleDetails) => {
 
     return {
       id: uniqueId(),
-      option: noteParam?.value || optionValue,
+      option: finalOptionValue,
       tenants,
       actionsDetails: {
         actions: [

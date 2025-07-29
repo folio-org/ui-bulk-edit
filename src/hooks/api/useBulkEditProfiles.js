@@ -73,6 +73,7 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
         searchQuery,
       ),
       enabled,
+      keepPreviousData: true,
       ...queryOptions,
     },
   );
