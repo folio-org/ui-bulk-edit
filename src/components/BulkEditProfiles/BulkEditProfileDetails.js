@@ -54,8 +54,13 @@ import {
 } from '../../hooks/api';
 import { PROFILE_DETAILS_ACCORDIONS } from './constants';
 import { useBulkPermissions } from '../../hooks';
+import { ruleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
+import { BulkEditProfileBulkEditsDetails } from './BulkEditProfileBulkEditsDetails';
 
-const { SUMMARY } = PROFILE_DETAILS_ACCORDIONS;
+const {
+  BULK_EDITS,
+  SUMMARY,
+} = PROFILE_DETAILS_ACCORDIONS;
 
 export const BulkEditProfileDetails = ({
   entityType,
@@ -262,6 +267,16 @@ export const BulkEditProfileDetails = ({
                     />
                   </Col>
                 </Row>
+              </Accordion>
+
+              <Accordion
+                id={BULK_EDITS}
+                label={<FormattedMessage id={`ui-bulk-edit.settings.profiles.details.${BULK_EDITS}`} />}
+              >
+                <BulkEditProfileBulkEditsDetails
+                  entityType={entityType}
+                  initialValues={ruleDetailsToSource(profile?.ruleDetails, entityType)}
+                />
               </Accordion>
             </AccordionSet>
           </AccordionStatus>

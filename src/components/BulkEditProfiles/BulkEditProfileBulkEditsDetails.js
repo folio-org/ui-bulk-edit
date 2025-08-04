@@ -1,0 +1,37 @@
+import PropTypes from 'prop-types';
+
+import { APPROACHES } from '../../constants';
+import { useBulkEditForm } from '../../hooks/useBulkEditForm';
+import { useOptionsWithTenants } from '../../hooks/useOptionsWithTenants';
+import { folioFieldTemplate } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
+import { InAppForm } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
+import { validationSchema } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/validation';
+
+export const BulkEditProfileBulkEditsDetails = ({
+  entityType,
+  initialValues,
+}) => {
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType);
+  const { fields, setFields } = useBulkEditForm({
+    validationSchema,
+    initialValues,
+    template: folioFieldTemplate,
+  });
+
+  return (
+    <InAppForm
+      fields={fields}
+      setFields={setFields}
+      options={options}
+      recordType={entityType}
+      approach={APPROACHES.IN_APP}
+      loading={!areAllOptionsLoaded}
+      disabled
+    />
+  );
+};
+
+BulkEditProfileBulkEditsDetails.propTypes = {
+  entityType: PropTypes.string.isRequired,
+  initialValues: PropTypes.arrayOf(PropTypes.shape({})),
+};
