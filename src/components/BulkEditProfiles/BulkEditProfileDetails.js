@@ -44,6 +44,7 @@ import {
 
 import { useParams } from 'react-router';
 import {
+  APPROACHES,
   CAPABILITIES,
   RECORD_TYPES_MAPPING,
   RECORD_TYPES_PROFILES_MAPPING,
@@ -54,8 +55,34 @@ import {
 } from '../../hooks/api';
 import { PROFILE_DETAILS_ACCORDIONS } from './constants';
 import { useBulkPermissions } from '../../hooks';
+import { useOptionsWithTenants } from '../../hooks/useOptionsWithTenants';
+import { useBulkEditForm } from '../../hooks/useBulkEditForm';
+import { validationSchema } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/validation';
+import { folioFieldTemplate, ruleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
+import { InAppForm } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
 
 const { SUMMARY } = PROFILE_DETAILS_ACCORDIONS;
+
+const Form = ({ entityType, initialValues }) => {
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType);
+  const { fields, setFields } = useBulkEditForm({
+    validationSchema,
+    initialValues,
+    template: folioFieldTemplate,
+  });
+
+  return (
+    <InAppForm
+      fields={fields}
+      setFields={setFields}
+      options={options}
+      recordType={entityType}
+      approach={APPROACHES.IN_APP}
+      loading={!areAllOptionsLoaded}
+      disabled
+    />
+  );
+};
 
 export const BulkEditProfileDetails = ({
   entityType,
@@ -67,6 +94,7 @@ export const BulkEditProfileDetails = ({
   const accordionStatusRef = useRef();
   const { hasSettingsCreatePerms, hasSettingsDeletePerms } = useBulkPermissions();
   const [isDeleteProfileModalOpen, toggleDeleteProfileModalModal] = useModalToggle();
+
 
   const {
     isLoading,
@@ -262,6 +290,14 @@ export const BulkEditProfileDetails = ({
                     />
                   </Col>
                 </Row>
+              </Accordion>
+              <Accordion
+                label={intl.formatMessage({ id: 'ui-bulk-edit.layer.title' })}
+              >
+                <Form
+                  entityType={entityType}
+                  initialValues={ruleDetailsToSource(profile?.ruleDetails, entityType)}
+                />
               </Accordion>
             </AccordionSet>
           </AccordionStatus>
