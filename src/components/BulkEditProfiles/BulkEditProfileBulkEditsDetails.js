@@ -70,7 +70,6 @@ function BulkEditsForm({
       options={options}
       recordType={entityType}
       approach={APPROACHES.IN_APP}
-      disabled
       isNonInteractive
     />
   );

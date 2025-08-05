@@ -149,6 +149,7 @@ export const InAppFormBody = ({
 
           const groupedOptions = groupByCategory(filteredOptions);
           const isAddButtonShown = index === fields.length - 1 && index !== maxRowsCount - 1;
+          const isControlsDisabled = isNonInteractive || disabled;
 
           return (
             <Row
@@ -166,7 +167,7 @@ export const InAppFormBody = ({
                   marginBottom0
                   listMaxHeight="calc(45vh - 65px)" // 65px - for fixed header
                   onFilter={customFilter}
-                  disabled={disabled}
+                  disabled={isControlsDisabled}
                 />
               </Col>
               {item.actionsDetails && schema.map(field => (
@@ -183,7 +184,7 @@ export const InAppFormBody = ({
                   allOptions={options}
                   onChange={handleValueChange}
                   onActionChange={handleActionChange}
-                  disabled={disabled}
+                  disabled={isControlsDisabled}
                 />
               ))}
 
