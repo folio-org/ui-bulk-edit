@@ -217,10 +217,11 @@ export const InAppFormBody = ({
 };
 
 InAppFormBody.propTypes = {
+  approach: PropTypes.string,
+  disabled: PropTypes.bool,
+  fields: PropTypes.arrayOf(PropTypes.shape({})),
+  isNonInteractive: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.shape({})),
   recordType: PropTypes.string,
-  disabled: PropTypes.bool,
-  approach: PropTypes.string,
-  fields: PropTypes.arrayOf(PropTypes.shape({})),
   setFields: PropTypes.func,
 };

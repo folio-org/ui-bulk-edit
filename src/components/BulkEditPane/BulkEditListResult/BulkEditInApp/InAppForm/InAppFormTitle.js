@@ -91,4 +91,5 @@ export const InAppFormTitle = ({
 
 InAppFormTitle.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  isNonInteractive: PropTypes.bool,
 };

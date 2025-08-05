@@ -6,14 +6,14 @@ import { InAppFormTitle } from './InAppFormTitle';
 import { InAppFormBody } from './InAppFormBody';
 
 export const InAppForm = ({
-  fields,
-  setFields,
-  options,
-  recordType,
   approach,
   disabled,
-  loading,
+  fields,
   isNonInteractive,
+  loading,
+  options,
+  recordType,
+  setFields,
 }) => {
   if (loading) {
     return (
@@ -29,24 +29,25 @@ export const InAppForm = ({
         isNonInteractive={isNonInteractive}
       />
       <InAppFormBody
-        fields={fields}
-        setFields={setFields}
-        options={options}
-        recordType={recordType}
         approach={approach}
         disabled={disabled}
+        fields={fields}
         isNonInteractive={isNonInteractive}
+        options={options}
+        recordType={recordType}
+        setFields={setFields}
       />
     </>
   );
 };
 
 InAppForm.propTypes = {
-  fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  setFields: PropTypes.func.isRequired,
-  options: PropTypes.shape({}).isRequired,
-  recordType: PropTypes.string.isRequired,
   approach: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  loading: PropTypes.bool
+  fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  isNonInteractive: PropTypes.bool,
+  loading: PropTypes.bool,
+  options: PropTypes.shape({}).isRequired,
+  recordType: PropTypes.string.isRequired,
+  setFields: PropTypes.func.isRequired,
 };
