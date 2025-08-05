@@ -38,6 +38,7 @@ export const BulkEditProfileBulkEditsDetails = ({
       approach={APPROACHES.IN_APP}
       loading={!areAllOptionsLoaded}
       disabled
+      isNonInteractive
     />
   );
 };

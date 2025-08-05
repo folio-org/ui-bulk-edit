@@ -13,7 +13,7 @@ export const MarcFormTitle = ({ fields }) => {
   const longestField = getFieldWithMaxColumns(fields);
 
   return (
-    <Row>
+    <Row className={css.row}>
       <Col
         className={`${css.headerCell} ${css.field}`}
       >

@@ -27,7 +27,15 @@ import { getDefaultActionState, getNextActionState } from '../controlsConfig';
 
 import css from '../../../BulkEditPane.css';
 
-export const InAppFormBody = ({ options, fields, setFields, recordType, approach, disabled }) => {
+export const InAppFormBody = ({
+  approach,
+  disabled,
+  fields,
+  isNonInteractive,
+  options,
+  recordType,
+  setFields,
+}) => {
   const { formatMessage } = useIntl();
 
   const handleRemoveField = useCallback((e) => {
@@ -143,13 +151,16 @@ export const InAppFormBody = ({ options, fields, setFields, recordType, approach
           const isAddButtonShown = index === fields.length - 1 && index !== maxRowsCount - 1;
 
           return (
-            <Row data-testid={`row-${index}`} className={css.marcFieldRow}>
+            <Row
+              data-testid={`row-${index}`}
+              className={css.inAppFieldRow}
+            >
               <Col xs={2} sm={2} className={css.column}>
                 <Selection
                   dataOptions={groupedOptions}
                   value={item.option}
                   onChange={(value) => handleOptionChange({ path: [index], val: value })}
-                  placeholder={formatMessage({ id:'ui-bulk-edit.options.placeholder' })}
+                  placeholder={formatMessage({ id: 'ui-bulk-edit.options.placeholder' })}
                   dirty={!!item.option}
                   ariaLabel={`select-option-${index}`}
                   marginBottom0
@@ -176,24 +187,26 @@ export const InAppFormBody = ({ options, fields, setFields, recordType, approach
                 />
               ))}
 
-              <div className={css.actionButtonsWrapper}>
-                {isAddButtonShown && (
+              {!isNonInteractive && (
+                <div className={css.actionButtonsWrapper}>
+                  {isAddButtonShown && (
+                    <IconButton
+                      icon="plus-sign"
+                      size="medium"
+                      onClick={handleAddField}
+                      disabled={disabled}
+                      data-testid={`add-button-${index}`}
+                    />
+                  )}
                   <IconButton
-                    icon="plus-sign"
-                    size="medium"
-                    onClick={handleAddField}
-                    disabled={disabled}
-                    data-testid={`add-button-${index}`}
+                    icon="trash"
+                    data-row-index={index}
+                    onClick={handleRemoveField}
+                    disabled={fields.length === 1 || disabled}
+                    data-testid={`remove-button-${index}`}
                   />
-                )}
-                <IconButton
-                  icon="trash"
-                  data-row-index={index}
-                  onClick={handleRemoveField}
-                  disabled={fields.length === 1 || disabled}
-                  data-testid={`remove-button-${index}`}
-                />
-              </div>
+                </div>
+              )}
             </Row>
           );
         }}

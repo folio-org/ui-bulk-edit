@@ -12,7 +12,8 @@ export const InAppForm = ({
   recordType,
   approach,
   disabled,
-  loading
+  loading,
+  isNonInteractive,
 }) => {
   if (loading) {
     return (
@@ -25,6 +26,7 @@ export const InAppForm = ({
     <>
       <InAppFormTitle
         fields={fields}
+        isNonInteractive={isNonInteractive}
       />
       <InAppFormBody
         fields={fields}
@@ -33,6 +35,7 @@ export const InAppForm = ({
         recordType={recordType}
         approach={approach}
         disabled={disabled}
+        isNonInteractive={isNonInteractive}
       />
     </>
   );
