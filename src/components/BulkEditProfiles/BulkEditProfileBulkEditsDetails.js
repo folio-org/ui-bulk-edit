@@ -14,6 +14,37 @@ import { folioFieldTemplate } from '../BulkEditPane/BulkEditListResult/BulkEditI
 import { InAppForm } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
 import { validationSchema } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/validation';
 
+const BulkEditsForm = ({
+  entityType,
+  initialValues,
+  options,
+}) => {
+  const { fields, setFields } = useBulkEditForm({
+    validationSchema,
+    initialValues,
+    template: folioFieldTemplate,
+  });
+
+  if (!fields?.[0]?.option) {
+    return (
+      <EmptyMessage>
+        <FormattedMessage id="ui-bulk-edit.options.empty" />
+      </EmptyMessage>
+    );
+  }
+
+  return (
+    <InAppForm
+      fields={fields}
+      setFields={setFields}
+      options={options}
+      recordType={entityType}
+      approach={APPROACHES.IN_APP}
+      isNonInteractive
+    />
+  );
+};
+
 export const BulkEditProfileBulkEditsDetails = ({
   entityType,
   isLoading,
@@ -44,33 +75,8 @@ BulkEditProfileBulkEditsDetails.propTypes = {
   values: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-function BulkEditsForm({
-  entityType,
-  initialValues,
-  options,
-}) {
-  const { fields, setFields } = useBulkEditForm({
-    validationSchema,
-    initialValues,
-    template: folioFieldTemplate,
-  });
-
-  if (!fields?.[0]?.option) {
-    return (
-      <EmptyMessage>
-        <FormattedMessage id="ui-bulk-edit.options.empty" />
-      </EmptyMessage>
-    );
-  }
-
-  return (
-    <InAppForm
-      fields={fields}
-      setFields={setFields}
-      options={options}
-      recordType={entityType}
-      approach={APPROACHES.IN_APP}
-      isNonInteractive
-    />
-  );
-}
+BulkEditsForm.propTypes = {
+  entityType: PropTypes.string.isRequired,
+  initialValues: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+};
