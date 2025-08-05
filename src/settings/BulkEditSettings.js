@@ -34,17 +34,17 @@ export const BulkEditSettings = (props) => {
     pages: [
       {
         route: 'holdings-profiles',
-        label: renderMenuItemLabel('holdings', 'holdingsProfiles'),
+        label: renderMenuItemLabel('holdings', 'holdings'),
         component: () => <ProfilesContainer entityType={CAPABILITIES.HOLDING} />,
       },
       {
         route: 'instances-profiles',
-        label: renderMenuItemLabel('instance', 'instanceProfiles'),
+        label: renderMenuItemLabel('instance', 'instance'),
         component: () => <ProfilesContainer entityType={CAPABILITIES.INSTANCE} />,
       },
       {
         route: 'items-profiles',
-        label: renderMenuItemLabel('item', 'itemProfiles'),
+        label: renderMenuItemLabel('item', 'item'),
         component: () => <ProfilesContainer entityType={CAPABILITIES.ITEM} />,
       },
     ]
@@ -55,7 +55,7 @@ export const BulkEditSettings = (props) => {
     pages: [
       {
         route: 'users-profiles',
-        label: renderMenuItemLabel('user', 'userProfiles'),
+        label: renderMenuItemLabel('user', 'user'),
         component: () => <ProfilesContainer entityType={CAPABILITIES.USER} />
       },
     ]

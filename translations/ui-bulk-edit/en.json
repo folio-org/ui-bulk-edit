@@ -372,6 +372,7 @@
   "layer.title.marc": "Bulk edits for instances with source MARC",
   "layer.confirmChanges": "Confirm changes",
   "actions.placeholder": "Select action",
+  "options.empty": "No options found",
   "options.placeholder": "Select option",
   "type.placeholder": "Select type",
   "actions.findFullField": "Find (full field search)",

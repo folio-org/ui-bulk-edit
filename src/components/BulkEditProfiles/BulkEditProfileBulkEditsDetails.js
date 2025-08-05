@@ -1,4 +1,7 @@
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+
+import { EmptyMessage } from '@folio/stripes/components';
 
 import { APPROACHES } from '../../constants';
 import { useBulkEditForm } from '../../hooks/useBulkEditForm';
@@ -17,6 +20,14 @@ export const BulkEditProfileBulkEditsDetails = ({
     initialValues,
     template: folioFieldTemplate,
   });
+
+  if (!fields?.[0]?.option) {
+    return (
+      <EmptyMessage>
+        <FormattedMessage id="ui-bulk-edit.options.empty" />
+      </EmptyMessage>
+    );
+  }
 
   return (
     <InAppForm
