@@ -74,6 +74,7 @@ export const BulkEditProfileDetails = ({
   const [isDeleteProfileModalOpen, toggleDeleteProfileModalModal] = useModalToggle();
 
   const {
+    isFetching,
     isLoading,
     profile,
   } = useBulkEditProfile(id);
@@ -275,7 +276,8 @@ export const BulkEditProfileDetails = ({
               >
                 <BulkEditProfileBulkEditsDetails
                   entityType={entityType}
-                  initialValues={ruleDetailsToSource(profile?.ruleDetails, entityType)}
+                  isLoading={isFetching}
+                  values={ruleDetailsToSource(profile?.ruleDetails, entityType)}
                 />
               </Accordion>
             </AccordionSet>

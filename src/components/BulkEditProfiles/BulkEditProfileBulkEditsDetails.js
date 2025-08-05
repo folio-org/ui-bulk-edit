@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import { EmptyMessage } from '@folio/stripes/components';
+import {
+  EmptyMessage,
+  Layout,
+  Loading,
+} from '@folio/stripes/components';
 
 import { APPROACHES } from '../../constants';
 import { useBulkEditForm } from '../../hooks/useBulkEditForm';
@@ -12,9 +16,39 @@ import { validationSchema } from '../BulkEditPane/BulkEditListResult/BulkEditInA
 
 export const BulkEditProfileBulkEditsDetails = ({
   entityType,
-  initialValues,
+  isLoading,
+  values,
 }) => {
   const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType);
+
+  if (isLoading || !areAllOptionsLoaded) {
+    return (
+      <Layout className="display-flex centerContent">
+        <Loading size="large" />
+      </Layout>
+    );
+  }
+
+  return (
+    <BulkEditsForm
+      entityType={entityType}
+      initialValues={values}
+      options={options}
+    />
+  );
+};
+
+BulkEditProfileBulkEditsDetails.propTypes = {
+  entityType: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool,
+  values: PropTypes.arrayOf(PropTypes.shape({})),
+};
+
+function BulkEditsForm({
+  entityType,
+  initialValues,
+  options,
+}) {
   const { fields, setFields } = useBulkEditForm({
     validationSchema,
     initialValues,
@@ -36,14 +70,8 @@ export const BulkEditProfileBulkEditsDetails = ({
       options={options}
       recordType={entityType}
       approach={APPROACHES.IN_APP}
-      loading={!areAllOptionsLoaded}
       disabled
       isNonInteractive
     />
   );
-};
-
-BulkEditProfileBulkEditsDetails.propTypes = {
-  entityType: PropTypes.string.isRequired,
-  initialValues: PropTypes.arrayOf(PropTypes.shape({})),
-};
+}
