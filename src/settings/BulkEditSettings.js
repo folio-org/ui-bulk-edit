@@ -6,7 +6,7 @@ import { AppIcon, TitleManager, useStripes } from '@folio/stripes/core';
 import { CommandList, defaultKeyboardShortcuts } from '@folio/stripes/components';
 import { useBulkPermissions } from '../hooks';
 import { ProfilesContainer } from './profiles/ProfilesContainer';
-import { CAPABILITIES } from '../constants';
+import { CAPABILITIES, RECORD_TYPES_MAPPING } from '../constants';
 
 export const BulkEditSettings = (props) => {
   const stripes = useStripes();
@@ -19,13 +19,13 @@ export const BulkEditSettings = (props) => {
     </TitleManager>
   );
 
-  const renderMenuItemLabel = (iconKey, messageId) => (
+  const renderMenuItemLabel = (key) => (
     <AppIcon
       app="bulk-edit"
-      iconKey={iconKey}
+      iconKey={key}
       size="small"
     >
-      {formatMessage({ id: `ui-bulk-edit.settings.${messageId}` })}
+      {formatMessage({ id: `ui-bulk-edit.settings.${key}` })}
     </AppIcon>
   );
 
@@ -34,17 +34,17 @@ export const BulkEditSettings = (props) => {
     pages: [
       {
         route: 'holdings-profiles',
-        label: renderMenuItemLabel('holdings', 'holdingsProfiles'),
+        label: renderMenuItemLabel(RECORD_TYPES_MAPPING[CAPABILITIES.HOLDING]),
         component: () => <ProfilesContainer entityType={CAPABILITIES.HOLDING} />,
       },
       {
         route: 'instances-profiles',
-        label: renderMenuItemLabel('instance', 'instanceProfiles'),
+        label: renderMenuItemLabel(RECORD_TYPES_MAPPING[CAPABILITIES.INSTANCE]),
         component: () => <ProfilesContainer entityType={CAPABILITIES.INSTANCE} />,
       },
       {
         route: 'items-profiles',
-        label: renderMenuItemLabel('item', 'itemProfiles'),
+        label: renderMenuItemLabel(RECORD_TYPES_MAPPING[CAPABILITIES.ITEM]),
         component: () => <ProfilesContainer entityType={CAPABILITIES.ITEM} />,
       },
     ]
@@ -55,7 +55,7 @@ export const BulkEditSettings = (props) => {
     pages: [
       {
         route: 'users-profiles',
-        label: renderMenuItemLabel('user', 'userProfiles'),
+        label: renderMenuItemLabel(RECORD_TYPES_MAPPING[CAPABILITIES.USER]),
         component: () => <ProfilesContainer entityType={CAPABILITIES.USER} />
       },
     ]
