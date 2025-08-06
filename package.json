@@ -159,7 +159,9 @@
           "inventory-storage.item-note-types.collection.get",
           "inventory-storage.holdings-note-types.collection.get",
           "inventory-storage.electronic-access-relationships.collection.get",
-          "bulk-operations.item.inventory.put"
+          "bulk-operations.item.inventory.put",
+          "bulk-operations.profiles.collection.get",
+          "users.collection.get"
         ],
         "visible": true
       },

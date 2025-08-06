@@ -57,7 +57,6 @@ const BulkEditActionMenu = ({
     hasInstanceInventoryEdit,
     hasInstanceAndMarcEditPerm,
     hasInventoryAndMarcEditPerm,
-    hasSettingsCreatePerms,
   } = perms;
 
   const { id } = usePathParams('/bulk-edit/:id');
@@ -193,7 +192,7 @@ const BulkEditActionMenu = ({
           </Button>
         )}
 
-        {isStartBulkInAppActive && hasSettingsCreatePerms && (
+        {isStartBulkInAppActive && (
           <Button
             data-testid="selectProfile"
             buttonStyle="dropdownItem"
@@ -253,6 +252,7 @@ BulkEditActionMenu.propTypes = {
   onToggle: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   setFileInfo: PropTypes.func.isRequired,
+  onSelectProfile: PropTypes.func.isRequired,
 };
 
 export default BulkEditActionMenu;

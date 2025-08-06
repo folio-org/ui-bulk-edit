@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Modal, PaneHeader } from '@folio/stripes/components';
 
@@ -146,4 +147,11 @@ export const SelectProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) =>
       />
     </>
   );
+};
+
+SelectProfileFlow.propTypes = {
+  open: PropTypes.bool.isRequired,
+  bulkOperationId: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onOpen: PropTypes.func.isRequired,
 };

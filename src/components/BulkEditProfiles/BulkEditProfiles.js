@@ -108,4 +108,7 @@ BulkEditProfiles.propTypes = {
   searchTerm: PropTypes.string,
   sortOrder: PropTypes.string.isRequired,
   sortDirection: PropTypes.string.isRequired,
+  autosize: PropTypes.bool,
+  maxHeight: PropTypes.number,
+  onRowClick: PropTypes.func.isRequired,
 };
