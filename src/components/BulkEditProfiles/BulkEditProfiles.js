@@ -109,6 +109,6 @@ BulkEditProfiles.propTypes = {
   sortOrder: PropTypes.string.isRequired,
   sortDirection: PropTypes.string.isRequired,
   autosize: PropTypes.bool,
-  maxHeight: PropTypes.number,
+  maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onRowClick: PropTypes.func.isRequired,
 };
