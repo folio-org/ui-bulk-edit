@@ -72,10 +72,10 @@ describe('BulkEditSettings', () => {
     expectLabel('ui-bulk-edit.settings.paneTitle');
     expectLabel('ui-bulk-edit.settings.inventoryProfiles');
     expectLabel('ui-bulk-edit.settings.otherProfiles');
-    expectLabel('ui-bulk-edit.settings.holdingsProfiles');
-    expectLabel('ui-bulk-edit.settings.instanceProfiles');
-    expectLabel('ui-bulk-edit.settings.itemProfiles');
-    expectLabel('ui-bulk-edit.settings.userProfiles');
+    expectLabel('ui-bulk-edit.settings.holdings');
+    expectLabel('ui-bulk-edit.settings.instance');
+    expectLabel('ui-bulk-edit.settings.item');
+    expectLabel('ui-bulk-edit.settings.user');
   });
 
   it('renders only inventory profiles if only in-app edit permission is granted', () => {
@@ -90,12 +90,12 @@ describe('BulkEditSettings', () => {
 
     expectLabel('ui-bulk-edit.settings.paneTitle');
     expectLabel('ui-bulk-edit.settings.inventoryProfiles');
-    expectLabel('ui-bulk-edit.settings.holdingsProfiles');
-    expectLabel('ui-bulk-edit.settings.instanceProfiles');
-    expectLabel('ui-bulk-edit.settings.itemProfiles');
+    expectLabel('ui-bulk-edit.settings.holdings');
+    expectLabel('ui-bulk-edit.settings.instance');
+    expectLabel('ui-bulk-edit.settings.item');
 
     expect(screen.queryByText('ui-bulk-edit.settings.otherProfiles')).not.toBeInTheDocument();
-    expect(screen.queryByText('ui-bulk-edit.settings.userProfiles')).not.toBeInTheDocument();
+    expect(screen.queryByText('ui-bulk-edit.settings.user')).not.toBeInTheDocument();
   });
 
   it('renders only other profiles if user or CSV edit permissions are granted', () => {
@@ -110,10 +110,10 @@ describe('BulkEditSettings', () => {
 
     expectLabel('ui-bulk-edit.settings.paneTitle');
     expectLabel('ui-bulk-edit.settings.otherProfiles');
-    expectLabel('ui-bulk-edit.settings.userProfiles');
+    expectLabel('ui-bulk-edit.settings.user');
 
     expect(screen.queryByText('ui-bulk-edit.settings.inventoryProfiles')).not.toBeInTheDocument();
-    expect(screen.queryByText('ui-bulk-edit.settings.holdingsProfiles')).not.toBeInTheDocument();
+    expect(screen.queryByText('ui-bulk-edit.settings.holdings')).not.toBeInTheDocument();
   });
 
   it('renders nothing if settings view permission is missing', () => {
@@ -128,6 +128,6 @@ describe('BulkEditSettings', () => {
 
     expect(screen.queryByText('ui-bulk-edit.settings.inventoryProfiles')).not.toBeInTheDocument();
     expect(screen.queryByText('ui-bulk-edit.settings.otherProfiles')).not.toBeInTheDocument();
-    expect(screen.queryByText('ui-bulk-edit.settings.userProfiles')).not.toBeInTheDocument();
+    expect(screen.queryByText('ui-bulk-edit.settings.user')).not.toBeInTheDocument();
   });
 });

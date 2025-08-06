@@ -91,6 +91,7 @@
 
 .subRow {
     background: var(--color-fill-table-row-even);
+    margin: 0;
 }
 
 .row [class^="repeatableFieldList"],
@@ -98,8 +99,19 @@
     margin: 0;
 }
 
+.inAppTitleRow {
+    margin: 0;
+
+    &.isNonInteractive .headerCell:last-child {
+        flex: auto;
+        max-width: unset;
+    }
+}
+
+.inAppFieldRow,
 .marcFieldRow {
     background: var(--color-fill-table-row-odd);
+    margin: 0;
 }
 
 .actionButtonsWrapper {
