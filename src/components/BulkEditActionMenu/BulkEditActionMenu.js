@@ -19,7 +19,8 @@ import {
   EDITING_STEPS,
   JOB_STATUSES,
   BULK_VISIBLE_COLUMNS,
-  CRITERIA, RECORD_TYPES_PROFILES_MAPPING,
+  CRITERIA,
+  RECORD_TYPES_PROFILES_MAPPING,
 } from '../../constants';
 import {
   useBulkPermissions,

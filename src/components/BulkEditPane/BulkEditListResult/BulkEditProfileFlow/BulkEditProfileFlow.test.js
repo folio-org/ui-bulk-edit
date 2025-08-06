@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@folio/jest-config-stripes/testing-library/react';
 
-import { SelectProfileFlow } from './SelectProfileFlow';
+import { BulkEditProfileFlow } from './BulkEditProfileFlow';
 
 jest.mock('react-intl', () => ({
   FormattedMessage: ({ id, values }) => <span data-testid={id}>{JSON.stringify(values)}</span>
@@ -120,17 +120,17 @@ describe('SelectProfileFlow', () => {
 
   test('renders Preloader when loading', () => {
     mockUseProfilesFlow.mockReturnValueOnce({ ...mockUseProfilesFlow(), isProfilesLoading: true });
-    render(<SelectProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
     expect(screen.getByTestId('preloader')).toBeInTheDocument();
   });
 
   test('renders profile list when not loading', () => {
-    render(<SelectProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
     expect(screen.getByTestId('apply-profile')).toBeInTheDocument();
   });
 
   test('calls onClose and clearProfilesState when modal is closed', () => {
-    render(<SelectProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
     fireEvent.click(screen.getByTestId('modal-close'));
     expect(onClose).toHaveBeenCalled();
     expect(mockUseProfilesFlow().clearProfilesState).toHaveBeenCalled();
@@ -139,7 +139,7 @@ describe('SelectProfileFlow', () => {
   test('applies profile and triggers confirmChanges', () => {
     const { confirmChanges } = mockUseConfirmChanges();
     const { contentUpdate } = mockUseContentUpdate();
-    render(<SelectProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
     fireEvent.click(screen.getByTestId('apply-profile'));
     expect(confirmChanges).toHaveBeenCalledWith([
       contentUpdate({ bulkOperationRules: [
@@ -166,7 +166,7 @@ describe('SelectProfileFlow', () => {
     const commitHook = { commitChanges: jest.fn(), isCommitting: false };
     mockUseCommitChanges.mockReturnValueOnce(commitHook);
 
-    render(<SelectProfileFlow open={false} bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    render(<BulkEditProfileFlow open={false} bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
     fireEvent.click(screen.getByTestId('commit-changes'));
     expect(commitHook.commitChanges).toHaveBeenCalled();
     fireEvent.click(screen.getByTestId('keep-editing'));

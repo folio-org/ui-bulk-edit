@@ -46,7 +46,7 @@ import { BulkEditFolioLayer } from './BulkEditFolioLayer/BulkEditFolioLayer';
 import { BulkEditMarcLayer } from './BulkEditMarcLayer/BulkEditMarcLayer';
 import { savePreviewFile } from '../../utils/files';
 import { getBulkOperationStatsByStep } from './BulkEditListResult/PreviewLayout/helpers';
-import { SelectProfileFlow } from './BulkEditListResult/SelectProfileFlow/SelectProfileFlow';
+import { BulkEditProfileFlow } from './BulkEditListResult/BulkEditProfileFlow/BulkEditProfileFlow';
 
 export const BulkEditPane = () => {
   const history = useHistory();
@@ -55,7 +55,7 @@ export const BulkEditPane = () => {
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
   const [fileInfo, setFileInfo] = useState(null);
-  const [selectProfileModalOpen, setSelectProfileModalOpen] = useState(false);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
@@ -150,12 +150,13 @@ export const BulkEditPane = () => {
   }, [openInAppLayer, openManualModal, openMarcLayer]);
 
   const handleOpenProfilesModal = () => {
-    setSelectProfileModalOpen(true);
+    setProfileModalOpen(true);
   };
 
   const handleCloseProfilesModal = () => {
-    setSelectProfileModalOpen(false);
+    setProfileModalOpen(false);
 
+    // Reset search parameters when closing the profile modal
     history.replace({
       search: buildSearch({
         [SEARCH_PARAMETER]: null,
@@ -199,8 +200,8 @@ export const BulkEditPane = () => {
         countOfRecords={countOfRecords}
         setCountOfRecords={setCountOfRecords}
       />
-      <SelectProfileFlow
-        open={selectProfileModalOpen}
+      <BulkEditProfileFlow
+        open={profileModalOpen}
         bulkOperationId={bulkOperationId}
         onClose={handleCloseProfilesModal}
         onOpen={handleOpenProfilesModal}

@@ -17,7 +17,7 @@ import { useCommitChanges } from '../../../../hooks/useCommitChanges';
 import { RECORD_TYPES_MAPPING, RECORD_TYPES_PROFILES_MAPPING } from '../../../../constants';
 import css from '../../BulkEditPane.css';
 
-export const SelectProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) => {
+export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) => {
   const { currentRecordType } = useSearchParams();
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
 
@@ -149,7 +149,7 @@ export const SelectProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) =>
   );
 };
 
-SelectProfileFlow.propTypes = {
+BulkEditProfileFlow.propTypes = {
   open: PropTypes.bool.isRequired,
   bulkOperationId: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
