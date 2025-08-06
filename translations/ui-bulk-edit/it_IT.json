@@ -584,5 +584,7 @@
     "settings.profiles.details.action.delete.error": "Failed to delete profile.",
     "settings.profiles.details.action.delete.modal.heading": "Delete {entityType} records bulk edit profile",
     "settings.profiles.form.update.success": "Profile successfully updated.",
-    "settings.profiles.form.update.error": "Following error prevented updating the profile:"
+    "settings.profiles.form.update.error": "Following error prevented updating the profile:",
+    "options.empty": "No options found",
+    "settings.profiles.details.bulkEdits": "Bulk edits"
 }
