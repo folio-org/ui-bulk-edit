@@ -61,4 +61,5 @@ export const SORTABLE_COLUMNS = difference(VISIBLE_COLUMNS, NON_INTERACTIVE_HEAD
 
 export const PROFILE_DETAILS_ACCORDIONS = {
   SUMMARY: 'summary',
+  BULK_EDITS: 'bulkEdits',
 };

@@ -1,13 +1,16 @@
-import { FormattedMessage } from 'react-intl';
+import classnames from 'classnames/bind';
 import PropTypes from 'prop-types';
+import { Fragment } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { Col, Row, Label } from '@folio/stripes/components';
 
-import { Fragment } from 'react';
 import { FINAL_ACTIONS } from '../../../../../constants';
 import { shouldShowValueColumn } from '../helpers';
 
 import css from '../../../BulkEditPane.css';
+
+const cx = classnames.bind(css);
 
 const getMaxField = (fields) => {
   const filterFinal = action => !FINAL_ACTIONS.includes(action.name);
@@ -33,18 +36,21 @@ const getMaxField = (fields) => {
   }, fields[0]);
 };
 
-export const InAppFormTitle = ({ fields }) => {
+export const InAppFormTitle = ({
+  fields,
+  isNonInteractive,
+}) => {
   if (!fields.length) return null;
 
   const maxField = getMaxField(fields);
 
   return (
-    <Row>
+    <Row className={cx('inAppTitleRow', { isNonInteractive })}>
       <Col
         className={css.headerCell}
         sm={2}
       >
-        <Label required>
+        <Label required={!isNonInteractive}>
           <FormattedMessage id="ui-bulk-edit.layer.column.options" />
         </Label>
       </Col>
@@ -54,7 +60,7 @@ export const InAppFormTitle = ({ fields }) => {
             className={css.headerCell}
             sm={2}
           >
-            <Label required>
+            <Label required={!isNonInteractive}>
               <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
             </Label>
             <div className={css.splitter} />
@@ -64,7 +70,7 @@ export const InAppFormTitle = ({ fields }) => {
               className={css.headerCell}
               sm={2}
             >
-              <Label required>
+              <Label required={!isNonInteractive}>
                 <FormattedMessage id="ui-bulk-edit.layer.column.data" />
               </Label>
               <div className={css.splitter} />
@@ -72,17 +78,18 @@ export const InAppFormTitle = ({ fields }) => {
           )}
         </Fragment>
       ))}
-      <Col
-        className={css.emptyHeaderCell}
-      >
-        <Label>
-          <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
-        </Label>
-      </Col>
+      {!isNonInteractive && (
+        <Col className={css.emptyHeaderCell}>
+          <Label>
+            <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
+          </Label>
+        </Col>
+      )}
     </Row>
   );
 };
 
 InAppFormTitle.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  isNonInteractive: PropTypes.bool,
 };

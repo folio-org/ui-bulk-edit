@@ -6,8 +6,15 @@ import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { runAxeTest } from '@folio/stripes-testing';
 import { handleKeyCommand } from '@folio/stripes-acq-components';
 
-import { CAPABILITIES } from '../../constants';
-import { useBulkEditProfile, useProfileDelete } from '../../hooks/api';
+import {
+  CAPABILITIES,
+  getUserOptions,
+} from '../../constants';
+import {
+  useBulkEditProfile,
+  useProfileDelete,
+} from '../../hooks/api';
+import { useOptionsWithTenants } from '../../hooks/useOptionsWithTenants';
 import { BulkEditProfileDetails } from './BulkEditProfileDetails';
 
 jest.unmock('@folio/stripes/components');
@@ -25,6 +32,9 @@ jest.mock('@folio/stripes-acq-components', () => ({
 jest.mock('../../hooks/api', () => ({
   useBulkEditProfile: jest.fn(),
   useProfileDelete: jest.fn(),
+}));
+jest.mock('../../hooks/useOptionsWithTenants', () => ({
+  useOptionsWithTenants: jest.fn(),
 }));
 
 jest.mock('react-router', () => ({
@@ -55,6 +65,7 @@ describe('BulkEditProfileDetails', () => {
 
   beforeEach(() => {
     useBulkEditProfile.mockReturnValue({ profile: profileMock });
+    useOptionsWithTenants.mockReturnValue({ options: getUserOptions(jest.fn()) });
     useProfileDelete.mockReturnValue({ deleteProfile });
   });
 
