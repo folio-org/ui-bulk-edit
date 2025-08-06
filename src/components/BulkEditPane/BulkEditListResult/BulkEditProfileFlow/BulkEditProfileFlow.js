@@ -17,6 +17,8 @@ import { useCommitChanges } from '../../../../hooks/useCommitChanges';
 import { RECORD_TYPES_MAPPING, RECORD_TYPES_PROFILES_MAPPING } from '../../../../constants';
 import css from '../../BulkEditPane.css';
 
+const MAX_HEIGHT = 600;
+
 export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) => {
   const { currentRecordType } = useSearchParams();
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
@@ -125,7 +127,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
             onSearchChange={changeSearch}
             onSortingChange={changeLSorting}
             autosize={false}
-            maxHeight={600}
+            maxHeight={MAX_HEIGHT}
           />
         )}
       </Modal>
