@@ -19,7 +19,7 @@ import {
   EDITING_STEPS,
   JOB_STATUSES,
   BULK_VISIBLE_COLUMNS,
-  CRITERIA,
+  CRITERIA, RECORD_TYPES_PROFILES_MAPPING,
 } from '../../constants';
 import {
   useBulkPermissions,
@@ -34,6 +34,7 @@ import css from './ActionMenuGroup/ActionMenuGroup.css';
 
 const BulkEditActionMenu = ({
   onEdit,
+  onSelectProfile,
   onToggle,
   setFileInfo,
 }) => {
@@ -55,7 +56,8 @@ const BulkEditActionMenu = ({
     hasUserEditInAppPerm,
     hasInstanceInventoryEdit,
     hasInstanceAndMarcEditPerm,
-    hasInventoryAndMarcEditPerm
+    hasInventoryAndMarcEditPerm,
+    hasSettingsCreatePerms,
   } = perms;
 
   const { id } = usePathParams('/bulk-edit/:id');
@@ -107,6 +109,11 @@ const BulkEditActionMenu = ({
   const handleOnStartEdit = (approach) => {
     onToggle();
     onEdit(approach);
+  };
+
+  const handleSelectProfile = () => {
+    onToggle();
+    onSelectProfile();
   };
 
   const handleFileSave = (info) => {
@@ -182,6 +189,21 @@ const BulkEditActionMenu = ({
           >
             <Icon icon="edit">
               <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
+            </Icon>
+          </Button>
+        )}
+
+        {isStartBulkInAppActive && hasSettingsCreatePerms && (
+          <Button
+            data-testid="selectProfile"
+            buttonStyle="dropdownItem"
+            onClick={() => handleSelectProfile()}
+          >
+            <Icon icon="edit">
+              <FormattedMessage
+                id="ui-bulk-edit.previewModal.selectProfiles"
+                values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[currentRecordType] }}
+              />
             </Icon>
           </Button>
         )}

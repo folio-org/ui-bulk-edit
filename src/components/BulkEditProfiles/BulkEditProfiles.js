@@ -1,12 +1,6 @@
 import PropTypes from 'prop-types';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
-import {
-  useHistory,
-  useRouteMatch
-} from 'react-router-dom';
-
-
 import {
   Icon,
   MultiColumnList,
@@ -66,6 +60,8 @@ const getResultsFormatter = (entityType, searchTerm) => {
 };
 
 export const BulkEditProfiles = ({
+  autosize = true,
+  maxHeight,
   changeSorting,
   entityType,
   isLoading,
@@ -73,26 +69,16 @@ export const BulkEditProfiles = ({
   searchTerm,
   sortOrder,
   sortDirection,
+  onRowClick,
 }) => {
-  const history = useHistory();
-  const { path } = useRouteMatch();
-
   const formatter = useMemo(
     () => getResultsFormatter(entityType, searchTerm),
     [entityType, searchTerm],
   );
 
-  const handleRowClick = useCallback((e, profile) => {
-    e.stopPropagation();
-    history.push({
-      pathname: `${path}/${profile.id}`,
-      search: history.location.search,
-    });
-  }, [history, path]);
-
   return (
     <MultiColumnList
-      autosize
+      autosize={autosize}
       id={`${entityType}-profiles-list`}
       formatter={formatter}
       visibleColumns={VISIBLE_COLUMNS}
@@ -107,9 +93,9 @@ export const BulkEditProfiles = ({
       totalCount={profiles.length}
       loading={isLoading}
       onHeaderClick={changeSorting}
-      onRowClick={handleRowClick}
+      onRowClick={onRowClick}
       showSortIndicator
-      virtualize
+      maxHeight={maxHeight}
     />
   );
 };

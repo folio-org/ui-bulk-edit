@@ -465,6 +465,7 @@
   "previewModal.saveAndClose": "Commit changes",
   "previewModal.areYouSure": "Are you sure?",
   "previewModal.unsavedChanges": "There are unsaved changes",
+  "previewModal.selectProfiles": "Select {entityType} bulk edit profile",
 
   "progressBar.title": "Uploading {title} and retrieving relevant data",
   "progresssBar.retrieving": "Retrieving",
