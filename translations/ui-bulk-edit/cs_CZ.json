@@ -582,7 +582,9 @@
     "settings.profiles.details.action.delete.modal.message": "Smazat profil „ <b> {name} </b> “?",
     "settings.profiles.details.action.delete.success": "Profil byl úspěšně smazán.",
     "settings.profiles.details.action.delete.error": "Profil se nepodařilo smazat.",
-    "settings.profiles.details.action.delete.modal.heading": "Delete {entityType} records bulk edit profile",
-    "settings.profiles.form.update.success": "Profile successfully updated.",
-    "settings.profiles.form.update.error": "Following error prevented updating the profile:"
+    "settings.profiles.details.action.delete.modal.heading": "Smazat profil hromadných úprav záznamů pro {entityType}",
+    "settings.profiles.form.update.success": "Profil úspěšně aktualizován.",
+    "settings.profiles.form.update.error": "Následující chyba zabránila aktualizaci profilu:",
+    "options.empty": "No options found",
+    "settings.profiles.details.bulkEdits": "Bulk edits"
 }
