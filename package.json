@@ -257,6 +257,12 @@
         "visible": true
       },
       {
+        "permissionName": "ui-bulk-edit.settings.lock.edit",
+        "displayName": "Settings (Bulk edit): Can lock and unlock profiles",
+        "subPermissions": [],
+        "visible": true
+      },
+      {
         "permissionName": "ui-bulk-edit.settings.delete",
         "displayName": "Settings (Bulk edit): Can delete profiles",
         "subPermissions": [
