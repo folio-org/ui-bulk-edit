@@ -157,6 +157,7 @@ export const subfieldsSchema = [
     showWhen: null,
     className: 'subfield',
     maxLength: SUBFIELD_MAX_LENGTH,
+    showError: true,
     disabled: false,
     dirty: (value) => !!value?.length,
   },

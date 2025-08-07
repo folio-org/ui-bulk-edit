@@ -179,6 +179,20 @@ const BulkEditActionMenu = ({
                 </Icon>
               </Button>
             )}
+            {isStartBulkInAppActive && (
+              <Button
+                data-testid="selectProfile"
+                buttonStyle="dropdownItem"
+                onClick={() => handleSelectProfile()}
+              >
+                <Icon icon="edit">
+                  <FormattedMessage
+                    id="ui-bulk-edit.previewModal.selectProfiles"
+                    values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[currentRecordType] }}
+                  />
+                </Icon>
+              </Button>
+            )}
           </ActionMenuGroup>
         )}
         {isStartManualButtonVisible && (
@@ -189,21 +203,6 @@ const BulkEditActionMenu = ({
           >
             <Icon icon="edit">
               <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
-            </Icon>
-          </Button>
-        )}
-
-        {isStartBulkInAppActive && (
-          <Button
-            data-testid="selectProfile"
-            buttonStyle="dropdownItem"
-            onClick={() => handleSelectProfile()}
-          >
-            <Icon icon="edit">
-              <FormattedMessage
-                id="ui-bulk-edit.previewModal.selectProfiles"
-                values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[currentRecordType] }}
-              />
             </Icon>
           </Button>
         )}
