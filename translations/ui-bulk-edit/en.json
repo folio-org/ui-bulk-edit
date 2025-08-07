@@ -535,7 +535,9 @@
   "permission.logs.view": "Bulk edit: Can view logs",
   "permission.query.execute": "Bulk edit: Can build query",
   "permission.settings.view": "Settings (Bulk edit): Can view only",
-  "permission.settings.edit": "Settings (Bulk edit): Can view, add, update profiles",
+  "permission.settings.create": "Settings (Bulk edit): Can view, add, update profiles",
+  "permission.settings.delete": "Settings (Bulk edit): Can delete profiles",
+  "permission.settings.lock.edit": "Settings (Bulk edit): Can lock and unlock profiles",
 
   "ariaLabel.actionsSelect": "Actions select",
   "ariaLabel.textField": "Text field",

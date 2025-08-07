@@ -1,37 +1,45 @@
-import React, { useState } from 'react';
+import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useState } from 'react';
 import {
-  ExpandAllButton,
+  FormattedMessage,
+  useIntl,
+} from 'react-intl';
+
+import {
   Accordion,
   AccordionSet,
   Button,
   Checkbox,
   Col,
+  ConfirmationModal,
+  ExpandAllButton,
   Label,
   Layout,
   Pane,
   PaneFooter,
   Row,
   TextArea,
-  TextField,
-  ConfirmationModal
+  TextField
 } from '@folio/stripes/components';
-
 import { AppIcon } from '@folio/stripes/core';
-import { isEqual } from 'lodash';
+
+import {
+  APPROACHES,
+  RECORD_TYPES_MAPPING,
+} from '../../../constants';
+import { useBulkPermissions } from '../../../hooks';
 import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
-import { validationSchema } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/validation';
+import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
+import { getFormErrors } from '../../../utils/helpers';
 import {
   folioFieldTemplate,
   getContentUpdatesBody,
   getMappedContentUpdates,
 } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
-import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
-import { APPROACHES, RECORD_TYPES_MAPPING } from '../../../constants';
-import { profilesValidationSchema } from './validation';
-import { getFormErrors } from '../../../utils/helpers';
 import { InAppForm } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
+import { validationSchema } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/validation';
+import { profilesValidationSchema } from './validation';
 
 const initialFormState = (entityType) => ({
   name: '',
@@ -50,6 +58,7 @@ export const BulkEditProfilesForm = ({
   onSave
 }) => {
   const intl = useIntl();
+  const { hasSettingsLockPerms } = useBulkPermissions();
   const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType);
   const { fields, setFields, isValid: areContentUpdatesValid, isPristine: isContentUpdatePristine } = useBulkEditForm({
     validationSchema,
@@ -175,6 +184,7 @@ export const BulkEditProfilesForm = ({
                   <Label for="lockProfile">{intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.form.lockProfile' })}</Label>
                   <Checkbox
                     id="lockProfile"
+                    disabled={!hasSettingsLockPerms}
                     name="lockProfile"
                     inline
                     checked={locked}
@@ -224,15 +234,15 @@ export const BulkEditProfilesForm = ({
 
 BulkEditProfilesForm.propTypes = {
   entityType: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  initialValues: PropTypes.shape({
-    name: PropTypes.string,
-    description: PropTypes.string,
-    locked: PropTypes.bool,
-    entityType: PropTypes.string,
-  }),
   initialRuleDetails: PropTypes.arrayOf(PropTypes.shape({})),
+  initialValues: PropTypes.shape({
+    description: PropTypes.string,
+    entityType: PropTypes.string,
+    locked: PropTypes.bool,
+    name: PropTypes.string,
+  }),
   isLoading: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
