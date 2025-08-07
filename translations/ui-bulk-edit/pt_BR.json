@@ -584,5 +584,7 @@
     "settings.profiles.details.action.delete.error": "Falha ao excluir perfil.",
     "settings.profiles.details.action.delete.modal.heading": "Excluir perfil {entityType} de edição em massa de registros",
     "settings.profiles.form.update.success": "Perfil atualizado com sucesso.",
-    "settings.profiles.form.update.error": "O seguinte erro impediu a atualização do perfil:"
+    "settings.profiles.form.update.error": "O seguinte erro impediu a atualização do perfil:",
+    "options.empty": "Nenhuma opção encontrada",
+    "settings.profiles.details.bulkEdits": "Edições em massa"
 }
