@@ -64,7 +64,6 @@
         ],
         "visible": false,
         "subPermissions": [
-          "module.bulk-edit.enabled",
           "bulk-operations.item.preview.get",
           "bulk-operations.item.preview.download.get",
           "bulk-operations.item.errors.get",
@@ -84,6 +83,7 @@
         ],
         "visible": false,
         "subPermissions": [
+          "module.bulk-edit.enabled",
           "ui-bulk-edit.base-view.manage",
           "bulk-operations.item.upload.post",
           "bulk-operations.item.cancel.post",
@@ -116,6 +116,7 @@
         ],
         "visible": true,
         "subPermissions": [
+          "module.bulk-edit.enabled",
           "ui-bulk-edit.base-view.manage",
           "ui-bulk-edit.base-edit.manage",
           "bulk-operations.item.users.get"
@@ -128,6 +129,7 @@
           "ui-bulk-edit.edit"
         ],
         "subPermissions": [
+          "module.bulk-edit.enabled",
           "ui-bulk-edit.users.csv.view",
           "ui-bulk-edit.base-edit.manage",
           "bulk-operations.item.users.put"
@@ -141,6 +143,7 @@
           "ui-bulk-edit.app-view"
         ],
         "subPermissions": [
+          "module.bulk-edit.enabled",
           "ui-bulk-edit.base-view.manage",
           "ui-bulk-edit.base-edit.manage",
           "bulk-operations.item.inventory.get"
@@ -154,6 +157,7 @@
           "ui-bulk-edit.app-edit"
         ],
         "subPermissions": [
+          "module.bulk-edit.enabled",
           "ui-bulk-edit.inventory.view",
           "ui-bulk-edit.base-edit.manage",
           "inventory-storage.item-note-types.collection.get",
@@ -172,6 +176,7 @@
           "ui-bulk-edit.app-edit.users"
         ],
         "subPermissions": [
+          "module.bulk-edit.enabled",
           "ui-bulk-edit.base-edit.manage",
           "bulk-operations.item.users.get",
           "bulk-operations.item.users.put"
@@ -271,7 +276,7 @@
     "test:e2e": "echo Not implemented",
     "test": "yarn run test:unit && yarn run test:e2e",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
-    "formatjs-compile": "stripes translate compile"
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-bulk-edit ./translations/ui-bulk-edit/compiled"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
