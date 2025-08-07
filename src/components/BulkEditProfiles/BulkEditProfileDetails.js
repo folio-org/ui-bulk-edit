@@ -93,6 +93,8 @@ export const BulkEditProfileDetails = ({
   }, [deleteProfile, id, toggleDeleteProfileModalModal]);
 
   const renderActionMenu = useCallback(({ onToggle }) => {
+    const isDeletionAllowed = hasSettingsDeletePerms && !profile?.locked;
+
     return hasSettingsCreatePerms && (
       <MenuSection id="bulk-edit-profile-action-menu">
         <Button
@@ -113,11 +115,11 @@ export const BulkEditProfileDetails = ({
             <FormattedMessage id="stripes-core.button.edit" />
           </Icon>
         </Button>
-        {hasSettingsDeletePerms && (
+        {isDeletionAllowed && (
           <Button
             aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}
             buttonStyle="dropdownItem"
-            disabled={isDeletingProfile}
+            disabled={isDeletingProfile || isFetching}
             onClick={() => {
               toggleDeleteProfileModalModal();
               onToggle();
@@ -134,13 +136,15 @@ export const BulkEditProfileDetails = ({
       </MenuSection>
     );
   }, [
-    intl,
+    hasSettingsCreatePerms,
+    hasSettingsDeletePerms,
     history,
     id,
+    intl,
     isDeletingProfile,
+    isFetching,
+    profile?.locked,
     toggleDeleteProfileModalModal,
-    hasSettingsCreatePerms,
-    hasSettingsDeletePerms
   ]);
 
   const renderHeader = useCallback((renderProps) => {
