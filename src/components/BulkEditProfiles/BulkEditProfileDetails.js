@@ -70,7 +70,11 @@ export const BulkEditProfileDetails = ({
   const { id } = useParams();
   const history = useHistory();
   const accordionStatusRef = useRef();
-  const { hasSettingsCreatePerms, hasSettingsDeletePerms } = useBulkPermissions();
+  const {
+    hasSettingsCreatePerms,
+    hasSettingsDeletePerms,
+    hasSettingsLockPerms,
+  } = useBulkPermissions();
   const [isDeleteProfileModalOpen, toggleDeleteProfileModalModal] = useModalToggle();
 
   const {
@@ -93,28 +97,33 @@ export const BulkEditProfileDetails = ({
   }, [deleteProfile, id, toggleDeleteProfileModalModal]);
 
   const renderActionMenu = useCallback(({ onToggle }) => {
+    // Locked profile can't be deleted; user must have permission to delete profiles
     const isDeletionAllowed = hasSettingsDeletePerms && !profile?.locked;
+    // Locked profile can be edited if user has permission to lock profiles
+    const isEditAllowed = !profile?.locked || hasSettingsLockPerms;
 
     return hasSettingsCreatePerms && (
       <MenuSection id="bulk-edit-profile-action-menu">
-        <Button
-          aria-label={intl.formatMessage({ id: 'stripes-core.button.edit' })}
-          buttonStyle="dropdownItem"
-          onClick={() => {
-            onToggle();
-            history.push({
-              pathname: `${id}/edit`,
-              search: history.location.search,
-            });
-          }}
-        >
-          <Icon
-            size="small"
-            icon="edit"
+        {isEditAllowed && (
+          <Button
+            aria-label={intl.formatMessage({ id: 'stripes-core.button.edit' })}
+            buttonStyle="dropdownItem"
+            onClick={() => {
+              onToggle();
+              history.push({
+                pathname: `${id}/edit`,
+                search: history.location.search,
+              });
+            }}
           >
-            <FormattedMessage id="stripes-core.button.edit" />
-          </Icon>
-        </Button>
+            <Icon
+              size="small"
+              icon="edit"
+            >
+              <FormattedMessage id="stripes-core.button.edit" />
+            </Icon>
+          </Button>
+        )}
         {isDeletionAllowed && (
           <Button
             aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}
@@ -138,6 +147,7 @@ export const BulkEditProfileDetails = ({
   }, [
     hasSettingsCreatePerms,
     hasSettingsDeletePerms,
+    hasSettingsLockPerms,
     history,
     id,
     intl,
