@@ -139,19 +139,37 @@ const BulkEditActionMenu = ({
     ));
   };
 
+  const renderApplyProfileButton = () => isStartBulkInAppActive && (
+    <Button
+      data-testid="selectProfile"
+      buttonStyle="dropdownItem"
+      onClick={() => handleSelectProfile()}
+    >
+      <Icon icon="edit">
+        <FormattedMessage
+          id="ui-bulk-edit.previewModal.selectProfiles"
+          values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[currentRecordType] }}
+        />
+      </Icon>
+    </Button>
+  );
+
   const renderStartBulkEditButtons = () => {
     return (
       <>
         {isStartBulkInAppActive && currentRecordType !== CAPABILITIES.INSTANCE && (
-          <Button
-            data-testid="startInAppAction"
-            buttonStyle="dropdownItem"
-            onClick={() => handleOnStartEdit(APPROACHES.IN_APP)}
-          >
-            <Icon icon="edit">
-              <FormattedMessage id="ui-bulk-edit.start.edit" />
-            </Icon>
-          </Button>
+          <>
+            <Button
+              data-testid="startInAppAction"
+              buttonStyle="dropdownItem"
+              onClick={() => handleOnStartEdit(APPROACHES.IN_APP)}
+            >
+              <Icon icon="edit">
+                <FormattedMessage id="ui-bulk-edit.start.edit" />
+              </Icon>
+            </Button>
+            {renderApplyProfileButton}
+          </>
         )}
         {isStartMarcActive && (
           <ActionMenuGroup
@@ -179,20 +197,7 @@ const BulkEditActionMenu = ({
                 </Icon>
               </Button>
             )}
-            {isStartBulkInAppActive && (
-              <Button
-                data-testid="selectProfile"
-                buttonStyle="dropdownItem"
-                onClick={() => handleSelectProfile()}
-              >
-                <Icon icon="edit">
-                  <FormattedMessage
-                    id="ui-bulk-edit.previewModal.selectProfiles"
-                    values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[currentRecordType] }}
-                  />
-                </Icon>
-              </Button>
-            )}
+            {renderApplyProfileButton()}
           </ActionMenuGroup>
         )}
         {isStartManualButtonVisible && (
