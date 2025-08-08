@@ -147,3 +147,12 @@
 .fullWidth {
     width: 100%;
 }
+
+.modalHeader {
+    background: transparent;
+    border: none;
+}
+
+.modalHeader [class^="paneSub"] {
+    font-weight: 400;
+}

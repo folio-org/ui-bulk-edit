@@ -1,10 +1,17 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 
 import {
   Pane,
   Paneset,
 } from '@folio/stripes/components';
+import {
+  buildSearch,
+  SEARCH_PARAMETER,
+  SORTING_DIRECTION_PARAMETER,
+  SORTING_PARAMETER
+} from '@folio/stripes-acq-components';
 
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
@@ -39,13 +46,16 @@ import { BulkEditFolioLayer } from './BulkEditFolioLayer/BulkEditFolioLayer';
 import { BulkEditMarcLayer } from './BulkEditMarcLayer/BulkEditMarcLayer';
 import { savePreviewFile } from '../../utils/files';
 import { getBulkOperationStatsByStep } from './BulkEditListResult/PreviewLayout/helpers';
+import { BulkEditProfileFlow } from './BulkEditListResult/BulkEditProfileFlow/BulkEditProfileFlow';
 
 export const BulkEditPane = () => {
+  const history = useHistory();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [visibleColumns, setVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
   const [fileInfo, setFileInfo] = useState(null);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
@@ -112,7 +122,6 @@ export const BulkEditPane = () => {
       });
     },
     onSettled: () => {
-      /* istanbul ignore next */
       setFileInfo(null);
     },
   });
@@ -140,9 +149,27 @@ export const BulkEditPane = () => {
     }
   }, [openInAppLayer, openManualModal, openMarcLayer]);
 
+  const handleOpenProfilesModal = () => {
+    setProfileModalOpen(true);
+  };
+
+  const handleCloseProfilesModal = () => {
+    setProfileModalOpen(false);
+
+    // Reset search parameters when closing the profile modal
+    history.replace({
+      search: buildSearch({
+        [SEARCH_PARAMETER]: null,
+        [SORTING_PARAMETER]: null,
+        [SORTING_DIRECTION_PARAMETER]: null,
+      }, history.location.search),
+    });
+  };
+
   const renderActionMenu = ({ onToggle }) => isActionMenuVisible && (
     <BulkEditActionMenu
       onEdit={handleStartBulkEdit}
+      onSelectProfile={handleOpenProfilesModal}
       onToggle={onToggle}
       setFileInfo={setFileInfo}
     />
@@ -172,6 +199,12 @@ export const BulkEditPane = () => {
         onCancel={closeManualModal}
         countOfRecords={countOfRecords}
         setCountOfRecords={setCountOfRecords}
+      />
+      <BulkEditProfileFlow
+        open={profileModalOpen}
+        bulkOperationId={bulkOperationId}
+        onClose={handleCloseProfilesModal}
+        onOpen={handleOpenProfilesModal}
       />
     </>
   );

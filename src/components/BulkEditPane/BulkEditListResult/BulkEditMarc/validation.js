@@ -61,7 +61,8 @@ const subfieldSchema = {
             });
           }
         }
-        return true;
+
+        return !!firstName;
       }
     ),
 };
