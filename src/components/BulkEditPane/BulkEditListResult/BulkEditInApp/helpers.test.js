@@ -2,7 +2,7 @@ import {
   TEMPORARY_LOCATIONS,
   getFormattedDate,
   getContentUpdatesBody,
-  getStatisticalCodeActionIndex,
+  getActionIndex,
   getFieldsWithRules,
   getActionsWithRules,
   getOptionsWithRules,
@@ -94,7 +94,7 @@ describe('getContentUpdatesBody', () => {
   });
 });
 
-describe('getStatisticalCodeActionIndex', () => {
+describe('getActionIndex', () => {
   const baseFields = [
     { option: 'OTHER', actionsDetails: { actions: [] } },
     {
@@ -108,9 +108,9 @@ describe('getStatisticalCodeActionIndex', () => {
   ];
 
   it('finds the first matching action index', () => {
-    expect(getStatisticalCodeActionIndex(baseFields, ACTIONS.ADD_TO_EXISTING)).toBe(1);
-    expect(getStatisticalCodeActionIndex(baseFields, ACTIONS.REMOVE_SOME)).toBe(2);
-    expect(getStatisticalCodeActionIndex(baseFields, 'NOPE')).toBe(-1);
+    expect(getActionIndex(baseFields, OPTIONS.STATISTICAL_CODE, ACTIONS.ADD_TO_EXISTING)).toBe(1);
+    expect(getActionIndex(baseFields, OPTIONS.STATISTICAL_CODE, ACTIONS.REMOVE_SOME)).toBe(2);
+    expect(getActionIndex(baseFields, OPTIONS.STATISTICAL_CODE, 'NOPE')).toBe(-1);
   });
 });
 
@@ -312,6 +312,46 @@ describe('getOptionsWithRules', () => {
     expect(filteredOptions).toEqual([
       { value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [] },
     ]);
+  });
+
+  it('removes STAFF_SUPPRESS and SUPPRESS_FROM_DISCOVERY if SET_TO_TRUE for SET_RECORDS_FOR_DELETE is present', () => {
+    const options = [
+      { value: OPTIONS.STAFF_SUPPRESS, label: 'Staff suppress', parameters: [] },
+      { value: OPTIONS.SUPPRESS_FROM_DISCOVERY, label: 'Suppress from discovery', parameters: [] },
+      { value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [] },
+    ];
+    const fields = [
+      { option: OPTIONS.SET_RECORDS_FOR_DELETE, actionsDetails: { actions: [{ name: ACTIONS.SET_TO_TRUE }] } },
+    ];
+    const { filteredOptions } = getOptionsWithRules({ fields, options, item: { option: OPTIONS.ADMINISTRATIVE_NOTE } });
+    expect(filteredOptions).toEqual([
+      { value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [] },
+    ]);
+  });
+
+  it('allows used option for current row', () => {
+    const options = [
+      { value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [] },
+      { value: OPTIONS.ELECTRONIC_ACCESS_LINK_TEXT, label: 'Electronic access', parameters: [] },
+    ];
+    const fields = [
+      { option: OPTIONS.ADMINISTRATIVE_NOTE },
+    ];
+    const { filteredOptions } = getOptionsWithRules({ fields, options, item: { option: OPTIONS.ADMINISTRATIVE_NOTE } });
+    expect(filteredOptions).toContainEqual({ value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [] });
+  });
+
+  it('handles note parameter option usage', () => {
+    const options = [
+      { value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [{ key: 'type', value: 'noteType1' }] },
+      { value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [{ key: 'type', value: 'noteType2' }] },
+    ];
+    const fields = [
+      { option: OPTIONS.ADMINISTRATIVE_NOTE, parameters: [{ key: 'type', value: 'noteType1' }] },
+    ];
+    const { filteredOptions } = getOptionsWithRules({ fields, options, item: { option: OPTIONS.ADMINISTRATIVE_NOTE } });
+    expect(filteredOptions).toContainEqual({ value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [{ key: 'type', value: 'noteType1' }] });
+    expect(filteredOptions).toContainEqual({ value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [{ key: 'type', value: 'noteType2' }] });
   });
 });
 
