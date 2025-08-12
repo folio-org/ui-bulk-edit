@@ -284,7 +284,7 @@
     "test:e2e": "echo Not implemented",
     "test": "yarn run test:unit && yarn run test:e2e",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
-    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-bulk-edit ./translations/ui-bulk-edit/compiled"
+    "formatjs-compile": "stripes translate compile"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
