@@ -252,7 +252,9 @@
       {
         "permissionName": "ui-bulk-edit.settings.lock.edit",
         "displayName": "Settings (Bulk edit): Can lock and unlock profiles",
-        "subPermissions": [],
+        "subPermissions": [
+          "bulk-operations.profiles.item.lock.execute"
+        ],
         "visible": true
       },
       {
