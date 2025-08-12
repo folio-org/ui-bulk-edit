@@ -249,6 +249,8 @@ export const getOptionsWithRules = ({ fields, options, item }) => {
     return acc;
   }, []);
 
+  // Map of instances for each option type, defining how many times it can be used
+  // options outside this map will be limited to 1 instance
   const instancesMap = {
     [OPTIONS.STATISTICAL_CODE]: removeAllIndex !== -1 || !hasAddOrRemoveSome ? 1 : 2,
     [OPTIONS.STAFF_SUPPRESS]: setToTrueIndex !== -1 ? 0 : 1,
