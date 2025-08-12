@@ -34,6 +34,16 @@ export const useQueryPlugin = (recordType) => {
     return response.json();
   };
 
+  const getOrganizations = async (ids, property) => ky
+    .get('organizations/organizations', {
+      searchParams: {
+        query: ids.map((id) => `id=="${id}"`).join(' or '),
+        limit: ids.length,
+      },
+    })
+    .json()
+    .then((response) => response.organizations.map((org) => ({ value: org.id, label: org[property] })));
+
   const cancelQueryDataSource = async ({ queryId }) => {
     return ky.delete(`query/${queryId}`);
   };
@@ -53,6 +63,7 @@ export const useQueryPlugin = (recordType) => {
     queryDetailsDataSource,
     testQueryDataSource,
     getParamsSource,
+    getOrganizations,
     cancelQueryDataSource,
     runQueryDataSource,
   };

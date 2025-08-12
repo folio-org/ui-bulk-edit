@@ -65,6 +65,7 @@ export const QueryTab = ({ onClearState }) => {
     queryDetailsDataSource,
     testQueryDataSource,
     getParamsSource,
+    getOrganizations,
     cancelQueryDataSource,
     runQueryDataSource
   } = useQueryPlugin(recordTypeId);
@@ -112,6 +113,7 @@ export const QueryTab = ({ onClearState }) => {
         entityTypeDataSource={entityTypeDataSource}
         testQueryDataSource={testQueryDataSource}
         getParamsSource={getParamsSource}
+        getOrganizations={getOrganizations}
         queryDetailsDataSource={queryDetailsDataSource}
         onQueryRunFail={() => {}}
         cancelQueryDataSource={cancelQueryDataSource}
