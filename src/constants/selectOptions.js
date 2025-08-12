@@ -326,6 +326,7 @@ export const getAdministrativeDataOptions = (formatMessage) => [
     value: OPTIONS.SET_RECORDS_FOR_DELETE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.setRecordsForDelete' }),
     disabled: false,
+    perms: ['ui-inventory.instance.set-records-for-deletion.execute']
   },
   {
     value: OPTIONS.STAFF_SUPPRESS,
