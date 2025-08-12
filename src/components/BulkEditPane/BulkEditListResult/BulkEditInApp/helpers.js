@@ -236,6 +236,8 @@ export const getOptionsWithRules = ({ fields, options, item }) => {
   const removeSomeIndex = getActionIndex(fields, OPTIONS.STATISTICAL_CODE, ACTIONS.REMOVE_SOME);
   const setToTrueIndex = getActionIndex(fields, OPTIONS.SET_RECORDS_FOR_DELETE, ACTIONS.SET_TO_TRUE);
   const hasAddOrRemoveSome = addIndex !== -1 || removeSomeIndex !== -1;
+  const hasRemoveAll = removeAllIndex !== -1;
+  const hasSetToTrue = setToTrueIndex !== -1;
 
   const usedOptions = fields.reduce((acc, field) => {
     const noteParam = field.parameters?.find(param => NOTES_PARAMETERS_KEYS.includes(param.key));
@@ -252,9 +254,9 @@ export const getOptionsWithRules = ({ fields, options, item }) => {
   // Map of instances for each option type, defining how many times it can be used
   // options outside this map will be limited to 1 instance
   const instancesMap = {
-    [OPTIONS.STATISTICAL_CODE]: removeAllIndex !== -1 || !hasAddOrRemoveSome ? 1 : 2,
-    [OPTIONS.STAFF_SUPPRESS]: setToTrueIndex !== -1 ? 0 : 1,
-    [OPTIONS.SUPPRESS_FROM_DISCOVERY]: setToTrueIndex !== -1 ? 0 : 1,
+    [OPTIONS.STATISTICAL_CODE]: hasRemoveAll || !hasAddOrRemoveSome ? 1 : 2,
+    [OPTIONS.STAFF_SUPPRESS]: hasSetToTrue ? 0 : 1,
+    [OPTIONS.SUPPRESS_FROM_DISCOVERY]: hasSetToTrue ? 0 : 1,
   };
 
   const filteredOptions = options.filter(opt => {
