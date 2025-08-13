@@ -467,6 +467,7 @@
   "previewModal.saveAndClose": "Commit changes",
   "previewModal.areYouSure": "Are you sure?",
   "previewModal.unsavedChanges": "There are unsaved changes",
+  "previewModal.selectProfiles": "Select {entityType} bulk edit profile",
 
   "progressBar.title": "Uploading {title} and retrieving relevant data",
   "progresssBar.retrieving": "Retrieving",
@@ -609,7 +610,7 @@
   "settings.profiles.columns.status": "Status",
   "settings.profiles.details.bulkEdits": "Bulk edits",
   "settings.profiles.details.summary": "Summary",
-  "settings.profiles.details.action.delete.modal.heading": "Delete {entityType} records bulk edit profile",
+  "settings.profiles.details.action.delete.modal.heading": "Delete {entityType} records bulk edit profile?",
   "settings.profiles.details.action.delete.modal.message": "Delete \"<b>{name}</b>\" profile?",
   "settings.profiles.details.action.delete.success": "Profile successfully deleted.",
   "settings.profiles.details.action.delete.error": "Failed to delete profile.",
