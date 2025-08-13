@@ -4,10 +4,7 @@ import {
   useNamespace,
   useOkapiKy,
 } from '@folio/stripes/core';
-import {
-  CQLBuilder,
-  fetchAllRecords,
-} from '@folio/stripes-acq-components';
+import { CQLBuilder } from '@folio/stripes-acq-components';
 
 import {
   BULK_EDIT_PROFILES_API,
@@ -41,7 +38,7 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
   const [namespace] = useNamespace({ key: BULK_EDIT_PROFILES_KEY });
 
   const cqlBuilder = new CQLBuilder();
-  const searchQuery = entityType
+  const query = entityType
     ? (
       cqlBuilder
         .group(groupByEntityType(entityType))
@@ -62,16 +59,9 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
   } = useQuery(
     {
       queryKey: [namespace, entityType, tenantId],
-      queryFn: ({ signal }) => fetchAllRecords(
-        {
-          GET: ({ params: searchParams }) => (
-            ky.get(BULK_EDIT_PROFILES_API, { searchParams, signal })
-              .json()
-              .then(({ content }) => content)
-          ),
-        },
-        searchQuery,
-      ),
+      queryFn: ({ signal }) => ky.get(BULK_EDIT_PROFILES_API, { searchParams: { query, offset: 0, limit: 1000 }, signal })
+        .json()
+        .then(({ content }) => content),
       enabled,
       keepPreviousData: true,
       ...queryOptions,
