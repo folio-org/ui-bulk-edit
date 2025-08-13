@@ -33,6 +33,7 @@ export const schema = [
     className: 'in',
     maxLength: INDICATOR_FIELD_MAX_LENGTH,
     disabled: false,
+    showError: true,
     dirty: (value) => !!value?.length && value !== '\\'
   },
   {
@@ -43,6 +44,7 @@ export const schema = [
     className: 'in',
     maxLength: INDICATOR_FIELD_MAX_LENGTH,
     disabled: false,
+    showError: true,
     dirty: (value) => !!value?.length && value !== '\\'
   },
   {
@@ -157,6 +159,7 @@ export const subfieldsSchema = [
     showWhen: null,
     className: 'subfield',
     maxLength: SUBFIELD_MAX_LENGTH,
+    showError: true,
     disabled: false,
     dirty: (value) => !!value?.length,
   },
