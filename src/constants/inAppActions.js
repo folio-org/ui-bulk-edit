@@ -146,7 +146,7 @@ export const replaceClearActions = () => [
   getReplaceAction(),
   getClearAction(),
 ];
-export const suppressFromDiscActions = () => [
+export const booleanActions = () => [
   getPlaceholder(),
   getSetToTrueAction(),
   getSetToFalseAction(),

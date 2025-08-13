@@ -24,6 +24,7 @@ export const OPTIONS = {
   HOLDINGS_NOTE: 'HOLDINGS_NOTE',
   INSTANCE_NOTE: 'INSTANCE_NOTE',
   ADMINISTRATIVE_NOTE: 'ADMINISTRATIVE_NOTE',
+  SET_RECORDS_FOR_DELETE: 'SET_RECORDS_FOR_DELETE',
   CHECK_IN_NOTE: 'CHECK_IN_NOTE',
   CHECK_OUT_NOTE: 'CHECK_OUT_NOTE',
   ELECTRONIC_ACCESS_URI: 'ELECTRONIC_ACCESS_URI',
@@ -289,6 +290,12 @@ export const getInstanceOptions = (formatMessage, instanceNotes) => [
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
   },
   {
+    value: OPTIONS.SET_RECORDS_FOR_DELETE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.setRecordsForDelete' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
+  },
+  {
     value: OPTIONS.STAFF_SUPPRESS,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.instances.staffSuppress' }),
     disabled: false,
@@ -314,6 +321,12 @@ export const getAdministrativeDataOptions = (formatMessage) => [
     value: OPTIONS.ADMINISTRATIVE_NOTE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.administrativeNote' }),
     disabled: false,
+  },
+  {
+    value: OPTIONS.SET_RECORDS_FOR_DELETE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.setRecordsForDelete' }),
+    disabled: false,
+    perms: ['ui-inventory.instance.set-records-for-deletion.execute']
   },
   {
     value: OPTIONS.STAFF_SUPPRESS,

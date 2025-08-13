@@ -54,7 +54,8 @@ export const useOptionsWithTenants = (recordType) => {
   })[recordType];
 
   const areAllOptionsLoaded = optionsByType && !isItemNotesLoading && !isInstanceNotesLoading && !isItemsNotesEcsLoading && !isHoldingsNotesLoading && !isHoldingsNotesEcsLoading;
-  const options = sortAlphabetically(optionsByType);
+  const options = sortAlphabetically(optionsByType)
+    .filter(option => !option.perms || option.perms.some(stripes.hasPerm)); // Filter options based on permissions
 
   return {
     options,

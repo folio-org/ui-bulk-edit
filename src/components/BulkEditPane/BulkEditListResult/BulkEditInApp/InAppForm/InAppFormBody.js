@@ -26,6 +26,7 @@ import { InAppFieldRenderer } from './InAppFieldRenderer';
 import { getDefaultActionState, getNextActionState } from '../controlsConfig';
 
 import css from '../../../BulkEditPane.css';
+import { useFilterFields } from '../../../../../hooks/useFilterFields';
 
 export const InAppFormBody = ({
   approach,
@@ -132,6 +133,8 @@ export const InAppFormBody = ({
       setFields(withUpdatedActionValueAndTenants);
     }
   }, [fields, setFields]);
+
+  useFilterFields(fields, setFields);
 
   return (
     <StripesOverlayWrapper>

@@ -159,10 +159,11 @@ export const ruleDetailsToSource = (ruleDetails, entityType) => {
  * Finds the index of a statistical code action in a list of fields.
  *
  * @param {Array} fields - Array of field objects to search through.
+ * @param {string} requiredOption - The option type to filter by (e.g. 'STATISTICAL_CODE').
  * @param {string} action - The action name to find (e.g. 'REMOVE_ALL').
  * @returns {number} Index of the matching field, or -1 if not found.
  */
-export const getStatisticalCodeActionIndex = (fields, action) => fields.findIndex(({ option, actionsDetails }) => option === OPTIONS.STATISTICAL_CODE &&
+export const getActionIndex = (fields, requiredOption, action) => fields.findIndex(({ option, actionsDetails }) => option === requiredOption &&
     actionsDetails.actions.some(({ name }) => name === action));
 
 /**
@@ -196,8 +197,8 @@ export const getFieldsWithRules = ({ action, option, rowId, fields }) => {
  * @returns {Array} Adjusted list of actions to show.
  */
 export const getActionsWithRules = ({ row, option, actions, fields }) => {
-  const addActionIndex = getStatisticalCodeActionIndex(fields, ACTIONS.ADD_TO_EXISTING);
-  const removeActionIndex = getStatisticalCodeActionIndex(fields, ACTIONS.REMOVE_SOME);
+  const addActionIndex = getActionIndex(fields, OPTIONS.STATISTICAL_CODE, ACTIONS.ADD_TO_EXISTING);
+  const removeActionIndex = getActionIndex(fields, OPTIONS.STATISTICAL_CODE, ACTIONS.REMOVE_SOME);
   const currentIndex = fields.findIndex(field => field.id === row.id);
 
   if (option === OPTIONS.STATISTICAL_CODE) {
@@ -230,10 +231,13 @@ export const getActionsWithRules = ({ row, option, actions, fields }) => {
  * @returns {Object} Object containing maxRowsCount and filteredOptions list.
  */
 export const getOptionsWithRules = ({ fields, options, item }) => {
-  const removeAllIndex = getStatisticalCodeActionIndex(fields, ACTIONS.REMOVE_ALL);
-  const addIndex = getStatisticalCodeActionIndex(fields, ACTIONS.ADD_TO_EXISTING);
-  const removeSomeIndex = getStatisticalCodeActionIndex(fields, ACTIONS.REMOVE_SOME);
+  const removeAllIndex = getActionIndex(fields, OPTIONS.STATISTICAL_CODE, ACTIONS.REMOVE_ALL);
+  const addIndex = getActionIndex(fields, OPTIONS.STATISTICAL_CODE, ACTIONS.ADD_TO_EXISTING);
+  const removeSomeIndex = getActionIndex(fields, OPTIONS.STATISTICAL_CODE, ACTIONS.REMOVE_SOME);
+  const setToTrueIndex = getActionIndex(fields, OPTIONS.SET_RECORDS_FOR_DELETE, ACTIONS.SET_TO_TRUE);
   const hasAddOrRemoveSome = addIndex !== -1 || removeSomeIndex !== -1;
+  const hasRemoveAll = removeAllIndex !== -1;
+  const hasSetToTrue = setToTrueIndex !== -1;
 
   const usedOptions = fields.reduce((acc, field) => {
     const noteParam = field.parameters?.find(param => NOTES_PARAMETERS_KEYS.includes(param.key));
@@ -247,8 +251,12 @@ export const getOptionsWithRules = ({ fields, options, item }) => {
     return acc;
   }, []);
 
+  // Map of instances for each option type, defining how many times it can be used
+  // options outside this map will be limited to 1 instance
   const instancesMap = {
-    [OPTIONS.STATISTICAL_CODE]: removeAllIndex !== -1 || !hasAddOrRemoveSome ? 1 : 2
+    [OPTIONS.STATISTICAL_CODE]: hasRemoveAll || !hasAddOrRemoveSome ? 1 : 2,
+    [OPTIONS.STAFF_SUPPRESS]: hasSetToTrue ? 0 : 1,
+    [OPTIONS.SUPPRESS_FROM_DISCOVERY]: hasSetToTrue ? 0 : 1,
   };
 
   const filteredOptions = options.filter(opt => {

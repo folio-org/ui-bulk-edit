@@ -17,7 +17,7 @@ import {
   replaceClearActions,
   statisticalCodeActions,
   statusActions,
-  suppressFromDiscActions,
+  booleanActions,
   commonAdditionalActions,
   emailActionsReplace
 } from '../../../../constants';
@@ -117,7 +117,7 @@ const firstActionConfig = {
   },
 
   [OPTIONS.SUPPRESS_FROM_DISCOVERY]: {
-    actions: suppressFromDiscActions(),
+    actions: booleanActions(),
     controlType: CONTROL_TYPES.SUPPRESS_CHECKBOX,
     initialState: recordType => ({
       actions: [
@@ -130,7 +130,7 @@ const firstActionConfig = {
     }),
   },
   [OPTIONS.STAFF_SUPPRESS]: {
-    actions: suppressFromDiscActions(),
+    actions: booleanActions(),
     controlType: CONTROL_TYPES.SUPPRESS_CHECKBOX,
     initialState: recordType => ({
       actions: [
@@ -167,6 +167,12 @@ const firstActionConfig = {
     controlType: action => (action === ACTIONS.CHANGE_TYPE
       ? CONTROL_TYPES.NOTE_SELECT
       : CONTROL_TYPES.TEXTAREA),
+    initialState,
+  },
+
+  [OPTIONS.SET_RECORDS_FOR_DELETE]: {
+    actions: booleanActions(),
+    controlType: CONTROL_TYPES.TEXTAREA,
     initialState,
   },
 

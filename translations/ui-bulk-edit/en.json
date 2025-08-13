@@ -444,6 +444,7 @@
   "layer.options.items.duplicateTo": "Duplicate to",
   "layer.options.suppressFromDiscovery": "Suppress from discovery",
   "layer.options.administrativeNote": "Administrative note",
+  "layer.options.setRecordsForDelete": "Set records for deletion",
   "layer.options.checkInNote": "Check in note",
   "layer.options.checkOutNote": "Check out note",
   "layer.options.holdings.uri": "URI",
