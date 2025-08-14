@@ -16,7 +16,7 @@ export const useFilterFields = (fields, setFields) => {
   useEffect(() => {
     // If the action is present, filter out STAFF_SUPPRESS and SUPPRESS_FROM_DISCOVERY options
     if (setToTrueIndex !== -1) {
-      setFields(prevFields => prevFields.filter(field => ![OPTIONS.STAFF_SUPPRESS, OPTIONS.SUPPRESS_FROM_DISCOVERY].includes(field.option)));
+      setFields(prevFields => prevFields.filter(field => ![OPTIONS.STAFF_SUPPRESS, OPTIONS.SUPPRESS_FROM_DISCOVERY].includes(field.option) && field.option));
     }
   }, [setToTrueIndex, setFields]);
 };
