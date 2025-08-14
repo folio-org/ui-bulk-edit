@@ -168,7 +168,7 @@ const BulkEditActionMenu = ({
                 <FormattedMessage id="ui-bulk-edit.start.edit" />
               </Icon>
             </Button>
-            {renderApplyProfileButton}
+            {renderApplyProfileButton()}
           </>
         )}
         {isStartMarcActive && (
