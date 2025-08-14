@@ -16,6 +16,7 @@ import { useContentUpdate } from '../../../../hooks/api';
 import { useCommitChanges } from '../../../../hooks/useCommitChanges';
 import { RECORD_TYPES_MAPPING, RECORD_TYPES_PROFILES_MAPPING } from '../../../../constants';
 import css from '../../BulkEditPane.css';
+import { APPLYING_VISIBLE_COLUMNS } from '../../../BulkEditProfiles/constants';
 
 const MAX_HEIGHT = 600;
 
@@ -128,6 +129,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
             onSortingChange={changeLSorting}
             autosize={false}
             maxHeight={MAX_HEIGHT}
+            visibleColumns={APPLYING_VISIBLE_COLUMNS}
           />
         )}
       </Modal>
