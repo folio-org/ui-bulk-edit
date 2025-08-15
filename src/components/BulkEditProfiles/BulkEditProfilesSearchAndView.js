@@ -16,6 +16,7 @@ export const BulkEditProfilesSearchAndView = ({
   isLoading,
   maxHeight,
   autosize,
+  visibleColumns,
   onRowClick,
   onSearchChange,
   onSortingChange,
@@ -46,6 +47,7 @@ export const BulkEditProfilesSearchAndView = ({
           onRowClick={onRowClick}
           maxHeight={maxHeight}
           autosize={autosize}
+          visibleColumns={visibleColumns}
         />
       </div>
     </>
@@ -68,7 +70,8 @@ BulkEditProfilesSearchAndView.propTypes = {
   sortOrder: PropTypes.string.isRequired,
   sortDirection: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  maxHeight: PropTypes.string,
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  visibleColumns: PropTypes.arrayOf(PropTypes.string),
   autosize: PropTypes.bool,
   onRowClick: PropTypes.func.isRequired,
   onSearchChange: PropTypes.func.isRequired,

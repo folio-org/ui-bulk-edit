@@ -61,6 +61,7 @@ const getResultsFormatter = (entityType, searchTerm) => {
 
 export const BulkEditProfiles = ({
   autosize = true,
+  visibleColumns = VISIBLE_COLUMNS,
   maxHeight,
   changeSorting,
   entityType,
@@ -81,7 +82,7 @@ export const BulkEditProfiles = ({
       autosize={autosize}
       id={`${entityType}-profiles-list`}
       formatter={formatter}
-      visibleColumns={VISIBLE_COLUMNS}
+      visibleColumns={visibleColumns}
       sortOrder={sortOrder}
       sortDirection={sortDirection}
       columnMapping={COLUMN_MAPPING}
@@ -111,4 +112,5 @@ BulkEditProfiles.propTypes = {
   autosize: PropTypes.bool,
   maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onRowClick: PropTypes.func.isRequired,
+  visibleColumns: PropTypes.arrayOf(PropTypes.string),
 };

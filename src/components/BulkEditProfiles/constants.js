@@ -6,6 +6,7 @@ import {
   SORTING_DIRECTION_PARAMETER,
   SORTING_PARAMETER,
 } from '@folio/stripes-acq-components';
+import { omit } from 'lodash';
 
 export const COLUMNS = {
   name: 'name',
@@ -32,6 +33,7 @@ export const COLUMN_WIDTHS = {
 };
 
 export const VISIBLE_COLUMNS = Object.keys(COLUMN_MAPPING);
+export const APPLYING_PROFILE_VISIBLE_COLUMNS = Object.keys(omit(COLUMN_MAPPING, 'status'));
 
 export const DEFAULT_SORTING = {
   [SORTING_PARAMETER]: COLUMNS.name,
