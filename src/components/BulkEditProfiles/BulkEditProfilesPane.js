@@ -123,7 +123,7 @@ export const BulkEditProfilesPane = ({
   }, [entityType, filteredProfiles, isProfilesLoading, openCreateProfile, title, hasSettingsCreatePerms]);
 
   return (
-    <TenantsProvider tenants={[centralTenantId]}>
+    <TenantsProvider tenants={[centralTenantId]} showLocal>
       <Pane
         defaultWidth="fill"
         renderHeader={renderHeader}

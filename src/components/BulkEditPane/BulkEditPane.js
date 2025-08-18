@@ -214,7 +214,7 @@ export const BulkEditPane = () => {
       />
 
       {/* BULK-EDIT USING PROFILES */}
-      <TenantsProvider tenants={[centralTenantId]}>
+      <TenantsProvider tenants={[centralTenantId]} showLocal>
         <BulkEditProfileFlow
           open={profileModalOpen}
           bulkOperationId={bulkOperationId}
