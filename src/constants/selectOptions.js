@@ -294,6 +294,7 @@ export const getInstanceOptions = (formatMessage, instanceNotes) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.setRecordsForDelete' }),
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
+    perms: ['ui-inventory.instance.set-records-for-deletion.execute']
   },
   {
     value: OPTIONS.STAFF_SUPPRESS,

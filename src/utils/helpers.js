@@ -261,3 +261,13 @@ export const getFormErrors = (object, schema) => {
 
   return errors;
 };
+
+/**
+ * Filters options based on permissions.
+ * @param {Array} options - The array of options to filter.
+ * @param {Object} stripes - The stripes object containing permission checking methods.
+ * @returns {Array} Filtered options that the user has permission to access.
+ */
+export const filterOptionsByPermissions = (options, stripes) => {
+  return options.filter(option => !option.perms || option.perms.some(opt => stripes.hasPerm(opt)));
+};

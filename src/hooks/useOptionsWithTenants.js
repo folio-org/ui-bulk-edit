@@ -17,7 +17,7 @@ import {
   useItemNotes,
   useItemNotesEcs
 } from './api';
-import { removeDuplicatesByValue } from '../utils/helpers';
+import { filterOptionsByPermissions, removeDuplicatesByValue } from '../utils/helpers';
 import { sortAlphabetically } from '../utils/sortAlphabetically';
 
 
@@ -54,8 +54,7 @@ export const useOptionsWithTenants = (recordType) => {
   })[recordType];
 
   const areAllOptionsLoaded = optionsByType && !isItemNotesLoading && !isInstanceNotesLoading && !isItemsNotesEcsLoading && !isHoldingsNotesLoading && !isHoldingsNotesEcsLoading;
-  const options = sortAlphabetically(optionsByType)
-    .filter(option => !option.perms || option.perms.some(stripes.hasPerm)); // Filter options based on permissions
+  const options = filterOptionsByPermissions(sortAlphabetically(optionsByType), stripes);
 
   return {
     options,
