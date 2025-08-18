@@ -538,7 +538,6 @@
     "list.preview.classification.classification": "Classificação",
     "columns.INSTANCE.Classification": "Classificação",
     "permission.settings.view": "Configurações (edição em massa): só pode visualizar",
-    "permission.settings.edit": "Configurações (edição em massa): pode visualizar, adicionar e atualizar perfis",
     "settings.paneTitle": "Edição em massa",
     "settings.inventoryProfiles": "Perfis de inventário",
     "settings.otherProfiles": "Outros perfis",
@@ -586,5 +585,11 @@
     "settings.profiles.form.update.success": "Perfil atualizado com sucesso.",
     "settings.profiles.form.update.error": "O seguinte erro impediu a atualização do perfil:",
     "options.empty": "Nenhuma opção encontrada",
-    "settings.profiles.details.bulkEdits": "Edições em massa"
+    "settings.profiles.details.bulkEdits": "Edições em massa",
+    "permission.settings.create": "Configurações (Edição em massa): Pode visualizar, adicionar e atualizar perfis",
+    "permission.settings.delete": "Configurações (Edição em massa): Pode excluir perfis",
+    "permission.settings.lock.edit": "Configurações (Edição em massa): Pode bloquear e desbloquear perfis",
+    "previewModal.selectProfiles": "Selecione o perfil de edição em massa {entityType}",
+    "layer.options.setRecordsForDelete": "Definir registros para exclusão",
+    "columns.INSTANCE.Set for deletion": "Definido para exclusão"
 }

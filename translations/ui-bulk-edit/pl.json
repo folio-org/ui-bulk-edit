@@ -252,7 +252,7 @@
     "layer.options.items.true": "Set true",
     "layer.options.items.false": "Set false",
     "layer.options.suppressFromDiscovery": "Ukryj w katalogu WWW",
-    "columns.USER.Created Date": "Record created",
+    "columns.USER.Created Date": "Data utworzenia rekordu",
     "columns.HOLDINGS_RECORD.HRID": "HRID zasobów",
     "progressBar.committing": "Zatwierdzanie zmian",
     "progresssBar.processing": "Przetwarzanie",
@@ -280,7 +280,7 @@
     "layer.options.items.removeNote": "Remove",
     "logs.infoPopover": "Files are unavailable for download because 30 days have elapsed since the date the job was run.",
     "permissionsModal.title": "Wybierz uprawnienia",
-    "permissionsModal.filter.title": "Wyszukiwanie i filtrowanie",
+    "permissionsModal.filter.title": "Szukaj i filtruj",
     "permissionsModal.filter.search": "Szukaj",
     "permissionsModal.filter.resetAll": "Resetuj wszystko",
     "permissionsModal.filter.permissionTypes": "Permission types",
@@ -538,7 +538,6 @@
     "list.preview.classification.classification": "Klasyfikacja",
     "columns.INSTANCE.Classification": "Klasyfikacja",
     "permission.settings.view": "Ustawienia (Edycja masowa): można tylko przeglądać",
-    "permission.settings.edit": "Ustawienia (Edycja masowa): można przeglądać, dodawać i aktualizować profile",
     "settings.paneTitle": "Edycja masowa",
     "settings.inventoryProfiles": "Profile katalogowania",
     "settings.otherProfiles": "Inne profile",
@@ -586,5 +585,11 @@
     "settings.profiles.form.update.success": "Profil został pomyślnie zaktualizowany.",
     "settings.profiles.form.update.error": "Następujący błąd uniemożliwił aktualizację profilu:",
     "options.empty": "No options found",
-    "settings.profiles.details.bulkEdits": "Bulk edits"
+    "settings.profiles.details.bulkEdits": "Bulk edits",
+    "permission.settings.create": "Settings (Bulk edit): Can view, add, update profiles",
+    "permission.settings.delete": "Settings (Bulk edit): Can delete profiles",
+    "permission.settings.lock.edit": "Settings (Bulk edit): Can lock and unlock profiles",
+    "previewModal.selectProfiles": "Select {entityType} bulk edit profile",
+    "layer.options.setRecordsForDelete": "Set records for deletion",
+    "columns.INSTANCE.Set for deletion": "Set for deletion"
 }
