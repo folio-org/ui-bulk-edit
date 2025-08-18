@@ -83,7 +83,6 @@
         ],
         "visible": false,
         "subPermissions": [
-          "module.bulk-edit.enabled",
           "ui-bulk-edit.base-view.manage",
           "bulk-operations.item.upload.post",
           "bulk-operations.item.cancel.post",
