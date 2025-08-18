@@ -38,7 +38,7 @@ const formatPublicationResult = ({ publicationResults, totalRecords }) => {
   };
 };
 
-const filterPublicationResult = (publicationResults) => (showLocal) => {
+const filterPublicationResult = (showLocal) => (publicationResults) => {
   if (showLocal) return publicationResults;
 
   return publicationResults.filter(({ source }) => source !== 'local');
