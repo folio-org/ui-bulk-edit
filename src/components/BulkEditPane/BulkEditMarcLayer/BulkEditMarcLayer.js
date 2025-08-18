@@ -2,6 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
+import { useStripes } from '@folio/stripes/core';
 import { BulkEditLayer } from '../BulkEditListResult/BulkEditInAppLayer/BulkEditLayer';
 import { BulkEditMarc } from '../BulkEditListResult/BulkEditMarc/BulkEditMarc';
 import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal';
@@ -22,6 +23,7 @@ import { validationSchema as marcSchema } from '../BulkEditListResult/BulkEditMa
 import { validationSchema as administrativeSchema } from '../BulkEditListResult/BulkEditInApp/validation';
 import { ADMINISTRATIVE_DEFAULT_BODY, MARC_DEFAULT_BODY } from '../../../constants/forms';
 import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
+import { filterOptionsByPermissions } from '../../../utils/helpers';
 
 export const BulkEditMarcLayer = ({
   bulkOperationId,
@@ -29,6 +31,7 @@ export const BulkEditMarcLayer = ({
   onMarcLayerClose,
   paneProps,
 }) => {
+  const stripes = useStripes();
   const { formatMessage } = useIntl();
 
   const { marcContentUpdate } = useMarcContentUpdate({ id: bulkOperationId });
@@ -44,9 +47,10 @@ export const BulkEditMarcLayer = ({
     template: marcFieldTemplate
   });
 
-  const options = sortAlphabetically(getAdministrativeDataOptions(formatMessage));
+  const filteredOptions = filterOptionsByPermissions(getAdministrativeDataOptions(formatMessage), stripes);
+  const sortedOptions = sortAlphabetically(filteredOptions);
 
-  const contentUpdates = getMappedContentUpdates(fields, options);
+  const contentUpdates = getMappedContentUpdates(fields, sortedOptions);
 
   const areBothFormsValid = isAdministrativeFormValid && isMarcFormValid;
   const isOnlyAdministrativeValid = isAdministrativeFormValid && isMarcFormPristine;
@@ -116,7 +120,7 @@ export const BulkEditMarcLayer = ({
           setFields={setFields}
           marcFields={marcFields}
           setMarcFields={setMarcFields}
-          options={options}
+          options={sortedOptions}
         />
       </BulkEditLayer>
 
