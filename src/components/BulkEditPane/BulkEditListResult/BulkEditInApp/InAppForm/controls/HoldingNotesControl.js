@@ -5,19 +5,20 @@ import { useIntl } from 'react-intl';
 import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 import { Loading, Select } from '@folio/stripes/components';
 
-import { useBulkOperationTenants, useHoldingsNotes, useHoldingsNotesEcs } from '../../../../../../hooks/api';
+import { useHoldingsNotes, useHoldingsNotesEcs } from '../../../../../../hooks/api';
 import { getLabelByValue, sortWithoutPlaceholder } from '../../helpers';
 import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
 import { getHoldingsNotes } from '../../../../../../constants';
+import { useTenants } from '../../../../../../context/TenantsContext';
 
 
 export const HoldingNotesControl = ({ parameters, option, value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
+  const { tenants } = useTenants();
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
 
-  const { tenants } = useBulkOperationTenants();
   const { notesEcs: holdingsNotesEcs, isFetching: isHoldingsNotesEcsLoading } = useHoldingsNotesEcs(tenants, 'action', { enabled: isCentralTenant });
   const { holdingsNotes, isHoldingsNotesLoading } = useHoldingsNotes();
 

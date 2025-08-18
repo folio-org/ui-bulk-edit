@@ -9,15 +9,16 @@ import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
 import { filterByIds, getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
 import { getLabelByValue, TEMPORARY_LOCATIONS } from '../../helpers';
-import { useBulkOperationTenants, useLocationEcs } from '../../../../../../hooks/api';
+import { useLocationEcs } from '../../../../../../hooks/api';
+import { useTenants } from '../../../../../../context/TenantsContext';
 
 
 export const LocationControl = ({ option, value, path, name, ctx, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
+  const { tenants } = useTenants();
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
-  const { tenants } = useBulkOperationTenants();
   const { locationsEcs, isFetching: isLocationEcsLoading } = useLocationEcs(tenants, { enabled: isCentralTenant });
 
   const title = getLabelByValue(locationsEcs, value);

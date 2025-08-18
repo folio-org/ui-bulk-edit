@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 
+import { useStripes } from '@folio/stripes/core';
 import {
   Pane,
   Paneset,
@@ -36,6 +37,7 @@ import { BulkEditListSidebar } from './BulkEditListSidebar/BulkEditListSidebar';
 import {
   QUERY_KEY_DOWNLOAD_ACTION_MENU,
   useBulkOperationDetails,
+  useBulkOperationTenants,
   useFileDownload
 } from '../../hooks/api';
 import { BulkEditQuery } from './BulkEditQuery/BulkEditQuery';
@@ -47,9 +49,11 @@ import { BulkEditMarcLayer } from './BulkEditMarcLayer/BulkEditMarcLayer';
 import { savePreviewFile } from '../../utils/files';
 import { getBulkOperationStatsByStep } from './BulkEditListResult/PreviewLayout/helpers';
 import { BulkEditProfileFlow } from './BulkEditListResult/BulkEditProfileFlow/BulkEditProfileFlow';
+import { TenantsProvider } from '../../context/TenantsContext';
 
 export const BulkEditPane = () => {
   const history = useHistory();
+  const stripes = useStripes();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [visibleColumns, setVisibleColumns] = useState(null);
@@ -59,6 +63,9 @@ export const BulkEditPane = () => {
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
+  const { bulkOperationTenants } = useBulkOperationTenants(bulkOperationId);
+  const centralTenantId = stripes?.user?.user?.consortium?.centralTenantId;
+
   const {
     step,
     criteria,
@@ -175,24 +182,29 @@ export const BulkEditPane = () => {
     />
   );
 
-  const renderLayers = (paneProps) => (
+  const renderApproaches = (paneProps) => (
     <>
-      {isInAppLayerOpen && (
-        <BulkEditFolioLayer
-          bulkOperationId={bulkOperationId}
-          paneProps={paneProps}
-          onInAppLayerClose={closeInAppLayer}
-          isInAppLayerOpen={isInAppLayerOpen}
-        />
-      )}
-      {isMarcLayerOpen && (
-        <BulkEditMarcLayer
-          bulkOperationId={bulkOperationId}
-          paneProps={paneProps}
-          onMarcLayerClose={closeMarcLayer}
-          isMarcLayerOpen={isMarcLayerOpen}
-        />
-      )}
+      {/* BULK-EDIT IDENTIFIERS AND QUERY */}
+      <TenantsProvider tenants={bulkOperationTenants}>
+        {isInAppLayerOpen && (
+          <BulkEditFolioLayer
+            bulkOperationId={bulkOperationId}
+            paneProps={paneProps}
+            onInAppLayerClose={closeInAppLayer}
+            isInAppLayerOpen={isInAppLayerOpen}
+          />
+        )}
+        {isMarcLayerOpen && (
+          <BulkEditMarcLayer
+            bulkOperationId={bulkOperationId}
+            paneProps={paneProps}
+            onMarcLayerClose={closeMarcLayer}
+            isMarcLayerOpen={isMarcLayerOpen}
+          />
+        )}
+      </TenantsProvider>
+
+      {/* BULK-EDIT MANUAL UPLOAD CSV WITH CHANGES */}
       <BulkEditManualUploadModal
         operationId={bulkOperationId}
         open={isBulkEditModalOpen}
@@ -200,12 +212,16 @@ export const BulkEditPane = () => {
         countOfRecords={countOfRecords}
         setCountOfRecords={setCountOfRecords}
       />
-      <BulkEditProfileFlow
-        open={profileModalOpen}
-        bulkOperationId={bulkOperationId}
-        onClose={handleCloseProfilesModal}
-        onOpen={handleOpenProfilesModal}
-      />
+
+      {/* BULK-EDIT USING PROFILES */}
+      <TenantsProvider tenants={[centralTenantId]}>
+        <BulkEditProfileFlow
+          open={profileModalOpen}
+          bulkOperationId={bulkOperationId}
+          onClose={handleCloseProfilesModal}
+          onOpen={handleOpenProfilesModal}
+        />
+      </TenantsProvider>
     </>
   );
 
@@ -226,7 +242,7 @@ export const BulkEditPane = () => {
             bulkDetails={bulkDetails}
             actionMenu={renderActionMenu}
           >
-            {renderLayers}
+            {renderApproaches}
           </BulkEditIdentifiers>
         )}
 
@@ -235,7 +251,7 @@ export const BulkEditPane = () => {
             bulkDetails={bulkDetails}
             actionMenu={renderActionMenu}
           >
-            {renderLayers}
+            {renderApproaches}
           </BulkEditQuery>
         )}
 
