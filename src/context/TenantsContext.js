@@ -1,13 +1,19 @@
+import { createContext, useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { createContext, useContext, useMemo } from 'react';
 
-const TenantsContext = createContext({ tenants: [], showLocal: true });
+const TenantsContext = createContext({ tenants: [] });
 
 export function TenantsProvider({ children, tenants, showLocal }) {
+  const excludeLocalResults = useCallback((records) => {
+    if (showLocal) return records;
+
+    return records.filter(({ source }) => source !== 'local');
+  }, [showLocal]);
+
   const value = useMemo(() => ({
     tenants,
-    showLocal,
-  }), [tenants, showLocal]);
+    excludeLocalResults,
+  }), [tenants, excludeLocalResults]);
 
   return (
     <TenantsContext.Provider value={value}>

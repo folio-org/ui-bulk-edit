@@ -24,6 +24,11 @@ jest.mock('../usePublishCoordinator', () => ({
   usePublishCoordinator: jest.fn(),
 }));
 
+jest.mock('../../context/TenantsContext', () => ({
+  ...jest.requireActual('../../context/TenantsContext'),
+  useTenants: jest.fn(() => ({ tenants: [], excludeLocalResults: jest.fn(data => data) }))
+}));
+
 jest.mock('../../utils/helpers', () => ({
   getMappedAndSortedNotes: jest.fn(),
 }));

@@ -6,7 +6,7 @@ const DEFAULT_DATA = {};
 
 export const useLocationEcs = (tenants, options = {}) => {
   const [namespace] = useNamespace({ key: 'locationsEcs' });
-  const { initPublicationRequest } = usePublishCoordinator(namespace, { showLocal: true });
+  const { initPublicationRequest } = usePublishCoordinator(namespace);
 
   const { data = DEFAULT_DATA, isFetching } = useQuery({
     queryKey: [namespace, tenants],

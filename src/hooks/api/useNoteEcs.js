@@ -6,6 +6,7 @@ import { useNamespace } from '@folio/stripes/core';
 
 import { getMappedAndSortedNotes } from '../../utils/helpers';
 import { PUBLISH_COORDINATOR_STATUSES_METHODS, usePublishCoordinator } from '../usePublishCoordinator';
+import { useTenants } from '../../context/TenantsContext';
 
 const DEFAULT_DATA = {};
 
@@ -13,6 +14,7 @@ export const useNotesEcs = ({ namespaceKey, tenants, type, categoryId, url, note
   const [namespace] = useNamespace({ key: namespaceKey });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
   const { formatMessage } = useIntl();
+  const { excludeLocalResults } = useTenants();
 
   const { data = DEFAULT_DATA, isFetching } = useQuery({
     queryKey: [namespace, tenants, url, type],
@@ -34,7 +36,8 @@ export const useNotesEcs = ({ namespaceKey, tenants, type, categoryId, url, note
     if (!data?.length || isFetching) return [];
     const notes = data.flatMap(tenantData => {
       const tenantName = tenants.length ? tenantData.tenantId : null;
-      return tenantData.response?.[noteKey]?.map(note => ({
+      const filteredRecords = excludeLocalResults(tenantData.response?.[noteKey]);
+      return filteredRecords?.map(note => ({
         ...note,
         name: `${note.name} (${tenantName})`,
         tenantName
@@ -47,7 +50,7 @@ export const useNotesEcs = ({ namespaceKey, tenants, type, categoryId, url, note
       type: optionType,
       key: parameterKey,
     });
-  }, [categoryId, data, formatMessage, isFetching, noteKey, optionType, parameterKey]);
+  }, [categoryId, data, excludeLocalResults, formatMessage, isFetching, noteKey, optionType, parameterKey, tenants.length]);
 
   return {
     notesEcs,

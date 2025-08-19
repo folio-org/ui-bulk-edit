@@ -185,7 +185,7 @@ export const BulkEditPane = () => {
   const renderApproaches = (paneProps) => (
     <>
       {/* BULK-EDIT IDENTIFIERS AND QUERY */}
-      <TenantsProvider tenants={bulkOperationTenants}>
+      <TenantsProvider tenants={bulkOperationTenants} showLocal>
         {isInAppLayerOpen && (
           <BulkEditFolioLayer
             bulkOperationId={bulkOperationId}
@@ -214,7 +214,7 @@ export const BulkEditPane = () => {
       />
 
       {/* BULK-EDIT USING PROFILES */}
-      <TenantsProvider tenants={[centralTenantId]} showLocal>
+      <TenantsProvider tenants={[centralTenantId]} showLocal={false}>
         <BulkEditProfileFlow
           open={profileModalOpen}
           bulkOperationId={bulkOperationId}

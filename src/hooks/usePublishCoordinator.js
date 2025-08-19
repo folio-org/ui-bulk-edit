@@ -4,8 +4,6 @@ import { useCallback, useRef } from 'react';
 import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import { useErrorMessages } from './useErrorMessages';
-import { useTenants } from '../context/TenantsContext';
-
 
 export const PUBLISH_COORDINATOR_STATUSES = {
   COMPLETE: 'COMPLETE',
@@ -38,16 +36,9 @@ const formatPublicationResult = ({ publicationResults, totalRecords }) => {
   };
 };
 
-const filterPublicationResult = (showLocal) => (publicationResults) => {
-  if (showLocal) return publicationResults;
-
-  return publicationResults.filter(({ source }) => source !== 'local');
-};
-
 export const usePublishCoordinator = (namespace, options = {}) => {
   const ky = useOkapiKy();
   const stripes = useStripes();
-  const { showLocal } = useTenants();
   const abortController = useRef(new AbortController());
   const { showExternalModuleError } = useErrorMessages({ path: CONSORTIA_API });
 
@@ -91,9 +82,8 @@ export const usePublishCoordinator = (namespace, options = {}) => {
     return ky.post(baseApi, { json, signal })
       .json()
       .then(res => getPublicationResponse(res, { signal }))
-      .then(filterPublicationResult(options.showLocal ?? showLocal))
       .catch(showExternalModuleError);
-  }, [baseApi, getPublicationResponse, ky, showLocal, options.signal, options.showLocal, showExternalModuleError]);
+  }, [baseApi, getPublicationResponse, ky, options.signal, showExternalModuleError]);
 
   return {
     initPublicationRequest,
