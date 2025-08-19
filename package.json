@@ -90,6 +90,7 @@
           "bulk-operations.item.content-update.post",
           "bulk-operations.item.marc-content-update.post",
           "bulk-operations.item.start.post",
+          "bulk-operations.profiles.collection.get",
           "inventory-storage.loan-types.collection.get",
           "inventory-storage.locations.collection.get",
           "inventory-storage.location-units.institutions.collection.get",
@@ -97,6 +98,7 @@
           "inventory-storage.location-units.libraries.collection.get",
           "remote-storage.mappings.collection.get",
           "usergroups.collection.get",
+          "users.collection.get",
           "bulk-operations.used.tenants.get",
           "consortia.publications.item.get",
           "consortia.publications.item.post",
@@ -105,9 +107,7 @@
           "consortium-search.campuses.collection.get",
           "consortium-search.libraries.collection.get",
           "inventory-storage.statistical-codes.collection.get",
-          "inventory-storage.statistical-code-types.collection.get",
-          "bulk-operations.profiles.collection.get",
-          "users.collection.get"
+          "inventory-storage.statistical-code-types.collection.get"
         ]
       },
       {
