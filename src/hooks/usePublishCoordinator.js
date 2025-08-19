@@ -91,9 +91,9 @@ export const usePublishCoordinator = (namespace, options = {}) => {
     return ky.post(baseApi, { json, signal })
       .json()
       .then(res => getPublicationResponse(res, { signal }))
-      .then(filterPublicationResult(showLocal))
+      .then(filterPublicationResult(options.showLocal ?? showLocal))
       .catch(showExternalModuleError);
-  }, [baseApi, getPublicationResponse, ky, showLocal, options.signal, showExternalModuleError]);
+  }, [baseApi, getPublicationResponse, ky, showLocal, options.signal, options.showLocal, showExternalModuleError]);
 
   return {
     initPublicationRequest,
