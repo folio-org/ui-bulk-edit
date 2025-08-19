@@ -105,7 +105,9 @@
           "consortium-search.campuses.collection.get",
           "consortium-search.libraries.collection.get",
           "inventory-storage.statistical-codes.collection.get",
-          "inventory-storage.statistical-code-types.collection.get"
+          "inventory-storage.statistical-code-types.collection.get",
+          "bulk-operations.profiles.collection.get",
+          "users.collection.get"
         ]
       },
       {
@@ -163,9 +165,7 @@
           "inventory-storage.item-note-types.collection.get",
           "inventory-storage.holdings-note-types.collection.get",
           "inventory-storage.electronic-access-relationships.collection.get",
-          "bulk-operations.item.inventory.put",
-          "bulk-operations.profiles.collection.get",
-          "users.collection.get"
+          "bulk-operations.item.inventory.put"
         ],
         "visible": true
       },
@@ -234,8 +234,6 @@
         "subPermissions": [
           "settings.bulk-edit.enabled",
           "mod-settings.entries.collection.get",
-          "bulk-operations.profiles.collection.get",
-          "users.collection.get",
           "ui-bulk-edit.base-view.manage",
           "ui-bulk-edit.base-edit.manage",
           "bulk-operations.item.inventory.get",
