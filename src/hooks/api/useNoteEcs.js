@@ -50,7 +50,7 @@ export const useNotesEcs = ({ namespaceKey, tenants, type, categoryId, url, note
       type: optionType,
       key: parameterKey,
     });
-  }, [categoryId, data, excludeLocalResults, formatMessage, isFetching, noteKey, optionType, parameterKey, tenants.length]);
+  }, [categoryId, data, excludeLocalResults, formatMessage, isFetching, noteKey, optionType, parameterKey, tenants?.length]);
 
   return {
     notesEcs,

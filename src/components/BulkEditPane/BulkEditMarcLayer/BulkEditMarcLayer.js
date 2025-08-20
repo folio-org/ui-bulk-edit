@@ -9,7 +9,7 @@ import { BulkEditPreviewModal } from '../BulkEditListResult/BulkEditInAppPreview
 import { marcFieldTemplate } from '../BulkEditListResult/BulkEditMarc/helpers';
 import { useMarcContentUpdate } from '../../../hooks/api/useMarcContentUpdate';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
-import { useContentUpdate } from '../../../hooks/api';
+import { useBulkOperationTenants, useContentUpdate } from '../../../hooks/api';
 import {
   getContentUpdatesBody,
   folioFieldTemplate,
@@ -24,6 +24,7 @@ import { validationSchema as administrativeSchema } from '../BulkEditListResult/
 import { ADMINISTRATIVE_DEFAULT_BODY, MARC_DEFAULT_BODY } from '../../../constants/forms';
 import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
 import { filterOptionsByPermissions } from '../../../utils/helpers';
+import { TenantsProvider } from '../../../context/TenantsContext';
 
 export const BulkEditMarcLayer = ({
   bulkOperationId,
@@ -36,6 +37,7 @@ export const BulkEditMarcLayer = ({
 
   const { marcContentUpdate } = useMarcContentUpdate({ id: bulkOperationId });
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
+  const { bulkOperationTenants, isTenantsLoading } = useBulkOperationTenants(bulkOperationId);
 
   const { fields, setFields, isValid: isAdministrativeFormValid, isPristine: isAdministrativeFormPristine } = useBulkEditForm({
     validationSchema: administrativeSchema,
@@ -112,17 +114,20 @@ export const BulkEditMarcLayer = ({
       <BulkEditLayer
         isLayerOpen={isMarcLayerOpen}
         isConfirmDisabled={!areFormsStateValid}
+        isLoading={isTenantsLoading}
         onLayerClose={onMarcLayerClose}
         onConfirm={handleConfirm}
         {...paneProps}
       >
-        <BulkEditMarc
-          fields={fields}
-          setFields={setFields}
-          marcFields={marcFields}
-          setMarcFields={setMarcFields}
-          options={sortedOptions}
-        />
+        <TenantsProvider tenants={bulkOperationTenants} showLocal>
+          <BulkEditMarc
+            fields={fields}
+            setFields={setFields}
+            marcFields={marcFields}
+            setMarcFields={setMarcFields}
+            options={sortedOptions}
+          />
+        </TenantsProvider>
       </BulkEditLayer>
 
       <BulkEditPreviewModal

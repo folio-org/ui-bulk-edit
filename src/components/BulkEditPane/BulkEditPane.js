@@ -37,7 +37,6 @@ import { BulkEditListSidebar } from './BulkEditListSidebar/BulkEditListSidebar';
 import {
   QUERY_KEY_DOWNLOAD_ACTION_MENU,
   useBulkOperationDetails,
-  useBulkOperationTenants,
   useFileDownload
 } from '../../hooks/api';
 import { BulkEditQuery } from './BulkEditQuery/BulkEditQuery';
@@ -63,9 +62,6 @@ export const BulkEditPane = () => {
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const { bulkOperationTenants } = useBulkOperationTenants(bulkOperationId, {
-    enabled: !!bulkOperationId && countOfRecords > 0
-  });
   const centralTenantId = stripes?.user?.user?.consortium?.centralTenantId;
 
   const {
@@ -187,24 +183,22 @@ export const BulkEditPane = () => {
   const renderApproaches = (paneProps) => (
     <>
       {/* BULK-EDIT IDENTIFIERS AND QUERY */}
-      <TenantsProvider tenants={bulkOperationTenants} showLocal>
-        {isInAppLayerOpen && (
-          <BulkEditFolioLayer
-            bulkOperationId={bulkOperationId}
-            paneProps={paneProps}
-            onInAppLayerClose={closeInAppLayer}
-            isInAppLayerOpen={isInAppLayerOpen}
-          />
-        )}
-        {isMarcLayerOpen && (
-          <BulkEditMarcLayer
-            bulkOperationId={bulkOperationId}
-            paneProps={paneProps}
-            onMarcLayerClose={closeMarcLayer}
-            isMarcLayerOpen={isMarcLayerOpen}
-          />
-        )}
-      </TenantsProvider>
+      {isInAppLayerOpen && (
+        <BulkEditFolioLayer
+          bulkOperationId={bulkOperationId}
+          paneProps={paneProps}
+          onInAppLayerClose={closeInAppLayer}
+          isInAppLayerOpen={isInAppLayerOpen}
+        />
+      )}
+      {isMarcLayerOpen && (
+        <BulkEditMarcLayer
+          bulkOperationId={bulkOperationId}
+          paneProps={paneProps}
+          onMarcLayerClose={closeMarcLayer}
+          isMarcLayerOpen={isMarcLayerOpen}
+        />
+      )}
 
       {/* BULK-EDIT MANUAL UPLOAD CSV WITH CHANGES */}
       <BulkEditManualUploadModal

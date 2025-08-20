@@ -5,7 +5,7 @@ import { useErrorMessages } from '../useErrorMessages';
 
 export const BULK_TENANTS_KEY = 'BULK_TENANTS_KEY';
 
-export const useBulkOperationTenants = (id, options) => {
+export const useBulkOperationTenants = (id) => {
   const ky = useOkapiKy();
   const [namespace] = useNamespace({ key: BULK_TENANTS_KEY });
   const { showExternalModuleError } = useErrorMessages();
@@ -16,8 +16,8 @@ export const useBulkOperationTenants = (id, options) => {
     keepPreviousData: true,
     cacheTime: Infinity,
     staleTime: Infinity,
+    enabled: !!id,
     onError: showExternalModuleError,
-    ...options
   });
 
   return {

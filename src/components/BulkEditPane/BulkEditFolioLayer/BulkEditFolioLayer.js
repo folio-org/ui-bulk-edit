@@ -9,7 +9,7 @@ import {
   folioFieldTemplate,
   getMappedContentUpdates
 } from '../BulkEditListResult/BulkEditInApp/helpers';
-import { useContentUpdate } from '../../../hooks/api';
+import { useBulkOperationTenants, useContentUpdate } from '../../../hooks/api';
 import { useConfirmChanges } from '../../../hooks/useConfirmChanges';
 import { useOptionsWithTenants } from '../../../hooks/useOptionsWithTenants';
 import { BulkEditPreviewModalFooter } from '../BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
@@ -17,7 +17,7 @@ import { useCommitChanges } from '../../../hooks/useCommitChanges';
 import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
 import { validationSchema } from '../BulkEditListResult/BulkEditInApp/validation';
 import { useSearchParams } from '../../../hooks';
-import { useTenants } from '../../../context/TenantsContext';
+import { TenantsProvider } from '../../../context/TenantsContext';
 
 
 export const BulkEditFolioLayer = ({
@@ -28,8 +28,8 @@ export const BulkEditFolioLayer = ({
 }) => {
   const { currentRecordType } = useSearchParams();
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
-  const { tenants } = useTenants();
-  const { options, areAllOptionsLoaded } = useOptionsWithTenants(currentRecordType, tenants);
+  const { bulkOperationTenants, isTenantsLoading } = useBulkOperationTenants(bulkOperationId);
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(currentRecordType, bulkOperationTenants);
   const { fields, setFields, isValid } = useBulkEditForm({
     validationSchema,
     template: folioFieldTemplate
@@ -74,16 +74,19 @@ export const BulkEditFolioLayer = ({
       <BulkEditLayer
         isLayerOpen={isInAppLayerOpen}
         isConfirmDisabled={!isValid}
+        isLoading={isTenantsLoading}
         onLayerClose={onInAppLayerClose}
         onConfirm={handleConfirm}
         {...paneProps}
       >
-        <BulkEditInApp
-          fields={fields}
-          setFields={setFields}
-          options={options}
-          areAllOptionsLoaded={areAllOptionsLoaded}
-        />
+        <TenantsProvider tenants={bulkOperationTenants} showLocal>
+          <BulkEditInApp
+            fields={fields}
+            setFields={setFields}
+            options={options}
+            areAllOptionsLoaded={areAllOptionsLoaded}
+          />
+        </TenantsProvider>
       </BulkEditLayer>
 
       <BulkEditPreviewModal

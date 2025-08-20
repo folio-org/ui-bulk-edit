@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 
-import { Button, Layer, Pane, PaneFooter } from '@folio/stripes/components';
+import { Button, Layer, Layout, Loading, Pane, PaneFooter } from '@folio/stripes/components';
 
 import { useSearchParams } from '../../../../hooks';
 
@@ -10,6 +10,7 @@ import { useSearchParams } from '../../../../hooks';
 export const BulkEditLayer = ({
   isLayerOpen,
   isConfirmDisabled,
+  isLoading,
   onLayerClose,
   onConfirm,
   children,
@@ -54,7 +55,11 @@ export const BulkEditLayer = ({
         footer={renderPaneFooter()}
         onClose={onLayerClose}
       >
-        {children}
+        {isLoading ? (
+          <Layout className="display-flex centerContent">
+            <Loading size="large" />
+          </Layout>
+        ) : children}
       </Pane>
     </Layer>
   );
@@ -63,6 +68,7 @@ export const BulkEditLayer = ({
 BulkEditLayer.propTypes = {
   isLayerOpen: PropTypes.bool,
   isConfirmDisabled: PropTypes.bool,
+  isLoading: PropTypes.bool,
   onLayerClose: PropTypes.func,
   onConfirm: PropTypes.func,
   children: PropTypes.oneOfType([
