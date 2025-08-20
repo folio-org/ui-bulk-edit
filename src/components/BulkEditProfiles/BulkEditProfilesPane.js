@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
   Route,
+  Switch,
   useHistory,
   useLocation,
 } from 'react-router-dom';
@@ -142,46 +143,46 @@ export const BulkEditProfilesPane = ({
           />
         </div>
 
-        <Route
-          exact
-          path={`${path}/:id`}
-          render={() => (
-            <Layer isOpen>
-              <BulkEditProfileDetails
-                entityType={entityType}
-                onClose={closeDetailsPane}
-              />
-            </Layer>
-          )}
-        />
-
-        <Route
-          exact
-          path={`${path}/:id/edit`}
-          render={() => (
-            <Layer isOpen>
-              <BulkEditUpdateProfile
-                entityType={entityType}
-                onClose={closeFormLayer}
-              />
-            </Layer>
-          )}
-        />
-
-        <Route
-          exact
-          path={`${path}/create`}
-          render={() => (
-            <TitleManager>
+        <Switch>
+          <Route
+            exact
+            path={`${path}/create`}
+            render={() => (
+              <TitleManager>
+                <Layer isOpen>
+                  <BulkEditCreateProfile
+                    entityType={entityType}
+                    onClose={closeFormLayer}
+                  />
+                </Layer>
+              </TitleManager>
+            )}
+          />
+          <Route
+            exact
+            path={`${path}/:id/edit`}
+            render={() => (
               <Layer isOpen>
-                <BulkEditCreateProfile
+                <BulkEditUpdateProfile
                   entityType={entityType}
                   onClose={closeFormLayer}
                 />
               </Layer>
-            </TitleManager>
-          )}
-        />
+            )}
+          />
+          <Route
+            exact
+            path={`${path}/:id`}
+            render={() => (
+              <Layer isOpen>
+                <BulkEditProfileDetails
+                  entityType={entityType}
+                  onClose={closeDetailsPane}
+                />
+              </Layer>
+            )}
+          />
+        </Switch>
       </Pane>
     </TenantsProvider>
   );
