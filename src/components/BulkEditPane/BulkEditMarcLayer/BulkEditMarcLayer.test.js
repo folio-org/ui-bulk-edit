@@ -42,6 +42,13 @@ jest.mock('../../../hooks/api/useMarcContentUpdate', () => ({
   })),
 }));
 
+jest.mock('../../../hooks/api/useBulkOperationTenants', () => ({
+  useBulkOperationTenants: jest.fn(() => ({
+    bulkOperationTenants: ['consortium'],
+    isTenantsLoading: false,
+  })),
+}));
+
 jest.mock('../../../hooks/api/useContentUpdate', () => ({
   useContentUpdate: jest.fn(() => ({
     contentUpdate: mockContentUpdate,
