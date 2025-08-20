@@ -72,9 +72,9 @@ export const iseRecordsPreviewAvailable = (bulkDetails, step) => {
   const hasRecords = countOfRecords > 0;
 
   if (isInitialPreview) {
-    return initialPreviewStatuses.includes(bulkDetails.status) && hasRecords;
+    return initialPreviewStatuses.includes(bulkDetails?.status) && hasRecords;
   } else {
-    return commitPreviewStatuses.includes(bulkDetails.status) && hasRecords;
+    return commitPreviewStatuses.includes(bulkDetails?.status) && hasRecords;
   }
 };
 

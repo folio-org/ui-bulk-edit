@@ -47,7 +47,7 @@ import { useResetFilters } from '../../hooks/useResetFilters';
 import { BulkEditFolioLayer } from './BulkEditFolioLayer/BulkEditFolioLayer';
 import { BulkEditMarcLayer } from './BulkEditMarcLayer/BulkEditMarcLayer';
 import { savePreviewFile } from '../../utils/files';
-import { getBulkOperationStatsByStep } from './BulkEditListResult/PreviewLayout/helpers';
+import { getBulkOperationStatsByStep, iseRecordsPreviewAvailable } from './BulkEditListResult/PreviewLayout/helpers';
 import { BulkEditProfileFlow } from './BulkEditListResult/BulkEditProfileFlow/BulkEditProfileFlow';
 import { TenantsProvider } from '../../context/TenantsContext';
 
@@ -63,9 +63,6 @@ export const BulkEditPane = () => {
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const { bulkOperationTenants } = useBulkOperationTenants(bulkOperationId, {
-    enabled: !!bulkOperationId && countOfRecords > 0
-  });
   const centralTenantId = stripes?.user?.user?.consortium?.centralTenantId;
 
   const {
@@ -76,6 +73,9 @@ export const BulkEditPane = () => {
 
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
   const { filtersTab } = useResetFilters();
+  const { bulkOperationTenants } = useBulkOperationTenants(bulkOperationId, {
+    enabled: !!bulkOperationId && iseRecordsPreviewAvailable(bulkDetails, step)
+  });
 
   const {
     openInAppLayer,
