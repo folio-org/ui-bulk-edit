@@ -63,7 +63,9 @@ export const BulkEditPane = () => {
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const { bulkOperationTenants } = useBulkOperationTenants(bulkOperationId);
+  const { bulkOperationTenants } = useBulkOperationTenants(bulkOperationId, {
+    enabled: !!bulkOperationId && countOfRecords > 0
+  });
   const centralTenantId = stripes?.user?.user?.consortium?.centralTenantId;
 
   const {
