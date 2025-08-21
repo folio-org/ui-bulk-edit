@@ -627,6 +627,7 @@
   "settings.profiles.form.update.success": "Profile successfully updated.",
   "settings.profiles.form.create.error": "Following error prevented saving the profile:",
   "settings.profiles.form.update.error": "Following error prevented updating the profile:",
+  "settings.profiles.form.name.copy": "Copy of {name}",
 
   "titleManager.settings": "Bulk edit settings",
   "titleManager.settings.holdings": "Bulk edit settings - Holdings bulk edit profiles",
