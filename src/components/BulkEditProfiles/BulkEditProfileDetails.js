@@ -124,6 +124,26 @@ export const BulkEditProfileDetails = ({
             </Icon>
           </Button>
         )}
+
+        <Button
+          aria-label={intl.formatMessage({ id: 'stripes-core.button.duplicate' })}
+          buttonStyle="dropdownItem"
+          onClick={() => {
+            onToggle();
+            history.push({
+              pathname: `${id}/duplicate`,
+              search: history.location.search,
+            });
+          }}
+        >
+          <Icon
+            size="small"
+            icon="duplicate"
+          >
+            <FormattedMessage id="stripes-core.button.duplicate" />
+          </Icon>
+        </Button>
+
         {isDeletionAllowed && (
           <Button
             aria-label={intl.formatMessage({ id: 'stripes-core.button.delete' })}

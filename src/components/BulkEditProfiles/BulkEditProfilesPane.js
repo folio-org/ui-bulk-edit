@@ -24,6 +24,7 @@ import { useBulkPermissions } from '../../hooks';
 
 import css from './BulkEditProfilesPane.css';
 import { BulkEditCreateProfile } from './BulkEditCreateProfile';
+import { BulkEditDuplicateProfile } from './BulkEditDuplicateProfile';
 import { BulkEditUpdateProfile } from './BulkEditUpdateProfile';
 import { useProfilesFlow } from '../../hooks/useProfilesFlow';
 import { BulkEditProfilesSearchAndView } from './BulkEditProfilesSearchAndView';
@@ -157,6 +158,19 @@ export const BulkEditProfilesPane = ({
         render={() => (
           <Layer isOpen>
             <BulkEditUpdateProfile
+              entityType={entityType}
+              onClose={closeFormLayer}
+            />
+          </Layer>
+        )}
+      />
+
+      <Route
+        exact
+        path={`${path}/:id/duplicate`}
+        render={() => (
+          <Layer isOpen>
+            <BulkEditDuplicateProfile
               entityType={entityType}
               onClose={closeFormLayer}
             />
