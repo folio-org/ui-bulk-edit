@@ -17,6 +17,7 @@ import { useCommitChanges } from '../../../hooks/useCommitChanges';
 import { useBulkEditForm } from '../../../hooks/useBulkEditForm';
 import { validationSchema } from '../BulkEditListResult/BulkEditInApp/validation';
 import { useSearchParams } from '../../../hooks';
+import { useTenants } from '../../../context/TenantsContext';
 
 
 export const BulkEditFolioLayer = ({
@@ -27,7 +28,8 @@ export const BulkEditFolioLayer = ({
 }) => {
   const { currentRecordType } = useSearchParams();
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
-  const { options, areAllOptionsLoaded } = useOptionsWithTenants(currentRecordType);
+  const { tenants } = useTenants();
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(currentRecordType, tenants);
   const { fields, setFields, isValid } = useBulkEditForm({
     validationSchema,
     template: folioFieldTemplate

@@ -7,15 +7,16 @@ import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
 import { getLabelByValue } from '../../helpers';
 import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
-import { useBulkOperationTenants, useLoanTypes, useLoanTypesEcs } from '../../../../../../hooks/api';
+import { useLoanTypes, useLoanTypesEcs } from '../../../../../../hooks/api';
+import { useTenants } from '../../../../../../context/TenantsContext';
 
 
 export const LoanTypesControl = ({ value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
+  const { tenants } = useTenants();
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
-  const { tenants } = useBulkOperationTenants();
   const { loanTypes, isLoanTypesLoading } = useLoanTypes();
   const { escData: loanTypesEcs, isFetching: isLoanTypesEcsLoading } = useLoanTypesEcs(tenants, { enabled: isCentralTenant });
 

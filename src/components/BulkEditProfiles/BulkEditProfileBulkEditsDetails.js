@@ -13,6 +13,7 @@ import { useOptionsWithTenants } from '../../hooks/useOptionsWithTenants';
 import { folioFieldTemplate } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
 import { InAppForm } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
 import { validationSchema } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/validation';
+import { useTenants } from '../../context/TenantsContext';
 
 const BulkEditsForm = ({
   entityType,
@@ -50,7 +51,8 @@ export const BulkEditProfileBulkEditsDetails = ({
   isLoading,
   values,
 }) => {
-  const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType);
+  const { tenants } = useTenants();
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType, tenants);
 
   if (isLoading || !areAllOptionsLoaded) {
     return (

@@ -7,16 +7,17 @@ import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
 import { getLabelByValue, sortWithoutPlaceholder } from '../../helpers';
 import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
-import { useBulkOperationTenants, useItemNotes, useItemNotesEcs } from '../../../../../../hooks/api';
+import { useItemNotes, useItemNotesEcs } from '../../../../../../hooks/api';
 import { getItemNotes } from '../../../../../../constants';
+import { useTenants } from '../../../../../../context/TenantsContext';
 
 
 export const ItemNotesControl = ({ parameters, option, value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
+  const { tenants } = useTenants();
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
-  const { tenants } = useBulkOperationTenants();
   const { itemNotes, isItemNotesLoading } = useItemNotes();
   const { notesEcs: itemsNotes, isFetching: isItemsNotesEcsLoading } = useItemNotesEcs(tenants, 'action', { enabled: isCentralTenant });
 

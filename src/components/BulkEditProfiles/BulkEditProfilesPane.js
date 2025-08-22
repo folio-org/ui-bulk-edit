@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
   Route,
+  Switch,
   useHistory,
   useLocation,
 } from 'react-router-dom';
@@ -14,7 +15,7 @@ import {
   Pane,
   PaneHeader,
 } from '@folio/stripes/components';
-import { AppIcon, TitleManager } from '@folio/stripes/core';
+import { AppIcon, TitleManager, useStripes } from '@folio/stripes/core';
 import {
   CAPABILITIES,
   RECORD_TYPES_MAPPING,
@@ -28,6 +29,7 @@ import { BulkEditDuplicateProfile } from './BulkEditDuplicateProfile';
 import { BulkEditUpdateProfile } from './BulkEditUpdateProfile';
 import { useProfilesFlow } from '../../hooks/useProfilesFlow';
 import { BulkEditProfilesSearchAndView } from './BulkEditProfilesSearchAndView';
+import { TenantsProvider } from '../../context/TenantsContext';
 
 export const BulkEditProfilesPane = ({
   entityType,
@@ -35,6 +37,8 @@ export const BulkEditProfilesPane = ({
 }) => {
   const location = useLocation();
   const history = useHistory();
+  const stripes = useStripes();
+  const centralTenantId = stripes?.user?.user?.consortium?.centralTenantId;
   const { path } = useRouteMatch();
   const { hasSettingsCreatePerms } = useBulkPermissions();
   const {
@@ -121,53 +125,55 @@ export const BulkEditProfilesPane = ({
   }, [entityType, filteredProfiles, isProfilesLoading, openCreateProfile, title, hasSettingsCreatePerms]);
 
   return (
-    <Pane
-      defaultWidth="fill"
-      renderHeader={renderHeader}
-    >
-      <div className={css.paneContent}>
-        <BulkEditProfilesSearchAndView
-          entityType={entityType}
-          isLoading={isLoading}
-          profiles={filteredProfiles}
-          searchTerm={searchTerm}
-          sortOrder={sortOrder}
-          sortDirection={sortDirection}
-          onRowClick={openProfileDetails}
-          onSearchChange={changeSearch}
-          onSortingChange={changeLSorting}
-        />
-      </div>
+    <TenantsProvider tenants={[centralTenantId]} showLocal={false}>
+      <Pane
+        defaultWidth="fill"
+        renderHeader={renderHeader}
+      >
+        <div className={css.paneContent}>
+          <BulkEditProfilesSearchAndView
+            entityType={entityType}
+            isLoading={isLoading}
+            profiles={filteredProfiles}
+            searchTerm={searchTerm}
+            sortOrder={sortOrder}
+            sortDirection={sortDirection}
+            onRowClick={openProfileDetails}
+            onSearchChange={changeSearch}
+            onSortingChange={changeLSorting}
+          />
+        </div>
 
-      <Route
-        exact
-        path={`${path}/:id`}
-        render={() => (
-          <Layer isOpen>
-            <BulkEditProfileDetails
-              entityType={entityType}
-              onClose={closeDetailsPane}
-            />
-          </Layer>
-        )}
-      />
-
-      <Route
-        exact
-        path={`${path}/:id/edit`}
-        render={() => (
-          <Layer isOpen>
-            <BulkEditUpdateProfile
-              entityType={entityType}
-              onClose={closeFormLayer}
-            />
-          </Layer>
-        )}
-      />
-
-      <Route
-        exact
-        path={`${path}/:id/duplicate`}
+        <Switch>
+          <Route
+            exact
+            path={`${path}/create`}
+            render={() => (
+              <TitleManager>
+                <Layer isOpen>
+                  <BulkEditCreateProfile
+                    entityType={entityType}
+                    onClose={closeFormLayer}
+                  />
+                </Layer>
+              </TitleManager>
+            )}
+          />
+          <Route
+            exact
+            path={`${path}/:id/edit`}
+            render={() => (
+              <Layer isOpen>
+                <BulkEditUpdateProfile
+                  entityType={entityType}
+                  onClose={closeFormLayer}
+                />
+              </Layer>
+            )}
+          />
+          <Route
+            exact
+            path={`${path}/:id/duplicate`}
         render={() => (
           <Layer isOpen>
             <BulkEditDuplicateProfile
@@ -180,19 +186,19 @@ export const BulkEditProfilesPane = ({
 
       <Route
         exact
-        path={`${path}/create`}
-        render={() => (
-          <TitleManager>
-            <Layer isOpen>
-              <BulkEditCreateProfile
-                entityType={entityType}
-                onClose={closeFormLayer}
-              />
-            </Layer>
-          </TitleManager>
-        )}
-      />
-    </Pane>
+        path={`${path}/:id`}
+            render={() => (
+              <Layer isOpen>
+                <BulkEditProfileDetails
+                  entityType={entityType}
+                  onClose={closeDetailsPane}
+                />
+              </Layer>
+            )}
+          />
+        </Switch>
+      </Pane>
+    </TenantsProvider>
   );
 };
 

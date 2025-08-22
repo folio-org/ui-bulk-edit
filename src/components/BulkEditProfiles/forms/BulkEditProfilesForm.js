@@ -40,6 +40,7 @@ import {
 import { InAppForm } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
 import { validationSchema } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/validation';
 import { profilesValidationSchema } from './validation';
+import { useTenants } from '../../../context/TenantsContext';
 
 const initialFormState = (entityType) => ({
   name: '',
@@ -59,7 +60,8 @@ export const BulkEditProfilesForm = ({
 }) => {
   const intl = useIntl();
   const { hasSettingsLockPerms } = useBulkPermissions();
-  const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType);
+  const { tenants } = useTenants();
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType, tenants);
   const { fields, setFields, isValid: areContentUpdatesValid, isPristine: isContentUpdatePristine } = useBulkEditForm({
     validationSchema,
     initialValues: initialRuleDetails,

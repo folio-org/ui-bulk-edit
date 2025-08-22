@@ -5,7 +5,6 @@ import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import { useErrorMessages } from './useErrorMessages';
 
-
 export const PUBLISH_COORDINATOR_STATUSES = {
   COMPLETE: 'COMPLETE',
   ERROR: 'ERROR',

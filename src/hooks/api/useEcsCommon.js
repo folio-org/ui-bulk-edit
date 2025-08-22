@@ -1,12 +1,14 @@
 import { useNamespace } from '@folio/stripes/core';
 import { useQuery } from 'react-query';
 import { usePublishCoordinator } from '../usePublishCoordinator';
+import { useTenants } from '../../context/TenantsContext';
 
 const DEFAULT_DATA = {};
 
 export const useEcsCommon = (key, url, tenants, mapResponse, options = {}) => {
   const [namespace] = useNamespace({ key });
   const { initPublicationRequest } = usePublishCoordinator(namespace);
+  const { excludeLocalResults } = useTenants();
 
   const { data = DEFAULT_DATA, isFetching } = useQuery({
     queryKey: [namespace, tenants],
@@ -28,7 +30,7 @@ export const useEcsCommon = (key, url, tenants, mapResponse, options = {}) => {
     if (!data?.length || isFetching) return [];
     return data.flatMap(tenantData => {
       const tenantName = tenantData.tenantId;
-      return mapResponse(tenantData, tenantName);
+      return excludeLocalResults(mapResponse(tenantData, tenantName));
     });
   };
 

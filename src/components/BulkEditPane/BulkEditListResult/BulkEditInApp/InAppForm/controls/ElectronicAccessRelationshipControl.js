@@ -8,20 +8,20 @@ import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 import { getLabelByValue } from '../../helpers';
 import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
 import {
-  useBulkOperationTenants,
   useElectronicAccessEcs,
   useElectronicAccess
 } from '../../../../../../hooks/api';
 import { getItemsWithPlaceholder } from '../../../../../../constants';
+import { useTenants } from '../../../../../../context/TenantsContext';
 
 
 export const ElectronicAccessRelationshipControl = ({ ctx, value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
+  const { tenants } = useTenants();
 
   const isCentralTenant = checkIfUserInCentralTenant(stripes);
 
-  const { tenants } = useBulkOperationTenants();
   const { electronicAccessRelationships, isElectronicAccessLoading } = useElectronicAccess();
   const { escData: urlRelationshipsEcs, isFetching: isElectronicAccessEcsLoading } = useElectronicAccessEcs(tenants, { enabled: isCentralTenant });
 
