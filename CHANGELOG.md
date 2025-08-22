@@ -27,6 +27,7 @@
 * [UIBULKED-661](https://folio-org.atlassian.net/browse/UIBULKED-661) Locking and unlocking a bulk edit profile
 * [UIPQB-237](https://folio-org.atlassian.net/browse/UIPQB-237) Handle organization API calls for the query builder
 * [UIBULKED-505](https://folio-org.atlassian.net/browse/UIBULKED-505) Add Set Instance Records for Deletion
+* [UIBULKED-660](https://folio-org.atlassian.net/browse/UIBULKED-660) Duplicating a Bulk Edit Profile
 * [UIBULKED-696](https://folio-org.atlassian.net/browse/UIBULKED-696) Fix Bulk edit profiles in consortia environment
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
