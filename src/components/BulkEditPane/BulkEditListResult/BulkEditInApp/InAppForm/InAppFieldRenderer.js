@@ -258,7 +258,7 @@ InAppFieldRenderer.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     required: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    controlDisabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     options: PropTypes.func,
     showWhen: PropTypes.func,
     itemSchema: PropTypes.arrayOf(

@@ -76,10 +76,7 @@ export const useDerivedFields = (fields, setFields) => {
    * ensure the field parameters are updated with the correct boolean value.
    */
   useEffect(() => {
-    if (
-      suppressFromDiscoveryTrueIndex !== -1 ||
-      suppressFromDiscoveryFalseIndex !== -1
-    ) {
+    if (suppressFromDiscoveryTrueIndex !== -1 || suppressFromDiscoveryFalseIndex !== -1) {
       setFields(prevFields => prevFields.map(field => {
         if (field.option === OPTIONS.SUPPRESS_FROM_DISCOVERY) {
           return {
