@@ -29,6 +29,7 @@
 * [UIBULKED-505](https://folio-org.atlassian.net/browse/UIBULKED-505) Add Set Instance Records for Deletion
 * [UIBULKED-660](https://folio-org.atlassian.net/browse/UIBULKED-660) Duplicating a Bulk Edit Profile
 * [UIBULKED-696](https://folio-org.atlassian.net/browse/UIBULKED-696) Fix Bulk edit profiles in consortia environment
+* [UIBULKED-690](https://folio-org.atlassian.net/browse/UIBULKED-690) Setting instances as staff/discovery unsuppressed and as deleted in one bulk edit job
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 

@@ -167,6 +167,15 @@ export const getActionIndex = (fields, requiredOption, action) => fields.findInd
     actionsDetails.actions.some(({ name }) => name === action));
 
 /**
+ * Finds the index of a specific option in a list of fields.
+ *
+ * @param fields - Array of field objects to search through.
+ * @param requiredOption - The option type to filter by (e.g. 'STATISTICAL_CODE').
+ * @returns {number} Index of the matching field, or -1 if not found.
+ */
+export const getOptionIndex = (fields, requiredOption) => fields.findIndex(({ option }) => option === requiredOption);
+
+/**
  * Applies filtering rules to determine which fields remain visible
  * when removing or altering statistical code entries.
  *
@@ -234,10 +243,8 @@ export const getOptionsWithRules = ({ fields, options, item }) => {
   const removeAllIndex = getActionIndex(fields, OPTIONS.STATISTICAL_CODE, ACTIONS.REMOVE_ALL);
   const addIndex = getActionIndex(fields, OPTIONS.STATISTICAL_CODE, ACTIONS.ADD_TO_EXISTING);
   const removeSomeIndex = getActionIndex(fields, OPTIONS.STATISTICAL_CODE, ACTIONS.REMOVE_SOME);
-  const setToTrueIndex = getActionIndex(fields, OPTIONS.SET_RECORDS_FOR_DELETE, ACTIONS.SET_TO_TRUE);
   const hasAddOrRemoveSome = addIndex !== -1 || removeSomeIndex !== -1;
   const hasRemoveAll = removeAllIndex !== -1;
-  const hasSetToTrue = setToTrueIndex !== -1;
 
   const usedOptions = fields.reduce((acc, field) => {
     const noteParam = field.parameters?.find(param => NOTES_PARAMETERS_KEYS.includes(param.key));
@@ -255,8 +262,6 @@ export const getOptionsWithRules = ({ fields, options, item }) => {
   // options outside this map will be limited to 1 instance
   const instancesMap = {
     [OPTIONS.STATISTICAL_CODE]: hasRemoveAll || !hasAddOrRemoveSome ? 1 : 2,
-    [OPTIONS.STAFF_SUPPRESS]: hasSetToTrue ? 0 : 1,
-    [OPTIONS.SUPPRESS_FROM_DISCOVERY]: hasSetToTrue ? 0 : 1,
   };
 
   const filteredOptions = options.filter(opt => {
@@ -297,22 +302,6 @@ export const getPreselectedValue = (option, action) => {
   }
 
   return '';
-};
-
-
-/**
- * Returns preselected parameters based on the action type.
- * If the action is to set a boolean value, it updates the value
- * @param action
- * @param params
- * @returns {Array} Array of parameters with updated values.
- */
-export const getPreselectedParams = (action, params = []) => {
-  if ([ACTIONS.SET_TO_TRUE, ACTIONS.SET_TO_FALSE].includes(action)) {
-    return params.map((param) => ({ ...param, value: action === ACTIONS.SET_TO_TRUE }));
-  }
-
-  return params;
 };
 
 /**

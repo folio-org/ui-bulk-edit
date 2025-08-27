@@ -45,6 +45,7 @@ export const InAppFieldRenderer = memo(({
     itemSchema,
     renderParameters,
     dirty,
+    controlDisabled,
   } = field;
 
   if (showWhen && !showWhen(ctx)) return null;
@@ -52,6 +53,7 @@ export const InAppFieldRenderer = memo(({
   const value = item[name];
   const fullPath = [...path, name];
   const isDirty = typeof dirty === 'function' ? dirty(value) : dirty;
+  const isControlDisabled = typeof controlDisabled === 'function' ? controlDisabled({ fields, option }) : controlDisabled;
   const controlType = typeof type === 'function' ? type({ ...ctx, option, allOptions, recordType }) : type;
   const actions = options?.({ ...ctx, option, allOptions, recordType, approach }) || [];
   const actionsWithRules = getActionsWithRules({
@@ -69,6 +71,8 @@ export const InAppFieldRenderer = memo(({
     onChange,
     disabled,
   };
+
+  const isDisabled = isControlDisabled || disabled;
 
   if (controlType === CONTROL_TYPES.ARRAY) {
     return value?.map((subItem, idx) => {
@@ -113,7 +117,7 @@ export const InAppFieldRenderer = memo(({
           marginBottom0
           fullWidth
           validStylesEnabled
-          disabled={sortedActionsList.length === 1 || disabled}
+          disabled={sortedActionsList.length === 1 || isDisabled}
           onChange={e => onActionChange({ path, val: e.target.value, name, option, ctx })}
         />
       )}
