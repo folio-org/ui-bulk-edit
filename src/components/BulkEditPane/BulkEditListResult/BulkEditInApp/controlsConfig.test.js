@@ -5,6 +5,7 @@ import {
   getNextActionLists,
   getNextControlType,
   getNextActionState,
+  isActionControlDisabled,
 } from './controlsConfig';
 import {
   OPTIONS,
@@ -123,6 +124,77 @@ describe('actionConfig utilities', () => {
     it('returns template next state for FIND on supported option', () => {
       const nextState = getNextActionState(OPTIONS.EMAIL_ADDRESS, ACTIONS.FIND);
       expect(nextState).toEqual([{ name: '', value: '' }]);
+    });
+  });
+
+  describe('isActionControlDisabled', () => {
+    const makeFields = (withSetForDeleteTrue = false) => {
+      const fields = [
+        {
+          option: OPTIONS.STAFF_SUPPRESS,
+          actionsDetails: { actions: [{ name: '', parameters: [] }] },
+        },
+        {
+          option: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+          actionsDetails: {
+            actions: [{ name: '', parameters: [{ name: 'value', value: false }] }],
+          },
+        },
+      ];
+
+      if (withSetForDeleteTrue) {
+        fields.push({
+          option: OPTIONS.SET_RECORDS_FOR_DELETE,
+          actionsDetails: { actions: [{ name: ACTIONS.SET_TO_TRUE, parameters: [] }] },
+        });
+      }
+
+      return fields;
+    };
+
+    it('returns true for SUPPRESS_FROM_DISCOVERY when Set for Delete -> TRUE is present', () => {
+      const result = isActionControlDisabled({
+        fields: makeFields(true),
+        option: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+      });
+
+      expect(result).toBe(true);
+    });
+
+    it('returns false for SUPPRESS_FROM_DISCOVERY when Set for Delete -> TRUE is absent', () => {
+      const result = isActionControlDisabled({
+        fields: makeFields(false),
+        option: OPTIONS.SUPPRESS_FROM_DISCOVERY,
+      });
+
+      expect(result).toBe(false);
+    });
+
+    it('returns true for STAFF_SUPPRESS when Set for Delete -> TRUE is present', () => {
+      const result = isActionControlDisabled({
+        fields: makeFields(true),
+        option: OPTIONS.STAFF_SUPPRESS,
+      });
+
+      expect(result).toBe(true);
+    });
+
+    it('returns false for STAFF_SUPPRESS when Set for Delete -> TRUE is absent', () => {
+      const result = isActionControlDisabled({
+        fields: makeFields(false),
+        option: OPTIONS.STAFF_SUPPRESS,
+      });
+
+      expect(result).toBe(false);
+    });
+
+    it('returns false for unrelated option even if Set for Delete is present', () => {
+      const result = isActionControlDisabled({
+        fields: makeFields(true),
+        option: 'OTHER',
+      });
+
+      expect(result).toBe(false);
     });
   });
 });
