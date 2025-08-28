@@ -11,7 +11,6 @@ import {
   sortWithoutPlaceholder,
   getMappedContentUpdates,
   folioFieldTemplate,
-  getPreselectedParams,
   shouldShowValueColumn,
   ruleDetailsToSource,
 } from './helpers';
@@ -314,21 +313,6 @@ describe('getOptionsWithRules', () => {
     ]);
   });
 
-  it('removes STAFF_SUPPRESS and SUPPRESS_FROM_DISCOVERY if SET_TO_TRUE for SET_RECORDS_FOR_DELETE is present', () => {
-    const options = [
-      { value: OPTIONS.STAFF_SUPPRESS, label: 'Staff suppress', parameters: [] },
-      { value: OPTIONS.SUPPRESS_FROM_DISCOVERY, label: 'Suppress from discovery', parameters: [] },
-      { value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [] },
-    ];
-    const fields = [
-      { option: OPTIONS.SET_RECORDS_FOR_DELETE, actionsDetails: { actions: [{ name: ACTIONS.SET_TO_TRUE }] } },
-    ];
-    const { filteredOptions } = getOptionsWithRules({ fields, options, item: { option: OPTIONS.ADMINISTRATIVE_NOTE } });
-    expect(filteredOptions).toEqual([
-      { value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [] },
-    ]);
-  });
-
   it('allows used option for current row', () => {
     const options = [
       { value: OPTIONS.ADMINISTRATIVE_NOTE, label: 'Administrative note', parameters: [] },
@@ -450,66 +434,6 @@ describe('folioFieldTemplate', () => {
       tenants: [],
       actionsDetails: [],
     });
-  });
-});
-
-describe('getPreselectedParams', () => {
-  const sampleParams = [
-    { name: PARAMETERS_KEYS.STAFF_ONLY, value: false },
-    { name: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY, value: true },
-  ];
-
-  it('returns an empty array when no params are provided', () => {
-    const result = getPreselectedParams(ACTIONS.SET_TO_TRUE);
-    expect(result).toEqual([]);
-    expect(Array.isArray(result)).toBe(true);
-  });
-
-  it('sets all values to true when action is SET_TO_TRUE', () => {
-    const originals = sampleParams.map(p => ({ ...p }));
-    const result = getPreselectedParams(ACTIONS.SET_TO_TRUE, sampleParams);
-
-    expect(result).toEqual([
-      { name: PARAMETERS_KEYS.STAFF_ONLY, value: true },
-      { name: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY, value: true },
-    ]);
-
-    expect(sampleParams).toEqual(originals);
-
-    result.forEach((r, i) => {
-      expect(r).not.toBe(sampleParams[i]);
-    });
-  });
-
-  it('sets all values to false when action is SET_TO_FALSE', () => {
-    const originals = sampleParams.map(p => ({ ...p }));
-    const result = getPreselectedParams(ACTIONS.SET_TO_FALSE, sampleParams);
-
-    expect(result).toEqual([
-      { name: PARAMETERS_KEYS.STAFF_ONLY, value: false },
-      { name: PARAMETERS_KEYS.ITEM_NOTE_TYPE_ID_KEY, value: false },
-    ]);
-
-    expect(sampleParams).toEqual(originals);
-
-    result.forEach((r, i) => {
-      expect(r).not.toBe(sampleParams[i]);
-    });
-  });
-
-  it('returns the exact same array for other actions', () => {
-    const paramsCopy = [...sampleParams];
-    const result = getPreselectedParams(ACTIONS.REMOVE_SOME, paramsCopy);
-    expect(result).toBe(paramsCopy);
-  });
-
-  it('maps an empty array to a new empty array for SET actions', () => {
-    const empty = [];
-    const resultTrue = getPreselectedParams(ACTIONS.SET_TO_TRUE, empty);
-    const resultFalse = getPreselectedParams(ACTIONS.SET_TO_FALSE, empty);
-
-    expect(resultTrue).toEqual([]);
-    expect(resultFalse).toEqual([]);
   });
 });
 
