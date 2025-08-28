@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { render, screen, waitFor, cleanup } from '@folio/jest-config-stripes/testing-library/react';
+import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { useDerivedFields } from './useDerivedFields';
 
 let mockSetForDeleteTrueIndex = -1;
@@ -58,7 +58,6 @@ function HookHarness({ initialFields }) {
 }
 
 afterEach(() => {
-  cleanup();
   mockSetForDeleteTrueIndex = -1;
   mockSetForDeleteFalseIndex = -1;
   mockSuppressFromDiscoveryTrueIndex = -1;
