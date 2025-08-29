@@ -591,5 +591,6 @@
     "permission.settings.lock.edit": "Settings (Bulk edit): Can lock and unlock profiles",
     "previewModal.selectProfiles": "Select {entityType} bulk edit profile",
     "layer.options.setRecordsForDelete": "Set records for deletion",
-    "columns.INSTANCE.Set for deletion": "Set for deletion"
+    "columns.INSTANCE.Set for deletion": "Set for deletion",
+    "settings.profiles.form.name.copy": "Copy of {name}"
 }
