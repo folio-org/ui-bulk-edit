@@ -17,7 +17,6 @@ import {
   getFieldsWithRules,
   getOptionsWithRules,
   getOptionType,
-  getPreselectedParams,
   getPreselectedValue
 } from '../helpers';
 import { customFilter, getTenantsById, groupByCategory, updateIn } from '../../../../../utils/helpers';
@@ -26,7 +25,7 @@ import { InAppFieldRenderer } from './InAppFieldRenderer';
 import { getDefaultActionState, getNextActionState } from '../controlsConfig';
 
 import css from '../../../BulkEditPane.css';
-import { useFilterFields } from '../../../../../hooks/useFilterFields';
+import { useDerivedFields } from '../../../../../hooks/useDerivedFields';
 
 export const InAppFormBody = ({
   approach,
@@ -73,9 +72,9 @@ export const InAppFormBody = ({
     const [rowIndex, actionsDetails, actions] = path;
 
     const withUpdatedActionName = updateIn(fields, path, (currentAction) => ({
+      ...currentAction,
       [name]: action,
       tenants: [], // reset tenants when action changes
-      parameters: getPreselectedParams(action, currentAction.parameters),
       value: getPreselectedValue(option, action)
     }));
 
@@ -134,7 +133,7 @@ export const InAppFormBody = ({
     }
   }, [fields, setFields]);
 
-  useFilterFields(fields, setFields);
+  useDerivedFields(fields, setFields);
 
   return (
     <StripesOverlayWrapper>

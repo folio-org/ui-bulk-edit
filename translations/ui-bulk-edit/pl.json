@@ -165,7 +165,7 @@
     "logs.status.REVIEW_CHANGES": "Przeglądanie zmian",
     "logs.status.COMPLETED": "Zakończone",
     "logs.status.COMPLETED_WITH_ERRORS": "Zakończone z błędami",
-    "logs.status.FAILED": "Niepowodzenie",
+    "logs.status.FAILED": "Nieudany",
     "logs.status.APPLY_CHANGES": "Apply changes",
     "logs.entityType.HOLDINGS_RECORD": "Katalogowanie - zasoby",
     "logs.entityType.ITEM": "Katalogowanie - egzemplarze",
@@ -247,7 +247,7 @@
     "columns.HOLDINGS_RECORD.Instance HRID": "HRID instancji",
     "columns.HOLDINGS_RECORD.Item barcode": "Kod kreskowy egzemplarza",
     "list.preview.table.status.true": "Aktywny",
-    "list.preview.table.status.false": "Nieaktywne",
+    "list.preview.table.status.false": "Nieaktywny",
     "columns.logs.hrId": "ID",
     "layer.options.items.true": "Set true",
     "layer.options.items.false": "Set false",
@@ -591,5 +591,6 @@
     "permission.settings.lock.edit": "Settings (Bulk edit): Can lock and unlock profiles",
     "previewModal.selectProfiles": "Select {entityType} bulk edit profile",
     "layer.options.setRecordsForDelete": "Set records for deletion",
-    "columns.INSTANCE.Set for deletion": "Set for deletion"
+    "columns.INSTANCE.Set for deletion": "Set for deletion",
+    "settings.profiles.form.name.copy": "Copy of {name}"
 }

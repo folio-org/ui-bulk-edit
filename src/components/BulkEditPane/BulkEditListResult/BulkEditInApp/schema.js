@@ -1,5 +1,11 @@
 import { CONTROL_TYPES } from '../../../../constants';
-import { getControlType, getDefaultActionLists, getNextActionLists, getNextControlType } from './controlsConfig';
+import {
+  getControlType,
+  getDefaultActionLists,
+  getNextActionLists,
+  getNextControlType,
+  isActionControlDisabled,
+} from './controlsConfig';
 import { getOptionType, shouldShowValueColumn } from './helpers';
 
 /**
@@ -19,7 +25,7 @@ export const schema = [
         name: 'name',
         label: { id: 'ui-bulk-edit.layer.column.actions' },
         type: CONTROL_TYPES.ACTION,
-        disabled: false,
+        controlDisabled: isActionControlDisabled,
         colSize: 2,
         dirty: (value) => !!value,
         options: ({ index, option, recordType, parentArray, allOptions, approach }) => {
@@ -36,7 +42,7 @@ export const schema = [
         name: 'value',
         label: { id: 'ui-bulk-edit.layer.column.data' },
         colSize: 2,
-        disabled: false,
+        controlDisabled: false,
         renderParameters: true,
         dirty: (value) => !!value,
 

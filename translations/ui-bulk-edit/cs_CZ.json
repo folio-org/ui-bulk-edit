@@ -591,5 +591,6 @@
     "permission.settings.lock.edit": "Nastavení (Hromadné úpravy): Může uzamknout a odemknout profily",
     "previewModal.selectProfiles": "Vyberte profil hromadné úpravy pro {entityType}",
     "layer.options.setRecordsForDelete": "Nastavit záznamy pro smazání",
-    "columns.INSTANCE.Set for deletion": "Nastavit pro smazání"
+    "columns.INSTANCE.Set for deletion": "Nastavit pro smazání",
+    "settings.profiles.form.name.copy": "Copy of {name}"
 }
