@@ -29,6 +29,7 @@
 * [UIBULKED-505](https://folio-org.atlassian.net/browse/UIBULKED-505) Add Set Instance Records for Deletion
 * [UIBULKED-660](https://folio-org.atlassian.net/browse/UIBULKED-660) Duplicating a Bulk Edit Profile
 * [UIBULKED-696](https://folio-org.atlassian.net/browse/UIBULKED-696) Fix Bulk edit profiles in consortia environment
+* [UIBULKED-694](https://folio-org.atlassian.net/browse/UIBULKED-694) Populate "Status" column on the list of existing profiles
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
