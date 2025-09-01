@@ -591,5 +591,6 @@
     "permission.settings.lock.edit": "Налаштування (Пакетне редагування): Блокування та розблокування профілів",
     "previewModal.selectProfiles": "Виберіть {entityType} профіль для пакетного редагування",
     "layer.options.setRecordsForDelete": "Відмітити записи для видалення",
-    "columns.INSTANCE.Set for deletion": "Призначене для видалення"
+    "columns.INSTANCE.Set for deletion": "Призначене для видалення",
+    "settings.profiles.form.name.copy": "Копія {name}"
 }

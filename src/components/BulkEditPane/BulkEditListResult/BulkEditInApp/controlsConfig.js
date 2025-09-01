@@ -22,6 +22,7 @@ import {
   emailActionsReplace
 } from '../../../../constants';
 import { getActionParameters } from '../../../../constants/actionParameters';
+import { getActionIndex } from './helpers';
 
 /**
  * Defines default action entry template, used when the first action is not from "FINAL" actions.
@@ -323,6 +324,23 @@ export function getDefaultActionLists(option, recordType, approach = APPROACHES.
     ? cfg.actions(recordType, approach)
     : cfg.actions;
 }
+
+/**
+ * Determines if the current control should be disabled based on rules.
+ *
+ * @param {Array<Object>} fields - The current fields array from the form.
+ * @param {string} option - The option key being edited.
+ * @returns {boolean}
+ */
+export const isActionControlDisabled = ({ fields, option }) => {
+  const setForDeleteTrueIndex = getActionIndex(fields, OPTIONS.SET_RECORDS_FOR_DELETE, ACTIONS.SET_TO_TRUE);
+
+  if ([OPTIONS.SUPPRESS_FROM_DISCOVERY, OPTIONS.STAFF_SUPPRESS].includes(option)) {
+    return setForDeleteTrueIndex !== -1;
+  }
+
+  return false;
+};
 
 /**
  * Determines which control type to render for a first-action value field,
