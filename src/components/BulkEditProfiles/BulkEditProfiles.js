@@ -53,9 +53,16 @@ const getResultsFormatter = (entityType, searchTerm) => {
         iconKey="user"
       />
     ),
-    [COLUMNS.status]: (profile) => profile.locked && (
-      <Icon icon="lock" />
-    ),
+    [COLUMNS.status]: (profile) => {
+      const statusMessage = <FormattedMessage id="ui-bulk-edit.settings.profiles.columns.status.active" />;
+
+      return profile.locked ? (
+        <>
+          {statusMessage}
+          <Icon icon="lock" />
+        </>
+      ) : statusMessage;
+    },
   };
 };
 
