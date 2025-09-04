@@ -609,6 +609,7 @@
   "settings.profiles.columns.updated": "Updated",
   "settings.profiles.columns.updatedBy": "Updated by",
   "settings.profiles.columns.status": "Status",
+  "settings.profiles.columns.status.active": "Active",
   "settings.profiles.details.bulkEdits": "Bulk edits",
   "settings.profiles.details.summary": "Summary",
   "settings.profiles.details.action.delete.modal.heading": "Delete {entityType} records bulk edit profile?",
