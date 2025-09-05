@@ -85,6 +85,7 @@ export const BulkEditProfiles = ({
   return (
     <MultiColumnList
       autosize={autosize}
+      virtualize={autosize}
       id={`${entityType}-profiles-list`}
       formatter={formatter}
       visibleColumns={visibleColumns}

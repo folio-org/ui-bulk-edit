@@ -54,13 +54,24 @@ export const useDerivedFields = (fields, setFields) => {
             field.option,
           )
         ) {
+          const getUpdatedName = (name) => {
+            if (setForDeleteTrueIndex !== -1) {
+              return ACTIONS.SET_TO_TRUE;
+            }
+
+            if (name) {
+              return name;
+            }
+
+            return '';
+          };
+
           return {
             ...field,
             actionsDetails: {
               actions: field.actionsDetails.actions.map(action => ({
                 ...action,
-                name:
-                    setForDeleteTrueIndex !== -1 ? ACTIONS.SET_TO_TRUE : '',
+                name: getUpdatedName(action.name),
               })),
             },
           };
