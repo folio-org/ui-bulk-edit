@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { ACTIONS, OPTIONS } from '../constants';
 import {
   getActionIndex,
@@ -14,8 +14,17 @@ import {
  *
  * @param {Array<Object>} fields - The current list of field objects containing `option` and `actionsDetails`.
  * @param {Function} setFields - State updater function for modifying the fields array.
+ * @param {Object} opts - Optional parameters. Currently, supports: isActive (boolean) to enable/disable the rules.
  */
-export const useDerivedFields = (fields, setFields) => {
+export const useDerivedFields = (fields, setFields, opts = {}) => {
+  const { isActive = true } = opts;
+
+  const isActiveRef = useRef(isActive);
+
+  useEffect(() => {
+    isActiveRef.current = isActive;
+  }, [isActive]);
+
   const setForDeleteTrueIndex = getActionIndex(
     fields,
     OPTIONS.SET_RECORDS_FOR_DELETE,
@@ -47,6 +56,8 @@ export const useDerivedFields = (fields, setFields) => {
    * STAFF_SUPPRESS and SUPPRESS_FROM_DISCOVERY are updated accordingly.
    */
   useEffect(() => {
+    if (!isActiveRef.current) return;
+
     if (setForDeleteTrueIndex !== -1 || setForDeleteFalseIndex !== -1) {
       setFields(prevFields => prevFields.map(field => {
         if (
@@ -87,6 +98,8 @@ export const useDerivedFields = (fields, setFields) => {
    * ensure the field parameters are updated with the correct boolean value.
    */
   useEffect(() => {
+    if (!isActiveRef.current) return;
+
     if (suppressFromDiscoveryTrueIndex !== -1 || suppressFromDiscoveryFalseIndex !== -1) {
       setFields(prevFields => prevFields.map(field => {
         if (field.option === OPTIONS.SUPPRESS_FROM_DISCOVERY) {
@@ -114,6 +127,8 @@ export const useDerivedFields = (fields, setFields) => {
    * and "Set for Delete" is active, enforce setting action to true.
    */
   useEffect(() => {
+    if (!isActiveRef.current) return;
+
     if (staffSupressIndex !== -1 || suppressFromDiscoveryIndex !== -1) {
       setFields(prevFields => prevFields.map(field => {
         if (

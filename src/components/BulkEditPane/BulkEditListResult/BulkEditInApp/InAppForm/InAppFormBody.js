@@ -25,7 +25,6 @@ import { InAppFieldRenderer } from './InAppFieldRenderer';
 import { getDefaultActionState, getNextActionState } from '../controlsConfig';
 
 import css from '../../../BulkEditPane.css';
-import { useDerivedFields } from '../../../../../hooks/useDerivedFields';
 
 export const InAppFormBody = ({
   approach,
@@ -132,8 +131,6 @@ export const InAppFormBody = ({
       setFields(withUpdatedActionValueAndTenants);
     }
   }, [fields, setFields]);
-
-  useDerivedFields(fields, setFields);
 
   return (
     <StripesOverlayWrapper>
