@@ -49,6 +49,9 @@ InAppForm.propTypes = {
   approach: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  derivedFieldsConfig: PropTypes.shape({
+    isActive: PropTypes.bool,
+  }),
   isNonInteractive: PropTypes.bool,
   loading: PropTypes.bool,
   options: PropTypes.shape({}).isRequired,
