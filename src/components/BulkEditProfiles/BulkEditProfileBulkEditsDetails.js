@@ -20,7 +20,7 @@ const BulkEditsForm = ({
   initialValues,
   options,
 }) => {
-  const { fields, setFields } = useBulkEditForm({
+  const { fields, setFields, isPristine } = useBulkEditForm({
     validationSchema,
     initialValues,
     template: folioFieldTemplate,
@@ -42,6 +42,7 @@ const BulkEditsForm = ({
       recordType={entityType}
       approach={APPROACHES.IN_APP}
       isNonInteractive
+      derivedFieldsConfig={{ isActive: !isPristine }}
     />
   );
 };

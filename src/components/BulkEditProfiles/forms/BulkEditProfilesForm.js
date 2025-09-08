@@ -217,6 +217,7 @@ export const BulkEditProfilesForm = ({
             recordType={entityType}
             approach={APPROACHES.IN_APP}
             loading={!areAllOptionsLoaded}
+            derivedFieldsConfig={{ isActive: !isContentUpdatePristine }}
           />
         </Accordion>
       </AccordionSet>

@@ -4,6 +4,7 @@ import { Layout, Loading } from '@folio/stripes/components';
 
 import { InAppFormTitle } from './InAppFormTitle';
 import { InAppFormBody } from './InAppFormBody';
+import { useDerivedFields } from '../../../../../hooks/useDerivedFields';
 
 export const InAppForm = ({
   approach,
@@ -14,7 +15,10 @@ export const InAppForm = ({
   options,
   recordType,
   setFields,
+  derivedFieldsConfig,
 }) => {
+  useDerivedFields(fields, setFields, derivedFieldsConfig);
+
   if (loading) {
     return (
       <Layout className="display-flex centerContent">
@@ -45,6 +49,9 @@ InAppForm.propTypes = {
   approach: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  derivedFieldsConfig: PropTypes.shape({
+    isActive: PropTypes.bool,
+  }),
   isNonInteractive: PropTypes.bool,
   loading: PropTypes.bool,
   options: PropTypes.shape({}).isRequired,
