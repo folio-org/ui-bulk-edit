@@ -21,6 +21,7 @@ const popoverMap = {
 export const MarcFieldRenderer = memo(({
   field,
   item,
+  isNonInteractive,
   rootPath,
   ctx,
   errors,
@@ -57,7 +58,7 @@ export const MarcFieldRenderer = memo(({
   const errorMessageId = errors[fullPathString];
   const errorMessage = errorMessageId ? formatMessage({ id: errorMessageId }) : '';
 
-  const isDisabled = typeof disabled === 'function' ? disabled(ctx) : disabled;
+  const isDisabled = (typeof disabled === 'function' ? disabled(ctx) : disabled) || isNonInteractive;
   const isDirty = typeof dirty === 'function' ? dirty(value) : dirty;
   const isRequired = typeof required === 'function' ? required(ctx) : required;
   const dataOptions = options?.(ctx);
@@ -69,7 +70,7 @@ export const MarcFieldRenderer = memo(({
     value,
     name,
     error,
-    required: isRequired,
+    required: isRequired && !isNonInteractive,
     'data-row-index': fullPath[0], // fullPath[0] is the row index
     'data-action-index': fullPath[actionIndexInPath],
     'aria-label': ariaLabel,
@@ -94,6 +95,7 @@ export const MarcFieldRenderer = memo(({
               onBlur={onBlur}
               item={subItem}
               errors={errors}
+              isNonInteractive={isNonInteractive}
               rootPath={[...fullPath, idx]}
             />
           );
@@ -143,7 +145,7 @@ export const MarcFieldRenderer = memo(({
 
       {popoverMap[errorMessageId]}
 
-      {isRequired && !isFirstAction && <span className={css.asterisk} aria-hidden>*</span>}
+      {isRequired && !isFirstAction && !isNonInteractive && <span className={css.asterisk} aria-hidden>*</span>}
     </Col>
   );
 });
@@ -154,6 +156,7 @@ MarcFieldRenderer.propTypes = {
     type: PropTypes.string.isRequired,
     required: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    isNonInteractive: PropTypes.bool,
     options: PropTypes.func,
     showWhen: PropTypes.func,
     className: PropTypes.string,

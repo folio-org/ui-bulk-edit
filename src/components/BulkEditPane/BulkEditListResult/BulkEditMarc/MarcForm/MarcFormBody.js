@@ -24,7 +24,7 @@ import { validationSchema } from '../validation';
 
 import css from '../../../BulkEditPane.css';
 
-export const MarcFormBody = ({ fields, setFields }) => {
+export const MarcFormBody = ({ fields, setFields, isNonInteractive }) => {
   const errors = useMemo(() => getFormErrors(fields, validationSchema), [fields]);
 
   const enhancedFields = useMemo(() => injectMargins(fields), [fields]);
@@ -135,15 +135,19 @@ export const MarcFormBody = ({ fields, setFields }) => {
                   onActionChange={handleActionChange}
                   onBlur={handleBlur}
                   onFocus={handleFocus}
+                  isNonInteractive={isNonInteractive}
                 />
               ))}
-              <MarcFormActions
-                rowIndex={index}
-                onAdd={handleAddField}
-                onRemove={handleRemoveField}
-                removingDisabled={fields.length === 1}
-                addingDisabled={item.subfields.length > 0}
-              />
+              {!isNonInteractive && (
+                <MarcFormActions
+                  rowIndex={index}
+                  onAdd={handleAddField}
+                  onRemove={handleRemoveField}
+                  removingDisabled={fields.length === 1}
+                  addingDisabled={item.subfields.length > 0}
+                />
+              )}
+
             </Row>
             {item.subfields.map((subfield, subfieldIndex) => {
               const isAddingDisabled = subfieldIndex !== item.subfields.length - 1;
@@ -157,20 +161,23 @@ export const MarcFormBody = ({ fields, setFields }) => {
                       ctx={{ index: subfieldIndex }}
                       errors={errors}
                       rootPath={[index, 'subfields', subfieldIndex]}
+                      isNonInteractive={isNonInteractive}
                       onChange={handleChange}
                       onActionChange={handleActionChange}
                       onBlur={handleBlur}
                       onFocus={handleFocus}
                     />
                   ))}
-                  <MarcFormActions
-                    fields={item.subfields}
-                    rowIndex={index}
-                    subfieldIndex={subfieldIndex}
-                    onAdd={handleAddField}
-                    onRemove={handleRemoveSubfield}
-                    addingDisabled={isAddingDisabled}
-                  />
+                  {!isNonInteractive && (
+                    <MarcFormActions
+                      fields={item.subfields}
+                      rowIndex={index}
+                      subfieldIndex={subfieldIndex}
+                      onAdd={handleAddField}
+                      onRemove={handleRemoveSubfield}
+                      addingDisabled={isAddingDisabled}
+                    />
+                  )}
                 </Row>
               );
             })}

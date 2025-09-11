@@ -11,11 +11,12 @@ import { useBulkEditProfile } from '../../../hooks/api';
 import { ruleDetailsToSource } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
 
 import { BulkEditProfilesForm } from '../forms/BulkEditProfilesForm';
+import { useSearchParams } from '../../../hooks';
 
-export const BulkEditDuplicateProfile = ({ entityType, onClose }) => {
+export const BulkEditDuplicateProfile = ({ onClose }) => {
   const intl = useIntl();
-
   const { id } = useParams();
+  const { currentRecordType: entityType } = useSearchParams();
   const { profile, isLoading } = useBulkEditProfile(id);
   const { createProfile, isProfileCreating } = useProfileCreate({
     onSuccess: onClose
@@ -44,12 +45,12 @@ export const BulkEditDuplicateProfile = ({ entityType, onClose }) => {
   return (
     <TitleManager record={title}>
       <BulkEditProfilesForm
-        entityType={entityType}
         title={title}
         onClose={onClose}
         onSave={handleSave}
         initialValues={initialValues}
-        initialRuleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
+        initialRuleDetails={ruleDetailsToSource(profile.ruleDetails, entityType)}
+        initialMarcRuleDetails={profile.marcRuleDetails}
         isLoading={isProfileCreating}
       />
     </TitleManager>
@@ -57,6 +58,5 @@ export const BulkEditDuplicateProfile = ({ entityType, onClose }) => {
 };
 
 BulkEditDuplicateProfile.propTypes = {
-  entityType: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };
