@@ -99,8 +99,6 @@ describe('BulkEditProfilesPane', () => {
   const mockUseLocationSorting = jest.mocked(useLocationSorting);
 
   beforeEach(() => {
-    jest.clearAllMocks();
-
     mockUseBulkEditProfiles.mockReturnValue({
       isFetching: false,
       isLoading: false,

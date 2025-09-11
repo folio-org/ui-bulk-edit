@@ -198,4 +198,5 @@ MarcFormBody.propTypes = {
     })
   ).isRequired,
   setFields: PropTypes.func.isRequired,
+  isNonInteractive: PropTypes.bool,
 };

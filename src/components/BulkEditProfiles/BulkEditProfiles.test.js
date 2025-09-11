@@ -61,10 +61,6 @@ const renderBulkEditProfiles = (props = {}) => render(
 );
 
 describe('BulkEditProfiles', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   it('should render profiles data correctly', () => {
     renderBulkEditProfiles();
 

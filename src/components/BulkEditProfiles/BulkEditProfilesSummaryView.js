@@ -1,18 +1,19 @@
+import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+
 import { Accordion, Checkbox, Col, KeyValue, Label, Row } from '@folio/stripes/components';
 import { ViewMetaData } from '@folio/stripes/smart-components';
-import React, { useMemo } from 'react';
+
 import { PROFILE_DETAILS_ACCORDIONS } from './constants';
 
 export const BulkEditProfilesSummaryView = ({ profile }) => {
-  const metadata = useMemo(() => (
-    profile?.metadata || {
-      createdDate: profile?.createdDate,
-      createdByUserId: profile?.createdBy,
-      updatedDate: profile?.updatedDate,
-      updatedByUserId: profile?.updatedBy,
-    }
-  ), [profile]);
+  const metadata = useMemo(() => ({
+    createdDate: profile?.createdDate,
+    createdByUserId: profile?.createdBy,
+    updatedDate: profile?.updatedDate,
+    updatedByUserId: profile?.updatedBy,
+  }), [profile]);
 
   return (
     <Accordion
@@ -62,4 +63,16 @@ export const BulkEditProfilesSummaryView = ({ profile }) => {
       </Row>
     </Accordion>
   );
+};
+
+BulkEditProfilesSummaryView.propTypes = {
+  profile: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    locked: PropTypes.bool,
+    createdDate: PropTypes.string,
+    createdBy: PropTypes.string,
+    updatedDate: PropTypes.string,
+    updatedBy: PropTypes.string,
+  }),
 };

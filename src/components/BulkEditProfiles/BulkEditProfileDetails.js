@@ -240,8 +240,8 @@ export const BulkEditProfileDetails = ({
 
               {currentRecordType === CAPABILITIES.INSTANCE_MARC ? (
                 <BulkEditProfilesMarcDetails
-                  initialRuleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
-                  initialMarcRuleDetails={profile?.marcRuleDetails}
+                  ruleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
+                  marcRuleDetails={profile?.marcRuleDetails}
                 />
               ) : (
                 <BulkEditProfileBulkEditsDetails

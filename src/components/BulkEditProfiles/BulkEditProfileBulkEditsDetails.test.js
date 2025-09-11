@@ -20,7 +20,7 @@ jest.mock('../../hooks/useOptionsWithTenants', () => ({
   useOptionsWithTenants: jest.fn(),
 }));
 
-const values = [
+const ruleDetails = [
   {
     id: '123',
     option: 'ADMINISTRATIVE_NOTE',
@@ -41,7 +41,7 @@ const values = [
 const defaultProps = {
   entityType: CAPABILITIES.USER,
   isLoading: false,
-  values,
+  ruleDetails,
 };
 
 const renderBulkEditProfileBulkEditsDetails = (props = {}) => render(
@@ -57,10 +57,6 @@ describe('BulkEditProfileBulkEditsDetails', () => {
       areAllOptionsLoaded: true,
       options: getUserOptions(jest.fn()),
     });
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
   });
 
   it('should render loading state when isLoading is true', () => {

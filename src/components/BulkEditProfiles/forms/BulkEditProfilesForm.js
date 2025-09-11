@@ -7,7 +7,7 @@ import { ConfirmationModal } from '@folio/stripes/components';
 import { BulkEditProfilesInAppForm } from './BulkEditProfilesInAppForm';
 import { useSearchParams } from '../../../hooks';
 import { CAPABILITIES } from '../../../constants';
-import { BulkEditProfilesMarcForm } from './BulkEditProfilesMarcForm';
+import { BulkEditProfilesMarcPane } from '../BulkEditProfilesMarcPane';
 
 export const BulkEditProfilesForm = ({
   title,
@@ -37,26 +37,25 @@ export const BulkEditProfilesForm = ({
   return (
     <>
       {currentRecordType === CAPABILITIES.INSTANCE_MARC ? (
-        <BulkEditProfilesMarcForm
-          onSave={onSave}
+        <BulkEditProfilesMarcPane
           title={title}
-          onOpenModal={openPreventModal}
-          initialValues={initialValues}
-          onClose={onClose}
           isLoading={isLoading}
           initialSummaryValues={initialValues}
           initialRuleDetails={initialRuleDetails}
           initialMarcRuleDetails={initialMarcRuleDetails}
+          onSave={onSave}
+          onOpenModal={openPreventModal}
+          onClose={onClose}
         />
       ) : (
         <BulkEditProfilesInAppForm
+          initialRuleDetails={initialRuleDetails}
+          initialSummaryValues={initialValues}
           isLoading={isLoading}
           onClose={onClose}
           onOpenModal={openPreventModal}
-          initialValues={initialValues}
           onSave={onSave}
           title={title}
-          initialRuleDetails={initialRuleDetails}
         />
       )}
 
@@ -75,6 +74,7 @@ export const BulkEditProfilesForm = ({
 
 BulkEditProfilesForm.propTypes = {
   initialRuleDetails: PropTypes.arrayOf(PropTypes.shape({})),
+  initialMarcRuleDetails: PropTypes.arrayOf(PropTypes.shape({})),
   initialValues: PropTypes.shape({
     description: PropTypes.string,
     entityType: PropTypes.string,

@@ -68,8 +68,6 @@ describe('BulkEditDuplicateProfile', () => {
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
-
     useParams.mockReturnValue({ id: 'profile-123' });
 
     useBulkEditProfile.mockReturnValue({

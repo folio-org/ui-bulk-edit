@@ -187,4 +187,5 @@ MarcFieldRenderer.propTypes = {
   onFocus: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   onActionChange: PropTypes.func.isRequired,
+  isNonInteractive: PropTypes.bool,
 };

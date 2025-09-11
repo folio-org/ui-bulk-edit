@@ -1,6 +1,9 @@
-import { Accordion, AccordionSet, ExpandAllButton, Layout, Pane } from '@folio/stripes/components';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+
+import { Accordion, AccordionSet, ExpandAllButton, Layout, Pane } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
+
 import { BulkEditProfilesSummaryForm } from './BulkEditProfilesSummaryForm';
 import { APPROACHES, RECORD_TYPES_MAPPING } from '../../../constants';
 import { InAppForm } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
@@ -105,4 +108,19 @@ export const BulkEditProfilesInAppForm = ({ title, initialSummaryValues, initial
       </AccordionSet>
     </Pane>
   );
+};
+
+BulkEditProfilesInAppForm.propTypes = {
+  title: PropTypes.string.isRequired,
+  initialSummaryValues: PropTypes.shape({
+    description: PropTypes.string,
+    entityType: PropTypes.string,
+    locked: PropTypes.bool,
+    name: PropTypes.string,
+  }).isRequired,
+  initialRuleDetails: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  isLoading: PropTypes.bool,
+  onSave: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onOpenModal: PropTypes.func.isRequired,
 };

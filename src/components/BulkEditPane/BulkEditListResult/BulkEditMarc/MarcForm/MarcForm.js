@@ -23,4 +23,5 @@ export const MarcForm = ({
 MarcForm.propTypes = {
   marcFields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   setMarcFields: PropTypes.func.isRequired,
+  isNonInteractive: PropTypes.bool,
 };

@@ -49,8 +49,8 @@ export const BulkEditDuplicateProfile = ({ onClose }) => {
         onClose={onClose}
         onSave={handleSave}
         initialValues={initialValues}
-        initialRuleDetails={ruleDetailsToSource(profile.ruleDetails, entityType)}
-        initialMarcRuleDetails={profile.marcRuleDetails}
+        initialRuleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
+        initialMarcRuleDetails={profile?.marcRuleDetails}
         isLoading={isProfileCreating}
       />
     </TitleManager>
