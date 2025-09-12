@@ -12,8 +12,8 @@ import { marcFieldTemplate } from '../BulkEditPane/BulkEditListResult/BulkEditMa
 import { filterOptionsByPermissions } from '../../utils/helpers';
 import { getAdministrativeDataOptions } from '../../constants';
 import { sortAlphabetically } from '../../utils/sortAlphabetically';
-import { BulkEditProfilesMarcPane } from './BulkEditProfilesMarcPane';
 import { useSearchParams } from '../../hooks';
+import { BulkEditProfilesMarcForm } from './forms/BulkEditProfilesMarcForm';
 
 export const BulkEditProfilesMarcDetails = ({ ruleDetails, marcRuleDetails }) => {
   const intl = useIntl();
@@ -35,7 +35,7 @@ export const BulkEditProfilesMarcDetails = ({ ruleDetails, marcRuleDetails }) =>
   const sortedOptions = sortAlphabetically(filteredOptions);
 
   return (
-    <BulkEditProfilesMarcPane
+    <BulkEditProfilesMarcForm
       fields={fields}
       setFields={setFields}
       marcFields={marcFields}
