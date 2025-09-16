@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
   Route,
   Switch,
@@ -11,14 +11,18 @@ import { useRouteMatch } from 'react-router';
 
 import {
   Button,
+  Icon,
   Layer,
+  MenuSection,
   Pane,
   PaneHeader,
 } from '@folio/stripes/components';
 import { AppIcon, TitleManager, useStripes } from '@folio/stripes/core';
+import { buildSearch } from '@folio/stripes-acq-components';
 import {
   CAPABILITIES,
   RECORD_TYPES_MAPPING,
+  RECORD_TYPES_PROFILES_MAPPING,
 } from '../../constants';
 import { BulkEditProfileDetails } from './BulkEditProfileDetails';
 import { useBulkPermissions } from '../../hooks';
@@ -35,6 +39,7 @@ export const BulkEditProfilesPane = ({
   entityType,
   title,
 }) => {
+  const intl = useIntl();
   const location = useLocation();
   const history = useHistory();
   const stripes = useStripes();
@@ -59,14 +64,14 @@ export const BulkEditProfilesPane = ({
   const openCreateProfile = useCallback(() => {
     history.push({
       pathname: `${path}/create`,
-      search: location.search,
+      search: buildSearch({ capabilities: entityType }, location.search),
     });
-  }, [history, location.search, path]);
+  }, [entityType, history, location.search, path]);
 
   const closeFormLayer = useCallback(() => {
     history.push({
       pathname: path,
-      search: location.search,
+      search: buildSearch({ capabilities: null }, location.search),
     });
   }, [history, location.search, path]);
 
@@ -81,7 +86,7 @@ export const BulkEditProfilesPane = ({
     e.stopPropagation();
     history.push({
       pathname: `${path}/${profile.id}`,
-      search: history.location.search,
+      search: buildSearch({ capabilities: profile.entityType }, history.location.search),
     });
   }, [history, path]);
 
@@ -93,16 +98,71 @@ export const BulkEditProfilesPane = ({
       />
     );
 
-    const newButton = hasSettingsCreatePerms && (
-      <Button
-        buttonStyle="primary"
-        id="create-new-profile"
-        marginBottom0
-        onClick={openCreateProfile}
-      >
-        <FormattedMessage id="ui-bulk-edit.settings.profiles.button.new" />
-      </Button>
-    );
+    const renderNewButton = () => {
+      if (!hasSettingsCreatePerms || entityType === CAPABILITIES.INSTANCE) return null;
+
+      return (
+        <Button
+          buttonStyle="primary"
+          id="create-new-profile"
+          marginBottom0
+          onClick={openCreateProfile}
+        >
+          <FormattedMessage id="ui-bulk-edit.settings.profiles.button.new" />
+        </Button>
+      );
+    };
+
+    const renderActionMenu = ({ onToggle }) => {
+      if (!hasSettingsCreatePerms || entityType !== CAPABILITIES.INSTANCE) return null;
+
+      return (
+        <MenuSection id="bulk-edit-profile-action-menu">
+          <Button
+            aria-label={intl.formatMessage({ id: 'ui-bulk-edit.ariaLabel.createInstanceProfile' })}
+            buttonStyle="dropdownItem"
+            onClick={() => {
+              onToggle();
+              history.push({
+                pathname: `${path}/create`,
+                search: buildSearch({ capabilities: CAPABILITIES.INSTANCE }, location.search),
+              });
+            }}
+          >
+            <Icon
+              size="small"
+              icon="plus-sign"
+            >
+              <FormattedMessage
+                id="ui-bulk-edit.settings.profiles.title.new"
+                values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[CAPABILITIES.INSTANCE] }}
+              />
+            </Icon>
+          </Button>
+          <Button
+            aria-label={intl.formatMessage({ id: 'ui-bulk-edit.ariaLabel.createInstanceMarcProfile' })}
+            buttonStyle="dropdownItem"
+            onClick={() => {
+              onToggle();
+              history.push({
+                pathname: `${path}/create`,
+                search: buildSearch({ capabilities: CAPABILITIES.INSTANCE_MARC }, location.search),
+              });
+            }}
+          >
+            <Icon
+              size="small"
+              icon="plus-sign"
+            >
+              <FormattedMessage
+                id="ui-bulk-edit.settings.profiles.title.new"
+                values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[CAPABILITIES.INSTANCE_MARC] }}
+              />
+            </Icon>
+          </Button>
+        </MenuSection>
+      );
+    };
 
     const paneTitle = (
       <AppIcon
@@ -118,11 +178,23 @@ export const BulkEditProfilesPane = ({
       <PaneHeader
         {...renderProps}
         paneTitle={paneTitle}
-        lastMenu={newButton}
+        lastMenu={renderNewButton()}
+        actionMenu={renderActionMenu}
         paneSub={paneSub}
       />
     );
-  }, [entityType, filteredProfiles, isProfilesLoading, openCreateProfile, title, hasSettingsCreatePerms]);
+  }, [
+    isProfilesLoading,
+    filteredProfiles?.length,
+    entityType,
+    title,
+    hasSettingsCreatePerms,
+    openCreateProfile,
+    history,
+    path,
+    location.search,
+    intl
+  ]);
 
   return (
     <TenantsProvider tenants={[centralTenantId]} showLocal={false}>
@@ -152,7 +224,6 @@ export const BulkEditProfilesPane = ({
               <TitleManager>
                 <Layer isOpen>
                   <BulkEditCreateProfile
-                    entityType={entityType}
                     onClose={closeFormLayer}
                   />
                 </Layer>
@@ -165,7 +236,6 @@ export const BulkEditProfilesPane = ({
             render={() => (
               <Layer isOpen>
                 <BulkEditUpdateProfile
-                  entityType={entityType}
                   onClose={closeFormLayer}
                 />
               </Layer>
@@ -174,19 +244,18 @@ export const BulkEditProfilesPane = ({
           <Route
             exact
             path={`${path}/:id/duplicate`}
-        render={() => (
-          <Layer isOpen>
-            <BulkEditDuplicateProfile
-              entityType={entityType}
-              onClose={closeFormLayer}
-            />
-          </Layer>
-        )}
-      />
+            render={() => (
+              <Layer isOpen>
+                <BulkEditDuplicateProfile
+                  onClose={closeFormLayer}
+                />
+              </Layer>
+            )}
+          />
 
-      <Route
-        exact
-        path={`${path}/:id`}
+          <Route
+            exact
+            path={`${path}/:id`}
             render={() => (
               <Layer isOpen>
                 <BulkEditProfileDetails

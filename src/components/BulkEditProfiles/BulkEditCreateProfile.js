@@ -6,9 +6,12 @@ import { TitleManager } from '@folio/stripes/core';
 import { useProfileCreate } from '../../hooks/api/useProfileCreate';
 import { BulkEditProfilesForm } from './forms/BulkEditProfilesForm';
 import { RECORD_TYPES_PROFILES_MAPPING } from '../../constants';
+import { useSearchParams } from '../../hooks';
 
-export const BulkEditCreateProfile = ({ entityType, onClose }) => {
+export const BulkEditCreateProfile = ({ onClose }) => {
   const intl = useIntl();
+  const { currentRecordType: entityType } = useSearchParams();
+
   const { createProfile, isProfileCreating } = useProfileCreate({
     onSuccess: onClose
   });
@@ -26,7 +29,6 @@ export const BulkEditCreateProfile = ({ entityType, onClose }) => {
   return (
     <TitleManager record={title}>
       <BulkEditProfilesForm
-        entityType={entityType}
         title={title}
         onClose={onClose}
         onSave={handleSave}
@@ -37,6 +39,5 @@ export const BulkEditCreateProfile = ({ entityType, onClose }) => {
 };
 
 BulkEditCreateProfile.propTypes = {
-  entityType: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };

@@ -48,8 +48,7 @@ export const BulkEditMarcLayer = ({
   });
 
   const filteredOptions = filterOptionsByPermissions(getAdministrativeDataOptions(formatMessage), stripes);
-  const sortedOptions = sortAlphabetically(filteredOptions)
-    .filter(option => !option.perms || option.perms.some(perm => stripes.hasPerm(perm))); // Filter options based on permissions
+  const sortedOptions = sortAlphabetically(filteredOptions);
 
   const contentUpdates = getMappedContentUpdates(fields, sortedOptions);
 

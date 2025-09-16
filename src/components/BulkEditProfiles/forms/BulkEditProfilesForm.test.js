@@ -1,5 +1,6 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
+import { MemoryRouter } from 'react-router-dom';
 
 import { render, screen, fireEvent, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
@@ -25,12 +26,13 @@ jest.mock('../../../hooks/useBulkEditForm', () => ({
 describe('BulkEditProfilesForm', () => {
   const renderForm = (props = {}) => render(
     <IntlProvider locale="en">
-      <BulkEditProfilesForm
-        entityType="users"
-        onClose={jest.fn()}
-        onSave={jest.fn()}
-        {...props}
-      />
+      <MemoryRouter>
+        <BulkEditProfilesForm
+          onClose={jest.fn()}
+          onSave={jest.fn()}
+          {...props}
+        />
+      </MemoryRouter>
     </IntlProvider>
   );
 
@@ -83,7 +85,6 @@ describe('BulkEditProfilesForm', () => {
           name: 'Test Name',
           description: '',
           locked: false,
-          entityType: 'users',
           ruleDetails: [],
         })
       );

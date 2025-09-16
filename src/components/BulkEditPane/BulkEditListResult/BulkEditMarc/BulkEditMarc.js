@@ -6,9 +6,8 @@ import { Accordion, Headline, Layout } from '@folio/stripes/components';
 import { TitleManager, useStripes } from '@folio/stripes/core';
 
 import { RootContext } from '../../../../context/RootContext';
-import { MarcFormBody } from './MarcForm/MarcFormBody';
-import { MarcFormTitle } from './MarcForm/MarcFormTitle';
 import { useSearchParams } from '../../../../hooks';
+import { MarcForm } from './MarcForm/MarcForm';
 import { InAppForm } from '../BulkEditInApp/InAppForm/InAppForm';
 
 
@@ -44,10 +43,9 @@ export const BulkEditMarc = ({
         <Accordion
           label={<FormattedMessage id="ui-bulk-edit.layer.title.marc" />}
         >
-          <MarcFormTitle fields={marcFields} />
-          <MarcFormBody
-            setFields={setMarcFields}
-            fields={marcFields}
+          <MarcForm
+            marcFields={marcFields}
+            setMarcFields={setMarcFields}
           />
         </Accordion>
       </Layout>

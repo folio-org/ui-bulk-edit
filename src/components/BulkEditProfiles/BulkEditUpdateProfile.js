@@ -8,9 +8,11 @@ import { useProfileUpdate } from '../../hooks/api/useProfileUpdate';
 import { BulkEditProfilesForm } from './forms/BulkEditProfilesForm';
 import { useBulkEditProfile } from '../../hooks/api';
 import { ruleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
+import { useSearchParams } from '../../hooks';
 
-export const BulkEditUpdateProfile = ({ entityType, onClose }) => {
+export const BulkEditUpdateProfile = ({ onClose }) => {
   const { id } = useParams();
+  const { currentRecordType: entityType } = useSearchParams();
   const { profile, isLoading } = useBulkEditProfile(id);
   const { updateProfile, isProfileUpdating } = useProfileUpdate({
     id,
@@ -33,12 +35,12 @@ export const BulkEditUpdateProfile = ({ entityType, onClose }) => {
   return (
     <TitleManager record={profile?.name}>
       <BulkEditProfilesForm
-        entityType={entityType}
         title={profile.name}
         onClose={onClose}
         onSave={handleSave}
         initialValues={initialValues}
         initialRuleDetails={ruleDetailsToSource(profile.ruleDetails, entityType)}
+        initialMarcRuleDetails={profile.marcRuleDetails}
         isLoading={isProfileUpdating}
       />
     </TitleManager>
@@ -46,6 +48,5 @@ export const BulkEditUpdateProfile = ({ entityType, onClose }) => {
 };
 
 BulkEditUpdateProfile.propTypes = {
-  entityType: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
 };

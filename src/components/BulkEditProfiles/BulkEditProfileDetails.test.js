@@ -1,3 +1,4 @@
+import { MemoryRouter } from 'react-router-dom';
 import {
   render,
   screen,
@@ -54,10 +55,12 @@ const defaultProps = {
 };
 
 const renderBulkEditProfileDetails = (props = {}) => render(
-  <BulkEditProfileDetails
-    {...defaultProps}
-    {...props}
-  />,
+  <MemoryRouter>
+    <BulkEditProfileDetails
+      {...defaultProps}
+      {...props}
+    />,
+  </MemoryRouter>
 );
 
 describe('BulkEditProfileDetails', () => {
@@ -67,10 +70,6 @@ describe('BulkEditProfileDetails', () => {
     useBulkEditProfile.mockReturnValue({ profile: profileMock });
     useOptionsWithTenants.mockReturnValue({ options: getUserOptions(jest.fn()) });
     useProfileDelete.mockReturnValue({ deleteProfile });
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
   });
 
   it('should render profiles details', () => {
@@ -84,6 +83,33 @@ describe('BulkEditProfileDetails', () => {
     const { container } = renderBulkEditProfileDetails();
 
     await runAxeTest({ rootNode: container });
+  });
+
+  it('should disable delete button when profile is locked', () => {
+    useBulkEditProfile.mockReturnValue({ profile: { ...profileMock, locked: true } });
+    useProfileDelete.mockReturnValue({ deleteProfile, isDeletingProfile: false });
+    renderBulkEditProfileDetails();
+    expect(screen.queryByLabelText(/button.delete/)).not.toBeInTheDocument();
+  });
+
+  it('should enable edit button when profile is locked but user has lock perms', () => {
+    useBulkEditProfile.mockReturnValue({ profile: { ...profileMock, locked: true } });
+    renderBulkEditProfileDetails({ hasSettingsLockPerms: true });
+    expect(screen.getByLabelText(/button.edit/)).toBeInTheDocument();
+  });
+
+  it('should handle cancel in confirmation modal', async () => {
+    renderBulkEditProfileDetails();
+    await userEvent.click(screen.getByRole('button', { name: 'Icon' }));
+    await userEvent.click(screen.getByLabelText(/button.delete/));
+    await userEvent.click(screen.getByRole('button', { name: /Cancel/i }));
+    expect(screen.queryByText(/delete.modal.message/)).not.toBeInTheDocument();
+  });
+
+  it('should render with missing profile data', () => {
+    useBulkEditProfile.mockReturnValue({ profile: null });
+    renderBulkEditProfileDetails();
+    expect(screen.getByText(/ui-bulk-edit.settings.profiles.columns.name/)).toBeInTheDocument();
   });
 
   describe('Shortcuts', () => {

@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import React, {
   useCallback,
-  useMemo,
   useRef,
 } from 'react';
 import {
@@ -11,13 +10,10 @@ import {
 } from 'react-intl';
 
 import {
-  Accordion,
   AccordionSet,
   AccordionStatus,
   Button,
-  Checkbox,
   checkScope,
-  Col,
   collapseAllSections,
   ConfirmationModal,
   ExpandAllButton,
@@ -25,18 +21,14 @@ import {
   HasCommand,
   Headline,
   Icon,
-  KeyValue,
-  Label,
   Layout,
   Loading,
   LoadingPane,
   MenuSection,
   Pane,
   PaneHeader,
-  Row,
 } from '@folio/stripes/components';
 import { AppIcon, TitleManager } from '@folio/stripes/core';
-import { ViewMetaData } from '@folio/stripes/smart-components';
 import {
   handleKeyCommand,
   useModalToggle,
@@ -52,15 +44,11 @@ import {
   useBulkEditProfile,
   useProfileDelete,
 } from '../../hooks/api';
-import { PROFILE_DETAILS_ACCORDIONS } from './constants';
-import { useBulkPermissions } from '../../hooks';
+import { useBulkPermissions, useSearchParams } from '../../hooks';
 import { ruleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
 import { BulkEditProfileBulkEditsDetails } from './BulkEditProfileBulkEditsDetails';
-
-const {
-  BULK_EDITS,
-  SUMMARY,
-} = PROFILE_DETAILS_ACCORDIONS;
+import { BulkEditProfilesSummaryView } from './BulkEditProfilesSummaryView';
+import { BulkEditProfilesMarcDetails } from './BulkEditProfileMarcDetails';
 
 export const BulkEditProfileDetails = ({
   entityType,
@@ -68,6 +56,7 @@ export const BulkEditProfileDetails = ({
 }) => {
   const intl = useIntl();
   const { id } = useParams();
+  const { currentRecordType } = useSearchParams();
   const history = useHistory();
   const accordionStatusRef = useRef();
   const {
@@ -198,15 +187,6 @@ export const BulkEditProfileDetails = ({
     );
   }, [entityType, isLoading, onClose, profile?.name, renderActionMenu]);
 
-  const metadata = useMemo(() => (
-    profile?.metadata || {
-      createdDate: profile?.createdDate,
-      createdByUserId: profile?.createdBy,
-      updatedDate: profile?.updatedDate,
-      updatedByUserId: profile?.updatedBy,
-    }
-  ), [profile]);
-
   if (isLoading) {
     return (
       <LoadingPane
@@ -256,64 +236,20 @@ export const BulkEditProfileDetails = ({
             </Layout>
 
             <AccordionSet>
+              <BulkEditProfilesSummaryView profile={profile} />
 
-              <Accordion
-                id={SUMMARY}
-                label={<FormattedMessage id={`ui-bulk-edit.settings.profiles.details.${SUMMARY}`} />}
-              >
-                <Row>
-                  <Col xs={12}>
-                    <ViewMetaData metadata={metadata} />
-                  </Col>
-                </Row>
-                <Row start="xs">
-                  <Col
-                    xs={6}
-                    lg={3}
-                  >
-                    <KeyValue
-                      label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.name" />}
-                      value={profile?.name}
-                    />
-                  </Col>
-                  <Col
-                    xs={6}
-                    lg={3}
-                  >
-                    <fieldset>
-                      <Label for="lockProfile">
-                        <FormattedMessage id="ui-bulk-edit.settings.profiles.form.lockProfile" />
-                      </Label>
-                      <Checkbox
-                        id="lockProfile"
-                        name="lockProfile"
-                        inline
-                        checked={profile?.locked}
-                        disabled
-                      />
-                    </fieldset>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <KeyValue
-                      label={<FormattedMessage id="ui-bulk-edit.settings.profiles.columns.description" />}
-                      value={profile?.description}
-                    />
-                  </Col>
-                </Row>
-              </Accordion>
-
-              <Accordion
-                id={BULK_EDITS}
-                label={<FormattedMessage id={`ui-bulk-edit.settings.profiles.details.${BULK_EDITS}`} />}
-              >
+              {currentRecordType === CAPABILITIES.INSTANCE_MARC ? (
+                <BulkEditProfilesMarcDetails
+                  ruleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
+                  marcRuleDetails={profile?.marcRuleDetails}
+                />
+              ) : (
                 <BulkEditProfileBulkEditsDetails
                   entityType={entityType}
                   isLoading={isFetching}
-                  values={ruleDetailsToSource(profile?.ruleDetails, entityType)}
+                  ruleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
                 />
-              </Accordion>
+              )}
             </AccordionSet>
           </AccordionStatus>
 

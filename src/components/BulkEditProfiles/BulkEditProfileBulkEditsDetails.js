@@ -2,18 +2,20 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
+  Accordion,
   EmptyMessage,
   Layout,
   Loading,
 } from '@folio/stripes/components';
 
+import React from 'react';
 import { APPROACHES } from '../../constants';
 import { useBulkEditForm } from '../../hooks/useBulkEditForm';
 import { useOptionsWithTenants } from '../../hooks/useOptionsWithTenants';
 import { folioFieldTemplate } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
 import { InAppForm } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/InAppForm/InAppForm';
 import { validationSchema } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/validation';
-import { useTenants } from '../../context/TenantsContext';
+import { PROFILE_DETAILS_ACCORDIONS } from './constants';
 
 const BulkEditsForm = ({
   entityType,
@@ -50,10 +52,9 @@ const BulkEditsForm = ({
 export const BulkEditProfileBulkEditsDetails = ({
   entityType,
   isLoading,
-  values,
+  ruleDetails,
 }) => {
-  const { tenants } = useTenants();
-  const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType, tenants);
+  const { options, areAllOptionsLoaded } = useOptionsWithTenants(entityType);
 
   if (isLoading || !areAllOptionsLoaded) {
     return (
@@ -64,18 +65,23 @@ export const BulkEditProfileBulkEditsDetails = ({
   }
 
   return (
-    <BulkEditsForm
-      entityType={entityType}
-      initialValues={values}
-      options={options}
-    />
+    <Accordion
+      id={PROFILE_DETAILS_ACCORDIONS.BULK_EDITS}
+      label={<FormattedMessage id={`ui-bulk-edit.settings.profiles.details.${PROFILE_DETAILS_ACCORDIONS.BULK_EDITS}`} />}
+    >
+      <BulkEditsForm
+        entityType={entityType}
+        initialValues={ruleDetails}
+        options={options}
+      />
+    </Accordion>
   );
 };
 
 BulkEditProfileBulkEditsDetails.propTypes = {
   entityType: PropTypes.string.isRequired,
   isLoading: PropTypes.bool,
-  values: PropTypes.arrayOf(PropTypes.shape({})),
+  ruleDetails: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 BulkEditsForm.propTypes = {

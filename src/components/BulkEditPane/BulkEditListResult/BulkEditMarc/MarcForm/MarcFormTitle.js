@@ -9,7 +9,7 @@ import { DATA_KEYS, getFieldWithMaxColumns } from '../helpers';
 import css from '../../../BulkEditPane.css';
 
 
-export const MarcFormTitle = ({ fields }) => {
+export const MarcFormTitle = ({ fields, isNonInteractive }) => {
   const longestField = getFieldWithMaxColumns(fields);
 
   return (
@@ -17,28 +17,29 @@ export const MarcFormTitle = ({ fields }) => {
       <Col
         className={`${css.headerCell} ${css.field}`}
       >
-        <Label required>
+        <Label required={!isNonInteractive}>
           <FormattedMessage id="ui-bulk-edit.layer.column.field" />
         </Label>
-        <Tooltip
-          id="field-tooltip"
-          text={<FormattedMessage id="ui-bulk-edit.layer.marc.error.limited" />}
-        >
-          {({ ref, ariaIds }) => (
-            <Icon
-              ref={ref}
-              icon="info"
-              size="small"
-              aria-labelledby={ariaIds.text}
-            />
-          )}
-        </Tooltip>
+        {!isNonInteractive && (
+          <Tooltip
+            id="field-tooltip"
+            text={<FormattedMessage id="ui-bulk-edit.layer.marc.error.limited" />}
+          >
+            {({ ref, ariaIds }) => (
+              <Icon
+                ref={ref}
+                icon="info"
+                size="small"
+                aria-labelledby={ariaIds.text}
+              />
+            )}
+          </Tooltip>
+        )}
       </Col>
-
       <Col
         className={`${css.headerCell} ${css.in}`}
       >
-        <Label required>
+        <Label required={!isNonInteractive}>
           <FormattedMessage id="ui-bulk-edit.layer.column.ind1" />
         </Label>
         <div className={css.splitter} />
@@ -46,7 +47,7 @@ export const MarcFormTitle = ({ fields }) => {
       <Col
         className={`${css.headerCell} ${css.in}`}
       >
-        <Label required>
+        <Label required={!isNonInteractive}>
           <FormattedMessage id="ui-bulk-edit.layer.column.ind2" />
         </Label>
         <div className={css.splitter} />
@@ -54,7 +55,7 @@ export const MarcFormTitle = ({ fields }) => {
       <Col
         className={`${css.headerCell} ${css.subfield}`}
       >
-        <Label required>
+        <Label required={!isNonInteractive}>
           <FormattedMessage id="ui-bulk-edit.layer.column.subfield" />
         </Label>
         <div className={css.splitter} />
@@ -64,7 +65,7 @@ export const MarcFormTitle = ({ fields }) => {
           <Col
             className={`${css.headerCell} ${css.actions}`}
           >
-            <Label required={index === 0}>
+            <Label required={index === 0 && !isNonInteractive}>
               <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
             </Label>
             <div className={css.splitter} />
@@ -89,17 +90,20 @@ export const MarcFormTitle = ({ fields }) => {
       <Col className={`${css.headerCell} ${css.fill}`}>
         <div className={css.splitter} />
       </Col>
-      <Col
-        className={css.headerStickyCell}
-      >
-        <Label>
-          <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
-        </Label>
-      </Col>
+      {!isNonInteractive && (
+        <Col
+          className={css.headerStickyCell}
+        >
+          <Label>
+            <FormattedMessage id="ui-bulk-edit.layer.column.actions" />
+          </Label>
+        </Col>
+      )}
     </Row>
   );
 };
 
 MarcFormTitle.propTypes = {
+  isNonInteractive: PropTypes.bool,
   fields: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };

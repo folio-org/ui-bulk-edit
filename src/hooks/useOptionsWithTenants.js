@@ -18,9 +18,11 @@ import {
 } from './api';
 import { filterOptionsByPermissions, removeDuplicatesByValue } from '../utils/helpers';
 import { sortAlphabetically } from '../utils/sortAlphabetically';
+import { useTenants } from '../context/TenantsContext';
 
 
-export const useOptionsWithTenants = (recordType, tenants) => {
+export const useOptionsWithTenants = (recordType) => {
+  const { tenants } = useTenants();
   const stripes = useStripes();
   const { formatMessage } = useIntl();
   const isItemRecordType = recordType === CAPABILITIES.ITEM;
