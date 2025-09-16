@@ -35,6 +35,10 @@ import { useProfilesFlow } from '../../hooks/useProfilesFlow';
 import { BulkEditProfilesSearchAndView } from './BulkEditProfilesSearchAndView';
 import { TenantsProvider } from '../../context/TenantsContext';
 
+const ENTITY_TYPE_DICT = {
+  [CAPABILITIES.INSTANCE]: [CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC],
+};
+
 export const BulkEditProfilesPane = ({
   entityType,
   title,
@@ -44,6 +48,7 @@ export const BulkEditProfilesPane = ({
   const history = useHistory();
   const stripes = useStripes();
   const centralTenantId = stripes?.user?.user?.consortium?.centralTenantId;
+  const entityTypes = ENTITY_TYPE_DICT[entityType] || [entityType];
   const { path } = useRouteMatch();
   const { hasSettingsCreatePerms } = useBulkPermissions();
   const {
@@ -57,7 +62,7 @@ export const BulkEditProfilesPane = ({
     searchTerm,
     changeSearch,
     changeLSorting,
-  } = useProfilesFlow(entityType);
+  } = useProfilesFlow(entityTypes);
 
   const isLoading = isProfilesFetching || isUsersLoading || isPending;
 

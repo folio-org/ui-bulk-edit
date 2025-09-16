@@ -6,28 +6,19 @@ import {
 } from '@folio/stripes/core';
 import { CQLBuilder } from '@folio/stripes-acq-components';
 
-import {
-  BULK_EDIT_PROFILES_API,
-  CAPABILITIES,
-} from '../../constants';
+import { BULK_EDIT_PROFILES_API } from '../../constants';
 
 export const BULK_EDIT_PROFILES_KEY = 'BULK_EDIT_PROFILES_KEY';
 const DEFAULT_DATA = [];
 
-const ENTITY_TYPE_DICT = {
-  [CAPABILITIES.INSTANCE]: [CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC],
-};
-
-const groupByEntityType = (entityType) => (builder) => {
-  const entityTypes = ENTITY_TYPE_DICT[entityType] || [entityType];
-
+const groupByEntityType = (entityTypes) => (builder) => {
   entityTypes.forEach((t) => {
     builder.or().equal('entityType', t);
   });
 };
 
 export const useBulkEditProfiles = (params = {}, options = {}) => {
-  const { entityType } = params;
+  const { entityTypes } = params;
   const {
     enabled = true,
     tenantId,
@@ -38,10 +29,10 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
   const [namespace] = useNamespace({ key: BULK_EDIT_PROFILES_KEY });
 
   const cqlBuilder = new CQLBuilder();
-  const query = entityType
+  const query = entityTypes
     ? (
       cqlBuilder
-        .group(groupByEntityType(entityType))
+        .group(groupByEntityType(entityTypes))
         .sortBy('name', 'asc')
         .build()
     )
@@ -58,7 +49,7 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
     isLoading,
   } = useQuery(
     {
-      queryKey: [namespace, entityType, tenantId],
+      queryKey: [namespace, tenantId, ...entityTypes],
       queryFn: ({ signal }) => ky.get(BULK_EDIT_PROFILES_API, { searchParams: { query, offset: 0, limit: 1000 }, signal })
         .json()
         .then(({ content }) => content),

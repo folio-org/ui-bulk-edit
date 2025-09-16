@@ -49,6 +49,7 @@ import { ruleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEdit
 import { BulkEditProfileBulkEditsDetails } from './BulkEditProfileBulkEditsDetails';
 import { BulkEditProfilesSummaryView } from './BulkEditProfilesSummaryView';
 import { BulkEditProfilesMarcDetails } from './BulkEditProfileMarcDetails';
+import { marcRuleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEditMarc/helpers';
 
 export const BulkEditProfileDetails = ({
   entityType,
@@ -241,7 +242,7 @@ export const BulkEditProfileDetails = ({
               {currentRecordType === CAPABILITIES.INSTANCE_MARC ? (
                 <BulkEditProfilesMarcDetails
                   ruleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
-                  marcRuleDetails={profile?.marcRuleDetails}
+                  marcRuleDetails={marcRuleDetailsToSource(profile?.marcRuleDetails)}
                 />
               ) : (
                 <BulkEditProfileBulkEditsDetails

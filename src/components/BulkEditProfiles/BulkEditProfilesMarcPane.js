@@ -75,14 +75,14 @@ export const BulkEditProfilesMarcPane = ({ title, initialSummaryValues, initialR
   const handleSave = async () => {
     const { name, description, locked } = formState;
     const contentUpdates = getMappedContentUpdates(fields, sortedOptions);
-    const contentUpdateBody = getContentUpdatesBody({
+    const contentUpdateBody = isAdministrativeFormValid ? getContentUpdatesBody({
       bulkOperationId: null,
       contentUpdates,
-    });
-    const marcRuleDetails = marcFields.map((item) => ({
+    }) : [];
+    const marcRuleDetails = isMarcFormValid ? marcFields.map((item) => ({
       bulkOperationId: null,
       ...item
-    }));
+    })) : [];
     const ruleDetails = contentUpdateBody.bulkOperationRules.map(item => item.rule_details);
 
     onSave({

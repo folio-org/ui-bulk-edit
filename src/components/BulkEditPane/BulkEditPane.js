@@ -1,18 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useHistory } from 'react-router-dom';
 
 import { useStripes } from '@folio/stripes/core';
 import {
   Pane,
   Paneset,
 } from '@folio/stripes/components';
-import {
-  buildSearch,
-  SEARCH_PARAMETER,
-  SORTING_DIRECTION_PARAMETER,
-  SORTING_PARAMETER
-} from '@folio/stripes-acq-components';
 
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
@@ -52,7 +45,6 @@ import { BulkEditProfileFlow } from './BulkEditListResult/BulkEditProfileFlow/Bu
 import { TenantsProvider } from '../../context/TenantsContext';
 
 export const BulkEditPane = () => {
-  const history = useHistory();
   const stripes = useStripes();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
@@ -69,6 +61,7 @@ export const BulkEditPane = () => {
     step,
     criteria,
     initialFileName,
+    setParam
   } = useSearchParams();
 
   const { bulkDetails } = useBulkOperationDetails({ id: bulkOperationId });
@@ -158,27 +151,20 @@ export const BulkEditPane = () => {
     }
   }, [openInAppLayer, openManualModal, openMarcLayer]);
 
-  const handleOpenProfilesModal = () => {
+  const handleOpenProfilesModal = (approach) => {
     setProfileModalOpen(true);
+
+    setParam('approach', approach);
   };
 
   const handleCloseProfilesModal = () => {
     setProfileModalOpen(false);
-
-    // Reset search parameters when closing the profile modal
-    history.replace({
-      search: buildSearch({
-        [SEARCH_PARAMETER]: null,
-        [SORTING_PARAMETER]: null,
-        [SORTING_DIRECTION_PARAMETER]: null,
-      }, history.location.search),
-    });
   };
 
   const renderActionMenu = ({ onToggle }) => isActionMenuVisible && (
     <BulkEditActionMenu
       onEdit={handleStartBulkEdit}
-      onSelectProfile={handleOpenProfilesModal}
+      onOpenProfiles={handleOpenProfilesModal}
       onToggle={onToggle}
       setFileInfo={setFileInfo}
     />

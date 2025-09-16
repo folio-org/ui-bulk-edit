@@ -12,6 +12,7 @@ import { ruleDetailsToSource } from '../../BulkEditPane/BulkEditListResult/BulkE
 
 import { BulkEditProfilesForm } from '../forms/BulkEditProfilesForm';
 import { useSearchParams } from '../../../hooks';
+import { marcRuleDetailsToSource } from '../../BulkEditPane/BulkEditListResult/BulkEditMarc/helpers';
 
 export const BulkEditDuplicateProfile = ({ onClose }) => {
   const intl = useIntl();
@@ -49,8 +50,8 @@ export const BulkEditDuplicateProfile = ({ onClose }) => {
         onClose={onClose}
         onSave={handleSave}
         initialValues={initialValues}
-        initialRuleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
-        initialMarcRuleDetails={profile?.marcRuleDetails}
+        initialRuleDetails={ruleDetailsToSource(profile.ruleDetails, entityType)}
+        initialMarcRuleDetails={marcRuleDetailsToSource(profile.marcRuleDetails)}
         isLoading={isProfileCreating}
       />
     </TitleManager>

@@ -30,7 +30,7 @@ export const useBulkEditForm = ({ initialValues, validationSchema, template }) =
   });
   const fieldsWithoutId = fieldsWithUpdatedDate.map(item => omit(item, ['id']));
   const initialValuesWithoutId = initialValues?.map(item => omit(item, ['id']));
-  const isPristine = isEqual(initialValuesWithoutId || [template()], fieldsWithoutId);
+  const isPristine = isEqual(initialValuesWithoutId, fieldsWithoutId) || isEqual([template()], fieldsWithoutId);
 
   return {
     fields,
