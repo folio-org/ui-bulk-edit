@@ -71,12 +71,16 @@ jest.mock('../BulkEditInAppPreviewModal/BulkEditPreviewModalFooter', () => ({
 
 const mockUseSearchParams = jest.fn();
 const mockUseContentUpdate = jest.fn();
+const mockUseMarcContentUpdate = jest.fn();
 const mockUseConfirmChanges = jest.fn();
 const mockUseProfilesFlow = jest.fn();
 const mockUseCommitChanges = jest.fn();
 
 jest.mock('../../../../hooks/useSearchParams', () => ({ useSearchParams: () => mockUseSearchParams() }));
-jest.mock('../../../../hooks/api', () => ({ useContentUpdate: () => mockUseContentUpdate() }));
+jest.mock('../../../../hooks/api', () => ({
+  useContentUpdate: () => mockUseContentUpdate(),
+  useMarcContentUpdate: () => mockUseMarcContentUpdate(),
+}));
 jest.mock('../../../../hooks/useConfirmChanges', () => ({ useConfirmChanges: () => mockUseConfirmChanges() }));
 jest.mock('../../../../hooks/useProfilesFlow', () => ({ useProfilesFlow: () => mockUseProfilesFlow() }));
 jest.mock('../../../../hooks/useCommitChanges', () => ({ useCommitChanges: () => mockUseCommitChanges() }));
@@ -89,8 +93,9 @@ describe('SelectProfileFlow', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    mockUseSearchParams.mockReturnValue({ currentRecordType: 'typeA' });
+    mockUseSearchParams.mockReturnValue({ currentRecordType: 'typeA', setParam: jest.fn() });
     mockUseContentUpdate.mockReturnValue({ contentUpdate: jest.fn((args) => ({ args })) });
+    mockUseMarcContentUpdate.mockReturnValue({ marcContentUpdate: jest.fn((args) => ({ args })) });
     mockUseConfirmChanges.mockReturnValue({
       isPreviewModalOpened: false,
       isJobPreparing: false,

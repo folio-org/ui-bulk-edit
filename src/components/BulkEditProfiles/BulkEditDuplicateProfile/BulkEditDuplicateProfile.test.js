@@ -6,12 +6,8 @@ import { QueryClientProvider } from 'react-query';
 import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
-import { useBulkEditProfile } from '../../../hooks/api/useBulkEditProfile';
-import { useProfileCreate } from '../../../hooks/api/useProfileCreate';
-
-import { CAPABILITIES } from '../../../constants';
+import { useBulkEditProfile, useProfileCreate } from '../../../hooks/api';
 import { queryClient } from '../../../../test/jest/utils/queryClient';
-
 import { BulkEditDuplicateProfile } from './BulkEditDuplicateProfile';
 
 jest.mock('react-router', () => ({
@@ -29,8 +25,10 @@ jest.mock('@folio/stripes/core', () => ({
   ),
 }));
 
-jest.mock('../../../hooks/api/useBulkEditProfile', () => ({ useBulkEditProfile: jest.fn() }));
-jest.mock('../../../hooks/api/useProfileCreate', () => ({ useProfileCreate: jest.fn() }));
+jest.mock('../../../hooks/api', () => ({
+  useBulkEditProfile: jest.fn(),
+  useProfileCreate: jest.fn()
+}));
 
 jest.mock('../forms/BulkEditProfilesForm', () => ({
   BulkEditProfilesForm: jest.fn(({ onSave, onClose }) => (
@@ -43,7 +41,6 @@ jest.mock('../forms/BulkEditProfilesForm', () => ({
 
 describe('BulkEditDuplicateProfile', () => {
   const defaultProps = {
-    entityType: CAPABILITIES.USER,
     onClose: jest.fn(),
   };
 

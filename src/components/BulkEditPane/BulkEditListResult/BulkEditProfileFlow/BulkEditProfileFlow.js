@@ -11,11 +11,10 @@ import { useProfilesFlow } from '../../../../hooks/useProfilesFlow';
 import { BulkEditPreviewModalFooter } from '../BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
 import { BulkEditPreviewModal } from '../BulkEditInAppPreviewModal/BulkEditPreviewModal';
 import { useConfirmChanges } from '../../../../hooks/useConfirmChanges';
-import { useContentUpdate } from '../../../../hooks/api';
+import { useContentUpdate, useMarcContentUpdate } from '../../../../hooks/api';
 import { useCommitChanges } from '../../../../hooks/useCommitChanges';
 import { APPROACHES, CAPABILITIES, RECORD_TYPES_MAPPING, RECORD_TYPES_PROFILES_MAPPING } from '../../../../constants';
 import { APPLYING_PROFILE_VISIBLE_COLUMNS } from '../../../BulkEditProfiles/constants';
-import { useMarcContentUpdate } from '../../../../hooks/api/useMarcContentUpdate';
 import { useSearchParams } from '../../../../hooks';
 import css from '../../BulkEditPane.css';
 

@@ -11,6 +11,7 @@ import {
   useLocationSorting,
 } from '@folio/stripes-acq-components';
 
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { CAPABILITIES } from '../../constants';
 import { useBulkEditProfiles } from '../../hooks/api';
 import { BulkEditProfilesPane } from './BulkEditProfilesPane';
@@ -85,10 +86,12 @@ const renderBulkEditProfilesPane = (props = {}, routerProps = {}) => {
       initialEntries={initialEntries}
       {...otherRouterProps}
     >
-      <BulkEditProfilesPane
-        {...defaultProps}
-        {...props}
-      />
+      <QueryClientProvider client={new QueryClient()}>
+        <BulkEditProfilesPane
+          {...defaultProps}
+          {...props}
+        />
+      </QueryClientProvider>
     </MemoryRouter>
   );
 };
@@ -200,12 +203,6 @@ describe('BulkEditProfilesPane', () => {
 
     expect(screen.getByRole('searchbox')).toBeInTheDocument();
     // Loading state should be passed to SearchField
-  });
-
-  it('should handle different entity types', () => {
-    renderBulkEditProfilesPane({ entityType: CAPABILITIES.ITEM });
-
-    expect(mockUseBulkEditProfiles).toHaveBeenCalledWith({ entityType: CAPABILITIES.ITEM });
   });
 
   it('should extract user IDs from profiles for user batch loading', () => {

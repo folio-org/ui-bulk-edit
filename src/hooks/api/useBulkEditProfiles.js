@@ -29,7 +29,7 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
   const [namespace] = useNamespace({ key: BULK_EDIT_PROFILES_KEY });
 
   const cqlBuilder = new CQLBuilder();
-  const query = entityTypes
+  const query = entityTypes?.length > 0
     ? (
       cqlBuilder
         .group(groupByEntityType(entityTypes))
