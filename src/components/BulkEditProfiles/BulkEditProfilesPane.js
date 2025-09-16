@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import {
   Route,
   Switch,
@@ -39,6 +39,7 @@ export const BulkEditProfilesPane = ({
   entityType,
   title,
 }) => {
+  const intl = useIntl();
   const location = useLocation();
   const history = useHistory();
   const stripes = useStripes();
@@ -118,7 +119,7 @@ export const BulkEditProfilesPane = ({
       return (
         <MenuSection id="bulk-edit-profile-action-menu">
           <Button
-            aria-label="qqqq"
+            aria-label={intl.formatMessage({ id: 'ui-bulk-edit.ariaLabel.createInstanceProfile' })}
             buttonStyle="dropdownItem"
             onClick={() => {
               onToggle();
@@ -139,7 +140,7 @@ export const BulkEditProfilesPane = ({
             </Icon>
           </Button>
           <Button
-            aria-label="qqqq"
+            aria-label={intl.formatMessage({ id: 'ui-bulk-edit.ariaLabel.createInstanceMarcProfile' })}
             buttonStyle="dropdownItem"
             onClick={() => {
               onToggle();
@@ -191,7 +192,8 @@ export const BulkEditProfilesPane = ({
     openCreateProfile,
     history,
     path,
-    location.search
+    location.search,
+    intl
   ]);
 
   return (

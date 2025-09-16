@@ -553,6 +553,8 @@
   "ariaLabel.statisticalCode": "Statistical code select",
   "ariaLabel.urlRelationshipSelect": "Url relationship select",
   "ariaLabel.columnFilter": "Column filter input",
+  "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
+  "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
 
   "permissionsModal.title": "Select Permissions",
   "permissionsModal.filter.title": "Search & filter",
