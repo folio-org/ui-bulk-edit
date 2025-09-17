@@ -63,6 +63,34 @@ jest.mock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
       >
         Apply MARC Profile
       </button>
+      <button
+        type="button"
+        data-testid="apply-empty-profile"
+        onClick={() => onRowClick(null, { ruleDetails: [] })}
+      >
+        Apply Empty Profile
+      </button>
+      <button
+        type="button"
+        data-testid="apply-empty-marc-profile"
+        onClick={() => onRowClick(null, {
+          entityType: 'INSTANCE_MARC',
+          ruleDetails: ['rule1'],
+          marcRuleDetails: []
+        })}
+      >
+        Apply Empty MARC Profile
+      </button>
+      <button
+        type="button"
+        data-testid="apply-item-profile"
+        onClick={() => onRowClick(null, {
+          entityType: 'ITEM',
+          ruleDetails: ['item-rule1', 'item-rule2']
+        })}
+      >
+        Apply Item Profile
+      </button>
     </div>
   )
 }));
@@ -316,23 +344,6 @@ describe('SelectProfileFlow', () => {
     const { confirmChanges } = mockUseConfirmChanges();
     const { contentUpdate } = mockUseContentUpdate();
 
-    // Mock profile with empty ruleDetails
-    const mockProfileComponent = jest.fn(({ onRowClick }) => (
-      <div>
-        <button
-          type="button"
-          data-testid="apply-empty-profile"
-          onClick={() => onRowClick(null, { ruleDetails: [] })}
-        >
-          Apply Empty Profile
-        </button>
-      </div>
-    ));
-
-    jest.doMock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
-      BulkEditProfilesSearchAndView: mockProfileComponent
-    }));
-
     render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
     fireEvent.click(screen.getByTestId('apply-empty-profile'));
 
@@ -351,26 +362,6 @@ describe('SelectProfileFlow', () => {
 
     mockUseContentUpdate.mockReturnValue({ contentUpdate: contentUpdateSpy });
     mockUseMarcContentUpdate.mockReturnValue({ marcContentUpdate: marcContentUpdateSpy });
-
-    const mockProfileComponent = jest.fn(({ onRowClick }) => (
-      <div>
-        <button
-          type="button"
-          data-testid="apply-empty-marc-profile"
-          onClick={() => onRowClick(null, {
-            entityType: 'INSTANCE_MARC',
-            ruleDetails: ['rule1'],
-            marcRuleDetails: []
-          })}
-        >
-          Apply Empty MARC Profile
-        </button>
-      </div>
-    ));
-
-    jest.doMock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
-      BulkEditProfilesSearchAndView: mockProfileComponent
-    }));
 
     render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
     fireEvent.click(screen.getByTestId('apply-empty-marc-profile'));
@@ -439,25 +430,6 @@ describe('SelectProfileFlow', () => {
   test('handles profile application with different entity types', () => {
     const { confirmChanges } = mockUseConfirmChanges();
     const { contentUpdate } = mockUseContentUpdate();
-
-    const mockProfileComponent = jest.fn(({ onRowClick }) => (
-      <div>
-        <button
-          type="button"
-          data-testid="apply-item-profile"
-          onClick={() => onRowClick(null, {
-            entityType: 'ITEM',
-            ruleDetails: ['item-rule1', 'item-rule2']
-          })}
-        >
-          Apply Item Profile
-        </button>
-      </div>
-    ));
-
-    jest.doMock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
-      BulkEditProfilesSearchAndView: mockProfileComponent
-    }));
 
     render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
     fireEvent.click(screen.getByTestId('apply-item-profile'));
