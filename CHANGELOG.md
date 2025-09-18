@@ -32,6 +32,7 @@
 * [UIBULKED-690](https://folio-org.atlassian.net/browse/UIBULKED-690) Setting instances as staff/discovery unsuppressed and as deleted in one bulk edit job
 * [UIBULKED-694](https://folio-org.atlassian.net/browse/UIBULKED-694) Populate "Status" column on the list of existing profiles
 * [UIBULKED-651](https://folio-org.atlassian.net/browse/UIBULKED-651) Creating and Updating Profile for Instances with Source MARC bulk edit
+* [UIBULKED-690](https://folio-org.atlassian.net/browse/UIBULKED-690) Display electronic access for item records in the subtable
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
