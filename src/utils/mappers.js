@@ -48,7 +48,7 @@ const formatData = ({ capability, column, data }) => {
       return <FormattedUTCDate value={data} />;
     case dataType === DATA_TYPES.DATE_TIME:
       return <FolioFormattedTime dateString={data} />;
-    case [CAPABILITIES.HOLDING, CAPABILITIES.INSTANCE].includes(capability) && field === CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS:
+    case [CAPABILITIES.HOLDING, CAPABILITIES.INSTANCE, CAPABILITIES.ITEM].includes(capability) && field === CUSTOM_ENTITY_COLUMNS.ELECTRONIC_ACCESS:
       return <EmbeddedTable value={data} headTitles={ELECTRONIC_ACCESS_HEAD_TITLES} />;
     case [CAPABILITIES.INSTANCE].includes(capability) && field === CUSTOM_ENTITY_COLUMNS.SUBJECT:
       return <EmbeddedTable value={data} headTitles={SUBJECT_HEAD_TITLES} />;
