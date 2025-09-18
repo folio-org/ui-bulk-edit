@@ -32,12 +32,14 @@ const formatData = ({ capability, column, data }) => {
   if (!data) return '';
 
   switch (true) {
-    case capability === CAPABILITIES.USER && field === CUSTOM_ENTITY_COLUMNS.EXPIRATION_DATE:
+    case capability === CAPABILITIES.USER && [
+      CUSTOM_ENTITY_COLUMNS.EXPIRATION_DATE,
+      CUSTOM_ENTITY_COLUMNS.DATE_OF_BIRTH,
+      CUSTOM_ENTITY_COLUMNS.ENROLLMENT_DATE
+    ].includes(field):
       return <FormattedUTCDate value={data} />;
     case capability === CAPABILITIES.USER && field === CUSTOM_ENTITY_COLUMNS.USER_STATUS:
       return <FormattedMessage id={`ui-bulk-edit.list.preview.table.status.${data}`} />;
-    case capability === CAPABILITIES.USER && field === CUSTOM_ENTITY_COLUMNS.DATE_OF_BIRTH:
-      return <FormattedUTCDate value={data} />;
     case [CAPABILITIES.INSTANCE, CAPABILITIES.ITEM].includes(capability) && [
       CUSTOM_ENTITY_COLUMNS.CATALOGED_DATE,
       CUSTOM_ENTITY_COLUMNS.MISSING_PIECES_DATE,
