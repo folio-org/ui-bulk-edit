@@ -8,6 +8,7 @@ jest.mock('react-intl', () => ({
 }));
 
 jest.mock('@folio/stripes/components', () => ({
+  Loading: () => <div data-testid="loading" />,
   Modal: ({ children, open, onClose, label }) => (open ? (
     <div data-testid="modal">
       <button type="button" data-testid="modal-close" onClick={onClose}>Close</button>
@@ -133,7 +134,6 @@ describe('SelectProfileFlow', () => {
   const bulkOperationId = 'op123';
 
   beforeEach(() => {
-    jest.clearAllMocks();
     mockUseSearchParams.mockReturnValue({ currentRecordType: 'typeA', setParam: jest.fn() });
     mockUseContentUpdate.mockReturnValue({ contentUpdate: jest.fn((args) => ({ args })) });
     mockUseMarcContentUpdate.mockReturnValue({ marcContentUpdate: jest.fn((args) => ({ args })) });
