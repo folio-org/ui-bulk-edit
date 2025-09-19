@@ -21,7 +21,7 @@ export const BulkEditProfilesMarcForm = ({
   return (
     <>
       <Accordion
-        label={<FormattedMessage id="ui-bulk-edit.layer.title" />}
+        label={<FormattedMessage id="ui-bulk-edit.layer.title.administrative" />}
       >
         <InAppForm
           fields={fields}

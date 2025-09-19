@@ -9,6 +9,7 @@ import { BulkEditProfilesForm } from './forms/BulkEditProfilesForm';
 import { useBulkEditProfile } from '../../hooks/api';
 import { ruleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
 import { useSearchParams } from '../../hooks';
+import { marcRuleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEditMarc/helpers';
 
 export const BulkEditUpdateProfile = ({ onClose }) => {
   const { id } = useParams();
@@ -40,7 +41,7 @@ export const BulkEditUpdateProfile = ({ onClose }) => {
         onSave={handleSave}
         initialValues={initialValues}
         initialRuleDetails={ruleDetailsToSource(profile.ruleDetails, entityType)}
-        initialMarcRuleDetails={profile.marcRuleDetails}
+        initialMarcRuleDetails={marcRuleDetailsToSource(profile.marcRuleDetails)}
         isLoading={isProfileUpdating}
       />
     </TitleManager>

@@ -1,28 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Modal, PaneHeader } from '@folio/stripes/components';
+import { Loading, Modal, PaneHeader } from '@folio/stripes/components';
 
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { AppIcon } from '@folio/stripes/core';
 
 import { BulkEditProfilesSearchAndView } from '../../../BulkEditProfiles/BulkEditProfilesSearchAndView';
 import { useProfilesFlow } from '../../../../hooks/useProfilesFlow';
-import { useSearchParams } from '../../../../hooks';
 import { BulkEditPreviewModalFooter } from '../BulkEditInAppPreviewModal/BulkEditPreviewModalFooter';
 import { BulkEditPreviewModal } from '../BulkEditInAppPreviewModal/BulkEditPreviewModal';
 import { useConfirmChanges } from '../../../../hooks/useConfirmChanges';
-import { useContentUpdate } from '../../../../hooks/api';
+import { useContentUpdate, useMarcContentUpdate } from '../../../../hooks/api';
 import { useCommitChanges } from '../../../../hooks/useCommitChanges';
-import { RECORD_TYPES_MAPPING, RECORD_TYPES_PROFILES_MAPPING } from '../../../../constants';
-import css from '../../BulkEditPane.css';
+import { APPROACHES, CAPABILITIES, RECORD_TYPES_MAPPING, RECORD_TYPES_PROFILES_MAPPING } from '../../../../constants';
 import { APPLYING_PROFILE_VISIBLE_COLUMNS } from '../../../BulkEditProfiles/constants';
+import { useSearchParams } from '../../../../hooks';
+import css from '../../BulkEditPane.css';
 
 const MAX_HEIGHT = 600;
 
 export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) => {
-  const { currentRecordType } = useSearchParams();
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
+  const { marcContentUpdate } = useMarcContentUpdate({ id: bulkOperationId });
+  const { approach, currentRecordType, setParam } = useSearchParams();
+  const entityType = approach === APPROACHES.MARC ? CAPABILITIES.INSTANCE_MARC : currentRecordType;
 
   const {
     isPreviewModalOpened,
@@ -45,7 +47,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
     changeSearch,
     changeLSorting,
     clearProfilesState
-  } = useProfilesFlow(currentRecordType);
+  } = useProfilesFlow([entityType], { enabled: open, keepPreviousData: open });
 
   const { commitChanges, isCommitting } = useCommitChanges({
     bulkOperationId,
@@ -57,6 +59,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
   const handleClose = () => {
     onClose();
     clearProfilesState();
+    setParam('approach', null);
   };
 
   const handleApplyProfile = (_, profile) => {
@@ -65,20 +68,49 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
       rule_details: rule
     }));
 
-    confirmChanges([
-      contentUpdate({ bulkOperationRules, totalRecords })
-    ]);
+    if (profile.entityType === CAPABILITIES.INSTANCE_MARC) {
+      const bulkOperationMarcRules = profile.marcRuleDetails.map((item) => ({
+        bulkOperationId,
+        ...item
+      }));
 
-    handleClose();
+      const updateSequence = () => contentUpdate({
+        bulkOperationRules,
+        totalRecords
+      }).then(() => marcContentUpdate({
+        bulkOperationMarcRules,
+        totalRecords,
+      }));
+
+      confirmChanges(updateSequence);
+    } else {
+      confirmChanges([
+        contentUpdate({
+          bulkOperationRules,
+          totalRecords
+        })
+      ]);
+    }
+
+    onClose();
   };
 
   const handleKeepEditing = () => {
     closePreviewModal();
-    onOpen();
+    onOpen(approach);
   };
 
   const isLoading = isProfilesLoading || isUsersLoading;
   const isCsvFileReady = bulkDetails?.linkToModifiedRecordsCsvFile && isPreviewSettled;
+
+  const paneSub = isLoading ? <Loading /> : (
+    (
+      <FormattedMessage
+        id="ui-bulk-edit.settings.profiles.paneSub"
+        values={{ count: filteredProfiles?.length }}
+      />
+    )
+  );
 
   const modalHeader = (
     <PaneHeader
@@ -86,18 +118,13 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
       paneTitle={(
         <FormattedMessage
           id="ui-bulk-edit.previewModal.selectProfiles"
-          values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[currentRecordType] }}
+          values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[entityType] }}
         />)}
-      paneSub={(
-        <FormattedMessage
-          id="ui-bulk-edit.settings.profiles.paneSub"
-          values={{ count: filteredProfiles?.length }}
-        />
-      )}
+      paneSub={paneSub}
       appIcon={(
         <AppIcon
           app="bulk-edit"
-          iconKey={RECORD_TYPES_MAPPING[currentRecordType]}
+          iconKey={RECORD_TYPES_MAPPING[entityType]}
           size="small"
         />
       )}
@@ -118,7 +145,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
           <Preloader />
         ) : (
           <BulkEditProfilesSearchAndView
-            entityType={currentRecordType}
+            entityType={entityType}
             isLoading={isLoading}
             profiles={filteredProfiles}
             searchTerm={searchTerm}
@@ -135,6 +162,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
       </Modal>
 
       <BulkEditPreviewModal
+        entityType={entityType}
         isJobPreparing={isJobPreparing}
         isPreviewSettled={isPreviewSettled}
         onPreviewSettled={changePreviewSettled}

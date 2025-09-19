@@ -35,7 +35,7 @@ import css from './ActionMenuGroup/ActionMenuGroup.css';
 
 const BulkEditActionMenu = ({
   onEdit,
-  onSelectProfile,
+  onOpenProfiles,
   onToggle,
   setFileInfo,
 }) => {
@@ -111,9 +111,9 @@ const BulkEditActionMenu = ({
     onEdit(approach);
   };
 
-  const handleSelectProfile = () => {
+  const handleOpenProfiles = (approach) => {
     onToggle();
-    onSelectProfile();
+    onOpenProfiles(approach);
   };
 
   const handleFileSave = (info) => {
@@ -139,19 +139,37 @@ const BulkEditActionMenu = ({
     ));
   };
 
-  const renderApplyProfileButton = () => isStartBulkInAppActive && (
-    <Button
-      data-testid="selectProfile"
-      buttonStyle="dropdownItem"
-      onClick={() => handleSelectProfile()}
-    >
-      <Icon icon="edit">
-        <FormattedMessage
-          id="ui-bulk-edit.previewModal.selectProfiles"
-          values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[currentRecordType] }}
-        />
-      </Icon>
-    </Button>
+  const renderApplyProfileButtons = () => (
+    <>
+      {isStartBulkInAppActive && (
+        <Button
+          data-testid="selectProfile"
+          buttonStyle="dropdownItem"
+          onClick={() => handleOpenProfiles(APPROACHES.IN_APP)}
+        >
+          <Icon icon="edit">
+            <FormattedMessage
+              id="ui-bulk-edit.previewModal.selectProfiles"
+              values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[currentRecordType] }}
+            />
+          </Icon>
+        </Button>
+      )}
+      {isStartMarcActive && (hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && (
+        <Button
+          data-testid="selectProfile"
+          buttonStyle="dropdownItem"
+          onClick={() => handleOpenProfiles(APPROACHES.MARC)}
+        >
+          <Icon icon="edit">
+            <FormattedMessage
+              id="ui-bulk-edit.previewModal.selectProfiles"
+              values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[CAPABILITIES.INSTANCE_MARC] }}
+            />
+          </Icon>
+        </Button>
+      )}
+    </>
   );
 
   const renderStartBulkEditButtons = () => {
@@ -168,7 +186,7 @@ const BulkEditActionMenu = ({
                 <FormattedMessage id="ui-bulk-edit.start.edit" />
               </Icon>
             </Button>
-            {renderApplyProfileButton()}
+            {renderApplyProfileButtons()}
           </>
         )}
         {isStartMarcActive && (
@@ -197,7 +215,7 @@ const BulkEditActionMenu = ({
                 </Icon>
               </Button>
             )}
-            {renderApplyProfileButton()}
+            {renderApplyProfileButtons()}
           </ActionMenuGroup>
         )}
         {isStartManualButtonVisible && (
@@ -257,7 +275,7 @@ BulkEditActionMenu.propTypes = {
   onToggle: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   setFileInfo: PropTypes.func.isRequired,
-  onSelectProfile: PropTypes.func.isRequired,
+  onOpenProfiles: PropTypes.func.isRequired,
 };
 
 export default BulkEditActionMenu;

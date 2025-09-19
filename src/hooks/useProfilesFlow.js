@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState, useTransition } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
 import queryString from 'query-string';
+
 import {
   buildSearch,
   filterAndSort,
@@ -12,15 +14,19 @@ import {
 } from '@folio/stripes-acq-components';
 import { debounce, noop } from 'lodash';
 import { getFullName } from '@folio/stripes/util';
-import { DEFAULT_SORTING, FILTER_SORT_CONFIG, SORTABLE_COLUMNS } from '../components/BulkEditProfiles/constants';
-import { useBulkEditProfiles } from './api';
+import { useNamespace } from '@folio/stripes/core';
 
-export const useProfilesFlow = (entityType) => {
+import { DEFAULT_SORTING, FILTER_SORT_CONFIG, SORTABLE_COLUMNS } from '../components/BulkEditProfiles/constants';
+import { BULK_EDIT_PROFILES_KEY, useBulkEditProfiles } from './api';
+
+
+export const useProfilesFlow = (entityTypes, options) => {
   const [isPending, startTransition] = useTransition();
   const location = useLocation();
   const history = useHistory();
   const locationSearchQuery = queryString.parse(location.search)?.[SEARCH_PARAMETER];
-
+  const queryClient = useQueryClient();
+  const [namespace] = useNamespace({ key: BULK_EDIT_PROFILES_KEY });
   const [
     searchTerm,
     setSearchTerm,
@@ -44,7 +50,7 @@ export const useProfilesFlow = (entityType) => {
     isFetching: isProfilesFetching,
     isLoading: isProfilesLoading,
     profiles,
-  } = useBulkEditProfiles({ entityType });
+  } = useBulkEditProfiles({ entityTypes }, options);
 
   const userIds = useMemo(() => profiles.map(profile => profile.updatedBy), [profiles]);
 
@@ -96,15 +102,15 @@ export const useProfilesFlow = (entityType) => {
 
   const clearProfilesState = useCallback(() => {
     setSearchTerm('');
-    debouncedHistoryPush({
-      pathname: location.pathname,
+    history.replace({
       search: buildSearch({
         [SEARCH_PARAMETER]: '',
         [SORTING_PARAMETER]: '',
         [SORTING_DIRECTION_PARAMETER]: '',
-      }, location.search),
+      }, history.location.search),
     });
-  }, [debouncedHistoryPush, location.pathname, location.search]);
+    queryClient.removeQueries({ queryKey: [namespace] });
+  }, [queryClient, namespace, history]);
 
   return {
     filteredProfiles,

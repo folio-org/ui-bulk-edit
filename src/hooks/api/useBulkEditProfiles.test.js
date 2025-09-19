@@ -46,8 +46,8 @@ describe('useBulkEditProfiles', () => {
   });
 
   it('should fetch bulk edit profiles with the correct parameters', async () => {
-    const entityType = CAPABILITIES.INSTANCE;
-    const params = { entityType };
+    const entityTypes = [CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC];
+    const params = { entityTypes };
 
     const first = renderHook(() => useBulkEditProfiles(params), { wrapper });
 
@@ -58,7 +58,7 @@ describe('useBulkEditProfiles', () => {
     }));
     expect(first.result.current.profiles).toEqual(profiles);
 
-    const second = renderHook(() => useBulkEditProfiles(), { wrapper });
+    const second = renderHook(() => useBulkEditProfiles({ entityTypes: [] }), { wrapper });
 
     await waitFor(() => expect(second.result.current.isFetching).toBeFalsy());
 

@@ -1,3 +1,4 @@
+import { uniqueId } from 'lodash';
 import { ACTIONS } from '../../../../constants/marcActions';
 import { CONTROL_TYPES } from '../../../../constants';
 
@@ -55,6 +56,18 @@ export const getSubfieldTemplate = (id) => ({
     }
   ]
 });
+
+/**
+ * Maps MARC rule details from the backend into a source format that can be used
+ *
+ * @param ruleDetails
+ * @returns {*|{id?: (string|number), tag: string, ind1: string, ind2: string, subfield: string, actions: [{name: string, data: []}], subfields: []}[]}
+ */
+export const marcRuleDetailsToSource = (ruleDetails) => {
+  if (ruleDetails?.length === 0) return [marcFieldTemplate(uniqueId())];
+
+  return ruleDetails;
+};
 
 /**
  * Determines the next action placeholder based on the current action.

@@ -32,6 +32,19 @@ export const OPTIONS_MAP_REVERSED = {
 };
 
 /**
+ * Creates a blank folio field template structure, optionally with an ID.
+ *
+ * @param {string} [id] - Optional unique identifier for the field row.
+ * @returns {Object} New field object with defaults for option, tenants, and actions.
+ */
+export const folioFieldTemplate = (id) => ({
+  ...(id ? { id } : {}),
+  option: '',
+  tenants: [],
+  actionsDetails: [],
+});
+
+/**
  * Retrieves the type of option based on its value and available options.
  * Existing type means that the value is one of the NOTES options.
  *
@@ -104,6 +117,8 @@ export const getContentUpdatesBody = ({ bulkOperationId, contentUpdates, totalRe
  * @returns {Array} Array of formatted rule objects ready to be used as initial state of form.
  */
 export const ruleDetailsToSource = (ruleDetails, entityType) => {
+  if (ruleDetails?.length === 0) return [folioFieldTemplate(uniqueId())];
+
   return ruleDetails?.map(rule => {
     const { option, tenants, actions } = rule;
     const action = actions[0] || {};
@@ -418,17 +433,3 @@ export const shouldShowValueColumn = (name, parameters) => {
     || filteredParams?.length > 0
   );
 };
-
-
-/**
- * Creates a blank folio field template structure, optionally with an ID.
- *
- * @param {string} [id] - Optional unique identifier for the field row.
- * @returns {Object} New field object with defaults for option, tenants, and actions.
- */
-export const folioFieldTemplate = (id) => ({
-  ...(id ? { id } : {}),
-  option: '',
-  tenants: [],
-  actionsDetails: []
-});

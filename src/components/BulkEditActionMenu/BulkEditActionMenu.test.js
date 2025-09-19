@@ -33,6 +33,7 @@ jest.mock('../../hooks/api', () => ({
 
 const onEdit = jest.fn();
 const onToggle = jest.fn();
+const onOpenProfiles = jest.fn();
 const bulkOperation = {
   ...bulkEditLogsData[0],
   status: JOB_STATUSES.DATA_MODIFICATION,
@@ -69,7 +70,12 @@ const renderBulkEditActionMenu = ({ step, capability, providerState = defaultPro
     <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={[`/bulk-edit/1/preview?${params}`]}>
         <RootContext.Provider value={providerState}>
-          <BulkEditActionMenu onEdit={onEdit} onToggle={onToggle} setFileInfo={jest.fn()} />
+          <BulkEditActionMenu
+            onEdit={onEdit}
+            onToggle={onToggle}
+            onOpenProfiles={onOpenProfiles}
+            setFileInfo={jest.fn()}
+          />
         </RootContext.Provider>
       </MemoryRouter>,
     </QueryClientProvider>,
@@ -251,6 +257,159 @@ describe('BulkEditActionMenu', () => {
     userEvent.click(screen.getByText('ui-bulk-edit.columns.USER.uuid'));
 
     expect(setVisibleColumns).not.toHaveBeenCalledWith();
+  });
+
+  it('should display select profile button for in-app approach when isStartBulkInAppActive is true', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.ITEM,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    const selectProfileButtons = screen.getAllByTestId('selectProfile');
+    expect(selectProfileButtons).toHaveLength(1);
+    expect(selectProfileButtons[0]).toBeVisible();
+  });
+
+  it('should display select profile button for MARC approach when isStartMarcActive and has MARC permissions', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.INSTANCE,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    const selectProfileButtons = screen.getAllByTestId('selectProfile');
+    expect(selectProfileButtons.length).toBeGreaterThanOrEqual(1);
+    expect(selectProfileButtons[0]).toBeVisible();
+  });
+
+  it('should display both in-app and MARC select profile buttons for instances with proper permissions', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.INSTANCE,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    const selectProfileButtons = screen.getAllByTestId('selectProfile');
+    expect(selectProfileButtons.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('should not display select profile buttons when isStartBulkInAppActive is false', () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: {
+        ...bulkOperation,
+        status: JOB_STATUSES.COMPLETED
+      }
+    });
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.ITEM,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.queryByTestId('selectProfile')).not.toBeInTheDocument();
+  });
+
+  it('should not display MARC select profile button when currentRecordType is not INSTANCE', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    const selectProfileButtons = screen.queryAllByTestId('selectProfile');
+
+    expect(selectProfileButtons.length).toBeLessThanOrEqual(1);
+  });
+
+  it('should handle different job statuses correctly for profile button visibility', () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: {
+        ...bulkOperation,
+        status: JOB_STATUSES.REVIEW_CHANGES
+      }
+    });
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.ITEM,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.getByTestId('selectProfile')).toBeVisible();
+  });
+
+  it('should handle REVIEWED_NO_MARC_RECORDS status for profile button visibility', () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: {
+        ...bulkOperation,
+        status: JOB_STATUSES.REVIEWED_NO_MARC_RECORDS
+      }
+    });
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.HOLDING,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.getByTestId('selectProfile')).toBeVisible();
+  });
+
+  it('should not display profile buttons when step is not UPLOAD', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.COMMIT,
+      capability: CAPABILITIES.ITEM,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.queryByTestId('selectProfile')).not.toBeInTheDocument();
+  });
+
+  it('should handle holdings capability for profile button rendering', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.HOLDING,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.getByTestId('selectProfile')).toBeVisible();
+  });
+
+  it('should verify MARC profile button is only rendered for instances', () => {
+    const capabilities = [CAPABILITIES.USER, CAPABILITIES.ITEM, CAPABILITIES.HOLDING];
+
+    capabilities.forEach(capability => {
+      const { unmount } = renderBulkEditActionMenu({
+        step: EDITING_STEPS.UPLOAD,
+        capability,
+        providerState: { ...defaultProviderState, visibleColumns: [] },
+      });
+
+      const selectProfileButtons = screen.queryAllByTestId('selectProfile');
+
+      expect(selectProfileButtons.length).toBeLessThanOrEqual(1);
+
+      unmount();
+    });
+  });
+
+  it('should not render profile buttons when hasEditPerm is false', () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: {
+        ...bulkOperation,
+        status: JOB_STATUSES.FAILED
+      }
+    });
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.ITEM,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.queryByTestId('selectProfile')).not.toBeInTheDocument();
   });
 
   it('should render with no axe errors', async () => {

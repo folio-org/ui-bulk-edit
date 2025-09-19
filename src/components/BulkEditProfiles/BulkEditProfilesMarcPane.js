@@ -24,6 +24,7 @@ import { BulkEditProfilesSummaryForm } from './forms/BulkEditProfilesSummaryForm
 import { useProfilesSummaryForm } from '../../hooks/useProfilesSummaryForm';
 import { useBulkPermissions, useSearchParams } from '../../hooks';
 import { BulkEditProfilesMarcForm } from './forms/BulkEditProfilesMarcForm';
+import { ADMINISTRATIVE_DEFAULT_BODY } from '../../constants/forms';
 
 
 export const BulkEditProfilesMarcPane = ({ title, initialSummaryValues, initialRuleDetails, initialMarcRuleDetails, isLoading, onSave, onClose, onOpenModal }) => {
@@ -75,14 +76,14 @@ export const BulkEditProfilesMarcPane = ({ title, initialSummaryValues, initialR
   const handleSave = async () => {
     const { name, description, locked } = formState;
     const contentUpdates = getMappedContentUpdates(fields, sortedOptions);
-    const contentUpdateBody = getContentUpdatesBody({
+    const contentUpdateBody = isAdministrativeFormValid ? getContentUpdatesBody({
       bulkOperationId: null,
       contentUpdates,
-    });
-    const marcRuleDetails = marcFields.map((item) => ({
+    }) : ADMINISTRATIVE_DEFAULT_BODY;
+    const marcRuleDetails = isMarcFormValid ? marcFields.map((item) => ({
       bulkOperationId: null,
       ...item
-    }));
+    })) : [];
     const ruleDetails = contentUpdateBody.bulkOperationRules.map(item => item.rule_details);
 
     onSave({

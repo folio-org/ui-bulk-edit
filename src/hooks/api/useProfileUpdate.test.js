@@ -7,6 +7,7 @@ const mockPut = jest.fn();
 const mockKy = { put: mockPut };
 const mockCallout = jest.fn();
 const mockInvalidate = jest.fn();
+const mockRemove = jest.fn();
 const mockOnSuccess = jest.fn();
 const mockShowErrorMessage = jest.fn();
 
@@ -37,6 +38,7 @@ jest.mock('react-query', () => {
     ...original,
     useQueryClient: () => ({
       invalidateQueries: mockInvalidate,
+      removeQueries: mockRemove,
     }),
   };
 });

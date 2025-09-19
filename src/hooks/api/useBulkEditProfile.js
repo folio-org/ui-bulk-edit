@@ -8,7 +8,7 @@ import { CQLBuilder } from '@folio/stripes-acq-components';
 
 import { BULK_EDIT_PROFILES_API } from '../../constants';
 
-const NAMESPACE_KEY = 'bulk-edit-profile-details';
+export const PROFILE_DETAILS_KEY = 'PROFILE_DETAILS_KEY';
 
 export const useBulkEditProfile = (profileId, options = {}) => {
   const {
@@ -18,7 +18,7 @@ export const useBulkEditProfile = (profileId, options = {}) => {
   } = options;
 
   const ky = useOkapiKy({ tenant: tenantId });
-  const [namespace] = useNamespace({ key: NAMESPACE_KEY });
+  const [namespace] = useNamespace({ key: PROFILE_DETAILS_KEY });
 
   const cqlBuilder = new CQLBuilder();
 

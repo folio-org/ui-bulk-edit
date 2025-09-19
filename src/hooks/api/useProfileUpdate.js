@@ -5,12 +5,14 @@ import { useNamespace, useOkapiKy } from '@folio/stripes/core';
 import { useErrorMessages } from '../useErrorMessages';
 import { BULK_EDIT_PROFILES_KEY } from './useBulkEditProfiles';
 import { BULK_EDIT_PROFILES_API } from '../../constants';
+import { PROFILE_DETAILS_KEY } from './useBulkEditProfile';
 
 export const useProfileUpdate = ({ id, onSuccess }) => {
   const ky = useOkapiKy();
   const callout = useShowCallout();
   const client = useQueryClient();
-  const [namespace] = useNamespace({ key: BULK_EDIT_PROFILES_KEY });
+  const [profilesListKey] = useNamespace({ key: BULK_EDIT_PROFILES_KEY });
+  const [profileDetailsKey] = useNamespace({ key: PROFILE_DETAILS_KEY });
   const { formatMessage } = useIntl();
   const { showErrorMessage } = useErrorMessages({
     messageSuffix: formatMessage({ id: 'ui-bulk-edit.settings.profiles.form.update.error' })
@@ -29,7 +31,8 @@ export const useProfileUpdate = ({ id, onSuccess }) => {
         type: 'success',
       });
 
-      client.invalidateQueries({ queryKey: [namespace] });
+      client.invalidateQueries({ queryKey: [profilesListKey] });
+      client.removeQueries({ queryKey: [profileDetailsKey] });
 
       onSuccess();
     },

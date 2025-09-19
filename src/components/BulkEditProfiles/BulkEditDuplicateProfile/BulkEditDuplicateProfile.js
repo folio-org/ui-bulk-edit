@@ -6,12 +6,12 @@ import { Preloader } from '@folio/stripes-data-transfer-components';
 import { TitleManager } from '@folio/stripes/core';
 
 import { RECORD_TYPES_PROFILES_MAPPING } from '../../../constants';
-import { useProfileCreate } from '../../../hooks/api/useProfileCreate';
-import { useBulkEditProfile } from '../../../hooks/api';
+import { useBulkEditProfile, useProfileCreate } from '../../../hooks/api';
 import { ruleDetailsToSource } from '../../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
 
 import { BulkEditProfilesForm } from '../forms/BulkEditProfilesForm';
 import { useSearchParams } from '../../../hooks';
+import { marcRuleDetailsToSource } from '../../BulkEditPane/BulkEditListResult/BulkEditMarc/helpers';
 
 export const BulkEditDuplicateProfile = ({ onClose }) => {
   const intl = useIntl();
@@ -50,7 +50,7 @@ export const BulkEditDuplicateProfile = ({ onClose }) => {
         onSave={handleSave}
         initialValues={initialValues}
         initialRuleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
-        initialMarcRuleDetails={profile?.marcRuleDetails}
+        initialMarcRuleDetails={marcRuleDetailsToSource(profile?.marcRuleDetails)}
         isLoading={isProfileCreating}
       />
     </TitleManager>
