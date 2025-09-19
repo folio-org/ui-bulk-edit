@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Modal, PaneHeader } from '@folio/stripes/components';
+import { Loading, Modal, PaneHeader } from '@folio/stripes/components';
 
 import { Preloader } from '@folio/stripes-data-transfer-components';
 import { AppIcon } from '@folio/stripes/core';
@@ -103,6 +103,15 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
   const isLoading = isProfilesLoading || isUsersLoading;
   const isCsvFileReady = bulkDetails?.linkToModifiedRecordsCsvFile && isPreviewSettled;
 
+  const paneSub = isLoading ? <Loading /> : (
+    (
+      <FormattedMessage
+        id="ui-bulk-edit.settings.profiles.paneSub"
+        values={{ count: filteredProfiles?.length }}
+      />
+    )
+  );
+
   const modalHeader = (
     <PaneHeader
       className={css.modalHeader}
@@ -111,12 +120,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
           id="ui-bulk-edit.previewModal.selectProfiles"
           values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[entityType] }}
         />)}
-      paneSub={(
-        <FormattedMessage
-          id="ui-bulk-edit.settings.profiles.paneSub"
-          values={{ count: filteredProfiles?.length }}
-        />
-      )}
+      paneSub={paneSub}
       appIcon={(
         <AppIcon
           app="bulk-edit"

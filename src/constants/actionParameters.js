@@ -11,7 +11,7 @@ export const getActionParameters = (option, capability) => {
       ];
     }
 
-    if (capability === CAPABILITIES.INSTANCE) {
+    if ([CAPABILITIES.INSTANCE, CAPABILITIES.INSTANCE_MARC].includes(capability)) {
       return [
         {
           key: PARAMETERS_KEYS.APPLY_TO_HOLDINGS,

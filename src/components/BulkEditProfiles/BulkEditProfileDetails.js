@@ -259,7 +259,7 @@ export const BulkEditProfileDetails = ({
             heading={
               <FormattedMessage
                 id="ui-bulk-edit.settings.profiles.details.action.delete.modal.heading"
-                values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[entityType] }}
+                values={{ entityType: RECORD_TYPES_PROFILES_MAPPING[currentRecordType] }}
               />
             }
             onConfirm={handleProfileDelete}
