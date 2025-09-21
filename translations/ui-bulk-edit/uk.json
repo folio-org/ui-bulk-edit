@@ -323,12 +323,12 @@
     "type.placeholder": "Вибрати тип",
     "layer.options.holdings.materialsSpecified": "Вказані матеріали",
     "layer.options.holdings.linkText": "Текст посилання",
-    "layer.options.holdings.urlPublic": "Публічна примітка до URL-адреси",
+    "layer.options.holdings.urlPublic": "Публічна примітка щодо URL-адреси",
     "list.preview.electronicAccess.relationship": "URL зв'язку",
     "list.preview.electronicAccess.uri": "URI",
     "list.preview.electronicAccess.linkText": "Текст посилання",
     "list.preview.electronicAccess.materialsSpecified": "Вказані матеріали",
-    "list.preview.electronicAccess.publicNote": "Публічна примітка до URL-адреси",
+    "list.preview.electronicAccess.publicNote": "Публічна примітка щодо URL-адреси",
     "ariaLabel.columnFilter": "Введення фільтра колонки",
     "actionMenu.placeholder": "Пошук назви колонки",
     "list.result.emptyMessage.instance": "Вибрати ідентифікатор запису.",
@@ -592,5 +592,8 @@
     "previewModal.selectProfiles": "Виберіть {entityType} профіль для пакетного редагування",
     "layer.options.setRecordsForDelete": "Відмітити записи для видалення",
     "columns.INSTANCE.Set for deletion": "Призначене для видалення",
-    "settings.profiles.form.name.copy": "Копія {name}"
+    "settings.profiles.form.name.copy": "Копія {name}",
+    "settings.profiles.columns.status.active": "Active",
+    "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
 }

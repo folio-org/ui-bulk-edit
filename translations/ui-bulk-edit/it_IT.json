@@ -592,5 +592,8 @@
     "previewModal.selectProfiles": "Select {entityType} bulk edit profile",
     "layer.options.setRecordsForDelete": "Set records for deletion",
     "columns.INSTANCE.Set for deletion": "Set for deletion",
-    "settings.profiles.form.name.copy": "Copy of {name}"
+    "settings.profiles.form.name.copy": "Copy of {name}",
+    "settings.profiles.columns.status.active": "Active",
+    "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
 }

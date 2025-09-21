@@ -175,7 +175,7 @@
     "logs.approach.QUERY": "クエリ",
     "columns.USER.User name": "ユーザー名",
     "columns.USER.User id": "ユーザー ID",
-    "columns.USER.External system id": "学部システムID",
+    "columns.USER.External system id": "外部システムID",
     "columns.USER.Barcode": "バーコード",
     "columns.USER.Active": "有効",
     "columns.USER.Type": "タイプ",
@@ -592,5 +592,8 @@
     "previewModal.selectProfiles": "Select {entityType} bulk edit profile",
     "layer.options.setRecordsForDelete": "Set records for deletion",
     "columns.INSTANCE.Set for deletion": "Set for deletion",
-    "settings.profiles.form.name.copy": "Copy of {name}"
+    "settings.profiles.form.name.copy": "Copy of {name}",
+    "settings.profiles.columns.status.active": "Active",
+    "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
 }
