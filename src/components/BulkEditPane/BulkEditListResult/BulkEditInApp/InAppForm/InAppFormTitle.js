@@ -24,10 +24,14 @@ const getMaxField = (fields) => {
     }
 
     if (currentActions.length === maxActions.length) {
+      if (!currentActions[0]?.name) return max;
+
       const currentFiltered = currentActions.filter(filterFinal);
       const maxFiltered = maxActions.filter(filterFinal);
+      const currentActionParams = currentActions.reduce((acc, action) => acc + (action.parameters?.length || 0), 0);
+      const maxActionParams = maxActions.reduce((acc, action) => acc + (action.parameters?.length || 0), 0);
 
-      if (currentFiltered.length > maxFiltered.length) {
+      if (currentFiltered.length > maxFiltered.length || currentActionParams > maxActionParams) {
         return field;
       }
     }

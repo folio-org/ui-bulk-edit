@@ -9,7 +9,6 @@ import { CQLBuilder } from '@folio/stripes-acq-components';
 import { BULK_EDIT_PROFILES_API } from '../../constants';
 
 export const BULK_EDIT_PROFILES_KEY = 'BULK_EDIT_PROFILES_KEY';
-const DEFAULT_DATA = [];
 
 const groupByEntityType = (entityTypes) => (builder) => {
   entityTypes.forEach((t) => {
@@ -49,7 +48,7 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
     isLoading,
   } = useQuery(
     {
-      queryKey: [namespace, tenantId, ...entityTypes],
+      queryKey: [namespace, tenantId, entityTypes],
       queryFn: ({ signal }) => ky.get(BULK_EDIT_PROFILES_API, { searchParams: { query, offset: 0, limit: 1000 }, signal })
         .json()
         .then(({ content }) => content),
@@ -62,6 +61,6 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
   return {
     isFetching,
     isLoading,
-    profiles: data ?? DEFAULT_DATA,
+    profiles: data ?? [],
   };
 };

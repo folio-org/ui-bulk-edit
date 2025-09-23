@@ -51,6 +51,9 @@ export const useDerivedFields = (fields, setFields, opts = {}) => {
     OPTIONS.SUPPRESS_FROM_DISCOVERY,
   );
 
+  const isSuppressFromDiscoveryTrueActive = suppressFromDiscoveryTrueIndex !== -1;
+  const isSuppressFromDiscoveryFalseActive = suppressFromDiscoveryFalseIndex !== -1;
+
   /**
    * If "Set for Delete" is toggled, enforce that
    * STAFF_SUPPRESS and SUPPRESS_FROM_DISCOVERY are updated accordingly.
@@ -100,7 +103,7 @@ export const useDerivedFields = (fields, setFields, opts = {}) => {
   useEffect(() => {
     if (!isActiveRef.current) return;
 
-    if (suppressFromDiscoveryTrueIndex !== -1 || suppressFromDiscoveryFalseIndex !== -1) {
+    if (isSuppressFromDiscoveryTrueActive || isSuppressFromDiscoveryFalseActive) {
       setFields(prevFields => prevFields.map(field => {
         if (field.option === OPTIONS.SUPPRESS_FROM_DISCOVERY) {
           return {
@@ -110,7 +113,7 @@ export const useDerivedFields = (fields, setFields, opts = {}) => {
                 ...action,
                 parameters: action.parameters.map(param => ({
                   ...param,
-                  value: suppressFromDiscoveryTrueIndex !== -1,
+                  value: isSuppressFromDiscoveryTrueActive,
                 })),
               })),
             },
@@ -120,7 +123,7 @@ export const useDerivedFields = (fields, setFields, opts = {}) => {
         return field;
       }));
     }
-  }, [suppressFromDiscoveryTrueIndex, suppressFromDiscoveryFalseIndex, setFields]);
+  }, [isSuppressFromDiscoveryTrueActive, isSuppressFromDiscoveryFalseActive, setFields]);
 
   /**
    * If STAFF_SUPPRESS or SUPPRESS_FROM_DISCOVERY exist

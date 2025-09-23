@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { useStripes } from '@folio/stripes/core';
 import {
   Pane,
   Paneset,
@@ -45,7 +44,6 @@ import { BulkEditProfileFlow } from './BulkEditListResult/BulkEditProfileFlow/Bu
 import { TenantsProvider } from '../../context/TenantsContext';
 
 export const BulkEditPane = () => {
-  const stripes = useStripes();
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [visibleColumns, setVisibleColumns] = useState(null);
@@ -55,7 +53,6 @@ export const BulkEditPane = () => {
 
   const { isActionMenuShown } = useBulkPermissions();
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const centralTenantId = stripes?.user?.user?.consortium?.centralTenantId;
 
   const {
     step,
@@ -171,26 +168,24 @@ export const BulkEditPane = () => {
   );
 
   const renderApproaches = (paneProps) => (
-    <>
+    <TenantsProvider tenants={bulkOperationTenants} showLocal>
       {/* BULK-EDIT IDENTIFIERS AND QUERY */}
-      <TenantsProvider tenants={bulkOperationTenants} showLocal>
-        {isInAppLayerOpen && (
-          <BulkEditFolioLayer
-            bulkOperationId={bulkOperationId}
-            paneProps={paneProps}
-            onInAppLayerClose={closeInAppLayer}
-            isInAppLayerOpen={isInAppLayerOpen}
-          />
-        )}
-        {isMarcLayerOpen && (
-          <BulkEditMarcLayer
-            bulkOperationId={bulkOperationId}
-            paneProps={paneProps}
-            onMarcLayerClose={closeMarcLayer}
-            isMarcLayerOpen={isMarcLayerOpen}
-          />
-        )}
-      </TenantsProvider>
+      {isInAppLayerOpen && (
+      <BulkEditFolioLayer
+        bulkOperationId={bulkOperationId}
+        paneProps={paneProps}
+        onInAppLayerClose={closeInAppLayer}
+        isInAppLayerOpen={isInAppLayerOpen}
+      />
+      )}
+      {isMarcLayerOpen && (
+      <BulkEditMarcLayer
+        bulkOperationId={bulkOperationId}
+        paneProps={paneProps}
+        onMarcLayerClose={closeMarcLayer}
+        isMarcLayerOpen={isMarcLayerOpen}
+      />
+      )}
 
       {/* BULK-EDIT MANUAL UPLOAD CSV WITH CHANGES */}
       <BulkEditManualUploadModal
@@ -202,15 +197,13 @@ export const BulkEditPane = () => {
       />
 
       {/* BULK-EDIT USING PROFILES */}
-      <TenantsProvider tenants={[centralTenantId]} showLocal={false}>
-        <BulkEditProfileFlow
-          open={profileModalOpen}
-          bulkOperationId={bulkOperationId}
-          onClose={handleCloseProfilesModal}
-          onOpen={handleOpenProfilesModal}
-        />
-      </TenantsProvider>
-    </>
+      <BulkEditProfileFlow
+        open={profileModalOpen}
+        bulkOperationId={bulkOperationId}
+        onClose={handleCloseProfilesModal}
+        onOpen={handleOpenProfilesModal}
+      />
+    </TenantsProvider>
   );
 
   return (

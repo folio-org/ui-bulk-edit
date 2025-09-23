@@ -54,7 +54,7 @@ InAppForm.propTypes = {
   }),
   isNonInteractive: PropTypes.bool,
   loading: PropTypes.bool,
-  options: PropTypes.shape({}).isRequired,
+  options: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   recordType: PropTypes.string.isRequired,
   setFields: PropTypes.func.isRequired,
 };

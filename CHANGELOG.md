@@ -35,6 +35,7 @@
 * [UIBULKED-690](https://folio-org.atlassian.net/browse/UIBULKED-690) Display electronic access for item records in the subtable
 * [UIBULKED-678](https://folio-org.atlassian.net/browse/UIBULKED-678) "Date enrolled" displaying date without time in Previews of Users bulk edit
 * [UIBULKED-692](https://folio-org.atlassian.net/browse/UIBULKED-692) Executing bulk edit job with existing bulk edit profile - for  FOLIO and MARC instances
+* [UIBULKED-709](https://folio-org.atlassian.net/browse/UIBULKED-709) Fix properties update via profile in Central tenant
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
