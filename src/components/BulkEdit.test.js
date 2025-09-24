@@ -26,7 +26,6 @@ jest.mock('./BulkEditPane/BulkEditListResult', () => ({
   BulkEditListResult: () => 'BulkEditListResult',
 }));
 
-// Mock components to prevent prop validation errors
 jest.mock('./BulkEditPane/BulkEditIdentifiers/BulkEditIdentifiers', () => ({
   BulkEditIdentifiers: jest.fn(({ children }) => (
     <div>
