@@ -32,8 +32,7 @@ export const useProfilesFlow = (entityTypes, options) => {
     setSearchTerm,
   ] = useState(locationSearchQuery);
 
-  const debouncedHistoryPush = useMemo(() => debounce(history.push, 0), [history.push]);
-
+  const debouncedHistoryPush = useMemo(() => debounce(history.push, 300), [history.push]);
   const [
     sortOrder,
     sortDirection,
