@@ -13,7 +13,13 @@ import { BulkEditPreviewModal } from '../BulkEditInAppPreviewModal/BulkEditPrevi
 import { useConfirmChanges } from '../../../../hooks/useConfirmChanges';
 import { useContentUpdate, useMarcContentUpdate } from '../../../../hooks/api';
 import { useCommitChanges } from '../../../../hooks/useCommitChanges';
-import { APPROACHES, CAPABILITIES, RECORD_TYPES_MAPPING, RECORD_TYPES_PROFILES_MAPPING } from '../../../../constants';
+import {
+  APPROACHES,
+  CAPABILITIES,
+  LOCATION_OPTIONS,
+  RECORD_TYPES_MAPPING,
+  RECORD_TYPES_PROFILES_MAPPING
+} from '../../../../constants';
 import { APPLYING_PROFILE_VISIBLE_COLUMNS } from '../../../BulkEditProfiles/constants';
 import { useSearchParams } from '../../../../hooks';
 import { useTenants } from '../../../../context/TenantsContext';
@@ -68,17 +74,22 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
     // If tenants are present in entity, they should be replaced with bulk operation tenants
     const nestedTenants = (entity) => (entity.tenants?.length ? tenants : entity.tenants);
 
-    const bulkOperationRules = profile.ruleDetails.map(rule => ({
-      bulkOperationId,
-      rule_details: {
-        ...rule,
-        tenants: nestedTenants(rule),
-        actions: rule.actions.map(action => ({
-          ...action,
-          tenants: nestedTenants(action),
-        })),
-      }
-    }));
+    const bulkOperationRules = profile.ruleDetails.map(rule => {
+      // Location rules do not require tenants modification
+      if (LOCATION_OPTIONS.includes(rule.option)) return rule;
+
+      return {
+        bulkOperationId,
+        rule_details: {
+          ...rule,
+          tenants: nestedTenants(rule),
+          actions: rule.actions.map(action => ({
+            ...action,
+            tenants: nestedTenants(action),
+          })),
+        }
+      };
+    });
 
     if (profile.entityType === CAPABILITIES.INSTANCE_MARC) {
       const bulkOperationMarcRules = profile.marcRuleDetails.map((item) => ({
