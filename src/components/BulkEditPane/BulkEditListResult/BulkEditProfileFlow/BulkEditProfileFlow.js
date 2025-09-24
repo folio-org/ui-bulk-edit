@@ -72,7 +72,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
 
   const handleApplyProfile = (_, profile) => {
     // If tenants are present in entity, they should be replaced with bulk operation tenants
-    const nestedTenants = (entity) => (entity.tenants?.length ? tenants : entity.tenants);
+    const nestedTenants = (entity, key) => (entity[key]?.length ? tenants : entity[key]);
 
     const bulkOperationRules = profile.ruleDetails.map(rule => {
       // Location rules do not require tenants modification
@@ -85,7 +85,8 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
           tenants: nestedTenants(rule),
           actions: rule.actions.map(action => ({
             ...action,
-            tenants: nestedTenants(action),
+            tenants: nestedTenants(action, 'tenants'),
+            updated_tenants: nestedTenants(action, 'updated_tenants'),
           })),
         }
       };
