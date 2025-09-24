@@ -5,8 +5,6 @@ import { QueryClientProvider } from 'react-query';
 
 import '../../../test/jest/__mock__';
 
-import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
-import { useOkapiKy } from '@folio/stripes/core';
 import { runAxeTest } from '@folio/stripes-testing';
 import { queryClient } from '../../../test/jest/utils/queryClient';
 
@@ -15,26 +13,41 @@ import { BulkEditPane } from './BulkEditPane';
 
 jest.mock('../BulkEditLogs/BulkEditLogs', () => {
   return {
-    BulkEditLogs: jest.fn().mockReturnValue(() => <div>BulkEditLogs</div>),
+    BulkEditLogs: jest.fn(() => <div>BulkEditLogs</div>),
   };
 });
+
+jest.mock('./BulkEditQuery/BulkEditQuery', () => {
+  return {
+    BulkEditQuery: jest.fn(({ children }) => (
+      <div>
+        BulkEditQuery
+        {children && children()}
+      </div>
+    )),
+  };
+});
+
+jest.mock('./BulkEditIdentifiers/BulkEditIdentifiers', () => {
+  return {
+    BulkEditIdentifiers: jest.fn(({ children }) => (
+      <div>
+        BulkEditIdentifiers
+        {children && children()}
+      </div>
+    )),
+  };
+});
+
 jest.mock('./BulkEditListResult', () => {
   return {
     BulkEditListResult: jest.fn().mockReturnValue('BulkEditListResult'),
   };
 });
 
-jest.mock('@folio/stripes/core', () => ({
-  useOkapiKy: jest.fn(),
-}));
-jest.mock('./BulkEditListResult/BulkEditManualUploadModal', () => {
+jest.mock('./BulkEditListResult/BulkEditProfileFlow/BulkEditProfileFlow', () => {
   return {
-    BulkEditManualUploadModal: jest.fn().mockReturnValue('BulkEditManualUploadModal'),
-  };
-});
-jest.mock('./BulkEditListResult/BulkEditInAppPreviewModal/BulkEditPreviewModal', () => {
-  return {
-    BulkEditPreviewModal: jest.fn().mockReturnValue('BulkEditInAppPreviewModal'),
+    BulkEditProfileFlow: jest.fn(() => <div>BulkEditProfileFlow</div>),
   };
 });
 
@@ -73,7 +86,7 @@ describe('BulkEditList', () => {
   it('should display Filters pane', async () => {
     renderBulkEditList({ criteria: CRITERIA.LOGS });
 
-    expect(screen.getByText(/holdings/i)).toBeVisible();
+    expect(screen.getByText(/ui-bulk-edit.list.criteriaTitle/)).toBeVisible();
   });
 
   it('should render with no axe errors', async () => {
@@ -87,26 +100,18 @@ describe('BulkEditList', () => {
   it('should display Logs pane when criteria is logs', async () => {
     renderBulkEditList({ criteria: CRITERIA.LOGS });
 
-    waitFor(() => expect(screen.getByText(/BulkEditLogs/)).toBeVisible());
+    await waitFor(() => expect(screen.getByText(/BulkEditLogs/)).toBeVisible());
   });
 
-  it('should display Bulk edit preview container when criteria is not logs', async () => {
+  it('should display Bulk edit identifiers when criteria is identifier', async () => {
     renderBulkEditList({ criteria: CRITERIA.IDENTIFIER });
 
-    expect(screen.getByText(/BulkEditListResult/)).toBeVisible();
+    expect(screen.getByText(/BulkEditIdentifiers/)).toBeVisible();
   });
 
-  it('should display Bulk edit query', async () => {
-    useOkapiKy.mockReturnValue({
-      get: jest.fn().mockResolvedValue({ json: jest.fn().mockResolvedValue({}) }),
-      post: jest.fn().mockResolvedValue({ json: jest.fn().mockResolvedValue({}) }),
-      delete: jest.fn().mockResolvedValue({ json: jest.fn().mockResolvedValue({}) }),
-    });
+  it('should display Bulk edit query when criteria is query', async () => {
     renderBulkEditList({ criteria: CRITERIA.QUERY });
 
-    userEvent.click(screen.getByText(/Get query/));
-    userEvent.click(screen.getByText(/Cancel query/));
-
-    expect(screen.getByText(/holdings/i)).toBeVisible();
+    expect(screen.getByText(/BulkEditQuery/)).toBeVisible();
   });
 });

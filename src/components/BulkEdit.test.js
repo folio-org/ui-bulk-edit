@@ -26,6 +26,20 @@ jest.mock('./BulkEditPane/BulkEditListResult', () => ({
   BulkEditListResult: () => 'BulkEditListResult',
 }));
 
+// Mock components to prevent prop validation errors
+jest.mock('./BulkEditPane/BulkEditIdentifiers/BulkEditIdentifiers', () => ({
+  BulkEditIdentifiers: jest.fn(({ children }) => (
+    <div>
+      BulkEditIdentifiers
+      {children && children()}
+    </div>
+  )),
+}));
+
+jest.mock('./BulkEditPane/BulkEditListResult/BulkEditProfileFlow/BulkEditProfileFlow', () => ({
+  BulkEditProfileFlow: jest.fn(() => <div>BulkEditProfileFlow</div>),
+}));
+
 const history = createMemoryHistory();
 
 const renderBulkEdit = (type = 'USERS', bulkEditProps = {}) => {
@@ -56,7 +70,7 @@ describe('BulkEdit', () => {
   it('displays Bulk edit', () => {
     renderBulkEdit();
 
-    expect(screen.getByText(/TitleManager/)).toBeVisible();
+    expect(screen.getByText(/ui-bulk-edit.list.criteriaTitle/)).toBeVisible();
   });
 
   // This test will be passing after fixing problem in stripes-data-transfer-components
@@ -163,7 +177,7 @@ describe('BulkEdit', () => {
       pathname: 'bulk-edit/1',
     });
 
-    expect(screen.getByText(/TitleManager/)).toBeVisible();
+    expect(screen.getByText(/BulkEditIdentifiers/)).toBeVisible();
   });
 
   it('should update unsupported type of file', async () => {

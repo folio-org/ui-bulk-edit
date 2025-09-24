@@ -168,7 +168,6 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
           <Preloader />
         ) : (
           <BulkEditProfilesSearchAndView
-            key={entityType}
             entityType={entityType}
             isLoading={isLoading}
             profiles={filteredProfiles}
