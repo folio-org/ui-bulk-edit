@@ -82,7 +82,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
         bulkOperationId,
         rule_details: {
           ...rule,
-          tenants: nestedTenants(rule),
+          tenants: nestedTenants(rule, 'tenants'),
           actions: rule.actions.map(action => ({
             ...action,
             tenants: nestedTenants(action, 'tenants'),
