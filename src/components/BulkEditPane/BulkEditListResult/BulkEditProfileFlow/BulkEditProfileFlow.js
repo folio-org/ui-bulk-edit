@@ -13,9 +13,16 @@ import { BulkEditPreviewModal } from '../BulkEditInAppPreviewModal/BulkEditPrevi
 import { useConfirmChanges } from '../../../../hooks/useConfirmChanges';
 import { useContentUpdate, useMarcContentUpdate } from '../../../../hooks/api';
 import { useCommitChanges } from '../../../../hooks/useCommitChanges';
-import { APPROACHES, CAPABILITIES, RECORD_TYPES_MAPPING, RECORD_TYPES_PROFILES_MAPPING } from '../../../../constants';
+import {
+  APPROACHES,
+  CAPABILITIES,
+  LOCATION_OPTIONS,
+  RECORD_TYPES_MAPPING,
+  RECORD_TYPES_PROFILES_MAPPING
+} from '../../../../constants';
 import { APPLYING_PROFILE_VISIBLE_COLUMNS } from '../../../BulkEditProfiles/constants';
 import { useSearchParams } from '../../../../hooks';
+import { useTenants } from '../../../../context/TenantsContext';
 import css from '../../BulkEditPane.css';
 
 const MAX_HEIGHT = 600;
@@ -24,6 +31,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
   const { marcContentUpdate } = useMarcContentUpdate({ id: bulkOperationId });
   const { approach, currentRecordType, setParam } = useSearchParams();
+  const { tenants } = useTenants();
   const entityType = approach === APPROACHES.MARC ? CAPABILITIES.INSTANCE_MARC : currentRecordType;
 
   const {
@@ -63,10 +71,26 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
   };
 
   const handleApplyProfile = (_, profile) => {
-    const bulkOperationRules = profile.ruleDetails.map(rule => ({
-      bulkOperationId,
-      rule_details: rule
-    }));
+    // If tenants are present in entity, they should be replaced with bulk operation tenants
+    const nestedTenants = (entity, key) => (entity[key]?.length ? tenants : entity[key]);
+
+    const bulkOperationRules = profile.ruleDetails.map(rule => {
+      // Location rules do not require tenants modification
+      if (LOCATION_OPTIONS.includes(rule.option)) return rule;
+
+      return {
+        bulkOperationId,
+        rule_details: {
+          ...rule,
+          tenants: nestedTenants(rule, 'tenants'),
+          actions: rule.actions.map(action => ({
+            ...action,
+            tenants: nestedTenants(action, 'tenants'),
+            updated_tenants: nestedTenants(action, 'updated_tenants'),
+          })),
+        }
+      };
+    });
 
     if (profile.entityType === CAPABILITIES.INSTANCE_MARC) {
       const bulkOperationMarcRules = profile.marcRuleDetails.map((item) => ({

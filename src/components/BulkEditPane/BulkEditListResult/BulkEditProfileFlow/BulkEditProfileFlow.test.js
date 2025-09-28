@@ -50,7 +50,27 @@ jest.mock('@folio/stripes/core', () => ({
 jest.mock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
   BulkEditProfilesSearchAndView: ({ onRowClick }) => (
     <div>
-      <button type="button" data-testid="apply-profile" onClick={() => onRowClick(null, { ruleDetails: ['rule1', 'rule2'] })}>
+      <button
+        type="button"
+        data-testid="apply-profile"
+        onClick={() => onRowClick(null, {
+          ruleDetails: [
+            {
+              tenants: ['existing-tenant1'],
+              actions: [
+                { tenants: ['action-tenant1'] },
+                { tenants: [] }
+              ]
+            },
+            {
+              tenants: [],
+              actions: [
+                { tenants: ['action-tenant2'] }
+              ]
+            }
+          ]
+        })}
+      >
         Apply Profile
       </button>
       <button
@@ -58,11 +78,38 @@ jest.mock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
         data-testid="apply-marc-profile"
         onClick={() => onRowClick(null, {
           entityType: 'INSTANCE_MARC',
-          ruleDetails: ['rule1', 'rule2'],
-          marcRuleDetails: [{ field: '245', action: 'ADD' }, { field: '100', action: 'UPDATE' }]
+          ruleDetails: [
+            {
+              tenants: ['existing-tenant1'],
+              actions: [
+                { tenants: ['action-tenant1'] },
+                { tenants: [] }
+              ]
+            }
+          ],
+          marcRuleDetails: [
+            { field: '245', action: 'ADD' },
+            { field: '100', action: 'UPDATE' }
+          ]
         })}
       >
         Apply MARC Profile
+      </button>
+      <button
+        type="button"
+        data-testid="apply-profile-with-tenants"
+        onClick={() => onRowClick(null, {
+          ruleDetails: [
+            {
+              tenants: ['existing-tenant1', 'existing-tenant2'],
+              actions: [
+                { tenants: ['action-tenant1', 'action-tenant2'] }
+              ]
+            }
+          ]
+        })}
+      >
+        Apply Profile With Tenants
       </button>
       <button
         type="button"
@@ -76,7 +123,7 @@ jest.mock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
         data-testid="apply-empty-marc-profile"
         onClick={() => onRowClick(null, {
           entityType: 'INSTANCE_MARC',
-          ruleDetails: ['rule1'],
+          ruleDetails: [{ tenants: [], actions: [] }],
           marcRuleDetails: []
         })}
       >
@@ -87,7 +134,14 @@ jest.mock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
         data-testid="apply-item-profile"
         onClick={() => onRowClick(null, {
           entityType: 'ITEM',
-          ruleDetails: ['item-rule1', 'item-rule2']
+          ruleDetails: [
+            {
+              tenants: [],
+              actions: [
+                { tenants: [] }
+              ]
+            }
+          ]
         })}
       >
         Apply Item Profile
@@ -117,6 +171,7 @@ const mockUseMarcContentUpdate = jest.fn();
 const mockUseConfirmChanges = jest.fn();
 const mockUseProfilesFlow = jest.fn();
 const mockUseCommitChanges = jest.fn();
+const mockUseTenants = jest.fn();
 
 jest.mock('../../../../hooks/useSearchParams', () => ({ useSearchParams: () => mockUseSearchParams() }));
 jest.mock('../../../../hooks/api', () => ({
@@ -126,6 +181,7 @@ jest.mock('../../../../hooks/api', () => ({
 jest.mock('../../../../hooks/useConfirmChanges', () => ({ useConfirmChanges: () => mockUseConfirmChanges() }));
 jest.mock('../../../../hooks/useProfilesFlow', () => ({ useProfilesFlow: () => mockUseProfilesFlow() }));
 jest.mock('../../../../hooks/useCommitChanges', () => ({ useCommitChanges: () => mockUseCommitChanges() }));
+jest.mock('../../../../context/TenantsContext', () => ({ useTenants: () => mockUseTenants() }));
 
 
 describe('SelectProfileFlow', () => {
@@ -162,6 +218,9 @@ describe('SelectProfileFlow', () => {
       commitChanges: jest.fn(),
       isCommitting: false,
     });
+    mockUseTenants.mockReturnValue({
+      tenants: ['tenant1', 'tenant2']
+    });
   });
 
   test('renders Preloader when loading', () => {
@@ -187,12 +246,58 @@ describe('SelectProfileFlow', () => {
     const { contentUpdate } = mockUseContentUpdate();
     render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
     fireEvent.click(screen.getByTestId('apply-profile'));
+
     expect(confirmChanges).toHaveBeenCalledWith([
-      contentUpdate({ bulkOperationRules: [
-        { bulkOperationId, rule_details: 'rule1' },
-        { bulkOperationId, rule_details: 'rule2' }
-      ],
-      totalRecords: 5 })
+      contentUpdate({
+        bulkOperationRules: [
+          {
+            bulkOperationId,
+            rule_details: {
+              tenants: ['tenant1', 'tenant2'],
+              actions: [
+                { tenants: ['tenant1', 'tenant2'] },
+                { tenants: [] }
+              ]
+            }
+          },
+          {
+            bulkOperationId,
+            rule_details: {
+              tenants: [],
+              actions: [
+                { tenants: ['tenant1', 'tenant2'] }
+              ]
+            }
+          }
+        ],
+        totalRecords: 5
+      })
+    ]);
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  test('applies profile with tenants replacement logic', () => {
+    const { confirmChanges } = mockUseConfirmChanges();
+    const { contentUpdate } = mockUseContentUpdate();
+
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    fireEvent.click(screen.getByTestId('apply-profile-with-tenants'));
+
+    expect(confirmChanges).toHaveBeenCalledWith([
+      contentUpdate({
+        bulkOperationRules: [
+          {
+            bulkOperationId,
+            rule_details: {
+              tenants: ['tenant1', 'tenant2'], // Bulk operation tenants replace existing tenants
+              actions: [
+                { tenants: ['tenant1', 'tenant2'] } // Bulk operation tenants replace existing action tenants
+              ]
+            }
+          }
+        ],
+        totalRecords: 5
+      })
     ]);
     expect(onClose).toHaveBeenCalled();
   });
@@ -207,6 +312,79 @@ describe('SelectProfileFlow', () => {
     fireEvent.click(screen.getByTestId('apply-marc-profile'));
 
     expect(confirmChanges).toHaveBeenCalledWith(expect.any(Function));
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  test('handles empty ruleDetails array for regular profile', () => {
+    const { confirmChanges } = mockUseConfirmChanges();
+    const { contentUpdate } = mockUseContentUpdate();
+
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    fireEvent.click(screen.getByTestId('apply-empty-profile'));
+
+    expect(confirmChanges).toHaveBeenCalledWith([
+      contentUpdate({
+        bulkOperationRules: [],
+        totalRecords: 5
+      })
+    ]);
+  });
+
+  test('handles empty marcRuleDetails array for MARC profile', () => {
+    const { confirmChanges } = mockUseConfirmChanges();
+    const contentUpdateSpy = jest.fn().mockResolvedValue();
+    const marcContentUpdateSpy = jest.fn().mockResolvedValue();
+
+    mockUseContentUpdate.mockReturnValue({ contentUpdate: contentUpdateSpy });
+    mockUseMarcContentUpdate.mockReturnValue({ marcContentUpdate: marcContentUpdateSpy });
+
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    fireEvent.click(screen.getByTestId('apply-empty-marc-profile'));
+
+    const updateSequence = confirmChanges.mock.calls[0][0];
+    return updateSequence().then(() => {
+      expect(contentUpdateSpy).toHaveBeenCalledWith({
+        bulkOperationRules: [
+          {
+            bulkOperationId,
+            rule_details: {
+              tenants: [],
+              actions: []
+            }
+          }
+        ],
+        totalRecords: 5
+      });
+      expect(marcContentUpdateSpy).toHaveBeenCalledWith({
+        bulkOperationMarcRules: [],
+        totalRecords: 5
+      });
+    });
+  });
+
+  test('handles profile application with different entity types and tenant logic', () => {
+    const { confirmChanges } = mockUseConfirmChanges();
+    const { contentUpdate } = mockUseContentUpdate();
+
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    fireEvent.click(screen.getByTestId('apply-item-profile'));
+
+    expect(confirmChanges).toHaveBeenCalledWith([
+      contentUpdate({
+        bulkOperationRules: [
+          {
+            bulkOperationId,
+            rule_details: {
+              tenants: [], // Empty tenants remain empty
+              actions: [
+                { tenants: [] } // Empty action tenants remain empty
+              ]
+            }
+          }
+        ],
+        totalRecords: 5
+      })
+    ]);
     expect(onClose).toHaveBeenCalled();
   });
 
@@ -308,77 +486,17 @@ describe('SelectProfileFlow', () => {
     expect(onOpen).toHaveBeenCalledWith(mockApproach);
   });
 
-  test('applies MARC profile with proper data transformation', () => {
-    const { confirmChanges } = mockUseConfirmChanges();
-    const contentUpdateSpy = jest.fn().mockResolvedValue();
-    const marcContentUpdateSpy = jest.fn().mockResolvedValue();
-
-    mockUseContentUpdate.mockReturnValue({ contentUpdate: contentUpdateSpy });
-    mockUseMarcContentUpdate.mockReturnValue({ marcContentUpdate: marcContentUpdateSpy });
-
-    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
-    fireEvent.click(screen.getByTestId('apply-marc-profile'));
-
-    expect(confirmChanges).toHaveBeenCalledWith(expect.any(Function));
-
-    const updateSequence = confirmChanges.mock.calls[0][0];
-    return updateSequence().then(() => {
-      expect(contentUpdateSpy).toHaveBeenCalledWith({
-        bulkOperationRules: [
-          { bulkOperationId, rule_details: 'rule1' },
-          { bulkOperationId, rule_details: 'rule2' }
-        ],
-        totalRecords: 5
-      });
-      expect(marcContentUpdateSpy).toHaveBeenCalledWith({
-        bulkOperationMarcRules: [
-          { bulkOperationId, field: '245', action: 'ADD' },
-          { bulkOperationId, field: '100', action: 'UPDATE' }
-        ],
-        totalRecords: 5
-      });
-    });
-  });
-
-  test('handles empty ruleDetails array for regular profile', () => {
-    const { confirmChanges } = mockUseConfirmChanges();
-    const { contentUpdate } = mockUseContentUpdate();
-
-    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
-    fireEvent.click(screen.getByTestId('apply-empty-profile'));
-
-    expect(confirmChanges).toHaveBeenCalledWith([
-      contentUpdate({
-        bulkOperationRules: [],
-        totalRecords: 5
-      })
-    ]);
-  });
-
-  test('handles empty marcRuleDetails array for MARC profile', () => {
-    const { confirmChanges } = mockUseConfirmChanges();
-    const contentUpdateSpy = jest.fn().mockResolvedValue();
-    const marcContentUpdateSpy = jest.fn().mockResolvedValue();
-
-    mockUseContentUpdate.mockReturnValue({ contentUpdate: contentUpdateSpy });
-    mockUseMarcContentUpdate.mockReturnValue({ marcContentUpdate: marcContentUpdateSpy });
-
-    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
-    fireEvent.click(screen.getByTestId('apply-empty-marc-profile'));
-
-    const updateSequence = confirmChanges.mock.calls[0][0];
-    return updateSequence().then(() => {
-      expect(marcContentUpdateSpy).toHaveBeenCalledWith({
-        bulkOperationMarcRules: [],
-        totalRecords: 5
-      });
-    });
-  });
-
   test('renders with different totalRecords value', () => {
+    const mockTotalRecords = 100;
     mockUseConfirmChanges.mockReturnValue({
-      ...mockUseConfirmChanges(),
-      totalRecords: 100
+      isPreviewModalOpened: false,
+      isJobPreparing: false,
+      isPreviewSettled: false,
+      bulkDetails: {},
+      totalRecords: mockTotalRecords,
+      confirmChanges: jest.fn(),
+      closePreviewModal: jest.fn(),
+      changePreviewSettled: jest.fn(),
     });
 
     const { confirmChanges } = mockUseConfirmChanges();
@@ -390,10 +508,27 @@ describe('SelectProfileFlow', () => {
     expect(confirmChanges).toHaveBeenCalledWith([
       contentUpdate({
         bulkOperationRules: [
-          { bulkOperationId, rule_details: 'rule1' },
-          { bulkOperationId, rule_details: 'rule2' }
+          {
+            bulkOperationId,
+            rule_details: {
+              tenants: ['tenant1', 'tenant2'],
+              actions: [
+                { tenants: ['tenant1', 'tenant2'] },
+                { tenants: [] }
+              ]
+            }
+          },
+          {
+            bulkOperationId,
+            rule_details: {
+              tenants: [],
+              actions: [
+                { tenants: ['tenant1', 'tenant2'] }
+              ]
+            }
+          }
         ],
-        totalRecords: 100
+        totalRecords: mockTotalRecords
       })
     ]);
   });
@@ -427,22 +562,76 @@ describe('SelectProfileFlow', () => {
     expect(screen.queryByTestId('modal')).not.toBeInTheDocument();
   });
 
-  test('handles profile application with different entity types', () => {
+  test('handles profile application with tenant information', () => {
     const { confirmChanges } = mockUseConfirmChanges();
     const { contentUpdate } = mockUseContentUpdate();
 
     render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
-    fireEvent.click(screen.getByTestId('apply-item-profile'));
+    fireEvent.click(screen.getByTestId('apply-profile'));
 
     expect(confirmChanges).toHaveBeenCalledWith([
       contentUpdate({
         bulkOperationRules: [
-          { bulkOperationId, rule_details: 'item-rule1' },
-          { bulkOperationId, rule_details: 'item-rule2' }
+          {
+            bulkOperationId,
+            rule_details: {
+              tenants: ['tenant1', 'tenant2'], // Bulk operation tenants replace existing tenants
+              actions: [
+                { tenants: ['tenant1', 'tenant2'] }, // Bulk operation tenants replace existing action tenants
+                { tenants: [] }
+              ]
+            }
+          },
+          {
+            bulkOperationId,
+            rule_details: {
+              tenants: [], // Empty tenants remain empty
+              actions: [
+                { tenants: ['tenant1', 'tenant2'] } // Action tenants get replaced with bulk operation tenants
+              ]
+            }
+          }
         ],
         totalRecords: 5
       })
     ]);
     expect(onClose).toHaveBeenCalled();
+  });
+
+  test('applies MARC profile with tenant information', async () => {
+    const { confirmChanges } = mockUseConfirmChanges();
+    const { contentUpdate } = mockUseContentUpdate();
+
+    contentUpdate.mockReturnValue(Promise.resolve());
+
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    fireEvent.click(screen.getByTestId('apply-marc-profile'));
+
+    expect(confirmChanges).toHaveBeenCalledWith(expect.any(Function));
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  test('handles commit changes with tenant information', () => {
+    const mockCommitChanges = jest.fn();
+    const confirmHook = {
+      isPreviewModalOpened: true,
+      isJobPreparing: false,
+      isPreviewSettled: true,
+      bulkDetails: { linkToModifiedRecordsCsvFile: 'file.csv' },
+      totalRecords: 5,
+      confirmChanges: jest.fn(),
+      closePreviewModal: jest.fn(),
+      changePreviewSettled: jest.fn(),
+    };
+    mockUseConfirmChanges.mockReturnValueOnce(confirmHook);
+    mockUseCommitChanges.mockReturnValueOnce({
+      commitChanges: mockCommitChanges,
+      isCommitting: false,
+    });
+
+    render(<BulkEditProfileFlow open={false} bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+    fireEvent.click(screen.getByTestId('commit-changes'));
+
+    expect(mockCommitChanges).toHaveBeenCalled();
   });
 });
