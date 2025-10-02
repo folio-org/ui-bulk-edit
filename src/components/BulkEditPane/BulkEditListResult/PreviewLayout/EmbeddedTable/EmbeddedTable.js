@@ -3,7 +3,7 @@ import { DynamicTable } from '@folio/plugin-query-builder';
 
 export const EmbeddedTable = ({ value, headTitles }) => {
   // Split rows by unit separator and cells by record separator + map to required format for DynamicTable
-  // \u001f and \u001e are non-printable characters used as delimiters
+  // \u001f is non-printable character used as delimiter
   const values = value?.split('\u001f|')
     .map(row => {
       return row.split('\u001f;')
