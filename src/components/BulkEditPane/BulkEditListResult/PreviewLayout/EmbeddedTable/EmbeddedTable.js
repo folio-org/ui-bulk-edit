@@ -1,41 +1,27 @@
 import PropTypes from 'prop-types';
-import css from './EmbeddedTable.css';
+import { DynamicTable } from '@folio/plugin-query-builder';
 
 export const EmbeddedTable = ({ value, headTitles }) => {
-  const tableBodyRows = value?.split('\u001f|')
-    .map(row => row.split('\u001f;'));
+  // Split rows by unit separator and cells by record separator + map to required format for DynamicTable
+  // \u001f is non-printable character used as delimiter
+  const values = value?.split('\u001f|')
+    .map(row => {
+      return row.split('\u001f;')
+        .reduce((acc, cell, index) => {
+          acc[headTitles[index].id] = cell;
+          return acc;
+        }, {});
+    });
 
   return (
-    <table className={css.EmbeddedTable}>
-      <thead>
-        <tr>{headTitles.map((cell, index) => (
-          <th
-            key={cell.key + index}
-            style={{ width: cell.width }}
-          >
-            {cell.value}
-          </th>
-        ))}
-        </tr>
-      </thead>
-      <tbody>
-        {tableBodyRows.map((row, index) => (
-          <tr key={`${row}-${index}`}>
-            {row.map((cell, cellIndex) => (
-              <td key={`cell-${index}-${cellIndex}`}>{cell}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <DynamicTable
+      columns={headTitles}
+      values={values}
+    />
   );
 };
 
 EmbeddedTable.propTypes = {
   value: PropTypes.string,
-  headTitles: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string,
-    value: PropTypes.string,
-    width: PropTypes.string,
-  })),
+  headTitles: DynamicTable.propTypes.columns,
 };
