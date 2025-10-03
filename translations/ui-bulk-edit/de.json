@@ -462,7 +462,7 @@
     "columns.ITEM.Missing pieces date": "Datum fehlender Teile",
     "columns.ITEM.Item damaged status": "Beschädigungsstatus des Exemplars",
     "columns.ITEM.Item damaged status date": "Beschädigungsstatus des Exemplars (Datum)",
-    "columns.ITEM.Material type": "Materialarten",
+    "columns.ITEM.Material type": "Materialart",
     "columns.ITEM.Is bound with": "Ist gebunden mit",
     "columns.ITEM.Bound with titles": "Konvoluttitel",
     "columns.ITEM.Permanent loan type": "Dauerhafter Leihgabe-Typ",
@@ -544,7 +544,7 @@
     "list.preview.publication.publisher": "Verlag",
     "list.preview.publication.publisherRole": "Verlagsrolle",
     "list.preview.publication.placeOfPublication": "Publikationsort",
-    "list.preview.publication.publicationDate": "Veröffentlichungsdatum",
+    "list.preview.publication.publicationDate": "Erscheinungsdatum",
     "columns.INSTANCE.Publication": "Veröffentlichung",
     "titleManager.settings": "Massenbearbeitungseinstellungen",
     "File uploading failed : Cannot upload a file. Reason: file is empty.": "Die hochgeladene Datei ist leer.",
@@ -592,8 +592,8 @@
     "previewModal.selectProfiles": "{entityType}-Massenbearbeitungsprofil auswählen",
     "layer.options.setRecordsForDelete": "Datensätze zur Löschung vormerken",
     "columns.INSTANCE.Set for deletion": "Zur Löschung vormerken",
-    "settings.profiles.form.name.copy": "Copy of {name}",
-    "settings.profiles.columns.status.active": "Active",
-    "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
+    "settings.profiles.form.name.copy": "Kopie von {name}",
+    "settings.profiles.columns.status.active": "Aktiv",
+    "ariaLabel.createInstanceProfile": "Instanz-FOLIO-Profil erstellen",
+    "ariaLabel.createInstanceMarcProfile": "Instanz-MARC-Profil erstellen"
 }
