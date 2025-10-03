@@ -207,7 +207,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
 
 BulkEditProfileFlow.propTypes = {
   open: PropTypes.bool.isRequired,
-  bulkOperationId: PropTypes.string.isRequired,
+  bulkOperationId: PropTypes.string,
   onClose: PropTypes.func.isRequired,
   onOpen: PropTypes.func.isRequired,
 };

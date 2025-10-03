@@ -55,7 +55,7 @@ export const BulkEditProfilesSearchAndView = ({
 };
 
 BulkEditProfilesSearchAndView.propTypes = {
-  entityType: PropTypes.string.isRequired,
+  entityType: PropTypes.string,
   profiles: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

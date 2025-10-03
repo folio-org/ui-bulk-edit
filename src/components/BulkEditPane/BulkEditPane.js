@@ -168,7 +168,7 @@ export const BulkEditPane = () => {
   );
 
   const renderApproaches = (paneProps) => (
-    <TenantsProvider tenants={bulkOperationTenants} showLocal>
+    <TenantsProvider tenants={bulkOperationTenants || []} showLocal>
       {/* BULK-EDIT IDENTIFIERS AND QUERY */}
       {isInAppLayerOpen && (
       <BulkEditFolioLayer
