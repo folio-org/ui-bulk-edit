@@ -71,8 +71,7 @@
           "bulk-operations.collection.get",
           "bulk-operations.item.get",
           "usergroups.collection.get",
-          "data-export.job.item.download",
-          "configuration.entries.collection.get"
+          "data-export.job.item.download"
         ]
       },
       {
@@ -316,6 +315,7 @@
     "testing-library-selector": "^0.2.1"
   },
   "dependencies": {
+    "@folio/plugin-query-builder": "^3.0.0",
     "@folio/stripes-acq-components": "^7.0.0",
     "@folio/stripes-data-transfer-components": "^7.0.0",
     "@testing-library/react-hooks": "^8.0.1",

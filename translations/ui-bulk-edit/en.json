@@ -83,7 +83,7 @@
   "list.preview.electronicAccess.relationship": "URL relationship",
   "list.preview.electronicAccess.uri": "URI",
   "list.preview.electronicAccess.linkText": "Link text",
-  "list.preview.electronicAccess.materialsSpecified": "Materials specified",
+  "list.preview.electronicAccess.materialsSpecified": "Material specified",
   "list.preview.electronicAccess.publicNote": "URL public note",
 
   "list.preview.subject.subjectHeadings": "Subject headings",
@@ -401,7 +401,7 @@
   "layer.options.holdings.suppress": "Suppress from discovery",
   "layer.options.holdings.urlRelationship": "URL relationship",
   "layer.options.holdings.linkText": "Link text",
-  "layer.options.holdings.materialsSpecified": "Materials specified",
+  "layer.options.holdings.materialsSpecified": "Material specified",
   "layer.options.holdings.urlPublic": "URL public note",
   "layer.options.instances.staffSuppress": "Staff suppress",
   "layer.options.instances.suppress": "Suppress from discovery",
