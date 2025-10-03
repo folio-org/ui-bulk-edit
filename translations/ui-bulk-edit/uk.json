@@ -593,7 +593,7 @@
     "layer.options.setRecordsForDelete": "Відмітити записи для видалення",
     "columns.INSTANCE.Set for deletion": "Призначене для видалення",
     "settings.profiles.form.name.copy": "Копія {name}",
-    "settings.profiles.columns.status.active": "Active",
-    "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
+    "settings.profiles.columns.status.active": "Активно",
+    "ariaLabel.createInstanceProfile": "Створити профіль біб.запису (інстансу) FOLIO",
+    "ariaLabel.createInstanceMarcProfile": "Створити профіль MARC біб.запису (інстансу)"
 }
