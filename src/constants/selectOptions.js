@@ -549,7 +549,7 @@ export const EDIT_CAPABILITIES_OPTIONS = [
   },
   {
     value: CAPABILITIES.ITEM,
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.inventory" />,
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.items" />,
     disabled: false,
   },
   {
