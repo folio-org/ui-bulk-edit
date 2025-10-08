@@ -72,7 +72,7 @@
   "list.result.emptyMessage.holdings.ITEM_BARCODE": "Drag and drop or choose file with item barcodes.",
   "list.filters.capabilities.title": "Record types",
   "list.filters.capabilities.users": "Users",
-  "list.filters.capabilities.inventory": "Inventory - items",
+  "list.filters.capabilities.items": "Inventory - items",
   "list.filters.capabilities.holdings": "Inventory - holdings",
   "list.filters.capabilities.instances": "Inventory - instances",
   "list.filters.capabilities.circulation": "Circulation",

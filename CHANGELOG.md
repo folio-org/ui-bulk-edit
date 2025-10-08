@@ -39,6 +39,7 @@
 * [UIBULKED-686](https://folio-org.atlassian.net/browse/UIBULKED-686) Reuse DynamicTable from Query Builder plugin
 * [UIBULKED-689](https://folio-org.atlassian.net/browse/UIBULKED-689) Rename "Materials specified" to "Material specified" sub-column under Electronic access
 * [UIBULKED-664](https://folio-org.atlassian.net/browse/UIBULKED-664) Update the ui-bulk-edit permission sets to not use the mod-configuration permission
+* [UIBULKED-716](https://folio-org.atlassian.net/browse/UIBULKED-716) Configure query-plugin to show Record type information
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 

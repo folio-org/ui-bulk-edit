@@ -96,6 +96,12 @@ export const QueryTab = ({ onClearState }) => {
     });
   };
 
+  const getEntityTypeLabel = (entityType) => {
+    const lowerCaseEntityType = entityType?.labelAlias.toLowerCase() || '';
+
+    return formatMessage({ id: `ui-bulk-edit.list.filters.capabilities.${lowerCaseEntityType}` });
+  };
+
 
   return (
     <>
@@ -108,6 +114,7 @@ export const QueryTab = ({ onClearState }) => {
       <Pluggable
         componentType="builder"
         type="query-builder"
+        getEntityTypeLabel={getEntityTypeLabel}
         disabled={isQueryBuilderDisabled}
         key={recordTypeId}
         entityTypeDataSource={entityTypeDataSource}
