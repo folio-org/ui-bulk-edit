@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import { Pluggable } from '@folio/stripes/core';
 import { buildSearch } from '@folio/stripes-acq-components';
@@ -99,7 +99,7 @@ export const QueryTab = ({ onClearState }) => {
   const getEntityTypeLabel = (entityType) => {
     const lowerCaseEntityType = entityType?.labelAlias.toLowerCase() || '';
 
-    return <FormattedMessage id={`ui-bulk-edit.list.filters.capabilities.${lowerCaseEntityType}`} />;
+    return formatMessage({ id: `ui-bulk-edit.list.filters.capabilities.${lowerCaseEntityType}` });
   };
 
 
