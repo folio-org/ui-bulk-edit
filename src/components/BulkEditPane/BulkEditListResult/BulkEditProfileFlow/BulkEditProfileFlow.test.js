@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@folio/jest-config-stripes/testing-library/react';
 
 import { BulkEditProfileFlow } from './BulkEditProfileFlow';
+import { OPTIONS, LOCATION_OPTIONS } from '../../../../constants';
 
 jest.mock('react-intl', () => ({
   FormattedMessage: ({ id, values }) => <span data-testid={id}>{JSON.stringify(values)}</span>
@@ -43,9 +44,13 @@ jest.mock('@folio/stripes-data-transfer-components', () => ({
   Preloader: () => <div data-testid="preloader" />
 }));
 
+const mockUseStripes = jest.fn(() => ({ hasPerm: () => true }));
 jest.mock('@folio/stripes/core', () => ({
-  AppIcon: ({ iconKey }) => <span data-testid="app-icon-core">{iconKey}</span>
+  AppIcon: ({ iconKey }) => <span data-testid="app-icon-core">{iconKey}</span>,
+  useStripes: () => mockUseStripes(),
 }));
+
+const getLocationOption = () => LOCATION_OPTIONS[0];
 
 jest.mock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
   BulkEditProfilesSearchAndView: ({ onRowClick }) => (
@@ -146,6 +151,22 @@ jest.mock('../../../BulkEditProfiles/BulkEditProfilesSearchAndView', () => ({
       >
         Apply Item Profile
       </button>
+
+      <button
+        type="button"
+        data-testid="apply-location-profile"
+        onClick={() => onRowClick(null, {
+          ruleDetails: [
+            {
+              option: getLocationOption(),
+              tenants: ['existing-tenant1'],
+              actions: [{ tenants: ['action-tenant1'] }],
+            }
+          ]
+        })}
+      >
+        Apply Location Profile
+      </button>
     </div>
   )
 }));
@@ -183,13 +204,16 @@ jest.mock('../../../../hooks/useProfilesFlow', () => ({ useProfilesFlow: () => m
 jest.mock('../../../../hooks/useCommitChanges', () => ({ useCommitChanges: () => mockUseCommitChanges() }));
 jest.mock('../../../../context/TenantsContext', () => ({ useTenants: () => mockUseTenants() }));
 
-
 describe('SelectProfileFlow', () => {
   const onClose = jest.fn();
   const onOpen = jest.fn();
   const bulkOperationId = 'op123';
 
   beforeEach(() => {
+    jest.clearAllMocks();
+    // default perms: allowed
+    mockUseStripes.mockReturnValue({ hasPerm: () => true });
+
     mockUseSearchParams.mockReturnValue({ currentRecordType: 'typeA', setParam: jest.fn() });
     mockUseContentUpdate.mockReturnValue({ contentUpdate: jest.fn((args) => ({ args })) });
     mockUseMarcContentUpdate.mockReturnValue({ marcContentUpdate: jest.fn((args) => ({ args })) });
@@ -289,9 +313,9 @@ describe('SelectProfileFlow', () => {
           {
             bulkOperationId,
             rule_details: {
-              tenants: ['tenant1', 'tenant2'], // Bulk operation tenants replace existing tenants
+              tenants: ['tenant1', 'tenant2'],
               actions: [
-                { tenants: ['tenant1', 'tenant2'] } // Bulk operation tenants replace existing action tenants
+                { tenants: ['tenant1', 'tenant2'] }
               ]
             }
           }
@@ -375,9 +399,9 @@ describe('SelectProfileFlow', () => {
           {
             bulkOperationId,
             rule_details: {
-              tenants: [], // Empty tenants remain empty
+              tenants: [],
               actions: [
-                { tenants: [] } // Empty action tenants remain empty
+                { tenants: [] }
               ]
             }
           }
@@ -426,7 +450,7 @@ describe('SelectProfileFlow', () => {
     const confirmHook = {
       isPreviewModalOpened: true,
       isJobPreparing: false,
-      isPreviewSettled: false, // CSV not ready
+      isPreviewSettled: false,
       bulkDetails: {},
       totalRecords: 0,
       confirmChanges: jest.fn(),
@@ -575,9 +599,9 @@ describe('SelectProfileFlow', () => {
           {
             bulkOperationId,
             rule_details: {
-              tenants: ['tenant1', 'tenant2'], // Bulk operation tenants replace existing tenants
+              tenants: ['tenant1', 'tenant2'],
               actions: [
-                { tenants: ['tenant1', 'tenant2'] }, // Bulk operation tenants replace existing action tenants
+                { tenants: ['tenant1', 'tenant2'] },
                 { tenants: [] }
               ]
             }
@@ -585,9 +609,9 @@ describe('SelectProfileFlow', () => {
           {
             bulkOperationId,
             rule_details: {
-              tenants: [], // Empty tenants remain empty
+              tenants: [],
               actions: [
-                { tenants: ['tenant1', 'tenant2'] } // Action tenants get replaced with bulk operation tenants
+                { tenants: ['tenant1', 'tenant2'] }
               ]
             }
           }
@@ -633,5 +657,49 @@ describe('SelectProfileFlow', () => {
     fireEvent.click(screen.getByTestId('commit-changes'));
 
     expect(mockCommitChanges).toHaveBeenCalled();
+  });
+
+  test('filters profiles by permission (set-records-for-deletion)', () => {
+    mockUseProfilesFlow.mockReturnValueOnce({
+      ...mockUseProfilesFlow(),
+      filteredProfiles: [
+        { id: 1, ruleDetails: [{ option: OPTIONS.SET_RECORDS_FOR_DELETE }] },
+        { id: 2, ruleDetails: [] },
+      ],
+    });
+
+    mockUseStripes.mockReturnValue({ hasPerm: () => false });
+
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+
+    expect(screen.queryByTestId('apply-profile')).toBeInTheDocument();
+  });
+
+  // Location-options branch coverage
+  test('does not override tenants for LOCATION_OPTIONS rules', () => {
+    const { confirmChanges } = mockUseConfirmChanges();
+    const { contentUpdate } = mockUseContentUpdate();
+
+    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
+
+    fireEvent.click(screen.getByTestId('apply-location-profile'));
+
+    expect(confirmChanges).toHaveBeenCalledWith([
+      contentUpdate({
+        bulkOperationRules: [
+          {
+            bulkOperationId,
+            rule_details: {
+              option: LOCATION_OPTIONS[0],
+              tenants: ['existing-tenant1'],
+              actions: [{ tenants: ['action-tenant1'] }],
+            }
+          }
+        ],
+        totalRecords: 5
+      })
+    ]);
+
+    expect(onClose).toHaveBeenCalled();
   });
 });

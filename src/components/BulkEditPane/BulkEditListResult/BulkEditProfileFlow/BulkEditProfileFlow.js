@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Loading, Modal, PaneHeader } from '@folio/stripes/components';
 
 import { Preloader } from '@folio/stripes-data-transfer-components';
-import { AppIcon } from '@folio/stripes/core';
+import { AppIcon, useStripes } from '@folio/stripes/core';
 
 import { BulkEditProfilesSearchAndView } from '../../../BulkEditProfiles/BulkEditProfilesSearchAndView';
 import { useProfilesFlow } from '../../../../hooks/useProfilesFlow';
@@ -14,6 +14,7 @@ import { useConfirmChanges } from '../../../../hooks/useConfirmChanges';
 import { useContentUpdate, useMarcContentUpdate } from '../../../../hooks/api';
 import { useCommitChanges } from '../../../../hooks/useCommitChanges';
 import {
+  OPTIONS,
   APPROACHES,
   CAPABILITIES,
   LOCATION_OPTIONS,
@@ -27,7 +28,26 @@ import css from '../../BulkEditPane.css';
 
 const MAX_HEIGHT = 600;
 
+const filterProfilesByPermission = (profiles, stripes) => {
+  const hasRecordsForDeletePermission = stripes.hasPerm('ui-inventory.instance.set-records-for-deletion.execute');
+
+  return profiles?.filter(profile => {
+    // If there are no rules, no need to check permissions
+    if (!profile.ruleDetails?.length) return true;
+
+    // Check each rule, if any rule requires a permission the user doesn't have, filter out the profile
+    return profile.ruleDetails?.every(rule => {
+      if (rule.option === OPTIONS.SET_RECORDS_FOR_DELETE) {
+        return hasRecordsForDeletePermission;
+      }
+
+      return true;
+    });
+  });
+};
+
 export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) => {
+  const stripes = useStripes();
   const { contentUpdate } = useContentUpdate({ id: bulkOperationId });
   const { marcContentUpdate } = useMarcContentUpdate({ id: bulkOperationId });
   const { approach, currentRecordType, setParam } = useSearchParams();
@@ -57,6 +77,8 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
     clearProfilesState
   } = useProfilesFlow([entityType], { enabled: open, keepPreviousData: open });
 
+  const profilesFilteredByPerms = filterProfilesByPermission(filteredProfiles, stripes);
+
   const { commitChanges, isCommitting } = useCommitChanges({
     bulkOperationId,
     onChangesCommited: () => {
@@ -76,7 +98,12 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
 
     const bulkOperationRules = profile.ruleDetails.map(rule => {
       // Location rules do not require tenants modification
-      if (LOCATION_OPTIONS.includes(rule.option)) return rule;
+      if (LOCATION_OPTIONS.includes(rule.option)) {
+        return {
+          bulkOperationId,
+          rule_details: rule
+        };
+      }
 
       return {
         bulkOperationId,
@@ -131,7 +158,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
     (
       <FormattedMessage
         id="ui-bulk-edit.settings.profiles.paneSub"
-        values={{ count: filteredProfiles?.length }}
+        values={{ count: profilesFilteredByPerms?.length }}
       />
     )
   );
@@ -171,7 +198,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
           <BulkEditProfilesSearchAndView
             entityType={entityType}
             isLoading={isLoading}
-            profiles={filteredProfiles}
+            profiles={profilesFilteredByPerms}
             searchTerm={searchTerm}
             sortOrder={sortOrder}
             sortDirection={sortDirection}
