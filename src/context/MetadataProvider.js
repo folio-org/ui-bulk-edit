@@ -24,7 +24,7 @@ export function useMetadata() {
 
 MetadataProvider.propTypes = {
   value: PropTypes.shape({
-    metadata: Object.shape({
+    metadata: PropTypes.shape({
       createdDate: PropTypes.string,
       createdByUserId: PropTypes.string,
       updatedDate: PropTypes.string,
