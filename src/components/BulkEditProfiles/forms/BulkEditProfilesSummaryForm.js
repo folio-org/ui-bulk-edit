@@ -2,15 +2,25 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Accordion, Checkbox, Col, Label, Layout, Row, TextArea, TextField } from '@folio/stripes/components';
+import { ViewMetaData } from '@folio/stripes/smart-components';
+import { useMetadata } from '../../../context/MetadataProvider';
 
 export const BulkEditProfilesSummaryForm = ({ formState, lockedDisabled, onChange }) => {
   const intl = useIntl();
   const { name, description, locked } = formState;
+  const { metadata } = useMetadata();
 
   return (
     <Accordion
       label={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.summary' })}
     >
+      {metadata && (
+        <Row>
+          <Col xs={12}>
+            <ViewMetaData metadata={metadata} />
+          </Col>
+        </Row>
+      )}
       <Row>
         <Col xs={6}>
           <TextField

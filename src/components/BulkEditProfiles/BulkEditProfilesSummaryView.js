@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -6,15 +6,9 @@ import { Accordion, Checkbox, Col, KeyValue, Label, Row } from '@folio/stripes/c
 import { ViewMetaData } from '@folio/stripes/smart-components';
 
 import { PROFILE_DETAILS_ACCORDIONS } from './constants';
+import { getProfileMetadata } from '../../utils/helpers';
 
 export const BulkEditProfilesSummaryView = ({ profile }) => {
-  const metadata = useMemo(() => ({
-    createdDate: profile?.createdDate,
-    createdByUserId: profile?.createdBy,
-    updatedDate: profile?.updatedDate,
-    updatedByUserId: profile?.updatedBy,
-  }), [profile]);
-
   return (
     <Accordion
       id={PROFILE_DETAILS_ACCORDIONS.SUMMARY}
@@ -22,7 +16,7 @@ export const BulkEditProfilesSummaryView = ({ profile }) => {
     >
       <Row>
         <Col xs={12}>
-          <ViewMetaData metadata={metadata} />
+          <ViewMetaData metadata={getProfileMetadata(profile)} />
         </Col>
       </Row>
       <Row start="xs">

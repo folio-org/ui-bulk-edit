@@ -12,6 +12,7 @@ import { ruleDetailsToSource } from '../../BulkEditPane/BulkEditListResult/BulkE
 import { BulkEditProfilesForm } from '../forms/BulkEditProfilesForm';
 import { useSearchParams } from '../../../hooks';
 import { marcRuleDetailsToSource } from '../../BulkEditPane/BulkEditListResult/BulkEditMarc/helpers';
+import { MetadataProvider } from '../../../context/MetadataProvider';
 
 export const BulkEditDuplicateProfile = ({ onClose }) => {
   const intl = useIntl();
@@ -44,15 +45,17 @@ export const BulkEditDuplicateProfile = ({ onClose }) => {
 
   return (
     <TitleManager record={title}>
-      <BulkEditProfilesForm
-        title={title}
-        onClose={onClose}
-        onSave={handleSave}
-        initialValues={initialValues}
-        initialRuleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
-        initialMarcRuleDetails={marcRuleDetailsToSource(profile?.marcRuleDetails)}
-        isLoading={isProfileCreating}
-      />
+      <MetadataProvider value={{ metadata: null }}>
+        <BulkEditProfilesForm
+          title={title}
+          onClose={onClose}
+          onSave={handleSave}
+          initialValues={initialValues}
+          initialRuleDetails={ruleDetailsToSource(profile?.ruleDetails, entityType)}
+          initialMarcRuleDetails={marcRuleDetailsToSource(profile?.marcRuleDetails)}
+          isLoading={isProfileCreating}
+        />
+      </MetadataProvider>
     </TitleManager>
   );
 };

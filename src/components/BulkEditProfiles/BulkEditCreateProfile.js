@@ -3,10 +3,11 @@ import { useIntl } from 'react-intl';
 
 import { TitleManager } from '@folio/stripes/core';
 
-import { useProfileCreate } from '../../hooks/api/useProfileCreate';
+import { useProfileCreate } from '../../hooks/api';
 import { BulkEditProfilesForm } from './forms/BulkEditProfilesForm';
 import { RECORD_TYPES_PROFILES_MAPPING } from '../../constants';
 import { useSearchParams } from '../../hooks';
+import { MetadataProvider } from '../../context/MetadataProvider';
 
 export const BulkEditCreateProfile = ({ onClose }) => {
   const intl = useIntl();
@@ -28,12 +29,14 @@ export const BulkEditCreateProfile = ({ onClose }) => {
 
   return (
     <TitleManager record={title}>
-      <BulkEditProfilesForm
-        title={title}
-        onClose={onClose}
-        onSave={handleSave}
-        isLoading={isProfileCreating}
-      />
+      <MetadataProvider value={{ metadata: null }}>
+        <BulkEditProfilesForm
+          title={title}
+          onClose={onClose}
+          onSave={handleSave}
+          isLoading={isProfileCreating}
+        />
+      </MetadataProvider>
     </TitleManager>
   );
 };
