@@ -111,7 +111,7 @@ describe('BulkEdit', () => {
     renderBulkEdit();
 
     await act(async () => {
-      await userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.items/ }));
+      await userEvent.click(screen.getByRole('radio', { name: /filters.capabilities.item/ }));
     });
 
     const options = [

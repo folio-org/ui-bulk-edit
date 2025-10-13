@@ -6,6 +6,7 @@ import { render, screen, fireEvent, waitFor } from '@folio/jest-config-stripes/t
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import { BulkEditProfilesForm } from './BulkEditProfilesForm';
+import { MetadataProvider } from '../../../context/MetadataProvider';
 
 jest.mock('../../../hooks/useOptionsWithTenants', () => ({
   useOptionsWithTenants: jest.fn(() => ({
@@ -27,11 +28,13 @@ describe('BulkEditProfilesForm', () => {
   const renderForm = (props = {}) => render(
     <IntlProvider locale="en">
       <MemoryRouter>
-        <BulkEditProfilesForm
-          onClose={jest.fn()}
-          onSave={jest.fn()}
-          {...props}
-        />
+        <MetadataProvider value={{ metadata: props.metadata || null }}>
+          <BulkEditProfilesForm
+            onClose={jest.fn()}
+            onSave={jest.fn()}
+            {...props}
+          />
+        </MetadataProvider>
       </MemoryRouter>
     </IntlProvider>
   );
@@ -57,6 +60,12 @@ describe('BulkEditProfilesForm', () => {
 
     expect(nameInput).toHaveValue('Test Profile');
     expect(descriptionInput).toHaveValue('This is a description');
+  });
+
+  it('shows metadata when it is provided', async () => {
+    renderForm({ metadata: { createdDate: '2023-01-01', createdByUserId: 'admin', updatedDate: '2023-01-02', updatedByUserId: 'editor' } });
+
+    expect(screen.getByText(/ViewMetaData/i)).toBeInTheDocument();
   });
 
   it('toggles lock checkbox', () => {
