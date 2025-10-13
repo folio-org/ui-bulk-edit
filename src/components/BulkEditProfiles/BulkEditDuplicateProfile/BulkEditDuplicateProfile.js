@@ -13,6 +13,7 @@ import { BulkEditProfilesForm } from '../forms/BulkEditProfilesForm';
 import { useSearchParams } from '../../../hooks';
 import { marcRuleDetailsToSource } from '../../BulkEditPane/BulkEditListResult/BulkEditMarc/helpers';
 import { MetadataProvider } from '../../../context/MetadataProvider';
+import { getProfileMetadata } from '../../../utils/helpers';
 
 export const BulkEditDuplicateProfile = ({ onClose }) => {
   const intl = useIntl();
@@ -45,7 +46,7 @@ export const BulkEditDuplicateProfile = ({ onClose }) => {
 
   return (
     <TitleManager record={title}>
-      <MetadataProvider value={{ metadata: null }}>
+      <MetadataProvider value={{ metadata: getProfileMetadata(profile) }}>
         <BulkEditProfilesForm
           title={title}
           onClose={onClose}
