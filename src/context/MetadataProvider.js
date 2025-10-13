@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { createContext, useContext, useMemo } from 'react';
 
 const MetadataContext = createContext(null);
 
@@ -20,3 +21,15 @@ export function useMetadata() {
   }
   return ctx;
 }
+
+MetadataProvider.propTypes = {
+  value: PropTypes.shape({
+    metadata: Object.shape({
+      createdDate: PropTypes.string,
+      createdByUserId: PropTypes.string,
+      updatedDate: PropTypes.string,
+      updatedByUserId: PropTypes.string,
+    })
+  }),
+  children: PropTypes.node.isRequired,
+};
