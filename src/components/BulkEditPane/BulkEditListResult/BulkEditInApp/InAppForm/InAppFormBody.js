@@ -74,7 +74,9 @@ export const InAppFormBody = ({
       ...currentAction,
       [name]: action,
       tenants: [], // reset tenants when action changes
-      value: getPreselectedValue(option, action)
+      value: getPreselectedValue(option, action),
+      // reset parameters values when action changes
+      ...(currentAction.parameters ? { parameters: currentAction.parameters.map(param => ({ ...param, value: false })) } : {})
     }));
 
     // If this is the first action in the row, we need to update the next actions based on the selected values
