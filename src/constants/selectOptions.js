@@ -544,17 +544,17 @@ export const EDIT_CAPABILITIES_OPTIONS = [
   },
   {
     value: CAPABILITIES.INSTANCE,
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.instances" />,
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.instance" />,
     disabled: false,
   },
   {
     value: CAPABILITIES.ITEM,
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.items" />,
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.item" />,
     disabled: false,
   },
   {
     value: CAPABILITIES.USER,
-    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.users" />,
+    label: <FormattedMessage id="ui-bulk-edit.list.filters.capabilities.user" />,
     disabled: false,
   },
 ];

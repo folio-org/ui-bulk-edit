@@ -271,3 +271,15 @@ export const getFormErrors = (object, schema) => {
 export const filterOptionsByPermissions = (options, stripes) => {
   return options.filter(option => !option.perms || option.perms.some(opt => stripes.hasPerm(opt)));
 };
+
+/**
+ * Collect metadata from a profile object.
+ * @param profile
+ * @returns {{createdDate: number|string|*, createdByUserId: *, updatedDate: *, updatedByUserId: string|*}}
+ */
+export const getProfileMetadata = (profile) => ({
+  createdDate: profile?.createdDate,
+  createdByUserId: profile?.createdBy,
+  updatedDate: profile?.updatedDate,
+  updatedByUserId: profile?.updatedBy,
+});

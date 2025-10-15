@@ -10,6 +10,8 @@ import { useBulkEditProfile } from '../../hooks/api';
 import { ruleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEditInApp/helpers';
 import { useSearchParams } from '../../hooks';
 import { marcRuleDetailsToSource } from '../BulkEditPane/BulkEditListResult/BulkEditMarc/helpers';
+import { MetadataProvider } from '../../context/MetadataProvider';
+import { getProfileMetadata } from '../../utils/helpers';
 
 export const BulkEditUpdateProfile = ({ onClose }) => {
   const { id } = useParams();
@@ -35,15 +37,17 @@ export const BulkEditUpdateProfile = ({ onClose }) => {
 
   return (
     <TitleManager record={profile?.name}>
-      <BulkEditProfilesForm
-        title={profile.name}
-        onClose={onClose}
-        onSave={handleSave}
-        initialValues={initialValues}
-        initialRuleDetails={ruleDetailsToSource(profile.ruleDetails, entityType)}
-        initialMarcRuleDetails={marcRuleDetailsToSource(profile.marcRuleDetails)}
-        isLoading={isProfileUpdating}
-      />
+      <MetadataProvider value={{ metadata: getProfileMetadata(profile) }}>
+        <BulkEditProfilesForm
+          title={profile.name}
+          onClose={onClose}
+          onSave={handleSave}
+          initialValues={initialValues}
+          initialRuleDetails={ruleDetailsToSource(profile.ruleDetails, entityType)}
+          initialMarcRuleDetails={marcRuleDetailsToSource(profile.marcRuleDetails)}
+          isLoading={isProfileUpdating}
+        />
+      </MetadataProvider>
     </TitleManager>
   );
 };

@@ -8,14 +8,14 @@ import { buildSearch } from '@folio/stripes-acq-components';
 import { Capabilities } from '../../../shared/Capabilities/Capabilities';
 import { useRecordTypes } from '../../../../hooks/api/useRecordTypes';
 import { useQueryPlugin } from '../../../../hooks/api';
-import { useSearchParams } from '../../../../hooks/useSearchParams';
 import {
+  useSearchParams,
   useBulkPermissions,
   useLocationFilters,
   usePathParams
 } from '../../../../hooks';
 import { findRecordType, getCapabilityOptions } from '../../../../utils/helpers';
-import { CRITERIA, QUERY_FILTERS } from '../../../../constants';
+import { CRITERIA, QUERY_FILTERS, TRANSLATION_SUFFIX } from '../../../../constants';
 
 
 export const QueryTab = ({ onClearState }) => {
@@ -96,10 +96,8 @@ export const QueryTab = ({ onClearState }) => {
     });
   };
 
-  const getEntityTypeLabel = (entityType) => {
-    const lowerCaseEntityType = entityType?.labelAlias.toLowerCase() || '';
-
-    return formatMessage({ id: `ui-bulk-edit.list.filters.capabilities.${lowerCaseEntityType}` });
+  const getEntityTypeLabel = () => {
+    return formatMessage({ id: `ui-bulk-edit.list.filters.capabilities${TRANSLATION_SUFFIX[queryRecordType]}` });
   };
 
 
