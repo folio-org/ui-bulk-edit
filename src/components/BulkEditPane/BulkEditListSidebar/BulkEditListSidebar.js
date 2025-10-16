@@ -1,17 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
-import { ButtonGroup } from '@folio/stripes/components';
+import { ButtonGroup, getFirstFocusable } from '@folio/stripes/components';
 import { buildSearch } from '@folio/stripes-acq-components';
 
 import { CRITERIA } from '../../../constants';
-import { useBulkPermissions } from '../../../hooks';
+import { useBulkPermissions, useSearchParams } from '../../../hooks';
 import { TabsFilter } from './TabsFilter/TabsFilter';
 import { IdentifierTab } from './IdentifierTab/IdentifierTab';
 import { QueryTab } from './QueryTab/QueryTab';
 import { LogsTab } from './LogsTab/LogsTab';
-import { useSearchParams } from '../../../hooks/useSearchParams';
 import { BULK_OPERATION_DETAILS_KEY } from '../../../hooks/api';
 import { RootContext } from '../../../context/RootContext';
 
@@ -25,7 +24,7 @@ export const BulkEditListSidebar = () => {
     setIsFileUploaded,
     setVisibleColumns,
   } = useContext(RootContext);
-
+  const sidebarRef = useRef(null);
   const isQuery = criteria === CRITERIA.QUERY;
   const isLogs = criteria === CRITERIA.LOGS;
   const isIdentifier = criteria === CRITERIA.IDENTIFIER;
@@ -42,8 +41,13 @@ export const BulkEditListSidebar = () => {
     queryClient.removeQueries({ queryKey: [BULK_OPERATION_DETAILS_KEY] });
   };
 
+  useEffect(() => {
+    const firstFocusable = getFirstFocusable(sidebarRef.current);
+    if (firstFocusable) firstFocusable.focus();
+  }, []);
+
   return (
-    <>
+    <div ref={sidebarRef}>
       <ButtonGroup fullWidth>
         <TabsFilter
           criteria={criteria}
@@ -63,6 +67,6 @@ export const BulkEditListSidebar = () => {
 
       {/* LOGS TAB */}
       {isLogs && <LogsTab />}
-    </>
+    </div>
   );
 };
