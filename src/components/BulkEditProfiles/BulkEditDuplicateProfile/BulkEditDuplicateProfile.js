@@ -28,7 +28,7 @@ export const BulkEditDuplicateProfile = ({ onClose }) => {
     name: profile?.name
       && intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.form.name.copy' }, { name: profile?.name }),
     description: profile?.description,
-    locked: profile?.locked,
+    locked: false,
     entityType,
   };
 
