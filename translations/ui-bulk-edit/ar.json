@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "يمكن تحميل الملفات ذات امتداد .csv فقط.",
     "modal.fileExtensions.actionButton": "اختر ملفات أخرى للتحميل",
     "list.filters.capabilities.title": "أنواع التسجيلات",
-    "list.filters.capabilities.users": "المستخدمين",
-    "list.filters.capabilities.inventory": "المخزون - المواد",
     "list.filters.capabilities.circulation": "الإعارة",
     "list.filters.capabilities.acquisition": "التزويد",
     "start.edit": "بدء التحرير بالجملة",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "مدخلات منقح العمود",
     "actionMenu.placeholder": "بحث اسم العمود",
     "list.result.emptyMessage.instance": "Select a record identifier.",
-    "list.filters.capabilities.instances": "Inventory - instances",
     "list.filters.recordIdentifier.instance.instanceUUID": "Instance UUIDs",
     "list.filters.recordIdentifier.instance.instanceHRID": "Instance HRIDs",
     "list.filters.recordIdentifier.instance.instanceISBN": "ردمك",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Copy of {name}",
     "settings.profiles.columns.status.active": "Active",
     "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }

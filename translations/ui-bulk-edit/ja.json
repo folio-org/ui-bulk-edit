@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded.",
     "modal.fileExtensions.actionButton": "Choose other file to upload",
     "list.filters.capabilities.title": "Record types",
-    "list.filters.capabilities.users": "ユーザー",
-    "list.filters.capabilities.inventory": "インベントリ - 資料",
     "list.filters.capabilities.circulation": "貸出/返却",
     "list.filters.capabilities.acquisition": "収集",
     "start.edit": "一括編集の開始",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "Column filter input",
     "actionMenu.placeholder": "Search column name",
     "list.result.emptyMessage.instance": "レコードIDの選択",
-    "list.filters.capabilities.instances": "インベントリ - インスタンス",
     "list.filters.recordIdentifier.instance.instanceUUID": "インスタンスUUID",
     "list.filters.recordIdentifier.instance.instanceHRID": "インスタンスHRID",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Copy of {name}",
     "settings.profiles.columns.status.active": "Active",
     "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }

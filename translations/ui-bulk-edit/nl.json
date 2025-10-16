@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "Alleen bestanden met de extensie .csv kunnen worden geladen.",
     "modal.fileExtensions.actionButton": "Kies een ander bestand om te laden",
     "list.filters.capabilities.title": "Soorten records",
-    "list.filters.capabilities.users": "Gebruikers",
-    "list.filters.capabilities.inventory": "Collectiebezit - items",
     "list.filters.capabilities.circulation": "Circulatie",
     "list.filters.capabilities.acquisition": "Acquisitie",
     "start.edit": "Bulkbewerking starten",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "Invoer kolomfilter",
     "actionMenu.placeholder": "Kolomnaam zoeken",
     "list.result.emptyMessage.instance": "Selecteer een record-identificatiekenmerk.",
-    "list.filters.capabilities.instances": "Collectiebezit - instances",
     "list.filters.recordIdentifier.instance.instanceUUID": "Instance-UUID's",
     "list.filters.recordIdentifier.instance.instanceHRID": "Instance-HRID's",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Kopie van {name}",
     "settings.profiles.columns.status.active": "Actief",
     "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }

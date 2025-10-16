@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "Nahrát lze pouze soubor s příponou .csv.",
     "modal.fileExtensions.actionButton": "Vybrat jiný soubor k nahrání",
     "list.filters.capabilities.title": "Typy záznamů",
-    "list.filters.capabilities.users": "Uživatelé",
-    "list.filters.capabilities.inventory": "Katalog - jednotky",
     "list.filters.capabilities.circulation": "Cirkulace",
     "list.filters.capabilities.acquisition": "Akvizice",
     "start.edit": "Spustit hromadné úpravy",
@@ -95,7 +93,7 @@
     "uploaderSubTitle.item.ID": "Vybrat soubor s UUID jednotek.",
     "uploaderSubTitle.item.HRID": "Vybrat soubor s HRID jednotek.",
     "uploaderSubTitle.item.FORMER_IDS": "Vybrat soubor s původními identifikátory jednotky.",
-    "uploaderSubTitle.item.ACCESSION_NUMBER": "Vybrat soubor s přístupovými čísly jednotky.",
+    "uploaderSubTitle.item.ACCESSION_NUMBER": "Vybrat soubor s přírůstkovými čísly jednotky.",
     "uploaderSubTitle.item.HOLDINGS_RECORD_ID": "Vyberte soubor s UUID holdingů.",
     "layer.selectLocation": "Zvolit lokaci",
     "list.logSubTitle.changed": "{count, number} {recordType} záznamů změněno",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "Vstup filtru sloupců",
     "actionMenu.placeholder": "Název vyhledávacího sloupce",
     "list.result.emptyMessage.instance": "Vyberat identifikátor záznamu.",
-    "list.filters.capabilities.instances": "Katalog: tituly",
     "list.filters.recordIdentifier.instance.instanceUUID": "Tituly (UUID)",
     "list.filters.recordIdentifier.instance.instanceHRID": "Titul (HRID mn.)",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Kopie {name}",
     "settings.profiles.columns.status.active": "Aktivní",
     "ariaLabel.createInstanceProfile": "Vytvořit profil FOLIO titulu",
-    "ariaLabel.createInstanceMarcProfile": "Vytvořit profil MARC titulu"
+    "ariaLabel.createInstanceMarcProfile": "Vytvořit profil MARC titulu",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }

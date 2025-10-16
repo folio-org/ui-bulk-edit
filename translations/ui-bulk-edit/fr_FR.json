@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "Seul un fichier avec l'extension .csv peut être téléchargé",
     "modal.fileExtensions.actionButton": "Choisir un autre fichier à télécharger",
     "list.filters.capabilities.title": "Record types",
-    "list.filters.capabilities.users": "Utilisateurs",
-    "list.filters.capabilities.inventory": "Catalogue - exemplaires",
     "list.filters.capabilities.circulation": "Circulation",
     "list.filters.capabilities.acquisition": "Acquisition",
     "start.edit": "Lancer la modification par lots",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "Column filter input",
     "actionMenu.placeholder": "Search column name",
     "list.result.emptyMessage.instance": "Sélectionner un identifiant de notice",
-    "list.filters.capabilities.instances": "Catalogue - notices",
     "list.filters.recordIdentifier.instance.instanceUUID": "UUIDs des notices",
     "list.filters.recordIdentifier.instance.instanceHRID": "HRIDs des notices",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Copy of {name}",
     "settings.profiles.columns.status.active": "Active",
     "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }
