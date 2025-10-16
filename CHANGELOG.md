@@ -42,6 +42,7 @@
 * [UIBULKED-716](https://folio-org.atlassian.net/browse/UIBULKED-716) Configure query-plugin to show Record type information
 * [UIBULKED-691](https://folio-org.atlassian.net/browse/UIBULKED-691) Only users with required authorization can execute bulk edit profile setting records for deletion
 * [UIBULKED-708](https://folio-org.atlassian.net/browse/UIBULKED-708) Reset "Staff only" checkbox on selecting other action in bulk edit form
+* [UIBULKED-711](https://folio-org.atlassian.net/browse/UIBULKED-711) Duplicating locked bulk edit profiles
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
