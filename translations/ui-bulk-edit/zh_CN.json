@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "只能上传具有csv扩展名的文件",
     "modal.fileExtensions.actionButton": "选择其他文件上传",
     "list.filters.capabilities.title": "记录类型",
-    "list.filters.capabilities.users": "用户",
-    "list.filters.capabilities.inventory": "典藏-单件",
     "list.filters.capabilities.circulation": "流通",
     "list.filters.capabilities.acquisition": "采访",
     "start.edit": "开始批编辑",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "列筛选输入",
     "actionMenu.placeholder": "搜索栏名称",
     "list.result.emptyMessage.instance": "选择记录标识符。",
-    "list.filters.capabilities.instances": "典藏 - 实例",
     "list.filters.recordIdentifier.instance.instanceUUID": "实例 UUID",
     "list.filters.recordIdentifier.instance.instanceHRID": "实例HRID",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "{name}的副本",
     "settings.profiles.columns.status.active": "激活",
     "ariaLabel.createInstanceProfile": "创建实例 FOLIO 配置文件",
-    "ariaLabel.createInstanceMarcProfile": "创建实例 MARC 配置文件"
+    "ariaLabel.createInstanceMarcProfile": "创建实例 MARC 配置文件",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }

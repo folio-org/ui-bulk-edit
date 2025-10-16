@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "Somente arquivos com extensão .csv podem ser carregados",
     "modal.fileExtensions.actionButton": "Escolha outro arquivo para carregar",
     "list.filters.capabilities.title": "Tipos de registro",
-    "list.filters.capabilities.users": "Usuários",
-    "list.filters.capabilities.inventory": "Inventário - itens",
     "list.filters.capabilities.circulation": "Circulação",
     "list.filters.capabilities.acquisition": "Aquisição",
     "start.edit": "Iniciar edição em massa",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "Entrada de filtro de coluna",
     "actionMenu.placeholder": "Nome da coluna de busca",
     "list.result.emptyMessage.instance": "Selecione um identificador de registro.",
-    "list.filters.capabilities.instances": "Inventário - instâncias",
     "list.filters.recordIdentifier.instance.instanceUUID": "UUIDs de instância",
     "list.filters.recordIdentifier.instance.instanceHRID": "HRIDs de instância",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Cópia de {name}",
     "settings.profiles.columns.status.active": "Ativo",
     "ariaLabel.createInstanceProfile": "Criar perfil FOLIO de instância",
-    "ariaLabel.createInstanceMarcProfile": "Criar perfil MARC de instância"
+    "ariaLabel.createInstanceMarcProfile": "Criar perfil MARC de instância",
+    "list.filters.capabilities.user": "Usuários",
+    "list.filters.capabilities.item": "Inventário - itens",
+    "list.filters.capabilities.instance": "Inventário - instâncias"
 }

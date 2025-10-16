@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "Можна завантажувати лише файли із розширенням .csv.",
     "modal.fileExtensions.actionButton": "Вибрати інший файл для завантаження",
     "list.filters.capabilities.title": "Типи записів",
-    "list.filters.capabilities.users": "Користувачі",
-    "list.filters.capabilities.inventory": "Облік фонду - примірники",
     "list.filters.capabilities.circulation": "Книговидача",
     "list.filters.capabilities.acquisition": "Комплектування",
     "start.edit": "Розпочати пакетне редагування",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "Введення фільтра колонки",
     "actionMenu.placeholder": "Пошук назви колонки",
     "list.result.emptyMessage.instance": "Вибрати ідентифікатор запису.",
-    "list.filters.capabilities.instances": "Облік фонду - біб.записи (інстанси)",
     "list.filters.recordIdentifier.instance.instanceUUID": "UUID біб.записів (інстансів)",
     "list.filters.recordIdentifier.instance.instanceHRID": "HRID біб.записів (інстансів)",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Копія {name}",
     "settings.profiles.columns.status.active": "Активно",
     "ariaLabel.createInstanceProfile": "Створити профіль біб.запису (інстансу) FOLIO",
-    "ariaLabel.createInstanceMarcProfile": "Створити профіль MARC біб.запису (інстансу)"
+    "ariaLabel.createInstanceMarcProfile": "Створити профіль MARC біб.запису (інстансу)",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }

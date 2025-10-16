@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded.",
     "modal.fileExtensions.actionButton": "Choose other file to upload",
     "list.filters.capabilities.title": "Record types",
-    "list.filters.capabilities.users": "Users",
-    "list.filters.capabilities.inventory": "Inventory - items",
     "list.filters.capabilities.circulation": "Circulation",
     "list.filters.capabilities.acquisition": "Acquisition",
     "start.edit": "Avvia modifica massiva",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "Column filter input",
     "actionMenu.placeholder": "Search column name",
     "list.result.emptyMessage.instance": "Select a record identifier.",
-    "list.filters.capabilities.instances": "Inventory - instances",
     "list.filters.recordIdentifier.instance.instanceUUID": "Instance UUIDs",
     "list.filters.recordIdentifier.instance.instanceHRID": "Instance HRIDs",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Copy of {name}",
     "settings.profiles.columns.status.active": "Active",
     "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }

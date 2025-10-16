@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "Es können nur Dateien mit der Erweiterung .csv hochgeladen werden.",
     "modal.fileExtensions.actionButton": "Andere Datei zum Hochladen auswählen",
     "list.filters.capabilities.title": "Datensatztypen",
-    "list.filters.capabilities.users": "Personen",
-    "list.filters.capabilities.inventory": "Katalog - Exemplare",
     "list.filters.capabilities.circulation": "Ausleihe",
     "list.filters.capabilities.acquisition": "Erwerbung",
     "start.edit": "Massenbearbeitung starten",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "Eingabe Spaltenfilter",
     "actionMenu.placeholder": "Spaltenname suchen",
     "list.result.emptyMessage.instance": "Identifikatorentyp auswählen",
-    "list.filters.capabilities.instances": "Katalog - Instanzen",
     "list.filters.recordIdentifier.instance.instanceUUID": "Instanz-UUIDs",
     "list.filters.recordIdentifier.instance.instanceHRID": "Instanz-HRIDs",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Kopie von {name}",
     "settings.profiles.columns.status.active": "Aktiv",
     "ariaLabel.createInstanceProfile": "Instanz-FOLIO-Profil erstellen",
-    "ariaLabel.createInstanceMarcProfile": "Instanz-MARC-Profil erstellen"
+    "ariaLabel.createInstanceMarcProfile": "Instanz-MARC-Profil erstellen",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }

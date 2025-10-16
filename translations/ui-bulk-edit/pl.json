@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded.",
     "modal.fileExtensions.actionButton": "Choose other file to upload",
     "list.filters.capabilities.title": "Rodzaje rekordu",
-    "list.filters.capabilities.users": "Użytkownicy",
-    "list.filters.capabilities.inventory": "Katalogowanie - egzemplarze",
     "list.filters.capabilities.circulation": "Udostępnianie",
     "list.filters.capabilities.acquisition": "Gromadzenie",
     "start.edit": "Uruchom edycję grupową",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "Column filter input",
     "actionMenu.placeholder": "Przeszukaj nazwę kolumny",
     "list.result.emptyMessage.instance": "Wybierz „identyfikator rekordu”",
-    "list.filters.capabilities.instances": "Inwentarz - instancje",
     "list.filters.recordIdentifier.instance.instanceUUID": "Identyfikatory UUID instancji",
     "list.filters.recordIdentifier.instance.instanceHRID": "Identyfikatory HRID instancji",
     "list.filters.recordIdentifier.instance.instanceISBN": "ISBN",
@@ -593,7 +590,10 @@
     "layer.options.setRecordsForDelete": "Set records for deletion",
     "columns.INSTANCE.Set for deletion": "Set for deletion",
     "settings.profiles.form.name.copy": "Copy of {name}",
-    "settings.profiles.columns.status.active": "Active",
+    "settings.profiles.columns.status.active": "Aktywny",
     "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }

@@ -20,8 +20,6 @@
     "modal.fileExtensions.blocked.message": "只能上傳副檔名為 .csv 的檔案",
     "modal.fileExtensions.actionButton": "選擇其他檔案上傳",
     "list.filters.capabilities.title": "紀錄類型",
-    "list.filters.capabilities.users": "使用者",
-    "list.filters.capabilities.inventory": "館藏庫 : 單件",
     "list.filters.capabilities.circulation": "流通",
     "list.filters.capabilities.acquisition": "採購",
     "start.edit": "開始批次更新",
@@ -332,7 +330,6 @@
     "ariaLabel.columnFilter": "列過濾器輸入",
     "actionMenu.placeholder": "搜尋欄名稱",
     "list.result.emptyMessage.instance": "選擇紀錄識別號。",
-    "list.filters.capabilities.instances": "館藏庫 - 實例",
     "list.filters.recordIdentifier.instance.instanceUUID": "館藏 UUID",
     "list.filters.recordIdentifier.instance.instanceHRID": "實例 HRID",
     "list.filters.recordIdentifier.instance.instanceISBN": "國際標準書號 ISBN",
@@ -595,5 +592,8 @@
     "settings.profiles.form.name.copy": "Copy of {name}",
     "settings.profiles.columns.status.active": "Active",
     "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile"
+    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
+    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.item": "Inventory - items",
+    "list.filters.capabilities.instance": "Inventory - instances"
 }
