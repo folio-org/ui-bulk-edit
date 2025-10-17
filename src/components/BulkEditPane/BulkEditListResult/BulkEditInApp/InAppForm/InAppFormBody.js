@@ -25,6 +25,7 @@ import { InAppFieldRenderer } from './InAppFieldRenderer';
 import { getDefaultActionState, getNextActionState } from '../controlsConfig';
 
 import css from '../../../BulkEditPane.css';
+import { BOOLEAN_PARAMETERS_KEYS } from '../../../../../constants';
 
 export const InAppFormBody = ({
   approach,
@@ -76,7 +77,12 @@ export const InAppFormBody = ({
       tenants: [], // reset tenants when action changes
       value: getPreselectedValue(option, action),
       // reset parameters values when action changes
-      ...(currentAction.parameters ? { parameters: currentAction.parameters.map(param => ({ ...param, value: false })) } : {})
+      ...(currentAction.parameters ? { parameters: currentAction.parameters.map(param => {
+        if (BOOLEAN_PARAMETERS_KEYS.includes(param.key)) {
+          return ({ ...param, value: false });
+        }
+        return param;
+      }) } : {})
     }));
 
     // If this is the first action in the row, we need to update the next actions based on the selected values
