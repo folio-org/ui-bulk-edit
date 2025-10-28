@@ -23,7 +23,7 @@ const wrapper = ({ children }) => (
 );
 
 const profiles = [
-  { id: '1', entityType: CAPABILITIES.INSTANCE_MARC },
+  { id: '1', entityType: CAPABILITIES.INSTANCE_MARC, updatedBy: 'userId', userFullName: 'Smith, John ' },
 ];
 
 const kyMock = {
@@ -35,6 +35,11 @@ const kyMock = {
     ),
   }),
 };
+
+jest.mock('@folio/stripes-acq-components', () => ({
+  ...jest.requireActual('@folio/stripes-acq-components'),
+  batchRequest: jest.fn().mockReturnValue((Promise.resolve([{ users: [{ id: 'userId', personal: { firstName: 'John', lastName: 'Smith' } }] }]))),
+}));
 
 describe('useBulkEditProfiles', () => {
   beforeEach(() => {
