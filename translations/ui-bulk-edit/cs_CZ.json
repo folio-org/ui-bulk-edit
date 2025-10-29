@@ -593,7 +593,7 @@
     "settings.profiles.columns.status.active": "Aktivní",
     "ariaLabel.createInstanceProfile": "Vytvořit profil FOLIO titulu",
     "ariaLabel.createInstanceMarcProfile": "Vytvořit profil MARC titulu",
-    "list.filters.capabilities.user": "Users",
-    "list.filters.capabilities.item": "Inventory - items",
-    "list.filters.capabilities.instance": "Inventory - instances"
+    "list.filters.capabilities.user": "Uživatelé",
+    "list.filters.capabilities.item": "Katalog - jednotky",
+    "list.filters.capabilities.instance": "Katalog - tituly"
 }
