@@ -66,7 +66,7 @@ BulkEditProfilesSearchAndView.propTypes = {
     createdBy: PropTypes.string,
     updatedBy: PropTypes.string,
   })).isRequired,
-  searchTerm: PropTypes.string.isRequired,
+  searchTerm: PropTypes.string,
   sortOrder: PropTypes.string.isRequired,
   sortDirection: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
