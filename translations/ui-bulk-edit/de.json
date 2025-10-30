@@ -4,7 +4,7 @@
     "list.logSubTitle": "Kriterien für den Start der Massenbearbeitung festlegen",
     "list.filters.identifier": "Identifikator",
     "list.filters.query": "Abfrage",
-    "list.result.emptyMessage": "Select a record type and then a record identifier.",
+    "list.result.emptyMessage": "Einen Datensatzidentifikator auswählen",
     "list.filters.recordIdentifier": "Datensatzidentifikator",
     "list.filters.recordIdentifier.placeholder": "Identifikatorentyp auswählen",
     "list.filters.recordIdentifier.userUUIDs": "Personen UUIDs",
@@ -81,7 +81,7 @@
     "layer.options.unavailable": "Nicht verfügbar",
     "layer.options.unknown": "Unbekannt",
     "layer.options.placeholder": "Exemplarstatus auswählen",
-    "list.result.emptyMessage.item": "Select a record identifier.",
+    "list.result.emptyMessage.item": "Einen Datensatzidentifikator auswählen",
     "list.result.emptyMessage.item.BARCODE": "Drag & Drop oder Datei mit Exemplar-Barcodes auswählen",
     "list.result.emptyMessage.item.ID": "Drag & Drop oder Datei mit Exemplar-UUIDs auswählen",
     "list.result.emptyMessage.item.HRID": "Drag & Drop oder Datei mit Exemplar-HRIDs auswählen",
@@ -593,7 +593,7 @@
     "settings.profiles.columns.status.active": "Aktiv",
     "ariaLabel.createInstanceProfile": "Instanz-FOLIO-Profil erstellen",
     "ariaLabel.createInstanceMarcProfile": "Instanz-MARC-Profil erstellen",
-    "list.filters.capabilities.user": "Users",
-    "list.filters.capabilities.item": "Inventory - items",
-    "list.filters.capabilities.instance": "Inventory - instances"
+    "list.filters.capabilities.user": "Personen",
+    "list.filters.capabilities.item": "Katalog - Exemplare",
+    "list.filters.capabilities.instance": "Katalog - Instanzen"
 }
