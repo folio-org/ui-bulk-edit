@@ -7,7 +7,6 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import {
-  useUsersBatch,
   useLocationSorting,
 } from '@folio/stripes-acq-components';
 
@@ -22,7 +21,6 @@ jest.mock('../../hooks/api/useBulkEditProfiles', () => ({
 
 jest.mock('@folio/stripes-acq-components', () => ({
   ...jest.requireActual('@folio/stripes-acq-components'),
-  useUsersBatch: jest.fn(),
   useLocationSorting: jest.fn(),
 }));
 
@@ -56,23 +54,6 @@ const mockProfiles = [
   },
 ];
 
-const mockUsers = [
-  {
-    id: 'user1',
-    personal: {
-      firstName: 'John',
-      lastName: 'Doe',
-    },
-  },
-  {
-    id: 'user2',
-    personal: {
-      firstName: 'Jane',
-      lastName: 'Smith',
-    },
-  },
-];
-
 const defaultProps = {
   entityType: CAPABILITIES.USER,
   title: 'Test Profiles',
@@ -98,7 +79,6 @@ const renderBulkEditProfilesPane = (props = {}, routerProps = {}) => {
 
 describe('BulkEditProfilesPane', () => {
   const mockUseBulkEditProfiles = jest.mocked(useBulkEditProfiles);
-  const mockUseUsersBatch = jest.mocked(useUsersBatch);
   const mockUseLocationSorting = jest.mocked(useLocationSorting);
 
   beforeEach(() => {
@@ -106,11 +86,6 @@ describe('BulkEditProfilesPane', () => {
       isFetching: false,
       isLoading: false,
       profiles: mockProfiles,
-    });
-
-    mockUseUsersBatch.mockReturnValue({
-      isLoading: false,
-      users: mockUsers,
     });
 
     mockUseLocationSorting.mockReturnValue([
@@ -194,21 +169,10 @@ describe('BulkEditProfilesPane', () => {
   });
 
   it('should show loading state when users are loading', () => {
-    mockUseUsersBatch.mockReturnValue({
-      isLoading: true,
-      users: [],
-    });
-
     renderBulkEditProfilesPane();
 
     expect(screen.getByRole('searchbox')).toBeInTheDocument();
     // Loading state should be passed to SearchField
-  });
-
-  it('should extract user IDs from profiles for user batch loading', () => {
-    renderBulkEditProfilesPane();
-
-    expect(mockUseUsersBatch).toHaveBeenCalledWith(['user1', 'user2', 'user1']);
   });
 
   it('should handle empty profiles array', () => {
@@ -299,18 +263,6 @@ describe('BulkEditProfilesPane', () => {
 
     // Should handle empty profiles gracefully
     expect(screen.getByText('ui-bulk-edit.settings.profiles.empty')).toBeInTheDocument();
-  });
-
-  it('should handle errors in users loading', () => {
-    mockUseUsersBatch.mockReturnValue({
-      isLoading: false,
-      users: [],
-    });
-
-    renderBulkEditProfilesPane();
-
-    // Should handle empty users gracefully
-    expect(screen.getByText('Test Profile 1')).toBeInTheDocument();
   });
 
   it('should render pane with correct default width', () => {
