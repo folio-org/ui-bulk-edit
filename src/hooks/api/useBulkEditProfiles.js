@@ -4,8 +4,9 @@ import {
   useNamespace,
   useOkapiKy,
 } from '@folio/stripes/core';
-import { CQLBuilder } from '@folio/stripes-acq-components';
+import { batchRequest, CQLBuilder } from '@folio/stripes-acq-components';
 
+import { getFullName } from '@folio/stripes/util';
 import { BULK_EDIT_PROFILES_API } from '../../constants';
 
 export const BULK_EDIT_PROFILES_KEY = 'BULK_EDIT_PROFILES_KEY';
@@ -49,9 +50,24 @@ export const useBulkEditProfiles = (params = {}, options = {}) => {
   } = useQuery(
     {
       queryKey: [namespace, tenantId, entityTypes],
-      queryFn: ({ signal }) => ky.get(BULK_EDIT_PROFILES_API, { searchParams: { query, offset: 0, limit: 1000 }, signal })
-        .json()
-        .then(({ content }) => content),
+      queryFn: async ({ signal }) => {
+        const profiles = await ky.get(BULK_EDIT_PROFILES_API, { searchParams: { query, offset: 0, limit: 1000 }, signal })
+          .json()
+          .then(({ content }) => content);
+        const userIds = profiles.map(profile => profile.updatedBy).filter(Boolean);
+
+        const response = await batchRequest(
+          ({ params: usersParams }) => ky.get('users', { searchParams: usersParams, signal }).json(),
+          userIds,
+        );
+        const flatUsers = response.flatMap(({ users }) => users);
+        const usersMap = new Map(flatUsers.map(user => [user.id, user]));
+
+        return profiles.map(profile => ({
+          ...profile,
+          userFullName: getFullName(usersMap.get(profile.updatedBy)),
+        }));
+      },
       enabled,
       keepPreviousData: true,
       ...queryOptions,

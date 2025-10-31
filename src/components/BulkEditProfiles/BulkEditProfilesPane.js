@@ -57,14 +57,13 @@ export const BulkEditProfilesPane = ({
     filteredProfiles,
     isProfilesLoading,
     isProfilesFetching,
-    isUsersLoading,
     isPending,
     searchTerm,
     changeSearch,
     changeLSorting,
   } = useProfilesFlow(entityTypes);
 
-  const isLoading = isProfilesFetching || isUsersLoading || isPending;
+  const isLoading = isProfilesFetching || isPending;
 
   const openCreateProfile = useCallback(() => {
     history.push({

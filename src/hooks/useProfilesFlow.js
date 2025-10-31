@@ -10,10 +10,8 @@ import {
   SORTING_DIRECTION_PARAMETER,
   SORTING_PARAMETER,
   useLocationSorting,
-  useUsersBatch
 } from '@folio/stripes-acq-components';
 import { debounce, noop } from 'lodash';
-import { getFullName } from '@folio/stripes/util';
 import { useNamespace } from '@folio/stripes/core';
 
 import { DEFAULT_SORTING, FILTER_SORT_CONFIG, SORTABLE_COLUMNS } from '../components/BulkEditProfiles/constants';
@@ -51,14 +49,6 @@ export const useProfilesFlow = (entityTypes, options) => {
     profiles,
   } = useBulkEditProfiles({ entityTypes }, options);
 
-  const userIds = useMemo(() => profiles.map(profile => profile.updatedBy), [profiles]);
-
-  const {
-    isLoading: isUsersLoading,
-    users,
-  } = useUsersBatch(userIds);
-
-  const usersMap = useMemo(() => new Map(users.map(user => [user.id, user])), [users]);
 
   const [filteredProfiles, setFilteredProfiles] = useState(profiles);
 
@@ -70,11 +60,6 @@ export const useProfilesFlow = (entityTypes, options) => {
    */
   useEffect(() => {
     startTransition(() => {
-      const hydratedProfiles = profiles.map(profile => ({
-        ...profile,
-        userFullName: getFullName(usersMap.get(profile.updatedBy)),
-      }));
-
       setFilteredProfiles(() => {
         return filterAndSort(
           FILTER_SORT_CONFIG,
@@ -83,11 +68,11 @@ export const useProfilesFlow = (entityTypes, options) => {
             [SORTING_PARAMETER]: sortOrder,
             [SORTING_DIRECTION_PARAMETER]: sortDirection,
           },
-          hydratedProfiles,
+          profiles,
         );
       });
     });
-  }, [profiles, locationSearchQuery, sortOrder, sortDirection, usersMap]);
+  }, [profiles, locationSearchQuery, sortOrder, sortDirection]);
 
   const changeSearch = useCallback((e) => {
     const value = e?.target?.value;
@@ -117,7 +102,6 @@ export const useProfilesFlow = (entityTypes, options) => {
     sortDirection,
     isProfilesLoading,
     isProfilesFetching,
-    isUsersLoading,
     isPending,
     searchTerm,
     changeSearch,

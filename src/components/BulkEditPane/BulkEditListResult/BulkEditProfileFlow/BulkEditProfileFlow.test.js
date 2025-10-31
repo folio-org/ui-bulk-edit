@@ -232,7 +232,6 @@ describe('SelectProfileFlow', () => {
       sortDirection: 'up',
       filteredProfiles: [{ id: 1 }],
       isProfilesLoading: false,
-      isUsersLoading: false,
       searchTerm: 'search',
       changeSearch: jest.fn(),
       changeLSorting: jest.fn(),
@@ -410,16 +409,6 @@ describe('SelectProfileFlow', () => {
       })
     ]);
     expect(onClose).toHaveBeenCalled();
-  });
-
-  test('handles loading states correctly', () => {
-    mockUseProfilesFlow.mockReturnValueOnce({
-      ...mockUseProfilesFlow(),
-      isProfilesLoading: false,
-      isUsersLoading: true
-    });
-    render(<BulkEditProfileFlow open bulkOperationId={bulkOperationId} onClose={onClose} onOpen={onOpen} />);
-    expect(screen.getByTestId('preloader')).toBeInTheDocument();
   });
 
   test('renders correct modal header with entity type and profiles count', () => {

@@ -70,7 +70,6 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
     sortDirection,
     filteredProfiles,
     isProfilesLoading,
-    isUsersLoading,
     searchTerm,
     changeSearch,
     changeLSorting,
@@ -151,10 +150,9 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
     onOpen(approach);
   };
 
-  const isLoading = isProfilesLoading || isUsersLoading;
   const isCsvFileReady = bulkDetails?.linkToModifiedRecordsCsvFile && isPreviewSettled;
 
-  const paneSub = isLoading ? <Loading /> : (
+  const paneSub = isProfilesLoading ? <Loading /> : (
     (
       <FormattedMessage
         id="ui-bulk-edit.settings.profiles.paneSub"
@@ -192,12 +190,12 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
         dismissible
         onClose={handleClose}
       >
-        {isLoading ? (
+        {isProfilesLoading ? (
           <Preloader />
         ) : (
           <BulkEditProfilesSearchAndView
             entityType={entityType}
-            isLoading={isLoading}
+            isLoading={isProfilesLoading}
             profiles={profilesFilteredByPerms}
             searchTerm={searchTerm}
             sortOrder={sortOrder}
