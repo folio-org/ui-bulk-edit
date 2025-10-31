@@ -81,5 +81,5 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
 BulkEditQuery.propTypes = {
   children: PropTypes.func.isRequired,
   bulkDetails: PropTypes.object,
-  actionMenu: PropTypes.object,
+  actionMenu: PropTypes.func,
 };

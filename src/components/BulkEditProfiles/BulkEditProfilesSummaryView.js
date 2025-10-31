@@ -34,7 +34,7 @@ export const BulkEditProfilesSummaryView = ({ profile }) => {
           lg={3}
         >
           <fieldset>
-            <Label for="lockProfile">
+            <Label htmlFor="lockProfile">
               <FormattedMessage id="ui-bulk-edit.settings.profiles.form.lockProfile" />
             </Label>
             <Checkbox

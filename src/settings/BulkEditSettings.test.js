@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@folio/jest-config-stripes/testing-library/react';
+import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { useStripes } from '@folio/stripes/core';
 
 import { BulkEditSettings } from './BulkEditSettings';

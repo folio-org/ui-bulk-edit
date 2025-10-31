@@ -226,7 +226,10 @@ export const BulkEditProfilesPane = ({
             path={`${path}/create`}
             render={() => (
               <TitleManager>
-                <Layer isOpen>
+                <Layer
+                  isOpen
+                  contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.new' }, { entityType })}
+                >
                   <BulkEditCreateProfile
                     onClose={closeFormLayer}
                   />
@@ -238,7 +241,10 @@ export const BulkEditProfilesPane = ({
             exact
             path={`${path}/:id/edit`}
             render={() => (
-              <Layer isOpen>
+              <Layer
+                isOpen
+                contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.edit' }, { entityType })}
+              >
                 <BulkEditUpdateProfile
                   onClose={closeFormLayer}
                 />
@@ -249,7 +255,10 @@ export const BulkEditProfilesPane = ({
             exact
             path={`${path}/:id/duplicate`}
             render={() => (
-              <Layer isOpen>
+              <Layer
+                isOpen
+                contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.new' }, { entityType })}
+              >
                 <BulkEditDuplicateProfile
                   onClose={closeFormLayer}
                 />
@@ -261,7 +270,10 @@ export const BulkEditProfilesPane = ({
             exact
             path={`${path}/:id`}
             render={() => (
-              <Layer isOpen>
+              <Layer
+                isOpen
+                contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.details' }, { entityType })}
+              >
                 <BulkEditProfileDetails
                   entityType={entityType}
                   onClose={closeDetailsPane}
