@@ -229,7 +229,8 @@ export const BulkEditProfilesPane = ({
               <TitleManager>
                 <Layer
                   isOpen
-                  contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.new' }, { entityType })}>
+                  contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.new' }, { entityType })}
+                >
                   <BulkEditCreateProfile
                     onClose={closeFormLayer}
                   />
@@ -243,7 +244,8 @@ export const BulkEditProfilesPane = ({
             render={() => (
               <Layer
                 isOpen
-                contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.edit' }, { entityType })}>
+                contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.edit' }, { entityType })}
+              >
                 <BulkEditUpdateProfile
                   onClose={closeFormLayer}
                 />
@@ -256,7 +258,8 @@ export const BulkEditProfilesPane = ({
             render={() => (
               <Layer
                 isOpen
-                contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.new' }, { entityType })}>
+                contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.new' }, { entityType })}
+              >
                 <BulkEditDuplicateProfile
                   onClose={closeFormLayer}
                 />
@@ -270,7 +273,8 @@ export const BulkEditProfilesPane = ({
             render={() => (
               <Layer
                 isOpen
-                contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.details' }, { entityType })}>
+                contentLabel={intl.formatMessage({ id: 'ui-bulk-edit.settings.profiles.title.details' }, { entityType })}
+              >
                 <BulkEditProfileDetails
                   entityType={entityType}
                   onClose={closeDetailsPane}
