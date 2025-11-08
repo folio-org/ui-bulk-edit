@@ -6,7 +6,6 @@ import { Accordion, MultiColumnList } from '@folio/stripes/components';
 import { PrevNextPagination } from '@folio/stripes-acq-components';
 
 import { PREVIEW_COLUMN_WIDTHS } from '../../../../PermissionsModal/constants/lists';
-import { getVisibleColumnsKeys } from '../../../../../utils/helpers';
 import { EDITING_STEPS } from '../../../../../constants';
 
 import css from '../Preview.css';
@@ -27,7 +26,6 @@ export const PreviewRecordsAccordion = memo(({
   const isInitial = step === EDITING_STEPS.UPLOAD;
   const translationKey = isInitial ? 'title' : 'titleChanged';
   const accordionLabel = <FormattedMessage id={`ui-bulk-edit.list.preview.${translationKey}`} />;
-  const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
   return (
     <div className={css.previewAccordion}>
@@ -40,7 +38,7 @@ export const PreviewRecordsAccordion = memo(({
               striped
               contentData={contentData}
               columnMapping={columnMapping}
-              visibleColumns={visibleColumnKeys}
+              visibleColumns={visibleColumns}
               columnIdPrefix={step}
               columnWidths={PREVIEW_COLUMN_WIDTHS}
               autosize
@@ -66,7 +64,7 @@ PreviewRecordsAccordion.propTypes = {
   totalRecords: PropTypes.number,
   contentData: PropTypes.arrayOf(PropTypes.object),
   columnMapping: PropTypes.object,
-  visibleColumns: PropTypes.arrayOf(PropTypes.object),
+  visibleColumns: PropTypes.arrayOf(PropTypes.string),
   pagination: PropTypes.shape({
     offset: PropTypes.number,
     limit: PropTypes.number,
