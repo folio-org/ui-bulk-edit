@@ -70,6 +70,8 @@ const renderPreviewAccordion = ({
     return acc;
   }, {});
 
+  const visibleColumnKeys = visibleColumns.filter(item => item.selected).map(item => item.value);
+
   render(
     <RootContext.Provider value={{
       setCountOfRecords: jest.fn(),
@@ -79,7 +81,7 @@ const renderPreviewAccordion = ({
     >
       <PreviewRecordsAccordion
         contentData={items}
-        visibleColumns={visibleColumns}
+        visibleColumns={visibleColumnKeys}
         columnMapping={columnMapping}
         totalRecords={items.length}
         isFetching={false}

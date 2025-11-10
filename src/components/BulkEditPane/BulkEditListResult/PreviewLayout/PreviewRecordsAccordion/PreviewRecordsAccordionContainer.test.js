@@ -68,7 +68,10 @@ describe('PreviewRecordsAccordionContainer', () => {
 
     useBulkOperationStats.mockReturnValue({
       countOfRecords: 100,
-      visibleColumns: ['col1', 'col2'],
+      visibleColumns: [
+        { value: 'col1', selected: true },
+        { value: 'col2', selected: true },
+      ],
     });
 
     usePagination.mockReturnValue({
