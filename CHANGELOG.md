@@ -45,7 +45,7 @@
 * [UIBULKED-711](https://folio-org.atlassian.net/browse/UIBULKED-711) Duplicating locked bulk edit profiles
 * [UIBULKED-706](https://folio-org.atlassian.net/browse/UIBULKED-706) Set focus at left pane
 * [UIBULKED-695](https://folio-org.atlassian.net/browse/UIBULKED-695) Fix clearing values for "Updated by" column in bulk edit profiles
-* [UIBULKED-695](https://folio-org.atlassian.net/browse/UIBULKED-695) Fix clearing values for "Updated by" column in bulk edit profiles
+* [UIBULKED-715](https://folio-org.atlassian.net/browse/UIBULKED-715) Remove unnecessary icons
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
