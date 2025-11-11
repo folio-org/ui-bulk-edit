@@ -10,6 +10,7 @@ import { RECORDS_PREVIEW_KEY, useRecordsPreview } from '../../../../../hooks/api
 import { useBulkOperationStats } from '../../../../../hooks/useBulkOperationStats';
 import { useSearchParams } from '../../../../../hooks';
 import { iseRecordsPreviewAvailable } from '../helpers';
+import { getVisibleColumnsKeys } from '../../../../../utils/helpers';
 
 import css from '../Preview.css';
 
@@ -47,7 +48,9 @@ export const PreviewRecordsAccordionContainer = ({ bulkDetails }) => {
     ...previewPagination,
   });
 
-  if (isPreviewLoading) {
+  const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
+
+  if (isPreviewLoading || !visibleColumnKeys) {
     return (
       <Layout className={`flex centerContent ${css.loadingPreviewAccordion}`}>
         <Loading size="large" />
@@ -65,7 +68,7 @@ export const PreviewRecordsAccordionContainer = ({ bulkDetails }) => {
       columns={columns}
       contentData={contentData}
       columnMapping={columnMapping}
-      visibleColumns={visibleColumns}
+      visibleColumns={visibleColumnKeys}
       onChangePage={changePreviewPage}
       pagination={previewPagination}
       isFetching={isPreviewFetching}

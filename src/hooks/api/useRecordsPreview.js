@@ -29,7 +29,7 @@ export const useRecordsPreview = ({
   const [namespaceKey] = useNamespace({ key });
   const { showErrorMessage } = useErrorMessages();
 
-  const { data, refetch, isLoading, dataUpdatedAt, isFetching } = useQuery(
+  const { data, refetch, isLoading, isFetching } = useQuery(
     {
       queryKey: [key, namespaceKey, id, step, limit, offset],
       keepPreviousData: true,
@@ -56,31 +56,27 @@ export const useRecordsPreview = ({
     queryRecordType
   ]);
 
-  // set initial and visible columns
-  useEffect(() => {
-    if (columns.length) {
-      const storageKey = `${BULK_VISIBLE_COLUMNS}_${capabilities}`;
-      let storedVisibleColumns = JSON.parse(localStorage.getItem(storageKey) || null);
+  const visibleColumns = useMemo(() => {
+    if (!columns.length) return null;
 
-      if (columns.length !== storedVisibleColumns?.length) {
-        storedVisibleColumns = columns;
-        localStorage.setItem(storageKey, JSON.stringify(storedVisibleColumns));
-      }
+    const storageKey = `${BULK_VISIBLE_COLUMNS}_${capabilities}`;
+    let storedVisibleColumns = JSON.parse(localStorage.getItem(storageKey) || null);
 
-      // force selected columns to be visible
-      const mappedVisibleColumns = storedVisibleColumns.map(column => ({
-        ...column,
-        selected: column.selected || columns.find(({ value }) => value === column.value)?.forceSelected,
-      }));
-
-      setVisibleColumns(mappedVisibleColumns);
+    if (columns.length !== storedVisibleColumns?.length) {
+      storedVisibleColumns = columns;
+      localStorage.setItem(storageKey, JSON.stringify(storedVisibleColumns));
     }
-  }, [
-    columns,
-    dataUpdatedAt,
-    setVisibleColumns,
-    capabilities
-  ]);
+
+    // force selected columns to be visible
+    return storedVisibleColumns.map(column => ({
+      ...column,
+      selected: column.selected || columns.find(({ value }) => value === column.value)?.forceSelected,
+    }));
+  }, [columns, capabilities]);
+
+  useEffect(() => {
+    setVisibleColumns(visibleColumns);
+  }, [visibleColumns, setVisibleColumns]);
 
   return {
     isLoading,
