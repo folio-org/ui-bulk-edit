@@ -110,7 +110,7 @@ BulkEditProfiles.propTypes = {
   changeSorting: PropTypes.func.isRequired,
   entityType: PropTypes.oneOf(Object.values(CAPABILITIES)),
   isLoading: PropTypes.bool,
-  profiles: PropTypes.arrayOf(bulkEditProfilePropTypeShape).isRequired,
+  profiles: PropTypes.arrayOf(PropTypes.shape(bulkEditProfilePropTypeShape)).isRequired,
   searchTerm: PropTypes.string,
   sortOrder: PropTypes.string.isRequired,
   sortDirection: PropTypes.string.isRequired,
