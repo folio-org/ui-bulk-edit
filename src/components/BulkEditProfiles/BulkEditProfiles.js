@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
+  FormattedDate,
   Icon,
   MultiColumnList,
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import {
-  DateColumn,
   DefaultColumn,
 } from '@folio/stripes-data-transfer-components';
 
@@ -45,12 +45,11 @@ const getResultsFormatter = (entityType, searchTerm) => {
         searchTerm={searchTerm}
       />
     ),
-    [COLUMNS.updatedDate]: (profile) => <DateColumn value={profile.updatedDate} />,
+    [COLUMNS.updatedDate]: (profile) => <FormattedDate value={profile.updatedDate} />,
     [COLUMNS.updatedBy]: (profile) => (
       <DefaultColumn
         value={profile.userFullName}
         searchTerm={searchTerm}
-        iconKey="user"
       />
     ),
     [COLUMNS.status]: (profile) => {
@@ -111,7 +110,7 @@ BulkEditProfiles.propTypes = {
   changeSorting: PropTypes.func.isRequired,
   entityType: PropTypes.oneOf(Object.values(CAPABILITIES)),
   isLoading: PropTypes.bool,
-  profiles: PropTypes.arrayOf(bulkEditProfilePropTypeShape).isRequired,
+  profiles: PropTypes.arrayOf(PropTypes.shape(bulkEditProfilePropTypeShape)).isRequired,
   searchTerm: PropTypes.string,
   sortOrder: PropTypes.string.isRequired,
   sortDirection: PropTypes.string.isRequired,

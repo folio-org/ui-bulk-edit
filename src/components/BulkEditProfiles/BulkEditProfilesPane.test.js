@@ -1,4 +1,5 @@
 import { MemoryRouter } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
 
 import {
   render,
@@ -63,17 +64,19 @@ const renderBulkEditProfilesPane = (props = {}, routerProps = {}) => {
   const { initialEntries = ['/'], ...otherRouterProps } = routerProps;
 
   return render(
-    <MemoryRouter
-      initialEntries={initialEntries}
-      {...otherRouterProps}
-    >
-      <QueryClientProvider client={new QueryClient()}>
-        <BulkEditProfilesPane
-          {...defaultProps}
-          {...props}
-        />
-      </QueryClientProvider>
-    </MemoryRouter>
+    <IntlProvider locale="en">
+      <MemoryRouter
+        initialEntries={initialEntries}
+        {...otherRouterProps}
+      >
+        <QueryClientProvider client={new QueryClient()}>
+          <BulkEditProfilesPane
+            {...defaultProps}
+            {...props}
+          />
+        </QueryClientProvider>
+      </MemoryRouter>
+    </IntlProvider>
   );
 };
 
