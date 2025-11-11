@@ -1,4 +1,5 @@
 import { MemoryRouter } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
 
 import {
   render,
@@ -53,10 +54,12 @@ const defaultProps = {
 };
 
 const renderBulkEditProfiles = (props = {}) => render(
-  <BulkEditProfiles
-    {...defaultProps}
-    {...props}
-  />,
+  <IntlProvider locale="en">
+    <BulkEditProfiles
+      {...defaultProps}
+      {...props}
+    />
+  </IntlProvider>,
   { wrapper: MemoryRouter },
 );
 

@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
+  FormattedDate,
   Icon,
   MultiColumnList,
 } from '@folio/stripes/components';
 import { AppIcon } from '@folio/stripes/core';
 import {
-  DateColumn,
   DefaultColumn,
 } from '@folio/stripes-data-transfer-components';
 
@@ -45,12 +45,11 @@ const getResultsFormatter = (entityType, searchTerm) => {
         searchTerm={searchTerm}
       />
     ),
-    [COLUMNS.updatedDate]: (profile) => <DateColumn value={profile.updatedDate} />,
+    [COLUMNS.updatedDate]: (profile) => <FormattedDate value={profile.updatedDate} />,
     [COLUMNS.updatedBy]: (profile) => (
       <DefaultColumn
         value={profile.userFullName}
         searchTerm={searchTerm}
-        iconKey="user"
       />
     ),
     [COLUMNS.status]: (profile) => {
