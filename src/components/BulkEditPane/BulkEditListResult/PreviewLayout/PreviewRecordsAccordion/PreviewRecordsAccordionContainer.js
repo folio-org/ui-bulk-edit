@@ -50,7 +50,7 @@ export const PreviewRecordsAccordionContainer = ({ bulkDetails }) => {
 
   const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
-  if (isPreviewLoading || !visibleColumnKeys) {
+  if (isPreviewLoading || (contentData?.length > 0 && !visibleColumnKeys)) {
     return (
       <Layout className={`flex centerContent ${css.loadingPreviewAccordion}`}>
         <Loading size="large" />
