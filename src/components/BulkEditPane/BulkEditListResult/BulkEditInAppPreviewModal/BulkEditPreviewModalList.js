@@ -78,7 +78,8 @@ export const BulkEditPreviewModalList = ({
     ...pagination,
   });
 
-  if (!contentData) return <Preloader />;
+  // Show preloader while fetching or waiting for visible columns to be set
+  if (!contentData || (contentData.length > 0 && !visibleColumns)) return <Preloader />;
 
   const renderMessageBanner = () => {
     if (bulkDetails?.status === JOB_STATUSES.REVIEWED_NO_MARC_RECORDS) {
