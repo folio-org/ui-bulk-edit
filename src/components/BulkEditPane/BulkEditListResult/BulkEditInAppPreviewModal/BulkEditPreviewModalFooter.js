@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -13,6 +13,7 @@ import {
   useFileDownload
 } from '../../../../hooks/api';
 import { savePreviewFile } from '../../../../utils/files';
+import { RootContext } from '../../../../context/RootContext';
 
 export const BulkEditPreviewModalFooter = ({
   bulkDetails,
@@ -21,6 +22,7 @@ export const BulkEditPreviewModalFooter = ({
   onCommitChanges,
 }) => {
   const { approach } = useSearchParams();
+  const { visibleColumns } = useContext(RootContext);
 
   const { refetch: downloadCsvPreview, isFetching: isAdministrativeFetching } = useFileDownload({
     queryKey: QUERY_KEY_DOWNLOAD_ADMINISTRATIVE_PREVIEW_MODAL,
@@ -48,20 +50,24 @@ export const BulkEditPreviewModalFooter = ({
     },
   });
 
+  const isDownloadPreviewDisabled = buttonsDisabled || isAdministrativeFetching || !visibleColumns;
+  const isMarcDownloadDisabled = buttonsDisabled || isMarcFetching || !visibleColumns;
+  const isSaveAndCloseDisabled = buttonsDisabled || !visibleColumns;
+
   return (
     <div className={css.previewModalFooter}>
       <Button onClick={onKeepEditing}>
         <FormattedMessage id="ui-bulk-edit.previewModal.keepEditing" />
       </Button>
-      <Button onClick={downloadCsvPreview} disabled={buttonsDisabled || isAdministrativeFetching}>
+      <Button onClick={downloadCsvPreview} disabled={isDownloadPreviewDisabled}>
         <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview" />
       </Button>
       {approach === APPROACHES.MARC && (
-        <Button onClick={downloadMarcPreview} disabled={buttonsDisabled || isMarcFetching}>
+        <Button onClick={downloadMarcPreview} disabled={isMarcDownloadDisabled}>
           <FormattedMessage id="ui-bulk-edit.previewModal.downloadPreview.marc" />
         </Button>
       )}
-      <Button onClick={onCommitChanges} buttonStyle="primary" disabled={buttonsDisabled}>
+      <Button onClick={onCommitChanges} buttonStyle="primary" disabled={isSaveAndCloseDisabled}>
         <FormattedMessage id="ui-bulk-edit.previewModal.saveAndClose" />
       </Button>
     </div>
