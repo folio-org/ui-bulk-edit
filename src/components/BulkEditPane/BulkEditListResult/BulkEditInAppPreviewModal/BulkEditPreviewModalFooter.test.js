@@ -11,6 +11,7 @@ import {
   useFileDownload
 } from '../../../../hooks/api';
 import { APPROACHES } from '../../../../constants';
+import { RootContext } from '../../../../context/RootContext';
 
 jest.mock('../../../../hooks', () => ({
   useSearchParams: jest.fn(),
@@ -28,14 +29,20 @@ jest.mock('../../../../utils/files', () => ({
 }));
 
 const renderModalFooter = (overwrite = {}) => {
+  const contextValue = {
+    visibleColumns: [],
+  };
+
   return render(
-    <BulkEditPreviewModalFooter
-      bulkOperation={{ id: '123' }}
-      buttonsDisabled
-      onKeepEditing={jest.fn()}
-      onCommitChanges={jest.fn()}
-      {...overwrite}
-    />
+    <RootContext.Provider value={contextValue}>
+      <BulkEditPreviewModalFooter
+        bulkDetails={{ id: '123' }}
+        buttonsDisabled
+        onKeepEditing={jest.fn()}
+        onCommitChanges={jest.fn()}
+        {...overwrite}
+      />
+    </RootContext.Provider>
   );
 };
 
