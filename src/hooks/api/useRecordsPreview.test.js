@@ -34,7 +34,7 @@ jest.mock('../useErrorMessages', () => ({
 const mockSetVisibleColumns = jest.fn();
 
 const wrapper = ({ children }) => (
-  <RootContext.Provider value={{ setVisibleColumns: mockSetVisibleColumns }}>
+  <RootContext.Provider value={{ visibleColumns: ['col1'], setVisibleColumns: mockSetVisibleColumns }}>
     {children}
   </RootContext.Provider>
 );
@@ -223,12 +223,12 @@ describe('useRecordsPreview', () => {
       getMappedTableData.mockReturnValue({
         contentData: [],
         columnMapping: {},
-        columns: [],
+        columns: [{ value: 'col1', selected: true }],
       });
 
       renderHook(() => useRecordsPreview(defaultParams), { wrapper });
 
-      expect(mockSetVisibleColumns).toHaveBeenCalledWith(null);
+      expect(mockSetVisibleColumns).toHaveBeenCalledWith([{ 'selected': true, 'value': 'col1' }]);
     });
 
     it('should force selected columns to be visible', () => {

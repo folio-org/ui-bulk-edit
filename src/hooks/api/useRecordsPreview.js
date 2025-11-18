@@ -75,7 +75,9 @@ export const useRecordsPreview = ({
   }, [columns, capabilities]);
 
   useEffect(() => {
-    setVisibleColumns(visibleColumns);
+    if (visibleColumns) {
+      setVisibleColumns(visibleColumns);
+    }
   }, [visibleColumns, setVisibleColumns]);
 
   return {
