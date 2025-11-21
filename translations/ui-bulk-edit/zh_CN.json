@@ -595,5 +595,7 @@
     "ariaLabel.createInstanceMarcProfile": "创建实例 MARC 配置文件",
     "list.filters.capabilities.user": "Users",
     "list.filters.capabilities.item": "Inventory - items",
-    "list.filters.capabilities.instance": "Inventory - instances"
+    "list.filters.capabilities.instance": "Inventory - instances",
+    "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
+    "settings.profiles.title.details": "{entityType} bulk edit profile details"
 }

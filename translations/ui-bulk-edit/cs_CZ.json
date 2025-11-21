@@ -550,7 +550,7 @@
     "settings.profiles.columns.name": "Název",
     "settings.profiles.columns.description": "Popis",
     "settings.profiles.columns.updated": "Aktualizováno",
-    "settings.profiles.columns.updatedBy": "Aktualizoval",
+    "settings.profiles.columns.updatedBy": "Aktualizoval/a",
     "settings.profiles.columns.status": "Stav",
     "settings.profiles.paneSub": "{count, number} {count, plural, one { nalezený profil } few {nalezené profily} other { nalezených profilů }}",
     "settings.profiles.search.label": "Prohledávání profilů hromadných úprav",
@@ -595,5 +595,7 @@
     "ariaLabel.createInstanceMarcProfile": "Vytvořit profil MARC titulu",
     "list.filters.capabilities.user": "Uživatelé",
     "list.filters.capabilities.item": "Katalog - jednotky",
-    "list.filters.capabilities.instance": "Katalog - tituly"
+    "list.filters.capabilities.instance": "Katalog - tituly",
+    "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
+    "settings.profiles.title.details": "{entityType} bulk edit profile details"
 }

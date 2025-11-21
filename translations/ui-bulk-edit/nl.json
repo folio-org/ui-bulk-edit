@@ -595,5 +595,7 @@
     "ariaLabel.createInstanceMarcProfile": "Instance MARC profiel Aanmaken",
     "list.filters.capabilities.user": "Gebruikers",
     "list.filters.capabilities.item": "Collectiebezit - items",
-    "list.filters.capabilities.instance": "Collectiebezit - instances"
+    "list.filters.capabilities.instance": "Collectiebezit - instances",
+    "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
+    "settings.profiles.title.details": "{entityType} bulk edit profile details"
 }
