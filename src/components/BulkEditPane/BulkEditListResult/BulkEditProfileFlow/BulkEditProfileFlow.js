@@ -81,6 +81,7 @@ export const BulkEditProfileFlow = ({ open, bulkOperationId, onClose, onOpen }) 
   const { commitChanges, isCommitting } = useCommitChanges({
     bulkOperationId,
     onChangesCommited: () => {
+      clearProfilesState();
       closePreviewModal();
     }
   });

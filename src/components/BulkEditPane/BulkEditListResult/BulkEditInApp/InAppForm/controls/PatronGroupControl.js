@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
-import { Select } from '@folio/stripes/components';
+import { Loading, Select } from '@folio/stripes/components';
 
 import { sortAlphabeticallyWithoutGroups } from '../../../../../../utils/sortAlphabetically';
 import { getLabelByValue } from '../../helpers';
@@ -15,7 +15,7 @@ export const PatronGroupControl = ({ value, path, name, ctx, recordType, disable
 
   const isUserCapability = recordType === CAPABILITIES.USER;
 
-  const { userGroups } = usePatronGroup({ enabled: isUserCapability });
+  const { userGroups, isLoading } = usePatronGroup({ enabled: isUserCapability });
 
   const groups = Object.values(userGroups).reduce(
     (acc, { id, group, desc }) => {
@@ -35,6 +35,8 @@ export const PatronGroupControl = ({ value, path, name, ctx, recordType, disable
   );
   const patronGroups = sortAlphabeticallyWithoutGroups(groups);
   const title = getLabelByValue(patronGroups, value);
+
+  if (isLoading) return <Loading size="large" />;
 
   return (
     <div title={title}>
