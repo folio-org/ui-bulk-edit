@@ -1,5 +1,5 @@
+import { DynamicTable, formatValueByDataType } from '@folio/plugin-query-builder';
 import PropTypes from 'prop-types';
-import { DynamicTable } from '@folio/plugin-query-builder';
 
 export const EmbeddedTable = ({ value, headTitles }) => {
   // Split rows by unit separator and cells by record separator + map to required format for DynamicTable
@@ -17,6 +17,7 @@ export const EmbeddedTable = ({ value, headTitles }) => {
     <DynamicTable
       columns={headTitles}
       values={values}
+      formatter={formatValueByDataType}
     />
   );
 };
