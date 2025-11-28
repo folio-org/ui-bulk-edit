@@ -47,6 +47,7 @@
 * [UIBULKED-695](https://folio-org.atlassian.net/browse/UIBULKED-695) Fix clearing values for "Updated by" column in bulk edit profiles
 * [UIBULKED-715](https://folio-org.atlassian.net/browse/UIBULKED-715) Remove unnecessary icons
 * [UIBULKED-712](https://folio-org.atlassian.net/browse/UIBULKED-712) Eliminate matching records table refresh
+* [UIBULKED-714](https://folio-org.atlassian.net/browse/UIBULKED-714) Address cases related to view, execute bulk edit profiles
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
