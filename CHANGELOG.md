@@ -48,6 +48,7 @@
 * [UIBULKED-715](https://folio-org.atlassian.net/browse/UIBULKED-715) Remove unnecessary icons
 * [UIBULKED-712](https://folio-org.atlassian.net/browse/UIBULKED-712) Eliminate matching records table refresh
 * [UIBULKED-714](https://folio-org.atlassian.net/browse/UIBULKED-714) Address cases related to view, execute bulk edit profiles
+* [UIBULKED-731](https://folio-org.atlassian.net/browse/UIBULKED-731) Incorrect banner on Confirmation screen when changes are applied to not all records
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
