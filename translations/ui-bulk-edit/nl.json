@@ -564,7 +564,7 @@
     "settings.item": "Items profielen in bulk bewerken",
     "settings.user": "Gebruikersprofielen in bulk bewerken",
     "settings.profiles.button.new": "Nieuw",
-    "settings.profiles.title.new": "Nieuw {entiteittype} profiel in bulk bewerken",
+    "settings.profiles.title.new": "Nieuw {entityType} profiel in bulk bewerken",
     "settings.profiles.title.summary": "Overzicht",
     "settings.profiles.form.name": "Naam",
     "settings.profiles.form.description": "Omschrijving",
@@ -596,6 +596,6 @@
     "list.filters.capabilities.user": "Gebruikers",
     "list.filters.capabilities.item": "Collectiebezit - items",
     "list.filters.capabilities.instance": "Collectiebezit - instances",
-    "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
-    "settings.profiles.title.details": "{entityType} bulk edit profile details"
+    "settings.profiles.title.edit": "Editie {entityType} profiel in bulk bewerken",
+    "settings.profiles.title.details": "{entityType} Profielgegevens in bulk bewerken"
 }
