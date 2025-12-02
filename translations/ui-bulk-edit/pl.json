@@ -45,7 +45,7 @@
     "list.errors.table.code": "Identyfikator rekordu",
     "list.errors.table.message": "Powód",
     "modal.successfullMessage": "{fileName} załadowany pomyślnie",
-    "modal.next": "Next",
+    "modal.next": "Następny",
     "conformationModal.commitChanges": "Zatwierdź zmiany",
     "list.filters.recordIdentifier.item.barcode": "Kod kreskowy egzemplarza",
     "list.filters.recordIdentifier.item.UUID": "UUIDy egzemplarza",
