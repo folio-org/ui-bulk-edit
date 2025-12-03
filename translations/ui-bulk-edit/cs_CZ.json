@@ -596,6 +596,6 @@
     "list.filters.capabilities.user": "Uživatelé",
     "list.filters.capabilities.item": "Katalog - jednotky",
     "list.filters.capabilities.instance": "Katalog - tituly",
-    "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
-    "settings.profiles.title.details": "{entityType} bulk edit profile details"
+    "settings.profiles.title.edit": "Upravit {entityType} hromadné úpravy profilu",
+    "settings.profiles.title.details": "{entityType} hromadná úprava podrobností profilu"
 }
