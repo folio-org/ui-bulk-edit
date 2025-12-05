@@ -5,11 +5,11 @@ import { render, screen } from '@folio/jest-config-stripes/testing-library/react
 import { ERRORS_PAGINATION_CONFIG } from '../../../../../constants';
 import { PreviewErrorsAccordionContainer } from './PreviewErrorsAccordionContainer';
 import { useSearchParams } from '../../../../../hooks';
-import { useBulkOperationStats } from '../../../../../hooks/useBulkOperationStats';
+import { getBulkOperationStatsByStep, isErrorsPreviewAvailable } from '../helpers';
 import { useErrorType } from '../../../../../hooks/useErrorType';
 import { usePagination } from '../../../../../hooks/usePagination';
 import { useErrorsPreview } from '../../../../../hooks/api';
-import { isErrorsPreviewAvailable } from '../helpers';
+
 
 let mockPreviewErrorsAccordionProps = {};
 
@@ -33,8 +33,10 @@ jest.mock('../../../../../hooks', () => ({
   useSearchParams: jest.fn(),
 }));
 
-jest.mock('../../../../../hooks/useBulkOperationStats', () => ({
-  useBulkOperationStats: jest.fn(),
+jest.mock('../helpers', () => ({
+  ...jest.requireActual('../helpers'),
+  isErrorsPreviewAvailable: jest.fn(),
+  getBulkOperationStatsByStep: jest.fn(),
 }));
 
 jest.mock('../../../../../hooks/useErrorType', () => ({
@@ -49,9 +51,7 @@ jest.mock('../../../../../hooks/api', () => ({
   useErrorsPreview: jest.fn(),
 }));
 
-jest.mock('../helpers', () => ({
-  isErrorsPreviewAvailable: jest.fn(),
-}));
+
 
 describe('PreviewErrorsAccordionContainer', () => {
   const bulkDetails = { id: '123', someProp: 'value' };
@@ -65,7 +65,7 @@ describe('PreviewErrorsAccordionContainer', () => {
     jest.clearAllMocks();
 
     useSearchParams.mockReturnValue({ step: 'upload' });
-    useBulkOperationStats.mockReturnValue({
+    getBulkOperationStatsByStep.mockReturnValue({
       countOfErrors: 2,
       countOfWarnings: 1,
     });
