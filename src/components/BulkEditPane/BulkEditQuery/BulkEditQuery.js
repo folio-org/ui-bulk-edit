@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -12,6 +12,7 @@ import { Pane } from '@folio/stripes/components';
 import { BulkEditListResult } from '../BulkEditListResult';
 import { APPROACHES, EDITING_STEPS, RECORD_TYPES_MAPPING } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
+import { RootContext } from '../../../context/RootContext';
 import { getBulkOperationStatsByStep } from '../BulkEditListResult/PreviewLayout/helpers';
 
 export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
@@ -22,8 +23,9 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   } = useSearchParams();
   const intl = useIntl();
 
+  const { countOfRecords } = useContext(RootContext);
   const stripes = useStripes();
-  const { isOperationInPreviewStatus, countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
+  const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
   const isQueryCriteria = bulkDetails?.fqlQuery && isOperationInPreviewStatus;
 
   const paneTitle = useMemo(() => {
