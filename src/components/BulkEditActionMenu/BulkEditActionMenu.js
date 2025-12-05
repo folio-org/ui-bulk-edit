@@ -30,6 +30,7 @@ import {
 import { RootContext } from '../../context/RootContext';
 import { useBulkOperationDetails } from '../../hooks/api';
 import { getVisibleColumnsKeys } from '../../utils/helpers';
+import { getBulkOperationStatsByStep } from '../BulkEditPane/BulkEditListResult/PreviewLayout/helpers';
 
 import css from './ActionMenuGroup/ActionMenuGroup.css';
 
@@ -68,7 +69,8 @@ const BulkEditActionMenu = ({
       || (hasUserEditInAppPerm && currentRecordType === CAPABILITIES.USER)
       || (hasInstanceInventoryEdit && currentRecordType === CAPABILITIES.INSTANCE);
 
-  const { countOfRecords, visibleColumns, setVisibleColumns } = useContext(RootContext);
+  const { visibleColumns, setVisibleColumns } = useContext(RootContext);
+  const { countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
   const columns = visibleColumns || [];
   const visibleColumnKeys = getVisibleColumnsKeys(columns);
 
