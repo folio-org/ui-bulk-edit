@@ -37,6 +37,13 @@ const onOpenProfiles = jest.fn();
 const bulkOperation = {
   ...bulkEditLogsData[0],
   status: JOB_STATUSES.DATA_MODIFICATION,
+  matchedNumOfRecords: 10,
+  committedNumOfRecords: 20,
+  matchedNumOfErrors: 2,
+  committedNumOfErrors: 3,
+  matchedNumOfWarnings: 1,
+  committedNumOfWarnings: 4,
+  totalNumOfRecords: 30,
   ...omit(LINK_KEYS, ['expired']),
 };
 const defaultProviderState = {
@@ -156,7 +163,7 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
       capability: CAPABILITIES.ITEM,
-      providerState: { ...defaultProviderState, visibleColumns: [], countOfRecords: 10 },
+      providerState: { ...defaultProviderState, visibleColumns: [] },
     });
 
     await userEvent.click(screen.getByTestId('startInAppAction'));
@@ -169,7 +176,7 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
       capability: CAPABILITIES.USER,
-      providerState: { ...defaultProviderState, visibleColumns: [], countOfRecords: 10 },
+      providerState: { ...defaultProviderState, visibleColumns: [] },
     });
 
     expect(screen.getByTestId('startCsvAction')).toBeVisible();
@@ -182,7 +189,7 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
       capability: CAPABILITIES.USER,
-      providerState: { ...defaultProviderState, visibleColumns: [], countOfRecords: 10 },
+      providerState: { ...defaultProviderState, visibleColumns: [] },
     });
 
     await userEvent.click(screen.getByTestId('startCsvAction'));
@@ -209,7 +216,7 @@ describe('BulkEditActionMenu', () => {
     renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
       capability: CAPABILITIES.USER,
-      providerState: { ...defaultProviderState, setVisibleColumns, countOfRecords: 1 },
+      providerState: { ...defaultProviderState, setVisibleColumns },
     });
 
     await act(async () => {
@@ -228,7 +235,7 @@ describe('BulkEditActionMenu', () => {
     const { getByRole, queryByText } = renderBulkEditActionMenu({
       step: EDITING_STEPS.UPLOAD,
       capability: CAPABILITIES.USER,
-      providerState: { ...defaultProviderState, setVisibleColumns, countOfRecords: 1 },
+      providerState: { ...defaultProviderState, setVisibleColumns },
     });
 
     await act(async () => {
