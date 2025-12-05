@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Layout, Loading } from '@folio/stripes/components';
@@ -7,9 +7,9 @@ import { PreviewRecordsAccordion } from './PreviewRecordsAccordion';
 import { usePagination } from '../../../../../hooks/usePagination';
 import { PAGINATION_CONFIG } from '../../../../../constants';
 import { RECORDS_PREVIEW_KEY, useRecordsPreview } from '../../../../../hooks/api';
-import { RootContext } from '../../../../../context/RootContext';
+import { useBulkOperationStats } from '../../../../../hooks/useBulkOperationStats';
 import { useSearchParams } from '../../../../../hooks';
-import { getBulkOperationStatsByStep, iseRecordsPreviewAvailable } from '../helpers';
+import { iseRecordsPreviewAvailable } from '../helpers';
 import { getVisibleColumnsKeys } from '../../../../../utils/helpers';
 
 import css from '../Preview.css';
@@ -23,8 +23,10 @@ export const PreviewRecordsAccordionContainer = ({ bulkDetails }) => {
     currentRecordType,
   } = useSearchParams();
 
-  const { countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
-  const { visibleColumns } = useContext(RootContext);
+  const {
+    countOfRecords,
+    visibleColumns,
+  } = useBulkOperationStats({ bulkDetails, step });
 
   const isRecordsPreviewEnabled = iseRecordsPreviewAvailable(bulkDetails, step);
 

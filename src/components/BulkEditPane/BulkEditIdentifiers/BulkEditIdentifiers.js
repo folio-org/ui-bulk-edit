@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 
@@ -11,6 +11,7 @@ import {
 
 import { APPROACHES, EDITING_STEPS, RECORD_TYPES_MAPPING } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
+import { RootContext } from '../../../context/RootContext';
 import { BulkEditListResult } from '../BulkEditListResult';
 import { getBulkOperationStatsByStep } from '../BulkEditListResult/PreviewLayout/helpers';
 
@@ -29,7 +30,8 @@ export const BulkEditIdentifiers = ({
     currentRecordType,
   } = useSearchParams();
 
-  const { isOperationInPreviewStatus, countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
+  const { countOfRecords } = useContext(RootContext);
+  const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
 
   const isIdentifierCriteria = !bulkDetails?.fqlQuery && isOperationInPreviewStatus;
 
