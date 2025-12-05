@@ -4,10 +4,11 @@ import { render, screen } from '@folio/jest-config-stripes/testing-library/react
 
 import { PreviewRecordsAccordionContainer } from './PreviewRecordsAccordionContainer';
 import { useSearchParams } from '../../../../../hooks';
-import { useBulkOperationStats } from '../../../../../hooks/useBulkOperationStats';
+import { getBulkOperationStatsByStep, iseRecordsPreviewAvailable } from '../helpers';
+import { RootContext } from '../../../../../context/RootContext';
 import { usePagination } from '../../../../../hooks/usePagination';
 import { useRecordsPreview } from '../../../../../hooks/api';
-import { iseRecordsPreviewAvailable } from '../helpers';
+
 
 
 let mockPreviewRecordsAccordionProps = {};
@@ -32,8 +33,10 @@ jest.mock('../../../../../hooks', () => ({
   useSearchParams: jest.fn(),
 }));
 
-jest.mock('../../../../../hooks/useBulkOperationStats', () => ({
-  useBulkOperationStats: jest.fn(),
+jest.mock('../helpers', () => ({
+  ...jest.requireActual('../helpers'),
+  iseRecordsPreviewAvailable: jest.fn(),
+  getBulkOperationStatsByStep: jest.fn(),
 }));
 
 jest.mock('../../../../../hooks/usePagination', () => ({
@@ -44,9 +47,7 @@ jest.mock('../../../../../hooks/api', () => ({
   useRecordsPreview: jest.fn(),
 }));
 
-jest.mock('../helpers', () => ({
-  iseRecordsPreviewAvailable: jest.fn(),
-}));
+
 
 
 describe('PreviewRecordsAccordionContainer', () => {
@@ -66,12 +67,8 @@ describe('PreviewRecordsAccordionContainer', () => {
       currentRecordType: 'ITEM',
     });
 
-    useBulkOperationStats.mockReturnValue({
+    getBulkOperationStatsByStep.mockReturnValue({
       countOfRecords: 100,
-      visibleColumns: [
-        { value: 'col1', selected: true },
-        { value: 'col2', selected: true },
-      ],
     });
 
     usePagination.mockReturnValue({
@@ -99,7 +96,11 @@ describe('PreviewRecordsAccordionContainer', () => {
       isLoading: true,
     });
 
-    render(<PreviewRecordsAccordionContainer bulkDetails={bulkDetails} />);
+    render(
+      <RootContext.Provider value={{ visibleColumns: [] }}>
+        <PreviewRecordsAccordionContainer bulkDetails={bulkDetails} />
+      </RootContext.Provider>
+    );
 
     expect(screen.getByTestId('loading')).toBeInTheDocument();
   });
@@ -113,7 +114,11 @@ describe('PreviewRecordsAccordionContainer', () => {
       isLoading: false,
     });
 
-    const { container } = render(<PreviewRecordsAccordionContainer bulkDetails={bulkDetails} />);
+    const { container } = render(
+      <RootContext.Provider value={{ visibleColumns: [] }}>
+        <PreviewRecordsAccordionContainer bulkDetails={bulkDetails} />
+      </RootContext.Provider>
+    );
     expect(container.firstChild).toBeNull();
   });
 
@@ -127,7 +132,17 @@ describe('PreviewRecordsAccordionContainer', () => {
       isLoading: false,
     });
 
-    render(<PreviewRecordsAccordionContainer bulkDetails={bulkDetails} />);
+    render(
+      <RootContext.Provider value={{
+        visibleColumns: [
+          { value: 'col1', selected: true },
+          { value: 'col2', selected: true },
+        ],
+      }}
+      >
+        <PreviewRecordsAccordionContainer bulkDetails={bulkDetails} />
+      </RootContext.Provider>
+    );
 
     expect(screen.getByTestId('preview-records-accordion')).toBeInTheDocument();
 

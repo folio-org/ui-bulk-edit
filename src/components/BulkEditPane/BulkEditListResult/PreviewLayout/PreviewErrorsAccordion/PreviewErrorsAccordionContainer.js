@@ -8,20 +8,15 @@ import { usePagination } from '../../../../../hooks/usePagination';
 import { ERRORS_PAGINATION_CONFIG } from '../../../../../constants';
 import { useErrorsPreview } from '../../../../../hooks/api';
 import { useErrorType } from '../../../../../hooks/useErrorType';
-import { useBulkOperationStats } from '../../../../../hooks/useBulkOperationStats';
 import { useSearchParams } from '../../../../../hooks';
-import { isErrorsPreviewAvailable } from '../helpers';
+import { getBulkOperationStatsByStep, isErrorsPreviewAvailable } from '../helpers';
 
 import css from '../Preview.css';
 
 
 export const PreviewErrorsAccordionContainer = ({ bulkDetails }) => {
   const { step } = useSearchParams();
-
-  const {
-    countOfErrors,
-    countOfWarnings,
-  } = useBulkOperationStats({ bulkDetails, step });
+  const { countOfErrors, countOfWarnings } = getBulkOperationStatsByStep(bulkDetails, step);
 
   const { errorType, toggleShowWarnings } = useErrorType({
     countOfErrors,
