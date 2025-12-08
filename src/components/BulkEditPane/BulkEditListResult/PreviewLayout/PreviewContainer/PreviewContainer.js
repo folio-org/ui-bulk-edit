@@ -13,8 +13,7 @@ import { NoResultsMessage } from '../../NoResultsMessage/NoResultsMessage';
 import { useSearchParams } from '../../../../../hooks';
 import { PreviewErrorsAccordionContainer } from '../PreviewErrorsAccordion/PreviewErrorsAccordionContainer';
 import { PreviewRecordsAccordionContainer } from '../PreviewRecordsAccordion/PreviewRecordsAccordionContainer';
-
-import { useBulkOperationStats } from '../../../../../hooks/useBulkOperationStats';
+import { getBulkOperationStatsByStep } from '../helpers';
 
 import css from '../Preview.css';
 
@@ -26,7 +25,7 @@ export const PreviewContainer = ({ title, bulkDetails }) => {
   const isOtherTabProcessing = progress && criteria !== progress;
   const shouldShowPreview = !isOtherTabProcessing && Boolean(bulkDetails);
 
-  const { countOfRecords } = useBulkOperationStats({ bulkDetails, step });
+  const { countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
 
   if (!((bulkDetails.fqlQuery && criteria === CRITERIA.QUERY) || (criteria !== CRITERIA.QUERY && !bulkDetails.fqlQuery))) {
     return <NoResultsMessage />;
