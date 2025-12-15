@@ -593,9 +593,9 @@
     "settings.profiles.columns.status.active": "激活",
     "ariaLabel.createInstanceProfile": "创建实例 FOLIO 配置文件",
     "ariaLabel.createInstanceMarcProfile": "创建实例 MARC 配置文件",
-    "list.filters.capabilities.user": "Users",
-    "list.filters.capabilities.item": "Inventory - items",
-    "list.filters.capabilities.instance": "Inventory - instances",
-    "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
-    "settings.profiles.title.details": "{entityType} bulk edit profile details"
+    "list.filters.capabilities.user": "用户",
+    "list.filters.capabilities.item": "典藏-单件",
+    "list.filters.capabilities.instance": "典藏 - 实例",
+    "settings.profiles.title.edit": "编辑{entityType} 批量编辑配置文件",
+    "settings.profiles.title.details": "{entityType} 批量编辑配置文件详情"
 }
