@@ -1,3 +1,4 @@
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import { renderHook, act } from '@folio/jest-config-stripes/testing-library/react-hooks';
@@ -9,6 +10,7 @@ import { useSearchParams } from './useSearchParams';
 import { useErrorMessages } from './useErrorMessages';
 import { useBulkOperationStart } from './api';
 import { APPROACHES, EDITING_STEPS } from '../constants';
+import { RootContext } from '../context/RootContext';
 
 
 jest.mock('react-router-dom', () => ({
@@ -40,6 +42,8 @@ const mockBulkOperationStart = jest.fn();
 const mockSetQueriesData = jest.fn();
 const mockReplace = jest.fn();
 const mockShowErrorMessage = jest.fn();
+const mockSetVisibleColumns = jest.fn();
+const draftVisibleColumns = [{ selected: true, value: 'col1' }];
 
 describe('useCommitChanges', () => {
   beforeEach(() => {
@@ -74,7 +78,16 @@ describe('useCommitChanges', () => {
 
     mockBulkOperationStart.mockResolvedValueOnce();
 
-    const { result } = renderHook(() => useCommitChanges({ bulkOperationId: '123', onChangesCommited }));
+    const { result } = renderHook(
+      () => useCommitChanges({ bulkOperationId: '123', onChangesCommited }),
+      {
+        wrapper: ({ children }) => (
+          <RootContext.Provider value={{ draftVisibleColumns, setVisibleColumns: mockSetVisibleColumns }}>
+            {children}
+          </RootContext.Provider>
+        ),
+      }
+    );
 
     await act(async () => {
       await result.current.commitChanges();
@@ -87,6 +100,7 @@ describe('useCommitChanges', () => {
     });
     expect(mockSetQueriesData).toHaveBeenCalledWith('bulkOperationDetailsKey', { processedNumOfRecords: 0 });
     expect(onChangesCommited).toHaveBeenCalled();
+    expect(mockSetVisibleColumns).toHaveBeenCalledWith(draftVisibleColumns);
     expect(mockReplace).toHaveBeenCalledWith({
       pathname: '/bulk-edit/123/preview',
       search: '?progress=testCriteria&?query=test',
@@ -99,7 +113,16 @@ describe('useCommitChanges', () => {
 
     mockBulkOperationStart.mockRejectedValueOnce(error);
 
-    const { result } = renderHook(() => useCommitChanges({ bulkOperationId: '123', onChangesCommited }));
+    const { result } = renderHook(
+      () => useCommitChanges({ bulkOperationId: '123', onChangesCommited }),
+      {
+        wrapper: ({ children }) => (
+          <RootContext.Provider value={{ draftVisibleColumns, setVisibleColumns: mockSetVisibleColumns }}>
+            {children}
+          </RootContext.Provider>
+        ),
+      }
+    );
 
     await act(async () => {
       await result.current.commitChanges();
@@ -112,6 +135,7 @@ describe('useCommitChanges', () => {
     });
     expect(mockShowErrorMessage).toHaveBeenCalledWith(error);
     expect(onChangesCommited).not.toHaveBeenCalled();
+    expect(mockSetVisibleColumns).not.toHaveBeenCalled();
     expect(mockReplace).not.toHaveBeenCalled();
   });
 });

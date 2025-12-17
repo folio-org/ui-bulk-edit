@@ -24,7 +24,7 @@ export const useRecordsPreview = ({
   queryRecordType
 }) => {
   const intl = useIntl();
-  const { setVisibleColumns } = useContext(RootContext);
+  const { setVisibleColumns, setDraftVisibleColumns } = useContext(RootContext);
   const ky = useOkapiKy();
   const [namespaceKey] = useNamespace({ key });
   const { showErrorMessage } = useErrorMessages();
@@ -76,9 +76,13 @@ export const useRecordsPreview = ({
 
   useEffect(() => {
     if (visibleColumns) {
-      setVisibleColumns(visibleColumns);
+      if (key === PREVIEW_MODAL_KEY) {
+        setDraftVisibleColumns(visibleColumns);
+      } else {
+        setVisibleColumns(visibleColumns);
+      }
     }
-  }, [visibleColumns, setVisibleColumns]);
+  }, [visibleColumns, setVisibleColumns, setDraftVisibleColumns, key]);
 
   return {
     isLoading,
@@ -87,5 +91,6 @@ export const useRecordsPreview = ({
     contentData,
     columnMapping,
     columns,
+    visibleColumns
   };
 };

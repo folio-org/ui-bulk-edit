@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage,
@@ -28,7 +28,6 @@ import {
   useRecordsPreview
 } from '../../../../hooks/api';
 import { usePathParams, useSearchParams } from '../../../../hooks';
-import { RootContext } from '../../../../context/RootContext';
 import { getVisibleColumnsKeys } from '../../../../utils/helpers';
 import { useErrorMessages } from '../../../../hooks/useErrorMessages';
 
@@ -39,7 +38,6 @@ export const BulkEditPreviewModalList = ({
   isPreviewSettled,
 }) => {
   const { id: bulkOperationId } = usePathParams('/bulk-edit/:id');
-  const { visibleColumns } = useContext(RootContext);
   const { currentRecordType } = useSearchParams();
   const { showErrorMessage } = useErrorMessages();
   const {
@@ -53,7 +51,6 @@ export const BulkEditPreviewModalList = ({
     interval,
   });
 
-  const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
   const enabled = [JOB_STATUSES.REVIEWED_NO_MARC_RECORDS, JOB_STATUSES.REVIEW_CHANGES].includes(bulkDetails?.status);
   const numberOfSupportedEntities = bulkDetails?.processedNumOfRecords;
   const numberOfUnsupportedEntities = bulkDetails?.matchedNumOfRecords - numberOfSupportedEntities;
@@ -61,7 +58,8 @@ export const BulkEditPreviewModalList = ({
   const {
     contentData,
     columnMapping,
-    isFetching
+    isFetching,
+    visibleColumns
   } = useRecordsPreview({
     key: PREVIEW_MODAL_KEY,
     id: bulkDetails?.id,
@@ -77,6 +75,8 @@ export const BulkEditPreviewModalList = ({
     },
     ...pagination,
   });
+
+  const visibleColumnKeys = getVisibleColumnsKeys(visibleColumns);
 
   // Show preloader while fetching or waiting for visible columns to be set
   if (!contentData || (contentData.length > 0 && !visibleColumns)) return <Preloader />;
