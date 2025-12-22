@@ -1,6 +1,5 @@
 import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
 import { BulkEditPreviewModalList } from './BulkEditPreviewModalList';
-import { RootContext } from '../../../../context/RootContext';
 import { JOB_STATUSES } from '../../../../constants';
 
 import { usePagination } from '../../../../hooks/usePagination';
@@ -64,12 +63,13 @@ jest.mock('react-intl', () => ({
 }));
 
 describe('BulkEditPreviewModalList', () => {
-  const defaultVisibleColumns = ['col1', 'col2'];
+  const defaultVisibleColumns = [
+    { selected: true, value: 'col1' },
+    { selected: true, value: 'col2' },
+  ];
 
   const renderComponent = (props = {}) => render(
-    <RootContext.Provider value={{ visibleColumns: defaultVisibleColumns }}>
-      <BulkEditPreviewModalList {...props} />
-    </RootContext.Provider>
+    <BulkEditPreviewModalList {...props} />
   );
 
   const defaultPagination = {
@@ -90,6 +90,7 @@ describe('BulkEditPreviewModalList', () => {
     contentData: [{ id: 1 }, { id: 2 }],
     columnMapping: { col1: 'Column 1', col2: 'Column 2' },
     isFetching: false,
+    visibleColumns: defaultVisibleColumns,
   };
 
   beforeEach(() => {

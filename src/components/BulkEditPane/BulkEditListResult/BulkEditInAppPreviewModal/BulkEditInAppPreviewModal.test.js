@@ -77,6 +77,7 @@ describe('BulkEditInAppPreviewModal', () => {
       contentData: [],
       columnMapping: {},
       columns: [],
+      visibleColumns: [],
     });
 
     useOkapiKy

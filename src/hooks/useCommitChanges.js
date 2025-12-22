@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
@@ -8,6 +8,7 @@ import { useSearchParams } from './useSearchParams';
 import { useErrorMessages } from './useErrorMessages';
 import { BULK_OPERATION_DETAILS_KEY, useBulkOperationStart } from './api';
 import { APPROACHES, EDITING_STEPS } from '../constants';
+import { RootContext } from '../context/RootContext';
 
 
 export const useCommitChanges = ({
@@ -19,6 +20,7 @@ export const useCommitChanges = ({
   const { criteria } = useSearchParams();
   const { showErrorMessage } = useErrorMessages();
   const { bulkOperationStart } = useBulkOperationStart();
+  const { draftVisibleColumns, setVisibleColumns } = useContext(RootContext);
 
   const [isCommitting, setIsCommitting] = useState(false);
 
@@ -38,7 +40,7 @@ export const useCommitChanges = ({
       });
 
       onChangesCommited();
-
+      setVisibleColumns(draftVisibleColumns);
       history.replace({
         pathname: `/bulk-edit/${bulkOperationId}/preview`,
         search: buildSearch({

@@ -47,6 +47,7 @@ export const BulkEditPane = () => {
   const [isFileUploaded, setIsFileUploaded] = useState(false);
   const [countOfRecords, setCountOfRecords] = useState(0);
   const [visibleColumns, setVisibleColumns] = useState(null);
+  const [draftVisibleColumns, setDraftVisibleColumns] = useState(null);
   const [confirmedFileName, setConfirmedFileName] = useState(null);
   const [fileInfo, setFileInfo] = useState(null);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
@@ -103,6 +104,8 @@ export const BulkEditPane = () => {
     setCountOfRecords,
     visibleColumns,
     setVisibleColumns,
+    draftVisibleColumns,
+    setDraftVisibleColumns,
     confirmedFileName,
     isFileUploaded,
     setIsFileUploaded,
