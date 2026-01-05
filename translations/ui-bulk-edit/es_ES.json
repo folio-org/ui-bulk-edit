@@ -591,11 +591,11 @@
     "columns.INSTANCE.Set for deletion": "Set for deletion",
     "settings.profiles.form.name.copy": "Copy of {name}",
     "settings.profiles.columns.status.active": "Active",
-    "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
-    "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
-    "list.filters.capabilities.user": "Users",
-    "list.filters.capabilities.item": "Inventory - items",
-    "list.filters.capabilities.instance": "Inventory - instances",
-    "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
-    "settings.profiles.title.details": "{entityType} bulk edit profile details"
+    "ariaLabel.createInstanceProfile": "Crear perfil de instancia FOLIO",
+    "ariaLabel.createInstanceMarcProfile": "Crear perfil MARC de instancia",
+    "list.filters.capabilities.user": "Usuarios",
+    "list.filters.capabilities.item": "Inventario - ejemplares",
+    "list.filters.capabilities.instance": "Inventario - instancias",
+    "settings.profiles.title.edit": "Editar  perfil de edición en bloque {entityType} ",
+    "settings.profiles.title.details": "edición masiva {entityType} - detalles del perfil"
 }
