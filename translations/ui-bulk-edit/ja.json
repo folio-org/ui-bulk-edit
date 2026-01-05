@@ -593,7 +593,7 @@
     "settings.profiles.columns.status.active": "Active",
     "ariaLabel.createInstanceProfile": "Create Instance FOLIO profile",
     "ariaLabel.createInstanceMarcProfile": "Create Instance MARC profile",
-    "list.filters.capabilities.user": "Users",
+    "list.filters.capabilities.user": "ユーザー",
     "list.filters.capabilities.item": "Inventory - items",
     "list.filters.capabilities.instance": "Inventory - instances",
     "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
