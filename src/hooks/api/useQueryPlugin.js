@@ -30,10 +30,14 @@ export const useQueryPlugin = (recordType) => {
   };
 
   const getParamsSource = async ({ entityTypeId, columnName, searchValue }) => {
-    const response = ky.get(`entity-types/${entityTypeId}/columns/${encodeURIComponent(columnName)}/values?search=${searchValue}`);
-    return response.json();
+    return ky.get(`entity-types/${entityTypeId}/field-values`, {
+      searchParams: { 
+        field: columnName, 
+        search: searchValue 
+      },
+    }).json();
   };
-
+  
   const getOrganizations = async (ids, property) => ky
     .get('organizations/organizations', {
       searchParams: {
