@@ -31,13 +31,13 @@ export const useQueryPlugin = (recordType) => {
 
   const getParamsSource = async ({ entityTypeId, columnName, searchValue }) => {
     return ky.get(`entity-types/${entityTypeId}/field-values`, {
-      searchParams: { 
-        field: columnName, 
-        search: searchValue 
+      searchParams: {
+        field: columnName,
+        search: searchValue
       },
     }).json();
   };
-  
+
   const getOrganizations = async (ids, property) => ky
     .get('organizations/organizations', {
       searchParams: {
