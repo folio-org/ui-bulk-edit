@@ -53,7 +53,12 @@ describe('useQueryPlugin', () => {
       columnName: 'bar',
       searchValue: 'baz',
     });
-    expect(mockKy.get).toHaveBeenCalledWith('entity-types/foo/columns/bar/values?search=baz');
+    expect(mockKy.get).toHaveBeenCalledWith('entity-types/foo/field-values', {
+      searchParams: {
+        field: 'bar',
+        search: 'baz',
+      },
+    });
   });
 
   it('calls getOrganizations with correct params', async () => {
