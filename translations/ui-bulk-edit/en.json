@@ -22,6 +22,7 @@
   "list.filters.logs": "Logs",
   "list.filters.recordIdentifier": "Record identifier",
   "list.filters.recordIdentifier.placeholder": "Select record identifier",
+  "list.filters.recordIdentifier.tooltip": "To enable this field, select a Record type.",
   "list.filters.recordIdentifier.userUUIDs": "User UUIDs",
   "list.filters.recordIdentifier.userBarcodes": "User Barcodes",
   "list.filters.recordIdentifier.externalIDs": "External IDs",
