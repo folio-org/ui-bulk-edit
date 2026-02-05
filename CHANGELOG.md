@@ -82,6 +82,7 @@
 * [UIBULKED-615](https://folio-org.atlassian.net/browse/UIBULKED-615) Refactor error accordions to use accurate error count.
 * [UIBULKED-604](https://folio-org.atlassian.net/browse/UIBULKED-604) Show status from network in error message.
 * [UIBULKED-650](https://folio-org.atlassian.net/browse/UIBULKED-650) Update cache after start bulk operation (Local approach).
+* [UIBULKED-751](https://folio-org.atlassian.net/browse/UIBULKED-751) Add "Reset all" button on Identifiers and Query tabs
 
 ## [4.2.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.4) (2025-02-21)
 
