@@ -7,21 +7,6 @@ import { ListSelect } from './ListSelect';
 
 const mockOnChange = jest.fn();
 
-jest.mock('@folio/stripes/core', () => ({
-  useStripes: jest.fn(() => ({
-    user: {
-      user: {
-        consortium: {
-          centralTenantId: null,
-        },
-      },
-    },
-    okapi: {
-      tenant: 'test-tenant',
-    },
-  })),
-}));
-
 jest.mock('../../../constants', () => ({
   identifierOptions: {
     user: [
