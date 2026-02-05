@@ -51,6 +51,7 @@
 * [UIBULKED-731](https://folio-org.atlassian.net/browse/UIBULKED-731) Incorrect banner on Confirmation screen when changes are applied to not all records
 * [UIBULKED-739](https://folio-org.atlassian.net/browse/UIBULKED-739) Delay visible-column changes until after confirmation
 * [UIBULKED-732](https://folio-org.atlassian.net/browse/UIBULKED-732) Display meaningful error message in case of fail in Bulk edit settings
+* [UIBULKED-722](https://folio-org.atlassian.net/browse/UIBULKED-722) Include global mod-settings permissions in base permission sets
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 

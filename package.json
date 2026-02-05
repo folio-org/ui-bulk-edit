@@ -223,7 +223,9 @@
         "permissionName": "settings.bulk-edit.enabled",
         "displayName": "Settings bulk-edit enabled",
         "subPermissions": [
-          "settings.enabled"
+          "settings.enabled",
+          "mod-settings.global.read.stripes-core.prefs.manage",
+          "mod-settings.entries.collection.get"
         ],
         "visible": false
       },
