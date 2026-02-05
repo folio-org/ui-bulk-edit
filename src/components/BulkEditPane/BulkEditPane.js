@@ -99,6 +99,15 @@ export const BulkEditPane = () => {
     return <FormattedMessage id="ui-bulk-edit.preview.file.title" values={{ fileUploadedName: initialFileName }} />;
   }, [bulkDetails?.userFriendlyQuery, initialFileName]);
 
+  const { resetAppState } = useResetAppState({
+    setConfirmedFileName,
+    setCountOfRecords,
+    setVisibleColumns,
+    filtersTab,
+    closeInAppLayer,
+    closeMarcLayer,
+  });
+
   const providerValue = {
     countOfRecords,
     setCountOfRecords,
@@ -109,6 +118,7 @@ export const BulkEditPane = () => {
     confirmedFileName,
     isFileUploaded,
     setIsFileUploaded,
+    resetAppState,
     title,
   };
 
@@ -126,15 +136,6 @@ export const BulkEditPane = () => {
     onSettled: () => {
       setFileInfo(null);
     },
-  });
-
-  useResetAppState({
-    setConfirmedFileName,
-    setCountOfRecords,
-    setVisibleColumns,
-    filtersTab,
-    closeInAppLayer,
-    closeMarcLayer,
   });
 
   const handleStartBulkEdit = useCallback((approach) => {

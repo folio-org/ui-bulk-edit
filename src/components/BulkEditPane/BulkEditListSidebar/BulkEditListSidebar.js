@@ -3,8 +3,9 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 
 import { ButtonGroup, getFirstFocusable } from '@folio/stripes/components';
-import { buildSearch } from '@folio/stripes-acq-components';
+import { buildSearch, ResetButton } from '@folio/stripes-acq-components';
 
+import { FormattedMessage } from 'react-intl';
 import { CRITERIA } from '../../../constants';
 import { useBulkPermissions, useSearchParams } from '../../../hooks';
 import { TabsFilter } from './TabsFilter/TabsFilter';
@@ -13,21 +14,24 @@ import { QueryTab } from './QueryTab/QueryTab';
 import { LogsTab } from './LogsTab/LogsTab';
 import { BULK_OPERATION_DETAILS_KEY } from '../../../hooks/api';
 import { RootContext } from '../../../context/RootContext';
+import css from '../BulkEditPane.css';
 
 export const BulkEditListSidebar = () => {
   const history = useHistory();
   const location = useLocation();
   const { hasLogViewPerms, hasQueryPerms } = useBulkPermissions();
-  const { criteria } = useSearchParams();
+  const { criteria, capabilities, identifier, queryRecordType } = useSearchParams();
   const queryClient = useQueryClient();
   const {
     setIsFileUploaded,
     setVisibleColumns,
+    resetAppState,
   } = useContext(RootContext);
   const sidebarRef = useRef(null);
   const isQuery = criteria === CRITERIA.QUERY;
   const isLogs = criteria === CRITERIA.LOGS;
   const isIdentifier = criteria === CRITERIA.IDENTIFIER;
+  const isResetDisabled = !capabilities && !identifier && !queryRecordType;
 
   const handleCriteriaChange = (value) => {
     history.replace({
@@ -56,6 +60,18 @@ export const BulkEditListSidebar = () => {
           onCriteriaChange={handleCriteriaChange}
         />
       </ButtonGroup>
+
+      {!isLogs && (
+        <div className={css.resetButtonWrapper}>
+          <ResetButton
+            id="reset-bulk-edit-filters"
+            disabled={isResetDisabled}
+            reset={resetAppState}
+            label={<FormattedMessage id="ui-bulk-edit.resetFilters" />}
+            mb0
+          />
+        </div>
+      )}
 
       {/* IDENTIFIER TAB */}
       {isIdentifier && (
