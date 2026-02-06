@@ -52,6 +52,8 @@
 * [UIBULKED-739](https://folio-org.atlassian.net/browse/UIBULKED-739) Delay visible-column changes until after confirmation
 * [UIBULKED-732](https://folio-org.atlassian.net/browse/UIBULKED-732) Display meaningful error message in case of fail in Bulk edit settings
 * [UIBULKED-750](https://folio-org.atlassian.net/browse/UIBULKED-750) Add tooltip to disabled Record identifier field when no Record type is selected
+* [UIBULKED-751](https://folio-org.atlassian.net/browse/UIBULKED-751) Add "Reset all" button on Identifiers and Query tabs
+* [UIBULKED-722](https://folio-org.atlassian.net/browse/UIBULKED-722) Include universal read-only permissions
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
@@ -82,7 +84,6 @@
 * [UIBULKED-615](https://folio-org.atlassian.net/browse/UIBULKED-615) Refactor error accordions to use accurate error count.
 * [UIBULKED-604](https://folio-org.atlassian.net/browse/UIBULKED-604) Show status from network in error message.
 * [UIBULKED-650](https://folio-org.atlassian.net/browse/UIBULKED-650) Update cache after start bulk operation (Local approach).
-* [UIBULKED-751](https://folio-org.atlassian.net/browse/UIBULKED-751) Add "Reset all" button on Identifiers and Query tabs
 
 ## [4.2.4](https://github.com/folio-org/ui-bulk-edit/tree/v4.2.4) (2025-02-21)
 

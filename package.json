@@ -54,7 +54,9 @@
         "permissionName": "module.bulk-edit.enabled",
         "displayName": "UI: Bulk edit module is enabled",
         "visible": false,
-        "subPermissions": []
+        "subPermissions": [
+          "stripes-core.settings.read"
+        ]
       },
       {
         "permissionName": "ui-bulk-edit.base-view.manage",
@@ -223,7 +225,8 @@
         "permissionName": "settings.bulk-edit.enabled",
         "displayName": "Settings bulk-edit enabled",
         "subPermissions": [
-          "settings.enabled"
+          "settings.enabled",
+          "stripes-core.settings.read"
         ],
         "visible": false
       },
