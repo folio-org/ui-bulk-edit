@@ -156,3 +156,7 @@
 .modalHeader [class^="paneSub"] {
     font-weight: 400;
 }
+
+.resetButtonWrapper {
+    border-bottom: 1px solid var(--color-border-p2);
+}
