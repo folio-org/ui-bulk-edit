@@ -597,5 +597,6 @@
     "list.filters.capabilities.item": "Envanter - kalemler",
     "list.filters.capabilities.instance": "Envanter - örnekler",
     "settings.profiles.title.edit": "Düzenle {entityType} profili toplu düzenleme",
-    "settings.profiles.title.details": "{entityType} profil ayrıntılarını toplu düzenleme"
+    "settings.profiles.title.details": "{entityType} profil ayrıntılarını toplu düzenleme",
+    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
 }

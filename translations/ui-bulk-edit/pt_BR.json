@@ -597,5 +597,6 @@
     "list.filters.capabilities.item": "Inventário - itens",
     "list.filters.capabilities.instance": "Inventário - instâncias",
     "settings.profiles.title.edit": "Editar {entityType} Perfil de edição em massa",
-    "settings.profiles.title.details": "{entityType} edição em massa dos detalhes do perfil"
+    "settings.profiles.title.details": "{entityType} edição em massa dos detalhes do perfil",
+    "list.filters.recordIdentifier.tooltip": "Para ativar este campo, selecione um <b>Tipo de registro</b>."
 }
