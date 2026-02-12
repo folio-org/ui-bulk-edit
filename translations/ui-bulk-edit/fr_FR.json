@@ -597,5 +597,6 @@
     "list.filters.capabilities.item": "Inventory - items",
     "list.filters.capabilities.instance": "Inventory - instances",
     "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
-    "settings.profiles.title.details": "{entityType} bulk edit profile details"
+    "settings.profiles.title.details": "{entityType} bulk edit profile details",
+    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
 }

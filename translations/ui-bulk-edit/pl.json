@@ -475,7 +475,7 @@
     "columns.ITEM.Instance (Title, Publisher, Publication date)": "Instancja (tytuł, wydawca, data wydania)",
     "columns.ITEM.Holdings UUID": "UUID zasobu",
     "logs.filter.user.placeholder.empty": "Lista jest pusta",
-    "columns.USER.Preferred email communications": "Preferowany sposób komunikacji e-mail",
+    "columns.USER.Preferred email communications": "Rodzaj informacji wysyłanych e-mailem",
     "logs.actions.linkToModifiedRecordsMarcFile": "Plik z podglądem proponowanych zmian (MARC)",
     "logs.actions.linkToModifiedRecordsMarcFile.QUERY": "Plik z podglądem proponowanych zmian (MARC)",
     "logs.entityType.INSTANCE_MARC": "Katalogowanie - instancje (MARC)",
@@ -597,5 +597,6 @@
     "list.filters.capabilities.item": "Inventory - items",
     "list.filters.capabilities.instance": "Inventory - instances",
     "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
-    "settings.profiles.title.details": "{entityType} bulk edit profile details"
+    "settings.profiles.title.details": "{entityType} bulk edit profile details",
+    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
 }

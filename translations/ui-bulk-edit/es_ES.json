@@ -597,5 +597,6 @@
     "list.filters.capabilities.item": "Inventario - ejemplares",
     "list.filters.capabilities.instance": "Inventario - instancias",
     "settings.profiles.title.edit": "Editar  perfil de edición en bloque {entityType} ",
-    "settings.profiles.title.details": "edición masiva {entityType} - detalles del perfil"
+    "settings.profiles.title.details": "edición masiva {entityType} - detalles del perfil",
+    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
 }
