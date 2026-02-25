@@ -12,7 +12,7 @@ export const useLocationEcs = (tenants, options = {}) => {
     queryKey: [namespace, tenants],
     queryFn: async () => {
       const { publicationResults } = await initPublicationRequest({
-        url: 'locations',
+        url: 'locations?limit=1000',
         method: 'GET',
         tenants,
       });
