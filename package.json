@@ -108,7 +108,10 @@
           "consortium-search.libraries.collection.get",
           "consortium-search.locations.collection.get",
           "inventory-storage.statistical-codes.collection.get",
-          "inventory-storage.statistical-code-types.collection.get"
+          "inventory-storage.statistical-code-types.collection.get",
+          "fqm.query.async.post",
+          "fqm.query.async.results.get",
+          "fqm.entityTypes.item.get"
         ]
       },
       {
