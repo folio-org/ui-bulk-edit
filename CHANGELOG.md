@@ -54,6 +54,7 @@
 * [UIBULKED-750](https://folio-org.atlassian.net/browse/UIBULKED-750) Add tooltip to disabled Record identifier field when no Record type is selected
 * [UIBULKED-751](https://folio-org.atlassian.net/browse/UIBULKED-751) Add "Reset all" button on Identifiers and Query tabs
 * [UIBULKED-722](https://folio-org.atlassian.net/browse/UIBULKED-722) Include universal read-only permissions
+* [UIBULKED-753](https://folio-org.atlassian.net/browse/UIBULKED-753) Dependency correction: omit `@testing-library/react-hooks` since it is not used
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 
