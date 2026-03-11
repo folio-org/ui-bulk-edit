@@ -203,7 +203,7 @@
     "columns.ITEM.Call Number": "請求記号",
     "columns.ITEM.Barcode": "バーコード",
     "columns.ITEM.Volume": "巻",
-    "columns.ITEM.Enumeration": "Enumeration",
+    "columns.ITEM.Enumeration": "列挙",
     "columns.ITEM.Chronology": "年表",
     "columns.ITEM.Notes": "ノート",
     "columns.ITEM.Circulation Notes": "貸出/返却 ノート",
