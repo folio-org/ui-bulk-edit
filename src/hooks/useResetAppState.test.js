@@ -101,7 +101,6 @@ describe('useResetAppState', () => {
       expect(mockSetVisibleColumns).toHaveBeenCalledWith(null);
       expect(mockCloseInAppLayer).toHaveBeenCalled();
       expect(mockCloseMarcLayer).toHaveBeenCalled();
-      // On Query tab: clears queryRecordType, preserves identifier/capabilities from Identifier tab
       expect(buildSearch).toHaveBeenCalledWith({
         criteria: CRITERIA.QUERY,
         queryRecordType: '',
