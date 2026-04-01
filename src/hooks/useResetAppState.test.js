@@ -86,8 +86,8 @@ describe('useResetAppState', () => {
 
   describe('resetAppState function', () => {
     it('should reset state and preserve current criteria from URL', () => {
-      queryString.parse.mockReturnValue({ criteria: CRITERIA.QUERY });
-      mockHistory.location.search = '?criteria=query&identifier=123';
+      queryString.parse.mockReturnValue({ criteria: CRITERIA.QUERY, identifier: '123', capabilities: 'ITEM' });
+      mockHistory.location.search = '?criteria=query&identifier=123&capabilities=ITEM';
 
       const { result } = renderHook(() => useResetAppState(defaultProps));
 
@@ -101,10 +101,12 @@ describe('useResetAppState', () => {
       expect(mockSetVisibleColumns).toHaveBeenCalledWith(null);
       expect(mockCloseInAppLayer).toHaveBeenCalled();
       expect(mockCloseMarcLayer).toHaveBeenCalled();
+      // On Query tab: clears queryRecordType, preserves identifier/capabilities from Identifier tab
       expect(buildSearch).toHaveBeenCalledWith({
         criteria: CRITERIA.QUERY,
-        identifier: '',
-        capabilities: '',
+        queryRecordType: '',
+        identifier: '123',
+        capabilities: 'ITEM',
         status: 'status',
         entityType: 'entityType',
         operationType: 'operationType',
@@ -115,6 +117,44 @@ describe('useResetAppState', () => {
         pathname: '/bulk-edit',
         search: expect.any(String),
       });
+    });
+
+    it('should reset Query tab params without affecting Identifier tab params', () => {
+      queryString.parse.mockReturnValue({ criteria: CRITERIA.QUERY, identifier: 'abc', capabilities: 'USER' });
+
+      const { result } = renderHook(() => useResetAppState(defaultProps));
+
+      act(() => {
+        result.current.resetAppState();
+      });
+
+      expect(buildSearch).toHaveBeenCalledWith(
+        expect.objectContaining({
+          criteria: CRITERIA.QUERY,
+          queryRecordType: '',
+          identifier: 'abc',
+          capabilities: 'USER',
+        })
+      );
+    });
+
+    it('should reset Identifier tab params without affecting Query tab params', () => {
+      queryString.parse.mockReturnValue({ criteria: CRITERIA.IDENTIFIER, queryRecordType: 'INSTANCE' });
+
+      const { result } = renderHook(() => useResetAppState(defaultProps));
+
+      act(() => {
+        result.current.resetAppState();
+      });
+
+      expect(buildSearch).toHaveBeenCalledWith(
+        expect.objectContaining({
+          criteria: CRITERIA.IDENTIFIER,
+          identifier: '',
+          capabilities: '',
+          queryRecordType: 'INSTANCE',
+        })
+      );
     });
 
     it('should use default CRITERIA.IDENTIFIER when no criteria in URL', () => {

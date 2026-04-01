@@ -55,6 +55,7 @@
 * [UIBULKED-751](https://folio-org.atlassian.net/browse/UIBULKED-751) Add "Reset all" button on Identifiers and Query tabs
 * [UIBULKED-722](https://folio-org.atlassian.net/browse/UIBULKED-722) Include universal read-only permissions
 * [UIBULKED-753](https://folio-org.atlassian.net/browse/UIBULKED-753) Dependency correction: omit `@testing-library/react-hooks` since it is not used
+* [UIBULKED-757](https://folio-org.atlassian.net/browse/UIBULKED-757) Behavior of "Reset all" button is not independent on Identifier, Query tabs
 
 ## [5.0.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.0.0) (2025-03-12)
 

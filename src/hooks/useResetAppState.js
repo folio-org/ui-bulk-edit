@@ -30,15 +30,30 @@ export const useResetAppState = ({
     // clear visibleColumns preset
     setVisibleColumns(null);
 
+    const currentParams = queryString.parse(history.location.search);
     const [status, entityType, operationType, startTime, endTime] = filtersTab.logsTab;
+    const isQueryCriteria = criteria === CRITERIA.QUERY;
+
+    // Only reset the current tab's params; preserve the other tab's params so
+    // resetting Identifier tab does not affect Query tab and vice versa.
+    const tabSpecificParams = isQueryCriteria
+      ? {
+        queryRecordType: '',
+        ...(currentParams.identifier && { identifier: currentParams.identifier }),
+        ...(currentParams.capabilities && { capabilities: currentParams.capabilities }),
+      }
+      : {
+        identifier: '',
+        capabilities: '',
+        ...(currentParams.queryRecordType && { queryRecordType: currentParams.queryRecordType }),
+      };
 
     // set user capability by default
     history.replace({
       pathname: '/bulk-edit',
       search: buildSearch({
         criteria,
-        identifier: '',
-        capabilities: '',
+        ...tabSpecificParams,
         status,
         entityType,
         operationType,

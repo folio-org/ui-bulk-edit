@@ -291,8 +291,9 @@ describe('BulkEditListSidebar', () => {
       expect(resetButton).not.toBeDisabled();
     });
 
-    it('should be enabled when only queryRecordType is set', () => {
+    it('should be enabled when only queryRecordType is set on Query tab', () => {
       renderBulkEditListSidebar({
+        criteria: CRITERIA.QUERY,
         capabilities: '',
         identifier: '',
         queryRecordType: 'USER',
@@ -300,6 +301,18 @@ describe('BulkEditListSidebar', () => {
 
       const resetButton = screen.getByTestId('reset-button');
       expect(resetButton).not.toBeDisabled();
+    });
+
+    it('should be disabled on Identifier tab when only queryRecordType is set', () => {
+      renderBulkEditListSidebar({
+        criteria: CRITERIA.IDENTIFIER,
+        capabilities: '',
+        identifier: '',
+        queryRecordType: 'USER',
+      });
+
+      const resetButton = screen.getByTestId('reset-button');
+      expect(resetButton).toBeDisabled();
     });
 
     it('should be enabled when multiple search params are set', () => {
