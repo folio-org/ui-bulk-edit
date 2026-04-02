@@ -598,5 +598,5 @@
     "list.filters.capabilities.instance": "典藏 - 实例",
     "settings.profiles.title.edit": "编辑{entityType} 批量编辑配置文件",
     "settings.profiles.title.details": "{entityType} 批量编辑配置文件详情",
-    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
+    "list.filters.recordIdentifier.tooltip": "要启用此字段，请选择<b>记录类型</b>。"
 }
