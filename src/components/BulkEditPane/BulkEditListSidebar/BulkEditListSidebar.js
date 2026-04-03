@@ -31,7 +31,9 @@ export const BulkEditListSidebar = () => {
   const isQuery = criteria === CRITERIA.QUERY;
   const isLogs = criteria === CRITERIA.LOGS;
   const isIdentifier = criteria === CRITERIA.IDENTIFIER;
-  const isResetDisabled = !capabilities && !identifier && !queryRecordType;
+  const isResetDisabled = isIdentifier
+    ? !capabilities && !identifier
+    : !queryRecordType;
 
   const handleCriteriaChange = (value) => {
     history.replace({
