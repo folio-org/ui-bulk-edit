@@ -124,6 +124,12 @@ export const updateIn = (obj, path, updater) => {
   return update(copy, path, updater);
 };
 
+const stripTenantSuffix = (label, tenant) => {
+  if (!label || !tenant) return label;
+  const suffix = ` (${tenant})`;
+  return label.endsWith(suffix) ? label.slice(0, -suffix.length) : label;
+};
+
 export const removeDuplicatesByValue = (arr = [], tenants = []) => {
   const valueMap = new Map();
 
@@ -133,12 +139,7 @@ export const removeDuplicatesByValue = (arr = [], tenants = []) => {
     } else {
       const existingItem = valueMap.get(item.value);
 
-      const startIndex = existingItem.label.indexOf('(');
-      const endIndex = existingItem.label.indexOf(')', startIndex);
-
-      if (startIndex !== -1 && endIndex !== -1) {
-        existingItem.label = existingItem.label.slice(0, startIndex).trim() + existingItem.label.slice(endIndex + 1).trim();
-      }
+      existingItem.label = stripTenantSuffix(existingItem.label, existingItem.tenant[0]);
 
       if (!existingItem.tenant.includes(item.tenant)) {
         existingItem.tenant.push(item.tenant);
@@ -149,12 +150,7 @@ export const removeDuplicatesByValue = (arr = [], tenants = []) => {
   if (tenants.length === 1) {
     arr.forEach(item => {
       const existingItem = valueMap.get(item.value);
-      const tenantStartIndex = existingItem.label.indexOf('(');
-      const tenantEndIndex = existingItem.label.indexOf(')', tenantStartIndex);
-
-      if (tenantStartIndex !== -1 && tenantEndIndex !== -1) {
-        existingItem.label = existingItem.label.slice(0, tenantStartIndex).trim() + existingItem.label.slice(tenantEndIndex + 1).trim();
-      }
+      existingItem.label = stripTenantSuffix(existingItem.label, item.tenant);
     });
   }
 
