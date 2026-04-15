@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { FormattedUTCDate } from '@folio/stripes/components';
+import { FormattedUTCDate, dayjs } from '@folio/stripes/components';
 import { FolioFormattedTime } from '@folio/stripes-acq-components';
 
 import {
@@ -37,7 +37,7 @@ const formatData = ({ capability, column, data }) => {
       CUSTOM_ENTITY_COLUMNS.DATE_OF_BIRTH,
       CUSTOM_ENTITY_COLUMNS.ENROLLMENT_DATE
     ].includes(field):
-      return <FormattedUTCDate value={data} />;
+      return dayjs(data).format('MM/DD/YYYY');
     case capability === CAPABILITIES.USER && field === CUSTOM_ENTITY_COLUMNS.USER_STATUS:
       return <FormattedMessage id={`ui-bulk-edit.list.preview.table.status.${data}`} />;
     case [CAPABILITIES.INSTANCE, CAPABILITIES.ITEM].includes(capability) && [

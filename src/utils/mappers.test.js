@@ -1,4 +1,3 @@
-import { FormattedUTCDate } from '@folio/stripes/components';
 import { FolioFormattedTime } from '@folio/stripes-acq-components';
 
 import { CAPABILITIES, CUSTOM_ENTITY_COLUMNS } from '../constants';
@@ -70,14 +69,14 @@ describe('mappers', () => {
       expect(contentData[0][dateColumn.value].type).toEqual(FolioFormattedTime);
     });
 
-    it('should convert user expiration date string to FormattedUTCDate', () => {
+    it('should format user expiration date using dayjs', () => {
       const expirationColumn = {
         value: CUSTOM_ENTITY_COLUMNS.EXPIRATION_DATE,
         label: CUSTOM_ENTITY_COLUMNS.EXPIRATION_DATE,
         visible: true,
         dataType: DATA_TYPES.DATE_TIME,
       };
-      const row = ['2023-03-18 23:59:59.000Z'];
+      const row = ['2023-03-18'];
       const data = {
         header: [expirationColumn],
         rows: [{ row }],
@@ -85,7 +84,7 @@ describe('mappers', () => {
 
       const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.USER });
 
-      expect(contentData[0][expirationColumn.value].type).toEqual(FormattedUTCDate);
+      expect(contentData[0][expirationColumn.value]).toBe('03/18/2023');
     });
 
     it('should not convert date string to FolioFormattedTime when value is empty', () => {
