@@ -84,7 +84,7 @@ describe('mappers', () => {
 
       const { contentData } = getMappedTableData({ data, intl, capabilities: CAPABILITIES.USER });
 
-      expect(contentData[0][expirationColumn.value]).toBe('03/18/2023');
+      expect(contentData[0][expirationColumn.value]).toBe('3/18/2023');
     });
 
     it('should not convert date string to FolioFormattedTime when value is empty', () => {

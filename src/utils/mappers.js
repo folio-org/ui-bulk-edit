@@ -37,7 +37,7 @@ const formatData = ({ capability, column, data }) => {
       CUSTOM_ENTITY_COLUMNS.DATE_OF_BIRTH,
       CUSTOM_ENTITY_COLUMNS.ENROLLMENT_DATE
     ].includes(field):
-      return dayjs(data).format('MM/DD/YYYY');
+      return dayjs(data).format('M/D/YYYY');
     case capability === CAPABILITIES.USER && field === CUSTOM_ENTITY_COLUMNS.USER_STATUS:
       return <FormattedMessage id={`ui-bulk-edit.list.preview.table.status.${data}`} />;
     case [CAPABILITIES.INSTANCE, CAPABILITIES.ITEM].includes(capability) && [
