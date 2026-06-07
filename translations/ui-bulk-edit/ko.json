@@ -260,7 +260,7 @@
     "category.loanType": "Loan and availability",
     "category.location": "Location",
     "layer.options.items.removeAll": "Remove all",
-    "layer.options.items.addNote": "Add note",
+    "layer.options.items.addNote": "노트 추가",
     "layer.options.administrativeNote": "Administrative note",
     "layer.options.checkInNote": "Check in note",
     "layer.options.checkOutNote": "Check out note",
