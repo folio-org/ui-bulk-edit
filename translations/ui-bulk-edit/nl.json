@@ -598,5 +598,5 @@
     "list.filters.capabilities.instance": "Collectiebezit - instances",
     "settings.profiles.title.edit": "Editie {entityType} profiel in bulk bewerken",
     "settings.profiles.title.details": "{entityType} Profielgegevens in bulk bewerken",
-    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
+    "list.filters.recordIdentifier.tooltip": "Om dit veld in te schakelen, selecteert u een <b>Record type.</b>"
 }
