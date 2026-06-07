@@ -593,10 +593,10 @@
     "settings.profiles.columns.status.active": "Активно",
     "ariaLabel.createInstanceProfile": "Створити профіль біб.запису (інстансу) FOLIO",
     "ariaLabel.createInstanceMarcProfile": "Створити профіль MARC біб.запису (інстансу)",
-    "list.filters.capabilities.user": "Users",
-    "list.filters.capabilities.item": "Inventory - items",
-    "list.filters.capabilities.instance": "Inventory - instances",
-    "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
-    "settings.profiles.title.details": "{entityType} bulk edit profile details",
-    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
+    "list.filters.capabilities.user": "Користувачі",
+    "list.filters.capabilities.item": "Облік фонду - примірники",
+    "list.filters.capabilities.instance": "Облік фонду - біб.записи (інстанси)",
+    "settings.profiles.title.edit": "Редагувати {entityType} профіль пакетного редагування",
+    "settings.profiles.title.details": "{entityType} деталі профілю масового редагування",
+    "list.filters.recordIdentifier.tooltip": "Щоб увімкнути це поле, виберіть <b>Тип запису.</b>"
 }
