@@ -1,4 +1,4 @@
-import { renderHook } from '@folio/jest-config-stripes/testing-library/react-hooks';
+import { renderHook } from '@folio/jest-config-stripes/testing-library/react';
 import { useQuery } from 'react-query';
 
 import { useNamespace, useOkapiKy } from '@folio/stripes/core';
@@ -84,6 +84,28 @@ describe('useMaterialTypes', () => {
     expect(useQuery).toHaveBeenCalledWith(
       expect.objectContaining(additionalOptions)
     );
+  });
+
+  it('should call ky.get with correct path and search params in queryFn', async () => {
+    let capturedQueryFn;
+    useQuery.mockImplementation((config) => {
+      capturedQueryFn = config.queryFn;
+      return { data: null, isLoading: false };
+    });
+
+    const mockJson = jest.fn().mockResolvedValue({ mtypes: [] });
+    mockGet.mockReturnValue({ json: mockJson });
+
+    renderHook(() => useMaterialTypes());
+
+    await capturedQueryFn();
+
+    expect(mockGet).toHaveBeenCalledWith('material-types', {
+      searchParams: {
+        query: 'cql.allRecords=1 sortby name',
+        limit: 1000,
+      },
+    });
   });
 });
 
