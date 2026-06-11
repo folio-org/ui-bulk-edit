@@ -19,6 +19,8 @@ export * from './useItemNotes';
 export * from './useItemNotesEcs';
 export * from './useLoanTypes';
 export * from './useLoanTypesEcs';
+export * from './useMaterialTypes';
+export * from './useMaterialTypesEcs';
 export * from './useLocationEcs';
 export * from './usePatronGroup';
 export * from './useQueryPlugin';
