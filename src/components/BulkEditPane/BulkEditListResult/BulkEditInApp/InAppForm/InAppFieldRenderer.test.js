@@ -21,12 +21,16 @@ import {
   useItemNotesEcs,
   useLoanTypes,
   useLoanTypesEcs,
+  useMaterialTypes,
+  useMaterialTypesEcs,
   usePatronGroup,
   useStatisticalCodes
 } from '../../../../../hooks/api';
 
 jest.mock('../../../../../hooks/api/useLoanTypes');
 jest.mock('../../../../../hooks/api/useLoanTypesEcs');
+jest.mock('../../../../../hooks/api/useMaterialTypes');
+jest.mock('../../../../../hooks/api/useMaterialTypesEcs');
 jest.mock('../../../../../hooks/api/useInstanceNotes');
 jest.mock('../../../../../hooks/api/useHoldingsNotes');
 jest.mock('../../../../../hooks/api/useHoldingsNotesEcs');
@@ -220,6 +224,28 @@ describe('FolioFieldRenderer (integration)', () => {
     });
 
     const multiSelectButton = screen.getByRole('button', { name: /ui-bulk-edit.layer.selectLoanType/ });
+    expect(multiSelectButton).toBeInTheDocument();
+  });
+
+  it('renders real Select for CONTROL_TYPES.MATERIAL_TYPE', () => {
+    useMaterialTypes.mockReturnValue({
+      isLoading: false,
+      materialTypes: [],
+    });
+
+    useMaterialTypesEcs.mockReturnValue({
+      isFetching: false,
+      escData: [],
+    });
+
+    renderMe({
+      field: {
+        ...baseField,
+        type: CONTROL_TYPES.MATERIAL_TYPE
+      }
+    });
+
+    const multiSelectButton = screen.getByRole('button', { name: /ui-bulk-edit.layer.selectMaterialType/ });
     expect(multiSelectButton).toBeInTheDocument();
   });
 
