@@ -18,6 +18,7 @@ export const OPTIONS = {
   PATRON_GROUP: 'PATRON_GROUP',
   TEMPORARY_LOAN_TYPE: 'TEMPORARY_LOAN_TYPE',
   PERMANENT_LOAN_TYPE: 'PERMANENT_LOAN_TYPE',
+  MATERIAL_TYPE: 'MATERIAL_TYPE',
   TEMPORARY_HOLDINGS_LOCATION: 'TEMPORARY_HOLDINGS_LOCATION',
   PERMANENT_HOLDINGS_LOCATION: 'PERMANENT_HOLDINGS_LOCATION',
   ITEM_NOTE: 'ITEM_NOTE',
@@ -432,6 +433,12 @@ export const getItemsOptions = (formatMessage, itemNotes = []) => [
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.suppressFromDiscovery' }),
     disabled: false,
     categoryName: formatMessage({ id: 'ui-bulk-edit.category.administrativeData' }),
+  },
+  {
+    value: OPTIONS.MATERIAL_TYPE,
+    label: formatMessage({ id: 'ui-bulk-edit.layer.options.materialType' }),
+    disabled: false,
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.item' }),
   },
   {
     value: OPTIONS.CHECK_IN_NOTE,
