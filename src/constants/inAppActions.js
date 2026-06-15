@@ -140,6 +140,7 @@ export const patronActions = () => [getReplaceAction()];
 export const expirationActions = () => [getReplaceAction()];
 export const statusActions = () => [getReplaceAction()];
 export const permanentLoanTypeActions = () => [getReplaceAction()];
+export const materialTypeActions = () => [getReplaceAction()];
 export const permanentHoldingsLocation = () => [getReplaceAction()];
 export const replaceClearActions = () => [
   getPlaceholder(),

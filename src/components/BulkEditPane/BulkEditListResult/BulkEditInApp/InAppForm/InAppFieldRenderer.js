@@ -8,6 +8,7 @@ import { LocationControl } from './controls/LocationControl';
 import { PatronGroupControl } from './controls/PatronGroupControl';
 import { StatusControl } from './controls/StatusControl';
 import { LoanTypesControl } from './controls/LoanTypesControl';
+import { MaterialTypesControl } from './controls/MaterialTypesControl';
 import { HoldingNotesControl } from './controls/HoldingNotesControl';
 import { ItemNotesControl } from './controls/ItemNotesControl';
 import { InstanceNotesControl } from './controls/InstanceNotesControl';
@@ -182,6 +183,10 @@ export const InAppFieldRenderer = memo(({
 
       {controlType === CONTROL_TYPES.LOAN_TYPE && (
         <LoanTypesControl key={item.name} {...sharedProps} />
+      )}
+
+      {controlType === CONTROL_TYPES.MATERIAL_TYPE && (
+        <MaterialTypesControl key={item.name} {...sharedProps} />
       )}
 
       {controlType === CONTROL_TYPES.NOTE_SELECT && (
