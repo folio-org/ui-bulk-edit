@@ -1,6 +1,6 @@
 {
   "name": "@folio/bulk-edit",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "description": "Description for bulk edit",
   "main": "index.js",
   "repository": "",
@@ -92,6 +92,7 @@
           "bulk-operations.item.start.post",
           "bulk-operations.profiles.collection.get",
           "inventory-storage.loan-types.collection.get",
+          "inventory-storage.material-types.collection.get",
           "inventory-storage.locations.collection.get",
           "inventory-storage.location-units.institutions.collection.get",
           "inventory-storage.location-units.campuses.collection.get",
