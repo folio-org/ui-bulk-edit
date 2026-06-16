@@ -438,7 +438,7 @@ export const getItemsOptions = (formatMessage, itemNotes = []) => [
     value: OPTIONS.MATERIAL_TYPE,
     label: formatMessage({ id: 'ui-bulk-edit.layer.options.materialType' }),
     disabled: false,
-    categoryName: formatMessage({ id: 'ui-bulk-edit.category.item' }),
+    categoryName: formatMessage({ id: 'ui-bulk-edit.category.itemData' }),
   },
   {
     value: OPTIONS.CHECK_IN_NOTE,
