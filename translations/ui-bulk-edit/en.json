@@ -167,7 +167,7 @@
 
   "category.loanType": "Loan and availability",
   "category.location": "Location",
-  "category.item": "Item",
+  "category.itemData": "Item data",
   "category.itemNotes": "Item notes",
   "category.holdingsNotes": "Holdings notes",
   "category.holdingsLocation": "Holdings location",

@@ -6,12 +6,22 @@ import { Loading, Selection } from '@folio/stripes/components';
 import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
 import { getLabelByValue } from '../../helpers';
-import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
+import { customFilter, getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
 import { useMaterialTypes, useMaterialTypesEcs } from '../../../../../../hooks/api';
-import { useTenants } from '../../../../../../context/TenantsContext';
+import { TenantsProvider, useTenants } from '../../../../../../context/TenantsContext';
 
 
-export const MaterialTypesControl = ({ value, path, name, disabled, onChange }) => {
+const controlPropTypes = {
+  value: PropTypes.string,
+  name: PropTypes.string,
+  disabled: PropTypes.bool,
+  path: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
+  onChange: PropTypes.func,
+};
+
+const MaterialTypesSelection = ({ value, path, name, disabled, onChange }) => {
   const { formatMessage } = useIntl();
   const stripes = useStripes();
   const { tenants } = useTenants();
@@ -40,6 +50,7 @@ export const MaterialTypesControl = ({ value, path, name, disabled, onChange }) 
           });
         }}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectMaterialType' })}
+        onFilter={customFilter}
         dataOptions={types}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.materialTypeSelect' })}
         dirty={!!value}
@@ -49,13 +60,16 @@ export const MaterialTypesControl = ({ value, path, name, disabled, onChange }) 
   );
 };
 
-MaterialTypesControl.propTypes = {
-  value: PropTypes.string,
-  name: PropTypes.string,
-  disabled: PropTypes.bool,
-  path: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  ),
-  onChange: PropTypes.func,
+MaterialTypesSelection.propTypes = controlPropTypes;
+
+export const MaterialTypesControl = (props) => {
+  const { tenants } = useTenants();
+
+  return (
+    <TenantsProvider tenants={tenants} showLocal={false}>
+      <MaterialTypesSelection {...props} />
+    </TenantsProvider>
+  );
 };
 
+MaterialTypesControl.propTypes = controlPropTypes;

@@ -6,7 +6,7 @@ import { Loading, Selection } from '@folio/stripes/components';
 import { checkIfUserInCentralTenant, useStripes } from '@folio/stripes/core';
 
 import { getLabelByValue } from '../../helpers';
-import { getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
+import { customFilter, getTenantsById, removeDuplicatesByValue } from '../../../../../../utils/helpers';
 import { useLoanTypes, useLoanTypesEcs } from '../../../../../../hooks/api';
 import { useTenants } from '../../../../../../context/TenantsContext';
 
@@ -40,6 +40,7 @@ export const LoanTypesControl = ({ value, path, name, disabled, onChange }) => {
           });
         }}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.selectLoanType' })}
+        onFilter={customFilter}
         dataOptions={isCentralTenant ? removeDuplicatesByValue(loanTypesEcs, tenants) : loanTypes}
         aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.loanTypeSelect' })}
         dirty={!!value}

@@ -19,6 +19,7 @@ jest.mock('../../../../../../hooks/api/useMaterialTypesEcs');
 
 jest.mock('../../../../../../context/TenantsContext', () => ({
   useTenants: jest.fn(() => ({ tenants: [] })),
+  TenantsProvider: ({ children }) => children,
 }));
 
 jest.mock('@folio/stripes/components', () => ({
