@@ -332,7 +332,7 @@ describe('BulkEditMarcLayer', () => {
     await act(async () => {
       await userEvent.type(inputField, '555');
       await userEvent.type(inputSubField, 'a');
-      await userEvent.selectOptions(actionSelect, ACTIONS.REMOVE_ALL);
+      await userEvent.selectOptions(actionSelect, ACTIONS.REMOVE_FIELD);
     });
 
     const confirmChangesBtn = getByRole('button', { name: /confirmChanges/i });
