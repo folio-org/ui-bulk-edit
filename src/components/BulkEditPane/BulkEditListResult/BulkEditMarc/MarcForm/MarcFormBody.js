@@ -128,7 +128,7 @@ export const MarcFormBody = ({ fields, setFields, isNonInteractive }) => {
                   key={fieldConfig.name}
                   field={fieldConfig}
                   item={item}
-                  ctx={{ index }}
+                  ctx={{ index, actions: item.actions }}
                   errors={errors}
                   rootPath={[index]}
                   onChange={handleChange}

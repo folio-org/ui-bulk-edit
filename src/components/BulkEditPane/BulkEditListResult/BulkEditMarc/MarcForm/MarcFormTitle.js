@@ -4,13 +4,16 @@ import { FormattedMessage } from 'react-intl';
 
 import { Col, Icon, Label, Row, Tooltip } from '@folio/stripes/components';
 
+import { ACTIONS } from '../../../../../constants/marcActions';
 import { DATA_KEYS, getFieldWithMaxColumns } from '../helpers';
 
 import css from '../../../BulkEditPane.css';
 
+const SUBFIELD_REQUIRED_ACTIONS = [ACTIONS.ADD_TO_EXISTING, ACTIONS.FIND, ACTIONS.REMOVE_SUBFIELD];
 
 export const MarcFormTitle = ({ fields, isNonInteractive }) => {
   const longestField = getFieldWithMaxColumns(fields);
+  const isSubfieldRequired = fields.some(f => SUBFIELD_REQUIRED_ACTIONS.includes(f.actions?.[0]?.name));
 
   return (
     <Row className={css.row}>
@@ -55,7 +58,7 @@ export const MarcFormTitle = ({ fields, isNonInteractive }) => {
       <Col
         className={`${css.headerCell} ${css.subfield}`}
       >
-        <Label required={!isNonInteractive}>
+        <Label required={!isNonInteractive && isSubfieldRequired}>
           <FormattedMessage id="ui-bulk-edit.layer.column.subfield" />
         </Label>
         <div className={css.splitter} />

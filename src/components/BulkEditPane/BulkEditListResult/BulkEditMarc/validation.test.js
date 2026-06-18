@@ -142,6 +142,94 @@ describe('getMarcFormErrors', () => {
     });
   });
 
+  it('should not require subfield when action is Remove field', () => {
+    const input = [
+      {
+        id: '202',
+        tag: '500',
+        ind1: '\\',
+        ind2: '\\',
+        subfield: '',
+        actions: [
+          {
+            name: ACTIONS.REMOVE_FIELD,
+            data: [],
+          },
+        ],
+        subfields: [],
+      },
+    ];
+
+    const errors = getFormErrors(input, validationSchema);
+    expect(errors).toEqual({});
+  });
+
+  it('should require subfield when action is Remove subfield and subfield is empty', () => {
+    const input = [
+      {
+        id: '202',
+        tag: '500',
+        ind1: '\\',
+        ind2: '\\',
+        subfield: '',
+        actions: [
+          {
+            name: ACTIONS.REMOVE_SUBFIELD,
+            data: [],
+          },
+        ],
+        subfields: [],
+      },
+    ];
+
+    const errors = getFormErrors(input, validationSchema);
+    expect(errors['[0].subfield']).toBe('ui-bulk-edit.layer.marc.error.subfield');
+  });
+
+  it('should pass when action is Remove subfield and subfield is filled', () => {
+    const input = [
+      {
+        id: '202',
+        tag: '500',
+        ind1: '\\',
+        ind2: '\\',
+        subfield: 'a',
+        actions: [
+          {
+            name: ACTIONS.REMOVE_SUBFIELD,
+            data: [],
+          },
+        ],
+        subfields: [],
+      },
+    ];
+
+    const errors = getFormErrors(input, validationSchema);
+    expect(errors).toEqual({});
+  });
+
+  it('should not require subfield when no action is selected', () => {
+    const input = [
+      {
+        id: '202',
+        tag: '500',
+        ind1: '\\',
+        ind2: '\\',
+        subfield: '',
+        actions: [
+          {
+            name: '',
+            data: [],
+          },
+        ],
+        subfields: [],
+      },
+    ];
+
+    const errors = getFormErrors(input, validationSchema);
+    expect(errors['[0].subfield']).toBeUndefined();
+  });
+
   it('should return errors when second action is required', () => {
     const invalidInput = [
       {

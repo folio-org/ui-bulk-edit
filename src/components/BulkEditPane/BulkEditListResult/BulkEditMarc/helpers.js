@@ -84,7 +84,8 @@ export const getNextAction = (action) => {
         data: [],
       };
     case ACTIONS.REMOVE_ALL:
-      // No further action after removing all
+    case ACTIONS.REMOVE_FIELD:
+    case ACTIONS.REMOVE_SUBFIELD:
       return null;
     default:
       return null;
@@ -109,7 +110,8 @@ export const getNextData = (action) => {
         { key: DATA_KEYS.VALUE, value: '' }
       ];
     case ACTIONS.REMOVE_ALL:
-      // Removing all requires no extra data
+    case ACTIONS.REMOVE_FIELD:
+    case ACTIONS.REMOVE_SUBFIELD:
       return [];
     default:
       return [];

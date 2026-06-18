@@ -3,6 +3,15 @@ import { array, object, string } from 'yup';
 import { DATA_KEYS, INDICATOR_FIELD_MAX_LENGTH } from './helpers';
 import { ACTIONS } from '../../../../constants/marcActions';
 
+const SUBFIELD_FORMAT_TEST = [
+  'is-valid-subfield',
+  'ui-bulk-edit.layer.marc.error.subfield',
+  value => /^[a-z0-9]+$/.test(value),
+];
+
+// Actions that require the row-level subfield to be populated
+const SUBFIELD_REQUIRED_ACTIONS = [ACTIONS.ADD_TO_EXISTING, ACTIONS.FIND, ACTIONS.REMOVE_SUBFIELD];
+
 /**
  * Schema definition for validating individual subfield entries within a MARC field.
  * Ensures the subfield code and its associated actions conform to expected formats.
@@ -10,11 +19,7 @@ import { ACTIONS } from '../../../../constants/marcActions';
 const subfieldSchema = {
   subfield: string()
     .required()
-    .test(
-      'is-valid-subfield',
-      'ui-bulk-edit.layer.marc.error.subfield',
-      value => /^[a-z0-9]+$/.test(value), // Only lowercase alphanumeric characters allowed
-    ),
+    .test(...SUBFIELD_FORMAT_TEST),
 
   actions: array()
     .of(
@@ -100,7 +105,12 @@ export const validationSchema = array(
         value => latinRegex.test(value)
       ),
     subfields: array(object(subfieldSchema)).nullable(),
-    ...subfieldSchema,
+    subfield: string().when('actions', {
+      is: (actions) => SUBFIELD_REQUIRED_ACTIONS.includes(actions?.[0]?.name),
+      then: (schema) => schema.required().test(...SUBFIELD_FORMAT_TEST),
+      otherwise: (schema) => schema,
+    }),
+    actions: subfieldSchema.actions,
   }).test(
     'tag-999',
     'ui-bulk-edit.layer.marc.error.protected',
