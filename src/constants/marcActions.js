@@ -70,5 +70,6 @@ export const marcActions = () => [
   getPlaceholder(),
   getAddAction(),
   getFindAction(),
-  getRemoveAllAction(),
+  getRemoveFieldAction(),
+  getRemoveSubfieldAction(),
 ];

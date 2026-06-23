@@ -2,6 +2,13 @@
 
 ## In progress
 
+* [UIBULKED-766](https://folio-org.atlassian.net/browse/UIBULKED-766) Bulk Edit - Support editing material type in item records.
+* [UIBULKED-590](https://folio-org.atlassian.net/browse/UIBULKED-590) Replace "Remove all"  operation on MARC instance edits with "Remove field" and "Remove subfield".
+
+## [5.1.1](https://github.com/folio-org/ui-bulk-edit/tree/v5.1.1) (2026-05-14)
+
+* [UIBULKED-758](https://folio-org.atlassian.net/browse/UIBULKED-758) Rollback incorrect dates formatting
+
 ## [5.1.0](https://github.com/folio-org/ui-bulk-edit/tree/v5.1.0) (2026-04-16)
 
 * [UIBULKED-620](https://folio-org.atlassian.net/browse/UIBULKED-620) Alphabetical order of statistical codes on bulk edit form.

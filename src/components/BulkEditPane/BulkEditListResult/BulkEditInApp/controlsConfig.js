@@ -14,6 +14,7 @@ import {
   patronActions,
   permanentHoldingsLocation,
   permanentLoanTypeActions,
+  materialTypeActions,
   replaceClearActions,
   statisticalCodeActions,
   statusActions,
@@ -110,6 +111,16 @@ const firstActionConfig = {
   [OPTIONS.PERMANENT_LOAN_TYPE]: {
     actions: permanentLoanTypeActions(),
     controlType: CONTROL_TYPES.LOAN_TYPE,
+    initialState: {
+      actions: [
+        { name: ACTIONS.REPLACE_WITH, value: '' },
+      ]
+    },
+  },
+
+  [OPTIONS.MATERIAL_TYPE]: {
+    actions: materialTypeActions(),
+    controlType: CONTROL_TYPES.MATERIAL_TYPE,
     initialState: {
       actions: [
         { name: ACTIONS.REPLACE_WITH, value: '' },

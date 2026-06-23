@@ -6,12 +6,13 @@ import {
   getAppendAction,
   getFindAction,
   getPlaceholder,
-  getRemoveAllAction,
   getRemoveFieldAction,
   getRemoveSubfieldAction,
   getReplaceWithAction
 } from '../../../../constants/marcActions';
 import { INDICATOR_FIELD_MAX_LENGTH, SUBFIELD_MAX_LENGTH, TAG_FIELD_MAX_LENGTH } from './helpers';
+
+const SUBFIELD_REQUIRED_ACTIONS = [ACTIONS.ADD_TO_EXISTING, ACTIONS.FIND, ACTIONS.REMOVE_SUBFIELD];
 
 export const schema = [
   {
@@ -57,6 +58,7 @@ export const schema = [
     disabled: false,
     showError: true,
     dirty: (value) => !!value?.length,
+    required: ({ actions }) => SUBFIELD_REQUIRED_ACTIONS.includes(actions?.[0]?.name),
   },
   {
     name: 'actions',
@@ -89,7 +91,8 @@ export const schema = [
               getPlaceholder(),
               getAddAction(),
               getFindAction(),
-              getRemoveAllAction(),
+              getRemoveFieldAction(),
+              getRemoveSubfieldAction(),
             ];
           }
 
@@ -107,8 +110,6 @@ export const schema = [
                 getRemoveSubfieldAction(),
                 getReplaceWithAction(),
               ];
-            case ACTIONS.REMOVE_ALL:
-              return null;
             default:
               return null;
           }
