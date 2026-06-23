@@ -598,5 +598,9 @@
     "list.filters.capabilities.instance": "Inventario - instancias",
     "settings.profiles.title.edit": "Editar  perfil de edición en bloque {entityType} ",
     "settings.profiles.title.details": "edición masiva {entityType} - detalles del perfil",
-    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
+    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>",
+    "layer.options.materialType": "Material type",
+    "layer.selectMaterialType": "Select material type",
+    "ariaLabel.materialTypeSelect": "Material type select",
+    "category.itemData": "Item data"
 }

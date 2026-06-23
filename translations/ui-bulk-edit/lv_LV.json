@@ -598,5 +598,9 @@
     "list.filters.capabilities.instance": "Glabātuve - Bibliogrāfiskie ieraksti",
     "settings.profiles.title.edit": "Rediģēt masveida rediģēšanas profilu: {entityType}",
     "settings.profiles.title.details": "Masveida rediģēšanas profila informācija: {entityType}",
-    "list.filters.recordIdentifier.tooltip": "Lai iespējotu šo lauku, izvēlieties <b>ieraksta veidu.</b>"
+    "list.filters.recordIdentifier.tooltip": "Lai iespējotu šo lauku, izvēlieties <b>ieraksta veidu.</b>",
+    "layer.options.materialType": "Material type",
+    "layer.selectMaterialType": "Select material type",
+    "ariaLabel.materialTypeSelect": "Material type select",
+    "category.itemData": "Item data"
 }

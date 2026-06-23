@@ -598,5 +598,9 @@
     "list.filters.capabilities.instance": "Catalogue - notices",
     "settings.profiles.title.edit": "Edit {entityType} bulk edit profile",
     "settings.profiles.title.details": "{entityType} bulk edit profile details",
-    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
+    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>",
+    "layer.options.materialType": "Material type",
+    "layer.selectMaterialType": "Select material type",
+    "ariaLabel.materialTypeSelect": "Material type select",
+    "category.itemData": "Item data"
 }

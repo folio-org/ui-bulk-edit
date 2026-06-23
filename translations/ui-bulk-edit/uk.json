@@ -598,5 +598,9 @@
     "list.filters.capabilities.instance": "Облік фонду - біб.записи (інстанси)",
     "settings.profiles.title.edit": "Редагувати {entityType} профіль пакетного редагування",
     "settings.profiles.title.details": "{entityType} деталі профілю масового редагування",
-    "list.filters.recordIdentifier.tooltip": "Щоб увімкнути це поле, виберіть <b>Тип запису.</b>"
+    "list.filters.recordIdentifier.tooltip": "Щоб увімкнути це поле, виберіть <b>Тип запису.</b>",
+    "layer.options.materialType": "Material type",
+    "layer.selectMaterialType": "Select material type",
+    "ariaLabel.materialTypeSelect": "Material type select",
+    "category.itemData": "Item data"
 }
