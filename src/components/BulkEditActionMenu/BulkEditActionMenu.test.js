@@ -3,7 +3,7 @@ import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from 'react-query';
 
-import { useOkapiKy } from '@folio/stripes/core';
+import { useOkapiKy, useStripes } from '@folio/stripes/core';
 
 import '../../../test/jest/__mock__';
 import { runAxeTest } from '@folio/stripes-testing';
@@ -94,6 +94,7 @@ describe('BulkEditActionMenu', () => {
     useBulkOperationDetails.mockClear().mockReturnValue({ bulkDetails: bulkOperation });
 
     useOkapiKy.mockClear().mockReturnValue({});
+    useStripes().hasPerm.mockReturnValue(true);
   });
 
   it('should display actions group', async () => {
@@ -195,6 +196,66 @@ describe('BulkEditActionMenu', () => {
     await userEvent.click(screen.getByTestId('startCsvAction'));
 
     expect(onEdit).toHaveBeenCalledWith(APPROACHES.MANUAL);
+    expect(onToggle).toHaveBeenCalled();
+  });
+
+  it('should display start bulk delete action when user has both bulk delete and users delete permissions', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.getByTestId('startBulkDeleteAction')).toBeVisible();
+  });
+
+  it('should hide start bulk delete action when functional users delete permission is missing', () => {
+    useStripes().hasPerm.mockImplementation((perm) => perm !== 'ui-users.delete');
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.queryByTestId('startBulkDeleteAction')).not.toBeInTheDocument();
+  });
+
+  it('should hide start bulk delete action when bulk delete permission is missing', () => {
+    useStripes().hasPerm.mockImplementation((perm) => perm !== 'ui-bulk-edit.users.delete');
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.queryByTestId('startBulkDeleteAction')).not.toBeInTheDocument();
+  });
+
+  it('should not display start bulk delete action for non-user record types', () => {
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.ITEM,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    expect(screen.queryByTestId('startBulkDeleteAction')).not.toBeInTheDocument();
+  });
+
+  it('should start bulk delete when the delete action is clicked', async () => {
+    onEdit.mockClear();
+    onToggle.mockClear();
+
+    renderBulkEditActionMenu({
+      step: EDITING_STEPS.UPLOAD,
+      capability: CAPABILITIES.USER,
+      providerState: { ...defaultProviderState, visibleColumns: [] },
+    });
+
+    await userEvent.click(screen.getByTestId('startBulkDeleteAction'));
+
+    expect(onEdit).toHaveBeenCalledWith(APPROACHES.DELETE);
     expect(onToggle).toHaveBeenCalled();
   });
 

@@ -11,6 +11,7 @@ export const useBulkPermissions = () => {
   const hasInAppViewPerms = stripes.hasPerm('ui-bulk-edit.inventory.view');
   const hasInAppEditPerms = stripes.hasPerm('ui-bulk-edit.inventory.edit');
   const hasInAppUsersEditPerms = stripes.hasPerm('ui-bulk-edit.users.edit');
+  const hasInAppUsersDeletePerms = stripes.hasPerm('ui-bulk-edit.users.delete');
 
   // Query perms
   const hasQueryPerms = stripes.hasPerm('ui-bulk-edit.query.execute');
@@ -29,6 +30,7 @@ export const useBulkPermissions = () => {
   // Users
   const hasUsersPerms = stripes.hasPerm('ui-users.edit');
   const hasUsersViewPerms = stripes.hasPerm('ui-users.view');
+  const hasUsersDeletePerms = stripes.hasPerm('ui-users.delete');
 
   // derived pages
   const hasAnyInAppEditPermissions = hasInAppEditPerms || hasInAppUsersEditPerms;
@@ -53,6 +55,7 @@ export const useBulkPermissions = () => {
   const hasOnlyViewInventoryAndMarcPerms = hasInventoryInstanceViewPerms && hasQuickMarcViewPerms;
   const hasUserEditLocalPerm = hasCsvEditPerms && hasUsersPerms;
   const hasUserEditInAppPerm = hasInAppUsersEditPerms && hasUsersPerms;
+  const hasUserDeleteInAppPerm = hasInAppUsersDeletePerms && hasUsersDeletePerms;
   const hasAnyEditPermissions = hasAnyUserWithBulkPerm || hasAnyInventoryWithInAppView;
   const isSelectIdentifiersDisabled = !hasAnyEditPermissions;
   const isDropZoneDisabled = !hasAnyEditPermissions;
@@ -77,6 +80,7 @@ export const useBulkPermissions = () => {
     hasInAppViewPerms,
     hasInAppEditPerms,
     hasInAppUsersEditPerms,
+    hasInAppUsersDeletePerms,
     hasLogViewPerms,
     hasQueryPerms,
     hasInventoryInstanceViewPerms,
@@ -98,6 +102,7 @@ export const useBulkPermissions = () => {
     hasHoldingsPerms,
     hasUsersPerms,
     hasUsersViewPerms,
+    hasUsersDeletePerms,
     hasOnlyViewCsvPerms,
     hasViewInAppPerms,
     hasItemInventoryEdit,
@@ -112,6 +117,7 @@ export const useBulkPermissions = () => {
     hasAnyUserWithBulkPerm,
     hasUserEditLocalPerm,
     hasUserEditInAppPerm,
+    hasUserDeleteInAppPerm,
     hasLogInstanceViewPerms,
     hasInstanceInventoryEdit,
     hasInstanceInventoryView,
