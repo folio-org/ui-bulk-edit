@@ -56,6 +56,7 @@ const BulkEditActionMenu = ({
     hasHoldingsInventoryEdit,
     hasItemInventoryEdit,
     hasUserEditInAppPerm,
+    hasUserDeleteInAppPerm,
     hasInstanceInventoryEdit,
     hasInstanceAndMarcEditPerm,
     hasInventoryAndMarcEditPerm,
@@ -77,12 +78,19 @@ const BulkEditActionMenu = ({
   const isECS = stripes.user?.user?.consortium;
   const isStartBulkCsvActive = hasUserEditLocalPerm && currentRecordType === CAPABILITIES.USER;
   const isInitialStep = step === EDITING_STEPS.UPLOAD;
+  const isStatusActive = [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS].includes(bulkDetails?.status);
   const isStartBulkInAppActive =
        hasEditPerm
     && isInitialStep
-    && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS].includes(bulkDetails?.status);
+    && isStatusActive;
   const isStartMarcActive = (isStartBulkInAppActive || hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && currentRecordType === CAPABILITIES.INSTANCE && isInitialStep
-  && [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS].includes(bulkDetails?.status);
+  && isStatusActive;
+
+  const isStartBulkDeleteActive =
+       hasUserDeleteInAppPerm
+    && currentRecordType === CAPABILITIES.USER
+    && isInitialStep
+    && isStatusActive;
 
   const isStartManualButtonVisible = isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && criteria !== CRITERIA.QUERY && !isECS;
 
@@ -228,6 +236,17 @@ const BulkEditActionMenu = ({
           >
             <Icon icon="edit">
               <FormattedMessage id="ui-bulk-edit.start.edit.csv" />
+            </Icon>
+          </Button>
+        )}
+        {isStartBulkDeleteActive && (
+          <Button
+            data-testid="startBulkDeleteAction"
+            buttonStyle="dropdownItem"
+            onClick={() => handleOnStartEdit(APPROACHES.DELETE)}
+          >
+            <Icon icon="trash">
+              <FormattedMessage id="ui-bulk-edit.start.delete" />
             </Icon>
           </Button>
         )}

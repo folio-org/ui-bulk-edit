@@ -189,6 +189,14 @@
         "visible": true
       },
       {
+        "permissionName": "ui-bulk-edit.users.delete",
+        "displayName": "Bulk edit: In app - Delete user records",
+        "subPermissions": [
+          "ui-bulk-edit.users.edit"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "ui-bulk-edit.logs.view",
         "displayName": "Bulk edit: Can view logs",
         "subPermissions": [
