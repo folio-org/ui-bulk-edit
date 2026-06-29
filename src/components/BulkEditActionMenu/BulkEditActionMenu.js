@@ -10,16 +10,13 @@ import {
 import { CheckboxFilter } from '@folio/stripes/smart-components';
 import { Preloader } from '@folio/stripes-data-transfer-components';
 
-import { useStripes } from '@folio/stripes/core';
 import { ActionMenuGroup } from './ActionMenuGroup/ActionMenuGroup';
+import { useActionMenuContent } from './useActionMenuContent';
 import {
   APPROACHES,
   CAPABILITIES,
   getDownloadLinks,
-  EDITING_STEPS,
-  JOB_STATUSES,
   BULK_VISIBLE_COLUMNS,
-  CRITERIA,
   RECORD_TYPES_PROFILES_MAPPING,
 } from '../../constants';
 import {
@@ -40,24 +37,16 @@ const BulkEditActionMenu = ({
   onToggle,
   setFileInfo,
 }) => {
-  const stripes = useStripes();
   const intl = useIntl();
   const perms = useBulkPermissions();
   const {
     step,
     currentRecordType,
-    criteria,
   } = useSearchParams();
 
   const [columnSearch, setColumnSearch] = useState('');
 
   const {
-    hasUserEditLocalPerm,
-    hasHoldingsInventoryEdit,
-    hasItemInventoryEdit,
-    hasUserEditInAppPerm,
-    hasUserDeleteInAppPerm,
-    hasInstanceInventoryEdit,
     hasInstanceAndMarcEditPerm,
     hasInventoryAndMarcEditPerm,
   } = perms;
@@ -65,34 +54,17 @@ const BulkEditActionMenu = ({
   const { id } = usePathParams('/bulk-edit/:id');
   const { bulkDetails, isLoading } = useBulkOperationDetails({ id });
 
-  const hasEditPerm = (hasHoldingsInventoryEdit && currentRecordType === CAPABILITIES.HOLDING)
-      || (hasItemInventoryEdit && currentRecordType === CAPABILITIES.ITEM)
-      || (hasUserEditInAppPerm && currentRecordType === CAPABILITIES.USER)
-      || (hasInstanceInventoryEdit && currentRecordType === CAPABILITIES.INSTANCE);
-
   const { visibleColumns, setVisibleColumns } = useContext(RootContext);
   const { countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
   const columns = visibleColumns || [];
   const visibleColumnKeys = getVisibleColumnsKeys(columns);
 
-  const isECS = stripes.user?.user?.consortium;
-  const isStartBulkCsvActive = hasUserEditLocalPerm && currentRecordType === CAPABILITIES.USER;
-  const isInitialStep = step === EDITING_STEPS.UPLOAD;
-  const isStatusActive = [JOB_STATUSES.DATA_MODIFICATION, JOB_STATUSES.REVIEW_CHANGES, JOB_STATUSES.REVIEWED_NO_MARC_RECORDS].includes(bulkDetails?.status);
-  const isStartBulkInAppActive =
-       hasEditPerm
-    && isInitialStep
-    && isStatusActive;
-  const isStartMarcActive = (isStartBulkInAppActive || hasInstanceAndMarcEditPerm || hasInventoryAndMarcEditPerm) && currentRecordType === CAPABILITIES.INSTANCE && isInitialStep
-  && isStatusActive;
-
-  const isStartBulkDeleteActive =
-       hasUserDeleteInAppPerm
-    && currentRecordType === CAPABILITIES.USER
-    && isInitialStep
-    && isStatusActive;
-
-  const isStartManualButtonVisible = isStartBulkCsvActive && isInitialStep && countOfRecords > 0 && criteria !== CRITERIA.QUERY && !isECS;
+  const {
+    isStartBulkInAppActive,
+    isStartMarcActive,
+    isStartBulkDeleteActive,
+    isStartManualButtonVisible,
+  } = useActionMenuContent({ bulkDetails, visibleColumns });
 
   const isLastUnselectedColumn = (value) => {
     return visibleColumnKeys?.length === 1 && visibleColumnKeys?.[0] === value;

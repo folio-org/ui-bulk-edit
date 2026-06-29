@@ -74,7 +74,7 @@ describe('ProgressBar', () => {
 
     renderProgressBar(EDITING_STEPS.UPLOAD);
 
-    expect(screen.getByText(/progresssBar.processing/)).toBeVisible();
+    expect(screen.getByText(/progressBar.processing/)).toBeVisible();
   });
 
   it('should render "Deleting records" text when records are being deleted', async () => {
@@ -85,8 +85,11 @@ describe('ProgressBar', () => {
 
     renderProgressBar(EDITING_STEPS.COMMIT);
 
-    expect(await screen.findByText(/progressBar\.deleting/)).toBeVisible();
-    expect(screen.getByText(/progresssBar\.deleting/)).toBeVisible();
+    // "Deleting records" is shown as both the title and the status line.
+    const deletingMessages = await screen.findAllByText('ui-bulk-edit.progressBar.deleting');
+
+    expect(deletingMessages).toHaveLength(2);
+    deletingMessages.forEach((message) => expect(message).toBeVisible());
   });
 
   it('should display correct width percentage', async () => {

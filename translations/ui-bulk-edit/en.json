@@ -479,9 +479,9 @@
   "previewModal.selectProfiles": "Select {entityType} bulk edit profile",
 
   "progressBar.title": "Uploading {title} and retrieving relevant data",
-  "progresssBar.retrieving": "Retrieving",
+  "progressBar.retrieving": "Retrieving",
   "progressBar.committing": "Committing changes",
-  "progresssBar.processing": "Processing",
+  "progressBar.processing": "Processing",
   "progressBar.deleting": "Deleting records",
 
   "logs.infoPopover": "Files are unavailable for download because 30 days have elapsed since the date the job was run.",

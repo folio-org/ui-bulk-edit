@@ -7,6 +7,7 @@ import {
 } from '@folio/stripes/components';
 
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
+import { useActionMenuContent } from '../BulkEditActionMenu/useActionMenuContent';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
 import { BulkEditDeleteModal } from './BulkEditListResult/BulkEditDeleteModal';
 import {
@@ -95,11 +96,12 @@ export const BulkEditPane = () => {
   } = useDeleteApproach();
 
   const { isOperationInPreviewStatus, countOfRecords: previewRecordsCount } = getBulkOperationStatsByStep(bulkDetails, step);
+  const { hasAnyContent: hasActionMenuContent } = useActionMenuContent({ bulkDetails, visibleColumns });
   const isLogsTab = criteria === CRITERIA.LOGS;
   const isQueryTab = criteria === CRITERIA.QUERY;
   const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
   const isQueryOrIdentifierCriteria = (isQueryTab && bulkDetails?.fqlQuery) || (isIdentifierTab && !bulkDetails?.fqlQuery);
-  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && isOperationInPreviewStatus;
+  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && isOperationInPreviewStatus && hasActionMenuContent;
 
   const title = useMemo(() => {
     if (bulkDetails?.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;
