@@ -598,5 +598,9 @@
     "list.filters.capabilities.instance": "Katalog - Instanzen",
     "settings.profiles.title.edit": "Massenbearbeitungsprofil für {entityType} bearbeiten",
     "settings.profiles.title.details": "Details des Massenbearbeitungsprofils für {entityType}",
-    "list.filters.recordIdentifier.tooltip": "Um dieses Feld zu aktivieren, wählen Sie einen <b>Datensatztyp</b> aus."
+    "list.filters.recordIdentifier.tooltip": "Um dieses Feld zu aktivieren, wählen Sie einen <b>Datensatztyp</b> aus.",
+    "layer.options.materialType": "Material type",
+    "layer.selectMaterialType": "Select material type",
+    "ariaLabel.materialTypeSelect": "Material type select",
+    "category.itemData": "Item data"
 }

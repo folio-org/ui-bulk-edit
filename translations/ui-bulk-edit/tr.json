@@ -598,5 +598,9 @@
     "list.filters.capabilities.instance": "Envanter - örnekler",
     "settings.profiles.title.edit": "Düzenle {entityType} profili toplu düzenleme",
     "settings.profiles.title.details": "{entityType} profil ayrıntılarını toplu düzenleme",
-    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>"
+    "list.filters.recordIdentifier.tooltip": "To enable this field, select a <b>Record type.</b>",
+    "layer.options.materialType": "Material type",
+    "layer.selectMaterialType": "Select material type",
+    "ariaLabel.materialTypeSelect": "Material type select",
+    "category.itemData": "Item data"
 }

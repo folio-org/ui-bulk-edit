@@ -598,5 +598,9 @@
     "list.filters.capabilities.instance": "Katalog - tituly",
     "settings.profiles.title.edit": "Upravit {entityType} hromadné úpravy profilu",
     "settings.profiles.title.details": "{entityType} hromadná úprava podrobností profilu",
-    "list.filters.recordIdentifier.tooltip": "Chcete-li toto pole povolit, vyberte <b>Typ záznamu</b>."
+    "list.filters.recordIdentifier.tooltip": "Chcete-li toto pole povolit, vyberte <b>Typ záznamu</b>.",
+    "layer.options.materialType": "Material type",
+    "layer.selectMaterialType": "Select material type",
+    "ariaLabel.materialTypeSelect": "Material type select",
+    "category.itemData": "Item data"
 }
