@@ -8,6 +8,7 @@ import {
 
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
+import { BulkEditDeleteModal } from './BulkEditListResult/BulkEditDeleteModal';
 import {
   usePathParams,
   useBulkPermissions,
@@ -15,7 +16,8 @@ import {
   useResetAppState,
   useInAppApproach,
   useMarcApproach,
-  useManualApproach
+  useManualApproach,
+  useDeleteApproach
 } from '../../hooks';
 import {
   CRITERIA,
@@ -86,7 +88,13 @@ export const BulkEditPane = () => {
     closeManualModal,
   } = useManualApproach();
 
-  const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
+  const {
+    isDeleteModalOpen,
+    openDeleteModal,
+    closeDeleteModal,
+  } = useDeleteApproach();
+
+  const { isOperationInPreviewStatus, countOfRecords: previewRecordsCount } = getBulkOperationStatsByStep(bulkDetails, step);
   const isLogsTab = criteria === CRITERIA.LOGS;
   const isQueryTab = criteria === CRITERIA.QUERY;
   const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
@@ -150,7 +158,11 @@ export const BulkEditPane = () => {
     if (approach === APPROACHES.MARC) {
       openMarcLayer();
     }
-  }, [openInAppLayer, openManualModal, openMarcLayer]);
+
+    if (approach === APPROACHES.DELETE) {
+      openDeleteModal();
+    }
+  }, [openInAppLayer, openManualModal, openMarcLayer, openDeleteModal]);
 
   const handleOpenProfilesModal = (approach) => {
     setProfileModalOpen(true);
@@ -198,6 +210,14 @@ export const BulkEditPane = () => {
         onCancel={closeManualModal}
         countOfRecords={countOfRecords}
         setCountOfRecords={setCountOfRecords}
+      />
+
+      {/* BULK-EDIT DELETE USER RECORDS */}
+      <BulkEditDeleteModal
+        open={isDeleteModalOpen}
+        bulkOperationId={bulkOperationId}
+        countOfRecords={previewRecordsCount}
+        onClose={closeDeleteModal}
       />
 
       {/* BULK-EDIT USING PROFILES */}

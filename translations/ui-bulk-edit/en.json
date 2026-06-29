@@ -156,6 +156,10 @@
   "start.edit.marc": "Instances with source MARC",
   "start.edit.csv": "Start bulk edit (Local)",
   "start.delete": "Start bulk delete",
+  "start.delete.modal.heading": "Delete user records?",
+  "start.delete.modal.message": "{count, number} user records will be <b>deleted</b> if the <b>Delete</b> button is clicked.",
+  "start.delete.modal.note": "<b>This action cannot be undone</b> but a file of deleted user records will be available for download in <b>Logs</b> for {days, number} days.",
+  "start.delete.modal.confirm": "Delete",
 
   "textArea.search": "Search",
   "textArea.resetAll": "Reset all",
@@ -478,6 +482,7 @@
   "progresssBar.retrieving": "Retrieving",
   "progressBar.committing": "Committing changes",
   "progresssBar.processing": "Processing",
+  "progressBar.deleting": "Deleting records",
 
   "logs.infoPopover": "Files are unavailable for download because 30 days have elapsed since the date the job was run.",
   "logs.actions.linkToTriggeringCsvFile": "File that was used to trigger the bulk edit",

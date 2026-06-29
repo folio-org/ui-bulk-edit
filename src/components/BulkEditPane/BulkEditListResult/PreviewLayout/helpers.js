@@ -1,4 +1,4 @@
-import { EDITING_STEPS, JOB_STATUSES } from '../../../../constants';
+import { EDITING_STEPS, JOB_STATUSES, OPERATION_TYPES } from '../../../../constants';
 
 // Array of bulk operation statuses that indicate the operation is in its initial preview phase (UPLOAD phase).
 const initialPreviewStatuses = [
@@ -67,6 +67,11 @@ export const getBulkOperationStatsByStep = (bulkDetails = {}, step) => {
  * It used to prevent unnecessary requests to the server.
  */
 export const iseRecordsPreviewAvailable = (bulkDetails, step) => {
+  // Deleted records have no preview to fetch; skip the request entirely.
+  if (bulkDetails?.operationType === OPERATION_TYPES.DELETE) {
+    return false;
+  }
+
   const { isInitialPreview, countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
 
   const hasRecords = countOfRecords > 0;

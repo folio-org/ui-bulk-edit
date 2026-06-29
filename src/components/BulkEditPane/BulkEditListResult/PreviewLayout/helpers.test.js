@@ -3,7 +3,7 @@ import {
   iseRecordsPreviewAvailable,
   isErrorsPreviewAvailable,
 } from './helpers';
-import { EDITING_STEPS, JOB_STATUSES } from '../../../../constants';
+import { EDITING_STEPS, JOB_STATUSES, OPERATION_TYPES } from '../../../../constants';
 
 describe('getBulkOperationStatsByStep', () => {
   const bulkDetails = {
@@ -103,6 +103,18 @@ describe('iseRecordsPreviewAvailable', () => {
       const bulkDetails = {
         committedNumOfRecords: 5,
         status: JOB_STATUSES.DATA_MODIFICATION,
+      };
+      const result = iseRecordsPreviewAvailable(bulkDetails, 'COMMIT');
+      expect(result).toBe(false);
+    });
+  });
+
+  describe('Delete operation', () => {
+    it('returns false when operationType is DELETE even if status and records are valid', () => {
+      const bulkDetails = {
+        committedNumOfRecords: 1,
+        status: JOB_STATUSES.COMPLETED,
+        operationType: OPERATION_TYPES.DELETE,
       };
       const result = iseRecordsPreviewAvailable(bulkDetails, 'COMMIT');
       expect(result).toBe(false);

@@ -2,6 +2,9 @@ export const SUPPORTED_FILE_EXTENSIONS = ['csv'];
 
 export const BULK_VISIBLE_COLUMNS = 'bulk-edit-visible-columns';
 
+// Number of days bulk edit log files are retained and available for download in Logs.
+export const LOGS_RETENTION_DAYS = 30;
+
 export const PREVIEW_LIMITS = {
   ERRORS: 10,
   RECORDS: 100,
@@ -17,6 +20,7 @@ export const APPROACHES = {
   MANUAL: 'MANUAL',
   QUERY: 'QUERY',
   MARC: 'MARC',
+  DELETE: 'DELETE',
 };
 
 export const CAPABILITIES = {
@@ -77,12 +81,19 @@ export const JOB_STATUSES = {
   SCHEDULED: 'SCHEDULED',
   FAILED: 'FAILED',
   DATA_MODIFICATION_IN_PROGRESS: 'DATA_MODIFICATION_IN_PROGRESS',
+  DELETING_RECORDS: 'DELETING_RECORDS',
 };
 
 export const EDITING_STEPS = {
   UPLOAD: 'UPLOAD',
   EDIT: 'EDIT',
   COMMIT: 'COMMIT',
+  DELETE: 'DELETE',
+};
+
+export const OPERATION_TYPES = {
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
 };
 
 export const CRITERIA = {

@@ -77,6 +77,18 @@ describe('ProgressBar', () => {
     expect(screen.getByText(/progresssBar.processing/)).toBeVisible();
   });
 
+  it('should render "Deleting records" text when records are being deleted', async () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: { ...bulkOperation, status: JOB_STATUSES.DELETING_RECORDS },
+      clearIntervalAndRedirect,
+    });
+
+    renderProgressBar(EDITING_STEPS.COMMIT);
+
+    expect(await screen.findByText(/progressBar\.deleting/)).toBeVisible();
+    expect(screen.getByText(/progresssBar\.deleting/)).toBeVisible();
+  });
+
   it('should display correct width percentage', async () => {
     useBulkOperationDetails.mockReturnValue({ bulkDetails: bulkOperation });
 

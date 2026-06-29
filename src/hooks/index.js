@@ -7,3 +7,5 @@ export * from './useManualApproach';
 export * from './useResetAppState';
 export * from './useInAppApproach';
 export * from './useMarcApproach';
+export * from './useDeleteApproach';
+export * from './useStartBulkDelete';

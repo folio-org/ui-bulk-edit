@@ -11,6 +11,24 @@ import css from './ProgressBar.css';
 import { useSearchParams } from '../../../hooks';
 import { useErrorMessages } from '../../../hooks/useErrorMessages';
 
+const PROGRESS_BAR_CONTENT = {
+  deleting: {
+    icon: 'trash',
+    titleId: 'ui-bulk-edit.progressBar.deleting',
+    statusId: 'ui-bulk-edit.progressBar.deleting',
+  },
+  committing: {
+    icon: 'edit',
+    titleId: 'ui-bulk-edit.progressBar.committing',
+    statusId: 'ui-bulk-edit.progressBar.processing',
+  },
+  retrieving: {
+    icon: 'edit',
+    titleId: 'ui-bulk-edit.progressBar.title',
+    statusId: 'ui-bulk-edit.progressBar.retrieving',
+  },
+};
+
 export const ProgressBar = () => {
   const {
     processedFileName,
@@ -29,6 +47,15 @@ export const ProgressBar = () => {
   const progressPercentage = bulkDetails
     ? (bulkDetails.processedNumOfRecords / bulkDetails.totalNumOfRecords) * 100
     : 0;
+
+  const getProgressContent = () => {
+    if (status === JOB_STATUSES.DELETING_RECORDS) return PROGRESS_BAR_CONTENT.deleting;
+    if (step === EDITING_STEPS.UPLOAD) return PROGRESS_BAR_CONTENT.committing;
+
+    return PROGRESS_BAR_CONTENT.retrieving;
+  };
+
+  const { icon, titleId, statusId } = getProgressContent();
 
   useEffect(() => {
     const nextStep = getBulkOperationStep(bulkDetails);
@@ -54,19 +81,14 @@ export const ProgressBar = () => {
     <div className={css.progressBar}>
       <div className={css.progressBarTitle}>
         <Icon
-          icon="edit"
+          icon={icon}
           size="small"
         />
         <div className={css.progressBarTitleText}>
-          {step === EDITING_STEPS.UPLOAD ?
-            <FormattedMessage
-              id="ui-bulk-edit.progressBar.committing"
-            />
-            :
-            <FormattedMessage
-              id="ui-bulk-edit.progressBar.title"
-              values={{ title: initialFileName || processedFileName }}
-            />}
+          <FormattedMessage
+            id={titleId}
+            values={{ title: initialFileName || processedFileName }}
+          />
         </div>
       </div>
       <div className={css.progressBarBody}>
@@ -75,11 +97,7 @@ export const ProgressBar = () => {
         </div>
         <div className={css.progressBarLineStatus}>
           <span>
-            {step === EDITING_STEPS.UPLOAD ?
-              <FormattedMessage id="ui-bulk-edit.progresssBar.processing" />
-              :
-              <FormattedMessage id="ui-bulk-edit.progresssBar.retrieving" />
-            }
+            <FormattedMessage id={statusId} />
           </span>
           <Loading />
         </div>
