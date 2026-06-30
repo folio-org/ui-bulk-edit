@@ -62,6 +62,38 @@ export const getBulkOperationStatsByStep = (bulkDetails = {}, step) => {
 };
 
 /**
+ * Builds the descriptor ({ id, values }) for the pane subtitle.
+ * Shared by the query and identifier panes so the delete-specific wording lives in one place.
+ *   - When the tab is not actively previewing records, returns the default "set criteria" subtitle.
+ *   - For delete operations on the COMMIT step, returns the two-part "matched • deleted" subtitle.
+ *   - Otherwise returns the matched (UPLOAD) or changed (COMMIT) subtitle.
+ */
+export const getPaneSubtitle = ({
+  isCriteriaActive,
+  step,
+  operationType,
+  countOfRecords,
+  totalCount,
+  recordType,
+}) => {
+  if (!isCriteriaActive) {
+    return { id: 'ui-bulk-edit.list.logSubTitle' };
+  }
+
+  if (operationType === OPERATION_TYPES.DELETE && step === EDITING_STEPS.COMMIT) {
+    return {
+      id: 'ui-bulk-edit.list.logSubTitle.delete',
+      values: { matchedCount: totalCount, deletedCount: countOfRecords, recordType },
+    };
+  }
+
+  return {
+    id: `ui-bulk-edit.list.logSubTitle.${step === EDITING_STEPS.UPLOAD ? 'matched' : 'changed'}`,
+    values: { count: countOfRecords, recordType },
+  };
+};
+
+/**
  * Determines whether a records preview is available for the bulk operation.
  * Based on it useQuery `enabled` prop will be true or false.
  * It used to prevent unnecessary requests to the server.

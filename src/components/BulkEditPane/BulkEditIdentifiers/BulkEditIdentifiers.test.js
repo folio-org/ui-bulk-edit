@@ -39,6 +39,7 @@ jest.mock('../../../hooks', () => ({
 }));
 
 jest.mock('../BulkEditListResult/PreviewLayout/helpers', () => ({
+  ...jest.requireActual('../BulkEditListResult/PreviewLayout/helpers'),
   getBulkOperationStatsByStep: jest.fn(),
 }));
 
@@ -136,5 +137,21 @@ describe('BulkEditIdentifiers', () => {
     });
     renderBulkEditIdentifiers({ bulkDetails: { fqlQuery: null } });
     expect(screen.getByText('ui-bulk-edit.list.logSubTitle.changed')).toBeInTheDocument();
+  });
+
+  it('renders delete subtitle on the COMMIT step for delete operations', () => {
+    useSearchParams.mockReturnValue({
+      step: EDITING_STEPS.COMMIT,
+      approach: 'approach',
+      currentRecordType: 'USER',
+      processedFileName: 'file.csv',
+    });
+    getBulkOperationStatsByStep.mockReturnValue({
+      isOperationInPreviewStatus: true,
+      countOfRecords: 85,
+      totalCount: 88,
+    });
+    renderBulkEditIdentifiers({ bulkDetails: { fqlQuery: null, operationType: 'DELETE' } });
+    expect(screen.getByText('ui-bulk-edit.list.logSubTitle.delete')).toBeInTheDocument();
   });
 });

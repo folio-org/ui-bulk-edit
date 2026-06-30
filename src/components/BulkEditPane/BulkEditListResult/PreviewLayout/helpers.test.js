@@ -1,5 +1,6 @@
 import {
   getBulkOperationStatsByStep,
+  getPaneSubtitle,
   iseRecordsPreviewAvailable,
   isErrorsPreviewAvailable,
 } from './helpers';
@@ -37,6 +38,85 @@ describe('getBulkOperationStatsByStep', () => {
       totalCount: bulkDetails.matchedNumOfRecords,
       isOperationInPreviewStatus: false,
       isInitialPreview: false,
+    });
+  });
+});
+
+describe('getPaneSubtitle', () => {
+  it('returns the default subtitle when criteria is not active', () => {
+    const result = getPaneSubtitle({
+      isCriteriaActive: false,
+      step: EDITING_STEPS.COMMIT,
+      operationType: OPERATION_TYPES.UPDATE,
+      countOfRecords: 10,
+      totalCount: 20,
+      recordType: 'user',
+    });
+
+    expect(result).toEqual({ id: 'ui-bulk-edit.list.logSubTitle' });
+  });
+
+  it('returns the matched subtitle on the UPLOAD step', () => {
+    const result = getPaneSubtitle({
+      isCriteriaActive: true,
+      step: EDITING_STEPS.UPLOAD,
+      operationType: OPERATION_TYPES.UPDATE,
+      countOfRecords: 10,
+      totalCount: 20,
+      recordType: 'user',
+    });
+
+    expect(result).toEqual({
+      id: 'ui-bulk-edit.list.logSubTitle.matched',
+      values: { count: 10, recordType: 'user' },
+    });
+  });
+
+  it('returns the changed subtitle on the COMMIT step for update operations', () => {
+    const result = getPaneSubtitle({
+      isCriteriaActive: true,
+      step: EDITING_STEPS.COMMIT,
+      operationType: OPERATION_TYPES.UPDATE,
+      countOfRecords: 10,
+      totalCount: 20,
+      recordType: 'user',
+    });
+
+    expect(result).toEqual({
+      id: 'ui-bulk-edit.list.logSubTitle.changed',
+      values: { count: 10, recordType: 'user' },
+    });
+  });
+
+  it('returns the two-part delete subtitle on the COMMIT step for delete operations', () => {
+    const result = getPaneSubtitle({
+      isCriteriaActive: true,
+      step: EDITING_STEPS.COMMIT,
+      operationType: OPERATION_TYPES.DELETE,
+      countOfRecords: 85,
+      totalCount: 88,
+      recordType: 'user',
+    });
+
+    expect(result).toEqual({
+      id: 'ui-bulk-edit.list.logSubTitle.delete',
+      values: { matchedCount: 88, deletedCount: 85, recordType: 'user' },
+    });
+  });
+
+  it('returns the matched subtitle for delete operations still on the UPLOAD step', () => {
+    const result = getPaneSubtitle({
+      isCriteriaActive: true,
+      step: EDITING_STEPS.UPLOAD,
+      operationType: OPERATION_TYPES.DELETE,
+      countOfRecords: 88,
+      totalCount: 88,
+      recordType: 'user',
+    });
+
+    expect(result).toEqual({
+      id: 'ui-bulk-edit.list.logSubTitle.matched',
+      values: { count: 88, recordType: 'user' },
     });
   });
 });

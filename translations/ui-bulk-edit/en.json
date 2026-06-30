@@ -17,6 +17,7 @@
   "list.logSubTitle": "Set criteria to start bulk edit",
   "list.logSubTitle.matched": "{count, number} {recordType} records matched",
   "list.logSubTitle.changed": "{count, number} {recordType} records changed",
+  "list.logSubTitle.delete": "{matchedCount, number} {recordType} records match • {deletedCount, number} {recordType} records deleted",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
   "list.filters.logs": "Logs",
@@ -143,6 +144,7 @@
   "uploading": "Uploading",
   "cancel": "Cancel",
   "recordsSuccessfullyChanged": "{value, number} records have been successfully changed",
+  "recordsSuccessfullyDeleted": "{value, number} {recordType} records have been successfully deleted.",
 
   "modal.fileExtensions.blocked.header": "Invalid file",
   "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded.",

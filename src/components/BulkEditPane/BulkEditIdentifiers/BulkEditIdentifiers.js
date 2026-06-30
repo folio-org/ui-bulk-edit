@@ -9,10 +9,10 @@ import {
   useStripes,
 } from '@folio/stripes/core';
 
-import { APPROACHES, EDITING_STEPS, RECORD_TYPES_MAPPING } from '../../../constants';
+import { APPROACHES, RECORD_TYPES_MAPPING } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
 import { BulkEditListResult } from '../BulkEditListResult';
-import { getBulkOperationStatsByStep } from '../BulkEditListResult/PreviewLayout/helpers';
+import { getBulkOperationStatsByStep, getPaneSubtitle } from '../BulkEditListResult/PreviewLayout/helpers';
 
 export const BulkEditIdentifiers = ({
   children,
@@ -29,7 +29,7 @@ export const BulkEditIdentifiers = ({
     currentRecordType,
   } = useSearchParams();
 
-  const { isOperationInPreviewStatus, countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
+  const { isOperationInPreviewStatus, countOfRecords, totalCount } = getBulkOperationStatsByStep(bulkDetails, step);
 
   const isIdentifierCriteria = !bulkDetails?.fqlQuery && isOperationInPreviewStatus;
 
@@ -49,22 +49,18 @@ export const BulkEditIdentifiers = ({
     return <FormattedMessage id="ui-bulk-edit.meta.title" />;
   }, [processedFileName, initialFileName, isIdentifierCriteria, approach]);
 
-  const paneSubUpdated = useMemo(() => {
-    if (!isIdentifierCriteria) return null;
-
-    return (
-      <FormattedMessage
-        id={`ui-bulk-edit.list.logSubTitle.${step === EDITING_STEPS.UPLOAD ? 'matched' : 'changed'}`}
-        values={{ count: countOfRecords, recordType: RECORD_TYPES_MAPPING[currentRecordType] }}
-      />
-    );
-  }, [isIdentifierCriteria, countOfRecords, step, currentRecordType]);
-
   const paneSub = useMemo(() => {
-    return isIdentifierCriteria
-      ? paneSubUpdated
-      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />;
-  }, [paneSubUpdated, isIdentifierCriteria]);
+    const { id, values } = getPaneSubtitle({
+      isCriteriaActive: isIdentifierCriteria,
+      step,
+      operationType: bulkDetails?.operationType,
+      countOfRecords,
+      totalCount,
+      recordType: RECORD_TYPES_MAPPING[currentRecordType],
+    });
+
+    return <FormattedMessage id={id} values={values} />;
+  }, [isIdentifierCriteria, step, bulkDetails?.operationType, countOfRecords, totalCount, currentRecordType]);
 
   const paneProps = {
     defaultWidth: 'fill',

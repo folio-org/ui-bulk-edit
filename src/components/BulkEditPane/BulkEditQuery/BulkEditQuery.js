@@ -10,9 +10,9 @@ import {
 import { Pane } from '@folio/stripes/components';
 
 import { BulkEditListResult } from '../BulkEditListResult';
-import { APPROACHES, EDITING_STEPS, RECORD_TYPES_MAPPING } from '../../../constants';
+import { APPROACHES, RECORD_TYPES_MAPPING } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
-import { getBulkOperationStatsByStep } from '../BulkEditListResult/PreviewLayout/helpers';
+import { getBulkOperationStatsByStep, getPaneSubtitle } from '../BulkEditListResult/PreviewLayout/helpers';
 
 export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   const {
@@ -23,7 +23,7 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
   const intl = useIntl();
 
   const stripes = useStripes();
-  const { isOperationInPreviewStatus, countOfRecords } = getBulkOperationStatsByStep(bulkDetails, step);
+  const { isOperationInPreviewStatus, countOfRecords, totalCount } = getBulkOperationStatsByStep(bulkDetails, step);
   const isQueryCriteria = bulkDetails?.fqlQuery && isOperationInPreviewStatus;
 
   const paneTitle = useMemo(() => {
@@ -38,22 +38,18 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
     return <FormattedMessage id="ui-bulk-edit.meta.title" />;
   }, [isQueryCriteria, approach]);
 
-  const paneSubtitleUpdated = useMemo(() => {
-    if (!isQueryCriteria) return null;
-
-    return (
-      <FormattedMessage
-        id={`ui-bulk-edit.list.logSubTitle.${step === EDITING_STEPS.UPLOAD ? 'matched' : 'changed'}`}
-        values={{ count: countOfRecords, recordType: RECORD_TYPES_MAPPING[currentRecordType] }}
-      />
-    );
-  }, [isQueryCriteria, countOfRecords, step, currentRecordType]);
-
   const paneSub = useMemo(() => {
-    return isQueryCriteria
-      ? paneSubtitleUpdated
-      : <FormattedMessage id="ui-bulk-edit.list.logSubTitle" />;
-  }, [paneSubtitleUpdated, isQueryCriteria]);
+    const { id, values } = getPaneSubtitle({
+      isCriteriaActive: isQueryCriteria,
+      step,
+      operationType: bulkDetails?.operationType,
+      countOfRecords,
+      totalCount,
+      recordType: RECORD_TYPES_MAPPING[currentRecordType],
+    });
+
+    return <FormattedMessage id={id} values={values} />;
+  }, [isQueryCriteria, step, bulkDetails?.operationType, countOfRecords, totalCount, currentRecordType]);
 
   const paneProps = {
     defaultWidth: 'fill',

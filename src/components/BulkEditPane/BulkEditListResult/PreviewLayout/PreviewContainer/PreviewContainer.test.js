@@ -61,6 +61,24 @@ describe('Preview', () => {
 
     expect(screen.getByText(/preview.query.title/)).toBeVisible();
   });
+
+  it('displays the changed success banner for update operations', () => {
+    renderPreview({
+      title: 'preview.query.title',
+      bulkDetails: { fqlQuery: 'q', operationType: 'UPDATE', committedNumOfRecords: 10 },
+    });
+
+    expect(screen.getByText(/recordsSuccessfullyChanged/)).toBeVisible();
+  });
+
+  it('displays the delete success banner for delete operations', () => {
+    renderPreview({
+      title: 'preview.query.title',
+      bulkDetails: { fqlQuery: 'q', operationType: 'DELETE', committedNumOfRecords: 85 },
+    });
+
+    expect(screen.getByText(/recordsSuccessfullyDeleted/)).toBeVisible();
+  });
 });
 
 describe('Preview Query', () => {

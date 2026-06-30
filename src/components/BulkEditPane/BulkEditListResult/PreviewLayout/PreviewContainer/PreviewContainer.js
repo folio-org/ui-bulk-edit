@@ -8,7 +8,7 @@ import {
   MessageBanner,
 } from '@folio/stripes/components';
 
-import { CRITERIA, EDITING_STEPS } from '../../../../../constants';
+import { CRITERIA, EDITING_STEPS, OPERATION_TYPES, RECORD_TYPES_MAPPING } from '../../../../../constants';
 import { NoResultsMessage } from '../../NoResultsMessage/NoResultsMessage';
 import { useSearchParams } from '../../../../../hooks';
 import { PreviewErrorsAccordionContainer } from '../PreviewErrorsAccordion/PreviewErrorsAccordionContainer';
@@ -19,8 +19,9 @@ import css from '../Preview.css';
 
 
 export const PreviewContainer = ({ title, bulkDetails }) => {
-  const { criteria, step, progress } = useSearchParams();
+  const { criteria, step, progress, currentRecordType } = useSearchParams();
   const isInitial = step === EDITING_STEPS.UPLOAD;
+  const isDelete = bulkDetails.operationType === OPERATION_TYPES.DELETE;
 
   const isOtherTabProcessing = progress && criteria !== progress;
   const shouldShowPreview = !isOtherTabProcessing && Boolean(bulkDetails);
@@ -37,10 +38,17 @@ export const PreviewContainer = ({ title, bulkDetails }) => {
         {!isInitial && (
         <Headline size="large" margin="small">
           <MessageBanner type="success" contentClassName="SuccessBanner">
-            <FormattedMessage
-              id="ui-bulk-edit.recordsSuccessfullyChanged"
-              values={{ value: countOfRecords }}
-            />
+            {isDelete ? (
+              <FormattedMessage
+                id="ui-bulk-edit.recordsSuccessfullyDeleted"
+                values={{ value: countOfRecords, recordType: RECORD_TYPES_MAPPING[currentRecordType] }}
+              />
+            ) : (
+              <FormattedMessage
+                id="ui-bulk-edit.recordsSuccessfullyChanged"
+                values={{ value: countOfRecords }}
+              />
+            )}
           </MessageBanner>
         </Headline>
         )}
