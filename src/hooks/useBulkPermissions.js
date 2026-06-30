@@ -29,10 +29,10 @@ export const useBulkPermissions = () => {
 
   // Users
   // `ui-users.delete` lives in the separate `ui-users` module, so we can't make it
-  // include `ui-users.view` as sub-permissions here. Instead we treat
-  // delete as implying view, so granting delete grants view under the hood.
+  // include `ui-users.edit`/`ui-users.view` as sub-permissions here. Instead we treat
+  // delete as implying edit and view, so granting delete grants edit/view under the hood.
   const hasUsersDeletePerms = stripes.hasPerm('ui-users.delete');
-  const hasUsersPerms = stripes.hasPerm('ui-users.edit');
+  const hasUsersPerms = stripes.hasPerm('ui-users.edit') || hasUsersDeletePerms;
   const hasUsersViewPerms = stripes.hasPerm('ui-users.view') || hasUsersDeletePerms;
 
   // derived pages
