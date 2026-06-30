@@ -28,12 +28,9 @@ export const useBulkPermissions = () => {
   const hasQuickMarcViewPerms = stripes.hasPerm('ui-quick-marc.quick-marc-editor.view');
 
   // Users
-  // `ui-users.delete` lives in the separate `ui-users` module, so we can't make it
-  // include `ui-users.edit`/`ui-users.view` as sub-permissions here. Instead we treat
-  // delete as implying edit and view, so granting delete grants edit/view under the hood.
+  const hasUsersPerms = stripes.hasPerm('ui-users.edit');
+  const hasUsersViewPerms = stripes.hasPerm('ui-users.view');
   const hasUsersDeletePerms = stripes.hasPerm('ui-users.delete');
-  const hasUsersPerms = stripes.hasPerm('ui-users.edit') || hasUsersDeletePerms;
-  const hasUsersViewPerms = stripes.hasPerm('ui-users.view') || hasUsersDeletePerms;
 
   // derived pages
   const hasAnyInAppEditPermissions = hasInAppEditPerms || hasInAppUsersEditPerms;
