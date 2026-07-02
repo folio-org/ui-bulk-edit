@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@folio/jest-config-stripes/testing-library/react';
 import { QueryClientProvider } from 'react-query';
 import { useOkapiKy } from '@folio/stripes/core';
 import '../../../../test/jest/__mock__';
@@ -12,6 +12,7 @@ import { queryClient } from '../../../../test/jest/utils/queryClient';
 import {
   JOB_STATUSES,
   FILE_KEYS,
+  FILE_SEARCH_PARAMS,
   CAPABILITIES,
   LINK_KEYS,
 } from '../../../constants';
@@ -102,5 +103,16 @@ describe('BulkEditLogsActions', () => {
 
       expect(screen.getByTestId(fileKey)).toBeDefined();
     });
+  });
+
+  it('should download the triggering query file with the TRIGGERING_QUERY_FILE content type', async () => {
+    renderBulkEditLogsActions();
+
+    fireEvent.click(screen.getByTestId(FILE_KEYS.TRIGGERING_QUERY_FILE));
+
+    await waitFor(() => expect(mockRefetch).toHaveBeenCalled());
+
+    const lastCallArgs = useFileDownload.mock.calls.at(-1)[0];
+    expect(lastCallArgs.fileContentType).toBe(FILE_SEARCH_PARAMS.TRIGGERING_QUERY_FILE);
   });
 });

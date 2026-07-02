@@ -7,6 +7,7 @@
 * [UIBULKED-99](https://folio-org.atlassian.net/browse/UIBULKED-99) User records bulk delete authorization.
 * [UIBULKED-26](https://folio-org.atlassian.net/browse/UIBULKED-26) Bulk delete user records - Delete user records? form.
 * [UIBULKED-27](https://folio-org.atlassian.net/browse/UIBULKED-27) Confirmation form - Error accordion.
+* [UIBULKED-28](https://folio-org.atlassian.net/browse/UIBULKED-28) Bulk edit logs for bulk deletion - support downloading the triggering query file.
 
 ## [5.1.1](https://github.com/folio-org/ui-bulk-edit/tree/v5.1.1) (2026-05-14)
 
