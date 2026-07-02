@@ -496,6 +496,7 @@
   "logs.actions.linkToCommittedRecordsMarcFile": "File with updated records (MARC)",
   "logs.actions.linkToCommittedRecordsErrorsCsvFile": "File with errors encountered when committing the changes",
   "logs.actions.linkToTriggeringCsvFile.QUERY": "File with identifiers of the records affected by bulk update",
+  "logs.actions.linkToTriggeringQueryFile.QUERY": "File with the query used to trigger the bulk edit",
   "logs.actions.linkToMatchedRecordsCsvFile.QUERY": "File with the matching records",
   "logs.actions.linkToMatchedRecordsErrorsCsvFile.QUERY": "File with errors encountered during the record matching",
   "logs.actions.linkToModifiedRecordsCsvFile.QUERY": "File with the preview of proposed changes (CSV)",
