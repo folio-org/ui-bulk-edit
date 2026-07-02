@@ -17,6 +17,7 @@
   "list.logSubTitle": "Set criteria to start bulk edit",
   "list.logSubTitle.matched": "{count, number} {recordType} records matched",
   "list.logSubTitle.changed": "{count, number} {recordType} records changed",
+  "list.logSubTitle.delete": "{matchedCount, number} {recordType} records match • {deletedCount, number} {recordType} records deleted",
   "list.filters.identifier": "Identifier",
   "list.filters.query": "Query",
   "list.filters.logs": "Logs",
@@ -143,6 +144,7 @@
   "uploading": "Uploading",
   "cancel": "Cancel",
   "recordsSuccessfullyChanged": "{value, number} records have been successfully changed",
+  "recordsSuccessfullyDeleted": "{value, number} {recordType} records have been successfully deleted.",
 
   "modal.fileExtensions.blocked.header": "Invalid file",
   "modal.fileExtensions.blocked.message": "Only file with .csv extension can be uploaded.",
@@ -156,6 +158,10 @@
   "start.edit.marc": "Instances with source MARC",
   "start.edit.csv": "Start bulk edit (Local)",
   "start.delete": "Start bulk delete",
+  "start.delete.modal.heading": "Delete user records?",
+  "start.delete.modal.message": "{count, number} user records will be <b>deleted</b> if the <b>Delete</b> button is clicked.",
+  "start.delete.modal.note": "<b>This action cannot be undone</b> but a file of deleted user records will be available for download in <b>Logs</b> for {days, number} days.",
+  "start.delete.modal.confirm": "Delete",
 
   "textArea.search": "Search",
   "textArea.resetAll": "Reset all",
@@ -475,9 +481,10 @@
   "previewModal.selectProfiles": "Select {entityType} bulk edit profile",
 
   "progressBar.title": "Uploading {title} and retrieving relevant data",
-  "progresssBar.retrieving": "Retrieving",
+  "progressBar.retrieving": "Retrieving",
   "progressBar.committing": "Committing changes",
-  "progresssBar.processing": "Processing",
+  "progressBar.processing": "Processing",
+  "progressBar.deleting": "Deleting records",
 
   "logs.infoPopover": "Files are unavailable for download because 30 days have elapsed since the date the job was run.",
   "logs.actions.linkToTriggeringCsvFile": "File that was used to trigger the bulk edit",

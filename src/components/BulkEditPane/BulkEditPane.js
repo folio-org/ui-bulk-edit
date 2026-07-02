@@ -7,7 +7,9 @@ import {
 } from '@folio/stripes/components';
 
 import { BulkEditActionMenu } from '../BulkEditActionMenu';
+import { useActionMenuContent } from '../BulkEditActionMenu/useActionMenuContent';
 import { BulkEditManualUploadModal } from './BulkEditListResult/BulkEditManualUploadModal';
+import { BulkEditDeleteModal } from './BulkEditListResult/BulkEditDeleteModal';
 import {
   usePathParams,
   useBulkPermissions,
@@ -15,7 +17,8 @@ import {
   useResetAppState,
   useInAppApproach,
   useMarcApproach,
-  useManualApproach
+  useManualApproach,
+  useDeleteApproach
 } from '../../hooks';
 import {
   CRITERIA,
@@ -86,12 +89,19 @@ export const BulkEditPane = () => {
     closeManualModal,
   } = useManualApproach();
 
-  const { isOperationInPreviewStatus } = getBulkOperationStatsByStep(bulkDetails, step);
+  const {
+    isDeleteModalOpen,
+    openDeleteModal,
+    closeDeleteModal,
+  } = useDeleteApproach();
+
+  const { isOperationInPreviewStatus, countOfRecords: previewRecordsCount } = getBulkOperationStatsByStep(bulkDetails, step);
+  const { hasAnyContent: hasActionMenuContent } = useActionMenuContent({ bulkDetails, visibleColumns });
   const isLogsTab = criteria === CRITERIA.LOGS;
   const isQueryTab = criteria === CRITERIA.QUERY;
   const isIdentifierTab = criteria === CRITERIA.IDENTIFIER;
   const isQueryOrIdentifierCriteria = (isQueryTab && bulkDetails?.fqlQuery) || (isIdentifierTab && !bulkDetails?.fqlQuery);
-  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && isOperationInPreviewStatus;
+  const isActionMenuVisible = isQueryOrIdentifierCriteria && isActionMenuShown && !isLogsTab && isOperationInPreviewStatus && hasActionMenuContent;
 
   const title = useMemo(() => {
     if (bulkDetails?.userFriendlyQuery) return <FormattedMessage id="ui-bulk-edit.preview.query.title" values={{ queryText: bulkDetails.userFriendlyQuery }} />;
@@ -150,7 +160,11 @@ export const BulkEditPane = () => {
     if (approach === APPROACHES.MARC) {
       openMarcLayer();
     }
-  }, [openInAppLayer, openManualModal, openMarcLayer]);
+
+    if (approach === APPROACHES.DELETE) {
+      openDeleteModal();
+    }
+  }, [openInAppLayer, openManualModal, openMarcLayer, openDeleteModal]);
 
   const handleOpenProfilesModal = (approach) => {
     setProfileModalOpen(true);
@@ -198,6 +212,14 @@ export const BulkEditPane = () => {
         onCancel={closeManualModal}
         countOfRecords={countOfRecords}
         setCountOfRecords={setCountOfRecords}
+      />
+
+      {/* BULK-EDIT DELETE USER RECORDS */}
+      <BulkEditDeleteModal
+        open={isDeleteModalOpen}
+        bulkOperationId={bulkOperationId}
+        countOfRecords={previewRecordsCount}
+        onClose={closeDeleteModal}
       />
 
       {/* BULK-EDIT USING PROFILES */}
