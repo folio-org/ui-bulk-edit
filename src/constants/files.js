@@ -5,6 +5,7 @@ import { EDITING_STEPS } from './core';
 // use as API key for /download
 export const FILE_SEARCH_PARAMS = {
   TRIGGERING_FILE: 'TRIGGERING_FILE',
+  TRIGGERING_QUERY_FILE: 'TRIGGERING_QUERY_FILE',
   MATCHED_RECORDS_FILE: 'MATCHED_RECORDS_FILE',
   RECORD_MATCHING_ERROR_FILE: 'RECORD_MATCHING_ERROR_FILE',
   COMMITTED_RECORDS_FILE: 'COMMITTED_RECORDS_FILE',
@@ -17,6 +18,7 @@ export const FILE_SEARCH_PARAMS = {
 // use as marks that getFileName are ready
 export const FILE_KEYS = {
   TRIGGERING_FILE: 'linkToTriggeringCsvFile',
+  TRIGGERING_QUERY_FILE: 'linkToTriggeringQueryFile',
   MATCHED_RECORDS_FILE: 'linkToMatchedRecordsCsvFile',
   RECORD_MATCHING_ERROR_FILE: 'linkToMatchedRecordsErrorsCsvFile',
   COMMITTED_RECORDS_FILE: 'linkToCommittedRecordsCsvFile',
@@ -28,6 +30,7 @@ export const FILE_KEYS = {
 
 export const LINK_KEYS = {
   linkToTriggeringCsvFile: FILE_SEARCH_PARAMS.TRIGGERING_FILE,
+  linkToTriggeringQueryFile: FILE_SEARCH_PARAMS.TRIGGERING_QUERY_FILE,
   linkToMatchedRecordsCsvFile: FILE_SEARCH_PARAMS.MATCHED_RECORDS_FILE,
   linkToMatchedRecordsErrorsCsvFile: FILE_SEARCH_PARAMS.RECORD_MATCHING_ERROR_FILE,
   linkToModifiedRecordsCsvFile: FILE_SEARCH_PARAMS.PROPOSED_CHANGES_FILE,
