@@ -104,7 +104,7 @@ describe('getPaneSubtitle', () => {
     });
   });
 
-  it('returns the matched subtitle for delete operations still on the UPLOAD step', () => {
+  it('returns the two-part delete subtitle for delete operations regardless of step', () => {
     const result = getPaneSubtitle({
       isCriteriaActive: true,
       step: EDITING_STEPS.UPLOAD,
@@ -115,8 +115,8 @@ describe('getPaneSubtitle', () => {
     });
 
     expect(result).toEqual({
-      id: 'ui-bulk-edit.list.logSubTitle.matched',
-      values: { count: 88, recordType: 'user' },
+      id: 'ui-bulk-edit.list.logSubTitle.delete',
+      values: { matchedCount: 88, deletedCount: 88, recordType: 'user' },
     });
   });
 });

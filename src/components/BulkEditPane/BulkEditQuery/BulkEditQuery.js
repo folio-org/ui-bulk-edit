@@ -10,7 +10,7 @@ import {
 import { Pane } from '@folio/stripes/components';
 
 import { BulkEditListResult } from '../BulkEditListResult';
-import { APPROACHES, RECORD_TYPES_MAPPING } from '../../../constants';
+import { APPROACHES, JOB_STATUSES, RECORD_TYPES_MAPPING } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
 import { getBulkOperationStatsByStep, getPaneSubtitle } from '../BulkEditListResult/PreviewLayout/helpers';
 
@@ -24,7 +24,9 @@ export const BulkEditQuery = ({ children, bulkDetails, actionMenu }) => {
 
   const stripes = useStripes();
   const { isOperationInPreviewStatus, countOfRecords, totalCount } = getBulkOperationStatsByStep(bulkDetails, step);
-  const isQueryCriteria = bulkDetails?.fqlQuery && isOperationInPreviewStatus;
+
+  const isDeleting = bulkDetails?.status === JOB_STATUSES.DELETING_RECORDS;
+  const isQueryCriteria = bulkDetails?.fqlQuery && (isOperationInPreviewStatus || isDeleting);
 
   const paneTitle = useMemo(() => {
     if (isQueryCriteria) {

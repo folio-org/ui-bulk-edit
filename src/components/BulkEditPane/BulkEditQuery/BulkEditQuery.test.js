@@ -5,7 +5,7 @@ import { render, screen } from '@folio/jest-config-stripes/testing-library/react
 import { BulkEditQuery } from './BulkEditQuery';
 import { useSearchParams } from '../../../hooks';
 import { getBulkOperationStatsByStep } from '../BulkEditListResult/PreviewLayout/helpers';
-import { APPROACHES, EDITING_STEPS } from '../../../constants';
+import { APPROACHES, EDITING_STEPS, JOB_STATUSES } from '../../../constants';
 
 jest.mock('react-intl', () => ({
   useIntl: () => ({
@@ -139,5 +139,31 @@ describe('BulkEditQuery', () => {
     });
     renderBulkEditQuery({ bulkDetails: { fqlQuery: 'query', operationType: 'DELETE' } });
     expect(screen.getByText('ui-bulk-edit.list.logSubTitle.delete')).toBeInTheDocument();
+  });
+
+  it('keeps the query title and delete subtitle while records are being deleted (non-preview status)', () => {
+    useSearchParams.mockReturnValue({
+      step: EDITING_STEPS.COMMIT,
+      approach: 'approach',
+      currentRecordType: 'USER',
+    });
+    // DELETING_RECORDS is not a preview status, so isOperationInPreviewStatus is false.
+    getBulkOperationStatsByStep.mockReturnValue({
+      isOperationInPreviewStatus: false,
+      countOfRecords: 0,
+      totalCount: 88,
+    });
+    renderBulkEditQuery({
+      bulkDetails: {
+        fqlQuery: 'query',
+        operationType: 'DELETE',
+        status: JOB_STATUSES.DELETING_RECORDS,
+      },
+    });
+    // Title must stay "Bulk edit query", not fall back to the default "Bulk edit".
+    expect(screen.getByText('ui-bulk-edit.meta.query.title')).toBeInTheDocument();
+    expect(screen.queryByText('ui-bulk-edit.meta.title')).not.toBeInTheDocument();
+    expect(screen.getByText('ui-bulk-edit.list.logSubTitle.delete')).toBeInTheDocument();
+    expect(screen.queryByText('ui-bulk-edit.list.logSubTitle')).not.toBeInTheDocument();
   });
 });

@@ -80,7 +80,7 @@ export const getPaneSubtitle = ({
     return { id: 'ui-bulk-edit.list.logSubTitle' };
   }
 
-  if (operationType === OPERATION_TYPES.DELETE && step === EDITING_STEPS.COMMIT) {
+  if (operationType === OPERATION_TYPES.DELETE) {
     return {
       id: 'ui-bulk-edit.list.logSubTitle.delete',
       values: { matchedCount: totalCount, deletedCount: countOfRecords, recordType },

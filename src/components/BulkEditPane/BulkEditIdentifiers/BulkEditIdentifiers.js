@@ -9,7 +9,7 @@ import {
   useStripes,
 } from '@folio/stripes/core';
 
-import { APPROACHES, RECORD_TYPES_MAPPING } from '../../../constants';
+import { APPROACHES, JOB_STATUSES, RECORD_TYPES_MAPPING } from '../../../constants';
 import { useSearchParams } from '../../../hooks';
 import { BulkEditListResult } from '../BulkEditListResult';
 import { getBulkOperationStatsByStep, getPaneSubtitle } from '../BulkEditListResult/PreviewLayout/helpers';
@@ -31,7 +31,8 @@ export const BulkEditIdentifiers = ({
 
   const { isOperationInPreviewStatus, countOfRecords, totalCount } = getBulkOperationStatsByStep(bulkDetails, step);
 
-  const isIdentifierCriteria = !bulkDetails?.fqlQuery && isOperationInPreviewStatus;
+  const isDeleting = bulkDetails?.status === JOB_STATUSES.DELETING_RECORDS;
+  const isIdentifierCriteria = !bulkDetails?.fqlQuery && (isOperationInPreviewStatus || isDeleting);
 
   const paneTitle = useMemo(() => {
     if ((processedFileName || initialFileName) && isIdentifierCriteria) {
