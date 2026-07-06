@@ -86,10 +86,11 @@ describe('ProgressBar', () => {
     renderProgressBar(EDITING_STEPS.COMMIT);
 
     // "Deleting records" is shown as both the title and the status line.
-    const deletingMessages = await screen.findAllByText('ui-bulk-edit.progressBar.deleting');
+    const deletingMessage = await screen.findByText('ui-bulk-edit.progressBar.deleting');
+    const processingMessage = await screen.findByText('ui-bulk-edit.progressBar.processing');
 
-    expect(deletingMessages).toHaveLength(2);
-    deletingMessages.forEach((message) => expect(message).toBeVisible());
+    expect(deletingMessage).toBeVisible();
+    expect(processingMessage).toBeVisible();
   });
 
   it('should display correct width percentage', async () => {

@@ -2,6 +2,9 @@ import React from 'react';
 
 jest.mock('@folio/stripes/components', () => ({
   ...jest.requireActual('@folio/stripes/components'),
+  Icon: jest.fn(({ icon, children }) => (
+    <span data-testid={`icon-${icon}`}>{children}</span>
+  )),
   Layer: jest.fn(({
     contentLabel,
     isOpen,
