@@ -15,12 +15,13 @@ import {
 } from '@folio/stripes/components';
 import { FormattedMessage } from 'react-intl';
 import { QUERY_KEY_DOWNLOAD_LOGS, useFileDownload } from '../../../hooks/api';
-import { APPROACHES, CAPABILITIES, LINK_KEYS } from '../../../constants';
+import { APPROACHES, CAPABILITIES, LINK_KEYS, OPERATION_TYPES } from '../../../constants';
 import { useBulkPermissions } from '../../../hooks';
 import { savePreviewFile } from '../../../utils/files';
 
 const BulkEditLogsActions = ({ item }) => {
   const fileNamePostfix = item?.fqlQueryId ? `.${APPROACHES.QUERY}` : '';
+  const fileNameModifier = item?.operationType === OPERATION_TYPES.DELETE ? `.${OPERATION_TYPES.DELETE}` : '';
 
   const {
     hasUsersViewPerms,
@@ -80,13 +81,13 @@ const BulkEditLogsActions = ({ item }) => {
             onClick={() => onLoadFile(file)}
           >
             <Icon icon="download">
-              <FormattedMessage id={`ui-bulk-edit.logs.actions.${file}${fileNamePostfix}`} />
+              <FormattedMessage id={`ui-bulk-edit.logs.actions.${file}${fileNamePostfix}${fileNameModifier}`} />
             </Icon>
           </Button>
         ))}
       </MenuSection>
     </DropdownMenu>
-  ), [availableFiles, fileNamePostfix]);
+  ), [availableFiles, fileNamePostfix, fileNameModifier]);
 
   if (item.entityType === CAPABILITIES.USER && !hasUsersViewPerms) return null;
   if (item.entityType === CAPABILITIES.HOLDING &&

@@ -15,7 +15,9 @@ import {
   FILE_SEARCH_PARAMS,
   CAPABILITIES,
   LINK_KEYS,
+  OPERATION_TYPES,
 } from '../../../constants';
+import enTranslations from '../../../../translations/ui-bulk-edit/en.json';
 import BulkEditLogsActions from './BulkEditLogsActions';
 import { useBulkPermissions } from '../../../hooks';
 import { useFileDownload } from '../../../hooks/api';
@@ -114,5 +116,52 @@ describe('BulkEditLogsActions', () => {
 
     const lastCallArgs = useFileDownload.mock.calls.at(-1)[0];
     expect(lastCallArgs.fileContentType).toBe(FILE_SEARCH_PARAMS.TRIGGERING_QUERY_FILE);
+  });
+
+  describe('file name modifier for DELETE operations', () => {
+    it('should append the ".DELETE" postfix to the download label when the operation type is DELETE', () => {
+      renderBulkEditLogsActions({
+        item: { ...bulkOperation, operationType: OPERATION_TYPES.DELETE },
+      });
+
+      expect(screen.getByTestId(FILE_KEYS.COMMITTING_CHANGES_ERROR_FILE))
+        .toHaveTextContent('ui-bulk-edit.logs.actions.linkToCommittedRecordsErrorsCsvFile.DELETE');
+    });
+
+    it('should not append the ".DELETE" postfix when the operation type is not DELETE', () => {
+      renderBulkEditLogsActions({
+        item: { ...bulkOperation, operationType: OPERATION_TYPES.UPDATE },
+      });
+
+      const downloadButton = screen.getByTestId(FILE_KEYS.COMMITTING_CHANGES_ERROR_FILE);
+
+      expect(downloadButton).toHaveTextContent('ui-bulk-edit.logs.actions.linkToCommittedRecordsErrorsCsvFile');
+      expect(downloadButton).not.toHaveTextContent('.DELETE');
+    });
+
+    it('should combine the ".QUERY" and ".DELETE" postfixes for a query-based DELETE operation', () => {
+      renderBulkEditLogsActions({
+        item: {
+          ...bulkOperation,
+          fqlQueryId: 'test-query-id',
+          operationType: OPERATION_TYPES.DELETE,
+        },
+      });
+
+      expect(screen.getByTestId(FILE_KEYS.COMMITTING_CHANGES_ERROR_FILE))
+        .toHaveTextContent('ui-bulk-edit.logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY.DELETE');
+    });
+  });
+});
+
+describe('BulkEditLogsActions en.json translations', () => {
+  it('should provide a translation for the committed records errors file of a DELETE operation', () => {
+    expect(enTranslations['logs.actions.linkToCommittedRecordsErrorsCsvFile.DELETE'])
+      .toBe('File with errors encountered when deleting the records');
+  });
+
+  it('should provide a translation for the committed records errors file of a query-based DELETE operation', () => {
+    expect(enTranslations['logs.actions.linkToCommittedRecordsErrorsCsvFile.QUERY.DELETE'])
+      .toBe('File with errors encountered when deleting the records');
   });
 });

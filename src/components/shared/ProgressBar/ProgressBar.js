@@ -15,7 +15,7 @@ const PROGRESS_BAR_CONTENT = {
   deleting: {
     icon: 'trash',
     titleId: 'ui-bulk-edit.progressBar.deleting',
-    statusId: 'ui-bulk-edit.progressBar.deleting',
+    statusId: 'ui-bulk-edit.progressBar.processing',
   },
   committing: {
     icon: 'edit',
