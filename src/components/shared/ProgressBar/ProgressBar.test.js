@@ -22,6 +22,10 @@ jest.mock('../../../hooks/useErrorMessages', () => ({
 
 const history = createMemoryHistory();
 
+// Represents details that were (re)fetched after the progress bar mounted, i.e. trustworthy data
+// for the current phase (always greater than the component's mount timestamp).
+const FRESH = Number.MAX_SAFE_INTEGER;
+
 const renderProgressBar = (step = '') => {
   render(
     <MemoryRouter initialEntries={[`/bulk-edit/1/preview?processedFileName=some.scv&criteria=identifier&progress=identifier&step=${step}`]}>
@@ -45,8 +49,11 @@ describe('ProgressBar', () => {
     useBulkOperationDetails.mockClear();
   });
 
-  it('should display correct title', async () => {
-    useBulkOperationDetails.mockReturnValue({ bulkDetails: bulkOperation });
+  it('should display the retrieving title while records are being retrieved', async () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: { ...bulkOperation, status: JOB_STATUSES.RETRIEVING_RECORDS },
+      dataUpdatedAt: FRESH,
+    });
 
     history.push({
       search: '?fileName=Mock.csv',
@@ -60,7 +67,7 @@ describe('ProgressBar', () => {
   });
 
   it('should render with no axe errors', async () => {
-    useBulkOperationDetails.mockReturnValue({ bulkDetails: bulkOperation });
+    useBulkOperationDetails.mockReturnValue({ bulkDetails: bulkOperation, dataUpdatedAt: FRESH });
 
     renderProgressBar();
 
@@ -69,17 +76,35 @@ describe('ProgressBar', () => {
     });
   });
 
-  it('should render with text after in app committing', async () => {
-    useBulkOperationDetails.mockReturnValue({ bulkDetails: bulkOperation });
+  it('should render committing text when changes are being applied', async () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: { ...bulkOperation, status: JOB_STATUSES.APPLY_CHANGES },
+      dataUpdatedAt: FRESH,
+    });
 
+    renderProgressBar();
+
+    expect(screen.getByText('ui-bulk-edit.progressBar.committing')).toBeVisible();
+    expect(screen.getByText('ui-bulk-edit.progressBar.processing')).toBeVisible();
+  });
+
+  it('should rely on status, not the URL step, for progress content', async () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: { ...bulkOperation, status: JOB_STATUSES.RETRIEVING_RECORDS },
+      dataUpdatedAt: FRESH,
+    });
+
+    // step=UPLOAD previously forced "committing"; status must win now.
     renderProgressBar(EDITING_STEPS.UPLOAD);
 
-    expect(screen.getByText(/progressBar.processing/)).toBeVisible();
+    expect(screen.getByText('ui-bulk-edit.progressBar.retrieving')).toBeVisible();
+    expect(screen.queryByText('ui-bulk-edit.progressBar.committing')).not.toBeInTheDocument();
   });
 
   it('should render "Deleting records" text when records are being deleted', async () => {
     useBulkOperationDetails.mockReturnValue({
       bulkDetails: { ...bulkOperation, status: JOB_STATUSES.DELETING_RECORDS },
+      dataUpdatedAt: FRESH,
       clearIntervalAndRedirect,
     });
 
@@ -93,8 +118,49 @@ describe('ProgressBar', () => {
     expect(processingMessage).toBeVisible();
   });
 
+  it('should render a preloader instead of progress content while bulk operation details are loading', () => {
+    useBulkOperationDetails.mockReturnValue({
+      isLoading: true,
+      clearIntervalAndRedirect,
+    });
+
+    renderProgressBar(EDITING_STEPS.COMMIT);
+
+    expect(screen.getByTestId('preloader')).toBeVisible();
+    // The default "retrieving" title must not leak out before details load.
+    expect(screen.queryByText('ui-bulk-edit.progressBar.title')).not.toBeInTheDocument();
+  });
+
+  it('should show the preloader until details are refetched after mount, ignoring stale cache', () => {
+    useBulkOperationDetails.mockReturnValue({
+      // Cache still holds the previous phase's details for the same operation id.
+      bulkDetails: { ...bulkOperation, status: JOB_STATUSES.APPLY_CHANGES },
+      dataUpdatedAt: 1,
+      clearIntervalAndRedirect,
+    });
+
+    renderProgressBar();
+
+    expect(screen.getByTestId('preloader')).toBeVisible();
+    expect(screen.queryByText('ui-bulk-edit.progressBar.committing')).not.toBeInTheDocument();
+  });
+
+  it('should show the preloader instead of default content on the final tick when a redirect is pending', () => {
+    useBulkOperationDetails.mockReturnValue({
+      bulkDetails: { ...bulkOperation, status: JOB_STATUSES.COMPLETED },
+      clearIntervalAndRedirect,
+    });
+
+    renderProgressBar();
+
+    expect(screen.getByTestId('preloader')).toBeVisible();
+    // The default "retrieving" content must not flash before the redirect happens.
+    expect(screen.queryByText('ui-bulk-edit.progressBar.retrieving')).not.toBeInTheDocument();
+    expect(clearIntervalAndRedirect).toHaveBeenCalled();
+  });
+
   it('should display correct width percentage', async () => {
-    useBulkOperationDetails.mockReturnValue({ bulkDetails: bulkOperation });
+    useBulkOperationDetails.mockReturnValue({ bulkDetails: bulkOperation, dataUpdatedAt: FRESH });
 
     const progress = (bulkOperation.processedNumOfRecords / bulkOperation.totalNumOfRecords) * 100;
 
