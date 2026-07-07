@@ -38,7 +38,7 @@ export const useBulkOperationDetails = ({
     };
   }, [interval]);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, dataUpdatedAt } = useQuery({
     queryKey: [BULK_OPERATION_DETAILS_KEY, namespaceKey, id, ...additionalQueryKeys],
     enabled: !!id,
     refetchInterval,
@@ -49,6 +49,7 @@ export const useBulkOperationDetails = ({
   return {
     bulkDetails: data,
     isLoading,
+    dataUpdatedAt,
     clearInterval,
     clearIntervalAndRedirect,
   };

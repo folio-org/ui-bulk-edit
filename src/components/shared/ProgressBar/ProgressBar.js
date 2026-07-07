@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
 import { Icon, Loading } from '@folio/stripes/components';
+import { Preloader } from '@folio/stripes-data-transfer-components';
 
 import { useBulkOperationDetails } from '../../../hooks/api';
-import { EDITING_STEPS, JOB_STATUSES } from '../../../constants';
+import { JOB_STATUSES } from '../../../constants';
 import { getBulkOperationStep } from './utils';
 import css from './ProgressBar.css';
 import { useSearchParams } from '../../../hooks';
@@ -33,12 +34,14 @@ export const ProgressBar = () => {
   const {
     processedFileName,
     initialFileName,
-    step
   } = useSearchParams();
   const { id } = useParams();
   const { showErrorMessage } = useErrorMessages();
 
-  const { bulkDetails, clearIntervalAndRedirect } = useBulkOperationDetails({
+  // Captured once on mount so we can tell a fetch that lands here from the previous phase's cached data.
+  const mountedAt = useRef(Date.now());
+
+  const { bulkDetails, dataUpdatedAt, clearIntervalAndRedirect } = useBulkOperationDetails({
     id,
     interval: 1000 * 3,
   });
@@ -49,17 +52,24 @@ export const ProgressBar = () => {
     : 0;
 
   const getProgressContent = () => {
-    if (status === JOB_STATUSES.DELETING_RECORDS) return PROGRESS_BAR_CONTENT.deleting;
-    if (step === EDITING_STEPS.UPLOAD) return PROGRESS_BAR_CONTENT.committing;
-
-    return PROGRESS_BAR_CONTENT.retrieving;
+    switch (status) {
+      case JOB_STATUSES.DELETING_RECORDS:
+        return PROGRESS_BAR_CONTENT.deleting;
+      case JOB_STATUSES.APPLY_CHANGES:
+      case JOB_STATUSES.APPLY_MARC_CHANGES:
+        return PROGRESS_BAR_CONTENT.committing;
+      default:
+        return PROGRESS_BAR_CONTENT.retrieving;
+    }
   };
 
   const { icon, titleId, statusId } = getProgressContent();
 
-  useEffect(() => {
-    const nextStep = getBulkOperationStep(bulkDetails);
+  const nextStep = getBulkOperationStep(bulkDetails);
+  const isRedirectPending = Boolean(nextStep) || status === JOB_STATUSES.FAILED;
+  const hasFetchedSinceMount = dataUpdatedAt > mountedAt.current;
 
+  useEffect(() => {
     if (nextStep) {
       clearIntervalAndRedirect(`/bulk-edit/${id}/preview`, { step: nextStep, progress: null });
     }
@@ -73,9 +83,14 @@ export const ProgressBar = () => {
     status,
     bulkDetails,
     id,
+    nextStep,
     clearIntervalAndRedirect,
     showErrorMessage,
   ]);
+
+  if (!hasFetchedSinceMount || isRedirectPending) {
+    return <Preloader />;
+  }
 
   return (
     <div className={css.progressBar}>

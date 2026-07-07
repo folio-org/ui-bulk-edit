@@ -22,7 +22,9 @@ jest.mock('./PreviewLayout/PreviewRecordsAccordion/PreviewRecordsAccordion', () 
 
 jest.mock('../../../hooks/api', () => ({
   ...jest.requireActual('../../../hooks/api'),
-  useBulkOperationDetails: jest.fn().mockReturnValue({ bulkDetails: {} }),
+  // dataUpdatedAt in the future marks the details as freshly fetched, so the ProgressBar renders
+  // its content instead of the "awaiting fresh data" preloader.
+  useBulkOperationDetails: jest.fn().mockReturnValue({ bulkDetails: {}, dataUpdatedAt: Number.MAX_SAFE_INTEGER }),
   useRecordsPreview: () => ({
     contentData: [],
   }),
@@ -113,6 +115,8 @@ describe('BulkEditListResult', () => {
   it('displays title', () => {
     const history = createMemoryHistory();
 
+    useBulkOperationDetails.mockReturnValue({ bulkDetails: {}, dataUpdatedAt: Number.MAX_SAFE_INTEGER });
+
     history.push('/bulk-edit/1/preview?fileName=Mock.csv&capabilities=USERS&criteria=identifier&progress=identifier');
 
     renderBulkEditResult(history, TYPE_OF_PROGRESS.INITIAL);
@@ -150,6 +154,8 @@ describe('BulkEditListResult', () => {
 
   it('displays processed title', () => {
     const history = createMemoryHistory();
+
+    useBulkOperationDetails.mockReturnValue({ bulkDetails: {}, dataUpdatedAt: Number.MAX_SAFE_INTEGER });
 
     history.push('/bulk-edit/1/preview?processedFileName=Mock.csv&capabilities=USERS&criteria=identifier&progress=identifier');
 
