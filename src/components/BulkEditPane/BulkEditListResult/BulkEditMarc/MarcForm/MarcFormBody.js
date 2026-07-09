@@ -53,7 +53,15 @@ export const MarcFormBody = ({ fields, setFields, isNonInteractive }) => {
       const withClearedSubfields = setIn(withUpdatedAction, [rowIndex, 'subfields'], []);
       const nextAction = getNextAction(val);
 
-      if (actionIndex === 0) {
+      if (actionsKey === 'actions' && actionIndex === 0 && val === ACTIONS.REMOVE_FIELD) {
+        const withClearedSubfield = setIn(withClearedSubfields, [rowIndex, 'subfield'], '');
+        const withNextActions = updateIn(
+          withClearedSubfield,
+          [rowIndex, actionsKey],
+          prev => [prev[0], ...(nextAction ? [nextAction] : [])]
+        );
+        setFields(withNextActions);
+      } else if (actionIndex === 0) {
         const withNextActions = updateIn(
           withClearedSubfields,
           [rowIndex, actionsKey],
