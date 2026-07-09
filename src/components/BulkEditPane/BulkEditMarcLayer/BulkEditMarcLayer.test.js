@@ -317,6 +317,55 @@ describe('BulkEditMarcLayer', () => {
     });
   });
 
+  it('should disable and clear the subfield textbox when "Remove field" action is selected', async () => {
+    const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    const actionSelect = getByRole('combobox', { name: /name/i });
+    const subfieldInput = getByRole('textbox', { name: /subfield/i });
+
+    await act(async () => {
+      await userEvent.selectOptions(actionSelect, ACTIONS.ADD_TO_EXISTING);
+      await userEvent.type(subfieldInput, 'a');
+    });
+
+    expect(subfieldInput).toHaveValue('a');
+    expect(subfieldInput).toBeRequired();
+
+    await act(async () => {
+      await userEvent.selectOptions(actionSelect, ACTIONS.REMOVE_FIELD);
+    });
+
+    await waitFor(() => {
+      expect(subfieldInput).toHaveValue('');
+      expect(subfieldInput).toBeDisabled();
+      expect(subfieldInput).not.toBeRequired();
+    });
+  });
+
+  it('should re-enable and mark the subfield textbox as required when action changes away from "Remove field"', async () => {
+    const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    const actionSelect = getByRole('combobox', { name: /name/i });
+    const subfieldInput = getByRole('textbox', { name: /subfield/i });
+
+    await act(async () => {
+      await userEvent.selectOptions(actionSelect, ACTIONS.REMOVE_FIELD);
+    });
+
+    await waitFor(() => {
+      expect(subfieldInput).toBeDisabled();
+    });
+
+    await act(async () => {
+      await userEvent.selectOptions(actionSelect, ACTIONS.ADD_TO_EXISTING);
+    });
+
+    await waitFor(() => {
+      expect(subfieldInput).toBeEnabled();
+      expect(subfieldInput).toBeRequired();
+    });
+  });
+
   it('should call "confirm changes" function', async () => {
     const {
       getByRole,

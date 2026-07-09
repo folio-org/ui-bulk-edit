@@ -55,7 +55,7 @@ export const schema = [
     showWhen: null,
     className: 'subfield',
     maxLength: SUBFIELD_MAX_LENGTH,
-    disabled: false,
+    disabled: ({ actions }) => actions?.[0]?.name === ACTIONS.REMOVE_FIELD,
     showError: true,
     dirty: (value) => !!value?.length,
     required: ({ actions }) => SUBFIELD_REQUIRED_ACTIONS.includes(actions?.[0]?.name),
