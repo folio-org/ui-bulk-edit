@@ -142,6 +142,28 @@ describe('getMarcFormErrors', () => {
     });
   });
 
+  it('should return an error for a tag with fewer than three digits', () => {
+    const input = [
+      {
+        id: '202',
+        tag: '90',
+        ind1: '\\',
+        ind2: '\\',
+        subfield: '',
+        actions: [
+          {
+            name: ACTIONS.REMOVE_FIELD,
+            data: [],
+          },
+        ],
+        subfields: [],
+      },
+    ];
+
+    const errors = getFormErrors(input, validationSchema);
+    expect(errors['[0].tag']).toBe('ui-bulk-edit.layer.marc.error');
+  });
+
   it('should not require subfield when action is Remove field', () => {
     const input = [
       {
