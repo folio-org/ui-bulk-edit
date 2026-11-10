@@ -54,11 +54,11 @@ const renderComponent = (selectedPermissionsIds = []) => render(
 );
 
 const checkRowsLength = (length) => {
-  const tableBody = screen.getByRole('rowgroup', { hidden: true });
+  const grid = screen.getByRole('grid', { hidden: true });
 
-  expect(tableBody).toBeInTheDocument();
-
-  const rows = within(tableBody).getAllByRole('row', { hidden: true });
+  const rows = within(grid)
+    .getAllByRole('row', { hidden: true })
+    .filter((row) => row.getAttribute('aria-rowindex') !== '1');
 
   expect(rows).toHaveLength(length);
 };
