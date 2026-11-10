@@ -1,6 +1,6 @@
 import { array, object, string } from 'yup';
 
-import { DATA_KEYS, INDICATOR_FIELD_MAX_LENGTH } from './helpers';
+import { DATA_KEYS, INDICATOR_FIELD_MAX_LENGTH, TAG_FIELD_MAX_LENGTH } from './helpers';
 import { ACTIONS } from '../../../../constants/marcActions';
 
 const SUBFIELD_FORMAT_TEST = [
@@ -86,7 +86,8 @@ export const validationSchema = array(
       .test(
         'is-valid-tag',
         'ui-bulk-edit.layer.marc.error',
-        value => Number(value) > 9 // Tags must represent a number greater than 9
+        // MARC tags are always exactly 3 digits, and tags under 010 are reserved
+        value => value?.length === TAG_FIELD_MAX_LENGTH && Number(value) > 9
       ),
     ind1: string()
       .required()

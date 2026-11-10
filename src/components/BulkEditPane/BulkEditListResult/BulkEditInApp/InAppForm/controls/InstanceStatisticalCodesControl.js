@@ -30,6 +30,8 @@ export const InstanceStatisticalCodesControl = ({ value, name, path, disabled, o
     return value ? value.map(code => code.value).includes(statisticalCode.value) : value;
   });
 
+  const statisticalCodesLabel = formatMessage({ id: 'ui-bulk-edit.ariaLabel.statisticalCode' });
+
   return (
     <div title={title}>
       <MultiSelection
@@ -37,7 +39,8 @@ export const InstanceStatisticalCodesControl = ({ value, name, path, disabled, o
         value={selectedStatisticalCodes}
         onChange={handleChange}
         placeholder={formatMessage({ id: 'ui-bulk-edit.layer.statisticalCode' })}
-        aria-label={formatMessage({ id: 'ui-bulk-edit.ariaLabel.statisticalCode' })}
+        label={statisticalCodesLabel}
+        ariaLabel={statisticalCodesLabel}
         dataOptions={statisticalCodes}
         dirty={!!value}
         filter={customMultiSelectionFilter}
