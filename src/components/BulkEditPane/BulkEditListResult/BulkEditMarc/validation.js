@@ -76,7 +76,7 @@ const subfieldSchema = {
 const latinRegex = /^[a-zA-Z0-9\s\\]+$/;
 
 // A MARC tag is exactly TAG_FIELD_MAX_LENGTH digits
-const tagFormatRegex = new RegExp(`^\\d{${TAG_FIELD_MAX_LENGTH}}$`);
+const tagFormatRegex = new RegExp(String.raw`^\d{${TAG_FIELD_MAX_LENGTH}}$`);
 
 /**
  * Top-level schema for validating an array of MARC field objects.
