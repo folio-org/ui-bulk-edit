@@ -291,6 +291,32 @@ describe('BulkEditMarcLayer', () => {
     });
   });
 
+  it('should mark the subfield textbox of an additional subfield row as required', async () => {
+    const {
+      getByTestId,
+      getByRole,
+      getAllByRole,
+    } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    userEvent.selectOptions(getByRole('combobox', { name: /name/i }), ACTIONS.ADD_TO_EXISTING);
+
+    await waitFor(() => {
+      expect(getAllByRole('combobox', { name: /name/i })).toHaveLength(2);
+    });
+
+    userEvent.selectOptions(getAllByRole('combobox', { name: /name/i })[1], ACTIONS.ADDITIONAL_SUBFIELD);
+
+    await waitFor(() => {
+      expect(getByTestId('subfield-row-0')).toBeVisible();
+    });
+
+    const subfieldRow = within(getByTestId('subfield-row-0'));
+
+    expect(subfieldRow.getByRole('textbox', { name: /subfield/i })).toBeRequired();
+    // one asterisk for the "Subfield" textbox and one for the "Data" textarea
+    expect(subfieldRow.getAllByText('*')).toHaveLength(2);
+  });
+
   it('should work correctly with "Find" + "Replace with" actions', async () => {
     const {
       getByRole,

@@ -162,6 +162,7 @@ export const subfieldsSchema = [
     maxLength: SUBFIELD_MAX_LENGTH,
     showError: true,
     disabled: false,
+    required: true,
     dirty: (value) => !!value?.length,
   },
   {

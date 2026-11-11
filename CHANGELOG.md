@@ -10,6 +10,7 @@
 * [UIBULKED-767](https://folio-org.atlassian.net/browse/UIBULKED-767) Bulk edit logs for bulk deletion - support downloading the triggering query file.
 * [UIBULKED-775](https://folio-org.atlassian.net/browse/UIBULKED-775) Disable "Subfield" textbox when "Remove field" action is selected.
 * [UIBULKED-778](https://folio-org.atlassian.net/browse/UIBULKED-778) "Field" textbox should require 3 digits
+* [UIBULKED-774](https://folio-org.atlassian.net/browse/UIBULKED-774) "Subfield" column should not be marked as required
 
 ## [5.1.1](https://github.com/folio-org/ui-bulk-edit/tree/v5.1.1) (2026-05-14)
 
