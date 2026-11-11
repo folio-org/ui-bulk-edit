@@ -182,6 +182,32 @@ describe('BulkEditMarcLayer', () => {
     });
   });
 
+  it('should show the 3-digit error (not the control fields error) if the 3-character value is not numeric', async () => {
+    const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    userEvent.type(getByRole('textbox', { name: /tag/i }), 'abc');
+
+    await waitFor(() => {
+      expect(screen.getByText('ui-bulk-edit.layer.marc.error.tagLength'))
+        .toBeVisible();
+    });
+    expect(screen.queryByText('ui-bulk-edit.layer.marc.error'))
+      .not.toBeInTheDocument();
+  });
+
+  it('should not show the 3-digit error text for a tag that is still shorter than 3 characters', async () => {
+    const { getByRole } = renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
+
+    userEvent.type(getByRole('textbox', { name: /tag/i }), '90');
+
+    await waitFor(() => {
+      expect(getByRole('textbox', { name: /tag/i }))
+        .toHaveValue('90');
+    });
+    expect(screen.queryByText('ui-bulk-edit.layer.marc.error.tagLength'))
+      .not.toBeInTheDocument();
+  });
+
   it('should put backslash in ind1 field if its empty', async () => {
     renderBulkEditMarcLayer({ criteria: CRITERIA.IDENTIFIER });
 
