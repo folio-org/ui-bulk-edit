@@ -161,7 +161,73 @@ describe('getMarcFormErrors', () => {
     ];
 
     const errors = getFormErrors(input, validationSchema);
+    expect(errors['[0].tag']).toBe('ui-bulk-edit.layer.marc.error.tagLength');
+  });
+
+  it('should return the 3-digit error for a single-digit tag', () => {
+    const input = [
+      {
+        id: '202',
+        tag: '9',
+        ind1: '\\',
+        ind2: '\\',
+        subfield: '',
+        actions: [
+          {
+            name: ACTIONS.REMOVE_FIELD,
+            data: [],
+          },
+        ],
+        subfields: [],
+      },
+    ];
+
+    const errors = getFormErrors(input, validationSchema);
+    expect(errors['[0].tag']).toBe('ui-bulk-edit.layer.marc.error.tagLength');
+  });
+
+  it('should return the control fields error for a 3-character tag under 010', () => {
+    const input = [
+      {
+        id: '202',
+        tag: '009',
+        ind1: '\\',
+        ind2: '\\',
+        subfield: '',
+        actions: [
+          {
+            name: ACTIONS.REMOVE_FIELD,
+            data: [],
+          },
+        ],
+        subfields: [],
+      },
+    ];
+
+    const errors = getFormErrors(input, validationSchema);
     expect(errors['[0].tag']).toBe('ui-bulk-edit.layer.marc.error');
+  });
+
+  it.each(['abc', '24a', '1 2'])('should return the 3-digit error for the non-numeric tag "%s"', (tag) => {
+    const input = [
+      {
+        id: '202',
+        tag,
+        ind1: '\\',
+        ind2: '\\',
+        subfield: '',
+        actions: [
+          {
+            name: ACTIONS.REMOVE_FIELD,
+            data: [],
+          },
+        ],
+        subfields: [],
+      },
+    ];
+
+    const errors = getFormErrors(input, validationSchema);
+    expect(errors['[0].tag']).toBe('ui-bulk-edit.layer.marc.error.tagLength');
   });
 
   it('should not require subfield when action is Remove field', () => {

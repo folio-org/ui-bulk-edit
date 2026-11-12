@@ -75,6 +75,9 @@ const subfieldSchema = {
 // Regular expression allowing Latin letters, digits, spaces, and backslashes
 const latinRegex = /^[a-zA-Z0-9\s\\]+$/;
 
+// A MARC tag is exactly TAG_FIELD_MAX_LENGTH digits
+const tagFormatRegex = new RegExp(String.raw`^\d{${TAG_FIELD_MAX_LENGTH}}$`);
+
 /**
  * Top-level schema for validating an array of MARC field objects.
  * Validates tags, indicators, and nested subfields according to MARC rules.
@@ -86,8 +89,15 @@ export const validationSchema = array(
       .test(
         'is-valid-tag',
         'ui-bulk-edit.layer.marc.error',
-        // MARC tags are always exactly 3 digits, and tags under 010 are reserved
-        value => value?.length === TAG_FIELD_MAX_LENGTH && Number(value) > 9
+        (value, context) => {
+          // MARC tags are always exactly 3 digits
+          if (!tagFormatRegex.test(value ?? '')) {
+            return context.createError({ message: 'ui-bulk-edit.layer.marc.error.tagLength' });
+          }
+
+          // Tags under 010 (control fields) are reserved
+          return Number(value) > 9;
+        }
       ),
     ind1: string()
       .required()

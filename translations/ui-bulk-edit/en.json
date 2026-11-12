@@ -460,6 +460,7 @@
   "layer.options.checkOutNote": "Check out note",
   "layer.options.holdings.uri": "URI",
   "layer.marc.error": "Bulk edit of MARC control fields 00X is not supported.",
+  "layer.marc.error.tagLength": "Enter a 3-digit field",
   "layer.marc.error.protected": "This field is protected.",
   "layer.marc.error.limited": "Bulk edit of 00x fields is not supported.",
   "layer.marc.error.ind": "Please check your input.",
